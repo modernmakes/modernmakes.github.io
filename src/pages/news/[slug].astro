@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('news');
+  return entries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, category, date, readTime, heroImage, excerpt, summary } = entry.data;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+<ArticleLayout
+  title={title}
+  category={category}
+  date={formattedDate}
+  readTime={readTime}
+  heroImage={heroImage}
+  excerpt={excerpt}
+  summary={summary}
+>
+  <Content />
+</ArticleLayout>

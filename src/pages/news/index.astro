@@ -1,18 +1,77 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-const label = 'news'.charAt(0).toUpperCase() + 'news'.slice(1);
+
+const currentPath = '/news';
+
+const allNews = await getCollection('news');
+const sorted = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+function cardBg(entry: (typeof sorted)[number]) {
+  if (entry.data.heroImage) {
+    return `background-color:#1a1520;background-image:url('${entry.data.heroImage}');background-size:cover;background-position:center`;
+  }
+  return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
+}
 ---
-<Base title={label}>
-  <Nav slot="nav" currentPath={'/news'} />
-  <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
-    <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--black)">{label}</h1>
-    <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);margin:12px auto 24px;max-width:440px">This section is being built.</p>
-    <a href="/" style="font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+<Base
+  title="News"
+  description="Latest 3D printing news — product launches, firmware updates, safety notices, and industry moves."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
+        News
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:520px">
+        Product launches, firmware updates, safety notices, and industry moves — the news that matters to 3D printing enthusiasts.
+      </p>
+    </div>
+  </div>
+
+  <!-- ARTICLES -->
+  <section class="section" aria-label="News articles">
+    <div class="container">
+      {sorted.length === 0 ? (
+        <p style="font-family:'Lora',serif;color:var(--g1);font-size:15px;text-align:center;padding:40px 0">
+          No articles published yet.
+        </p>
+      ) : (
+        <div class="grid-3">
+          {sorted.map(entry => (
+            <a href={`/news/${entry.slug}`} class="card" aria-label={entry.data.title}>
+              <div class="card-img" style={cardBg(entry)}>
+                <div class="news-img-overlay"></div>
+                <span class="news-img-cat">{entry.data.category}</span>
+              </div>
+              <div class="card-body">
+                <div class="card-cat">{entry.data.category}</div>
+                <div class="card-title">{entry.data.title}</div>
+                <p class="card-excerpt">{entry.data.excerpt}</p>
+                <div class="card-footer">
+                  <time class="card-date">{formatDate(entry.data.date)}</time>
+                  <span class="card-date" style="margin-left:auto">{entry.data.readTime}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
   </section>
+
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -33,3 +92,29 @@ const label = 'news'.charAt(0).toUpperCase() + 'news'.slice(1);
     ]
   })}></script>
 </Base>
+
+<style is:global>
+/* Card image area overlay + category label for news index */
+.card-img {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+.news-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.5), transparent 60%);
+  border-radius: 0;
+}
+.news-img-cat {
+  position: relative;
+  z-index: 1;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  padding: 0 14px 10px;
+}
+</style>

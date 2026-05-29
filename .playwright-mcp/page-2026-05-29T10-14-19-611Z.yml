@@ -1,0 +1,227 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary navigation" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Modern Makes home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Modern Makes" [ref=e6]
+      - generic [ref=e7]:
+        - button "Printers" [ref=e9] [cursor=pointer]:
+          - text: Printers
+          - img [ref=e10]
+        - link "Filament" [ref=e12] [cursor=pointer]:
+          - /url: /filament
+        - link "Guides" [ref=e13] [cursor=pointer]:
+          - /url: /guides
+        - link "Tools" [ref=e14] [cursor=pointer]:
+          - /url: /tools
+        - link "News" [ref=e15] [cursor=pointer]:
+          - /url: /news
+      - generic [ref=e17]:
+        - textbox "Search" [ref=e18]:
+          - /placeholder: Search Modern Makes…
+        - button "Search" [ref=e19] [cursor=pointer]:
+          - img [ref=e20]
+  - generic [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]: Printers
+      - link [ref=e27] [cursor=pointer]:
+        - /url: /voron
+        - text: Voron
+    - link [ref=e29] [cursor=pointer]:
+      - /url: /filament
+      - text: Filament
+    - link [ref=e30] [cursor=pointer]:
+      - /url: /guides
+      - text: Guides
+    - link [ref=e31] [cursor=pointer]:
+      - /url: /tools
+      - text: Tools
+    - link [ref=e32] [cursor=pointer]:
+      - /url: /news
+      - text: News
+  - main [ref=e33]:
+    - heading "Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter" [level=1] [ref=e34]
+    - generic [ref=e35]:
+      - img [ref=e36]
+      - generic [ref=e39]: SAFETY
+    - generic [ref=e41]:
+      - navigation "Breadcrumb" [ref=e42]:
+        - link "Home" [ref=e43] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e44]: /
+        - link "News" [ref=e45] [cursor=pointer]:
+          - /url: /news
+        - generic [ref=e46]: /
+        - generic [ref=e47]: SAFETY
+      - generic [ref=e48]: SAFETY
+      - heading "Bambu Lab Confirms Free Board Replacement After Fire Reports" [level=1] [ref=e49]
+      - generic [ref=e50]:
+        - time [ref=e51]: May 28, 2026
+        - generic [ref=e52]: ·
+        - generic [ref=e53]: 4 min read
+    - generic [ref=e55]:
+      - article [ref=e56]:
+        - paragraph [ref=e57]: Bambu Lab has confirmed a free replacement program for the AC power boards of affected printers after approximately 70 fire incidents were linked to a faulty NTC thermistor component in units manufactured during Q3 2025.
+        - heading "How Reports Surfaced" [level=2] [ref=e58]
+        - paragraph [ref=e59]: Accounts of overheating and small fires originating from the internal electrical enclosures of certain Bambu Lab desktop printers began appearing on community forums and the r/BambuLab subreddit in late April 2026. Users described burning odors, visible smoke, and in multiple cases open flames, all tracing back to the printer's AC power board.
+        - paragraph [ref=e60]: Bambu Lab acknowledged the reports publicly and launched an internal engineering investigation. Within weeks the company identified a root cause and moved to a voluntary, no-cost replacement program covering all confirmed affected units worldwide.
+        - 'heading "The Cause: A Faulty NTC Thermistor" [level=2] [ref=e61]'
+        - paragraph [ref=e62]: Bambu Lab identified a defective NTC (negative temperature coefficient) thermistor on the AC power board as the source of the failures. The component is responsible for monitoring the board's operating temperature. When the thermistor fails to read accurately, the power board can exceed safe thermal limits without triggering a protective shutdown.
+        - paragraph [ref=e63]: In the roughly 70 documented incidents, this condition caused localized overheating severe enough to ignite surrounding materials inside the printer enclosure. The company has not publicly named the component supplier. No injuries have been reported by Bambu Lab in its communications to date.
+        - heading "Which Units Are Affected" [level=2] [ref=e64]
+        - paragraph [ref=e65]:
+          - text: "The issue is limited to a specific production batch from Q3 2025 — not every printer manufactured in that period contains the defective component. Bambu Lab has confirmed that the affected batch can be identified by a single character in the printer's serial number: units where the"
+          - strong [ref=e66]: 6th character of the serial number is the letter A
+          - text: are from the affected run and should be treated as potentially unsafe until the board is replaced.
+        - generic [ref=e67]:
+          - generic [ref=e68]: Are you affected?
+          - paragraph [ref=e69]: "To determine whether your printer contains the faulty AC power board, locate and read your serial number:"
+          - list [ref=e70]:
+            - listitem [ref=e71]:
+              - text: Find the serial number label on the
+              - strong [ref=e72]: rear panel
+              - text: or
+              - strong [ref=e73]: underside
+              - text: of your printer.
+            - listitem [ref=e74]:
+              - text: Count along the serial number string to the
+              - strong [ref=e75]: 6th character
+              - text: .
+            - listitem [ref=e76]:
+              - text: If the 6th character is the letter
+              - strong [ref=e77]: A
+              - text: ", your unit is from the affected production batch and is eligible for a free replacement board."
+            - listitem [ref=e78]: If the 6th character is any other letter or digit, your unit does not contain the faulty component.
+          - paragraph [ref=e79]:
+            - text: "Example: a serial number reading"
+            - code [ref=e80]: BL1F3A8...
+            - text: would be affected — the 6th character is
+            - strong [ref=e81]: A
+            - text: .
+        - 'heading "The Fix: Free AC Power Board Replacement" [level=2] [ref=e82]'
+        - paragraph [ref=e83]: Bambu Lab is providing a no-cost replacement of the AC power board for all verified affected units. The program does not require proof of purchase and is open to owners worldwide regardless of whether the printer was bought directly from Bambu Lab or through a third-party reseller.
+        - paragraph [ref=e84]: Bambu Lab has advised owners of potentially affected units to stop using their printers until the replacement is completed. The company has not issued guidance on any temporary mitigations and recommends discontinuing use as the only safe course of action pending the repair.
+        - heading "How to Request a Replacement" [level=2] [ref=e85]
+        - list [ref=e86]:
+          - listitem [ref=e87]: Confirm your unit is affected using the serial number check above.
+          - listitem [ref=e88]:
+            - text: Open a support ticket through the
+            - strong [ref=e89]: Bambu Lab official support portal
+            - text: ", referencing the AC power board replacement program."
+          - listitem [ref=e90]: Provide your serial number and shipping address. A Bambu Lab support agent will verify eligibility and arrange dispatch of a replacement board.
+        - paragraph [ref=e91]: Bambu Lab has stated that the free replacement program will not have an arbitrary end date applied to it, and that safety-related repairs will be honoured on an ongoing basis. Response times from support may be extended in some regions due to the volume of requests.
+        - paragraph [ref=e92]:
+          - text: For the most current instructions, region-specific support contact details, and any updates to the replacement process, visit
+          - strong [ref=e93]: Bambu Lab's official support page
+          - text: directly. The company has not filed a formal product recall with national consumer product safety agencies as of the date this article was published.
+      - complementary "Article sidebar" [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]: What to know
+          - list [ref=e97]:
+            - listitem [ref=e98]: ~70 fire incidents reported globally since late April 2026
+            - listitem [ref=e99]: "Root cause: faulty NTC thermistor on the AC power board"
+            - listitem [ref=e100]: Only units with 'A' as the 6th character of the serial number are affected
+            - listitem [ref=e101]: Printers manufactured and shipped in Q3 2025 carry the suspect component
+            - listitem [ref=e102]: Bambu Lab is offering free AC board replacement — no proof of purchase required
+        - generic [ref=e103]:
+          - generic [ref=e104]: More News
+          - generic [ref=e105]:
+            - 'link "News Bambu Announces AMS Pro: 16 Spools, Active Drying May 19, 2026" [ref=e106] [cursor=pointer]':
+              - /url: /news/bambu-ams-pro-announced
+              - generic [ref=e107]: News
+              - generic [ref=e108]: "Bambu Announces AMS Pro: 16 Spools, Active Drying"
+              - time [ref=e109]: May 19, 2026
+            - link "Update OrcaSlicer 2.3 Drops Arachne Wall Generation May 20, 2026" [ref=e110] [cursor=pointer]:
+              - /url: /software/orcaslicer-2-3
+              - generic [ref=e111]: Update
+              - generic [ref=e112]: OrcaSlicer 2.3 Drops Arachne Wall Generation
+              - time [ref=e113]: May 20, 2026
+            - 'link "Guide Revo Voron vs Rapido 2: The 2026 Hotend Verdict May 17, 2026" [ref=e114] [cursor=pointer]':
+              - /url: /voron/hotends
+              - generic [ref=e115]: Guide
+              - generic [ref=e116]: "Revo Voron vs Rapido 2: The 2026 Hotend Verdict"
+              - time [ref=e117]: May 17, 2026
+    - region "Related articles" [ref=e118]:
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - generic [ref=e121]: Related
+          - link "All news →" [ref=e122] [cursor=pointer]:
+            - /url: /news
+        - generic [ref=e123]:
+          - 'link "News News Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3 May 19, 2026" [ref=e124] [cursor=pointer]':
+            - /url: /news/bambu-ams-pro-announced
+            - generic [ref=e127]: News
+            - generic [ref=e128]:
+              - generic [ref=e129]: News
+              - generic [ref=e130]: "Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3"
+              - time [ref=e131]: May 19, 2026
+          - 'link "Printers Printers Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It May 24, 2026" [ref=e132] [cursor=pointer]':
+            - /url: /printers/prusa-core-one-plus
+            - generic [ref=e135]: Printers
+            - generic [ref=e136]:
+              - generic [ref=e137]: Printers
+              - generic [ref=e138]: "Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It"
+              - time [ref=e139]: May 24, 2026
+          - link "Software Software OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed. May 20, 2026" [ref=e140] [cursor=pointer]:
+            - /url: /software/orcaslicer-2-3
+            - generic [ref=e143]: Software
+            - generic [ref=e144]:
+              - generic [ref=e145]: Software
+              - generic [ref=e146]: OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.
+              - time [ref=e147]: May 20, 2026
+  - contentinfo [ref=e148]:
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - link "Modern Makes home" [ref=e152] [cursor=pointer]:
+            - /url: /
+            - img "Modern Makes" [ref=e153]
+          - paragraph [ref=e154]: The editorial voice of the 3D printing enthusiast.
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e157]: Printers
+            - link "Voron" [ref=e158] [cursor=pointer]:
+              - /url: /voron
+          - generic [ref=e159]:
+            - generic [ref=e160]: Editorial
+            - link "Filament" [ref=e161] [cursor=pointer]:
+              - /url: /filament
+            - link "Guides" [ref=e162] [cursor=pointer]:
+              - /url: /guides
+            - link "News" [ref=e163] [cursor=pointer]:
+              - /url: /news
+            - link "Tools" [ref=e164] [cursor=pointer]:
+              - /url: /tools
+          - generic [ref=e165]:
+            - generic [ref=e166]: Parts
+            - link "Hotends" [ref=e167] [cursor=pointer]:
+              - /url: /hotends
+            - link "Extruders" [ref=e168] [cursor=pointer]:
+              - /url: /extruders
+            - link "Electronics" [ref=e169] [cursor=pointer]:
+              - /url: /electronics
+            - link "Motion system" [ref=e170] [cursor=pointer]:
+              - /url: /motion-system
+            - link "Build surfaces" [ref=e171] [cursor=pointer]:
+              - /url: /build-surfaces
+          - generic [ref=e172]:
+            - generic [ref=e173]: Publication
+            - link "Newsletter" [ref=e174] [cursor=pointer]:
+              - /url: /newsletter
+            - link "About" [ref=e175] [cursor=pointer]:
+              - /url: /about
+            - link "Editorial policy" [ref=e176] [cursor=pointer]:
+              - /url: /about#editorial
+            - link "Affiliate disclosure" [ref=e177] [cursor=pointer]:
+              - /url: /about#affiliate
+            - link "Contact" [ref=e178] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - text: © 2026 Modern Makes.
+          - link "Privacy" [ref=e181] [cursor=pointer]:
+            - /url: /privacy
+          - text: ·
+          - link "Terms" [ref=e182] [cursor=pointer]:
+            - /url: /terms
+        - generic [ref=e183]: Modern Makes uses affiliate links. We may earn a commission when you buy through links on this site. This never influences our editorial recommendations.
