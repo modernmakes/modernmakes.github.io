@@ -1,0 +1,146 @@
+{
+  "hero": {
+    "autoRotate": true,
+    "interval": 6000,
+    "featured": {
+      "type": "review",
+      "href": "/printers/bambu-lab-x1e-review",
+      "category": "Review",
+      "title": "Bambu Lab X1E: The Enclosed Workhorse That Actually Delivers",
+      "date": "May 22, 2026",
+      "readTime": "12 min",
+      "verdict": "✓ Recommended",
+      "image": "/Media/articles/2026/05/bambu-lab-x1e-review/hero.webp",
+      "gradient": "linear-gradient(160deg,#1a2535,#0d1520 60%,#1a1008)"
+    },
+    "sidebar": [
+      {
+        "type": "review",
+        "href": "/filament/polymaker-polylite-asa-review",
+        "category": "Filament",
+        "title": "Polymaker PolyLite ASA: Finally a Spool That Doesn't Warp at 40°C",
+        "date": "May 20, 2026",
+        "readTime": "7 min",
+        "image": "/Media/articles/2026/05/polymaker-polylite-asa-review/hero.webp",
+        "gradient": "linear-gradient(135deg,#2a1a10,#1a0e08)"
+      },
+      {
+        "type": "news",
+        "href": "/news/bambu-ams-pro-announced",
+        "category": "News",
+        "title": "Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3",
+        "date": "May 19, 2026",
+        "readTime": "3 min",
+        "image": "/Media/articles/2026/05/bambu-ams-pro-announced/hero.webp",
+        "gradient": "linear-gradient(135deg,#1a1520,#0d0d18)"
+      },
+      {
+        "type": "guide",
+        "href": "/voron/hotends",
+        "category": "Voron · Hotends",
+        "title": "Revo Voron vs Rapido 2 vs Dragon HF: The 2026 Hotend Verdict",
+        "date": "May 17, 2026",
+        "readTime": "15 min",
+        "image": "/Media/articles/2026/05/voron-hotends-2026/hero.webp",
+        "gradient": "linear-gradient(135deg,#282018,#1a1510)"
+      }
+    ]
+  },
+  "ticker": [
+    { "text": "Prusa CORE One INDX 8-nozzle toolchanger now orderable", "category": "Launch", "href": "/" },
+    { "text": "Bambu PETG HF 1kg at $19.99 — 20% off this week", "category": "Deal", "href": "/" },
+    { "text": "Voron 2.4 BOM costs down 12% year-on-year", "category": "Community", "href": "/" },
+    { "text": "OrcaSlicer 2.3 drops Arachne wall generation", "category": "Update", "href": "/" },
+    { "text": "Running CF-PA12 on a stock printer: what you actually need", "category": "Guide", "href": "/" }
+  ],
+  "latestArticles": [
+    {
+      "type": "review",
+      "category": "Printers",
+      "title": "Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It",
+      "date": "May 24, 2026",
+      "verdict": "rec",
+      "verdictLabel": "✓ Rec",
+      "href": "/printers/prusa-core-one-plus",
+      "image": null,
+      "gradient": "linear-gradient(135deg,#1f2010,#131708)"
+    },
+    {
+      "type": "guide",
+      "category": "Filament",
+      "title": "Best PETG Filament 2026: We've Tracked 14 Spools. These Earn a Spot.",
+      "date": "May 23, 2026",
+      "verdict": "best",
+      "verdictLabel": "✓ Best",
+      "href": "/filament/best-petg-2026",
+      "image": null,
+      "gradient": "linear-gradient(135deg,#0d2020,#061414)"
+    },
+    {
+      "type": "guide",
+      "category": "Accessories",
+      "title": "The Best Bambu Build Plate for Every Filament Type",
+      "date": "May 21, 2026",
+      "price": "From $20",
+      "href": "/accessories/bambu-build-plates",
+      "image": null,
+      "gradient": "linear-gradient(135deg,#1a2828,#0d1818)"
+    },
+    {
+      "type": "news",
+      "category": "Software",
+      "title": "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.",
+      "date": "May 20, 2026",
+      "verdict": "upd",
+      "verdictLabel": "↑ Update",
+      "href": "/software/orcaslicer-2-3",
+      "image": null,
+      "gradient": "linear-gradient(135deg,#1a1520,#0d0d18)"
+    }
+  ]
+,
+"tools": [
+  {
+    "name": "Flowrate Calculator",
+    "description": "Find your printer's maximum volumetric flow rate",
+    "href": "/tools/flowrate-calculator",
+    "unit": "mm³/s",
+    "category": "Calibration",
+    "icon": "flow"
+  },
+  {
+    "name": "Print Cost Estimator",
+    "description": "Calculate filament, time, and power costs per print",
+    "href": "/tools/cost-calculator",
+    "unit": "$/print",
+    "category": "Planning",
+    "icon": "cost"
+  },
+  {
+    "name": "Filament Converter",
+    "description": "Convert between filament length and weight",
+    "href": "/tools/filament-converter",
+    "unit": "g ↔ m",
+    "category": "Utility",
+    "icon": "convert"
+  }
+],
+"ecosystems": [
+  {
+    "name": "Voron",
+    "slug": "voron",
+    "status": "live",
+    "badge": "Launch",
+    "description": "12 subsystem pages. Interactive configurator. Full parts directory for hotends, extruders, motion system, electronics, and more.",
+    "variants": ["2.4 · 300mm", "2.4 · 350mm", "2.4 · 400mm", "Trident · 250mm", "Trident · 300mm", "Trident · 350mm"],
+    "href": "/voron",
+    "image": null,
+    "gradient": "linear-gradient(135deg,#0d1520,#080e18)"
+  },
+  { "name": "RatRig",   "slug": "ratrig", "status": "coming", "badge": "Phase 1", "description": "V-Core 4, 3.1, and 3", "href": "/ratrig",  "image": null, "gradient": "linear-gradient(135deg,#1a1008,#100a04)" },
+  { "name": "VzBot",    "slug": "vzbot",  "status": "coming", "badge": "Phase 1", "description": "235, 330, Goliath",   "href": "/vzbot",   "image": null, "gradient": "linear-gradient(135deg,#0d1510,#080e0a)" },
+  { "name": "HevORT",   "slug": "hevort", "status": "coming", "badge": "Phase 1", "description": "Standard variants",   "href": "/hevort",  "image": null, "gradient": "linear-gradient(135deg,#151020,#0d0a18)" },
+  { "name": "Annex K3", "slug": "k3",     "status": "coming", "badge": "Phase 2", "description": "K3 builds & mods",    "href": "/k3",      "image": null, "gradient": "linear-gradient(135deg,#201510,#180f08)" },
+  { "name": "Bambu Lab","slug": "bambu",  "status": "coming", "badge": "Mods",    "description": "X1C, P1S, H2D",       "href": "/bambu",   "image": null, "gradient": "linear-gradient(135deg,#102020,#081414)" }
+]
+}

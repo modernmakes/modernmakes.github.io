@@ -1,0 +1,385 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary navigation" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Modern Makes home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Modern Makes" [ref=e6]
+      - generic [ref=e7]:
+        - button "Printers" [ref=e9] [cursor=pointer]:
+          - text: Printers
+          - img [ref=e10]
+        - link "Filament" [ref=e12] [cursor=pointer]:
+          - /url: /filament
+        - link "Guides" [ref=e13] [cursor=pointer]:
+          - /url: /guides
+        - link "Tools" [ref=e14] [cursor=pointer]:
+          - /url: /tools
+        - link "News" [ref=e15] [cursor=pointer]:
+          - /url: /news
+      - generic [ref=e17]:
+        - textbox "Search" [ref=e18]:
+          - /placeholder: Search Modern Makes…
+        - button "Search" [ref=e19] [cursor=pointer]:
+          - img [ref=e20]
+  - generic [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]: Printers
+      - link [ref=e27] [cursor=pointer]:
+        - /url: /voron
+        - text: Voron
+    - link [ref=e29] [cursor=pointer]:
+      - /url: /filament
+      - text: Filament
+    - link [ref=e30] [cursor=pointer]:
+      - /url: /guides
+      - text: Guides
+    - link [ref=e31] [cursor=pointer]:
+      - /url: /tools
+      - text: Tools
+    - link [ref=e32] [cursor=pointer]:
+      - /url: /news
+      - text: News
+  - main [ref=e33]:
+    - region "Featured articles" [ref=e34]:
+      - 'link "Review Bambu Lab X1E: The Enclosed Workhorse That Actually Delivers May 22, 2026 · 12 min read · ✓ Recommended" [ref=e35] [cursor=pointer]':
+        - /url: /printers/bambu-lab-x1e-review
+        - generic [ref=e39]:
+          - generic [ref=e40]: Review
+          - 'heading "Bambu Lab X1E: The Enclosed Workhorse That Actually Delivers" [level=1] [ref=e41]'
+          - generic [ref=e42]:
+            - generic [ref=e43]: May 22, 2026
+            - generic [ref=e44]: ·
+            - generic [ref=e45]: 12 min read
+            - generic [ref=e46]: ·
+            - generic [ref=e47]: ✓ Recommended
+      - complementary [ref=e48]:
+        - 'link "Filament Filament Polymaker PolyLite ASA: Finally a Spool That Doesn''t Warp at 40°C May 20 · 7 min" [ref=e49] [cursor=pointer]':
+          - /url: /filament/polymaker-polylite-asa-review
+          - generic [ref=e51]: Filament
+          - generic [ref=e52]:
+            - generic [ref=e53]: Filament
+            - generic [ref=e54]: "Polymaker PolyLite ASA: Finally a Spool That Doesn't Warp at 40°C"
+            - generic [ref=e55]: May 20 · 7 min
+        - 'link "News News Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3 May 19 · 3 min" [ref=e56] [cursor=pointer]':
+          - /url: /news/bambu-ams-pro-announced
+          - generic [ref=e58]: News
+          - generic [ref=e59]:
+            - generic [ref=e60]: News
+            - generic [ref=e61]: "Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3"
+            - generic [ref=e62]: May 19 · 3 min
+        - 'link "Voron · Hotends Voron · Hotends Revo Voron vs Rapido 2 vs Dragon HF: The 2026 Hotend Verdict May 17 · 15 min" [ref=e63] [cursor=pointer]':
+          - /url: /voron/hotends
+          - generic [ref=e65]: Voron · Hotends
+          - generic [ref=e66]:
+            - generic [ref=e67]: Voron · Hotends
+            - generic [ref=e68]: "Revo Voron vs Rapido 2 vs Dragon HF: The 2026 Hotend Verdict"
+            - generic [ref=e69]: May 17 · 15 min
+    - marquee "Latest news" [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e72]: Latest
+        - generic [ref=e74]:
+          - link "Launch Prusa CORE One INDX 8-nozzle toolchanger now orderable" [ref=e75] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e76]: Launch
+            - generic [ref=e77]: Prusa CORE One INDX 8-nozzle toolchanger now orderable
+            - generic [ref=e78]: ·
+          - link "Deal Bambu PETG HF 1kg at $19.99 — 20% off this week" [ref=e79] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e80]: Deal
+            - generic [ref=e81]: Bambu PETG HF 1kg at $19.99 — 20% off this week
+            - generic [ref=e82]: ·
+          - link "Community Voron 2.4 BOM costs down 12% year-on-year" [ref=e83] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e84]: Community
+            - generic [ref=e85]: Voron 2.4 BOM costs down 12% year-on-year
+            - generic [ref=e86]: ·
+          - link "Update OrcaSlicer 2.3 drops Arachne wall generation" [ref=e87] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e88]: Update
+            - generic [ref=e89]: OrcaSlicer 2.3 drops Arachne wall generation
+            - generic [ref=e90]: ·
+          - 'link "Guide Running CF-PA12 on a stock printer: what you actually need" [ref=e91] [cursor=pointer]':
+            - /url: /
+            - generic [ref=e92]: Guide
+            - generic [ref=e93]: "Running CF-PA12 on a stock printer: what you actually need"
+            - generic [ref=e94]: ·
+          - link "Launch Prusa CORE One INDX 8-nozzle toolchanger now orderable" [ref=e95] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e96]: Launch
+            - generic [ref=e97]: Prusa CORE One INDX 8-nozzle toolchanger now orderable
+            - generic [ref=e98]: ·
+          - link "Deal Bambu PETG HF 1kg at $19.99 — 20% off this week" [ref=e99] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e100]: Deal
+            - generic [ref=e101]: Bambu PETG HF 1kg at $19.99 — 20% off this week
+            - generic [ref=e102]: ·
+          - link "Community Voron 2.4 BOM costs down 12% year-on-year" [ref=e103] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e104]: Community
+            - generic [ref=e105]: Voron 2.4 BOM costs down 12% year-on-year
+            - generic [ref=e106]: ·
+          - link "Update OrcaSlicer 2.3 drops Arachne wall generation" [ref=e107] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e108]: Update
+            - generic [ref=e109]: OrcaSlicer 2.3 drops Arachne wall generation
+            - generic [ref=e110]: ·
+          - 'link "Guide Running CF-PA12 on a stock printer: what you actually need" [ref=e111] [cursor=pointer]':
+            - /url: /
+            - generic [ref=e112]: Guide
+            - generic [ref=e113]: "Running CF-PA12 on a stock printer: what you actually need"
+    - region "Latest articles" [ref=e114]:
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]: Latest
+          - link "All articles →" [ref=e118] [cursor=pointer]:
+            - /url: /latest
+        - generic [ref=e119]:
+          - 'link "Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It" [ref=e120] [cursor=pointer]':
+            - /url: /printers/prusa-core-one-plus
+            - generic [ref=e123]: Printers
+            - generic [ref=e124]:
+              - generic [ref=e125]: Printers
+              - generic [ref=e126]: "Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It"
+              - generic [ref=e127]:
+                - generic [ref=e128]: May 24, 2026
+                - generic [ref=e129]: ✓ Rec
+          - 'link "Best PETG Filament 2026: We''ve Tracked 14 Spools. These Earn a Spot." [ref=e130] [cursor=pointer]':
+            - /url: /filament/best-petg-2026
+            - generic [ref=e133]: Filament
+            - generic [ref=e134]:
+              - generic [ref=e135]: Filament
+              - generic [ref=e136]: "Best PETG Filament 2026: We've Tracked 14 Spools. These Earn a Spot."
+              - generic [ref=e137]:
+                - generic [ref=e138]: May 23, 2026
+                - generic [ref=e139]: ✓ Best
+          - link "The Best Bambu Build Plate for Every Filament Type" [ref=e140] [cursor=pointer]:
+            - /url: /accessories/bambu-build-plates
+            - generic [ref=e143]: Accessories
+            - generic [ref=e144]:
+              - generic [ref=e145]: Accessories
+              - generic [ref=e146]: The Best Bambu Build Plate for Every Filament Type
+              - generic [ref=e147]:
+                - generic [ref=e148]: May 21, 2026
+                - generic [ref=e149]: From $20
+          - link "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed." [ref=e150] [cursor=pointer]:
+            - /url: /software/orcaslicer-2-3
+            - generic [ref=e153]: Software
+            - generic [ref=e154]:
+              - generic [ref=e155]: Software
+              - generic [ref=e156]: OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.
+              - generic [ref=e157]:
+                - generic [ref=e158]: May 20, 2026
+                - generic [ref=e159]: ↑ Update
+    - region "Newsletter signup" [ref=e160]:
+      - generic [ref=e162]:
+        - generic [ref=e163]:
+          - generic [ref=e164]: Free Weekly Newsletter
+          - generic [ref=e165]: The 3D printing briefing
+          - generic [ref=e166]: What's worth buying, building, and following — every Tuesday.
+        - generic [ref=e167]:
+          - generic [ref=e168]:
+            - textbox "Email address" [ref=e169]:
+              - /placeholder: your@email.com
+            - button "Subscribe" [ref=e170] [cursor=pointer]
+          - generic [ref=e171]: Free, always. No spam.
+    - region "Printer ecosystem hubs" [ref=e172]:
+      - generic [ref=e173]:
+        - generic [ref=e174]:
+          - generic [ref=e175]: Printer ecosystems
+          - heading "The Voron ecosystem, fully mapped." [level=2] [ref=e176]
+          - paragraph [ref=e177]: Every part, every upgrade, every build path — for Voron 2.4 and Trident. The most complete self-build resource anywhere.
+        - link "Explore the Voron ecosystem" [ref=e178] [cursor=pointer]:
+          - /url: /voron
+          - generic [ref=e179]:
+            - generic [ref=e180]: Voron
+            - generic [ref=e181]: Launch
+          - generic [ref=e182]:
+            - generic [ref=e183]: 2.4 · 300mm
+            - generic [ref=e184]: 2.4 · 350mm
+            - generic [ref=e185]: 2.4 · 400mm
+            - generic [ref=e186]: Trident · 250mm
+            - generic [ref=e187]: Trident · 300mm
+            - generic [ref=e188]: Trident · 350mm
+          - paragraph [ref=e189]: 12 subsystem pages. Interactive configurator. Full parts directory for hotends, extruders, motion system, electronics, and more.
+          - generic [ref=e190]:
+            - generic [ref=e191]: 12 pages · Configurator
+            - generic [ref=e192]: Explore →
+    - region "Builder content" [ref=e193]:
+      - generic [ref=e194]:
+        - generic [ref=e195]:
+          - heading "Builds & Prosumer" [level=2] [ref=e196]
+          - generic [ref=e197]: Deep coverage
+          - link "All build content →" [ref=e198] [cursor=pointer]:
+            - /url: /builds
+        - generic [ref=e199]:
+          - link [ref=e200] [cursor=pointer]:
+            - /url: /builds/voron-24-bom-2026
+            - article [ref=e201]:
+              - generic [ref=e203]: Voron · Build guide
+              - generic [ref=e204]:
+                - generic [ref=e205]: Voron · Build guide
+                - generic [ref=e206]: What a $1,400 Voron 2.4 BOM Actually Looks Like in 2026
+                - generic [ref=e207]: Parts costs are down 12% year-on-year. We priced out four realistic build paths — LDO kit, Formbot, China-source, and premium domestic.
+          - generic [ref=e208]:
+            - link [ref=e209] [cursor=pointer]:
+              - /url: /builds/rapido-2
+              - article [ref=e210]:
+                - generic [ref=e212]: Hotends · Overview
+                - generic [ref=e213]:
+                  - generic [ref=e214]: Hotends · Overview
+                  - generic [ref=e215]: The Rapido 2 Is Now the Default Voron Hotend. Here's Why.
+                  - generic [ref=e216]: May 18 · 9 min
+            - link [ref=e217] [cursor=pointer]:
+              - /url: /builds/cf-pa12-guide
+              - article [ref=e218]:
+                - generic [ref=e220]: Materials · Guide
+                - generic [ref=e221]:
+                  - generic [ref=e222]: Materials · Guide
+                  - generic [ref=e223]: "Running CF-PA12 on a Voron vs a Stock Printer: What You Actually Need"
+                  - generic [ref=e224]: May 14 · 11 min
+            - link [ref=e225] [cursor=pointer]:
+              - /url: /builds/galileo-2-vs-orbiter
+              - article [ref=e226]:
+                - generic [ref=e228]: Extruders · Comparison
+                - generic [ref=e229]:
+                  - generic [ref=e230]: Extruders · Comparison
+                  - generic [ref=e231]: "Galileo 2 vs Orbiter 2.0: The Community Has Spoken"
+                  - generic [ref=e232]: May 12 · 8 min
+    - generic [ref=e234]:
+      - generic [ref=e235]:
+        - generic [ref=e236]: Free tools
+        - generic [ref=e237]: Calculators for serious printers
+        - generic [ref=e238]: No sign-up required.
+      - generic [ref=e239]:
+        - link "Flowrate Calculator Volumetric mm³/s" [ref=e240] [cursor=pointer]:
+          - /url: /tools/flowrate-calculator
+          - generic [ref=e241]: ⚡
+          - generic [ref=e242]:
+            - generic [ref=e243]: Flowrate Calculator
+            - generic [ref=e244]: Volumetric mm³/s
+        - link "Print Cost Estimator Filament + time + power" [ref=e245] [cursor=pointer]:
+          - /url: /tools/cost-calculator
+          - generic [ref=e246]: 💰
+          - generic [ref=e247]:
+            - generic [ref=e248]: Print Cost Estimator
+            - generic [ref=e249]: Filament + time + power
+        - link "Filament Converter Length ↔ weight" [ref=e250] [cursor=pointer]:
+          - /url: /tools/filament-converter
+          - generic [ref=e251]: 📏
+          - generic [ref=e252]:
+            - generic [ref=e253]: Filament Converter
+            - generic [ref=e254]: Length ↔ weight
+        - link "All tools View all 7" [ref=e255] [cursor=pointer]:
+          - /url: /tools
+          - generic [ref=e256]: →
+          - generic [ref=e257]:
+            - generic [ref=e258]: All tools
+            - generic [ref=e259]: View all 7
+    - region "Newsletter preview" [ref=e260]:
+      - generic [ref=e261]:
+        - generic [ref=e262]:
+          - generic [ref=e263]: Weekly newsletter
+          - heading "The briefing your inbox has been missing" [level=2] [ref=e264]
+          - paragraph [ref=e265]: Every Tuesday. The most important launches, the best current deals, and one thing from the community worth paying attention to. Never padded.
+          - generic [ref=e266]:
+            - generic [ref=e269]:
+              - strong [ref=e270]: One lead story
+              - text: — the week's most important development
+            - generic [ref=e273]:
+              - strong [ref=e274]: 3–4 quick hits
+              - text: — launches, news, and deals
+            - generic [ref=e277]:
+              - strong [ref=e278]: Find of the week
+              - text: — one cool thing from the community
+            - generic [ref=e281]:
+              - strong [ref=e282]: Free, always
+              - text: — no paywall, no tracking pixels
+          - generic [ref=e283]:
+            - textbox "Email address" [ref=e284]:
+              - /placeholder: your@email.com
+            - button "Join the briefing →" [ref=e285] [cursor=pointer]
+            - generic [ref=e286]: Free. No spam. Unsubscribe any time.
+        - generic [ref=e287]:
+          - generic [ref=e288]:
+            - generic [ref=e289]: ModernMakes
+            - generic [ref=e290]: The 3D printing enthusiast's weekly briefing
+          - generic [ref=e291]:
+            - generic [ref=e292]: "Issue #14 · May 20, 2026"
+            - generic [ref=e293]: Bambu's AMS Pro changes the multi-material calculus
+            - generic [ref=e294]: "Sixteen spools. Active drying. Humidity monitoring. Two weeks in, the verdict is: it's the enclosure the AMS should have shipped with in 2023."
+            - link "Read the full issue →" [ref=e295] [cursor=pointer]:
+              - /url: /newsletter
+            - separator [ref=e296]
+            - generic [ref=e297]: This week's quick hits
+            - generic [ref=e298]: Launch — Prusa CORE One INDX orderable now
+            - generic [ref=e299]: Deal — Bambu PETG HF 1kg at $19.99 — 20% off
+            - generic [ref=e300]: Community — Voron 2.4 BOM costs down 12% YoY
+  - contentinfo [ref=e301]:
+    - generic [ref=e302]:
+      - generic [ref=e303]:
+        - generic [ref=e304]:
+          - link "Modern Makes home" [ref=e305] [cursor=pointer]:
+            - /url: /
+            - img "Modern Makes" [ref=e306]
+          - paragraph [ref=e307]: The editorial voice of the 3D printing enthusiast.
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - generic [ref=e310]: Printers
+            - link "Voron" [ref=e311] [cursor=pointer]:
+              - /url: /voron
+          - generic [ref=e312]:
+            - generic [ref=e313]: Editorial
+            - link "Filament" [ref=e314] [cursor=pointer]:
+              - /url: /filament
+            - link "Guides" [ref=e315] [cursor=pointer]:
+              - /url: /guides
+            - link "News" [ref=e316] [cursor=pointer]:
+              - /url: /news
+            - link "Tools" [ref=e317] [cursor=pointer]:
+              - /url: /tools
+          - generic [ref=e318]:
+            - generic [ref=e319]: Parts
+            - link "Hotends" [ref=e320] [cursor=pointer]:
+              - /url: /hotends
+            - link "Extruders" [ref=e321] [cursor=pointer]:
+              - /url: /extruders
+            - link "Electronics" [ref=e322] [cursor=pointer]:
+              - /url: /electronics
+            - link "Motion system" [ref=e323] [cursor=pointer]:
+              - /url: /motion-system
+            - link "Build surfaces" [ref=e324] [cursor=pointer]:
+              - /url: /build-surfaces
+          - generic [ref=e325]:
+            - generic [ref=e326]: Publication
+            - link "Newsletter" [ref=e327] [cursor=pointer]:
+              - /url: /newsletter
+            - link "About" [ref=e328] [cursor=pointer]:
+              - /url: /about
+            - link "Editorial policy" [ref=e329] [cursor=pointer]:
+              - /url: /about#editorial
+            - link "Affiliate disclosure" [ref=e330] [cursor=pointer]:
+              - /url: /about#affiliate
+            - link "Contact" [ref=e331] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e332]:
+        - generic [ref=e333]:
+          - text: © 2026 Modern Makes.
+          - link "Privacy" [ref=e334] [cursor=pointer]:
+            - /url: /privacy
+          - text: ·
+          - link "Terms" [ref=e335] [cursor=pointer]:
+            - /url: /terms
+        - generic [ref=e336]: Modern Makes uses affiliate links. We may earn a commission when you buy through links on this site. This never influences our editorial recommendations.
+  - generic [ref=e339]:
+    - button "Menu" [ref=e340]:
+      - img [ref=e342]
+      - generic: Menu
+    - button "Inspect" [ref=e346]:
+      - img [ref=e348]
+      - generic: Inspect
+    - button "Audit" [ref=e350]:
+      - img [ref=e352]
+      - generic: Audit
+    - button "Settings" [ref=e355]:
+      - img [ref=e357]
+      - generic: Settings

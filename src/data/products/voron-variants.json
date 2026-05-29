@@ -1,0 +1,73 @@
+{
+  "printer": "voron",
+  "printerLabel": "Voron",
+  "variants": [
+    {
+      "id": "voron-2-4-300",
+      "label": "Voron 2.4 · 300mm",
+      "shortLabel": "2.4 · 300",
+      "series": "2.4",
+      "buildVolume": "300×300×280mm",
+      "zDrive": "4-point gantry-mounted",
+      "motion": "CoreXY"
+    },
+    {
+      "id": "voron-2-4-350",
+      "label": "Voron 2.4 · 350mm",
+      "shortLabel": "2.4 · 350",
+      "series": "2.4",
+      "buildVolume": "350×350×330mm",
+      "zDrive": "4-point gantry-mounted",
+      "motion": "CoreXY"
+    },
+    {
+      "id": "voron-2-4-400",
+      "label": "Voron 2.4 · 400mm",
+      "shortLabel": "2.4 · 400",
+      "series": "2.4",
+      "buildVolume": "400×400×380mm",
+      "zDrive": "4-point gantry-mounted",
+      "motion": "CoreXY"
+    },
+    {
+      "id": "voron-trident-250",
+      "label": "Voron Trident · 250mm",
+      "shortLabel": "Trident · 250",
+      "series": "trident",
+      "buildVolume": "250×250×250mm",
+      "zDrive": "3-point leadscrew",
+      "motion": "CoreXY"
+    },
+    {
+      "id": "voron-trident-300",
+      "label": "Voron Trident · 300mm",
+      "shortLabel": "Trident · 300",
+      "series": "trident",
+      "buildVolume": "300×300×290mm",
+      "zDrive": "3-point leadscrew",
+      "motion": "CoreXY"
+    },
+    {
+      "id": "voron-trident-350",
+      "label": "Voron Trident · 350mm",
+      "shortLabel": "Trident · 350",
+      "series": "trident",
+      "buildVolume": "350×350×340mm",
+      "zDrive": "3-point leadscrew",
+      "motion": "CoreXY"
+    }
+  ],
+  "subsystems": [
+    { "id": "hotends", "label": "Hotends", "icon": "🔥", "description": "Max temp, flow rate, toolhead compatibility", "partCount": 8 },
+    { "id": "extruders", "label": "Extruders", "icon": "⚙️", "description": "Gear ratio, weight, toolhead fit", "partCount": 6 },
+    { "id": "motion-system", "label": "Motion System", "icon": "🔩", "description": "Rails, belts, pulleys, idlers, AWD", "partCount": 14 },
+    { "id": "gantry", "label": "Gantry", "icon": "📐", "description": "Aluminum vs carbon fiber, stiffeners", "partCount": 5 },
+    { "id": "z-system", "label": "Z System", "icon": "↕️", "description": "Motors, leadscrews, Z joints", "partCount": 9 },
+    { "id": "electronics", "label": "Electronics", "icon": "💻", "description": "MCU, host, CAN bus, PSU", "partCount": 12 },
+    { "id": "probe-system", "label": "Probe System", "icon": "📡", "description": "Tap, Klicky, Beacon, Eddy", "partCount": 5 },
+    { "id": "bed", "label": "Bed & Surfaces", "icon": "🟦", "description": "Heaters, PEI, magnetic bases", "partCount": 8 },
+    { "id": "enclosure", "label": "Enclosure & Filtration", "icon": "🏠", "description": "Panels, sealing, Nevermore, HEPA", "partCount": 10 },
+    { "id": "toolhead", "label": "Toolhead & Mounts", "icon": "🛠", "description": "Stealthburner, Xol, Dragon Burner", "partCount": 7 },
+    { "id": "lighting", "label": "Lighting & Cameras", "icon": "💡", "description": "LED strips, nozzle cams, timelapse", "partCount": 6 }
+  ]
+}

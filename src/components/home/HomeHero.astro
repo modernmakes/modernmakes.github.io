@@ -1,0 +1,472 @@
+---
+import heroData from '../../data/homepage.json';
+const { featured, sidebar } = heroData.hero;
+const intervalMs = heroData.hero.interval ?? 6000;
+
+const slides = [featured as any, ...(sidebar as any[])];
+
+function bgStyle(slide: any) {
+  if (slide.image) {
+    return `background-image: url('${slide.image}'); background-size: cover; background-position: center 15%;`;
+  }
+  return `background: ${slide.gradient};`;
+}
+---
+
+<section class="hero" aria-label="Featured articles">
+
+  <div class="hero-slides">
+    {slides.map((slide, i) => (
+      <div class:list={['hero-slide', { 'is-active': i === 0 }]} data-index={i}>
+        <div
+          class:list={['hero-bg', { 'kb-active': i === 0 }]}
+          style={bgStyle(slide)}
+        ></div>
+        <div class:list={['hero-overlay', { 'hero-overlay--photo': !!slide.image }]}></div>
+        <a href={slide.href} class="hero-content" tabindex={i === 0 ? 0 : -1}>
+          <div class="hero-content-inner">
+            <span class="hero-cat">{slide.category}</span>
+            <h2 class="hero-title">{slide.title}</h2>
+            <div class="hero-meta">
+              <span>{slide.date}</span>
+              {slide.readTime && (
+                <>
+                  <span class="hero-sep">·</span>
+                  <span>{slide.readTime} read</span>
+                </>
+              )}
+              {slide.verdict && (
+                <>
+                  <span class="hero-sep">·</span>
+                  <span class="hero-verdict">{slide.verdict}</span>
+                </>
+              )}
+            </div>
+          </div>
+        </a>
+      </div>
+    ))}
+
+    <div class="hero-dots" aria-hidden="true">
+      {slides.map((_, i) => (
+        <button
+          class:list={['hero-dot', { active: i === 0 }]}
+          data-goto={i}
+          aria-label={`Go to slide ${i + 1}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+
+  <aside class="hero-sidebar">
+    {slides.map((story, i) => (
+      <a
+        href={story.href}
+        class:list={['hero-story', { 'is-hidden': i === 0 }]}
+        data-goto={i}
+      >
+        <div class="hero-story-img" style={`background: ${story.gradient};`}>
+          <span class="hero-story-label">{story.category}</span>
+        </div>
+        <div class="hero-story-body">
+          <div class="hero-story-cat">{story.category}</div>
+          <div class="hero-story-title">{story.title}</div>
+          <div class="hero-story-meta">{story.date}{story.readTime ? ` · ${story.readTime}` : ''}</div>
+        </div>
+      </a>
+    ))}
+  </aside>
+
+</section>
+
+<style is:global>
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 620px;
+    overflow: hidden;
+    opacity: 0;
+    animation: hero-enter 600ms 80ms cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-slides {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 600ms ease;
+    pointer-events: none;
+  }
+
+  .hero-slide.is-active {
+    opacity: 1;
+    z-index: 1;
+    pointer-events: all;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    transform-origin: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero-bg.kb-active {
+    animation: ken-burns 7s ease-out forwards;
+  }
+
+  @keyframes ken-burns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.04); }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top,  rgba(0,0,0,.90) 0%, rgba(0,0,0,.4) 40%, rgba(0,0,0,.15) 70%, transparent 100%),
+      linear-gradient(to right, rgba(0,0,0,.3) 0%, transparent 60%);
+  }
+
+  .hero-overlay--photo {
+    background:
+      linear-gradient(to top,   rgba(0,0,0,.88) 0%, rgba(0,0,0,.45) 35%, rgba(0,0,0,.1) 65%, transparent 100%),
+      linear-gradient(to right, rgba(0,0,0,.75) 0%, rgba(0,0,0,.2) 45%, transparent 70%);
+  }
+
+  .hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0 40px 40px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .hero-content-inner { max-width: 560px; }
+
+  .hero-cat {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: var(--fd);
+    font-size: clamp(22px, 3.5vw + 8px, 42px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.02;
+    letter-spacing: -.5px;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 20px rgba(0,0,0,.3);
+  }
+
+  .hero-meta {
+    font-family: var(--fm);
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hero-sep { opacity: .35; }
+
+  .hero-verdict {
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 3px;
+    background: rgba(255,90,31,.18);
+    border: 1px solid rgba(255,90,31,.35);
+    color: var(--accent-mid);
+    letter-spacing: .03em;
+  }
+
+  .hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 3;
+  }
+
+  .hero-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.3);
+    border: none;
+    cursor: pointer;
+    transition: background 200ms, transform 200ms;
+    padding: 0;
+  }
+
+  .hero-dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  .hero-sidebar {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    top: 40px;
+    width: 280px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .hero-story {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 10px;
+    align-items: start;
+    background: rgba(10,10,10,.72);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 8px;
+    padding: 10px 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .hero-story:hover {
+    background: rgba(20,20,20,.85);
+    border-color: rgba(255,255,255,.18);
+    transform: translateX(-2px);
+  }
+
+  .hero-story.is-hidden { display: none; }
+
+  .hero-story-img {
+    width: 60px;
+    height: 46px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hero-story-label {
+    font-family: var(--fd);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.3);
+    text-align: center;
+    padding: 0 3px;
+    line-height: 1.2;
+  }
+
+  .hero-story-cat {
+    font-family: var(--fu);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+
+  .hero-story-title {
+    font-family: var(--fd);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+
+  .hero-story-meta {
+    font-family: var(--fm);
+    font-size: 10px;
+    color: rgba(255,255,255,.35);
+  }
+
+  /* ── ULTRAWIDE ── */
+  @media (min-width: 1800px) {
+    .hero { height: 620px; }
+    .hero-bg[style*="background-image"] { background-position: 65% center; }
+  }
+
+  /* ── TABLET ── */
+  @media (max-width: 1024px) {
+    .hero {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-slides {
+      position: relative;
+      height: 460px;
+      flex-shrink: 0;
+    }
+    .hero-bg[style*="background-image"] { background-position: center center; }
+    .hero-title { letter-spacing: -.3px; }
+    .hero-sidebar {
+  position: static;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--black);
+  height: auto;
+  top: auto; right: auto; bottom: auto;
+  flex-shrink: 0;
+}
+    .hero-sidebar::-webkit-scrollbar { display: none; }
+    .hero-story {
+  min-width: 0;
+  max-width: 100%;
+  flex-shrink: unset;
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.08);
+}
+    .hero-story:hover { transform: translateY(-1px); }
+    .hero-content { padding: 0 24px 32px; }
+    .hero-content-inner { max-width: 100%; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 767px) {
+    .hero-slides { height: 420px; }
+    .hero-bg[style*="background-image"] { background-position: 70% center; }
+    .hero-overlay--photo {
+      background:
+        linear-gradient(to top,   rgba(0,0,0,.92) 0%, rgba(0,0,0,.55) 40%, rgba(0,0,0,.15) 70%, transparent 100%),
+        linear-gradient(to right, rgba(0,0,0,.6)  0%, transparent 70%);
+    }
+    .hero-title { letter-spacing: -.3px; }
+    .hero-content { padding: 0 20px 28px; }
+	.hero-sidebar { padding: 10px 20px; gap: 8px; }    
+/* Single consistent min/max — no conflicting rules */
+    .hero-story {
+  min-width: 0;
+  max-width: 100%;
+}
+    .hero-story-title {
+      font-size: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .hero-cat { font-size: 9px; padding: 3px 8px; margin-bottom: 8px; }
+    .hero-meta { font-size: 10px; gap: 6px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-slides { height: 360px; }
+    .hero-bg[style*="background-image"] { background-position: center center; }
+    .hero-story {
+  min-width: 0;
+  max-width: 100%;
+}
+  }
+</style>
+
+<script define:vars={{ intervalMs }}>
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    const slideEls    = hero.querySelectorAll('.hero-slide');
+    const storyEls    = hero.querySelectorAll('.hero-story');
+    const dotEls      = hero.querySelectorAll('.hero-dot');
+    const contentLinks = hero.querySelectorAll('.hero-content');
+    const total = slideEls.length;
+    let current = 0;
+    let timer = null;
+
+    function activateSlide(idx) {
+      const next = ((idx % total) + total) % total;
+      // Fixed: removed the broken early-return that prevented looping
+      if (next === current) return;
+
+      slideEls[current].classList.remove('is-active');
+      storyEls[current].classList.remove('is-hidden');
+      dotEls[current].classList.remove('active');
+      if (contentLinks[current]) contentLinks[current].setAttribute('tabindex', '-1');
+
+      current = next;
+
+      slideEls[current].classList.add('is-active');
+      storyEls[current].classList.add('is-hidden');
+      dotEls[current].classList.add('active');
+      if (contentLinks[current]) contentLinks[current].removeAttribute('tabindex');
+
+      const bg = slideEls[current].querySelector('.hero-bg');
+      if (bg) {
+        bg.classList.remove('kb-active');
+        void bg.offsetWidth;
+        bg.classList.add('kb-active');
+      }
+    }
+
+    function startTimer() {
+      stopTimer();
+      timer = setInterval(() => activateSlide(current + 1), intervalMs);
+    }
+
+    function stopTimer() {
+      if (timer !== null) { clearInterval(timer); timer = null; }
+    }
+
+    dotEls.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        stopTimer();
+        activateSlide(i);
+        startTimer();
+      });
+    });
+
+    storyEls.forEach((card, i) => {
+      card.addEventListener('click', (e) => {
+        if (i !== current) {
+          e.preventDefault();
+          stopTimer();
+          activateSlide(i);
+          startTimer();
+        }
+      });
+    });
+
+    hero.addEventListener('mouseenter', stopTimer);
+    hero.addEventListener('mouseleave', startTimer);
+
+    startTimer();
+  }
+</script>

@@ -1,0 +1,93 @@
+---
+// Base layout — wraps every page on the site
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  heroPage?: boolean;
+}
+const {
+  title,
+  description = "The editorial voice of the 3D printing enthusiast. Printers, filament, mods, and the culture that matters.",
+  ogImage = "/images/og-default.jpg",
+  heroPage = false
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>{title} — Modern Makes</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:title" content={`${title} — Modern Makes`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Modern Makes",
+    "url": "https://modernmakes.com",
+    "description": "Editorial coverage of 3D printers, filament, mods, and builds that matter.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://modernmakes.com/images/wordmark.svg"
+      }
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://modernmakes.com/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })}></script>
+  <slot name="head" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGR4N532H6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CGR4N532H6');
+  </script>
+</head>
+<body>
+  <slot name="nav" />
+  <main style={heroPage ? '' : 'padding-top: 80px;'}>
+    <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>
+    <slot />
+  </main>
+  <slot name="footer" />
+  <script>
+    document.querySelectorAll('form[data-nl]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const input = form.querySelector('input[type="email"]') as HTMLInputElement;
+        const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        if (input && input.value.includes('@')) {
+          const orig = btn.textContent;
+          btn.textContent = 'Subscribed ✓';
+          btn.style.background = '#2E7D32';
+          input.value = '';
+          input.placeholder = "You're on the list";
+          setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
+        } else if (input) {
+          input.style.borderColor = 'rgba(255,90,31,.7)';
+          setTimeout(() => input.style.borderColor = '', 1000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

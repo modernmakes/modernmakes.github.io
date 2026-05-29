@@ -1,0 +1,131 @@
+---
+import data from '../../data/homepage.json';
+const { ticker } = data;
+---
+
+<div class="ticker" role="marquee" aria-label="Latest news">
+  <div class="ticker-inner">
+    <span class="ticker-label">Latest</span>
+    <div class="ticker-track">
+      <div class="ticker-items">
+        {[...ticker, ...ticker].map((item, i) => (
+          <a href={item.href} class="ticker-item">
+            <span class="ticker-cat">{item.category}</span>
+            <span class="ticker-text">{item.text}</span>
+            {i < ticker.length * 2 - 1 && <span class="ticker-dot" aria-hidden="true">·</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .ticker {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,.06);
+    height: 38px;
+    overflow: hidden;
+  }
+
+  .ticker-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ticker-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    flex-shrink: 0;
+    padding: 0 20px 0 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ticker-label::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 14px;
+    width: 1px;
+    background: rgba(255,255,255,.12);
+  }
+
+  .ticker-track {
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-items {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker-scroll 40s linear infinite;
+    padding-left: 20px;
+  }
+
+  .ticker-track:hover .ticker-items {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    padding: 0 4px;
+  }
+
+  .ticker-cat {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .ticker-text {
+    font-family: var(--fu);
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+    flex-shrink: 0;
+  }
+
+  .ticker-dot {
+    font-size: 13px;
+    color: rgba(255,255,255,.2);
+    padding: 0 10px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .ticker {
+      height: 34px;
+    }
+
+    .ticker-items {
+      animation-duration: 28s;
+    }
+
+    .ticker-label {
+      padding: 0 14px 0 20px;
+    }
+  }
+</style>

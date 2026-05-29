@@ -1,0 +1,218 @@
+---
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" class="footer-logo" aria-label="Modern Makes home">
+          <img src="/images/wordmark.svg" alt="Modern Makes" class="footer-wordmark" />
+        </a>
+        <p class="footer-tagline">The editorial voice of the 3D printing enthusiast.</p>
+      </div>
+
+      <!-- Link columns -->
+      <div class="footer-cats">
+        <div>
+          <div class="footer-cat-label">Printers</div>
+          <a href="/voron" class="footer-link">Voron</a>
+        </div>
+        <div>
+          <div class="footer-cat-label">Editorial</div>
+          <a href="/filament" class="footer-link">Filament</a>
+          <a href="/guides"   class="footer-link">Guides</a>
+          <a href="/news"     class="footer-link">News</a>
+          <a href="/tools"    class="footer-link">Tools</a>
+        </div>
+        <div>
+          <div class="footer-cat-label">Parts</div>
+          <a href="/hotends"        class="footer-link">Hotends</a>
+          <a href="/extruders"      class="footer-link">Extruders</a>
+          <a href="/electronics"    class="footer-link">Electronics</a>
+          <a href="/motion-system"  class="footer-link">Motion system</a>
+          <a href="/build-surfaces" class="footer-link">Build surfaces</a>
+        </div>
+        <div>
+          <div class="footer-cat-label">Publication</div>
+          <a href="/newsletter"      class="footer-link">Newsletter</a>
+          <a href="/about"           class="footer-link">About</a>
+          <a href="/about#editorial" class="footer-link">Editorial policy</a>
+          <a href="/about#affiliate" class="footer-link">Affiliate disclosure</a>
+          <a href="/contact"         class="footer-link">Contact</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        &copy; 2026 Modern Makes.
+        <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a>
+      </div>
+      <div class="footer-disclosure">
+        Modern Makes uses affiliate links. We may earn a commission when you buy through links on this site. This never influences our editorial recommendations.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  /* ─── FOOTER ENTRANCE ─── */
+  .footer {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 500ms ease, transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── SHELL ─── */
+  .footer {
+    background: #111;
+    padding: 56px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── TOP SECTION ─── */
+  .footer-top {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* ─── LOGO ─── */
+  .footer-logo { display: inline-block; line-height: 0; }
+
+  .footer-wordmark {
+    height: 28px;
+    width: auto;
+    display: block;
+    margin-bottom: 16px;
+    opacity: 0.9;
+    transition: opacity 150ms ease;
+  }
+  .footer-wordmark:hover { opacity: 1; }
+
+  /* ─── TAGLINE ─── */
+  .footer-tagline {
+    font-family: var(--fb);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.6;
+    max-width: 180px;
+    font-style: italic;
+  }
+
+  /* ─── COLUMNS ─── */
+  .footer-cats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .footer-cat-label {
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+    margin-bottom: 12px;
+  }
+
+  .footer-link {
+    display: block;
+    font-family: var(--fu);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 3px 0;
+    transition: color 150ms ease;
+    line-height: 1.5;
+  }
+  .footer-link:hover { color: rgba(255, 255, 255, 0.8); }
+
+  /* ─── BOTTOM BAR ─── */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    flex-wrap: wrap;
+  }
+
+  .footer-legal {
+    font-family: var(--fu);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-legal a {
+    color: rgba(255, 255, 255, 0.25);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 150ms ease;
+  }
+  .footer-legal a:hover { color: rgba(255, 255, 255, 0.5); }
+
+  .footer-disclosure {
+    font-family: var(--fu);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.15);
+    max-width: 480px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-cats { grid-template-columns: repeat(2, 1fr); }
+    .footer-tagline { max-width: 100%; }
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner { padding: 0 20px; }
+    .footer-top { padding-bottom: 32px; }
+    .footer-cats { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-disclosure { text-align: left; max-width: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-cats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const footer = document.querySelector('.footer') as HTMLElement | null;
+    if (!footer) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          footer.classList.add('visible');
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    obs.observe(footer);
+  });
+</script>

@@ -1,0 +1,325 @@
+---
+// AdSlot.astro
+// Drop anywhere on any page. Pass the slot name as a prop.
+// If the slot is inactive, renders nothing — zero height, no layout shift.
+//
+// Usage:
+//   <AdSlot slot="home-above-footer" />
+//   <AdSlot slot="article-sidebar" />
+//
+// To activate an ad: set "active": true in src/data/ads.json
+// To swap format:    change "format" to "banner" | "text" | "card" | "programmatic"
+
+import adsData from '../data/ads.json';
+
+interface Props {
+  slotName: string;
+}
+const { slotName } = Astro.props;
+const slotConfig = (adsData.slots as Record<string, any>)[slotName];
+
+// If slot doesn't exist or isn't active, render nothing
+const isActive = slotConfig?.active === true;
+const format = slotConfig?.format;
+
+// Build UTM-tagged URL helper
+function withUTM(href: string, config: any): string {
+  if (!href) return '#';
+  const params = new URLSearchParams({
+    utm_source:   config.utm_source   ?? 'modernmakes',
+    utm_medium:   config.utm_medium   ?? 'display',
+    utm_campaign: config.utm_campaign ?? slotName,
+  });
+  const separator = href.includes('?') ? '&' : '?';
+  return `${href}${separator}${params.toString()}`;
+}
+---
+
+{isActive && (
+  <div class:list={['adslot', `adslot--${slotName}`, `adslot--${format}`]} data-slot={slotName}>
+
+    {/* ── BANNER ── */}
+    {format === 'banner' && slotConfig.banner && (
+      <div class="adslot-inner adslot-banner">
+        <span class="adslot-label">{slotConfig.label ?? 'Sponsored'}</span>
+        <a
+          href={withUTM(slotConfig.banner.href, slotConfig)}
+          class="adslot-banner-link"
+          target="_blank"
+          rel="noopener sponsored"
+          aria-label={slotConfig.banner.alt}
+        >
+          <img
+            src={slotConfig.banner.image}
+            alt={slotConfig.banner.alt}
+            width={slotConfig.banner.width}
+            height={slotConfig.banner.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </div>
+    )}
+
+    {/* ── TEXT AD ── */}
+    {format === 'text' && slotConfig.text && (
+      <div class="adslot-inner adslot-text">
+        <a
+          href={withUTM(slotConfig.text.href, slotConfig)}
+          class="adslot-text-link"
+          target="_blank"
+          rel="noopener sponsored"
+        >
+          <span class="adslot-label">{slotConfig.label ?? 'Sponsored'}</span>
+          <p class="adslot-text-eyebrow">{slotConfig.text.eyebrow}</p>
+          <p class="adslot-text-headline">{slotConfig.text.headline}</p>
+          <p class="adslot-text-desc">{slotConfig.text.description}</p>
+          <span class="adslot-text-cta">{slotConfig.text.cta}</span>
+        </a>
+      </div>
+    )}
+
+    {/* ── SPONSORED CARD ── */}
+    {format === 'card' && slotConfig.card && (
+      <div class="adslot-inner adslot-card">
+        <a
+          href={withUTM(slotConfig.card.href, slotConfig)}
+          class="adslot-card-link"
+          target="_blank"
+          rel="noopener sponsored"
+        >
+          <div class="adslot-card-inner">
+            {slotConfig.card.image && (
+              <div class="adslot-card-img">
+                <img
+                  src={slotConfig.card.image}
+                  alt={slotConfig.card.headline}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            <div class="adslot-card-body">
+              <span class="adslot-label">{slotConfig.label ?? 'Sponsored'}</span>
+              <p class="adslot-card-eyebrow">{slotConfig.card.eyebrow}</p>
+              <p class="adslot-card-headline">{slotConfig.card.headline}</p>
+              <p class="adslot-card-body-text">{slotConfig.card.body}</p>
+              <span class="adslot-card-cta">{slotConfig.card.cta}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    )}
+
+    {/* ── PROGRAMMATIC (AdSense) ── */}
+    {format === 'programmatic' && slotConfig.programmatic && (
+      <div class="adslot-inner adslot-programmatic">
+        <span class="adslot-label">{slotConfig.label ?? 'Advertisement'}</span>
+        <ins
+          class="adsbygoogle"
+          style="display:block"
+          data-ad-client={slotConfig.programmatic.client}
+          data-ad-slot={slotConfig.programmatic.slot}
+          data-ad-format={slotConfig.programmatic.format ?? 'auto'}
+          data-full-width-responsive={slotConfig.programmatic.responsive ? 'true' : 'false'}
+        ></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    )}
+
+  </div>
+)}
+
+<style is:global>
+/* ── AdSlot shell ── */
+/* When inactive the component renders nothing — no empty space */
+.adslot {
+  width: 100%;
+}
+
+/* Shared label */
+.adslot-label {
+  display: inline-block;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+  margin-bottom: 8px;
+}
+
+/* ──────────────────────────────
+   BANNER
+────────────────────────────── */
+.adslot-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 40px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.adslot-banner-link {
+  display: block;
+  transition: opacity .15s;
+}
+.adslot-banner-link:hover { opacity: .85; }
+.adslot-banner-link img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ──────────────────────────────
+   TEXT AD
+────────────────────────────── */
+.adslot-text {
+  padding: 0;
+}
+
+.adslot-text-link {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-s);
+  border-radius: 8px;
+  padding: 16px 20px;
+  transition: border-color .15s;
+  text-decoration: none;
+  color: inherit;
+}
+.adslot-text-link:hover {
+  border-color: var(--border-s);
+  border-left-color: var(--accent);
+}
+
+.adslot-text-eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--grey-2);
+  margin: 0 0 4px;
+}
+.adslot-text-headline {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  margin: 0 0 6px;
+}
+.adslot-text-desc {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--grey-1);
+  line-height: 1.65;
+  margin: 0 0 10px;
+}
+.adslot-text-cta {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ──────────────────────────────
+   SPONSORED CARD
+────────────────────────────── */
+.adslot-card {
+  padding: 0;
+}
+
+.adslot-card-link {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .15s, transform .15s;
+  text-decoration: none;
+  color: inherit;
+}
+.adslot-card-link:hover {
+  border-color: var(--border-s);
+  transform: translateY(-2px);
+}
+
+.adslot-card-inner {
+  display: flex;
+  flex-direction: column;
+}
+.adslot-card-img img {
+  width: 100%;
+  aspect-ratio: 16/7;
+  object-fit: cover;
+  display: block;
+}
+.adslot-card-body {
+  padding: 16px 20px;
+}
+.adslot-card-eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--grey-2);
+  margin: 0 0 4px;
+}
+.adslot-card-headline {
+  font-family: var(--fd);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+.adslot-card-body-text {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--grey-1);
+  line-height: 1.65;
+  margin: 0 0 12px;
+}
+.adslot-card-cta {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ──────────────────────────────
+   POSITION-SPECIFIC OVERRIDES
+────────────────────────────── */
+
+/* Above footer — full width, more breathing room */
+.adslot--home-above-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 40px;
+}
+
+/* Article sidebar — constrained width, no horizontal padding */
+.adslot--article-sidebar {
+  width: 100%;
+}
+.adslot--article-sidebar .adslot-banner {
+  padding: 0;
+  border: none;
+  background: transparent;
+  align-items: flex-start;
+}
+
+/* ──────────────────────────────
+   RESPONSIVE
+────────────────────────────── */
+@media (max-width: 768px) {
+  .adslot--home-above-footer {
+    padding: 32px 20px;
+  }
+  .adslot-banner {
+    padding: 20px;
+  }
+}
+</style>

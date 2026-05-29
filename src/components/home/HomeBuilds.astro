@@ -1,0 +1,348 @@
+---
+// HomeBuilds.astro
+// Dark-register prosumer section. Feature article left, 3 build cards right.
+---
+
+<section class="builds" aria-labelledby="builds-heading">
+  <div class="builds-inner">
+
+    <header class="builds-head">
+      <span class="builds-eyebrow">Builds &amp; Prosumer</span>
+      <h2 id="builds-heading" class="builds-title">For the people who read the BOM twice.</h2>
+      <a href="/guides" class="builds-all">All build content →</a>
+    </header>
+
+    <div class="builds-grid">
+
+      <!-- Feature article -->
+      <a href="/voron/builds/voron-24-bom-2026" class="build-feature" aria-label="Feature build article">
+        <article>
+          <div class="build-feature-img" aria-hidden="true">
+            <div class="build-feature-img-inner">
+              <svg width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect x="30" y="30" width="140" height="140" rx="4" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <rect x="55" y="55" width="90" height="90" rx="3" stroke="#FF5A1F" stroke-width=".75" stroke-dasharray="4 3" opacity=".4"/>
+                <circle cx="100" cy="100" r="22" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+                <circle cx="100" cy="100" r="6" fill="#FF5A1F" opacity=".5"/>
+                <line x1="30" y1="100" x2="55" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <line x1="145" y1="100" x2="170" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <line x1="100" y1="30" x2="100" y2="55" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <line x1="100" y1="145" x2="100" y2="170" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <rect x="30" y="30" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect x="162" y="30" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect x="30" y="162" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect x="162" y="162" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+              </svg>
+            </div>
+            <div class="build-feature-img-overlay"></div>
+            <span class="build-feature-tag">Voron · Build guide</span>
+          </div>
+          <div class="build-feature-body">
+            <h3 class="build-feature-title">What a $1,400 Voron 2.4 BOM Actually Looks Like in 2026</h3>
+            <p class="build-feature-excerpt">Parts costs are down 12% year-on-year. LDO kits, where to source extrusions, and whether the Formbot kit is still worth it. We mapped four realistic build paths.</p>
+            <span class="build-feature-meta">
+              <span class="build-feature-date">May 22, 2026</span>
+              <span class="build-feature-read">18 min</span>
+            </span>
+          </div>
+        </article>
+      </a>
+
+      <!-- Side cards -->
+      <div class="build-cards">
+
+        <a href="/voron/hotends#rapido-2" class="build-card">
+          <article>
+            <div class="build-card-img img-rapido" aria-hidden="true"></div>
+            <div class="build-card-body">
+              <span class="build-card-cat">Hotends · Review</span>
+              <h3 class="build-card-title">Phaetus Rapido 2: The High-Temp Hotend That Earns Its Spot</h3>
+              <div class="build-card-meta">
+                <span>May 18, 2026</span>
+                <span class="build-card-dot" aria-hidden="true"></span>
+                <span>9 min</span>
+              </div>
+            </div>
+          </article>
+        </a>
+
+        <a href="/guides/cf-pa12" class="build-card">
+          <article>
+            <div class="build-card-img img-pa12" aria-hidden="true"></div>
+            <div class="build-card-body">
+              <span class="build-card-cat">Materials · Guide</span>
+              <h3 class="build-card-title">Running CF-PA12 on a Stock Printer vs an Enclosed Voron: What You Actually Need</h3>
+              <div class="build-card-meta">
+                <span>May 14, 2026</span>
+                <span class="build-card-dot" aria-hidden="true"></span>
+                <span>11 min</span>
+              </div>
+            </div>
+          </article>
+        </a>
+
+        <a href="/guides/galileo-2-vs-orbiter-2" class="build-card">
+          <article>
+            <div class="build-card-img img-mod-hotend" aria-hidden="true"></div>
+            <div class="build-card-body">
+              <span class="build-card-cat">Extruders · Comparison</span>
+              <h3 class="build-card-title">Galileo 2 vs Orbiter 2.0: The Community Has Spoken</h3>
+              <div class="build-card-meta">
+                <span>May 12, 2026</span>
+                <span class="build-card-dot" aria-hidden="true"></span>
+                <span>8 min</span>
+              </div>
+            </div>
+          </article>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+/* Build card image gradients */
+.img-rapido    { background: linear-gradient(135deg, #201010, #180808); }
+.img-pa12      { background: linear-gradient(135deg, #0d1510, #080e0a); }
+.img-mod-hotend { background: linear-gradient(135deg, #282018, #1a1510); }
+/* ── HomeBuilds ── */
+.builds {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 52px 0;
+}
+.builds-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Header row */
+.builds-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+.builds-eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.builds-title {
+  font-family: var(--fd);
+  font-size: clamp(18px, 1.8vw + 8px, 24px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.2px;
+  margin: 0;
+}
+.builds-all {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,.3);
+  margin-left: auto;
+  transition: color .15s;
+  white-space: nowrap;
+}
+.builds-all:hover { color: rgba(255,255,255,.7); }
+
+/* 2-col grid: feature left (wider), cards right (narrower) */
+.builds-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* Feature article */
+.build-feature {
+  display: block;
+  background: #1c1c1c;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .15s, transform .15s;
+  height: 100%;
+}
+.build-feature:hover {
+  border-color: rgba(255,255,255,.18);
+  transform: translateY(-2px);
+}
+.build-feature article {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.build-feature-img {
+  position: relative;
+  width: 100%;
+  /* Fixed height instead of aspect-ratio so it doesn't balloon */
+  height: 220px;
+  background: linear-gradient(160deg, #0d1520 0%, #080e18 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.build-feature-img-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.build-feature-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 60%);
+}
+.build-feature-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  z-index: 1;
+}
+
+.build-feature-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.build-feature-title {
+  font-family: var(--fd);
+  font-size: clamp(18px, 1.6vw + 8px, 26px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -.2px;
+  margin: 0 0 10px;
+}
+.build-feature-excerpt {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: rgba(255,255,255,.42);
+  line-height: 1.7;
+  margin: 0 0 16px;
+  flex: 1;
+}
+.build-feature-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,.25);
+}
+.build-feature-read::before {
+  content: '·';
+  margin-right: 10px;
+}
+
+/* Side build cards — stretch to fill column height evenly */
+.build-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+.build-card {
+  display: block;
+  background: #222;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 9px;
+  overflow: hidden;
+  transition: border-color .15s, transform .15s;
+  flex: 1;
+}
+.build-card:hover {
+  border-color: rgba(255,255,255,.18);
+  transform: translateX(2px);
+}
+.build-card article {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  height: 100%;
+}
+.build-card-img {
+  width: 88px;
+  min-height: 80px;
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  align-self: stretch;
+}
+.build-card-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+}
+.build-card-cat {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: .8;
+}
+.build-card-title {
+  font-family: var(--fd);
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0;
+}
+.build-card-meta {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,.25);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+.build-card-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .builds-grid { grid-template-columns: 1fr; }
+  .build-feature { height: auto; }
+  .build-cards { flex-direction: row; height: auto; }
+  .build-card { flex: 1; }
+  .build-card article { grid-template-columns: 72px 1fr; }
+  .build-card-img { width: 72px; }
+}
+@media (max-width: 768px) {
+  .builds-inner { padding: 0 20px; }
+  .builds-head { flex-wrap: wrap; gap: 8px; }
+  .builds-all { margin-left: 0; }
+  .build-cards { flex-direction: column; }
+  .build-card { flex: none; }
+}
+</style>

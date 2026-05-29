@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+const label = 'guides'.charAt(0).toUpperCase() + 'guides'.slice(1);
+---
+<Base title={label}>
+  <Nav slot="nav" currentPath={'/guides'} />
+  <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
+    <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--black)">{label}</h1>
+    <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);margin:12px auto 24px;max-width:440px">This section is being built.</p>
+    <a href="/" style="font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+  </section>
+  <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "3D Printing Guides — Modern Makes",
+        "description": "Practical guides for 3D printing — calibration, materials, software, and getting the most from your machine.",
+        "url": "https://modernmakes.com/guides",
+        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
+          { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://modernmakes.com/guides" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>

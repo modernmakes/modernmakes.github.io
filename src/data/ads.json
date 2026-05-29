@@ -1,0 +1,77 @@
+{
+  "slots": {
+    "home-above-footer": {
+      "active": false,
+      "format": "text",
+      "label": "Sponsored",
+      "utm_source": "modernmakes",
+      "utm_medium": "display",
+      "utm_campaign": "home-above-footer",
+      "banner": {
+        "href": "https://example.com",
+        "image": "/images/ads/sponsor-banner.png",
+        "alt": "Sponsor name — short description",
+        "width": 1200,
+        "height": 90
+      },
+      "text": {
+        "href": "https://example.com",
+        "eyebrow": "Sponsored by Sponsor Name",
+        "headline": "Short punchy headline about the product",
+        "description": "One or two sentences about the sponsor's product or offer. Keep it honest and relevant to the audience.",
+        "cta": "Learn more →"
+      },
+      "card": {
+        "href": "https://example.com",
+        "eyebrow": "Sponsored",
+        "headline": "Short punchy headline",
+        "body": "Newsletter-style paragraph. Reads like editorial content but clearly labeled as sponsored.",
+        "cta": "See the deal →",
+        "image": null
+      },
+      "programmatic": {
+        "client": "ca-pub-XXXXXXXXXXXXXXXX",
+        "slot": "XXXXXXXXXX",
+        "format": "auto",
+        "responsive": true
+      }
+    },
+
+    "article-sidebar": {
+      "active": false,
+      "format": "text",
+      "label": "Sponsored",
+      "utm_source": "modernmakes",
+      "utm_medium": "display",
+      "utm_campaign": "article-sidebar",
+      "banner": {
+        "href": "https://example.com",
+        "image": "/images/ads/sponsor-sidebar.png",
+        "alt": "Sponsor name",
+        "width": 300,
+        "height": 250
+      },
+      "text": {
+        "href": "https://example.com",
+        "eyebrow": "Sponsored by Sponsor Name",
+        "headline": "Short punchy headline about the product",
+        "description": "One or two sentences about the sponsor's product or offer.",
+        "cta": "Learn more →"
+      },
+      "card": {
+        "href": "https://example.com",
+        "eyebrow": "Sponsored",
+        "headline": "Short punchy headline",
+        "body": "Newsletter-style paragraph. Reads like editorial but clearly labeled as sponsored.",
+        "cta": "See the deal →",
+        "image": null
+      },
+      "programmatic": {
+        "client": "ca-pub-XXXXXXXXXXXXXXXX",
+        "slot": "XXXXXXXXXX",
+        "format": "auto",
+        "responsive": true
+      }
+    }
+  }
+}

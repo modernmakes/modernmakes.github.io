@@ -1,0 +1,2 @@
+[ 5459451ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:4321/printers/bambu-lab-x1e-review:0
+[ 5459471ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:4321/favicon.ico:0

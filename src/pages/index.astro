@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeTicker from '../components/home/HomeTicker.astro';
+import HomeNewsletterCTA from '../components/home/HomeNewsletterCTA.astro';
+import HomeLatestArticles from '../components/home/HomeLatestArticles.astro';
+import HomeEcosystemHubs from '../components/home/HomeEcosystemHubs.astro';
+import HomeBuilds from '../components/home/HomeBuilds.astro';
+import HomeToolsTeaser from '../components/home/HomeToolsTeaser.astro';
+import HomeNewsletterPreview from '../components/home/HomeNewsletterPreview.astro';
+import AdSlot from '../components/AdSlot.astro';
+const currentPath = '/';
+---
+<Base title="The 3D Printing Enthusiast's Publication" description="Modern Makes — editorial coverage of 3D printers, filament, mods, and the builds that matter." heroPage={true}>
+  <Nav slot="nav" currentPath={currentPath} />
+  <HomeHero />
+  <HomeTicker />
+  <HomeLatestArticles />
+  <HomeNewsletterCTA />
+  <HomeEcosystemHubs />
+  <HomeBuilds />
+  <HomeToolsTeaser />
+  <HomeNewsletterPreview />
+  <AdSlot slotName="home-above-footer" />
+  <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Modern Makes — The 3D Printing Enthusiast's Publication",
+    "description": "Editorial coverage of 3D printers, filament, mods, and builds that matter.",
+    "url": "https://modernmakes.com",
+    "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" }
+      ]
+    }
+  })}></script>
+</Base>

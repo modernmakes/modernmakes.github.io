@@ -1,0 +1,247 @@
+---
+import data from '../../data/homepage.json';
+const tools = (data as any).tools ?? [];
+
+// SVG icons keyed by icon field
+const icons: Record<string, string> = {
+  flow: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  cost: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  convert: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/></svg>`,
+};
+---
+
+<section class="tools-section" aria-labelledby="tools-heading">
+  <div class="tools-container">
+
+    <header class="tools-header">
+      <div class="tools-header-text">
+        <p class="tools-eyebrow">Free Tools</p>
+        <h2 id="tools-heading" class="tools-headline">Calculators built for serious printers.</h2>
+        <p class="tools-sub">No sign-up. No fluff. Just the numbers you need.</p>
+      </div>
+      <a href="/tools" class="tools-all-link">View all tools →</a>
+    </header>
+
+    <div class="tools-grid">
+      {tools.map((tool: any) => (
+        <a
+          href={tool.href}
+          class="tool-card"
+          data-tool={tool.href}
+          aria-label={`${tool.name} — ${tool.description}`}
+        >
+          <div class="tool-card-icon" aria-hidden="true" set:html={icons[tool.icon] ?? icons.flow} />
+          <div class="tool-card-body">
+            <p class="tool-card-category">{tool.category}</p>
+            <p class="tool-card-name">{tool.name}</p>
+            <p class="tool-card-desc">{tool.description}</p>
+          </div>
+          <div class="tool-card-footer">
+            <span class="tool-card-unit">{tool.unit}</span>
+            <span class="tool-card-arrow">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style is:global>
+  .tools-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0;
+  }
+  .tools-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* Header */
+  .tools-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tools-header-text {}
+  .tools-eyebrow {
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .tools-headline {
+    font-family: var(--fd);
+    font-size: clamp(22px, 2vw + 10px, 32px);
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -.3px;
+    line-height: 1.05;
+    margin: 0 0 6px;
+  }
+  .tools-sub {
+    font-family: var(--fb);
+    font-size: 14px;
+    color: var(--grey-1);
+    font-style: italic;
+    margin: 0;
+  }
+  .tools-all-link {
+    font-family: var(--fu);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color .15s;
+    padding-bottom: 2px;
+  }
+  .tools-all-link:hover { color: var(--accent-dk); }
+
+  /* Tool cards grid */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
+  }
+  .tool-card:hover {
+    border-color: var(--accent);
+    background: var(--accent-t);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,90,31,.1);
+  }
+  .tool-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .tool-card-icon {
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    width: 22px;
+  }
+  .tool-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .tool-card-category {
+    font-family: var(--fu);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--grey-2);
+    margin: 0;
+  }
+  .tool-card-name {
+    font-family: var(--fd);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .tool-card-desc {
+    font-family: var(--fb);
+    font-size: 13px;
+    color: var(--grey-1);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .tool-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .tool-card-unit {
+    font-family: var(--fm);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(255,90,31,.08);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .tool-card-arrow {
+    font-size: 16px;
+    color: var(--grey-2);
+    transition: color .15s, transform .15s;
+  }
+  .tool-card:hover .tool-card-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .tools-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .tools-all-link { padding-bottom: 0; }
+  }
+  @media (max-width: 768px) {
+    .tools-section { padding: 40px 0; }
+    .tools-container { padding: 0 20px; }
+  }
+  @media (max-width: 560px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .tool-card { padding: 20px; }
+  }
+</style>
+
+<script>
+  // GA4 click tracking on tool cards
+  document.querySelectorAll('.tool-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const toolHref = (card as HTMLElement).dataset.tool ?? '';
+      const toolName = card.querySelector('.tool-card-name')?.textContent ?? '';
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'tool_click', {
+          tool_name: toolName,
+          tool_href: toolHref,
+          location: 'homepage_tools_section'
+        });
+      }
+    });
+  });
+</script>

@@ -1,0 +1,229 @@
+---
+import data from '../../data/homepage.json';
+const { latestArticles } = data;
+
+function bgStyle(card: any) {
+  if (card.image) {
+    return `background-image:url('${card.image}');background-size:cover;background-position:center;`;
+  }
+  return `background:${card.gradient};`;
+}
+---
+
+<section class="la-section" aria-label="Latest articles">
+  <div class="la-container">
+    <div class="la-head">
+      <span class="la-label">Latest</span>
+      <a href="/latest" class="la-all-link">All articles →</a>
+    </div>
+    <div class="la-grid">
+      {latestArticles.map((card, i) => (
+        <a href={card.href} class="la-card" data-index={i} aria-label={card.title}>
+          <div class="la-card-img" style={bgStyle(card)}>
+            <div class="la-card-img-overlay"></div>
+            <span class="la-card-img-cat">{card.category}</span>
+          </div>
+          <div class="la-card-body">
+            <div class="la-card-cat">{card.category}</div>
+            <div class="la-card-title">{card.title}</div>
+            <div class="la-card-footer">
+              <span class="la-card-date">{card.date}</span>
+              {card.verdict && (
+                <span class={`verdict verdict-${card.verdict}`}>{card.verdictLabel}</span>
+              )}
+              {card.price && (
+                <span class="la-card-price">{card.price}</span>
+              )}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .la-section {
+    background: var(--bg);
+    padding: 48px 40px;
+  }
+  .la-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .la-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .la-label {
+    font-family: var(--fd);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--accent);
+  }
+  .la-all-link {
+    font-size: 12px;
+    color: var(--grey-1);
+    font-family: var(--fu);
+    transition: color 150ms;
+  }
+  .la-all-link:hover { color: var(--black); }
+
+  .la-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .la-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: transform 200ms cubic-bezier(0.4,0,0.2,1),
+                box-shadow 200ms cubic-bezier(0.4,0,0.2,1),
+                border-color 200ms cubic-bezier(0.4,0,0.2,1),
+                opacity 380ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .la-card.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .la-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    border-color: var(--border-s);
+  }
+
+  .la-card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .la-card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.1) 50%, transparent 100%);
+  }
+  .la-card-img-cat {
+    font-family: var(--fu);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    position: relative;
+    z-index: 1;
+    padding: 0 12px 10px;
+  }
+
+  .la-card-body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .la-card-cat {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-family: var(--fu);
+  }
+  .la-card-title {
+    font-family: var(--fd);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    flex: 1;
+  }
+  .la-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    flex-wrap: wrap;
+  }
+  .la-card-date {
+    font-family: var(--fm);
+    font-size: 10px;
+    color: var(--grey-2);
+  }
+  .la-card-price {
+    font-family: var(--fm);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--black);
+    margin-left: auto;
+  }
+
+  /* Verdict badges */
+  .verdict {
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+  .verdict-rec  { background: rgba(34,197,94,.12);  color: #16a34a; }
+  .verdict-best { background: rgba(255,90,31,.12);  color: var(--accent); }
+  .verdict-upd  { background: rgba(59,130,246,.12); color: #3b82f6; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .la-section { padding: 40px 24px; }
+    .la-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  }
+  @media (max-width: 640px) {
+    .la-section { padding: 32px 20px; }
+    .la-grid { grid-template-columns: 1fr; gap: 10px; }
+    .la-card-img { aspect-ratio: 16/7; }
+    .la-card-title { font-size: 17px; }
+  }
+</style>
+
+<script>
+  // Staggered entrance with IntersectionObserver
+  // Cards start visible if JS is slow — opacity transition handles the rest
+  const cards = document.querySelectorAll('.la-card');
+  if (cards.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.index ?? 0);
+            setTimeout(() => {
+              entry.target.classList.add('card-visible');
+            }, idx * 60);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+    );
+    cards.forEach((card) => observer.observe(card));
+  }
+</script>
