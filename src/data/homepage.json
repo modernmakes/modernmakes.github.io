@@ -103,7 +103,7 @@
   {
     "name": "Flowrate Calculator",
     "description": "Find your printer's maximum volumetric flow rate",
-    "href": "/tools/flowrate-calculator",
+    "href": "/tools/flowrate",
     "unit": "mm³/s",
     "category": "Calibration",
     "icon": "flow"
@@ -111,7 +111,7 @@
   {
     "name": "Print Cost Estimator",
     "description": "Calculate filament, time, and power costs per print",
-    "href": "/tools/cost-calculator",
+    "href": "/tools/cost",
     "unit": "$/print",
     "category": "Planning",
     "icon": "cost"
