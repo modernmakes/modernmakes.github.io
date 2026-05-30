@@ -151,9 +151,9 @@
 .art-body {
   background: var(--bg);
   padding: 48px 0 64px;
-  /* z-index 2 so this section paints OVER the sticky header (z-index 1) */
+  /* isolation:isolate creates a new stacking context that paints over the sticky header (z-index:1) without triggering compositor layer conflicts from child hover transitions */
   position: relative;
-  z-index: 2;
+  isolation: isolate;
 }
 .art-body-container {
   max-width: 1200px;
@@ -377,11 +377,13 @@
 /* ── SIDEBAR ── */
 .art-sidebar {
   position: sticky;
-  /* Updated: sit below the sticky article header (~130px) plus nav (56px) */
-  top: 200px;
+  top: 100px;          /* default when header is not yet sticky; JS overrides dynamically */
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Prevent the sidebar from overflowing the viewport when it has many items */
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 .art-sb-box {
   background: var(--surface);
@@ -472,9 +474,9 @@
   background: var(--surface);
   border-top: 1px solid var(--border);
   padding: 48px 0;
-  /* z-index 2 — paints over sticky header just like .art-body */
+  /* isolation:isolate — same stacking context fix as .art-body */
   position: relative;
-  z-index: 2;
+  isolation: isolate;
 }
 .art-related-container {
   max-width: 1200px;
@@ -515,6 +517,7 @@
   display: flex;
   flex-direction: column;
   transition: border-color .15s, transform .15s;
+  will-change: transform;
 }
 .art-related-card:hover {
   border-color: var(--border-s);

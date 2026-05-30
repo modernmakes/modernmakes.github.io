@@ -21,11 +21,11 @@ const categories = [
     icon: '⚙️',
   },
   {
-    name: 'Motion Systems',
-    description: 'CoreXY conversion mods, belt routing, and motor mount kits for common printers.',
+    name: 'Motion Mods',
+    description: 'Community gantry mods, AWD conversions, and motion system upgrades for CoreXY printers.',
     href: '/hardware/motion',
     live: true,
-    count: '2 pages',
+    count: '1 mod live',
     icon: '🔄',
   },
   {
@@ -71,7 +71,7 @@ const featured = [
     verdict: 'COMMUNITY',
     verdictColor: '#1565C0',
     verdictBg: '#E3F2FD',
-    href: '/hardware/motion/mammoth3d',
+    href: '/hardware/motion/mammoth-awd-gantry-300',
     description: 'Full CoreXY conversion for Ender 3 — no new frame, uses existing extrusion.',
     gradient: 'linear-gradient(135deg, #0d1520, #1a1510)',
   },
@@ -169,6 +169,23 @@ const featured = [
             )
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- WIKI -->
+  <section style="padding:0 0 48px">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head-label">Reference Wiki</span>
+      </div>
+      <a href="/hardware/motion/corexy" class="hw-wiki-card">
+        <div class="hw-wiki-icon">📐</div>
+        <div class="hw-wiki-body">
+          <div class="hw-wiki-title">CoreXY Architecture</div>
+          <div class="hw-wiki-desc">How CoreXY kinematics work, belt routing, pros/cons, and which printers use this motion system.</div>
+        </div>
+        <span class="hw-wiki-arrow">→</span>
+      </a>
     </div>
   </section>
 
@@ -297,4 +314,22 @@ const featured = [
 @media (max-width: 480px) {
   .hw-cats-grid { grid-template-columns: 1fr; }
 }
+
+/* ── WIKI CARD ── */
+.hw-wiki-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color .15s, transform .15s;
+}
+.hw-wiki-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.hw-wiki-icon { font-size: 22px; flex-shrink: 0; }
+.hw-wiki-body { flex: 1; min-width: 0; }
+.hw-wiki-title { font-family: var(--fd); font-size: 16px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+.hw-wiki-desc { font-family: var(--fu); font-size: 12px; color: var(--g1); line-height: 1.5; }
+.hw-wiki-arrow { font-size: 14px; color: var(--g2); flex-shrink: 0; }
 </style>

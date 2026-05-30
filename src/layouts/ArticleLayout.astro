@@ -170,28 +170,28 @@ const relatedArticles = [
   const header   = document.getElementById('art-header');
   const sidebar  = document.querySelector<HTMLElement>('.art-sidebar');
 
-  function navHeight() {
-    return window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
-  }
-
-  /* Keep sidebar top below the sticky header */
-  function updateSidebarTop() {
-    if (!header || !sidebar) return;
-    const total = navHeight() + header.offsetHeight + 16;
-    sidebar.style.top = total + 'px';
+  /* Only adjust sidebar top on wide viewports — on ≤1024px sidebar is position:static */
+  function updateSidebarTop(isSticky: boolean) {
+    if (!header || !sidebar || window.innerWidth <= 1024) return;
+    sidebar.style.top = isSticky
+      ? (60 + header.offsetHeight + 16) + 'px'
+      : '100px';
   }
 
   if (sentinel && header) {
     const io = new IntersectionObserver(
       ([entry]) => {
-        header.classList.toggle('is-sticky', !entry.isIntersecting);
-        updateSidebarTop();
+        const sticky = !entry.isIntersecting;
+        header.classList.toggle('is-sticky', sticky);
+        updateSidebarTop(sticky);
       },
       { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
     );
     io.observe(sentinel);
   }
 
-  updateSidebarTop();
-  window.addEventListener('resize', updateSidebarTop, { passive: true });
+  updateSidebarTop(false);
+  window.addEventListener('resize', () => {
+    updateSidebarTop(header?.classList.contains('is-sticky') ?? false);
+  }, { passive: true });
 </script>

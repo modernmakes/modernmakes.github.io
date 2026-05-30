@@ -319,25 +319,26 @@ const relatedArticles = [
   const cmpBar         = document.querySelector<HTMLElement>('.cmp-bar');
   const sidebar        = document.querySelector<HTMLElement>('.art-sidebar');
 
-  function navH() {
-    return window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
-  }
-
   /* Position the comparison bar directly below the sticky article header */
   function stackCmpBar() {
     if (!stickyHeader || !cmpBar) return;
-    cmpBar.style.top = (navH() + stickyHeader.offsetHeight) + 'px';
+    const navH = window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
+    cmpBar.style.top = (navH + stickyHeader.offsetHeight) + 'px';
   }
 
-  function updateSidebarTop() {
-    if (!stickyHeader || !cmpBar || !sidebar) return;
-    sidebar.style.top = (navH() + stickyHeader.offsetHeight + cmpBar.offsetHeight + 16) + 'px';
+  function updateSidebarTop(isSticky: boolean) {
+    if (!stickyHeader || !cmpBar || !sidebar || window.innerWidth <= 1024) return;
+    if (isSticky) {
+      sidebar.style.top = (60 + stickyHeader.offsetHeight + cmpBar.offsetHeight + 16) + 'px';
+    } else {
+      sidebar.style.top = '100px';
+    }
   }
 
   function onStickyChange(isSticky: boolean) {
     stickyHeader?.classList.toggle('is-sticky', isSticky);
     stackCmpBar();
-    updateSidebarTop();
+    updateSidebarTop(isSticky);
   }
 
   if (stickySentinel && stickyHeader) {
@@ -348,8 +349,11 @@ const relatedArticles = [
   }
 
   stackCmpBar();
-  updateSidebarTop();
-  window.addEventListener('resize', () => { stackCmpBar(); updateSidebarTop(); }, { passive: true });
+  updateSidebarTop(false);
+  window.addEventListener('resize', () => {
+    stackCmpBar();
+    updateSidebarTop(stickyHeader?.classList.contains('is-sticky') ?? false);
+  }, { passive: true });
 </script>
 
 <style is:global>

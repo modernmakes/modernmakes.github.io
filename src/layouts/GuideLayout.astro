@@ -295,21 +295,26 @@ const relatedArticles = [
   const stickySentinel = document.getElementById('art-sticky-sentinel');
   const sidebar        = document.querySelector<HTMLElement>('.art-sidebar');
 
-  function navH() {
-    return window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
-  }
-  function updateSidebarTop() {
-    if (!stickyHeader || !sidebar) return;
-    sidebar.style.top = (navH() + stickyHeader.offsetHeight + 16) + 'px';
+  function updateSidebarTop(isSticky: boolean) {
+    if (!stickyHeader || !sidebar || window.innerWidth <= 1024) return;
+    sidebar.style.top = isSticky
+      ? (60 + stickyHeader.offsetHeight + 16) + 'px'
+      : '100px';
   }
   if (stickySentinel && stickyHeader) {
     new IntersectionObserver(
-      ([e]) => { stickyHeader.classList.toggle('is-sticky', !e.isIntersecting); updateSidebarTop(); },
+      ([e]) => {
+        const sticky = !e.isIntersecting;
+        stickyHeader.classList.toggle('is-sticky', sticky);
+        updateSidebarTop(sticky);
+      },
       { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
     ).observe(stickySentinel);
   }
-  updateSidebarTop();
-  window.addEventListener('resize', updateSidebarTop, { passive: true });
+  updateSidebarTop(false);
+  window.addEventListener('resize', () => {
+    updateSidebarTop(stickyHeader?.classList.contains('is-sticky') ?? false);
+  }, { passive: true });
 </script>
 
 <style is:global>
@@ -451,6 +456,7 @@ const relatedArticles = [
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  will-change: transform;
 }
 .guide-steps h2::after {
   content: '';
