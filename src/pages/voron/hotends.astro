@@ -8,12 +8,12 @@ const voronHotends = hotendsData.products.filter(p =>
   p.compatibility.some(c => c.startsWith('voron'))
 );
 
-// Task-specified verdict badges for the top of each card
+// Verdict badges for top of each card
 const badges: Record<string, { label: string; cls: string }> = {
-  'rapido-2':              { label: 'BEST BUY',    cls: 'verdict-best' },
+  'rapido-2':              { label: 'OUR PICK',    cls: 'verdict-best' },
   'dragon-hf':             { label: 'RECOMMENDED', cls: 'verdict-rec'  },
-  'revo-voron':            { label: 'EASY SETUP',  cls: 'verdict-upd'  },
-  'nf-crazy':              { label: 'SPECIALIST',  cls: 'verdict-upd'  },
+  'revo-voron':            { label: 'RECOMMENDED', cls: 'verdict-rec'  },
+  'nf-crazy':              { label: 'BUDGET',      cls: 'verdict-upd'  },
   'bambu-hardened-nozzle': { label: 'BAMBU ONLY',  cls: 'verdict-skip' },
 };
 ---
@@ -68,9 +68,9 @@ const badges: Record<string, { label: string; cls: string }> = {
       <div class="grid-3">
         {voronHotends.map(product => {
           const badge = badges[product.id];
-          const primaryVendor = product.vendors.find(v => v.primary) ?? product.vendors[0];
+          const buyVendor = product.primaryVendor ?? product.vendors.find(v => v.primary) ?? product.vendors[0];
           return (
-            <div class="product-card" data-model="both">
+            <div class="product-card" data-compatible={product.compatible.join(',')}>
               <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
                 <div style="text-align:center">
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
@@ -101,15 +101,15 @@ const badges: Record<string, { label: string; cls: string }> = {
                   </div>
                 )}
                 {/* Primary buy CTA */}
-                <a href={primaryVendor?.url ?? '#'}
+                <a href={buyVendor?.url ?? '#'}
                    class="btn-buy"
                    target="_blank"
                    rel="noopener sponsored">
-                  Buy from {primaryVendor?.name ?? 'vendor'} →
+                  Buy at {buyVendor?.name ?? 'vendor'} →
                 </a>
                 {/* Full review link */}
-                <a href={`/hardware/hotends/${product.id}`} class="btn-review">
-                  Full specs &amp; review →
+                <a href={product.reviewPath} class="btn-review">
+                  Full review →
                 </a>
                 <!-- Footer: price + verdict -->
                 <div class="product-card-footer" style="margin-top:12px">
@@ -118,7 +118,7 @@ const badges: Record<string, { label: string; cls: string }> = {
                     <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
                   </div>
                   {product.verdict && (
-                    <span class={`verdict verdict-${product.verdict === 'recommended' ? 'rec' : product.verdict === 'situational' ? 'skip' : 'best'}`}>{product.verdictLabel}</span>
+                    <span class={`verdict verdict-${product.verdict}`}>{product.verdictLabel}</span>
                   )}
                 </div>
                 {product.vendors.length > 1 && (
@@ -229,19 +229,19 @@ const badges: Record<string, { label: string; cls: string }> = {
 </Base>
 
 <script>
-  // ── Model-aware: reads ?model= and syncs sessionStorage ──
+  // ── Model-aware: reads ?model= and syncs localStorage ──
   (function() {
     const STORAGE_KEY = 'voron-model';
     const params = new URLSearchParams(window.location.search);
-    const model = params.get('model') || sessionStorage.getItem(STORAGE_KEY) || '2.4';
-    sessionStorage.setItem(STORAGE_KEY, model);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
 
     const label = document.getElementById('active-model-label');
     if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
 
-    document.querySelectorAll<HTMLElement>('[data-model]').forEach(el => {
-      const m = el.dataset.model;
-      (el as HTMLElement).style.display = (m === 'both' || m === model) ? '' : 'none';
+    document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
+      const compatible = (el.dataset.compatible ?? '').split(',');
+      el.style.display = compatible.includes(model) ? '' : 'none';
     });
   })();
 </script>

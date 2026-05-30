@@ -115,23 +115,66 @@ const partCounts: Record<string, { a: number; t: number }> = {
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin:28px 0 16px">Browse by subsystem</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-        {voronData.subsystems.map(sub => {
+        {voronData.subsystems.flatMap(sub => {
           const pc = partCounts[sub.id] ?? { a: sub.partCount, t: sub.partCount };
-          return (
-            <a href={`/voron/${sub.id}`}
-               data-subsystem-link=""
-               data-href={`/voron/${sub.id}`}>
+          const baseLink = `/voron/${sub.id}`;
+          const cardStyle = "background:#1e1e1e;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;height:100%";
+
+          if (sub.id === 'z-system') {
+            return [
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4">
+                <div class="subsystem-card" style={cardStyle}>
+                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">4 leadscrews, Z joints, gantry-mounted motors</div>
+                  <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">9 parts →</div>
+                </div>
+              </a>,
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none">
+                <div class="subsystem-card" style={cardStyle}>
+                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">3-point belt-driven levelling, simpler Z mechanics</div>
+                  <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">6 parts →</div>
+                </div>
+              </a>
+            ];
+          }
+
+          if (sub.id === 'gantry') {
+            return [
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4">
+                <div class="subsystem-card" style={cardStyle}>
+                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">Flying gantry — rises with Z. Aluminum or CF options</div>
+                  <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">5 parts →</div>
+                </div>
+              </a>,
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none">
+                <div class="subsystem-card" style={cardStyle}>
+                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">Fixed gantry — bed drops. Simpler mechanics, faster tramming</div>
+                  <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">4 parts →</div>
+                </div>
+              </a>
+            ];
+          }
+
+          return [
+            <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4,trident">
               <div class="subsystem-card"
                    data-parts24={String(pc.a)}
                    data-parts-trident={String(pc.t)}
-                   style="background:#1e1e1e;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;height:100%">
+                   style={cardStyle}>
                 <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                 <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                 <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">{sub.description}</div>
                 <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">{pc.a} parts →</div>
               </div>
             </a>
-          );
+          ];
         })}
         <!-- Community Mods card -->
         <a href="/voron/mods">
