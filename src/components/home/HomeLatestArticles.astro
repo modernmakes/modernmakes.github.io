@@ -1,12 +1,20 @@
 ---
-import data from '../../data/homepage.json';
-const { latestArticles } = data;
+import { getCollection } from 'astro:content';
 
-function bgStyle(card: any) {
-  if (card.image) {
-    return `background-image:url('${card.image}');background-size:cover;background-position:center;`;
+const allNews = await getCollection('news');
+const latestArticles = allNews
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+
+function bgStyle(heroImage?: string) {
+  if (heroImage) {
+    return `background-image:url('${heroImage}');background-size:cover;background-position:center;`;
   }
-  return `background:${card.gradient};`;
+  return `background:var(--dark-bg);`;
+}
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 ---
 
@@ -14,26 +22,20 @@ function bgStyle(card: any) {
   <div class="la-container">
     <div class="la-head">
       <span class="la-label">Latest</span>
-      <a href="/latest" class="la-all-link">All articles →</a>
+      <a href="/news" class="la-all-link">All articles →</a>
     </div>
     <div class="la-grid">
-      {latestArticles.map((card, i) => (
-        <a href={card.href} class="la-card" data-index={i} aria-label={card.title}>
-          <div class="la-card-img" style={bgStyle(card)}>
+      {latestArticles.map((article, i) => (
+        <a href={`/news/${article.slug}`} class="la-card" data-index={i} aria-label={article.data.title}>
+          <div class="la-card-img" style={bgStyle(article.data.heroImage)}>
             <div class="la-card-img-overlay"></div>
-            <span class="la-card-img-cat">{card.category}</span>
+            <span class="la-card-img-cat">{article.data.category}</span>
           </div>
           <div class="la-card-body">
-            <div class="la-card-cat">{card.category}</div>
-            <div class="la-card-title">{card.title}</div>
+            <div class="la-card-cat">{article.data.category}</div>
+            <div class="la-card-title">{article.data.title}</div>
             <div class="la-card-footer">
-              <span class="la-card-date">{card.date}</span>
-              {card.verdict && (
-                <span class={`verdict verdict-${card.verdict}`}>{card.verdictLabel}</span>
-              )}
-              {card.price && (
-                <span class="la-card-price">{card.price}</span>
-              )}
+              <span class="la-card-date">{formatDate(article.data.date)}</span>
             </div>
           </div>
         </a>
