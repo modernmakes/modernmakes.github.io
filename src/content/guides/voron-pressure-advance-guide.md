@@ -22,6 +22,7 @@ parts:
   - "50–100g of your target filament (PLA recommended for first calibration)"
   - "A clean, freshly leveled bed"
   - "Klipper v0.11.0 or newer (check with FIRMWARE_VERSION command)"
+guideCategory: "Calibration"
 ---
 
 <p class="art-lead">Pressure advance is one of those tuning parameters that sounds complicated but pays back its setup time on the first decent-looking corner. On a well-tuned Voron, it's the difference between rounded blobs at direction changes and crisp, angular walls that look milled rather than printed.</p>

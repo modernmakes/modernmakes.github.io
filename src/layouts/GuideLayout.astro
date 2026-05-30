@@ -16,6 +16,7 @@ interface Props {
   timeRequired: string;
   tools?: string[];
   parts?: string[];
+  guideCategory?: string;
 }
 
 const {
@@ -30,7 +31,12 @@ const {
   timeRequired = '',
   tools = [],
   parts = [],
+  guideCategory,
 } = Astro.props;
+
+function guideCatSlug(cat: string): string {
+  return cat.toLowerCase().replace(/\s*&\s*/g, '-').replace(/\s+/g, '-');
+}
 
 const difficultyColor = {
   Beginner: '#2E7D32',
@@ -51,7 +57,7 @@ const relatedArticles = [
 ];
 ---
 <Base title={title} description={excerpt} heroPage={true} hasHero={true}>
-  <Nav slot="nav" currentPath="/news" />
+  <Nav slot="nav" currentPath="/guides" />
 
   <!-- ── HERO ── -->
   <div class="art-hero">
@@ -76,9 +82,11 @@ const relatedArticles = [
       <nav class="art-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span aria-hidden="true">/</span>
-        <a href="/news">News</a>
+        <a href="/guides">Guides</a>
+        {guideCategory && <span aria-hidden="true">/</span>}
+        {guideCategory && <a href={`/guides#${guideCatSlug(guideCategory)}`}>{guideCategory}</a>}
         <span aria-hidden="true">/</span>
-        <span>Guide</span>
+        <span>{title}</span>
       </nav>
       <div class="art-cat-badge">{category}</div>
       <h1 class="art-headline">{title}</h1>

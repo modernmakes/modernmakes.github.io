@@ -12,6 +12,7 @@ tools:
   - "Silica gel desiccant packets"
 parts:
   - "Filament dryer (recommended: Sunlu S2, Bambu AMS dryer, or Creality Filament Dryer Pro)"
+guideCategory: "Filament"
 summary:
   - "Nylon, PA-CF, and TPU absorb moisture fastest — must be dried before printing"
   - "PLA and PETG degrade slowly — drying helps after prolonged exposure"

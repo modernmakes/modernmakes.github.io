@@ -13,6 +13,7 @@ tools:
 parts:
   - "ADXL345 module"
   - "Dupont wires or JST connector"
+guideCategory: "Calibration"
 summary:
   - "Requires ADXL345 accelerometer connected to the toolhead or bed"
   - "Run SHAPER_CALIBRATE from the Klipper console"

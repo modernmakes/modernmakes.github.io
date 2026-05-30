@@ -10,6 +10,7 @@ tools:
   - "Klipper console (Mainsail or Fluidd)"
   - "Probe installed and configured (TAP, Klicky, CR Touch, etc.)"
 parts: []
+guideCategory: "Calibration"
 summary:
   - "Bed mesh maps surface variation across the full bed area"
   - "Klipper compensates for warps in real time during printing"

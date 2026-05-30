@@ -29,6 +29,14 @@ const guides = defineCollection({
     timeRequired: z.string(),
     tools: z.array(z.string()).optional().default([]),
     parts: z.array(z.string()).optional().default([]),
+    guideCategory: z.enum([
+      'Calibration',
+      'Hardware Setup',
+      'Software & Firmware',
+      'Filament',
+      'Troubleshooting',
+      'Builds',
+    ]).optional(),
   }),
 });
 

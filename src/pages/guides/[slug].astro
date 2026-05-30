@@ -25,6 +25,7 @@ const {
   timeRequired,
   tools,
   parts,
+  guideCategory,
 } = entry.data;
 
 const formattedDate = date.toLocaleDateString('en-US', {
@@ -46,6 +47,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   timeRequired={timeRequired}
   tools={tools}
   parts={parts}
+  guideCategory={guideCategory}
 >
   <Content />
 </GuideLayout>

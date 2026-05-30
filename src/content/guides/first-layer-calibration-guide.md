@@ -10,6 +10,7 @@ tools:
   - "Sheet of standard 80gsm paper"
   - "Klipper console (Mainsail or Fluidd)"
 parts: []
+guideCategory: "Calibration"
 summary:
   - "Z offset sets the gap between the nozzle and the bed at the start of a print"
   - "Too high — first layer doesn't stick. Too low — nozzle gouges the bed."

@@ -67,7 +67,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </head>
 <body data-hero={hasHero ? "true" : undefined}>
   <slot name="nav" />
-  <main style={heroPage ? '' : 'padding-top: 80px;'}>
+  <main class={heroPage ? 'main-has-hero' : ''}>
     <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>
     <slot />
   </main>

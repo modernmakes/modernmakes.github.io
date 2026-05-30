@@ -9,31 +9,63 @@ const currentPath = '/guides';
 const allGuides = await getCollection('guides');
 const sorted = allGuides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
+const CATEGORY_ORDER = [
+  'Calibration',
+  'Hardware Setup',
+  'Software & Firmware',
+  'Filament',
+  'Troubleshooting',
+  'Builds',
+] as const;
+
+const DIFFICULTIES = ['Beginner', 'Intermediate', 'Advanced'] as const;
+
+function catSlug(cat: string): string {
+  return cat.toLowerCase().replace(/\s*&\s*/g, '-').replace(/\s+/g, '-');
+}
+
+// Only expose tabs for categories that actually have guides
+const usedCategories = CATEGORY_ORDER.filter(cat =>
+  sorted.some(e => e.data.guideCategory === cat)
+);
+
+// Build-time counts for initial render
+const catCounts: Record<string, number> = { all: sorted.length };
+for (const cat of usedCategories) {
+  catCounts[cat] = sorted.filter(e => e.data.guideCategory === cat).length;
+}
+
+const diffCounts: Record<string, number> = { all: sorted.length };
+for (const d of DIFFICULTIES) {
+  diffCounts[d] = sorted.filter(e => e.data.difficulty === d).length;
+}
+
 function formatDate(d: Date) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
 
-function cardBg(entry: (typeof sorted)[number]) {
+function cardBg(entry: (typeof sorted)[number]): string {
   if (entry.data.heroImage) {
     return `background-color:#0a1a14;background-image:url('${entry.data.heroImage}');background-size:cover;background-position:center`;
   }
-  return 'background:linear-gradient(135deg,#0a1a14,#0d1520)';
+  return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
 }
 
 const difficultyColors: Record<string, string> = {
-  Beginner: '#2E7D32',
+  Beginner:     '#2E7D32',
   Intermediate: '#E65100',
-  Advanced: '#C62828',
+  Advanced:     '#C62828',
 };
 ---
 <Base
   title="Guides"
   description="Calibration guides, how-tos, and step-by-step tutorials for 3D printing — pressure advance, input shaping, bed levelling, and more."
+  heroPage={true}
 >
   <Nav slot="nav" currentPath={currentPath} />
 
-  <!-- HEADER -->
-  <div class="gi-page-hero" style="background:var(--black);padding:40px 0">
+  <!-- ── HERO ── -->
+  <div class="gi-page-hero pg-hero">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
@@ -45,55 +77,106 @@ const difficultyColors: Record<string, string> = {
     </div>
   </div>
 
-  <!-- GUIDES GRID -->
-  <section class="section" aria-label="Guides">
+  <!-- ── CATEGORY FILTER BAR ── -->
+  <div class="gf-bar">
+    <div class="gf-bar-inner">
+      <div class="gf-cats" role="group" aria-label="Filter by category">
+        <button class="gf-tab is-active" data-cat="all" data-slug="all">
+          All Guides
+          <span class="gf-badge">{sorted.length}</span>
+        </button>
+        {usedCategories.map(cat => (
+          <button class="gf-tab" data-cat={cat} data-slug={catSlug(cat)}>
+            {cat}
+            <span class="gf-badge">{catCounts[cat]}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DIFFICULTY ROW ── -->
+  <div class="gf-diff-bar">
+    <div class="gf-bar-inner">
+      <div class="gf-diffs" role="group" aria-label="Filter by difficulty">
+        <button class="gf-diff-tab is-active" data-diff="all">
+          All levels
+          <span class="gf-diff-badge">{sorted.length}</span>
+        </button>
+        {DIFFICULTIES.filter(d => (diffCounts[d] ?? 0) > 0).map(d => (
+          <button class="gf-diff-tab" data-diff={d}>
+            {d}
+            <span class="gf-diff-badge">{diffCounts[d]}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <section aria-label="Guides" style="background:var(--bg);padding-bottom:56px">
     <div class="container">
-      {sorted.length === 0 ? (
-        <div style="text-align:center;padding:60px 0">
-          <p style="font-family:'Lora',serif;color:var(--g1);font-size:15px;margin-bottom:16px">No guides published yet.</p>
-          <a href="/news" style="font-size:13px;font-weight:600;color:var(--accent);font-family:var(--fu)">Browse all news →</a>
-        </div>
-      ) : (
-        <div class="grid-3">
-          {sorted.map(entry => (
-            <a href={`/guides/${entry.slug}`} class="card" aria-label={entry.data.title}>
-              <div class="card-img" style={cardBg(entry)}>
-                <div class="gi-overlay"></div>
-                <span class="gi-cat">{entry.data.category}</span>
+
+      <!-- Count summary -->
+      <p class="gf-summary" id="gf-count">
+        Showing {sorted.length} of {sorted.length} guide{sorted.length !== 1 ? 's' : ''}
+      </p>
+
+      <!-- Cards grid -->
+      <div class="gf-grid" id="gf-grid">
+        {sorted.map(entry => (
+          <a
+            href={`/guides/${entry.slug}`}
+            class="card gf-card"
+            data-category={entry.data.guideCategory ?? ''}
+            data-difficulty={entry.data.difficulty}
+            aria-label={entry.data.title}
+          >
+            <div class="card-img" style={cardBg(entry)}>
+              <div class="gi-overlay"></div>
+              <span class="gi-cat">{entry.data.category}</span>
+              {entry.data.difficulty && (
+                <span
+                  class="gi-diff-badge"
+                  style={`background:${(difficultyColors[entry.data.difficulty] ?? '#E65100')}dd`}
+                >
+                  {entry.data.difficulty}
+                </span>
+              )}
+            </div>
+            <div class="card-body">
+              <div class="gi-meta-row">
+                {entry.data.guideCategory && (
+                  <span class="gf-cat-chip">{entry.data.guideCategory}</span>
+                )}
                 {entry.data.difficulty && (
                   <span
-                    class="gi-diff-badge"
-                    style={`background:${(difficultyColors[entry.data.difficulty] ?? '#E65100')}dd`}
+                    class="gi-diff-chip"
+                    style={`color:${difficultyColors[entry.data.difficulty] ?? '#E65100'};border-color:${difficultyColors[entry.data.difficulty] ?? '#E65100'}44;background:${difficultyColors[entry.data.difficulty] ?? '#E65100'}0d`}
                   >
                     {entry.data.difficulty}
                   </span>
                 )}
               </div>
-              <div class="card-body">
-                <div class="gi-meta-row">
-                  <span class="card-cat">{entry.data.category}</span>
-                  {entry.data.difficulty && (
-                    <span
-                      class="gi-diff-chip"
-                      style={`color:${difficultyColors[entry.data.difficulty] ?? '#E65100'};border-color:${difficultyColors[entry.data.difficulty] ?? '#E65100'}44;background:${difficultyColors[entry.data.difficulty] ?? '#E65100'}0d`}
-                    >
-                      {entry.data.difficulty}
-                    </span>
-                  )}
-                </div>
-                <div class="card-title">{entry.data.title}</div>
-                <p class="card-excerpt">{entry.data.excerpt}</p>
-                <div class="card-footer">
-                  <time class="card-date">{formatDate(entry.data.date)}</time>
-                  {entry.data.timeRequired && (
-                    <span class="card-date" style="margin-left:auto">⏱ {entry.data.timeRequired}</span>
-                  )}
-                </div>
+              <div class="card-title">{entry.data.title}</div>
+              <p class="card-excerpt">{entry.data.excerpt}</p>
+              <div class="card-footer">
+                <time class="card-date">{formatDate(entry.data.date)}</time>
+                {entry.data.timeRequired && (
+                  <span class="card-date" style="margin-left:auto">⏱ {entry.data.timeRequired}</span>
+                )}
               </div>
-            </a>
-          ))}
-        </div>
-      )}
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Empty state -->
+      <div class="gf-empty" id="gf-empty" hidden>
+        <p>No guides match this filter combination.</p>
+        <button class="gf-reset" id="gf-reset">Clear all filters</button>
+      </div>
+
     </div>
   </section>
 
@@ -113,16 +196,169 @@ const difficultyColors: Record<string, string> = {
   })}></script>
 </Base>
 
+<script>
+  // ── STATE ──
+  let activeCat  = 'all';
+  let activeDiff = 'all';
+
+  const allCards  = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
+  const total     = allCards.length;
+  const catTabs   = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
+  const diffTabs  = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-diff-tab'));
+  const countEl   = document.getElementById('gf-count');
+  const emptyEl   = document.getElementById('gf-empty') as HTMLElement | null;
+  const resetBtn  = document.getElementById('gf-reset');
+
+  // ── CARD ANIMATION ──
+  function showCard(card: HTMLElement) {
+    if (!card.classList.contains('gf-hidden')) return;
+    card.classList.remove('gf-hidden');
+    card.style.opacity = '0';
+    void card.offsetHeight; // force reflow so transition fires from 0
+    card.style.opacity = '1';
+  }
+
+  function hideCard(card: HTMLElement) {
+    if (card.classList.contains('gf-hidden')) return;
+    card.style.opacity = '0';
+    const done = () => card.classList.add('gf-hidden');
+    card.addEventListener('transitionend', done, { once: true });
+    setTimeout(done, 180); // fallback if transitionend doesn't fire
+  }
+
+  // ── FILTER LOGIC ──
+  function applyFilters() {
+    let visible = 0;
+
+    allCards.forEach(card => {
+      const catMatch  = activeCat  === 'all' || card.dataset.category  === activeCat;
+      const diffMatch = activeDiff === 'all' || card.dataset.difficulty === activeDiff;
+      if (catMatch && diffMatch) { showCard(card); visible++; }
+      else                       { hideCard(card); }
+    });
+
+    // Count line
+    if (countEl) {
+      countEl.textContent = `Showing ${visible} of ${total} guide${total !== 1 ? 's' : ''}`;
+    }
+
+    // Empty state
+    if (emptyEl) emptyEl.hidden = visible > 0;
+
+    updateDiffCounts();
+    pushHash();
+  }
+
+  // ── DIFF TAB COUNTS ──
+  // When a category is selected, update difficulty counts to reflect only that category
+  function updateDiffCounts() {
+    diffTabs.forEach(tab => {
+      const diff  = tab.dataset.diff ?? 'all';
+      const badge = tab.querySelector<HTMLElement>('.gf-diff-badge');
+      if (!badge) return;
+
+      const count = allCards.filter(c => {
+        const catMatch = activeCat === 'all' || c.dataset.category === activeCat;
+        return diff === 'all'
+          ? catMatch
+          : catMatch && c.dataset.difficulty === diff;
+      }).length;
+
+      badge.textContent = String(count);
+    });
+  }
+
+  // ── URL HASH ──
+  function pushHash() {
+    if (activeCat === 'all' && activeDiff === 'all') {
+      history.replaceState(null, '', location.pathname);
+      return;
+    }
+    const catTab  = catTabs.find(t => t.dataset.cat === activeCat);
+    const catPart = catTab?.dataset.slug ?? '';
+    const diffPart = activeDiff === 'all' ? '' : `-${activeDiff.toLowerCase()}`;
+    const hash = catPart + diffPart;
+    history.replaceState(null, '', hash ? `#${hash}` : location.pathname);
+  }
+
+  function parseHash() {
+    const raw = location.hash.slice(1);
+    if (!raw) return;
+
+    // Strip known diff suffixes to isolate the category slug
+    const knownDiffs = ['beginner', 'intermediate', 'advanced'];
+    let catPart = raw;
+    let diffPart = '';
+
+    for (const d of knownDiffs) {
+      if (raw.endsWith('-' + d)) {
+        catPart = raw.slice(0, -(d.length + 1));
+        diffPart = d.charAt(0).toUpperCase() + d.slice(1);
+        break;
+      }
+    }
+
+    const matchedCatTab = catTabs.find(t => t.dataset.slug === catPart);
+    if (matchedCatTab) activeCat = matchedCatTab.dataset.cat ?? 'all';
+    if (diffPart) activeDiff = diffPart;
+  }
+
+  // ── TAB ACTIVE STATES ──
+  function syncCatTabs() {
+    catTabs.forEach(t => t.classList.toggle('is-active', t.dataset.cat === activeCat));
+  }
+  function syncDiffTabs() {
+    diffTabs.forEach(t => t.classList.toggle('is-active', t.dataset.diff === activeDiff));
+  }
+
+  // ── EVENT LISTENERS ──
+  catTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeCat  = tab.dataset.cat ?? 'all';
+      activeDiff = 'all'; // reset difficulty when changing category
+      syncCatTabs();
+      syncDiffTabs();
+      applyFilters();
+    });
+  });
+
+  diffTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeDiff = tab.dataset.diff ?? 'all';
+      syncDiffTabs();
+      applyFilters();
+    });
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    activeCat  = 'all';
+    activeDiff = 'all';
+    syncCatTabs();
+    syncDiffTabs();
+    applyFilters();
+  });
+
+  // ── INIT ──
+  parseHash();
+  syncCatTabs();
+  syncDiffTabs();
+  // Only run filter logic if hash specified a non-default state
+  if (activeCat !== 'all' || activeDiff !== 'all') {
+    applyFilters();
+  } else {
+    // Still update diff counts for initial render accuracy
+    updateDiffCounts();
+  }
+</script>
+
 <style is:global>
-/*
- * Promote the hero to its own GPU compositor layer.
- * Prevents repaint bleed from the nav's backdrop-filter re-compositing
- * (triggered by nav-link/card transform transitions on hover).
- */
+/* ── COMPOSITOR FIX (prevents backdrop-filter repaint bleed from nav) ── */
 .gi-page-hero {
   will-change: transform;
   transform: translateZ(0);
 }
+
+/* ── CARD IMAGE OVERLAYS ── */
 .gi-overlay {
   position: absolute;
   inset: 0;
@@ -153,12 +389,16 @@ const difficultyColors: Record<string, string> = {
   border-radius: 3px;
   padding: 3px 8px;
 }
+
+/* ── CARD BODY META ── */
 .gi-meta-row {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-bottom: 6px;
+  flex-wrap: wrap;
 }
+.gi-meta-row .card-cat { margin-bottom: 0; }
 .gi-diff-chip {
   font-family: var(--fu);
   font-size: 8px;
@@ -169,6 +409,188 @@ const difficultyColors: Record<string, string> = {
   border-radius: 3px;
   padding: 2px 7px;
 }
-/* Reset card-cat margin when inside meta-row */
-.gi-meta-row .card-cat { margin-bottom: 0; }
+.gf-cat-chip {
+  font-family: var(--fu);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: rgba(255,90,31,.08);
+  color: var(--accent);
+  border: 1px solid rgba(255,90,31,.2);
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+
+/* ── SHARED BAR CONTAINER ── */
+.gf-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── CATEGORY FILTER BAR ── */
+.gf-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 56px; /* pins below the scrolled nav height */
+  z-index: 10;
+}
+.gf-cats {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gf-cats::-webkit-scrollbar { display: none; }
+.gf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--g1);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.gf-tab:hover { color: var(--black); background: var(--bg); }
+.gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
+.gf-badge {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.gf-tab.is-active .gf-badge {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ── DIFFICULTY ROW ── */
+.gf-diff-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.gf-diffs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gf-diffs::-webkit-scrollbar { display: none; }
+.gf-diff-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--g2);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  transition: color .15s, border-color .15s;
+}
+.gf-diff-tab:hover { color: var(--g1); }
+.gf-diff-tab.is-active { color: var(--black); border-bottom-color: var(--black); }
+.gf-diff-badge {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--g2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+.gf-diff-tab.is-active .gf-diff-badge {
+  background: var(--black);
+  color: #fff;
+  border-color: var(--black);
+}
+
+/* ── COUNT LINE ── */
+.gf-summary {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--g2);
+  padding: 16px 0 12px;
+  margin: 0;
+}
+
+/* ── GUIDES GRID ── */
+.gf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* ── CARD VISIBILITY ── */
+.gf-card {
+  opacity: 1;
+  transition: opacity 0.15s ease, border-color .15s, transform .15s;
+}
+.gf-card.gf-hidden {
+  display: none;
+}
+
+/* ── EMPTY STATE ── */
+.gf-empty {
+  text-align: center;
+  padding: 60px 0;
+}
+.gf-empty p {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g1);
+  margin-bottom: 16px;
+}
+.gf-reset {
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 4px 0;
+}
+.gf-reset:hover { color: var(--accent-dk); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .gf-bar-inner { padding: 0 20px; }
+  .gf-tab { padding: 12px 14px; font-size: 11px; }
+  .gf-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+@media (max-width: 480px) {
+  .gf-grid { grid-template-columns: 1fr; }
+}
 </style>

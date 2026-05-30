@@ -90,7 +90,7 @@ const featured = [
 <Base
   title="Hardware Reference"
   description="Specs, compatibility, and where to buy — every component we cover. Hotends, extruders, motion systems, electronics, and more."
-  heroPage={false}
+  heroPage={true}
 >
   <Nav slot="nav" currentPath="/hardware" />
 
@@ -196,7 +196,7 @@ const featured = [
 /* ── HARDWARE HUB HERO ── */
 .hw-hero {
   background: var(--black);
-  padding: 52px 0 48px;
+  padding: 120px 0 48px;
   border-bottom: 1px solid rgba(255,255,255,.08);
   /* Isolate from nav backdrop-filter repaint cascade */
   will-change: transform;
@@ -310,6 +310,7 @@ const featured = [
 .hw-cat-arrow { font-size: 14px; color: var(--g2); align-self: center; flex-shrink: 0; margin-top: 2px; }
 
 @media (max-width: 768px) {
+  .hw-hero { padding: 96px 0 40px; }
   .hw-hero-inner { padding: 0 20px; }
   .hw-hero-title { font-size: 36px; }
   .hw-cats-grid { grid-template-columns: repeat(2, 1fr); }

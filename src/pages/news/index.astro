@@ -25,11 +25,12 @@ const counts = { all: sorted.length };
 <Base
   title="News"
   description="Latest 3D printing news — product launches, firmware updates, safety notices, and industry moves."
+  heroPage={true}
 >
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- HEADER -->
-  <div class="ni-page-hero" style="background:var(--black);padding:40px 0">
+  <div class="ni-page-hero pg-hero">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
