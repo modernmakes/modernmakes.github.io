@@ -71,13 +71,17 @@
 
 .art-header {
   /*
-   * Sticky at z-index 1 (LOW) so scrolling content paints OVER it.
-   * .art-body and .art-related are position:relative z-index:2 and
-   * slide over the top of the header as the user scrolls down.
+   * z-index: 0 puts this in paint category 6 (same as z-index:auto).
+   * .art-body and .art-related both have isolation:isolate which also
+   * lands in category 6, and since they come LATER in the DOM they
+   * paint ON TOP of this header as the user scrolls down — which is
+   * exactly the "content slides over the sticky header" effect we want.
+   * Raising this above 0 (e.g. z-index:1) would flip it to category 7
+   * and cause the header to paint over the body regardless of scroll.
    */
   position: sticky;
   top: 60px;
-  z-index: 1;
+  z-index: 0;
 
   background: var(--surface);
   border-bottom: 1px solid var(--border);

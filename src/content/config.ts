@@ -73,7 +73,7 @@ const filament = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    excerpt: z.string(),
+    excerpt: z.string().optional(),
     category: z.string().optional(),
     featured: z.boolean().optional().default(false),
   }),
