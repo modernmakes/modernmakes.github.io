@@ -198,6 +198,9 @@ const featured = [
   background: var(--black);
   padding: 52px 0 48px;
   border-bottom: 1px solid rgba(255,255,255,.08);
+  /* Isolate from nav backdrop-filter repaint cascade */
+  will-change: transform;
+  transform: translateZ(0);
 }
 .hw-hero-inner {
   max-width: 1200px;

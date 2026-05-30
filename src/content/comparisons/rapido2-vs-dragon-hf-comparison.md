@@ -1,6 +1,5 @@
 ---
 title: "Phaetus Rapido 2 UHF vs Dragon HF: Which High-Flow Hotend Should You Build With?"
-type: "comparison"
 category: "COMPARISON"
 date: 2026-05-20
 readTime: "9 min read"

@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import GuideLayout from '../../layouts/GuideLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('news');
+  const entries = await getCollection('guides');
   return entries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -21,6 +21,10 @@ const {
   heroImage,
   excerpt,
   summary,
+  difficulty,
+  timeRequired,
+  tools,
+  parts,
 } = entry.data;
 
 const formattedDate = date.toLocaleDateString('en-US', {
@@ -30,7 +34,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   timeZone: 'UTC',
 });
 ---
-<ArticleLayout
+<GuideLayout
   title={title}
   category={category}
   date={formattedDate}
@@ -38,6 +42,10 @@ const formattedDate = date.toLocaleDateString('en-US', {
   heroImage={heroImage}
   excerpt={excerpt}
   summary={summary}
+  difficulty={difficulty}
+  timeRequired={timeRequired}
+  tools={tools}
+  parts={parts}
 >
   <Content />
-</ArticleLayout>
+</GuideLayout>

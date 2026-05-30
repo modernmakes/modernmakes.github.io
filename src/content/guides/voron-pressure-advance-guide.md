@@ -1,6 +1,5 @@
 ---
 title: "How to Tune Pressure Advance on a Voron Printer"
-type: "guide"
 category: "GUIDE"
 date: 2026-05-10
 readTime: "45 min read"

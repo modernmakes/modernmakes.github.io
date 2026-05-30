@@ -1,0 +1,77 @@
+---
+import FilamentLayout from '../../layouts/FilamentLayout.astro';
+---
+<FilamentLayout
+  title="PLA"
+  fullName="Polylactic Acid"
+  tagline="The most accessible FDM material — and the right choice more often than enthusiasts admit."
+  category="Entry Material"
+  difficulty="Beginner"
+  verdict="PLA is the default starting point for a reason. Use it for everything that doesn't need heat resistance or outdoor exposure."
+  verdictLabel="ESSENTIAL"
+  enclosureRequired={false}
+  driedRequired={false}
+  hardnessRequired={false}
+  tempNozzle="190–230°C"
+  tempBed="25–60°C"
+  coolingRequired="Full"
+  maxSpeed="Up to 300mm/s+ on tuned CoreXY machines"
+  excerpt="PLA filament review — print settings, best brands, failure modes, and hardware compatibility for FDM 3D printing."
+  brands={[
+    { name: "Bambu Lab PLA Basic", tier: "top", verdict: "The benchmark for consistent, fast PLA.", notes: "Designed around Bambu's own speed targets. Runs cleanly at 300mm/s on an X1C without tuning. Excellent layer adhesion, consistent diameter, minimal stringing. Limited color range compared to competitors." },
+    { name: "Prusament PLA", tier: "top", verdict: "Best in class for dimensional accuracy.", notes: "±0.02mm diameter tolerance — the tightest in the consumer market. Color consistency batch to batch is exceptional. Slightly more expensive but worth it for mechanical prints where fit matters." },
+    { name: "PolyTerra PLA", tier: "mid", verdict: "The best matte PLA available.", notes: "Matte finish eliminates the shiny look of standard PLA. Prints beautifully, good color range, cardboard spool. Slightly more brittle than Prusament but not a problem for most use cases." },
+    { name: "Overture PLA", tier: "mid", verdict: "Reliable everyday workhorse.", notes: "Consistent quality, wide color selection, competitively priced. Not the most exciting option but rarely causes problems. Good choice for high-volume printing where cost matters." },
+    { name: "Hatchbox PLA", tier: "mid", verdict: "North American staple with solid consistency.", notes: "Long track record of reliability. Good for Canadian and US buyers who want fast shipping. Not the highest performer but rarely disappoints." },
+    { name: "SUNLU PLA", tier: "budget", verdict: "Acceptable for low-stakes prints.", notes: "Inconsistent diameter tolerance across batches. Fine for decorative prints but not reliable enough for functional parts or precision work. Price is genuinely low." }
+  ]}
+  useCases={[
+    "Decorative models, figurines, and display pieces",
+    "Functional prototypes that don't see heat above 50°C",
+    "Calibration prints and test objects",
+    "Enclosures, cases, and organizers for indoor use",
+    "Educational and beginner projects",
+    "High-detail prints where surface quality matters",
+    "High-speed printing on CoreXY machines"
+  ]}
+  failureModes={[
+    { name: "Warping", cause: "Insufficient bed adhesion or printing in a drafty environment. More common with large flat prints.", fix: "Clean the PEI surface with IPA before every print. Increase first layer squish. Add a brim for large parts. Keep drafts away from the printer." },
+    { name: "Stringing", cause: "Retraction settings too low, or print temperature too high for the speed being used.", fix: "Reduce print temperature by 5°C increments. Increase retraction distance (direct drive: 0.5–1mm, Bowden: 4–7mm). Enable combing to keep the nozzle over infill during travel." },
+    { name: "Brittle prints / layer delamination", cause: "Print temperature too low, cooling too aggressive, or old/moisture-affected filament.", fix: "Increase print temp by 5°C. Reduce part cooling fan speed slightly. Store filament in a sealed bag with desiccant between uses." },
+    { name: "Clogging at high speeds", cause: "Hotend heat creep — the melt zone extends too far up into the cold zone, causing soft filament to jam.", fix: "Ensure part cooling fan is running at full speed. Check that the heatsink fan is working. Consider a high-flow hotend (Rapido 2, Dragon HF) for sustained high-speed printing." },
+    { name: "Poor overhangs", cause: "Insufficient cooling. PLA relies on active cooling to bridge and overhang — more than almost any other material.", fix: "Maximize part cooling fan speed. Slow down overhanging perimeters to 25–40mm/s. Print cooler if possible (200–210°C for overhangs)." }
+  ]}
+  compatibility={[
+    { item: "Direct drive extruder", status: "yes", note: "Ideal — short filament path minimizes retraction needs" },
+    { item: "Bowden extruder", status: "yes", note: "Works well — PLA is stiff enough to push through long tubes" },
+    { item: "Brass nozzle", status: "yes", note: "The standard choice — no abrasion risk with standard PLA" },
+    { item: "Hardened nozzle", status: "yes", note: "Not required but works fine" },
+    { item: "Enclosure", status: "sometimes", note: "Not needed — can cause heat creep if enclosure runs hot. Keep open or vented." },
+    { item: "PEI spring steel sheet", status: "yes", note: "Best bed surface for PLA — excellent adhesion when warm, releases cleanly when cool" },
+    { item: "Glass bed", status: "yes", note: "Works with glue stick. Less ideal than PEI but reliable." },
+    { item: "PTFE-lined hotend", status: "yes", note: "Fine for PLA temperatures — PTFE is only a concern above 240°C" },
+    { item: "Dry box", status: "sometimes", note: "Not usually needed. PLA absorbs moisture slowly. Drying helps if filament has been exposed for weeks." }
+  ]}
+  pros={[
+    "Easiest FDM material to print — very forgiving of imperfect settings",
+    "No enclosure required — prints well in open air",
+    "Excellent detail reproduction and surface quality",
+    "Wide color range across all price tiers",
+    "Fast — the highest speeds in FDM are achieved with PLA",
+    "Low odor compared to ABS and ASA",
+    "Strong layer adhesion with good settings"
+  ]}
+  cons={[
+    "Low heat resistance — parts deform above 50–60°C",
+    "Brittle under impact compared to PETG or ABS",
+    "Not suitable for outdoor use — UV degrades the material over months",
+    "Can be prone to heat creep at sustained high speeds without good cooling",
+    "Not chemical resistant"
+  ]}
+>
+  <p>PLA's reputation as a beginner material undersells it. The fastest FDM printers in the world — Bambu X1C, Voron 2.4 with input shaping, tuned CoreXY machines — all run PLA as their primary material. The speed ceiling for PLA is higher than for PETG, ASA, or ABS because it requires aggressive active cooling, which is also what lets it print fast. If your machine is tuned, PLA will show you what it can actually do.</p>
+
+  <p>The practical limitations are real but specific. PLA fails in heat — leave a PLA part on a car dashboard in summer and it will warp. It fails in UV exposure over time — outdoor fixtures printed in PLA will become brittle and discolored within months. And it fails under sudden impact loads better than it fails under sustained stress. Know these limits and PLA is excellent. Ignore them and you'll blame the printer for a material choice problem.</p>
+
+  <p>On brand choice — the difference between top-tier and budget PLA shows up in dimensional accuracy and batch consistency, not print quality on a good day. Budget PLA from a reliable batch prints just as well as Prusament. The issue is reliability across batches and over time. For one-off prints, buy cheap. For anything where fit and finish matter across multiple prints, spend the extra money on Prusament or Bambu.</p>
+</FilamentLayout>

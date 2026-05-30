@@ -1,9 +1,46 @@
 ---
 import { getCollection } from 'astro:content';
 
-const allNews = await getCollection('news');
-const latestArticles = allNews
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+const [newsEntries, guideEntries, comparisonEntries] = await Promise.all([
+  getCollection('news'),
+  getCollection('guides'),
+  getCollection('comparisons'),
+]);
+
+type ArticleCard = {
+  title: string;
+  category: string;
+  date: Date;
+  heroImage?: string;
+  href: string;
+};
+
+const allArticles: ArticleCard[] = [
+  ...newsEntries.map(e => ({
+    title: e.data.title,
+    category: e.data.category,
+    date: e.data.date,
+    heroImage: e.data.heroImage,
+    href: `/news/${e.slug}`,
+  })),
+  ...guideEntries.map(e => ({
+    title: e.data.title,
+    category: e.data.category,
+    date: e.data.date,
+    heroImage: e.data.heroImage,
+    href: `/guides/${e.slug}`,
+  })),
+  ...comparisonEntries.map(e => ({
+    title: e.data.title,
+    category: e.data.category,
+    date: e.data.date,
+    heroImage: e.data.heroImage,
+    href: `/comparisons/${e.slug}`,
+  })),
+];
+
+const latestArticles = allArticles
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf())
   .slice(0, 4);
 
 function bgStyle(heroImage?: string) {
@@ -26,16 +63,16 @@ function formatDate(date: Date) {
     </div>
     <div class="la-grid">
       {latestArticles.map((article, i) => (
-        <a href={`/news/${article.slug}`} class="la-card" data-index={i} aria-label={article.data.title}>
-          <div class="la-card-img" style={bgStyle(article.data.heroImage)}>
+        <a href={article.href} class="la-card" data-index={i} aria-label={article.title}>
+          <div class="la-card-img" style={bgStyle(article.heroImage)}>
             <div class="la-card-img-overlay"></div>
-            <span class="la-card-img-cat">{article.data.category}</span>
+            <span class="la-card-img-cat">{article.category}</span>
           </div>
           <div class="la-card-body">
-            <div class="la-card-cat">{article.data.category}</div>
-            <div class="la-card-title">{article.data.title}</div>
+            <div class="la-card-cat">{article.category}</div>
+            <div class="la-card-title">{article.title}</div>
             <div class="la-card-footer">
-              <span class="la-card-date">{formatDate(article.data.date)}</span>
+              <span class="la-card-date">{formatDate(article.date)}</span>
             </div>
           </div>
         </a>
@@ -209,7 +246,6 @@ function formatDate(date: Date) {
 
 <script>
   // Staggered entrance with IntersectionObserver
-  // Cards start visible if JS is slow — opacity transition handles the rest
   const cards = document.querySelectorAll('.la-card');
   if (cards.length) {
     const observer = new IntersectionObserver(

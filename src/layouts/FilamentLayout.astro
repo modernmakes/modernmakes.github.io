@@ -1,0 +1,1100 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Brand {
+  name: string;
+  verdict: string;
+  tier: 'top' | 'mid' | 'budget';
+  notes: string;
+}
+interface FailureMode {
+  name: string;
+  cause: string;
+  fix: string;
+}
+interface CompatItem {
+  item: string;
+  status: 'yes' | 'no' | 'sometimes';
+  note?: string;
+}
+
+interface Props {
+  title: string;
+  fullName: string;
+  tagline: string;
+  category: string;
+  difficulty: string;
+  verdict: string;
+  verdictLabel: 'RECOMMENDED' | 'ESSENTIAL' | 'SITUATIONAL' | 'AVOID';
+  enclosureRequired: boolean;
+  driedRequired: boolean;
+  hardnessRequired: boolean;
+  tempNozzle: string;
+  tempBed: string;
+  tempChamber?: string;
+  coolingRequired: string;
+  maxSpeed?: string;
+  brands: Brand[];
+  useCases: string[];
+  failureModes: FailureMode[];
+  compatibility: CompatItem[];
+  pros: string[];
+  cons: string[];
+  excerpt: string;
+}
+
+const {
+  title,
+  fullName,
+  tagline,
+  category,
+  difficulty,
+  verdict,
+  verdictLabel,
+  enclosureRequired,
+  driedRequired,
+  hardnessRequired,
+  tempNozzle,
+  tempBed,
+  tempChamber,
+  coolingRequired,
+  maxSpeed,
+  brands = [],
+  useCases = [],
+  failureModes = [],
+  compatibility = [],
+  pros = [],
+  cons = [],
+  excerpt,
+} = Astro.props;
+
+const difficultyColor = {
+  Beginner:     '#2E7D32',
+  Intermediate: '#E65100',
+  Advanced:     '#C62828',
+}[difficulty] ?? '#E65100';
+
+const verdictStyles = {
+  ESSENTIAL:   { bg: 'rgba(255,90,31,.12)',  border: 'rgba(255,90,31,.35)',  text: '#FF5A1F' },
+  RECOMMENDED: { bg: 'rgba(46,125,50,.10)',  border: 'rgba(46,125,50,.30)',  text: '#2E7D32' },
+  SITUATIONAL: { bg: 'rgba(230,81,0,.10)',   border: 'rgba(230,81,0,.30)',   text: '#E65100' },
+  AVOID:       { bg: 'rgba(198,40,40,.10)',  border: 'rgba(198,40,40,.30)',  text: '#C62828' },
+}[verdictLabel] ?? { bg: 'rgba(255,90,31,.12)', border: 'rgba(255,90,31,.35)', text: '#FF5A1F' };
+
+const relatedMaterials = [
+  {
+    name: 'PETG',
+    desc: 'Tougher than PLA, easier than ABS. The daily driver for functional parts.',
+    href: '/filament/petg',
+    gradient: 'linear-gradient(135deg,#0d1a10,#1a1008)',
+  },
+  {
+    name: 'ASA',
+    desc: 'UV-stable, heat-resistant outdoor material. The true outdoor replacement.',
+    href: '/filament/asa',
+    gradient: 'linear-gradient(135deg,#1a1008,#201510)',
+  },
+  {
+    name: 'PLA+',
+    desc: 'More impact resistance, better layer adhesion. Still beginner-friendly.',
+    href: '/filament/pla-plus',
+    gradient: 'linear-gradient(135deg,#0d1520,#1a1020)',
+  },
+];
+---
+<Base title={`${title} — Filament Guide`} description={excerpt} heroPage={true} hasHero={true}>
+  <Nav slot="nav" currentPath="/filament" />
+
+  <!-- ── HERO ── -->
+  <div class="fil-hero">
+    <div class="fil-hero-bg"></div>
+    <div class="fil-hero-content">
+      <div class="fil-hero-inner">
+        <div class="fil-hero-badges">
+          <span class="fil-cat-badge">{category}</span>
+          <span
+            class="fil-diff-badge"
+            style={`background:${difficultyColor}22;color:${difficultyColor};border-color:${difficultyColor}55`}
+          >{difficulty}</span>
+        </div>
+        <h1 class="fil-hero-name">{title}</h1>
+        <p class="fil-hero-fullname">{fullName}</p>
+        <p class="fil-hero-tagline">{tagline}</p>
+      </div>
+    </div>
+    <div class="fil-hero-stats-strip">
+      <div class="fil-hero-inner">
+        <div class="fil-stats-row">
+          <div class="fil-stat">
+            <span class="fil-stat-label">Nozzle</span>
+            <span class="fil-stat-value">{tempNozzle}</span>
+          </div>
+          <div class="fil-stat-sep" aria-hidden="true"></div>
+          <div class="fil-stat">
+            <span class="fil-stat-label">Bed</span>
+            <span class="fil-stat-value">{tempBed}</span>
+          </div>
+          <div class="fil-stat-sep" aria-hidden="true"></div>
+          <div class="fil-stat">
+            <span class="fil-stat-label">Cooling</span>
+            <span class="fil-stat-value">{coolingRequired}</span>
+          </div>
+          <div class="fil-stat-sep" aria-hidden="true"></div>
+          <div class="fil-stat">
+            <span class="fil-stat-label">Enclosure</span>
+            <span class={`fil-stat-chip ${enclosureRequired ? 'fil-chip-req' : 'fil-chip-no'}`}>
+              {enclosureRequired ? 'Required' : 'Not needed'}
+            </span>
+          </div>
+          <div class="fil-stat-sep" aria-hidden="true"></div>
+          <div class="fil-stat">
+            <span class="fil-stat-label">Dry Box</span>
+            <span class={`fil-stat-chip ${driedRequired ? 'fil-chip-req' : 'fil-chip-opt'}`}>
+              {driedRequired ? 'Recommended' : 'Optional'}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BREADCRUMB ── -->
+  <div class="fil-breadcrumb-bar">
+    <div class="fil-container">
+      <nav class="fil-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/filament">Filament</a>
+        <span aria-hidden="true">/</span>
+        <span>{title}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ── VERDICT BLOCK ── -->
+  <div class="fil-verdict-wrap">
+    <div class="fil-container">
+      <div class="fil-verdict-block">
+        <span
+          class="fil-verdict-badge"
+          style={`background:${verdictStyles.bg};color:${verdictStyles.text};border-color:${verdictStyles.border}`}
+        >{verdictLabel}</span>
+        <p class="fil-verdict-text">{verdict}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="fil-body">
+    <div class="fil-container">
+
+      <!-- BEST USES -->
+      {useCases.length > 0 && (
+        <section class="fil-section">
+          <h2 class="fil-section-heading">Best Uses</h2>
+          <div class="fil-uses-grid">
+            {useCases.map(uc => (
+              <div class="fil-use-item">
+                <span class="fil-use-dot" aria-hidden="true">◆</span>
+                <span>{uc}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- PRINT SETTINGS -->
+      <section class="fil-section">
+        <h2 class="fil-section-heading">Print Settings</h2>
+        <div class="fil-settings-card">
+          <div class="fil-setting-row">
+            <span class="fil-setting-label">Nozzle Temp</span>
+            <span class="fil-setting-value">{tempNozzle}</span>
+          </div>
+          <div class="fil-setting-row">
+            <span class="fil-setting-label">Bed Temp</span>
+            <span class="fil-setting-value">{tempBed}</span>
+          </div>
+          {tempChamber && (
+            <div class="fil-setting-row">
+              <span class="fil-setting-label">Chamber Temp</span>
+              <span class="fil-setting-value">{tempChamber}</span>
+            </div>
+          )}
+          <div class="fil-setting-row">
+            <span class="fil-setting-label">Cooling</span>
+            <span class="fil-setting-value">{coolingRequired}</span>
+          </div>
+          {maxSpeed && (
+            <div class="fil-setting-row">
+              <span class="fil-setting-label">Max Speed</span>
+              <span class="fil-setting-value">{maxSpeed}</span>
+            </div>
+          )}
+          <div class="fil-setting-row">
+            <span class="fil-setting-label">Enclosure</span>
+            <span class="fil-setting-value">{enclosureRequired ? 'Required' : 'Not required'}</span>
+          </div>
+          <div class="fil-setting-row">
+            <span class="fil-setting-label">Dry Before Print</span>
+            <span class="fil-setting-value">{driedRequired ? 'Recommended' : 'Usually not needed'}</span>
+          </div>
+          <div class="fil-setting-row">
+            <span class="fil-setting-label">Hardened Nozzle</span>
+            <span class="fil-setting-value">{hardnessRequired ? 'Required' : 'Not needed'}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- BRAND BREAKDOWN -->
+      {brands.length > 0 && (
+        <section class="fil-section">
+          <h2 class="fil-section-heading">Brand Breakdown</h2>
+          <div class="fil-brands-grid">
+            {brands.map(brand => (
+              <div class={`fil-brand-card fil-brand-${brand.tier}`}>
+                <div class="fil-brand-header">
+                  <span class="fil-brand-name">{brand.name}</span>
+                  <span class={`fil-tier-badge fil-tier-${brand.tier}`}>{brand.tier.toUpperCase()}</span>
+                </div>
+                <p class="fil-brand-verdict">{brand.verdict}</p>
+                {brand.notes && <p class="fil-brand-notes">{brand.notes}</p>}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- HARDWARE COMPATIBILITY -->
+      {compatibility.length > 0 && (
+        <section class="fil-section">
+          <h2 class="fil-section-heading">Hardware Compatibility</h2>
+          <div class="fil-compat-wrap">
+            <table class="fil-compat-table">
+              <thead>
+                <tr>
+                  <th>Hardware</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {compatibility.map(row => (
+                  <tr>
+                    <td class="fil-compat-item">{row.item}</td>
+                    <td>
+                      <span class={`fil-compat-chip fil-compat-${row.status}`}>
+                        {row.status === 'yes' ? '✓ Yes' : row.status === 'no' ? '✗ No' : '~ Sometimes'}
+                      </span>
+                    </td>
+                    <td class="fil-compat-note">{row.note ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <!-- FAILURE MODES -->
+      {failureModes.length > 0 && (
+        <section class="fil-section">
+          <h2 class="fil-section-heading">Common Failure Modes</h2>
+          <div class="fil-failures-list">
+            {failureModes.map(fm => (
+              <div class="fil-failure-card">
+                <h3 class="fil-failure-name">{fm.name}</h3>
+                <div class="fil-failure-body">
+                  <div class="fil-failure-row">
+                    <span class="fil-failure-key">Cause</span>
+                    <span class="fil-failure-val">{fm.cause}</span>
+                  </div>
+                  <div class="fil-failure-row">
+                    <span class="fil-failure-key">Fix</span>
+                    <span class="fil-failure-val">{fm.fix}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- PROS & CONS -->
+      {(pros.length > 0 || cons.length > 0) && (
+        <section class="fil-section">
+          <h2 class="fil-section-heading">Pros &amp; Cons</h2>
+          <div class="fil-procon-grid">
+            {pros.length > 0 && (
+              <div class="fil-procon-col fil-pros-col">
+                <div class="fil-procon-col-head">Pros</div>
+                <ul class="fil-procon-list">
+                  {pros.map(p => <li>{p}</li>)}
+                </ul>
+              </div>
+            )}
+            {cons.length > 0 && (
+              <div class="fil-procon-col fil-cons-col">
+                <div class="fil-procon-col-head">Cons</div>
+                <ul class="fil-procon-list">
+                  {cons.map(c => <li>{c}</li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      <!-- PROSE SLOT -->
+      <section class="fil-section fil-prose">
+        <slot />
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ── RELATED MATERIALS ── -->
+  <section class="fil-related-section" aria-label="Related filament materials">
+    <div class="fil-container">
+      <div class="fil-related-head">
+        <span class="fil-related-label">Related Materials</span>
+        <a href="/filament" class="fil-related-all">All filaments →</a>
+      </div>
+      <div class="fil-related-grid">
+        {relatedMaterials.map(mat => (
+          <a href={mat.href} class="fil-related-card">
+            <div class="fil-related-card-img" style={`background: ${mat.gradient}`}>
+              <span class="fil-related-card-bigname">{mat.name}</span>
+            </div>
+            <div class="fil-related-card-body">
+              <div class="fil-related-card-title">{mat.name}</div>
+              <div class="fil-related-card-desc">{mat.desc}</div>
+              <span class="fil-related-card-soon">Coming Soon</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
+
+<style is:global>
+
+/* ── HERO ── */
+.fil-hero {
+  position: relative;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+}
+.fil-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #10080a 0%, #0d0d14 45%, #0a1210 100%);
+  pointer-events: none;
+}
+.fil-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 15% 40%, rgba(255,90,31,.07) 0%, transparent 70%);
+}
+.fil-hero-content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 80px 0 48px;
+  min-height: 400px;
+}
+.fil-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+}
+.fil-hero-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.fil-cat-badge {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+.fil-diff-badge {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 4px 12px;
+}
+.fil-hero-name {
+  font-family: var(--fd);
+  font-size: clamp(80px, 14vw, 144px);
+  font-weight: 800;
+  color: #fff;
+  line-height: .9;
+  letter-spacing: -.02em;
+  margin: 0 0 14px;
+}
+.fil-hero-fullname {
+  font-family: var(--fu);
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.fil-hero-tagline {
+  font-family: var(--fb);
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.55;
+  max-width: 580px;
+}
+.fil-hero-stats-strip {
+  position: relative;
+  background: rgba(0,0,0,.55);
+  border-top: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.fil-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 60px;
+  flex-wrap: wrap;
+}
+.fil-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+.fil-stat-sep {
+  width: 1px;
+  height: 24px;
+  background: rgba(255,255,255,.1);
+  flex-shrink: 0;
+}
+.fil-stat-label {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+.fil-stat-value {
+  font-family: var(--fm);
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+.fil-stat-chip {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  border-radius: 3px;
+  padding: 3px 9px;
+}
+.fil-chip-req {
+  background: rgba(198,40,40,.2);
+  color: #EF9A9A;
+  border: 1px solid rgba(198,40,40,.35);
+}
+.fil-chip-no {
+  background: rgba(46,125,50,.15);
+  color: #A5D6A7;
+  border: 1px solid rgba(46,125,50,.3);
+}
+.fil-chip-opt {
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+/* ── SHARED CONTAINER ── */
+.fil-container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── BREADCRUMB ── */
+.fil-breadcrumb-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.fil-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0;
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g2);
+}
+.fil-breadcrumb a {
+  color: var(--g1);
+  transition: color .15s;
+}
+.fil-breadcrumb a:hover { color: var(--accent); }
+.fil-breadcrumb span[aria-hidden] { color: var(--border-s); }
+
+/* ── VERDICT BLOCK ── */
+.fil-verdict-wrap {
+  background: var(--surface);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+.fil-verdict-block {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: linear-gradient(135deg, #fff8f0, #fff2e8);
+  border: 1.5px solid #FFCFBD;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: 22px 28px;
+}
+.fil-verdict-badge {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.fil-verdict-text {
+  font-family: var(--fb);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--g1);
+  margin: 0;
+}
+
+/* ── BODY ── */
+.fil-body {
+  background: var(--bg);
+  padding: 0 0 16px;
+}
+
+/* ── SECTION HEADINGS ── */
+.fil-section {
+  padding: 48px 0 0;
+}
+.fil-section-heading {
+  font-family: var(--fd);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -.2px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ── BEST USES GRID ── */
+.fil-uses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.fil-use-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: var(--fu);
+  font-size: 14px;
+  color: var(--g1);
+  line-height: 1.4;
+}
+.fil-use-dot {
+  color: var(--accent);
+  font-size: 8px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* ── PRINT SETTINGS ── */
+.fil-settings-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.fil-setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.fil-setting-row:last-child { border-bottom: none; }
+.fil-setting-row:nth-child(even) { background: #fafaf9; }
+.fil-setting-label {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--g1);
+}
+.fil-setting-value {
+  font-family: var(--fm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* ── BRAND BREAKDOWN ── */
+.fil-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.fil-brand-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+.fil-brand-top {
+  border-top: 3px solid var(--accent);
+}
+.fil-brand-mid {
+  border-top: 3px solid var(--g2);
+}
+.fil-brand-budget {
+  border-top: 3px solid var(--border-s);
+}
+.fil-brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.fil-brand-name {
+  font-family: var(--fd);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+}
+.fil-tier-badge {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  border-radius: 3px;
+  padding: 3px 8px;
+  flex-shrink: 0;
+}
+.fil-tier-top {
+  background: rgba(255,90,31,.12);
+  color: var(--accent);
+  border: 1px solid rgba(255,90,31,.3);
+}
+.fil-tier-mid {
+  background: rgba(140,140,140,.1);
+  color: var(--g1);
+  border: 1px solid var(--border);
+}
+.fil-tier-budget {
+  background: var(--bg);
+  color: var(--g2);
+  border: 1px solid var(--border);
+}
+.fil-brand-verdict {
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+.fil-brand-notes {
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── HARDWARE COMPATIBILITY ── */
+.fil-compat-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.fil-compat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fu);
+}
+.fil-compat-table thead tr {
+  background: var(--black);
+}
+.fil-compat-table th {
+  padding: 12px 18px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  text-align: left;
+}
+.fil-compat-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+.fil-compat-table tbody tr:last-child { border-bottom: none; }
+.fil-compat-table tbody tr:hover { background: #fafaf9; }
+.fil-compat-item {
+  padding: 13px 18px;
+  font-size: 13px;
+  color: var(--g1);
+}
+.fil-compat-chip {
+  display: inline-block;
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+.fil-compat-yes {
+  background: rgba(46,125,50,.1);
+  color: #2E7D32;
+  border: 1px solid rgba(46,125,50,.25);
+}
+.fil-compat-no {
+  background: rgba(198,40,40,.1);
+  color: #C62828;
+  border: 1px solid rgba(198,40,40,.25);
+}
+.fil-compat-sometimes {
+  background: rgba(230,81,0,.1);
+  color: #E65100;
+  border: 1px solid rgba(230,81,0,.25);
+}
+.fil-compat-note {
+  padding: 13px 18px;
+  font-size: 12px;
+  color: var(--g2);
+  line-height: 1.5;
+}
+
+/* ── FAILURE MODES ── */
+.fil-failures-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fil-failure-card {
+  background: var(--surface);
+  border: 1.5px solid #FCD34D44;
+  border-left: 4px solid #F59E0B;
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+}
+.fil-failure-name {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.fil-failure-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fil-failure-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.fil-failure-key {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--g2);
+  min-width: 44px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.fil-failure-val {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.5;
+}
+
+/* ── PROS & CONS ── */
+.fil-procon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.fil-procon-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.fil-procon-col-head {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.fil-pros-col .fil-procon-col-head {
+  background: rgba(46,125,50,.08);
+  color: #2E7D32;
+}
+.fil-cons-col .fil-procon-col-head {
+  background: rgba(198,40,40,.07);
+  color: #C62828;
+}
+.fil-procon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fil-procon-list li {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--g1);
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.fil-procon-list li:last-child { border-bottom: none; }
+.fil-pros-col .fil-procon-list li::before {
+  content: '+';
+  font-family: var(--fm);
+  font-size: 12px;
+  font-weight: 700;
+  color: #2E7D32;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.fil-cons-col .fil-procon-list li::before {
+  content: '–';
+  font-family: var(--fm);
+  font-size: 12px;
+  font-weight: 700;
+  color: #C62828;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── PROSE SLOT ── */
+.fil-prose { padding-bottom: 48px; }
+.fil-prose :global(h2) {
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--black);
+  margin: 36px 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.fil-prose :global(h3) {
+  font-family: var(--fd);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--black);
+  margin: 28px 0 10px;
+}
+.fil-prose :global(p) {
+  font-family: var(--fb);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--g1);
+  margin-bottom: 18px;
+}
+.fil-prose :global(ul), .fil-prose :global(ol) {
+  font-family: var(--fb);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--g1);
+  padding-left: 24px;
+  margin-bottom: 18px;
+}
+.fil-prose :global(li) { margin-bottom: 6px; }
+.fil-prose :global(code) {
+  font-family: var(--fm);
+  font-size: 13px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+  color: var(--black);
+}
+
+/* ── RELATED MATERIALS ── */
+.fil-related-section {
+  background: var(--dark-bg);
+  padding: 56px 0;
+}
+.fil-related-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.fil-related-label {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: .02em;
+}
+.fil-related-all {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: opacity .15s;
+}
+.fil-related-all:hover { opacity: .75; }
+.fil-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.fil-related-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.fil-related-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.14);
+}
+.fil-related-card-img {
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px 18px;
+}
+.fil-related-card-bigname {
+  font-family: var(--fd);
+  font-size: 52px;
+  font-weight: 800;
+  color: rgba(255,255,255,.15);
+  letter-spacing: -.02em;
+  line-height: 1;
+  user-select: none;
+}
+.fil-related-card-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.fil-related-card-title {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+.fil-related-card-desc {
+  font-family: var(--fu);
+  font-size: 12px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.55;
+  flex: 1;
+}
+.fil-related-card-soon {
+  display: inline-block;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 3px;
+  padding: 3px 8px;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .fil-brands-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .fil-hero-content { padding: 64px 0 36px; min-height: 320px; }
+  .fil-hero-inner { padding: 0 20px; }
+  .fil-container { padding: 0 20px; }
+  .fil-hero-name { font-size: clamp(64px, 18vw, 100px); }
+  .fil-hero-tagline { font-size: 15px; }
+  .fil-stats-row {
+    height: auto;
+    padding: 12px 0;
+    gap: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .fil-stat { padding: 8px 16px; }
+  .fil-stat-sep { display: none; }
+  .fil-uses-grid { grid-template-columns: 1fr; }
+  .fil-brands-grid { grid-template-columns: 1fr; }
+  .fil-procon-grid { grid-template-columns: 1fr; }
+  .fil-related-grid { grid-template-columns: 1fr; }
+  .fil-verdict-block { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .fil-compat-table th:last-child,
+  .fil-compat-note { display: none; }
+}
+
+@media (max-width: 480px) {
+  .fil-hero-name { font-size: 64px; }
+  .fil-section { padding: 36px 0 0; }
+  .fil-failure-row { flex-direction: column; gap: 4px; }
+  .fil-failure-key { min-width: unset; }
+}
+</style>

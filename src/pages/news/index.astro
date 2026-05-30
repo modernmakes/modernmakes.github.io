@@ -6,8 +6,7 @@ import Footer from '../../components/Footer.astro';
 
 const currentPath = '/news';
 
-// Guides live at /guides — exclude them from the news index entirely
-const allNews = await getCollection('news', ({ data }) => data.type !== 'guide');
+const allNews = await getCollection('news');
 const sorted = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function formatDate(d: Date) {
@@ -21,11 +20,7 @@ function cardBg(entry: (typeof sorted)[number]) {
   return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
 }
 
-const counts = {
-  all:        sorted.length,
-  news:       sorted.filter(e => !e.data.type || e.data.type === 'news').length,
-  comparison: sorted.filter(e => e.data.type === 'comparison').length,
-};
+const counts = { all: sorted.length };
 ---
 <Base
   title="News"
@@ -34,7 +29,7 @@ const counts = {
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- HEADER -->
-  <div style="background:var(--black);padding:40px 0">
+  <div class="ni-page-hero" style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
@@ -46,23 +41,13 @@ const counts = {
     </div>
   </div>
 
-  <!-- FILTER TABS: All / News / Comparisons only -->
+  <!-- ARTICLE COUNT BAR -->
   <div class="ni-tabs-bar">
     <div class="ni-tabs-inner">
-      <button class="ni-tab active" data-filter="all">
+      <span class="ni-tab active">
         All
         <span class="ni-tab-count">{counts.all}</span>
-      </button>
-      <button class="ni-tab" data-filter="news">
-        News
-        <span class="ni-tab-count">{counts.news}</span>
-      </button>
-      {counts.comparison > 0 && (
-        <button class="ni-tab" data-filter="comparison">
-          Comparisons
-          <span class="ni-tab-count">{counts.comparison}</span>
-        </button>
-      )}
+      </span>
     </div>
   </div>
 
@@ -75,45 +60,30 @@ const counts = {
         </p>
       ) : (
         <div class="grid-3" id="news-grid">
-          {sorted.map(entry => {
-            const articleType = entry.data.type ?? 'news';
-            return (
-              <a
-                href={`/news/${entry.slug}`}
-                class="card"
-                aria-label={entry.data.title}
-                data-article-type={articleType}
-              >
-                <div class="card-img" style={cardBg(entry)}>
-                  <div class="news-img-overlay"></div>
-                  <span class="news-img-cat">{entry.data.category}</span>
-                  {articleType === 'comparison' && (
-                    <span class="ni-badge ni-badge-vs">VS</span>
-                  )}
+          {sorted.map(entry => (
+            <a
+              href={`/news/${entry.slug}`}
+              class="card"
+              aria-label={entry.data.title}
+            >
+              <div class="card-img" style={cardBg(entry)}>
+                <div class="news-img-overlay"></div>
+                <span class="news-img-cat">{entry.data.category}</span>
+              </div>
+              <div class="card-body">
+                <div class="card-cat">{entry.data.category}</div>
+                <div class="card-title">{entry.data.title}</div>
+                <p class="card-excerpt">{entry.data.excerpt}</p>
+                <div class="card-footer">
+                  <time class="card-date">{formatDate(entry.data.date)}</time>
+                  <span class="card-date" style="margin-left:auto">{entry.data.readTime}</span>
                 </div>
-                <div class="card-body">
-                  <div class="card-cat-row">
-                    <div class="card-cat">{entry.data.category}</div>
-                    {articleType === 'comparison' && (
-                      <span class="ni-type-chip ni-type-vs">COMPARISON</span>
-                    )}
-                  </div>
-                  <div class="card-title">{entry.data.title}</div>
-                  <p class="card-excerpt">{entry.data.excerpt}</p>
-                  <div class="card-footer">
-                    <time class="card-date">{formatDate(entry.data.date)}</time>
-                    <span class="card-date" style="margin-left:auto">{entry.data.readTime}</span>
-                  </div>
-                </div>
-              </a>
-            );
-          })}
+              </div>
+            </a>
+          ))}
         </div>
       )}
 
-      <p class="ni-empty" id="ni-empty-msg" style="display:none;font-family:'Lora',serif;color:var(--g1);font-size:15px;text-align:center;padding:40px 0">
-        No articles in this category yet.
-      </p>
     </div>
   </section>
 
@@ -133,35 +103,13 @@ const counts = {
   })}></script>
 </Base>
 
-<script>
-  const tabs = document.querySelectorAll<HTMLButtonElement>('.ni-tab');
-  const cards = document.querySelectorAll<HTMLElement>('[data-article-type]');
-  const emptyMsg = document.getElementById('ni-empty-msg');
-
-  function applyFilter(filter: string) {
-    let visible = 0;
-    cards.forEach(card => {
-      const type = card.dataset.articleType ?? 'news';
-      const show = filter === 'all' || type === filter;
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-    if (emptyMsg) emptyMsg.style.display = visible === 0 ? '' : 'none';
-    tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.filter === filter));
-    history.replaceState(null, '', filter === 'all' ? location.pathname : `#${filter}`);
-  }
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => applyFilter(tab.dataset.filter ?? 'all'));
-  });
-
-  const hash = location.hash.replace('#', '');
-  if (hash && ['news', 'comparison'].includes(hash)) {
-    applyFilter(hash);
-  }
-</script>
 
 <style is:global>
+/* Isolate hero from nav backdrop-filter repaint cascade — same fix as guides/index */
+.ni-page-hero {
+  will-change: transform;
+  transform: translateZ(0);
+}
 .card-img {
   position: relative;
   display: flex;

@@ -4,7 +4,6 @@ const news = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    type: z.enum(['news', 'comparison', 'guide']).optional().default('news'),
     category: z.string(),
     date: z.coerce.date(),
     readTime: z.string(),
@@ -12,9 +11,39 @@ const news = defineCollection({
     heroImage: z.string().optional(),
     summary: z.array(z.string()).optional().default([]),
     featured: z.boolean().optional().default(false),
+  }),
+});
 
-    // Comparison-specific fields
-    items: z.array(z.string()).optional(),
+const guides = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    category: z.string(),
+    date: z.coerce.date(),
+    readTime: z.string(),
+    excerpt: z.string(),
+    heroImage: z.string().optional(),
+    summary: z.array(z.string()).optional().default([]),
+    featured: z.boolean().optional().default(false),
+    difficulty: z.enum(['Beginner', 'Intermediate', 'Advanced']),
+    timeRequired: z.string(),
+    tools: z.array(z.string()).optional().default([]),
+    parts: z.array(z.string()).optional().default([]),
+  }),
+});
+
+const comparisons = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    category: z.string(),
+    date: z.coerce.date(),
+    readTime: z.string(),
+    excerpt: z.string(),
+    heroImage: z.string().optional(),
+    summary: z.array(z.string()).optional().default([]),
+    featured: z.boolean().optional().default(false),
+    items: z.array(z.string()),
     verdict: z.string().optional(),
     verdictText: z.string().optional(),
     specs: z.array(z.object({
@@ -23,19 +52,33 @@ const news = defineCollection({
       a: z.string(),
       b: z.string(),
       winner: z.enum(['a', 'b', 'draw']).optional(),
-    })).optional(),
+    })).optional().default([]),
     scores: z.array(z.object({
       category: z.string(),
       a: z.number(),
       b: z.number(),
-    })).optional(),
-
-    // Guide-specific fields
-    difficulty: z.enum(['Beginner', 'Intermediate', 'Advanced']).optional(),
-    timeRequired: z.string().optional(),
-    tools: z.array(z.string()).optional(),
-    parts: z.array(z.string()).optional(),
+    })).optional().default([]),
   }),
 });
 
-export const collections = { news };
+const filament = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    category: z.string().optional(),
+    featured: z.boolean().optional().default(false),
+  }),
+});
+
+const hardware = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    category: z.string().optional(),
+    featured: z.boolean().optional().default(false),
+  }),
+});
+
+export const collections = { news, guides, comparisons, filament, hardware };

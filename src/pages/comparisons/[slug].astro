@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import ComparisonLayout from '../../layouts/ComparisonLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('news');
+  const entries = await getCollection('comparisons');
   return entries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -21,6 +21,11 @@ const {
   heroImage,
   excerpt,
   summary,
+  items,
+  verdict,
+  verdictText,
+  specs,
+  scores,
 } = entry.data;
 
 const formattedDate = date.toLocaleDateString('en-US', {
@@ -30,7 +35,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   timeZone: 'UTC',
 });
 ---
-<ArticleLayout
+<ComparisonLayout
   title={title}
   category={category}
   date={formattedDate}
@@ -38,6 +43,11 @@ const formattedDate = date.toLocaleDateString('en-US', {
   heroImage={heroImage}
   excerpt={excerpt}
   summary={summary}
+  items={items}
+  verdict={verdict}
+  verdictText={verdictText}
+  specs={specs}
+  scores={scores}
 >
   <Content />
-</ArticleLayout>
+</ComparisonLayout>

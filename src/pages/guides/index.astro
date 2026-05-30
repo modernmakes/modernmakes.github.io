@@ -6,7 +6,7 @@ import Footer from '../../components/Footer.astro';
 
 const currentPath = '/guides';
 
-const allGuides = await getCollection('news', ({ data }) => data.type === 'guide');
+const allGuides = await getCollection('guides');
 const sorted = allGuides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function formatDate(d: Date) {
@@ -33,7 +33,7 @@ const difficultyColors: Record<string, string> = {
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- HEADER -->
-  <div style="background:var(--black);padding:40px 0">
+  <div class="gi-page-hero" style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
@@ -56,7 +56,7 @@ const difficultyColors: Record<string, string> = {
       ) : (
         <div class="grid-3">
           {sorted.map(entry => (
-            <a href={`/news/${entry.slug}`} class="card" aria-label={entry.data.title}>
+            <a href={`/guides/${entry.slug}`} class="card" aria-label={entry.data.title}>
               <div class="card-img" style={cardBg(entry)}>
                 <div class="gi-overlay"></div>
                 <span class="gi-cat">{entry.data.category}</span>
@@ -114,6 +114,15 @@ const difficultyColors: Record<string, string> = {
 </Base>
 
 <style is:global>
+/*
+ * Promote the hero to its own GPU compositor layer.
+ * Prevents repaint bleed from the nav's backdrop-filter re-compositing
+ * (triggered by nav-link/card transform transitions on hover).
+ */
+.gi-page-hero {
+  will-change: transform;
+  transform: translateZ(0);
+}
 .gi-overlay {
   position: absolute;
   inset: 0;
