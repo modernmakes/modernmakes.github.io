@@ -274,6 +274,35 @@ img { display: block; max-width: 100%; height: auto; }
   .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
 }
 
+/* ── MODEL CONTEXT BAR (Voron subsystem pages) ── */
+.model-context-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255,90,31,.08);
+  border: 1px solid rgba(255,90,31,.2);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.model-context-label { color: var(--g2); font-family: var(--fu); }
+.model-context-value {
+  font-family: var(--fu);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--accent);
+}
+.model-context-switch {
+  color: var(--g2);
+  text-decoration: none;
+  font-size: 12px;
+  margin-left: 4px;
+  border-left: 1px solid var(--border);
+  padding-left: 10px;
+  font-family: var(--fu);
+}
+.model-context-switch:hover { color: var(--accent); }
+
 /* ── NAV CLEARANCE ── */
 /*
  * Non-hero pages: push main content below the fixed nav.

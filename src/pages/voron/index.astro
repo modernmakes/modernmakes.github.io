@@ -4,53 +4,144 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import voronData from '../../data/products/voron-variants.json';
 const currentPath = '/voron';
+
+const partCounts: Record<string, { a: number; t: number }> = {
+  'hotends':        { a: 8,  t: 8  },
+  'extruders':      { a: 6,  t: 6  },
+  'motion-system':  { a: 14, t: 10 },
+  'gantry':         { a: 5,  t: 4  },
+  'z-system':       { a: 9,  t: 6  },
+  'electronics':    { a: 12, t: 12 },
+  'probe-system':   { a: 5,  t: 5  },
+  'bed':            { a: 8,  t: 8  },
+  'enclosure':      { a: 18, t: 14 },
+  'toolhead':       { a: 7,  t: 7  },
+  'lighting':       { a: 6,  t: 6  },
+};
 ---
 <Base title="Voron Upgrades, Mods & Parts" description="The complete resource for Voron 2.4 and Trident builders. Every hotend, extruder, motion system, electronics, and more — with affiliate links and community mod picks.">
   <Nav slot="nav" currentPath={currentPath} />
 
-  <!-- HERO -->
+  <!-- ── HERO ── -->
   <div style="background:var(--black);padding:52px 0 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <!-- Breadcrumb -->
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
         <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
         <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Voron</span>
       </div>
+      <!-- Title + Configurator -->
       <div style="display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08)">
         <div>
           <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
           <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron</h1>
-          <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">The community-designed CoreXY benchmark. Voron 2.4 and Trident are the most-built self-build printers on the planet — and have the deepest aftermarket parts ecosystem to match. Every upgrade worth knowing about, mapped and sourced.</p>
+          <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">The community-designed CoreXY benchmark. Voron 2.4 and Trident are the most-built self-build printers on the planet — and have the deepest aftermarket parts ecosystem to match.</p>
         </div>
         <a href="/voron/configurator" style="background:var(--accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;padding:14px 24px;border-radius:8px;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .15s">
           Open Configurator →
         </a>
       </div>
-      <!-- Variant pills -->
-      <div style="display:flex;gap:6px;padding:16px 0;flex-wrap:wrap">
-        {voronData.variants.map(v => (
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:4px 12px">{v.label}</span>
-        ))}
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);background:transparent;border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:4px 12px">0.2 · Coming soon</span>
+
+      <!-- ── MODEL SELECTOR (replaces variant pills) ── -->
+      <div class="model-selector">
+        <button class="model-btn active" data-model="2.4" aria-pressed="true">
+          <span class="model-btn-name">Voron 2.4</span>
+          <span class="model-btn-sub">300 · 350 · 400mm</span>
+        </button>
+        <button class="model-btn" data-model="trident" aria-pressed="false">
+          <span class="model-btn-name">Trident</span>
+          <span class="model-btn-sub">250 · 300 · 350mm</span>
+        </button>
+        <div class="model-coming">
+          <span class="coming-label">0.2</span>
+          <span class="coming-text">Coming soon</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- SUBSYSTEM GRID -->
+  <!-- ── COMPARISON CALLOUT ── -->
+  <div style="background:#0d0d0d;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:32px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="comparison-callout">
+        <div class="cc-inner">
+          <div class="cc-text">
+            <p class="cc-eyebrow">NOT SURE WHICH TO BUILD?</p>
+            <h2 class="cc-heading">Voron 2.4 vs Trident</h2>
+            <ul class="cc-verdicts">
+              <li>
+                <strong>Build a Trident if:</strong> You want a faster build, easier first-time calibration, and are printing 250–300mm parts.
+              </li>
+              <li>
+                <strong>Build a 2.4 if:</strong> You want maximum print volume (up to 400mm), the largest aftermarket ecosystem, or plan to run high-temp materials at scale.
+              </li>
+              <li>
+                <strong>Both are equally capable</strong> at standard print quality. The differences are build complexity, max size, and Z system design (leadscrew vs belt).
+              </li>
+            </ul>
+            <a href="/guides/voron-2-4-vs-trident" class="cc-link">Full comparison guide →</a>
+          </div>
+          <div class="cc-specs">
+            <div class="cc-spec-col">
+              <p class="cc-spec-model">2.4</p>
+              <dl class="cc-spec-list">
+                <dt>Z system</dt><dd>4 leadscrews</dd>
+                <dt>Max size</dt><dd>400mm</dd>
+                <dt>Build time</dt><dd>40–60 hrs</dd>
+                <dt>Aftermarket</dt><dd>Largest</dd>
+                <dt>Difficulty</dt><dd>Intermediate</dd>
+              </dl>
+            </div>
+            <div class="cc-spec-divider"></div>
+            <div class="cc-spec-col">
+              <p class="cc-spec-model">Trident</p>
+              <dl class="cc-spec-list">
+                <dt>Z system</dt><dd>3 belts</dd>
+                <dt>Max size</dt><dd>350mm</dd>
+                <dt>Build time</dt><dd>30–45 hrs</dd>
+                <dt>Aftermarket</dt><dd>Large</dd>
+                <dt>Difficulty</dt><dd>Beginner-friendly</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUBSYSTEM GRID ── -->
   <section style="background:var(--black);padding:0 0 52px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px">Browse by subsystem</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin:28px 0 16px">Browse by subsystem</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-        {voronData.subsystems.map(sub => (
-          <a href={`/voron/${sub.id}`}>
-            <div style="background:#1e1e1e;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;height:100%">
-              <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
-              <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">{sub.description}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">{sub.partCount} parts →</div>
-            </div>
-          </a>
-        ))}
+        {voronData.subsystems.map(sub => {
+          const pc = partCounts[sub.id] ?? { a: sub.partCount, t: sub.partCount };
+          return (
+            <a href={`/voron/${sub.id}`}
+               data-subsystem-link=""
+               data-href={`/voron/${sub.id}`}>
+              <div class="subsystem-card"
+                   data-parts24={String(pc.a)}
+                   data-parts-trident={String(pc.t)}
+                   style="background:#1e1e1e;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;height:100%">
+                <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">{sub.description}</div>
+                <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">{pc.a} parts →</div>
+              </div>
+            </a>
+          );
+        })}
+        <!-- Community Mods card -->
+        <a href="/voron/mods">
+          <div style="background:#1a1e12;border:1px solid rgba(46,125,50,.25);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;height:100%">
+            <div style="font-size:20px;margin-bottom:8px">🔧</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">Community Mods</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">Toolheads, filtration, probes, panels — the best user-made upgrades</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(46,125,50,.7)">12 mods →</div>
+          </div>
+        </a>
         <!-- Configurator card -->
         <a href="/voron/configurator">
           <div style="background:rgba(255,90,31,.1);border:1px solid rgba(255,90,31,.25);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s;height:100%">
@@ -64,7 +155,7 @@ const currentPath = '/voron';
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS STRIP -->
+  <!-- ── FEATURED PRODUCTS ── -->
   <section class="section" aria-label="Top picks for Voron">
     <div class="container">
       <div class="section-head">
@@ -99,13 +190,13 @@ const currentPath = '/voron';
     </div>
   </section>
 
-  <!-- COMMUNITY MODS -->
+  <!-- ── COMMUNITY MODS TEASER ── -->
   <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Community mods">
     <div class="container">
       <div class="section-head">
         <h2 class="section-head-label">Community mods</h2>
         <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
-        <a href="https://printables.com/tag/voron" class="section-head-link" target="_blank" rel="noopener">Browse Printables</a>
+        <a href="/voron/mods" class="section-head-link">View all 12 mods</a>
       </div>
       <div class="grid-3">
         {[
@@ -129,10 +220,16 @@ const currentPath = '/voron';
           </a>
         ))}
       </div>
+      <div style="text-align:center;margin-top:24px">
+        <a href="/voron/mods" style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none">
+          Browse all 12 community mods →
+        </a>
+      </div>
     </div>
   </section>
 
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -153,3 +250,214 @@ const currentPath = '/voron';
     ]
   })}></script>
 </Base>
+
+<style is:global>
+/* ── MODEL SELECTOR ── */
+.model-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 32px;
+  flex-wrap: wrap;
+}
+.model-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 20px;
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  min-width: 140px;
+}
+.model-btn:hover { border-color: var(--accent); }
+.model-btn.active {
+  border-color: var(--accent);
+  background: rgba(255,90,31,.1);
+}
+.model-btn-name {
+  font-family: var(--fu);
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+.model-btn.active .model-btn-name { color: var(--accent); }
+.model-btn-sub {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: 0.02em;
+}
+.model-coming {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1.5px dashed rgba(255,255,255,.1);
+  border-radius: 10px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.coming-label {
+  font-family: var(--fu);
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+}
+.coming-text {
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  font-family: var(--fm);
+}
+
+/* ── COMPARISON CALLOUT ── */
+.comparison-callout {
+  background: var(--black);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.cc-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+.cc-text {
+  padding: 40px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.cc-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--accent);
+  font-family: var(--fu);
+  margin-bottom: 10px;
+}
+.cc-heading {
+  font-family: var(--fu);
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+.cc-verdicts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 0;
+}
+.cc-verdicts li {
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.5;
+  padding-left: 14px;
+  border-left: 2px solid rgba(255,90,31,.4);
+}
+.cc-verdicts li strong { color: #fff; }
+.cc-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--fu);
+}
+.cc-link:hover { color: #fff; }
+.cc-specs {
+  padding: 40px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.cc-spec-col { flex: 1; }
+.cc-spec-model {
+  font-family: var(--fu);
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+.cc-spec-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+.cc-spec-list dt {
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  font-family: var(--fm);
+}
+.cc-spec-list dd {
+  font-size: 12px;
+  color: rgba(255,255,255,.8);
+  font-family: var(--fm);
+  margin: 0;
+}
+.cc-spec-divider {
+  width: 1px;
+  background: rgba(255,255,255,.08);
+  align-self: stretch;
+  margin: 4px 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .cc-inner { grid-template-columns: 1fr; }
+  .cc-text { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding: 32px 24px; }
+  .cc-specs { padding: 24px; }
+}
+@media (max-width: 640px) {
+  .cc-specs { flex-direction: column; }
+  .cc-spec-divider { display: none; }
+  .model-btn { min-width: 120px; padding: 10px 14px; }
+  .model-btn-name { font-size: 15px; }
+}
+</style>
+
+<script>
+  // ── MODEL SELECTOR — persists choice to sessionStorage ──
+  const modelBtns = document.querySelectorAll<HTMLButtonElement>('.model-btn');
+  const STORAGE_KEY = 'voron-model';
+
+  function setModel(model: string) {
+    sessionStorage.setItem(STORAGE_KEY, model);
+    modelBtns.forEach(btn => {
+      const active = btn.dataset.model === model;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+    updateSubsystemCards(model);
+    // Update subsystem link hrefs to pass ?model= param
+    document.querySelectorAll<HTMLAnchorElement>('a[data-subsystem-link]').forEach(link => {
+      const base = link.dataset.href ?? link.getAttribute('href') ?? '';
+      link.href = base + '?model=' + model;
+    });
+  }
+
+  function updateSubsystemCards(model: string) {
+    document.querySelectorAll<HTMLElement>('.subsystem-card[data-parts24]').forEach(card => {
+      const count = model === '2.4'
+        ? card.dataset.parts24
+        : card.dataset.partsTrident;
+      const countEl = card.querySelector<HTMLElement>('.subsystem-parts');
+      if (countEl && count) countEl.textContent = count + ' parts →';
+    });
+  }
+
+  modelBtns.forEach(btn => {
+    btn.addEventListener('click', () => setModel(btn.dataset.model ?? '2.4'));
+  });
+
+  // Restore from sessionStorage on load
+  const saved = sessionStorage.getItem(STORAGE_KEY) ?? '2.4';
+  setModel(saved);
+</script>

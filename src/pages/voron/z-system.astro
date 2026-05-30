@@ -3,9 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/voron/z-system';
-const label = 'z-system'.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 ---
-<Base title={`Voron ${label}`} description={`The complete guide to ${label.toLowerCase()} for Voron 2.4 and Trident builds.`}>
+<Base title="Voron Z System" description="The complete guide to Z drive components for Voron 2.4 and Trident builds.">
   <Nav slot="nav" currentPath={currentPath} />
   <section style="background:var(--black);padding:60px 0 40px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
@@ -14,13 +13,36 @@ const label = 'z-system'.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
         <span style="color:rgba(255,255,255,.2)">/</span>
         <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">{label}</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Z System</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px">Voron · {label}</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron {label}</h1>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Z System</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron Z System</h1>
       <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
       <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
     </div>
   </section>
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-context-bar">
+        <span class="model-context-label">Showing parts for:</span>
+        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
+        <a href="/voron" class="model-context-switch">Switch model →</a>
+      </div>
+    </div>
+  </div>
   <Footer slot="footer" />
 </Base>
+<script>
+  (function() {
+    const STORAGE_KEY = 'voron-model';
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model') || sessionStorage.getItem(STORAGE_KEY) || '2.4';
+    sessionStorage.setItem(STORAGE_KEY, model);
+    const label = document.getElementById('active-model-label');
+    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+    document.querySelectorAll('[data-model]').forEach(el => {
+      const m = (el as HTMLElement).dataset.model;
+      (el as HTMLElement).style.display = (m === 'both' || m === model) ? '' : 'none';
+    });
+  })();
+</script>
