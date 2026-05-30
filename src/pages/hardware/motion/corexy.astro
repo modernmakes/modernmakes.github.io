@@ -1,0 +1,352 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+
+const printers = [
+  { name: 'Voron 2.4',       href: '/voron' },
+  { name: 'Voron Trident',   href: '/voron' },
+  { name: 'RatRig V-Core 4', href: '/ratrig' },
+  { name: 'VCore 3.1',       href: '/voron' },
+  { name: 'HevORT',          href: '/hevort' },
+  { name: 'K3',              href: '/k3' },
+  { name: 'Bambu X1 Carbon', href: '/bambu' },
+  { name: 'Bambu P1S',       href: '/bambu' },
+  { name: 'Creality K1 Max', href: '/printers' },
+  { name: 'Sovol SV08',      href: '/printers' },
+  { name: 'Prusa CORE One',  href: '/printers' },
+  { name: 'AnkerMake M5C',   href: '/printers' },
+];
+
+const pros = [
+  'Both drive motors are stationary — only the toolhead mass moves',
+  'Exceptionally high achievable acceleration without moving-bed resonance',
+  'Symmetrical X/Y kinematics — equal performance in both axes',
+  'No bed mass inertia — Z is the only dimension the bed moves',
+  'Scales well to large build volumes with proper frame rigidity',
+  'Extremely well-documented — the largest enthusiast knowledgebase of any motion system',
+];
+const cons = [
+  'Complex belt routing — two motors share responsibility for both axes simultaneously',
+  'Requires precise gantry squaring; asymmetry produces visual print artifacts',
+  'Any motor, belt, or pulley imbalance causes axis skew',
+  'Input shaper calibration is required for high-speed printing',
+  'Enclosure design is more complex due to stationary motors at gantry corners',
+  'Higher part count than cartesian bed-slinger or delta designs',
+];
+---
+<Base
+  title="CoreXY Motion System — Reference"
+  description="How CoreXY motion kinematics work, which printers use it, and why it became the architecture of choice for high-performance desktop 3D printers."
+  heroPage={false}
+>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <!-- ── HERO ── -->
+  <section class="cxy-hero">
+    <div class="cxy-hero-inner">
+      <nav class="cxy-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/hardware">Hardware</a>
+        <span>/</span>
+        <a href="/hardware/motion">Wiki</a>
+        <span>/</span>
+        <span>CoreXY</span>
+      </nav>
+      <div class="cxy-hero-eyebrow">Motion System Reference</div>
+      <h1 class="cxy-hero-title">CoreXY</h1>
+      <p class="cxy-hero-desc">
+        The kinematic architecture behind most high-performance desktop 3D printers.
+        Two stationary motors drive a single shared toolhead through a crossed-belt arrangement
+        that decouples XY motion from the Z axis.
+      </p>
+      <div class="cxy-hero-meta">
+        <span class="cxy-meta-item"><span class="cxy-meta-label">Type</span> Cartesian XY gantry</span>
+        <span class="cxy-meta-item"><span class="cxy-meta-label">Motors</span> 2× NEMA17 (stationary)</span>
+        <span class="cxy-meta-item"><span class="cxy-meta-label">Notable for</span> Speed &amp; acceleration</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="cxy-body">
+    <div class="cxy-body-inner">
+
+      <!-- HOW IT WORKS -->
+      <section class="cxy-section">
+        <h2 class="cxy-section-title">How It Works</h2>
+        <div class="cxy-prose">
+          <p>
+            CoreXY kinematics use two fixed motors — labelled A and B — to drive a single toolhead
+            across the XY plane. Both motors run simultaneously for every XY move. When the toolhead
+            moves in pure X, both motors turn in opposite directions. For pure Y, both turn the same
+            direction. For diagonal moves, one motor runs faster than the other. The belt arrangement
+            combines their outputs at the toolhead carriage.
+          </p>
+          <p>
+            The engineering advantage is that the two heaviest moving components — the stepper motors —
+            are mounted stationary on the frame. Only the toolhead, its carriage, and a short run of
+            belt travel with each XY move. This dramatically reduces the effective moving mass compared
+            to a bed-slinger design, which is why CoreXY printers can achieve several times higher
+            acceleration without ringing artifacts.
+          </p>
+          <h3>Belt Routing</h3>
+          <p>
+            Each belt originates at one motor, wraps around a series of idlers on the gantry
+            perimeter, and connects to one side of the toolhead carriage. The two belts cross each
+            other in the middle of the gantry — this crossing pattern ensures the vector sum of both
+            motors maps correctly to XY toolhead motion.
+          </p>
+          <p>
+            Getting this routing exactly right — both belts at equal tension and perfectly parallel
+            at shared idler points — is the primary assembly challenge. Unequal tension causes
+            different resonant frequencies on A and B axes, which shows up as asymmetric ringing
+            even after input shaper compensation.
+          </p>
+          <h3>Tuning</h3>
+          <p>
+            CoreXY printers benefit significantly from input shaper calibration, which measures the
+            actual resonant frequencies of the assembled machine and compensates in firmware. On
+            Klipper, run <code>SHAPER_CALIBRATE</code> with an ADXL345 accelerometer after the
+            belt tension is set. Belt frequency target is typically 110 Hz on both A and B axes,
+            within 5 Hz of each other.
+          </p>
+        </div>
+      </section>
+
+      <!-- PROS & CONS -->
+      <section class="cxy-section">
+        <h2 class="cxy-section-title">Advantages &amp; Limitations</h2>
+        <div class="cxy-proscons">
+          <div class="cxy-pros">
+            <div class="cxy-pros-head">Advantages</div>
+            <ul class="cxy-pros-list">
+              {pros.map(p => <li><span class="cxy-check" aria-hidden="true">✓</span>{p}</li>)}
+            </ul>
+          </div>
+          <div class="cxy-cons">
+            <div class="cxy-cons-head">Limitations</div>
+            <ul class="cxy-cons-list">
+              {cons.map(c => <li><span class="cxy-x" aria-hidden="true">✗</span>{c}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOTABLE PRINTERS -->
+      <section class="cxy-section">
+        <h2 class="cxy-section-title">Notable Printers Using CoreXY</h2>
+        <div class="cxy-printers-grid">
+          {printers.map(p => (
+            <a href={p.href} class="cxy-printer-card">
+              {p.name}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- MOD CALLOUT -->
+      <div class="cxy-mod-callout">
+        <div class="cxy-mod-callout-inner">
+          <span class="cxy-mod-callout-icon" aria-hidden="true">🔧</span>
+          <div>
+            <div class="cxy-mod-callout-title">Looking for motion system mods?</div>
+            <div class="cxy-mod-callout-text">
+              Browse community-created CoreXY conversion kits that retrofit bed-slinger printers
+              like the Ender 3 and CR-10 with full CoreXY motion.
+            </div>
+          </div>
+          <a href="/hardware/motion" class="cxy-mod-callout-link">Browse motion mods →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "CoreXY Motion System",
+    "description": "How CoreXY motion kinematics work, which printers use it, and why it became the default for high-performance desktop 3D printing.",
+    "publisher": { "@type": "Organization", "name": "Modern Makes", "url": "https://modernmakes.com" }
+  })}></script>
+</Base>
+
+<style is:global>
+/* ── COREXY WIKI ── */
+.cxy-hero {
+  background: var(--black);
+  padding: 52px 0 48px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.cxy-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.cxy-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.cxy-breadcrumb a,
+.cxy-breadcrumb span {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  transition: color .15s;
+}
+.cxy-breadcrumb a:hover { color: var(--accent); }
+.cxy-hero-eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.cxy-hero-title {
+  font-family: var(--fd);
+  font-size: 64px;
+  font-weight: 800;
+  color: #fff;
+  line-height: .95;
+  letter-spacing: -.6px;
+  margin-bottom: 18px;
+}
+.cxy-hero-desc {
+  font-family: var(--fb);
+  font-size: 17px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.75;
+  max-width: 640px;
+  margin-bottom: 24px;
+}
+.cxy-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.cxy-meta-item {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+}
+.cxy-meta-label {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ── BODY ── */
+.cxy-body {
+  background: var(--bg);
+  padding: 52px 0 64px;
+}
+.cxy-body-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.cxy-section { margin-bottom: 52px; }
+.cxy-section-title {
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--black);
+}
+
+/* ── PROSE ── */
+.cxy-prose p { font-family: var(--fb); font-size: 16px; line-height: 1.8; color: var(--g1); margin-bottom: 18px; }
+.cxy-prose h3 { font-family: var(--fd); font-size: 19px; font-weight: 800; color: var(--black); margin: 28px 0 12px; }
+.cxy-prose code { font-family: var(--fm); font-size: 13px; background: #fff; border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; color: var(--black); }
+
+/* ── PROS & CONS ── */
+.cxy-proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cxy-pros, .cxy-cons { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.cxy-pros { border-top: 3px solid #2E7D32; }
+.cxy-cons { border-top: 3px solid #C62828; }
+.cxy-pros-head, .cxy-cons-head { font-family: var(--fd); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 12px 18px; border-bottom: 1px solid var(--border); }
+.cxy-pros-head { color: #2E7D32; }
+.cxy-cons-head { color: #C62828; }
+.cxy-pros-list, .cxy-cons-list { list-style: none; padding: 12px 18px 16px; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.cxy-pros-list li, .cxy-cons-list li { font-family: var(--fu); font-size: 13px; color: var(--g1); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+.cxy-check { color: #2E7D32; font-weight: 800; flex-shrink: 0; }
+.cxy-x { color: #C62828; font-weight: 800; flex-shrink: 0; }
+
+/* ── PRINTERS GRID ── */
+.cxy-printers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.cxy-printer-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--black);
+  text-align: center;
+  display: block;
+  transition: border-color .15s, color .15s;
+}
+.cxy-printer-card:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── MOD CALLOUT ── */
+.cxy-mod-callout {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-top: 16px;
+}
+.cxy-mod-callout-inner {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cxy-mod-callout-icon { font-size: 22px; flex-shrink: 0; }
+.cxy-mod-callout-title { font-family: var(--fd); font-size: 16px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+.cxy-mod-callout-text { font-family: var(--fu); font-size: 13px; color: var(--g1); line-height: 1.5; }
+.cxy-mod-callout-link {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+  flex-shrink: 0;
+}
+.cxy-mod-callout-link:hover { background: var(--accent); color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .cxy-hero-inner, .cxy-body-inner { padding: 0 20px; }
+  .cxy-hero-title { font-size: 44px; }
+  .cxy-proscons { grid-template-columns: 1fr; }
+  .cxy-printers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .cxy-hero-title { font-size: 36px; }
+  .cxy-printers-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>

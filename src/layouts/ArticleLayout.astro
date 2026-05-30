@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import '../styles/article.css';
 
 interface Props {
   title: string;
@@ -32,16 +33,16 @@ const moreNews = [
 const relatedArticles = [
   { category: 'News',     title: 'Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3', href: '/news/bambu-ams-pro-announced', date: 'May 19, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
   { category: 'Printers', title: 'Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It', href: '/printers/prusa-core-one-plus',  date: 'May 24, 2026', gradient: 'linear-gradient(135deg,#1f2010,#131708)' },
-  { category: 'Software', title: 'OrcaSlicer 2.3 Drops Arachne Wall Generation. Here\'s What Actually Changed.', href: '/software/orcaslicer-2-3', date: 'May 20, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
+  { category: 'Software', title: "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.", href: '/software/orcaslicer-2-3', date: 'May 20, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
 ];
 ---
-<Base title={title} description={excerpt} heroPage={true}>
+<Base title={title} description={excerpt} heroPage={true} hasHero={true}>
   <Nav slot="nav" currentPath="/news" />
 
   <!-- ── HERO ── -->
   <div class="art-hero">
     {heroImage
-      ? <img src={heroImage} alt="" class="art-hero-img" aria-hidden="true" />
+      ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
       : <div class="art-hero-bg" style="background: linear-gradient(160deg, #1a0e0a, #0d1520 55%, #1a1520)"></div>
     }
     <div class="art-hero-overlay"></div>
@@ -52,8 +53,11 @@ const relatedArticles = [
     </div>
   </div>
 
+  <!-- Sentinel: IntersectionObserver watches this to toggle .is-sticky on the header -->
+  <div id="art-sticky-sentinel" class="art-sticky-sentinel"></div>
+
   <!-- ── ARTICLE HEADER ── -->
-  <div class="art-header">
+  <div class="art-header" id="art-header">
     <div class="art-header-container">
       <nav class="art-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
@@ -155,470 +159,39 @@ const relatedArticles = [
   })}></script>
 </Base>
 
-<style is:global>
-/* ── HERO ── */
-.art-hero {
-  position: relative;
-  width: 100%;
-  height: 520px;
-  overflow: hidden;
-  flex-shrink: 0;
-  background-color: #0a0a0a;
-}
-.art-hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-}
-.art-hero-bg {
-  width: 100%;
-  height: 100%;
-}
-.art-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,.65) 0%,
-    rgba(0,0,0,.15) 50%,
-    rgba(0,0,0,.3) 100%
-  );
-}
-.art-hero-foot {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.art-hero-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px 28px;
-}
-.art-hero-cat {
-  font-family: var(--fu);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--accent);
-  padding: 3px 10px;
-  border-radius: 3px;
-}
+<script>
+  /* ── Lazy-load article images ── */
+  document.querySelectorAll('.art-content img').forEach(img => {
+    if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+  });
 
-/* ── ARTICLE HEADER ── */
-.art-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 32px 0 36px;
-}
-.art-header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-.art-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-.art-breadcrumb a,
-.art-breadcrumb span {
-  font-family: var(--fm);
-  font-size: 11px;
-  color: var(--g2);
-  transition: color .15s;
-}
-.art-breadcrumb a:hover { color: var(--accent); }
-.art-cat-badge {
-  font-family: var(--fu);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-.art-headline {
-  font-family: var(--fd);
-  font-size: 44px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1.05;
-  letter-spacing: -.4px;
-  max-width: 820px;
-  margin-bottom: 16px;
-}
-.art-byline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.art-date,
-.art-readtime {
-  font-family: var(--fm);
-  font-size: 12px;
-  color: var(--g2);
-}
-.art-sep {
-  color: var(--border-s);
-  font-size: 14px;
-}
+  /* ── Sticky header: IntersectionObserver on sentinel ── */
+  const sentinel = document.getElementById('art-sticky-sentinel');
+  const header   = document.getElementById('art-header');
+  const sidebar  = document.querySelector<HTMLElement>('.art-sidebar');
 
-/* ── BODY LAYOUT ── */
-.art-body {
-  background: var(--bg);
-  padding: 48px 0 64px;
-}
-.art-body-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 48px;
-  align-items: start;
-}
-
-/* ── ARTICLE CONTENT ── */
-.art-content {
-  min-width: 0;
-}
-
-.art-lead {
-  font-family: var(--fb);
-  font-size: 18px;
-  line-height: 1.75;
-  color: var(--black);
-  font-weight: 500;
-  margin-bottom: 32px;
-  border-left: 3px solid var(--accent);
-  padding-left: 20px;
-}
-
-.art-content p {
-  font-family: var(--fb);
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--g1);
-  margin-bottom: 20px;
-}
-.art-content h2 {
-  font-family: var(--fd);
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--black);
-  letter-spacing: -.2px;
-  margin: 40px 0 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.art-content h3 {
-  font-family: var(--fd);
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--black);
-  margin: 28px 0 10px;
-}
-.art-content ul,
-.art-content ol {
-  margin: 0 0 20px 0;
-  padding-left: 24px;
-}
-.art-content li {
-  font-family: var(--fb);
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--g1);
-  margin-bottom: 8px;
-}
-.art-content strong {
-  font-weight: 700;
-  color: var(--black);
-}
-.art-content a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color .15s;
-}
-.art-content a:hover { color: var(--accent-dk); }
-.art-content code {
-  font-family: var(--fm);
-  font-size: 13px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 1px 6px;
-  color: var(--black);
-}
-
-/* "Are you affected?" callout — used in article pages */
-.art-affected-box {
-  background: #fff8f0;
-  border: 1.5px solid #FFCFBD;
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius-md);
-  padding: 20px 24px;
-  margin: 32px 0;
-}
-.art-affected-box-label {
-  font-family: var(--fd);
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--accent-dk);
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  margin-bottom: 12px;
-}
-.art-affected-box p {
-  margin-bottom: 12px !important;
-  font-size: 15px !important;
-}
-.art-affected-box ol {
-  margin-bottom: 12px !important;
-}
-.art-affected-box li {
-  font-size: 15px !important;
-  margin-bottom: 6px !important;
-}
-.art-affected-example {
-  font-family: var(--fm) !important;
-  font-size: 12px !important;
-  color: var(--g1);
-  margin-top: 4px;
-  margin-bottom: 0 !important;
-}
-
-/* ── SIDEBAR ── */
-.art-sidebar {
-  position: sticky;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.art-sb-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.art-sb-box-label {
-  font-family: var(--fu);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--g2);
-  padding: 13px 18px 12px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-}
-
-/* Summary */
-.art-sb-summary-list {
-  list-style: none;
-  padding: 14px 18px 16px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.art-sb-summary-list li {
-  font-family: var(--fb);
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--g1);
-  padding-left: 16px;
-  position: relative;
-}
-.art-sb-summary-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-/* More news */
-.art-sb-more-list {
-  display: flex;
-  flex-direction: column;
-}
-.art-sb-more-item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 13px 18px;
-  border-bottom: 1px solid var(--border);
-  transition: background .15s;
-}
-.art-sb-more-item:last-child { border-bottom: none; }
-.art-sb-more-item:hover { background: var(--bg); }
-.art-sb-more-cat {
-  font-family: var(--fu);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.art-sb-more-title {
-  font-family: var(--fd);
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1.2;
-}
-.art-sb-more-date {
-  font-family: var(--fm);
-  font-size: 10px;
-  color: var(--g2);
-  margin-top: 2px;
-}
-
-/* ── RELATED ARTICLES ── */
-.art-related {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding: 48px 0;
-}
-.art-related-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-.art-related-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--black);
-}
-.art-related-label {
-  font-family: var(--fd);
-  font-size: 22px;
-  font-weight: 800;
-}
-.art-related-all {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--g1);
-  transition: color .15s;
-  font-family: var(--fu);
-}
-.art-related-all:hover { color: var(--accent); }
-.art-related-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.art-related-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: border-color .15s, transform .15s;
-}
-.art-related-card:hover {
-  border-color: var(--border-s);
-  transform: translateY(-2px);
-}
-.art-related-card-img {
-  width: 100%;
-  aspect-ratio: 16/9;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 10px;
-}
-.art-related-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.5), transparent 60%);
-}
-.art-related-card-cat-overlay {
-  position: relative;
-  z-index: 1;
-  font-family: var(--fu);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.5);
-  padding-left: 14px;
-}
-.art-related-card-body {
-  padding: 14px 16px 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.art-related-card-cat {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 6px;
-  font-family: var(--fu);
-}
-.art-related-card-title {
-  font-family: var(--fd);
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1.15;
-  flex: 1;
-  margin-bottom: 10px;
-}
-.art-related-card-date {
-  font-family: var(--fm);
-  font-size: 10px;
-  color: var(--g2);
-  margin-top: auto;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .art-hero { height: 400px; }
-  .art-headline { font-size: 36px; }
-  .art-related-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 768px) {
-  .art-hero { height: 280px; }
-  .art-hero-container { padding: 0 20px 20px; }
-  .art-header { padding: 24px 0 28px; }
-  .art-header-container { padding: 0 20px; }
-  .art-headline { font-size: 28px; }
-  .art-body { padding: 32px 0 48px; }
-  .art-body-container {
-    padding: 0 20px;
-    grid-template-columns: 1fr;
-    gap: 32px;
+  function navHeight() {
+    return window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
   }
-  .art-sidebar { position: static; }
-  .art-related-container { padding: 0 20px; }
-  .art-related-grid { grid-template-columns: 1fr; gap: 12px; }
-  .art-lead { font-size: 16px; }
-  .art-content p,
-  .art-content li { font-size: 15px; }
-}
-@media (max-width: 480px) {
-  .art-hero { height: 220px; }
-  .art-headline { font-size: 24px; }
-  .art-lead { padding-left: 14px; }
-}
-</style>
+
+  /* Keep sidebar top below the sticky header */
+  function updateSidebarTop() {
+    if (!header || !sidebar) return;
+    const total = navHeight() + header.offsetHeight + 16;
+    sidebar.style.top = total + 'px';
+  }
+
+  if (sentinel && header) {
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        header.classList.toggle('is-sticky', !entry.isIntersecting);
+        updateSidebarTop();
+      },
+      { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
+    );
+    io.observe(sentinel);
+  }
+
+  updateSidebarTop();
+  window.addEventListener('resize', updateSidebarTop, { passive: true });
+</script>

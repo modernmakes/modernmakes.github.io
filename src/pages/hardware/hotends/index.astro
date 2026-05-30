@@ -1,0 +1,44 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+---
+<Base title="Hotends" description="Hotend reviews, specs, and where to buy — high-flow, standard, and specialty hotends for CoreXY and other 3D printer builds." heroPage={false}>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <div style="background:var(--black);padding:48px 0 44px;border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <nav style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
+        <a href="/hardware" style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.3)">Hardware</a>
+        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.2)">/</span>
+        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.4)">Hotends</span>
+      </nav>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Hotends</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:480px">High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        <a href="/hardware/hotends/rapido-2" class="card">
+          <div class="card-img" style="background:linear-gradient(135deg,#1a0e0a,#0d1520)">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+            <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">HOTEND</span>
+          </div>
+          <div class="card-body">
+            <div class="card-cat">Phaetus</div>
+            <div class="card-title">Rapido 2 UHF</div>
+            <p class="card-excerpt">60 mm³/s max flow. The benchmark high-flow hotend for CoreXY builds targeting 150mm/s and above.</p>
+            <div class="card-footer">
+              <span class="card-date">~$89 USD</span>
+              <span class="verdict verdict-best" style="margin-left:auto">BUY</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

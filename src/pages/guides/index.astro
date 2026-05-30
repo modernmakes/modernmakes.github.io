@@ -1,35 +1,165 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-const label = 'guides'.charAt(0).toUpperCase() + 'guides'.slice(1);
+
+const currentPath = '/guides';
+
+const allGuides = await getCollection('news', ({ data }) => data.type === 'guide');
+const sorted = allGuides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+function cardBg(entry: (typeof sorted)[number]) {
+  if (entry.data.heroImage) {
+    return `background-color:#0a1a14;background-image:url('${entry.data.heroImage}');background-size:cover;background-position:center`;
+  }
+  return 'background:linear-gradient(135deg,#0a1a14,#0d1520)';
+}
+
+const difficultyColors: Record<string, string> = {
+  Beginner: '#2E7D32',
+  Intermediate: '#E65100',
+  Advanced: '#C62828',
+};
 ---
-<Base title={label}>
-  <Nav slot="nav" currentPath={'/guides'} />
-  <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
-    <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--black)">{label}</h1>
-    <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);margin:12px auto 24px;max-width:440px">This section is being built.</p>
-    <a href="/" style="font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+<Base
+  title="Guides"
+  description="Calibration guides, how-tos, and step-by-step tutorials for 3D printing — pressure advance, input shaping, bed levelling, and more."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
+        Guides
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:520px">
+        Calibration, tuning, and how-to guides — practical steps for getting more from your 3D printer.
+      </p>
+    </div>
+  </div>
+
+  <!-- GUIDES GRID -->
+  <section class="section" aria-label="Guides">
+    <div class="container">
+      {sorted.length === 0 ? (
+        <div style="text-align:center;padding:60px 0">
+          <p style="font-family:'Lora',serif;color:var(--g1);font-size:15px;margin-bottom:16px">No guides published yet.</p>
+          <a href="/news" style="font-size:13px;font-weight:600;color:var(--accent);font-family:var(--fu)">Browse all news →</a>
+        </div>
+      ) : (
+        <div class="grid-3">
+          {sorted.map(entry => (
+            <a href={`/news/${entry.slug}`} class="card" aria-label={entry.data.title}>
+              <div class="card-img" style={cardBg(entry)}>
+                <div class="gi-overlay"></div>
+                <span class="gi-cat">{entry.data.category}</span>
+                {entry.data.difficulty && (
+                  <span
+                    class="gi-diff-badge"
+                    style={`background:${(difficultyColors[entry.data.difficulty] ?? '#E65100')}dd`}
+                  >
+                    {entry.data.difficulty}
+                  </span>
+                )}
+              </div>
+              <div class="card-body">
+                <div class="gi-meta-row">
+                  <span class="card-cat">{entry.data.category}</span>
+                  {entry.data.difficulty && (
+                    <span
+                      class="gi-diff-chip"
+                      style={`color:${difficultyColors[entry.data.difficulty] ?? '#E65100'};border-color:${difficultyColors[entry.data.difficulty] ?? '#E65100'}44;background:${difficultyColors[entry.data.difficulty] ?? '#E65100'}0d`}
+                    >
+                      {entry.data.difficulty}
+                    </span>
+                  )}
+                </div>
+                <div class="card-title">{entry.data.title}</div>
+                <p class="card-excerpt">{entry.data.excerpt}</p>
+                <div class="card-footer">
+                  <time class="card-date">{formatDate(entry.data.date)}</time>
+                  {entry.data.timeRequired && (
+                    <span class="card-date" style="margin-left:auto">⏱ {entry.data.timeRequired}</span>
+                  )}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
   </section>
+
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "CollectionPage",
         "name": "3D Printing Guides — Modern Makes",
-        "description": "Practical guides for 3D printing — calibration, materials, software, and getting the most from your machine.",
+        "description": "Calibration guides, how-tos, and step-by-step tutorials for 3D printing.",
         "url": "https://modernmakes.com/guides",
         "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://modernmakes.com/guides" }
-        ]
       }
     ]
   })}></script>
 </Base>
+
+<style is:global>
+.gi-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.55), transparent 60%);
+}
+.gi-cat {
+  position: relative;
+  z-index: 1;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  padding: 0 14px 10px;
+}
+.gi-diff-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+.gi-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.gi-diff-chip {
+  font-family: var(--fu);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+/* Reset card-cat margin when inside meta-row */
+.gi-meta-row .card-cat { margin-bottom: 0; }
+</style>

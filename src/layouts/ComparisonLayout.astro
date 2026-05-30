@@ -1,0 +1,688 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/article.css';
+
+interface SpecRow {
+  label: string;
+  key?: boolean;
+  a: string;
+  b: string;
+  winner?: 'a' | 'b' | 'draw';
+}
+interface ScoreRow {
+  category: string;
+  a: number;
+  b: number;
+}
+
+interface Props {
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  heroImage?: string;
+  excerpt?: string;
+  summary?: string[];
+  items: string[];
+  verdict?: string;
+  verdictText?: string;
+  specs?: SpecRow[];
+  scores?: ScoreRow[];
+}
+
+const {
+  title,
+  category,
+  date,
+  readTime,
+  heroImage,
+  excerpt = '',
+  summary = [],
+  items = ['Product A', 'Product B'],
+  verdict,
+  verdictText,
+  specs = [],
+  scores = [],
+} = Astro.props;
+
+const itemA = items[0] ?? 'Product A';
+const itemB = items[1] ?? 'Product B';
+
+const moreNews = [
+  { category: 'News',   title: 'Bambu Announces AMS Pro: 16 Spools, Active Drying', href: '/news/bambu-ams-pro-announced', date: 'May 19, 2026' },
+  { category: 'Update', title: 'OrcaSlicer 2.3 Drops Arachne Wall Generation',       href: '/software/orcaslicer-2-3',      date: 'May 20, 2026' },
+  { category: 'Guide',  title: 'Voron Pressure Advance Calibration Guide',           href: '/news/voron-pressure-advance-guide', date: 'May 10, 2026' },
+];
+
+const relatedArticles = [
+  { category: 'News',     title: 'Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3', href: '/news/bambu-ams-pro-announced', date: 'May 19, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
+  { category: 'Printers', title: 'Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It', href: '/printers/prusa-core-one-plus',  date: 'May 24, 2026', gradient: 'linear-gradient(135deg,#1f2010,#131708)' },
+  { category: 'Software', title: "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.", href: '/software/orcaslicer-2-3', date: 'May 20, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
+];
+---
+<Base title={title} description={excerpt} heroPage={true} hasHero={true}>
+  <Nav slot="nav" currentPath="/news" />
+
+  <!-- ── HERO ── -->
+  <div class="art-hero">
+    {heroImage
+      ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
+      : <div class="art-hero-bg" style="background: linear-gradient(160deg, #120a18, #0d1a20 55%, #1a1010)"></div>
+    }
+    <div class="art-hero-overlay"></div>
+    <div class="art-hero-foot">
+      <div class="art-hero-container">
+        <span class="art-hero-cat">{category}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sentinel for sticky header -->
+  <div id="art-sticky-sentinel" class="art-sticky-sentinel"></div>
+
+  <!-- ── ARTICLE HEADER ── -->
+  <div class="art-header" id="art-header">
+    <div class="art-header-container">
+      <nav class="art-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/news">News</a>
+        <span aria-hidden="true">/</span>
+        <span>Comparison</span>
+      </nav>
+      <div class="art-cat-badge">{category}</div>
+      <h1 class="art-headline">{title}</h1>
+      <div class="art-byline">
+        <time class="art-date">{date}</time>
+        <span class="art-sep" aria-hidden="true">·</span>
+        <span class="art-readtime">{readTime}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STICKY COMPARISON BAR ── -->
+  <div class="cmp-bar" aria-label="Products being compared">
+    <div class="cmp-bar-inner">
+      <div class="cmp-bar-item cmp-bar-item-a">
+        <span class="cmp-bar-side-label">A</span>
+        <span class="cmp-bar-name">{itemA}</span>
+      </div>
+      <div class="cmp-bar-vs" aria-hidden="true">VS</div>
+      <div class="cmp-bar-item cmp-bar-item-b">
+        <span class="cmp-bar-name">{itemB}</span>
+        <span class="cmp-bar-side-label">B</span>
+      </div>
+      {verdict && (
+        <div class="cmp-bar-verdict">
+          Winner: <strong>{verdict}</strong>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="art-body">
+    <div class="art-body-container">
+
+      <article class="art-content">
+
+        <!-- VERDICT CALLOUT -->
+        {verdict && (
+          <div class="cmp-verdict-box" role="note" aria-label="Verdict">
+            <div class="cmp-verdict-eyebrow">Verdict</div>
+            <div class="cmp-verdict-winner">
+              {verdict === 'draw' || verdict === 'Draw' ? 'It\'s a Draw' : `Winner: ${verdict}`}
+            </div>
+            {verdictText && <p class="cmp-verdict-text">{verdictText}</p>}
+          </div>
+        )}
+
+        <!-- SPECS TABLE -->
+        {specs.length > 0 && (
+          <div class="cmp-specs-section">
+            <h2>Specs at a Glance</h2>
+            <div class="cmp-table-wrap">
+              <table class="cmp-table">
+                <thead>
+                  <tr>
+                    <th class="cmp-th-label">Specification</th>
+                    <th class="cmp-th-val cmp-th-a">
+                      <span class="cmp-th-side">A</span>
+                      {itemA}
+                    </th>
+                    <th class="cmp-th-val cmp-th-b">
+                      <span class="cmp-th-side">B</span>
+                      {itemB}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {specs.map(row => (
+                    <tr class={`cmp-row${row.key ? ' cmp-row-key' : ''}`}>
+                      <td class="cmp-td-label">{row.label}</td>
+                      <td class={`cmp-td-val${row.winner === 'a' ? ' cmp-td-win' : ''}`}>
+                        {row.winner === 'a' && <span class="cmp-win-tick" aria-label="Winner">✓</span>}
+                        {row.a}
+                      </td>
+                      <td class={`cmp-td-val${row.winner === 'b' ? ' cmp-td-win' : ''}`}>
+                        {row.winner === 'b' && <span class="cmp-win-tick" aria-label="Winner">✓</span>}
+                        {row.b}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        <!-- PROSE (markdown body) -->
+        <slot />
+
+        <!-- SCORE BREAKDOWN -->
+        {scores.length > 0 && (
+          <div class="cmp-scores-section">
+            <h2>Score Breakdown</h2>
+            <div class="cmp-scores-list">
+              {scores.map(row => (
+                <div class="cmp-score-item">
+                  <div class="cmp-score-cat">{row.category}</div>
+                  <div class="cmp-score-rows">
+                    <div class="cmp-score-bar-row">
+                      <span class="cmp-score-name">{itemA}</span>
+                      <div class="cmp-score-track">
+                        <div class="cmp-score-fill cmp-fill-a" style={`width:${row.a * 10}%`}></div>
+                      </div>
+                      <span class="cmp-score-num">{row.a}</span>
+                    </div>
+                    <div class="cmp-score-bar-row">
+                      <span class="cmp-score-name">{itemB}</span>
+                      <div class="cmp-score-track">
+                        <div class="cmp-score-fill cmp-fill-b" style={`width:${row.b * 10}%`}></div>
+                      </div>
+                      <span class="cmp-score-num">{row.b}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </article>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="art-sidebar" aria-label="Comparison sidebar">
+
+        <!-- Quick verdict card -->
+        <div class="art-sb-box cmp-sb-card">
+          <div class="art-sb-box-label">Quick Verdict</div>
+          <div class="cmp-sb-inner">
+            <div class="cmp-sb-row cmp-sb-row-a">
+              <span class="cmp-sb-side">A</span>
+              <span class="cmp-sb-pname">{itemA}</span>
+              {verdict === itemA && <span class="cmp-sb-win-badge">Winner</span>}
+            </div>
+            <div class="cmp-sb-divider">VS</div>
+            <div class="cmp-sb-row cmp-sb-row-b">
+              <span class="cmp-sb-side">B</span>
+              <span class="cmp-sb-pname">{itemB}</span>
+              {verdict === itemB && <span class="cmp-sb-win-badge">Winner</span>}
+            </div>
+            {verdict === 'draw' || verdict === 'Draw' ? (
+              <div class="cmp-sb-draw">Draw</div>
+            ) : null}
+          </div>
+        </div>
+
+        {summary.length > 0 && (
+          <div class="art-sb-box art-sb-summary">
+            <div class="art-sb-box-label">Key Takeaways</div>
+            <ul class="art-sb-summary-list">
+              {summary.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div class="art-sb-box art-sb-more">
+          <div class="art-sb-box-label">More News</div>
+          <div class="art-sb-more-list">
+            {moreNews.map(item => (
+              <a href={item.href} class="art-sb-more-item">
+                <span class="art-sb-more-cat">{item.category}</span>
+                <span class="art-sb-more-title">{item.title}</span>
+                <time class="art-sb-more-date">{item.date}</time>
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ── RELATED ARTICLES ── -->
+  <section class="art-related" aria-label="Related articles">
+    <div class="art-related-container">
+      <div class="art-related-head">
+        <span class="art-related-label">Related</span>
+        <a href="/news" class="art-related-all">All news →</a>
+      </div>
+      <div class="art-related-grid">
+        {relatedArticles.map(card => (
+          <a href={card.href} class="art-related-card">
+            <div class="art-related-card-img" style={`background: ${card.gradient}`}>
+              <div class="art-related-card-overlay"></div>
+              <span class="art-related-card-cat-overlay">{card.category}</span>
+            </div>
+            <div class="art-related-card-body">
+              <div class="art-related-card-cat">{card.category}</div>
+              <div class="art-related-card-title">{card.title}</div>
+              <time class="art-related-card-date">{card.date}</time>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": excerpt,
+    "datePublished": date,
+    "articleSection": "Comparison",
+    "about": items.map(item => ({ "@type": "Product", "name": item })),
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.com",
+      "logo": { "@type": "ImageObject", "url": "https://modernmakes.com/images/wordmark.svg" }
+    },
+    "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+  })}></script>
+</Base>
+
+<script>
+  document.querySelectorAll('.art-content img').forEach(img => {
+    if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+  });
+
+  /* ── Sticky header + stacking cmp-bar beneath it ── */
+  const stickyHeader   = document.getElementById('art-header');
+  const stickySentinel = document.getElementById('art-sticky-sentinel');
+  const cmpBar         = document.querySelector<HTMLElement>('.cmp-bar');
+  const sidebar        = document.querySelector<HTMLElement>('.art-sidebar');
+
+  function navH() {
+    return window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
+  }
+
+  /* Position the comparison bar directly below the sticky article header */
+  function stackCmpBar() {
+    if (!stickyHeader || !cmpBar) return;
+    cmpBar.style.top = (navH() + stickyHeader.offsetHeight) + 'px';
+  }
+
+  function updateSidebarTop() {
+    if (!stickyHeader || !cmpBar || !sidebar) return;
+    sidebar.style.top = (navH() + stickyHeader.offsetHeight + cmpBar.offsetHeight + 16) + 'px';
+  }
+
+  function onStickyChange(isSticky: boolean) {
+    stickyHeader?.classList.toggle('is-sticky', isSticky);
+    stackCmpBar();
+    updateSidebarTop();
+  }
+
+  if (stickySentinel && stickyHeader) {
+    new IntersectionObserver(
+      ([e]) => onStickyChange(!e.isIntersecting),
+      { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
+    ).observe(stickySentinel);
+  }
+
+  stackCmpBar();
+  updateSidebarTop();
+  window.addEventListener('resize', () => { stackCmpBar(); updateSidebarTop(); }, { passive: true });
+</script>
+
+<style is:global>
+/* ── COMPARISON BAR ── */
+.cmp-bar {
+  position: sticky;
+  top: 140px; /* JS sets this precisely once header height is known */
+  z-index: 1; /* LOW — art-body (z-index:2) scrolls over it */
+  background: var(--black);
+  border-bottom: 2px solid var(--accent);
+  padding: 0;
+}
+.cmp-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 52px;
+}
+.cmp-bar-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.cmp-bar-item-b {
+  justify-content: flex-end;
+}
+.cmp-bar-side-label {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(255,90,31,.15);
+  border: 1px solid rgba(255,90,31,.3);
+  border-radius: 3px;
+  padding: 2px 7px;
+  letter-spacing: .08em;
+  flex-shrink: 0;
+}
+.cmp-bar-name {
+  font-family: var(--fd);
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmp-bar-vs {
+  font-family: var(--fd);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--g2);
+  letter-spacing: .15em;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+.cmp-bar-verdict {
+  font-family: var(--fu);
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  padding-left: 24px;
+  border-left: 1px solid rgba(255,255,255,.1);
+  margin-left: 20px;
+  flex-shrink: 0;
+}
+.cmp-bar-verdict strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── VERDICT BOX ── */
+.cmp-verdict-box {
+  background: linear-gradient(135deg, #fff8f0, #fff2e8);
+  border: 1.5px solid #FFCFBD;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin: 0 0 36px;
+}
+.cmp-verdict-eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.cmp-verdict-winner {
+  font-family: var(--fd);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.cmp-verdict-text {
+  font-family: var(--fb);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--g1);
+  margin: 0 !important;
+}
+
+/* ── SPECS TABLE ── */
+.cmp-specs-section h2,
+.cmp-scores-section h2 {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  margin: 36px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.cmp-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fu);
+}
+.cmp-table thead tr {
+  background: var(--black);
+}
+.cmp-th-label,
+.cmp-th-val {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(255,255,255,.6);
+  border-bottom: none;
+}
+.cmp-th-val {
+  text-align: center;
+  min-width: 140px;
+}
+.cmp-th-side {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 2px;
+  padding: 1px 5px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.cmp-row {
+  border-bottom: 1px solid var(--border);
+}
+.cmp-row:last-child { border-bottom: none; }
+.cmp-row:hover { background: #fafaf9; }
+.cmp-row-key {
+  background: #fafaf9;
+}
+.cmp-row-key .cmp-td-label {
+  font-weight: 700;
+  color: var(--black);
+}
+.cmp-td-label {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--g1);
+  font-family: var(--fu);
+}
+.cmp-td-val {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-family: var(--fm);
+  text-align: center;
+  color: var(--black);
+}
+.cmp-td-win {
+  color: var(--accent) !important;
+  font-weight: 700;
+  background: rgba(255,90,31,.05);
+}
+.cmp-win-tick {
+  font-size: 10px;
+  color: var(--accent);
+  margin-right: 4px;
+  font-family: var(--fu);
+}
+
+/* ── SCORE BREAKDOWN ── */
+.cmp-scores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.cmp-score-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+.cmp-score-cat {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.cmp-score-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cmp-score-bar-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 36px;
+  align-items: center;
+  gap: 10px;
+}
+.cmp-score-name {
+  font-family: var(--fu);
+  font-size: 11px;
+  color: var(--g1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmp-score-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cmp-score-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width .5s ease;
+}
+.cmp-fill-a { background: var(--accent); }
+.cmp-fill-b { background: var(--g2); }
+.cmp-score-num {
+  font-family: var(--fm);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+  text-align: right;
+}
+
+/* ── SIDEBAR VERDICT CARD ── */
+.cmp-sb-inner {
+  padding: 16px 18px;
+}
+.cmp-sb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+.cmp-sb-side {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 2px;
+  padding: 2px 5px;
+  flex-shrink: 0;
+}
+.cmp-sb-pname {
+  font-family: var(--fd);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--black);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cmp-sb-win-badge {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+.cmp-sb-divider {
+  font-family: var(--fd);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--g2);
+  letter-spacing: .15em;
+  text-align: center;
+  padding: 4px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 4px 0;
+}
+.cmp-sb-draw {
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--g1);
+  text-align: center;
+  padding-top: 8px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .cmp-bar-inner { padding: 0 20px; }
+  .cmp-bar-name { font-size: 13px; }
+  .cmp-bar-verdict { display: none; }
+  .cmp-score-bar-row { grid-template-columns: 90px 1fr 32px; }
+  .cmp-score-name { font-size: 10px; }
+}
+@media (max-width: 480px) {
+  .cmp-verdict-winner { font-size: 22px; }
+  .cmp-bar-vs { padding: 0 12px; }
+  .cmp-table { font-size: 12px; }
+  .cmp-td-label, .cmp-td-val { padding: 10px 12px; }
+}
+</style>

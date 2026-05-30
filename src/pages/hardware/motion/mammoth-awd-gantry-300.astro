@@ -1,0 +1,78 @@
+---
+import MotionSystemLayout from '../../../layouts/MotionSystemLayout.astro';
+---
+<MotionSystemLayout
+  title="Mammoth-3D AWD Gantry 300"
+  creator="mammoth-3D-DevTeam"
+  creatorUrl="https://github.com/mammoth-3D"
+  projectUrl="https://github.com/mammoth-3D/Mammoth-FDM-MODs/tree/main/Voron%203D%20Printers/mammoth-3D%20AWD%20Gantry%20300%20V1.7.3"
+  projectLabel="GitHub — mammoth-3D/Mammoth-FDM-MODs"
+  license="GPL-3.0"
+  targetPrinters={[
+    { name: "Voron 2.4 300mm", notes: "Primary target; designed and tested for this build volume" },
+  ]}
+  alsoFitsOn={[
+    { name: "Voron Trident 300mm", notes: "Minor modifications to Z attachment points required" },
+  ]}
+  motionType="AWD CoreXY"
+  motors="4× NEMA17 — 2 additional vs stock for all-wheel-drive"
+  beltSpec="6mm GT2 open loop"
+  railSpec="MGN12H on X, MGN9C or MGN12H on Y"
+  difficulty="Advanced"
+  printedParts={40}
+  printTime="~25–35 hours total"
+  compatibleToolheads={[
+    { name: "Voron Stealthburner", notes: "Primary" },
+    { name: "CW2 Clockwork 2" },
+    { name: "Dragon Burner", notes: "With adapter" },
+    { name: "MGN12 toolhead carriages" },
+  ]}
+  communityResources={[
+    {
+      name: "mammoth-3D/Mammoth-FDM-MODs",
+      url: "https://github.com/mammoth-3D/Mammoth-FDM-MODs",
+      type: "GitHub",
+    },
+  ]}
+  tags={["AWD", "CoreXY", "Voron", "gantry", "performance", "high-speed"]}
+  excerpt="Mammoth-3D AWD Gantry 300 — all-wheel-drive CoreXY gantry mod for the Voron 2.4 300mm. Four motors, 40 printed parts, GPL-3.0."
+>
+  <p>
+    AWD (all-wheel-drive) in the context of a CoreXY printer means driving all four belt attachment
+    points with independent motors — two A-motors and two B-motors — rather than the standard
+    configuration of one per axis. The Mammoth-3D AWD Gantry 300 implements this on a Voron 2.4
+    300mm by replacing the stock single-motor-per-axis arrangement with paired motors at all four
+    gantry corners. All four motors work together: on a pure X move, both B-motors spin the same
+    direction while both A-motors oppose them; on a pure Y move, the arrangement reverses. The
+    firmware (typically Klipper with a custom kinematics configuration) sums the forces at each
+    belt anchor point in real time.
+  </p>
+  <p>
+    The primary benefit of AWD over standard CoreXY is belt tension consistency under load. In a
+    standard two-motor CoreXY, the single A-motor and single B-motor each drive a long, continuous
+    belt path from one corner across the full gantry width. At high accelerations, the belt
+    stretches asymmetrically — more tension near the motor pulley, less at the far anchor point.
+    This shows up as ringing artifacts that input shaping can reduce but not fully eliminate,
+    because the frequency response varies with toolhead position. AWD distributes the drive force
+    to both anchor points simultaneously, keeping belt tension consistent across the full travel.
+    Community builders report measurably lower ringing residuals and the ability to push
+    acceleration targets higher before print quality degrades.
+  </p>
+  <p>
+    The tradeoff is real. An AWD gantry requires two additional stepper drivers — standard Voron
+    2.4 electronics (Octopus, Spider) have enough spare drivers for this, but the wiring adds
+    complexity. Klipper needs a custom <code>printer.cfg</code> section to define the paired motor
+    relationships. You're also printing roughly 40 parts versus the standard gantry's 15–20, and
+    every motor mount, idler bracket, and belt path must be squared to tighter tolerances than a
+    two-motor system, because any asymmetry between paired motors on the same axis causes
+    torque imbalance rather than simple skew.
+  </p>
+  <p>
+    This mod is for builders who already run a well-tuned standard Voron 2.4 300mm and want to
+    push further. If you haven't fully calibrated input shaping, pressure advance, and resonance
+    compensation on your current gantry, that work should come first — the gains from AWD only
+    become meaningful once the rest of the machine is dialled in. For builders at that level,
+    the Mammoth-3D AWD Gantry 300 is one of the most thoroughly documented community AWD
+    implementations available.
+  </p>
+</MotionSystemLayout>

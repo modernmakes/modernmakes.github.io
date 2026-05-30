@@ -1,0 +1,237 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+
+const live = [
+  {
+    title: "Mammoth-3D AWD Gantry 300",
+    href: "/hardware/motion/mammoth-awd-gantry-300",
+    targetPrinter: "Voron 2.4 300mm",
+    motionType: "AWD CoreXY",
+    difficulty: "Advanced",
+    difficultyColor: "#C62828",
+    creator: "@mammoth-3D-DevTeam",
+    creatorUrl: "https://github.com/mammoth-3D",
+    gradient: "linear-gradient(135deg, #0d1520, #1a0e08)",
+  },
+];
+
+const comingSoon = [
+  {
+    title: "Mammoth-3D AWD Gantry 350",
+    targetPrinter: "Voron 2.4 350mm",
+    motionType: "AWD CoreXY",
+    difficulty: "Advanced",
+    difficultyColor: "#C62828",
+    creator: "@mammoth-3D-DevTeam",
+    gradient: "linear-gradient(135deg, #1a0e08, #0d1520)",
+  },
+  {
+    title: "Pandora Gantry",
+    targetPrinter: "Voron 2.4",
+    motionType: "CoreXY",
+    difficulty: "Intermediate",
+    difficultyColor: "#E65100",
+    creator: "@MasturMynd",
+    gradient: "linear-gradient(135deg, #0d1a10, #1a1208)",
+  },
+  {
+    title: "VT.850 Motion System",
+    targetPrinter: "VT.850",
+    motionType: "CoreXY",
+    difficulty: "Advanced",
+    difficultyColor: "#C62828",
+    creator: "@VoronTech",
+    gradient: "linear-gradient(135deg, #101020, #0a0d1a)",
+  },
+];
+---
+<Base
+  title="Motion Mods"
+  description="Community gantry modifications, AWD conversions, and motion system upgrades — documented and linked back to their creators."
+  heroPage={false}
+>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:48px 0 44px;border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <nav style="display:flex;gap:8px;align-items:center;margin-bottom:18px">
+        <a href="/hardware" style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.3);transition:color .15s">Hardware</a>
+        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.15)">/</span>
+        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.45)">Motion Mods</span>
+      </nav>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:14px">Motion Mods</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:540px">
+        Community gantry modifications, AWD conversions, and motion system upgrades — documented and linked back to their creators.
+      </p>
+    </div>
+  </div>
+
+  <!-- LIVE MODS -->
+  <section class="section" aria-label="Available motion mods">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head-label">Available Now</span>
+      </div>
+      <div class="grid-3">
+        {live.map(mod => (
+          <a href={mod.href} class="mm-card" aria-label={mod.title}>
+            <div class="mm-card-img" style={`background:${mod.gradient}`}>
+              <span class="mm-motion-badge">{mod.motionType}</span>
+            </div>
+            <div class="mm-card-body">
+              <div class="mm-card-title">{mod.title}</div>
+              <div class="mm-card-meta">
+                <span class="mm-target">{mod.targetPrinter}</span>
+                <span
+                  class="mm-diff"
+                  style={`color:${mod.difficultyColor};background:${mod.difficultyColor}12;border-color:${mod.difficultyColor}30`}
+                >
+                  {mod.difficulty}
+                </span>
+              </div>
+              <a
+                href={mod.creatorUrl}
+                class="mm-creator"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="event.stopPropagation()"
+              >
+                {mod.creator}
+              </a>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section class="section" aria-label="Coming soon motion mods" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head-label">Coming Soon</span>
+      </div>
+      <div class="grid-3">
+        {comingSoon.map(mod => (
+          <div class="mm-card mm-card-soon" aria-label={`${mod.title} — coming soon`}>
+            <div class="mm-card-img mm-card-img-dim" style={`background:${mod.gradient}`}>
+              <span class="mm-motion-badge mm-motion-badge-dim">{mod.motionType}</span>
+            </div>
+            <div class="mm-card-body">
+              <div class="mm-card-title mm-title-dim">{mod.title}</div>
+              <div class="mm-card-meta">
+                <span class="mm-target mm-target-dim">{mod.targetPrinter}</span>
+                <span class="mm-soon-chip">Coming Soon</span>
+              </div>
+              <span class="mm-creator mm-creator-dim">{mod.creator}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WIKI CALLOUT -->
+  <section style="padding:0 0 48px">
+    <div class="container">
+      <div class="mm-wiki-callout">
+        <div>
+          <div class="mm-wiki-title">New to CoreXY?</div>
+          <div class="mm-wiki-text">Read the CoreXY architecture reference — how the kinematics work, which printers use it, and what to know before modding.</div>
+        </div>
+        <a href="/hardware/motion/corexy" class="mm-wiki-link">CoreXY Reference →</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
+
+<style is:global>
+.mm-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .15s, transform .15s;
+  cursor: pointer;
+}
+.mm-card:hover:not(.mm-card-soon) { border-color: var(--border-s); transform: translateY(-2px); }
+.mm-card-soon { opacity: .65; cursor: default; }
+.mm-card-img {
+  aspect-ratio: 16/9;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 14px;
+}
+.mm-card-img-dim { filter: grayscale(.4); }
+.mm-motion-badge {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(255,90,31,.15);
+  border: 1px solid rgba(255,90,31,.25);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+.mm-motion-badge-dim {
+  color: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.1);
+}
+.mm-card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
+.mm-card-title { font-family: var(--fd); font-size: 17px; font-weight: 800; color: var(--black); line-height: 1.15; }
+.mm-title-dim { color: var(--g1); }
+.mm-card-meta { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.mm-target { font-family: var(--fm); font-size: 11px; color: var(--g2); }
+.mm-target-dim { color: var(--border-s); }
+.mm-diff {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+.mm-soon-chip { font-family: var(--fm); font-size: 9px; color: var(--g2); background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 2px 7px; }
+.mm-creator { font-family: var(--fm); font-size: 11px; color: var(--accent); transition: opacity .15s; align-self: flex-start; }
+.mm-creator:hover { opacity: .7; }
+.mm-creator-dim { color: var(--g2); pointer-events: none; }
+
+.mm-wiki-callout {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.mm-wiki-title { font-family: var(--fd); font-size: 16px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+.mm-wiki-text { font-family: var(--fu); font-size: 13px; color: var(--g1); line-height: 1.5; max-width: 520px; }
+.mm-wiki-link {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+  flex-shrink: 0;
+}
+.mm-wiki-link:hover { background: var(--accent); color: #fff; }
+</style>

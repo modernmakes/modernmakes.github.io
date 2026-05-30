@@ -1,0 +1,919 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface VendorLink {
+  name: string;
+  url: string;
+  price: string;
+  region: 'us' | 'ca' | 'eu' | 'global';
+  primary?: boolean;
+}
+interface SpecItem {
+  label: string;
+  value: string;
+  note?: string;
+}
+interface CompatItem {
+  name: string;
+  status: 'compatible' | 'incompatible' | 'untested';
+}
+interface RelatedComp {
+  title: string;
+  category: string;
+  href: string;
+  price?: string;
+  gradient?: string;
+}
+
+interface Props {
+  title: string;
+  category: string;
+  componentType: string;
+  brand: string;
+  price: { usd: number; cad?: number };
+  verdict: string;
+  verdictLabel: 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL';
+  heroImage?: string;
+  maxTemp?: number;
+  maxFlow?: number;
+  compatibility?: CompatItem[];
+  tags?: string[];
+  vendors?: VendorLink[];
+  specs?: SpecItem[];
+  pros?: string[];
+  cons?: string[];
+  relatedComponents?: RelatedComp[];
+  excerpt?: string;
+}
+
+const {
+  title,
+  category,
+  componentType,
+  brand,
+  price,
+  verdict,
+  verdictLabel,
+  heroImage,
+  maxTemp,
+  maxFlow,
+  compatibility = [],
+  tags = [],
+  vendors = [],
+  specs = [],
+  pros = [],
+  cons = [],
+  relatedComponents = [],
+  excerpt = '',
+} = Astro.props;
+
+const verdictColors: Record<string, { bg: string; text: string; border: string }> = {
+  BUY:         { bg: '#E8F5E9', text: '#2E7D32', border: '#A5D6A7' },
+  SKIP:        { bg: '#FFEBEE', text: '#C62828', border: '#FFCDD2' },
+  WAIT:        { bg: '#FFF8E1', text: '#E65100', border: '#FFE082' },
+  CONDITIONAL: { bg: '#E3F2FD', text: '#1565C0', border: '#90CAF9' },
+};
+const vc = verdictColors[verdictLabel] ?? verdictColors.BUY;
+
+const regionFlags: Record<string, string> = {
+  us: '🇺🇸',
+  ca: '🇨🇦',
+  eu: '🇪🇺',
+  global: '🌐',
+};
+
+const FLOW_MAX = 70;
+const flowBenchmarks = [
+  { label: 'Standard', value: 15 },
+  { label: 'High Flow', value: 30 },
+  { label: 'Volcano', value: 45 },
+];
+---
+<Base title={`${title} — ${brand} ${category} Review`} description={excerpt || verdict} heroPage={true} hasHero={true}>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <!-- ── COMPONENT HERO ── -->
+  <section class="comp-hero">
+    <div class="comp-hero-inner">
+      <div class="comp-hero-image">
+        {heroImage
+          ? <img src={heroImage} alt={title} loading="lazy" class="comp-hero-img" />
+          : <div class="comp-hero-placeholder">
+              <span class="comp-hero-placeholder-cat">{category}</span>
+            </div>
+        }
+      </div>
+      <div class="comp-hero-info">
+        <nav class="comp-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/hardware">Hardware</a>
+          <span>/</span>
+          <span>{category}</span>
+        </nav>
+        <div class="comp-brand">{brand}</div>
+        <h1 class="comp-title">{title}</h1>
+        <div class="comp-verdict-row">
+          <span class="comp-verdict-badge" style={`background:${vc.bg};color:${vc.text};border-color:${vc.border}`}>
+            {verdictLabel}
+          </span>
+          <span class="comp-verdict-text">{verdict}</span>
+        </div>
+        <div class="comp-key-stats">
+          <div class="comp-stat">
+            <span class="comp-stat-label">USD</span>
+            <span class="comp-stat-val">${price.usd}</span>
+          </div>
+          {price.cad && (
+            <div class="comp-stat">
+              <span class="comp-stat-label">CAD</span>
+              <span class="comp-stat-val">${price.cad}</span>
+            </div>
+          )}
+          {maxTemp && (
+            <div class="comp-stat">
+              <span class="comp-stat-label">Max Temp</span>
+              <span class="comp-stat-val">{maxTemp}°C</span>
+            </div>
+          )}
+          {maxFlow && (
+            <div class="comp-stat">
+              <span class="comp-stat-label">Max Flow</span>
+              <span class="comp-stat-val">{maxFlow} mm³/s</span>
+            </div>
+          )}
+        </div>
+        {tags.length > 0 && (
+          <div class="comp-tags">
+            {tags.map(tag => <span class="comp-tag">{tag}</span>)}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="comp-body">
+    <div class="comp-body-inner">
+
+      <div class="comp-main">
+
+        <!-- BUY SECTION -->
+        {vendors.length > 0 && (
+          <section class="comp-section" aria-labelledby="buy-heading">
+            <h2 class="comp-section-title" id="buy-heading">Where to Buy</h2>
+            <div class="comp-vendors-grid">
+              {vendors.map(v => (
+                <a
+                  href={v.url}
+                  class={`comp-vendor-card${v.primary ? ' comp-vendor-primary' : ''}`}
+                  target="_blank"
+                  rel="noopener sponsored"
+                  aria-label={`Buy from ${v.name}`}
+                >
+                  {v.primary && <span class="comp-vendor-primary-badge">Best Option</span>}
+                  <div class="comp-vendor-flag">{regionFlags[v.region] ?? '🌐'}</div>
+                  <div class="comp-vendor-name">{v.name}</div>
+                  <div class="comp-vendor-price">{v.price}</div>
+                  <div class="comp-vendor-arrow">→</div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- FLOW RATE BOX -->
+        {maxFlow && (
+          <section class="comp-section comp-flow-section" aria-labelledby="flow-heading">
+            <h2 class="comp-section-title" id="flow-heading">Flow Rate Reference</h2>
+            <div class="comp-flow-box">
+              <div class="comp-flow-track-wrap">
+                <div class="comp-flow-track">
+                  {flowBenchmarks.map(b => (
+                    <div class="comp-flow-ref" style={`left:${(b.value / FLOW_MAX) * 100}%`}>
+                      <div class="comp-flow-ref-line"></div>
+                      <span class="comp-flow-ref-label">{b.label}<br/>{b.value}</span>
+                    </div>
+                  ))}
+                  <div class="comp-flow-fill" style={`width:${Math.min((maxFlow / FLOW_MAX) * 100, 100)}%`}></div>
+                  <div class="comp-flow-marker" style={`left:${Math.min((maxFlow / FLOW_MAX) * 100, 100)}%`}>
+                    <div class="comp-flow-marker-val">{maxFlow} mm³/s</div>
+                  </div>
+                </div>
+                <div class="comp-flow-axis">
+                  <span>0</span>
+                  <span>{FLOW_MAX}+ mm³/s</span>
+                </div>
+              </div>
+              <p class="comp-flow-note">
+                Max flow tested at 250°C with standard PLA/PETG. Actual performance varies by filament, nozzle diameter, and temperature.
+              </p>
+            </div>
+          </section>
+        )}
+
+        <!-- SPECS TABLE -->
+        {specs.length > 0 && (
+          <section class="comp-section" aria-labelledby="specs-heading">
+            <h2 class="comp-section-title" id="specs-heading">Full Specifications</h2>
+            <div class="comp-specs-wrap">
+              <table class="comp-specs-table">
+                <tbody>
+                  {specs.map(s => (
+                    <tr class="comp-specs-row">
+                      <td class="comp-specs-label">{s.label}</td>
+                      <td class="comp-specs-val">
+                        {s.value}
+                        {s.note && <span class="comp-specs-note">{s.note}</span>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
+        <!-- COMPATIBILITY MATRIX -->
+        {compatibility.length > 0 && (
+          <section class="comp-section" aria-labelledby="compat-heading">
+            <h2 class="comp-section-title" id="compat-heading">Compatibility</h2>
+            <div class="comp-compat-grid">
+              {compatibility.map(c => (
+                <span class={`comp-compat-chip comp-compat-${c.status}`} title={c.status}>
+                  {c.name}
+                  <span class="comp-compat-dot" aria-hidden="true"></span>
+                </span>
+              ))}
+            </div>
+            <div class="comp-compat-legend">
+              <span class="comp-compat-chip comp-compat-compatible comp-compat-legend-item">Compatible</span>
+              <span class="comp-compat-chip comp-compat-untested comp-compat-legend-item">Untested</span>
+              <span class="comp-compat-chip comp-compat-incompatible comp-compat-legend-item">Incompatible</span>
+            </div>
+          </section>
+        )}
+
+        <!-- PROS & CONS -->
+        {(pros.length > 0 || cons.length > 0) && (
+          <section class="comp-section" aria-labelledby="proscons-heading">
+            <h2 class="comp-section-title" id="proscons-heading">Pros &amp; Cons</h2>
+            <div class="comp-proscons-grid">
+              {pros.length > 0 && (
+                <div class="comp-pros">
+                  <div class="comp-pros-head">Pros</div>
+                  <ul class="comp-pros-list">
+                    {pros.map(p => <li><span class="comp-pros-icon" aria-hidden="true">✓</span>{p}</li>)}
+                  </ul>
+                </div>
+              )}
+              {cons.length > 0 && (
+                <div class="comp-cons">
+                  <div class="comp-cons-head">Cons</div>
+                  <ul class="comp-cons-list">
+                    {cons.map(c => <li><span class="comp-cons-icon" aria-hidden="true">✗</span>{c}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        <!-- PROSE CONTENT (editorial notes) -->
+        <div class="comp-prose art-content">
+          <slot />
+        </div>
+
+      </div><!-- /comp-main -->
+    </div>
+  </div>
+
+  <!-- ── RELATED COMPONENTS ── -->
+  {relatedComponents.length > 0 && (
+    <section class="comp-related" aria-labelledby="related-heading">
+      <div class="comp-related-inner">
+        <div class="comp-related-head">
+          <h2 class="comp-related-title" id="related-heading">Related Components</h2>
+          <a href="/hardware" class="comp-related-all">All hardware →</a>
+        </div>
+        <div class="comp-related-grid">
+          {relatedComponents.map(r => (
+            <a href={r.href} class="comp-related-card">
+              <div class="comp-related-card-img" style={r.gradient ? `background:${r.gradient}` : 'background:linear-gradient(135deg,#1a1520,#0d0d18)'}>
+                <span class="comp-related-card-cat">{r.category}</span>
+              </div>
+              <div class="comp-related-card-body">
+                <div class="comp-related-card-title">{r.title}</div>
+                {r.price && <div class="comp-related-card-price">{r.price}</div>}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": title,
+    "brand": { "@type": "Brand", "name": brand },
+    "description": excerpt || verdict,
+    "category": componentType,
+    "offers": {
+      "@type": "Offer",
+      "price": price.usd,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "review": {
+      "@type": "Review",
+      "reviewBody": verdict,
+      "publisher": { "@type": "Organization", "name": "Modern Makes" }
+    }
+  })}></script>
+</Base>
+
+<style is:global>
+/* ── COMPONENT HERO ── */
+.comp-hero {
+  background: var(--black);
+  /* padding-top: 80px nav clearance + 48px design spacing */
+  padding: 128px 0 48px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.comp-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 52px;
+  align-items: center;
+}
+.comp-hero-image {
+  background: #111;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.comp-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.comp-hero-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1520, #0d0d18);
+}
+.comp-hero-placeholder-cat {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.2);
+}
+.comp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.comp-breadcrumb a,
+.comp-breadcrumb span {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  transition: color .15s;
+}
+.comp-breadcrumb a:hover { color: var(--accent); }
+.comp-brand {
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.comp-title {
+  font-family: var(--fd);
+  font-size: 38px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -.3px;
+  margin-bottom: 16px;
+}
+.comp-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.comp-verdict-badge {
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1.5px solid;
+  border-radius: 4px;
+  padding: 4px 12px;
+  flex-shrink: 0;
+}
+.comp-verdict-text {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.5;
+}
+.comp-key-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.comp-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.comp-stat-label {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+.comp-stat-val {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.comp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.comp-tag {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+
+/* ── BODY ── */
+.comp-body {
+  background: var(--bg);
+  padding: 48px 0 64px;
+}
+.comp-body-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.comp-main { max-width: 820px; }
+
+/* ── SECTIONS ── */
+.comp-section {
+  margin-bottom: 52px;
+}
+.comp-section-title {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--black);
+}
+
+/* ── VENDORS ── */
+.comp-vendors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.comp-vendor-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  transition: border-color .15s, transform .15s;
+  overflow: hidden;
+}
+.comp-vendor-card:hover {
+  border-color: var(--border-s);
+  transform: translateY(-2px);
+}
+.comp-vendor-primary {
+  border-color: var(--accent) !important;
+}
+.comp-vendor-primary-badge {
+  font-family: var(--fu);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  padding: 2px 7px;
+  border-radius: 3px;
+  align-self: flex-start;
+  margin-bottom: 2px;
+}
+.comp-vendor-flag {
+  font-size: 18px;
+  line-height: 1;
+}
+.comp-vendor-name {
+  font-family: var(--fd);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--black);
+}
+.comp-vendor-price {
+  font-family: var(--fm);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.comp-vendor-arrow {
+  font-size: 14px;
+  color: var(--g2);
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+/* ── FLOW RATE BOX ── */
+.comp-flow-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+}
+.comp-flow-track-wrap {
+  margin-bottom: 16px;
+}
+.comp-flow-track {
+  position: relative;
+  height: 14px;
+  background: var(--border);
+  border-radius: 7px;
+  margin-bottom: 32px;
+  overflow: visible;
+}
+.comp-flow-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 7px;
+  transition: width .6s ease;
+}
+.comp-flow-ref {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.comp-flow-ref-line {
+  width: 1px;
+  height: 22px;
+  background: rgba(0,0,0,.2);
+  margin: 0 auto;
+}
+.comp-flow-ref-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  color: var(--g2);
+  text-align: center;
+  display: block;
+  white-space: nowrap;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+.comp-flow-marker {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.comp-flow-marker::before {
+  content: '';
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: var(--accent);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--accent);
+  margin: 0 auto;
+}
+.comp-flow-marker-val {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+.comp-flow-axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+}
+.comp-flow-note {
+  font-family: var(--fb);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--g2);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── SPECS TABLE ── */
+.comp-specs-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.comp-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.comp-specs-row {
+  border-bottom: 1px solid var(--border);
+}
+.comp-specs-row:last-child { border-bottom: none; }
+.comp-specs-row:nth-child(even) { background: #fafaf9; }
+.comp-specs-label {
+  padding: 12px 18px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--g1);
+  width: 40%;
+  vertical-align: top;
+}
+.comp-specs-val {
+  padding: 12px 18px;
+  font-family: var(--fm);
+  font-size: 13px;
+  color: var(--black);
+  vertical-align: top;
+}
+.comp-specs-note {
+  display: block;
+  font-size: 11px;
+  color: var(--g2);
+  margin-top: 2px;
+  font-family: var(--fu);
+}
+
+/* ── COMPATIBILITY ── */
+.comp-compat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.comp-compat-chip {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 5px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid;
+}
+.comp-compat-compatible {
+  background: rgba(255,90,31,.1);
+  color: var(--accent-dk);
+  border-color: rgba(255,90,31,.3);
+}
+.comp-compat-incompatible {
+  background: rgba(150,150,150,.1);
+  color: var(--g2);
+  border-color: var(--border);
+  text-decoration: line-through;
+  opacity: .7;
+}
+.comp-compat-untested {
+  background: transparent;
+  color: var(--g1);
+  border-color: var(--border);
+}
+.comp-compat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.comp-compat-compatible .comp-compat-dot { background: var(--accent); }
+.comp-compat-incompatible .comp-compat-dot { background: var(--g2); }
+.comp-compat-untested .comp-compat-dot { border: 1.5px solid var(--g2); }
+.comp-compat-legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.comp-compat-legend-item {
+  font-size: 10px !important;
+  padding: 3px 10px !important;
+  pointer-events: none;
+}
+
+/* ── PROS & CONS ── */
+.comp-proscons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.comp-pros, .comp-cons {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.comp-pros { border-top: 3px solid #2E7D32; }
+.comp-cons { border-top: 3px solid #C62828; }
+.comp-pros-head, .comp-cons-head {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.comp-pros-head { color: #2E7D32; }
+.comp-cons-head { color: #C62828; }
+.comp-pros-list, .comp-cons-list {
+  list-style: none;
+  padding: 12px 18px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.comp-pros-list li, .comp-cons-list li {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--g1);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.comp-pros-icon { color: #2E7D32; font-weight: 800; flex-shrink: 0; }
+.comp-cons-icon { color: #C62828; font-weight: 800; flex-shrink: 0; }
+
+/* ── PROSE ── */
+.comp-prose {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.comp-prose:empty { display: none; }
+
+/* ── RELATED COMPONENTS ── */
+.comp-related {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 48px 0;
+}
+.comp-related-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.comp-related-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--black);
+}
+.comp-related-title {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+}
+.comp-related-all {
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--g1);
+  transition: color .15s;
+}
+.comp-related-all:hover { color: var(--accent); }
+.comp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.comp-related-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .15s, transform .15s;
+}
+.comp-related-card:hover {
+  border-color: var(--border-s);
+  transform: translateY(-2px);
+}
+.comp-related-card-img {
+  aspect-ratio: 16/9;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+}
+.comp-related-card-cat {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+.comp-related-card-body {
+  padding: 14px 16px 18px;
+  flex: 1;
+}
+.comp-related-card-title {
+  font-family: var(--fd);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.comp-related-card-price {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .comp-hero-inner { grid-template-columns: 300px 1fr; gap: 36px; }
+  .comp-vendors-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  /* 64px mobile nav + 32px spacing */
+  .comp-hero { padding: 96px 0 32px; }
+  .comp-hero-inner { grid-template-columns: 1fr; padding: 0 20px; gap: 24px; }
+  .comp-hero-image { max-width: 320px; margin: 0 auto; }
+  .comp-title { font-size: 28px; }
+  .comp-body-inner { padding: 0 20px; }
+  .comp-vendors-grid { grid-template-columns: 1fr 1fr; }
+  .comp-proscons-grid { grid-template-columns: 1fr; }
+  .comp-related-inner { padding: 0 20px; }
+  .comp-related-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .comp-vendors-grid { grid-template-columns: 1fr; }
+  .comp-key-stats { gap: 16px; }
+  .comp-stat-val { font-size: 18px; }
+}
+</style>

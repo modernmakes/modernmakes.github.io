@@ -1,0 +1,300 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const categories = [
+  {
+    name: 'Hotends',
+    description: 'High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.',
+    href: '/hardware/hotends',
+    live: true,
+    count: '1 reviewed',
+    icon: '🔥',
+  },
+  {
+    name: 'Extruders',
+    description: 'Direct-drive and Bowden extruders — gear ratios, weight, and toolhead fit.',
+    href: '/hardware/extruders',
+    live: false,
+    count: 'Coming Soon',
+    icon: '⚙️',
+  },
+  {
+    name: 'Motion Systems',
+    description: 'CoreXY conversion mods, belt routing, and motor mount kits for common printers.',
+    href: '/hardware/motion',
+    live: true,
+    count: '2 pages',
+    icon: '🔄',
+  },
+  {
+    name: 'Electronics',
+    description: 'Controller boards, toolhead PCBs, accelerometers, and wiring guides.',
+    href: '/hardware/electronics',
+    live: false,
+    count: 'Coming Soon',
+    icon: '🔌',
+  },
+  {
+    name: 'Build Surfaces',
+    description: 'PEI, textured, and smooth bed surfaces — adhesion, release, and longevity.',
+    href: '/hardware/build-surfaces',
+    live: false,
+    count: 'Coming Soon',
+    icon: '🧲',
+  },
+  {
+    name: 'Nozzles',
+    description: 'Hardened steel, brass, ruby, and specialty nozzles for every filament type.',
+    href: '/hardware/nozzles',
+    live: false,
+    count: 'Coming Soon',
+    icon: '💧',
+  },
+];
+
+const featured = [
+  {
+    title: 'Phaetus Rapido 2 UHF',
+    category: 'Hotend',
+    verdict: 'BUY',
+    verdictColor: '#2E7D32',
+    verdictBg: '#E8F5E9',
+    href: '/hardware/hotends/rapido-2',
+    description: '60 mm³/s max flow. The benchmark high-flow hotend for CoreXY builds in 2026.',
+    gradient: 'linear-gradient(135deg, #1a0e0a, #0d1520)',
+  },
+  {
+    title: 'Mammoth3D',
+    category: 'Motion Mod',
+    verdict: 'COMMUNITY',
+    verdictColor: '#1565C0',
+    verdictBg: '#E3F2FD',
+    href: '/hardware/motion/mammoth3d',
+    description: 'Full CoreXY conversion for Ender 3 — no new frame, uses existing extrusion.',
+    gradient: 'linear-gradient(135deg, #0d1520, #1a1510)',
+  },
+  {
+    title: 'CoreXY Reference',
+    category: 'Architecture',
+    verdict: 'WIKI',
+    verdictColor: '#5A5A5A',
+    verdictBg: '#F5F5F5',
+    href: '/hardware/motion/corexy',
+    description: 'How CoreXY kinematics work and which printers use this motion architecture.',
+    gradient: 'linear-gradient(135deg, #101520, #0d0d18)',
+  },
+];
+---
+<Base
+  title="Hardware Reference"
+  description="Specs, compatibility, and where to buy — every component we cover. Hotends, extruders, motion systems, electronics, and more."
+  heroPage={false}
+>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <!-- HERO -->
+  <section class="hw-hero">
+    <div class="hw-hero-inner">
+      <div class="eyebrow" style="margin-bottom:12px;color:var(--accent)">Modern Makes</div>
+      <h1 class="hw-hero-title">Hardware Reference</h1>
+      <p class="hw-hero-desc">
+        Specs, compatibility, and where to buy — every component we cover.
+        Real-world testing, honest verdicts.
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="section" aria-labelledby="featured-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head-label" id="featured-heading">Featured</span>
+        <a href="/news" class="section-head-link">All reviews</a>
+      </div>
+      <div class="grid-3">
+        {featured.map(f => (
+          <a href={f.href} class="hw-feat-card">
+            <div class="hw-feat-img" style={`background:${f.gradient}`}>
+              <span class="hw-feat-cat">{f.category}</span>
+            </div>
+            <div class="hw-feat-body">
+              <div class="hw-feat-top">
+                <span class="hw-feat-title">{f.title}</span>
+                <span
+                  class="hw-feat-verdict"
+                  style={`background:${f.verdictBg};color:${f.verdictColor}`}
+                >
+                  {f.verdict}
+                </span>
+              </div>
+              <p class="hw-feat-desc">{f.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section-lg hw-cats-section" aria-labelledby="cats-heading">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:24px">
+        <span class="section-head-label" id="cats-heading">Browse by Category</span>
+      </div>
+      <div class="hw-cats-grid">
+        {categories.map(cat => (
+          cat.live
+            ? (
+              <a href={cat.href} class="hw-cat-card hw-cat-live">
+                <div class="hw-cat-icon">{cat.icon}</div>
+                <div class="hw-cat-body">
+                  <div class="hw-cat-name">{cat.name}</div>
+                  <div class="hw-cat-desc">{cat.description}</div>
+                  <span class="hw-cat-count hw-cat-count-live">{cat.count}</span>
+                </div>
+                <span class="hw-cat-arrow">→</span>
+              </a>
+            )
+            : (
+              <div class="hw-cat-card hw-cat-soon" aria-label={`${cat.name} — coming soon`}>
+                <div class="hw-cat-icon hw-cat-icon-dim">{cat.icon}</div>
+                <div class="hw-cat-body">
+                  <div class="hw-cat-name hw-cat-name-dim">{cat.name}</div>
+                  <div class="hw-cat-desc hw-cat-desc-dim">{cat.description}</div>
+                  <span class="hw-cat-count hw-cat-count-soon">Coming Soon</span>
+                </div>
+              </div>
+            )
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
+
+<style is:global>
+/* ── HARDWARE HUB HERO ── */
+.hw-hero {
+  background: var(--black);
+  padding: 52px 0 48px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.hw-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.hw-hero-title {
+  font-family: var(--fd);
+  font-size: 52px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin-bottom: 14px;
+}
+.hw-hero-desc {
+  font-family: var(--fb);
+  font-size: 16px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.7;
+  max-width: 500px;
+}
+
+/* ── FEATURED CARDS ── */
+.hw-feat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .15s, transform .15s;
+}
+.hw-feat-card:hover { border-color: var(--border-s); transform: translateY(-2px); }
+.hw-feat-img {
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px 14px;
+}
+.hw-feat-cat {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+.hw-feat-body { padding: 14px 16px 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.hw-feat-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.hw-feat-title {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  flex: 1;
+}
+.hw-feat-verdict {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 3px 8px;
+  flex-shrink: 0;
+}
+.hw-feat-desc {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── CATEGORY GRID ── */
+.hw-cats-section { background: var(--surface); border-top: 1px solid var(--border); }
+.hw-cats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.hw-cat-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 20px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color .15s, transform .15s;
+}
+.hw-cat-live { cursor: pointer; }
+.hw-cat-live:hover { border-color: var(--accent); transform: translateY(-1px); }
+.hw-cat-soon { opacity: .6; cursor: default; }
+.hw-cat-icon { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.hw-cat-icon-dim { filter: grayscale(1); }
+.hw-cat-body { flex: 1; min-width: 0; }
+.hw-cat-name { font-family: var(--fd); font-size: 17px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+.hw-cat-name-dim { color: var(--g1); }
+.hw-cat-desc { font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.5; margin-bottom: 10px; }
+.hw-cat-desc-dim { color: var(--g2); }
+.hw-cat-count { font-family: var(--fm); font-size: 10px; font-weight: 700; border-radius: 3px; padding: 2px 8px; }
+.hw-cat-count-live { background: rgba(255,90,31,.1); color: var(--accent); }
+.hw-cat-count-soon { background: var(--border); color: var(--g2); }
+.hw-cat-arrow { font-size: 14px; color: var(--g2); align-self: center; flex-shrink: 0; margin-top: 2px; }
+
+@media (max-width: 768px) {
+  .hw-hero-inner { padding: 0 20px; }
+  .hw-hero-title { font-size: 36px; }
+  .hw-cats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .hw-cats-grid { grid-template-columns: 1fr; }
+}
+</style>

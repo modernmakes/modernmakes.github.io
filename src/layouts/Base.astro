@@ -6,12 +6,15 @@ interface Props {
   description?: string;
   ogImage?: string;
   heroPage?: boolean;
+  /** Set true on pages with a full-bleed dark hero so the nav starts transparent */
+  hasHero?: boolean;
 }
 const {
   title,
   description = "The editorial voice of the 3D printing enthusiast. Printers, filament, mods, and the culture that matters.",
   ogImage = "/images/og-default.jpg",
-  heroPage = false
+  heroPage = false,
+  hasHero  = false,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -62,7 +65,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     gtag('config', 'G-CGR4N532H6');
   </script>
 </head>
-<body>
+<body data-hero={hasHero ? "true" : undefined}>
   <slot name="nav" />
   <main style={heroPage ? '' : 'padding-top: 80px;'}>
     <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>

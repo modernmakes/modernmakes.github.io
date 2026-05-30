@@ -4,7 +4,8 @@ interface Props {
 }
 const { currentPath = '/' } = Astro.props;
 
-const printersActive = currentPath.startsWith('/voron');
+const printersActive  = currentPath.startsWith('/voron');
+const hardwareActive  = currentPath.startsWith('/hardware');
 ---
 
 <nav class="nav" id="site-nav" aria-label="Primary navigation">
@@ -36,6 +37,7 @@ const printersActive = currentPath.startsWith('/voron');
           </div>
         </div>
 
+        <a href="/hardware" class:list={['nav-link', { active: hardwareActive }]}>Hardware</a>
         <a href="/filament" class:list={['nav-link', { active: currentPath.startsWith('/filament') }]}>Filament</a>
         <a href="/guides"   class:list={['nav-link', { active: currentPath.startsWith('/guides') }]}>Guides</a>
         <a href="/tools"    class:list={['nav-link', { active: currentPath.startsWith('/tools') }]}>Tools</a>
@@ -88,6 +90,7 @@ const printersActive = currentPath.startsWith('/voron');
 
     <div class="panel-divider"></div>
 
+    <a href="/hardware" class:list={['panel-link', { active: hardwareActive }]}>Hardware</a>
     <a href="/filament" class:list={['panel-link', { active: currentPath.startsWith('/filament') }]}>Filament</a>
     <a href="/guides"   class:list={['panel-link', { active: currentPath.startsWith('/guides') }]}>Guides</a>
     <a href="/tools"    class:list={['panel-link', { active: currentPath.startsWith('/tools') }]}>Tools</a>
@@ -142,6 +145,34 @@ const printersActive = currentPath.startsWith('/voron');
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* ─── TRANSPARENT STATE — hero pages on initial load ─── */
+  /*
+   * Active when body[data-hero="true"] and the user hasn't scrolled yet.
+   * The nav-enter slide-in animation plays through this transparent state,
+   * so the hero image fills the viewport cleanly edge-to-edge.
+   */
+  .nav.nav-transparent {
+    background: transparent !important;
+    /* Use blur(0px) instead of none so the CSS transition animates smoothly */
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+    border-bottom-color: transparent !important;
+  }
+  /* Keep nav text/logo clearly legible over dark heroes */
+  .nav.nav-transparent .nav-link,
+  .nav.nav-transparent .nav-dd-btn {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .nav.nav-transparent .nav-link:hover,
+  .nav.nav-transparent .nav-dd-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .nav.nav-transparent .nav-search-btn,
+  .nav.nav-transparent .nav-hamburger {
+    color: rgba(255, 255, 255, 0.6);
   }
 
   /* ─── BAR HEIGHT ─── */
@@ -555,6 +586,20 @@ const printersActive = currentPath.startsWith('/voron');
     const hamburger    = document.getElementById('nav-hamburger')  as HTMLButtonElement;
     const panel        = document.getElementById('nav-panel')      as HTMLElement;
 
+    /* ── Hero-page transparent nav ── */
+    /*
+     * When body[data-hero="true"], the nav starts fully transparent so the
+     * hero image fills the viewport cleanly. On scroll, it transitions to
+     * the glass state. Hysteresis mirrors the .scrolled pattern below.
+     */
+    const isHeroPage    = document.body.dataset.hero === 'true';
+    const TRANS_HIDE    = 50;  // remove transparent when scroll > 50px
+    const TRANS_RESTORE = 10;  // restore transparent when scroll < 10px
+
+    if (isHeroPage && window.scrollY < TRANS_RESTORE) {
+      nav.classList.add('nav-transparent');
+    }
+
     /* ── Throttled scroll → .scrolled with hysteresis (on:80 / off:60) ── */
     let rafPending = false;
     let isScrolled = false;
@@ -566,6 +611,17 @@ const printersActive = currentPath.startsWith('/voron');
         rafPending = true;
         requestAnimationFrame(() => {
           const y = window.scrollY;
+
+          /* Transparent ↔ glass toggle (hero pages only) */
+          if (isHeroPage) {
+            if (y > TRANS_HIDE) {
+              nav.classList.remove('nav-transparent');
+            } else if (y < TRANS_RESTORE) {
+              nav.classList.add('nav-transparent');
+            }
+          }
+
+          /* Glass ↔ solid toggle */
           if (!isScrolled && y > SCROLL_ON) {
             isScrolled = true;
             nav.classList.add('scrolled');

@@ -6,7 +6,8 @@ import Footer from '../../components/Footer.astro';
 
 const currentPath = '/news';
 
-const allNews = await getCollection('news');
+// Guides live at /guides — exclude them from the news index entirely
+const allNews = await getCollection('news', ({ data }) => data.type !== 'guide');
 const sorted = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function formatDate(d: Date) {
@@ -19,6 +20,12 @@ function cardBg(entry: (typeof sorted)[number]) {
   }
   return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
 }
+
+const counts = {
+  all:        sorted.length,
+  news:       sorted.filter(e => !e.data.type || e.data.type === 'news').length,
+  comparison: sorted.filter(e => e.data.type === 'comparison').length,
+};
 ---
 <Base
   title="News"
@@ -39,6 +46,26 @@ function cardBg(entry: (typeof sorted)[number]) {
     </div>
   </div>
 
+  <!-- FILTER TABS: All / News / Comparisons only -->
+  <div class="ni-tabs-bar">
+    <div class="ni-tabs-inner">
+      <button class="ni-tab active" data-filter="all">
+        All
+        <span class="ni-tab-count">{counts.all}</span>
+      </button>
+      <button class="ni-tab" data-filter="news">
+        News
+        <span class="ni-tab-count">{counts.news}</span>
+      </button>
+      {counts.comparison > 0 && (
+        <button class="ni-tab" data-filter="comparison">
+          Comparisons
+          <span class="ni-tab-count">{counts.comparison}</span>
+        </button>
+      )}
+    </div>
+  </div>
+
   <!-- ARTICLES -->
   <section class="section" aria-label="News articles">
     <div class="container">
@@ -47,26 +74,46 @@ function cardBg(entry: (typeof sorted)[number]) {
           No articles published yet.
         </p>
       ) : (
-        <div class="grid-3">
-          {sorted.map(entry => (
-            <a href={`/news/${entry.slug}`} class="card" aria-label={entry.data.title}>
-              <div class="card-img" style={cardBg(entry)}>
-                <div class="news-img-overlay"></div>
-                <span class="news-img-cat">{entry.data.category}</span>
-              </div>
-              <div class="card-body">
-                <div class="card-cat">{entry.data.category}</div>
-                <div class="card-title">{entry.data.title}</div>
-                <p class="card-excerpt">{entry.data.excerpt}</p>
-                <div class="card-footer">
-                  <time class="card-date">{formatDate(entry.data.date)}</time>
-                  <span class="card-date" style="margin-left:auto">{entry.data.readTime}</span>
+        <div class="grid-3" id="news-grid">
+          {sorted.map(entry => {
+            const articleType = entry.data.type ?? 'news';
+            return (
+              <a
+                href={`/news/${entry.slug}`}
+                class="card"
+                aria-label={entry.data.title}
+                data-article-type={articleType}
+              >
+                <div class="card-img" style={cardBg(entry)}>
+                  <div class="news-img-overlay"></div>
+                  <span class="news-img-cat">{entry.data.category}</span>
+                  {articleType === 'comparison' && (
+                    <span class="ni-badge ni-badge-vs">VS</span>
+                  )}
                 </div>
-              </div>
-            </a>
-          ))}
+                <div class="card-body">
+                  <div class="card-cat-row">
+                    <div class="card-cat">{entry.data.category}</div>
+                    {articleType === 'comparison' && (
+                      <span class="ni-type-chip ni-type-vs">COMPARISON</span>
+                    )}
+                  </div>
+                  <div class="card-title">{entry.data.title}</div>
+                  <p class="card-excerpt">{entry.data.excerpt}</p>
+                  <div class="card-footer">
+                    <time class="card-date">{formatDate(entry.data.date)}</time>
+                    <span class="card-date" style="margin-left:auto">{entry.data.readTime}</span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
         </div>
       )}
+
+      <p class="ni-empty" id="ni-empty-msg" style="display:none;font-family:'Lora',serif;color:var(--g1);font-size:15px;text-align:center;padding:40px 0">
+        No articles in this category yet.
+      </p>
     </div>
   </section>
 
@@ -81,20 +128,40 @@ function cardBg(entry: (typeof sorted)[number]) {
         "description": "Latest news in 3D printing — product launches, firmware updates, community developments, and industry moves.",
         "url": "https://modernmakes.com/news",
         "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "News", "item": "https://modernmakes.com/news" }
-        ]
       }
     ]
   })}></script>
 </Base>
 
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.ni-tab');
+  const cards = document.querySelectorAll<HTMLElement>('[data-article-type]');
+  const emptyMsg = document.getElementById('ni-empty-msg');
+
+  function applyFilter(filter: string) {
+    let visible = 0;
+    cards.forEach(card => {
+      const type = card.dataset.articleType ?? 'news';
+      const show = filter === 'all' || type === filter;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (emptyMsg) emptyMsg.style.display = visible === 0 ? '' : 'none';
+    tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.filter === filter));
+    history.replaceState(null, '', filter === 'all' ? location.pathname : `#${filter}`);
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => applyFilter(tab.dataset.filter ?? 'all'));
+  });
+
+  const hash = location.hash.replace('#', '');
+  if (hash && ['news', 'comparison'].includes(hash)) {
+    applyFilter(hash);
+  }
+</script>
+
 <style is:global>
-/* Card image area overlay + category label for news index */
 .card-img {
   position: relative;
   display: flex;
@@ -104,7 +171,6 @@ function cardBg(entry: (typeof sorted)[number]) {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,.5), transparent 60%);
-  border-radius: 0;
 }
 .news-img-cat {
   position: relative;
@@ -116,5 +182,84 @@ function cardBg(entry: (typeof sorted)[number]) {
   text-transform: uppercase;
   color: rgba(255,255,255,.55);
   padding: 0 14px 10px;
+}
+.ni-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: #fff;
+}
+.ni-badge-vs { background: var(--accent); }
+.card-cat-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.card-cat-row .card-cat { margin-bottom: 0; }
+.ni-type-chip {
+  font-family: var(--fu);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+.ni-type-vs {
+  background: rgba(255,90,31,.1);
+  color: var(--accent);
+  border: 1px solid rgba(255,90,31,.25);
+}
+.ni-tabs-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.ni-tabs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+}
+.ni-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--g1);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+  margin-bottom: -1px;
+}
+.ni-tab:hover { color: var(--black); }
+.ni-tab.active { color: var(--black); border-bottom-color: var(--accent); }
+.ni-tab-count {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+}
+.ni-tab.active .ni-tab-count { background: var(--accent); color: #fff; border-color: var(--accent); }
+@media (max-width: 768px) {
+  .ni-tabs-inner { padding: 0 16px; }
+  .ni-tab { padding: 12px 14px; font-size: 11px; }
 }
 </style>

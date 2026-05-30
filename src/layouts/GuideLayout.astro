@@ -1,0 +1,618 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/article.css';
+
+interface Props {
+  title: string;
+  category: string;
+  date: string;
+  readTime: string;
+  heroImage?: string;
+  excerpt?: string;
+  summary?: string[];
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  timeRequired: string;
+  tools?: string[];
+  parts?: string[];
+}
+
+const {
+  title,
+  category,
+  date,
+  readTime,
+  heroImage,
+  excerpt = '',
+  summary = [],
+  difficulty = 'Intermediate',
+  timeRequired = '',
+  tools = [],
+  parts = [],
+} = Astro.props;
+
+const difficultyColor = {
+  Beginner: '#2E7D32',
+  Intermediate: '#E65100',
+  Advanced: '#C62828',
+}[difficulty] ?? '#E65100';
+
+const moreNews = [
+  { category: 'News',   title: 'Bondtech INDX Tool Changer Released', href: '/news/bondtech-indx-tool-changer-released', date: 'May 22, 2026' },
+  { category: 'News',   title: 'Voron Phoenix 600mm Build Volume Announced', href: '/news/voron-phoenix-600mm-released', date: 'May 21, 2026' },
+  { category: 'Safety', title: 'Bambu Lab Confirms Free Board Replacement After Fire Reports', href: '/news/bambu-lab-fire-safety-recall', date: 'May 28, 2026' },
+];
+
+const relatedArticles = [
+  { category: 'News',     title: 'Bondtech INDX Tool Changer: Multi-Material for CoreXY Printers', href: '/news/bondtech-indx-tool-changer-released', date: 'May 22, 2026', gradient: 'linear-gradient(135deg,#0d1520,#1a1008)' },
+  { category: 'Printers', title: 'Voron Phoenix 600mm — The Build Volume Nobody Asked For', href: '/news/voron-phoenix-600mm-released',  date: 'May 21, 2026', gradient: 'linear-gradient(135deg,#1f2010,#131708)' },
+  { category: 'Safety',   title: 'Bambu Lab Confirms Free Board Replacement After Fire Reports', href: '/news/bambu-lab-fire-safety-recall', date: 'May 28, 2026', gradient: 'linear-gradient(135deg,#1a0e0a,#0d1520)' },
+];
+---
+<Base title={title} description={excerpt} heroPage={true} hasHero={true}>
+  <Nav slot="nav" currentPath="/news" />
+
+  <!-- ── HERO ── -->
+  <div class="art-hero">
+    {heroImage
+      ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
+      : <div class="art-hero-bg" style="background: linear-gradient(160deg, #0a1520, #0d1a10 55%, #1a1520)"></div>
+    }
+    <div class="art-hero-overlay"></div>
+    <div class="art-hero-foot">
+      <div class="art-hero-container">
+        <span class="art-hero-cat">{category}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sentinel for sticky header -->
+  <div id="art-sticky-sentinel" class="art-sticky-sentinel"></div>
+
+  <!-- ── ARTICLE HEADER ── -->
+  <div class="art-header" id="art-header">
+    <div class="art-header-container">
+      <nav class="art-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/news">News</a>
+        <span aria-hidden="true">/</span>
+        <span>Guide</span>
+      </nav>
+      <div class="art-cat-badge">{category}</div>
+      <h1 class="art-headline">{title}</h1>
+      <div class="art-byline">
+        <time class="art-date">{date}</time>
+        <span class="art-sep" aria-hidden="true">·</span>
+        <span class="art-readtime">{readTime}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GUIDE META BAR ── -->
+  <div class="guide-meta-bar">
+    <div class="guide-meta-inner">
+      <div class="guide-meta-item">
+        <span class="guide-meta-label">Difficulty</span>
+        <span class="guide-meta-badge" style={`background:${difficultyColor}22;color:${difficultyColor};border-color:${difficultyColor}44`}>
+          {difficulty}
+        </span>
+      </div>
+      {timeRequired && (
+        <div class="guide-meta-item">
+          <span class="guide-meta-label">Time Required</span>
+          <span class="guide-meta-value">⏱ {timeRequired}</span>
+        </div>
+      )}
+      {tools.length > 0 && (
+        <div class="guide-meta-item">
+          <span class="guide-meta-label">Tools</span>
+          <span class="guide-meta-value">{tools.length} required</span>
+        </div>
+      )}
+      {parts.length > 0 && (
+        <div class="guide-meta-item">
+          <span class="guide-meta-label">Parts</span>
+          <span class="guide-meta-value">{parts.length} required</span>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="art-body">
+    <div class="art-body-container">
+
+      <article class="art-content guide-content">
+
+        <!-- TOOLS & PARTS -->
+        {(tools.length > 0 || parts.length > 0) && (
+          <div class="guide-requirements">
+            <div class="guide-req-title">Before You Start</div>
+            <div class="guide-req-grid">
+              {tools.length > 0 && (
+                <div class="guide-req-col">
+                  <div class="guide-req-col-label">Tools</div>
+                  <ul class="guide-req-list">
+                    {tools.map(t => <li><span class="guide-req-check" aria-hidden="true">□</span>{t}</li>)}
+                  </ul>
+                </div>
+              )}
+              {parts.length > 0 && (
+                <div class="guide-req-col">
+                  <div class="guide-req-col-label">Parts &amp; Software</div>
+                  <ul class="guide-req-list">
+                    {parts.map(p => <li><span class="guide-req-check" aria-hidden="true">□</span>{p}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        <!-- NUMBERED STEP CONTENT (slot) -->
+        <div class="guide-steps">
+          <slot />
+        </div>
+
+      </article>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="art-sidebar" aria-label="Guide sidebar">
+
+        <!-- Progress indicator (populated via JS) -->
+        <div class="art-sb-box guide-progress-box" id="guide-progress-box">
+          <div class="art-sb-box-label">Progress</div>
+          <ul class="guide-progress-list" id="guide-progress-list" aria-label="Guide steps"></ul>
+        </div>
+
+        {summary.length > 0 && (
+          <div class="art-sb-box art-sb-summary">
+            <div class="art-sb-box-label">Key Points</div>
+            <ul class="art-sb-summary-list">
+              {summary.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div class="art-sb-box guide-meta-card">
+          <div class="art-sb-box-label">At a Glance</div>
+          <div class="guide-meta-card-inner">
+            <div class="guide-meta-card-row">
+              <span class="guide-meta-card-key">Difficulty</span>
+              <span class="guide-meta-card-val" style={`color:${difficultyColor}`}>{difficulty}</span>
+            </div>
+            {timeRequired && (
+              <div class="guide-meta-card-row">
+                <span class="guide-meta-card-key">Time</span>
+                <span class="guide-meta-card-val">{timeRequired}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div class="art-sb-box art-sb-more">
+          <div class="art-sb-box-label">More from Modern Makes</div>
+          <div class="art-sb-more-list">
+            {moreNews.map(item => (
+              <a href={item.href} class="art-sb-more-item">
+                <span class="art-sb-more-cat">{item.category}</span>
+                <span class="art-sb-more-title">{item.title}</span>
+                <time class="art-sb-more-date">{item.date}</time>
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ── RELATED ARTICLES ── -->
+  <section class="art-related" aria-label="Related articles">
+    <div class="art-related-container">
+      <div class="art-related-head">
+        <span class="art-related-label">Related</span>
+        <a href="/news" class="art-related-all">All news →</a>
+      </div>
+      <div class="art-related-grid">
+        {relatedArticles.map(card => (
+          <a href={card.href} class="art-related-card">
+            <div class="art-related-card-img" style={`background: ${card.gradient}`}>
+              <div class="art-related-card-overlay"></div>
+              <span class="art-related-card-cat-overlay">{card.category}</span>
+            </div>
+            <div class="art-related-card-body">
+              <div class="art-related-card-cat">{card.category}</div>
+              <div class="art-related-card-title">{card.title}</div>
+              <time class="art-related-card-date">{card.date}</time>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": title,
+    "description": excerpt,
+    "totalTime": timeRequired ? `PT${timeRequired.replace(/\D/g, '')}M` : undefined,
+    "supply": parts.map(p => ({ "@type": "HowToSupply", "name": p })),
+    "tool": tools.map(t => ({ "@type": "HowToTool", "name": t })),
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.com"
+    }
+  })}></script>
+</Base>
+
+<script>
+  const headings = Array.from(document.querySelectorAll<HTMLHeadingElement>('.guide-steps h2'));
+  const listEl = document.getElementById('guide-progress-list');
+  const boxEl = document.getElementById('guide-progress-box');
+
+  if (listEl && headings.length > 0) {
+    headings.forEach((h, i) => {
+      if (!h.id) h.id = `step-${i + 1}`;
+      const li = document.createElement('li');
+      li.className = 'guide-prog-item';
+      li.innerHTML = `<button class="guide-prog-btn" data-target="${h.id}"><span class="guide-prog-num">${i + 1}</span><span class="guide-prog-title">${h.textContent ?? ''}</span></button>`;
+      li.querySelector('button')?.addEventListener('click', () => {
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      listEl.appendChild(li);
+    });
+
+    const items = Array.from(listEl.querySelectorAll<HTMLElement>('.guide-prog-item'));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = headings.findIndex(h => h.id === entry.target.id);
+          items.forEach((item, i) => item.classList.toggle('active', i === idx));
+        }
+      });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+
+    headings.forEach(h => observer.observe(h));
+    if (items[0]) items[0].classList.add('active');
+  } else if (boxEl && headings.length === 0) {
+    boxEl.style.display = 'none';
+  }
+
+  document.querySelectorAll('.art-content img').forEach(img => {
+    if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+  });
+
+  /* ── Sticky article header ── */
+  const stickyHeader   = document.getElementById('art-header');
+  const stickySentinel = document.getElementById('art-sticky-sentinel');
+  const sidebar        = document.querySelector<HTMLElement>('.art-sidebar');
+
+  function navH() {
+    return window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
+  }
+  function updateSidebarTop() {
+    if (!stickyHeader || !sidebar) return;
+    sidebar.style.top = (navH() + stickyHeader.offsetHeight + 16) + 'px';
+  }
+  if (stickySentinel && stickyHeader) {
+    new IntersectionObserver(
+      ([e]) => { stickyHeader.classList.toggle('is-sticky', !e.isIntersecting); updateSidebarTop(); },
+      { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
+    ).observe(stickySentinel);
+  }
+  updateSidebarTop();
+  window.addEventListener('resize', updateSidebarTop, { passive: true });
+</script>
+
+<style is:global>
+/* ── GUIDE META BAR ── */
+.guide-meta-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.guide-meta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 52px;
+  flex-wrap: wrap;
+}
+.guide-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.guide-meta-label {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+.guide-meta-badge {
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 3px 10px;
+}
+.guide-meta-value {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--black);
+}
+
+/* ── REQUIREMENTS ── */
+.guide-requirements {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px 24px;
+  margin-bottom: 36px;
+}
+.guide-req-title {
+  font-family: var(--fd);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: .02em;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.guide-req-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.guide-req-col-label {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2);
+  margin-bottom: 10px;
+}
+.guide-req-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.guide-req-list li {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--g1);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.guide-req-check {
+  color: var(--border-s);
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── NUMBERED STEPS ── */
+.guide-steps {
+  counter-reset: guide-step;
+}
+.guide-steps h2 {
+  counter-increment: guide-step;
+  position: relative;
+  padding-left: 60px;
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -.2px;
+  margin: 44px 0 16px;
+  padding-bottom: 0;
+  border-bottom: none;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+.guide-steps h2::before {
+  content: counter(guide-step);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--fd);
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.guide-steps h2::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 21px;
+  top: calc(50% + 21px);
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+.guide-steps h2:last-of-type::after { display: none; }
+
+.guide-steps h3 {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  margin: 24px 0 10px;
+}
+
+/* ── CALLOUT BLOCKS ── */
+.callout-warning,
+.callout-tip,
+.callout-note {
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+.callout-warning {
+  background: #fff5f5;
+  border: 1.5px solid #FFCDD2;
+  border-left: 4px solid #C62828;
+}
+.callout-warning strong:first-child {
+  color: #C62828;
+  display: block;
+  font-family: var(--fd);
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.callout-tip {
+  background: #fff8f0;
+  border: 1.5px solid #FFCFBD;
+  border-left: 4px solid var(--accent);
+}
+.callout-tip strong:first-child {
+  color: var(--accent-dk);
+  display: block;
+  font-family: var(--fd);
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.callout-note {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--g2);
+}
+.callout-note strong:first-child {
+  color: var(--g1);
+  display: block;
+  font-family: var(--fd);
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.callout-warning p,
+.callout-tip p,
+.callout-note p {
+  margin-bottom: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+}
+
+/* ── PROGRESS WIDGET ── */
+.guide-progress-list {
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.guide-prog-item { display: flex; }
+.guide-prog-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background .12s;
+  border-left: 2px solid transparent;
+}
+.guide-prog-btn:hover { background: var(--bg); }
+.guide-prog-item.active .guide-prog-btn {
+  border-left-color: var(--accent);
+  background: rgba(255,90,31,.04);
+}
+.guide-prog-num {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--g2);
+  background: var(--border);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.guide-prog-item.active .guide-prog-num {
+  background: var(--accent);
+  color: #fff;
+}
+.guide-prog-title {
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g1);
+  line-height: 1.4;
+}
+.guide-prog-item.active .guide-prog-title { color: var(--black); font-weight: 600; }
+
+/* ── META CARD ── */
+.guide-meta-card-inner {
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.guide-meta-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.guide-meta-card-key {
+  font-family: var(--fu);
+  font-size: 11px;
+  color: var(--g2);
+}
+.guide-meta-card-val {
+  font-family: var(--fm);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .guide-meta-inner { padding: 0 20px; height: auto; padding-top: 12px; padding-bottom: 12px; gap: 16px; }
+  .guide-req-grid { grid-template-columns: 1fr; gap: 16px; }
+  .guide-steps h2 { padding-left: 52px; font-size: 20px; }
+  .guide-steps h2::before { width: 36px; height: 36px; font-size: 17px; }
+}
+</style>

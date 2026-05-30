@@ -1,0 +1,129 @@
+---
+import ComponentLayout from '../../../layouts/ComponentLayout.astro';
+---
+<ComponentLayout
+  title="Phaetus Rapido 2 UHF"
+  category="HOTEND"
+  componentType="High-Flow Hotend"
+  brand="Phaetus"
+  price={{ usd: 89, cad: 119 }}
+  verdict="The best high-flow hotend for CoreXY builds targeting 150mm/s and above. Overkill for relaxed-speed printers, but unmatched if throughput is your goal."
+  verdictLabel="BUY"
+  maxTemp={500}
+  maxFlow={60}
+  tags={["high-flow", "uhf", "phaetus", "volcano", "voron", "corexy"]}
+  excerpt="Phaetus Rapido 2 UHF review — specs, vendor links, compatibility with Voron 2.4, Trident, and RatRig V-Core. Max flow 60mm³/s at 500°C."
+  vendors={[
+    {
+      name: "West3D",
+      url: "https://west3d.com",
+      price: "$89 USD",
+      region: "us",
+      primary: true,
+    },
+    {
+      name: "Printed Solid",
+      url: "https://www.printedsolid.com",
+      price: "$89 USD",
+      region: "us",
+    },
+    {
+      name: "Fabreeko",
+      url: "https://www.fabreeko.com",
+      price: "$92 USD",
+      region: "us",
+    },
+    {
+      name: "Printed Solid (CA)",
+      url: "https://www.printedsolid.com",
+      price: "~$119 CAD",
+      region: "ca",
+    },
+    {
+      name: "Triangle Lab (AliExpress)",
+      url: "https://www.aliexpress.com/store/4543082",
+      price: "~$75 USD",
+      region: "global",
+    },
+  ]}
+  specs={[
+    { label: "Max Volumetric Flow",   value: "60 mm³/s",          note: "At 250°C with PLA/PETG. At 300°C with ABS/nylon." },
+    { label: "Max Temperature",       value: "500°C",             note: "Requires PT100 or PT1000 above 300°C" },
+    { label: "Heater Block",          value: "UHF / Volcano",     note: "Compatible with all Volcano/UHF-thread M6 nozzles" },
+    { label: "Heater Cartridge",      value: "60W",               note: "24V standard" },
+    { label: "Heat Break",            value: "Bi-metal",          note: "Titanium alloy cold end, copper alloy hot end" },
+    { label: "Nozzle Thread",         value: "M6 Volcano pitch",  note: "Not compatible with standard V6 nozzles" },
+    { label: "Thermistor",            value: "NTC100K (stock)",   note: "Swap to PT100/PT1000 for temps above 300°C" },
+    { label: "Fan",                   value: "Axial 25×10mm",     note: "Included; 24V" },
+    { label: "Mount Style",           value: "Groove mount",      note: "Compatible with Stealthburner, EVA 3, Orbiter toolheads" },
+    { label: "Nozzle Diameter",       value: "0.4mm (stock)",     note: "Supports 0.25–1.0mm in UHF format" },
+    { label: "Total Weight",          value: "~62g",              note: "Hotend + fan + wiring, no extruder" },
+    { label: "Throat Length",         value: "25mm",              note: "UHF extended melt zone" },
+    { label: "Part Number",           value: "RA2-UHF",           note: "" },
+  ]}
+  compatibility={[
+    { name: "Voron 2.4",          status: "compatible" },
+    { name: "Voron Trident",      status: "compatible" },
+    { name: "Voron 0.2",          status: "incompatible" },
+    { name: "VCore 3.1",          status: "compatible" },
+    { name: "RatRig V-Core 4",    status: "compatible" },
+    { name: "RatRig V-Minion",    status: "untested" },
+    { name: "HevORT",             status: "compatible" },
+    { name: "K3",                 status: "untested" },
+    { name: "Bambu X1C",          status: "incompatible" },
+    { name: "Prusa MK4",          status: "incompatible" },
+    { name: "Stealthburner",      status: "compatible" },
+    { name: "EVA 3",              status: "compatible" },
+    { name: "Dragon Burner",      status: "compatible" },
+    { name: "Mini Stealthburner", status: "incompatible" },
+  ]}
+  pros={[
+    "Best-in-class flow rate for standard nozzle diameters",
+    "60W heater recovers temperature quickly between layers",
+    "Bi-metal heat break excels at high-speed, high-temp printing",
+    "500°C capability handles PEI, PEEK, and high-temp composites",
+    "Excellent community support — well-documented in Voron and RatRig communities",
+    "Compatible with the broad Volcano/UHF nozzle ecosystem",
+  ]}
+  cons={[
+    "At 62g, it's the heaviest common hotend — affects resonance frequency",
+    "Significantly more expensive than standard V6-format hotends",
+    "UHF nozzle thread is not interchangeable with standard V6 nozzles",
+    "60W heater requires well-sized power supply — check your PSU headroom",
+    "Overkill if your motion system tops out at 100mm/s",
+  ]}
+  relatedComponents={[
+    {
+      title: "Phaetus Dragon HF",
+      category: "Hotend",
+      href: "/hardware/hotends/dragon-hf",
+      price: "~$59 USD",
+      gradient: "linear-gradient(135deg, #0d1520, #1a1010)",
+    },
+    {
+      title: "E3D Revo Voron",
+      category: "Hotend",
+      href: "/hardware/hotends/e3d-revo-voron",
+      price: "~$109 USD",
+      gradient: "linear-gradient(135deg, #1a0e0a, #0d1520)",
+    },
+    {
+      title: "Orbiter Extruder v2",
+      category: "Extruder",
+      href: "/hardware/extruders/orbiter-v2",
+      price: "~$45 USD",
+      gradient: "linear-gradient(135deg, #101a0d, #0a0d1a)",
+    },
+  ]}
+>
+  <h2>Who It's For</h2>
+  <p>
+    The Rapido 2 UHF is not the hotend for every Voron build. If you're printing structural parts in PLA at 80mm/s, a Dragon HF does the same job for $30 less and weighs half as much. The UHF's extended melt zone and 60W heater only justify themselves once you start pushing volumetric throughput — which, on a well-tuned Voron 2.4, happens above about 150mm/s with a 0.4mm nozzle.
+  </p>
+  <p>
+    Where the Rapido 2 UHF shines is in multi-material printing and draft mode. With a 0.6mm or 0.8mm nozzle at 200mm/s+, the UHF stays well inside its thermal limits while a standard hotend is already gasping. The 60mm³/s ceiling means your slicer's speed limit is your motion system, not your hotend, which is exactly the relationship you want.
+  </p>
+  <p>
+    The bi-metal heat break is worth mentioning independently: it outperforms titanium-only heat breaks at the top of the temperature range because it manages heat distribution more actively rather than simply insulating. For anyone printing nylon or ABS at 270°C+, the more active thermal management reduces the likelihood of partial melts creeping up the heat break.
+  </p>
+</ComponentLayout>
