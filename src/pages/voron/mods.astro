@@ -1,0 +1,628 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+const currentPath = '/voron';
+---
+
+<Base title="Voron Community Mods — Modern Makes" description="The best community-designed mods for Voron 2.4 and Trident. Filtration, toolheads, probe systems, panels, and more — curated and sourced.">
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <main class="voron-mods-page">
+    <div class="mods-inner">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>·</span>
+        <a href="/voron">Voron</a>
+        <span>·</span>
+        <span>Community Mods</span>
+      </nav>
+
+      <!-- Header -->
+      <div class="mods-header">
+        <div class="mods-header-text">
+          <p class="ecosystem-label">PRINTER ECOSYSTEM</p>
+          <h1 class="mods-title">Community Mods</h1>
+          <p class="mods-subtitle">The best user-designed upgrades for Voron 2.4 and Trident. Every mod here is community-tested, sourced from Printables and GitHub, and compatible with the standard Voron BOM.</p>
+        </div>
+        <div class="model-selector">
+          <button class="model-btn active" data-model="2.4" aria-pressed="true">
+            <span class="model-btn-name">Voron 2.4</span>
+            <span class="model-btn-sub">300 · 350 · 400mm</span>
+          </button>
+          <button class="model-btn" data-model="trident" aria-pressed="false">
+            <span class="model-btn-name">Trident</span>
+            <span class="model-btn-sub">250 · 300 · 350mm</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category filter -->
+      <div class="cat-filter">
+        <button class="cat-pill active" data-cat="all">All</button>
+        <button class="cat-pill" data-cat="Filtration">Filtration</button>
+        <button class="cat-pill" data-cat="Toolheads">Toolheads</button>
+        <button class="cat-pill" data-cat="Probe Systems">Probe Systems</button>
+        <button class="cat-pill" data-cat="Panels">Panels</button>
+        <button class="cat-pill" data-cat="Z System">Z System</button>
+        <button class="cat-pill" data-cat="Aesthetics">Aesthetics</button>
+      </div>
+
+      <!-- Mods count -->
+      <p class="mods-count"><span id="mods-count-num">12</span> mods</p>
+
+      <!-- Mods grid — rendered by JS from the mods array in <script> -->
+      <div class="mods-grid" id="mods-grid"></div>
+
+    </div>
+  </main>
+
+  <Footer slot="footer" />
+</Base>
+
+<style>
+.voron-mods-page {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.mods-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 40px 80px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  font-size: 12px;
+  font-family: var(--fm);
+}
+
+.breadcrumb a {
+  color: var(--g2);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { color: var(--accent); }
+
+.breadcrumb span {
+  color: var(--g2);
+}
+
+.mods-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.ecosystem-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-family: var(--fu);
+  margin-bottom: 8px;
+}
+
+.mods-title {
+  font-family: var(--fu);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.mods-subtitle {
+  font-size: 15px;
+  color: var(--g2);
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* Model selector (light mode variant) */
+.model-selector {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.model-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  min-width: 130px;
+}
+
+.model-btn:hover { border-color: var(--accent); }
+
+.model-btn.active {
+  border-color: var(--accent);
+  background: rgba(255,90,31,0.07);
+}
+
+.model-btn-name {
+  font-family: var(--fu);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -0.3px;
+}
+
+.model-btn.active .model-btn-name { color: var(--accent); }
+
+.model-btn-sub {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g2);
+}
+
+.cat-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.cat-pill {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cat-pill:hover { border-color: var(--accent); }
+
+.cat-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.mods-count {
+  font-size: 13px;
+  color: var(--g2);
+  font-family: var(--fm);
+  margin-bottom: 24px;
+}
+
+.mods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .mods-grid { grid-template-columns: repeat(2, 1fr); }
+  .mods-header { flex-direction: column; }
+  .model-selector { flex-wrap: wrap; }
+}
+
+@media (max-width: 640px) {
+  .mods-inner { padding: 24px 20px 60px; }
+  .mods-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<style is:global>
+.mod-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.mod-card:hover {
+  border-color: rgba(255,90,31,0.3);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.mod-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mod-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--fm);
+  color: var(--accent);
+  background: rgba(255,90,31,0.1);
+  border: 1px solid rgba(255,90,31,0.2);
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin-bottom: 6px;
+}
+
+.mod-name {
+  font-family: var(--fu);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+
+.mod-creator {
+  font-size: 12px;
+  color: var(--g2);
+  font-family: var(--fm);
+}
+
+.mod-cat-tag {
+  font-size: 11px;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mod-desc {
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.mod-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mod-meta-item {
+  font-size: 12px;
+  color: var(--g2);
+  font-family: var(--fm);
+}
+
+.mod-difficulty {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--fm);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+
+.mod-difficulty--beginner  { background: rgba(34,197,94,0.1);  color: #16a34a; }
+.mod-difficulty--intermediate { background: rgba(59,130,246,0.1); color: #2563eb; }
+.mod-difficulty--advanced  { background: rgba(239,68,68,0.1);  color: #dc2626; }
+
+.mod-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.mod-btn-primary {
+  flex: 1;
+  display: inline-block;
+  text-align: center;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--fu);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.mod-btn-primary:hover { opacity: 0.85; }
+
+.mod-btn-secondary {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--black);
+  font-size: 12px;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.mod-btn-secondary:hover { border-color: var(--accent); }
+
+.mod-card-hidden { display: none !important; }
+</style>
+
+<script>
+  const mods = [
+    {
+      id: "nevermore-micro",
+      name: "Nevermore Micro V6",
+      creator: "@nevermore3d",
+      category: "Filtration",
+      model: "both",
+      description: "VOC filter using activated carbon pellets. Standard for enclosed Voron builds running ABS or ASA. Mounts inside the chamber.",
+      difficulty: "Beginner",
+      printedParts: true,
+      boughtParts: "Activated carbon, 5015 blower fans",
+      printablesUrl: "https://www.printables.com/model/235657",
+      githubUrl: "https://github.com/nevermore3d/Nevermore_Micro",
+      badge: "COMMUNITY STANDARD"
+    },
+    {
+      id: "klicky-probe",
+      name: "Klicky Probe",
+      creator: "@jlas1",
+      category: "Probe Systems",
+      model: "both",
+      description: "Magnetic dock-and-deploy probe system. More reliable than stock Omron microswitches, easier to set up than TAP. The community go-to for Voron 2.4 and Trident.",
+      difficulty: "Intermediate",
+      printedParts: true,
+      boughtParts: "Microswitch, magnets, M2 screws",
+      printablesUrl: "https://www.printables.com/model/179929",
+      githubUrl: "https://github.com/jlas1/Klicky-Probe",
+      badge: "MOST POPULAR"
+    },
+    {
+      id: "boop",
+      name: "Boop",
+      creator: "@printer-insanity",
+      category: "Probe Systems",
+      model: "both",
+      description: "Nozzle-as-probe system using the toolhead's own nozzle for Z homing. Eliminates probe offset errors entirely. Compatible with Stealthburner and Xol toolheads.",
+      difficulty: "Intermediate",
+      printedParts: true,
+      boughtParts: "PCB (optional), magnets, limit switch",
+      printablesUrl: "https://www.printables.com/model/380256",
+      githubUrl: "https://github.com/PrinterInsanity/boop",
+      badge: null
+    },
+    {
+      id: "sexbolt-z",
+      name: "Sexbolt Z Endstop",
+      creator: "@hartk1213",
+      category: "Z System",
+      model: "2.4",
+      description: "Spring-loaded Z endstop that eliminates the stock Voron Z calibration post. Nozzle touches directly, no offset drift. Standard on most 2.4 builds.",
+      difficulty: "Beginner",
+      printedParts: true,
+      boughtParts: "M5 bolt, spring, microswitch",
+      printablesUrl: "https://www.printables.com/model/376799",
+      githubUrl: "https://github.com/hartk1213/MISC/tree/main/Voron%20Mods/Voron%202/2.4/Voron2.4_SexBolt_ZEndstop",
+      badge: "2.4 STANDARD"
+    },
+    {
+      id: "stealthburner",
+      name: "Stealthburner",
+      creator: "Voron Design",
+      category: "Toolheads",
+      model: "both",
+      description: "The official Voron toolhead. Shroud, NEMA14 / NEMA17 motor mount, 5015 part cooling fan. Compatible with most V6-format hotends and the Clockwork 2 extruder.",
+      difficulty: "Beginner",
+      printedParts: true,
+      boughtParts: "5015 fan, 4010 hotend fan, hardware kit",
+      printablesUrl: "https://www.printables.com/model/300382",
+      githubUrl: "https://github.com/VoronDesign/Voron-Stealthburner",
+      badge: "OFFICIAL"
+    },
+    {
+      id: "xol-toolhead",
+      name: "Xol Toolhead",
+      creator: "@armchairengineer",
+      category: "Toolheads",
+      model: "both",
+      description: "High-performance toolhead designed around dual 4020 axial fans for part cooling. Better overhang performance than Stealthburner with a larger hotend selection.",
+      difficulty: "Intermediate",
+      printedParts: true,
+      boughtParts: "2× 4020 fans, hardware kit, hotend of choice",
+      printablesUrl: "https://www.printables.com/model/447278",
+      githubUrl: "https://github.com/Armchair-Heavy-Industries/Xol-Toolhead",
+      badge: "EDITORS PICK"
+    },
+    {
+      id: "dragon-burner",
+      name: "Dragon Burner",
+      creator: "@chirpy2605",
+      category: "Toolheads",
+      model: "both",
+      description: "Lightweight toolhead focused on cooling performance. Supports an extremely wide range of hotends — Rapido, Dragon, Revo, Mosquito, NF-Crazy, and more.",
+      difficulty: "Intermediate",
+      printedParts: true,
+      boughtParts: "4010 fans, hotend of choice",
+      printablesUrl: "https://www.printables.com/model/250831",
+      githubUrl: "https://github.com/chirpy2605/voron-user-mods/tree/main/V0/Dragon_Burner",
+      badge: null
+    },
+    {
+      id: "nevermore-stealthmax",
+      name: "Nevermore StealthMax",
+      creator: "@nevermore3d",
+      category: "Filtration",
+      model: "both",
+      description: "Full-enclosure activated carbon filter for larger builds. Dual 5015 fans, higher CFM than the Micro. Better suited for 350mm and 400mm 2.4 builds running high-VOC materials.",
+      difficulty: "Intermediate",
+      printedParts: true,
+      boughtParts: "Activated carbon, 2× 5015 fans",
+      printablesUrl: "https://www.printables.com/model/484339",
+      githubUrl: "https://github.com/nevermore3d/StealthMax",
+      badge: null
+    },
+    {
+      id: "rama-frame-extrusion",
+      name: "Rama Frame Extrusion Mod",
+      creator: "@Rama",
+      category: "Aesthetics",
+      model: "2.4",
+      description: "Decorative printed covers for the 2.4 frame extrusions. Gives the printer a more finished, intentional look. Community favourite for clean build photos.",
+      difficulty: "Beginner",
+      printedParts: true,
+      boughtParts: "None",
+      printablesUrl: "https://www.printables.com/model/39716",
+      githubUrl: null,
+      badge: "POPULAR"
+    },
+    {
+      id: "voron-tap",
+      name: "Voron TAP",
+      creator: "Voron Design",
+      category: "Probe Systems",
+      model: "both",
+      description: "Official nozzle-as-probe system from Voron Design. Uses an optical sensor and a floating carriage — the toolhead itself moves slightly to trigger the probe. No separate probe needed.",
+      difficulty: "Intermediate",
+      printedParts: true,
+      boughtParts: "Optical endstop PCB, hardware kit",
+      printablesUrl: "https://www.printables.com/model/401779",
+      githubUrl: "https://github.com/VoronDesign/Voron-Tap",
+      badge: "OFFICIAL"
+    },
+    {
+      id: "gds-panels",
+      name: "GDS Panel System",
+      creator: "@GDS3D",
+      category: "Panels",
+      model: "both",
+      description: "Improved panel mounting system with better light sealing than the stock clips. Magnetic release on some variants. Popular with builders who open and close their enclosure often.",
+      difficulty: "Beginner",
+      printedParts: true,
+      boughtParts: "M3 magnets, VHB tape",
+      printablesUrl: "https://www.printables.com/model/211972",
+      githubUrl: null,
+      badge: null
+    },
+    {
+      id: "canbus-umbilical",
+      name: "CAN Bus Umbilical",
+      creator: "Community",
+      category: "Aesthetics",
+      model: "both",
+      description: "Replaces the standard cable chain with a flexible umbilical running a CAN bus toolhead board (EBB36, UTOC, etc). Reduces moving mass on the carriage, cleaner cable management.",
+      difficulty: "Advanced",
+      printedParts: true,
+      boughtParts: "CAN toolhead board, cable, connectors",
+      printablesUrl: null,
+      githubUrl: null,
+      badge: null
+    }
+  ];
+
+  const STORAGE_KEY = 'voron-model';
+  const grid = document.getElementById('mods-grid');
+  const countEl = document.getElementById('mods-count-num');
+  const modelBtns = document.querySelectorAll<HTMLButtonElement>('.model-btn');
+  const catPills = document.querySelectorAll<HTMLButtonElement>('.cat-pill');
+
+  let currentModel = sessionStorage.getItem(STORAGE_KEY) ?? '2.4';
+  let currentCat = 'all';
+
+  function difficultyClass(d: string): string {
+    if (d === 'Beginner') return 'mod-difficulty--beginner';
+    if (d === 'Advanced') return 'mod-difficulty--advanced';
+    return 'mod-difficulty--intermediate';
+  }
+
+  function renderGrid() {
+    if (!grid) return;
+
+    const visible = mods.filter(m =>
+      (m.model === 'both' || m.model === currentModel) &&
+      (currentCat === 'all' || m.category === currentCat)
+    );
+
+    grid.innerHTML = visible.map(m => {
+      const badgeHtml = m.badge
+        ? `<span class="mod-badge">${m.badge}</span>`
+        : '';
+
+      const primaryBtn = m.printablesUrl
+        ? `<a href="${m.printablesUrl}" class="mod-btn-primary" target="_blank" rel="noopener">Printables →</a>`
+        : '';
+
+      const secondaryBtn = m.githubUrl
+        ? `<a href="${m.githubUrl}" class="mod-btn-secondary" target="_blank" rel="noopener">GitHub</a>`
+        : '';
+
+      const actionsHtml = (primaryBtn || secondaryBtn)
+        ? `<div class="mod-actions">${primaryBtn}${secondaryBtn}</div>`
+        : '';
+
+      return `
+        <article class="mod-card" data-model="${m.model}" data-cat="${m.category}">
+          <div class="mod-card-head">
+            <div>
+              ${badgeHtml}
+              <h3 class="mod-name">${m.name}</h3>
+              <p class="mod-creator">by ${m.creator}</p>
+            </div>
+            <span class="mod-cat-tag">${m.category}</span>
+          </div>
+          <p class="mod-desc">${m.description}</p>
+          <div class="mod-meta">
+            ${m.printedParts ? '<span class="mod-meta-item">🖨️ Printed parts included</span>' : ''}
+            ${m.boughtParts ? `<span class="mod-meta-item">🛒 ${m.boughtParts}</span>` : ''}
+            <span class="mod-difficulty ${difficultyClass(m.difficulty)}">${m.difficulty}</span>
+          </div>
+          ${actionsHtml}
+        </article>
+      `;
+    }).join('');
+
+    if (countEl) countEl.textContent = String(visible.length);
+  }
+
+  function setModel(model: string) {
+    currentModel = model;
+    sessionStorage.setItem(STORAGE_KEY, model);
+    modelBtns.forEach(btn => {
+      const active = btn.dataset.model === model;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+    renderGrid();
+  }
+
+  function setCat(cat: string) {
+    currentCat = cat;
+    catPills.forEach(pill => {
+      pill.classList.toggle('active', pill.dataset.cat === cat);
+    });
+    renderGrid();
+  }
+
+  modelBtns.forEach(btn => {
+    btn.addEventListener('click', () => setModel(btn.dataset.model ?? '2.4'));
+  });
+
+  catPills.forEach(pill => {
+    pill.addEventListener('click', () => setCat(pill.dataset.cat ?? 'all'));
+  });
+
+  // Init: restore model from sessionStorage, render all
+  setModel(currentModel);
+</script>
