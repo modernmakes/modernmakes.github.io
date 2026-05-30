@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+<Base
+  title="Motion System"
+  description="Motion system mods and guides have moved to the Modern Makes Hardware section."
+>
+  <meta http-equiv="refresh" content="0;url=/hardware/motion" slot="head" />
+  <Nav slot="nav" currentPath="/motion-system" />
+
+  <section style="background:var(--black);padding:72px 0 56px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px;text-align:center">
+      <div class="eyebrow" style="margin-bottom:12px">Redirecting</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:16px">
+        Motion System
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:480px;margin:0 auto 28px">
+        Motion system mods and guides have moved to Hardware → Motion Mods.
+      </p>
+      <a
+        href="/hardware/motion"
+        style="display:inline-flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;background:var(--accent);color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none"
+      >
+        Go to Motion Mods
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

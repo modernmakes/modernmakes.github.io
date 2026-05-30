@@ -2,17 +2,77 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-const label = 'filament'.charAt(0).toUpperCase() + 'filament'.slice(1);
 ---
-<Base title={label}>
-  <Nav slot="nav" currentPath={'/filament'} />
-  <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
-    <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--black)">{label}</h1>
-    <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);margin:12px auto 24px;max-width:440px">This section is being built.</p>
-    <a href="/" style="font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+<Base
+  title="Filament"
+  description="Filament reviews, comparisons, and material guides — every filament tested by Modern Makes. Coming soon."
+>
+  <Nav slot="nav" currentPath="/filament" />
+
+  <!-- HERO -->
+  <section style="background:var(--black);padding:72px 0 56px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:12px">Modern Makes</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:16px">
+        Filament
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:16px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">
+        Reviews, comparisons, and material guides — every filament we've tested.
+      </p>
+    </div>
   </section>
+
+  <!-- BODY -->
+  <section class="section">
+    <div class="container" style="max-width:800px">
+
+      <!-- Coming soon card -->
+      <div style="border:1px solid var(--border);border-radius:10px;padding:40px;margin-bottom:32px;background:var(--bg)">
+        <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:var(--black);margin:0 0 16px;line-height:1">
+          Filament coverage is in progress
+        </h2>
+        <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);line-height:1.8;max-width:560px;margin:0 0 16px">
+          We're building out a full filament section — brand-by-brand reviews, material-by-material comparisons
+          (PLA, PETG, ASA, ABS, PA-CF, TPU, and more), and practical guides covering print settings, storage,
+          and drying.
+        </p>
+        <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);line-height:1.8;max-width:560px;margin:0">
+          Every review will include our own test prints on a real machine, with settings and results you can
+          actually use — not just spec sheets from the manufacturer.
+        </p>
+      </div>
+
+      <!-- Bridge to current coverage -->
+      <div style="display:flex;align-items:flex-start;gap:20px;border:1px solid rgba(255,90,31,.2);border-radius:10px;padding:28px 32px;background:rgba(255,90,31,.04)">
+        <div style="flex-shrink:0;width:40px;height:40px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"/>
+            <path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+        </div>
+        <div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--black);margin:0 0 8px;line-height:1">
+            Current filament coverage in News
+          </h3>
+          <p style="font-family:'Lora',serif;font-size:14px;color:var(--g1);line-height:1.7;margin:0 0 14px">
+            While the filament section is being built, we're covering new filament launches and notable materials
+            in our News section.
+          </p>
+          <a
+            href="/news"
+            style="display:inline-flex;align-items:center;gap:6px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent)"
+          >
+            Browse News for filament coverage →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -20,14 +80,14 @@ const label = 'filament'.charAt(0).toUpperCase() + 'filament'.slice(1);
         "@type": "CollectionPage",
         "name": "Filament Reviews & Guides — Modern Makes",
         "description": "Independent filament reviews, buying guides, and comparisons for PLA, PETG, ASA, TPU and more.",
-        "url": "https://modernmakes.com/filament",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": "https://modernmakes.github.io/filament",
+        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.github.io" }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "Filament", "item": "https://modernmakes.com/filament" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Filament", "item": "https://modernmakes.github.io/filament" }
         ]
       }
     ]

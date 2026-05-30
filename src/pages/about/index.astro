@@ -2,33 +2,149 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-const label = 'about'.charAt(0).toUpperCase() + 'about'.slice(1);
 ---
-<Base title={label}>
-  <Nav slot="nav" currentPath={'/about'} />
-  <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
-    <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--black)">{label}</h1>
-    <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);margin:12px auto 24px;max-width:440px">This section is being built.</p>
-    <a href="/" style="font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+<Base
+  title="About Modern Makes"
+  description="Modern Makes is an independent editorial publication for the 3D printing enthusiast — hardware, software, mods, and the builds that matter."
+>
+  <Nav slot="nav" currentPath="/about" />
+
+  <!-- HERO -->
+  <section style="background:var(--black);padding:72px 0 56px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:12px">Modern Makes</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:16px">
+        About Modern Makes
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:16px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">
+        Independent editorial for people who build, modify, and obsess over 3D printers.
+      </p>
+    </div>
   </section>
+
+  <!-- WHAT WE ARE -->
+  <section class="section">
+    <div class="container" style="max-width:720px">
+
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
+        What We Are
+      </h2>
+      <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
+        <p style="margin:0 0 16px">
+          Modern Makes is an editorial publication for the 3D printing enthusiast. We cover hardware, software,
+          mods, and the builds that matter — written by people who actually run the machines.
+        </p>
+        <p style="margin:0 0 16px">
+          Our focus is the enthusiast and builder market: Voron and CoreXY printers, community mods, hotends,
+          extruders, filament, and the software that ties it together. We do long-form reviews, technical guides,
+          and news coverage of the hardware and projects worth paying attention to.
+        </p>
+        <p style="margin:0">
+          Modern Makes is not affiliated with any manufacturer. We are not sponsored by, employed by, or
+          commercially partnered with any printer brand or supplier. Our opinions are our own.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDITORIAL POLICY -->
+  <section class="section" id="editorial" style="background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container" style="max-width:720px">
+
+      <div class="eyebrow" style="margin-bottom:12px">Policy</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
+        Editorial Policy
+      </h2>
+      <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
+        <p style="margin:0 0 16px">
+          We test what we cover. Verdicts — ratings, recommendations, and conclusions — are based on our own
+          hands-on experience unless explicitly stated otherwise. Where we rely on third-party data or manufacturer
+          specifications, we say so.
+        </p>
+        <p style="margin:0 0 16px">
+          Any material relationship with a manufacturer is disclosed in the relevant content. This includes review
+          units provided at no cost, loaner hardware, and early access programmes. A disclosed relationship does not
+          mean a positive review is guaranteed — we have declined to publish coverage where we could not give an
+          honest assessment.
+        </p>
+        <p style="margin:0 0 16px">
+          We do not accept payment for editorial coverage. Sponsored content, if it ever appears on the site,
+          will be labelled clearly as sponsored.
+        </p>
+        <p style="margin:0">
+          Corrections are published when we get something wrong. If you spot an error, email us at
+          <a href="mailto:hello@modernmakes.ca" style="color:var(--accent)">hello@modernmakes.ca</a>.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AFFILIATE DISCLOSURE -->
+  <section class="section" id="affiliate">
+    <div class="container" style="max-width:720px">
+
+      <div class="eyebrow" style="margin-bottom:12px">Disclosure</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
+        Affiliate Disclosure
+      </h2>
+      <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
+        <p style="margin:0 0 16px">
+          Modern Makes uses affiliate links. When you click a product link on this site and make a purchase through
+          it, we may earn a commission from the retailer — at no extra cost to you.
+        </p>
+        <p style="margin:0 0 16px">
+          Affiliate commissions are how we keep the lights on. They do not influence what we cover, what we
+          recommend, or what verdicts we reach. We link to the best place to buy something — not the highest
+          commission rate.
+        </p>
+        <p style="margin:0">
+          A note on pricing and availability: affiliate links are accurate at the time of publishing, but prices
+          and stock levels change. Always check the current price before purchasing.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="section" id="contact" style="background:var(--black)">
+    <div class="container" style="max-width:720px;text-align:center">
+      <div class="eyebrow" style="margin-bottom:12px">Get in touch</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#fff;margin:0 0 16px;line-height:1">
+        Contact Us
+      </h2>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.5);line-height:1.7;max-width:440px;margin:0 auto 28px">
+        Reader feedback, corrections, PR enquiries, and review requests are all welcome.
+      </p>
+      <a
+        href="/contact"
+        style="display:inline-flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;background:var(--accent);color:#fff;padding:14px 28px;border-radius:6px;text-decoration:none"
+      >
+        Contact Modern Makes →
+      </a>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "AboutPage",
         "name": "About Modern Makes",
-        "description": "Modern Makes is an independent editorial publication covering 3D printing for enthusiasts and builders.",
-        "url": "https://modernmakes.com/about",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" },
+        "description": "Modern Makes is an independent editorial publication for the 3D printing enthusiast — hardware, software, mods, and the builds that matter.",
+        "url": "https://modernmakes.github.io/about",
+        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.github.io" },
         "publisher": { "@type": "Organization", "name": "Modern Makes" }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://modernmakes.com/about" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://modernmakes.github.io/about" }
         ]
       }
     ]

@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+<Base
+  title="Terms of Use"
+  description="Modern Makes terms of use — content ownership, affiliate disclosure, and limitations of liability."
+>
+  <Nav slot="nav" currentPath="/terms" />
+
+  <!-- HERO -->
+  <section style="background:var(--black);padding:72px 0 56px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:12px">Legal</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:16px">
+        Terms of Use
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:16px;color:rgba(255,255,255,.45);line-height:1.7;max-width:500px">
+        Last updated: May 2026. By using this site you agree to these terms.
+      </p>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <div style="font-family:'Lora',serif;font-size:15px;color:var(--g1);line-height:1.8">
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          About this site
+        </h2>
+        <p style="margin:0 0 32px">
+          Modern Makes (modernmakes.github.io) is an independent editorial publication covering 3D printing hardware,
+          software, and culture. These terms govern your use of the site and its content.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Content ownership
+        </h2>
+        <p style="margin:0 0 16px">
+          All editorial content on Modern Makes — articles, guides, reviews, photographs, and original graphics — is
+          owned by Modern Makes and protected by copyright. You may not reproduce, republish, or redistribute content
+          from this site without written permission.
+        </p>
+        <p style="margin:0 0 32px">
+          Short quotations with clear attribution and a link back to the original article are permitted under fair use.
+          If you want to license or syndicate content, email us at
+          <a href="mailto:hello@modernmakes.ca" style="color:var(--accent)">hello@modernmakes.ca</a>.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Affiliate links
+        </h2>
+        <p style="margin:0 0 32px">
+          Modern Makes uses affiliate links. When you click an affiliate link and make a qualifying purchase, we may
+          earn a commission from the retailer at no additional cost to you. Affiliate relationships never influence
+          our editorial coverage or verdicts. See our full
+          <a href="/about#affiliate" style="color:var(--accent)">Affiliate Disclosure</a> for details.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          No warranties on information accuracy
+        </h2>
+        <p style="margin:0 0 16px">
+          Modern Makes publishes content in good faith based on our own testing, research, and publicly available
+          information. We make no warranties, express or implied, regarding the accuracy, completeness, or fitness
+          for purpose of any information on this site.
+        </p>
+        <p style="margin:0 0 16px">
+          Product specifications, prices, and availability change over time. Always verify critical information
+          directly with the manufacturer or retailer before making a purchase.
+        </p>
+        <p style="margin:0 0 32px">
+          3D printing involves hardware that operates at high temperatures and with motorised components. Nothing
+          on this site constitutes safety advice. Always follow manufacturer guidelines and exercise appropriate
+          caution when building, modifying, or operating 3D printing equipment.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Limitation of liability
+        </h2>
+        <p style="margin:0 0 32px">
+          To the fullest extent permitted by applicable law, Modern Makes shall not be liable for any direct,
+          indirect, incidental, consequential, or special damages arising from your use of, or inability to use,
+          this site or any content on it — including but not limited to damages resulting from reliance on product
+          information, guides, or recommendations published here.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          External links
+        </h2>
+        <p style="margin:0 0 32px">
+          Modern Makes links to third-party sites including manufacturers, retailers, and affiliate partners. These
+          links are provided as a convenience. We do not endorse and are not responsible for the content, privacy
+          practices, or accuracy of information on external sites.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Changes to these terms
+        </h2>
+        <p style="margin:0 0 32px">
+          We may update these terms from time to time. Material changes will be reflected in the "Last updated"
+          date above. Continued use of the site after any update constitutes acceptance of the revised terms.
+        </p>
+
+        <div style="border-top:1px solid var(--border);padding-top:24px;margin-top:8px">
+          <p style="font-size:14px;color:var(--g2)">
+            Questions? Email <a href="mailto:hello@modernmakes.ca" style="color:var(--accent)">hello@modernmakes.ca</a>.
+            See also: <a href="/privacy" style="color:var(--accent)">Privacy Policy</a> &middot;
+            <a href="/about#editorial" style="color:var(--accent)">Editorial Policy</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

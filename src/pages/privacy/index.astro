@@ -1,0 +1,129 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+<Base
+  title="Privacy Policy"
+  description="Modern Makes privacy policy — what data we collect, how it is used, and your rights."
+>
+  <Nav slot="nav" currentPath="/privacy" />
+
+  <!-- HERO -->
+  <section style="background:var(--black);padding:72px 0 56px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:12px">Legal</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:16px">
+        Privacy Policy
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:16px;color:rgba(255,255,255,.45);line-height:1.7;max-width:500px">
+        Last updated: May 2026. We keep this short and readable — not legalese.
+      </p>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <div style="font-family:'Lora',serif;font-size:15px;color:var(--g1);line-height:1.8">
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Who we are
+        </h2>
+        <p style="margin:0 0 32px">
+          Modern Makes is an independent editorial publication covering 3D printing. We operate at
+          modernmakes.github.io. For privacy enquiries, contact us at
+          <a href="mailto:hello@modernmakes.ca" style="color:var(--accent)">hello@modernmakes.ca</a>.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          What data we collect
+        </h2>
+        <p style="margin:0 0 16px">We collect minimal data to understand how the site is being used and to operate it:</p>
+        <ul style="margin:0 0 16px;padding-left:24px">
+          <li style="margin-bottom:8px">
+            <strong style="color:var(--black)">Analytics data</strong> — We use Google Analytics (GA4) to collect
+            anonymised usage data including pages visited, time on page, referral source, device type, and approximate
+            geographic location (country/region level). IP addresses are anonymised by Google before storage.
+          </li>
+          <li style="margin-bottom:8px">
+            <strong style="color:var(--black)">Email addresses</strong> — If you subscribe to the Modern Makes newsletter,
+            we collect your email address. This is the only personally identifiable information we store directly.
+          </li>
+          <li style="margin-bottom:8px">
+            <strong style="color:var(--black)">Contact messages</strong> — If you email us, we retain your message and
+            email address for correspondence purposes only.
+          </li>
+        </ul>
+        <p style="margin:0 0 32px">
+          We do not collect names, addresses, payment information, or any data beyond what is described above.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          How we use your data
+        </h2>
+        <ul style="margin:0 0 32px;padding-left:24px">
+          <li style="margin-bottom:8px">Analytics data is used to understand which content is useful and to improve the site.</li>
+          <li style="margin-bottom:8px">Email addresses are used solely to send the newsletter you subscribed to.</li>
+          <li style="margin-bottom:8px">We do not sell data to third parties. We do not use data for targeted advertising.</li>
+        </ul>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Cookies
+        </h2>
+        <p style="margin:0 0 16px">
+          Google Analytics sets cookies to distinguish users and track sessions. These are analytics cookies, not
+          advertising or tracking cookies. You can opt out of Google Analytics tracking via the
+          <a href="https://tools.google.com/dlpage/gaoptout" style="color:var(--accent)" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a>.
+        </p>
+        <p style="margin:0 0 32px">
+          We do not set any first-party cookies of our own.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Affiliate links and third-party sites
+        </h2>
+        <p style="margin:0 0 16px">
+          Modern Makes uses affiliate links. When you click an affiliate link and make a purchase, we may receive a
+          commission from the retailer at no cost to you. Affiliate links are disclosed in our content and in the
+          site footer.
+        </p>
+        <p style="margin:0 0 32px">
+          Clicking through to third-party sites (retailers, manufacturers, affiliate networks) is subject to those
+          sites' own privacy policies. We are not responsible for their data practices.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Data retention and your rights
+        </h2>
+        <p style="margin:0 0 16px">
+          Newsletter subscribers can unsubscribe at any time using the link at the bottom of any newsletter email.
+          To request deletion of your email address or any other data we hold, email us at
+          <a href="mailto:hello@modernmakes.ca" style="color:var(--accent)">hello@modernmakes.ca</a> with "Privacy Request" in the subject line.
+        </p>
+        <p style="margin:0 0 32px">
+          Google Analytics data is retained for 14 months and then automatically deleted per our GA4 configuration.
+        </p>
+
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin:0 0 12px">
+          Changes to this policy
+        </h2>
+        <p style="margin:0 0 32px">
+          If we make material changes to this policy, we will update the date at the top of this page. Continued
+          use of the site after a policy update constitutes acceptance of the updated policy.
+        </p>
+
+        <div style="border-top:1px solid var(--border);padding-top:24px;margin-top:8px">
+          <p style="font-size:14px;color:var(--g2)">
+            Questions? Email <a href="mailto:hello@modernmakes.ca" style="color:var(--accent)">hello@modernmakes.ca</a>.
+            See also: <a href="/terms" style="color:var(--accent)">Terms of Use</a> &middot;
+            <a href="/about#affiliate" style="color:var(--accent)">Affiliate Disclosure</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
