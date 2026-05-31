@@ -44,7 +44,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   </div>
 
   <!-- ── 2. MODEL SELECTOR HERO BLOCK ── -->
-  <div style="background:#0d0d0d;padding:48px 0 0;border-top:3px solid var(--accent)">
+  <div style="background:#0d0d0d;padding:48px 0 0;border-top:3px solid var(--accent);overflow-x:hidden">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
 
       <div class="model-hero">
@@ -113,14 +113,13 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
       </div>
 
-      <!-- "Now browsing" context bar — breaks out of container padding for full bleed -->
-      <div class="voron-context-bar">
-        <span class="mcb-label">Now browsing parts for</span>
-        <span class="mcb-model" id="mcb-model">Voron 2.4</span>
-        <span class="mcb-separator">·</span>
-        <span class="mcb-count" id="mcb-count">Compatible with all sizes</span>
-      </div>
-
+    </div>
+    <!-- "Now browsing" context bar — full width, outside inner container -->
+    <div class="voron-context-bar">
+      <span class="mcb-label">Now browsing parts for</span>
+      <span class="mcb-model" id="mcb-model">Voron 2.4</span>
+      <span class="mcb-separator">·</span>
+      <span class="mcb-count" id="mcb-count">Compatible with all sizes</span>
     </div>
   </div>
 
@@ -540,7 +539,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   background: rgba(255,90,31,.08);
   border-top: 1px solid rgba(255,90,31,.2);
   border-bottom: 1px solid rgba(255,90,31,.2);
-  margin: 32px -40px 0;
+  margin-top: 32px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .mcb-label {
   font-family: 'JetBrains Mono', monospace;
