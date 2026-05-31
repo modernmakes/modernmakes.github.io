@@ -303,6 +303,11 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .model-context-switch:hover { color: var(--accent); }
 
+/* ── PAGE HERO UTILITY ── */
+.page-hero {
+  padding: 64px 0 48px;
+}
+
 /* ── NAV CLEARANCE ── */
 /*
  * Non-hero pages: push main content below the fixed nav.

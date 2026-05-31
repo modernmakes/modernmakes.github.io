@@ -23,7 +23,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- ── 1. DARK HERO ── -->
-  <div style="background:var(--black);padding:52px 0 32px;border-bottom:1px solid rgba(255,255,255,.1)">
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
@@ -114,18 +114,17 @@ const partCounts: Record<string, { a: number; t: number }> = {
       </div>
 
     </div>
-    <!-- "Now browsing" context bar — full width, outside inner container -->
-    <div class="voron-context-bar">
-      <span class="mcb-label">Now browsing parts for</span>
-      <span class="mcb-model" id="mcb-model">Voron 2.4</span>
-      <span class="mcb-separator">·</span>
-      <span class="mcb-count" id="mcb-count">Compatible with all sizes</span>
-    </div>
   </div>
 
   <!-- ── 3. SUBSYSTEM CARD GRID ── -->
   <section style="background:var(--black);padding:40px 0 52px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="voron-context-bar">
+        <span class="mcb-label">Now browsing parts for</span>
+        <span class="mcb-model" id="mcb-model">Voron 2.4</span>
+        <span class="mcb-separator">·</span>
+        <span class="mcb-count" id="mcb-count">Compatible with all sizes</span>
+      </div>
       <div id="subsystem-heading" style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--fu);margin-bottom:16px">Voron 2.4 — Browse by subsystem</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
         {voronData.subsystems.flatMap(sub => {
@@ -254,42 +253,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
     </div>
   </section>
 
-  <!-- ── 5. TOP PICKS FOR VORON ── -->
-  <section class="section" style="padding-top:64px" aria-label="Top picks for Voron">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-head-label">Top picks for Voron</h2>
-        <a href="/voron/configurator" class="section-head-link">See all parts</a>
-      </div>
-      <div class="grid-4">
-        {[
-          { name:'Rapido 2', brand:'Phaetus', spec:'320°C · 32mm³/s', price:'$69', verdict:'rec', verdictLabel:'Community standard', href:'/voron/hotends#rapido-2', bg:'linear-gradient(135deg,#201010,#180808)' },
-          { name:'Galileo 2', brand:'Hartk', spec:'9:1 gear ratio · 180g', price:'~$45', verdict:'best', verdictLabel:'Best extruder', href:'/voron/extruders#galileo-2', bg:'linear-gradient(135deg,#101820,#080e18)' },
-          { name:'Beacon Rev H', brand:'Beacon', spec:'Eddy current · 0.2μm', price:'$70', verdict:'rec', verdictLabel:'Best probe', href:'/voron/probe-system#beacon', bg:'linear-gradient(135deg,#102010,#081408)' },
-          { name:'Mandala Rose Works PEI', brand:'MRW', spec:'Spring steel · textured', price:'$45+', verdict:'rec', verdictLabel:'Best surface', href:'/voron/bed#mrw-pei', bg:'linear-gradient(135deg,#201520,#140e18)' }
-        ].map(p => (
-          <a href={p.href}>
-            <div class="product-card">
-              <div class="product-card-img" style={`background:${p.bg};height:120px`}></div>
-              <div class="product-card-body">
-                <div class="product-card-brand">{p.brand}</div>
-                <div class="product-card-name">{p.name}</div>
-                <div class="product-card-specs">
-                  <span class="spec-chip">{p.spec}</span>
-                </div>
-                <div class="product-card-footer">
-                  <span class="product-card-price">{p.price}</span>
-                  <span class={`verdict verdict-${p.verdict}`}>{p.verdictLabel}</span>
-                </div>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 6. COMMUNITY MODS ── -->
+  <!-- ── 5. COMMUNITY MODS ── -->
   <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Community mods">
     <div class="container">
       <div class="section-head">
@@ -323,6 +287,41 @@ const partCounts: Record<string, { a: number; t: number }> = {
         <a href="/voron/mods" style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none">
           Browse all 13 community mods →
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. TOP PICKS FOR VORON ── -->
+  <section class="section" style="padding-top:64px" aria-label="Top picks for Voron">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Top picks for Voron</h2>
+        <a href="/voron/configurator" class="section-head-link">See all parts</a>
+      </div>
+      <div class="grid-4">
+        {[
+          { name:'Rapido 2', brand:'Phaetus', spec:'320°C · 32mm³/s', price:'$69', verdict:'rec', verdictLabel:'Community standard', href:'/voron/hotends#rapido-2', bg:'linear-gradient(135deg,#201010,#180808)' },
+          { name:'Galileo 2', brand:'Hartk', spec:'9:1 gear ratio · 180g', price:'~$45', verdict:'best', verdictLabel:'Best extruder', href:'/voron/extruders#galileo-2', bg:'linear-gradient(135deg,#101820,#080e18)' },
+          { name:'Beacon Rev H', brand:'Beacon', spec:'Eddy current · 0.2μm', price:'$70', verdict:'rec', verdictLabel:'Best probe', href:'/voron/probe-system#beacon', bg:'linear-gradient(135deg,#102010,#081408)' },
+          { name:'Mandala Rose Works PEI', brand:'MRW', spec:'Spring steel · textured', price:'$45+', verdict:'rec', verdictLabel:'Best surface', href:'/voron/bed#mrw-pei', bg:'linear-gradient(135deg,#201520,#140e18)' }
+        ].map(p => (
+          <a href={p.href}>
+            <div class="product-card">
+              <div class="product-card-img" style={`background:${p.bg};height:120px`}></div>
+              <div class="product-card-body">
+                <div class="product-card-brand">{p.brand}</div>
+                <div class="product-card-name">{p.name}</div>
+                <div class="product-card-specs">
+                  <span class="spec-chip">{p.spec}</span>
+                </div>
+                <div class="product-card-footer">
+                  <span class="product-card-price">{p.price}</span>
+                  <span class={`verdict verdict-${p.verdict}`}>{p.verdictLabel}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -532,15 +531,15 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
 /* ── VORON CONTEXT BAR ── */
 .voron-context-bar {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 40px;
+  padding: 8px 16px;
   background: rgba(255,90,31,.08);
-  border-top: 1px solid rgba(255,90,31,.2);
-  border-bottom: 1px solid rgba(255,90,31,.2);
-  margin-top: 32px;
-  width: 100%;
+  border: 1px solid rgba(255,90,31,.2);
+  border-radius: 6px;
+  margin: 0 0 16px 0;
+  width: auto;
   box-sizing: border-box;
 }
 .mcb-label {
