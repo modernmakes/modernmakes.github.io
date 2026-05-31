@@ -1,0 +1,627 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('filament');
+  return entries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const {
+  title, material, materialFull, verdict, verdictLabel, summary,
+  publishedDate, updatedDate, stats, brands, compatibility,
+  failureModes, pros, cons,
+} = entry.data;
+
+// Map verdict string to badge class
+function verdictClass(v: string): string {
+  const upper = v.toUpperCase();
+  if (upper === 'BEST IN CLASS' || upper === 'BEST')     return 'verdict-best';
+  if (upper === 'AVOID' || upper === 'NOT RECOMMENDED')  return 'verdict-skip';
+  return 'verdict-rec';
+}
+
+// Map tier to badge styles
+function tierStyle(tier: string): string {
+  if (tier === 'TOP')    return 'background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7';
+  if (tier === 'MID')    return 'background:rgba(59,130,246,.1);color:#1d4ed8;border:1px solid rgba(59,130,246,.25)';
+  if (tier === 'BUDGET') return 'background:rgba(255,255,255,.06);color:var(--g2);border:1px solid var(--border-s)';
+  return 'background:var(--bg);color:var(--g2);border:1px solid var(--border)';
+}
+
+// Map compatibility rating to colour
+function ratingStyle(rating: string): string {
+  if (rating === 'EXCELLENT') return 'color:#16a34a';
+  if (rating === 'GOOD')      return 'color:#2563eb';
+  if (rating === 'LIMITED')   return 'color:#d97706';
+  return 'color:#dc2626';
+}
+
+const difficultyColor: Record<string, string> = {
+  Beginner:     '#16a34a',
+  Intermediate: '#d97706',
+  Advanced:     '#dc2626',
+};
+---
+<Base
+  title={`${material} Filament Guide — Modern Makes`}
+  description={summary}
+  heroPage={true}
+>
+  <Nav slot="nav" currentPath="/filament" />
+
+  <!-- ── HERO ── -->
+  <div class="fil-hero">
+    <div class="fil-hero-inner">
+      <nav class="fil-breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/filament">Filament</a>
+        <span>/</span>
+        <span>{material}</span>
+      </nav>
+
+      <div class="fil-hero-layout">
+        <div class="fil-hero-left">
+          <p class="fil-material-full">{materialFull}</p>
+          <h1 class="fil-hero-title">{material}</h1>
+          <div class="fil-verdict-row">
+            <span class={`verdict ${verdictClass(verdict)}`}>{verdict}</span>
+            <span class="fil-verdict-label">{verdictLabel}</span>
+          </div>
+          <p class="fil-summary">{summary}</p>
+        </div>
+
+        <!-- Quick stats sidebar -->
+        <div class="fil-stats-card">
+          <div class="fil-stats-title">Print Settings</div>
+          {[
+            { label: 'Nozzle Temp',      val: stats.nozzleTemp },
+            { label: 'Bed Temp',         val: stats.bedTemp },
+            { label: 'Chamber',          val: stats.chamberTemp },
+            { label: 'Cooling Fan',      val: stats.coolingFan },
+            { label: 'Max Speed',        val: stats.maxSpeed },
+            { label: 'Heat Deflection',  val: stats.heatDeflection },
+          ].map(s => (
+            <div class="fil-stat-row">
+              <span class="fil-stat-label">{s.label}</span>
+              <span class="fil-stat-val">{s.val}</span>
+            </div>
+          ))}
+          <div class="fil-stat-row" style="border-top:1px solid rgba(255,255,255,.1);margin-top:4px;padding-top:8px">
+            <span class="fil-stat-label">Difficulty</span>
+            <span class="fil-stat-val" style={`color:${difficultyColor[stats.difficulty] ?? '#fff'}`}>{stats.difficulty}</span>
+          </div>
+          <div class="fil-stats-meta">
+            Updated {updatedDate}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="section" style="background:var(--bg)">
+    <div class="fil-body-grid container">
+
+      <!-- MAIN CONTENT -->
+      <article class="fil-article">
+
+        <!-- Pros / Cons -->
+        <div class="fil-section">
+          <div class="fil-section-head">At a glance</div>
+          <div class="fil-proscons">
+            <div class="fil-pros">
+              <div class="fil-pc-head fil-pc-head--pro">Pros</div>
+              <ul class="fil-pc-list">
+                {pros.map(p => <li class="fil-pc-item fil-pc-item--pro">{p}</li>)}
+              </ul>
+            </div>
+            <div class="fil-cons">
+              <div class="fil-pc-head fil-pc-head--con">Cons</div>
+              <ul class="fil-pc-list">
+                {cons.map(c => <li class="fil-pc-item fil-pc-item--con">{c}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Narrative body from markdown -->
+        <div class="fil-section">
+          <div class="fil-section-head">Overview</div>
+          <div class="fil-prose">
+            <Content />
+          </div>
+        </div>
+
+        <!-- Brands -->
+        <div class="fil-section">
+          <div class="fil-section-head">Brand Recommendations</div>
+          <div class="fil-brands">
+            {brands.map(brand => (
+              <div class="fil-brand-card">
+                <div class="fil-brand-top">
+                  <span class="fil-brand-name">{brand.name}</span>
+                  <span class="fil-brand-tier" style={tierStyle(brand.tier)}>{brand.tier}</span>
+                </div>
+                <div class="fil-brand-price">{brand.price}</div>
+                <p class="fil-brand-notes">{brand.notes}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Failure Modes -->
+        <div class="fil-section">
+          <div class="fil-section-head">Troubleshooting</div>
+          <div class="fil-failures">
+            {failureModes.map(f => (
+              <div class="fil-failure">
+                <div class="fil-failure-issue">{f.issue}</div>
+                <div class="fil-failure-row">
+                  <div class="fil-failure-block">
+                    <span class="fil-failure-label">Cause</span>
+                    <span class="fil-failure-text">{f.cause}</span>
+                  </div>
+                  <div class="fil-failure-block">
+                    <span class="fil-failure-label">Fix</span>
+                    <span class="fil-failure-text">{f.fix}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Printer Compatibility -->
+        <div class="fil-section">
+          <div class="fil-section-head">Printer Compatibility</div>
+          <table class="fil-compat-table">
+            <thead>
+              <tr>
+                <th>Printer</th>
+                <th>Rating</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {compatibility.map(c => (
+                <tr>
+                  <td class="fil-compat-printer">{c.printer}</td>
+                  <td class="fil-compat-rating" style={ratingStyle(c.rating)}>{c.rating}</td>
+                  <td class="fil-compat-notes">{c.notes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="fil-sidebar">
+        <div class="fil-sidebar-card">
+          <div class="fil-sidebar-head">Other Materials</div>
+          {['petg','asa','abs','pa-cf','tpu']
+            .filter(s => s !== entry.slug)
+            .map(s => (
+              <a href={`/filament/${s}`} class="fil-sidebar-link">
+                {s.toUpperCase().replace('-', '‑')}
+              </a>
+            ))
+          }
+        </div>
+        <div class="fil-sidebar-card" style="margin-top:16px">
+          <div class="fil-sidebar-head">Guides</div>
+          <a href="/guides/filament-drying-guide" class="fil-sidebar-link">Filament Drying Guide</a>
+          <a href="/guides/first-layer-calibration-guide" class="fil-sidebar-link">First Layer Calibration</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "name": `${material} Filament Guide`,
+        "description": summary,
+        "url": `https://modernmakes.github.io/filament/${entry.slug}`,
+        "datePublished": publishedDate,
+        "dateModified": updatedDate,
+        "publisher": { "@type": "Organization", "name": "Modern Makes" },
+        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.github.io" },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home",     "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Filament", "item": "https://modernmakes.github.io/filament" },
+          { "@type": "ListItem", "position": 3, "name": material,   "item": `https://modernmakes.github.io/filament/${entry.slug}` },
+        ],
+      },
+    ],
+  })}></script>
+</Base>
+
+<style is:global>
+/* ── HERO ── */
+.fil-hero {
+  background: var(--black);
+  padding-top: 120px;
+  padding-bottom: 56px;
+  border-bottom: 3px solid var(--accent);
+}
+.fil-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.fil-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-family: var(--fm);
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+}
+.fil-breadcrumb a { color: rgba(255,255,255,.35); transition: color .12s; }
+.fil-breadcrumb a:hover { color: rgba(255,255,255,.7); }
+.fil-breadcrumb span { color: rgba(255,255,255,.2); }
+.fil-breadcrumb span:last-child { color: rgba(255,255,255,.5); }
+
+.fil-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: start;
+}
+.fil-material-full {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 8px;
+}
+.fil-hero-title {
+  font-family: var(--fd);
+  font-size: 72px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.fil-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.fil-verdict-label {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  font-style: italic;
+}
+.fil-summary {
+  font-family: var(--fb);
+  font-size: 16px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+/* Stats card */
+.fil-stats-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 20px;
+  flex-shrink: 0;
+}
+.fil-stats-title {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.fil-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.fil-stat-row:last-child { border-bottom: none; }
+.fil-stat-label {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,.35);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  flex-shrink: 0;
+}
+.fil-stat-val {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+  text-align: right;
+}
+.fil-stats-meta {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,.2);
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+/* ── BODY GRID ── */
+.fil-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 40px;
+  align-items: start;
+  padding-top: 40px;
+  padding-bottom: 64px;
+}
+
+/* ── SECTIONS ── */
+.fil-section { margin-bottom: 48px; }
+.fil-section:last-child { margin-bottom: 0; }
+.fil-section-head {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* ── PROSE ── */
+.fil-prose {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g1);
+  line-height: 1.85;
+}
+.fil-prose p { margin-bottom: 1.2em; }
+.fil-prose p:last-child { margin-bottom: 0; }
+
+/* ── PROS / CONS ── */
+.fil-proscons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.fil-pc-head {
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0;
+}
+.fil-pc-head--pro { background: #E8F5E9; color: #2E7D32; }
+.fil-pc-head--con { background: #FFF3E0; color: #E65100; }
+.fil-pc-list {
+  list-style: none;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+}
+.fil-pc-item {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  padding-left: 26px;
+}
+.fil-pc-item:last-child { border-bottom: none; }
+.fil-pc-item--pro::before { content: '✓'; position: absolute; left: 10px; color: #16a34a; font-weight: 700; }
+.fil-pc-item--con::before { content: '✗'; position: absolute; left: 10px; color: #dc2626; font-weight: 700; }
+
+/* ── BRANDS ── */
+.fil-brands {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fil-brand-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: var(--surface);
+}
+.fil-brand-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.fil-brand-name {
+  font-family: var(--fu);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+}
+.fil-brand-tier {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.fil-brand-price {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.fil-brand-notes {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── FAILURE MODES ── */
+.fil-failures {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.fil-failure {
+  background: var(--surface);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.fil-failure:last-child { border-bottom: none; }
+.fil-failure-issue {
+  font-family: var(--fu);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+.fil-failure-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.fil-failure-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fil-failure-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--g2);
+}
+.fil-failure-text {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.55;
+}
+
+/* ── COMPATIBILITY TABLE ── */
+.fil-compat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.fil-compat-table th {
+  background: var(--black);
+  color: rgba(255,255,255,.5);
+  font-family: var(--fm);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 16px;
+}
+.fil-compat-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.fil-compat-table tr:last-child td { border-bottom: none; }
+.fil-compat-table tr:nth-child(even) td { background: var(--bg); }
+.fil-compat-printer { font-family: var(--fu); font-weight: 600; color: var(--black); white-space: nowrap; }
+.fil-compat-rating  { font-family: var(--fm); font-size: 11px; font-weight: 700; white-space: nowrap; }
+.fil-compat-notes   { font-family: var(--fb); color: var(--g1); line-height: 1.5; }
+
+/* ── SIDEBAR ── */
+.fil-sidebar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.fil-sidebar-head {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--g2);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.fil-sidebar-link {
+  display: block;
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background .12s, color .12s;
+}
+.fil-sidebar-link:last-child { border-bottom: none; }
+.fil-sidebar-link:hover { background: var(--bg); color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .fil-hero-layout { grid-template-columns: 1fr 240px; gap: 32px; }
+  .fil-body-grid   { grid-template-columns: 1fr; }
+  .fil-sidebar     { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fil-sidebar-card { margin-top: 0 !important; }
+}
+@media (max-width: 768px) {
+  .fil-hero { padding-top: 96px; padding-bottom: 40px; }
+  .fil-hero-inner  { padding: 0 20px; }
+  .fil-hero-layout { grid-template-columns: 1fr; gap: 24px; }
+  .fil-hero-title  { font-size: 52px; }
+  .fil-body-grid   { padding: 24px 20px 48px; gap: 32px; }
+  .fil-proscons    { grid-template-columns: 1fr; }
+  .fil-failure-row { grid-template-columns: 1fr; }
+  .fil-sidebar     { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .fil-hero-title { font-size: 40px; }
+}
+</style>
