@@ -100,6 +100,14 @@
 ,
 "tools": [
   {
+    "name": "Pressure Advance Calibration",
+    "description": "Generate a PA/LA test pattern for Klipper, Marlin, or RepRapFirmware",
+    "href": "/tools/pressure-advance",
+    "unit": "Klipper · Marlin · RRF",
+    "category": "Calibration",
+    "icon": "pa"
+  },
+  {
     "name": "Flowrate Calculator",
     "description": "Find your printer's maximum volumetric flow rate",
     "href": "/tools/flowrate",

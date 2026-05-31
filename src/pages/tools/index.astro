@@ -2,24 +2,100 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-const label = 'tools'.charAt(0).toUpperCase() + 'tools'.slice(1);
+
+const tools = [
+  {
+    name: 'Pressure Advance Calibration',
+    description: 'Generate a PA/LA test pattern for Klipper, Marlin, or RepRapFirmware. Supports presets for Voron, Bambu, and Prusa.',
+    href: '/tools/pressure-advance',
+    badge: 'Klipper · Marlin · RRF',
+    category: 'Calibration',
+    icon: 'pa',
+  },
+  {
+    name: 'Flowrate Calculator',
+    description: 'Find your printer\'s maximum volumetric flow rate — hotend, nozzle, and filament.',
+    href: '/tools/flowrate',
+    badge: 'mm³/s',
+    category: 'Calibration',
+    icon: 'flow',
+  },
+  {
+    name: 'Print Cost Estimator',
+    description: 'Calculate filament, time, and power costs per print job.',
+    href: '/tools/cost',
+    badge: '$/print',
+    category: 'Planning',
+    icon: 'cost',
+  },
+  {
+    name: 'Filament Converter',
+    description: 'Convert between filament length and weight for any diameter or density.',
+    href: '/tools/filament-converter',
+    badge: 'g ↔ m',
+    category: 'Utility',
+    icon: 'convert',
+  },
+];
+
+const iconSvgs: Record<string, string> = {
+  pa: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 4 4 4-6 4 10"/></svg>`,
+  flow: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  cost: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  convert: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/></svg>`,
+};
 ---
-<Base title={label}>
-  <Nav slot="nav" currentPath={'/tools'} />
-  <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
-    <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--black)">{label}</h1>
-    <p style="font-family:'Lora',serif;font-size:15px;color:var(--g1);margin:12px auto 24px;max-width:440px">This section is being built.</p>
-    <a href="/" style="font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+<Base
+  title="Free 3D Printing Tools & Calculators"
+  description="Free calculators and tools for 3D printing — pressure advance calibration, volumetric flow rate, print cost estimator, filament converter, and more."
+>
+  <Nav slot="nav" currentPath="/tools" />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Tools</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Free Tools</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">3D Printing Calculators</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:520px">No sign-up. No ads. Just the tools serious 3D printers actually need.</p>
+    </div>
+  </div>
+
+  <!-- TOOLS GRID -->
+  <section style="padding:48px 0 64px;background:var(--bg)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="tools-idx-grid">
+        {tools.map(tool => (
+          <a href={tool.href} class="tools-idx-card">
+            <div class="tools-idx-icon" set:html={iconSvgs[tool.icon] ?? iconSvgs.flow} />
+            <div class="tools-idx-body">
+              <span class="tools-idx-cat">{tool.category}</span>
+              <div class="tools-idx-name">{tool.name}</div>
+              <div class="tools-idx-desc">{tool.description}</div>
+            </div>
+            <div class="tools-idx-footer">
+              <span class="tools-idx-badge">{tool.badge}</span>
+              <span class="tools-idx-arrow">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
+
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "CollectionPage",
         "name": "Free 3D Printing Tools & Calculators — Modern Makes",
-        "description": "Free calculators and tools for 3D printing — volumetric flow rate, print cost estimator, filament converter and more.",
+        "description": "Free calculators and tools for 3D printing — pressure advance, volumetric flow rate, print cost estimator, filament converter and more.",
         "url": "https://modernmakes.com/tools",
         "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
       },
@@ -33,3 +109,90 @@ const label = 'tools'.charAt(0).toUpperCase() + 'tools'.slice(1);
     ]
   })}></script>
 </Base>
+
+<style is:global>
+.tools-idx-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.tools-idx-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+  position: relative;
+  overflow: hidden;
+}
+.tools-idx-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+.tools-idx-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-t);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,90,31,.1);
+}
+.tools-idx-card:hover::before { transform: scaleX(1); }
+.tools-idx-icon { color: var(--accent); display: flex; align-items: center; width: 22px; }
+.tools-idx-body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.tools-idx-cat {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+.tools-idx-name {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+}
+.tools-idx-desc {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.55;
+}
+.tools-idx-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.tools-idx-badge {
+  font-family: var(--fm);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(255,90,31,.08);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+.tools-idx-arrow {
+  font-size: 16px;
+  color: var(--g2);
+  transition: color .15s, transform .15s;
+}
+.tools-idx-card:hover .tools-idx-arrow { color: var(--accent); transform: translateX(3px); }
+@media (max-width: 768px) {
+  .tools-idx-grid { grid-template-columns: 1fr; }
+}
+</style>

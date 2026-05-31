@@ -1,0 +1,1028 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Pressure Advance Calibration Tool — Klipper, Marlin, RRF"
+  description="Generate a PA/LA test pattern for Klipper, Marlin, or RepRapFirmware. Supports Voron, Bambu, Prusa, and Ender presets. Free, no sign-up."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Pressure Advance</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calibration Tool</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Pressure Advance Calibration</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Generate a corner-test G-code pattern for Klipper (PA), Marlin (LA/K), or RepRapFirmware. Configure your printer, download the file, and read the cleanest corner.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Marlin 1.1.9+</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">RepRapFirmware 3+</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="pa-tool-wrap">
+    <div class="pa-tool-inner">
+
+      <!-- LEFT: SETTINGS -->
+      <aside class="pa-sidebar">
+
+        <!-- Preset -->
+        <div class="pa-form-group" style="margin-bottom:0;padding-bottom:16px;border-bottom:1px solid var(--border)">
+          <label class="pa-label" for="preset">Printer Preset</label>
+          <div style="position:relative">
+            <select class="pa-select" id="preset">
+              <option value="custom">Custom (manual)</option>
+              <option value="voron">Voron 2.4 / Trident</option>
+              <option value="bambu">Bambu X1C / P1S</option>
+              <option value="prusa">Prusa MK4</option>
+              <option value="ender">Ender 3 / CR-10</option>
+            </select>
+            <span id="preset-modified" style="display:none;font-size:10px;color:var(--g2);font-family:'JetBrains Mono',monospace;margin-top:4px;display:none">(modified)</span>
+          </div>
+        </div>
+
+        <!-- Section: PA Range (open first, most important) -->
+        <details class="pa-section" open>
+          <summary class="pa-section-head">
+            <span>PA / LA Range</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-3">
+              <div class="pa-form-group">
+                <label class="pa-label" for="paStart">PA Start</label>
+                <input class="pa-input" type="number" id="paStart" value="0" min="0" max="2" step="0.001">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="paEnd">PA End</label>
+                <input class="pa-input" type="number" id="paEnd" value="0.08" min="0" max="2" step="0.001">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="paIncrement">Increment</label>
+                <input class="pa-input" type="number" id="paIncrement" value="0.005" min="0.001" max="0.1" step="0.001">
+              </div>
+            </div>
+            <div class="pa-pattern-count" id="patternCountDisplay">
+              <span id="patternCountNum">17</span> patterns will be generated
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Firmware / Printer -->
+        <details class="pa-section" open>
+          <summary class="pa-section-head">
+            <span>Printer</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-form-group">
+              <label class="pa-label">Firmware</label>
+              <div class="pa-radio-group">
+                <label class="pa-radio"><input type="radio" name="firmware" value="klipper" checked> Klipper</label>
+                <label class="pa-radio"><input type="radio" name="firmware" value="marlin"> Marlin 1.1.9+</label>
+                <label class="pa-radio"><input type="radio" name="firmware" value="rrf"> RepRapFirmware 3+</label>
+              </div>
+            </div>
+            <div class="pa-form-group">
+              <label class="pa-label">Bed Shape</label>
+              <div class="pa-radio-group" style="flex-direction:row;gap:16px">
+                <label class="pa-radio"><input type="radio" name="bedShape" value="rect" checked> Rectangular</label>
+                <label class="pa-radio"><input type="radio" name="bedShape" value="round"> Round</label>
+              </div>
+            </div>
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="nozzleDia">Nozzle Diameter (mm)</label>
+                <input class="pa-input" type="number" id="nozzleDia" value="0.4" min="0.1" max="1.2" step="0.1">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="filamentDia">Filament Diameter (mm)</label>
+                <input class="pa-input" type="number" id="filamentDia" value="1.75" min="1.6" max="3.1" step="0.01">
+              </div>
+            </div>
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="bedX">Bed Size X (mm)</label>
+                <input class="pa-input" type="number" id="bedX" value="250" min="100" max="700">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="bedY">Bed Size Y (mm)</label>
+                <input class="pa-input" type="number" id="bedY" value="210" min="100" max="700">
+              </div>
+            </div>
+            <div class="pa-form-group">
+              <label class="pa-label" for="travelSpeed">Travel Speed (mm/s)</label>
+              <input class="pa-input" type="number" id="travelSpeed" value="120" min="20" max="800">
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Temperature -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Temperature</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="bedTemp">Bed Temp (°C)</label>
+                <input class="pa-input" type="number" id="bedTemp" value="60" min="0" max="150">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="hotendTemp">Hotend Temp (°C)</label>
+                <input class="pa-input" type="number" id="hotendTemp" value="220" min="150" max="350">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Retraction -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Retraction</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-3">
+              <div class="pa-form-group">
+                <label class="pa-label" for="retractDist">Distance (mm)</label>
+                <input class="pa-input" type="number" id="retractDist" value="0.5" min="0" max="10" step="0.1">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="retractSpeed">Retract (mm/s)</label>
+                <input class="pa-input" type="number" id="retractSpeed" value="35" min="1" max="120">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="unretractSpeed">Unretract (mm/s)</label>
+                <input class="pa-input" type="number" id="unretractSpeed" value="35" min="1" max="120">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: First Layer -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>First Layer</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-3">
+              <div class="pa-form-group">
+                <label class="pa-label" for="firstLayerHeight">Height (mm)</label>
+                <input class="pa-input" type="number" id="firstLayerHeight" value="0.24" min="0.05" max="0.8" step="0.01">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="firstLayerSpeed">Speed (mm/s)</label>
+                <input class="pa-input" type="number" id="firstLayerSpeed" value="30" min="5" max="200">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="firstLayerFan">Fan (%)</label>
+                <input class="pa-input" type="number" id="firstLayerFan" value="0" min="0" max="100">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Print Settings -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Print Settings</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="lineWidthPct">Line Width (% of nozzle)</label>
+                <input class="pa-input" type="number" id="lineWidthPct" value="112" min="80" max="200">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="layerHeight">Layer Height (mm)</label>
+                <input class="pa-input" type="number" id="layerHeight" value="0.2" min="0.05" max="0.6" step="0.01">
+              </div>
+            </div>
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="layerCount">Layer Count</label>
+                <input class="pa-input" type="number" id="layerCount" value="4" min="1" max="20">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="printSpeed">Print Speed (mm/s)</label>
+                <input class="pa-input" type="number" id="printSpeed" value="100" min="10" max="800">
+              </div>
+            </div>
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="acceleration">Acceleration (mm/s²)</label>
+                <input class="pa-input" type="number" id="acceleration" value="3000" min="100" max="30000">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="fanSpeed">Fan Speed (%)</label>
+                <input class="pa-input" type="number" id="fanSpeed" value="50" min="0" max="100">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Start G-code -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Start G-code</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-form-group">
+              <label class="pa-label" for="startGcode">Tokens: [BED_TEMP] [HOTEND_TEMP] [TOTAL_LAYER_COUNT]</label>
+              <textarea class="pa-textarea" id="startGcode" rows="7">SET_PRINT_STATS_INFO TOTAL_LAYER=[TOTAL_LAYER_COUNT]
+G28
+G90
+M190 S[BED_TEMP]
+M109 S[HOTEND_TEMP]
+G92 E0
+G1 Z5 F3000</textarea>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: End G-code -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>End G-code</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-form-group">
+              <textarea class="pa-textarea" id="endGcode" rows="4">M104 S0
+M140 S0
+G28 X
+M84</textarea>
+            </div>
+          </div>
+        </details>
+
+      </aside>
+
+      <!-- RIGHT: OUTPUT -->
+      <main class="pa-output">
+
+        <!-- Stats bar -->
+        <div class="pa-stats-bar">
+          <div class="pa-stat">
+            <span class="pa-stat-label">Patterns</span>
+            <span class="pa-stat-val" id="statPatterns">17</span>
+          </div>
+          <div class="pa-stat-div"></div>
+          <div class="pa-stat">
+            <span class="pa-stat-label">PA Range</span>
+            <span class="pa-stat-val" id="statRange">0.000 → 0.080</span>
+          </div>
+          <div class="pa-stat-div"></div>
+          <div class="pa-stat">
+            <span class="pa-stat-label">Est. Print Time</span>
+            <span class="pa-stat-val" id="statTime">~8 min</span>
+          </div>
+          <div class="pa-stat-div"></div>
+          <div class="pa-stat">
+            <span class="pa-stat-label">Firmware</span>
+            <span class="pa-stat-val" id="statFirmware">Klipper</span>
+          </div>
+          <div class="pa-updating" id="updatingIndicator">Updating…</div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="pa-actions">
+          <button class="pa-btn-copy" id="copyBtn">Copy G-code</button>
+          <button class="pa-btn-download" id="downloadBtn">Download .gcode</button>
+        </div>
+
+        <!-- G-code output -->
+        <div class="pa-code-wrap">
+          <pre class="pa-code" id="gcodeOutput" aria-label="Generated G-code"></pre>
+        </div>
+
+        <!-- How to use -->
+        <div class="pa-howto">
+          <h2 class="pa-howto-title">How to use</h2>
+          <ol class="pa-howto-steps">
+            <li><strong>Configure</strong> your printer settings in the panel. Select a preset to auto-fill common values.</li>
+            <li><strong>Download or copy</strong> the G-code file. Do <em>not</em> slice it — print it directly from your host (Mainsail, Fluidd, OctoPrint, or SD card).</li>
+            <li><strong>Print it.</strong> Each column of corners corresponds to one PA value, printed left to right in ascending order.</li>
+            <li><strong>Find the cleanest column</strong> — the one with the sharpest corners and no bulging or gaps. Count from left: <code>PA = start + (column_index × increment)</code>.</li>
+          </ol>
+          <div class="pa-diagram">
+            <div class="pa-diagram-title">Reading the test pattern</div>
+            <pre class="pa-diagram-art">  Too low (PA=0)      Correct           Too high
+  ┌──────┐           ┌──────┐           ┌──────┐
+  │  ╔══╗│           │  ┌──┐│           │  ╔══╗│
+  │◀▶║  ║│           │  │  ││           │◀▶║  ║│
+  │  ╚══╝│ ← bulge   │  └──┘│ ← clean  │  ╚══╝│ ← ringing
+  └──────┘ at corner └──────┘ 90° walls └──────┘ overshoot</pre>
+          </div>
+          <div class="pa-howto-note">
+            Klipper: set <code>pressure_advance:</code> in your <code>printer.cfg</code> extruder section.<br>
+            Marlin: set <code>DEFAULT_LINEAR_ADVANCE_K</code> in <code>Configuration_adv.h</code> or send <code>M900 K[value]</code> and <code>M500</code> to save.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Pressure Advance Calibration Tool",
+        "description": "Generate PA/LA test pattern G-code for Klipper, Marlin, or RepRapFirmware.",
+        "url": "https://modernmakes.com/tools/pressure-advance",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.com/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Pressure Advance", "item": "https://modernmakes.com/tools/pressure-advance" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+/* ── TOOL WRAP ── */
+.pa-tool-wrap {
+  background: var(--bg);
+  min-height: 60vh;
+  padding: 32px 0 64px;
+}
+.pa-tool-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ── SIDEBAR ── */
+.pa-sidebar {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.pa-sidebar::-webkit-scrollbar { width: 4px; }
+.pa-sidebar::-webkit-scrollbar-track { background: transparent; }
+.pa-sidebar::-webkit-scrollbar-thumb { background: var(--border-s); border-radius: 2px; }
+
+/* Preset row */
+.pa-sidebar > .pa-form-group {
+  padding: 16px 20px;
+  background: var(--bg);
+}
+
+/* ── COLLAPSIBLE SECTIONS ── */
+.pa-section {
+  border-top: 1px solid var(--border);
+}
+.pa-section[open] .pa-section-arrow { transform: rotate(0deg); }
+.pa-section:not([open]) .pa-section-arrow { transform: rotate(-90deg); }
+.pa-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  list-style: none;
+  user-select: none;
+  background: var(--surface);
+  transition: background .12s;
+}
+.pa-section-head:hover { background: var(--bg); }
+.pa-section-head::-webkit-details-marker { display: none; }
+.pa-section-arrow {
+  font-size: 11px;
+  color: var(--g2);
+  transition: transform .15s;
+  display: inline-block;
+}
+.pa-section-body { padding: 4px 20px 16px; }
+
+/* ── FORM ELEMENTS ── */
+.pa-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.pa-label {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.pa-input, .pa-select, .pa-textarea {
+  font-family: var(--fm);
+  font-size: 13px;
+  color: var(--black);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 7px 10px;
+  transition: border-color .12s;
+  width: 100%;
+}
+.pa-input:focus, .pa-select:focus, .pa-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.pa-textarea {
+  resize: vertical;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.pa-select { appearance: none; cursor: pointer; padding-right: 24px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238C8C8C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.pa-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pa-radio {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--black);
+  cursor: pointer;
+}
+.pa-radio input[type="radio"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.pa-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pa-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.pa-pattern-count {
+  margin-top: 8px;
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--accent);
+  background: rgba(255,90,31,.07);
+  border: 1px solid rgba(255,90,31,.18);
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+#patternCountNum { font-weight: 700; font-size: 13px; }
+
+/* ── OUTPUT PANEL ── */
+.pa-output { display: flex; flex-direction: column; gap: 16px; }
+
+/* Stats bar */
+.pa-stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  position: relative;
+}
+.pa-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 20px;
+  flex: 1;
+  min-width: 100px;
+}
+.pa-stat-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--g2);
+}
+.pa-stat-val {
+  font-family: var(--fd);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+}
+.pa-stat-div { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+.pa-updating {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity .15s;
+  pointer-events: none;
+}
+.pa-updating.visible { opacity: 1; }
+
+/* Action buttons */
+.pa-actions { display: flex; gap: 10px; }
+.pa-btn-copy, .pa-btn-download {
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background .12s, transform .1s;
+}
+.pa-btn-copy {
+  background: var(--black);
+  color: #fff;
+}
+.pa-btn-copy:hover { background: #333; }
+.pa-btn-copy.copied { background: #1a7a1a; }
+.pa-btn-download {
+  background: var(--accent);
+  color: #fff;
+}
+.pa-btn-download:hover { background: var(--accent-dk); }
+
+/* G-code display */
+.pa-code-wrap {
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pa-code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #ccc;
+  padding: 20px 24px;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 520px;
+  white-space: pre;
+  margin: 0;
+}
+.pa-code .gc-comment { color: #5a5a5a; }
+.pa-code .gc-cmd    { color: var(--accent); font-weight: 700; }
+.pa-code .gc-val    { color: #e0e0e0; }
+.pa-code .gc-pa     { color: #4fc3f7; }
+
+/* How to use */
+.pa-howto {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+.pa-howto-title {
+  font-family: var(--fd);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 14px;
+}
+.pa-howto-steps {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--g1);
+  line-height: 1.7;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.pa-howto-steps strong { color: var(--black); font-family: var(--fu); }
+.pa-howto-steps code {
+  font-family: var(--fm);
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--accent);
+}
+.pa-diagram {
+  background: #0d0d0d;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+.pa-diagram-title {
+  font-family: var(--fm);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #666;
+  margin-bottom: 10px;
+}
+.pa-diagram-art {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #aaa;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+.pa-howto-note {
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g2);
+  line-height: 1.6;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.pa-howto-note code {
+  font-family: var(--fm);
+  font-size: 11px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--accent);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .pa-tool-inner { grid-template-columns: 300px 1fr; gap: 24px; }
+}
+@media (max-width: 860px) {
+  .pa-tool-inner { grid-template-columns: 1fr; }
+  .pa-sidebar { position: static; max-height: none; }
+}
+@media (max-width: 768px) {
+  .pa-tool-wrap { padding: 20px 0 48px; }
+  .pa-tool-inner { padding: 0 20px; }
+  .pa-row-2, .pa-row-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .pa-row-3 { grid-template-columns: 1fr; }
+  .pa-stats-bar { flex-direction: column; align-items: stretch; }
+  .pa-stat-div { width: 100%; height: 1px; }
+  .pa-actions { flex-direction: column; }
+}
+</style>
+
+<script>
+// ── PRESETS ──
+const PRESETS: Record<string, Record<string, string | number>> = {
+  voron: { bedX:250, bedY:250, hotendTemp:240, bedTemp:110, acceleration:5000, travelSpeed:300, nozzleDia:0.4, firmware:'klipper' },
+  bambu: { bedX:256, bedY:256, hotendTemp:220, bedTemp:60, acceleration:10000, travelSpeed:500, firmware:'klipper' },
+  prusa:  { bedX:250, bedY:210, hotendTemp:215, bedTemp:60, acceleration:1000, travelSpeed:150 },
+  ender:  { bedX:235, bedY:235, hotendTemp:200, bedTemp:60, acceleration:500, travelSpeed:120 },
+};
+
+const KLIPPER_START = `SET_PRINT_STATS_INFO TOTAL_LAYER=[TOTAL_LAYER_COUNT]\nG28\nG90\nM190 S[BED_TEMP]\nM109 S[HOTEND_TEMP]\nG92 E0\nG1 Z5 F3000`;
+const MARLIN_START  = `G28\nM190 S[BED_TEMP]\nM109 S[HOTEND_TEMP]\nG92 E0\nG1 Z5 F3000`;
+
+// ── G-CODE GENERATOR ──
+function generateGcode(s: Record<string, any>): string {
+  const patternCount = Math.max(1, Math.round((s.paEnd - s.paStart) / s.paIncrement) + 1);
+  const lineLength   = 30;
+  const spacing      = 3;
+  const totalWidth   = patternCount * (lineLength + spacing);
+  const startX       = (s.bedX - totalWidth) / 2;
+  const startY       = (s.bedY - lineLength) / 2;
+
+  const extW  = (s.lineWidthPct / 100) * s.nozzleDia;
+  const fArea = Math.PI * Math.pow(s.filamentDia / 2, 2);
+
+  const crossSec = (h: number) => extW * h - (Math.PI / 4) * h * h;
+  const ePerMm   = (h: number) => crossSec(h) / fArea;
+  const fle = ePerMm(s.firstLayerHeight);
+  const rle = ePerMm(s.layerHeight);
+
+  const slowSpeed = s.printSpeed * 0.25;
+  const setPACmd  = (v: number): string => {
+    const f = v.toFixed(4);
+    if (s.firmware === 'klipper') return `SET_PRESSURE_ADVANCE ADVANCE=${f}`;
+    if (s.firmware === 'marlin')  return `M900 K${f}`;
+    return `M572 D0 S${f}`;
+  };
+  const accelCmd = (a: number): string =>
+    s.firmware === 'marlin' ? `M204 P${a}` : `SET_VELOCITY_LIMIT ACCEL=${a}`;
+
+  const processGcode = (raw: string) =>
+    raw.replace(/\[BED_TEMP\]/g, s.bedTemp)
+       .replace(/\[HOTEND_TEMP\]/g, s.hotendTemp)
+       .replace(/\[TOTAL_LAYER_COUNT\]/g, String(s.layerCount + 1));
+
+  const lines: string[] = [];
+  const push = (...args: string[]) => lines.push(...args);
+
+  push(
+    `; Pressure Advance Calibration Pattern`,
+    `; Generated by Modern Makes — modernmakes.github.io/tools/pressure-advance`,
+    `; ─────────────────────────────────────────`,
+    `; Firmware  : ${s.firmware === 'klipper' ? 'Klipper' : s.firmware === 'marlin' ? 'Marlin' : 'RepRapFirmware'}`,
+    `; PA Range  : ${s.paStart.toFixed(3)} → ${s.paEnd.toFixed(3)} (step ${s.paIncrement.toFixed(3)})`,
+    `; Patterns  : ${patternCount}`,
+    `; Nozzle    : ${s.nozzleDia}mm | Layer: ${s.layerHeight}mm | Layers: ${s.layerCount}`,
+    `; Bed       : ${s.bedX}×${s.bedY}mm | Hotend: ${s.hotendTemp}°C | Bed: ${s.bedTemp}°C`,
+    `; ─────────────────────────────────────────`,
+    ``,
+    `; === START G-CODE ===`,
+    processGcode(s.startGcode).trim(),
+    ``,
+    `; Acceleration`,
+    accelCmd(s.acceleration),
+    ``,
+    `; First layer fan`,
+    `M106 S${Math.round(s.firstLayerFan * 2.55)}`,
+    ``,
+  );
+
+  // Prime line
+  const primeLen = 50;
+  const primeX0 = Math.max(5, startX - 20);
+  const primeE  = (fle * primeLen).toFixed(5);
+  push(
+    `; === PRIME LINE ===`,
+    `G1 Z${s.firstLayerHeight.toFixed(2)} F3000`,
+    `G1 X${primeX0.toFixed(2)} Y5.00 F${s.travelSpeed * 60}`,
+    `G1 E${s.retractDist.toFixed(3)} F${s.unretractSpeed * 60}`,
+    `G1 X${(primeX0 + primeLen).toFixed(2)} Y5.00 E${primeE} F${s.firstLayerSpeed * 60}`,
+    `G92 E0`,
+    ``,
+  );
+
+  for (let layer = 0; layer < s.layerCount; layer++) {
+    const z        = s.firstLayerHeight + layer * s.layerHeight;
+    const isFirst  = layer === 0;
+    const lEpMm    = isFirst ? fle : rle;
+    const lE       = (lEpMm * lineLength).toFixed(5);
+    const curSlow  = isFirst ? s.firstLayerSpeed : slowSpeed;
+    const curFast  = isFirst ? s.firstLayerSpeed : s.printSpeed;
+
+    push(`; === LAYER ${layer + 1} / ${s.layerCount} === Z${z.toFixed(2)}`);
+    push(`G1 Z${z.toFixed(2)} F3000`);
+    if (layer === 1) push(`M106 S${Math.round(s.fanSpeed * 2.55)} ; print fan on`);
+    push(`G92 E0`, ``);
+
+    for (let i = 0; i < patternCount; i++) {
+      const paValue = s.paStart + i * s.paIncrement;
+      const px = startX + i * (lineLength + spacing);
+      const py = startY;
+
+      push(
+        `; Pattern ${i + 1}/${patternCount} — PA ${paValue.toFixed(4)}`,
+        setPACmd(paValue),
+        `G1 X${px.toFixed(2)} Y${py.toFixed(2)} F${s.travelSpeed * 60}`,
+        `G1 E${s.retractDist.toFixed(3)} F${s.unretractSpeed * 60}`,
+        `G1 X${px.toFixed(2)} Y${(py + lineLength).toFixed(2)} E${lE} F${curSlow * 60}`,
+        `G1 X${(px + lineLength).toFixed(2)} Y${(py + lineLength).toFixed(2)} E${lE} F${curFast * 60}`,
+        `G1 X${(px + lineLength).toFixed(2)} Y${py.toFixed(2)} E${lE} F${curSlow * 60}`,
+        `G1 E-${s.retractDist.toFixed(3)} F${s.retractSpeed * 60}`,
+        ``,
+      );
+    }
+  }
+
+  push(`; === END G-CODE ===`, processGcode(s.endGcode).trim());
+  return lines.join('\n');
+}
+
+// ── SYNTAX HIGHLIGHT ──
+function highlight(raw: string): string {
+  return raw.split('\n').map(line => {
+    const t = line.trimStart();
+    if (t.startsWith(';')) return `<span class="gc-comment">${esc(line)}</span>`;
+    if (t.startsWith('SET_PRESSURE_ADVANCE') || t.startsWith('M900') || t.startsWith('M572'))
+      return `<span class="gc-pa">${esc(line)}</span>`;
+    return line.replace(/^([A-Z][0-9]+)/, '<span class="gc-cmd">$1</span>');
+  }).join('\n');
+}
+function esc(s: string) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── COLLECT SETTINGS ──
+function getSettings(): Record<string, any> {
+  const fw = (document.querySelector<HTMLInputElement>('input[name="firmware"]:checked'))?.value ?? 'klipper';
+  return {
+    firmware:          fw,
+    bedX:              +v('bedX'),
+    bedY:              +v('bedY'),
+    nozzleDia:         +v('nozzleDia'),
+    filamentDia:       +v('filamentDia'),
+    travelSpeed:       +v('travelSpeed'),
+    bedTemp:           +v('bedTemp'),
+    hotendTemp:        +v('hotendTemp'),
+    retractDist:       +v('retractDist'),
+    retractSpeed:      +v('retractSpeed'),
+    unretractSpeed:    +v('unretractSpeed'),
+    firstLayerHeight:  +v('firstLayerHeight'),
+    firstLayerSpeed:   +v('firstLayerSpeed'),
+    firstLayerFan:     +v('firstLayerFan'),
+    lineWidthPct:      +v('lineWidthPct'),
+    layerHeight:       +v('layerHeight'),
+    layerCount:        +v('layerCount'),
+    printSpeed:        +v('printSpeed'),
+    acceleration:      +v('acceleration'),
+    fanSpeed:          +v('fanSpeed'),
+    paStart:           +v('paStart'),
+    paEnd:             +v('paEnd'),
+    paIncrement:       +v('paIncrement'),
+    startGcode:        v('startGcode'),
+    endGcode:          v('endGcode'),
+  };
+}
+function v(id: string): string {
+  const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+  return el?.value ?? '';
+}
+
+// ── UPDATE UI ──
+let currentGcode = '';
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+function updatePatternCount() {
+  const start = +v('paStart');
+  const end   = +v('paEnd');
+  const inc   = +v('paIncrement');
+  if (inc <= 0) return;
+  const count = Math.max(1, Math.round((end - start) / inc) + 1);
+  const el = document.getElementById('patternCountNum');
+  if (el) el.textContent = String(count);
+}
+
+function updateStats(s: Record<string, any>) {
+  const count = Math.max(1, Math.round((s.paEnd - s.paStart) / s.paIncrement) + 1);
+  const lineLength = 30;
+  const spacing    = 3;
+  const totalMoves = count * s.layerCount * 3;
+  const avgSpeed   = (s.printSpeed * 0.625);
+  const totalMm    = totalMoves * lineLength;
+  const estSec     = (totalMm / avgSpeed) + count * s.layerCount * 2;
+  const estMin     = Math.max(1, Math.round(estSec / 60));
+  const fw = { klipper: 'Klipper', marlin: 'Marlin', rrf: 'RRF' }[s.firmware as string] ?? 'Klipper';
+
+  setText('statPatterns', String(count));
+  setText('statRange', `${s.paStart.toFixed(3)} → ${s.paEnd.toFixed(3)}`);
+  setText('statTime', `~${estMin} min`);
+  setText('statFirmware', fw);
+}
+
+function setText(id: string, val: string) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+function doUpdate() {
+  const ind = document.getElementById('updatingIndicator');
+  if (ind) ind.classList.remove('visible');
+
+  const s = getSettings();
+  updateStats(s);
+
+  try {
+    currentGcode = generateGcode(s);
+    const out = document.getElementById('gcodeOutput');
+    if (out) out.innerHTML = highlight(currentGcode);
+  } catch(e) {
+    console.error('G-code generation error:', e);
+  }
+}
+
+function scheduleUpdate() {
+  const ind = document.getElementById('updatingIndicator');
+  if (ind) ind.classList.add('visible');
+  if (debounceTimer) clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(doUpdate, 150);
+}
+
+// ── PRESET APPLY ──
+let presetActive = 'custom';
+let userModified = false;
+
+function applyPreset(preset: string) {
+  presetActive = preset;
+  userModified = false;
+  const data = PRESETS[preset];
+  if (!data) return;
+
+  for (const [key, val] of Object.entries(data)) {
+    if (key === 'firmware') {
+      const radio = document.querySelector<HTMLInputElement>(`input[name="firmware"][value="${val}"]`);
+      if (radio) radio.checked = true;
+    } else {
+      const el = document.getElementById(key) as HTMLInputElement | null;
+      if (el) el.value = String(val);
+    }
+  }
+  updateModifiedBadge();
+  scheduleUpdate();
+}
+
+function updateModifiedBadge() {
+  const badge = document.getElementById('preset-modified');
+  if (!badge) return;
+  badge.style.display = (presetActive !== 'custom' && userModified) ? 'block' : 'none';
+}
+
+// ── WIRE UP ──
+document.addEventListener('DOMContentLoaded', () => {
+  // Preset selector
+  const presetEl = document.getElementById('preset') as HTMLSelectElement | null;
+  presetEl?.addEventListener('change', () => {
+    applyPreset(presetEl.value);
+  });
+
+  // All form inputs
+  document.querySelectorAll<HTMLElement>('.pa-input, .pa-select, .pa-textarea, input[type="radio"]')
+    .forEach(el => {
+      el.addEventListener('input', () => {
+        if (presetActive !== 'custom') { userModified = true; updateModifiedBadge(); }
+        updatePatternCount();
+        scheduleUpdate();
+      });
+      el.addEventListener('change', () => {
+        // For firmware radio — also update start gcode default
+        if ((el as HTMLInputElement).name === 'firmware') {
+          const fw = (el as HTMLInputElement).value;
+          const sgEl = document.getElementById('startGcode') as HTMLTextAreaElement | null;
+          if (sgEl && !userModified) {
+            sgEl.value = fw === 'klipper' ? KLIPPER_START : MARLIN_START;
+          }
+        }
+        if (presetActive !== 'custom') { userModified = true; updateModifiedBadge(); }
+        updatePatternCount();
+        scheduleUpdate();
+      });
+    });
+
+  // Copy button
+  document.getElementById('copyBtn')?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(currentGcode);
+      const btn = document.getElementById('copyBtn') as HTMLButtonElement;
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy G-code'; btn.classList.remove('copied'); }, 2000);
+    } catch { /* clipboard blocked */ }
+  });
+
+  // Download button
+  document.getElementById('downloadBtn')?.addEventListener('click', () => {
+    const s = getSettings();
+    const filename = `pressure_advance_pa${s.paStart.toFixed(3)}-${s.paEnd.toFixed(3)}.gcode`;
+    const blob = new Blob([currentGcode], { type: 'text/plain' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // Initial render
+  updatePatternCount();
+  doUpdate();
+});
+</script>
