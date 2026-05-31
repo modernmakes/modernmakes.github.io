@@ -22,16 +22,14 @@ const partCounts: Record<string, { a: number; t: number }> = {
 <Base title="Voron Upgrades, Mods & Parts" description="The complete resource for Voron 2.4 and Trident builders. Every hotend, extruder, motion system, electronics, and more — with affiliate links and community mod picks.">
   <Nav slot="nav" currentPath={currentPath} />
 
-  <!-- ── HERO (dark) — breadcrumb + title + description only ── -->
-  <div style="background:var(--black);padding:52px 0 40px;border-bottom:1px solid rgba(255,255,255,.08)">
+  <!-- ── 1. DARK HERO ── -->
+  <div style="background:var(--black);padding:52px 0 40px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <!-- Breadcrumb -->
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
         <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
         <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Voron</span>
       </div>
-      <!-- Title + Configurator -->
       <div style="display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px">
         <div>
           <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
@@ -45,84 +43,74 @@ const partCounts: Record<string, { a: number; t: number }> = {
     </div>
   </div>
 
-  <!-- ── CONTENT SECTION (light bg) ── -->
-  <section style="background:var(--black);padding:32px 0 52px">
+  <!-- ── 2. MODEL SELECTOR HERO BLOCK ── -->
+  <div style="background:var(--black);padding:48px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-hero">
 
-      <!-- 1. Model selector -->
-      <div class="model-selector" style="margin-bottom:20px">
-        <button class="model-btn active" data-model="2.4" aria-pressed="true">
-          <span class="model-btn-name">Voron 2.4</span>
-          <span class="model-btn-sub">250 · 300 · 350mm</span>
-        </button>
-        <button class="model-btn" data-model="trident" aria-pressed="false">
-          <span class="model-btn-name">Trident</span>
-          <span class="model-btn-sub">250 · 300 · 350mm</span>
-        </button>
-        <div class="model-coming">
-          <span class="coming-label">0.2</span>
-          <span class="coming-text">Coming soon</span>
-        </div>
-      </div>
-
-      <!-- 2. Printer hero image -->
-      <div class="printer-hero" style="margin-bottom:24px">
-        <img
-          id="printer-img"
-          src="/Media/ecosystems/voron/voron-2-4.webp"
-          alt="Voron 2.4"
-          class="printer-img"
-          onerror="this.style.display='none'"
-        />
-        <div class="printer-overlay">
-          <p class="printer-model-label" id="printer-model-label">Voron 2.4</p>
-          <p class="printer-model-sub" id="printer-model-sub">250mm · 300mm · 350mm</p>
-        </div>
-      </div>
-
-      <!-- 3. 2.4 vs Trident chooser callout -->
-      <div class="model-chooser" style="margin-bottom:32px">
-        <p class="mc-question">Which one should you build?</p>
-        <div class="mc-cols">
-          <div class="mc-col">
-            <div class="mc-col-head">
-              <span class="mc-badge mc-badge--popular">More popular</span>
-              <h3 class="mc-model-name">Voron 2.4</h3>
-              <p class="mc-size">Up to 400mm³</p>
+        <!-- LEFT: buttons + model info -->
+        <div class="model-hero-left">
+          <div class="model-selector" style="margin-bottom:24px">
+            <button class="model-btn active" data-model="2.4" aria-pressed="true">
+              <span class="model-btn-name">Voron 2.4</span>
+              <span class="model-btn-sub">250 · 300 · 350mm</span>
+            </button>
+            <button class="model-btn" data-model="trident" aria-pressed="false">
+              <span class="model-btn-name">Trident</span>
+              <span class="model-btn-sub">250 · 300 · 350mm</span>
+            </button>
+            <div class="model-coming">
+              <span class="coming-label">0.2</span>
+              <span class="coming-text">Coming soon</span>
             </div>
-            <ul class="mc-traits">
-              <li>Flying gantry — better for large format</li>
-              <li>4-point Z levelling — more adjustment points</li>
-              <li>Larger community, more mod support</li>
-              <li>Slightly more complex build</li>
-            </ul>
-            <p class="mc-best"><strong>Best for:</strong> Builders who want maximum build volume and the deepest mod ecosystem</p>
           </div>
-          <div class="mc-divider"></div>
-          <div class="mc-col">
-            <div class="mc-col-head">
-              <span class="mc-badge mc-badge--easier">Easier build</span>
-              <h3 class="mc-model-name">Trident</h3>
-              <p class="mc-size">Up to 350mm³</p>
+
+          <div class="model-info">
+            <h2 class="model-info-name" id="model-info-name">Voron 2.4</h2>
+            <p class="model-info-sizes" id="model-info-sizes">250mm · 300mm · 350mm</p>
+            <div class="model-spec-strip">
+              <div class="mspec-item">
+                <span class="mspec-label">Z System</span>
+                <span class="mspec-val" id="spec-z">4-point quad gantry</span>
+              </div>
+              <div class="mspec-item">
+                <span class="mspec-label">Max size</span>
+                <span class="mspec-val" id="spec-size">350mm³</span>
+              </div>
+              <div class="mspec-item">
+                <span class="mspec-label">Build time</span>
+                <span class="mspec-val" id="spec-build">40–60 hrs</span>
+              </div>
+              <div class="mspec-item">
+                <span class="mspec-label">Difficulty</span>
+                <span class="mspec-val" id="spec-diff">Intermediate</span>
+              </div>
             </div>
-            <ul class="mc-traits">
-              <li>Fixed gantry — mechanically simpler</li>
-              <li>3-point Z levelling — self-levels automatically</li>
-              <li>Faster to build and tune</li>
-              <li>Excellent for 250mm builds</li>
-            </ul>
-            <p class="mc-best"><strong>Best for:</strong> Builders who want a faster, cleaner build experience and don't need 400mm</p>
+            <p class="model-tagline" id="model-tagline">The flying-gantry flagship. Maximum build volume, deepest mod ecosystem, quad Z levelling.</p>
           </div>
         </div>
-        <div class="mc-footer">
-          <a href="/guides/voron-2-4-vs-trident" class="mc-full-link">Full comparison: Voron 2.4 vs Trident →</a>
-        </div>
-      </div>
 
-      <!-- 4. Browse by subsystem label -->
+        <!-- RIGHT: square printer image -->
+        <div class="model-hero-right">
+          <div class="model-img-wrap">
+            <img
+              id="printer-img"
+              src="/Media/ecosystems/Voron/voron-2-4.webp"
+              alt="Voron 2.4"
+              class="model-img"
+              onerror="this.style.display='none'"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. SUBSYSTEM CARD GRID ── -->
+  <section style="background:var(--black);padding:40px 0 52px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--fu);margin-bottom:16px">Browse by subsystem</div>
-
-      <!-- 5. Subsystem card grid -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
         {voronData.subsystems.flatMap(sub => {
           const pc = partCounts[sub.id] ?? { a: sub.partCount, t: sub.partCount };
@@ -204,12 +192,54 @@ const partCounts: Record<string, { a: number; t: number }> = {
           </div>
         </a>
       </div>
-
     </div>
   </section>
 
-  <!-- ── FEATURED PRODUCTS ── -->
-  <section class="section" style="padding-top:0" aria-label="Top picks for Voron">
+  <!-- ── 4. COMPARISON CALLOUT ── -->
+  <section style="background:#111;padding:48px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-chooser">
+        <p class="mc-question">Which one should you build?</p>
+        <div class="mc-cols">
+          <div class="mc-col">
+            <div class="mc-col-head">
+              <span class="mc-badge mc-badge--popular">More popular</span>
+              <h3 class="mc-model-name">Voron 2.4</h3>
+              <p class="mc-size">Up to 350mm³</p>
+            </div>
+            <ul class="mc-traits">
+              <li>Flying gantry — better for large format</li>
+              <li>4-point Z levelling — more adjustment points</li>
+              <li>Larger community, more mod support</li>
+              <li>Slightly more complex build</li>
+            </ul>
+            <p class="mc-best"><strong>Best for:</strong> Builders who want maximum build volume and the deepest mod ecosystem</p>
+          </div>
+          <div class="mc-divider"></div>
+          <div class="mc-col">
+            <div class="mc-col-head">
+              <span class="mc-badge mc-badge--easier">Easier build</span>
+              <h3 class="mc-model-name">Trident</h3>
+              <p class="mc-size">Up to 350mm³</p>
+            </div>
+            <ul class="mc-traits">
+              <li>Fixed gantry — mechanically simpler</li>
+              <li>3-point Z levelling — self-levels automatically</li>
+              <li>Faster to build and tune</li>
+              <li>Excellent for 250mm builds</li>
+            </ul>
+            <p class="mc-best"><strong>Best for:</strong> Builders who want a faster, cleaner build experience and easier first-time calibration</p>
+          </div>
+        </div>
+        <div class="mc-footer">
+          <a href="/guides/voron-2-4-vs-trident" class="mc-full-link">Full comparison: Voron 2.4 vs Trident →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. TOP PICKS FOR VORON ── -->
+  <section class="section" style="padding-top:64px" aria-label="Top picks for Voron">
     <div class="container">
       <div class="section-head">
         <h2 class="section-head-label">Top picks for Voron</h2>
@@ -243,7 +273,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
     </div>
   </section>
 
-  <!-- ── COMMUNITY MODS TEASER ── -->
+  <!-- ── 6. COMMUNITY MODS ── -->
   <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Community mods">
     <div class="container">
       <div class="section-head">
@@ -305,7 +335,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 </Base>
 
 <style is:global>
-/* ── MODEL SELECTOR (dark-background variant) ── */
+/* ── MODEL SELECTOR ── */
 .model-selector {
   display: flex;
   align-items: center;
@@ -317,13 +347,13 @@ const partCounts: Record<string, { a: number; t: number }> = {
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
-  padding: 12px 20px;
-  border: 1.5px solid rgba(255,255,255,.15);
+  padding: 16px 24px;
+  border: 1.5px solid rgba(255,255,255,.1);
   border-radius: 10px;
   background: rgba(255,255,255,.04);
   cursor: pointer;
   transition: border-color .15s, background .15s;
-  min-width: 140px;
+  min-width: 160px;
 }
 .model-btn:hover { border-color: var(--accent); }
 .model-btn.active {
@@ -366,44 +396,78 @@ const partCounts: Record<string, { a: number; t: number }> = {
   font-family: var(--fm);
 }
 
-/* ── PRINTER HERO IMAGE ── */
-.printer-hero {
-  position: relative;
-  width: 100%;
-  max-height: 320px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #1a1a1a;
-  aspect-ratio: 3 / 2;
+/* ── MODEL HERO BLOCK ── */
+.model-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
 }
-.printer-img {
+.model-hero-left { flex: 1; min-width: 0; }
+.model-hero-right { flex-shrink: 0; width: 420px; }
+.model-img-wrap {
+  width: 420px;
+  height: 420px;
+  border-radius: 8px;
+  background: #111;
+  border: 1px solid rgba(255,255,255,.06);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.model-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: contain;
+  object-position: center center;
 }
-.printer-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 24px;
-  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,0) 40%);
-}
-.printer-model-label {
-  font-family: var(--fd);
-  font-size: 36px;
+.model-info-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 52px;
   font-weight: 800;
   color: #fff;
-  line-height: 1;
-  margin-bottom: 4px;
   letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 6px;
 }
-.printer-model-sub {
+.model-info-sizes {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
-  color: rgba(255,255,255,.6);
-  font-family: var(--fm);
-  letter-spacing: 0.02em;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 24px;
+}
+.model-spec-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.mspec-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.mspec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,.3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+.mspec-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.7);
+}
+.model-tagline {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.6;
+  max-width: 440px;
 }
 
 /* ── MODEL CHOOSER CALLOUT ── */
@@ -504,15 +568,19 @@ const partCounts: Record<string, { a: number; t: number }> = {
 }
 .mc-full-link:hover { color: #fff; }
 
+/* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
+  .model-hero { flex-direction: column; gap: 32px; }
+  .model-hero-right { width: 100%; }
+  .model-img-wrap { width: 100%; height: auto; aspect-ratio: 1 / 1; max-width: 420px; }
   .mc-cols { grid-template-columns: 1fr; }
   .mc-divider { height: 1px; width: 100%; margin: 0; }
 }
 @media (max-width: 640px) {
-  .mc-divider { display: none; }
-  .model-btn { min-width: 120px; padding: 10px 14px; }
+  .model-btn { min-width: 120px; padding: 12px 16px; }
   .model-btn-name { font-size: 15px; }
-  .printer-model-label { font-size: 28px; }
+  .model-info-name { font-size: 36px; }
+  .mc-divider { display: none; }
 }
 </style>
 
@@ -521,39 +589,69 @@ const partCounts: Record<string, { a: number; t: number }> = {
   const modelBtns = document.querySelectorAll<HTMLButtonElement>('.model-btn');
   const STORAGE_KEY = 'voron-model';
 
-  const printerImg   = document.getElementById('printer-img') as HTMLImageElement | null;
-  const printerLabel = document.getElementById('printer-model-label');
-  const printerSub   = document.getElementById('printer-model-sub');
+  const printerImg = document.getElementById('printer-img') as HTMLImageElement | null;
+  const infoName   = document.getElementById('model-info-name');
+  const infoSizes  = document.getElementById('model-info-sizes');
+  const specZ      = document.getElementById('spec-z');
+  const specSize   = document.getElementById('spec-size');
+  const specBuild  = document.getElementById('spec-build');
+  const specDiff   = document.getElementById('spec-diff');
+  const taglineEl  = document.getElementById('model-tagline');
 
-  const modelMeta: Record<string, { src: string; label: string; sub: string }> = {
-    '2.4':     { src: '/Media/ecosystems/voron/voron-2-4.webp',     label: 'Voron 2.4', sub: '250mm · 300mm · 350mm' },
-    'trident': { src: '/Media/ecosystems/voron/voron-trident.webp', label: 'Trident',    sub: '250mm · 300mm · 350mm' },
+  interface ModelMeta {
+    src: string; label: string; sizes: string;
+    z: string; size: string; build: string; diff: string;
+    tagline: string;
+  }
+
+  const modelMeta: Record<string, ModelMeta> = {
+    '2.4': {
+      src:     '/Media/ecosystems/Voron/voron-2-4.webp',
+      label:   'Voron 2.4',
+      sizes:   '250mm · 300mm · 350mm',
+      z:       '4-point quad gantry',
+      size:    '350mm³',
+      build:   '40–60 hrs',
+      diff:    'Intermediate',
+      tagline: 'The flying-gantry flagship. Maximum build volume, deepest mod ecosystem, quad Z levelling.',
+    },
+    'trident': {
+      src:     '/Media/ecosystems/Voron/voron-trident.webp',
+      label:   'Trident',
+      sizes:   '250mm · 300mm · 350mm',
+      z:       '3-point belt driven',
+      size:    '350mm³',
+      build:   '30–45 hrs',
+      diff:    'Beginner-friendly',
+      tagline: 'Fixed gantry, three-point self-levelling. Faster to build, easier to tune, excellent for 250–300mm work.',
+    },
   };
 
   function setModel(model: string) {
     localStorage.setItem(STORAGE_KEY, model);
 
-    // Update button active states
+    // Button active states
     modelBtns.forEach(btn => {
       const active = btn.dataset.model === model;
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', String(active));
     });
 
-    // Swap printer image + overlay text
+    // Model info + image
     const meta = modelMeta[model];
-    if (meta && printerImg) {
-      printerImg.style.display = '';   // restore if hidden by a previous onerror
-      printerImg.src = meta.src;
-      printerImg.alt = meta.label;
+    if (meta) {
+      if (printerImg) { printerImg.style.display = ''; printerImg.src = meta.src; printerImg.alt = meta.label; }
+      if (infoName)  infoName.textContent  = meta.label;
+      if (infoSizes) infoSizes.textContent = meta.sizes;
+      if (specZ)     specZ.textContent     = meta.z;
+      if (specSize)  specSize.textContent  = meta.size;
+      if (specBuild) specBuild.textContent = meta.build;
+      if (specDiff)  specDiff.textContent  = meta.diff;
+      if (taglineEl) taglineEl.textContent = meta.tagline;
     }
-    if (meta && printerLabel) printerLabel.textContent = meta.label;
-    if (meta && printerSub)   printerSub.textContent   = meta.sub;
 
-    // Update subsystem cards
+    // Subsystem card filtering + link hrefs
     updateSubsystemCards(model);
-
-    // Append ?model= to subsystem link hrefs
     document.querySelectorAll<HTMLAnchorElement>('a[data-subsystem-link]').forEach(link => {
       const base = link.dataset.href ?? link.getAttribute('href') ?? '';
       link.href = base + '?model=' + model;
@@ -562,9 +660,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
   function updateSubsystemCards(model: string) {
     document.querySelectorAll<HTMLElement>('.subsystem-card[data-parts24]').forEach(card => {
-      const count = model === '2.4'
-        ? card.dataset.parts24
-        : card.dataset.partsTrident;
+      const count = model === '2.4' ? card.dataset.parts24 : card.dataset.partsTrident;
       const countEl = card.querySelector<HTMLElement>('.subsystem-parts');
       if (countEl && count) countEl.textContent = count + ' parts →';
     });
@@ -578,7 +674,6 @@ const partCounts: Record<string, { a: number; t: number }> = {
     btn.addEventListener('click', () => setModel(btn.dataset.model ?? '2.4'));
   });
 
-  // Restore from localStorage on load
   const saved = localStorage.getItem(STORAGE_KEY) ?? '2.4';
   setModel(saved);
 </script>
