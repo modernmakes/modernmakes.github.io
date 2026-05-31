@@ -36,13 +36,13 @@ const currentPath = '/voron/bed';
   (function() {
     const STORAGE_KEY = 'voron-model';
     const params = new URLSearchParams(window.location.search);
-    const model = params.get('model') || sessionStorage.getItem(STORAGE_KEY) || '2.4';
-    sessionStorage.setItem(STORAGE_KEY, model);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
     const label = document.getElementById('active-model-label');
     if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
-    document.querySelectorAll('[data-model]').forEach(el => {
-      const m = (el as HTMLElement).dataset.model;
-      (el as HTMLElement).style.display = (m === 'both' || m === model) ? '' : 'none';
+    document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
+      const compatible = (el.dataset.compatible ?? '').split(',');
+      el.style.display = compatible.includes(model) ? '' : 'none';
     });
   })();
 </script>
