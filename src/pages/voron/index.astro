@@ -30,13 +30,13 @@ const partCounts: Record<string, { a: number; t: number }> = {
         <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
         <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Voron</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px">
+      <div class="hero-content-grid">
         <div>
           <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
           <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron</h1>
           <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">The community-designed CoreXY benchmark. Voron 2.4 and Trident are the most-built self-build printers on the planet — and have the deepest aftermarket parts ecosystem to match.</p>
         </div>
-        <a href="/voron/configurator" style="background:var(--accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;padding:14px 24px;border-radius:8px;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .15s">
+        <a href="/voron/configurator" class="btn-configurator" style="background:var(--accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;padding:14px 24px;border-radius:8px;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .15s">
           Open Configurator →
         </a>
       </div>
@@ -348,6 +348,23 @@ const partCounts: Record<string, { a: number; t: number }> = {
 </Base>
 
 <style is:global>
+/* ── HERO CONTENT GRID ── */
+.hero-content-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .hero-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-content-grid .btn-configurator {
+    width: fit-content;
+    margin-top: 8px;
+  }
+}
+
 /* ── STEP PROMPT ── */
 .step-prompt {
   display: flex;
@@ -677,7 +694,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
     object-fit: contain;
     border-radius: 8px;
     background: #111;
-    margin: 16px auto 20px;
+    margin: 24px auto 0;
   }
   .model-hero-right {
     display: none;
@@ -710,6 +727,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 }
 @media (max-width: 768px) {
   .model-hero { flex-direction: column; gap: 32px; }
+  .model-hero-left { padding-bottom: 24px; }
   .model-hero-right { width: 100%; }
   .model-img-wrap { width: 100%; height: auto; aspect-ratio: 1 / 1; max-width: 420px; }
   .step-number { font-size: 40px; }
