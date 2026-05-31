@@ -75,6 +75,13 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
           <div class="model-info">
             <h2 class="model-info-name" id="model-info-name">Voron 2.4</h2>
+            <img
+              class="model-img-mobile"
+              id="printer-img-mobile"
+              src="/Media/ecosystems/Voron/voron-2-4.webp"
+              alt="Voron 2.4"
+              onerror="this.style.display='none'"
+            />
             <p class="model-info-sizes" id="model-info-sizes">250mm · 300mm · 350mm</p>
             <div class="model-spec-strip">
               <div class="mspec-item">
@@ -657,6 +664,26 @@ const partCounts: Record<string, { a: number; t: number }> = {
 }
 .mc-full-link:hover { color: #fff; }
 
+/* ── MOBILE PRINTER IMAGE ── */
+.model-img-mobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .model-img-mobile {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #111;
+    margin: 16px auto 20px;
+  }
+  .model-hero-right {
+    display: none;
+  }
+}
+
 /* ── SUBSYSTEM GRID ── */
 .subsystem-grid {
   display: grid;
@@ -706,7 +733,8 @@ const partCounts: Record<string, { a: number; t: number }> = {
   const modelBtns = document.querySelectorAll<HTMLButtonElement>('.model-btn');
   const STORAGE_KEY = 'voron-model';
 
-  const printerImg = document.getElementById('printer-img') as HTMLImageElement | null;
+  const printerImg  = document.getElementById('printer-img') as HTMLImageElement | null;
+  const mobileImg   = document.getElementById('printer-img-mobile') as HTMLImageElement | null;
   const infoName   = document.getElementById('model-info-name');
   const infoSizes  = document.getElementById('model-info-sizes');
   const specZ      = document.getElementById('spec-z');
@@ -760,6 +788,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
     const meta = modelMeta[model];
     if (meta) {
       if (printerImg) { printerImg.style.display = ''; printerImg.src = meta.src; printerImg.alt = meta.label; }
+      if (mobileImg)  { mobileImg.style.display  = ''; mobileImg.src  = meta.src; mobileImg.alt  = meta.label; }
       if (infoName)  infoName.textContent  = meta.label;
       if (infoSizes) infoSizes.textContent = meta.sizes;
       if (specZ)     specZ.textContent     = meta.z;
