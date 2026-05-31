@@ -23,7 +23,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- ── 1. DARK HERO ── -->
-  <div style="background:var(--black);padding:52px 0 40px">
+  <div style="background:var(--black);padding:52px 0 32px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
@@ -44,12 +44,20 @@ const partCounts: Record<string, { a: number; t: number }> = {
   </div>
 
   <!-- ── 2. MODEL SELECTOR HERO BLOCK ── -->
-  <div style="background:var(--black);padding:48px 0">
+  <div style="background:#0d0d0d;padding:48px 0 0;border-top:3px solid var(--accent)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+
       <div class="model-hero">
 
-        <!-- LEFT: buttons + model info -->
+        <!-- LEFT: step prompt + buttons + model info -->
         <div class="model-hero-left">
+
+          <!-- Step 1 prompt -->
+          <div class="step-prompt">
+            <span class="step-number">01</span>
+            <span class="step-text">Choose your printer to explore compatible parts and upgrades</span>
+          </div>
+
           <div class="model-selector" style="margin-bottom:24px">
             <button class="model-btn active" data-model="2.4" aria-pressed="true">
               <span class="model-btn-name">Voron 2.4</span>
@@ -104,13 +112,22 @@ const partCounts: Record<string, { a: number; t: number }> = {
         </div>
 
       </div>
+
+      <!-- "Now browsing" context bar — breaks out of container padding for full bleed -->
+      <div class="voron-context-bar">
+        <span class="mcb-label">Now browsing parts for</span>
+        <span class="mcb-model" id="mcb-model">Voron 2.4</span>
+        <span class="mcb-separator">·</span>
+        <span class="mcb-count" id="mcb-count">Compatible with all sizes</span>
+      </div>
+
     </div>
   </div>
 
   <!-- ── 3. SUBSYSTEM CARD GRID ── -->
   <section style="background:var(--black);padding:40px 0 52px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--fu);margin-bottom:16px">Browse by subsystem</div>
+      <div id="subsystem-heading" style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--fu);margin-bottom:16px">Voron 2.4 — Browse by subsystem</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
         {voronData.subsystems.flatMap(sub => {
           const pc = partCounts[sub.id] ?? { a: sub.partCount, t: sub.partCount };
@@ -335,6 +352,35 @@ const partCounts: Record<string, { a: number; t: number }> = {
 </Base>
 
 <style is:global>
+/* ── STEP PROMPT ── */
+.step-prompt {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.step-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  opacity: 0.25;
+  flex-shrink: 0;
+}
+.step-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255,255,255,.5);
+  line-height: 1.3;
+  max-width: 320px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
 /* ── MODEL SELECTOR ── */
 .model-selector {
   display: flex;
@@ -352,13 +398,14 @@ const partCounts: Record<string, { a: number; t: number }> = {
   border-radius: 10px;
   background: rgba(255,255,255,.04);
   cursor: pointer;
-  transition: border-color .15s, background .15s;
+  transition: border-color .15s, background .15s, box-shadow .15s;
   min-width: 160px;
 }
 .model-btn:hover { border-color: var(--accent); }
 .model-btn.active {
   border-color: var(--accent);
-  background: rgba(255,90,31,.1);
+  background: rgba(255,90,31,.15);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 .model-btn-name {
   font-family: var(--fu);
@@ -366,8 +413,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.3px;
+  transition: font-size .15s, color .15s;
 }
-.model-btn.active .model-btn-name { color: var(--accent); }
+.model-btn.active .model-btn-name { color: var(--accent); font-size: 20px; }
 .model-btn-sub {
   font-family: var(--fm);
   font-size: 11px;
@@ -394,6 +442,16 @@ const partCounts: Record<string, { a: number; t: number }> = {
   font-size: 11px;
   color: rgba(255,255,255,.4);
   font-family: var(--fm);
+}
+
+/* ── SELECTION PULSE ── */
+@keyframes selectPulse {
+  0%   { opacity: 1; }
+  30%  { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+.model-hero.model-selected .model-info {
+  animation: selectPulse 0.35s ease-out;
 }
 
 /* ── MODEL HERO BLOCK ── */
@@ -423,7 +481,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 }
 .model-info-name {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 52px;
+  font-size: 64px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.5px;
@@ -434,40 +492,79 @@ const partCounts: Record<string, { a: number; t: number }> = {
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   color: rgba(255,255,255,.4);
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 .model-spec-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+  margin-bottom: 28px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .mspec-item {
   display: flex;
-  align-items: baseline;
-  gap: 12px;
+  flex-direction: column;
+  gap: 4px;
 }
 .mspec-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 9px;
   color: rgba(255,255,255,.3);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  min-width: 80px;
-  flex-shrink: 0;
+  letter-spacing: 0.1em;
 }
 .mspec-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  color: rgba(255,255,255,.7);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
 }
 .model-tagline {
   font-family: 'Lora', serif;
   font-style: italic;
-  font-size: 15px;
-  color: rgba(255,255,255,.55);
+  font-size: 17px;
+  color: rgba(255,255,255,.65);
   line-height: 1.6;
   max-width: 440px;
+  margin-top: 20px;
+}
+
+/* ── VORON CONTEXT BAR ── */
+.voron-context-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 40px;
+  background: rgba(255,90,31,.08);
+  border-top: 1px solid rgba(255,90,31,.2);
+  border-bottom: 1px solid rgba(255,90,31,.2);
+  margin: 32px -40px 0;
+}
+.mcb-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.mcb-model {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.mcb-separator {
+  color: rgba(255,255,255,.2);
+  font-size: 12px;
+}
+.mcb-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
 }
 
 /* ── MODEL CHOOSER CALLOUT ── */
@@ -570,22 +667,27 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  /* Tablet: keep two-column layout, shrink image to 320px */
   .model-hero-right { width: 320px; }
   .model-img-wrap { width: 320px; height: 320px; }
-  .model-info-name { font-size: 42px; }
+  .model-info-name { font-size: 52px; }
   .mc-cols { grid-template-columns: 1fr; }
   .mc-divider { height: 1px; width: 100%; margin: 0; }
 }
 @media (max-width: 768px) {
-  /* Mobile: switch to single column */
   .model-hero { flex-direction: column; gap: 32px; }
   .model-hero-right { width: 100%; }
   .model-img-wrap { width: 100%; height: auto; aspect-ratio: 1 / 1; max-width: 420px; }
+  .step-number { font-size: 40px; }
+  .step-text { font-size: 16px; }
+  .model-info-name { font-size: 44px; }
+  .mspec-val { font-size: 17px; }
+  .model-spec-strip { grid-template-columns: 1fr 1fr; }
+  .voron-context-bar { flex-wrap: wrap; gap: 8px; }
 }
 @media (max-width: 640px) {
   .model-btn { min-width: 120px; padding: 12px 16px; }
   .model-btn-name { font-size: 15px; }
+  .model-btn.active .model-btn-name { font-size: 17px; }
   .model-info-name { font-size: 36px; }
   .mc-divider { display: none; }
 }
@@ -604,6 +706,8 @@ const partCounts: Record<string, { a: number; t: number }> = {
   const specBuild  = document.getElementById('spec-build');
   const specDiff   = document.getElementById('spec-diff');
   const taglineEl  = document.getElementById('model-tagline');
+  const mcbModel   = document.getElementById('mcb-model');
+  const subHead    = document.getElementById('subsystem-heading');
 
   interface ModelMeta {
     src: string; label: string; sizes: string;
@@ -656,6 +760,18 @@ const partCounts: Record<string, { a: number; t: number }> = {
       if (specDiff)  specDiff.textContent  = meta.diff;
       if (taglineEl) taglineEl.textContent = meta.tagline;
     }
+
+    // Selection pulse animation
+    const heroEl = document.querySelector<HTMLElement>('.model-hero');
+    if (heroEl) {
+      heroEl.classList.remove('model-selected');
+      void heroEl.offsetWidth;
+      heroEl.classList.add('model-selected');
+    }
+
+    // Context bar + subsystem heading
+    if (mcbModel) mcbModel.textContent = model === '2.4' ? 'Voron 2.4' : 'Trident';
+    if (subHead)  subHead.textContent  = (model === '2.4' ? 'Voron 2.4' : 'Trident') + ' — Browse by subsystem';
 
     // Subsystem card filtering + link hrefs
     updateSubsystemCards(model);
