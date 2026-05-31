@@ -21,11 +21,11 @@
       "motion": "CoreXY"
     },
     {
-      "id": "voron-2-4-400",
-      "label": "Voron 2.4 · 400mm",
-      "shortLabel": "2.4 · 400",
+      "id": "voron-2-4-250",
+      "label": "Voron 2.4 · 250mm",
+      "shortLabel": "2.4 · 250",
       "series": "2.4",
-      "buildVolume": "400×400×380mm",
+      "buildVolume": "250×250×230mm",
       "zDrive": "4-point gantry-mounted",
       "motion": "CoreXY"
     },

@@ -53,7 +53,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
       <div class="model-selector" style="margin-bottom:20px">
         <button class="model-btn active" data-model="2.4" aria-pressed="true">
           <span class="model-btn-name">Voron 2.4</span>
-          <span class="model-btn-sub">300 · 350 · 400mm</span>
+          <span class="model-btn-sub">250 · 300 · 350mm</span>
         </button>
         <button class="model-btn" data-model="trident" aria-pressed="false">
           <span class="model-btn-name">Trident</span>
@@ -76,7 +76,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
         />
         <div class="printer-overlay">
           <p class="printer-model-label" id="printer-model-label">Voron 2.4</p>
-          <p class="printer-model-sub" id="printer-model-sub">300mm · 350mm · 400mm</p>
+          <p class="printer-model-sub" id="printer-model-sub">250mm · 300mm · 350mm</p>
         </div>
       </div>
 
@@ -526,7 +526,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   const printerSub   = document.getElementById('printer-model-sub');
 
   const modelMeta: Record<string, { src: string; label: string; sub: string }> = {
-    '2.4':     { src: '/Media/ecosystems/voron/voron-2-4.webp',     label: 'Voron 2.4', sub: '300mm · 350mm · 400mm' },
+    '2.4':     { src: '/Media/ecosystems/voron/voron-2-4.webp',     label: 'Voron 2.4', sub: '250mm · 300mm · 350mm' },
     'trident': { src: '/Media/ecosystems/voron/voron-trident.webp', label: 'Trident',    sub: '250mm · 300mm · 350mm' },
   };
 
