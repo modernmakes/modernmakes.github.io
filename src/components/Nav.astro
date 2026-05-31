@@ -127,7 +127,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   .nav {
   position: fixed !important;
   top: 0 !important;
-    z-index: 100;
+    z-index: 1000;
     width: 100%;
   background: rgba(20, 20, 20, 0.85);
   backdrop-filter: blur(20px);
@@ -293,7 +293,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 6px;
-    z-index: 200;
+    z-index: 1001;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
   .nav-dd.open .nav-dd-panel { display: block; }
@@ -423,7 +423,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 999;
   }
   .nav-panel.open { max-height: 480px; }
 
@@ -489,7 +489,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0);
-    z-index: 500;
+    z-index: 1100;
     align-items: center;
     justify-content: center;
     transition: background 200ms ease;

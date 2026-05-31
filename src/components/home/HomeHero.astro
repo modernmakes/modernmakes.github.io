@@ -21,6 +21,7 @@ function bgStyle(slide: any) {
         <div
           class:list={['hero-bg', { 'kb-active': i === 0 }]}
           style={bgStyle(slide)}
+          data-fallback={slide.gradient}
         ></div>
         <div class:list={['hero-overlay', { 'hero-overlay--photo': !!slide.image }]}></div>
         <a href={slide.href} class="hero-content" tabindex={i === 0 ? 0 : -1}>
@@ -149,7 +150,7 @@ function bgStyle(slide: any) {
     left: 0;
     right: 0;
     z-index: 2;
-    padding: 0 40px 40px;
+    padding: 0 40px 80px;
     text-decoration: none;
     color: inherit;
     display: block;
@@ -358,7 +359,7 @@ function bgStyle(slide: any) {
   border-color: rgba(255,255,255,.08);
 }
     .hero-story:hover { transform: translateY(-1px); }
-    .hero-content { padding: 0 24px 32px; }
+    .hero-content { padding: 0 24px 80px; }
     .hero-content-inner { max-width: 100%; }
   }
 
@@ -372,7 +373,7 @@ function bgStyle(slide: any) {
         linear-gradient(to right, rgba(0,0,0,.6)  0%, transparent 70%);
     }
     .hero-title { letter-spacing: -.3px; }
-    .hero-content { padding: 0 20px 28px; }
+    .hero-content { padding: 0 20px 72px; }
 	.hero-sidebar { padding: 10px 20px; gap: 8px; }    
 /* Single consistent min/max — no conflicting rules */
     .hero-story {
@@ -468,5 +469,21 @@ function bgStyle(slide: any) {
     hero.addEventListener('mouseleave', startTimer);
 
     startTimer();
+
+    // Graceful fallback: if a hero background-image 404s, replace with gradient
+    hero.querySelectorAll('.hero-bg').forEach(function(bg) {
+      var style = bg.getAttribute('style') || '';
+      var match = style.match(/url\(['"]?([^'")\s]+)['"]?\)/);
+      if (!match) return;
+      var img = new Image();
+      img.onerror = function() {
+        var fallback = bg.dataset.fallback;
+        if (fallback) {
+          bg.style.backgroundImage = '';
+          bg.style.background = fallback;
+        }
+      };
+      img.src = match[1];
+    });
   }
 </script>
