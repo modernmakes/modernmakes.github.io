@@ -307,7 +307,7 @@ const relatedArticles = [
     if (!stickyHeader || !sidebar || window.innerWidth <= 1024) return;
     sidebar.style.top = isSticky
       ? (60 + stickyHeader.offsetHeight + 16) + 'px'
-      : '100px';
+      : '80px';
   }
   if (stickySentinel && stickyHeader) {
     new IntersectionObserver(
