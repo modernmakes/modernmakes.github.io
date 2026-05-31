@@ -126,7 +126,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
         <span class="mcb-count" id="mcb-count">Compatible with all sizes</span>
       </div>
       <div id="subsystem-heading" style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--fu);margin-bottom:16px">Voron 2.4 — Browse by subsystem</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      <div class="subsystem-grid">
         {voronData.subsystems.flatMap(sub => {
           const pc = partCounts[sub.id] ?? { a: sub.partCount, t: sub.partCount };
           const baseLink = `/voron/${sub.id}`;
@@ -134,7 +134,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
           if (sub.id === 'z-system') {
             return [
-              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4">
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
                   <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
@@ -142,7 +142,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">9 parts →</div>
                 </div>
               </a>,
-              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none">
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none;min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
                   <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
@@ -155,7 +155,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
           if (sub.id === 'gantry') {
             return [
-              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4">
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
                   <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
@@ -163,7 +163,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">5 parts →</div>
                 </div>
               </a>,
-              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none">
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none;min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
                   <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
@@ -175,7 +175,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
           }
 
           return [
-            <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4,trident">
+            <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4,trident" style="min-width:0;overflow:hidden">
               <div class="subsystem-card"
                    data-parts24={String(pc.a)}
                    data-parts-trident={String(pc.t)}
@@ -188,17 +188,8 @@ const partCounts: Record<string, { a: number; t: number }> = {
             </a>
           ];
         })}
-        <!-- Community Mods card -->
-        <a href="/voron/mods" data-models="2.4,trident">
-          <div style="background:#1a1e12;border:1px solid rgba(46,125,50,.25);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;height:100%">
-            <div style="font-size:20px;margin-bottom:8px">🔧</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">Community Mods</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">Toolheads, filtration, probes, panels — the best user-made upgrades</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(46,125,50,.7)">13 mods →</div>
-          </div>
-        </a>
         <!-- Configurator card -->
-        <a href="/voron/configurator" data-models="2.4,trident">
+        <a href="/voron/configurator" data-models="2.4,trident" style="min-width:0;overflow:hidden">
           <div style="background:rgba(255,90,31,.1);border:1px solid rgba(255,90,31,.25);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s;height:100%">
             <div style="font-size:20px;margin-bottom:8px">🔧</div>
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:var(--accent-mid);margin-bottom:3px">Configurator</div>
@@ -458,7 +449,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   align-items: flex-start;
   gap: 48px;
 }
-.model-hero-left { flex: 1; min-width: 0; }
+.model-hero-left { flex: 1; min-width: 0; padding-bottom: 48px; }
 .model-hero-right { flex-shrink: 0; width: 420px; }
 .model-img-wrap {
   width: 420px;
@@ -527,6 +518,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   line-height: 1.6;
   max-width: 440px;
   margin-top: 20px;
+  margin-bottom: 48px;
 }
 
 /* ── VORON CONTEXT BAR ── */
@@ -664,6 +656,22 @@ const partCounts: Record<string, { a: number; t: number }> = {
   letter-spacing: .02em;
 }
 .mc-full-link:hover { color: #fff; }
+
+/* ── SUBSYSTEM GRID ── */
+.subsystem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@media (max-width: 1024px) {
+  .subsystem-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .subsystem-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .subsystem-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
