@@ -5,8 +5,8 @@ import Footer from '../../components/Footer.astro';
 const currentPath = '/tools';
 ---
 <Base
-  title="Pressure Advance Calibration Tool — Klipper, Marlin, RRF"
-  description="Generate a PA/LA test pattern for Klipper, Marlin, or RepRapFirmware. Supports Voron, Bambu, Prusa, and Ender presets. Free, no sign-up."
+  title="Pressure Advance Calibration Tool — Klipper, Marlin, RRF, Bambu"
+  description="Generate a PA/LA test pattern for Klipper, Marlin, RepRapFirmware, or Bambu. Supports Voron, Bambu, Prusa, and Ender presets. Free, no sign-up."
 >
   <Nav slot="nav" currentPath={currentPath} />
 
@@ -22,11 +22,12 @@ const currentPath = '/tools';
       </div>
       <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calibration Tool</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Pressure Advance Calibration</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Generate a corner-test G-code pattern for Klipper (PA), Marlin (LA/K), or RepRapFirmware. Configure your printer, download the file, and read the cleanest corner.</p>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Generate a corner-test G-code pattern for Klipper (PA), Marlin (LA/K), RepRapFirmware, or Bambu. Configure your printer, download the file, and read the cleanest corner.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper</span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Marlin 1.1.9+</span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">RepRapFirmware 3+</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Bambu (X1C/P1S/A1)</span>
       </div>
     </div>
   </div>
@@ -49,7 +50,7 @@ const currentPath = '/tools';
               <option value="prusa">Prusa MK4</option>
               <option value="ender">Ender 3 / CR-10</option>
             </select>
-            <span id="preset-modified" style="display:none;font-size:10px;color:var(--g2);font-family:'JetBrains Mono',monospace;margin-top:4px;display:none">(modified)</span>
+            <span id="preset-modified" class="pa-modified-badge">(modified)</span>
           </div>
         </div>
 
@@ -64,18 +65,27 @@ const currentPath = '/tools';
               <div class="pa-form-group">
                 <label class="pa-label" for="paStart">PA Start</label>
                 <input class="pa-input" type="number" id="paStart" value="0" min="0" max="2" step="0.001">
+                <span id="err-paStart" class="pa-field-error"></span>
               </div>
               <div class="pa-form-group">
                 <label class="pa-label" for="paEnd">PA End</label>
                 <input class="pa-input" type="number" id="paEnd" value="0.08" min="0" max="2" step="0.001">
+                <span id="err-paEnd" class="pa-field-error"></span>
               </div>
               <div class="pa-form-group">
                 <label class="pa-label" for="paIncrement">Increment</label>
                 <input class="pa-input" type="number" id="paIncrement" value="0.005" min="0.001" max="0.1" step="0.001">
+                <span id="err-paIncrement" class="pa-field-error"></span>
               </div>
             </div>
             <div class="pa-pattern-count" id="patternCountDisplay">
               <span id="patternCountNum">17</span> patterns will be generated
+            </div>
+            <div id="pattern-count-error" class="pa-inline-error" style="display:none">
+              ⚠ Too many patterns — maximum 30. Increase increment or reduce range.
+            </div>
+            <div id="increment-warning" class="pa-inline-warn" style="display:none">
+              ⚠ Increment doesn't divide evenly into range — <span id="incrementActualEnd"></span>
             </div>
           </div>
         </details>
@@ -93,6 +103,7 @@ const currentPath = '/tools';
                 <label class="pa-radio"><input type="radio" name="firmware" value="klipper" checked> Klipper</label>
                 <label class="pa-radio"><input type="radio" name="firmware" value="marlin"> Marlin 1.1.9+</label>
                 <label class="pa-radio"><input type="radio" name="firmware" value="rrf"> RepRapFirmware 3+</label>
+                <label class="pa-radio"><input type="radio" name="firmware" value="bambu"> Bambu (X1C/P1S/A1)</label>
               </div>
             </div>
             <div class="pa-form-group">
@@ -105,7 +116,8 @@ const currentPath = '/tools';
             <div class="pa-row-2">
               <div class="pa-form-group">
                 <label class="pa-label" for="nozzleDia">Nozzle Diameter (mm)</label>
-                <input class="pa-input" type="number" id="nozzleDia" value="0.4" min="0.1" max="1.2" step="0.1">
+                <input class="pa-input" type="number" id="nozzleDia" value="0.4" min="0.1" max="2.0" step="0.1">
+                <span id="err-nozzleDia" class="pa-field-error"></span>
               </div>
               <div class="pa-form-group">
                 <label class="pa-label" for="filamentDia">Filament Diameter (mm)</label>
@@ -115,13 +127,16 @@ const currentPath = '/tools';
             <div class="pa-row-2">
               <div class="pa-form-group">
                 <label class="pa-label" for="bedX">Bed Size X (mm)</label>
-                <input class="pa-input" type="number" id="bedX" value="250" min="100" max="700">
+                <input class="pa-input" type="number" id="bedX" value="250" min="51" max="700">
+                <span id="err-bedX" class="pa-field-error"></span>
               </div>
               <div class="pa-form-group">
                 <label class="pa-label" for="bedY">Bed Size Y (mm)</label>
-                <input class="pa-input" type="number" id="bedY" value="210" min="100" max="700">
+                <input class="pa-input" type="number" id="bedY" value="210" min="51" max="700">
+                <span id="err-bedY" class="pa-field-error"></span>
               </div>
             </div>
+            <div id="bed-fit-warning" class="pa-inline-error" style="display:none"></div>
             <div class="pa-form-group">
               <label class="pa-label" for="travelSpeed">Travel Speed (mm/s)</label>
               <input class="pa-input" type="number" id="travelSpeed" value="120" min="20" max="800">
@@ -211,7 +226,8 @@ const currentPath = '/tools';
               </div>
               <div class="pa-form-group">
                 <label class="pa-label" for="layerHeight">Layer Height (mm)</label>
-                <input class="pa-input" type="number" id="layerHeight" value="0.2" min="0.05" max="0.6" step="0.01">
+                <input class="pa-input" type="number" id="layerHeight" value="0.2" min="0.05" max="0.5" step="0.01">
+                <span id="err-layerHeight" class="pa-field-error"></span>
               </div>
             </div>
             <div class="pa-row-2">
@@ -221,7 +237,8 @@ const currentPath = '/tools';
               </div>
               <div class="pa-form-group">
                 <label class="pa-label" for="printSpeed">Print Speed (mm/s)</label>
-                <input class="pa-input" type="number" id="printSpeed" value="100" min="10" max="800">
+                <input class="pa-input" type="number" id="printSpeed" value="100" min="1" max="800">
+                <span id="err-printSpeed" class="pa-field-error"></span>
               </div>
             </div>
             <div class="pa-row-2">
@@ -319,7 +336,7 @@ M84</textarea>
           <ol class="pa-howto-steps">
             <li><strong>Configure</strong> your printer settings in the panel. Select a preset to auto-fill common values.</li>
             <li><strong>Download or copy</strong> the G-code file. Do <em>not</em> slice it — print it directly from your host (Mainsail, Fluidd, OctoPrint, or SD card).</li>
-            <li><strong>Print it.</strong> Each column of corners corresponds to one PA value, printed left to right in ascending order.</li>
+            <li><strong>Print it.</strong> Each column of corners corresponds to one PA value, printed left to right in ascending order. Your display will show the current PA value during printing.</li>
             <li><strong>Find the cleanest column</strong> — the one with the sharpest corners and no bulging or gaps. Count from left: <code>PA = start + (column_index × increment)</code>.</li>
           </ol>
           <div class="pa-diagram">
@@ -333,8 +350,13 @@ M84</textarea>
           </div>
           <div class="pa-howto-note">
             Klipper: set <code>pressure_advance:</code> in your <code>printer.cfg</code> extruder section.<br>
-            Marlin: set <code>DEFAULT_LINEAR_ADVANCE_K</code> in <code>Configuration_adv.h</code> or send <code>M900 K[value]</code> and <code>M500</code> to save.
+            Marlin: set <code>DEFAULT_LINEAR_ADVANCE_K</code> in <code>Configuration_adv.h</code> or send <code>M900 K[value]</code> and <code>M500</code> to save.<br>
+            Bambu users: M900 support varies by firmware version. If this doesn't work, use Bambu Studio's built-in <strong>Calibration → Pressure Advance</strong> tool instead.
           </div>
+          <p style="margin-top:16px;font-size:13px;font-family:var(--fu)">
+            <a href="/guides/pressure-advance-tuning" style="color:var(--accent)">Full pressure advance tuning guide →</a>
+            <span style="color:var(--g2)"> (covers interpreting results, corner analysis, and applying your value)</span>
+          </p>
         </div>
 
       </main>
@@ -349,7 +371,7 @@ M84</textarea>
       {
         "@type": "SoftwareApplication",
         "name": "Pressure Advance Calibration Tool",
-        "description": "Generate PA/LA test pattern G-code for Klipper, Marlin, or RepRapFirmware.",
+        "description": "Generate PA/LA test pattern G-code for Klipper, Marlin, RepRapFirmware, or Bambu.",
         "url": "https://modernmakes.com/tools/pressure-advance",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
@@ -407,6 +429,13 @@ M84</textarea>
 .pa-sidebar > .pa-form-group {
   padding: 16px 20px;
   background: var(--bg);
+}
+.pa-modified-badge {
+  display: none;
+  font-size: 10px;
+  color: var(--g2);
+  font-family: var(--fm);
+  margin-top: 4px;
 }
 
 /* ── COLLAPSIBLE SECTIONS ── */
@@ -510,6 +539,27 @@ M84</textarea>
 }
 #patternCountNum { font-weight: 700; font-size: 13px; }
 
+/* ── VALIDATION ── */
+.input-error { border-color: #ef4444 !important; }
+.pa-field-error {
+  display: none;
+  font-size: 11px;
+  color: #ef4444;
+  font-family: var(--fm);
+}
+.pa-inline-error {
+  font-size: 12px;
+  color: #ef4444;
+  font-family: var(--fm);
+  margin-top: 6px;
+}
+.pa-inline-warn {
+  font-size: 12px;
+  color: #f59e0b;
+  font-family: var(--fm);
+  margin-top: 6px;
+}
+
 /* ── OUTPUT PANEL ── */
 .pa-output { display: flex; flex-direction: column; gap: 16px; }
 
@@ -572,19 +622,14 @@ M84</textarea>
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: background .12s, transform .1s;
+  transition: background .12s, opacity .12s;
 }
-.pa-btn-copy {
-  background: var(--black);
-  color: #fff;
-}
-.pa-btn-copy:hover { background: #333; }
+.pa-btn-copy { background: var(--black); color: #fff; }
+.pa-btn-copy:hover:not(:disabled) { background: #333; }
 .pa-btn-copy.copied { background: #1a7a1a; }
-.pa-btn-download {
-  background: var(--accent);
-  color: #fff;
-}
-.pa-btn-download:hover { background: var(--accent-dk); }
+.pa-btn-download { background: var(--accent); color: #fff; }
+.pa-btn-download:hover:not(:disabled) { background: var(--accent-dk); }
+.pa-btn-copy:disabled, .pa-btn-download:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* G-code display */
 .pa-code-wrap {
@@ -673,7 +718,7 @@ M84</textarea>
   font-family: var(--fu);
   font-size: 12px;
   color: var(--g2);
-  line-height: 1.6;
+  line-height: 1.7;
   padding-top: 14px;
   border-top: 1px solid var(--border);
 }
@@ -712,9 +757,9 @@ M84</textarea>
 // ── PRESETS ──
 const PRESETS: Record<string, Record<string, string | number>> = {
   voron: { bedX:250, bedY:250, hotendTemp:240, bedTemp:110, acceleration:5000, travelSpeed:300, nozzleDia:0.4, firmware:'klipper' },
-  bambu: { bedX:256, bedY:256, hotendTemp:220, bedTemp:60, acceleration:10000, travelSpeed:500, firmware:'klipper' },
-  prusa:  { bedX:250, bedY:210, hotendTemp:215, bedTemp:60, acceleration:1000, travelSpeed:150 },
-  ender:  { bedX:235, bedY:235, hotendTemp:200, bedTemp:60, acceleration:500, travelSpeed:120 },
+  bambu: { bedX:256, bedY:256, hotendTemp:220, bedTemp:60, acceleration:10000, travelSpeed:500, firmware:'bambu' },
+  prusa: { bedX:250, bedY:210, hotendTemp:215, bedTemp:60, acceleration:1000, travelSpeed:150 },
+  ender: { bedX:235, bedY:235, hotendTemp:200, bedTemp:60, acceleration:500, travelSpeed:120 },
 };
 
 const KLIPPER_START = `SET_PRINT_STATS_INFO TOTAL_LAYER=[TOTAL_LAYER_COUNT]\nG28\nG90\nM190 S[BED_TEMP]\nM109 S[HOTEND_TEMP]\nG92 E0\nG1 Z5 F3000`;
@@ -722,35 +767,54 @@ const MARLIN_START  = `G28\nM190 S[BED_TEMP]\nM109 S[HOTEND_TEMP]\nG92 E0\nG1 Z5
 
 // ── G-CODE GENERATOR ──
 function generateGcode(s: Record<string, any>): string {
-  const patternCount = Math.max(1, Math.round((s.paEnd - s.paStart) / s.paIncrement) + 1);
-  const lineLength   = 30;
-  const spacing      = 3;
-  const totalWidth   = patternCount * (lineLength + spacing);
-  const startX       = (s.bedX - totalWidth) / 2;
-  const startY       = (s.bedY - lineLength) / 2;
+  const rawCount    = (s.paEnd - s.paStart) / s.paIncrement;
+  const patternCount = Math.max(1, Math.round(rawCount) + 1);
+
+  if (patternCount > 30) {
+    return `; ERROR: Too many patterns (${patternCount}). Reduce your PA range or increase the increment.\n; Maximum is 30 patterns.`;
+  }
+
+  const lineLength = 30;
+  const spacing    = 3;
+  const totalWidth = patternCount * (lineLength + spacing);
+  const startX     = (s.bedX - totalWidth) / 2;
+  const startY     = (s.bedY - lineLength) / 2;
 
   const extW  = (s.lineWidthPct / 100) * s.nozzleDia;
   const fArea = Math.PI * Math.pow(s.filamentDia / 2, 2);
-
   const crossSec = (h: number) => extW * h - (Math.PI / 4) * h * h;
   const ePerMm   = (h: number) => crossSec(h) / fArea;
   const fle = ePerMm(s.firstLayerHeight);
   const rle = ePerMm(s.layerHeight);
 
   const slowSpeed = s.printSpeed * 0.25;
-  const setPACmd  = (v: number): string => {
+
+  const setPACmd = (v: number): string => {
     const f = v.toFixed(4);
     if (s.firmware === 'klipper') return `SET_PRESSURE_ADVANCE ADVANCE=${f}`;
-    if (s.firmware === 'marlin')  return `M900 K${f}`;
-    return `M572 D0 S${f}`;
+    if (s.firmware === 'rrf')     return `M572 D0 S${f}`;
+    return `M900 K${f}`; // marlin + bambu
   };
-  const accelCmd = (a: number): string =>
-    s.firmware === 'marlin' ? `M204 P${a}` : `SET_VELOCITY_LIMIT ACCEL=${a}`;
+
+  const displayCmd = (v: number): string => {
+    const label = `PA=${v.toFixed(4)}`;
+    if (s.firmware === 'rrf') return `M291 P"${label}" S0 T3`;
+    return `M117 ${label}`;
+  };
+
+  const accelCmd = (a: number): string => {
+    if (s.firmware === 'klipper') return `SET_VELOCITY_LIMIT ACCEL=${a}`;
+    if (s.firmware === 'rrf')     return `M566 X${a} Y${a}`;
+    return `M204 P${a}`; // marlin + bambu
+  };
 
   const processGcode = (raw: string) =>
-    raw.replace(/\[BED_TEMP\]/g, s.bedTemp)
-       .replace(/\[HOTEND_TEMP\]/g, s.hotendTemp)
+    raw.replace(/\[BED_TEMP\]/g, String(s.bedTemp))
+       .replace(/\[HOTEND_TEMP\]/g, String(s.hotendTemp))
        .replace(/\[TOTAL_LAYER_COUNT\]/g, String(s.layerCount + 1));
+
+  const fwNames: Record<string, string> = { klipper:'Klipper', marlin:'Marlin', rrf:'RepRapFirmware', bambu:'Bambu' };
+  const fwName  = fwNames[s.firmware] ?? 'Klipper';
 
   const lines: string[] = [];
   const push = (...args: string[]) => lines.push(...args);
@@ -759,12 +823,22 @@ function generateGcode(s: Record<string, any>): string {
     `; Pressure Advance Calibration Pattern`,
     `; Generated by Modern Makes — modernmakes.github.io/tools/pressure-advance`,
     `; ─────────────────────────────────────────`,
-    `; Firmware  : ${s.firmware === 'klipper' ? 'Klipper' : s.firmware === 'marlin' ? 'Marlin' : 'RepRapFirmware'}`,
+    `; Firmware  : ${fwName}`,
     `; PA Range  : ${s.paStart.toFixed(3)} → ${s.paEnd.toFixed(3)} (step ${s.paIncrement.toFixed(3)})`,
     `; Patterns  : ${patternCount}`,
     `; Nozzle    : ${s.nozzleDia}mm | Layer: ${s.layerHeight}mm | Layers: ${s.layerCount}`,
     `; Bed       : ${s.bedX}×${s.bedY}mm | Hotend: ${s.hotendTemp}°C | Bed: ${s.bedTemp}°C`,
     `; ─────────────────────────────────────────`,
+  );
+
+  if (s.firmware === 'bambu') {
+    push(
+      `; NOTE: Bambu printers — verify M900 is supported on your firmware version.`,
+      `; Alternative: use Bambu Studio's built-in Calibration → Pressure Advance tool.`,
+    );
+  }
+
+  push(
     ``,
     `; === START G-CODE ===`,
     processGcode(s.startGcode).trim(),
@@ -779,8 +853,8 @@ function generateGcode(s: Record<string, any>): string {
 
   // Prime line
   const primeLen = 50;
-  const primeX0 = Math.max(5, startX - 20);
-  const primeE  = (fle * primeLen).toFixed(5);
+  const primeX0  = Math.max(5, startX - 20);
+  const primeE   = (fle * primeLen).toFixed(5);
   push(
     `; === PRIME LINE ===`,
     `G1 Z${s.firstLayerHeight.toFixed(2)} F3000`,
@@ -792,12 +866,12 @@ function generateGcode(s: Record<string, any>): string {
   );
 
   for (let layer = 0; layer < s.layerCount; layer++) {
-    const z        = s.firstLayerHeight + layer * s.layerHeight;
-    const isFirst  = layer === 0;
-    const lEpMm    = isFirst ? fle : rle;
-    const lE       = (lEpMm * lineLength).toFixed(5);
-    const curSlow  = isFirst ? s.firstLayerSpeed : slowSpeed;
-    const curFast  = isFirst ? s.firstLayerSpeed : s.printSpeed;
+    const z       = s.firstLayerHeight + layer * s.layerHeight;
+    const isFirst = layer === 0;
+    const lEpMm   = isFirst ? fle : rle;
+    const lE      = (lEpMm * lineLength).toFixed(5);
+    const curSlow = isFirst ? s.firstLayerSpeed : slowSpeed;
+    const curFast = isFirst ? s.firstLayerSpeed : s.printSpeed;
 
     push(`; === LAYER ${layer + 1} / ${s.layerCount} === Z${z.toFixed(2)}`);
     push(`G1 Z${z.toFixed(2)} F3000`);
@@ -810,8 +884,9 @@ function generateGcode(s: Record<string, any>): string {
       const py = startY;
 
       push(
-        `; Pattern ${i + 1}/${patternCount} — PA ${paValue.toFixed(4)}`,
+        `; ── Pattern ${i + 1}/${patternCount} — PA ${paValue.toFixed(4)} ──`,
         setPACmd(paValue),
+        displayCmd(paValue),
         `G1 X${px.toFixed(2)} Y${py.toFixed(2)} F${s.travelSpeed * 60}`,
         `G1 E${s.retractDist.toFixed(3)} F${s.unretractSpeed * 60}`,
         `G1 X${px.toFixed(2)} Y${(py + lineLength).toFixed(2)} E${lE} F${curSlow * 60}`,
@@ -834,6 +909,8 @@ function highlight(raw: string): string {
     if (t.startsWith(';')) return `<span class="gc-comment">${esc(line)}</span>`;
     if (t.startsWith('SET_PRESSURE_ADVANCE') || t.startsWith('M900') || t.startsWith('M572'))
       return `<span class="gc-pa">${esc(line)}</span>`;
+    if (t.startsWith('M117') || t.startsWith('M291'))
+      return `<span class="gc-comment">${esc(line)}</span>`;
     return line.replace(/^([A-Z][0-9]+)/, '<span class="gc-cmd">$1</span>');
   }).join('\n');
 }
@@ -845,31 +922,31 @@ function esc(s: string) {
 function getSettings(): Record<string, any> {
   const fw = (document.querySelector<HTMLInputElement>('input[name="firmware"]:checked'))?.value ?? 'klipper';
   return {
-    firmware:          fw,
-    bedX:              +v('bedX'),
-    bedY:              +v('bedY'),
-    nozzleDia:         +v('nozzleDia'),
-    filamentDia:       +v('filamentDia'),
-    travelSpeed:       +v('travelSpeed'),
-    bedTemp:           +v('bedTemp'),
-    hotendTemp:        +v('hotendTemp'),
-    retractDist:       +v('retractDist'),
-    retractSpeed:      +v('retractSpeed'),
-    unretractSpeed:    +v('unretractSpeed'),
-    firstLayerHeight:  +v('firstLayerHeight'),
-    firstLayerSpeed:   +v('firstLayerSpeed'),
-    firstLayerFan:     +v('firstLayerFan'),
-    lineWidthPct:      +v('lineWidthPct'),
-    layerHeight:       +v('layerHeight'),
-    layerCount:        +v('layerCount'),
-    printSpeed:        +v('printSpeed'),
-    acceleration:      +v('acceleration'),
-    fanSpeed:          +v('fanSpeed'),
-    paStart:           +v('paStart'),
-    paEnd:             +v('paEnd'),
-    paIncrement:       +v('paIncrement'),
-    startGcode:        v('startGcode'),
-    endGcode:          v('endGcode'),
+    firmware:         fw,
+    bedX:             +v('bedX'),
+    bedY:             +v('bedY'),
+    nozzleDia:        +v('nozzleDia'),
+    filamentDia:      +v('filamentDia'),
+    travelSpeed:      +v('travelSpeed'),
+    bedTemp:          +v('bedTemp'),
+    hotendTemp:       +v('hotendTemp'),
+    retractDist:      +v('retractDist'),
+    retractSpeed:     +v('retractSpeed'),
+    unretractSpeed:   +v('unretractSpeed'),
+    firstLayerHeight: +v('firstLayerHeight'),
+    firstLayerSpeed:  +v('firstLayerSpeed'),
+    firstLayerFan:    +v('firstLayerFan'),
+    lineWidthPct:     +v('lineWidthPct'),
+    layerHeight:      +v('layerHeight'),
+    layerCount:       +v('layerCount'),
+    printSpeed:       +v('printSpeed'),
+    acceleration:     +v('acceleration'),
+    fanSpeed:         +v('fanSpeed'),
+    paStart:          +v('paStart'),
+    paEnd:            +v('paEnd'),
+    paIncrement:      +v('paIncrement'),
+    startGcode:       v('startGcode'),
+    endGcode:         v('endGcode'),
   };
 }
 function v(id: string): string {
@@ -877,30 +954,77 @@ function v(id: string): string {
   return el?.value ?? '';
 }
 
-// ── UPDATE UI ──
-let currentGcode = '';
-let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+// ── VALIDATION ──
+interface VResult { valid: boolean; errors: Map<string, string>; }
 
+function validate(s: Record<string, any>): VResult {
+  const errors = new Map<string, string>();
+  if (s.paStart < 0)                                         errors.set('paStart',     'Must be ≥ 0');
+  if (s.paEnd <= s.paStart)                                  errors.set('paEnd',       'Must be > PA Start');
+  if (s.paIncrement <= 0 || s.paIncrement > (s.paEnd - s.paStart))
+                                                             errors.set('paIncrement', 'Must be > 0 and ≤ range');
+  if (s.nozzleDia < 0.1 || s.nozzleDia > 2.0)              errors.set('nozzleDia',   '0.1 – 2.0 mm');
+  if (s.bedX <= 50)                                          errors.set('bedX',        'Must be > 50');
+  if (s.bedY <= 50)                                          errors.set('bedY',        'Must be > 50');
+  if (s.layerHeight < 0.05 || s.layerHeight > 0.5)         errors.set('layerHeight', '0.05 – 0.5 mm');
+  if (s.printSpeed <= 0)                                     errors.set('printSpeed',  'Must be > 0');
+  return { valid: errors.size === 0, errors };
+}
+
+function applyValidation(result: VResult) {
+  document.querySelectorAll<HTMLInputElement>('.pa-input').forEach(el => el.classList.remove('input-error'));
+  document.querySelectorAll<HTMLElement>('.pa-field-error').forEach(el => { el.style.display = 'none'; el.textContent = ''; });
+  result.errors.forEach((msg, fieldId) => {
+    const input = document.getElementById(fieldId) as HTMLInputElement | null;
+    if (input) input.classList.add('input-error');
+    const errEl = document.getElementById(`err-${fieldId}`);
+    if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+  });
+  const disabled = !result.valid;
+  const copyBtn = document.getElementById('copyBtn') as HTMLButtonElement | null;
+  const dlBtn   = document.getElementById('downloadBtn') as HTMLButtonElement | null;
+  if (copyBtn) copyBtn.disabled = disabled;
+  if (dlBtn)   dlBtn.disabled   = disabled;
+}
+
+// ── PATTERN COUNT + RANGE WARNINGS ──
 function updatePatternCount() {
   const start = +v('paStart');
   const end   = +v('paEnd');
   const inc   = +v('paIncrement');
-  if (inc <= 0) return;
-  const count = Math.max(1, Math.round((end - start) / inc) + 1);
-  const el = document.getElementById('patternCountNum');
-  if (el) el.textContent = String(count);
+  if (inc <= 0 || end <= start) return;
+
+  const rawCount = (end - start) / inc;
+  const count    = Math.max(1, Math.round(rawCount) + 1);
+  const countEl  = document.getElementById('patternCountNum');
+  if (countEl) countEl.textContent = String(count);
+
+  const errEl = document.getElementById('pattern-count-error');
+  if (errEl) errEl.style.display = count > 30 ? 'block' : 'none';
+
+  const isClean = Math.abs(rawCount - Math.round(rawCount)) < 0.0001;
+  const warnEl  = document.getElementById('increment-warning');
+  if (warnEl) {
+    warnEl.style.display = !isClean ? 'block' : 'none';
+    if (!isClean) {
+      const actualEnd = (start + Math.round(rawCount) * inc).toFixed(4);
+      const spanEl = document.getElementById('incrementActualEnd');
+      if (spanEl) spanEl.textContent = `Actual end: ${actualEnd}`;
+    }
+  }
 }
 
+// ── STATS BAR ──
 function updateStats(s: Record<string, any>) {
-  const count = Math.max(1, Math.round((s.paEnd - s.paStart) / s.paIncrement) + 1);
+  const count      = Math.max(1, Math.round((s.paEnd - s.paStart) / s.paIncrement) + 1);
   const lineLength = 30;
-  const spacing    = 3;
   const totalMoves = count * s.layerCount * 3;
-  const avgSpeed   = (s.printSpeed * 0.625);
+  const avgSpeed   = s.printSpeed * 0.625;
   const totalMm    = totalMoves * lineLength;
   const estSec     = (totalMm / avgSpeed) + count * s.layerCount * 2;
   const estMin     = Math.max(1, Math.round(estSec / 60));
-  const fw = { klipper: 'Klipper', marlin: 'Marlin', rrf: 'RRF' }[s.firmware as string] ?? 'Klipper';
+  const fwLabels: Record<string, string> = { klipper:'Klipper', marlin:'Marlin', rrf:'RRF', bambu:'Bambu' };
+  const fw = fwLabels[s.firmware] ?? 'Klipper';
 
   setText('statPatterns', String(count));
   setText('statRange', `${s.paStart.toFixed(3)} → ${s.paEnd.toFixed(3)}`);
@@ -913,12 +1037,40 @@ function setText(id: string, val: string) {
   if (el) el.textContent = val;
 }
 
+// ── BED FIT CHECK ──
+function checkBedFit(s: Record<string, any>) {
+  const count      = Math.max(1, Math.round((s.paEnd - s.paStart) / s.paIncrement) + 1);
+  const lineLength = 30;
+  const spacing    = 3;
+  const totalWidth = count * (lineLength + spacing);
+  const bedFitEl   = document.getElementById('bed-fit-warning');
+  if (!bedFitEl) return;
+  if (totalWidth > s.bedX * 0.9) {
+    bedFitEl.textContent = `⚠ Patterns (${totalWidth}mm) exceed bed width (${s.bedX}mm). Reduce pattern count or increase increment.`;
+    bedFitEl.style.display = 'block';
+  } else if (lineLength > s.bedY * 0.9) {
+    bedFitEl.textContent = `⚠ Pattern height exceeds bed depth.`;
+    bedFitEl.style.display = 'block';
+  } else {
+    bedFitEl.style.display = 'none';
+  }
+}
+
+// ── MAIN UPDATE ──
+let currentGcode = '';
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
 function doUpdate() {
   const ind = document.getElementById('updatingIndicator');
   if (ind) ind.classList.remove('visible');
 
   const s = getSettings();
   updateStats(s);
+  updatePatternCount();
+  checkBedFit(s);
+
+  const vResult = validate(s);
+  applyValidation(vResult);
 
   try {
     currentGcode = generateGcode(s);
@@ -937,64 +1089,69 @@ function scheduleUpdate() {
 }
 
 // ── PRESET APPLY ──
-let presetActive = 'custom';
-let userModified = false;
+let presetActive   = 'custom';
+let presetModified = false;
 
 function applyPreset(preset: string) {
-  presetActive = preset;
-  userModified = false;
+  presetActive   = preset;
+  presetModified = false;
+  updateModifiedBadge();
+
   const data = PRESETS[preset];
-  if (!data) return;
+  if (!data) { scheduleUpdate(); return; }
 
   for (const [key, val] of Object.entries(data)) {
     if (key === 'firmware') {
       const radio = document.querySelector<HTMLInputElement>(`input[name="firmware"][value="${val}"]`);
       if (radio) radio.checked = true;
+      // Update start gcode to match firmware
+      const sgEl = document.getElementById('startGcode') as HTMLTextAreaElement | null;
+      if (sgEl) {
+        sgEl.value = (val === 'klipper' || val === 'bambu') ? KLIPPER_START : MARLIN_START;
+      }
     } else {
       const el = document.getElementById(key) as HTMLInputElement | null;
       if (el) el.value = String(val);
     }
   }
-  updateModifiedBadge();
   scheduleUpdate();
 }
 
 function updateModifiedBadge() {
   const badge = document.getElementById('preset-modified');
   if (!badge) return;
-  badge.style.display = (presetActive !== 'custom' && userModified) ? 'block' : 'none';
+  badge.style.display = (presetActive !== 'custom' && presetModified) ? 'block' : 'none';
 }
 
 // ── WIRE UP ──
 document.addEventListener('DOMContentLoaded', () => {
   // Preset selector
   const presetEl = document.getElementById('preset') as HTMLSelectElement | null;
-  presetEl?.addEventListener('change', () => {
-    applyPreset(presetEl.value);
-  });
+  presetEl?.addEventListener('change', () => applyPreset(presetEl.value));
 
-  // All form inputs
-  document.querySelectorAll<HTMLElement>('.pa-input, .pa-select, .pa-textarea, input[type="radio"]')
+  // All form inputs — track modifications
+  document.querySelectorAll<HTMLElement>('.pa-input, .pa-textarea')
     .forEach(el => {
       el.addEventListener('input', () => {
-        if (presetActive !== 'custom') { userModified = true; updateModifiedBadge(); }
-        updatePatternCount();
-        scheduleUpdate();
-      });
-      el.addEventListener('change', () => {
-        // For firmware radio — also update start gcode default
-        if ((el as HTMLInputElement).name === 'firmware') {
-          const fw = (el as HTMLInputElement).value;
-          const sgEl = document.getElementById('startGcode') as HTMLTextAreaElement | null;
-          if (sgEl && !userModified) {
-            sgEl.value = fw === 'klipper' ? KLIPPER_START : MARLIN_START;
-          }
-        }
-        if (presetActive !== 'custom') { userModified = true; updateModifiedBadge(); }
-        updatePatternCount();
+        if (presetActive !== 'custom') { presetModified = true; updateModifiedBadge(); }
         scheduleUpdate();
       });
     });
+
+  // Radio buttons
+  document.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(el => {
+    el.addEventListener('change', () => {
+      if (presetActive !== 'custom') { presetModified = true; updateModifiedBadge(); }
+      // Auto-update start gcode when firmware changes (unless user already edited it)
+      if (el.name === 'firmware' && !presetModified) {
+        const sgEl = document.getElementById('startGcode') as HTMLTextAreaElement | null;
+        if (sgEl) {
+          sgEl.value = (el.value === 'klipper' || el.value === 'bambu') ? KLIPPER_START : MARLIN_START;
+        }
+      }
+      scheduleUpdate();
+    });
+  });
 
   // Copy button
   document.getElementById('copyBtn')?.addEventListener('click', async () => {
@@ -1010,7 +1167,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Download button
   document.getElementById('downloadBtn')?.addEventListener('click', () => {
     const s = getSettings();
-    const filename = `pressure_advance_pa${s.paStart.toFixed(3)}-${s.paEnd.toFixed(3)}.gcode`;
+    const fwPrefix: Record<string, string> = { klipper:'pa_klipper', marlin:'la_marlin', rrf:'pa_rrf', bambu:'pa_bambu' };
+    const prefix   = fwPrefix[s.firmware] ?? 'pa_klipper';
+    const filename = `${prefix}_${s.paStart.toFixed(3)}-${s.paEnd.toFixed(3)}_${s.paIncrement.toFixed(3)}.gcode`;
     const blob = new Blob([currentGcode], { type: 'text/plain' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
@@ -1022,7 +1181,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Initial render
-  updatePatternCount();
   doUpdate();
 });
 </script>
