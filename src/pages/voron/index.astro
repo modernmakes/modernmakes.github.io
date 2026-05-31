@@ -22,8 +22,8 @@ const partCounts: Record<string, { a: number; t: number }> = {
 <Base title="Voron Upgrades, Mods & Parts" description="The complete resource for Voron 2.4 and Trident builders. Every hotend, extruder, motion system, electronics, and more — with affiliate links and community mod picks.">
   <Nav slot="nav" currentPath={currentPath} />
 
-  <!-- ── HERO ── -->
-  <div style="background:var(--black);padding:52px 0 0">
+  <!-- ── HERO (dark) — breadcrumb + title + description only ── -->
+  <div style="background:var(--black);padding:52px 0 40px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <!-- Breadcrumb -->
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
@@ -32,7 +32,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
         <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Voron</span>
       </div>
       <!-- Title + Configurator -->
-      <div style="display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.08)">
+      <div style="display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px">
         <div>
           <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
           <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron</h1>
@@ -42,9 +42,15 @@ const partCounts: Record<string, { a: number; t: number }> = {
           Open Configurator →
         </a>
       </div>
+    </div>
+  </div>
 
-      <!-- ── MODEL SELECTOR (replaces variant pills) ── -->
-      <div class="model-selector">
+  <!-- ── CONTENT SECTION (light bg) ── -->
+  <section style="background:var(--bg);padding:32px 0 52px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+
+      <!-- 1. Model selector -->
+      <div class="model-selector" style="margin-bottom:20px">
         <button class="model-btn active" data-model="2.4" aria-pressed="true">
           <span class="model-btn-name">Voron 2.4</span>
           <span class="model-btn-sub">300 · 350 · 400mm</span>
@@ -58,13 +64,24 @@ const partCounts: Record<string, { a: number; t: number }> = {
           <span class="coming-text">Coming soon</span>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- ── 2.4 vs TRIDENT CHOOSER ── -->
-  <div style="background:var(--black);padding:0 0 32px">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="model-chooser">
+      <!-- 2. Printer hero image -->
+      <div class="printer-hero" style="margin-bottom:24px">
+        <img
+          id="printer-img"
+          src="/Media/ecosystems/voron/voron-2-4.webp"
+          alt="Voron 2.4"
+          class="printer-img"
+          onerror="this.style.display='none'"
+        />
+        <div class="printer-overlay">
+          <p class="printer-model-label" id="printer-model-label">Voron 2.4</p>
+          <p class="printer-model-sub" id="printer-model-sub">300mm · 350mm · 400mm</p>
+        </div>
+      </div>
+
+      <!-- 3. 2.4 vs Trident chooser callout -->
+      <div class="model-chooser" style="margin-bottom:32px">
         <p class="mc-question">Which one should you build?</p>
         <div class="mc-cols">
           <div class="mc-col">
@@ -101,13 +118,11 @@ const partCounts: Record<string, { a: number; t: number }> = {
           <a href="/guides/voron-2-4-vs-trident" class="mc-full-link">Full comparison: Voron 2.4 vs Trident →</a>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- ── SUBSYSTEM GRID ── -->
-  <section style="background:var(--black);padding:0 0 52px">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin:28px 0 16px">Browse by subsystem</div>
+      <!-- 4. Browse by subsystem label -->
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:16px">Browse by subsystem</div>
+
+      <!-- 5. Subsystem card grid -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
         {voronData.subsystems.flatMap(sub => {
           const pc = partCounts[sub.id] ?? { a: sub.partCount, t: sub.partCount };
@@ -189,6 +204,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
           </div>
         </a>
       </div>
+
     </div>
   </section>
 
@@ -289,12 +305,11 @@ const partCounts: Record<string, { a: number; t: number }> = {
 </Base>
 
 <style is:global>
-/* ── MODEL SELECTOR ── */
+/* ── MODEL SELECTOR (light-background variant) ── */
 .model-selector {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 24px 0 32px;
   flex-wrap: wrap;
 }
 .model-btn {
@@ -303,9 +318,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   align-items: flex-start;
   gap: 2px;
   padding: 12px 20px;
-  border: 1.5px solid rgba(255,255,255,.15);
+  border: 1.5px solid var(--border);
   border-radius: 10px;
-  background: rgba(255,255,255,.04);
+  background: var(--surface);
   cursor: pointer;
   transition: border-color .15s, background .15s;
   min-width: 140px;
@@ -313,20 +328,20 @@ const partCounts: Record<string, { a: number; t: number }> = {
 .model-btn:hover { border-color: var(--accent); }
 .model-btn.active {
   border-color: var(--accent);
-  background: rgba(255,90,31,.1);
+  background: rgba(255,90,31,.06);
 }
 .model-btn-name {
   font-family: var(--fu);
   font-size: 18px;
   font-weight: 800;
-  color: #fff;
+  color: var(--black);
   letter-spacing: -0.3px;
 }
 .model-btn.active .model-btn-name { color: var(--accent); }
 .model-btn-sub {
   font-family: var(--fm);
   font-size: 11px;
-  color: rgba(255,255,255,.35);
+  color: var(--g2);
   letter-spacing: 0.02em;
 }
 .model-coming {
@@ -334,21 +349,61 @@ const partCounts: Record<string, { a: number; t: number }> = {
   align-items: center;
   gap: 8px;
   padding: 12px 18px;
-  border: 1.5px dashed rgba(255,255,255,.1);
+  border: 1.5px dashed var(--border-s);
   border-radius: 10px;
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
 }
 .coming-label {
   font-family: var(--fu);
   font-size: 16px;
   font-weight: 800;
-  color: #fff;
+  color: var(--black);
 }
 .coming-text {
   font-size: 11px;
-  color: rgba(255,255,255,.4);
+  color: var(--g2);
   font-family: var(--fm);
+}
+
+/* ── PRINTER HERO IMAGE ── */
+.printer-hero {
+  position: relative;
+  width: 100%;
+  max-height: 320px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1a1a1a;
+  aspect-ratio: 3 / 2;
+}
+.printer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.printer-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 24px;
+  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%);
+}
+.printer-model-label {
+  font-family: var(--fd);
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+.printer-model-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  font-family: var(--fm);
+  letter-spacing: 0.02em;
 }
 
 /* ── MODEL CHOOSER CALLOUT ── */
@@ -457,23 +512,48 @@ const partCounts: Record<string, { a: number; t: number }> = {
   .mc-divider { display: none; }
   .model-btn { min-width: 120px; padding: 10px 14px; }
   .model-btn-name { font-size: 15px; }
+  .printer-model-label { font-size: 28px; }
 }
 </style>
 
 <script>
-  // ── MODEL SELECTOR — persists choice to sessionStorage ──
+  // ── MODEL SELECTOR — persists choice to localStorage ──
   const modelBtns = document.querySelectorAll<HTMLButtonElement>('.model-btn');
   const STORAGE_KEY = 'voron-model';
 
+  const printerImg   = document.getElementById('printer-img') as HTMLImageElement | null;
+  const printerLabel = document.getElementById('printer-model-label');
+  const printerSub   = document.getElementById('printer-model-sub');
+
+  const modelMeta: Record<string, { src: string; label: string; sub: string }> = {
+    '2.4':     { src: '/Media/ecosystems/voron/voron-2-4.webp',     label: 'Voron 2.4', sub: '300mm · 350mm · 400mm' },
+    'trident': { src: '/Media/ecosystems/voron/voron-trident.webp', label: 'Trident',    sub: '250mm · 300mm · 350mm' },
+  };
+
   function setModel(model: string) {
     localStorage.setItem(STORAGE_KEY, model);
+
+    // Update button active states
     modelBtns.forEach(btn => {
       const active = btn.dataset.model === model;
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', String(active));
     });
+
+    // Swap printer image + overlay text
+    const meta = modelMeta[model];
+    if (meta && printerImg) {
+      printerImg.style.display = '';   // restore if hidden by a previous onerror
+      printerImg.src = meta.src;
+      printerImg.alt = meta.label;
+    }
+    if (meta && printerLabel) printerLabel.textContent = meta.label;
+    if (meta && printerSub)   printerSub.textContent   = meta.sub;
+
+    // Update subsystem cards
     updateSubsystemCards(model);
-    // Update subsystem link hrefs to pass ?model= param
+
+    // Append ?model= to subsystem link hrefs
     document.querySelectorAll<HTMLAnchorElement>('a[data-subsystem-link]').forEach(link => {
       const base = link.dataset.href ?? link.getAttribute('href') ?? '';
       link.href = base + '?model=' + model;
