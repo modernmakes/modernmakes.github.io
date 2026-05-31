@@ -4,13 +4,57 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
-const entries = await getCollection('filament');
+const FILAMENT_CATEGORIES: Record<string, string> = {
+  'pla':       'Standard',
+  'petg':      'Standard',
+  'silk-pla':  'Standard',
+  'matte-pla': 'Standard',
+  'abs':       'Engineering',
+  'asa':       'Engineering',
+  'pc':        'Engineering',
+  'pla-cf':    'Engineering',
+  'petg-cf':   'Engineering',
+  'pa-cf':     'Engineering',
+  'pa12':      'Engineering',
+  'tpu':       'Flexible',
+  'tpe':       'Flexible',
+  'pva':       'Support',
+  'hips':      'Support',
+};
 
-// Stable display order
-const ORDER = ['petg', 'asa', 'abs', 'pa-cf', 'tpu'];
-const sorted = [...entries].sort(
-  (a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug)
-);
+// Prescribed display order (pla is a static page — not in collection)
+const SORT_ORDER = [
+  'petg', 'matte-pla', 'silk-pla',
+  'pla-cf', 'petg-cf', 'asa', 'abs', 'pa-cf', 'pa12', 'pc',
+  'tpu', 'tpe',
+  'pva', 'hips',
+];
+
+const entries = await getCollection('filament');
+const sorted = [...entries].sort((a, b) => {
+  const ai = SORT_ORDER.indexOf(a.slug);
+  const bi = SORT_ORDER.indexOf(b.slug);
+  // Unknown slugs go to end
+  if (ai === -1 && bi === -1) return a.slug.localeCompare(b.slug);
+  if (ai === -1) return 1;
+  if (bi === -1) return -1;
+  return ai - bi;
+});
+
+// Category counts from actual collection entries
+const categoryCounts: Record<string, number> = {};
+for (const entry of sorted) {
+  const cat = FILAMENT_CATEGORIES[entry.slug] ?? 'Other';
+  categoryCounts[cat] = (categoryCounts[cat] ?? 0) + 1;
+}
+
+const FILTER_TABS = [
+  { label: 'All',         key: 'All' },
+  { label: 'Standard',    key: 'Standard' },
+  { label: 'Engineering', key: 'Engineering' },
+  { label: 'Flexible',    key: 'Flexible' },
+  { label: 'Support',     key: 'Support' },
+];
 
 function verdictClass(v: string): string {
   const u = v.toUpperCase();
@@ -24,6 +68,8 @@ const difficultyColor: Record<string, string> = {
   Intermediate: '#d97706',
   Advanced:     '#dc2626',
 };
+
+const totalCount = sorted.length;
 ---
 <Base
   title="Filament Reviews & Material Guides — Modern Makes"
@@ -48,21 +94,54 @@ const difficultyColor: Record<string, string> = {
   <!-- MATERIALS GRID -->
   <section class="section" style="background:var(--bg)">
     <div class="container">
+
       <div class="section-head">
         <span class="section-head-label">Materials</span>
-        <span style="font-family:var(--fm);font-size:11px;color:var(--g2)">{sorted.length} guides</span>
+        <span style="font-family:var(--fm);font-size:11px;color:var(--g2)">{totalCount} guides</span>
       </div>
-      <div class="fil-index-grid">
+
+      <!-- Filter strip -->
+      <div class="fil-filter-strip" role="group" aria-label="Filter by category">
+        {FILTER_TABS.map(tab => {
+          const count = tab.key === 'All' ? totalCount : (categoryCounts[tab.key] ?? 0);
+          return (
+            <button
+              class={`fil-filter-btn${tab.key === 'All' ? ' active' : ''}`}
+              data-filter={tab.key}
+              type="button"
+            >
+              {tab.label} <span class="fil-filter-count">({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <!-- Results count -->
+      <p id="filament-count" class="fil-results-count">
+        Showing {totalCount} of {totalCount} materials
+      </p>
+
+      <!-- Cards grid -->
+      <div class="fil-index-grid" id="filament-grid">
         {sorted.map(entry => {
           const { material, materialFull, verdict, verdictLabel, summary, stats } = entry.data;
+          const category = FILAMENT_CATEGORIES[entry.slug] ?? 'Other';
           return (
-            <a href={`/filament/${entry.slug}`} class="fil-index-card">
+            <a
+              href={`/filament/${entry.slug}`}
+              class="fil-index-card"
+              data-category={category}
+              data-slug={entry.slug}
+            >
               <div class="fil-index-card-head">
                 <div>
                   <p class="fil-index-full">{materialFull}</p>
                   <h2 class="fil-index-name">{material}</h2>
                 </div>
-                <span class={`verdict ${verdictClass(verdict)}`}>{verdict}</span>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+                  <span class={`verdict ${verdictClass(verdict)}`}>{verdict}</span>
+                  <span class="fil-cat-badge">{category}</span>
+                </div>
               </div>
               <p class="fil-index-summary">{summary}</p>
               <div class="fil-index-chips">
@@ -80,6 +159,7 @@ const difficultyColor: Record<string, string> = {
           );
         })}
       </div>
+
     </div>
   </section>
 
@@ -132,6 +212,66 @@ const difficultyColor: Record<string, string> = {
 </Base>
 
 <style is:global>
+/* ── FILTER STRIP ── */
+.fil-filter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.fil-filter-btn {
+  font-family: var(--fm);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-s);
+  background: var(--surface);
+  color: var(--g1);
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+  white-space: nowrap;
+}
+.fil-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.fil-filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.fil-filter-count {
+  opacity: .75;
+  font-size: 10px;
+}
+
+/* Results count */
+.fil-results-count {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g2);
+  margin-bottom: 20px;
+}
+
+/* ── CATEGORY BADGE ON CARDS ── */
+.fil-cat-badge {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+/* ── MATERIAL GRID ── */
 .fil-index-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -167,6 +307,7 @@ const difficultyColor: Record<string, string> = {
   box-shadow: 0 8px 24px rgba(255,90,31,.08);
 }
 .fil-index-card:hover::before { transform: scaleX(1); }
+.fil-index-card[style*="display:none"] { transform: none !important; }
 
 .fil-index-card-head {
   display: flex;
@@ -238,5 +379,35 @@ const difficultyColor: Record<string, string> = {
 }
 @media (max-width: 640px) {
   .fil-index-grid { grid-template-columns: 1fr; }
+  .fil-filter-btn { font-size: 10px; padding: 5px 11px; }
 }
 </style>
+
+<script>
+  const TOTAL = document.querySelectorAll<HTMLElement>('.fil-index-card').length;
+
+  document.querySelectorAll<HTMLButtonElement>('.fil-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      document.querySelectorAll<HTMLButtonElement>('.fil-filter-btn')
+        .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter ?? 'All';
+      let visible = 0;
+
+      document.querySelectorAll<HTMLElement>('.fil-index-card').forEach(card => {
+        const match = filter === 'All' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      const countEl = document.getElementById('filament-count');
+      if (countEl) {
+        countEl.textContent = filter === 'All'
+          ? `Showing ${visible} of ${TOTAL} materials`
+          : `Showing ${visible} of ${TOTAL} materials — ${filter}`;
+      }
+    });
+  });
+</script>
