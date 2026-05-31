@@ -46,7 +46,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   </div>
 
   <!-- ── CONTENT SECTION (light bg) ── -->
-  <section style="background:var(--bg);padding:32px 0 52px">
+  <section style="background:var(--black);padding:32px 0 52px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
 
       <!-- 1. Model selector -->
@@ -120,7 +120,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
       </div>
 
       <!-- 4. Browse by subsystem label -->
-      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:16px">Browse by subsystem</div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--fu);margin-bottom:16px">Browse by subsystem</div>
 
       <!-- 5. Subsystem card grid -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
@@ -209,7 +209,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   </section>
 
   <!-- ── FEATURED PRODUCTS ── -->
-  <section class="section" aria-label="Top picks for Voron">
+  <section class="section" style="padding-top:0" aria-label="Top picks for Voron">
     <div class="container">
       <div class="section-head">
         <h2 class="section-head-label">Top picks for Voron</h2>
@@ -305,7 +305,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 </Base>
 
 <style is:global>
-/* ── MODEL SELECTOR (light-background variant) ── */
+/* ── MODEL SELECTOR (dark-background variant) ── */
 .model-selector {
   display: flex;
   align-items: center;
@@ -318,9 +318,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   align-items: flex-start;
   gap: 2px;
   padding: 12px 20px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid rgba(255,255,255,.15);
   border-radius: 10px;
-  background: var(--surface);
+  background: rgba(255,255,255,.04);
   cursor: pointer;
   transition: border-color .15s, background .15s;
   min-width: 140px;
@@ -328,20 +328,20 @@ const partCounts: Record<string, { a: number; t: number }> = {
 .model-btn:hover { border-color: var(--accent); }
 .model-btn.active {
   border-color: var(--accent);
-  background: rgba(255,90,31,.06);
+  background: rgba(255,90,31,.1);
 }
 .model-btn-name {
   font-family: var(--fu);
   font-size: 18px;
   font-weight: 800;
-  color: var(--black);
+  color: #fff;
   letter-spacing: -0.3px;
 }
 .model-btn.active .model-btn-name { color: var(--accent); }
 .model-btn-sub {
   font-family: var(--fm);
   font-size: 11px;
-  color: var(--g2);
+  color: rgba(255,255,255,.35);
   letter-spacing: 0.02em;
 }
 .model-coming {
@@ -349,20 +349,20 @@ const partCounts: Record<string, { a: number; t: number }> = {
   align-items: center;
   gap: 8px;
   padding: 12px 18px;
-  border: 1.5px dashed var(--border-s);
+  border: 1.5px dashed rgba(255,255,255,.1);
   border-radius: 10px;
-  opacity: 0.5;
+  opacity: 0.4;
   pointer-events: none;
 }
 .coming-label {
   font-family: var(--fu);
   font-size: 16px;
   font-weight: 800;
-  color: var(--black);
+  color: #fff;
 }
 .coming-text {
   font-size: 11px;
-  color: var(--g2);
+  color: rgba(255,255,255,.4);
   font-family: var(--fm);
 }
 
@@ -388,7 +388,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   left: 0;
   right: 0;
   padding: 20px 24px;
-  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,0) 40%);
 }
 .printer-model-label {
   font-family: var(--fd);
