@@ -61,50 +61,44 @@ const partCounts: Record<string, { a: number; t: number }> = {
     </div>
   </div>
 
-  <!-- ── COMPARISON CALLOUT ── -->
-  <div style="background:#0d0d0d;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:32px 0">
+  <!-- ── 2.4 vs TRIDENT CHOOSER ── -->
+  <div style="background:var(--black);padding:0 0 32px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="comparison-callout">
-        <div class="cc-inner">
-          <div class="cc-text">
-            <p class="cc-eyebrow">NOT SURE WHICH TO BUILD?</p>
-            <h2 class="cc-heading">Voron 2.4 vs Trident</h2>
-            <ul class="cc-verdicts">
-              <li>
-                <strong>Build a Trident if:</strong> You want a faster build, easier first-time calibration, and are printing 250–300mm parts.
-              </li>
-              <li>
-                <strong>Build a 2.4 if:</strong> You want maximum print volume (up to 400mm), the largest aftermarket ecosystem, or plan to run high-temp materials at scale.
-              </li>
-              <li>
-                <strong>Both are equally capable</strong> at standard print quality. The differences are build complexity, max size, and Z system design (leadscrew vs belt).
-              </li>
+      <div class="model-chooser">
+        <p class="mc-question">Which one should you build?</p>
+        <div class="mc-cols">
+          <div class="mc-col">
+            <div class="mc-col-head">
+              <span class="mc-badge mc-badge--popular">More popular</span>
+              <h3 class="mc-model-name">Voron 2.4</h3>
+              <p class="mc-size">Up to 400mm³</p>
+            </div>
+            <ul class="mc-traits">
+              <li>Flying gantry — better for large format</li>
+              <li>4-point Z levelling — more adjustment points</li>
+              <li>Larger community, more mod support</li>
+              <li>Slightly more complex build</li>
             </ul>
-            <a href="/guides/voron-2-4-vs-trident" class="cc-link">Full comparison guide →</a>
+            <p class="mc-best"><strong>Best for:</strong> Builders who want maximum build volume and the deepest mod ecosystem</p>
           </div>
-          <div class="cc-specs">
-            <div class="cc-spec-col">
-              <p class="cc-spec-model">2.4</p>
-              <dl class="cc-spec-list">
-                <dt>Z system</dt><dd>4 leadscrews</dd>
-                <dt>Max size</dt><dd>400mm</dd>
-                <dt>Build time</dt><dd>40–60 hrs</dd>
-                <dt>Aftermarket</dt><dd>Largest</dd>
-                <dt>Difficulty</dt><dd>Intermediate</dd>
-              </dl>
+          <div class="mc-divider"></div>
+          <div class="mc-col">
+            <div class="mc-col-head">
+              <span class="mc-badge mc-badge--easier">Easier build</span>
+              <h3 class="mc-model-name">Trident</h3>
+              <p class="mc-size">Up to 350mm³</p>
             </div>
-            <div class="cc-spec-divider"></div>
-            <div class="cc-spec-col">
-              <p class="cc-spec-model">Trident</p>
-              <dl class="cc-spec-list">
-                <dt>Z system</dt><dd>3 belts</dd>
-                <dt>Max size</dt><dd>350mm</dd>
-                <dt>Build time</dt><dd>30–45 hrs</dd>
-                <dt>Aftermarket</dt><dd>Large</dd>
-                <dt>Difficulty</dt><dd>Beginner-friendly</dd>
-              </dl>
-            </div>
+            <ul class="mc-traits">
+              <li>Fixed gantry — mechanically simpler</li>
+              <li>3-point Z levelling — self-levels automatically</li>
+              <li>Faster to build and tune</li>
+              <li>Excellent for 250mm builds</li>
+            </ul>
+            <p class="mc-best"><strong>Best for:</strong> Builders who want a faster, cleaner build experience and don't need 400mm</p>
           </div>
+        </div>
+        <div class="mc-footer">
+          <a href="/guides/voron-2-4-vs-trident" class="mc-full-link">Full comparison: Voron 2.4 vs Trident →</a>
         </div>
       </div>
     </div>
@@ -182,7 +176,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
             <div style="font-size:20px;margin-bottom:8px">🔧</div>
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">Community Mods</div>
             <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">Toolheads, filtration, probes, panels — the best user-made upgrades</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(46,125,50,.7)">12 mods →</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(46,125,50,.7)">13 mods →</div>
           </div>
         </a>
         <!-- Configurator card -->
@@ -239,7 +233,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
       <div class="section-head">
         <h2 class="section-head-label">Community mods</h2>
         <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
-        <a href="/voron/mods" class="section-head-link">View all 12 mods</a>
+        <a href="/voron/mods" class="section-head-link">View all 13 mods</a>
       </div>
       <div class="grid-3">
         {[
@@ -265,7 +259,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
       </div>
       <div style="text-align:center;margin-top:24px">
         <a href="/voron/mods" style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none">
-          Browse all 12 community mods →
+          Browse all 13 community mods →
         </a>
       </div>
     </div>
@@ -357,110 +351,110 @@ const partCounts: Record<string, { a: number; t: number }> = {
   font-family: var(--fm);
 }
 
-/* ── COMPARISON CALLOUT ── */
-.comparison-callout {
-  background: var(--black);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 14px;
-  overflow: hidden;
+/* ── MODEL CHOOSER CALLOUT ── */
+.model-chooser {
+  background: #1e1e1e;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px;
 }
-.cc-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-}
-.cc-text {
-  padding: 40px;
-  border-right: 1px solid rgba(255,255,255,.08);
-}
-.cc-eyebrow {
+.mc-question {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
   color: var(--accent);
   font-family: var(--fu);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-.cc-heading {
+.mc-cols {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+.mc-divider {
+  width: 1px;
+  background: rgba(255,255,255,.08);
+  align-self: stretch;
+}
+.mc-col-head { margin-bottom: 14px; }
+.mc-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-family: var(--fm);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.mc-badge--popular { background: rgba(255,90,31,.15); color: var(--accent); border: 1px solid rgba(255,90,31,.3); }
+.mc-badge--easier  { background: rgba(34,197,94,.12);  color: #22c55e; border: 1px solid rgba(34,197,94,.25); }
+.mc-model-name {
   font-family: var(--fu);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 20px;
-  letter-spacing: -0.5px;
+  margin-bottom: 2px;
 }
-.cc-verdicts {
+.mc-size {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  font-family: var(--fm);
+}
+.mc-traits {
   list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding: 0;
+  gap: 6px;
+  margin-bottom: 14px;
 }
-.cc-verdicts li {
-  font-size: 14px;
-  color: rgba(255,255,255,.65);
-  line-height: 1.5;
+.mc-traits li {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.4;
   padding-left: 14px;
-  border-left: 2px solid rgba(255,90,31,.4);
+  position: relative;
 }
-.cc-verdicts li strong { color: #fff; }
-.cc-link {
+.mc-traits li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 1;
+  top: 1px;
+}
+.mc-best {
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.5;
+}
+.mc-best strong { color: rgba(255,255,255,.75); }
+.mc-footer {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.mc-full-link {
   font-size: 13px;
   font-weight: 700;
   color: var(--accent);
   text-decoration: none;
   font-family: var(--fu);
+  letter-spacing: .02em;
 }
-.cc-link:hover { color: #fff; }
-.cc-specs {
-  padding: 40px;
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-.cc-spec-col { flex: 1; }
-.cc-spec-model {
-  font-family: var(--fu);
-  font-size: 32px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 16px;
-  opacity: 0.9;
-}
-.cc-spec-list {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 6px 16px;
-  margin: 0;
-}
-.cc-spec-list dt {
-  font-size: 12px;
-  color: rgba(255,255,255,.35);
-  font-family: var(--fm);
-}
-.cc-spec-list dd {
-  font-size: 12px;
-  color: rgba(255,255,255,.8);
-  font-family: var(--fm);
-  margin: 0;
-}
-.cc-spec-divider {
-  width: 1px;
-  background: rgba(255,255,255,.08);
-  align-self: stretch;
-  margin: 4px 0;
-  flex-shrink: 0;
-}
+.mc-full-link:hover { color: #fff; }
 
 @media (max-width: 1024px) {
-  .cc-inner { grid-template-columns: 1fr; }
-  .cc-text { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding: 32px 24px; }
-  .cc-specs { padding: 24px; }
+  .mc-cols { grid-template-columns: 1fr; }
+  .mc-divider { height: 1px; width: 100%; margin: 0; }
 }
 @media (max-width: 640px) {
-  .cc-specs { flex-direction: column; }
-  .cc-spec-divider { display: none; }
+  .mc-divider { display: none; }
   .model-btn { min-width: 120px; padding: 10px 14px; }
   .model-btn-name { font-size: 15px; }
 }

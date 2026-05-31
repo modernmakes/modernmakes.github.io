@@ -1,0 +1,394 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+
+const currentPath = '/voron/mods';
+
+interface Mod {
+  id: string;
+  name: string;
+  creator: string;
+  category: string;
+  models: string[];
+  difficulty: 'Easy' | 'Intermediate' | 'Advanced';
+  sourceType: 'github' | 'printables';
+  sourceUrl: string;
+  description: string;
+}
+
+const mods: Mod[] = [
+  // Toolhead
+  { id: 'stealthburner', name: 'Stealthburner', creator: 'Voron Design', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/VoronDesign/Voron-Stealthburner', description: 'Official high-performance toolhead with integrated LED lighting and support for most Voron-ecosystem hotends.' },
+  { id: 'xol-toolhead', name: 'Xol Toolhead', creator: 'Armchairengineer', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/Armchair-Engineering/Xol-Toolhead', description: 'Lightweight Stealthburner alternative optimised for high-speed printing. Lower mass, better input shaping results.' },
+  { id: 'dragon-burner', name: 'Dragon Burner', creator: 'chirpy2605', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner', description: 'Compact toolhead designed for the Dragon and Rapido hotend family. Excellent print quality at speed.' },
+  // Filtration
+  { id: 'nevermore-micro', name: 'Nevermore Micro', creator: 'nevermore3d', category: 'Filtration', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'github', sourceUrl: 'https://github.com/nevermore3d/Nevermore_Micro', description: 'Activated carbon recirculating filter. Essential for ABS/ASA printing in an enclosed Voron. Mounts inside the chamber.' },
+  { id: 'nevermore-stealthmax', name: 'Nevermore StealthMax', creator: 'nevermore3d', category: 'Filtration', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'github', sourceUrl: 'https://github.com/nevermore3d/StealthMax', description: 'Full-size high-volume carbon filter for larger chambers. Better airflow than Micro. Fits Trident with minor modification.' },
+  // Motion
+  { id: 'klicky-probe', name: 'Klicky Probe', creator: 'jlas1', category: 'Motion', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'github', sourceUrl: 'https://github.com/jlas1/Klicky-Probe', description: 'Mechanical dock-and-pickup probe system. Reliable, inexpensive, no battery or cable required.' },
+  { id: 'boop', name: 'Boop', creator: 'Ellis3DP', category: 'Motion', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/PrintersForAnts/Boop', description: 'Nozzle-contact bed probe mod. Direct nozzle probing for maximum accuracy. 2.4 and Trident variants available.' },
+  { id: 'tap', name: 'TAP', creator: 'Voron Design', category: 'Motion', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/VoronDesign/Voron-Tap', description: 'Official nozzle-as-probe system. Gold standard for first layer accuracy on Voron.' },
+  { id: 'mammoth-awd', name: 'Mammoth AWD Gantry', creator: 'mammoth-3D-DevTeam', category: 'Motion', models: ['2.4'], difficulty: 'Advanced', sourceType: 'github', sourceUrl: 'https://github.com/mammoths-3D/Mammoth-AWD-300-350-400', description: 'All-wheel-drive gantry conversion. Adds two additional motors for dramatically improved belt tension consistency.' },
+  // Bed
+  { id: 'sexbolt', name: 'Sexbolt Z Endstop', creator: 'hartk1213', category: 'Bed', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'github', sourceUrl: 'https://github.com/hartk1213/MISC/tree/main/Voron%20Mods/Voron%202/2.4/Voron2.4_SexBolt_ZEndstop', description: 'Replaces the stock Z endstop with a bolt that the nozzle touches directly. More repeatable, simpler to adjust.' },
+  // QOL
+  { id: 'purge-bucket', name: 'Purge Bucket & Brush', creator: 'Dendrowen', category: 'QOL', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'printables', sourceUrl: 'https://www.printables.com/model/201999', description: 'Nozzle purge and wipe station for use with macros. Keeps nozzle clean at print start.' },
+  { id: 'mzf-frame-brace', name: "Rama's MZF Frame Brace", creator: 'Rama', category: 'QOL', models: ['2.4'], difficulty: 'Easy', sourceType: 'printables', sourceUrl: 'https://www.printables.com/model/39088', description: 'Diagonal frame braces that significantly reduce frame flex on larger Voron builds.' },
+  // Electronics
+  { id: 'canbus-umbilical', name: 'CAN Bus Umbilical', creator: 'Lanefu', category: 'Electronics', models: ['2.4', 'trident'], difficulty: 'Advanced', sourceType: 'github', sourceUrl: 'https://github.com/Lanefu/voron-canbus-umbilical', description: 'Replaces the wiring drag chain with a CAN bus cable and toolhead PCB. Cleaner wiring, easier maintenance.' },
+];
+
+const categories = ['All', 'Toolhead', 'Motion', 'Electronics', 'Bed', 'Filtration', 'Cosmetic', 'QOL'];
+---
+
+<Base title="Voron Community Mods — Modern Makes" description="The best user-designed upgrades for Voron 2.4 and Trident. Sourced from Printables, GitHub, and the Voron Discord.">
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div class="mods-hero">
+    <div class="mods-hero-inner">
+      <nav class="mods-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/voron">Voron</a>
+        <span>/</span>
+        <span>Community Mods</span>
+      </nav>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Community</div>
+      <h1 class="mods-title">Community Mods</h1>
+      <p class="mods-subtitle">The best user-designed upgrades for Voron 2.4 and Trident. Sourced from Printables, GitHub, and the Voron Discord.</p>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters-bar">
+    <div class="filters-inner">
+      <div class="model-filter">
+        <button class="mf-btn active" data-model="all">Both</button>
+        <button class="mf-btn" data-model="2.4">Voron 2.4</button>
+        <button class="mf-btn" data-model="trident">Trident</button>
+      </div>
+      <div class="cat-filter">
+        {categories.map(cat => (
+          <button class={`cat-pill${cat === 'All' ? ' active' : ''}`} data-cat={cat === 'All' ? 'all' : cat}>
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- MODS GRID -->
+  <section class="mods-section">
+    <div class="mods-container">
+      <p class="mods-count-line"><span id="mods-count">{mods.length}</span> mods</p>
+      <div class="mods-grid">
+        {mods.map(mod => (
+          <article class="mod-card" data-category={mod.category} data-models={mod.models.join(',')}>
+            <div class="mod-card-header">
+              <div>
+                <h3 class="mod-name">{mod.name}</h3>
+                <p class="mod-creator">by @{mod.creator}</p>
+              </div>
+              <span class="mod-cat-tag">{mod.category}</span>
+            </div>
+            <p class="mod-desc">{mod.description}</p>
+            <div class="mod-card-footer">
+              <div class="mod-pills">
+                {mod.models.map(m => (
+                  <span class="mod-model-pill">{m === '2.4' ? 'Voron 2.4' : 'Trident'}</span>
+                ))}
+                <span class={`mod-difficulty mod-difficulty--${mod.difficulty.toLowerCase()}`}>{mod.difficulty}</span>
+              </div>
+              <a href={mod.sourceUrl} class="mod-source-btn" target="_blank" rel="noopener">
+                View on {mod.sourceType === 'github' ? 'GitHub' : 'Printables'} →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
+
+<style>
+/* ── HERO ── */
+.mods-hero {
+  background: var(--black);
+  padding: 40px 0 36px;
+}
+.mods-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.mods-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-family: var(--fm);
+  font-size: 11px;
+}
+.mods-breadcrumb a { color: rgba(255,255,255,.3); }
+.mods-breadcrumb a:hover { color: rgba(255,255,255,.6); }
+.mods-breadcrumb span { color: rgba(255,255,255,.2); }
+.mods-breadcrumb span:last-child { color: rgba(255,255,255,.55); }
+.mods-title {
+  font-family: var(--fd);
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+.mods-subtitle {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ── FILTERS ── */
+.filters-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.filters-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.model-filter {
+  display: flex;
+  gap: 6px;
+}
+.mf-btn {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--g1);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--fu);
+}
+.mf-btn:hover { border-color: var(--accent); color: var(--accent); }
+.mf-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.cat-filter {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cat-pill {
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: transparent;
+  font-size: 12px;
+  color: var(--g1);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--fu);
+}
+.cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+.cat-pill.active {
+  background: var(--black);
+  border-color: var(--black);
+  color: #fff;
+}
+
+/* ── MODS GRID ── */
+.mods-section { padding: 32px 0 64px; }
+.mods-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.mods-count-line {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--g2);
+  margin-bottom: 20px;
+}
+.mods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── MOD CARD ── */
+.mod-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.mod-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.mod-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.mod-name {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+.mod-creator {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g2);
+}
+.mod-cat-tag {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--fm);
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mod-desc {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.6;
+  flex: 1;
+}
+.mod-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.mod-pills {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.mod-model-pill {
+  font-size: 10px;
+  font-family: var(--fm);
+  color: var(--g1);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+.mod-difficulty {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--fm);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.mod-difficulty--easy         { background: rgba(34,197,94,.1);  color: #16a34a; }
+.mod-difficulty--intermediate { background: rgba(59,130,246,.1); color: #2563eb; }
+.mod-difficulty--advanced     { background: rgba(239,68,68,.1);  color: #dc2626; }
+.mod-source-btn {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--fu);
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.mod-source-btn:hover { color: var(--accent-dk); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .mods-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .mods-hero-inner,
+  .filters-inner,
+  .mods-container { padding: 0 20px; }
+  .mods-grid { grid-template-columns: 1fr; }
+  .filters-inner { gap: 12px; }
+}
+</style>
+
+<script>
+  const STORAGE_KEY = 'voron-model';
+  let currentModel = 'all';
+  let currentCat = 'all';
+
+  const modelBtns = document.querySelectorAll<HTMLButtonElement>('.mf-btn');
+  const catPills  = document.querySelectorAll<HTMLButtonElement>('.cat-pill');
+  const countEl   = document.getElementById('mods-count');
+
+  function filterMods() {
+    let visible = 0;
+    document.querySelectorAll<HTMLElement>('.mod-card').forEach(card => {
+      const models   = (card.dataset.models ?? '').split(',');
+      const category = card.dataset.category ?? '';
+      const modelOk  = currentModel === 'all' || models.includes(currentModel);
+      const catOk    = currentCat === 'all' || category === currentCat;
+      const show     = modelOk && catOk;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (countEl) countEl.textContent = String(visible);
+  }
+
+  modelBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const model = btn.dataset.model ?? 'all';
+      currentModel = model;
+      if (model !== 'all') localStorage.setItem(STORAGE_KEY, model);
+      modelBtns.forEach(b => b.classList.toggle('active', b === btn));
+      filterMods();
+    });
+  });
+
+  catPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const cat = pill.dataset.cat ?? 'all';
+      currentCat = cat;
+      catPills.forEach(p => p.classList.toggle('active', p === pill));
+      filterMods();
+    });
+  });
+
+  // Init: restore model from localStorage, default to 'all'
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved === '2.4' || saved === 'trident') {
+    currentModel = saved;
+    modelBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.model === saved));
+  }
+  filterMods();
+</script>
