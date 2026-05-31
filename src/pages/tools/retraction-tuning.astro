@@ -1,0 +1,850 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Retraction Calibration Tool — Direct Drive & Bowden"
+  description="Generate a retraction distance test tower for Klipper, Marlin, or RepRapFirmware. Finds your optimal retraction in one print. Supports Voron, Bambu, Prusa, and Ender presets."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Retraction Calibration</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calibration Tool</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Retraction Calibration</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Generate a retraction distance tower test for direct drive or Bowden setups. Each tower uses a different retraction distance — find the cleanest travel move and you have your value.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Marlin</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">RepRapFirmware</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Direct Drive · Bowden</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="pa-tool-wrap">
+    <div class="pa-tool-inner">
+
+      <!-- LEFT: SETTINGS -->
+      <aside class="pa-sidebar">
+
+        <!-- Preset -->
+        <div class="pa-form-group" style="margin-bottom:0;padding-bottom:16px;border-bottom:1px solid var(--border)">
+          <label class="pa-label" for="preset">Printer Preset</label>
+          <div style="position:relative">
+            <select class="pa-select" id="preset">
+              <option value="custom">Custom (manual)</option>
+              <option value="voron">Voron 2.4 / Trident</option>
+              <option value="bambu">Bambu X1C / P1S</option>
+              <option value="prusa">Prusa MK4</option>
+              <option value="ender">Ender 3 / CR-10</option>
+            </select>
+            <span id="preset-modified" class="pa-modified-badge">(modified)</span>
+          </div>
+        </div>
+
+        <!-- Section: Retraction Range (open first — most important) -->
+        <details class="pa-section" open>
+          <summary class="pa-section-head">
+            <span>Retraction Range</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-3">
+              <div class="pa-form-group">
+                <label class="pa-label" for="rStart">Start (mm)</label>
+                <input class="pa-input" type="number" id="rStart" value="0.5" min="0" max="10" step="0.1">
+                <span id="err-rStart" class="pa-field-error"></span>
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="rEnd">End (mm)</label>
+                <input class="pa-input" type="number" id="rEnd" value="6.0" min="0.1" max="15" step="0.1">
+                <span id="err-rEnd" class="pa-field-error"></span>
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="rIncrement">Increment</label>
+                <input class="pa-input" type="number" id="rIncrement" value="0.5" min="0.1" max="2" step="0.1">
+                <span id="err-rIncrement" class="pa-field-error"></span>
+              </div>
+            </div>
+            <div class="pa-form-group" style="margin-top:10px">
+              <label class="pa-label" for="rSpeed">Retraction Speed (mm/s)</label>
+              <input class="pa-input" type="number" id="rSpeed" value="35" min="1" max="120">
+            </div>
+            <div class="pa-pattern-count" id="towerCountDisplay">
+              <span id="towerCountNum">12</span> towers will be generated
+            </div>
+            <div id="tower-count-error" class="pa-inline-error" style="display:none">
+              ⚠ Too many towers — maximum 20. Increase increment or reduce range.
+            </div>
+            <div id="increment-warning" class="pa-inline-warn" style="display:none">
+              ⚠ Increment doesn't divide evenly into range — <span id="incrementActualEnd"></span>
+            </div>
+            <div class="rt-range-note">
+              Direct drive: 0.5–2.0mm &nbsp;·&nbsp; Bowden: 2.0–7.0mm
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Firmware -->
+        <details class="pa-section" open>
+          <summary class="pa-section-head">
+            <span>Firmware</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-form-group">
+              <div class="pa-radio-group">
+                <label class="pa-radio"><input type="radio" name="firmware" value="klipper" checked> Klipper</label>
+                <label class="pa-radio"><input type="radio" name="firmware" value="marlin"> Marlin</label>
+                <label class="pa-radio"><input type="radio" name="firmware" value="rrf"> RepRapFirmware 3+</label>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Printer -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Printer</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="nozzleDia">Nozzle Diameter (mm)</label>
+                <input class="pa-input" type="number" id="nozzleDia" value="0.4" min="0.1" max="2.0" step="0.1">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="filamentDia">Filament Diameter (mm)</label>
+                <input class="pa-input" type="number" id="filamentDia" value="1.75" min="1.6" max="3.1" step="0.01">
+              </div>
+            </div>
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="bedX">Bed Size X (mm)</label>
+                <input class="pa-input" type="number" id="bedX" value="250" min="51" max="700">
+                <span id="err-bedX" class="pa-field-error"></span>
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="bedY">Bed Size Y (mm)</label>
+                <input class="pa-input" type="number" id="bedY" value="210" min="51" max="700">
+                <span id="err-bedY" class="pa-field-error"></span>
+              </div>
+            </div>
+            <div id="bed-fit-warning" class="pa-inline-error" style="display:none"></div>
+            <div class="pa-form-group">
+              <label class="pa-label" for="travelSpeed">Travel Speed (mm/s)</label>
+              <input class="pa-input" type="number" id="travelSpeed" value="150" min="20" max="800">
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Temperature -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Temperature</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="hotendTemp">Hotend Temp (°C)</label>
+                <input class="pa-input" type="number" id="hotendTemp" value="220" min="150" max="350">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="bedTemp">Bed Temp (°C)</label>
+                <input class="pa-input" type="number" id="bedTemp" value="60" min="0" max="150">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Tower Settings -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Tower Settings</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="towerHeight">Tower Height (mm)</label>
+                <input class="pa-input" type="number" id="towerHeight" value="20" min="5" max="60">
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="towerWidth">Tower Width (mm)</label>
+                <input class="pa-input" type="number" id="towerWidth" value="10" min="5" max="30">
+              </div>
+            </div>
+            <div class="pa-row-2">
+              <div class="pa-form-group">
+                <label class="pa-label" for="layerHeight">Layer Height (mm)</label>
+                <input class="pa-input" type="number" id="layerHeight" value="0.2" min="0.05" max="0.5" step="0.01">
+                <span id="err-layerHeight" class="pa-field-error"></span>
+              </div>
+              <div class="pa-form-group">
+                <label class="pa-label" for="printSpeed">Print Speed (mm/s)</label>
+                <input class="pa-input" type="number" id="printSpeed" value="50" min="1" max="400">
+                <span id="err-printSpeed" class="pa-field-error"></span>
+              </div>
+            </div>
+            <div class="pa-form-group">
+              <label class="pa-label" for="fanSpeed">Fan Speed (%)</label>
+              <input class="pa-input" type="number" id="fanSpeed" value="100" min="0" max="100">
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: Start G-code -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>Start G-code</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-form-group">
+              <label class="pa-label" for="startGcode">Tokens: [BED_TEMP] [HOTEND_TEMP]</label>
+              <textarea class="pa-textarea" id="startGcode" rows="6">G28
+G90
+M190 S[BED_TEMP]
+M109 S[HOTEND_TEMP]
+G92 E0
+G1 Z5 F3000</textarea>
+            </div>
+          </div>
+        </details>
+
+        <!-- Section: End G-code -->
+        <details class="pa-section">
+          <summary class="pa-section-head">
+            <span>End G-code</span>
+            <span class="pa-section-arrow">▾</span>
+          </summary>
+          <div class="pa-section-body">
+            <div class="pa-form-group">
+              <textarea class="pa-textarea" id="endGcode" rows="4">M104 S0
+M140 S0
+G28 X
+M84</textarea>
+            </div>
+          </div>
+        </details>
+
+      </aside>
+
+      <!-- RIGHT: OUTPUT -->
+      <main class="pa-output">
+
+        <!-- Stats bar -->
+        <div class="pa-stats-bar">
+          <div class="pa-stat">
+            <span class="pa-stat-label">Towers</span>
+            <span class="pa-stat-val" id="statTowers">12</span>
+          </div>
+          <div class="pa-stat-div"></div>
+          <div class="pa-stat">
+            <span class="pa-stat-label">Retraction Range</span>
+            <span class="pa-stat-val" id="statRange">0.5 → 6.0mm</span>
+          </div>
+          <div class="pa-stat-div"></div>
+          <div class="pa-stat">
+            <span class="pa-stat-label">Est. Print Time</span>
+            <span class="pa-stat-val" id="statTime">~18 min</span>
+          </div>
+          <div class="pa-stat-div"></div>
+          <div class="pa-stat">
+            <span class="pa-stat-label">Firmware</span>
+            <span class="pa-stat-val" id="statFirmware">Klipper</span>
+          </div>
+          <div class="pa-updating" id="updatingIndicator">Updating…</div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="pa-actions">
+          <button class="pa-btn-copy" id="copyBtn">Copy G-code</button>
+          <button class="pa-btn-download" id="downloadBtn">Download .gcode</button>
+        </div>
+
+        <!-- G-code output -->
+        <div class="pa-code-wrap">
+          <pre class="pa-code" id="gcodeOutput" aria-label="Generated G-code"></pre>
+        </div>
+
+        <!-- How to use -->
+        <div class="pa-howto">
+          <h2 class="pa-howto-title">How to use</h2>
+          <ol class="pa-howto-steps">
+            <li><strong>Configure settings.</strong> Select a preset to fill common values. Set your retraction range: <code>0.5–2.0mm</code> for direct drive, <code>2.0–7.0mm</code> for Bowden.</li>
+            <li><strong>Download and print directly.</strong> Do not slice this file. Load it in Mainsail, Fluidd, OctoPrint, or from SD card and print as-is.</li>
+            <li><strong>Inspect the travel moves between towers.</strong> Too little retraction: strings bridge between towers. Too much: blobs on resume, gaps at layer start.</li>
+            <li><strong>Find the cleanest tower.</strong> Count from left — the leftmost tower is your start distance. <code>distance = start + (index × increment)</code>. Apply this value in your slicer retraction settings.</li>
+          </ol>
+          <div class="pa-diagram">
+            <div class="pa-diagram-title">Reading the retraction towers</div>
+            <pre class="pa-diagram-art">  Too little retraction     Correct          Too much retraction
+  ┌──┐  ┌──┐  ┌──┐         ┌──┐  ┌──┐       ┌──┐  ┌──┐
+  │  │~~│  │~~│  │         │  │  │  │       ●│  │  │  │●
+  │  │~~│  │~~│  │         │  │  │  │        │  │  │  │
+  └──┘  └──┘  └──┘         └──┘  └──┘       └──┘  └──┘
+  strings between towers   clean travels    blobs on resume</pre>
+          </div>
+          <div class="pa-howto-note">
+            Klipper: set retraction in your slicer — it passes <code>G1 E</code> commands directly. Or use <code>SET_RETRACTION</code> if firmware retraction is enabled in your config.<br>
+            Marlin: <code>M207</code> sets firmware retraction distance. Enable <code>FWRETRACT</code> in <code>Configuration_adv.h</code>. Or configure retraction in your slicer profile directly.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Retraction Calibration Tool",
+        "description": "Generate a retraction distance tower test for direct drive or Bowden printers.",
+        "url": "https://modernmakes.com/tools/retraction-tuning",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.com/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Retraction Calibration", "item": "https://modernmakes.com/tools/retraction-tuning" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+/* ── TOOL WRAP (shared with PA tool — duplicated for page independence) ── */
+.pa-tool-wrap {
+  background: var(--bg);
+  min-height: 60vh;
+  padding: 32px 0 64px;
+}
+.pa-tool-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.pa-sidebar {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.pa-sidebar::-webkit-scrollbar { width: 4px; }
+.pa-sidebar::-webkit-scrollbar-track { background: transparent; }
+.pa-sidebar::-webkit-scrollbar-thumb { background: var(--border-s); border-radius: 2px; }
+.pa-sidebar > .pa-form-group { padding: 16px 20px; background: var(--bg); }
+.pa-modified-badge { display: none; font-size: 10px; color: var(--g2); font-family: var(--fm); margin-top: 4px; }
+.pa-section { border-top: 1px solid var(--border); }
+.pa-section[open] .pa-section-arrow { transform: rotate(0deg); }
+.pa-section:not([open]) .pa-section-arrow { transform: rotate(-90deg); }
+.pa-section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; cursor: pointer; font-family: var(--fu);
+  font-size: 12px; font-weight: 700; color: var(--black); letter-spacing: .03em;
+  text-transform: uppercase; list-style: none; user-select: none;
+  background: var(--surface); transition: background .12s;
+}
+.pa-section-head:hover { background: var(--bg); }
+.pa-section-head::-webkit-details-marker { display: none; }
+.pa-section-arrow { font-size: 11px; color: var(--g2); transition: transform .15s; display: inline-block; }
+.pa-section-body { padding: 4px 20px 16px; }
+.pa-form-group { display: flex; flex-direction: column; gap: 5px; }
+.pa-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.pa-input, .pa-select, .pa-textarea {
+  font-family: var(--fm); font-size: 13px; color: var(--black);
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 5px; padding: 7px 10px; transition: border-color .12s; width: 100%;
+}
+.pa-input:focus, .pa-select:focus, .pa-textarea:focus { outline: none; border-color: var(--accent); }
+.pa-textarea { resize: vertical; font-size: 11px; line-height: 1.6; }
+.pa-select { appearance: none; cursor: pointer; padding-right: 24px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238C8C8C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.pa-radio-group { display: flex; flex-direction: column; gap: 6px; }
+.pa-radio { display: flex; align-items: center; gap: 7px; font-family: var(--fu); font-size: 13px; color: var(--black); cursor: pointer; }
+.pa-radio input[type="radio"] { accent-color: var(--accent); width: 14px; height: 14px; flex-shrink: 0; }
+.pa-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pa-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.pa-pattern-count { margin-top: 8px; font-family: var(--fm); font-size: 11px; color: var(--accent); background: rgba(255,90,31,.07); border: 1px solid rgba(255,90,31,.18); border-radius: 4px; padding: 6px 10px; }
+#towerCountNum { font-weight: 700; font-size: 13px; }
+.input-error { border-color: #ef4444 !important; }
+.pa-field-error { display: none; font-size: 11px; color: #ef4444; font-family: var(--fm); }
+.pa-inline-error { font-size: 12px; color: #ef4444; font-family: var(--fm); margin-top: 6px; }
+.pa-inline-warn  { font-size: 12px; color: #f59e0b; font-family: var(--fm); margin-top: 6px; }
+.pa-output { display: flex; flex-direction: column; gap: 16px; }
+.pa-stats-bar { display: flex; align-items: center; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; flex-wrap: wrap; position: relative; }
+.pa-stat { display: flex; flex-direction: column; gap: 3px; padding: 12px 20px; flex: 1; min-width: 100px; }
+.pa-stat-label { font-family: var(--fm); font-size: 9px; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); }
+.pa-stat-val { font-family: var(--fd); font-size: 20px; font-weight: 800; color: var(--black); line-height: 1; }
+.pa-stat-div { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+.pa-updating { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-family: var(--fm); font-size: 10px; color: var(--accent); opacity: 0; transition: opacity .15s; pointer-events: none; }
+.pa-updating.visible { opacity: 1; }
+.pa-actions { display: flex; gap: 10px; }
+.pa-btn-copy, .pa-btn-download { font-family: var(--fu); font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; transition: background .12s, opacity .12s; }
+.pa-btn-copy { background: var(--black); color: #fff; }
+.pa-btn-copy:hover:not(:disabled) { background: #333; }
+.pa-btn-copy.copied { background: #1a7a1a; }
+.pa-btn-download { background: var(--accent); color: #fff; }
+.pa-btn-download:hover:not(:disabled) { background: var(--accent-dk); }
+.pa-btn-copy:disabled, .pa-btn-download:disabled { opacity: 0.4; cursor: not-allowed; }
+.pa-code-wrap { background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 8px; overflow: hidden; }
+.pa-code { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.7; color: #ccc; padding: 20px 24px; overflow-x: auto; overflow-y: auto; max-height: 520px; white-space: pre; margin: 0; }
+.pa-code .gc-comment { color: #5a5a5a; }
+.pa-code .gc-cmd    { color: var(--accent); font-weight: 700; }
+.pa-code .gc-retract { color: #4fc3f7; }
+.pa-howto { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.pa-howto-title { font-family: var(--fd); font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 14px; }
+.pa-howto-steps { font-family: var(--fb); font-size: 14px; color: var(--g1); line-height: 1.7; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.pa-howto-steps strong { color: var(--black); font-family: var(--fu); }
+.pa-howto-steps code { font-family: var(--fm); font-size: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent); }
+.pa-diagram { background: #0d0d0d; border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
+.pa-diagram-title { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #666; margin-bottom: 10px; }
+.pa-diagram-art { font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; color: #aaa; margin: 0; white-space: pre; overflow-x: auto; }
+.pa-howto-note { font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.7; padding-top: 14px; border-top: 1px solid var(--border); }
+.pa-howto-note code { font-family: var(--fm); font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent); }
+
+/* ── RETRACTION-SPECIFIC ── */
+.rt-range-note {
+  margin-top: 8px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  padding: 5px 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) { .pa-tool-inner { grid-template-columns: 300px 1fr; gap: 24px; } }
+@media (max-width: 860px)  { .pa-tool-inner { grid-template-columns: 1fr; } .pa-sidebar { position: static; max-height: none; } }
+@media (max-width: 768px)  { .pa-tool-wrap { padding: 20px 0 48px; } .pa-tool-inner { padding: 0 20px; } .pa-row-2, .pa-row-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px)  { .pa-row-3 { grid-template-columns: 1fr; } .pa-stats-bar { flex-direction: column; align-items: stretch; } .pa-stat-div { width: 100%; height: 1px; } .pa-actions { flex-direction: column; } }
+</style>
+
+<script>
+// ── PRESETS ──
+const PRESETS: Record<string, Record<string, string | number>> = {
+  voron: { bedX:250, bedY:250, hotendTemp:240, bedTemp:110, travelSpeed:300, firmware:'klipper', rStart:0.5, rEnd:2.0, rIncrement:0.25 },
+  bambu: { bedX:256, bedY:256, hotendTemp:220, bedTemp:60,  travelSpeed:500, firmware:'klipper', rStart:0.5, rEnd:1.5, rIncrement:0.25 },
+  prusa: { bedX:250, bedY:210, hotendTemp:215, bedTemp:60,  travelSpeed:150, rStart:0.5, rEnd:2.0, rIncrement:0.25 },
+  ender: { bedX:235, bedY:235, hotendTemp:200, bedTemp:60,  travelSpeed:120, rStart:2.0, rEnd:7.0, rIncrement:0.5  },
+};
+
+const KLIPPER_START = `G28\nG90\nM190 S[BED_TEMP]\nM109 S[HOTEND_TEMP]\nG92 E0\nG1 Z5 F3000`;
+const MARLIN_START  = `G28\nM190 S[BED_TEMP]\nM109 S[HOTEND_TEMP]\nG92 E0\nG1 Z5 F3000`;
+
+// ── G-CODE GENERATOR ──
+function generateGcode(s: Record<string, any>): string {
+  const rawCount   = (s.rEnd - s.rStart) / s.rIncrement;
+  const towerCount = Math.max(1, Math.round(rawCount) + 1);
+
+  if (towerCount > 20) {
+    return `; ERROR: Too many towers (${towerCount}). Reduce range or increase increment.\n; Maximum is 20 towers.`;
+  }
+
+  const tw      = s.towerWidth;
+  const tSpc    = 10;  // gap between towers
+  const totalW  = towerCount * (tw + tSpc);
+  const startX  = (s.bedX - totalW) / 2;
+  const startY  = (s.bedY - tw) / 2;
+
+  if (startX < 5 || startY < 5) {
+    return `; ERROR: Towers (${totalW.toFixed(0)}mm) do not fit on bed (${s.bedX}mm). Reduce tower count or increment.`;
+  }
+
+  // Extrusion math
+  const extW    = 1.05 * s.nozzleDia;  // ~105% nozzle width
+  const fArea   = Math.PI * Math.pow(s.filamentDia / 2, 2);
+  const crossSec= (h: number) => extW * h - (Math.PI / 4) * h * h;
+  const ePerMm  = (h: number) => crossSec(h) / fArea;
+  const lE      = ePerMm(s.layerHeight);
+  const sideE   = (lE * tw).toFixed(5);
+  const towerLayers = Math.max(1, Math.round(s.towerHeight / s.layerHeight));
+
+  const fwNames: Record<string, string> = { klipper:'Klipper', marlin:'Marlin', rrf:'RepRapFirmware' };
+  const fwName  = fwNames[s.firmware] ?? 'Klipper';
+
+  const processGcode = (raw: string) =>
+    raw.replace(/\[BED_TEMP\]/g, String(s.bedTemp))
+       .replace(/\[HOTEND_TEMP\]/g, String(s.hotendTemp));
+
+  const lines: string[] = [];
+  const push = (...args: string[]) => lines.push(...args);
+
+  push(
+    `; Retraction Distance Calibration Tower`,
+    `; Generated by Modern Makes — modernmakes.github.io/tools/retraction-tuning`,
+    `; ─────────────────────────────────────────`,
+    `; Firmware    : ${fwName}`,
+    `; Ret. Range  : ${s.rStart.toFixed(1)} → ${s.rEnd.toFixed(1)}mm (step ${s.rIncrement.toFixed(2)}mm)`,
+    `; Ret. Speed  : ${s.rSpeed} mm/s`,
+    `; Towers      : ${towerCount} | Size: ${tw}×${tw}mm | Height: ${s.towerHeight}mm`,
+    `; Bed         : ${s.bedX}×${s.bedY}mm | Hotend: ${s.hotendTemp}°C | Bed: ${s.bedTemp}°C`,
+    `; ─────────────────────────────────────────`,
+    ``,
+    `; === START G-CODE ===`,
+    processGcode(s.startGcode).trim(),
+    ``,
+    `; Fan on`,
+    `M106 S${Math.round(s.fanSpeed * 2.55)}`,
+    ``,
+    `; === PRIME LINE ===`,
+    `G1 Z${s.layerHeight.toFixed(2)} F3000`,
+    `G1 X${Math.max(5, startX - 15).toFixed(2)} Y5.00 F${s.travelSpeed * 60}`,
+    `G1 E0.5 F${s.rSpeed * 60}`,
+    `G1 X${Math.max(5, startX - 15 + 40).toFixed(2)} Y5.00 E${(lE * 40).toFixed(5)} F${s.printSpeed * 60}`,
+    `G92 E0`,
+    ``,
+  );
+
+  // Initial travel to tower 0 (retract at start distance before moving)
+  const t0x = startX;
+  const t0y = startY;
+  push(
+    `; Initial move to tower 0`,
+    `G1 E-${s.rStart.toFixed(2)} F${s.rSpeed * 60} ; retract`,
+    `G1 X${t0x.toFixed(2)} Y${t0y.toFixed(2)} F${s.travelSpeed * 60} ; travel`,
+    `G1 E${s.rStart.toFixed(2)} F${s.rSpeed * 60} ; unretract`,
+    ``,
+  );
+
+  for (let i = 0; i < towerCount; i++) {
+    const retDist = s.rStart + i * s.rIncrement;
+    const tx = startX + i * (tw + tSpc);
+    const ty = startY;
+
+    push(`; ── Tower ${i + 1}/${towerCount} — Retraction: ${retDist.toFixed(2)}mm ──`);
+    if (s.firmware === 'marlin') {
+      push(`M207 S${retDist.toFixed(2)} F${s.rSpeed * 60} ; set firmware retraction`);
+    }
+    push(`M117 RET=${retDist.toFixed(2)}mm`);
+    push(``);
+
+    for (let layer = 0; layer < towerLayers; layer++) {
+      const z = s.layerHeight + layer * s.layerHeight;
+      push(`G1 Z${z.toFixed(2)} F3000`);
+      push(`G92 E0`);
+      // Move to tower start corner
+      push(`G1 X${tx.toFixed(2)} Y${ty.toFixed(2)} F${s.travelSpeed * 60}`);
+      // Print 4 sides of the square
+      push(`G1 X${(tx + tw).toFixed(2)} Y${ty.toFixed(2)} E${sideE} F${s.printSpeed * 60}`);
+      push(`G1 X${(tx + tw).toFixed(2)} Y${(ty + tw).toFixed(2)} E${sideE}`);
+      push(`G1 X${tx.toFixed(2)} Y${(ty + tw).toFixed(2)} E${sideE}`);
+      push(`G1 X${tx.toFixed(2)} Y${ty.toFixed(2)} E${sideE}`);
+      push(`G92 E0`);
+    }
+
+    // After completing this tower, travel to next (if not last)
+    if (i < towerCount - 1) {
+      const nextTx = startX + (i + 1) * (tw + tSpc);
+      const nextTy = startY;
+      const zTop   = (s.layerHeight + (towerLayers - 1) * s.layerHeight + 0.5).toFixed(2);
+      push(``);
+      push(`; Travel to tower ${i + 2} — testing ${retDist.toFixed(2)}mm retraction`);
+      push(`G1 Z${zTop} F3000 ; z-hop`);
+      push(`G1 E-${retDist.toFixed(2)} F${s.rSpeed * 60} ; retract`);
+      push(`G1 X${nextTx.toFixed(2)} Y${nextTy.toFixed(2)} F${s.travelSpeed * 60} ; travel (inspect for stringing)`);
+      push(`G1 E${retDist.toFixed(2)} F${s.rSpeed * 60} ; unretract`);
+      push(`G1 Z${(s.layerHeight).toFixed(2)} F3000 ; drop to first layer height`);
+      push(``);
+    }
+  }
+
+  push(``);
+  push(`; === END G-CODE ===`, processGcode(s.endGcode).trim());
+  return lines.join('\n');
+}
+
+// ── SYNTAX HIGHLIGHT ──
+function highlight(raw: string): string {
+  return raw.split('\n').map(line => {
+    const t = line.trimStart();
+    if (t.startsWith(';')) return `<span class="gc-comment">${esc(line)}</span>`;
+    if (t.match(/^G1 E-/) || t.match(/^M207/))
+      return `<span class="gc-retract">${esc(line)}</span>`;
+    if (t.startsWith('M117')) return `<span class="gc-comment">${esc(line)}</span>`;
+    return line.replace(/^([A-Z][0-9]+)/, '<span class="gc-cmd">$1</span>');
+  }).join('\n');
+}
+function esc(s: string) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── COLLECT SETTINGS ──
+function getSettings(): Record<string, any> {
+  const fw = (document.querySelector<HTMLInputElement>('input[name="firmware"]:checked'))?.value ?? 'klipper';
+  return {
+    firmware:    fw,
+    bedX:        +v('bedX'),
+    bedY:        +v('bedY'),
+    nozzleDia:   +v('nozzleDia'),
+    filamentDia: +v('filamentDia'),
+    travelSpeed: +v('travelSpeed'),
+    hotendTemp:  +v('hotendTemp'),
+    bedTemp:     +v('bedTemp'),
+    rStart:      +v('rStart'),
+    rEnd:        +v('rEnd'),
+    rIncrement:  +v('rIncrement'),
+    rSpeed:      +v('rSpeed'),
+    towerHeight: +v('towerHeight'),
+    towerWidth:  +v('towerWidth'),
+    layerHeight: +v('layerHeight'),
+    printSpeed:  +v('printSpeed'),
+    fanSpeed:    +v('fanSpeed'),
+    startGcode:  v('startGcode'),
+    endGcode:    v('endGcode'),
+  };
+}
+function v(id: string): string {
+  const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+  return el?.value ?? '';
+}
+
+// ── VALIDATION ──
+interface VResult { valid: boolean; errors: Map<string, string>; }
+
+function validate(s: Record<string, any>): VResult {
+  const errors = new Map<string, string>();
+  if (s.rStart < 0)                                        errors.set('rStart',      'Must be ≥ 0');
+  if (s.rEnd <= s.rStart)                                  errors.set('rEnd',        'Must be > Start');
+  if (s.rIncrement <= 0 || s.rIncrement > (s.rEnd - s.rStart))
+                                                           errors.set('rIncrement',  'Must be > 0 and ≤ range');
+  if (s.bedX <= 50)                                        errors.set('bedX',        'Must be > 50');
+  if (s.bedY <= 50)                                        errors.set('bedY',        'Must be > 50');
+  if (s.layerHeight < 0.05 || s.layerHeight > 0.5)       errors.set('layerHeight', '0.05 – 0.5 mm');
+  if (s.printSpeed <= 0)                                   errors.set('printSpeed',  'Must be > 0');
+  return { valid: errors.size === 0, errors };
+}
+
+function applyValidation(result: VResult) {
+  document.querySelectorAll<HTMLInputElement>('.pa-input').forEach(el => el.classList.remove('input-error'));
+  document.querySelectorAll<HTMLElement>('.pa-field-error').forEach(el => { el.style.display = 'none'; el.textContent = ''; });
+  result.errors.forEach((msg, fieldId) => {
+    const input = document.getElementById(fieldId) as HTMLInputElement | null;
+    if (input) input.classList.add('input-error');
+    const errEl = document.getElementById(`err-${fieldId}`);
+    if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+  });
+  const disabled = !result.valid;
+  const copyBtn = document.getElementById('copyBtn') as HTMLButtonElement | null;
+  const dlBtn   = document.getElementById('downloadBtn') as HTMLButtonElement | null;
+  if (copyBtn) copyBtn.disabled = disabled;
+  if (dlBtn)   dlBtn.disabled   = disabled;
+}
+
+// ── TOWER COUNT + WARNINGS ──
+function updateTowerCount() {
+  const start = +v('rStart');
+  const end   = +v('rEnd');
+  const inc   = +v('rIncrement');
+  if (inc <= 0 || end <= start) return;
+
+  const rawCount = (end - start) / inc;
+  const count    = Math.max(1, Math.round(rawCount) + 1);
+  const countEl  = document.getElementById('towerCountNum');
+  if (countEl) countEl.textContent = String(count);
+
+  const errEl = document.getElementById('tower-count-error');
+  if (errEl) errEl.style.display = count > 20 ? 'block' : 'none';
+
+  const isClean = Math.abs(rawCount - Math.round(rawCount)) < 0.0001;
+  const warnEl  = document.getElementById('increment-warning');
+  if (warnEl) {
+    warnEl.style.display = !isClean ? 'block' : 'none';
+    if (!isClean) {
+      const actualEnd = (start + Math.round(rawCount) * inc).toFixed(2);
+      const spanEl = document.getElementById('incrementActualEnd');
+      if (spanEl) spanEl.textContent = `Actual end: ${actualEnd}mm`;
+    }
+  }
+}
+
+// ── BED FIT CHECK ──
+function checkBedFit(s: Record<string, any>) {
+  const count    = Math.max(1, Math.round((s.rEnd - s.rStart) / s.rIncrement) + 1);
+  const tw       = s.towerWidth;
+  const tSpc     = 10;
+  const totalW   = count * (tw + tSpc);
+  const bedFitEl = document.getElementById('bed-fit-warning');
+  if (!bedFitEl) return;
+  if (totalW > s.bedX * 0.9) {
+    bedFitEl.textContent = `⚠ Towers (${totalW.toFixed(0)}mm) exceed bed width (${s.bedX}mm). Increase increment or reduce range.`;
+    bedFitEl.style.display = 'block';
+  } else if (tw > s.bedY * 0.9) {
+    bedFitEl.textContent = `⚠ Tower depth exceeds bed Y dimension.`;
+    bedFitEl.style.display = 'block';
+  } else {
+    bedFitEl.style.display = 'none';
+  }
+}
+
+// ── STATS BAR ──
+function updateStats(s: Record<string, any>) {
+  const count    = Math.max(1, Math.round((s.rEnd - s.rStart) / s.rIncrement) + 1);
+  const tw       = s.towerWidth;
+  const tLayers  = Math.max(1, Math.round(s.towerHeight / s.layerHeight));
+  // 4 sides per layer × towerWidth each + travel between towers
+  const perimMm  = count * tLayers * 4 * tw;
+  const estSec   = (perimMm / s.printSpeed) + count * 3; // rough estimate
+  const estMin   = Math.max(1, Math.round(estSec / 60));
+  const fwLabels: Record<string, string> = { klipper:'Klipper', marlin:'Marlin', rrf:'RRF' };
+  const fw = fwLabels[s.firmware] ?? 'Klipper';
+
+  setText('statTowers', String(count));
+  setText('statRange', `${s.rStart.toFixed(1)} → ${s.rEnd.toFixed(1)}mm`);
+  setText('statTime', `~${estMin} min`);
+  setText('statFirmware', fw);
+}
+
+function setText(id: string, val: string) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+// ── MAIN UPDATE ──
+let currentGcode = '';
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+function doUpdate() {
+  const ind = document.getElementById('updatingIndicator');
+  if (ind) ind.classList.remove('visible');
+
+  const s = getSettings();
+  updateStats(s);
+  updateTowerCount();
+  checkBedFit(s);
+  const vResult = validate(s);
+  applyValidation(vResult);
+
+  try {
+    currentGcode = generateGcode(s);
+    const out = document.getElementById('gcodeOutput');
+    if (out) out.innerHTML = highlight(currentGcode);
+  } catch(e) {
+    console.error('G-code generation error:', e);
+  }
+}
+
+function scheduleUpdate() {
+  const ind = document.getElementById('updatingIndicator');
+  if (ind) ind.classList.add('visible');
+  if (debounceTimer) clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(doUpdate, 150);
+}
+
+// ── PRESET APPLY ──
+let presetActive   = 'custom';
+let presetModified = false;
+
+function applyPreset(preset: string) {
+  presetActive   = preset;
+  presetModified = false;
+  updateModifiedBadge();
+
+  const data = PRESETS[preset];
+  if (!data) { scheduleUpdate(); return; }
+
+  for (const [key, val] of Object.entries(data)) {
+    if (key === 'firmware') {
+      const radio = document.querySelector<HTMLInputElement>(`input[name="firmware"][value="${val}"]`);
+      if (radio) radio.checked = true;
+      const sgEl = document.getElementById('startGcode') as HTMLTextAreaElement | null;
+      if (sgEl) sgEl.value = (val === 'klipper') ? KLIPPER_START : MARLIN_START;
+    } else {
+      const el = document.getElementById(key) as HTMLInputElement | null;
+      if (el) el.value = String(val);
+    }
+  }
+  scheduleUpdate();
+}
+
+function updateModifiedBadge() {
+  const badge = document.getElementById('preset-modified');
+  if (!badge) return;
+  badge.style.display = (presetActive !== 'custom' && presetModified) ? 'block' : 'none';
+}
+
+// ── WIRE UP ──
+document.addEventListener('DOMContentLoaded', () => {
+  const presetEl = document.getElementById('preset') as HTMLSelectElement | null;
+  presetEl?.addEventListener('change', () => applyPreset(presetEl.value));
+
+  document.querySelectorAll<HTMLElement>('.pa-input, .pa-textarea').forEach(el => {
+    el.addEventListener('input', () => {
+      if (presetActive !== 'custom') { presetModified = true; updateModifiedBadge(); }
+      scheduleUpdate();
+    });
+  });
+
+  document.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(el => {
+    el.addEventListener('change', () => {
+      if (presetActive !== 'custom') { presetModified = true; updateModifiedBadge(); }
+      if (el.name === 'firmware' && !presetModified) {
+        const sgEl = document.getElementById('startGcode') as HTMLTextAreaElement | null;
+        if (sgEl) sgEl.value = el.value === 'klipper' ? KLIPPER_START : MARLIN_START;
+      }
+      scheduleUpdate();
+    });
+  });
+
+  document.getElementById('copyBtn')?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(currentGcode);
+      const btn = document.getElementById('copyBtn') as HTMLButtonElement;
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy G-code'; btn.classList.remove('copied'); }, 2000);
+    } catch { /* clipboard blocked */ }
+  });
+
+  document.getElementById('downloadBtn')?.addEventListener('click', () => {
+    const s = getSettings();
+    const fwPrefix: Record<string, string> = { klipper:'retraction_klipper', marlin:'retraction_marlin', rrf:'retraction_rrf' };
+    const prefix   = fwPrefix[s.firmware] ?? 'retraction_klipper';
+    const filename = `${prefix}_${s.rStart.toFixed(1)}-${s.rEnd.toFixed(1)}mm.gcode`;
+    const blob = new Blob([currentGcode], { type: 'text/plain' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  doUpdate();
+});
+</script>
