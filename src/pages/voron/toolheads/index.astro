@@ -1,0 +1,235 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/voron/toolheads';
+
+const toolheads = [
+  {
+    name: 'Stealthburner',
+    tags: 'official',
+    creator: 'Voron Design',
+    creatorLabel: 'Official Voron Design',
+    verdict: 'COMMUNITY STANDARD',
+    verdictClass: 'verdict-best',
+    description: 'The official Voron toolhead. Integrated LED lighting, wide hotend support, proven in millions of builds.',
+    hotends: ['Rapido 2', 'Dragon HF', 'Revo Voron', 'NF-Crazy'],
+    extruders: ['Clockwork 2', 'Orbiter v2', 'Galileo 2'],
+    difficulty: 'Intermediate',
+    compatible: '2.4,trident',
+    href: '/voron/toolheads/stealthburner',
+    githubUrl: 'https://github.com/VoronDesign/Voron-Stealthburner',
+    bg: 'linear-gradient(135deg,#1a0e0a,#0d1520)',
+  },
+  {
+    name: 'Xol Toolhead',
+    tags: 'community,speed',
+    creator: '@Armchairengineer',
+    creatorLabel: 'Community · Armchair Engineering',
+    verdict: 'RECOMMENDED',
+    verdictClass: 'verdict-rec',
+    description: 'Lightweight Stealthburner alternative. Lower moving mass means better input shaping results at high speed.',
+    hotends: ['Rapido 2', 'Dragon HF', 'NF-Crazy'],
+    extruders: ['Orbiter v2', 'Galileo 2', 'Sherpa Mini'],
+    difficulty: 'Intermediate',
+    compatible: '2.4,trident',
+    href: '/voron/toolheads/xol',
+    githubUrl: 'https://github.com/Armchair-Engineering/Xol-Toolhead',
+    bg: 'linear-gradient(135deg,#0d1a10,#1a1008)',
+  },
+  {
+    name: 'Dragon Burner',
+    tags: 'community,speed',
+    creator: '@chirpy2605',
+    creatorLabel: 'Community · chirpy2605',
+    verdict: 'RECOMMENDED',
+    verdictClass: 'verdict-rec',
+    description: 'Compact toolhead designed around the Dragon and Rapido hotend family. Excellent at speed.',
+    hotends: ['Dragon HF', 'Rapido 2', 'NF-Crazy'],
+    extruders: ['Orbiter v2', 'LGX Lite', 'Sherpa Mini'],
+    difficulty: 'Intermediate',
+    compatible: '2.4,trident',
+    href: '/voron/toolheads/dragon-burner',
+    githubUrl: 'https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner',
+    bg: 'linear-gradient(135deg,#1f2010,#131708)',
+  },
+  {
+    name: 'Mini-Stealthburner',
+    tags: 'official',
+    creator: 'Voron Design',
+    creatorLabel: 'Official Voron Design',
+    verdict: 'SITUATIONAL',
+    verdictClass: 'verdict-upd',
+    description: 'Scaled-down Stealthburner for smaller builds and lighter hotends. Primarily used on Voron 0.',
+    hotends: ['Dragon HF', 'Revo Micro'],
+    extruders: ['Orbiter v2', 'Sherpa Mini'],
+    difficulty: 'Intermediate',
+    compatible: '2.4,trident',
+    href: '/voron/toolheads/mini-stealthburner',
+    githubUrl: 'https://github.com/VoronDesign/Voron-0',
+    bg: 'linear-gradient(135deg,#1a1520,#0d0d18)',
+  },
+  {
+    name: 'Archetype',
+    tags: 'community',
+    creator: '@Armchairengineer',
+    creatorLabel: 'Community · Armchair Engineering',
+    verdict: 'ENTHUSIAST',
+    verdictClass: 'verdict-upd',
+    description: 'Modular toolhead system. Swap hotend mounts without reprinting the entire toolhead.',
+    hotends: ['Rapido 2', 'Dragon HF', 'Revo Voron', 'NF-Crazy'],
+    extruders: ['Orbiter v2', 'Galileo 2'],
+    difficulty: 'Advanced',
+    compatible: '2.4,trident',
+    href: '/voron/toolheads/archetype',
+    githubUrl: 'https://github.com/Armchair-Engineering/Archetype',
+    bg: 'linear-gradient(135deg,#101820,#0d0d14)',
+  },
+];
+---
+<Base title="Voron Toolheads — Stealthburner, Xol, Dragon Burner & More" description="The community-validated toolhead options for Voron 2.4 and Trident. Stealthburner, Xol, Dragon Burner, and Archetype — with full compatibility tables, printed parts lists, and build guides.">
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:40px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Toolheads</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Toolheads</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Toolheads</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">The complete toolhead assembly defines your hotend compatibility, extruder fit, and cooling geometry. These are the community-validated options for Voron 2.4 and Trident.</p>
+    </div>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-context-bar" id="model-context">
+        <span class="model-context-label">Showing parts for:</span>
+        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
+        <a href="/voron" class="model-context-switch">Switch model →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER STRIP -->
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:10px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:8px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;margin-right:4px">Filter:</span>
+      <button class="th-filter active" data-filter="all">All</button>
+      <button class="th-filter" data-filter="official">Official</button>
+      <button class="th-filter" data-filter="community">Community</button>
+      <button class="th-filter" data-filter="speed">Speed-Optimised</button>
+    </div>
+  </div>
+
+  <!-- TOOLHEAD GRID -->
+  <section class="section" aria-label="Voron toolheads">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Toolheads to consider</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{toolheads.length} toolheads</span>
+      </div>
+      <div class="grid-3">
+        {toolheads.map(th => (
+          <div class="product-card" data-compatible={th.compatible} data-tags={th.tags}>
+            <div class="product-card-img" style={`background:${th.bg};height:120px;display:flex;align-items:center;justify-content:center`}>
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-.5px">{th.name}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.08);text-transform:uppercase;letter-spacing:.08em">Toolhead</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span class={`verdict ${th.verdictClass}`} style="font-size:9px;letter-spacing:.06em">{th.verdict}</span>
+                <span style={`font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:3px;${th.difficulty === 'Advanced' ? 'background:rgba(239,68,68,.1);color:#dc2626' : 'background:rgba(59,130,246,.1);color:#2563eb'}`}>{th.difficulty}</span>
+              </div>
+              <div class="product-card-name" style="font-size:18px;margin-bottom:2px">{th.name}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--g2);margin-bottom:8px">{th.creatorLabel}</div>
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{th.description}</p>
+              <div style="margin-bottom:10px">
+                <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Fits hotends</div>
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+                  {th.hotends.slice(0, 3).map(h => (
+                    <span class="spec-chip">{h}</span>
+                  ))}
+                  {th.hotends.length > 3 && <span class="spec-chip">+{th.hotends.length - 3} more</span>}
+                </div>
+              </div>
+              <div class="product-card-footer" style="margin-top:auto">
+                <a href={th.href} style="font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;color:var(--accent)">View toolhead →</a>
+                <a href={th.githubUrl} target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--g2)">GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p id="no-toolheads-msg" style="display:none;color:var(--g2);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No toolheads match the current filter.</p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'voron-model';
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
+
+    const label = document.getElementById('active-model-label');
+    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
+    let activeFilter = 'all';
+
+    function applyFilters() {
+      let visible = 0;
+      document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(card => {
+        const compatible = (card.dataset.compatible ?? '').split(',');
+        const tags = (card.dataset.tags ?? '').split(',');
+        const modelOk = compatible.includes(model);
+        const filterOk = activeFilter === 'all' || tags.includes(activeFilter);
+        const show = modelOk && filterOk;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      const noMsg = document.getElementById('no-toolheads-msg');
+      if (noMsg) noMsg.style.display = visible === 0 ? '' : 'none';
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.th-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.filter ?? 'all';
+        document.querySelectorAll<HTMLButtonElement>('.th-filter').forEach(b =>
+          b.classList.toggle('active', b === btn)
+        );
+        applyFilters();
+      });
+    });
+
+    applyFilters();
+  })();
+</script>
+
+<style is:global>
+.th-filter {
+  padding: 5px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--g1);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--fu);
+}
+.th-filter:hover { border-color: var(--accent); color: var(--accent); }
+.th-filter.active { background: var(--black); border-color: var(--black); color: #fff; }
+</style>

@@ -1,0 +1,226 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/voron/toolheads';
+---
+<Base title="Stealthburner — Official Voron Toolhead Guide" description="Complete guide to the Stealthburner: printed parts, hardware list, hotend and extruder compatibility tables, and build notes for Voron 2.4 and Trident.">
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:40px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <a href="/voron/toolheads" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Toolheads</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Stealthburner</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Toolhead</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:8px">Stealthburner</h1>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.4);margin-bottom:16px">Official Voron Design</div>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">The official Voron toolhead. Integrated LED lighting, wide hotend support, proven in millions of builds.</p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span class="verdict verdict-best" style="font-size:10px;letter-spacing:.06em">COMMUNITY STANDARD</span>
+        <a href="https://github.com/VoronDesign/Voron-Stealthburner" target="_blank" rel="noopener" style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent)">View on GitHub →</a>
+        <a href="/voron/toolheads" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.4)">← All Toolheads</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-context-bar">
+        <span class="model-context-label">Showing parts for:</span>
+        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
+        <a href="/voron" class="model-context-switch">Switch model →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="section" style="background:var(--bg)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start">
+
+      <!-- LEFT COLUMN -->
+      <div>
+
+        <!-- Overview -->
+        <section style="margin-bottom:40px">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">Overview</h2>
+          <p style="font-family:'Lora',serif;font-size:16px;line-height:1.8;color:var(--g1);margin-bottom:16px">The Stealthburner is the official Voron toolhead — designed by the Voron Design team as the default assembly for Voron 2.4 and Trident. It replaced the Afterburner in 2022 and has since become the most widely built toolhead in the Voron ecosystem.</p>
+          <p style="font-family:'Lora',serif;font-size:16px;line-height:1.8;color:var(--g1);margin-bottom:16px">The design priorities are broad hotend compatibility, integrated LED lighting (Neopixel), and a rigid mounting system that keeps the toolhead stable at high accelerations. The LEDs are wired through the toolhead PCB and controlled via Klipper's led_effect plugin.</p>
+          <p style="font-family:'Lora',serif;font-size:16px;line-height:1.8;color:var(--g1)">Clockwork 2 is the official extruder for Stealthburner. Orbiter v2 and Galileo 2 are popular community alternatives that mount with the same interface. The hotend mount is modular — different hotend cowls are printed for each supported hotend.</p>
+        </section>
+
+        <!-- Printed Parts -->
+        <section style="margin-bottom:40px">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">Printed Parts</h2>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+            {['Stealthburner main body','Clockwork 2 extruder body (or alternative extruder mount)','Hotend-specific cowl (one per hotend model)','LED carrier','ADXL345 mount (for input shaping)'].map(part => (
+              <li style="font-family:'Barlow',sans-serif;font-size:14px;color:var(--g1);display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px">
+                <span style="color:var(--accent);flex-shrink:0;margin-top:1px">▸</span>{part}
+              </li>
+            ))}
+          </ul>
+          <p style="margin-top:12px"><a href="https://github.com/VoronDesign/Voron-Stealthburner" target="_blank" rel="noopener" style="font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;color:var(--accent)">All STLs on Voron Design GitHub →</a></p>
+        </section>
+
+        <!-- Required Hardware -->
+        <section style="margin-bottom:40px">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">Required Hardware</h2>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+            {['M3 heat inserts (standard Voron BOM)','M3 × 8, M3 × 16, M3 × 25 SHCS','Neopixel LEDs (2× front, 1× logo)','Toolhead PCB (Hartk or similar)','ADXL345 accelerometer (for input shaping)'].map(hw => (
+              <li style="font-family:'Barlow',sans-serif;font-size:14px;color:var(--g1);padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px;display:flex;align-items:flex-start;gap:10px">
+                <span style="color:var(--g2);flex-shrink:0">·</span>{hw}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Hotend Compatibility -->
+        <section style="margin-bottom:40px">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">Hotend Compatibility</h2>
+          <div style="background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+            <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:'Barlow',sans-serif">
+              <thead>
+                <tr style="background:var(--black)">
+                  <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Hotend</th>
+                  <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Max Temp</th>
+                  <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Flow</th>
+                  <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name:'Rapido 2 UHF', temp:'320°C', flow:'32mm³/s', status:'SUPPORTED', note:'primary', ok:true },
+                  { name:'Dragon HF',    temp:'300°C', flow:'25mm³/s', status:'SUPPORTED', note:'',        ok:true },
+                  { name:'Revo Voron',   temp:'300°C', flow:'20mm³/s', status:'SUPPORTED', note:'',        ok:true },
+                  { name:'NF-Crazy',     temp:'450°C', flow:'30mm³/s', status:'SUPPORTED', note:'',        ok:true },
+                  { name:'Bambu Hotend', temp:'300°C', flow:'—',       status:'NOT COMPATIBLE', note:'',   ok:false },
+                ].map((row, i) => (
+                  <tr style={`border-bottom:1px solid var(--border);background:${i%2===0?'#fff':'var(--bg)'}`}>
+                    <td style="padding:10px 16px;font-weight:600;color:var(--black)">{row.name}</td>
+                    <td style="text-align:center;padding:10px 12px;color:var(--g1);font-family:'JetBrains Mono',monospace;font-size:12px">{row.temp}</td>
+                    <td style="text-align:center;padding:10px 12px;color:var(--g1);font-family:'JetBrains Mono',monospace;font-size:12px">{row.flow}</td>
+                    <td style="text-align:center;padding:10px 12px">
+                      <span style={`font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 8px;border-radius:3px;${row.ok?'background:rgba(46,125,50,.1);color:#2E7D32':'background:rgba(198,40,40,.1);color:#C62828'}`}>
+                        {row.status}{row.note ? ` · ${row.note}` : ''}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Extruder Compatibility -->
+        <section style="margin-bottom:40px">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--black);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)">Extruder Compatibility</h2>
+          <div style="background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+            <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:'Barlow',sans-serif">
+              <thead>
+                <tr style="background:var(--black)">
+                  <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Extruder</th>
+                  <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Gear Ratio</th>
+                  <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Weight</th>
+                  <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name:'Clockwork 2', ratio:'50:17', weight:'210g', status:'SUPPORTED', note:'official', ok:true },
+                  { name:'Orbiter v2',  ratio:'7.5:1', weight:'175g', status:'SUPPORTED', note:'',         ok:true },
+                  { name:'Galileo 2',   ratio:'9:1',   weight:'180g', status:'SUPPORTED', note:'',         ok:true },
+                  { name:'Sherpa Mini', ratio:'5:1',   weight:'85g',  status:'LIMITED',   note:'',         ok:null },
+                ].map((row, i) => (
+                  <tr style={`border-bottom:1px solid var(--border);background:${i%2===0?'#fff':'var(--bg)'}`}>
+                    <td style="padding:10px 16px;font-weight:600;color:var(--black)">{row.name}</td>
+                    <td style="text-align:center;padding:10px 12px;color:var(--g1);font-family:'JetBrains Mono',monospace;font-size:12px">{row.ratio}</td>
+                    <td style="text-align:center;padding:10px 12px;color:var(--g1);font-family:'JetBrains Mono',monospace;font-size:12px">{row.weight}</td>
+                    <td style="text-align:center;padding:10px 12px">
+                      <span style={`font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 8px;border-radius:3px;${row.ok===true?'background:rgba(46,125,50,.1);color:#2E7D32':row.ok===false?'background:rgba(198,40,40,.1);color:#C62828':'background:rgba(230,81,0,.1);color:#E65100'}`}>
+                        {row.status}{row.note ? ` · ${row.note}` : ''}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside style="position:sticky;top:80px;align-self:start;display:flex;flex-direction:column;gap:20px">
+
+        <!-- Quick Specs -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);padding:13px 18px 12px;border-bottom:1px solid var(--border);background:var(--bg)">Quick Specs</div>
+          <div style="padding:12px 18px;display:flex;flex-direction:column;gap:10px">
+            {[
+              { k:'Difficulty',     v:'Intermediate' },
+              { k:'Creator',        v:'Voron Design' },
+              { k:'Type',           v:'Official' },
+              { k:'Printed Parts',  v:'Yes' },
+              { k:'License',        v:'GPL v3' },
+            ].map(row => (
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+                <span style="font-family:'Barlow',sans-serif;font-size:11px;color:var(--g2)">{row.k}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--black)">{row.v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Compatible Hotends -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);padding:13px 18px 12px;border-bottom:1px solid var(--border);background:var(--bg)">Compatible Hotends</div>
+          <div style="padding:8px 0">
+            {['Rapido 2', 'Dragon HF', 'Revo Voron', 'NF-Crazy'].map(h => (
+              <div style="padding:8px 18px;border-bottom:1px solid var(--border);font-family:'Barlow',sans-serif;font-size:13px;color:var(--g1);display:flex;align-items:center;justify-content:space-between">
+                <span>{h}</span>
+                <span style="font-size:10px;color:#2E7D32">✓</span>
+              </div>
+            ))}
+          </div>
+          <div style="padding:10px 18px">
+            <a href="/voron/hotends" style="font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;color:var(--accent)">Browse all hotends →</a>
+          </div>
+        </div>
+
+        <!-- Compatible Extruders -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <div style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);padding:13px 18px 12px;border-bottom:1px solid var(--border);background:var(--bg)">Compatible Extruders</div>
+          <div style="padding:8px 0">
+            {['Clockwork 2 (official)', 'Orbiter v2', 'Galileo 2'].map(e => (
+              <div style="padding:8px 18px;border-bottom:1px solid var(--border);font-family:'Barlow',sans-serif;font-size:13px;color:var(--g1)">
+                {e}
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</Base>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'voron-model';
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
+    const label = document.getElementById('active-model-label');
+    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+  })();
+</script>

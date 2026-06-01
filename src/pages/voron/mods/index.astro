@@ -15,13 +15,14 @@ interface Mod {
   sourceType: 'github' | 'printables';
   sourceUrl: string;
   description: string;
+  modernMakesUrl?: string;
 }
 
 const mods: Mod[] = [
   // Toolhead
-  { id: 'stealthburner', name: 'Stealthburner', creator: 'Voron Design', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/VoronDesign/Voron-Stealthburner', description: 'Official high-performance toolhead with integrated LED lighting and support for most Voron-ecosystem hotends.' },
-  { id: 'xol-toolhead', name: 'Xol Toolhead', creator: 'Armchairengineer', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/Armchair-Engineering/Xol-Toolhead', description: 'Lightweight Stealthburner alternative optimised for high-speed printing. Lower mass, better input shaping results.' },
-  { id: 'dragon-burner', name: 'Dragon Burner', creator: 'chirpy2605', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner', description: 'Compact toolhead designed for the Dragon and Rapido hotend family. Excellent print quality at speed.' },
+  { id: 'stealthburner', name: 'Stealthburner', creator: 'Voron Design', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/VoronDesign/Voron-Stealthburner', description: 'Official high-performance toolhead with integrated LED lighting and support for most Voron-ecosystem hotends.', modernMakesUrl: '/voron/toolheads/stealthburner' },
+  { id: 'xol-toolhead', name: 'Xol Toolhead', creator: 'Armchairengineer', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/Armchair-Engineering/Xol-Toolhead', description: 'Lightweight Stealthburner alternative optimised for high-speed printing. Lower mass, better input shaping results.', modernMakesUrl: '/voron/toolheads/xol' },
+  { id: 'dragon-burner', name: 'Dragon Burner', creator: 'chirpy2605', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner', description: 'Compact toolhead designed for the Dragon and Rapido hotend family. Excellent print quality at speed.', modernMakesUrl: '/voron/toolheads/dragon-burner' },
   // Filtration
   { id: 'nevermore-micro', name: 'Nevermore Micro', creator: 'nevermore3d', category: 'Filtration', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'github', sourceUrl: 'https://github.com/nevermore3d/Nevermore_Micro', description: 'Activated carbon recirculating filter. Essential for ABS/ASA printing in an enclosed Voron. Mounts inside the chamber.' },
   { id: 'nevermore-stealthmax', name: 'Nevermore StealthMax', creator: 'nevermore3d', category: 'Filtration', models: ['2.4', 'trident'], difficulty: 'Easy', sourceType: 'github', sourceUrl: 'https://github.com/nevermore3d/StealthMax', description: 'Full-size high-volume carbon filter for larger chambers. Better airflow than Micro. Fits Trident with minor modification.' },
@@ -101,9 +102,16 @@ const categories = ['All', 'Toolhead', 'Motion', 'Electronics', 'Bed', 'Filtrati
                 ))}
                 <span class={`mod-difficulty mod-difficulty--${mod.difficulty.toLowerCase()}`}>{mod.difficulty}</span>
               </div>
-              <a href={mod.sourceUrl} class="mod-source-btn" target="_blank" rel="noopener">
-                View on {mod.sourceType === 'github' ? 'GitHub' : 'Printables'} →
-              </a>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <a href={mod.sourceUrl} class="mod-source-btn" target="_blank" rel="noopener">
+                  View on {mod.sourceType === 'github' ? 'GitHub' : 'Printables'} →
+                </a>
+                {mod.modernMakesUrl && (
+                  <a href={mod.modernMakesUrl} class="mod-source-btn" style="color:var(--black)">
+                    Modern Makes guide →
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         ))}

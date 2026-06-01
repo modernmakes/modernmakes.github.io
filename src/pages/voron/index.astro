@@ -160,6 +160,23 @@ const partCounts: Record<string, { a: number; t: number }> = {
             ];
           }
 
+          if (sub.id === 'toolhead') {
+            const thLink = '/voron/toolheads';
+            return [
+              <a href={thLink} data-subsystem-link="" data-href={thLink} data-models="2.4,trident" style="min-width:0;overflow:hidden">
+                <div class="subsystem-card"
+                     data-parts24={String(pc.a)}
+                     data-parts-trident={String(pc.t)}
+                     style={cardStyle}>
+                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
+                  <div style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.45;margin-bottom:8px">Stealthburner, Xol, Dragon Burner — full toolhead comparisons and compatibility</div>
+                  <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">{pc.a} parts →</div>
+                </div>
+              </a>
+            ];
+          }
+
           if (sub.id === 'gantry') {
             return [
               <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4" style="min-width:0;overflow:hidden">
