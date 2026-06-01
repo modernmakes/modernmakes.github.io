@@ -19,7 +19,7 @@ const currentPath = '/voron/z-system';
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron Z System</h1>
       <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
       <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
-      <p id="no-compatible-msg" style="display:none;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No parts listed for this model yet — check back soon.</p>
+      <p id="no-parts-msg" style="display:none;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No parts listed for this model yet — check back soon.</p>
     </div>
   </section>
   <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
@@ -45,7 +45,7 @@ const currentPath = '/voron/z-system';
       const compatible = (el.dataset.compatible ?? '').split(',');
       el.style.display = compatible.includes(model) ? '' : 'none';
     });
-    const noMsg = document.getElementById('no-compatible-msg');
+    const noMsg = document.getElementById('no-parts-msg');
     if (noMsg) {
       const hasVisible = Array.from(document.querySelectorAll<HTMLElement>('[data-compatible]')).some(
         el => el.style.display !== 'none'
