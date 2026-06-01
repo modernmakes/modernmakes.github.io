@@ -305,9 +305,13 @@ const relatedArticles = [
 
   function updateSidebarTop(isSticky: boolean) {
     if (!stickyHeader || !sidebar || window.innerWidth <= 1024) return;
+    const navH = 60;
+    const headerH = stickyHeader.offsetHeight;
+    const metaBar = document.querySelector<HTMLElement>('.guide-meta-bar');
+    const metaBarH = metaBar ? metaBar.offsetHeight : 0;
     sidebar.style.top = isSticky
-      ? (60 + stickyHeader.offsetHeight + 16) + 'px'
-      : '80px';
+      ? (navH + headerH + metaBarH + 16) + 'px'
+      : '24px';
   }
   if (stickySentinel && stickyHeader) {
     new IntersectionObserver(

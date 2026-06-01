@@ -381,14 +381,11 @@
 /* ── SIDEBAR ── */
 .art-sidebar {
   position: sticky;
-  top: 80px;           /* default when header is not yet sticky; JS overrides dynamically */
+  top: 24px;           /* fallback before JS runs; JS recalculates after measuring stacked sticky elements */
   align-self: start;   /* REQUIRED — prevents grid from stretching sidebar to row height, which breaks sticky */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* Prevent the sidebar from overflowing the viewport when it has many items */
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
 }
 .art-sb-box {
   background: var(--surface);
