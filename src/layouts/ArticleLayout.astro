@@ -53,9 +53,6 @@ const relatedArticles = [
     </div>
   </div>
 
-  <!-- Sentinel: IntersectionObserver watches this to toggle .is-sticky on the header -->
-  <div id="art-sticky-sentinel" class="art-sticky-sentinel"></div>
-
   <!-- ── ARTICLE HEADER ── -->
   <div class="art-header" id="art-header">
     <div class="art-header-container">
@@ -164,34 +161,4 @@ const relatedArticles = [
   document.querySelectorAll('.art-content img').forEach(img => {
     if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
   });
-
-  /* ── Sticky header: IntersectionObserver on sentinel ── */
-  const sentinel = document.getElementById('art-sticky-sentinel');
-  const header   = document.getElementById('art-header');
-  const sidebar  = document.querySelector<HTMLElement>('.art-sidebar');
-
-  /* Only adjust sidebar top on wide viewports — on ≤1024px sidebar is position:static */
-  function updateSidebarTop(isSticky: boolean) {
-    if (!header || !sidebar || window.innerWidth <= 1024) return;
-    sidebar.style.top = isSticky
-      ? (60 + header.offsetHeight + 16) + 'px'
-      : '24px';
-  }
-
-  if (sentinel && header) {
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        const sticky = !entry.isIntersecting;
-        header.classList.toggle('is-sticky', sticky);
-        updateSidebarTop(sticky);
-      },
-      { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
-    );
-    io.observe(sentinel);
-  }
-
-  updateSidebarTop(false);
-  window.addEventListener('resize', () => {
-    updateSidebarTop(header?.classList.contains('is-sticky') ?? false);
-  }, { passive: true });
 </script>

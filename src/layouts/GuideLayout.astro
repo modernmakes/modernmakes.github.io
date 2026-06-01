@@ -9,7 +9,6 @@ interface Props {
   category: string;
   date: string;
   readTime: string;
-  heroImage?: string;
   excerpt?: string;
   summary?: string[];
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
@@ -24,7 +23,6 @@ const {
   category,
   date,
   readTime,
-  heroImage,
   excerpt = '',
   summary = [],
   difficulty = 'Intermediate',
@@ -56,25 +54,8 @@ const relatedArticles = [
   { category: 'Safety',   title: 'Bambu Lab Confirms Free Board Replacement After Fire Reports', href: '/news/bambu-lab-fire-safety-recall', date: 'May 28, 2026', gradient: 'linear-gradient(135deg,#1a0e0a,#0d1520)' },
 ];
 ---
-<Base title={title} description={excerpt} heroPage={true} hasHero={true}>
+<Base title={title} description={excerpt} heroPage={false} hasHero={false}>
   <Nav slot="nav" currentPath="/guides" />
-
-  <!-- ── HERO ── -->
-  <div class="art-hero">
-    {heroImage
-      ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
-      : <div class="art-hero-bg" style="background: linear-gradient(160deg, #0a1520, #0d1a10 55%, #1a1520)"></div>
-    }
-    <div class="art-hero-overlay"></div>
-    <div class="art-hero-foot">
-      <div class="art-hero-container">
-        <span class="art-hero-cat">{category}</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sentinel for sticky header -->
-  <div id="art-sticky-sentinel" class="art-sticky-sentinel"></div>
 
   <!-- ── ARTICLE HEADER ── -->
   <div class="art-header" id="art-header">
@@ -297,36 +278,6 @@ const relatedArticles = [
   document.querySelectorAll('.art-content img').forEach(img => {
     if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
   });
-
-  /* ── Sticky article header ── */
-  const stickyHeader   = document.getElementById('art-header');
-  const stickySentinel = document.getElementById('art-sticky-sentinel');
-  const sidebar        = document.querySelector<HTMLElement>('.art-sidebar');
-
-  function updateSidebarTop(isSticky: boolean) {
-    if (!stickyHeader || !sidebar || window.innerWidth <= 1024) return;
-    const navH = 60;
-    const headerH = stickyHeader.offsetHeight;
-    const metaBar = document.querySelector<HTMLElement>('.guide-meta-bar');
-    const metaBarH = metaBar ? metaBar.offsetHeight : 0;
-    sidebar.style.top = isSticky
-      ? (navH + headerH + metaBarH + 16) + 'px'
-      : '24px';
-  }
-  if (stickySentinel && stickyHeader) {
-    new IntersectionObserver(
-      ([e]) => {
-        const sticky = !e.isIntersecting;
-        stickyHeader.classList.toggle('is-sticky', sticky);
-        updateSidebarTop(sticky);
-      },
-      { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
-    ).observe(stickySentinel);
-  }
-  updateSidebarTop(false);
-  window.addEventListener('resize', () => {
-    updateSidebarTop(stickyHeader?.classList.contains('is-sticky') ?? false);
-  }, { passive: true });
 </script>
 
 <style is:global>
