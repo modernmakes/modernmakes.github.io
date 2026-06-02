@@ -58,6 +58,7 @@ interface Props {
   compatibleToolheads?: ToolheadLink[];
   pageTitle?: string;
   primaryVendorUrl?: string;
+  heroImageUrl?: string;
 }
 
 const {
@@ -83,6 +84,7 @@ const {
   compatibleToolheads = [],
   pageTitle,
   primaryVendorUrl = '',
+  heroImageUrl = '',
 } = Astro.props;
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
@@ -135,6 +137,9 @@ const productSchema = {
   brand: { '@type': 'Brand', name: brand },
   description: excerpt || verdict,
   url: canonicalUrl,
+  image: heroImageUrl
+    ? `${siteBase}${heroImageUrl}`
+    : `${siteBase}/images/og-default.jpg`,
   offers: {
     '@type': 'Offer',
     price: price.usd,
