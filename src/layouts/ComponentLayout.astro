@@ -160,30 +160,6 @@ const flowBenchmarks = [
 
       <div class="comp-main">
 
-        <!-- BUY SECTION -->
-        {vendors.length > 0 && (
-          <section class="comp-section" aria-labelledby="buy-heading">
-            <h2 class="comp-section-title" id="buy-heading">Where to Buy</h2>
-            <div class="comp-vendors-grid">
-              {vendors.map(v => (
-                <a
-                  href={v.url}
-                  class={`comp-vendor-card${v.primary ? ' comp-vendor-primary' : ''}`}
-                  target="_blank"
-                  rel="noopener sponsored"
-                  aria-label={`Buy from ${v.name}`}
-                >
-                  {v.primary && <span class="comp-vendor-primary-badge">Best Option</span>}
-                  <div class="comp-vendor-flag">{regionFlags[v.region] ?? '🌐'}</div>
-                  <div class="comp-vendor-name">{v.name}</div>
-                  <div class="comp-vendor-price">{v.price}</div>
-                  <div class="comp-vendor-arrow">→</div>
-                </a>
-              ))}
-            </div>
-          </section>
-        )}
-
         <!-- FLOW RATE BOX -->
         {maxFlow && (
           <section class="comp-section comp-flow-section" aria-labelledby="flow-heading">
@@ -285,6 +261,30 @@ const flowBenchmarks = [
         <div class="comp-prose art-content">
           <slot />
         </div>
+
+        <!-- BUY SECTION -->
+        {vendors.length > 0 && (
+          <section class="comp-section" aria-labelledby="buy-heading">
+            <h2 class="comp-section-title" id="buy-heading">Where to Buy</h2>
+            <div class="comp-vendors-grid">
+              {vendors.map(v => (
+                <a
+                  href={v.url}
+                  class={`comp-vendor-card${v.primary ? ' comp-vendor-primary' : ''}`}
+                  target="_blank"
+                  rel="noopener sponsored"
+                  aria-label={`Buy from ${v.name}`}
+                >
+                  {v.primary && <span class="comp-vendor-primary-badge">Best Option</span>}
+                  <div class="comp-vendor-flag">{regionFlags[v.region] ?? '🌐'}</div>
+                  <div class="comp-vendor-name">{v.name}</div>
+                  <div class="comp-vendor-price">{v.price}</div>
+                  <div class="comp-vendor-arrow">→</div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
       </div><!-- /comp-main -->
     </div>

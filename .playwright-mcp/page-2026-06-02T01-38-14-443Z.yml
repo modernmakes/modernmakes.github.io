@@ -1,0 +1,343 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary navigation" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Modern Makes home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Modern Makes" [ref=e6]
+      - generic [ref=e7]:
+        - button "Printers" [ref=e9] [cursor=pointer]:
+          - text: Printers
+          - img [ref=e10]
+        - link "Hardware" [ref=e12] [cursor=pointer]:
+          - /url: /hardware
+        - link "Filament" [ref=e13] [cursor=pointer]:
+          - /url: /filament
+        - link "Guides" [ref=e14] [cursor=pointer]:
+          - /url: /guides
+        - link "Tools" [ref=e15] [cursor=pointer]:
+          - /url: /tools
+        - link "News" [ref=e16] [cursor=pointer]:
+          - /url: /news
+      - generic [ref=e18]:
+        - textbox "Search" [ref=e19]:
+          - /placeholder: Search Modern Makes…
+        - button "Search" [ref=e20] [cursor=pointer]:
+          - img [ref=e21]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - generic [ref=e27]: Printers
+      - link [ref=e28] [cursor=pointer]:
+        - /url: /voron
+        - text: Voron
+    - link [ref=e30] [cursor=pointer]:
+      - /url: /hardware
+      - text: Hardware
+    - link [ref=e31] [cursor=pointer]:
+      - /url: /filament
+      - text: Filament
+    - link [ref=e32] [cursor=pointer]:
+      - /url: /guides
+      - text: Guides
+    - link [ref=e33] [cursor=pointer]:
+      - /url: /tools
+      - text: Tools
+    - link [ref=e34] [cursor=pointer]:
+      - /url: /news
+      - text: News
+  - main [ref=e35]:
+    - heading "Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter" [level=1] [ref=e36]
+    - generic [ref=e38]:
+      - navigation [ref=e39]:
+        - link "Home" [ref=e40] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e41]: /
+        - link "Filament" [ref=e42] [cursor=pointer]:
+          - /url: /filament
+        - generic [ref=e43]: /
+        - generic [ref=e44]: PETG
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - paragraph [ref=e47]: Polyethylene Terephthalate Glycol
+          - heading "PETG" [level=1] [ref=e48]
+          - generic [ref=e49]:
+            - generic [ref=e50]: RECOMMENDED
+            - generic [ref=e51]: The default step up from PLA
+          - paragraph [ref=e52]: PETG closes most of the gap between PLA's ease and ABS's toughness. Better heat resistance, better layer adhesion, prints on the same machines. The tradeoff is stringing and a tendency to absorb moisture faster than people expect.
+        - generic [ref=e53]:
+          - generic [ref=e54]: Print Settings
+          - generic [ref=e55]:
+            - generic [ref=e56]: Nozzle Temp
+            - generic [ref=e57]: 230–250°C
+          - generic [ref=e58]:
+            - generic [ref=e59]: Bed Temp
+            - generic [ref=e60]: 70–90°C
+          - generic [ref=e61]:
+            - generic [ref=e62]: Chamber
+            - generic [ref=e63]: None required
+          - generic [ref=e64]:
+            - generic [ref=e65]: Cooling Fan
+            - generic [ref=e66]: 30–50%
+          - generic [ref=e67]:
+            - generic [ref=e68]: Max Speed
+            - generic [ref=e69]: 120 mm/s
+          - generic [ref=e70]:
+            - generic [ref=e71]: Heat Deflection
+            - generic [ref=e72]: ~80°C
+          - generic [ref=e73]:
+            - generic [ref=e74]: Difficulty
+            - generic [ref=e75]: Beginner
+          - generic [ref=e76]: Updated 2026-06-01
+    - generic [ref=e78]:
+      - article [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]: At a glance
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: Pros
+              - list [ref=e85]:
+                - listitem [ref=e86]: ✓ Better heat resistance than PLA — functional up to ~80°C vs ~60°C
+                - listitem [ref=e87]: ✓ Excellent layer adhesion — nearly isotropic strength
+                - listitem [ref=e88]: ✓ Chemical resistance — handles mild acids, fuels, water
+                - listitem [ref=e89]: ✓ Flexible enough to avoid brittleness at thin walls
+                - listitem [ref=e90]: ✓ Food-safe when printed correctly (though layer gaps prevent sterilization)
+            - generic [ref=e91]:
+              - generic [ref=e92]: Cons
+              - list [ref=e93]:
+                - listitem [ref=e94]: ✗ Strings more than PLA — requires tuning
+                - listitem [ref=e95]: ✗ Absorbs moisture faster than PLA — store sealed
+                - listitem [ref=e96]: ✗ Bonds permanently to smooth PEI — use textured sheet only
+                - listitem [ref=e97]: ✗ Enclosed chambers can cause warping if ambient runs hot
+                - listitem [ref=e98]: ✗ Scratch resistance is poor compared to ABS or ASA
+        - generic [ref=e99]:
+          - generic [ref=e100]: Overview
+          - generic [ref=e101]:
+            - paragraph [ref=e102]: "PETG is the filament you reach for when PLA isn’t tough enough but you don’t want to deal with ABS. Better heat resistance, better impact strength, prints on the same machines with minimal changes. The catch: it strings, it sticks too aggressively to smooth surfaces, and it drinks moisture faster than PLA."
+            - paragraph [ref=e103]: Get a textured PEI sheet if you don’t have one. Keep retraction short — PETG doesn’t like long pulls. And dry it before any print that matters. Do those three things and PETG is nearly as easy as PLA.
+            - paragraph [ref=e104]: "Use it for: tool holders, cable clips, brackets, anything in a car or garage, functional enclosures, parts that need to survive dishwashers."
+            - paragraph [ref=e105]: "Don’t use it for: outdoor UV exposure (use ASA), high-temp applications above 80°C (use ABS or PA), or anything that needs to be very rigid and thin (use ASA or ABS)."
+        - generic [ref=e106]:
+          - generic [ref=e107]: Brand Recommendations
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - generic [ref=e111]: Bambu Lab PETG-HF
+                - generic [ref=e112]: TOP
+              - generic [ref=e113]: $24.99/kg
+              - paragraph [ref=e114]: Tuned for Bambu printers but runs well on anything. High-flow variant pushes past 200mm/s on a capable hotend. Consistent diameter.
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - generic [ref=e117]: Prusament PETG
+                - generic [ref=e118]: TOP
+              - generic [ref=e119]: $29.99/kg
+              - paragraph [ref=e120]: Best-in-class consistency. Runs exactly at published settings. More colors than most. Worth the price on anything that matters.
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - generic [ref=e123]: Polymaker PolyLite PETG
+                - generic [ref=e124]: MID
+              - generic [ref=e125]: $19.99/kg
+              - paragraph [ref=e126]: Reliable workhorse. Slightly more stringing than premium options. Fine for functional parts where appearance doesn't matter.
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - generic [ref=e129]: Hatchbox PETG
+                - generic [ref=e130]: MID
+              - generic [ref=e131]: $22.99/kg
+              - paragraph [ref=e132]: Widely available, consistent, no surprises. Good default if you can't get Prusament. Diameter tolerance is adequate.
+            - generic [ref=e133]:
+              - generic [ref=e134]:
+                - generic [ref=e135]: SUNLU PETG
+                - generic [ref=e136]: BUDGET
+              - generic [ref=e137]: $14.99/kg
+              - paragraph [ref=e138]: Works but strings aggressively. Dry it before use without exception. Fine for throw-away prototypes.
+        - generic [ref=e139]:
+          - generic [ref=e140]: Troubleshooting
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - generic [ref=e143]: Stringing
+              - generic [ref=e144]:
+                - generic [ref=e145]:
+                  - generic [ref=e146]: Cause
+                  - generic [ref=e147]: Too high temp, too low retraction, or wet filament
+                - generic [ref=e148]:
+                  - generic [ref=e149]: Fix
+                  - generic [ref=e150]: Drop temp 5°C. Increase retraction 0.5mm at a time. Dry filament 65°C for 4–6 hours.
+            - generic [ref=e151]:
+              - generic [ref=e152]: Bed adhesion failure
+              - generic [ref=e153]:
+                - generic [ref=e154]:
+                  - generic [ref=e155]: Cause
+                  - generic [ref=e156]: Wrong surface, contaminated PEI, or bed temp too low
+                - generic [ref=e157]:
+                  - generic [ref=e158]: Fix
+                  - generic [ref=e159]: Textured PEI sheet at 85°C. Clean with IPA before every print. Avoid smooth PEI — PETG bonds too aggressively and can pull chunks.
+            - generic [ref=e160]:
+              - generic [ref=e161]: Layer delamination
+              - generic [ref=e162]:
+                - generic [ref=e163]:
+                  - generic [ref=e164]: Cause
+                  - generic [ref=e165]: Too much cooling or printing too fast
+                - generic [ref=e166]:
+                  - generic [ref=e167]: Fix
+                  - generic [ref=e168]: Reduce fan to 30%. Slow perimeters to 60mm/s. PETG needs heat to bond layers.
+            - generic [ref=e169]:
+              - generic [ref=e170]: Zits and blobs
+              - generic [ref=e171]:
+                - generic [ref=e172]:
+                  - generic [ref=e173]: Cause
+                  - generic [ref=e174]: Pressure imbalance at seams
+                - generic [ref=e175]:
+                  - generic [ref=e176]: Fix
+                  - generic [ref=e177]: Enable Seam Painting in OrcaSlicer to hide seams. Tune pressure advance.
+            - generic [ref=e178]:
+              - generic [ref=e179]: Poor overhang performance
+              - generic [ref=e180]:
+                - generic [ref=e181]:
+                  - generic [ref=e182]: Cause
+                  - generic [ref=e183]: PETG sags more than PLA at the same fan speed
+                - generic [ref=e184]:
+                  - generic [ref=e185]: Fix
+                  - generic [ref=e186]: Increase fan to 50% on overhangs specifically. Slow overhang speed to 30mm/s.
+        - generic [ref=e187]:
+          - generic [ref=e188]: Printer Compatibility
+          - table [ref=e189]:
+            - rowgroup [ref=e190]:
+              - row "Printer Rating Notes" [ref=e191]:
+                - columnheader "Printer" [ref=e192]
+                - columnheader "Rating" [ref=e193]
+                - columnheader "Notes" [ref=e194]
+            - rowgroup [ref=e195]:
+              - row "Bambu X1C / P1S EXCELLENT AMS compatible. Use Generic PETG profile." [ref=e196]:
+                - cell "Bambu X1C / P1S" [ref=e197]
+                - cell "EXCELLENT" [ref=e198]
+                - cell "AMS compatible. Use Generic PETG profile." [ref=e199]
+              - row "Bambu A1 / A1 Mini EXCELLENT AMS Lite compatible. Runs without enclosure fine." [ref=e200]:
+                - cell "Bambu A1 / A1 Mini" [ref=e201]
+                - cell "EXCELLENT" [ref=e202]
+                - cell "AMS Lite compatible. Runs without enclosure fine." [ref=e203]
+              - row "Voron 2.4 EXCELLENT Enclosed chamber — vent it or keep temps below 40°C ambient. PETG hates too much heat." [ref=e204]:
+                - cell "Voron 2.4" [ref=e205]
+                - cell "EXCELLENT" [ref=e206]
+                - cell "Enclosed chamber — vent it or keep temps below 40°C ambient. PETG hates too much heat." [ref=e207]
+              - row "Voron Trident EXCELLENT Same as 2.4. Open door or crack enclosure slightly." [ref=e208]:
+                - cell "Voron Trident" [ref=e209]
+                - cell "EXCELLENT" [ref=e210]
+                - cell "Same as 2.4. Open door or crack enclosure slightly." [ref=e211]
+              - row "RatRig V-Core 3 EXCELLENT Enclosed — same enclosure warning applies." [ref=e212]:
+                - cell "RatRig V-Core 3" [ref=e213]
+                - cell "EXCELLENT" [ref=e214]
+                - cell "Enclosed — same enclosure warning applies." [ref=e215]
+              - row "Prusa MK4 EXCELLENT Has a dedicated PETG profile. Textured sheet recommended over smooth for release." [ref=e216]:
+                - cell "Prusa MK4" [ref=e217]
+                - cell "EXCELLENT" [ref=e218]
+                - cell "Has a dedicated PETG profile. Textured sheet recommended over smooth for release." [ref=e219]
+              - row "Bambu A1 Mini GOOD No enclosure helps with PETG. Good adhesion on textured PEI." [ref=e220]:
+                - cell "Bambu A1 Mini" [ref=e221]
+                - cell "GOOD" [ref=e222]
+                - cell "No enclosure helps with PETG. Good adhesion on textured PEI." [ref=e223]
+      - complementary [ref=e224]:
+        - generic [ref=e225]:
+          - generic [ref=e226]: Other Materials
+          - link "ASA" [ref=e227] [cursor=pointer]:
+            - /url: /filament/asa
+          - link "ABS" [ref=e228] [cursor=pointer]:
+            - /url: /filament/abs
+          - link "PA‑CF" [ref=e229] [cursor=pointer]:
+            - /url: /filament/pa-cf
+          - link "TPU" [ref=e230] [cursor=pointer]:
+            - /url: /filament/tpu
+        - generic [ref=e231]:
+          - generic [ref=e232]: Guides
+          - link "Filament Drying Guide" [ref=e233] [cursor=pointer]:
+            - /url: /guides/filament-drying-guide
+          - link "First Layer Calibration" [ref=e234] [cursor=pointer]:
+            - /url: /guides/first-layer-calibration-guide
+  - contentinfo [ref=e235]:
+    - generic [ref=e236]:
+      - generic [ref=e237]:
+        - generic [ref=e238]:
+          - link "Modern Makes home" [ref=e239] [cursor=pointer]:
+            - /url: /
+            - img "Modern Makes" [ref=e240]
+          - paragraph [ref=e241]: The editorial voice of the 3D printing enthusiast.
+        - generic [ref=e242]:
+          - generic [ref=e243]:
+            - generic [ref=e244]: Printers
+            - link "Voron" [ref=e245] [cursor=pointer]:
+              - /url: /voron
+          - generic [ref=e246]:
+            - generic [ref=e247]: Editorial
+            - link "Filament" [ref=e248] [cursor=pointer]:
+              - /url: /filament
+            - link "Guides" [ref=e249] [cursor=pointer]:
+              - /url: /guides
+            - link "News" [ref=e250] [cursor=pointer]:
+              - /url: /news
+            - link "Tools" [ref=e251] [cursor=pointer]:
+              - /url: /tools
+          - generic [ref=e252]:
+            - generic [ref=e253]: Parts
+            - link "Hotends" [ref=e254] [cursor=pointer]:
+              - /url: /hotends
+            - link "Extruders" [ref=e255] [cursor=pointer]:
+              - /url: /extruders
+            - link "Electronics" [ref=e256] [cursor=pointer]:
+              - /url: /electronics
+            - link "Motion system" [ref=e257] [cursor=pointer]:
+              - /url: /motion-system
+            - link "Build surfaces" [ref=e258] [cursor=pointer]:
+              - /url: /build-surfaces
+          - generic [ref=e259]:
+            - generic [ref=e260]: Publication
+            - link "Newsletter" [ref=e261] [cursor=pointer]:
+              - /url: /newsletter
+            - link "About" [ref=e262] [cursor=pointer]:
+              - /url: /about
+            - link "Editorial policy" [ref=e263] [cursor=pointer]:
+              - /url: /about#editorial
+            - link "Affiliate disclosure" [ref=e264] [cursor=pointer]:
+              - /url: /about#affiliate
+            - link "Press & Advertising" [ref=e265] [cursor=pointer]:
+              - /url: /press
+            - link "Contact" [ref=e266] [cursor=pointer]:
+              - /url: /contact
+            - link "modernmakesco@gmail.com" [ref=e267] [cursor=pointer]:
+              - /url: mailto:modernmakesco@gmail.com
+      - generic [ref=e268]:
+        - generic [ref=e269]:
+          - text: © 2026 Modern Makes.
+          - link "Privacy" [ref=e270] [cursor=pointer]:
+            - /url: /privacy
+          - text: ·
+          - link "Terms" [ref=e271] [cursor=pointer]:
+            - /url: /terms
+        - generic [ref=e272]: Modern Makes uses affiliate links. We may earn a commission when you buy through links on this site. This never influences our editorial recommendations.
+  - generic [ref=e275]:
+    - generic [ref=e276]:
+      - checkbox "Use dark theme" [ref=e277]
+      - generic [ref=e278] [cursor=pointer]:
+        - img [ref=e279]
+        - img [ref=e283]
+        - generic [ref=e287]: Use dark theme
+    - banner [ref=e288]:
+      - generic [ref=e289]:
+        - heading "UnhandledRejection" [level=2] [ref=e290]
+        - heading "Unhandled rejection" [level=1] [ref=e291]
+      - img [ref=e294]
+    - generic [ref=e297]:
+      - generic [ref=e298]:
+        - img [ref=e300]
+        - generic [ref=e302]: "Astro detected an unhandled rejection. Here's the stack trace: Error: ENOENT: no such file or directory, stat 'D:\\Work\\Modern Makes\\2026\\modernmakes-astro-project\\modernmakes.github.io\\src\\pages\\voron\\enclosure.astro.tmp.39392.f467101bc2ff' at Object.statSync (node:fs:1710:25) at walk (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:87:24) at walk (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:153:9) at createFileBasedRoutes (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:181:5) at createRouteManifest (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:325:27) at rebuildManifest (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/vite-plugin-astro-server/plugin.js:38:56) at FSWatcher.emit (node:events:521:24) at FSWatcher.emitWithAll (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44374:8) at FSWatcher._emit (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44466:8) at NodeFsHandler._handleFile (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43051:14)"
+        - link "See Docs Reference" [ref=e304] [cursor=pointer]:
+          - /url: https://docs.astro.build/en/reference/errors/unhandled-rejection/
+          - text: See Docs Reference
+          - img [ref=e305]
+      - generic [ref=e308]:
+        - img [ref=e310]
+        - generic [ref=e312]:
+          - text: Make sure your promises all have an
+          - code [ref=e313]: await
+          - text: or a
+          - code [ref=e314]: .catch()
+          - text: handler.
+    - generic [ref=e315]:
+      - heading "Stack Trace" [level=2] [ref=e316]
+      - generic [ref=e317]: "UnhandledRejection: Astro detected an unhandled rejection. Here's the stack trace: Error: ENOENT: no such file or directory, stat 'D:\\Work\\Modern Makes\\2026\\modernmakes-astro-project\\modernmakes.github.io\\src\\pages\\voron\\enclosure.astro.tmp.39392.f467101bc2ff' at Object.statSync (node:fs:1710:25) at walk (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:87:24) at walk (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:153:9) at createFileBasedRoutes (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:181:5) at createRouteManifest (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/core/routing/manifest/create.js:325:27) at rebuildManifest (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/vite-plugin-astro-server/plugin.js:38:56) at FSWatcher.emit (node:events:521:24) at FSWatcher.emitWithAll (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44374:8) at FSWatcher._emit (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44466:8) at NodeFsHandler._handleFile (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43051:14) at process.handleUnhandledRejection (file:///D:/Work/Modern%20Makes/2026/modernmakes-astro-project/modernmakes.github.io/node_modules/astro/dist/vite-plugin-astro-server/plugin.js:46:23) at process.emit (node:events:509:20) at emitUnhandledRejection (node:internal/process/promises:190:13) at throwUnhandledRejectionsMode (node:internal/process/promises:326:19) at processPromiseRejections (node:internal/process/promises:413:17) at process.processTicksAndRejections (node:internal/process/task_queues:105:32)"
