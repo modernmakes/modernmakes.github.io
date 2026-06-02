@@ -20,6 +20,8 @@ const TOOLHEAD_HREFS: Record<string, string> = {
 };
 
 export function getStaticPaths() {
+  const toSlug = (name: string) =>
+    name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   return (hotends as any[])
     .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
     .map((r: any) => ({
