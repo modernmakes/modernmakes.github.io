@@ -35,8 +35,22 @@ const relatedArticles = [
   { category: 'Printers', title: 'Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It', href: '/printers/prusa-core-one-plus',  date: 'May 24, 2026', gradient: 'linear-gradient(135deg,#1f2010,#131708)' },
   { category: 'Software', title: "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.", href: '/software/orcaslicer-2-3', date: 'May 20, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
 ];
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteBase}/` },
+  ...pathSegments.map((seg: string, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: i === pathSegments.length - 1 ? title : seg.charAt(0).toUpperCase() + seg.slice(1),
+    item: `${siteBase}/${pathSegments.slice(0, i + 1).join('/')}`,
+  })),
+];
 ---
-<Base title={title} description={excerpt} heroPage={true} hasHero={true}>
+<Base title={title} description={excerpt} heroPage={true} hasHero={true} hasPageH1={true}>
   <Nav slot="nav" currentPath="/news" />
 
   <!-- ── HERO ── -->
@@ -147,12 +161,14 @@ const relatedArticles = [
       "@type": "Organization",
       "name": "Modern Makes",
       "url": "https://modernmakes.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://modernmakes.com/images/wordmark.svg"
-      }
+      "logo": { "@type": "ImageObject", "url": "https://modernmakes.com/images/wordmark.svg" }
     },
     "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+  })}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems,
   })}></script>
 </Base>
 

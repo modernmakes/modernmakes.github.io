@@ -56,6 +56,8 @@ interface Props {
   excerpt?: string;
   quickSpecs?: QuickSpec[];
   compatibleToolheads?: ToolheadLink[];
+  pageTitle?: string;
+  primaryVendorUrl?: string;
 }
 
 const {
@@ -79,6 +81,8 @@ const {
   excerpt = '',
   quickSpecs = [],
   compatibleToolheads = [],
+  pageTitle,
+  primaryVendorUrl = '',
 } = Astro.props;
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
@@ -104,8 +108,54 @@ const flowBenchmarks = [
   { label: 'High Flow', value: 30 },
   { label: 'Volcano', value: 45 },
 ];
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+const canonicalUrl = siteBase + Astro.url.pathname;
+const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+const segLabels: Record<string, string> = {
+  hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', motion: 'Motion Mods',
+};
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteBase}/` },
+  ...pathSegments.map((seg: string, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: i === pathSegments.length - 1
+      ? title
+      : (segLabels[seg] ?? seg.charAt(0).toUpperCase() + seg.slice(1)),
+    item: `${siteBase}/${pathSegments.slice(0, i + 1).join('/')}`,
+  })),
+];
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: title,
+  brand: { '@type': 'Brand', name: brand },
+  description: excerpt || verdict,
+  url: canonicalUrl,
+  offers: {
+    '@type': 'Offer',
+    price: price.usd,
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    ...(primaryVendorUrl ? { url: primaryVendorUrl } : {}),
+  },
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems,
+};
 ---
-<Base title={`${title} — ${brand} ${category} Review`} description={excerpt || verdict} heroPage={true} hasHero={true}>
+<Base
+  title={pageTitle ?? `${title} — ${brand} ${category} Review`}
+  description={excerpt || verdict}
+  heroPage={true}
+  hasHero={true}
+  hasPageH1={true}
+>
   <Nav slot="nav" currentPath="/hardware" />
 
   <!-- ── COMPONENT HERO ── -->
@@ -380,25 +430,9 @@ const flowBenchmarks = [
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": title,
-    "brand": { "@type": "Brand", "name": brand },
-    "description": excerpt || verdict,
-    "category": componentType,
-    "offers": {
-      "@type": "Offer",
-      "price": price.usd,
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
-    "review": {
-      "@type": "Review",
-      "reviewBody": verdict,
-      "publisher": { "@type": "Organization", "name": "Modern Makes" }
-    }
-  })}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(productSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <slot name="head" slot="head" />
 </Base>
 
 <style is:global>

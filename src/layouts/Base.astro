@@ -8,6 +8,8 @@ interface Props {
   heroPage?: boolean;
   /** Set true on pages with a full-bleed dark hero so the nav starts transparent */
   hasHero?: boolean;
+  /** Set true on pages that render their own visible H1 to suppress the sr-only fallback */
+  hasPageH1?: boolean;
 }
 const {
   title,
@@ -15,6 +17,7 @@ const {
   ogImage = "/images/og-default.jpg",
   heroPage = false,
   hasHero  = false,
+  hasPageH1 = false,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -68,7 +71,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <body data-hero={hasHero ? "true" : undefined}>
   <slot name="nav" />
   <main class={heroPage ? 'main-has-hero' : ''}>
-    <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>
+    {!hasPageH1 && <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>}
     <slot />
   </main>
   <slot name="footer" />

@@ -24,9 +24,27 @@ const records = (hotends as any[])
     const bi = VERDICT_ORDER.indexOf(b['Verdict'] ?? '');
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
   });
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Best FDM Hotends for Voron & Prosumer Printers',
+  url: `${siteBase}/hardware/hotends`,
+  itemListElement: records.map((r: any, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: r['Name'] as string,
+    url: `${siteBase}/hardware/hotends/${toSlug(r['Name'] as string)}`,
+    description: (r['Verdict Label'] as string | undefined) ?? (r['Description'] as string | undefined) ?? '',
+  })),
+};
 ---
 <Base
-  title="Hotends"
+  title="Best FDM Hotends for Voron & Prosumer Printers"
   description="Hotend reviews, specs, and where to buy — high-flow, standard, and specialty hotends for CoreXY and other 3D printer builds."
   heroPage={false}
 >
@@ -83,4 +101,5 @@ const records = (hotends as any[])
   </section>
 
   <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
 </Base>

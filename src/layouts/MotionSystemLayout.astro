@@ -75,12 +75,32 @@ const resourceIcons: Record<string, string> = {
   Wiki:          '📖',
   Printables:    '🐙',
 };
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+const segLabels: Record<string, string> = {
+  hardware: 'Hardware', motion: 'Motion Mods',
+};
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteBase}/` },
+  ...pathSegments.map((seg: string, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: i === pathSegments.length - 1
+      ? title
+      : (segLabels[seg] ?? seg.charAt(0).toUpperCase() + seg.slice(1)),
+    item: `${siteBase}/${pathSegments.slice(0, i + 1).join('/')}`,
+  })),
+];
 ---
 <Base
   title={`${title} — Gantry Mod`}
   description={excerpt || `${title} — ${motionType} gantry mod by @${creator}. Target: ${targetPrinters.map(p => p.name).join(', ')}.`}
   heroPage={true}
   hasHero={true}
+  hasPageH1={true}
 >
   <Nav slot="nav" currentPath="/hardware" />
 
@@ -384,6 +404,11 @@ const resourceIcons: Record<string, string> = {
     "codeRepository": projectUrl,
     "programmingLanguage": "Hardware mod",
     "publisher": { "@type": "Organization", "name": "Modern Makes", "url": "https://modernmakes.com" }
+  })}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems,
   })}></script>
 </Base>
 

@@ -103,8 +103,23 @@ const relatedMaterials = [
     gradient: 'linear-gradient(135deg,#0d1520,#1a1020)',
   },
 ];
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+const canonicalUrl = siteBase + Astro.url.pathname;
+const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteBase}/` },
+  ...pathSegments.map((seg: string, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: i === pathSegments.length - 1 ? title : seg.charAt(0).toUpperCase() + seg.slice(1),
+    item: `${siteBase}/${pathSegments.slice(0, i + 1).join('/')}`,
+  })),
+];
 ---
-<Base title={`${title} — Filament Guide`} description={excerpt} heroPage={true} hasHero={true}>
+<Base title={`${title} — Filament Guide`} description={excerpt} heroPage={true} hasHero={true} hasPageH1={true}>
   <Nav slot="nav" currentPath="/filament" />
 
   <!-- ── HERO ── -->
@@ -380,6 +395,25 @@ const relatedMaterials = [
   </section>
 
   <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": `${title} — Filament Guide`,
+    "description": excerpt,
+    "url": canonicalUrl,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.com",
+      "logo": { "@type": "ImageObject", "url": "https://modernmakes.com/images/wordmark.svg" }
+    },
+    "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+  })}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbItems,
+  })}></script>
 </Base>
 
 <style is:global>

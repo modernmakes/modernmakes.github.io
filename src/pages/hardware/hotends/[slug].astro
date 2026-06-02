@@ -107,6 +107,9 @@ const vendors: VendorEntry[] = [];
   }
 });
 
+const pageTitle = `${record['Name']} Hotend — Specs, Verdict & Where to Buy`;
+const primaryVendorUrl = vendors[0]?.url ?? '';
+
 // Related components — Related 1 through 3, skip empty
 type RelatedEntry = { title: string; category: string; href: string };
 const relatedComponents: RelatedEntry[] = [];
@@ -147,6 +150,8 @@ const excerpt = rawDesc.match(/^[^.!?]+[.!?]/) ? rawDesc.match(/^[^.!?]+[.!?]/)!
   specs={specs}
   vendors={vendors}
   relatedComponents={relatedComponents}
+  pageTitle={pageTitle}
+  primaryVendorUrl={primaryVendorUrl}
 >
   {bodyParagraphs.map((para: string) => <p>{para}</p>)}
 </ComponentLayout>
