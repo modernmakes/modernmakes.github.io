@@ -1,0 +1,41 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const title   = "How RatRig Got Here: From Extrusion Supplier to CoreXY Benchmark";
+const excerpt = "RatRig started selling aluminum rails to people who built things. The logical next step was designing the machine those rails belonged in.";
+---
+<ArticleLayout
+  title={title}
+  excerpt={excerpt}
+  category="HISTORY"
+  date="2026-06-02"
+  readTime="6 min read"
+  currentPath="/ratrig"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": excerpt,
+    "datePublished": "2026-06-02",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.github.io"
+    }
+  })}></script>
+
+  <h2>Hardware First, Printers Second</h2>
+  <p>RatRig started as something simpler than a printer company: a Portuguese supplier of aluminum extrusion hardware for people who built things. Camera sliders. CNC rigs. Custom motion platforms. The kind of hardware that ends up in a workshop owned by someone who knows what a T-nut is and why V-slot beats round rod.</p>
+  <p>The move into 3D printers was a natural extension of that identity. If you're already selling the frame rails and motion components that builders use to construct machines, the next question is obvious: what if you designed the machine too? The V-Core series was the answer — a CoreXY printer built on the same extrusion ecosystem RatRig already knew, designed explicitly for builders who wanted something they could assemble, tune, understand, and modify.</p>
+
+  <h2>Open Hardware, Commercial Kit</h2>
+  <p>What separated RatRig from purely community-driven projects was its position as a commercial vendor that genuinely committed to open hardware. The CAD is published. The BOMs are public. The documentation is thorough enough that an intermediate builder can go from unboxing to first layer without guessing. At the same time, RatRig sells complete kits rather than just specifications, offering a middle path between the self-sourced community build and the closed consumer appliance.</p>
+
+  <h2>The V-Core Lineage</h2>
+  <p>The V-Core 3 — released around 2020–2021 — put RatRig firmly on the map among serious CoreXY builders. It brought a refined motion system, a robust enclosure-ready frame, and documentation quality that matched the hardware. Community feedback shaped subsequent revisions quickly: the V-Core 3.1 followed, then the 3.2H upgrade kit that let existing owners modernize rather than replace. The V-Core 4 arrived in 2024 with IDEX variants, hybrid kinematics options, and build volumes up to 500mm — a machine that competes with anything in the prosumer DIY space.</p>
+  <p>When the V-Minion, their compact cantilevered printer, was discontinued due to supply chain issues and limited demand, RatRig released all CAD and STLs publicly and sold remaining custom toolheads at cost. It's a small detail that says something meaningful about how the company operates when a product fails.</p>
+
+  <h2>What RatRig Represents</h2>
+  <p>RatRig also runs RatOS, a Klipper-based firmware distribution tuned for its hardware. You're not required to use it — stock Klipper works — but the option reflects a company that thinks about the full stack, not just the mechanical assembly. Within the CoreXY landscape, RatRig occupies a position that few others can: a commercial company with a genuine open-hardware commitment, building hardware serious enough to sit alongside community projects that answer to no one.</p>
+</ArticleLayout>

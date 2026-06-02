@@ -1,0 +1,42 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const title   = "How VzBoT Happened: A TronXY Frame and a Demand for Speed";
+const excerpt = "Simon Vez started with a donor frame and a question: how fast can this actually go? The answer became one of the most technically distinctive printers in the open-source ecosystem.";
+---
+<ArticleLayout
+  title={title}
+  excerpt={excerpt}
+  category="HISTORY"
+  date="2026-06-02"
+  readTime="6 min read"
+  currentPath="/vzbot"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": excerpt,
+    "datePublished": "2026-06-02",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.github.io"
+    }
+  })}></script>
+
+  <h2>A Donor Frame and a Better Idea</h2>
+  <p>Simon Vez had a TronXY X5S and wanted more from it. In 2020, he started modifying it into something faster — a high-speed CoreXY that could push accelerations and print times beyond what the donor frame was designed for. He published his work, called it VzBoT, and the community immediately started building.</p>
+  <p>The founding concept was direct: high speed, moderately sized, and open enough that other builders could iterate on it. The 330mm class build volume hit a useful sweet spot — large enough for functional parts, compact enough that the frame could still be made stiff and accelerated aggressively.</p>
+
+  <h2>AWD: The Technical Differentiator</h2>
+  <p>What made VzBoT technically distinct was AWD — all-wheel drive CoreXY. Instead of the conventional two-motor XY setup, VzBoT uses two motors on X and two on Y. Four motors total. The shorter effective belt loops reduce stretch and improve input shaper performance. The additional torque supports higher usable acceleration. It's a meaningful mechanical difference, not a marketing distinction, and it's visible in the machine's behavior at speed.</p>
+
+  <h2>From Donor Frame to Dedicated Kit</h2>
+  <p>Over time the TronXY donor approach was retired. Documentation now describes it as producing too many leftover parts and complicating the build. Dedicated kits from Mellow3D and F3D Racing replaced it — CNC aluminum frames, purpose-built motion components, and electronics specified for high-speed Klipper operation. Guillaume developed the compact VZ235 variant around the 235mm Ender-class bed, giving builders a smaller, lighter, faster option that's easier to source.</p>
+  <p>F3D Racing co-developed the official VzBoT printhead — a deliberate step into partial commercialization in a project that otherwise runs on CC BY-NC 4.0. The printhead is not open source. The documentation is direct about why: purchasing it supports continued development. It's an honest arrangement that lets the project sustain itself without fully closing.</p>
+
+  <h2>A Community That Functions as an R&amp;D Lab</h2>
+  <p>The community infrastructure — Discord, GitHub, Facebook groups, YouTube build series — functions as much as an R&amp;D lab as a support forum. Builders push the acceleration envelope and report back. Slicer settings, belt synchronization techniques, 48V electronics configurations — the knowledge base is built in public and updated continuously.</p>
+  <p>If Voron is the daily driver and HevORT is the precision instrument, VzBoT is the race car. It rewards builders who know what they're getting into and are prepared to tune for it.</p>
+</ArticleLayout>

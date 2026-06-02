@@ -35,6 +35,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
           <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
           <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron</h1>
           <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">The community-designed CoreXY benchmark. Voron 2.4 and Trident are the most-built self-build printers on the planet — and have the deepest aftermarket parts ecosystem to match.</p>
+          <a href="/voron/origin" class="voron-story-link">The Voron Story →</a>
         </div>
         <a href="/voron/configurator" class="btn-configurator" style="background:var(--accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;padding:14px 24px;border-radius:8px;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:background .15s">
           Open Configurator →
@@ -365,6 +366,20 @@ const partCounts: Record<string, { a: number; t: number }> = {
 </Base>
 
 <style is:global>
+/* ── ORIGIN STORY LINK ── */
+.voron-story-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.35);
+  text-decoration: none;
+  transition: color .15s;
+}
+.voron-story-link:hover { color: rgba(255,255,255,.75); }
+
 /* ── HERO CONTENT GRID ── */
 .hero-content-grid {
   display: grid;

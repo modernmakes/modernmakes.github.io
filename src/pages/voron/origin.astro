@@ -1,0 +1,42 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const title   = "How Voron Started: A Garage Project That Became a Movement";
+const excerpt = "In 2015, Maksim Zolin wanted a better printer. What he built instead was a design philosophy — and a community of 15,000 builders that changed what DIY 3D printing could be.";
+---
+<ArticleLayout
+  title={title}
+  excerpt={excerpt}
+  category="HISTORY"
+  date="2026-06-02"
+  readTime="6 min read"
+  currentPath="/voron"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": excerpt,
+    "datePublished": "2026-06-02",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.github.io"
+    }
+  })}></script>
+
+  <h2>One Engineer, One Garage, One Specification</h2>
+  <p>In 2015, a Russian engineer named Maksim Zolin — known online as Russiancatfood — started building a printer in his garage because nothing on the market was good enough. Not good enough at noise. Not good enough at reliability. Not good enough at looking like it belonged in a serious workspace rather than a hobbyist's nightmare. He called the project Voron, Russian for raven, and his stated goal was blunt: a no-compromise 3D printer that was fun to assemble and a joy to use, capable of running 24/7 without babysitting.</p>
+  <p>What he built wasn't a product. It was a specification — open hardware, published openly, built from parts anyone could source. The printer didn't come in a box. You built it from a bill of materials, sourced your own components, and printed your own parts in red and black ABS on whatever machine you already owned. The first Voron attracted a small group of builders who wanted the same thing Zolin did. Then it attracted more.</p>
+
+  <h2>A Design Ethos, Not Just a Printer</h2>
+  <p>The design ethos hardened into something durable: CoreXY kinematics to minimize moving mass, full enclosure capability for ABS and ASA, Klipper firmware on commodity hardware, and modular construction that kept every part repairable and every subsystem upgradeable. These weren't arbitrary choices — they reflected a considered position that performance and reliability weren't in conflict if you designed for both from the start.</p>
+  <p>By the time the Voron 2.4 launched in May 2020, the community numbered in the thousands. By 2025, over 15,000 printers had been registered with serial numbers — a ritual that requires posting video proof of a completed, safely wired build. The serial number system isn't gatekeeping. It's a shared standard that says this community takes craftsmanship seriously.</p>
+
+  <h2>The Lineup and What It Means</h2>
+  <p>Today Voron Design is a small, tight-knit team of engineers operating as a nonprofit. They don't sell printers. They don't sell kits. They publish specifications and let the community, the vendors, and the builders do the rest. The lineup spans from the compact V0.2 — a desktop machine with a 120mm build volume and the same DNA as its larger siblings — through the Trident and the 2.4, each optimized for different budgets, spaces, and levels of builder ambition.</p>
+
+  <h2>The Influence That Spread</h2>
+  <p>The influence has spread far beyond the builds that wear the Voron name. CoreXY designs that came after it borrowed from its aesthetics and mechanical thinking. Klipper's adoption grew in part because Voron standardized on it. The vocabulary of prosumer DIY printing — quad gantry leveling, Stealthburner, toolhead ecosystem, the serial number — comes from this community.</p>
+  <p>Voron didn't set out to become a movement. It set out to build a better printer. The movement followed.</p>
+</ArticleLayout>

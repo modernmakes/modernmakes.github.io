@@ -12,6 +12,7 @@ interface Props {
   heroImage?: string;
   excerpt?: string;
   summary?: string[];
+  currentPath?: string;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   heroImage,
   excerpt = '',
   summary = [],
+  currentPath = '/news',
 } = Astro.props;
 
 const moreNews = [
@@ -51,7 +53,7 @@ const breadcrumbItems = [
 ];
 ---
 <Base title={title} description={excerpt} heroPage={true} hasHero={true} hasPageH1={true}>
-  <Nav slot="nav" currentPath="/news" />
+  <Nav slot="nav" currentPath={currentPath} />
 
   <!-- ── HERO ── -->
   <div class="art-hero">
@@ -150,6 +152,7 @@ const breadcrumbItems = [
 
   <Footer slot="footer" />
 
+  <slot name="head" slot="head" />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "NewsArticle",

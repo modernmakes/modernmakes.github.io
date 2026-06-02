@@ -1,0 +1,41 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+const title   = "How HevORT Was Built: One Engineer's Answer to Mechanical Precision";
+const excerpt = "MirageC decided that firmware compensation for mechanical problems was the wrong approach. What he built instead starts with the mechanics being correct.";
+---
+<ArticleLayout
+  title={title}
+  excerpt={excerpt}
+  category="HISTORY"
+  date="2026-06-02"
+  readTime="6 min read"
+  currentPath="/hevort"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": excerpt,
+    "datePublished": "2026-06-02",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": "https://modernmakes.github.io"
+    }
+  })}></script>
+
+  <h2>The Wrong Solution</h2>
+  <p>HevORT came from one person who decided that software compensation for mechanical problems was the wrong solution. MirageC — Oliver, on the internet — started publishing early work around 2019. The question driving the project was specific: what happens when you treat the Z axis as a precision mechanical system rather than an approximation you correct with firmware?</p>
+  <p>The answer was triple independent Z motors driving ball screws, with MGN12H rails guiding the bed. Three independent NEMA 17 steppers, each on its own SFU1204 ball screw, physically level the print surface rather than relying on mesh compensation to work around misalignment. The bed is mechanically level or it isn't, and the machine makes it level.</p>
+
+  <h2>Mechanical Correctness as a Philosophy</h2>
+  <p>This philosophy extends to the rest of the machine. MGN rails throughout. XY motors mounted at the rear, outside the heated chamber, for thermal stability. A frame built for stiffness rather than minimum part count. Everything is chosen because it solves a mechanical problem correctly, not because it's the easiest or cheapest way to approximate the result.</p>
+
+  <h2>Not a Kit. Not a Beginner Project.</h2>
+  <p>HevORT is not a kit and it is not a beginner project. The documentation asks builders to define their own target build volume, calculate extrusion and rail lengths, pull CAD from the repository, and print their own parts. The expected skill set includes comfort with parametric design and detailed mechanical assembly. This is a project for builders who treat the construction as part of the point, not an obstacle to printing.</p>
+  <p>Mellow3D has partnered with HevORT to produce hardware kits that reduce sourcing friction, but the project remains fundamentally a design platform rather than a commercial product. MirageC continues developing it with an R&amp;D mindset — alternative Z configurations, experimental subsystems — treating it less as a frozen product and more as ongoing engineering work.</p>
+
+  <h2>Where HevORT Sits</h2>
+  <p>Within the open-source CoreXY ecosystem, HevORT occupies the position furthest from convenience and closest to first principles. For the builder who has already run Voron or RatRig builds and is ready to go deeper on mechanical precision, it represents a different kind of ceiling.</p>
+</ArticleLayout>
