@@ -285,9 +285,8 @@
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
     "Compatible Toolheads": [
-      "Stealthburner",
-      "XOL",
-      "Dragon Burner"
+      "Takeoff",
+      "Custom community mounts"
     ],
     "Part Number": "CHUBE-COND",
     "Thermistor": "NTC100K",
@@ -295,7 +294,7 @@
     "Name": "Chube Conduction",
     "Type": "All-Metal",
     "Vendor 1 URL": "https://www.lukeslabonline.com/products/chube-conduction",
-    "Brand": "Chube",
+    "Brand": "Luke's Lab",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Bi-Metal",
     "Price (USD)": 95,
@@ -325,9 +324,9 @@
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
     "Compatible Toolheads": [
-      "Stealthburner",
-      "XOL",
-      "Dragon Burner"
+      "Stealthburner (Dragon printhead)",
+      "Dragon Burner",
+      "XOL"
     ],
     "Vendor 2 Name": "NorthPrint3D",
     "Part Number": "GOLIATH-AIR",
@@ -336,7 +335,7 @@
     "Name": "Goliath Air",
     "Type": "All-Metal",
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005005298362710.html",
-    "Brand": "Mellow",
+    "Brand": "Mellow3D",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Copper-Zirconia Bi-Material",
     "Price (USD)": 30,
@@ -365,9 +364,9 @@
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
     "Compatible Toolheads": [
-      "Stealthburner",
-      "XOL",
-      "Dragon Burner"
+      "Stealthburner (Dragon printhead)",
+      "Dragon Burner",
+      "XOL"
     ],
     "Vendor 2 Name": "NorthPrint3D",
     "Part Number": "GOLIATH-WATER",
@@ -376,7 +375,7 @@
     "Name": "Goliath Water",
     "Type": "All-Metal",
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005005298362710.html",
-    "Brand": "Mellow",
+    "Brand": "Mellow3D",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Copper-Zirconia Bi-Material",
     "Price (USD)": 45,
@@ -405,9 +404,8 @@
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
     "Compatible Toolheads": [
-      "Stealthburner",
-      "XOL",
-      "Dragon Burner"
+      "Takeoff",
+      "Custom community mounts"
     ],
     "Part Number": "CHUBE-AIR",
     "Thermistor": "NTC100K",
@@ -415,7 +413,7 @@
     "Name": "Chube Air",
     "Type": "All-Metal",
     "Vendor 1 URL": "https://www.lukeslabonline.com/products/chube-air",
-    "Brand": "Chube",
+    "Brand": "Luke's Lab",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Bi-Metal",
     "Price (USD)": 85,
@@ -445,7 +443,7 @@
     "Heat Block": "Copper Alloy",
     "Compatible Toolheads": [
       "Stealthburner",
-      "Mini Stealthburner"
+      "Dragon Burner"
     ],
     "Part Number": "CHUBE-COMPACT",
     "Thermistor": "NTC100K",
@@ -453,7 +451,7 @@
     "Name": "Chube Compact",
     "Type": "All-Metal",
     "Vendor 1 URL": "https://www.lukeslabonline.com/products/chube-compact",
-    "Brand": "Chube",
+    "Brand": "Luke's Lab",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Bi-Metal",
     "Price (USD)": 65,
