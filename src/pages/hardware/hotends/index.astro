@@ -2,8 +2,34 @@
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import hotends from '../../../data/hardware/hotends.json';
+
+const toSlug = (name: string) =>
+  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+const VERDICT_ORDER = ['Top Pick', 'Solid Choice', 'Niche Pick', 'Skip'];
+
+const VERDICT_BADGE: Record<string, { cls: string; label: string }> = {
+  'Top Pick':     { cls: 'verdict-best', label: 'Top Pick' },
+  'Solid Choice': { cls: 'verdict-rec',  label: 'Solid Choice' },
+  'Niche Pick':   { cls: 'verdict-upd',  label: 'Niche Pick' },
+  'Skip':         { cls: 'verdict-skip', label: 'Skip' },
+};
+
+// Only records that have a Name field; sort by Verdict priority
+const records = (hotends as any[])
+  .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
+  .sort((a: any, b: any) => {
+    const ai = VERDICT_ORDER.indexOf(a['Verdict'] ?? '');
+    const bi = VERDICT_ORDER.indexOf(b['Verdict'] ?? '');
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
 ---
-<Base title="Hotends" description="Hotend reviews, specs, and where to buy — high-flow, standard, and specialty hotends for CoreXY and other 3D printer builds." heroPage={false}>
+<Base
+  title="Hotends"
+  description="Hotend reviews, specs, and where to buy — high-flow, standard, and specialty hotends for CoreXY and other 3D printer builds."
+  heroPage={false}
+>
   <Nav slot="nav" currentPath="/hardware" />
 
   <div style="background:var(--black);padding:48px 0 44px;border-bottom:1px solid rgba(255,255,255,.08)">
@@ -20,23 +46,39 @@ import Footer from '../../../components/Footer.astro';
 
   <section class="section">
     <div class="container">
-      <div class="grid-3">
-        <a href="/hardware/hotends/rapido-2" class="card">
-          <div class="card-img" style="background:linear-gradient(135deg,#1a0e0a,#0d1520)">
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
-            <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">HOTEND</span>
-          </div>
-          <div class="card-body">
-            <div class="card-cat">Phaetus</div>
-            <div class="card-title">Rapido 2 UHF</div>
-            <p class="card-excerpt">60 mm³/s max flow. The benchmark high-flow hotend for CoreXY builds targeting 150mm/s and above.</p>
-            <div class="card-footer">
-              <span class="card-date">~$89 USD</span>
-              <span class="verdict verdict-best" style="margin-left:auto">BUY</span>
-            </div>
-          </div>
-        </a>
-      </div>
+      {records.length > 0 ? (
+        <div class="grid-3">
+          {records.map((r: any) => {
+            const slug = toSlug(r['Name']);
+            const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
+            return (
+              <a href={`/hardware/hotends/${slug}`} class="card">
+                <div class="card-img" style="background:linear-gradient(135deg,#1a0e0a,#0d1520)">
+                  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+                  <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">HOTEND</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-cat">{r['Brand'] ?? ''}</div>
+                  <div class="card-title">{r['Name']}</div>
+                  <div class="product-card-specs" style="margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap">
+                    {r['Max Temp (°C)'] != null && <span class="spec-chip">{r['Max Temp (°C)']}°C</span>}
+                    {r['Max Flow (mm³/s)'] != null && <span class="spec-chip">{r['Max Flow (mm³/s)']} mm³/s</span>}
+                    {r['Price (USD)'] != null && <span class="spec-chip">~${r['Price (USD)']} USD</span>}
+                  </div>
+                  <p class="card-excerpt">{r['Verdict Label'] ?? r['Description'] ?? ''}</p>
+                  <div class="card-footer">
+                    {badge.label && <span class={`verdict ${badge.cls}`}>{badge.label}</span>}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      ) : (
+        <p style="font-family:var(--fb);font-size:15px;color:var(--g2);padding:40px 0">
+          No hotend data yet — check back after the next Airtable sync.
+        </p>
+      )}
     </div>
   </section>
 

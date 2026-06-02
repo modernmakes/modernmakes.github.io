@@ -11,7 +11,7 @@
       "verdict": "best",
       "verdictLabel": "Our Pick",
       "primaryVendor": { "name": "West3D", "url": "https://west3d.com" },
-      "reviewPath": "/hardware/hotends/rapido-2",
+      "reviewPath": "/hardware/hotends/rapido-2-uhf",
       "compatible": ["2.4", "trident"],
       "maxTemp": 320,
       "maxFlow": 32,
