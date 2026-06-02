@@ -1,50 +1,42 @@
 {
-  "hero": {
-    "autoRotate": true,
-    "interval": 6000,
-    "featured": {
-      "type": "review",
-      "href": "/printers/bambu-lab-x1e-review",
-      "category": "Review",
-      "title": "Bambu Lab X1E: The Enclosed Workhorse That Actually Delivers",
-      "date": "May 22, 2026",
-      "readTime": "12 min",
-      "verdict": "✓ Recommended",
-      "image": "/Media/articles/2026/05/bambu-lab-x1e-review/hero.webp",
-      "gradient": "linear-gradient(160deg,#1a2535,#0d1520 60%,#1a1008)"
+  "heroSlides": [
+    {
+      "title": "Voron 2.4 vs Trident: Which Should You Build?",
+      "category": "Guide",
+      "categoryColor": "guide",
+      "excerpt": "The two most popular Voron builds share a lot of DNA but differ where it matters. We break down Z systems, build complexity, and which one fits your goals.",
+      "url": "/guides/voron-2-4-vs-trident",
+      "gradient": "linear-gradient(160deg,#0d1520,#1a2030)",
+      "image": null
     },
-    "sidebar": [
-      {
-        "type": "review",
-        "href": "/filament/polymaker-polylite-asa-review",
-        "category": "Filament",
-        "title": "Polymaker PolyLite ASA: Finally a Spool That Doesn't Warp at 40°C",
-        "date": "May 20, 2026",
-        "readTime": "7 min",
-        "image": "/Media/articles/2026/05/polymaker-polylite-asa-review/hero.webp",
-        "gradient": "linear-gradient(135deg,#2a1a10,#1a0e08)"
-      },
-      {
-        "type": "news",
-        "href": "/news/bambu-ams-pro-announced",
-        "category": "News",
-        "title": "Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3",
-        "date": "May 19, 2026",
-        "readTime": "3 min",
-        "gradient": "linear-gradient(135deg,#1a1520,#0d0d18)"
-      },
-      {
-        "type": "guide",
-        "href": "/voron/hotends",
-        "category": "Voron · Hotends",
-        "title": "Revo Voron vs Rapido 2 vs Dragon HF: The 2026 Hotend Verdict",
-        "date": "May 17, 2026",
-        "readTime": "15 min",
-        "image": "/Media/articles/2026/05/voron-hotends-2026/hero.webp",
-        "gradient": "linear-gradient(135deg,#282018,#1a1510)"
-      }
-    ]
-  },
+    {
+      "title": "Phaetus Rapido 2 UHF: The High-Flow Standard",
+      "category": "Hardware",
+      "categoryColor": "hardware",
+      "excerpt": "The Rapido 2 UHF raises the bar for prosumer hotends. Genuine high-flow performance, broad toolhead compatibility, and a price that makes sense for serious builds.",
+      "url": "/hardware/hotends/rapido-2",
+      "gradient": "linear-gradient(160deg,#201510,#100a04)",
+      "image": null
+    },
+    {
+      "title": "How to Tune Pressure Advance on a Voron",
+      "category": "Calibration",
+      "categoryColor": "guide",
+      "excerpt": "Pressure advance is the single biggest print quality lever after basic calibration. Here is how to dial it in correctly on Klipper, Marlin, and RepRapFirmware.",
+      "url": "/guides/pressure-advance-tuning",
+      "gradient": "linear-gradient(160deg,#0d1820,#101810)",
+      "image": null
+    },
+    {
+      "title": "PETG: The Default Step Up From PLA",
+      "category": "Filament",
+      "categoryColor": "filament",
+      "excerpt": "PETG closes most of the gap between PLA ease and ABS toughness. Better heat resistance, better layer adhesion — same machines. The tradeoff is stringing and moisture sensitivity.",
+      "url": "/filament/petg",
+      "gradient": "linear-gradient(160deg,#181018,#0d1020)",
+      "image": null
+    }
+  ],
   "ticker": [
     { "text": "Prusa CORE One INDX 8-nozzle toolchanger now orderable", "category": "Launch", "href": "/" },
     { "text": "Bambu PETG HF 1kg at $19.99 — 20% off this week", "category": "Deal", "href": "/" },

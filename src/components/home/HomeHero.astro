@@ -1,83 +1,59 @@
 ---
+import { getCollection } from 'astro:content';
 import heroData from '../../data/homepage.json';
-const { featured, sidebar } = heroData.hero;
-const intervalMs = heroData.hero.interval ?? 6000;
 
-const slides = [featured as any, ...(sidebar as any[])];
+// Build url → heroImage from every collection that carries heroImage
+const heroImageMap = new Map<string, string>();
+const [newsEntries, guidesEntries, comparisonsEntries] = await Promise.all([
+  getCollection('news'),
+  getCollection('guides'),
+  getCollection('comparisons'),
+]);
+for (const e of newsEntries)        if (e.data.heroImage) heroImageMap.set(`/news/${e.slug}`,        e.data.heroImage);
+for (const e of guidesEntries)      if (e.data.heroImage) heroImageMap.set(`/guides/${e.slug}`,       e.data.heroImage);
+for (const e of comparisonsEntries) if (e.data.heroImage) heroImageMap.set(`/comparisons/${e.slug}`, e.data.heroImage);
+
+// Enrich slides with resolved heroImage — image field is not stored in JSON
+const slides = (heroData.heroSlides as any[]).map(slide => ({
+  ...slide,
+  resolvedImage: heroImageMap.get(slide.url) ?? null,
+}));
+
+const defaultSlide = slides[0];
 
 function bgStyle(slide: any) {
-  if (slide.image) {
-    return `background-image: url('${slide.image}'); background-size: cover; background-position: center 15%;`;
+  if (slide.resolvedImage) {
+    return `background-image: url('${slide.resolvedImage}'); background-size: cover; background-position: center 15%;`;
   }
   return `background: ${slide.gradient};`;
 }
 ---
 
-<section class="hero" aria-label="Featured articles">
-
+<section
+  class="hero"
+  aria-label="Featured article"
+  data-slides={JSON.stringify(slides)}
+>
   <div class="hero-slides">
-    {slides.map((slide, i) => (
-      <div class:list={['hero-slide', { 'is-active': i === 0 }]} data-index={i}>
-        <div
-          class:list={['hero-bg', { 'kb-active': i === 0 }]}
-          style={bgStyle(slide)}
-          data-fallback={slide.gradient}
-        ></div>
-        <div class:list={['hero-overlay', { 'hero-overlay--photo': !!slide.image }]}></div>
-        <a href={slide.href} class="hero-content" tabindex={i === 0 ? 0 : -1}>
-          <div class="hero-content-inner">
-            <span class="hero-cat">{slide.category}</span>
-            <h2 class="hero-title">{slide.title}</h2>
-            <div class="hero-meta">
-              <span>{slide.date}</span>
-              {slide.readTime && (
-                <>
-                  <span class="hero-sep">·</span>
-                  <span>{slide.readTime} read</span>
-                </>
-              )}
-              {slide.verdict && (
-                <>
-                  <span class="hero-sep">·</span>
-                  <span class="hero-verdict">{slide.verdict}</span>
-                </>
-              )}
-            </div>
+    <div class="hero-slide is-active">
+      <div
+        class="hero-bg kb-active"
+        style={bgStyle(defaultSlide)}
+        data-fallback={defaultSlide.gradient}
+      ></div>
+      <div class:list={['hero-overlay', { 'hero-overlay--photo': !!defaultSlide.resolvedImage }]}></div>
+      <a href={defaultSlide.url} class="hero-content" tabindex="0">
+        <div class="hero-content-inner">
+          <span class={`hero-cat hero-cat--${defaultSlide.categoryColor}`}>{defaultSlide.category}</span>
+          <h2 class="hero-title">{defaultSlide.title}</h2>
+          <p class="hero-excerpt">{defaultSlide.excerpt}</p>
+          <div class="hero-meta">
+            <span class="hero-read-cta">Read article →</span>
           </div>
-        </a>
-      </div>
-    ))}
-
-    <div class="hero-dots" aria-hidden="true">
-      {slides.map((_, i) => (
-        <button
-          class:list={['hero-dot', { active: i === 0 }]}
-          data-goto={i}
-          aria-label={`Go to slide ${i + 1}`}
-        ></button>
-      ))}
-    </div>
-  </div>
-
-  <aside class="hero-sidebar">
-    {slides.map((story, i) => (
-      <a
-        href={story.href}
-        class:list={['hero-story', { 'is-hidden': i === 0 }]}
-        data-goto={i}
-      >
-        <div class="hero-story-img" style={`background: ${story.gradient};`}>
-          <span class="hero-story-label">{story.category}</span>
-        </div>
-        <div class="hero-story-body">
-          <div class="hero-story-cat">{story.category}</div>
-          <div class="hero-story-title">{story.title}</div>
-          <div class="hero-story-meta">{story.date}{story.readTime ? ` · ${story.readTime}` : ''}</div>
         </div>
       </a>
-    ))}
-  </aside>
-
+    </div>
+  </div>
 </section>
 
 <style is:global>
@@ -206,6 +182,23 @@ function bgStyle(slide: any) {
     border: 1px solid rgba(255,90,31,.35);
     color: var(--accent-mid);
     letter-spacing: .03em;
+  }
+
+  .hero-excerpt {
+    font-family: var(--fb);
+    font-size: clamp(13px, 1.2vw, 15px);
+    color: rgba(255,255,255,.65);
+    line-height: 1.65;
+    margin-bottom: 18px;
+    max-width: 480px;
+  }
+
+  .hero-read-cta {
+    font-family: var(--fu);
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .04em;
   }
 
   .hero-dots {
@@ -401,89 +394,61 @@ function bgStyle(slide: any) {
   }
 </style>
 
-<script define:vars={{ intervalMs }}>
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    const slideEls    = hero.querySelectorAll('.hero-slide');
-    const storyEls    = hero.querySelectorAll('.hero-story');
-    const dotEls      = hero.querySelectorAll('.hero-dot');
-    const contentLinks = hero.querySelectorAll('.hero-content');
-    const total = slideEls.length;
-    let current = 0;
-    let timer = null;
+<script>
+(function () {
+  const heroEl = document.querySelector('.hero');
+  if (!heroEl) return;
 
-    function activateSlide(idx) {
-      const next = ((idx % total) + total) % total;
-      // Fixed: removed the broken early-return that prevented looping
-      if (next === current) return;
+  // Determine today's slide via day-of-year seed — same index for all visitors on the same day
+  const now       = new Date();
+  const start     = new Date(now.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((now - start) / (1000 * 60 * 60 * 24));
 
-      slideEls[current].classList.remove('is-active');
-      storyEls[current].classList.remove('is-hidden');
-      dotEls[current].classList.remove('active');
-      if (contentLinks[current]) contentLinks[current].setAttribute('tabindex', '-1');
+  const slides = JSON.parse(heroEl.dataset.slides || '[]');
+  if (!slides.length) return;
 
-      current = next;
+  const activeIdx = dayOfYear % slides.length;
+  const active    = slides[activeIdx];
 
-      slideEls[current].classList.add('is-active');
-      storyEls[current].classList.add('is-hidden');
-      dotEls[current].classList.add('active');
-      if (contentLinks[current]) contentLinks[current].removeAttribute('tabindex');
+  // Slide 0 is already rendered as the SSR default; only update DOM when a different slide is active
+  if (activeIdx !== 0) {
+    const bgEl      = heroEl.querySelector('.hero-bg');
+    const overlayEl = heroEl.querySelector('.hero-overlay');
+    const catEl     = heroEl.querySelector('.hero-cat');
+    const titleEl   = heroEl.querySelector('.hero-title');
+    const excerptEl = heroEl.querySelector('.hero-excerpt');
+    const linkEl    = heroEl.querySelector('.hero-content');
 
-      const bg = slideEls[current].querySelector('.hero-bg');
-      if (bg) {
-        bg.classList.remove('kb-active');
-        void bg.offsetWidth;
-        bg.classList.add('kb-active');
+    if (catEl)     { catEl.textContent = active.category; catEl.className = 'hero-cat hero-cat--' + active.categoryColor; }
+    if (titleEl)   titleEl.textContent  = active.title;
+    if (excerptEl) excerptEl.textContent = active.excerpt;
+    if (linkEl)    linkEl.setAttribute('href', active.url);
+
+    if (bgEl) {
+      if (active.resolvedImage) {
+        bgEl.style.cssText = "background-image:url('" + active.resolvedImage + "');background-size:cover;background-position:center 15%;";
+        if (overlayEl) overlayEl.classList.add('hero-overlay--photo');
+      } else {
+        bgEl.style.cssText = 'background:' + active.gradient + ';';
+        if (overlayEl) overlayEl.classList.remove('hero-overlay--photo');
       }
+      bgEl.dataset.fallback = active.gradient;
     }
+  }
 
-    function startTimer() {
-      stopTimer();
-      timer = setInterval(() => activateSlide(current + 1), intervalMs);
-    }
-
-    function stopTimer() {
-      if (timer !== null) { clearInterval(timer); timer = null; }
-    }
-
-    dotEls.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        stopTimer();
-        activateSlide(i);
-        startTimer();
-      });
-    });
-
-    storyEls.forEach((card, i) => {
-      card.addEventListener('click', (e) => {
-        if (i !== current) {
-          e.preventDefault();
-          stopTimer();
-          activateSlide(i);
-          startTimer();
-        }
-      });
-    });
-
-    hero.addEventListener('mouseenter', stopTimer);
-    hero.addEventListener('mouseleave', startTimer);
-
-    startTimer();
-
-    // Graceful fallback: if a hero background-image 404s, replace with gradient
-    hero.querySelectorAll('.hero-bg').forEach(function(bg) {
-      var style = bg.getAttribute('style') || '';
-      var match = style.match(/url\(['"]?([^'")\s]+)['"]?\)/);
-      if (!match) return;
-      var img = new Image();
-      img.onerror = function() {
-        var fallback = bg.dataset.fallback;
-        if (fallback) {
-          bg.style.backgroundImage = '';
-          bg.style.background = fallback;
-        }
+  // Graceful fallback: swap to gradient if background-image 404s
+  const bgEl = heroEl.querySelector('.hero-bg');
+  if (bgEl) {
+    const styleVal = bgEl.getAttribute('style') || '';
+    const match    = styleVal.match(/url\(['"]?([^'")\s]+)['"]?\)/);
+    if (match) {
+      const img = new Image();
+      img.onerror = function () {
+        const fallback = bgEl.dataset.fallback;
+        if (fallback) { bgEl.style.backgroundImage = ''; bgEl.style.background = fallback; }
       };
       img.src = match[1];
-    });
+    }
   }
+}());
 </script>

@@ -7,6 +7,20 @@ import ComponentLayout from '../../../layouts/ComponentLayout.astro';
   componentType="High-Flow Hotend"
   brand="Phaetus"
   price={{ usd: 89, cad: 119 }}
+  quickSpecs={[
+    { label: "Max Temp",    value: "500°C" },
+    { label: "Max Flow",    value: "60 mm³/s" },
+    { label: "Thermistor",  value: "PT1000" },
+    { label: "Heater",      value: "CHC Pro" },
+    { label: "Weight",      value: "65g" },
+    { label: "Price",       value: "~$75 USD" },
+  ]}
+  compatibleToolheads={[
+    { name: "Stealthburner",  href: "/voron/toolheads/stealthburner" },
+    { name: "XOL",            href: "/voron/toolheads/xol" },
+    { name: "Dragon Burner",  href: "/voron/toolheads/dragon-burner" },
+    { name: "Archetype",      href: "/voron/toolheads/archetype" },
+  ]}
   verdict="The best high-flow hotend for CoreXY builds targeting 150mm/s and above. Overkill for relaxed-speed printers, but unmatched if throughput is your goal."
   verdictLabel="BUY"
   maxTemp={500}

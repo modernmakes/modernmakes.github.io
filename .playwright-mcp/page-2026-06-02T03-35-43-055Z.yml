@@ -1,0 +1,426 @@
+- generic [active] [ref=e1]:
+  - navigation "Primary navigation" [ref=e2]:
+    - generic [ref=e4]:
+      - link "Modern Makes home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Modern Makes" [ref=e6]
+      - generic [ref=e7]:
+        - button "Printers" [ref=e9] [cursor=pointer]:
+          - text: Printers
+          - img [ref=e10]
+        - link "Hardware" [ref=e12] [cursor=pointer]:
+          - /url: /hardware
+        - link "Filament" [ref=e13] [cursor=pointer]:
+          - /url: /filament
+        - link "Guides" [ref=e14] [cursor=pointer]:
+          - /url: /guides
+        - link "Tools" [ref=e15] [cursor=pointer]:
+          - /url: /tools
+        - link "News" [ref=e16] [cursor=pointer]:
+          - /url: /news
+      - generic [ref=e18]:
+        - textbox "Search" [ref=e19]:
+          - /placeholder: Search Modern Makes…
+        - button "Search" [ref=e20] [cursor=pointer]:
+          - img [ref=e21]
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - generic [ref=e27]: Printers
+      - link [ref=e28] [cursor=pointer]:
+        - /url: /voron
+        - text: Voron
+    - link [ref=e30] [cursor=pointer]:
+      - /url: /hardware
+      - text: Hardware
+    - link [ref=e31] [cursor=pointer]:
+      - /url: /filament
+      - text: Filament
+    - link [ref=e32] [cursor=pointer]:
+      - /url: /guides
+      - text: Guides
+    - link [ref=e33] [cursor=pointer]:
+      - /url: /tools
+      - text: Tools
+    - link [ref=e34] [cursor=pointer]:
+      - /url: /news
+      - text: News
+  - main [ref=e35]:
+    - heading "Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter" [level=1] [ref=e36]
+    - generic [ref=e38]:
+      - generic [ref=e41]: HOTEND
+      - generic [ref=e42]:
+        - navigation "Breadcrumb" [ref=e43]:
+          - link "Home" [ref=e44] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e45]: /
+          - link "Hardware" [ref=e46] [cursor=pointer]:
+            - /url: /hardware
+          - generic [ref=e47]: /
+          - generic [ref=e48]: HOTEND
+        - generic [ref=e49]: Phaetus
+        - heading "Phaetus Rapido 2 UHF" [level=1] [ref=e50]
+        - generic [ref=e51]:
+          - generic [ref=e52]: BUY
+          - generic [ref=e53]: The best high-flow hotend for CoreXY builds targeting 150mm/s and above. Overkill for relaxed-speed printers, but unmatched if throughput is your goal.
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e56]: USD
+            - generic [ref=e57]: $89
+          - generic [ref=e58]:
+            - generic [ref=e59]: CAD
+            - generic [ref=e60]: $119
+          - generic [ref=e61]:
+            - generic [ref=e62]: Max Temp
+            - generic [ref=e63]: 500°C
+          - generic [ref=e64]:
+            - generic [ref=e65]: Max Flow
+            - generic [ref=e66]: 60 mm³/s
+        - generic [ref=e67]:
+          - generic [ref=e68]: high-flow
+          - generic [ref=e69]: uhf
+          - generic [ref=e70]: phaetus
+          - generic [ref=e71]: volcano
+          - generic [ref=e72]: voron
+          - generic [ref=e73]: corexy
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - region "Flow Rate Reference" [ref=e77]:
+          - heading "Flow Rate Reference" [level=2] [ref=e78]
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - generic [ref=e81]:
+                - generic [ref=e84]:
+                  - text: Standard
+                  - text: "15"
+                - generic [ref=e87]:
+                  - text: High Flow
+                  - text: "30"
+                - generic [ref=e90]:
+                  - text: Volcano
+                  - text: "45"
+                - generic [ref=e93]: 60 mm³/s
+              - generic [ref=e94]:
+                - generic [ref=e95]: "0"
+                - generic [ref=e96]: 70+ mm³/s
+            - paragraph [ref=e97]: Max flow tested at 250°C with standard PLA/PETG. Actual performance varies by filament, nozzle diameter, and temperature.
+        - region "Full Specifications" [ref=e98]:
+          - heading "Full Specifications" [level=2] [ref=e99]
+          - table [ref=e101]:
+            - rowgroup [ref=e102]:
+              - row "Max Volumetric Flow 60 mm³/s At 250°C with PLA/PETG. At 300°C with ABS/nylon." [ref=e103]:
+                - cell "Max Volumetric Flow" [ref=e104]
+                - cell "60 mm³/s At 250°C with PLA/PETG. At 300°C with ABS/nylon." [ref=e105]:
+                  - text: 60 mm³/s
+                  - generic [ref=e106]: At 250°C with PLA/PETG. At 300°C with ABS/nylon.
+              - row "Max Temperature 500°C Requires PT100 or PT1000 above 300°C" [ref=e107]:
+                - cell "Max Temperature" [ref=e108]
+                - cell "500°C Requires PT100 or PT1000 above 300°C" [ref=e109]:
+                  - text: 500°C
+                  - generic [ref=e110]: Requires PT100 or PT1000 above 300°C
+              - row "Heater Block UHF / Volcano Compatible with all Volcano/UHF-thread M6 nozzles" [ref=e111]:
+                - cell "Heater Block" [ref=e112]
+                - cell "UHF / Volcano Compatible with all Volcano/UHF-thread M6 nozzles" [ref=e113]:
+                  - text: UHF / Volcano
+                  - generic [ref=e114]: Compatible with all Volcano/UHF-thread M6 nozzles
+              - row "Heater Cartridge 60W 24V standard" [ref=e115]:
+                - cell "Heater Cartridge" [ref=e116]
+                - cell "60W 24V standard" [ref=e117]:
+                  - text: 60W
+                  - generic [ref=e118]: 24V standard
+              - row "Heat Break Bi-metal Titanium alloy cold end, copper alloy hot end" [ref=e119]:
+                - cell "Heat Break" [ref=e120]
+                - cell "Bi-metal Titanium alloy cold end, copper alloy hot end" [ref=e121]:
+                  - text: Bi-metal
+                  - generic [ref=e122]: Titanium alloy cold end, copper alloy hot end
+              - row "Nozzle Thread M6 Volcano pitch Not compatible with standard V6 nozzles" [ref=e123]:
+                - cell "Nozzle Thread" [ref=e124]
+                - cell "M6 Volcano pitch Not compatible with standard V6 nozzles" [ref=e125]:
+                  - text: M6 Volcano pitch
+                  - generic [ref=e126]: Not compatible with standard V6 nozzles
+              - row "Thermistor NTC100K (stock) Swap to PT100/PT1000 for temps above 300°C" [ref=e127]:
+                - cell "Thermistor" [ref=e128]
+                - cell "NTC100K (stock) Swap to PT100/PT1000 for temps above 300°C" [ref=e129]:
+                  - text: NTC100K (stock)
+                  - generic [ref=e130]: Swap to PT100/PT1000 for temps above 300°C
+              - row "Fan Axial 25×10mm Included; 24V" [ref=e131]:
+                - cell "Fan" [ref=e132]
+                - cell "Axial 25×10mm Included; 24V" [ref=e133]:
+                  - text: Axial 25×10mm
+                  - generic [ref=e134]: Included; 24V
+              - row "Mount Style Groove mount Compatible with Stealthburner, EVA 3, Orbiter toolheads" [ref=e135]:
+                - cell "Mount Style" [ref=e136]
+                - cell "Groove mount Compatible with Stealthburner, EVA 3, Orbiter toolheads" [ref=e137]:
+                  - text: Groove mount
+                  - generic [ref=e138]: Compatible with Stealthburner, EVA 3, Orbiter toolheads
+              - row "Nozzle Diameter 0.4mm (stock) Supports 0.25–1.0mm in UHF format" [ref=e139]:
+                - cell "Nozzle Diameter" [ref=e140]
+                - cell "0.4mm (stock) Supports 0.25–1.0mm in UHF format" [ref=e141]:
+                  - text: 0.4mm (stock)
+                  - generic [ref=e142]: Supports 0.25–1.0mm in UHF format
+              - row "Total Weight ~62g Hotend + fan + wiring, no extruder" [ref=e143]:
+                - cell "Total Weight" [ref=e144]
+                - cell "~62g Hotend + fan + wiring, no extruder" [ref=e145]:
+                  - text: ~62g
+                  - generic [ref=e146]: Hotend + fan + wiring, no extruder
+              - row "Throat Length 25mm UHF extended melt zone" [ref=e147]:
+                - cell "Throat Length" [ref=e148]
+                - cell "25mm UHF extended melt zone" [ref=e149]:
+                  - text: 25mm
+                  - generic [ref=e150]: UHF extended melt zone
+              - row "Part Number RA2-UHF" [ref=e151]:
+                - cell "Part Number" [ref=e152]
+                - cell "RA2-UHF" [ref=e153]
+        - region "Compatibility" [ref=e154]:
+          - heading "Compatibility" [level=2] [ref=e155]
+          - generic [ref=e156]:
+            - generic "compatible" [ref=e157]: Voron 2.4
+            - generic "compatible" [ref=e159]: Voron Trident
+            - generic "incompatible" [ref=e161]: Voron 0.2
+            - generic "compatible" [ref=e163]: VCore 3.1
+            - generic "compatible" [ref=e165]: RatRig V-Core 4
+            - generic "untested" [ref=e167]: RatRig V-Minion
+            - generic "compatible" [ref=e169]: HevORT
+            - generic "untested" [ref=e171]: K3
+            - generic "incompatible" [ref=e173]: Bambu X1C
+            - generic "incompatible" [ref=e175]: Prusa MK4
+            - generic "compatible" [ref=e177]: Stealthburner
+            - generic "compatible" [ref=e179]: EVA 3
+            - generic "compatible" [ref=e181]: Dragon Burner
+            - generic "incompatible" [ref=e183]: Mini Stealthburner
+          - generic [ref=e185]:
+            - generic: Compatible
+            - generic: Untested
+            - generic: Incompatible
+        - region "Pros & Cons" [ref=e186]:
+          - heading "Pros & Cons" [level=2] [ref=e187]
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - generic [ref=e190]: Pros
+              - list [ref=e191]:
+                - listitem [ref=e192]:
+                  - generic [ref=e193]: ✓
+                  - text: Best-in-class flow rate for standard nozzle diameters
+                - listitem [ref=e194]:
+                  - generic [ref=e195]: ✓
+                  - text: 60W heater recovers temperature quickly between layers
+                - listitem [ref=e196]:
+                  - generic [ref=e197]: ✓
+                  - text: Bi-metal heat break excels at high-speed, high-temp printing
+                - listitem [ref=e198]:
+                  - generic [ref=e199]: ✓
+                  - text: 500°C capability handles PEI, PEEK, and high-temp composites
+                - listitem [ref=e200]:
+                  - generic [ref=e201]: ✓
+                  - text: Excellent community support — well-documented in Voron and RatRig communities
+                - listitem [ref=e202]:
+                  - generic [ref=e203]: ✓
+                  - text: Compatible with the broad Volcano/UHF nozzle ecosystem
+            - generic [ref=e204]:
+              - generic [ref=e205]: Cons
+              - list [ref=e206]:
+                - listitem [ref=e207]:
+                  - generic [ref=e208]: ✗
+                  - text: At 62g, it's the heaviest common hotend — affects resonance frequency
+                - listitem [ref=e209]:
+                  - generic [ref=e210]: ✗
+                  - text: Significantly more expensive than standard V6-format hotends
+                - listitem [ref=e211]:
+                  - generic [ref=e212]: ✗
+                  - text: UHF nozzle thread is not interchangeable with standard V6 nozzles
+                - listitem [ref=e213]:
+                  - generic [ref=e214]: ✗
+                  - text: 60W heater requires well-sized power supply — check your PSU headroom
+                - listitem [ref=e215]:
+                  - generic [ref=e216]: ✗
+                  - text: Overkill if your motion system tops out at 100mm/s
+        - generic [ref=e217]:
+          - heading "Who It's For" [level=2] [ref=e218]
+          - paragraph [ref=e219]: The Rapido 2 UHF is not the hotend for every Voron build. If you're printing structural parts in PLA at 80mm/s, a Dragon HF does the same job for $30 less and weighs half as much. The UHF's extended melt zone and 60W heater only justify themselves once you start pushing volumetric throughput — which, on a well-tuned Voron 2.4, happens above about 150mm/s with a 0.4mm nozzle.
+          - paragraph [ref=e220]: Where the Rapido 2 UHF shines is in multi-material printing and draft mode. With a 0.6mm or 0.8mm nozzle at 200mm/s+, the UHF stays well inside its thermal limits while a standard hotend is already gasping. The 60mm³/s ceiling means your slicer's speed limit is your motion system, not your hotend, which is exactly the relationship you want.
+          - paragraph [ref=e221]: "The bi-metal heat break is worth mentioning independently: it outperforms titanium-only heat breaks at the top of the temperature range because it manages heat distribution more actively rather than simply insulating. For anyone printing nylon or ABS at 270°C+, the more active thermal management reduces the likelihood of partial melts creeping up the heat break."
+        - region "Where to Buy" [ref=e222]:
+          - heading "Where to Buy" [level=2] [ref=e223]
+          - generic [ref=e224]:
+            - link "Buy from West3D" [ref=e225] [cursor=pointer]:
+              - /url: https://west3d.com
+              - generic [ref=e226]: Best Option
+              - generic [ref=e227]: 🇺🇸
+              - generic [ref=e228]: West3D
+              - generic [ref=e229]: $89 USD
+              - generic [ref=e230]: →
+            - link "Buy from Printed Solid" [ref=e231] [cursor=pointer]:
+              - /url: https://www.printedsolid.com
+              - generic [ref=e232]: 🇺🇸
+              - generic [ref=e233]: Printed Solid
+              - generic [ref=e234]: $89 USD
+              - generic [ref=e235]: →
+            - link "Buy from Fabreeko" [ref=e236] [cursor=pointer]:
+              - /url: https://www.fabreeko.com
+              - generic [ref=e237]: 🇺🇸
+              - generic [ref=e238]: Fabreeko
+              - generic [ref=e239]: $92 USD
+              - generic [ref=e240]: →
+            - link "Buy from Printed Solid (CA)" [ref=e241] [cursor=pointer]:
+              - /url: https://www.printedsolid.com
+              - generic [ref=e242]: 🇨🇦
+              - generic [ref=e243]: Printed Solid (CA)
+              - generic [ref=e244]: ~$119 CAD
+              - generic [ref=e245]: →
+            - link "Buy from Triangle Lab (AliExpress)" [ref=e246] [cursor=pointer]:
+              - /url: https://www.aliexpress.com/store/4543082
+              - generic [ref=e247]: 🌐
+              - generic [ref=e248]: Triangle Lab (AliExpress)
+              - generic [ref=e249]: ~$75 USD
+              - generic [ref=e250]: →
+      - complementary [ref=e251]:
+        - generic [ref=e252]:
+          - generic [ref=e253]: Quick Specs
+          - generic [ref=e254]:
+            - generic [ref=e255]: Max Temp
+            - generic [ref=e256]: 500°C
+          - generic [ref=e257]:
+            - generic [ref=e258]: Max Flow
+            - generic [ref=e259]: 60 mm³/s
+          - generic [ref=e260]:
+            - generic [ref=e261]: Thermistor
+            - generic [ref=e262]: PT1000
+          - generic [ref=e263]:
+            - generic [ref=e264]: Heater
+            - generic [ref=e265]: CHC Pro
+          - generic [ref=e266]:
+            - generic [ref=e267]: Weight
+            - generic [ref=e268]: 65g
+          - generic [ref=e269]:
+            - generic [ref=e270]: Price
+            - generic [ref=e271]: ~$75 USD
+        - generic [ref=e272]:
+          - generic [ref=e273]: Compatible Toolheads
+          - generic [ref=e274]:
+            - link "Stealthburner" [ref=e275] [cursor=pointer]:
+              - /url: /voron/toolheads/stealthburner
+            - link "XOL" [ref=e276] [cursor=pointer]:
+              - /url: /voron/toolheads/xol
+            - link "Dragon Burner" [ref=e277] [cursor=pointer]:
+              - /url: /voron/toolheads/dragon-burner
+            - link "Archetype" [ref=e278] [cursor=pointer]:
+              - /url: /voron/toolheads/archetype
+        - generic [ref=e279]:
+          - generic [ref=e280]: Where to Buy
+          - link "Buy from West3D" [ref=e281] [cursor=pointer]:
+            - /url: https://west3d.com
+            - generic [ref=e282]: West3D
+            - generic [ref=e283]: →
+          - link "Buy from Printed Solid" [ref=e284] [cursor=pointer]:
+            - /url: https://www.printedsolid.com
+            - generic [ref=e285]: Printed Solid
+            - generic [ref=e286]: →
+          - link "Buy from Fabreeko" [ref=e287] [cursor=pointer]:
+            - /url: https://www.fabreeko.com
+            - generic [ref=e288]: Fabreeko
+            - generic [ref=e289]: →
+          - link "Buy from Printed Solid (CA)" [ref=e290] [cursor=pointer]:
+            - /url: https://www.printedsolid.com
+            - generic [ref=e291]: Printed Solid (CA)
+            - generic [ref=e292]: →
+          - link "Buy from Triangle Lab (AliExpress)" [ref=e293] [cursor=pointer]:
+            - /url: https://www.aliexpress.com/store/4543082
+            - generic [ref=e294]: Triangle Lab (AliExpress)
+            - generic [ref=e295]: →
+    - region "Related Components" [ref=e296]:
+      - generic [ref=e297]:
+        - generic [ref=e298]:
+          - heading "Related Components" [level=2] [ref=e299]
+          - link "All hardware →" [ref=e300] [cursor=pointer]:
+            - /url: /hardware
+        - generic [ref=e301]:
+          - link "Hotend Phaetus Dragon HF ~$59 USD" [ref=e302] [cursor=pointer]:
+            - /url: /hardware/hotends/dragon-hf
+            - generic [ref=e304]: Hotend
+            - generic [ref=e305]:
+              - generic [ref=e306]: Phaetus Dragon HF
+              - generic [ref=e307]: ~$59 USD
+          - link "Hotend E3D Revo Voron ~$109 USD" [ref=e308] [cursor=pointer]:
+            - /url: /hardware/hotends/e3d-revo-voron
+            - generic [ref=e310]: Hotend
+            - generic [ref=e311]:
+              - generic [ref=e312]: E3D Revo Voron
+              - generic [ref=e313]: ~$109 USD
+          - link "Extruder Orbiter Extruder v2 ~$45 USD" [ref=e314] [cursor=pointer]:
+            - /url: /hardware/extruders/orbiter-v2
+            - generic [ref=e316]: Extruder
+            - generic [ref=e317]:
+              - generic [ref=e318]: Orbiter Extruder v2
+              - generic [ref=e319]: ~$45 USD
+  - contentinfo [ref=e320]:
+    - generic [ref=e321]:
+      - generic [ref=e322]:
+        - generic [ref=e323]:
+          - link "Modern Makes home" [ref=e324] [cursor=pointer]:
+            - /url: /
+            - img "Modern Makes" [ref=e325]
+          - paragraph [ref=e326]: The editorial voice of the 3D printing enthusiast.
+        - generic [ref=e327]:
+          - generic [ref=e328]:
+            - generic [ref=e329]: Printers
+            - link "Voron" [ref=e330] [cursor=pointer]:
+              - /url: /voron
+          - generic [ref=e331]:
+            - generic [ref=e332]: Editorial
+            - link "Filament" [ref=e333] [cursor=pointer]:
+              - /url: /filament
+            - link "Guides" [ref=e334] [cursor=pointer]:
+              - /url: /guides
+            - link "News" [ref=e335] [cursor=pointer]:
+              - /url: /news
+            - link "Tools" [ref=e336] [cursor=pointer]:
+              - /url: /tools
+          - generic [ref=e337]:
+            - generic [ref=e338]: Parts
+            - link "Hotends" [ref=e339] [cursor=pointer]:
+              - /url: /hotends
+            - link "Extruders" [ref=e340] [cursor=pointer]:
+              - /url: /extruders
+            - link "Electronics" [ref=e341] [cursor=pointer]:
+              - /url: /electronics
+            - link "Motion system" [ref=e342] [cursor=pointer]:
+              - /url: /motion-system
+            - link "Build surfaces" [ref=e343] [cursor=pointer]:
+              - /url: /build-surfaces
+          - generic [ref=e344]:
+            - generic [ref=e345]: Publication
+            - link "Newsletter" [ref=e346] [cursor=pointer]:
+              - /url: /newsletter
+            - link "About" [ref=e347] [cursor=pointer]:
+              - /url: /about
+            - link "Editorial policy" [ref=e348] [cursor=pointer]:
+              - /url: /about#editorial
+            - link "Affiliate disclosure" [ref=e349] [cursor=pointer]:
+              - /url: /about#affiliate
+            - link "Press & Advertising" [ref=e350] [cursor=pointer]:
+              - /url: /press
+            - link "Contact" [ref=e351] [cursor=pointer]:
+              - /url: /contact
+            - link "modernmakesco@gmail.com" [ref=e352] [cursor=pointer]:
+              - /url: mailto:modernmakesco@gmail.com
+      - generic [ref=e353]:
+        - generic [ref=e354]:
+          - text: © 2026 Modern Makes.
+          - link "Privacy" [ref=e355] [cursor=pointer]:
+            - /url: /privacy
+          - text: ·
+          - link "Terms" [ref=e356] [cursor=pointer]:
+            - /url: /terms
+        - generic [ref=e357]: Modern Makes uses affiliate links. We may earn a commission when you buy through links on this site. This never influences our editorial recommendations.
+  - generic [ref=e360]:
+    - button "Menu" [ref=e361]:
+      - img [ref=e363]
+      - generic: Menu
+    - button "Inspect" [ref=e367]:
+      - img [ref=e369]
+      - generic: Inspect
+    - button "Audit" [ref=e371]:
+      - img [ref=e373]
+      - generic: Audit
+    - button "Settings" [ref=e376]:
+      - img [ref=e378]
+      - generic: Settings
