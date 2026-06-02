@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "fetch-data": "node scripts/fetch-airtable.mjs"
   },
   "dependencies": {
     "astro": "^4.15.0",
