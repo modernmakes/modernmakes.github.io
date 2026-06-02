@@ -1,11 +1,152 @@
 [
   {
-    "id": "rec0AGezsyimPxcYk"
+    "id": "rec7Nntel8WpI6ldz",
+    "Cons": "Same 45 mm³/s flow ceiling as standard HF, Premium price over non-Plus for sensor upgrade only, Heater wattage inconsistently reported",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "Universal"
+    ],
+    "Max Flow (mm³/s)": 45,
+    "Description": "The Rapido 2 Plus HF adds a PT1000 thermistor and 350°C rating to the standard HF flow architecture. Physically identical to the Rapido 2 HF — same heatsink, same titanium heat break, same plated copper block. The upgrade is purely in the sensor and temp ceiling, making it the right choice when you need to run PA, PC, or other engineering filaments. Prices vary by vendor — expect $99–$120 USD from North American distributors.",
+    "Verdict Label": "The 350°C-capable HF variant — same flow as the standard but ready for engineering filaments.",
+    "Weight (g)": 47,
+    "Verdict": "Solid Choice",
+    "Max Temp (°C)": 350,
+    "Heater Type": "Cartridge",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner",
+      "Archetype"
+    ],
+    "Thermistor": "PT1000",
+    "Name": "Rapido 2 Plus HF",
+    "Type": "All-metal",
+    "Brand": "Phaetus",
+    "Price (USD)": 99,
+    "Pros": "350°C max temp, PT1000 thermistor, Detachable thermistor, Titanium heat break, Mechanically identical to Rapido 2 — easy upgrade path",
+    "Updated": "2026-06-02"
   },
   {
-    "id": "recD1Lly97QafZlXQ"
+    "id": "rec7nAlY5yM2ZzAFb",
+    "Cons": "Most expensive Rapido 2 variant, UHF nozzle ecosystem less universal than V6, Heater wattage inconsistently reported across vendors",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "Universal"
+    ],
+    "Max Flow (mm³/s)": 75,
+    "Description": "The Rapido 2 Plus UHF combines the ultra-high-flow UHF melt zone with the PT1000 thermistor and 350°C rating of the Plus lineup. The best all-around Rapido 2 variant for builders who want both speed and engineering filament capability without switching hotends. Prices vary by vendor — expect $109–$130 USD from North American distributors.",
+    "Verdict Label": "The complete package — 75 mm³/s flow and 350°C capability in one hotend.",
+    "Weight (g)": 55,
+    "Verdict": "Top Pick",
+    "Max Temp (°C)": 350,
+    "Heater Type": "Cartridge",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner",
+      "Archetype"
+    ],
+    "Thermistor": "PT1000",
+    "Name": "Rapido 2 Plus UHF",
+    "Type": "All-metal",
+    "Brand": "Phaetus",
+    "Price (USD)": 109,
+    "Pros": "75 mm³/s max flow, 350°C max temp, PT1000 thermistor, Detachable thermistor, Titanium heat break, Includes V6 and Volcano nozzles",
+    "Updated": "2026-06-02"
   },
   {
-    "id": "recuexDSndKv9hNq3"
+    "id": "recAsuEJU5161ysSg",
+    "Cons": "36 mm³/s flow — lowest in the Rapido 2 family, UHF only — no HF option, Not ideal for standard filaments where titanium heat break performs better",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "Universal"
+    ],
+    "Max Flow (mm³/s)": 36,
+    "Description": "The Rapido 2F is a fiber-optimized UHF variant built around an EndCoat all-metal heat break and hardened steel nozzles. Lower max flow than the standard UHF at 36 mm³/s, but purpose-built for CF, GF, and other abrasive filaments that would destroy a standard heat break and brass nozzle. PT1000 thermistor with 350°C ceiling. UHF geometry only — no HF variant exists. Prices vary by vendor — expect $75–$95 USD from North American distributors.",
+    "Verdict Label": "Built specifically for abrasive filaments — EndCoat heat break and hardened steel nozzles out of the box.",
+    "Weight (g)": 54.5,
+    "Verdict": "Niche Pick",
+    "Max Temp (°C)": 350,
+    "Heater Type": "Cartridge",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner",
+      "Archetype"
+    ],
+    "Thermistor": "PT1000",
+    "Name": "Rapido 2F",
+    "Type": "All-metal",
+    "Brand": "Phaetus",
+    "Price (USD)": 75,
+    "Pros": "EndCoat all-metal heat break for abrasive filaments, Hardened steel nozzles included, PT1000 thermistor, 350°C max temp, Lower price than Plus variants",
+    "Updated": "2026-06-02"
+  },
+  {
+    "id": "recD1Lly97QafZlXQ",
+    "Cons": "290°C limit rules out high-temp engineering filaments, NTC100K thermistor not ideal for high-temp use, Heater wattage inconsistently reported across vendors",
+    "Compatible Printers": [
+      "Voron 2.4 ",
+      "Voron Trident",
+      "RatRig",
+      "VZBot"
+    ],
+    "Max Flow (mm³/s)": 45,
+    "Description": "The Rapido 2 HF is the standard-flow variant of Phaetus's second-generation hotend. Titanium heat break, plated copper heat block, and detachable thermistor cartridge. Solid choice for builds not pushing extreme volumetric speeds. Prices vary by vendor — expect $89–$110 USD from North American distributors.",
+    "Verdict Label": "The reliable entry point into the Rapido 2 family — strong flow for most builds without the UHF premium.",
+    "Weight (g)": 50.5,
+    "Verdict": "Solid Choice",
+    "Max Temp (°C)": 290,
+    "Heater Type": "Cartridge",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL ",
+      "Dragon Burner ",
+      "Archetype"
+    ],
+    "Thermistor": "NTC100K",
+    "Name": "Rapido 2 HF",
+    "Type": "All-metal",
+    "Brand": "Phaetus",
+    "Price (USD)": 89,
+    "Pros": "Detachable thermistor, Titanium heat break, Plated copper heat block, Wide toolhead compatibility, Convertible to UHF via block swap",
+    "Updated": "2026-06-02"
+  },
+  {
+    "id": "recPc9uC0INefKqim",
+    "Cons": "290°C limit rules out high-temp engineering filaments, NTC100K not ideal for high-temp use, UHF nozzle ecosystem less universal than V6, Heater wattage inconsistently reported",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "Universal"
+    ],
+    "Max Flow (mm³/s)": 75,
+    "Description": "The Rapido 2 UHF is the ultra-high-flow variant of the Rapido 2, with a volcano-style extended melt zone pushing up to 75 mm³/s. Same titanium heat break and plated copper block as the HF, same 290°C ceiling. The go-to hotend for builders running 150mm/s and above on Voron and RatRig platforms. Prices vary by vendor — expect $99–$120 USD from North American distributors.",
+    "Verdict Label": "The high-flow standard for CoreXY builds — 75 mm³/s ceiling with broad toolhead support.",
+    "Weight (g)": 53.6,
+    "Verdict": "Top Pick",
+    "Max Temp (°C)": 290,
+    "Heater Type": "Cartridge",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner",
+      "Archetype"
+    ],
+    "Thermistor": "NTC100K",
+    "Name": "Rapido 2 UHF",
+    "Type": "All-metal",
+    "Brand": "Phaetus",
+    "Price (USD)": 99,
+    "Pros": "75 mm³/s max flow, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
+    "Updated": "2026-06-02"
   }
 ]
