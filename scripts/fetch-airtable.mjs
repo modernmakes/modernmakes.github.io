@@ -43,7 +43,8 @@ async function fetchTable(tableId) {
       throw new Error(`HTTP ${res.status} — ${await res.text()}`);
     }
 
-    const data = await res.json();
+    const buffer = await res.arrayBuffer();
+    const data = JSON.parse(new TextDecoder('utf-8').decode(buffer));
 
     for (const record of data.records) {
       records.push({ id: record.id, ...record.fields });
