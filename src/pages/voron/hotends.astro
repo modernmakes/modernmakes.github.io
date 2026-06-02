@@ -245,30 +245,3 @@ const badges: Record<string, { label: string; cls: string }> = {
     });
   })();
 </script>
-
-<style is:global>
-/* ── Verdict badge (top of card) ── */
-.verdict-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  font-family: var(--fm);
-}
-
-/* ── Review link ── */
-.btn-review {
-  display: inline-block;
-  margin-top: 8px;
-  margin-left: 12px;
-  font-size: 12px;
-  color: var(--g2);
-  text-decoration: none;
-  font-family: var(--fm);
-}
-.btn-review:hover { color: var(--accent); }
-</style>

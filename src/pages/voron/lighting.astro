@@ -3,54 +3,240 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/voron/lighting';
+
+const products = [
+  {
+    id: 'btt-led-strip',
+    name: 'LED Strip (White)',
+    brand: 'BIGTREETECH',
+    price: 15,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Addressable', 'Klipper compatible', '~$15/strip'],
+    description: 'The straightforward chamber lighting solution. BTT\'s white addressable LED strip is plug-compatible with common Voron mainboards and controlled via Klipper\'s LED framework. Mount along the top frame extrusions for even print bed illumination.',
+    compatible: '2.4,trident',
+    vendor: 'West3D',
+    vendorUrl: '#',
+  },
+  {
+    id: 'wled-sk6812',
+    name: 'WLED Controller + SK6812 RGBW',
+    brand: 'WLED / Generic',
+    price: 25,
+    badge: { label: 'COMMUNITY FAV', cls: 'verdict-comm' },
+    specs: ['RGBW addressable', 'WLED firmware', 'Full color + white'],
+    description: 'Full RGBW lighting with WLED firmware on an ESP8266 or ESP32 controller. Enables dynamic color effects, print status lighting, and integration with Klipper via the moonraker-WLED plugin. Popular with builders who want visual print progress feedback or just want to make it look great.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+  {
+    id: 'pcb-led-bars',
+    name: 'PCB Mount LED Bars',
+    brand: 'Various',
+    price: 8,
+    badge: { label: 'BUDGET PICK', cls: 'verdict-upd' },
+    specs: ['Frame-mounted', 'Fixed white', 'Easy install'],
+    description: 'Simple PCB-format LED bars that mount directly to 2020 extrusions via M3 hardware. No addressable control — always-on when the printer is powered. The easiest possible lighting solution. Good first lighting option before deciding if you want full Klipper-controlled RGBW.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+  {
+    id: 'neopixel-ring',
+    name: 'Neopixel Ring (Toolhead)',
+    brand: 'Adafruit / Clone',
+    price: 6,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Stealthburner logo', 'WS2812B', 'Klipper addressable'],
+    description: 'The Stealthburner Neopixel logo ring — the iconic accent lighting for the most common Voron toolhead. Controlled by Klipper\'s led_effect module, it can display print progress, error states, and homing animations. Comes in clone format for ~$6 and works identically to genuine Adafruit units.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+];
 ---
-<Base title="Voron Lighting & Cameras" description="The complete guide to LED strips, nozzle cameras, and timelapse rigs for Voron 2.4 and Trident builds.">
+<Base title="Lighting for Voron 2.4 & Trident" description="LED lighting options for Voron 2.4 and Trident builds — addressable strips, WLED RGBW setups, and Stealthburner Neopixel rings. Klipper-controlled and always-on options covered.">
   <Nav slot="nav" currentPath={currentPath} />
-  <section style="background:var(--black);padding:60px 0 40px">
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
         <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Lighting & Cameras</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Lighting</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px">Voron · Lighting & Cameras</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron Lighting & Cameras</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
-      <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
-      <p id="no-parts-msg" style="display:none;color:var(--g2);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No parts listed for this model yet — check back soon.</p>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Lighting</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Lighting for Voron 2.4 &amp; Trident</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">Chamber lighting is functional as much as aesthetic — good illumination is essential for camera monitoring and first-layer inspection. Klipper's LED framework makes addressable lighting genuinely useful: print status, homing feedback, and error alerts via light.</p>
     </div>
-  </section>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
   <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="model-context-bar">
+      <div class="model-context-bar" id="model-context">
         <span class="model-context-label">Showing parts for:</span>
         <span id="active-model-label" class="model-context-value">Voron 2.4</span>
         <a href="/voron" class="model-context-switch">Switch model →</a>
       </div>
     </div>
   </div>
+
+  <!-- CONTEXT CALLOUT -->
+  <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="callout callout-orange" style="margin:0">
+        <strong>Addressable LEDs are worth the setup</strong>
+        Klipper's <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(0,0,0,.08);padding:1px 5px;border-radius:3px">SET_LED</code> command and the led_effect plugin transform lighting from decoration to UX. Error states turn red, homing turns blue, print success turns green. If you're going to add any lighting, add addressable LEDs — the cost difference over simple fixed strips is under $10.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" aria-label="Voron lighting products">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Lighting to consider</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{products.length} products</span>
+      </div>
+      <div class="grid-3">
+        {products.map(product => (
+          <div class="product-card" data-compatible={product.compatible}>
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              <div class="product-card-brand">{product.brand}</div>
+              <div class="product-card-name">{product.name}</div>
+              <div class="product-card-specs">
+                {product.specs.map(s => <span class="spec-chip">{s}</span>)}
+              </div>
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
+              <a href={product.vendorUrl} class="btn-buy" target="_blank" rel="noopener sponsored">
+                Buy at {product.vendor} →
+              </a>
+              <div class="product-card-footer" style="margin-top:12px">
+                <div>
+                  <span class="product-card-price">${product.price}</span>
+                  <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+    </div>
+  </section>
+
+  <!-- KLIPPER LED CONTROL TABLE -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Klipper LED control methods">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Klipper LED control methods</h2>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
+          <thead>
+            <tr style="background:var(--black)">
+              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.08)">Method</th>
+              {['Color control','Effects','Setup effort','Best for'].map(h => (
+                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { method:'Klipper SET_LED',    color:'Full RGB/W',   effects:'Static only',       effort:'Low',    best:'Simple status colors' },
+              { method:'led_effect plugin',  color:'Full RGB/W',   effects:'Animations + macros',effort:'Medium', best:'Print status feedback' },
+              { method:'Moonraker + WLED',   color:'Full RGBW',    effects:'Full WLED library',  effort:'High',   best:'Dynamic effects + independence' },
+              { method:'Always-on (fixed)',  color:'White only',   effects:'None',               effort:'Zero',   best:'Basic illumination' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
+                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px">{row.method}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.color}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.effects}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.effort}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g2);font-size:11px">{row.best}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">led_effect plugin is the sweet spot for most builders — animation support without needing a separate WLED controller.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY MODS -->
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--border)" aria-label="Community lighting resources">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Community resources</h2>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Open Source</span>
+      </div>
+      <div class="grid-3">
+        {[
+          { name:'Klipper LED Effects', creator:'julianschill', desc:'The led_effect plugin that adds animated lighting macros to Klipper. Enables blink, pulse, progress bar, and custom effects triggered by printer events. Widely adopted in the Voron community.', href:'https://github.com/julianschill/klipper-led_effect' },
+          { name:'WLED Firmware', creator:'Aircookie', desc:'Open-source firmware for ESP8266/ESP32-based LED controllers. 200+ effects, full RGBW support, and a REST API that Moonraker can call. The go-to for builders who want full lighting independence.', href:'https://github.com/Aircoookie/WLED' },
+          { name:'Stealthburner LED Mount', creator:'VoronDesign', desc:'Official Neopixel ring mount and wiring guide for the Stealthburner toolhead. Includes Klipper config snippets for print status lighting via the CW2 LED chain.', href:'https://github.com/VoronDesign/Voron-Stealthburner' },
+        ].map(mod => (
+          <a href={mod.href} target="_blank" rel="noopener">
+            <div class="product-card community" style="background:#fff">
+              <div class="product-card-body">
+                <span class="community-badge">Community · Free</span>
+                <div class="product-card-name" style="font-size:16px">{mod.name}</div>
+                <div style="font-size:11px;color:var(--g2);margin-bottom:8px;font-family:'JetBrains Mono',monospace">by {mod.creator}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin-bottom:12px">{mod.desc}</div>
+                <div class="product-card-footer" style="border-top:none;padding-top:0">
+                  <span class="btn-printables">View on GitHub →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "ItemList",
+      "name": "Lighting for Voron 2.4 and Trident 2026",
+      "url": "https://modernmakes.github.io/voron/lighting",
+      "numberOfItems": 4,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "BTT LED Strip (White)" },
+        { "@type": "ListItem", "position": 2, "name": "WLED Controller + SK6812 RGBW" },
+        { "@type": "ListItem", "position": 3, "name": "PCB Mount LED Bars" },
+        { "@type": "ListItem", "position": 4, "name": "Neopixel Ring (Toolhead)" },
+      ]
+    }]
+  })}></script>
 </Base>
+
 <script>
   (function() {
     const STORAGE_KEY = 'voron-model';
     const params = new URLSearchParams(window.location.search);
     const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
     localStorage.setItem(STORAGE_KEY, model);
+
     const label = document.getElementById('active-model-label');
     if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
     document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
       const compatible = (el.dataset.compatible ?? '').split(',');
       el.style.display = compatible.includes(model) ? '' : 'none';
     });
-    const noMsg = document.getElementById('no-parts-msg');
-    if (noMsg) {
-      const hasVisible = Array.from(document.querySelectorAll<HTMLElement>('[data-compatible]')).some(
-        el => el.style.display !== 'none'
-      );
-      noMsg.style.display = hasVisible ? 'none' : '';
-    }
   })();
 </script>

@@ -1,0 +1,239 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+const currentPath = '/voron/toolhead-mounts';
+
+const products = [
+  {
+    id: 'stealthburner',
+    name: 'Stealthburner',
+    brand: 'VoronDesign',
+    price: 0,
+    priceNote: 'Free — print + BOM',
+    badge: { label: 'TOP PICK', cls: 'verdict-best' },
+    specs: ['CW2 extruder system', 'Neopixel logo', 'Dual 4010 fans'],
+    description: 'The official Voron toolhead and the community default. Stealthburner uses the Clockwork 2 extruder mount system which directly accepts the Orbiter v2.0, Galileo 2, and Sherpa Mini. Native support for Rapido 2, Dragon HF, Revo Voron, and most standard hotends. Tap-compatible out of the box.',
+    compatible: '2.4,trident',
+    pageLink: '/voron/toolheads/stealthburner',
+  },
+  {
+    id: 'xol-toolhead',
+    name: 'XOL Toolhead',
+    brand: 'Armchair Engineering',
+    price: 0,
+    priceNote: 'Free — print + BOM',
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Lightweight', 'Dual 4010 fans', 'Speed-focused'],
+    description: 'A lighter alternative to Stealthburner with improved part cooling airflow. Growing community adoption for builders prioritizing high-acceleration, high-speed printing where toolhead mass matters for input shaper performance. Compatible with most common hotends.',
+    compatible: '2.4,trident',
+    pageLink: '/voron/toolheads/xol',
+  },
+  {
+    id: 'dragon-burner',
+    name: 'Dragon Burner',
+    brand: 'chirpy2605',
+    price: 0,
+    priceNote: 'Free — print + BOM',
+    badge: { label: 'COMMUNITY FAV', cls: 'verdict-comm' },
+    specs: ['Compact design', 'Dragon/Rapido focus', 'Dual 4010 fans'],
+    description: 'Compact, lightweight, and aggressively optimized for Dragon and Rapido hotend families. Popular on Voron 0.2 but widely used on 2.4 and Trident builds as well. Excellent cooling performance in a smaller package than Stealthburner.',
+    compatible: '2.4,trident',
+    pageLink: '/voron/toolheads/dragon-burner',
+  },
+  {
+    id: 'mini-stealthburner',
+    name: 'Mini Stealthburner',
+    brand: 'VoronDesign',
+    price: 0,
+    priceNote: 'Free — print + BOM',
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Compact profile', 'Neopixel logo', 'Voron 0 / compact builds'],
+    description: 'The smaller sibling of Stealthburner. Designed for Voron 0 and other compact builds, but usable on 2.4 and Trident for builders who want a lower-profile toolhead. Lighter than full Stealthburner with the same CW2-compatible extruder system.',
+    compatible: '2.4,trident',
+    pageLink: '/voron/toolheads/mini-stealthburner',
+  },
+];
+---
+<Base title="Toolhead Mounts for Voron 2.4 & Trident" description="Toolhead options for Voron 2.4 and Trident — Stealthburner, XOL, Dragon Burner, and Mini SB. Hotend compatibility, weight, and community consensus.">
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Toolhead Mounts</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Toolhead Mounts</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Toolhead Mounts for Voron 2.4 &amp; Trident</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">Your toolhead determines your hotend options, extruder compatibility, part cooling performance, and probe system. Every toolhead here is print-and-BOM — no cost beyond the hardware kit and your own printing time.</p>
+    </div>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-context-bar" id="model-context">
+        <span class="model-context-label">Showing parts for:</span>
+        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
+        <a href="/voron" class="model-context-switch">Switch model →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEXT CALLOUT -->
+  <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="callout callout-orange" style="margin:0">
+        <strong>Your toolhead determines your entire toolhead ecosystem</strong>
+        Hotend, extruder, probe, and part cooling all depend on your toolhead choice. Stealthburner is the safe default — widest hotend support, largest community, most documentation. XOL and Dragon Burner are better if weight is a priority. All toolheads must be printed in ABS or ASA — they live inside a heated chamber.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" aria-label="Voron toolhead products">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Toolheads to consider</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{products.length} toolheads</span>
+      </div>
+      <div class="grid-3">
+        {products.map(product => (
+          <div class="product-card" data-compatible={product.compatible}>
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              <div class="product-card-brand">{product.brand}</div>
+              <div class="product-card-name">{product.name}</div>
+              <div class="product-card-specs">
+                {product.specs.map(s => <span class="spec-chip">{s}</span>)}
+              </div>
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
+              <a href={product.pageLink} class="btn-buy">
+                View toolhead page →
+              </a>
+              <div class="product-card-footer" style="margin-top:12px">
+                <div>
+                  <span style="font-size:11px;color:var(--g2);font-family:'JetBrains Mono',monospace">{product.priceNote}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOTEND COMPATIBILITY MATRIX -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Hotend compatibility matrix">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Hotend compatibility</h2>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
+          <thead>
+            <tr style="background:var(--black)">
+              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.08)">Hotend</th>
+              {['Stealthburner','XOL','Dragon Burner','Mini SB'].map(h => (
+                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name:'Rapido 2',   sb:'✓ Native', xol:'✓',        db:'✓',        msb:'✗' },
+              { name:'Dragon HF',  sb:'✓ Native', xol:'✓',        db:'✓ Native', msb:'✓' },
+              { name:'Revo Voron', sb:'✓ Native', xol:'Adapter',  db:'Adapter',  msb:'✗' },
+              { name:'NF-Crazy',   sb:'✓',        xol:'✓',        db:'✓',        msb:'✗' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
+                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
+                {[row.sb, row.xol, row.db, row.msb].map(val => (
+                  <td style={`text-align:center;padding:10px 12px;color:${val.startsWith('✓') ? '#2E7D32' : val==='✗' ? 'var(--accent)' : '#E65100'};font-weight:${val.startsWith('✓') ? '600' : '400'}`}>{val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">✓ Native = fits without adapter. Adapter = community-printed adapter required. ✗ = not currently supported.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY MODS / TOOLHEAD LINKS -->
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--border)" aria-label="Toolhead GitHub resources">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">GitHub sources</h2>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Open Source</span>
+      </div>
+      <div class="grid-3">
+        {[
+          { name:'Stealthburner', creator:'VoronDesign', desc:'Official Voron toolhead — print files, BOM, and full assembly documentation. The starting point for every new 2.4 or Trident build. Includes CW2 extruder bodies for all supported extruders.', href:'https://github.com/VoronDesign/Voron-Stealthburner' },
+          { name:'XOL Toolhead', creator:'Armchair Engineering', desc:'Lightweight high-speed toolhead optimized for acceleration-focused builds. Includes detailed weight comparison data vs Stealthburner and extensive hotend compatibility notes.', href:'https://github.com/Armchair-Engineering/Xol-Toolhead' },
+          { name:'Dragon Burner', creator:'chirpy2605', desc:'Compact and lightweight, specifically optimized for Dragon and Rapido hotend families. Includes Voron 2.4 and Trident mounting instructions alongside the primary Voron 0.2 documentation.', href:'https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner' },
+        ].map(mod => (
+          <a href={mod.href} target="_blank" rel="noopener">
+            <div class="product-card community" style="background:#fff">
+              <div class="product-card-body">
+                <span class="community-badge">Community · Free</span>
+                <div class="product-card-name" style="font-size:16px">{mod.name}</div>
+                <div style="font-size:11px;color:var(--g2);margin-bottom:8px;font-family:'JetBrains Mono',monospace">by {mod.creator}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin-bottom:12px">{mod.desc}</div>
+                <div class="product-card-footer" style="border-top:none;padding-top:0">
+                  <span class="btn-printables">View on GitHub →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "ItemList",
+      "name": "Toolhead Mounts for Voron 2.4 and Trident 2026",
+      "url": "https://modernmakes.github.io/voron/toolhead-mounts",
+      "numberOfItems": 4,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Stealthburner" },
+        { "@type": "ListItem", "position": 2, "name": "XOL Toolhead" },
+        { "@type": "ListItem", "position": 3, "name": "Dragon Burner" },
+        { "@type": "ListItem", "position": 4, "name": "Mini Stealthburner" },
+      ]
+    }]
+  })}></script>
+</Base>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'voron-model';
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
+
+    const label = document.getElementById('active-model-label');
+    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
+    document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
+      const compatible = (el.dataset.compatible ?? '').split(',');
+      el.style.display = compatible.includes(model) ? '' : 'none';
+    });
+  })();
+</script>

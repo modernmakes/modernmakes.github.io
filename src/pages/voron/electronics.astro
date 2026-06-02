@@ -3,10 +3,89 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/voron/electronics';
+
+const products = [
+  {
+    id: 'octopus-pro',
+    name: 'Octopus Pro',
+    brand: 'BIGTREETECH',
+    price: 85,
+    badge: { label: 'TOP PICK', cls: 'verdict-best' },
+    specs: ['8 stepper drivers', '32-bit STM32', 'USB / CAN'],
+    primaryNote: 'Preferred for Voron 2.4 (4-motor Z)',
+    description: 'The community-standard mainboard for Voron 2.4. Eight driver slots handle all four Z motors plus X, Y, extruder, and a spare. Runs Klipper on STM32F446. Wide community support and extensive Voron Discord documentation make this the default recommendation.',
+    compatible: '2.4,trident',
+    vendor: 'West3D',
+    vendorUrl: '#',
+  },
+  {
+    id: 'manta-m8p',
+    name: 'Manta M8P',
+    brand: 'BIGTREETECH',
+    price: 75,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['8 stepper drivers', 'CANbus native', 'CB1 module slot'],
+    primaryNote: 'Preferred for Trident + CAN bus builds',
+    description: 'BTT\'s Klipper-native board with a built-in CB1 module slot — run your entire system from one PCB without a separate Raspberry Pi. First-class CANbus support makes it an excellent choice for EBB toolboard setups, particularly on Trident builds.',
+    compatible: '2.4,trident',
+    vendor: 'Fabreeko',
+    vendorUrl: '#',
+  },
+  {
+    id: 'ebb36-can',
+    name: 'EBB36 CAN Toolboard',
+    brand: 'BIGTREETECH',
+    price: 35,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['CANbus', 'Toolhead PCB', 'ADXL345 onboard'],
+    description: 'Moves extruder, hotend, part cooling, and probe wiring to a single toolhead PCB. Two wires (CAN + 24V) replace the full wiring loom. ADXL345 built in for input shaper measurement. A major quality-of-life upgrade for any wired build.',
+    compatible: '2.4,trident',
+    vendor: 'West3D',
+    vendorUrl: '#',
+  },
+  {
+    id: 'rpi4-2gb',
+    name: 'Raspberry Pi 4 (2GB)',
+    brand: 'Raspberry Pi Foundation',
+    price: 45,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Klipper host', '2GB RAM', 'USB / Ethernet'],
+    description: 'The standard Klipper host for Voron builds. 2GB RAM is sufficient for Klipper + Moonraker + Mainsail. Pair with a quality SD card (Samsung Endurance or equivalent). Buy only from approved resellers to avoid counterfeit units.',
+    compatible: '2.4,trident',
+    vendor: 'Approved Reseller',
+    vendorUrl: '#',
+  },
+  {
+    id: 'btt-pi',
+    name: 'BTT Pi v1.2',
+    brand: 'BIGTREETECH',
+    price: 30,
+    badge: { label: 'BUDGET PICK', cls: 'verdict-upd' },
+    specs: ['Klipper host', 'RPi CM4 form factor', 'eMMC storage'],
+    description: 'A Raspberry Pi alternative at a lower price point. eMMC storage is more reliable than SD cards for long-term use. Runs Klipper and Moonraker well. Community support is growing but shallower than RPi — expect more configuration DIY.',
+    compatible: '2.4,trident',
+    vendor: 'Fabreeko',
+    vendorUrl: '#',
+  },
+  {
+    id: 'meanwell-lrs200-24',
+    name: 'LRS-200-24',
+    brand: 'Mean Well',
+    price: 25,
+    badge: { label: 'TOP PICK', cls: 'verdict-best' },
+    specs: ['24V / 200W', 'BOM spec', 'UL listed'],
+    description: 'The BOM-specified 24V PSU for Voron builds. Mean Well is the gold standard for enclosed switcher supplies — reliable, thermally stable, and UL-listed. Do not substitute a cheap clone here. This is the one part in a Voron build where you genuinely should not compromise.',
+    compatible: '2.4,trident',
+    vendor: 'Mouser / Digi-Key',
+    vendorUrl: '#',
+  },
+];
 ---
-<Base title="Voron Electronics" description="The complete guide to electronics for Voron 2.4 and Trident builds.">
+<Base title="Electronics for Voron 2.4 & Trident" description="Mainboards, toolboard PCBs, Klipper hosts, and power supplies for Voron 2.4 and Trident builds. BTT Octopus Pro, EBB36, Raspberry Pi 4, and more.">
   <Nav slot="nav" currentPath={currentPath} />
-  <section style="background:var(--black);padding:60px 0 40px">
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
@@ -16,41 +95,178 @@ const currentPath = '/voron/electronics';
         <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Electronics</span>
       </div>
       <div class="eyebrow" style="margin-bottom:10px">Voron · Electronics</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron Electronics</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
-      <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
-      <p id="no-parts-msg" style="display:none;color:var(--g2);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No parts listed for this model yet — check back soon.</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Electronics for Voron 2.4 &amp; Trident</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">The electronics stack — mainboard, host computer, toolboard, and PSU — determines your wiring complexity, feature set, and upgrade path. Klipper runs on all of these. The main decision is how much you want to simplify your wiring loom with CAN bus.</p>
     </div>
-  </section>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
   <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="model-context-bar">
+      <div class="model-context-bar" id="model-context">
         <span class="model-context-label">Showing parts for:</span>
         <span id="active-model-label" class="model-context-value">Voron 2.4</span>
         <a href="/voron" class="model-context-switch">Switch model →</a>
       </div>
     </div>
   </div>
+
+  <!-- CONTEXT CALLOUT -->
+  <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="callout callout-orange" style="margin:0">
+        <strong>CAN bus vs traditional wiring</strong>
+        The EBB36 toolboard cuts your toolhead wiring from ~12 conductors to 2 (CAN + 24V). It requires a CAN-capable mainboard (Octopus Pro or Manta M8P) and a USB-to-CAN bridge or onboard transceiver. More setup upfront, cleaner long-term. Voron 2.4 needs a board with at least 7 stepper driver slots for 4× Z + X + Y + extruder.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" aria-label="Voron electronics products">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Electronics to consider</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{products.length} products</span>
+      </div>
+      <div class="grid-3">
+        {products.map(product => (
+          <div class="product-card" data-compatible={product.compatible}>
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              <div class="product-card-brand">{product.brand}</div>
+              <div class="product-card-name">{product.name}</div>
+              <div class="product-card-specs">
+                {product.specs.map(s => <span class="spec-chip">{s}</span>)}
+              </div>
+              {product.primaryNote && (
+                <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--accent);margin-bottom:8px">{product.primaryNote}</div>
+              )}
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
+              <a href={product.vendorUrl} class="btn-buy" target="_blank" rel="noopener sponsored">
+                Buy at {product.vendor} →
+              </a>
+              <div class="product-card-footer" style="margin-top:12px">
+                <div>
+                  <span class="product-card-price">${product.price}</span>
+                  <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+    </div>
+  </section>
+
+  <!-- BOARD FEATURE COMPARISON TABLE -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Mainboard comparison">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Mainboard feature comparison</h2>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
+          <thead>
+            <tr style="background:var(--black)">
+              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.08)">Board</th>
+              {['Drivers','CAN','Host CPU','Best for 2.4','Best for Trident'].map(h => (
+                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name:'Octopus Pro', drivers:'8', can:'Via USB bridge', host:'External (RPi / BTT Pi)', v24:'✓ Primary', tri:'✓ Good' },
+              { name:'Manta M8P',   drivers:'8', can:'Native',         host:'CB1 module slot',         v24:'✓ Good',    tri:'✓ Primary' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
+                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
+                <td style="text-align:center;padding:10px 12px;font-weight:600;color:var(--black)">{row.drivers}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.can}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.host}</td>
+                <td style={`text-align:center;padding:10px 12px;color:${row.v24.includes('Primary') ? 'var(--accent)' : '#2E7D32'};font-weight:600`}>{row.v24}</td>
+                <td style={`text-align:center;padding:10px 12px;color:${row.tri.includes('Primary') ? 'var(--accent)' : '#2E7D32'};font-weight:600`}>{row.tri}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">Both boards run Klipper and support all Voron features. "Primary" = the community's first recommendation for that printer model.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY RESOURCES -->
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--border)" aria-label="Community electronics resources">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Community resources</h2>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Guides</span>
+      </div>
+      <div class="grid-3">
+        {[
+          { name:'Voron Wiring Guide', creator:'VoronDesign', desc:'Official wiring diagrams for Voron 2.4 and Trident covering Octopus Pro, Manta M8P, and EBB toolboard setups. The authoritative reference for your build\'s electrical plan.', href:'https://github.com/VoronDesign/Voron-2/tree/Voron2.4/Docs' },
+          { name:'EBB36 CAN Setup', creator:'BIGTREETECH', desc:'Step-by-step guide for configuring the EBB36 toolboard with Klipper CANbus. Covers USB-to-CAN bridge mode and native CAN transceiver setups from BTT.', href:'https://github.com/bigtreetech/EBB' },
+          { name:'Klipper Config Reference', creator:'Klipper3D', desc:'The canonical printer.cfg reference for Klipper. Every configuration option documented with examples. Essential reading before you wire your first Voron.', href:'https://www.klipper3d.org/Config_Reference.html' },
+        ].map(mod => (
+          <a href={mod.href} target="_blank" rel="noopener">
+            <div class="product-card community" style="background:#fff">
+              <div class="product-card-body">
+                <span class="community-badge">Community · Free</span>
+                <div class="product-card-name" style="font-size:16px">{mod.name}</div>
+                <div style="font-size:11px;color:var(--g2);margin-bottom:8px;font-family:'JetBrains Mono',monospace">by {mod.creator}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin-bottom:12px">{mod.desc}</div>
+                <div class="product-card-footer" style="border-top:none;padding-top:0">
+                  <span class="btn-printables">View on GitHub →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "ItemList",
+      "name": "Electronics for Voron 2.4 and Trident 2026",
+      "url": "https://modernmakes.github.io/voron/electronics",
+      "numberOfItems": 6,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "BTT Octopus Pro" },
+        { "@type": "ListItem", "position": 2, "name": "BTT Manta M8P" },
+        { "@type": "ListItem", "position": 3, "name": "BTT EBB36 CAN Toolboard" },
+        { "@type": "ListItem", "position": 4, "name": "Raspberry Pi 4 (2GB)" },
+        { "@type": "ListItem", "position": 5, "name": "BTT Pi v1.2" },
+        { "@type": "ListItem", "position": 6, "name": "Mean Well LRS-200-24" },
+      ]
+    }]
+  })}></script>
 </Base>
+
 <script>
   (function() {
     const STORAGE_KEY = 'voron-model';
     const params = new URLSearchParams(window.location.search);
     const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
     localStorage.setItem(STORAGE_KEY, model);
+
     const label = document.getElementById('active-model-label');
     if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
     document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
       const compatible = (el.dataset.compatible ?? '').split(',');
       el.style.display = compatible.includes(model) ? '' : 'none';
     });
-    const noMsg = document.getElementById('no-parts-msg');
-    if (noMsg) {
-      const hasVisible = Array.from(document.querySelectorAll<HTMLElement>('[data-compatible]')).some(
-        el => el.style.display !== 'none'
-      );
-      noMsg.style.display = hasVisible ? 'none' : '';
-    }
   })();
 </script>

@@ -3,54 +3,263 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/voron/enclosure';
+
+const products = [
+  {
+    id: 'polycarb-panels',
+    name: 'Polycarbonate Panels',
+    brand: 'TAP Plastics / ePlastics',
+    price: 0,
+    priceNote: 'custom cut — varies',
+    badge: { label: 'TOP PICK', cls: 'verdict-best' },
+    specs: ['3mm thickness', 'Best heat retention', 'Custom cut to size'],
+    description: 'Polycarbonate is the best panel material for high-temp printing — it holds up to 110°C+ chamber temps without deforming and provides better heat retention than ACM or acrylic. Order custom-cut from TAP Plastics (US West), ePlastics, or a local plastic supplier. Measure your frame panels carefully before ordering.',
+    compatible: '2.4,trident',
+    vendor: 'TAP Plastics',
+    vendorUrl: '#',
+  },
+  {
+    id: 'acm-panels',
+    name: 'ACM Composite Panels',
+    brand: 'Local fabricator',
+    price: 0,
+    priceNote: 'custom cut — varies',
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Aluminium composite', 'Lightweight', 'Rigid'],
+    description: 'Aluminium Composite Material panels are lighter than polycarb and easier to cut locally. Heat retention is slightly worse than polycarbonate for high-temp chambers. Popular with builders who want a more industrial aesthetic or have access to local metal fabricators.',
+    compatible: '2.4,trident',
+    vendor: 'Local fabricator',
+    vendorUrl: '#',
+  },
+  {
+    id: 'vhb-foam-tape',
+    name: 'VHB Foam Tape Seal Kit',
+    brand: '3M',
+    price: 12,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Panel sealing', 'Heat resistant', '~$12/kit'],
+    description: 'The standard sealing solution for Voron panel gaps. 3M VHB foam compresses around the panel edges and creates a decent thermal seal. A properly sealed enclosure can reach and hold 60°C+ chamber temps, which is the target for printing ABS without warping.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+  {
+    id: 'gdstime-blower',
+    name: 'GDSTIME 60×20 Blower',
+    brand: 'GDSTIME',
+    price: 8,
+    priceNote: 'each',
+    badge: { label: 'BUDGET PICK', cls: 'verdict-upd' },
+    specs: ['60×20mm', '24V', 'Exhaust / recirculation'],
+    description: 'The go-to exhaust fan for Voron enclosures. Used for chamber exhaust to push filtered air out of the enclosure, and as the recirculation fan in the Nevermore filtration system. $8 each means you can buy two or three without worrying about it.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+  {
+    id: 'nevermore-micro-v5',
+    name: 'Nevermore Micro V5',
+    brand: 'Nevermore3D',
+    price: 20,
+    priceNote: 'BOM parts only',
+    badge: { label: 'COMMUNITY FAV', cls: 'verdict-comm' },
+    specs: ['Active carbon filter', 'Klipper controlled', 'Print + BOM ~$20'],
+    description: 'The community-standard active carbon filter for Voron enclosures. Print the housing (ABS/ASA), source the BOM (~$20 in parts: carbon pellets, magnets, fan), and run it with a Klipper macro. Filters VOCs from ABS/ASA printing — essential for enclosed spaces. Recirculates heated air rather than exhausting it, helping maintain chamber temp.',
+    compatible: '2.4,trident',
+    vendor: 'Community BOM',
+    vendorUrl: '#',
+  },
+];
 ---
-<Base title="Voron Enclosure & Filtration" description="The complete guide to enclosure panels, sealing, and filtration for Voron 2.4 and Trident builds.">
+<Base title="Enclosure Parts for Voron 2.4 & Trident" description="Panel materials, sealing, exhaust fans, and the Nevermore carbon filter for Voron 2.4 and Trident enclosures. Complete guide to enclosure setup for ABS and ASA printing.">
   <Nav slot="nav" currentPath={currentPath} />
-  <section style="background:var(--black);padding:60px 0 40px">
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
         <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Enclosure & Filtration</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Enclosure</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px">Voron · Enclosure & Filtration</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron Enclosure & Filtration</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
-      <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
-      <p id="no-parts-msg" style="display:none;color:var(--g2);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No parts listed for this model yet — check back soon.</p>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Enclosure</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Enclosure for Voron 2.4 &amp; Trident</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">A proper enclosure is what separates a Voron from any open-frame printer. Panel material, sealing quality, and filtration determine whether you can reliably print ABS and engineering materials. These are not afterthoughts — plan them from the start.</p>
     </div>
-  </section>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
   <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="model-context-bar">
+      <div class="model-context-bar" id="model-context">
         <span class="model-context-label">Showing parts for:</span>
         <span id="active-model-label" class="model-context-value">Voron 2.4</span>
         <a href="/voron" class="model-context-switch">Switch model →</a>
       </div>
     </div>
   </div>
+
+  <!-- CONTEXT CALLOUT -->
+  <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="callout callout-orange" style="margin:0">
+        <strong>Seal it properly and filter the fumes</strong>
+        An unsealed enclosure can't reach or hold printing temperatures for ABS — the chamber temp goal is 55–65°C. VHB foam tape around every panel is the minimum. If you're printing ABS in any occupied space, add the Nevermore or similar active filtration. The VOC output from ABS without filtration is significant.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" aria-label="Voron enclosure products">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Enclosure components</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{products.length} products</span>
+      </div>
+      <div class="grid-3">
+        {products.map(product => (
+          <div class="product-card" data-compatible={product.compatible}>
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              <div class="product-card-brand">{product.brand}</div>
+              <div class="product-card-name">{product.name}</div>
+              <div class="product-card-specs">
+                {product.specs.map(s => <span class="spec-chip">{s}</span>)}
+              </div>
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
+              <a href={product.vendorUrl} class="btn-buy" target="_blank" rel="noopener sponsored">
+                Buy at {product.vendor} →
+              </a>
+              <div class="product-card-footer" style="margin-top:12px">
+                <div>
+                  {product.price > 0 ? (
+                    <>
+                      <span class="product-card-price">${product.price}</span>
+                      <span style="font-size:10px;color:var(--g2);margin-left:4px">{product.priceNote ?? 'USD'}</span>
+                    </>
+                  ) : (
+                    <span style="font-size:11px;color:var(--g2);font-family:'JetBrains Mono',monospace">{product.priceNote}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+    </div>
+  </section>
+
+  <!-- PANEL MATERIAL COMPARISON TABLE -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Panel material comparison">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Panel material comparison</h2>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
+          <thead>
+            <tr style="background:var(--black)">
+              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.08)">Material</th>
+              {['Heat retention','Max temp','Weight','Cost','Local sourcing'].map(h => (
+                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name:'Polycarbonate (3mm)', heat:'✓✓ Excellent', temp:'110°C+', wt:'Medium', cost:'$$',  local:'Plastic suppliers' },
+              { name:'ACM (3mm)',           heat:'✓ Good',       temp:'80°C',   wt:'Light',  cost:'$$',  local:'Metal fabricators' },
+              { name:'Acrylic (3mm)',       heat:'OK',           temp:'60°C',   wt:'Medium', cost:'$',   local:'Hardware stores' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
+                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
+                <td style={`text-align:center;padding:10px 12px;color:${row.heat.startsWith('✓✓') ? 'var(--accent)' : row.heat.startsWith('✓') ? '#2E7D32' : '#E65100'};font-weight:600`}>{row.heat}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.temp}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.wt}</td>
+                <td style="text-align:center;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g1)">{row.cost}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g2);font-size:11px">{row.local}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">Acrylic panels can work but may warp near the bed at high chamber temps. Polycarbonate is strongly recommended for enclosures targeting 60°C+ chambers.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY MODS -->
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--border)" aria-label="Community enclosure mods">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Community mods</h2>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
+      </div>
+      <div class="grid-3">
+        {[
+          { name:'Nevermore Micro V5', creator:'Nevermore3D', desc:'Active carbon filter for ABS/ASA fumes. Print the housing, source the BOM parts, and run it via Klipper. The most important quality-of-life mod for anyone printing ABS in an occupied room.', href:'https://github.com/nevermore3d/Nevermore_Micro' },
+          { name:'Panel Clips & Latches', creator:'Community (Printables)', desc:'Printed snap-in clips and door latches for clean panel attachment without adhesive. Makes it easy to remove panels for maintenance. Search Printables for your specific Voron size.', href:'https://www.printables.com/model/search?q=voron+panel+clips' },
+          { name:'Exhaust Fan Mount', creator:'VoronDesign', desc:'Official exhaust fan mount for the Voron 2.4 rear. Takes the GDSTIME 60×20 blower and mounts it cleanly to the back panel. Print in ABS/ASA — it lives in the heated chamber.', href:'https://github.com/VoronDesign/Voron-2' },
+        ].map(mod => (
+          <a href={mod.href} target="_blank" rel="noopener">
+            <div class="product-card community" style="background:#fff">
+              <div class="product-card-body">
+                <span class="community-badge">Community · Free</span>
+                <div class="product-card-name" style="font-size:16px">{mod.name}</div>
+                <div style="font-size:11px;color:var(--g2);margin-bottom:8px;font-family:'JetBrains Mono',monospace">by {mod.creator}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin-bottom:12px">{mod.desc}</div>
+                <div class="product-card-footer" style="border-top:none;padding-top:0">
+                  <span class="btn-printables">View on GitHub →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "ItemList",
+      "name": "Enclosure Parts for Voron 2.4 and Trident 2026",
+      "url": "https://modernmakes.github.io/voron/enclosure",
+      "numberOfItems": 5,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Polycarbonate Panels" },
+        { "@type": "ListItem", "position": 2, "name": "ACM Composite Panels" },
+        { "@type": "ListItem", "position": 3, "name": "VHB Foam Tape Seal Kit" },
+        { "@type": "ListItem", "position": 4, "name": "GDSTIME 60x20 Blower" },
+        { "@type": "ListItem", "position": 5, "name": "Nevermore Micro V5" },
+      ]
+    }]
+  })}></script>
 </Base>
+
 <script>
   (function() {
     const STORAGE_KEY = 'voron-model';
     const params = new URLSearchParams(window.location.search);
     const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
     localStorage.setItem(STORAGE_KEY, model);
+
     const label = document.getElementById('active-model-label');
     if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
     document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
       const compatible = (el.dataset.compatible ?? '').split(',');
       el.style.display = compatible.includes(model) ? '' : 'none';
     });
-    const noMsg = document.getElementById('no-parts-msg');
-    if (noMsg) {
-      const hasVisible = Array.from(document.querySelectorAll<HTMLElement>('[data-compatible]')).some(
-        el => el.style.display !== 'none'
-      );
-      noMsg.style.display = hasVisible ? 'none' : '';
-    }
   })();
 </script>

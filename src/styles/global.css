@@ -156,6 +156,22 @@ img { display: block; max-width: 100%; height: auto; }
 .verdict-best { background: rgba(255,90,31,.12);  border: 1px solid rgba(255,90,31,.25);  color: var(--accent); }
 .verdict-skip { background: #FFF3E0; color: #E65100; }
 .verdict-upd  { background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.25); color: #3b82f6; }
+.verdict-comm { background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.25); color: #7c3aed; }
+
+/* ── VERDICT BADGE (top-of-card pill used on subsystem pages) ── */
+.verdict-badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; padding: 3px 8px;
+  border-radius: 4px; margin-bottom: 8px; font-family: var(--fm);
+}
+
+/* ── REVIEW LINK ── */
+.btn-review {
+  display: inline-block; margin-top: 8px; margin-left: 12px;
+  font-size: 12px; color: var(--g2); text-decoration: none; font-family: var(--fm);
+}
+.btn-review:hover { color: var(--accent); }
 
 /* ── PRODUCT CARDS (ecosystem pages) ── */
 .product-card {

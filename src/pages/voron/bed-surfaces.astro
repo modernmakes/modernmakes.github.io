@@ -1,0 +1,256 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+const currentPath = '/voron/bed-surfaces';
+
+const products = [
+  {
+    id: 'mrw-textured-pei',
+    name: 'Textured PEI Flex Plate',
+    brand: 'Mandala Rose Works',
+    price: 45,
+    priceNote: 'avg (250–350mm)',
+    badge: { label: 'TOP PICK', cls: 'verdict-best' },
+    specs: ['Textured PEI', '250 / 300 / 350mm', 'Spring steel'],
+    description: 'The most popular bed surface in the Voron community. MRW\'s textured PEI is consistently flat, holds firmly at temp, and releases ABS and ASA cleanly when cooled. Available in all standard Voron build sizes. The reference recommendation from the Voron Discord.',
+    compatible: '2.4,trident',
+    vendor: 'Mandala Rose Works',
+    vendorUrl: '#',
+  },
+  {
+    id: 'fabreeko-honeybadger',
+    name: 'Honeybadger Textured PEI',
+    brand: 'Fabreeko',
+    price: 40,
+    badge: { label: 'COMMUNITY FAV', cls: 'verdict-comm' },
+    specs: ['Textured PEI', 'High-temp rated', 'Spring steel'],
+    description: 'Fabreeko\'s house-brand textured PEI flex plate, widely praised for its aggressive texture that provides excellent first-layer adhesion without glue stick. Community consensus puts it on par with MRW at a slightly lower price point.',
+    compatible: '2.4,trident',
+    vendor: 'Fabreeko',
+    vendorUrl: '#',
+  },
+  {
+    id: 'whambam-textured',
+    name: 'Whambam Textured PEI',
+    brand: 'Whambam Systems',
+    price: 25,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Textured PEI', '250 / 300 / 350mm', 'Flex plate'],
+    description: 'A reliable mid-range option from a well-known brand. Slightly less flat than MRW or Fabreeko across the full plate area, but for most builds it\'s indistinguishable in practice. Good first plate if you\'re not sure which texture you prefer.',
+    compatible: '2.4,trident',
+    vendor: 'Whambam',
+    vendorUrl: '#',
+  },
+  {
+    id: 'energetic-textured',
+    name: 'Energetic Textured PEI',
+    brand: 'Energetic',
+    price: 20,
+    badge: { label: 'BUDGET PICK', cls: 'verdict-upd' },
+    specs: ['Textured PEI', 'Budget price', 'Spring steel'],
+    description: 'The budget entry point for textured PEI. Quality is variable across production batches — some builders report excellent results, others encounter flatness issues on larger plates. Good option for a spare or if you print mostly PLA/PETG.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+  {
+    id: 'buildtak-flexplate',
+    name: 'FlexPlate Smooth PEI',
+    brand: 'Buildtak',
+    price: 30,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['Smooth PEI', 'Gloss finish', 'Spring steel'],
+    description: 'Smooth PEI surface for prints that need a gloss bottom finish. Adhesion is excellent at ABS printing temps without bed prep. Parts release cleanly when the plate flexes after cooling. Keep a textured plate on hand for materials that stick too well to smooth surfaces.',
+    compatible: '2.4,trident',
+    vendor: 'West3D',
+    vendorUrl: '#',
+  },
+];
+---
+<Base title="Bed Surfaces for Voron 2.4 & Trident" description="Textured PEI flex plates and bed surfaces for Voron 2.4 and Trident builds. Mandala Rose Works, Fabreeko Honeybadger, Whambam, and more compared.">
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Bed Surfaces</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px">Voron · Bed Surfaces</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Bed Surfaces for Voron 2.4 &amp; Trident</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">Textured PEI flex plates have become the de facto standard for Voron builds. They hold ABS and ASA firmly at print temp and release cleanly when cooled — no hairspray, no glue stick. The main choice is whose texture you prefer.</p>
+    </div>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
+  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="model-context-bar" id="model-context">
+        <span class="model-context-label">Showing parts for:</span>
+        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
+        <a href="/voron" class="model-context-switch">Switch model →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEXT CALLOUT -->
+  <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="callout callout-orange" style="margin:0">
+        <strong>Flatness matters more than brand</strong>
+        A warped flex plate causes adhesion issues that no amount of mesh bed leveling can fully compensate. The community suppliers listed here are all reliably flat. Avoid no-name AliExpress plates for larger build sizes (300mm+) — flatness variance increases significantly with plate size and cheap suppliers don't QC for it.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" aria-label="Voron bed surface products">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Bed surfaces to consider</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{products.length} products</span>
+      </div>
+      <div class="grid-3">
+        {products.map(product => (
+          <div class="product-card" data-compatible={product.compatible}>
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              <div class="product-card-brand">{product.brand}</div>
+              <div class="product-card-name">{product.name}</div>
+              <div class="product-card-specs">
+                {product.specs.map(s => <span class="spec-chip">{s}</span>)}
+              </div>
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
+              <a href={product.vendorUrl} class="btn-buy" target="_blank" rel="noopener sponsored">
+                Buy at {product.vendor} →
+              </a>
+              <div class="product-card-footer" style="margin-top:12px">
+                <div>
+                  <span class="product-card-price">${product.price}</span>
+                  <span style="font-size:10px;color:var(--g2);margin-left:4px">{product.priceNote ?? 'USD'}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+    </div>
+  </section>
+
+  <!-- SIZE AVAILABILITY TABLE -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Size availability">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Size &amp; material availability</h2>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
+          <thead>
+            <tr style="background:var(--black)">
+              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.08)">Surface</th>
+              {['250mm','300mm','350mm','Textured','Smooth'].map(h => (
+                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name:'MRW Textured PEI',     s250:'✓', s300:'✓', s350:'✓', tex:'✓', smo:'✓' },
+              { name:'Fabreeko Honeybadger',  s250:'✓', s300:'✓', s350:'✓', tex:'✓', smo:'✗' },
+              { name:'Whambam Textured PEI',  s250:'✓', s300:'✓', s350:'✓', tex:'✓', smo:'✓' },
+              { name:'Energetic Textured PEI',s250:'✓', s300:'✓', s350:'✓', tex:'✓', smo:'✗' },
+              { name:'Buildtak FlexPlate',    s250:'✓', s300:'✓', s350:'✓', tex:'✗', smo:'✓' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
+                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
+                {[row.s250, row.s300, row.s350, row.tex, row.smo].map(val => (
+                  <td style={`text-align:center;padding:10px 12px;color:${val==='✓' ? '#2E7D32' : 'var(--accent-dk)'};font-weight:${val==='✓' ? '600' : '400'}`}>{val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">Size availability may change — verify with the vendor before ordering. Custom cut sizes are available from most suppliers.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY MODS -->
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--border)" aria-label="Community bed surface resources">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Community resources</h2>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Guides</span>
+      </div>
+      <div class="grid-3">
+        {[
+          { name:'Bed Leveling Macros', creator:'Klipper3D', desc:'The Klipper bed leveling documentation. Covers bed_mesh, screws_tilt_adjust, and z_tilt — the three calibration procedures every Voron builder should run at first start.', href:'https://www.klipper3d.org/Bed_Level.html' },
+          { name:'Nevermore Micro V5', creator:'Nevermore3D', desc:'Active carbon filtration for ABS/ASA fumes. Print the housing, add the BOM parts (~$20), and you have an enclosed chamber filter that recirculates air. Required if you print in a bedroom or shared space.', href:'https://github.com/nevermore3d/Nevermore_Micro' },
+          { name:'PEI Cleaning Guide', creator:'VoronDesign Docs', desc:'The official guide for maintaining textured PEI surfaces. IPA cleaning protocol, what causes adhesion loss, and when to replace vs. resurface your plate.', href:'https://docs.vorondesign.com/' },
+        ].map(mod => (
+          <a href={mod.href} target="_blank" rel="noopener">
+            <div class="product-card community" style="background:#fff">
+              <div class="product-card-body">
+                <span class="community-badge">Community · Free</span>
+                <div class="product-card-name" style="font-size:16px">{mod.name}</div>
+                <div style="font-size:11px;color:var(--g2);margin-bottom:8px;font-family:'JetBrains Mono',monospace">by {mod.creator}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin-bottom:12px">{mod.desc}</div>
+                <div class="product-card-footer" style="border-top:none;padding-top:0">
+                  <span class="btn-printables">View resource →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "ItemList",
+      "name": "Bed Surfaces for Voron 2.4 and Trident 2026",
+      "url": "https://modernmakes.github.io/voron/bed-surfaces",
+      "numberOfItems": 5,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "MRW Textured PEI Flex Plate" },
+        { "@type": "ListItem", "position": 2, "name": "Fabreeko Honeybadger" },
+        { "@type": "ListItem", "position": 3, "name": "Whambam Textured PEI" },
+        { "@type": "ListItem", "position": 4, "name": "Energetic Textured PEI" },
+        { "@type": "ListItem", "position": 5, "name": "Buildtak FlexPlate Smooth PEI" },
+      ]
+    }]
+  })}></script>
+</Base>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'voron-model';
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
+
+    const label = document.getElementById('active-model-label');
+    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
+    document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
+      const compatible = (el.dataset.compatible ?? '').split(',');
+      el.style.display = compatible.includes(model) ? '' : 'none';
+    });
+  })();
+</script>

@@ -1,0 +1,206 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+const currentPath = '/press';
+---
+<Base
+  title="Press & Advertising — Modern Makes"
+  description="Work with Modern Makes to reach serious 3D printing enthusiasts. Sponsored content, newsletter placements, product reviews, and display advertising."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- SECTION 1: HERO -->
+  <div style="background:var(--black);padding:72px 0 64px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <!-- Breadcrumb -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2)">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.45);font-family:'JetBrains Mono',monospace">Press &amp; Advertising</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:14px">Work With Us</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:60px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:20px;max-width:720px">
+        Reach the Builders Who Buy
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:17px;color:rgba(255,255,255,.4);line-height:1.75;max-width:560px">
+        Modern Makes covers the tools serious makers actually use. Our readers research before they buy — and they spend significantly on hardware, filament, and tooling.
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: AUDIENCE STATS -->
+  <section class="section" style="background:var(--bg);border-bottom:1px solid var(--border)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:800;color:var(--black);margin:0 0 36px;line-height:1">
+        Who Reads Modern Makes
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+
+        <div class="press-stat-card">
+          <div class="press-stat-label">AUDIENCE</div>
+          <div class="press-stat-value">Prosumer hobbyists</div>
+          <div class="press-stat-sub">Voron builders, multi-machine owners, high-spend enthusiasts</div>
+        </div>
+
+        <div class="press-stat-card">
+          <div class="press-stat-label">INTENT</div>
+          <div class="press-stat-value">Purchase-driven</div>
+          <div class="press-stat-sub">Readers who research components before buying — not casual browsers</div>
+        </div>
+
+        <div class="press-stat-card">
+          <div class="press-stat-label">KNOWLEDGE</div>
+          <div class="press-stat-value">Technically fluent</div>
+          <div class="press-stat-sub">Content that doesn't talk down to them. They know what a Rapido HF is.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: PARTNERSHIP OPTIONS -->
+  <section class="section" style="background:#fff;border-bottom:1px solid var(--border)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:800;color:var(--black);margin:0 0 36px;line-height:1">
+        How We Work Together
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+
+        <div class="press-option-card">
+          <div class="press-option-label">Sponsored Content</div>
+          <p class="press-option-body">
+            Dedicated articles, roundups, or buying guides featuring your product. Clearly disclosed. Written in our voice, not yours — that's why it lands.
+          </p>
+        </div>
+
+        <div class="press-option-card">
+          <div class="press-option-label">Newsletter Sponsorship</div>
+          <p class="press-option-body">
+            A dedicated placement in our weekly newsletter to opted-in subscribers who care about 3D printing hardware.
+          </p>
+        </div>
+
+        <div class="press-option-card">
+          <div class="press-option-label">Product Review</div>
+          <p class="press-option-body">
+            Send us hardware. We test it and publish our findings. No guaranteed positive coverage — that's the point. Readers trust us because we don't pull punches.
+          </p>
+        </div>
+
+        <div class="press-option-card">
+          <div class="press-option-label">Display Advertising</div>
+          <p class="press-option-body">
+            Contextual placements on high-intent pages: hotend guides, filament reviews, calibration tools. Ask about available slots.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: PRESS INQUIRIES -->
+  <section class="section" style="background:var(--bg);border-bottom:1px solid var(--border)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px;max-width:760px">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
+        Press &amp; Media
+      </h2>
+      <p style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8;max-width:620px">
+        Journalists and researchers covering 3D printing, maker culture, or the prosumer hardware market are welcome to reach out. We can provide context, data, community insight, or on-record commentary.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: CTA BAND -->
+  <section style="background:var(--accent);padding:72px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px;text-align:center">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;margin:0 0 16px;letter-spacing:-.3px">
+        Ready to talk?
+      </h2>
+      <p style="font-family:'Lora',serif;font-size:16px;color:rgba(255,255,255,.75);line-height:1.7;margin:0 auto 36px;max-width:440px">
+        Email us with your brief and we'll respond within 2 business days.
+      </p>
+      <a
+        href="mailto:modernmakesco@gmail.com"
+        style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;padding:18px 36px;border-radius:100px;text-decoration:none;transition:opacity 150ms ease"
+        onmouseover="this.style.opacity='0.9'"
+        onmouseout="this.style.opacity='1'"
+      >
+        modernmakesco@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Press & Advertising — Modern Makes",
+    "description": "Work with Modern Makes to reach serious 3D printing enthusiasts. Sponsored content, newsletter placements, product reviews, and display advertising.",
+    "url": "https://modernmakes.github.io/press"
+  })}></script>
+</Base>
+
+<style>
+  /* ── Audience stat cards ── */
+  .press-stat-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 28px 28px 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  }
+  .press-stat-label {
+    font-family: var(--fm);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--g2);
+    margin-bottom: 10px;
+  }
+  .press-stat-value {
+    font-family: var(--fd);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .press-stat-sub {
+    font-family: var(--fb);
+    font-size: 13px;
+    color: var(--g1);
+    line-height: 1.6;
+  }
+
+  /* ── Partnership option cards ── */
+  .press-option-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 28px 32px;
+    background: #fff;
+  }
+  .press-option-label {
+    font-family: var(--fd);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 14px;
+  }
+  .press-option-body {
+    font-family: var(--fb);
+    font-size: 14px;
+    color: var(--g1);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .press-stat-card, .press-option-card { grid-column: 1 / -1; }
+  }
+</style>

@@ -3,10 +3,75 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/voron/extruders';
+
+const products = [
+  {
+    id: 'orbiter-v2',
+    name: 'Orbiter v2.0',
+    brand: 'LDO',
+    price: 45,
+    badge: { label: 'TOP PICK', cls: 'verdict-best' },
+    specs: ['8.33:1 ratio', 'Direct drive', '~150g'],
+    description: 'The community default for Voron direct-drive builds. LDO quality with a proven 8.33:1 gear ratio handles flexible filaments reliably and pairs directly with the Stealthburner CW2 mount without modification.',
+    compatible: '2.4,trident',
+    vendor: 'West3D',
+    vendorUrl: '#',
+  },
+  {
+    id: 'galileo-2',
+    name: 'Galileo 2 Standalone',
+    brand: 'Annex Engineering',
+    price: 65,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['13.76:1 ratio', 'Direct drive', 'PA12/CF optimized'],
+    description: 'Exceptional gear ratio for engineering materials — PA12, CF-Nylon, and TPU behave far better with Galileo 2\'s 13.76:1 ratio. Preferred by builders running abrasive filaments at high speed.',
+    compatible: '2.4,trident',
+    vendor: 'Fabreeko',
+    vendorUrl: '#',
+  },
+  {
+    id: 'sherpa-mini',
+    name: 'Sherpa Mini',
+    brand: 'Annex Engineering',
+    price: 35,
+    badge: { label: 'POPULAR', cls: 'verdict-rec' },
+    specs: ['5:1 ratio', 'Direct drive', '~30g'],
+    description: 'The lightest direct-drive extruder in this category at ~30g. Popular for high-acceleration builds where toolhead mass matters. Less mechanical advantage than Orbiter but prints PLA/PETG and ABS without issue.',
+    compatible: '2.4,trident',
+    vendor: 'West3D',
+    vendorUrl: '#',
+  },
+  {
+    id: 'bondtech-bmg',
+    name: 'BMG Extruder (clone)',
+    brand: 'Bondtech / Clone',
+    price: 25,
+    badge: { label: 'BUDGET PICK', cls: 'verdict-upd' },
+    specs: ['3:1 ratio', 'Direct drive', 'Clone-friendly'],
+    description: 'The original dual-drive reference design. Clone versions at $25 are a functional budget entry — quality varies. Genuine Bondtech units are more consistent. Clockwork 2 integrates a BMG-derived mechanism natively.',
+    compatible: '2.4,trident',
+    vendor: 'Amazon',
+    vendorUrl: '#',
+  },
+  {
+    id: 'vz-hextrudort',
+    name: 'Vz-HextrudORT',
+    brand: 'VzBoT Community',
+    price: 55,
+    badge: { label: 'COMMUNITY FAV', cls: 'verdict-comm' },
+    specs: ['Direct drive', 'High flow focused', 'CNC aluminium'],
+    description: 'Designed for the VzBoT ecosystem but widely adopted on Voron builds chasing maximum volumetric flow. CNC-machined aluminium body and high-torque motor coupling make this the go-to for speed printing setups.',
+    compatible: '2.4,trident',
+    vendor: 'VzBoT Store',
+    vendorUrl: '#',
+  },
+];
 ---
-<Base title="Voron Extruders" description="The complete guide to extruders for Voron 2.4 and Trident builds.">
+<Base title="Best Extruders for Voron 2.4 & Trident" description="Every extruder worth running on a Voron 2.4 or Trident — Orbiter v2, Galileo 2, Sherpa Mini, and more. Gear ratios, weight, and community consensus.">
   <Nav slot="nav" currentPath={currentPath} />
-  <section style="background:var(--black);padding:60px 0 40px">
+
+  <!-- HEADER -->
+  <div style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
@@ -16,41 +81,177 @@ const currentPath = '/voron/extruders';
         <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Extruders</span>
       </div>
       <div class="eyebrow" style="margin-bottom:10px">Voron · Extruders</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron Extruders</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
-      <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
-      <p id="no-parts-msg" style="display:none;color:var(--g2);font-family:'JetBrains Mono',monospace;font-size:13px;padding:24px 0">No parts listed for this model yet — check back soon.</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Extruders for Voron 2.4 &amp; Trident</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:20px">The extruder controls everything from extrusion consistency to max print speed. Gear ratio, weight, and toolhead compatibility all factor in — and Voron's CW2 mount means your extruder choice is tied to your toolhead choice.</p>
     </div>
-  </section>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
   <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="model-context-bar">
+      <div class="model-context-bar" id="model-context">
         <span class="model-context-label">Showing parts for:</span>
         <span id="active-model-label" class="model-context-value">Voron 2.4</span>
         <a href="/voron" class="model-context-switch">Switch model →</a>
       </div>
     </div>
   </div>
+
+  <!-- CONTEXT CALLOUT -->
+  <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="callout callout-orange" style="margin:0">
+        <strong>What to know before you choose</strong>
+        Gear ratio determines how much motor torque is converted to filament grip — higher ratios (13:1+) are better for flexible and abrasive materials. Weight matters for high-acceleration builds: every gram on the toolhead affects input shaper performance. All extruders here require a compatible toolhead mount — Stealthburner uses the CW2 system.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="section" aria-label="Voron extruder products">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Extruders to consider</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g2)">{products.length} products</span>
+      </div>
+      <div class="grid-3">
+        {products.map(product => (
+          <div class="product-card" data-compatible={product.compatible}>
+            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+              <div style="text-align:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
+              </div>
+            </div>
+            <div class="product-card-body">
+              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              <div class="product-card-brand">{product.brand}</div>
+              <div class="product-card-name">{product.name}</div>
+              <div class="product-card-specs">
+                {product.specs.map(s => <span class="spec-chip">{s}</span>)}
+              </div>
+              <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
+              <a href={product.vendorUrl} class="btn-buy" target="_blank" rel="noopener sponsored">
+                Buy at {product.vendor} →
+              </a>
+              <div class="product-card-footer" style="margin-top:12px">
+                <div>
+                  <span class="product-card-price">${product.price}</span>
+                  <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+    </div>
+  </section>
+
+  <!-- GEAR RATIO REFERENCE TABLE -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Extruder comparison">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Gear ratio &amp; weight comparison</h2>
+      </div>
+      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
+          <thead>
+            <tr style="background:var(--black)">
+              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);border-right:1px solid rgba(255,255,255,.08)">Extruder</th>
+              {['Gear Ratio','Weight','PLA/PETG','ABS/ASA','PA12/CF','Flex (TPU)'].map(h => (
+                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { name:'Orbiter v2.0',      ratio:'8.33:1', weight:'~150g', pla:'✓', abs:'✓', pa:'✓', flex:'✓' },
+              { name:'Galileo 2',         ratio:'13.76:1',weight:'~175g', pla:'✓', abs:'✓', pa:'✓✓', flex:'✓✓' },
+              { name:'Sherpa Mini',       ratio:'5:1',    weight:'~30g',  pla:'✓', abs:'✓', pa:'OK', flex:'OK' },
+              { name:'BMG (clone)',        ratio:'3:1',    weight:'~170g', pla:'✓', abs:'✓', pa:'OK', flex:'Adapter' },
+              { name:'Vz-HextrudORT',     ratio:'High',   weight:'~120g', pla:'✓', abs:'✓', pa:'✓', flex:'OK' },
+            ].map((row, i) => (
+              <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
+                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.ratio}</td>
+                <td style="text-align:center;padding:10px 12px;color:var(--g2);font-family:'JetBrains Mono',monospace;font-size:11px">{row.weight}</td>
+                {[row.pla, row.abs, row.pa, row.flex].map(val => (
+                  <td style={`text-align:center;padding:10px 12px;color:${val.startsWith('✓') ? '#2E7D32' : val==='OK' ? '#E65100' : 'var(--g2)'};font-weight:${val.startsWith('✓') ? '600' : '400'}`}>{val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">✓✓ = excellent. ✓ = good. OK = functional with tuning. Adapter = requires printed adapter.</p>
+    </div>
+  </section>
+
+  <!-- COMMUNITY MODS -->
+  <section class="section" style="background:var(--bg);border-top:1px solid var(--border)" aria-label="Community extruder mods">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Community mods</h2>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
+      </div>
+      <div class="grid-3">
+        {[
+          { name:'Galileo 2 Extruder', creator:'Annex Engineering', desc:'Open-source 13.76:1 extruder. Full CAD, BOM, and print files on GitHub. Requires sourcing a handful of hardware parts.', href:'https://github.com/JaredC01/Galileo2' },
+          { name:'Sherpa Mini Extruder', creator:'Annex Engineering', desc:'Ultra-lightweight open-source extruder. Print files and full BOM on GitHub. Popular for minimizing toolhead inertia.', href:'https://github.com/Annex-Engineering/Sherpa_Mini-Extruder' },
+          { name:'CW2 Orbiter Mount', creator:'VoronDesign', desc:'Official Clockwork 2 body for the Orbiter v2.0 extruder. Drop-in for Stealthburner. Shipped with the Stealthburner print files.', href:'https://github.com/VoronDesign/Voron-Stealthburner' },
+        ].map(mod => (
+          <a href={mod.href} target="_blank" rel="noopener">
+            <div class="product-card community" style="background:#fff">
+              <div class="product-card-body">
+                <span class="community-badge">Community · Free</span>
+                <div class="product-card-name" style="font-size:16px">{mod.name}</div>
+                <div style="font-size:11px;color:var(--g2);margin-bottom:8px;font-family:'JetBrains Mono',monospace">by {mod.creator}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin-bottom:12px">{mod.desc}</div>
+                <div class="product-card-footer" style="border-top:none;padding-top:0">
+                  <span class="btn-printables">View on GitHub →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "ItemList",
+      "name": "Best Extruders for Voron 2.4 and Trident 2026",
+      "url": "https://modernmakes.github.io/voron/extruders",
+      "numberOfItems": 5,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Orbiter v2.0" },
+        { "@type": "ListItem", "position": 2, "name": "Galileo 2 Standalone" },
+        { "@type": "ListItem", "position": 3, "name": "Sherpa Mini" },
+        { "@type": "ListItem", "position": 4, "name": "BMG Extruder (clone)" },
+        { "@type": "ListItem", "position": 5, "name": "Vz-HextrudORT" },
+      ]
+    }]
+  })}></script>
 </Base>
+
 <script>
   (function() {
     const STORAGE_KEY = 'voron-model';
     const params = new URLSearchParams(window.location.search);
     const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
     localStorage.setItem(STORAGE_KEY, model);
+
     const label = document.getElementById('active-model-label');
     if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+
     document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
       const compatible = (el.dataset.compatible ?? '').split(',');
       el.style.display = compatible.includes(model) ? '' : 'none';
     });
-    const noMsg = document.getElementById('no-parts-msg');
-    if (noMsg) {
-      const hasVisible = Array.from(document.querySelectorAll<HTMLElement>('[data-compatible]')).some(
-        el => el.style.display !== 'none'
-      );
-      noMsg.style.display = hasVisible ? 'none' : '';
-    }
   })();
 </script>
