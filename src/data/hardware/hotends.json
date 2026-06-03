@@ -9,7 +9,7 @@
     ],
     "Fan Size": "3010",
     "Vendor 4 Name": "KB-3D",
-    "Max Flow (mm³/s)": 45,
+    "Max Flow (mm³/s)": 36,
     "Related 2 Name": "Rapido 2 HF",
     "Vendor 2 Affiliate": true,
     "Related 1 Name": "Rapido 2 Plus UHF",
@@ -391,7 +391,7 @@
       "RatRig V-Core 3"
     ],
     "Fan Size": "Not included",
-    "Max Flow (mm³/s)": 60,
+    "Max Flow (mm³/s)": 35,
     "Related 2 Name": "Chube Compact",
     "Related 1 Name": "Chube Conduction",
     "Description": "The Chube Air is a high-flow, air-cooled hotend from Luke's Lab designed around V6 nozzle compatibility and all M3 hardware. With a 500°C max temp ceiling and a 42mm meltzone, it targets prosumer builders who want extreme temperature headroom without proprietary nozzle lock-in.",
@@ -429,7 +429,7 @@
       "Voron Trident"
     ],
     "Fan Size": "Not included",
-    "Max Flow (mm³/s)": 45,
+    "Max Flow (mm³/s)": 50,
     "Related 2 Name": "Chube Conduction",
     "Related 1 Name": "Chube Air",
     "Description": "The Chube Compact is the smallest member of the Chube family, with a 22.23mm OD and 48.5mm length. It uses a 6x16mm heater cartridge (upgradeable to 6x20mm) and a 33mm meltzone. Designed for toolhead designs where space and mass are a constraint but 500°C headroom is still desired.",
