@@ -75,6 +75,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot />
   </main>
   <slot name="footer" />
+  <Fragment set:html={`<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>`} />
   <script>
     document.querySelectorAll('form[data-nl]').forEach(form => {
       form.addEventListener('submit', e => {

@@ -1,5 +1,6 @@
 ---
 // HomeNewsletterCTA — compact editorial callout strip between Latest and Ecosystems
+import BeehiivEmbed from '../BeehiivEmbed.astro';
 ---
 <section class="nlcta-section" aria-label="Newsletter signup">
   <div class="nlcta-container">
@@ -11,7 +12,7 @@
       </div>
       <div class="nlcta-form-wrap">
         <div class="nlcta-beehiiv-wrap">
-          <script is:inline async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="8068dc9b-7145-4bfc-a15b-e4c4d7791ce4"></script>
+          <BeehiivEmbed />
         </div>
         <p class="nlcta-note">Free, always. No spam. Unsubscribe any time.</p>
       </div>

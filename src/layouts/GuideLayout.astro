@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import BeehiivEmbed from '../components/BeehiivEmbed.astro';
 import '../styles/article.css';
 
 interface Props {
@@ -244,7 +245,7 @@ const breadcrumbItems = [
       <h3 class="newsletter-capture__heading">The Modern Makes Brief</h3>
       <p class="newsletter-capture__sub">Printers, hardware, and builds worth knowing about. Weekly.</p>
       <div class="newsletter-capture__form">
-        <script is:inline async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="8068dc9b-7145-4bfc-a15b-e4c4d7791ce4"></script>
+        <BeehiivEmbed />
       </div>
     </div>
   </div>
