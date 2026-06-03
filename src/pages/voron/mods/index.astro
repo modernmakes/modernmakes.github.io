@@ -38,9 +38,16 @@ const mods: Mod[] = [
   { id: 'mzf-frame-brace', name: "Rama's MZF Frame Brace", creator: 'Rama', category: 'QOL', models: ['2.4'], difficulty: 'Easy', sourceType: 'printables', sourceUrl: 'https://www.printables.com/model/39088', description: 'Diagonal frame braces that significantly reduce frame flex on larger Voron builds.' },
   // Electronics
   { id: 'canbus-umbilical', name: 'CAN Bus Umbilical', creator: 'Lanefu', category: 'Electronics', models: ['2.4', 'trident'], difficulty: 'Advanced', sourceType: 'github', sourceUrl: 'https://github.com/Lanefu/voron-canbus-umbilical', description: 'Replaces the wiring drag chain with a CAN bus cable and toolhead PCB. Cleaner wiring, easier maintenance.' },
+  // Toolhead additions
+  { id: 'a4t', name: 'A4T', creator: 'Armchair Heavy Industries', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/Armchair-Heavy-Industries/A4T', description: 'Another 4010 Toolhead — dual 4010 blower fans, improved part cooling over Xol, 2510 hotend cooling fan. Compatible with Xol-Carriage, Voron Tap, and CW2 carriage. Originally designed around Dragon HF with extender for UHF support.' },
+  { id: 'p-rexz', name: 'P-REXZ', creator: 'Armchair Heavy Industries', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Intermediate', sourceType: 'github', sourceUrl: 'https://github.com/Armchair-Heavy-Industries/P-REXZ', description: 'Compact toolhead from Armchair Heavy Industries. Designed for Voron printers with a focus on minimal footprint and compatibility with the Xol ecosystem.' },
+  { id: 'cn3d-y-cpap', name: 'CN3D Y-CPAP Toolhead', creator: 'CN3D', category: 'Toolhead', models: ['2.4', 'trident'], difficulty: 'Advanced', sourceType: 'printables', sourceUrl: 'https://www.printables.com/model/1693013-cn3d-y-cpap-toolhead-multi-material-ready-filament', description: 'Multi-material ready CPAP-cooled toolhead. Remote CPAP blower (Wonsmart WS9290) provides extreme part cooling airflow without adding fan mass to the toolhead carriage.' },
+  // Gantry additions
+  { id: 'monolith-gantry', name: 'Monolith Gantry', creator: 'Monolith3D', category: 'Gantry', models: ['2.4', 'trident'], difficulty: 'Advanced', sourceType: 'github', sourceUrl: 'https://github.com/Monolith3D/Monolith_Gantry', description: 'Performance-oriented, configurable gantry platform for Voron 2.4 and Trident. Shortest belt path possible with AWD compatibility. Double shear steppers and live shaft idlers for higher belt tension. 2WD kit shortens belt path 10–15cm vs stock; AWD halves effective belt length without adding belt length. Official kits manufactured by LDO.' },
+  { id: 'mercury-fmg', name: 'Mercury One.1 Full Metal Gantry', creator: 'TurtleCrawler', category: 'Gantry', models: ['Mercury One.1'], difficulty: 'Advanced', sourceType: 'github', sourceUrl: 'https://github.com/TurtleCrawler/Mercury-One.1---Full-Metal-Gantry', description: 'Full metal gantry conversion for the Mercury One.1 (ZeroG EVA-based printer). Replaces printed gantry components with CNC metal parts for improved rigidity and belt tension capability.' },
 ];
 
-const categories = ['All', 'Toolhead', 'Motion', 'Electronics', 'Bed', 'Filtration', 'Cosmetic', 'QOL'];
+const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed', 'Filtration', 'Cosmetic', 'QOL'];
 ---
 
 <Base title="Voron Community Mods — Modern Makes" description="The best user-designed upgrades for Voron 2.4 and Trident. Sourced from Printables, GitHub, and the Voron Discord.">
@@ -98,7 +105,7 @@ const categories = ['All', 'Toolhead', 'Motion', 'Electronics', 'Bed', 'Filtrati
             <div class="mod-card-footer">
               <div class="mod-pills">
                 {mod.models.map(m => (
-                  <span class="mod-model-pill">{m === '2.4' ? 'Voron 2.4' : 'Trident'}</span>
+                  <span class="mod-model-pill">{m === '2.4' ? 'Voron 2.4' : m === 'trident' ? 'Trident' : m}</span>
                 ))}
                 <span class={`mod-difficulty mod-difficulty--${mod.difficulty.toLowerCase()}`}>{mod.difficulty}</span>
               </div>

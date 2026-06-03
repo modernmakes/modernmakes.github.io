@@ -44,6 +44,42 @@ const tools = [
     category: 'Utility',
     icon: 'convert',
   },
+  {
+    name: 'Motor Simulator',
+    description: 'Simulate stepper motor performance at different voltages, currents, and speeds. Useful for validating AWD motor choices and 48V upgrades.',
+    href: 'https://tools.excit3d.shop/motor-sym/',
+    badge: 'AWD · 48V',
+    category: 'Calibration Tools',
+    icon: 'external',
+    external: true,
+  },
+  {
+    name: 'Pin Mapper',
+    description: 'Interactive Klipper pin mapping tool for common control boards. Find the correct pin names for your board without digging through documentation.',
+    href: 'https://tools.excit3d.shop/pin-mapper/',
+    badge: 'Klipper pins',
+    category: 'Reference Tools',
+    icon: 'external',
+    external: true,
+  },
+  {
+    name: 'PA Calculator',
+    description: 'Calculate starting Pressure Advance values based on your hotend, extruder, and print speed. Complements the Modern Makes PA tuner tool.',
+    href: 'https://tools.excit3d.shop/pa-calc/',
+    badge: 'Pressure Advance',
+    category: 'Calibration Tools',
+    icon: 'external',
+    external: true,
+  },
+  {
+    name: 'PA Tuner',
+    description: 'Step-by-step Pressure Advance tuning workflow from Excit3D. Pattern-based PA tuning with visual guidance.',
+    href: 'https://tools.excit3d.shop/pa-tuner/',
+    badge: 'Pressure Advance',
+    category: 'Calibration Tools',
+    icon: 'external',
+    external: true,
+  },
 ];
 
 const iconSvgs: Record<string, string> = {
@@ -52,6 +88,7 @@ const iconSvgs: Record<string, string> = {
   flow: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
   cost: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
   convert: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/></svg>`,
+  external: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
 };
 ---
 <Base
@@ -79,7 +116,12 @@ const iconSvgs: Record<string, string> = {
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div class="tools-idx-grid">
         {tools.map(tool => (
-          <a href={tool.href} class="tools-idx-card">
+          <a
+            href={tool.href}
+            class="tools-idx-card"
+            target={tool.external ? '_blank' : undefined}
+            rel={tool.external ? 'noopener noreferrer' : undefined}
+          >
             <div class="tools-idx-icon" set:html={iconSvgs[tool.icon] ?? iconSvgs.flow} />
             <div class="tools-idx-body">
               <span class="tools-idx-cat">{tool.category}</span>
@@ -87,8 +129,11 @@ const iconSvgs: Record<string, string> = {
               <div class="tools-idx-desc">{tool.description}</div>
             </div>
             <div class="tools-idx-footer">
-              <span class="tools-idx-badge">{tool.badge}</span>
-              <span class="tools-idx-arrow">→</span>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                <span class="tools-idx-badge">{tool.badge}</span>
+                {tool.external && <span class="tools-idx-ext-label">↗ External tool</span>}
+              </div>
+              <span class="tools-idx-arrow">{tool.external ? '↗' : '→'}</span>
             </div>
           </a>
         ))}
@@ -201,6 +246,16 @@ const iconSvgs: Record<string, string> = {
   transition: color .15s, transform .15s;
 }
 .tools-idx-card:hover .tools-idx-arrow { color: var(--accent); transform: translateX(3px); }
+.tools-idx-ext-label {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
 @media (max-width: 768px) {
   .tools-idx-grid { grid-template-columns: 1fr; }
 }
