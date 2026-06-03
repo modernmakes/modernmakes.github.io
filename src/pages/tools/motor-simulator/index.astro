@@ -5,10 +5,11 @@ import Footer from '../../../components/Footer.astro';
 const currentPath = '/tools';
 ---
 <Base
-  title="Stepper Motor Simulator — Voron Motor Comparison at 24V / 48V"
-  description="Compare stepper motor specifications for Voron and prosumer FDM printers. Understand 48V suitability, torque, and recommended use cases side-by-side."
+  title="Stepper Motor Simulator — Torque vs Speed for Voron & Prosumer Printers"
+  description="Physics-based stepper motor torque vs speed simulator for 3D printing. Compare 45 motors at 24V or 48V with real inductance and back-EMF calculations."
 >
   <Nav slot="nav" currentPath={currentPath} />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" slot="head"></script>
 
   <!-- HERO -->
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
@@ -20,12 +21,13 @@ const currentPath = '/tools';
         <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
         <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Motor Simulator</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Reference Tool</div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Physics Simulator</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Motor Simulator</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Compare common Voron stepper motors at 24V or 48V. Understand usable current, estimated torque, and suitability for XY, Z, and extruder roles.</p>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Real physics simulation — inductance, back-EMF, and coil impedance — to plot delivered torque across speeds. Compare up to 4 motors at 24V or 48V.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">AWD · 48V</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">LDO · Moons</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">45 motors</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">24V · 48V</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">LDO · Moons · OMC · Fysetc</span>
       </div>
     </div>
   </div>
@@ -34,45 +36,127 @@ const currentPath = '/tools';
   <div class="ms-wrap">
     <div class="ms-inner">
 
-      <!-- Controls -->
-      <div class="ms-controls">
-        <div>
-          <div class="ms-ctrl-label">Supply Voltage</div>
-          <div class="ms-volt-toggle">
-            <button class="ms-volt-btn active" id="btn24">24V</button>
-            <button class="ms-volt-btn" id="btn48">48V</button>
+      <!-- LEFT SIDEBAR -->
+      <aside class="ms-sidebar">
+
+        <div class="ms-section-label">Supply Voltage</div>
+        <div class="ms-volt-toggle">
+          <button type="button" class="ms-volt-btn active" id="btn24">24V</button>
+          <button type="button" class="ms-volt-btn" id="btn48">48V</button>
+        </div>
+
+        <div class="ms-divider"></div>
+        <div class="ms-section-label">Drive Settings</div>
+
+        <div class="ms-field">
+          <label class="ms-label" for="driveCurrent">Max Drive Current (A)</label>
+          <input class="ms-input" type="number" id="driveCurrent" value="2.0" min="0.1" max="6.0" step="0.1">
+        </div>
+        <div class="ms-field">
+          <label class="ms-label" for="pulleyTeeth">Pulley Size</label>
+          <select class="ms-input" id="pulleyTeeth">
+            <option value="16">16T (GT2)</option>
+            <option value="20" selected>20T (GT2)</option>
+            <option value="24">24T (GT2)</option>
+          </select>
+        </div>
+
+        <div class="ms-divider"></div>
+        <div class="ms-section-label">Load (Torque Required)</div>
+
+        <div class="ms-field">
+          <label class="ms-label" for="accelInput">Acceleration (mm/s²)</label>
+          <input class="ms-input" type="number" id="accelInput" value="10000" min="100" max="100000" step="500">
+        </div>
+        <div class="ms-field">
+          <label class="ms-label" for="massInput">Toolhead + Y Carriage Mass (g)</label>
+          <input class="ms-input" type="number" id="massInput" value="500" min="50" max="5000" step="10">
+        </div>
+
+        <div class="ms-computed-box">
+          <div class="ms-computed-label">Torque Required</div>
+          <div class="ms-computed-val" id="torqueRequiredDisplay">— N·cm</div>
+          <div class="ms-computed-note">Shown as red dashed line on chart</div>
+        </div>
+
+        <div class="ms-divider"></div>
+        <div class="ms-section-label">Select Motors (up to 4)</div>
+        <input class="ms-input" type="text" id="motorSearch" placeholder="Search brand or model…" autocomplete="off">
+        <div class="ms-motor-list" id="motorList"></div>
+        <div class="ms-max-msg" id="maxMsg">Max 4 motors selected</div>
+
+      </aside>
+
+      <!-- RIGHT MAIN -->
+      <main class="ms-main">
+
+        <!-- Chart -->
+        <div class="ms-chart-card">
+          <div class="ms-chart-header">
+            <div class="ms-chart-title">Torque vs Speed</div>
+            <div class="ms-chart-subtitle" id="chartSubtitle">24V · 20T pulley · 2.0A drive</div>
+          </div>
+          <div class="ms-canvas-wrap">
+            <canvas id="torqueChart"></canvas>
           </div>
         </div>
-        <div style="flex:1">
-          <div class="ms-ctrl-label">Select motors to compare (up to 3)</div>
-          <div class="ms-motor-checks" id="motorChecks">
-            <!-- rendered by JS -->
+
+        <!-- Max speed summary -->
+        <div class="ms-table-card">
+          <div class="ms-table-title">Performance Summary</div>
+          <div style="overflow-x:auto">
+            <table class="ms-table" id="summaryTable">
+              <thead>
+                <tr>
+                  <th>Motor</th>
+                  <th>Max usable speed</th>
+                  <th>Torque @ 100 mm/s</th>
+                  <th>Torque @ 300 mm/s</th>
+                  <th>48V suitability</th>
+                </tr>
+              </thead>
+              <tbody id="summaryBody">
+                <tr><td colspan="5" class="ms-empty">Select motors to see summary.</td></tr>
+              </tbody>
+            </table>
           </div>
-          <div class="ms-max-msg" id="maxMsg">Max 3 motors selected</div>
         </div>
-      </div>
 
-      <!-- Comparison table -->
-      <div class="ms-table-card">
-        <table class="ms-table" id="compTable">
-          <thead>
-            <tr id="compHead">
-              <th>Spec</th>
-              <!-- Motor columns injected by JS -->
-            </tr>
-          </thead>
-          <tbody id="compBody">
-            <tr><td class="ms-empty" colspan="4">Select motors above to compare.</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- Spec comparison (collapsible) -->
+        <details class="ms-specs-details">
+          <summary class="ms-specs-summary">Motor specs ▾</summary>
+          <div class="ms-table-card" style="margin-top:8px">
+            <div style="overflow-x:auto">
+              <table class="ms-table" id="specTable">
+                <thead>
+                  <tr>
+                    <th>Motor</th>
+                    <th>NEMA</th>
+                    <th>Body</th>
+                    <th>Step</th>
+                    <th>Rated A</th>
+                    <th>Hold N·cm</th>
+                    <th>L (mH)</th>
+                    <th>R (Ω)</th>
+                  </tr>
+                </thead>
+                <tbody id="specBody">
+                  <tr><td colspan="8" class="ms-empty">Select motors above.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
 
-      <!-- Note -->
-      <div class="ms-note">
-        <strong>Simplified model:</strong> Usable current = 80% of rated. Estimated torque uses a voltage-factor approximation (24V: ×0.85, 48V: ×1.05 of holding torque). Actual torque curves depend on driver settings, microstepping, back-EMF, and inductance. For full physics simulation with torque curves, see the
-        <a href="https://tools.excit3d.shop/motor-sym/" target="_blank" rel="noopener">Excit3D Motor Simulator ↗</a>
-      </div>
+        <!-- Attribution -->
+        <div class="ms-attribution">
+          Physics model based on work by <strong>daveidmx</strong> and the
+          <a href="https://github.com/MSzturc/the100" target="_blank" rel="noopener">MSzturc/the100 project</a>.
+          Motor database from
+          <a href="https://github.com/eddietheengineer/documentation" target="_blank" rel="noopener">eddietheengineer/documentation</a>.
+        </div>
 
+      </main>
     </div>
   </div>
 
@@ -84,7 +168,7 @@ const currentPath = '/tools';
       {
         "@type": "SoftwareApplication",
         "name": "Stepper Motor Simulator",
-        "description": "Compare Voron stepper motors at 24V or 48V with torque and current recommendations.",
+        "description": "Physics-based stepper motor torque vs speed simulator for 3D printing with 45-motor database.",
         "url": "https://modernmakes.github.io/tools/motor-simulator",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
@@ -104,199 +188,456 @@ const currentPath = '/tools';
 
 <style is:global>
 .ms-wrap { background: var(--bg); padding: 40px 0 64px; }
-.ms-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; gap: 20px; }
-
-.ms-controls {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-  padding: 24px; display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;
+.ms-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start;
 }
-.ms-ctrl-label { font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); margin-bottom: 10px; }
-.ms-volt-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+
+/* Sidebar */
+.ms-sidebar {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; position: sticky; top: 88px;
+  max-height: calc(100vh - 108px); overflow-y: auto;
+}
+.ms-sidebar::-webkit-scrollbar { width: 4px; }
+.ms-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.ms-section-label {
+  font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--g2); margin-bottom: 10px;
+}
+.ms-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+.ms-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.ms-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.ms-input {
+  font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 5px; padding: 7px 10px; width: 100%;
+  transition: border-color .12s; appearance: none;
+}
+.ms-input:focus { outline: none; border-color: var(--accent); }
+
+.ms-volt-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 0; }
 .ms-volt-btn {
-  font-family: var(--fu); font-size: 14px; font-weight: 700; padding: 8px 24px;
+  font-family: var(--fu); font-size: 14px; font-weight: 700; padding: 8px 0; flex: 1;
   background: var(--bg); color: var(--g2); border: none; cursor: pointer; transition: all .12s;
 }
 .ms-volt-btn.active { background: var(--black); color: #fff; }
 .ms-volt-btn:not(.active):hover { background: var(--border); }
 
-.ms-motor-checks { display: flex; flex-wrap: wrap; gap: 8px; }
-.ms-motor-check {
-  font-family: var(--fu); font-size: 12px; font-weight: 600; color: var(--black);
-  background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
-  padding: 6px 12px; cursor: pointer; transition: all .12s; user-select: none;
-  appearance: none; line-height: 1.4;
+.ms-computed-box {
+  background: rgba(255,90,31,.06); border: 1px solid rgba(255,90,31,.2);
+  border-radius: 6px; padding: 12px 14px; margin-bottom: 2px;
 }
-.ms-motor-check:hover:not(.selected) { border-color: var(--g1); }
-.ms-motor-check.selected { border-color: var(--accent); background: rgba(255,90,31,.06); color: var(--accent); }
+.ms-computed-label { font-family: var(--fm); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.ms-computed-val { font-family: var(--fd); font-size: 24px; font-weight: 800; color: var(--black); line-height: 1.1; }
+.ms-computed-note { font-family: var(--fm); font-size: 10px; color: var(--g2); margin-top: 4px; }
+
+.ms-motor-list {
+  display: flex; flex-direction: column; gap: 3px; margin-top: 8px;
+  max-height: 280px; overflow-y: auto;
+}
+.ms-motor-list::-webkit-scrollbar { width: 4px; }
+.ms-motor-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.ms-motor-item {
+  font-family: var(--fu); font-size: 11px; color: var(--black); text-align: left;
+  background: var(--bg); border: 1px solid transparent; border-radius: 4px;
+  padding: 6px 10px; cursor: pointer; transition: all .1s; line-height: 1.3; width: 100%;
+  appearance: none;
+}
+.ms-motor-item:hover { border-color: var(--border); background: var(--surface); }
+.ms-motor-item.selected { border-color: var(--accent); background: rgba(255,90,31,.07); color: var(--accent); }
+.ms-motor-item-brand { font-size: 9px; color: var(--g2); display: block; }
+.ms-motor-item.selected .ms-motor-item-brand { color: rgba(255,90,31,.6); }
+
 .ms-max-msg {
   font-family: var(--fm); font-size: 11px; color: var(--accent);
-  margin-top: 8px; opacity: 0; transition: opacity .2s; height: 16px;
+  margin-top: 8px; opacity: 0; transition: opacity .2s; min-height: 16px;
 }
 .ms-max-msg.visible { opacity: 1; }
 
-.ms-table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; overflow-x: auto; }
+/* Main area */
+.ms-main { display: flex; flex-direction: column; gap: 16px; }
+
+.ms-chart-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 24px;
+}
+.ms-chart-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+.ms-chart-title { font-family: var(--fd); font-size: 20px; font-weight: 800; color: var(--black); }
+.ms-chart-subtitle { font-family: var(--fm); font-size: 11px; color: var(--g2); }
+.ms-canvas-wrap { position: relative; height: 400px; background: #0d0d0d; border-radius: 6px; padding: 12px; }
+
+.ms-table-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px;
+}
+.ms-table-title { font-family: var(--fd); font-size: 18px; font-weight: 800; color: var(--black); margin-bottom: 14px; }
 .ms-table { width: 100%; border-collapse: collapse; }
-.ms-table thead { background: var(--bg); }
 .ms-table th {
-  font-family: var(--fu); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--g2); padding: 12px 18px; text-align: left; border-bottom: 2px solid var(--border);
+  font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--g2); padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap;
 }
-.ms-table th.ms-motor-col { color: var(--black); font-size: 13px; min-width: 200px; }
-.ms-table td { padding: 11px 18px; border-bottom: 1px solid var(--border); }
+.ms-table td { font-family: var(--fb); font-size: 13px; color: var(--g1); padding: 9px 12px; border-bottom: 1px solid var(--border); }
 .ms-table tbody tr:last-child td { border-bottom: none; }
-.ms-spec-name { font-family: var(--fu); font-size: 12px; font-weight: 700; color: var(--g1); text-transform: uppercase; letter-spacing: .04em; }
-.ms-spec-val { font-family: var(--fm); font-size: 14px; color: var(--black); }
-.ms-spec-val.accent { color: var(--accent); font-weight: 700; }
-.ms-badge-use { font-family: var(--fm); font-size: 10px; padding: 2px 7px; border-radius: 3px; }
-.ms-badge-xy       { background: rgba(255,90,31,.12); color: var(--accent); }
-.ms-badge-z        { background: rgba(96,165,250,.12); color: #60a5fa; }
-.ms-badge-ext      { background: rgba(74,222,128,.12); color: #22c55e; }
-.ms-badge-awd      { background: rgba(251,191,36,.12); color: #d97706; }
-.ms-badge-48v-ok   { background: rgba(74,222,128,.12); color: #22c55e; }
-.ms-badge-48v-good { background: rgba(255,90,31,.12); color: var(--accent); }
-.ms-badge-48v-not  { background: rgba(156,163,175,.12); color: #9ca3af; }
-.ms-empty { font-family: var(--fm); font-size: 13px; color: var(--g2); padding: 24px 18px; }
+.ms-table td:first-child { font-family: var(--fm); font-size: 12px; color: var(--black); }
+.ms-empty { font-family: var(--fm); font-size: 12px; color: var(--g2); padding: 16px 12px !important; }
+.ms-motor-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; flex-shrink: 0; }
+.ms-speed-val { font-family: var(--fd); font-size: 16px; font-weight: 800; }
+.ms-speed-val.capped { color: var(--g2); }
+.ms-48v-ok   { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(74,222,128,.12); color: #22c55e; }
+.ms-48v-good { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(255,90,31,.12); color: var(--accent); }
+.ms-48v-not  { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(156,163,175,.12); color: #9ca3af; }
 
-.ms-note {
-  font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.6;
-  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px;
+.ms-specs-details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 4px 0; }
+.ms-specs-summary {
+  font-family: var(--fu); font-size: 12px; font-weight: 700; color: var(--g2); text-transform: uppercase; letter-spacing: .07em;
+  padding: 14px 24px; cursor: pointer; list-style: none; user-select: none;
 }
-.ms-note a { color: var(--accent); text-decoration: none; }
-.ms-note a:hover { text-decoration: underline; }
+.ms-specs-summary::-webkit-details-marker { display: none; }
+.ms-specs-summary:hover { color: var(--black); }
+.ms-specs-details[open] .ms-specs-summary { border-bottom: 1px solid var(--border); }
 
-@media (max-width: 768px) { .ms-wrap { padding: 20px 0 48px; } .ms-inner { padding: 0 20px; } .ms-controls { flex-direction: column; } }
+.ms-attribution {
+  font-family: var(--fu); font-size: 11px; color: var(--g2); line-height: 1.6;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px;
+}
+.ms-attribution a { color: var(--accent); text-decoration: none; }
+.ms-attribution a:hover { text-decoration: underline; }
+
+@media (max-width: 960px)  { .ms-inner { grid-template-columns: 1fr; } .ms-sidebar { position: static; max-height: none; } }
+@media (max-width: 768px)  { .ms-wrap { padding: 20px 0 48px; } .ms-inner { padding: 0 20px; } .ms-canvas-wrap { height: 280px; } }
 </style>
 
 <script>
+declare const Chart: any;
+
 interface Motor {
-  id: string;
-  name: string;
-  brand: string;
-  size: string;
-  ratedA: number;
-  holdingNcm: number;
-  stepDeg: number;
-  frameLen: string;
-  use: string[];
-  suitable48v: string;
+  id: string; brand: string; model: string; nema: number; bodyMm: number;
+  stepDeg: number; ratedA: number; holdNcm: number; inductMH: number; resistOhm: number;
 }
 
 const MOTORS: Motor[] = [
-  { id: 'ldo-48-2504ac', name: 'LDO 42STH48-2504AC',  brand: 'LDO',   size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 48, stepDeg: 1.8, frameLen: '48mm',             use: ['XY', 'AWD'],      suitable48v: 'good' },
-  { id: 'ldo-40-2004ac', name: 'LDO 42STH40-2004AC',  brand: 'LDO',   size: 'NEMA17 40mm', ratedA: 2.0, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm',             use: ['XY', 'Z'],        suitable48v: 'good' },
-  { id: 'ldo-20-1004as', name: 'LDO 42STH20-1004AS',  brand: 'LDO',   size: 'NEMA17 20mm', ratedA: 1.0, holdingNcm: 14, stepDeg: 1.8, frameLen: '20mm (pancake)',   use: ['Z', 'Extruder'],  suitable48v: 'ok' },
-  { id: 'moons-p4100',   name: 'Moons MS17HA2P4100',  brand: 'Moons', size: 'NEMA17 40mm', ratedA: 2.1, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm',             use: ['XY', 'Z'],        suitable48v: 'good' },
-  { id: 'moons-p4200',   name: 'Moons MS17HA6P4200',  brand: 'Moons', size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 59, stepDeg: 1.8, frameLen: '48mm',             use: ['XY', 'AWD'],      suitable48v: 'good' },
-  { id: 'ldo-n14-1004a', name: 'LDO 36STH20-1004AHG', brand: 'LDO',   size: 'NEMA14 20mm', ratedA: 1.0, holdingNcm: 10, stepDeg: 1.8, frameLen: '20mm (pancake)',   use: ['Extruder'],       suitable48v: 'not-ideal' },
+  { id: 'fysetc-35hsh7402',    brand: 'FYSETC',  model: '35HSH7402-24B-400A',        nema: 14, bodyMm: 51,   stepDeg: 1.8, ratedA: 1.5,  holdNcm: 42,    inductMH: 5.5,  resistOhm: 2.8  },
+  { id: 'fysetc-42hsc1404',    brand: 'FYSETC',  model: '42HSC1404B-200N8',           nema: 14, bodyMm: 34.5, stepDeg: 1.8, ratedA: 0.4,  holdNcm: 32,    inductMH: 38,   resistOhm: 29   },
+  { id: 'fysetc-g36hsy4407',   brand: 'FYSETC',  model: 'G36HSY4407-6D-550',          nema: 14, bodyMm: 20.5, stepDeg: 1.8, ratedA: 0.5,  holdNcm: 12,    inductMH: 10,   resistOhm: 13   },
+  { id: 'fysetc-msm30010',     brand: 'FYSETC',  model: 'MSM-30010-R0005',            nema: 17, bodyMm: 20,   stepDeg: 1.8, ratedA: 1.0,  holdNcm: 14,    inductMH: 3.6,  resistOhm: 4.1  },
+  { id: 'fysetc-tb3544',       brand: 'FYSETC',  model: 'TB-3544',                    nema: 17, bodyMm: 39,   stepDeg: 1.8, ratedA: 1.5,  holdNcm: 50,    inductMH: 3.8,  resistOhm: 1.8  },
+  { id: 'hanpose-23hs4128',    brand: 'Hanpose', model: '23HS4128',                   nema: 23, bodyMm: 41,   stepDeg: 1.8, ratedA: 2.8,  holdNcm: 55,    inductMH: 1.4,  resistOhm: 0.7  },
+  { id: 'ldo-35sth48-1504',    brand: 'LDO',     model: '35STH48-1504AH(VRN)',        nema: 14, bodyMm: 52,   stepDeg: 1.8, ratedA: 1.5,  holdNcm: 37,    inductMH: 3.8,  resistOhm: 2.8  },
+  { id: 'ldo-35sth48-1684',    brand: 'LDO',     model: '35STH48-1684AHVRN',          nema: 14, bodyMm: 48,   stepDeg: 1.8, ratedA: 1.68, holdNcm: 40,    inductMH: 2.8,  resistOhm: 1.65 },
+  { id: 'ldo-36sth20-1004xh',  brand: 'LDO',     model: '36STH20-1004AHG(XH)',        nema: 14, bodyMm: 20,   stepDeg: 1.8, ratedA: 1.0,  holdNcm: 10,    inductMH: 1.6,  resistOhm: 2.1  },
+  { id: 'ldo-42sth20-1004',    brand: 'LDO',     model: '42STH20-1004ASH',            nema: 17, bodyMm: 20,   stepDeg: 1.8, ratedA: 1.0,  holdNcm: 18,    inductMH: 7,    resistOhm: 7.2  },
+  { id: 'ldo-42sth38-1684mac', brand: 'LDO',     model: '42STH38-1684MAC',            nema: 17, bodyMm: 40,   stepDeg: 0.9, ratedA: 1.68, holdNcm: 32,    inductMH: 3.2,  resistOhm: 1.65 },
+  { id: 'ldo-42sth40-1004mah', brand: 'LDO',     model: '42STH40-1004MAH(VRN)',       nema: 17, bodyMm: 40,   stepDeg: 0.9, ratedA: 1.0,  holdNcm: 39,    inductMH: 11.5, resistOhm: 4.1  },
+  { id: 'ldo-42sth40-1684ac',  brand: 'LDO',     model: '42STH40-1684AC',             nema: 17, bodyMm: 40,   stepDeg: 1.8, ratedA: 1.68, holdNcm: 36,    inductMH: 3.6,  resistOhm: 1.65 },
+  { id: 'ldo-42sth40-2004mah', brand: 'LDO',     model: '42STH40-2004MAH(VRN)',       nema: 17, bodyMm: 40,   stepDeg: 0.9, ratedA: 2.0,  holdNcm: 35,    inductMH: 2.8,  resistOhm: 1.1  },
+  { id: 'ldo-42sth47-1684ac',  brand: 'LDO',     model: '42STH47-1684AC',             nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 1.68, holdNcm: 49,    inductMH: 2.8,  resistOhm: 1.65 },
+  { id: 'ldo-42sth47-2504ac',  brand: 'LDO',     model: '42STH47-2504AC',             nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 2.5,  holdNcm: 53.9,  inductMH: 1.8,  resistOhm: 1.25 },
+  { id: 'ldo-42sth48-1684mah', brand: 'LDO',     model: '42STH48-1684MAH',            nema: 17, bodyMm: 48,   stepDeg: 0.9, ratedA: 1.68, holdNcm: 39,    inductMH: 2.8,  resistOhm: 1.65 },
+  { id: 'ldo-42sth48-2004ac',  brand: 'LDO',     model: '42STH48-2004AC(VRN)',        nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 2.0,  holdNcm: 59,    inductMH: 3,    resistOhm: 1.6  },
+  { id: 'ldo-42sth48-2004ah',  brand: 'LDO',     model: '42STH48-2004AH',             nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 2.0,  holdNcm: 59,    inductMH: 3,    resistOhm: 1.4  },
+  { id: 'ldo-42sth48-2004mah', brand: 'LDO',     model: '42STH48-2004MAH(VRN)',       nema: 17, bodyMm: 48,   stepDeg: 0.9, ratedA: 2.0,  holdNcm: 40,    inductMH: 2,    resistOhm: 1.45 },
+  { id: 'ldo-42sth48-2504ac',  brand: 'LDO',     model: '42STH48-2504AC',             nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 2.5,  holdNcm: 55,    inductMH: 1.5,  resistOhm: 1.2  },
+  { id: 'ldo-42sth48-2504ah',  brand: 'LDO',     model: '42STH48-2504AH',             nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 2.5,  holdNcm: 55,    inductMH: 1.5,  resistOhm: 1.2  },
+  { id: 'ldo-42sth60-2004ah',  brand: 'LDO',     model: '42STH60-2004AH',             nema: 17, bodyMm: 60,   stepDeg: 1.8, ratedA: 2.0,  holdNcm: 83,    inductMH: 3.3,  resistOhm: 2    },
+  { id: 'ldo-42sth60-2004mac', brand: 'LDO',     model: '42STH60-2004MAC(Railcore)',  nema: 17, bodyMm: 60,   stepDeg: 0.9, ratedA: 2.0,  holdNcm: 59,    inductMH: 3,    resistOhm: 1.4  },
+  { id: 'ldo-42sth60-2004mah', brand: 'LDO',     model: '42STH60-2004MAH',            nema: 17, bodyMm: 60,   stepDeg: 0.9, ratedA: 2.0,  holdNcm: 58.8,  inductMH: 3,    resistOhm: 1.4  },
+  { id: 'ldo-57sth41-2804mac', brand: 'LDO',     model: '57STH41-2804MAC(HEV)',       nema: 23, bodyMm: 41,   stepDeg: 0.9, ratedA: 2.8,  holdNcm: 60,    inductMH: 1.4,  resistOhm: 0.7  },
+  { id: 'ldo-57sth56-2804mac', brand: 'LDO',     model: '57STH56-2804MAC(RC)',        nema: 23, bodyMm: 56,   stepDeg: 0.9, ratedA: 2.8,  holdNcm: 120,   inductMH: 3.4,  resistOhm: 1.1  },
+  { id: 'moons-ms14ha1p4150',  brand: 'Moons',   model: 'MS14HA1P4150',               nema: 14, bodyMm: 27,   stepDeg: 0.9, ratedA: 1.5,  holdNcm: 11,    inductMH: 1.8,  resistOhm: 1.55 },
+  { id: 'moons-ms14ha3p4150',  brand: 'Moons',   model: 'MS14HA3P4150',               nema: 14, bodyMm: 36,   stepDeg: 0.9, ratedA: 1.5,  holdNcm: 18,    inductMH: 2.2,  resistOhm: 1.61 },
+  { id: 'moons-ms17ha2p4150',  brand: 'Moons',   model: 'MS17HA2P4150',               nema: 17, bodyMm: 39.8, stepDeg: 0.9, ratedA: 1.5,  holdNcm: 40,    inductMH: 5.4,  resistOhm: 1.98 },
+  { id: 'moons-ms17ha2p4200',  brand: 'Moons',   model: 'MS17HA2P4200',               nema: 17, bodyMm: 40,   stepDeg: 0.9, ratedA: 2.0,  holdNcm: 39,    inductMH: 2.8,  resistOhm: 1.05 },
+  { id: 'moons-ms17hdbp4100',  brand: 'Moons',   model: 'MS17HDBP4100',               nema: 17, bodyMm: 63,   stepDeg: 1.8, ratedA: 1.0,  holdNcm: 82,    inductMH: 14.6, resistOhm: 5.6  },
+  { id: 'motech-mt1704hsm168', brand: 'Motech',  model: 'MT-1704HSM168RE',            nema: 17, bodyMm: 48,   stepDeg: 0.9, ratedA: 1.68, holdNcm: 43.12, inductMH: 2.8,  resistOhm: 1.65 },
+  { id: 'nanotec-st4209l1704', brand: 'Nanotec', model: 'ST4209L1704-A',              nema: 17, bodyMm: 48,   stepDeg: 0.9, ratedA: 1.68, holdNcm: 44,    inductMH: 5,    resistOhm: 1.8  },
+  { id: 'omc-14hs10-0404s',    brand: 'OMC',     model: '14HS10-0404S',               nema: 14, bodyMm: 26,   stepDeg: 1.8, ratedA: 0.4,  holdNcm: 14,    inductMH: 30,   resistOhm: 30   },
+  { id: 'omc-14hs13-0804s',    brand: 'OMC',     model: '14HS13-0804S',               nema: 14, bodyMm: 34,   stepDeg: 1.8, ratedA: 0.8,  holdNcm: 18,    inductMH: 10,   resistOhm: 6.8  },
+  { id: 'omc-14hs17-0504s',    brand: 'OMC',     model: '14HS17-0504S',               nema: 14, bodyMm: 42,   stepDeg: 1.8, ratedA: 0.5,  holdNcm: 23,    inductMH: 26,   resistOhm: 15   },
+  { id: 'omc-14hs20-1504s',    brand: 'OMC',     model: '14HS20-1504S',               nema: 14, bodyMm: 52,   stepDeg: 1.8, ratedA: 1.5,  holdNcm: 40,    inductMH: 3.8,  resistOhm: 2.8  },
+  { id: 'omc-17hm19-1684s',    brand: 'OMC',     model: '17HM19-1684S',               nema: 17, bodyMm: 48,   stepDeg: 0.9, ratedA: 1.68, holdNcm: 44,    inductMH: 4.1,  resistOhm: 1.65 },
+  { id: 'omc-17hm19-2004s',    brand: 'OMC',     model: '17HM19-2004S',               nema: 17, bodyMm: 48,   stepDeg: 0.9, ratedA: 2.0,  holdNcm: 46,    inductMH: 4,    resistOhm: 1.45 },
+  { id: 'omc-17hs08-1004s',    brand: 'OMC',     model: '17HS08-1004S',               nema: 17, bodyMm: 20,   stepDeg: 1.8, ratedA: 1.0,  holdNcm: 16,    inductMH: 3.7,  resistOhm: 4.5  },
+  { id: 'omc-17hs13-0404s1',   brand: 'OMC',     model: '17HS13-0404S1',              nema: 17, bodyMm: 34,   stepDeg: 1.8, ratedA: 0.4,  holdNcm: 26,    inductMH: 37,   resistOhm: 30   },
+  { id: 'omc-17hs16-2004s1',   brand: 'OMC',     model: '17HS16-2004S1',              nema: 17, bodyMm: 40,   stepDeg: 1.8, ratedA: 2.0,  holdNcm: 45,    inductMH: 2.6,  resistOhm: 1.1  },
+  { id: 'omc-17hs19-2004s1',   brand: 'OMC',     model: '17HS19-2004S1',              nema: 17, bodyMm: 48,   stepDeg: 1.8, ratedA: 2.0,  holdNcm: 59,    inductMH: 3,    resistOhm: 1.4  },
+  { id: 'omc-17hs24-2104s',    brand: 'OMC',     model: '17HS24-2104S',               nema: 17, bodyMm: 60,   stepDeg: 1.8, ratedA: 2.1,  holdNcm: 65,    inductMH: 3,    resistOhm: 1.6  },
 ];
 
+const COLORS = ['#FF5A1F', '#3B82F6', '#10B981', '#8B5CF6'];
+const SPEED_MAX = 1200;
+const SPEED_STEP = 20;
+const SPEED_LABELS = Array.from({ length: SPEED_MAX / SPEED_STEP + 1 }, (_, i) => i * SPEED_STEP);
+
+// ── PHYSICS ──────────────────────────────────────────────────────────────────
+function torqueAt(motor: Motor, speedMms: number, voltage: number, driveCurrent: number, pulleyTeeth: number): number {
+  const stepsPerRev = 360 / motor.stepDeg;
+  const mmPerStep   = (pulleyTeeth * 2) / stepsPerRev; // GT2 2mm pitch
+  const stepsPerSec = speedMms / mmPerStep;
+  const fCoil       = stepsPerSec / 4; // electrical cycles/s for bipolar stepper
+  const inductH     = motor.inductMH / 1000;
+  const xCoil       = 2 * Math.PI * fCoil * inductH;
+  const zCoil       = Math.sqrt(motor.resistOhm ** 2 + xCoil ** 2);
+  const vGen        = driveCurrent * zCoil;
+  const vAvail      = Math.max(0, voltage - vGen);
+  const iAvail      = vAvail / motor.resistOhm;
+  const iActual     = Math.min(iAvail, driveCurrent);
+  return Math.max(0, motor.holdNcm * (iActual / motor.ratedA));
+}
+
+function computeCurve(motor: Motor, voltage: number, driveCurrent: number, pulleyTeeth: number): number[] {
+  return SPEED_LABELS.map(s =>
+    s === 0
+      ? motor.holdNcm * Math.min(driveCurrent, voltage / motor.resistOhm) / motor.ratedA
+      : torqueAt(motor, s, voltage, driveCurrent, pulleyTeeth)
+  );
+}
+
+function torqueRequired(massG: number, accelMms2: number, pulleyTeeth: number): number {
+  const forceN        = (massG / 1000) * (accelMms2 / 1000);
+  const pitchRadiusCm = (pulleyTeeth * 2) / (2 * Math.PI) / 10; // mm → cm
+  return forceN * pitchRadiusCm;
+}
+
+function maxUsableSpeed(curve: number[], reqNcm: number): number | null {
+  for (let i = 1; i < curve.length; i++) {
+    if (curve[i] < reqNcm && curve[i - 1] >= reqNcm) {
+      const t = (reqNcm - curve[i - 1]) / (curve[i] - curve[i - 1]);
+      return (i - 1 + t) * SPEED_STEP;
+    }
+  }
+  return curve[curve.length - 1] >= reqNcm ? null : 0; // null = ">1200"
+}
+
+// ── CHART ────────────────────────────────────────────────────────────────────
+function buildChartConfig(datasets: any[]) {
+  return {
+    type: 'line',
+    data: { labels: SPEED_LABELS, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 200 },
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: {
+          title: { display: true, text: 'Speed (mm/s)', color: '#666', font: { family: "'JetBrains Mono', monospace", size: 11 } },
+          grid: { color: '#222' },
+          ticks: { color: '#555', font: { family: "'JetBrains Mono', monospace", size: 10 }, maxTicksLimit: 13 },
+        },
+        y: {
+          title: { display: true, text: 'Torque (N·cm)', color: '#666', font: { family: "'JetBrains Mono', monospace", size: 11 } },
+          min: 0,
+          grid: { color: '#222' },
+          ticks: { color: '#555', font: { family: "'JetBrains Mono', monospace", size: 10 } },
+        },
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: '#888',
+            font: { family: "'JetBrains Mono', monospace", size: 10 },
+            usePointStyle: true,
+            pointStyleWidth: 12,
+            boxHeight: 2,
+            padding: 16,
+          },
+        },
+        tooltip: {
+          backgroundColor: '#1a1a1a',
+          borderColor: '#333',
+          borderWidth: 1,
+          titleColor: '#ccc',
+          bodyColor: '#999',
+          titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+          bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
+          callbacks: {
+            title: (items: any[]) => `${items[0].label} mm/s`,
+            label: (item: any) => ` ${item.dataset.label}: ${Number(item.raw).toFixed(1)} N·cm`,
+          },
+        },
+      },
+    },
+  };
+}
+
+// ── MAIN ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  let voltage = 24;
-  const selected = new Set<string>(['ldo-48-2504ac', 'moons-p4200']);
+  let voltage     = 24;
+  const selected  = new Set<string>(['ldo-42sth48-2504ac', 'omc-17hs19-2004s1']);
+  let chart: any  = null;
   let maxMsgTimer: ReturnType<typeof setTimeout> | null = null;
 
-  function usableA(motor: Motor): number { return motor.ratedA * 0.80; }
-  function estimatedTorque(motor: Motor, v: number): number {
-    return motor.holdingNcm * (v === 48 ? 1.05 : 0.85);
-  }
+  const canvasEl = document.getElementById('torqueChart') as HTMLCanvasElement;
 
-  function useBadge(role: string): string {
-    const map: Record<string, string> = {
-      XY:       '<span class="ms-badge-use ms-badge-xy">XY</span>',
-      Z:        '<span class="ms-badge-use ms-badge-z">Z</span>',
-      Extruder: '<span class="ms-badge-use ms-badge-ext">Extruder</span>',
-      AWD:      '<span class="ms-badge-use ms-badge-awd">AWD</span>',
-    };
-    return map[role] ?? `<span class="ms-badge-use">${role}</span>`;
-  }
-  function suitBadge(s: string): string {
-    if (s === 'good') return '<span class="ms-badge-use ms-badge-48v-good">Great at 48V</span>';
-    if (s === 'ok')   return '<span class="ms-badge-use ms-badge-48v-ok">OK at 48V</span>';
-    return '<span class="ms-badge-use ms-badge-48v-not">Not ideal at 48V</span>';
+  function getInputs() {
+    const driveA    = parseFloat((document.getElementById('driveCurrent') as HTMLInputElement).value) || 2.0;
+    const pulley    = parseInt((document.getElementById('pulleyTeeth') as HTMLSelectElement).value) || 20;
+    const accel     = parseFloat((document.getElementById('accelInput') as HTMLInputElement).value) || 10000;
+    const mass      = parseFloat((document.getElementById('massInput') as HTMLInputElement).value) || 500;
+    return { driveA, pulley, accel, mass };
   }
 
   function showMaxMsg() {
-    const el = document.getElementById('maxMsg');
-    if (!el) return;
+    const el = document.getElementById('maxMsg') as HTMLElement;
     el.classList.add('visible');
     if (maxMsgTimer) clearTimeout(maxMsgTimer);
-    maxMsgTimer = setTimeout(() => el.classList.remove('visible'), 2000);
+    maxMsgTimer = setTimeout(() => el.classList.remove('visible'), 2200);
   }
 
-  function renderTable() {
-    const motors = MOTORS.filter(m => selected.has(m.id));
-    const head = document.getElementById('compHead') as HTMLTableRowElement;
-    const body = document.getElementById('compBody') as HTMLTableSectionElement;
-
-    if (!motors.length) {
-      head.innerHTML = '<th>Spec</th>';
-      body.innerHTML = '<tr><td class="ms-empty" colspan="2">Select motors above to compare.</td></tr>';
-      return;
-    }
-
-    head.innerHTML = '<th>Spec</th>' + motors.map(m =>
-      `<th class="ms-motor-col">${m.name}<br><span style="font-size:10px;color:var(--g2);font-family:var(--fm)">${m.brand} · ${m.size}</span></th>`
+  function renderMotorList() {
+    const search    = ((document.getElementById('motorSearch') as HTMLInputElement).value || '').toLowerCase();
+    const container = document.getElementById('motorList') as HTMLElement;
+    const filtered  = MOTORS.filter(m =>
+      !search || m.brand.toLowerCase().includes(search) || m.model.toLowerCase().includes(search)
+    );
+    container.innerHTML = filtered.map(m =>
+      `<button type="button" class="ms-motor-item${selected.has(m.id) ? ' selected' : ''}" data-id="${m.id}">
+        <span class="ms-motor-item-brand">${m.brand} · NEMA${m.nema} · ${m.bodyMm}mm</span>
+        ${m.model}
+      </button>`
     ).join('');
-
-    const specs: Array<{ label: string; fn: (m: Motor) => string }> = [
-      { label: 'Rated Current',        fn: m => `${m.ratedA}A` },
-      { label: 'Usable Current (80%)', fn: m => `<span class="ms-spec-val accent">${usableA(m).toFixed(2)}A</span>` },
-      { label: 'Holding Torque',       fn: m => `${m.holdingNcm} N·cm` },
-      { label: `Est. Torque @ ${voltage}V`, fn: m => `<span class="ms-spec-val accent">${estimatedTorque(m, voltage).toFixed(0)} N·cm</span>` },
-      { label: 'Step Angle',           fn: m => `${m.stepDeg}°` },
-      { label: 'Frame',                fn: m => `${m.size} · ${m.frameLen}` },
-      { label: 'Recommended Use',      fn: m => m.use.map(useBadge).join(' ') },
-      { label: '48V Suitability',      fn: m => suitBadge(m.suitable48v) },
-    ];
-
-    body.innerHTML = specs.map(s =>
-      `<tr><td><div class="ms-spec-name">${s.label}</div></td>` +
-      motors.map(m => `<td>${s.fn(m)}</td>`).join('') +
-      `</tr>`
-    ).join('');
-  }
-
-  function renderButtons() {
-    const container = document.getElementById('motorChecks') as HTMLElement;
-    // Render plain <button> elements — no wrapped <input>, which caused double-fire on click
-    container.innerHTML = MOTORS.map(m =>
-      `<button type="button" class="ms-motor-check${selected.has(m.id) ? ' selected' : ''}" data-id="${m.id}">${m.name}</button>`
-    ).join('');
-
-    container.querySelectorAll<HTMLButtonElement>('.ms-motor-check').forEach(btn => {
+    container.querySelectorAll<HTMLButtonElement>('.ms-motor-item').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.id ?? '';
         if (selected.has(id)) {
           selected.delete(id);
-          btn.classList.remove('selected');
-        } else if (selected.size < 3) {
+        } else if (selected.size < 4) {
           selected.add(id);
-          btn.classList.add('selected');
         } else {
           showMaxMsg();
+          return;
         }
-        renderTable();
+        renderAll();
       });
     });
   }
 
-  // Voltage toggle
-  const btn24 = document.getElementById('btn24') as HTMLButtonElement;
-  const btn48 = document.getElementById('btn48') as HTMLButtonElement;
-  btn24.addEventListener('click', () => {
-    voltage = 24;
-    btn24.classList.add('active');
-    btn48.classList.remove('active');
-    renderTable();
-  });
-  btn48.addEventListener('click', () => {
-    voltage = 48;
-    btn48.classList.add('active');
-    btn24.classList.remove('active');
-    renderTable();
-  });
+  function buildDatasets(driveA: number, pulley: number, reqNcm: number) {
+    const selectedMotors = MOTORS.filter(m => selected.has(m.id));
+    const datasets: any[] = selectedMotors.map((motor, i) => ({
+      label: `${motor.brand} ${motor.model}`,
+      data: computeCurve(motor, voltage, driveA, pulley),
+      borderColor: COLORS[i],
+      backgroundColor: 'transparent',
+      borderWidth: 2.5,
+      pointRadius: 0,
+      tension: 0.35,
+    }));
+    // Torque required line
+    datasets.push({
+      label: `Torque required (${reqNcm.toFixed(2)} N·cm)`,
+      data: SPEED_LABELS.map(() => reqNcm),
+      borderColor: '#EF4444',
+      borderDash: [6, 4],
+      borderWidth: 1.5,
+      pointRadius: 0,
+      backgroundColor: 'transparent',
+      tension: 0,
+    });
+    return { datasets, selectedMotors };
+  }
 
-  renderButtons();
-  renderTable();
+  function updateChart(driveA: number, pulley: number, reqNcm: number) {
+    const { datasets } = buildDatasets(driveA, pulley, reqNcm);
+    const allTorques   = datasets.flatMap(ds => ds.data as number[]).filter(v => isFinite(v));
+    const yMax         = Math.ceil(Math.max(...allTorques, reqNcm, 10) / 5) * 5 + 5;
+
+    if (!chart) {
+      const cfg = buildChartConfig(datasets);
+      (cfg.options as any).scales.y.max = yMax;
+      chart = new Chart(canvasEl, cfg);
+    } else {
+      chart.data.datasets   = datasets;
+      chart.options.scales.y.max = yMax;
+      chart.update('none');
+    }
+  }
+
+  function updateSummary(driveA: number, pulley: number, reqNcm: number) {
+    const selectedMotors = MOTORS.filter(m => selected.has(m.id));
+    const tbody          = document.getElementById('summaryBody') as HTMLTableSectionElement;
+    if (!selectedMotors.length) {
+      tbody.innerHTML = '<tr><td colspan="5" class="ms-empty">Select motors to see summary.</td></tr>';
+      return;
+    }
+    const suit48 = (m: Motor) => {
+      const ratio = 48 / (m.ratedA * m.resistOhm);
+      if (ratio > 4) return '<span class="ms-48v-good">Great</span>';
+      if (ratio > 2) return '<span class="ms-48v-ok">OK</span>';
+      return '<span class="ms-48v-not">Not ideal</span>';
+    };
+    tbody.innerHTML = selectedMotors.map((m, i) => {
+      const curve   = computeCurve(m, voltage, driveA, pulley);
+      const maxSpd  = maxUsableSpeed(curve, reqNcm);
+      const t100idx = Math.round(100 / SPEED_STEP);
+      const t300idx = Math.round(300 / SPEED_STEP);
+      const spdLabel = maxSpd === null ? '<span class="ms-speed-val capped">&gt;1200 mm/s</span>' :
+                       maxSpd === 0    ? '<span class="ms-speed-val capped">— (below req.)</span>' :
+                       `<span class="ms-speed-val" style="color:${COLORS[i]}">${maxSpd.toFixed(0)} mm/s</span>`;
+      return `<tr>
+        <td><span class="ms-motor-dot" style="background:${COLORS[i]}"></span>${m.brand} ${m.model}</td>
+        <td>${spdLabel}</td>
+        <td style="font-family:var(--fm);font-size:12px">${(curve[t100idx] ?? 0).toFixed(1)} N·cm</td>
+        <td style="font-family:var(--fm);font-size:12px">${(curve[t300idx] ?? 0).toFixed(1)} N·cm</td>
+        <td>${suit48(m)}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function updateSpecTable() {
+    const selectedMotors = MOTORS.filter(m => selected.has(m.id));
+    const tbody = document.getElementById('specBody') as HTMLTableSectionElement;
+    if (!selectedMotors.length) {
+      tbody.innerHTML = '<tr><td colspan="8" class="ms-empty">Select motors above.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = selectedMotors.map((m, i) =>
+      `<tr>
+        <td><span class="ms-motor-dot" style="background:${COLORS[i]}"></span>${m.brand} ${m.model}</td>
+        <td>NEMA ${m.nema}</td>
+        <td>${m.bodyMm}mm</td>
+        <td>${m.stepDeg}°</td>
+        <td>${m.ratedA}A</td>
+        <td>${m.holdNcm}</td>
+        <td>${m.inductMH}</td>
+        <td>${m.resistOhm}</td>
+      </tr>`
+    ).join('');
+  }
+
+  function renderAll() {
+    const { driveA, pulley, accel, mass } = getInputs();
+    const reqNcm = torqueRequired(mass, accel, pulley);
+
+    // Update computed display
+    (document.getElementById('torqueRequiredDisplay') as HTMLElement).textContent = `${reqNcm.toFixed(2)} N·cm`;
+    (document.getElementById('chartSubtitle') as HTMLElement).textContent =
+      `${voltage}V · ${pulley}T pulley · ${driveA}A drive`;
+
+    updateChart(driveA, pulley, reqNcm);
+    updateSummary(driveA, pulley, reqNcm);
+    updateSpecTable();
+    renderMotorList();
+  }
+
+  // Wire inputs
+  document.getElementById('btn24')?.addEventListener('click', () => {
+    voltage = 24;
+    document.getElementById('btn24')?.classList.add('active');
+    document.getElementById('btn48')?.classList.remove('active');
+    renderAll();
+  });
+  document.getElementById('btn48')?.addEventListener('click', () => {
+    voltage = 48;
+    document.getElementById('btn48')?.classList.add('active');
+    document.getElementById('btn24')?.classList.remove('active');
+    renderAll();
+  });
+  ['driveCurrent', 'pulleyTeeth', 'accelInput', 'massInput'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', renderAll);
+  });
+  document.getElementById('motorSearch')?.addEventListener('input', renderMotorList);
+
+  renderAll();
 });
 </script>
