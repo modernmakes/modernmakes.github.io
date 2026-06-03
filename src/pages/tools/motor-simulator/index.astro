@@ -48,6 +48,7 @@ const currentPath = '/tools';
           <div class="ms-motor-checks" id="motorChecks">
             <!-- rendered by JS -->
           </div>
+          <div class="ms-max-msg" id="maxMsg">Max 3 motors selected</div>
         </div>
       </div>
 
@@ -120,13 +121,18 @@ const currentPath = '/tools';
 
 .ms-motor-checks { display: flex; flex-wrap: wrap; gap: 8px; }
 .ms-motor-check {
-  display: flex; align-items: center; gap: 6px;
-  font-family: var(--fu); font-size: 12px; color: var(--black);
+  font-family: var(--fu); font-size: 12px; font-weight: 600; color: var(--black);
   background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
   padding: 6px 12px; cursor: pointer; transition: all .12s; user-select: none;
+  appearance: none; line-height: 1.4;
 }
+.ms-motor-check:hover:not(.selected) { border-color: var(--g1); }
 .ms-motor-check.selected { border-color: var(--accent); background: rgba(255,90,31,.06); color: var(--accent); }
-.ms-motor-check input { accent-color: var(--accent); width: 14px; height: 14px; }
+.ms-max-msg {
+  font-family: var(--fm); font-size: 11px; color: var(--accent);
+  margin-top: 8px; opacity: 0; transition: opacity .2s; height: 16px;
+}
+.ms-max-msg.visible { opacity: 1; }
 
 .ms-table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; overflow-x: auto; }
 .ms-table { width: 100%; border-collapse: collapse; }
@@ -176,106 +182,121 @@ interface Motor {
 }
 
 const MOTORS: Motor[] = [
-  { id: 'ldo-48-2504ac', name: 'LDO 42STH48-2504AC',   brand: 'LDO',   size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 48, stepDeg: 1.8, frameLen: '48mm', use: ['XY', 'AWD'],   suitable48v: 'good' },
-  { id: 'ldo-40-2004ac', name: 'LDO 42STH40-2004AC',   brand: 'LDO',   size: 'NEMA17 40mm', ratedA: 2.0, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm', use: ['XY', 'Z'],    suitable48v: 'good' },
-  { id: 'ldo-20-1004as', name: 'LDO 42STH20-1004AS',   brand: 'LDO',   size: 'NEMA17 20mm', ratedA: 1.0, holdingNcm: 14, stepDeg: 1.8, frameLen: '20mm (pancake)', use: ['Z', 'Extruder'], suitable48v: 'ok' },
-  { id: 'moons-p4100',   name: 'Moons MS17HA2P4100',   brand: 'Moons', size: 'NEMA17 40mm', ratedA: 2.1, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm', use: ['XY', 'Z'],    suitable48v: 'good' },
-  { id: 'moons-p4200',   name: 'Moons MS17HA6P4200',   brand: 'Moons', size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 59, stepDeg: 1.8, frameLen: '48mm', use: ['XY', 'AWD'],  suitable48v: 'good' },
-  { id: 'ldo-n14-1004a', name: 'LDO 36STH20-1004AHG',  brand: 'LDO',   size: 'NEMA14 20mm', ratedA: 1.0, holdingNcm: 10, stepDeg: 1.8, frameLen: '20mm (pancake)', use: ['Extruder'], suitable48v: 'not-ideal' },
+  { id: 'ldo-48-2504ac', name: 'LDO 42STH48-2504AC',  brand: 'LDO',   size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 48, stepDeg: 1.8, frameLen: '48mm',             use: ['XY', 'AWD'],      suitable48v: 'good' },
+  { id: 'ldo-40-2004ac', name: 'LDO 42STH40-2004AC',  brand: 'LDO',   size: 'NEMA17 40mm', ratedA: 2.0, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm',             use: ['XY', 'Z'],        suitable48v: 'good' },
+  { id: 'ldo-20-1004as', name: 'LDO 42STH20-1004AS',  brand: 'LDO',   size: 'NEMA17 20mm', ratedA: 1.0, holdingNcm: 14, stepDeg: 1.8, frameLen: '20mm (pancake)',   use: ['Z', 'Extruder'],  suitable48v: 'ok' },
+  { id: 'moons-p4100',   name: 'Moons MS17HA2P4100',  brand: 'Moons', size: 'NEMA17 40mm', ratedA: 2.1, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm',             use: ['XY', 'Z'],        suitable48v: 'good' },
+  { id: 'moons-p4200',   name: 'Moons MS17HA6P4200',  brand: 'Moons', size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 59, stepDeg: 1.8, frameLen: '48mm',             use: ['XY', 'AWD'],      suitable48v: 'good' },
+  { id: 'ldo-n14-1004a', name: 'LDO 36STH20-1004AHG', brand: 'LDO',   size: 'NEMA14 20mm', ratedA: 1.0, holdingNcm: 10, stepDeg: 1.8, frameLen: '20mm (pancake)',   use: ['Extruder'],       suitable48v: 'not-ideal' },
 ];
 
-let voltage = 24;
-let selected: Set<string> = new Set(['ldo-48-2504ac', 'moons-p4200']);
+document.addEventListener('DOMContentLoaded', () => {
+  let voltage = 24;
+  const selected = new Set<string>(['ldo-48-2504ac', 'moons-p4200']);
+  let maxMsgTimer: ReturnType<typeof setTimeout> | null = null;
 
-function usableA(motor: Motor): number { return motor.ratedA * 0.80; }
-function estimatedTorque(motor: Motor, v: number): number {
-  const factor = v === 48 ? 1.05 : 0.85;
-  return motor.holdingNcm * factor;
-}
-
-function useBadge(role: string): string {
-  const map: Record<string, string> = {
-    XY:       '<span class="ms-badge-use ms-badge-xy">XY</span>',
-    Z:        '<span class="ms-badge-use ms-badge-z">Z</span>',
-    Extruder: '<span class="ms-badge-use ms-badge-ext">Extruder</span>',
-    AWD:      '<span class="ms-badge-use ms-badge-awd">AWD</span>',
-  };
-  return map[role] ?? `<span class="ms-badge-use">${role}</span>`;
-}
-function suitBadge(s: string): string {
-  if (s === 'good')      return '<span class="ms-badge-use ms-badge-48v-good">Great at 48V</span>';
-  if (s === 'ok')        return '<span class="ms-badge-use ms-badge-48v-ok">OK at 48V</span>';
-  return '<span class="ms-badge-use ms-badge-48v-not">Not ideal at 48V</span>';
-}
-
-function renderTable() {
-  const motors = MOTORS.filter(m => selected.has(m.id));
-  const head = document.getElementById('compHead') as HTMLTableRowElement;
-  const body = document.getElementById('compBody') as HTMLTableSectionElement;
-  if (!motors.length) {
-    head.innerHTML = '<th>Spec</th>';
-    body.innerHTML = '<tr><td class="ms-empty" colspan="2">Select motors above to compare.</td></tr>';
-    return;
+  function usableA(motor: Motor): number { return motor.ratedA * 0.80; }
+  function estimatedTorque(motor: Motor, v: number): number {
+    return motor.holdingNcm * (v === 48 ? 1.05 : 0.85);
   }
-  head.innerHTML = '<th>Spec</th>' + motors.map(m =>
-    `<th class="ms-motor-col">${m.name}<br><span style="font-size:10px;color:var(--g2);font-family:var(--fm)">${m.brand} · ${m.size}</span></th>`
-  ).join('');
 
-  const specs: Array<{label: string; fn: (m: Motor) => string}> = [
-    { label: 'Rated Current', fn: m => `${m.ratedA}A` },
-    { label: `Usable Current (80%)`, fn: m => `<span class="ms-spec-val accent">${usableA(m).toFixed(2)}A</span>` },
-    { label: 'Holding Torque', fn: m => `${m.holdingNcm} N·cm` },
-    { label: `Est. Torque @ ${voltage}V`, fn: m => `<span class="ms-spec-val accent">${estimatedTorque(m, voltage).toFixed(0)} N·cm</span>` },
-    { label: 'Step Angle', fn: m => `${m.stepDeg}°` },
-    { label: 'Frame', fn: m => `${m.size} · ${m.frameLen}` },
-    { label: 'Recommended Use', fn: m => m.use.map(useBadge).join(' ') },
-    { label: '48V Suitability', fn: m => suitBadge(m.suitable48v) },
-  ];
+  function useBadge(role: string): string {
+    const map: Record<string, string> = {
+      XY:       '<span class="ms-badge-use ms-badge-xy">XY</span>',
+      Z:        '<span class="ms-badge-use ms-badge-z">Z</span>',
+      Extruder: '<span class="ms-badge-use ms-badge-ext">Extruder</span>',
+      AWD:      '<span class="ms-badge-use ms-badge-awd">AWD</span>',
+    };
+    return map[role] ?? `<span class="ms-badge-use">${role}</span>`;
+  }
+  function suitBadge(s: string): string {
+    if (s === 'good') return '<span class="ms-badge-use ms-badge-48v-good">Great at 48V</span>';
+    if (s === 'ok')   return '<span class="ms-badge-use ms-badge-48v-ok">OK at 48V</span>';
+    return '<span class="ms-badge-use ms-badge-48v-not">Not ideal at 48V</span>';
+  }
 
-  body.innerHTML = specs.map(s =>
-    `<tr><td><div class="ms-spec-name">${s.label}</div></td>` +
-    motors.map(m => `<td>${s.fn(m)}</td>`).join('') +
-    `</tr>`
-  ).join('');
-}
+  function showMaxMsg() {
+    const el = document.getElementById('maxMsg');
+    if (!el) return;
+    el.classList.add('visible');
+    if (maxMsgTimer) clearTimeout(maxMsgTimer);
+    maxMsgTimer = setTimeout(() => el.classList.remove('visible'), 2000);
+  }
 
-function renderCheckboxes() {
-  const container = document.getElementById('motorChecks') as HTMLElement;
-  container.innerHTML = MOTORS.map(m =>
-    `<label class="ms-motor-check${selected.has(m.id) ? ' selected' : ''}" data-id="${m.id}">
-      <input type="checkbox" ${selected.has(m.id) ? 'checked' : ''} style="display:none">
-      ${m.name}
-    </label>`
-  ).join('');
+  function renderTable() {
+    const motors = MOTORS.filter(m => selected.has(m.id));
+    const head = document.getElementById('compHead') as HTMLTableRowElement;
+    const body = document.getElementById('compBody') as HTMLTableSectionElement;
 
-  container.querySelectorAll<HTMLLabelElement>('.ms-motor-check').forEach(lbl => {
-    lbl.addEventListener('click', () => {
-      const id = lbl.dataset.id ?? '';
-      if (selected.has(id)) {
-        selected.delete(id);
-        lbl.classList.remove('selected');
-      } else if (selected.size < 3) {
-        selected.add(id);
-        lbl.classList.add('selected');
-      }
-      renderTable();
+    if (!motors.length) {
+      head.innerHTML = '<th>Spec</th>';
+      body.innerHTML = '<tr><td class="ms-empty" colspan="2">Select motors above to compare.</td></tr>';
+      return;
+    }
+
+    head.innerHTML = '<th>Spec</th>' + motors.map(m =>
+      `<th class="ms-motor-col">${m.name}<br><span style="font-size:10px;color:var(--g2);font-family:var(--fm)">${m.brand} · ${m.size}</span></th>`
+    ).join('');
+
+    const specs: Array<{ label: string; fn: (m: Motor) => string }> = [
+      { label: 'Rated Current',        fn: m => `${m.ratedA}A` },
+      { label: 'Usable Current (80%)', fn: m => `<span class="ms-spec-val accent">${usableA(m).toFixed(2)}A</span>` },
+      { label: 'Holding Torque',       fn: m => `${m.holdingNcm} N·cm` },
+      { label: `Est. Torque @ ${voltage}V`, fn: m => `<span class="ms-spec-val accent">${estimatedTorque(m, voltage).toFixed(0)} N·cm</span>` },
+      { label: 'Step Angle',           fn: m => `${m.stepDeg}°` },
+      { label: 'Frame',                fn: m => `${m.size} · ${m.frameLen}` },
+      { label: 'Recommended Use',      fn: m => m.use.map(useBadge).join(' ') },
+      { label: '48V Suitability',      fn: m => suitBadge(m.suitable48v) },
+    ];
+
+    body.innerHTML = specs.map(s =>
+      `<tr><td><div class="ms-spec-name">${s.label}</div></td>` +
+      motors.map(m => `<td>${s.fn(m)}</td>`).join('') +
+      `</tr>`
+    ).join('');
+  }
+
+  function renderButtons() {
+    const container = document.getElementById('motorChecks') as HTMLElement;
+    // Render plain <button> elements — no wrapped <input>, which caused double-fire on click
+    container.innerHTML = MOTORS.map(m =>
+      `<button type="button" class="ms-motor-check${selected.has(m.id) ? ' selected' : ''}" data-id="${m.id}">${m.name}</button>`
+    ).join('');
+
+    container.querySelectorAll<HTMLButtonElement>('.ms-motor-check').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id ?? '';
+        if (selected.has(id)) {
+          selected.delete(id);
+          btn.classList.remove('selected');
+        } else if (selected.size < 3) {
+          selected.add(id);
+          btn.classList.add('selected');
+        } else {
+          showMaxMsg();
+        }
+        renderTable();
+      });
     });
+  }
+
+  // Voltage toggle
+  const btn24 = document.getElementById('btn24') as HTMLButtonElement;
+  const btn48 = document.getElementById('btn48') as HTMLButtonElement;
+  btn24.addEventListener('click', () => {
+    voltage = 24;
+    btn24.classList.add('active');
+    btn48.classList.remove('active');
+    renderTable();
   });
-}
+  btn48.addEventListener('click', () => {
+    voltage = 48;
+    btn48.classList.add('active');
+    btn24.classList.remove('active');
+    renderTable();
+  });
 
-document.getElementById('btn24')?.addEventListener('click', () => {
-  voltage = 24;
-  document.getElementById('btn24')?.classList.add('active');
-  document.getElementById('btn48')?.classList.remove('active');
+  renderButtons();
   renderTable();
 });
-document.getElementById('btn48')?.addEventListener('click', () => {
-  voltage = 48;
-  document.getElementById('btn48')?.classList.add('active');
-  document.getElementById('btn24')?.classList.remove('active');
-  renderTable();
-});
-
-renderCheckboxes();
-renderTable();
 </script>
