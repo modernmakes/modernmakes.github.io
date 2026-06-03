@@ -1,0 +1,506 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="PA Tuner — AI-Powered Pressure Advance Analysis"
+  description="AI-powered Pressure Advance analysis for Klipper. Describe your setup, paste PA data or upload a test photo, and get actionable tuning recommendations."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">PA Tuner</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">AI Tool</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">PA Tuner</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">AI-powered Pressure Advance analysis. Describe your setup, enter your PA data, and optionally upload a photo of your test print for specific, actionable recommendations.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper PA</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Claude AI</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Vision analysis</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="pt-wrap">
+    <div class="pt-inner">
+
+      <!-- LEFT: SETUP FORM -->
+      <aside class="pt-sidebar">
+
+        <!-- API Key Setup -->
+        <div class="pt-api-section" id="apiSection">
+          <div class="pt-section-head">API Key</div>
+          <p class="pt-section-note">Your Anthropic API key is stored locally in your browser and never sent to our servers. <a href="https://console.anthropic.com" target="_blank" rel="noopener">Get a key ↗</a></p>
+          <div class="pt-field">
+            <label class="pt-label" for="apiKeyIn">Anthropic API Key</label>
+            <input class="pt-input" type="password" id="apiKeyIn" placeholder="sk-ant-…">
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="pt-btn-save-key" id="saveKeyBtn">Save key</button>
+            <button class="pt-btn-clear-key" id="clearKeyBtn" style="display:none">Clear key</button>
+          </div>
+          <div class="pt-key-status" id="keyStatus"></div>
+        </div>
+
+        <div class="pt-divider"></div>
+
+        <!-- Step 1: Setup -->
+        <div class="pt-section-head">Step 1 — Printer Setup</div>
+        <div class="pt-field">
+          <label class="pt-label" for="extruderType">Extruder Type</label>
+          <select class="pt-select" id="extruderType">
+            <option value="direct-drive">Direct Drive</option>
+            <option value="bowden">Bowden</option>
+          </select>
+        </div>
+        <div class="pt-row-2">
+          <div class="pt-field">
+            <label class="pt-label" for="nozzleDia">Nozzle Diameter</label>
+            <select class="pt-select" id="nozzleDia">
+              <option value="0.4">0.4mm</option>
+              <option value="0.6">0.6mm</option>
+              <option value="0.8">0.8mm</option>
+              <option value="0.2">0.2mm</option>
+            </select>
+          </div>
+          <div class="pt-field">
+            <label class="pt-label" for="layerH">Layer Height</label>
+            <input class="pt-input" type="number" id="layerH" value="0.20" step="0.01" min="0.05" max="1.0">
+          </div>
+        </div>
+        <div class="pt-row-2">
+          <div class="pt-field">
+            <label class="pt-label" for="lineW">Line Width (mm)</label>
+            <input class="pt-input" type="number" id="lineW" value="0.45" step="0.01" min="0.1">
+          </div>
+          <div class="pt-field">
+            <label class="pt-label" for="wallSpeed">Outer Wall Speed (mm/s)</label>
+            <input class="pt-input" type="number" id="wallSpeed" value="80" step="5" min="1">
+          </div>
+        </div>
+
+        <div class="pt-divider"></div>
+
+        <!-- Step 2: PA Data -->
+        <div class="pt-section-head">Step 2 — PA Data</div>
+        <div class="pt-field">
+          <label class="pt-label" for="paData">PA values or OrcaSlicer triplets</label>
+          <textarea class="pt-textarea" id="paData" rows="5" placeholder="Single value: 0.035&#10;Or OrcaSlicer triplets (one per line):&#10;0.025, 8.0, 2000&#10;0.030, 12.0, 2000&#10;0.032, 8.0, 3000"></textarea>
+        </div>
+
+        <div class="pt-divider"></div>
+
+        <!-- Step 3: Image -->
+        <div class="pt-section-head">Step 3 — Photo (optional)</div>
+        <div class="pt-field">
+          <label class="pt-label" for="printPhoto">Upload test print photo</label>
+          <div class="pt-upload-area" id="uploadArea">
+            <input type="file" id="printPhoto" accept="image/*" style="display:none">
+            <div id="uploadPrompt" class="pt-upload-prompt">
+              <span>Click to upload or drag &amp; drop</span>
+              <span style="font-size:10px;color:var(--g2)">PNG, JPG, WEBP · max 5MB</span>
+            </div>
+            <div id="uploadPreview" style="display:none">
+              <img id="previewImg" style="max-width:100%;border-radius:4px;max-height:180px;object-fit:contain" alt="Preview">
+              <button class="pt-btn-remove" id="removeImg">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analyze button -->
+        <button class="pt-btn-analyze" id="analyzeBtn">Analyze with AI →</button>
+        <div class="pt-analyze-error" id="analyzeError" style="display:none"></div>
+
+      </aside>
+
+      <!-- RIGHT: OUTPUT -->
+      <main class="pt-output">
+
+        <!-- Idle state -->
+        <div class="pt-idle-card" id="idleCard">
+          <div class="pt-idle-icon">⚙</div>
+          <div class="pt-idle-title">Ready to analyze</div>
+          <div class="pt-idle-desc">Fill in your setup, enter PA data, and click "Analyze with AI" for specific tuning recommendations.</div>
+        </div>
+
+        <!-- Streaming output -->
+        <div class="pt-result-card" id="resultCard" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <div style="font-family:var(--fd);font-size:20px;font-weight:800;color:var(--black)">AI Recommendations</div>
+            <button class="pt-btn-copy-rec" id="copyRecBtn" style="display:none">Copy</button>
+          </div>
+          <div class="pt-result-stream" id="streamOutput"></div>
+          <div class="pt-loading" id="loadingIndicator" style="display:none">
+            <span class="pt-dot"></span><span class="pt-dot"></span><span class="pt-dot"></span>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "PA Tuner — AI Pressure Advance Analysis",
+        "description": "AI-powered Pressure Advance tuning assistant for Klipper printers.",
+        "url": "https://modernmakes.github.io/tools/pa-tuner",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "PA Tuner", "item": "https://modernmakes.github.io/tools/pa-tuner" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.pt-wrap { background: var(--bg); padding: 40px 0 64px; }
+.pt-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 360px 1fr; gap: 32px; align-items: start;
+}
+.pt-sidebar {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 0;
+}
+.pt-output { display: flex; flex-direction: column; gap: 16px; }
+
+.pt-api-section { background: rgba(255,90,31,.04); border: 1px solid rgba(255,90,31,.15); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+.pt-api-section.hidden { display: none; }
+.pt-section-head { font-family: var(--fu); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--black); margin-bottom: 10px; }
+.pt-section-note { font-family: var(--fu); font-size: 11px; color: var(--g2); line-height: 1.55; margin-bottom: 10px; }
+.pt-section-note a { color: var(--accent); text-decoration: none; }
+.pt-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.pt-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.pt-input, .pt-select, .pt-textarea {
+  font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 5px; padding: 8px 10px; width: 100%; transition: border-color .12s;
+}
+.pt-input:focus, .pt-select:focus, .pt-textarea:focus { outline: none; border-color: var(--accent); }
+.pt-textarea { resize: vertical; font-size: 11px; line-height: 1.6; }
+.pt-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pt-divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+.pt-btn-save-key {
+  font-family: var(--fu); font-size: 11px; font-weight: 700; padding: 6px 14px;
+  background: var(--accent); color: #fff; border: none; border-radius: 4px; cursor: pointer;
+}
+.pt-btn-clear-key {
+  font-family: var(--fu); font-size: 11px; font-weight: 600; padding: 6px 12px;
+  background: transparent; color: var(--g2); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;
+}
+.pt-key-status { font-family: var(--fm); font-size: 11px; color: #22c55e; margin-top: 6px; }
+.pt-key-status.error { color: #ef4444; }
+
+.pt-upload-area {
+  border: 2px dashed var(--border); border-radius: 6px; padding: 16px; cursor: pointer;
+  transition: border-color .12s; min-height: 80px; display: flex; align-items: center; justify-content: center;
+}
+.pt-upload-area:hover { border-color: var(--accent); }
+.pt-upload-prompt { display: flex; flex-direction: column; gap: 4px; align-items: center; font-family: var(--fu); font-size: 12px; color: var(--g2); }
+.pt-btn-remove {
+  font-family: var(--fu); font-size: 11px; padding: 4px 10px; margin-top: 8px;
+  background: transparent; color: var(--g2); border: 1px solid var(--border); border-radius: 3px; cursor: pointer;
+}
+.pt-btn-remove:hover { color: #ef4444; border-color: #ef4444; }
+
+.pt-btn-analyze {
+  font-family: var(--fu); font-size: 14px; font-weight: 700; padding: 12px 24px;
+  background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer;
+  transition: opacity .12s; margin-top: 8px; width: 100%;
+}
+.pt-btn-analyze:hover { opacity: .88; }
+.pt-btn-analyze:disabled { opacity: .4; cursor: not-allowed; }
+.pt-analyze-error { font-family: var(--fm); font-size: 11px; color: #ef4444; margin-top: 6px; }
+
+.pt-idle-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 48px 32px; text-align: center;
+}
+.pt-idle-icon { font-size: 32px; margin-bottom: 12px; color: var(--g2); }
+.pt-idle-title { font-family: var(--fd); font-size: 22px; font-weight: 800; color: var(--black); margin-bottom: 8px; }
+.pt-idle-desc { font-family: var(--fb); font-size: 14px; color: var(--g1); line-height: 1.6; max-width: 380px; margin: 0 auto; }
+
+.pt-result-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; min-height: 300px; }
+.pt-result-stream {
+  font-family: var(--fb); font-size: 14px; color: var(--g1); line-height: 1.75;
+  white-space: pre-wrap; word-break: break-word;
+}
+.pt-result-stream strong { color: var(--black); }
+.pt-loading { display: flex; gap: 6px; align-items: center; padding: 16px 0; }
+.pt-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  animation: ptDotPulse 1.4s infinite ease-in-out;
+}
+.pt-dot:nth-child(2) { animation-delay: .2s; }
+.pt-dot:nth-child(3) { animation-delay: .4s; }
+@keyframes ptDotPulse { 0%,80%,100% { opacity: .2; transform: scale(.8); } 40% { opacity: 1; transform: scale(1); } }
+
+.pt-btn-copy-rec {
+  font-family: var(--fu); font-size: 12px; font-weight: 700; padding: 7px 16px;
+  background: var(--black); color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background .12s;
+}
+.pt-btn-copy-rec:hover { background: #333; }
+.pt-btn-copy-rec.copied { background: #1a7a1a; }
+
+@media (max-width: 1024px) { .pt-inner { grid-template-columns: 320px 1fr; } }
+@media (max-width: 860px)  { .pt-inner { grid-template-columns: 1fr; } }
+@media (max-width: 768px)  { .pt-wrap { padding: 20px 0 48px; } .pt-inner { padding: 0 20px; } .pt-row-2 { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+const SYSTEM_PROMPT = `You are an expert 3D printer calibration assistant specializing in Pressure Advance tuning for Klipper. Analyze the provided PA data and printer setup. Give specific, actionable recommendations. Be concise and technical. Format your response with clear sections using bold headers. Keep your response under 800 tokens.`;
+
+let imageBase64: string | null = null;
+let imageMediaType: string | null = null;
+let accumulatedText = '';
+
+function getApiKey(): string {
+  return localStorage.getItem('mm_anthropic_key') ?? '';
+}
+
+function updateKeyUI() {
+  const key = getApiKey();
+  const apiSection = document.getElementById('apiSection') as HTMLElement;
+  const keyInput   = document.getElementById('apiKeyIn') as HTMLInputElement;
+  const clearBtn   = document.getElementById('clearKeyBtn') as HTMLButtonElement;
+  const keyStatus  = document.getElementById('keyStatus') as HTMLElement;
+
+  if (key) {
+    keyInput.value = '••••••••••••••••••••' + key.slice(-4);
+    keyInput.disabled = true;
+    clearBtn.style.display = 'inline-block';
+    keyStatus.textContent = '✓ API key saved';
+    keyStatus.className = 'pt-key-status';
+    apiSection.classList.add('hidden');
+  } else {
+    keyInput.value = '';
+    keyInput.disabled = false;
+    clearBtn.style.display = 'none';
+    keyStatus.textContent = '';
+    apiSection.classList.remove('hidden');
+  }
+}
+
+document.getElementById('saveKeyBtn')?.addEventListener('click', () => {
+  const val = (document.getElementById('apiKeyIn') as HTMLInputElement).value.trim();
+  if (!val || (!val.startsWith('sk-ant-') && !val.startsWith('sk-'))) {
+    const s = document.getElementById('keyStatus') as HTMLElement;
+    s.textContent = '⚠ Key should start with sk-ant-…';
+    s.className = 'pt-key-status error';
+    return;
+  }
+  localStorage.setItem('mm_anthropic_key', val);
+  updateKeyUI();
+});
+
+document.getElementById('clearKeyBtn')?.addEventListener('click', () => {
+  localStorage.removeItem('mm_anthropic_key');
+  updateKeyUI();
+  const apiSection = document.getElementById('apiSection') as HTMLElement;
+  apiSection.classList.remove('hidden');
+});
+
+// Image upload
+const uploadArea = document.getElementById('uploadArea') as HTMLElement;
+const photoInput = document.getElementById('printPhoto') as HTMLInputElement;
+uploadArea.addEventListener('click', () => photoInput.click());
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'var(--accent)'; });
+uploadArea.addEventListener('dragleave', () => { uploadArea.style.borderColor = ''; });
+uploadArea.addEventListener('drop', e => {
+  e.preventDefault(); uploadArea.style.borderColor = '';
+  const file = e.dataTransfer?.files[0];
+  if (file) handleFile(file);
+});
+photoInput.addEventListener('change', () => { if (photoInput.files?.[0]) handleFile(photoInput.files[0]); });
+
+function handleFile(file: File) {
+  if (file.size > 5 * 1024 * 1024) { alert('Image must be under 5MB.'); return; }
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const result = reader.result as string;
+    imageBase64    = result.split(',')[1];
+    imageMediaType = file.type;
+    const preview = document.getElementById('uploadPreview') as HTMLElement;
+    const prompt  = document.getElementById('uploadPrompt') as HTMLElement;
+    const img     = document.getElementById('previewImg') as HTMLImageElement;
+    img.src = result;
+    preview.style.display = 'flex';
+    preview.style.flexDirection = 'column';
+    preview.style.alignItems = 'flex-start';
+    prompt.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+document.getElementById('removeImg')?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  imageBase64 = null; imageMediaType = null;
+  photoInput.value = '';
+  (document.getElementById('uploadPreview') as HTMLElement).style.display = 'none';
+  (document.getElementById('uploadPrompt') as HTMLElement).style.display = 'flex';
+});
+
+// Analyze
+document.getElementById('analyzeBtn')?.addEventListener('click', analyze);
+
+async function analyze() {
+  const apiKey = getApiKey();
+  const errorEl = document.getElementById('analyzeError') as HTMLElement;
+  errorEl.style.display = 'none';
+
+  if (!apiKey) {
+    errorEl.textContent = '⚠ Please save your Anthropic API key first.';
+    errorEl.style.display = 'block';
+    document.getElementById('apiSection')?.classList.remove('hidden');
+    return;
+  }
+
+  const extType  = (document.getElementById('extruderType') as HTMLSelectElement).value;
+  const nozzle   = (document.getElementById('nozzleDia') as HTMLSelectElement).value;
+  const layerH   = (document.getElementById('layerH') as HTMLInputElement).value;
+  const lineW    = (document.getElementById('lineW') as HTMLInputElement).value;
+  const wallSpd  = (document.getElementById('wallSpeed') as HTMLInputElement).value;
+  const paData   = (document.getElementById('paData') as HTMLTextAreaElement).value.trim();
+
+  if (!paData) {
+    errorEl.textContent = '⚠ Please enter your PA data in Step 2.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  const userText = `Printer setup:
+- Extruder: ${extType}
+- Nozzle: ${nozzle}mm
+- Layer height: ${layerH}mm
+- Line width: ${lineW}mm
+- Outer wall speed: ${wallSpd} mm/s
+
+PA data:
+${paData}
+
+${imageBase64 ? 'I have uploaded a photo of my PA test print for visual analysis.' : 'No photo provided — analysis based on data only.'}
+
+Please analyze this and give me:
+1. My recommended PA value
+2. Any patterns or issues you notice in the data
+3. Specific next steps`;
+
+  const contentArr: any[] = [];
+  if (imageBase64 && imageMediaType) {
+    contentArr.push({
+      type: 'image',
+      source: { type: 'base64', media_type: imageMediaType, data: imageBase64 }
+    });
+  }
+  contentArr.push({ type: 'text', text: userText });
+
+  // Switch to result view
+  (document.getElementById('idleCard') as HTMLElement).style.display = 'none';
+  const resultCard = document.getElementById('resultCard') as HTMLElement;
+  resultCard.style.display = 'block';
+  const streamEl   = document.getElementById('streamOutput') as HTMLElement;
+  const loadingEl  = document.getElementById('loadingIndicator') as HTMLElement;
+  const copyBtn    = document.getElementById('copyRecBtn') as HTMLButtonElement;
+  streamEl.textContent = '';
+  loadingEl.style.display = 'flex';
+  copyBtn.style.display = 'none';
+  accumulatedText = '';
+
+  const analyzeBtn = document.getElementById('analyzeBtn') as HTMLButtonElement;
+  analyzeBtn.disabled = true;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        stream: true,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: contentArr }]
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error((err as any)?.error?.message ?? `API error ${response.status}`);
+    }
+
+    const reader = response.body!.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() ?? '';
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const evt = JSON.parse(data);
+          if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta') {
+            accumulatedText += evt.delta.text;
+            streamEl.textContent = accumulatedText;
+          }
+        } catch {}
+      }
+    }
+
+    loadingEl.style.display = 'none';
+    copyBtn.style.display = 'inline-block';
+
+  } catch (err: any) {
+    loadingEl.style.display = 'none';
+    errorEl.textContent = `⚠ ${err.message ?? 'Request failed. Check your API key and try again.'}`;
+    errorEl.style.display = 'block';
+    (document.getElementById('idleCard') as HTMLElement).style.display = 'block';
+    resultCard.style.display = 'none';
+  } finally {
+    analyzeBtn.disabled = false;
+  }
+}
+
+document.getElementById('copyRecBtn')?.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(accumulatedText);
+    const btn = document.getElementById('copyRecBtn') as HTMLButtonElement;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  } catch {}
+});
+
+updateKeyUI();
+</script>

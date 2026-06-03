@@ -1,0 +1,281 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Stepper Motor Simulator — Voron Motor Comparison at 24V / 48V"
+  description="Compare stepper motor specifications for Voron and prosumer FDM printers. Understand 48V suitability, torque, and recommended use cases side-by-side."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Motor Simulator</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Reference Tool</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Motor Simulator</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Compare common Voron stepper motors at 24V or 48V. Understand usable current, estimated torque, and suitability for XY, Z, and extruder roles.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">AWD · 48V</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">LDO · Moons</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="ms-wrap">
+    <div class="ms-inner">
+
+      <!-- Controls -->
+      <div class="ms-controls">
+        <div>
+          <div class="ms-ctrl-label">Supply Voltage</div>
+          <div class="ms-volt-toggle">
+            <button class="ms-volt-btn active" id="btn24">24V</button>
+            <button class="ms-volt-btn" id="btn48">48V</button>
+          </div>
+        </div>
+        <div style="flex:1">
+          <div class="ms-ctrl-label">Select motors to compare (up to 3)</div>
+          <div class="ms-motor-checks" id="motorChecks">
+            <!-- rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="ms-table-card">
+        <table class="ms-table" id="compTable">
+          <thead>
+            <tr id="compHead">
+              <th>Spec</th>
+              <!-- Motor columns injected by JS -->
+            </tr>
+          </thead>
+          <tbody id="compBody">
+            <tr><td class="ms-empty" colspan="4">Select motors above to compare.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Note -->
+      <div class="ms-note">
+        <strong>Simplified model:</strong> Usable current = 80% of rated. Estimated torque uses a voltage-factor approximation (24V: ×0.85, 48V: ×1.05 of holding torque). Actual torque curves depend on driver settings, microstepping, back-EMF, and inductance. For full physics simulation with torque curves, see the
+        <a href="https://tools.excit3d.shop/motor-sym/" target="_blank" rel="noopener">Excit3D Motor Simulator ↗</a>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Stepper Motor Simulator",
+        "description": "Compare Voron stepper motors at 24V or 48V with torque and current recommendations.",
+        "url": "https://modernmakes.github.io/tools/motor-simulator",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Motor Simulator", "item": "https://modernmakes.github.io/tools/motor-simulator" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.ms-wrap { background: var(--bg); padding: 40px 0 64px; }
+.ms-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; gap: 20px; }
+
+.ms-controls {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 24px; display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;
+}
+.ms-ctrl-label { font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); margin-bottom: 10px; }
+.ms-volt-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.ms-volt-btn {
+  font-family: var(--fu); font-size: 14px; font-weight: 700; padding: 8px 24px;
+  background: var(--bg); color: var(--g2); border: none; cursor: pointer; transition: all .12s;
+}
+.ms-volt-btn.active { background: var(--black); color: #fff; }
+.ms-volt-btn:not(.active):hover { background: var(--border); }
+
+.ms-motor-checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.ms-motor-check {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--fu); font-size: 12px; color: var(--black);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
+  padding: 6px 12px; cursor: pointer; transition: all .12s; user-select: none;
+}
+.ms-motor-check.selected { border-color: var(--accent); background: rgba(255,90,31,.06); color: var(--accent); }
+.ms-motor-check input { accent-color: var(--accent); width: 14px; height: 14px; }
+
+.ms-table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; overflow-x: auto; }
+.ms-table { width: 100%; border-collapse: collapse; }
+.ms-table thead { background: var(--bg); }
+.ms-table th {
+  font-family: var(--fu); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--g2); padding: 12px 18px; text-align: left; border-bottom: 2px solid var(--border);
+}
+.ms-table th.ms-motor-col { color: var(--black); font-size: 13px; min-width: 200px; }
+.ms-table td { padding: 11px 18px; border-bottom: 1px solid var(--border); }
+.ms-table tbody tr:last-child td { border-bottom: none; }
+.ms-spec-name { font-family: var(--fu); font-size: 12px; font-weight: 700; color: var(--g1); text-transform: uppercase; letter-spacing: .04em; }
+.ms-spec-val { font-family: var(--fm); font-size: 14px; color: var(--black); }
+.ms-spec-val.accent { color: var(--accent); font-weight: 700; }
+.ms-badge-use { font-family: var(--fm); font-size: 10px; padding: 2px 7px; border-radius: 3px; }
+.ms-badge-xy       { background: rgba(255,90,31,.12); color: var(--accent); }
+.ms-badge-z        { background: rgba(96,165,250,.12); color: #60a5fa; }
+.ms-badge-ext      { background: rgba(74,222,128,.12); color: #22c55e; }
+.ms-badge-awd      { background: rgba(251,191,36,.12); color: #d97706; }
+.ms-badge-48v-ok   { background: rgba(74,222,128,.12); color: #22c55e; }
+.ms-badge-48v-good { background: rgba(255,90,31,.12); color: var(--accent); }
+.ms-badge-48v-not  { background: rgba(156,163,175,.12); color: #9ca3af; }
+.ms-empty { font-family: var(--fm); font-size: 13px; color: var(--g2); padding: 24px 18px; }
+
+.ms-note {
+  font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.6;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px;
+}
+.ms-note a { color: var(--accent); text-decoration: none; }
+.ms-note a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) { .ms-wrap { padding: 20px 0 48px; } .ms-inner { padding: 0 20px; } .ms-controls { flex-direction: column; } }
+</style>
+
+<script>
+interface Motor {
+  id: string;
+  name: string;
+  brand: string;
+  size: string;
+  ratedA: number;
+  holdingNcm: number;
+  stepDeg: number;
+  frameLen: string;
+  use: string[];
+  suitable48v: string;
+}
+
+const MOTORS: Motor[] = [
+  { id: 'ldo-48-2504ac', name: 'LDO 42STH48-2504AC',   brand: 'LDO',   size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 48, stepDeg: 1.8, frameLen: '48mm', use: ['XY', 'AWD'],   suitable48v: 'good' },
+  { id: 'ldo-40-2004ac', name: 'LDO 42STH40-2004AC',   brand: 'LDO',   size: 'NEMA17 40mm', ratedA: 2.0, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm', use: ['XY', 'Z'],    suitable48v: 'good' },
+  { id: 'ldo-20-1004as', name: 'LDO 42STH20-1004AS',   brand: 'LDO',   size: 'NEMA17 20mm', ratedA: 1.0, holdingNcm: 14, stepDeg: 1.8, frameLen: '20mm (pancake)', use: ['Z', 'Extruder'], suitable48v: 'ok' },
+  { id: 'moons-p4100',   name: 'Moons MS17HA2P4100',   brand: 'Moons', size: 'NEMA17 40mm', ratedA: 2.1, holdingNcm: 40, stepDeg: 1.8, frameLen: '40mm', use: ['XY', 'Z'],    suitable48v: 'good' },
+  { id: 'moons-p4200',   name: 'Moons MS17HA6P4200',   brand: 'Moons', size: 'NEMA17 48mm', ratedA: 2.5, holdingNcm: 59, stepDeg: 1.8, frameLen: '48mm', use: ['XY', 'AWD'],  suitable48v: 'good' },
+  { id: 'ldo-n14-1004a', name: 'LDO 36STH20-1004AHG',  brand: 'LDO',   size: 'NEMA14 20mm', ratedA: 1.0, holdingNcm: 10, stepDeg: 1.8, frameLen: '20mm (pancake)', use: ['Extruder'], suitable48v: 'not-ideal' },
+];
+
+let voltage = 24;
+let selected: Set<string> = new Set(['ldo-48-2504ac', 'moons-p4200']);
+
+function usableA(motor: Motor): number { return motor.ratedA * 0.80; }
+function estimatedTorque(motor: Motor, v: number): number {
+  const factor = v === 48 ? 1.05 : 0.85;
+  return motor.holdingNcm * factor;
+}
+
+function useBadge(role: string): string {
+  const map: Record<string, string> = {
+    XY:       '<span class="ms-badge-use ms-badge-xy">XY</span>',
+    Z:        '<span class="ms-badge-use ms-badge-z">Z</span>',
+    Extruder: '<span class="ms-badge-use ms-badge-ext">Extruder</span>',
+    AWD:      '<span class="ms-badge-use ms-badge-awd">AWD</span>',
+  };
+  return map[role] ?? `<span class="ms-badge-use">${role}</span>`;
+}
+function suitBadge(s: string): string {
+  if (s === 'good')      return '<span class="ms-badge-use ms-badge-48v-good">Great at 48V</span>';
+  if (s === 'ok')        return '<span class="ms-badge-use ms-badge-48v-ok">OK at 48V</span>';
+  return '<span class="ms-badge-use ms-badge-48v-not">Not ideal at 48V</span>';
+}
+
+function renderTable() {
+  const motors = MOTORS.filter(m => selected.has(m.id));
+  const head = document.getElementById('compHead') as HTMLTableRowElement;
+  const body = document.getElementById('compBody') as HTMLTableSectionElement;
+  if (!motors.length) {
+    head.innerHTML = '<th>Spec</th>';
+    body.innerHTML = '<tr><td class="ms-empty" colspan="2">Select motors above to compare.</td></tr>';
+    return;
+  }
+  head.innerHTML = '<th>Spec</th>' + motors.map(m =>
+    `<th class="ms-motor-col">${m.name}<br><span style="font-size:10px;color:var(--g2);font-family:var(--fm)">${m.brand} · ${m.size}</span></th>`
+  ).join('');
+
+  const specs: Array<{label: string; fn: (m: Motor) => string}> = [
+    { label: 'Rated Current', fn: m => `${m.ratedA}A` },
+    { label: `Usable Current (80%)`, fn: m => `<span class="ms-spec-val accent">${usableA(m).toFixed(2)}A</span>` },
+    { label: 'Holding Torque', fn: m => `${m.holdingNcm} N·cm` },
+    { label: `Est. Torque @ ${voltage}V`, fn: m => `<span class="ms-spec-val accent">${estimatedTorque(m, voltage).toFixed(0)} N·cm</span>` },
+    { label: 'Step Angle', fn: m => `${m.stepDeg}°` },
+    { label: 'Frame', fn: m => `${m.size} · ${m.frameLen}` },
+    { label: 'Recommended Use', fn: m => m.use.map(useBadge).join(' ') },
+    { label: '48V Suitability', fn: m => suitBadge(m.suitable48v) },
+  ];
+
+  body.innerHTML = specs.map(s =>
+    `<tr><td><div class="ms-spec-name">${s.label}</div></td>` +
+    motors.map(m => `<td>${s.fn(m)}</td>`).join('') +
+    `</tr>`
+  ).join('');
+}
+
+function renderCheckboxes() {
+  const container = document.getElementById('motorChecks') as HTMLElement;
+  container.innerHTML = MOTORS.map(m =>
+    `<label class="ms-motor-check${selected.has(m.id) ? ' selected' : ''}" data-id="${m.id}">
+      <input type="checkbox" ${selected.has(m.id) ? 'checked' : ''} style="display:none">
+      ${m.name}
+    </label>`
+  ).join('');
+
+  container.querySelectorAll<HTMLLabelElement>('.ms-motor-check').forEach(lbl => {
+    lbl.addEventListener('click', () => {
+      const id = lbl.dataset.id ?? '';
+      if (selected.has(id)) {
+        selected.delete(id);
+        lbl.classList.remove('selected');
+      } else if (selected.size < 3) {
+        selected.add(id);
+        lbl.classList.add('selected');
+      }
+      renderTable();
+    });
+  });
+}
+
+document.getElementById('btn24')?.addEventListener('click', () => {
+  voltage = 24;
+  document.getElementById('btn24')?.classList.add('active');
+  document.getElementById('btn48')?.classList.remove('active');
+  renderTable();
+});
+document.getElementById('btn48')?.addEventListener('click', () => {
+  voltage = 48;
+  document.getElementById('btn48')?.classList.add('active');
+  document.getElementById('btn24')?.classList.remove('active');
+  renderTable();
+});
+
+renderCheckboxes();
+renderTable();
+</script>

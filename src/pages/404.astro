@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base
+  title="404 — Page Not Found — Modern Makes"
+  description="This page doesn't exist. Browse Modern Makes hardware specs, guides, and calibration tools."
+  hasPageH1={true}
+>
+  <Nav slot="nav" currentPath="/" />
+
+  <div class="notfound-wrap">
+    <div class="notfound-inner">
+      <div class="notfound-code">404</div>
+      <h1 class="notfound-headline">This page doesn't exist yet.</h1>
+      <p class="notfound-sub">It might be coming soon, or the URL changed. Try one of these instead.</p>
+      <div class="notfound-ctas">
+        <a href="/" class="notfound-btn-primary">← Back to homepage</a>
+        <a href="/hardware" class="notfound-btn-secondary">Browse hardware →</a>
+      </div>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</Base>
+
+<style is:global>
+.notfound-wrap {
+  background: var(--black);
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+}
+.notfound-inner {
+  text-align: center;
+  max-width: 520px;
+}
+.notfound-code {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(120px, 20vw, 180px);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -4px;
+  margin-bottom: 0;
+}
+.notfound-headline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin: 8px 0 16px;
+  letter-spacing: -.5px;
+}
+.notfound-sub {
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.notfound-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.notfound-btn-primary {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: opacity .12s;
+}
+.notfound-btn-primary:hover { opacity: .88; }
+.notfound-btn-secondary {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.7);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all .12s;
+}
+.notfound-btn-secondary:hover { background: rgba(255,255,255,.14); color: #fff; }
+</style>

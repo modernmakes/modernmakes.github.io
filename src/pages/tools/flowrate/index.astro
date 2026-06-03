@@ -1,0 +1,285 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Volumetric Flow Rate Calculator — 3D Printing"
+  description="Calculate your printer's volumetric flow rate from layer height, line width, and print speed. Know exactly what your hotend needs to deliver."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Flow Rate Calculator</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calculator</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Flow Rate Calculator</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Enter your print settings to calculate the volumetric flow rate your hotend must sustain. Compare the result against your hotend's rated maximum.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">mm³/s</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Hotend Matching</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="tc-wrap">
+    <div class="tc-inner">
+
+      <!-- LEFT: INPUTS -->
+      <aside class="tc-sidebar">
+        <div class="tc-section-label">Print Settings</div>
+
+        <div class="tc-field">
+          <label class="tc-label" for="layerH">Layer Height (mm)</label>
+          <input class="tc-input" type="number" id="layerH" value="0.20" min="0.05" max="1.0" step="0.01">
+        </div>
+
+        <div class="tc-field">
+          <label class="tc-label" for="lineW">Line Width (mm)</label>
+          <input class="tc-input" type="number" id="lineW" value="0.45" min="0.1" max="2.0" step="0.01">
+        </div>
+
+        <div class="tc-field">
+          <label class="tc-label" for="speed">Print Speed (mm/s)</label>
+          <input class="tc-input" type="number" id="speed" value="100" min="1" max="1000" step="1">
+        </div>
+
+        <div class="tc-divider"></div>
+        <div class="tc-section-label" style="margin-top:0">Quick Presets</div>
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <button class="tc-preset-btn" data-lh="0.20" data-lw="0.45" data-spd="100">Standard (0.4mm nozzle)</button>
+          <button class="tc-preset-btn" data-lh="0.30" data-lw="0.60" data-spd="150">Speed PLA (0.6mm nozzle)</button>
+          <button class="tc-preset-btn" data-lh="0.30" data-lw="0.60" data-spd="300">High-speed (0.6mm)</button>
+          <button class="tc-preset-btn" data-lh="0.40" data-lw="0.80" data-spd="200">Draft (0.8mm nozzle)</button>
+        </div>
+      </aside>
+
+      <!-- RIGHT: RESULT -->
+      <main class="tc-output">
+
+        <!-- Result display -->
+        <div class="tc-result-dark">
+          <div class="tc-result-eyebrow">Volumetric Flow Rate</div>
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <div class="tc-result-num" id="flowResult">9.0</div>
+            <div class="tc-result-unit">mm³/s</div>
+          </div>
+          <div class="tc-formula" id="formulaLine">0.20 × 0.45 × 100 = 9.0 mm³/s</div>
+          <button class="tc-copy-btn" id="copyBtn">Copy result</button>
+        </div>
+
+        <!-- Tier card -->
+        <div class="tc-tier-card" id="tierCard">
+          <div class="tc-tier-dot" id="tierDot"></div>
+          <div>
+            <div class="tc-tier-label" id="tierLabel">Any standard hotend</div>
+            <div class="tc-tier-desc" id="tierDesc">Any hotend handles this flow rate comfortably.</div>
+          </div>
+        </div>
+
+        <!-- Hotend reference table -->
+        <div class="tc-ref-card">
+          <div class="tc-ref-title">Hotend Flow Tiers</div>
+          <table class="tc-ref-table">
+            <thead>
+              <tr>
+                <th>Flow range</th>
+                <th>Tier</th>
+                <th>Example hotends</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0 – 15 mm³/s</td>
+                <td><span class="tc-badge tc-badge-ok">Any</span></td>
+                <td>V6, Dragon Standard, Bambu stock</td>
+              </tr>
+              <tr>
+                <td>15 – 45 mm³/s</td>
+                <td><span class="tc-badge tc-badge-mid">Standard</span></td>
+                <td>Dragon HF, Rapido 2 HF, Chube</td>
+              </tr>
+              <tr>
+                <td>45 – 75 mm³/s</td>
+                <td><span class="tc-badge tc-badge-high">High-flow</span></td>
+                <td>Rapido 2 UHF, Dragon UHF</td>
+              </tr>
+              <tr>
+                <td>75+ mm³/s</td>
+                <td><span class="tc-badge tc-badge-extreme">Extreme</span></td>
+                <td>Goliath Air/Water, Chube Air</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Volumetric Flow Rate Calculator",
+        "description": "Calculate the volumetric flow rate for 3D printing based on layer height, line width, and print speed.",
+        "url": "https://modernmakes.github.io/tools/flowrate",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Flow Rate Calculator", "item": "https://modernmakes.github.io/tools/flowrate" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.tc-wrap { background: var(--bg); padding: 40px 0 64px; }
+.tc-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start;
+}
+.tc-sidebar {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+}
+.tc-output { display: flex; flex-direction: column; gap: 16px; }
+.tc-section-label {
+  font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--g2); margin-bottom: 14px;
+}
+.tc-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.tc-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.tc-input, .tc-select {
+  font-family: var(--fm); font-size: 13px; color: var(--black);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
+  padding: 8px 10px; width: 100%; transition: border-color .12s;
+}
+.tc-input:focus, .tc-select:focus { outline: none; border-color: var(--accent); }
+.tc-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+.tc-preset-btn {
+  font-family: var(--fu); font-size: 11px; font-weight: 600; text-align: left;
+  padding: 7px 12px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 5px; cursor: pointer; color: var(--g1); transition: all .12s;
+}
+.tc-preset-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,90,31,.04); }
+
+.tc-result-dark {
+  background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 10px;
+  padding: 28px 32px;
+}
+.tc-result-eyebrow { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: 8px; }
+.tc-result-num { font-family: var(--fd); font-size: 72px; font-weight: 800; color: var(--accent); line-height: 1; }
+.tc-result-unit { font-family: var(--fm); font-size: 18px; color: rgba(255,255,255,.4); }
+.tc-formula { font-family: var(--fm); font-size: 11px; color: rgba(255,255,255,.3); margin-top: 10px; }
+.tc-copy-btn {
+  font-family: var(--fu); font-size: 11px; font-weight: 700; margin-top: 14px;
+  padding: 7px 16px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.6);
+  border: 1px solid rgba(255,255,255,.14); border-radius: 5px; cursor: pointer; transition: all .12s;
+}
+.tc-copy-btn:hover { background: rgba(255,255,255,.13); }
+.tc-copy-btn.copied { background: rgba(74,222,128,.15); color: #4ade80; border-color: rgba(74,222,128,.3); }
+
+.tc-tier-card {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px;
+}
+.tc-tier-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+.tc-tier-dot.ok      { background: #4ade80; }
+.tc-tier-dot.mid     { background: #fbbf24; }
+.tc-tier-dot.high    { background: var(--accent); }
+.tc-tier-dot.extreme { background: #ef4444; }
+.tc-tier-label { font-family: var(--fd); font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
+.tc-tier-desc { font-family: var(--fb); font-size: 13px; color: var(--g1); line-height: 1.55; }
+
+.tc-ref-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.tc-ref-title { font-family: var(--fd); font-size: 18px; font-weight: 800; color: var(--black); margin-bottom: 14px; }
+.tc-ref-table { width: 100%; border-collapse: collapse; }
+.tc-ref-table th { font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--g2); padding: 6px 12px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+.tc-ref-table td { font-family: var(--fb); font-size: 13px; color: var(--g1); padding: 9px 12px; border-bottom: 1px solid var(--border); }
+.tc-ref-table tr:last-child td { border-bottom: none; }
+.tc-ref-table td:first-child { font-family: var(--fm); font-size: 12px; color: var(--black); }
+.tc-badge { font-family: var(--fm); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; }
+.tc-badge-ok      { background: rgba(74,222,128,.12); color: #22c55e; }
+.tc-badge-mid     { background: rgba(251,191,36,.12); color: #d97706; }
+.tc-badge-high    { background: rgba(255,90,31,.12); color: var(--accent); }
+.tc-badge-extreme { background: rgba(239,68,68,.12); color: #ef4444; }
+
+@media (max-width: 860px)  { .tc-inner { grid-template-columns: 1fr; } }
+@media (max-width: 768px)  { .tc-wrap { padding: 20px 0 48px; } .tc-inner { padding: 0 20px; } }
+</style>
+
+<script>
+const TIERS = [
+  { max: 15,   cls: 'ok',      label: 'Any standard hotend',       desc: 'Any hotend handles this comfortably. No upgrade needed.' },
+  { max: 45,   cls: 'mid',     label: 'Standard high-flow hotend',  desc: 'A Dragon HF, Rapido 2 HF, or similar handles this. Standard E3D V6 may struggle at the upper end.' },
+  { max: 75,   cls: 'high',    label: 'High-flow hotend required',  desc: 'You need a UHF hotend — Rapido 2 UHF, Dragon UHF, or equivalent. Pair with a 0.6mm+ nozzle.' },
+  { max: 9999, cls: 'extreme', label: 'Extreme-flow hotend only',   desc: 'Only a Goliath Air/Water, Chube Air, or similar extreme-flow design can sustain this. Typically requires 0.8mm+ nozzle.' },
+];
+
+function calc() {
+  const lh  = parseFloat((document.getElementById('layerH') as HTMLInputElement).value) || 0;
+  const lw  = parseFloat((document.getElementById('lineW')  as HTMLInputElement).value) || 0;
+  const spd = parseFloat((document.getElementById('speed')  as HTMLInputElement).value) || 0;
+  const flow = lh * lw * spd;
+
+  (document.getElementById('flowResult') as HTMLElement).textContent = flow.toFixed(1);
+  (document.getElementById('formulaLine') as HTMLElement).textContent =
+    `${lh.toFixed(2)} × ${lw.toFixed(2)} × ${spd.toFixed(0)} = ${flow.toFixed(1)} mm³/s`;
+
+  const tier = TIERS.find(t => flow <= t.max) ?? TIERS[TIERS.length - 1];
+  const dot  = document.getElementById('tierDot') as HTMLElement;
+  dot.className = `tc-tier-dot ${tier.cls}`;
+  (document.getElementById('tierLabel') as HTMLElement).textContent = tier.label;
+  (document.getElementById('tierDesc')  as HTMLElement).textContent = tier.desc;
+}
+
+document.querySelectorAll<HTMLInputElement>('.tc-input').forEach(el =>
+  el.addEventListener('input', calc)
+);
+
+document.querySelectorAll<HTMLButtonElement>('.tc-preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    (document.getElementById('layerH') as HTMLInputElement).value = btn.dataset.lh ?? '0.2';
+    (document.getElementById('lineW')  as HTMLInputElement).value = btn.dataset.lw ?? '0.45';
+    (document.getElementById('speed')  as HTMLInputElement).value = btn.dataset.spd ?? '100';
+    calc();
+  });
+});
+
+document.getElementById('copyBtn')?.addEventListener('click', async () => {
+  const lh  = (document.getElementById('layerH') as HTMLInputElement).value;
+  const lw  = (document.getElementById('lineW')  as HTMLInputElement).value;
+  const spd = (document.getElementById('speed')  as HTMLInputElement).value;
+  const flow = (parseFloat(lh) * parseFloat(lw) * parseFloat(spd)).toFixed(1);
+  try {
+    await navigator.clipboard.writeText(`${flow} mm³/s`);
+    const btn = document.getElementById('copyBtn') as HTMLButtonElement;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy result'; btn.classList.remove('copied'); }, 2000);
+  } catch {}
+});
+
+calc();
+</script>

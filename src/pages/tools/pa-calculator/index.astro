@@ -1,0 +1,380 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="PA Calculator — Pressure Advance Speed/Accel Grid"
+  description="Build a Pressure Advance grid mapping PA values across multiple speeds and accelerations. Import OrcaSlicer PA sweep results directly."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">PA Calculator</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calibration Tool</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">PA Calculator</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Map your Pressure Advance values across a grid of speeds and accelerations. Paste OrcaSlicer PA sweep output to auto-fill.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper PA</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">OrcaSlicer Import</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="pac-wrap">
+    <div class="pac-inner">
+
+      <!-- TOP: SETTINGS -->
+      <div class="pac-settings-bar">
+        <div class="pac-field-group">
+          <label class="pac-label" for="lineW">Line Width (mm)</label>
+          <input class="pac-input" type="number" id="lineW" value="0.45" min="0.1" max="2.0" step="0.01">
+        </div>
+        <div class="pac-field-group">
+          <label class="pac-label" for="layerH">Layer Height (mm)</label>
+          <input class="pac-input" type="number" id="layerH" value="0.20" min="0.05" max="1.0" step="0.01">
+        </div>
+        <div class="pac-field-group" style="flex:2">
+          <label class="pac-label" for="speedsInput">Speeds — mm/s (comma-separated, up to 6)</label>
+          <input class="pac-input" type="text" id="speedsInput" value="100, 150, 200, 250">
+        </div>
+        <div class="pac-field-group" style="flex:2">
+          <label class="pac-label" for="accelsInput">Accelerations — mm/s² (comma-separated, up to 6)</label>
+          <input class="pac-input" type="text" id="accelsInput" value="2000, 3000, 5000">
+        </div>
+      </div>
+
+      <!-- GRID -->
+      <div class="pac-grid-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:var(--black)">PA Value Grid</div>
+          <button class="pac-btn-ghost" id="clearGridBtn">Clear grid</button>
+        </div>
+        <div class="pac-table-scroll">
+          <table class="pac-grid-table" id="paGrid">
+            <!-- Rendered by JS -->
+          </table>
+        </div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="pac-output-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:var(--black)">Output Strings</div>
+          <button class="pac-btn-copy-all" id="copyAllBtn">Copy all</button>
+        </div>
+        <div id="outputLines" class="pac-output-lines">
+          <div class="pac-output-empty">Fill in PA values above to generate output strings.</div>
+        </div>
+      </div>
+
+      <!-- IMPORT -->
+      <div class="pac-import-card">
+        <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:var(--black);margin-bottom:8px">Import from OrcaSlicer</div>
+        <p style="font-family:var(--fb);font-size:13px;color:var(--g1);margin:0 0 12px;line-height:1.6">
+          Paste PA sweep triplets from OrcaSlicer — one per line in format: <code class="pac-code">pa_value, flow_mm3s, accel</code>
+        </p>
+        <textarea class="pac-textarea" id="importPaste" rows="5" placeholder="0.020, 8.0, 2000&#10;0.022, 12.0, 2000&#10;0.025, 8.0, 3000"></textarea>
+        <button class="pac-btn-import" id="importBtn">Import & auto-fill grid</button>
+        <div id="importStatus" class="pac-import-status"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "PA Calculator — Pressure Advance Grid",
+        "description": "Map Pressure Advance values across speeds and accelerations, with OrcaSlicer import support.",
+        "url": "https://modernmakes.github.io/tools/pa-calculator",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "PA Calculator", "item": "https://modernmakes.github.io/tools/pa-calculator" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.pac-wrap { background: var(--bg); padding: 40px 0 64px; }
+.pac-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; gap: 20px; }
+
+.pac-settings-bar {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;
+}
+.pac-field-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 120px; }
+.pac-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.pac-input {
+  font-family: var(--fm); font-size: 13px; color: var(--black);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 5px;
+  padding: 8px 10px; width: 100%; transition: border-color .12s;
+}
+.pac-input:focus { outline: none; border-color: var(--accent); }
+
+.pac-grid-card, .pac-output-card, .pac-import-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px;
+}
+.pac-table-scroll { overflow-x: auto; }
+.pac-grid-table { border-collapse: collapse; min-width: 100%; }
+.pac-grid-table th {
+  font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--g2); padding: 8px 14px; border-bottom: 1px solid var(--border); text-align: center;
+  white-space: nowrap;
+}
+.pac-grid-table th.pac-th-accel { text-align: left; min-width: 120px; }
+.pac-grid-table td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: center; }
+.pac-grid-table tr:last-child td { border-bottom: none; }
+.pac-td-accel {
+  font-family: var(--fm); font-size: 12px; color: var(--g1); text-align: left;
+  padding: 6px 14px; white-space: nowrap;
+}
+.pac-cell-input {
+  font-family: var(--fm); font-size: 13px; color: var(--black);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  padding: 6px 8px; width: 80px; text-align: center; transition: border-color .12s;
+}
+.pac-cell-input:focus { outline: none; border-color: var(--accent); }
+.pac-cell-input.has-value { border-color: rgba(255,90,31,.4); background: rgba(255,90,31,.04); }
+
+.pac-output-lines { display: flex; flex-direction: column; gap: 6px; }
+.pac-output-empty { font-family: var(--fm); font-size: 12px; color: var(--g2); padding: 12px 0; }
+.pac-output-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: #0d0d0d; border-radius: 5px; padding: 10px 14px;
+}
+.pac-output-text { font-family: var(--fm); font-size: 12px; color: #ccc; flex: 1; }
+.pac-copy-row-btn {
+  font-family: var(--fu); font-size: 10px; font-weight: 600; padding: 4px 10px;
+  background: rgba(255,255,255,.07); color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.12); border-radius: 3px; cursor: pointer; flex-shrink: 0;
+  transition: all .12s; white-space: nowrap;
+}
+.pac-copy-row-btn:hover { background: rgba(255,255,255,.14); color: rgba(255,255,255,.8); }
+.pac-copy-row-btn.copied { background: rgba(74,222,128,.15); color: #4ade80; border-color: rgba(74,222,128,.3); }
+
+.pac-btn-copy-all {
+  font-family: var(--fu); font-size: 12px; font-weight: 700; padding: 8px 18px;
+  background: var(--black); color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background .12s;
+}
+.pac-btn-copy-all:hover { background: #333; }
+.pac-btn-copy-all.copied { background: #1a7a1a; }
+.pac-btn-ghost {
+  font-family: var(--fu); font-size: 11px; font-weight: 600; padding: 6px 12px;
+  background: transparent; color: var(--g2); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; transition: all .12s;
+}
+.pac-btn-ghost:hover { border-color: var(--g1); color: var(--g1); }
+
+.pac-textarea {
+  font-family: var(--fm); font-size: 12px; color: var(--black); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 5px; padding: 10px 12px; width: 100%;
+  resize: vertical; transition: border-color .12s;
+}
+.pac-textarea:focus { outline: none; border-color: var(--accent); }
+.pac-btn-import {
+  font-family: var(--fu); font-size: 12px; font-weight: 700; padding: 9px 20px;
+  background: var(--accent); color: #fff; border: none; border-radius: 5px; cursor: pointer;
+  margin-top: 10px; transition: opacity .12s;
+}
+.pac-btn-import:hover { opacity: .88; }
+.pac-import-status { margin-top: 8px; font-family: var(--fm); font-size: 11px; color: var(--g2); }
+.pac-code { font-family: var(--fm); font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent); }
+
+@media (max-width: 768px) { .pac-wrap { padding: 20px 0 48px; } .pac-inner { padding: 0 20px; } .pac-settings-bar { flex-direction: column; } }
+</style>
+
+<script>
+let gridData: Record<string, string> = {};
+
+function parseList(raw: string, max: number): number[] {
+  return raw.split(',').map(s => parseFloat(s.trim())).filter(n => !isNaN(n) && n > 0).slice(0, max);
+}
+function getLineW() { return parseFloat((document.getElementById('lineW') as HTMLInputElement).value) || 0.45; }
+function getLayerH() { return parseFloat((document.getElementById('layerH') as HTMLInputElement).value) || 0.20; }
+function getSpeeds() { return parseList((document.getElementById('speedsInput') as HTMLInputElement).value, 6); }
+function getAccels() { return parseList((document.getElementById('accelsInput') as HTMLInputElement).value, 6); }
+function cellKey(accelIdx: number, speedIdx: number) { return `${accelIdx}-${speedIdx}`; }
+function flow(speed: number) { return (speed * getLineW() * getLayerH()).toFixed(1); }
+
+function renderGrid() {
+  const table = document.getElementById('paGrid') as HTMLTableElement;
+  const speeds = getSpeeds();
+  const accels = getAccels();
+  if (!speeds.length || !accels.length) { table.innerHTML = ''; return; }
+
+  let html = '<thead><tr><th class="pac-th-accel">Accel (mm/s²)</th>';
+  for (const s of speeds) {
+    html += `<th>${s} mm/s<br><span style="font-size:9px;color:#aaa">${flow(s)} mm³/s</span></th>`;
+  }
+  html += '</tr></thead><tbody>';
+
+  for (let ai = 0; ai < accels.length; ai++) {
+    html += `<tr><td class="pac-td-accel">${accels[ai].toLocaleString()}</td>`;
+    for (let si = 0; si < speeds.length; si++) {
+      const key = cellKey(ai, si);
+      const val = gridData[key] ?? '';
+      html += `<td><input class="pac-cell-input${val ? ' has-value' : ''}" type="number" step="0.001" min="0" max="2" placeholder="PA" data-key="${key}" value="${val}"></td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</tbody>';
+  table.innerHTML = html;
+
+  table.querySelectorAll<HTMLInputElement>('.pac-cell-input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const k = inp.dataset.key ?? '';
+      if (inp.value.trim()) {
+        gridData[k] = inp.value;
+        inp.classList.add('has-value');
+      } else {
+        delete gridData[k];
+        inp.classList.remove('has-value');
+      }
+      renderOutput();
+    });
+  });
+
+  renderOutput();
+}
+
+function renderOutput() {
+  const speeds = getSpeeds();
+  const accels = getAccels();
+  const linesEl = document.getElementById('outputLines') as HTMLElement;
+  const rows: string[] = [];
+
+  for (let ai = 0; ai < accels.length; ai++) {
+    for (let si = 0; si < speeds.length; si++) {
+      const key = cellKey(ai, si);
+      const pa = gridData[key];
+      if (pa && parseFloat(pa) >= 0) {
+        rows.push(`PA=${parseFloat(pa).toFixed(3)}, Flow=${flow(speeds[si])}mm³/s, Accel=${accels[ai]}mm/s²`);
+      }
+    }
+  }
+
+  if (!rows.length) {
+    linesEl.innerHTML = '<div class="pac-output-empty">Fill in PA values above to generate output strings.</div>';
+    return;
+  }
+
+  linesEl.innerHTML = rows.map((txt, i) =>
+    `<div class="pac-output-row">
+      <div class="pac-output-text">${txt}</div>
+      <button class="pac-copy-row-btn" data-idx="${i}">Copy</button>
+    </div>`
+  ).join('');
+
+  linesEl.querySelectorAll<HTMLButtonElement>('.pac-copy-row-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const idx = parseInt(btn.dataset.idx ?? '0');
+      try {
+        await navigator.clipboard.writeText(rows[idx]);
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+      } catch {}
+    });
+  });
+}
+
+document.getElementById('clearGridBtn')?.addEventListener('click', () => {
+  gridData = {};
+  renderGrid();
+});
+
+document.getElementById('copyAllBtn')?.addEventListener('click', async () => {
+  const speeds = getSpeeds();
+  const accels = getAccels();
+  const lines: string[] = [];
+  for (let ai = 0; ai < accels.length; ai++) {
+    for (let si = 0; si < speeds.length; si++) {
+      const pa = gridData[cellKey(ai, si)];
+      if (pa && parseFloat(pa) >= 0) {
+        lines.push(`PA=${parseFloat(pa).toFixed(3)}, Flow=${flow(speeds[si])}mm³/s, Accel=${accels[ai]}mm/s²`);
+      }
+    }
+  }
+  if (!lines.length) return;
+  try {
+    await navigator.clipboard.writeText(lines.join('\n'));
+    const btn = document.getElementById('copyAllBtn') as HTMLButtonElement;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy all'; btn.classList.remove('copied'); }, 2000);
+  } catch {}
+});
+
+document.getElementById('importBtn')?.addEventListener('click', () => {
+  const raw = (document.getElementById('importPaste') as HTMLTextAreaElement).value.trim();
+  const statusEl = document.getElementById('importStatus') as HTMLElement;
+  if (!raw) { statusEl.textContent = 'Paste data first.'; return; }
+
+  const triplets: Array<{pa: number; flowVal: number; accel: number}> = [];
+  for (const line of raw.split('\n')) {
+    const clean = line.replace(/[PApa=\s]/g, '').replace(/[Ff]low[=:]?/i, '').replace(/[Aa]ccel[=:]?/i, '');
+    const parts = line.replace(/[A-Za-z=\s]/g, '').split(',');
+    if (parts.length >= 3) {
+      const pa = parseFloat(parts[0]);
+      const fl = parseFloat(parts[1]);
+      const ac = parseFloat(parts[2]);
+      if (!isNaN(pa) && !isNaN(fl) && !isNaN(ac)) triplets.push({ pa, flowVal: fl, accel: ac });
+    }
+  }
+
+  if (!triplets.length) { statusEl.textContent = '⚠ Could not parse any triplets. Expected format: pa_value, flow, accel'; return; }
+
+  const lineW = getLineW();
+  const layerH = getLayerH();
+  const uniqueFlows = [...new Set(triplets.map(t => t.flowVal))].sort((a, b) => a - b);
+  const uniqueAccels = [...new Set(triplets.map(t => t.accel))].sort((a, b) => a - b);
+  const inferredSpeeds = uniqueFlows.map(f => +(f / (lineW * layerH)).toFixed(0));
+
+  (document.getElementById('speedsInput') as HTMLInputElement).value = inferredSpeeds.join(', ');
+  (document.getElementById('accelsInput') as HTMLInputElement).value = uniqueAccels.join(', ');
+  renderGrid();
+
+  const speeds = inferredSpeeds;
+  const accels = uniqueAccels;
+  let filled = 0;
+  for (const t of triplets) {
+    const si = uniqueFlows.indexOf(t.flowVal);
+    const ai = accels.indexOf(t.accel);
+    if (si >= 0 && ai >= 0) {
+      gridData[cellKey(ai, si)] = t.pa.toFixed(3);
+      filled++;
+    }
+  }
+  renderGrid();
+  statusEl.textContent = `✓ Imported ${filled} values across ${uniqueAccels.length} accel × ${uniqueFlows.length} speed.`;
+});
+
+['lineW', 'layerH', 'speedsInput', 'accelsInput'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', renderGrid);
+});
+
+renderGrid();
+</script>

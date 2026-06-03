@@ -1,0 +1,481 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Klipper Pin Mapper — BTT, Fysetc, LDO Board Pin Reference"
+  description="Quick-reference pin lookup for common Klipper control boards. Find step, dir, enable, thermistor, heater, fan, and endstop pin names without digging through docs."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Pin Mapper</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Reference Tool</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Klipper Pin Mapper</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Quick-reference pin names for common Klipper boards. Select your board, search by function, and copy pin names directly into your config.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper pins</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">BTT · Fysetc · LDO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="pm-wrap">
+    <div class="pm-inner">
+
+      <!-- Controls bar -->
+      <div class="pm-controls">
+        <div class="pm-ctrl-field">
+          <label class="pm-label" for="boardSel">Board</label>
+          <select class="pm-select" id="boardSel">
+            <option value="octopus-v1">BTT Octopus v1.1</option>
+            <option value="octopus-pro">BTT Octopus Pro v1.0/1.1</option>
+            <option value="manta-m8p-v1">BTT Manta M8P v1.0</option>
+            <option value="manta-m8p-v2">BTT Manta M8P v2.0</option>
+            <option value="skr3">BTT SKR 3 / SKR 3 EZ</option>
+            <option value="spider">Fysetc Spider v2.2</option>
+            <option value="leviathan">LDO Leviathan v1.2</option>
+          </select>
+        </div>
+        <div class="pm-ctrl-field" style="flex:2">
+          <label class="pm-label" for="pinSearch">Search pins</label>
+          <input class="pm-input" type="text" id="pinSearch" placeholder="e.g. stepper, fan, probe, heater…">
+        </div>
+        <div class="pm-board-info">
+          <div class="pm-board-mcu" id="boardMcu">STM32F446ZET6</div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="pm-table-card">
+        <table class="pm-table" id="pinTable">
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Config key</th>
+              <th>Pin</th>
+              <th>Notes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="pinTableBody">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="pm-disclaimer">
+        <strong>Verify against documentation.</strong> Pin assignments can vary between board revisions. Always cross-check with your board's official Klipper config template or schematic before flashing.
+        Klipper sample configs: <a href="https://github.com/Klipper3d/klipper/tree/master/config" target="_blank" rel="noopener">github.com/Klipper3d/klipper/config</a>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Klipper Pin Mapper",
+        "description": "Quick-reference pin lookup tool for common Klipper 3D printer control boards.",
+        "url": "https://modernmakes.github.io/tools/pin-mapper",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Pin Mapper", "item": "https://modernmakes.github.io/tools/pin-mapper" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.pm-wrap { background: var(--bg); padding: 40px 0 64px; }
+.pm-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; gap: 20px; }
+.pm-controls {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px; display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;
+}
+.pm-ctrl-field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 180px; }
+.pm-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.pm-select, .pm-input {
+  font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 5px; padding: 8px 10px; width: 100%; transition: border-color .12s;
+}
+.pm-select:focus, .pm-input:focus { outline: none; border-color: var(--accent); }
+.pm-board-info { display: flex; align-items: flex-end; padding-bottom: 2px; }
+.pm-board-mcu { font-family: var(--fm); font-size: 11px; color: var(--g2); background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; white-space: nowrap; }
+
+.pm-table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; overflow-x: auto; }
+.pm-table { width: 100%; border-collapse: collapse; }
+.pm-table thead { background: var(--bg); }
+.pm-table th {
+  font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--g2); padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border);
+}
+.pm-table td { padding: 9px 16px; border-bottom: 1px solid var(--border); }
+.pm-table tbody tr:last-child td { border-bottom: none; }
+.pm-table tbody tr:hover { background: rgba(255,90,31,.03); }
+.pm-func { font-family: var(--fu); font-size: 13px; color: var(--black); font-weight: 600; }
+.pm-key { font-family: var(--fm); font-size: 11px; color: var(--g2); }
+.pm-pin {
+  font-family: var(--fm); font-size: 13px; font-weight: 600; color: var(--accent);
+  background: rgba(255,90,31,.08); border: 1px solid rgba(255,90,31,.2);
+  border-radius: 3px; padding: 2px 8px; display: inline-block;
+}
+.pm-pin-neg { color: #60a5fa; background: rgba(96,165,250,.08); border-color: rgba(96,165,250,.2); }
+.pm-note { font-family: var(--fu); font-size: 11px; color: var(--g2); }
+.pm-copy-pin {
+  font-family: var(--fu); font-size: 10px; font-weight: 600; padding: 4px 10px;
+  background: var(--bg); color: var(--g2); border: 1px solid var(--border); border-radius: 3px;
+  cursor: pointer; transition: all .12s; white-space: nowrap;
+}
+.pm-copy-pin:hover { border-color: var(--accent); color: var(--accent); }
+.pm-copy-pin.copied { background: rgba(74,222,128,.12); color: #22c55e; border-color: rgba(74,222,128,.3); }
+.pm-section-row td { background: var(--bg); }
+.pm-section-row .pm-section-label { font-family: var(--fu); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--g2); }
+.pm-no-results { font-family: var(--fm); font-size: 13px; color: var(--g2); padding: 20px 16px; }
+
+.pm-disclaimer {
+  font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.6;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px;
+}
+.pm-disclaimer a { color: var(--accent); text-decoration: none; }
+.pm-disclaimer a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) { .pm-wrap { padding: 20px 0 48px; } .pm-inner { padding: 0 20px; } .pm-controls { flex-direction: column; } }
+</style>
+
+<script>
+interface PinRow {
+  func: string;
+  key: string;
+  pin: string;
+  note: string;
+  section?: string;
+}
+
+interface BoardData {
+  mcu: string;
+  pins: PinRow[];
+}
+
+const BOARDS: Record<string, BoardData> = {
+  'octopus-v1': {
+    mcu: 'STM32F446ZET6',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PF13', note: 'MOT0 · dir=PF12 · en=!PF14 · uart=PC4' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PG0',  note: 'MOT1 · dir=PG1 · en=!PF15 · uart=PD11' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PF11', note: 'MOT2 · dir=PG3 · en=!PG5 · uart=PC6' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PG4',  note: 'MOT3 · dir=PC1 · en=!PA0 · uart=PC7' },
+      { func: 'Stepper Z2', key: 'step_pin', pin: 'PF9',  note: 'MOT4 · dir=PF10 · en=!PG2 · uart=PF2' },
+      { func: 'Stepper Z3', key: 'step_pin', pin: 'PC13', note: 'MOT5 · dir=PF0 · en=!PF1 · uart=PE4' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PE2',  note: 'MOT6 · dir=PE3 · en=!PD4 · uart=PE1' },
+      { func: 'Stepper E1', key: 'step_pin', pin: 'PE6',  note: 'MOT7 · dir=PA14 · en=!PE0 · uart=PD3' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X',   key: 'endstop_pin', pin: 'PG6',  note: 'STOP_0 — pull up active' },
+      { func: 'Endstop Y',   key: 'endstop_pin', pin: 'PG9',  note: 'STOP_1' },
+      { func: 'Endstop Z',   key: 'endstop_pin', pin: 'PG10', note: 'STOP_2' },
+      { func: 'STOP 3–7',    key: 'endstop_pin', pin: 'PG11–PG15', note: 'Additional endstop/probe connections' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0', key: 'sensor_pin', pin: 'PF4', note: 'Hotend 0 NTC — 4.7kΩ pullup' },
+      { func: 'Thermistor T1', key: 'sensor_pin', pin: 'PF5', note: 'Hotend 1 NTC' },
+      { func: 'Thermistor T2', key: 'sensor_pin', pin: 'PF6', note: 'Hotend 2 NTC' },
+      { func: 'Thermistor T3', key: 'sensor_pin', pin: 'PF7', note: 'Hotend 3 NTC' },
+      { func: 'Bed Thermistor', key: 'sensor_pin', pin: 'PF3', note: 'TB — bed NTC' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0', key: 'heater_pin', pin: 'PA2', note: 'HE0 — 60W max' },
+      { func: 'Heater E1', key: 'heater_pin', pin: 'PA3', note: 'HE1' },
+      { func: 'Heater E2', key: 'heater_pin', pin: 'PB10', note: 'HE2' },
+      { func: 'Heater E3', key: 'heater_pin', pin: 'PB11', note: 'HE3' },
+      { func: 'Heated Bed', key: 'heater_pin', pin: 'PA1', note: 'BED — high-current MOSFET' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0 (Part cooling)', key: 'pin', pin: 'PA8',  note: 'FAN0 — PWM' },
+      { func: 'Fan 1 (Hotend)',       key: 'pin', pin: 'PE5',  note: 'FAN1 — always-on capable' },
+      { func: 'Fan 2 (Controller)',   key: 'pin', pin: 'PD12', note: 'FAN2' },
+      { func: 'Fan 3',                key: 'pin', pin: 'PD13', note: 'FAN3' },
+      { func: 'Fan 4',                key: 'pin', pin: 'PD14', note: 'FAN4' },
+      { func: 'Fan 5',                key: 'pin', pin: 'PD15', note: 'FAN5' },
+      { func: '', key: '', pin: '', note: '', section: 'Probe / RGB' },
+      { func: 'Probe',   key: 'pin', pin: 'PB7',  note: 'Probe connector — pull-up varies' },
+      { func: 'Neopixel', key: 'pin', pin: 'PB0', note: 'Onboard WS2812 RGB LED' },
+    ]
+  },
+  'octopus-pro': {
+    mcu: 'STM32F429ZGT6 / STM32H723ZGT6',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PF13', note: 'MOT0 · dir=PF12 · en=!PF14 · uart=PC4' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PG0',  note: 'MOT1 · dir=PG1 · en=!PF15 · uart=PD11' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PF11', note: 'MOT2 · dir=PG3 · en=!PG5 · uart=PC6' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PG4',  note: 'MOT3 · dir=PC1 · en=!PA0 · uart=PC7' },
+      { func: 'Stepper Z2', key: 'step_pin', pin: 'PF9',  note: 'MOT4 · dir=PF10 · en=!PG2 · uart=PF2' },
+      { func: 'Stepper Z3', key: 'step_pin', pin: 'PC13', note: 'MOT5 · dir=PF0 · en=!PF1 · uart=PE4' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PE2',  note: 'MOT6 · dir=PE3 · en=!PD4 · uart=PE1' },
+      { func: 'Stepper E1', key: 'step_pin', pin: 'PE6',  note: 'MOT7 · dir=PA14 · en=!PE0 · uart=PD3' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X', key: 'endstop_pin', pin: 'PG6',  note: 'STOP_0' },
+      { func: 'Endstop Y', key: 'endstop_pin', pin: 'PG9',  note: 'STOP_1' },
+      { func: 'Endstop Z', key: 'endstop_pin', pin: 'PG10', note: 'STOP_2' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0', key: 'sensor_pin', pin: 'PF4', note: 'Hotend 0' },
+      { func: 'Thermistor T1', key: 'sensor_pin', pin: 'PF5', note: 'Hotend 1' },
+      { func: 'Thermistor T2', key: 'sensor_pin', pin: 'PF6', note: 'Hotend 2' },
+      { func: 'Thermistor T3', key: 'sensor_pin', pin: 'PF7', note: 'Hotend 3' },
+      { func: 'Bed Thermistor', key: 'sensor_pin', pin: 'PF3', note: 'TB' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0',   key: 'heater_pin', pin: 'PA2', note: 'HE0' },
+      { func: 'Heater E1',   key: 'heater_pin', pin: 'PA3', note: 'HE1' },
+      { func: 'Heated Bed',  key: 'heater_pin', pin: 'PA1', note: 'BED' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0', key: 'pin', pin: 'PA8',  note: 'FAN0 — part cooling' },
+      { func: 'Fan 1', key: 'pin', pin: 'PE5',  note: 'FAN1 — hotend' },
+      { func: 'Fan 2', key: 'pin', pin: 'PD12', note: 'FAN2 — controller' },
+    ]
+  },
+  'manta-m8p-v1': {
+    mcu: 'STM32G0B1RET6 (with CB2/CM4 host)',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PE6',  note: 'M1 · dir=PE5 · en=!PC14 · uart=PB12' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PE2',  note: 'M2 · dir=PE1 · en=!PE4 · uart=PC9' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PB8',  note: 'M3 · dir=PB7 · en=!PE0 · uart=PA9' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PB4',  note: 'M4 · dir=PB3 · en=!PB6 · uart=PA10' },
+      { func: 'Stepper Z2', key: 'step_pin', pin: 'PG13', note: 'M5 · dir=PG12 · en=!PG15 · uart=PB2' },
+      { func: 'Stepper Z3', key: 'step_pin', pin: 'PG9',  note: 'M6 · dir=PD7 · en=!PG11 · uart=PD6' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PA10', note: 'M7 · dir=PA9 · en=!PA15 · uart=PF13' },
+      { func: 'Stepper E1', key: 'step_pin', pin: 'PD11', note: 'M8 · dir=PD9 · en=!PD12 · uart=PD10' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X', key: 'endstop_pin', pin: 'PD8',  note: 'STOP0' },
+      { func: 'Endstop Y', key: 'endstop_pin', pin: 'PC15', note: 'STOP1' },
+      { func: 'Endstop Z', key: 'endstop_pin', pin: 'PB10', note: 'STOP2 / Z-stop' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0',  key: 'sensor_pin', pin: 'PA1', note: 'Hotend 0 — 2.2kΩ pullup' },
+      { func: 'Thermistor T1',  key: 'sensor_pin', pin: 'PA2', note: 'Hotend 1' },
+      { func: 'Thermistor T2',  key: 'sensor_pin', pin: 'PA3', note: 'Hotend 2' },
+      { func: 'Bed Thermistor', key: 'sensor_pin', pin: 'PB0', note: 'THB — bed NTC' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0',  key: 'heater_pin', pin: 'PF6', note: 'HE0' },
+      { func: 'Heater E1',  key: 'heater_pin', pin: 'PF7', note: 'HE1' },
+      { func: 'Heater E2',  key: 'heater_pin', pin: 'PF9', note: 'HE2' },
+      { func: 'Heated Bed', key: 'heater_pin', pin: 'PF5', note: 'BED_OUT — high current' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0', key: 'pin', pin: 'PF7', note: 'FAN0' },
+      { func: 'Fan 1', key: 'pin', pin: 'PF8', note: 'FAN1' },
+      { func: 'Fan 2', key: 'pin', pin: 'PF6', note: 'FAN2' },
+      { func: '', key: '', pin: '', note: '', section: 'Probe / RGB' },
+      { func: 'Probe',    key: 'pin', pin: 'PD13', note: 'BLTouch/CRTouch signal' },
+      { func: 'Neopixel', key: 'pin', pin: 'PD3',  note: 'RGB_1' },
+    ]
+  },
+  'manta-m8p-v2': {
+    mcu: 'STM32H723ZGT6 (with CB2/CM4 host)',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PC8',  note: 'M1 · dir=PC9 · en=!PA15 · uart=PC10' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PB15', note: 'M2 · dir=PB14 · en=!PB13 · uart=PB12' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PB8',  note: 'M3 · dir=PB7 · en=!PB9 · uart=PB5' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PB4',  note: 'M4 · dir=PB3 · en=!PB6 · uart=PB2' },
+      { func: 'Stepper Z2', key: 'step_pin', pin: 'PG13', note: 'M5 · dir=PG12 · en=!PG15 · uart=PG10' },
+      { func: 'Stepper Z3', key: 'step_pin', pin: 'PD4',  note: 'M6 · dir=PD3 · en=!PD6 · uart=PD5' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PE2',  note: 'M7 · dir=PE3 · en=!PE4 · uart=PE1' },
+      { func: 'Stepper E1', key: 'step_pin', pin: 'PE6',  note: 'M8 · dir=PA14 · en=!PE0 · uart=PD3' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X', key: 'endstop_pin', pin: 'PF4',  note: 'STOP0' },
+      { func: 'Endstop Y', key: 'endstop_pin', pin: 'PC15', note: 'STOP1' },
+      { func: 'Endstop Z', key: 'endstop_pin', pin: 'PF0',  note: 'STOP2' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0',  key: 'sensor_pin', pin: 'PB1', note: 'Hotend 0' },
+      { func: 'Thermistor T1',  key: 'sensor_pin', pin: 'PC5', note: 'Hotend 1' },
+      { func: 'Bed Thermistor', key: 'sensor_pin', pin: 'PB0', note: 'THB' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0',  key: 'heater_pin', pin: 'PA0', note: 'HE0' },
+      { func: 'Heater E1',  key: 'heater_pin', pin: 'PA1', note: 'HE1' },
+      { func: 'Heated Bed', key: 'heater_pin', pin: 'PF10', note: 'BED_OUT' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0', key: 'pin', pin: 'PF7', note: 'FAN0 — part cooling' },
+      { func: 'Fan 1', key: 'pin', pin: 'PF8', note: 'FAN1 — hotend' },
+      { func: 'Fan 2', key: 'pin', pin: 'PF9', note: 'FAN2' },
+    ]
+  },
+  'skr3': {
+    mcu: 'STM32H743VIT6',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PD4',  note: 'dir=PD3 · en=!PD6 · uart=PD5' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PA15', note: 'dir=PA8 · en=!PD1 · uart=PD0' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PE2',  note: 'dir=PE3 · en=!PE0 · uart=PE1' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PD11', note: 'dir=PD10 · en=!PD13 · uart=PD12' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PD15', note: 'dir=PD14 · en=!PC7 · uart=PC6' },
+      { func: 'Stepper E1', key: 'step_pin', pin: 'PD8',  note: 'dir=PD9 · en=!PD7 · uart=PC8' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X', key: 'endstop_pin', pin: 'PC1', note: 'STOP0 — X-min' },
+      { func: 'Endstop Y', key: 'endstop_pin', pin: 'PC3', note: 'STOP1 — Y-min' },
+      { func: 'Endstop Z', key: 'endstop_pin', pin: 'PC0', note: 'STOP2 — Z-min' },
+      { func: 'Endstop E0', key: 'endstop_pin', pin: 'PA0', note: 'STOP3' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0',  key: 'sensor_pin', pin: 'PA2', note: 'Hotend 0 — 4.7kΩ' },
+      { func: 'Thermistor T1',  key: 'sensor_pin', pin: 'PA3', note: 'Hotend 1' },
+      { func: 'Bed Thermistor', key: 'sensor_pin', pin: 'PA1', note: 'TB' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0',  key: 'heater_pin', pin: 'PB3', note: 'HE0' },
+      { func: 'Heater E1',  key: 'heater_pin', pin: 'PB4', note: 'HE1' },
+      { func: 'Heated Bed', key: 'heater_pin', pin: 'PD7', note: 'BED' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0', key: 'pin', pin: 'PB7', note: 'FAN0 — part cooling' },
+      { func: 'Fan 1', key: 'pin', pin: 'PB6', note: 'FAN1 — hotend fan' },
+      { func: 'Fan 2', key: 'pin', pin: 'PB5', note: 'FAN2 — controller' },
+      { func: '', key: '', pin: '', note: '', section: 'Probe / RGB' },
+      { func: 'BLTouch Signal', key: 'pin', pin: 'PA6', note: 'Servo — BLTouch deploy/stow' },
+      { func: 'BLTouch Probe',  key: 'pin', pin: 'PC13', note: 'Probe input' },
+      { func: 'Neopixel', key: 'pin', pin: 'PB0', note: 'RGB header' },
+    ]
+  },
+  'spider': {
+    mcu: 'STM32F446ZET6',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PE11', note: 'dir=PE10 · en=!PE9 · uart=PB2' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PD8',  note: 'dir=PB12 · en=!PD9 · uart=PE15' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PD14', note: 'dir=PD13 · en=!PD15 · uart=PD10' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PE6',  note: 'dir=PC13 · en=!PE5 · uart=PC14' },
+      { func: 'Stepper Z2', key: 'step_pin', pin: 'PE15', note: 'dir=PE14 · en=!PE13 · uart=PC15' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PD5',  note: 'dir=PD6 · en=!PD4 · uart=PD7' },
+      { func: 'Stepper E1', key: 'step_pin', pin: 'PE7',  note: 'dir=PE8 · en=!PG1 · uart=PE10' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X', key: 'endstop_pin', pin: 'PB14', note: 'X-endstop' },
+      { func: 'Endstop Y', key: 'endstop_pin', pin: 'PB13', note: 'Y-endstop' },
+      { func: 'Endstop Z', key: 'endstop_pin', pin: 'PA0',  note: 'Z-endstop' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0',  key: 'sensor_pin', pin: 'PC0', note: 'Hotend 0 — 4.7kΩ pull' },
+      { func: 'Thermistor T1',  key: 'sensor_pin', pin: 'PC1', note: 'Hotend 1' },
+      { func: 'Bed Thermistor', key: 'sensor_pin', pin: 'PC3', note: 'THB — bed' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0',  key: 'heater_pin', pin: 'PB15', note: 'HE0 · 5A' },
+      { func: 'Heater E1',  key: 'heater_pin', pin: 'PC8',  note: 'HE1' },
+      { func: 'Heated Bed', key: 'heater_pin', pin: 'PB4',  note: 'BED — 15A max' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0', key: 'pin', pin: 'PA14', note: 'FAN0 — part cooling' },
+      { func: 'Fan 1', key: 'pin', pin: 'PA13', note: 'FAN1 — hotend' },
+      { func: 'Fan 2', key: 'pin', pin: 'PB2',  note: 'FAN2' },
+      { func: '', key: '', pin: '', note: '', section: 'Probe / RGB' },
+      { func: 'Probe',    key: 'pin', pin: 'PB15', note: 'Shared with HE0 on some revisions — check schematic' },
+      { func: 'Neopixel', key: 'pin', pin: 'PD3',  note: 'WS2812 LED chain' },
+    ]
+  },
+  'leviathan': {
+    mcu: 'STM32F446ZET6',
+    pins: [
+      { func: '', key: '', pin: '', note: '', section: 'Steppers' },
+      { func: 'Stepper X',  key: 'step_pin', pin: 'PD4',  note: 'dir=PD3 · en=!PD7 · uart=PD5' },
+      { func: 'Stepper Y',  key: 'step_pin', pin: 'PD0',  note: 'dir=PC14 · en=!PD1 · uart=PD2' },
+      { func: 'Stepper Z',  key: 'step_pin', pin: 'PC6',  note: 'dir=PC5 · en=!PC7 · uart=PA8' },
+      { func: 'Stepper Z1', key: 'step_pin', pin: 'PF9',  note: 'dir=PF10 · en=!PF8 · uart=PG2' },
+      { func: 'Stepper Z2', key: 'step_pin', pin: 'PB8',  note: 'dir=PB7 · en=!PB9 · uart=PB5' },
+      { func: 'Stepper Z3', key: 'step_pin', pin: 'PB4',  note: 'dir=PB3 · en=!PB5 · uart=PB2' },
+      { func: 'Stepper E0', key: 'step_pin', pin: 'PE2',  note: 'dir=PE3 · en=!PE4 · uart=PE1' },
+      { func: '', key: '', pin: '', note: '', section: 'Endstops' },
+      { func: 'Endstop X', key: 'endstop_pin', pin: 'PG11', note: 'X-min — DIAG0' },
+      { func: 'Endstop Y', key: 'endstop_pin', pin: 'PG9',  note: 'Y-min — DIAG1' },
+      { func: 'Endstop Z', key: 'endstop_pin', pin: 'PG13', note: 'Z-min' },
+      { func: '', key: '', pin: '', note: '', section: 'Thermistors' },
+      { func: 'Thermistor T0',    key: 'sensor_pin', pin: 'PC3', note: 'Hotend 0 — 4.7kΩ' },
+      { func: 'Thermistor T1',    key: 'sensor_pin', pin: 'PC2', note: 'Hotend 1' },
+      { func: 'Chamber Therm.',   key: 'sensor_pin', pin: 'PC1', note: 'Chamber NTC' },
+      { func: 'Bed Thermistor',   key: 'sensor_pin', pin: 'PC0', note: 'THB' },
+      { func: '', key: '', pin: '', note: '', section: 'Heaters' },
+      { func: 'Heater E0',  key: 'heater_pin', pin: 'PA1', note: 'HE0 — 60W' },
+      { func: 'Heater E1',  key: 'heater_pin', pin: 'PA0', note: 'HE1' },
+      { func: 'Heated Bed', key: 'heater_pin', pin: 'PB0', note: 'BED — 30A capable' },
+      { func: '', key: '', pin: '', note: '', section: 'Fans' },
+      { func: 'Fan 0 (Part cooling)', key: 'pin', pin: 'PE6',  note: 'FAN0 — PWM' },
+      { func: 'Fan 1 (Hotend)',       key: 'pin', pin: 'PE5',  note: 'FAN1' },
+      { func: 'Fan 2 (Controller)',   key: 'pin', pin: 'PD12', note: 'FAN2' },
+      { func: 'Fan 3',                key: 'pin', pin: 'PD13', note: 'FAN3' },
+      { func: '', key: '', pin: '', note: '', section: 'Probe / RGB' },
+      { func: 'Probe',         key: 'pin', pin: 'PB6',  note: 'Probe signal — Tap or klicky' },
+      { func: 'Servo (probe)', key: 'pin', pin: 'PB10', note: 'Servo for deployable probes' },
+      { func: 'Neopixel',      key: 'pin', pin: 'PB12', note: 'WS2812 LED chain' },
+    ]
+  },
+};
+
+function renderTable() {
+  const boardId = (document.getElementById('boardSel') as HTMLSelectElement).value;
+  const search  = (document.getElementById('pinSearch') as HTMLInputElement).value.toLowerCase().trim();
+  const board   = BOARDS[boardId];
+  if (!board) return;
+
+  (document.getElementById('boardMcu') as HTMLElement).textContent = board.mcu;
+
+  const tbody = document.getElementById('pinTableBody') as HTMLTableSectionElement;
+  const rows  = board.pins;
+  let html = '';
+  let hasMatch = false;
+
+  for (const row of rows) {
+    if (row.section !== undefined) {
+      if (search) continue;
+      html += `<tr class="pm-section-row"><td class="pm-section-label" colspan="5">${row.section}</td></tr>`;
+      continue;
+    }
+    if (search) {
+      const haystack = `${row.func} ${row.key} ${row.pin} ${row.note}`.toLowerCase();
+      if (!haystack.includes(search)) continue;
+    }
+    hasMatch = true;
+    const isNegative = row.pin.startsWith('!');
+    const pinDisplay = isNegative ? row.pin.slice(1) : row.pin;
+    html += `<tr>
+      <td><div class="pm-func">${row.func}</div></td>
+      <td><div class="pm-key">${row.key}</div></td>
+      <td><span class="pm-pin${isNegative ? ' pm-pin-neg' : ''}">${isNegative ? '!' : ''}${pinDisplay}</span></td>
+      <td><div class="pm-note">${row.note}</div></td>
+      <td><button class="pm-copy-pin" data-pin="${row.key}: ${row.pin}">Copy</button></td>
+    </tr>`;
+  }
+
+  if (!hasMatch && search) {
+    html = `<tr><td colspan="5" class="pm-no-results">No pins match "${search}"</td></tr>`;
+  }
+
+  tbody.innerHTML = html;
+
+  tbody.querySelectorAll<HTMLButtonElement>('.pm-copy-pin').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const pinVal = (btn.dataset.pin ?? '').split(':').pop()?.trim() ?? '';
+      try {
+        await navigator.clipboard.writeText(pinVal);
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+      } catch {}
+    });
+  });
+}
+
+document.getElementById('boardSel')?.addEventListener('change', renderTable);
+document.getElementById('pinSearch')?.addEventListener('input', renderTable);
+renderTable();
+</script>

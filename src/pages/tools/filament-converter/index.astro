@@ -1,0 +1,290 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Filament Weight to Length Converter — g ↔ m"
+  description="Convert filament weight to length and back. Supports PLA, PETG, ABS, ASA, PA-CF, and TPU at 1.75mm or 2.85mm diameter. Includes spool remaining calculator."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Filament Converter</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Converter</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Filament Converter</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Convert between filament weight (grams) and length (metres) for any material density and diameter. Includes spool remaining percentage.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">g ↔ m</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">1.75mm · 2.85mm</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">PLA · PETG · ABS · more</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="tc-wrap">
+    <div class="tc-inner">
+
+      <!-- LEFT: INPUTS -->
+      <aside class="tc-sidebar">
+
+        <div class="tc-section-label">Material</div>
+        <div class="tc-field">
+          <label class="tc-label" for="material">Filament Type</label>
+          <select class="tc-select tc-input" id="material">
+            <option value="1.24">PLA (1.24 g/cm³)</option>
+            <option value="1.27">PETG (1.27 g/cm³)</option>
+            <option value="1.04">ABS (1.04 g/cm³)</option>
+            <option value="1.07">ASA (1.07 g/cm³)</option>
+            <option value="1.09">PA-CF (1.09 g/cm³)</option>
+            <option value="1.21">TPU (1.21 g/cm³)</option>
+          </select>
+        </div>
+        <div class="tc-field">
+          <label class="tc-label">Diameter</label>
+          <div class="fc-radio-row">
+            <label class="fc-radio"><input type="radio" name="dia" value="1.75" checked> 1.75mm</label>
+            <label class="fc-radio"><input type="radio" name="dia" value="2.85"> 2.85mm</label>
+          </div>
+        </div>
+
+        <div class="tc-divider"></div>
+        <div class="tc-section-label" style="margin-top:0">Density Reference</div>
+        <table class="fc-density-table">
+          <tbody>
+            <tr><td>PLA</td><td>1.24 g/cm³</td></tr>
+            <tr><td>PETG</td><td>1.27 g/cm³</td></tr>
+            <tr><td>ABS</td><td>1.04 g/cm³</td></tr>
+            <tr><td>ASA</td><td>1.07 g/cm³</td></tr>
+            <tr><td>PA-CF</td><td>1.09 g/cm³</td></tr>
+            <tr><td>TPU</td><td>1.21 g/cm³</td></tr>
+          </tbody>
+        </table>
+
+      </aside>
+
+      <!-- RIGHT: CONVERTER -->
+      <main class="tc-output">
+
+        <!-- Two-way converter -->
+        <div class="fc-converter-card">
+          <div class="fc-converter-row">
+            <div class="fc-half">
+              <label class="tc-label" for="weightIn">Weight (grams)</label>
+              <input class="tc-input fc-big-input" type="number" id="weightIn" value="100" min="0" step="0.1" placeholder="Enter grams">
+              <div class="fc-result-line" id="weightToLen">= <strong>80.7 m</strong></div>
+            </div>
+            <div class="fc-arrow">⇄</div>
+            <div class="fc-half">
+              <label class="tc-label" for="lengthIn">Length (metres)</label>
+              <input class="tc-input fc-big-input" type="number" id="lengthIn" value="" min="0" step="0.1" placeholder="Enter metres">
+              <div class="fc-result-line" id="lenToWeight">= <strong>—</strong></div>
+            </div>
+          </div>
+          <div class="fc-formula-note" id="formulaNote">PLA · 1.75mm · ρ=1.24 g/cm³</div>
+        </div>
+
+        <!-- Spool remaining -->
+        <div class="tc-ref-card">
+          <div class="tc-ref-title">Spool Remaining</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+            <div class="tc-field" style="margin:0">
+              <label class="tc-label" for="remG">Remaining Filament (g)</label>
+              <input class="tc-input" type="number" id="remG" value="200" min="0" step="1">
+            </div>
+            <div class="tc-field" style="margin:0">
+              <label class="tc-label" for="fullG">Full Spool Weight (g)</label>
+              <input class="tc-input" type="number" id="fullG" value="1000" min="1" step="1">
+            </div>
+          </div>
+          <div class="fc-spool-bar-wrap">
+            <div class="fc-spool-bar-track">
+              <div class="fc-spool-bar-fill" id="spoolBarFill" style="width:20%"></div>
+            </div>
+            <div class="fc-spool-stats">
+              <span class="fc-spool-pct" id="spoolPct">20%</span>
+              <span class="fc-spool-len" id="spoolLen">≈ 161.4 m remaining</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- How it works -->
+        <div class="tc-ref-card">
+          <div class="tc-ref-title">How it works</div>
+          <p style="font-family:var(--fb);font-size:13px;color:var(--g1);line-height:1.65;margin:0 0 10px">
+            Filament is a cylinder. Given the density (ρ), diameter (d), and weight (m), length follows from:
+          </p>
+          <div style="background:#0d0d0d;border-radius:6px;padding:12px 16px;font-family:var(--fm);font-size:12px;color:#ccc">
+            Volume = m / ρ<br>
+            Cross-section = π × (d/2)²<br>
+            Length = Volume / Cross-section
+          </div>
+          <p style="font-family:var(--fb);font-size:12px;color:var(--g2);line-height:1.6;margin:10px 0 0">
+            Densities are approximate — different formulations and additives shift the value slightly.
+          </p>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Filament Weight to Length Converter",
+        "description": "Convert filament weight to length and back for any material and diameter.",
+        "url": "https://modernmakes.github.io/tools/filament-converter",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Filament Converter", "item": "https://modernmakes.github.io/tools/filament-converter" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.tc-wrap { background: var(--bg); padding: 40px 0 64px; }
+.tc-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; }
+.tc-sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+.tc-output { display: flex; flex-direction: column; gap: 16px; }
+.tc-section-label { font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); margin-bottom: 14px; }
+.tc-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.tc-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.tc-input, .tc-select { font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 8px 10px; width: 100%; transition: border-color .12s; }
+.tc-input:focus, .tc-select:focus { outline: none; border-color: var(--accent); }
+.tc-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+.tc-ref-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.tc-ref-title { font-family: var(--fd); font-size: 18px; font-weight: 800; color: var(--black); margin-bottom: 14px; }
+
+.fc-radio-row { display: flex; gap: 16px; }
+.fc-radio { display: flex; align-items: center; gap: 6px; font-family: var(--fu); font-size: 13px; color: var(--black); cursor: pointer; }
+.fc-radio input { accent-color: var(--accent); }
+.fc-density-table { width: 100%; border-collapse: collapse; }
+.fc-density-table td { font-family: var(--fm); font-size: 11px; color: var(--g1); padding: 4px 0; }
+.fc-density-table td:last-child { text-align: right; color: var(--g2); }
+
+.fc-converter-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; }
+.fc-converter-row { display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; gap: 0; }
+.fc-half { display: flex; flex-direction: column; gap: 8px; }
+.fc-arrow { text-align: center; font-size: 22px; color: var(--g2); font-family: var(--fu); }
+.fc-big-input { font-size: 18px !important; padding: 12px 14px !important; font-weight: 600; }
+.fc-result-line { font-family: var(--fm); font-size: 13px; color: var(--g2); min-height: 20px; }
+.fc-result-line strong { color: var(--accent); font-size: 15px; }
+.fc-formula-note { margin-top: 16px; font-family: var(--fm); font-size: 10px; color: var(--g2); padding-top: 12px; border-top: 1px solid var(--border); }
+
+.fc-spool-bar-wrap { display: flex; flex-direction: column; gap: 8px; }
+.fc-spool-bar-track { height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+.fc-spool-bar-fill { height: 100%; background: var(--accent); border-radius: 5px; transition: width .3s ease; }
+.fc-spool-stats { display: flex; justify-content: space-between; align-items: baseline; }
+.fc-spool-pct { font-family: var(--fd); font-size: 28px; font-weight: 800; color: var(--black); }
+.fc-spool-len { font-family: var(--fm); font-size: 12px; color: var(--g2); }
+
+@media (max-width: 860px)  { .tc-inner { grid-template-columns: 1fr; } }
+@media (max-width: 768px)  { .tc-wrap { padding: 20px 0 48px; } .tc-inner { padding: 0 20px; } .fc-converter-row { grid-template-columns: 1fr; } .fc-arrow { transform: rotate(90deg); margin: 4px 0; } }
+</style>
+
+<script>
+let lastChanged: 'weight' | 'length' = 'weight';
+
+function getDensity(): number {
+  return parseFloat((document.getElementById('material') as HTMLSelectElement).value) || 1.24;
+}
+function getDia(): number {
+  return parseFloat((document.querySelector<HTMLInputElement>('input[name="dia"]:checked')?.value ?? '1.75'));
+}
+function getMaterialName(): string {
+  const sel = document.getElementById('material') as HTMLSelectElement;
+  return sel.options[sel.selectedIndex]?.text.split(' ')[0] ?? 'PLA';
+}
+
+function gToM(g: number, density: number, dia: number): number {
+  const r = (dia / 2) / 10; // cm
+  const area = Math.PI * r * r; // cm²
+  const vol = g / density; // cm³
+  return vol / area / 100; // convert cm to m
+}
+function mToG(m: number, density: number, dia: number): number {
+  const r = (dia / 2) / 10;
+  const area = Math.PI * r * r;
+  const vol = m * 100 * area; // m → cm × cm² = cm³
+  return vol * density;
+}
+
+function updateAll() {
+  const density = getDensity();
+  const dia = getDia();
+  const matName = getMaterialName();
+
+  const wIn = document.getElementById('weightIn') as HTMLInputElement;
+  const lIn = document.getElementById('lengthIn') as HTMLInputElement;
+
+  if (lastChanged === 'weight') {
+    const g = parseFloat(wIn.value);
+    if (!isNaN(g) && g >= 0) {
+      const m = gToM(g, density, dia);
+      const el = document.getElementById('weightToLen');
+      if (el) el.innerHTML = `= <strong>${m.toFixed(1)} m</strong>`;
+      lIn.value = '';
+      const el2 = document.getElementById('lenToWeight');
+      if (el2) el2.innerHTML = `= <strong>—</strong>`;
+    }
+  } else {
+    const m = parseFloat(lIn.value);
+    if (!isNaN(m) && m >= 0) {
+      const g = mToG(m, density, dia);
+      const el = document.getElementById('lenToWeight');
+      if (el) el.innerHTML = `= <strong>${g.toFixed(1)} g</strong>`;
+      wIn.value = '';
+      const el2 = document.getElementById('weightToLen');
+      if (el2) el2.innerHTML = `= <strong>—</strong>`;
+    }
+  }
+
+  const noteEl = document.getElementById('formulaNote');
+  if (noteEl) noteEl.textContent = `${matName} · ${dia}mm · ρ=${density} g/cm³`;
+
+  // Spool remaining
+  const remG = parseFloat((document.getElementById('remG') as HTMLInputElement).value) || 0;
+  const fullG = parseFloat((document.getElementById('fullG') as HTMLInputElement).value) || 1000;
+  const pct = Math.min(100, Math.max(0, (remG / fullG) * 100));
+  const remM = gToM(remG, density, dia);
+
+  const barEl = document.getElementById('spoolBarFill') as HTMLElement;
+  if (barEl) barEl.style.width = pct.toFixed(1) + '%';
+  const pctEl = document.getElementById('spoolPct');
+  if (pctEl) pctEl.textContent = pct.toFixed(0) + '%';
+  const lenEl = document.getElementById('spoolLen');
+  if (lenEl) lenEl.textContent = `≈ ${remM.toFixed(1)} m remaining`;
+}
+
+(document.getElementById('weightIn') as HTMLInputElement)?.addEventListener('input', () => { lastChanged = 'weight'; updateAll(); });
+(document.getElementById('lengthIn') as HTMLInputElement)?.addEventListener('input', () => { lastChanged = 'length'; updateAll(); });
+(document.getElementById('material') as HTMLSelectElement)?.addEventListener('change', updateAll);
+document.querySelectorAll<HTMLInputElement>('input[name="dia"]').forEach(r => r.addEventListener('change', updateAll));
+(document.getElementById('remG') as HTMLInputElement)?.addEventListener('input', updateAll);
+(document.getElementById('fullG') as HTMLInputElement)?.addEventListener('input', updateAll);
+
+updateAll();
+</script>

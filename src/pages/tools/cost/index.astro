@@ -1,0 +1,255 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+const currentPath = '/tools';
+---
+<Base
+  title="Print Cost Estimator — Filament & Electricity Cost Calculator"
+  description="Calculate the real cost of a 3D print job. Accounts for filament, print time, electricity, and printer wattage. Updates live."
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Print Cost Estimator</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calculator</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Print Cost Estimator</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Enter your filament usage and electricity rates to see the true cost per print. Useful for quoting and material budgeting.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">$/print</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Live Update</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL BODY -->
+  <div class="tc-wrap">
+    <div class="tc-inner">
+
+      <!-- LEFT: INPUTS -->
+      <aside class="tc-sidebar">
+
+        <div class="tc-section-label">Filament</div>
+        <div class="tc-field">
+          <label class="tc-label" for="filamentG">Filament Used (g)</label>
+          <input class="tc-input" type="number" id="filamentG" value="50" min="0" max="5000" step="1">
+        </div>
+        <div class="tc-field">
+          <label class="tc-label" for="costPerKg">Cost per kg (USD)</label>
+          <input class="tc-input" type="number" id="costPerKg" value="25" min="0" max="500" step="0.5">
+        </div>
+
+        <div class="tc-divider"></div>
+        <div class="tc-section-label" style="margin-top:0">Electricity</div>
+        <div class="tc-field">
+          <label class="tc-label" for="printHours">Print Time (hours)</label>
+          <input class="tc-input" type="number" id="printHours" value="5" min="0" max="500" step="0.5">
+        </div>
+        <div class="tc-field">
+          <label class="tc-label" for="printerW">Printer Wattage (W)</label>
+          <input class="tc-input" type="number" id="printerW" value="300" min="0" max="3000" step="10">
+        </div>
+        <div class="tc-field">
+          <label class="tc-label" for="kwhRate">Electricity Rate ($/kWh)</label>
+          <input class="tc-input" type="number" id="kwhRate" value="0.12" min="0" max="2" step="0.01">
+        </div>
+
+      </aside>
+
+      <!-- RIGHT: RESULT -->
+      <main class="tc-output">
+
+        <!-- Stats bar -->
+        <div class="cost-stats-bar">
+          <div class="cost-stat">
+            <div class="cost-stat-label">Filament Cost</div>
+            <div class="cost-stat-val" id="statFilament">$1.25</div>
+          </div>
+          <div class="cost-stat-div"></div>
+          <div class="cost-stat">
+            <div class="cost-stat-label">Electricity Cost</div>
+            <div class="cost-stat-val" id="statElec">$0.18</div>
+          </div>
+          <div class="cost-stat-div"></div>
+          <div class="cost-stat cost-stat-total">
+            <div class="cost-stat-label">Total Cost</div>
+            <div class="cost-stat-val cost-total-num" id="statTotal">$1.43</div>
+          </div>
+        </div>
+
+        <!-- Breakdown card -->
+        <div class="tc-result-dark">
+          <div class="tc-result-eyebrow">Total Print Cost</div>
+          <div style="display:flex;align-items:baseline;gap:8px">
+            <div class="tc-result-num" id="totalResult">$1.43</div>
+          </div>
+          <div class="tc-formula" id="breakdownLine">Filament $1.25 + Electricity $0.18</div>
+          <button class="tc-copy-btn" id="copyBtn">Copy total</button>
+        </div>
+
+        <!-- Per-100g reference -->
+        <div class="tc-ref-card">
+          <div class="tc-ref-title">Cost Breakdown</div>
+          <table class="tc-ref-table">
+            <thead>
+              <tr>
+                <th>Line item</th>
+                <th>Formula</th>
+                <th>Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Filament</td>
+                <td id="filmFormula" style="font-family:var(--fm);font-size:11px">50g × $0.025/g</td>
+                <td id="filmCost" style="font-family:var(--fm);font-size:12px;color:var(--accent)">$1.25</td>
+              </tr>
+              <tr>
+                <td>Electricity</td>
+                <td id="elecFormula" style="font-family:var(--fm);font-size:11px">5h × 300W × $0.12</td>
+                <td id="elecCost" style="font-family:var(--fm);font-size:12px;color:var(--accent)">$0.18</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td></td>
+                <td id="totalCostRow" style="font-family:var(--fd);font-size:16px;font-weight:800;color:var(--black)">$1.43</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:14px;font-family:var(--fm);font-size:10px;color:var(--g2);padding-top:12px;border-top:1px solid var(--border)">
+            Note: Does not include machine depreciation, failed prints, or wear. Add 10–25% for realistic job pricing.
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Print Cost Estimator",
+        "description": "Calculate the filament, electricity, and total cost for a 3D print job.",
+        "url": "https://modernmakes.github.io/tools/cost",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.github.io/tools" },
+          { "@type": "ListItem", "position": 3, "name": "Print Cost Estimator", "item": "https://modernmakes.github.io/tools/cost" }
+        ]
+      }
+    ]
+  })}></script>
+</Base>
+
+<style is:global>
+.tc-wrap { background: var(--bg); padding: 40px 0 64px; }
+.tc-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start;
+}
+.tc-sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+.tc-output { display: flex; flex-direction: column; gap: 16px; }
+.tc-section-label { font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); margin-bottom: 14px; }
+.tc-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.tc-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.tc-input, .tc-select { font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 8px 10px; width: 100%; transition: border-color .12s; }
+.tc-input:focus, .tc-select:focus { outline: none; border-color: var(--accent); }
+.tc-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+.cost-stats-bar { display: flex; align-items: stretch; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.cost-stat { display: flex; flex-direction: column; gap: 3px; padding: 14px 20px; flex: 1; }
+.cost-stat-total { background: rgba(255,90,31,.04); }
+.cost-stat-label { font-family: var(--fm); font-size: 9px; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); }
+.cost-stat-val { font-family: var(--fd); font-size: 22px; font-weight: 800; color: var(--black); }
+.cost-total-num { color: var(--accent); }
+.cost-stat-div { width: 1px; background: var(--border); }
+
+.tc-result-dark { background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 10px; padding: 28px 32px; }
+.tc-result-eyebrow { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: 8px; }
+.tc-result-num { font-family: var(--fd); font-size: 72px; font-weight: 800; color: var(--accent); line-height: 1; }
+.tc-formula { font-family: var(--fm); font-size: 11px; color: rgba(255,255,255,.3); margin-top: 10px; }
+.tc-copy-btn { font-family: var(--fu); font-size: 11px; font-weight: 700; margin-top: 14px; padding: 7px 16px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.14); border-radius: 5px; cursor: pointer; transition: all .12s; }
+.tc-copy-btn:hover { background: rgba(255,255,255,.13); }
+.tc-copy-btn.copied { background: rgba(74,222,128,.15); color: #4ade80; border-color: rgba(74,222,128,.3); }
+
+.tc-ref-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+.tc-ref-title { font-family: var(--fd); font-size: 18px; font-weight: 800; color: var(--black); margin-bottom: 14px; }
+.tc-ref-table { width: 100%; border-collapse: collapse; }
+.tc-ref-table th { font-family: var(--fu); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--g2); padding: 6px 12px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+.tc-ref-table td { font-family: var(--fb); font-size: 13px; color: var(--g1); padding: 9px 12px; border-bottom: 1px solid var(--border); }
+.tc-ref-table tr:last-child td { border-bottom: none; }
+
+@media (max-width: 860px)  { .tc-inner { grid-template-columns: 1fr; } }
+@media (max-width: 768px)  { .tc-wrap { padding: 20px 0 48px; } .tc-inner { padding: 0 20px; } .cost-stats-bar { flex-direction: column; } .cost-stat-div { width: 100%; height: 1px; } }
+</style>
+
+<script>
+function v(id: string): number {
+  return parseFloat((document.getElementById(id) as HTMLInputElement)?.value) || 0;
+}
+function fmt(n: number): string {
+  return '$' + n.toFixed(2);
+}
+function calc() {
+  const g    = v('filamentG');
+  const cpk  = v('costPerKg');
+  const hrs  = v('printHours');
+  const watt = v('printerW');
+  const rate = v('kwhRate');
+
+  const filmCost = (g / 1000) * cpk;
+  const elecCost = (watt / 1000) * hrs * rate;
+  const total    = filmCost + elecCost;
+
+  const setText = (id: string, val: string) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  setText('statFilament', fmt(filmCost));
+  setText('statElec', fmt(elecCost));
+  setText('statTotal', fmt(total));
+  setText('totalResult', fmt(total));
+  setText('breakdownLine', `Filament ${fmt(filmCost)} + Electricity ${fmt(elecCost)}`);
+  setText('filmFormula',  `${g}g × ${fmt(cpk / 1000)}/g`);
+  setText('elecFormula',  `${hrs}h × ${watt}W × ${fmt(rate)}/kWh`);
+  setText('filmCost',     fmt(filmCost));
+  setText('elecCost',     fmt(elecCost));
+  setText('totalCostRow', fmt(total));
+}
+
+document.querySelectorAll<HTMLInputElement>('.tc-input').forEach(el =>
+  el.addEventListener('input', calc)
+);
+
+document.getElementById('copyBtn')?.addEventListener('click', async () => {
+  const total = v('filamentG') / 1000 * v('costPerKg') + (v('printerW') / 1000) * v('printHours') * v('kwhRate');
+  try {
+    await navigator.clipboard.writeText(fmt(total));
+    const btn = document.getElementById('copyBtn') as HTMLButtonElement;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy total'; btn.classList.remove('copied'); }, 2000);
+  } catch {}
+});
+
+calc();
+</script>
