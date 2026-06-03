@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "recg3F9WrQ5UqEPF6",
+    "Verdict": "CONSIDER",
+    "Driver - A/B": "TMC5160",
+    "Updated": "2026-06-03",
+    "Description": "The StrideMax Dual FD is a dual TMC5160 expansion board built around the RP2040 microcontroller. It adds two high-current stepper channels to an existing Klipper or RRF setup via CAN, CANFD, or USB. Each channel supports up to 10A continuous and 60V max, making it the standard solution for adding AWD motor channels or upgrading to 48V on a Voron 2.4 or VzBoT build without replacing the main control board.",
+    "Verdict Label": "The cleanest way to add AWD or 48V to an existing Voron or VzBoT build.",
+    "Cons": "Not a standalone board — requires an existing controller\nLarger physical footprint (91x80mm) — DIN rail mount only\nRequires CAN configuration knowledge\nNot suitable for toolhead mounting",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBoT 330"
+    ],
+    "Name": "StrideMax Dual FD",
+    "Vendor 1 Name": "Excit3D",
+    "Driver Count": 2,
+    "Vendor 1 URL": "https://excit3d.shop/shop/fysetc-stridemax-dual-fd",
+    "Brand": "Fysetc",
+    "Voltage": "48V",
+    "Price (USD)": 55,
+    "Pros": "Dual TMC5160 drivers at up to 10A each\n60V max power supply input\nRP2040 MCU onboard\nKlipper and RRF firmware support\nCAN, CANFD, and USB interfaces\nOnboard heatsink and MOSFET temperature monitoring\n2x 4-pin fan outputs (5V/12V)\n3x thermistor ports\nNeopixel RGB support\nDIN rail mount case ready\nCar fuse protection on both channels"
+  }
+]
