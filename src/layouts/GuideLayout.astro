@@ -237,6 +237,18 @@ const breadcrumbItems = [
     </div>
   </section>
 
+  <!-- ── NEWSLETTER CAPTURE ── -->
+  <div class="nl-capture-outer">
+    <div class="newsletter-capture">
+      <p class="newsletter-capture__label">Stay current</p>
+      <h3 class="newsletter-capture__heading">The Modern Makes Brief</h3>
+      <p class="newsletter-capture__sub">Printers, hardware, and builds worth knowing about. Weekly.</p>
+      <div class="newsletter-capture__form">
+        <!-- Beehiiv renders here via the loader script -->
+      </div>
+    </div>
+  </div>
+
   <Footer slot="footer" />
 
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
@@ -598,5 +610,50 @@ const breadcrumbItems = [
   .guide-req-grid { grid-template-columns: 1fr; gap: 16px; }
   .guide-steps h2 { padding-left: 52px; font-size: 20px; }
   .guide-steps h2::before { width: 36px; height: 36px; font-size: 17px; }
+}
+
+/* ── NEWSLETTER CAPTURE ── */
+.nl-capture-outer {
+  background: var(--black);
+  border-top: 1px solid #1f1f1f;
+  margin-top: 64px;
+}
+.newsletter-capture {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: center;
+}
+.newsletter-capture__label {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+.newsletter-capture__heading {
+  font-family: var(--fd);
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -.3px;
+  margin: 0 0 10px;
+}
+.newsletter-capture__sub {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.65;
+  margin: 0 0 24px;
+}
+.newsletter-capture__form {
+  min-height: 48px;
+}
+@media (max-width: 640px) {
+  .newsletter-capture { padding: 40px 20px; }
+  .newsletter-capture__heading { font-size: 22px; }
 }
 </style>
