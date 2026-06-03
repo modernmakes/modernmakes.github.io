@@ -1,45 +1,15 @@
 ---
 ---
-<div class="beehiiv-embed-container">
-  <Fragment set:html={`<script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="8068dc9b-7145-4bfc-a15b-e4c4d7791ce4"></script>`} />
-</div>
-
-<noscript>
-  <form
-    class="beehiiv-fallback-form"
-    action="https://www.modernmakes.beehiiv.com/subscribe"
-    method="get"
-    target="_blank"
-  >
-    <input type="email" name="email" placeholder="Enter your email" required />
-    <button type="submit">Subscribe</button>
-  </form>
-</noscript>
-
-<script is:inline>
-(function() {
-  setTimeout(function() {
-    var container = document.querySelector('.beehiiv-embed-container');
-    if (container && !container.querySelector('iframe, input[type="email"]')) {
-      var fallback = document.querySelector('.beehiiv-js-fallback');
-      if (fallback) fallback.style.display = 'flex';
-    }
-  }, 3000);
-})();
-</script>
-
-<div class="beehiiv-js-fallback" style="display:none; flex-direction:column; align-items:center; gap:12px;">
-  <form
-    class="beehiiv-fallback-form"
-    action="https://www.modernmakes.beehiiv.com/subscribe"
-    method="get"
-    target="_blank"
-  >
-    <input type="email" name="email" placeholder="Enter your email" required />
-    <button type="submit">Subscribe →</button>
-  </form>
-  <p style="font-size:12px; color:rgba(255,255,255,0.35); font-family:var(--fb);">Opens in new tab</p>
-</div>
+<form
+  class="beehiiv-fallback-form"
+  action="https://modernmakes.beehiiv.com/subscribe"
+  method="get"
+  target="_blank"
+>
+  <input type="email" name="email" placeholder="Enter your email" required />
+  <button type="submit">Subscribe →</button>
+</form>
+<p class="beehiiv-open-note">Opens in new tab</p>
 
 <style>
   .beehiiv-fallback-form {
@@ -75,5 +45,16 @@
     text-transform: uppercase;
     letter-spacing: .05em;
     cursor: pointer;
+    white-space: nowrap;
+  }
+  .beehiiv-fallback-form button:hover {
+    background: #e04d1a;
+  }
+  .beehiiv-open-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    font-family: var(--fb);
+    text-align: center;
+    margin: 8px 0 0;
   }
 </style>
