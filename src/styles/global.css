@@ -317,6 +317,14 @@ img { display: block; max-width: 100%; height: auto; }
   padding-left: 10px;
   font-family: var(--fu);
 }
+
+/* ── Beehiiv embed global overrides ── */
+div[id^="beehiiv-embed"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
 .model-context-switch:hover { color: var(--accent); }
 
 /* ── PAGE HERO UTILITY ── */

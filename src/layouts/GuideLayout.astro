@@ -613,6 +613,18 @@ const breadcrumbItems = [
   .guide-steps h2::before { width: 36px; height: 36px; font-size: 17px; }
 }
 
+/* ── Beehiiv widget overrides ── */
+[data-beehiiv-form] iframe,
+.beehiiv-embed-container {
+  background: transparent !important;
+}
+div[id^="beehiiv-embed"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
 /* ── NEWSLETTER CAPTURE ── */
 .nl-capture-outer {
   background: var(--black);

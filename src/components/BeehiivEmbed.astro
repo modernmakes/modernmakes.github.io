@@ -1,3 +1,79 @@
 ---
 ---
-<Fragment set:html={`<script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="8068dc9b-7145-4bfc-a15b-e4c4d7791ce4"></script>`} />
+<div class="beehiiv-embed-container">
+  <Fragment set:html={`<script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="8068dc9b-7145-4bfc-a15b-e4c4d7791ce4"></script>`} />
+</div>
+
+<noscript>
+  <form
+    class="beehiiv-fallback-form"
+    action="https://www.modernmakes.beehiiv.com/subscribe"
+    method="get"
+    target="_blank"
+  >
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</noscript>
+
+<script is:inline>
+(function() {
+  setTimeout(function() {
+    var container = document.querySelector('.beehiiv-embed-container');
+    if (container && !container.querySelector('iframe, input[type="email"]')) {
+      var fallback = document.querySelector('.beehiiv-js-fallback');
+      if (fallback) fallback.style.display = 'flex';
+    }
+  }, 3000);
+})();
+</script>
+
+<div class="beehiiv-js-fallback" style="display:none; flex-direction:column; align-items:center; gap:12px;">
+  <form
+    class="beehiiv-fallback-form"
+    action="https://www.modernmakes.beehiiv.com/subscribe"
+    method="get"
+    target="_blank"
+  >
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <button type="submit">Subscribe →</button>
+  </form>
+  <p style="font-size:12px; color:rgba(255,255,255,0.35); font-family:var(--fb);">Opens in new tab</p>
+</div>
+
+<style>
+  .beehiiv-fallback-form {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .beehiiv-fallback-form input[type="email"] {
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--fb);
+    font-size: 14px;
+  }
+  .beehiiv-fallback-form input[type="email"]::placeholder {
+    color: rgba(255,255,255,0.4);
+  }
+  .beehiiv-fallback-form button {
+    padding: 12px 24px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--fd);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    cursor: pointer;
+  }
+</style>
