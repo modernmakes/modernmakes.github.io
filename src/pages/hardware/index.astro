@@ -2,6 +2,20 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import hotendsData    from '../../data/hardware/hotends.json';
+import extrudersData  from '../../data/hardware/extruders.json';
+import mainboardsData from '../../data/hardware/mainboards.json';
+import toolboardsData from '../../data/hardware/toolboards.json';
+import buildPlatesData from '../../data/hardware/build-plates.json';
+import nozzlesData    from '../../data/hardware/nozzles.json';
+
+const counts = {
+  hotends:    (hotendsData    as any[]).length,
+  extruders:  (extrudersData  as any[]).length,
+  electronics:(mainboardsData as any[]).length + (toolboardsData as any[]).length,
+  buildSurfaces: (buildPlatesData as any[]).length,
+  nozzles:    (nozzlesData    as any[]).length,
+};
 
 const categories = [
   {
@@ -9,7 +23,7 @@ const categories = [
     description: 'High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.',
     href: '/hardware/hotends',
     live: true,
-    count: '1 reviewed',
+    count: counts.hotends,
     icon: '🔥',
   },
   {
@@ -17,23 +31,15 @@ const categories = [
     description: 'Direct-drive and Bowden extruders — gear ratios, weight, and toolhead fit.',
     href: '/hardware/extruders',
     live: false,
-    count: 'Coming Soon',
+    count: counts.extruders,
     icon: '⚙️',
-  },
-  {
-    name: 'Motion Mods',
-    description: 'Community gantry mods, AWD conversions, and motion system upgrades for CoreXY printers.',
-    href: '/hardware/motion',
-    live: true,
-    count: '1 mod live',
-    icon: '🔄',
   },
   {
     name: 'Electronics',
     description: 'Controller boards, toolhead PCBs, accelerometers, and wiring guides.',
     href: '/hardware/electronics',
     live: false,
-    count: 'Coming Soon',
+    count: counts.electronics,
     icon: '🔌',
   },
   {
@@ -41,7 +47,7 @@ const categories = [
     description: 'PEI, textured, and smooth bed surfaces — adhesion, release, and longevity.',
     href: '/hardware/build-surfaces',
     live: false,
-    count: 'Coming Soon',
+    count: counts.buildSurfaces,
     icon: '🧲',
   },
   {
@@ -49,7 +55,7 @@ const categories = [
     description: 'Hardened steel, brass, ruby, and specialty nozzles for every filament type.',
     href: '/hardware/nozzles',
     live: false,
-    count: 'Coming Soon',
+    count: counts.nozzles,
     icon: '💧',
   },
 ];
@@ -152,7 +158,9 @@ const featured = [
                 <div class="hw-cat-body">
                   <div class="hw-cat-name">{cat.name}</div>
                   <div class="hw-cat-desc">{cat.description}</div>
-                  <span class="hw-cat-count hw-cat-count-live">{cat.count}</span>
+                  <span class={`hw-cat-count ${cat.count > 0 ? 'hw-cat-count-live' : 'hw-cat-count-soon'}`}>
+                    {cat.count > 0 ? `${cat.count} listed` : 'Coming Soon'}
+                  </span>
                 </div>
                 <span class="hw-cat-arrow">→</span>
               </a>
@@ -163,7 +171,9 @@ const featured = [
                 <div class="hw-cat-body">
                   <div class="hw-cat-name hw-cat-name-dim">{cat.name}</div>
                   <div class="hw-cat-desc hw-cat-desc-dim">{cat.description}</div>
-                  <span class="hw-cat-count hw-cat-count-soon">Coming Soon</span>
+                  <span class={`hw-cat-count ${cat.count > 0 ? 'hw-cat-count-live' : 'hw-cat-count-soon'}`}>
+                    {cat.count > 0 ? `${cat.count} listed` : 'Coming Soon'}
+                  </span>
                 </div>
               </div>
             )
