@@ -293,12 +293,33 @@ M84</textarea>
           </ol>
           <div class="pa-diagram">
             <div class="pa-diagram-title">Reading the retraction towers</div>
-            <pre class="pa-diagram-art">  Too little retraction     Correct          Too much retraction
-  ┌──┐  ┌──┐  ┌──┐         ┌──┐  ┌──┐       ┌──┐  ┌──┐
-  │  │~~│  │~~│  │         │  │  │  │       ●│  │  │  │●
-  │  │~~│  │~~│  │         │  │  │  │        │  │  │  │
-  └──┘  └──┘  └──┘         └──┘  └──┘       └──┘  └──┘
-  strings between towers   clean travels    blobs on resume</pre>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140" style="width:100%;display:block" aria-label="Retraction tower comparison: too little shows strings between towers, correct shows clean gap, too much shows blobs on resume">
+
+            <!-- ── Group 1: Too little retraction ── -->
+            <text x="80" y="18" text-anchor="middle" fill="#ccc" font-size="11" font-weight="bold" font-family="'JetBrains Mono',monospace">Too little retraction</text>
+            <rect x="46" y="26" width="26" height="84" fill="none" stroke="#555" stroke-width="1.5"/>
+            <rect x="88" y="26" width="26" height="84" fill="none" stroke="#555" stroke-width="1.5"/>
+            <path d="M 72,46 Q 80,42 88,46" fill="none" stroke="#FF5A1F" stroke-width="1.5"/>
+            <path d="M 72,61 Q 80,57 88,61" fill="none" stroke="#FF5A1F" stroke-width="1.5"/>
+            <path d="M 72,76 Q 80,72 88,76" fill="none" stroke="#FF5A1F" stroke-width="1.5"/>
+            <path d="M 72,91 Q 80,87 88,91" fill="none" stroke="#FF5A1F" stroke-width="1.5"/>
+            <text x="80" y="126" text-anchor="middle" fill="#888" font-size="9" font-family="'JetBrains Mono',monospace">strings between towers</text>
+
+            <!-- ── Group 2: Correct ── -->
+            <text x="240" y="18" text-anchor="middle" fill="#ccc" font-size="11" font-weight="bold" font-family="'JetBrains Mono',monospace">Correct</text>
+            <rect x="206" y="26" width="26" height="84" fill="none" stroke="#555" stroke-width="1.5"/>
+            <rect x="248" y="26" width="26" height="84" fill="none" stroke="#555" stroke-width="1.5"/>
+            <text x="240" y="126" text-anchor="middle" fill="#888" font-size="9" font-family="'JetBrains Mono',monospace">clean travels</text>
+
+            <!-- ── Group 3: Too much retraction ── -->
+            <text x="400" y="18" text-anchor="middle" fill="#ccc" font-size="11" font-weight="bold" font-family="'JetBrains Mono',monospace">Too much retraction</text>
+            <rect x="366" y="26" width="26" height="84" fill="none" stroke="#555" stroke-width="1.5"/>
+            <rect x="408" y="26" width="26" height="84" fill="none" stroke="#555" stroke-width="1.5"/>
+            <circle cx="392" cy="28" r="6" fill="#FF5A1F"/>
+            <circle cx="408" cy="28" r="6" fill="#FF5A1F"/>
+            <text x="400" y="126" text-anchor="middle" fill="#888" font-size="9" font-family="'JetBrains Mono',monospace">blobs on resume</text>
+
+          </svg>
           </div>
           <div class="pa-howto-note">
             Klipper: set retraction in your slicer — it passes <code>G1 E</code> commands directly. Or use <code>SET_RETRACTION</code> if firmware retraction is enabled in your config.<br>
