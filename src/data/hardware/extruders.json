@@ -1,1 +1,77 @@
-[]
+[
+  {
+    "id": "rec08iNZwKasrStBB",
+    "Cons": "Very small — gear ratio means higher rotation distance config needed\nMore expensive than printed Sherpa Micro alternatives\nLimited reseller availability\nNot ideal for high-torque abrasive filament applications",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "The SLM Sherpa Micro is Lettucehead3D's SLM metal-printed version of the Sherpa Micro RC2, using the 6T motor variant. SLM printing produces near-solid metal density without the porosity of cast or sintered parts. The 6T motor runs cooler than the 8T, reducing heat transfer into the filament path.",
+    "Verdict Label": "An SLM-printed Sherpa Micro with the 6T motor — lighter and cooler-running than aluminum alternatives.",
+    "Verdict": "CONSIDER",
+    "Weight (g)": 12,
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner",
+      "A4T"
+    ],
+    "Vendor 1 Name": "Lettucehead3D",
+    "Name": "SLM Sherpa Micro",
+    "Gear Ratio": "Sherpa Micro RC2",
+    "Vendor 1 URL": "https://lettucehead3d.com/product/slm-sherpa-micro/",
+    "Brand": "Luke's Lab",
+    "Price (USD)": 35,
+    "Pros": "SLM (Selective Laser Melting) metal printing — near-tool-steel density\nBased on Sherpa Micro RC2 — latest revision with 6T motor\n6T motor runs cooler than 8T — less heat transferred to filament\nSmallest and lightest extruder in the SLM lineup\nDirect from Lettucehead3D — quality-controlled production"
+  },
+  {
+    "id": "recKZWr538a7kJVVy",
+    "Cons": "PEEK gears are harder to source as replacements than POM\nMore expensive than printed Sherpa alternatives\n10T version requires rotation distance recalibration vs 8T",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 3"
+    ],
+    "Description": "The Fysetc Sherpa V3 is the third-generation CNC version of the Sherpa Mini extruder. The key upgrade over V2 is the replacement of POM gears with PEEK (30% glass fiber) gears and PEEK motor inserts, specifically solving the heat creep and TPU clogging issue that affected earlier all-metal Sherpa builds. CNC aviation aluminum body, Moons 36 motor, nano-coated steel drive gears.",
+    "Verdict Label": "The most refined CNC Sherpa available — PEEK gears and inserts solve the TPU heat creep problem.",
+    "Verdict": "BUY",
+    "Weight (g)": 18,
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner",
+      "A4T"
+    ],
+    "Vendor 1 Name": "Excit3D",
+    "Name": "Fysetc Sherpa V3",
+    "Gear Ratio": "50:10 (10T) or 50:8 (8T)",
+    "Vendor 1 URL": "https://excit3d.shop/shop/fysetc-cnc-sherpa-v3",
+    "Brand": "Fysetc",
+    "Price (USD)": 45,
+    "Pros": "PEEK (30% GF) gears replace POM — dramatically better thermal isolation from motor\nPEEK inserts added to further block motor heat transfer\nCNC aviation aluminum body — lightweight and stiff\nNano-coated mold steel drive gears — durable and precise\nMoons 36 pancake motor included\nSupports both 8T and 10T configurations\nDirect and Bowden compatible"
+  },
+  {
+    "id": "recz1G5OzR9hhHnmH",
+    "Cons": "Newer product with smaller community install base\nLimited documentation compared to Sherpa Mini\nNiche form factor — most builders don't need this slim profile",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "The Lite Pro Slim Repack is Lettucehead3D's production version of the Lite Pro extruder in a slimmed-down repackaged form factor. Designed for toolhead builds where standard extruder body depth is a constraint.",
+    "Verdict Label": "A slim, high-ratio compact extruder for space-constrained toolheads — Lettucehead3D's production repack.",
+    "Verdict": "CONSIDER",
+    "Weight (g)": 20,
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner"
+    ],
+    "Vendor 1 Name": "Lettucehead3D",
+    "Name": "Lite Pro Slim Repack",
+    "Gear Ratio": "High ratio compact",
+    "Vendor 1 URL": "https://lettucehead3d.com/product/lite-pro-slim-repack/",
+    "Brand": "Luke's Lab",
+    "Price (USD)": 55,
+    "Pros": "Slim profile fits tight toolhead designs\nProduction quality from Lettucehead3D\nHigh gear ratio for increased extrusion torque\nLightweight design reduces toolhead moving mass"
+  }
+]

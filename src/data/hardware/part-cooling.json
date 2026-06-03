@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "id": "rech12AlWChrWbb6P",
+    "Price (USD)": 45,
+    "Pros": "47 m³/h max airflow at 0 kPa\n12.5 kPa max static pressure (24V) / 14 kPa (48V)\nDramatically outperforms any 5015 blower fan\n3-phase brushless DC motor with NMB ball bearings\n20,000+ hour MTTF\nPWM speed control compatible\nAvailable in 24V and 48V variants",
+    "Compatible Toolheads": [
+      "CN3D Y-CPAP Toolhead",
+      "Takeoff"
+    ],
+    "Cons": "Requires remote mounting — not suitable for direct toolhead attachment\nNeeds a CPAP tube routed from remote location to toolhead\nAdapter board or PWM controller required for Klipper control\nOverkill for small-format builds like V0",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 3"
+    ],
+    "Voltage": "24V",
+    "Name": "Wonsmart WS9290",
+    "Vendor 1 Name": "Excit3D",
+    "Type": "CPAP Blower",
+    "Vendor 1 URL": "https://excit3d.shop/shop/wonsmart-ws9290",
+    "Description": "The Wonsmart WS9290 is the CPAP blower used in most remote part-cooling builds for high-performance Voron toolheads. Originally designed for medical CPAP machines, it delivers 47 m³/h airflow at 0 kPa and up to 12.5 kPa static pressure in the 24V variant. At full speed it produces substantially more airflow than any conventional 5015 blower fan, at the cost of being too large and heavy to mount on the toolhead itself.",
+    "Verdict Label": "BUY",
+    "Size (mm)": "90mm",
+    "Verdict": "BUY",
+    "CFM / Static Pressure": "47 m³/h / 12.5 kPa"
+  }
+]
