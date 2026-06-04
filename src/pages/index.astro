@@ -9,7 +9,6 @@ import HomeLatestArticles from '../components/home/HomeLatestArticles.astro';
 import HomeEcosystemHubs from '../components/home/HomeEcosystemHubs.astro';
 import HomeBuilds from '../components/home/HomeBuilds.astro';
 import HomeToolsTeaser from '../components/home/HomeToolsTeaser.astro';
-import HomeNewsletterPreview from '../components/home/HomeNewsletterPreview.astro';
 import AdSlot from '../components/AdSlot.astro';
 const currentPath = '/';
 ---
@@ -22,7 +21,6 @@ const currentPath = '/';
   <HomeNewsletterCTA />
   <HomeToolsTeaser />
   <HomeBuilds />
-  <HomeNewsletterPreview />
   <AdSlot slotName="home-above-footer" />
   <Footer slot="footer" />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({

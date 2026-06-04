@@ -1,6 +1,5 @@
 ---
 // HomeNewsletterCTA — compact editorial callout strip between Latest and Ecosystems
-import BeehiivEmbed from '../BeehiivEmbed.astro';
 ---
 <section class="nlcta-section" aria-label="Newsletter signup">
   <div class="nlcta-container">
@@ -11,15 +10,16 @@ import BeehiivEmbed from '../BeehiivEmbed.astro';
         <p class="nlcta-sub">What's worth buying, building, and following — every Tuesday.</p>
       </div>
       <div class="nlcta-form-wrap">
-        <div class="nlcta-beehiiv-wrap">
-          <BeehiivEmbed />
-        </div>
-        <p class="nlcta-note">Free, always. No spam. Unsubscribe any time.</p>
+        <form class="beehiiv-fallback-form" id="nlcta-form">
+          <input type="email" name="email" id="nlcta-email"
+            placeholder="your@email.com" required />
+          <button type="submit" id="nlcta-btn">Subscribe →</button>
+        </form>
+        <p class="nlcta-note" id="nlcta-msg" style="display:none;"></p>
       </div>
     </div>
   </div>
 </section>
-<script is:inline type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 
 <style is:global>
   .nlcta-section {
@@ -88,12 +88,12 @@ import BeehiivEmbed from '../BeehiivEmbed.astro';
     width: 320px;
     flex-shrink: 0;
   }
-  .nlcta-form {
+  .beehiiv-fallback-form {
     display: flex;
     gap: 8px;
     width: 100%;
   }
-  .nlcta-field {
+  .beehiiv-fallback-form input[type="email"] {
     flex: 1;
     height: 40px;
     padding: 0 14px;
@@ -108,9 +108,9 @@ import BeehiivEmbed from '../BeehiivEmbed.astro';
     min-width: 0;
     box-sizing: border-box;
   }
-  .nlcta-field::placeholder { color: var(--grey-2); }
-  .nlcta-field:focus { border-color: var(--accent); }
-  .nlcta-btn {
+  .beehiiv-fallback-form input[type="email"]::placeholder { color: var(--grey-2); }
+  .beehiiv-fallback-form input[type="email"]:focus { border-color: var(--accent); }
+  .beehiiv-fallback-form button[type="submit"] {
     height: 40px;
     padding: 0 18px;
     background: var(--accent);
@@ -125,7 +125,7 @@ import BeehiivEmbed from '../BeehiivEmbed.astro';
     transition: background 150ms;
     flex-shrink: 0;
   }
-  .nlcta-btn:hover { background: var(--accent-dk); }
+  .beehiiv-fallback-form button[type="submit"]:hover { background: var(--accent-dk); }
   .nlcta-note {
     font-size: 11px;
     color: var(--grey-2);
@@ -147,13 +147,13 @@ import BeehiivEmbed from '../BeehiivEmbed.astro';
       padding: 20px;
     }
     .nlcta-form-wrap { width: 100%; }
-    .nlcta-form { flex-direction: column; }
-    .nlcta-field,
-    .nlcta-btn {
+    .beehiiv-fallback-form { flex-direction: column; }
+    .beehiiv-fallback-form input[type="email"],
+    .beehiiv-fallback-form button[type="submit"] {
       width: 100%;
       box-sizing: border-box;
     }
-    .nlcta-btn { height: 44px; }
+    .beehiiv-fallback-form button[type="submit"] { height: 44px; }
   }
 </style>
 
@@ -171,4 +171,36 @@ import BeehiivEmbed from '../BeehiivEmbed.astro';
     );
     observer.observe(container);
   }
+</script>
+
+<script is:inline>
+(function() {
+  var form = document.getElementById('nlcta-form');
+  var btn = document.getElementById('nlcta-btn');
+  var msg = document.getElementById('nlcta-msg');
+  var email = document.getElementById('nlcta-email');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btn.textContent = 'Subscribing...';
+    btn.disabled = true;
+    fetch('https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.value })
+    })
+    .then(function(res) { return res.json(); })
+    .then(function() {
+      form.style.display = 'none';
+      msg.textContent = "You're in. Welcome to The Modern Makes Brief.";
+      msg.style.display = 'block';
+      msg.style.color = 'var(--accent)';
+      msg.style.fontSize = '14px';
+    })
+    .catch(function() {
+      btn.textContent = 'Subscribe →';
+      btn.disabled = false;
+    });
+  });
+})();
 </script>
