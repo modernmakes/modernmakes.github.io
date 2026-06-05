@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "hallmark": {
+      "source": "nutlope/hallmark",
+      "sourceType": "github",
+      "skillPath": "skills/hallmark/SKILL.md",
+      "computedHash": "d3a20aae61e43793d74932c92b63bcad5882e73ec1c8545b858910fd95b25136"
+    },
+    "transitions-dev": {
+      "source": "Jakubantalik/transitions.dev",
+      "sourceType": "github",
+      "skillPath": "skills/transitions-dev/SKILL.md",
+      "computedHash": "3e054fc65e5cfced994aea3b120edd5abb1059c32af56a297d60910f266a53d1"
+    }
+  }
+}
