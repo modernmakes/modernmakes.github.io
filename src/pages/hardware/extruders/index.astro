@@ -1,4 +1,7 @@
 ---
+/* Hallmark · macrostructure: Workbench · tone: technical-utilitarian · anchor hue: orange
+ * transitions: tabs-sliding (16) on filter · texts-reveal (18) on row entrance
+ */
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
@@ -7,16 +10,13 @@ import extruders from '../../../data/hardware/extruders.json';
 const toSlug = (name: string) =>
   name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
-const VERDICT_ORDER = ['BUY', 'CONSIDER', 'SKIP', 'UPDATED', 'Top Pick', 'Solid Choice', 'Niche Pick'];
+const VERDICT_ORDER = ['BUY', 'CONSIDER', 'SKIP', 'UPDATED'];
 
 const VERDICT_BADGE: Record<string, { cls: string; label: string }> = {
-  'BUY':          { cls: 'verdict-best', label: 'Buy' },
-  'CONSIDER':     { cls: 'verdict-rec',  label: 'Consider' },
-  'SKIP':         { cls: 'verdict-skip', label: 'Skip' },
-  'UPDATED':      { cls: 'verdict-upd',  label: 'Updated' },
-  'Top Pick':     { cls: 'verdict-best', label: 'Top Pick' },
-  'Solid Choice': { cls: 'verdict-rec',  label: 'Solid Choice' },
-  'Niche Pick':   { cls: 'verdict-upd',  label: 'Niche Pick' },
+  'BUY':      { cls: 'verdict-best', label: 'Buy' },
+  'CONSIDER': { cls: 'verdict-rec',  label: 'Consider' },
+  'SKIP':     { cls: 'verdict-skip', label: 'Skip' },
+  'UPDATED':  { cls: 'verdict-upd',  label: 'Updated' },
 };
 
 const records = (extruders as any[])
@@ -34,6 +34,11 @@ for (const v of VERDICT_ORDER) {
 }
 const activeVerdicts = VERDICT_ORDER.filter(v => (verdictCounts[v] ?? 0) > 0);
 
+const prices = records.map((r: any) => r['Price (USD)']).filter((p: any) => p != null);
+const priceMin = prices.length ? Math.min(...prices) : null;
+const priceMax = prices.length ? Math.max(...prices) : null;
+const brands = [...new Set(records.map((r: any) => r['Brand']).filter(Boolean))];
+
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
@@ -48,7 +53,7 @@ const itemListSchema = {
     position: i + 1,
     name: r['Name'] as string,
     url: `${siteBase}/hardware/extruders/${toSlug(r['Name'] as string)}`,
-    description: (r['Verdict Label'] as string | undefined) ?? (r['Description'] as string | undefined) ?? '',
+    description: (r['Verdict Label'] as string | undefined) ?? '',
   })),
 };
 ---
@@ -59,225 +64,510 @@ const itemListSchema = {
 >
   <Nav slot="nav" currentPath="/hardware" />
 
-  <div style="background:var(--black);padding:48px 0 44px;border-bottom:1px solid rgba(255,255,255,.08)">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <nav style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
-        <a href="/hardware" style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.3)">Hardware</a>
-        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.2)">/</span>
-        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.4)">Extruders</span>
-      </nav>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Extruders</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:480px">Direct-drive extruders for Voron, RatRig, and prosumer CoreXY builds. Specs, compatibility, and where to buy.</p>
-    </div>
-  </div>
+  <!-- HEADER — light surface, 2-col: title+meta left, filter tabs right -->
+  <div class="exti-header">
+    <div class="exti-header-inner">
+      <div class="exti-header-content">
+        <nav class="exti-breadcrumb" aria-label="Breadcrumb">
+          <a href="/hardware">Hardware</a>
+          <span aria-hidden="true">/</span>
+          <span>Extruders</span>
+        </nav>
+        <h1 class="exti-title">Extruders</h1>
+        <p class="exti-sub">Direct-drive extruders for Voron, RatRig, and prosumer CoreXY builds.</p>
+        <div class="exti-meta-row">
+          <span class="exti-meta-chip">{records.length} model{records.length !== 1 ? 's' : ''}</span>
+          {priceMin != null && priceMax != null && priceMin !== priceMax && (
+            <span class="exti-meta-chip">${priceMin}–${priceMax}</span>
+          )}
+          {priceMin != null && priceMin === priceMax && (
+            <span class="exti-meta-chip">${priceMin}</span>
+          )}
+          {brands.length > 0 && (
+            <span class="exti-meta-chip">{brands.length} brand{brands.length !== 1 ? 's' : ''}</span>
+          )}
+        </div>
+      </div>
 
-  <!-- VERDICT FILTER BAR -->
-  <div class="gf-bar">
-    <div class="gf-bar-inner">
-      <div class="gf-cats" role="group" aria-label="Filter by verdict">
-        <button class="gf-tab is-active" data-verdict="all" data-slug="all">
-          All
-          <span class="gf-badge">{records.length}</span>
-        </button>
-        {activeVerdicts.map(v => (
-          <button class="gf-tab" data-verdict={v.toLowerCase()} data-slug={v.toLowerCase().replace(/\s+/g, '-')}>
-            {v}
-            <span class="gf-badge">{verdictCounts[v]}</span>
+      <!-- Pill filter — tabs sliding (16) -->
+      <div class="exti-filter-wrap">
+        <p class="exti-filter-label">Filter</p>
+        <div class="t-tabs" role="tablist" id="ext-tabs" aria-label="Filter by verdict">
+          <span class="t-tabs-pill" aria-hidden="true"></span>
+          <button class="t-tab" role="tab" aria-selected="true" data-verdict="all">
+            All<span class="exti-count">{records.length}</span>
           </button>
-        ))}
+          {activeVerdicts.map(v => (
+            <button class="t-tab" role="tab" aria-selected="false" data-verdict={v.toLowerCase()}>
+              {v.charAt(0).toUpperCase() + v.slice(1).toLowerCase()}<span class="exti-count">{verdictCounts[v]}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   </div>
 
-  <section class="section">
-    <div class="container">
-      <p class="gf-summary" id="extruder-count">
-        Showing {records.length} of {records.length} extruder{records.length !== 1 ? 's' : ''}
-      </p>
+  <!-- SPEC LIST -->
+  <div class="exti-body">
+    <div class="exti-container">
+
+      <!-- Column labels — desktop only -->
+      <div class="exti-col-labels" aria-hidden="true">
+        <span>Model</span>
+        <span>Gear Ratio</span>
+        <span>Weight</span>
+        <span>Price</span>
+        <span>Verdict</span>
+        <span></span>
+      </div>
+
       {records.length > 0 ? (
-        <div class="grid-3" id="extruder-grid">
-          {records.map((r: any) => {
+        <div class="ext-list" id="ext-list">
+          {records.map((r: any, i: number) => {
             const slug = toSlug(r['Name']);
             const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
             return (
-              <a href={`/hardware/extruders/${slug}`} class="card gf-card" data-verdict={r['Verdict']?.toLowerCase() ?? ''}>
-                <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#0d1520)">
-                  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
-                  <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">EXTRUDER</span>
+              <a
+                href={`/hardware/extruders/${slug}`}
+                class="ext-row"
+                data-verdict={r['Verdict']?.toLowerCase() ?? ''}
+                style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}
+                aria-label={`${r['Name']} — ${badge.label}`}
+              >
+                <div class="ext-row-identity">
+                  <span class="ext-row-name">{r['Name']}</span>
+                  <span class="ext-row-brand">{r['Brand'] ?? ''}</span>
                 </div>
-                <div class="card-body">
-                  <div class="card-cat">{r['Brand'] ?? ''}</div>
-                  <div class="card-title">{r['Name']}</div>
-                  <div class="product-card-specs" style="margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap">
-                    {r['Gear Ratio'] && <span class="spec-chip">{r['Gear Ratio']}</span>}
-                    {r['Weight (g)'] != null && <span class="spec-chip">{r['Weight (g)']}g</span>}
-                    {r['Price (USD)'] != null && <span class="spec-chip">~${r['Price (USD)']} USD</span>}
-                  </div>
-                  <p class="card-excerpt">{r['Verdict Label'] ?? r['Description'] ?? ''}</p>
-                  <div class="card-footer">
-                    {badge.label && <span class={`verdict ${badge.cls}`}>{badge.label}</span>}
-                  </div>
+                <div class="ext-row-cell ext-ratio">{r['Gear Ratio'] ?? '—'}</div>
+                <div class="ext-row-cell ext-weight">{r['Weight (g)'] != null ? `${r['Weight (g)']}g` : '—'}</div>
+                <div class="ext-row-cell ext-price">{r['Price (USD)'] != null ? `$${r['Price (USD)']}` : '—'}</div>
+                <div class="ext-row-verdict">
+                  {badge.label && <span class={`verdict ${badge.cls}`}>{badge.label}</span>}
                 </div>
+                <div class="ext-row-arrow" aria-hidden="true">→</div>
               </a>
             );
           })}
         </div>
       ) : (
-        <p style="font-family:var(--fb);font-size:15px;color:var(--g2);padding:40px 0">
-          No extruder data yet — check back after the next Airtable sync.
-        </p>
+        <p class="exti-empty">No extruder data yet — check back after the next Airtable sync.</p>
       )}
+
+      <p class="exti-no-match" id="ext-no-match" style="display:none">
+        No extruders match this filter.
+      </p>
+
     </div>
-  </section>
+  </div>
 
   <Footer slot="footer" />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
 </Base>
 
+<!-- ── FILTER + TABS-SLIDING JS ── -->
 <script>
-  let activeVerdict = 'all';
+(function () {
+  const bar   = document.getElementById('ext-tabs') as HTMLElement | null;
+  const list  = document.getElementById('ext-list') as HTMLElement | null;
+  const noMsg = document.getElementById('ext-no-match') as HTMLElement | null;
+  if (!bar || !list) return;
 
-  const allCards = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
-  const total    = allCards.length;
-  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
-  const countEl  = document.getElementById('extruder-count');
+  const pill  = bar.querySelector('.t-tabs-pill') as HTMLElement;
+  const tabs  = [...bar.querySelectorAll<HTMLButtonElement>('.t-tab')];
+  const rows  = [...list.querySelectorAll<HTMLElement>('.ext-row')];
 
-  function showCard(card: HTMLElement) {
-    if (!card.classList.contains('gf-hidden')) return;
-    card.classList.remove('gf-hidden');
-    card.style.opacity = '0';
-    void card.offsetHeight;
-    card.style.opacity = '1';
-  }
-
-  function hideCard(card: HTMLElement) {
-    if (card.classList.contains('gf-hidden')) return;
-    card.style.opacity = '0';
-    const done = () => card.classList.add('gf-hidden');
-    card.addEventListener('transitionend', done, { once: true });
-    setTimeout(done, 180);
-  }
-
-  function applyFilter() {
-    let visible = 0;
-    allCards.forEach(card => {
-      const match = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
-      if (match) { showCard(card); visible++; }
-      else        { hideCard(card); }
-    });
-    if (countEl) {
-      countEl.textContent = `Showing ${visible} of ${total} extruder${total !== 1 ? 's' : ''}`;
-    }
-    pushHash();
-  }
-
-  function pushHash() {
-    if (activeVerdict === 'all') {
-      history.replaceState(null, '', location.pathname);
+  /* ── tabs-sliding pill position ── */
+  function moveTo(tab: HTMLButtonElement, animate: boolean) {
+    if (!animate) {
+      const prev = pill.style.transition;
+      pill.style.transition = 'none';
+      pill.style.transform = `translateX(${tab.offsetLeft}px)`;
+      pill.style.width     = `${tab.offsetWidth}px`;
+      void pill.offsetWidth;
+      pill.style.transition = prev;
     } else {
-      const tab = tabs.find(t => t.dataset.verdict === activeVerdict);
-      const slug = tab?.dataset.slug ?? activeVerdict.replace(/\s+/g, '-');
-      history.replaceState(null, '', `#${slug}`);
+      pill.style.transform = `translateX(${tab.offsetLeft}px)`;
+      pill.style.width     = `${tab.offsetWidth}px`;
     }
   }
 
-  function parseHash() {
-    const raw = location.hash.slice(1);
-    if (!raw) return;
-    const matched = tabs.find(t => t.dataset.slug === raw);
-    if (matched) activeVerdict = matched.dataset.verdict ?? 'all';
-  }
+  const activeTab = () =>
+    tabs.find(t => t.getAttribute('aria-selected') === 'true') ?? tabs[0];
 
-  function syncTabs() {
-    tabs.forEach(t => t.classList.toggle('is-active', t.dataset.verdict === activeVerdict));
+  /* ── filter ── */
+  function applyFilter(verdict: string) {
+    let visible = 0;
+    rows.forEach(row => {
+      const match = verdict === 'all' || row.dataset.verdict === verdict;
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (noMsg) noMsg.style.display = visible === 0 ? 'block' : 'none';
   }
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      activeVerdict = tab.dataset.verdict ?? 'all';
-      syncTabs();
-      applyFilter();
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tab ? 'true' : 'false'));
+      moveTo(tab, true);
+      applyFilter(tab.dataset.verdict ?? 'all');
     });
   });
 
-  parseHash();
-  syncTabs();
-  if (activeVerdict !== 'all') applyFilter();
+  requestAnimationFrame(() => moveTo(activeTab(), false));
+  window.addEventListener('resize', () => moveTo(activeTab(), false));
+
+  /* ── texts-reveal stagger on list enter ── */
+  const obs = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      list.classList.add('is-shown');
+      obs.disconnect();
+    }
+  }, { threshold: 0.05 });
+  obs.observe(list);
+})();
 </script>
 
+<!-- ── STYLES ── -->
 <style is:global>
-.gf-bar {
+/* ─── EXTRUDER INDEX — Workbench macrostructure ─────────────────────── */
+
+/* HEADER */
+.exti-header {
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 56px;
-  z-index: 10;
+  border-bottom: 2px solid var(--black);
+  padding: 40px 0 32px;
 }
-.gf-bar-inner {
-  max-width: 1200px;
+.exti-header-inner {
+  max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 40px;
-}
-.gf-cats {
   display: flex;
-  gap: 2px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
 }
-.gf-cats::-webkit-scrollbar { display: none; }
-.gf-tab {
-  display: inline-flex;
+.exti-header-content { flex: 1; min-width: 0; }
+
+.exti-breadcrumb {
+  display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 14px 20px;
-  font-family: var(--fu);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--g1);
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-bottom: -1px;
-  transition: color .15s, background .15s, border-color .15s;
-}
-.gf-tab:hover { color: var(--black); background: var(--bg); }
-.gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
-.gf-badge {
+  gap: 8px;
   font-family: var(--fm);
   font-size: 10px;
-  font-weight: 700;
+  color: var(--g2);
+  margin-bottom: 14px;
+}
+.exti-breadcrumb a { transition: color .15s; }
+.exti-breadcrumb a:hover { color: var(--accent); }
+
+.exti-title {
+  font-family: var(--fd);
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin-bottom: 8px;
+}
+.exti-sub {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--g1);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  max-width: 420px;
+}
+.exti-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.exti-meta-chip {
+  font-family: var(--fm);
+  font-size: 10px;
   color: var(--g2);
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1px 7px;
-  transition: background .15s, color .15s, border-color .15s;
+  border-radius: 3px;
+  padding: 2px 8px;
 }
-.gf-tab.is-active .gf-badge {
-  background: var(--accent);
-  color: #fff;
+
+/* FILTER WRAP */
+.exti-filter-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+.exti-filter-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+
+/* TABS SLIDING — transitions.dev 16 */
+.t-tabs {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.t-tab {
+  position: relative;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  height: 32px;
+  padding: 4px 14px;
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--g1);
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 1;
+  white-space: nowrap;
+  transition: color var(--tabs-dur) var(--tabs-ease);
+}
+.t-tab:not([aria-selected="true"]):hover,
+.t-tab[aria-selected="true"] { color: var(--black); }
+.t-tabs-pill {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 32px;
+  width: 0;
+  background: var(--surface);
+  border-radius: 5px;
+  transform: translateX(0);
+  transition: transform var(--tabs-dur) var(--tabs-ease),
+              width     var(--tabs-dur) var(--tabs-ease);
+  will-change: transform, width;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.exti-count {
+  display: inline-block;
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--g2);
+  background: rgba(0,0,0,.06);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 4px;
+}
+.t-tab[aria-selected="true"] .exti-count {
+  background: rgba(255,90,31,.12);
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-tabs-pill, .t-tab { transition: none !important; }
+}
+
+/* SPEC LIST BODY */
+.exti-body {
+  background: var(--bg);
+  padding: 28px 0 72px;
+}
+.exti-container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Column labels */
+.exti-col-labels {
+  display: grid;
+  grid-template-columns: 1fr 200px 90px 90px 110px 36px;
+  gap: 16px;
+  padding: 0 20px 10px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+
+/* ROW LIST */
+.ext-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* TEXTS REVEAL — transitions.dev 18 adapted for list rows */
+.ext-row {
+  display: grid;
+  grid-template-columns: 1fr 200px 90px 90px 110px 36px;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  /* entrance: blurred rise from below */
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+  will-change: opacity, transform, filter;
+}
+/* After reveal — switch to hover transitions */
+.ext-list.is-shown .ext-row {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.ext-list.is-shown .ext-row:hover {
   border-color: var(--accent);
+  box-shadow: 0 2px 16px rgba(255,90,31,.08);
 }
-.gf-summary {
+.ext-list.is-shown .ext-row:hover .ext-row-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ext-row {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Row cells */
+.ext-row-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.ext-row-name {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ext-row-brand {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ext-row-cell {
   font-family: var(--fm);
   font-size: 12px;
+  color: var(--black);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.ext-price {
+  font-weight: 700;
+  color: var(--black);
+}
+.ext-row-verdict {
+  display: flex;
+  align-items: center;
+}
+.ext-row-arrow {
+  font-family: var(--fm);
+  font-size: 14px;
   color: var(--g2);
-  padding: 16px 0 12px;
-  margin: 0;
+  text-align: right;
+  transition: color .15s ease, transform .15s ease;
 }
-.gf-card {
-  opacity: 1;
-  transition: opacity 0.15s ease, border-color .15s, transform .15s;
+
+.exti-empty,
+.exti-no-match {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g2);
+  font-style: italic;
+  padding: 40px 0;
 }
-.gf-card.gf-hidden { display: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .exti-col-labels,
+  .ext-row {
+    grid-template-columns: 1fr 160px 80px 80px 100px 28px;
+  }
+}
 @media (max-width: 768px) {
-  .gf-bar-inner { padding: 0 20px; }
-  .gf-tab { padding: 12px 14px; font-size: 11px; }
+  .exti-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 24px;
+  }
+  .exti-header { padding: 32px 0 24px; }
+  .exti-title { font-size: 40px; }
+  .exti-filter-wrap { align-items: flex-start; }
+  .exti-col-labels { display: none; }
+  .exti-container { padding: 0 24px; }
+  .ext-row {
+    grid-template-columns: 1fr auto 28px;
+    grid-template-rows: auto auto;
+    gap: 6px 12px;
+    padding: 14px 16px;
+  }
+  .ext-row-identity {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .ext-ratio,
+  .ext-weight {
+    display: none;
+  }
+  .ext-price {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 11px;
+    color: var(--g1);
+    font-weight: 500;
+  }
+  .ext-row-verdict {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+  .ext-row-arrow {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+  }
+}
+@media (max-width: 480px) {
+  .exti-header-inner,
+  .exti-container { padding: 0 20px; }
+  .exti-title { font-size: 34px; }
 }
 </style>

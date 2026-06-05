@@ -50,6 +50,17 @@
   --radius-md:    8px;
   --radius-lg:    10px;
   --radius-xl:    12px;
+
+  /* transitions-dev — texts reveal (18) */
+  --stagger-dur:      600ms;
+  --stagger-distance: 10px;
+  --stagger-stagger:  60ms;
+  --stagger-blur:     2px;
+  --stagger-ease:     cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* transitions-dev — tabs sliding (16) */
+  --tabs-dur:         200ms;
+  --tabs-ease:        cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ── RESET ── */
