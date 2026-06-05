@@ -20,10 +20,18 @@
     btn.textContent = 'Subscribing...';
     btn.disabled = true;
 
+    var slug = window.location.pathname.replace(/\//g, '-').replace(/^-|-$/g, '') || 'unknown';
+    var pageType = window.location.pathname.includes('/guides/') ? 'guide_footer' : 'article_footer';
+
     fetch('https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email.value })
+      body: JSON.stringify({
+        email: email.value,
+        utm_source: 'website',
+        utm_medium: 'subscribe_form',
+        utm_campaign: pageType + '__' + slug
+      })
     })
     .then(function(res) { return res.json(); })
     .then(function(data) {

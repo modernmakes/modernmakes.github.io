@@ -187,7 +187,12 @@
     fetch('https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email.value })
+      body: JSON.stringify({
+        email: email.value,
+        utm_source: 'website',
+        utm_medium: 'subscribe_form',
+        utm_campaign: 'homepage_cta'
+      })
     })
     .then(function(res) { return res.json(); })
     .then(function() {
