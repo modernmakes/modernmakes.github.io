@@ -1,0 +1,283 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import extruders from '../../../data/hardware/extruders.json';
+
+const toSlug = (name: string) =>
+  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+const VERDICT_ORDER = ['BUY', 'CONSIDER', 'SKIP', 'UPDATED', 'Top Pick', 'Solid Choice', 'Niche Pick'];
+
+const VERDICT_BADGE: Record<string, { cls: string; label: string }> = {
+  'BUY':          { cls: 'verdict-best', label: 'Buy' },
+  'CONSIDER':     { cls: 'verdict-rec',  label: 'Consider' },
+  'SKIP':         { cls: 'verdict-skip', label: 'Skip' },
+  'UPDATED':      { cls: 'verdict-upd',  label: 'Updated' },
+  'Top Pick':     { cls: 'verdict-best', label: 'Top Pick' },
+  'Solid Choice': { cls: 'verdict-rec',  label: 'Solid Choice' },
+  'Niche Pick':   { cls: 'verdict-upd',  label: 'Niche Pick' },
+};
+
+const records = (extruders as any[])
+  .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
+  .sort((a: any, b: any) => {
+    const ai = VERDICT_ORDER.indexOf(a['Verdict'] ?? '');
+    const bi = VERDICT_ORDER.indexOf(b['Verdict'] ?? '');
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+
+const verdictCounts: Record<string, number> = { all: records.length };
+for (const v of VERDICT_ORDER) {
+  const n = records.filter((r: any) => r['Verdict'] === v).length;
+  if (n > 0) verdictCounts[v] = n;
+}
+const activeVerdicts = VERDICT_ORDER.filter(v => (verdictCounts[v] ?? 0) > 0);
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Best Extruders for Voron & Prosumer Printers',
+  url: `${siteBase}/hardware/extruders`,
+  itemListElement: records.map((r: any, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: r['Name'] as string,
+    url: `${siteBase}/hardware/extruders/${toSlug(r['Name'] as string)}`,
+    description: (r['Verdict Label'] as string | undefined) ?? (r['Description'] as string | undefined) ?? '',
+  })),
+};
+---
+<Base
+  title="Best Extruders for Voron & Prosumer Printers — Modern Makes"
+  description="Community-tested extruder verdicts for Voron, RatRig, and high-performance FDM builds."
+  heroPage={false}
+>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <div style="background:var(--black);padding:48px 0 44px;border-bottom:1px solid rgba(255,255,255,.08)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <nav style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
+        <a href="/hardware" style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.3)">Hardware</a>
+        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.2)">/</span>
+        <span style="font-family:var(--fm);font-size:11px;color:rgba(255,255,255,.4)">Extruders</span>
+      </nav>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Extruders</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:480px">Direct-drive extruders for Voron, RatRig, and prosumer CoreXY builds. Specs, compatibility, and where to buy.</p>
+    </div>
+  </div>
+
+  <!-- VERDICT FILTER BAR -->
+  <div class="gf-bar">
+    <div class="gf-bar-inner">
+      <div class="gf-cats" role="group" aria-label="Filter by verdict">
+        <button class="gf-tab is-active" data-verdict="all" data-slug="all">
+          All
+          <span class="gf-badge">{records.length}</span>
+        </button>
+        {activeVerdicts.map(v => (
+          <button class="gf-tab" data-verdict={v.toLowerCase()} data-slug={v.toLowerCase().replace(/\s+/g, '-')}>
+            {v}
+            <span class="gf-badge">{verdictCounts[v]}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <p class="gf-summary" id="extruder-count">
+        Showing {records.length} of {records.length} extruder{records.length !== 1 ? 's' : ''}
+      </p>
+      {records.length > 0 ? (
+        <div class="grid-3" id="extruder-grid">
+          {records.map((r: any) => {
+            const slug = toSlug(r['Name']);
+            const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
+            return (
+              <a href={`/hardware/extruders/${slug}`} class="card gf-card" data-verdict={r['Verdict']?.toLowerCase() ?? ''}>
+                <div class="card-img" style="background:linear-gradient(135deg,#0a1a10,#0d1520)">
+                  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+                  <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">EXTRUDER</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-cat">{r['Brand'] ?? ''}</div>
+                  <div class="card-title">{r['Name']}</div>
+                  <div class="product-card-specs" style="margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap">
+                    {r['Gear Ratio'] && <span class="spec-chip">{r['Gear Ratio']}</span>}
+                    {r['Weight (g)'] != null && <span class="spec-chip">{r['Weight (g)']}g</span>}
+                    {r['Price (USD)'] != null && <span class="spec-chip">~${r['Price (USD)']} USD</span>}
+                  </div>
+                  <p class="card-excerpt">{r['Verdict Label'] ?? r['Description'] ?? ''}</p>
+                  <div class="card-footer">
+                    {badge.label && <span class={`verdict ${badge.cls}`}>{badge.label}</span>}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      ) : (
+        <p style="font-family:var(--fb);font-size:15px;color:var(--g2);padding:40px 0">
+          No extruder data yet — check back after the next Airtable sync.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
+</Base>
+
+<script>
+  let activeVerdict = 'all';
+
+  const allCards = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
+  const total    = allCards.length;
+  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
+  const countEl  = document.getElementById('extruder-count');
+
+  function showCard(card: HTMLElement) {
+    if (!card.classList.contains('gf-hidden')) return;
+    card.classList.remove('gf-hidden');
+    card.style.opacity = '0';
+    void card.offsetHeight;
+    card.style.opacity = '1';
+  }
+
+  function hideCard(card: HTMLElement) {
+    if (card.classList.contains('gf-hidden')) return;
+    card.style.opacity = '0';
+    const done = () => card.classList.add('gf-hidden');
+    card.addEventListener('transitionend', done, { once: true });
+    setTimeout(done, 180);
+  }
+
+  function applyFilter() {
+    let visible = 0;
+    allCards.forEach(card => {
+      const match = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
+      if (match) { showCard(card); visible++; }
+      else        { hideCard(card); }
+    });
+    if (countEl) {
+      countEl.textContent = `Showing ${visible} of ${total} extruder${total !== 1 ? 's' : ''}`;
+    }
+    pushHash();
+  }
+
+  function pushHash() {
+    if (activeVerdict === 'all') {
+      history.replaceState(null, '', location.pathname);
+    } else {
+      const tab = tabs.find(t => t.dataset.verdict === activeVerdict);
+      const slug = tab?.dataset.slug ?? activeVerdict.replace(/\s+/g, '-');
+      history.replaceState(null, '', `#${slug}`);
+    }
+  }
+
+  function parseHash() {
+    const raw = location.hash.slice(1);
+    if (!raw) return;
+    const matched = tabs.find(t => t.dataset.slug === raw);
+    if (matched) activeVerdict = matched.dataset.verdict ?? 'all';
+  }
+
+  function syncTabs() {
+    tabs.forEach(t => t.classList.toggle('is-active', t.dataset.verdict === activeVerdict));
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeVerdict = tab.dataset.verdict ?? 'all';
+      syncTabs();
+      applyFilter();
+    });
+  });
+
+  parseHash();
+  syncTabs();
+  if (activeVerdict !== 'all') applyFilter();
+</script>
+
+<style is:global>
+.gf-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+}
+.gf-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.gf-cats {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gf-cats::-webkit-scrollbar { display: none; }
+.gf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--g1);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.gf-tab:hover { color: var(--black); background: var(--bg); }
+.gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
+.gf-badge {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.gf-tab.is-active .gf-badge {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.gf-summary {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--g2);
+  padding: 16px 0 12px;
+  margin: 0;
+}
+.gf-card {
+  opacity: 1;
+  transition: opacity 0.15s ease, border-color .15s, transform .15s;
+}
+.gf-card.gf-hidden { display: none; }
+@media (max-width: 768px) {
+  .gf-bar-inner { padding: 0 20px; }
+  .gf-tab { padding: 12px 14px; font-size: 11px; }
+}
+</style>

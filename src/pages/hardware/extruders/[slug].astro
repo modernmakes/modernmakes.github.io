@@ -1,0 +1,143 @@
+---
+import ComponentLayout from '../../../layouts/ComponentLayout.astro';
+import extruders from '../../../data/hardware/extruders.json';
+
+const toSlug = (name: string) =>
+  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+const VERDICT_MAP: Record<string, 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL'> = {
+  'BUY':          'BUY',
+  'CONSIDER':     'CONDITIONAL',
+  'SKIP':         'SKIP',
+  'UPDATED':      'WAIT',
+  'Top Pick':     'BUY',
+  'Solid Choice': 'CONDITIONAL',
+  'Niche Pick':   'WAIT',
+};
+
+const TOOLHEAD_HREFS: Record<string, string> = {
+  'Stealthburner':      '/voron/toolheads/stealthburner',
+  'XOL':                '/voron/toolheads/xol',
+  'Dragon Burner':      '/voron/toolheads/dragon-burner',
+  'Archetype':          '/voron/toolheads/archetype',
+  'Mini Stealthburner': '/voron/toolheads/mini-stealthburner',
+};
+
+const PRINTER_HREFS: Record<string, string> = {
+  'Voron 2.4':     '/voron',
+  'Voron Trident': '/voron',
+  'Voron 0.2':     '/voron',
+  'RatRig V-Core 3': '/ratrig',
+  'RatRig':        '/ratrig',
+  'VZBot':         '/vzbot',
+  'HevORT':        '/hevort',
+  'K3':            '/k3',
+};
+
+export function getStaticPaths() {
+  const toSlug = (name: string) =>
+    name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  return (extruders as any[])
+    .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
+    .map((r: any) => ({
+      params: { slug: toSlug(r['Name']) },
+      props: { record: r },
+    }));
+}
+
+const { record } = Astro.props as { record: any };
+
+const verdictLabel: 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL' =
+  VERDICT_MAP[record['Verdict']] ?? 'CONDITIONAL';
+
+const pros: string[] = (record['Pros'] ?? '')
+  .split('\n').map((s: string) => s.trim()).filter(Boolean);
+
+const cons: string[] = (record['Cons'] ?? '')
+  .split('\n').map((s: string) => s.trim()).filter(Boolean);
+
+const toolheadNames: string[] = Array.isArray(record['Compatible Toolheads'])
+  ? record['Compatible Toolheads']
+  : [];
+const toolheadLinks = toolheadNames
+  .map((n: string) => n.trim())
+  .filter(Boolean)
+  .map((n) => ({ name: n, href: TOOLHEAD_HREFS[n] ?? '/hardware' }));
+
+const printerNames: string[] = Array.isArray(record['Compatible Printers'])
+  ? record['Compatible Printers']
+  : [];
+const printerLinks = printerNames
+  .map((n: string) => n.trim())
+  .filter(Boolean)
+  .map((n) => ({ name: n, href: PRINTER_HREFS[n] ?? '/hardware' }));
+
+const compatibleToolheads = [...toolheadLinks, ...printerLinks];
+
+const quickSpecs = ([
+  record['Gear Ratio']  ? { label: 'Gear Ratio', value: record['Gear Ratio'] }              : null,
+  record['Weight (g)'] != null ? { label: 'Weight',     value: `${record['Weight (g)']}g` } : null,
+  record['Price (USD)'] != null ? { label: 'Price',     value: `~$${record['Price (USD)']} USD` } : null,
+] as ({ label: string; value: string } | null)[]).filter((s): s is { label: string; value: string } => s !== null);
+
+const specs = ([
+  record['Gear Ratio']  ? { label: 'Gear Ratio',  value: record['Gear Ratio'] }                     : null,
+  record['Weight (g)'] != null ? { label: 'Weight',      value: `${record['Weight (g)']}g` }        : null,
+  record['Price (USD)'] != null ? { label: 'Price (USD)', value: `$${record['Price (USD)']}` }       : null,
+] as ({ label: string; value: string } | null)[]).filter((s): s is { label: string; value: string } => s !== null);
+
+type VendorEntry = { name: string; url: string; price: string; region: 'us'; primary: boolean };
+const vendors: VendorEntry[] = [];
+[1, 2, 3, 4, 5].forEach((n, idx) => {
+  const name = record[`Vendor ${n} Name`] as string | undefined;
+  const url  = record[`Vendor ${n} URL`]  as string | undefined;
+  if (name?.trim()) {
+    vendors.push({ name: name.trim(), url: url ?? '#', price: '', region: 'us', primary: idx === 0 });
+  }
+});
+
+const pageTitle = `${record['Name']} Extruder — Specs, Verdict & Where to Buy — Modern Makes`;
+const primaryVendorUrl = vendors[0]?.url ?? '';
+const heroImageUrl = (record['Image URL'] as string | undefined) ?? '';
+
+type RelatedEntry = { title: string; category: string; href: string };
+const relatedComponents: RelatedEntry[] = [];
+[1, 2, 3].forEach((n) => {
+  const name = record[`Related ${n} Name`] as string | undefined;
+  const href = record[`Related ${n} URL`]  as string | undefined;
+  if (name?.trim()) {
+    relatedComponents.push({ title: name.trim(), category: 'Hardware', href: href ?? '/hardware' });
+  }
+});
+
+const bodyText: string = record['Body'] ?? '';
+const bodyParagraphs: string[] = bodyText
+  .split(/\n\n+/)
+  .map((p: string) => p.trim())
+  .filter(Boolean);
+
+const rawDesc: string = record['Description'] ?? '';
+const excerpt = rawDesc.match(/^[^.!?]+[.!?]/) ? rawDesc.match(/^[^.!?]+[.!?]/)![0] : rawDesc;
+---
+<ComponentLayout
+  title={record['Name']}
+  category="EXTRUDER"
+  componentType="Extruder"
+  brand={record['Brand'] ?? ''}
+  price={{ usd: Number(record['Price (USD)']) || 0 }}
+  verdict={record['Verdict Label'] ?? ''}
+  verdictLabel={verdictLabel}
+  excerpt={excerpt}
+  pros={pros}
+  cons={cons}
+  quickSpecs={quickSpecs}
+  compatibleToolheads={compatibleToolheads}
+  specs={specs}
+  vendors={vendors}
+  relatedComponents={relatedComponents}
+  pageTitle={pageTitle}
+  primaryVendorUrl={primaryVendorUrl}
+  heroImageUrl={heroImageUrl}
+>
+  {bodyParagraphs.map((para: string) => <p>{para}</p>)}
+</ComponentLayout>
