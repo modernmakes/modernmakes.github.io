@@ -117,7 +117,7 @@ const siteBase = Astro.site
 const canonicalUrl = siteBase + Astro.url.pathname;
 const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 const segLabels: Record<string, string> = {
-  hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', motion: 'Motion Mods',
+  hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',
 };
 const breadcrumbItems = [
   { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteBase}/` },
@@ -177,10 +177,12 @@ const breadcrumbSchema = {
       <div class="comp-hero-info">
         <nav class="comp-breadcrumb" aria-label="Breadcrumb">
           <a href="/">Home</a>
-          <span>/</span>
+          <span>›</span>
           <a href="/hardware">Hardware</a>
-          <span>/</span>
-          <span>{category}</span>
+          <span>›</span>
+          <a href={`/hardware/${pathSegments[1]}`}>{segLabels[pathSegments[1]] ?? (pathSegments[1].charAt(0).toUpperCase() + pathSegments[1].slice(1))}</a>
+          <span>›</span>
+          <span>{title}</span>
         </nav>
         <div class="comp-brand">{brand}</div>
         <h1 class="comp-title">{title}</h1>
