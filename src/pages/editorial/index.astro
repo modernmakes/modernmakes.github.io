@@ -1,0 +1,126 @@
+---
+/* Hallmark · macrostructure: Long Document (2-col prose + sticky sidebar TOC) — inherits lg-* from ToS */
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Editorial Policy — Modern Makes',
+  url: `${siteBase}/editorial`,
+  description: 'How Modern Makes forms verdicts, handles affiliate relationships, and maintains editorial independence.',
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',             item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Editorial Policy', item: `${siteBase}/editorial` },
+  ],
+};
+
+const sections = [
+  { id: 'independence',  label: 'Independence' },
+  { id: 'verdicts',      label: 'How We Form Verdicts' },
+  { id: 'affiliate',     label: 'Affiliate Relationships' },
+  { id: 'sponsored',     label: 'Sponsored Content' },
+  { id: 'corrections',   label: 'Corrections' },
+  { id: 'what-we-dont',  label: 'What We Do Not Do' },
+];
+---
+<Base
+  title="Editorial Policy — Modern Makes"
+  description="How Modern Makes forms verdicts, handles affiliate relationships, and maintains editorial independence."
+  hasPageH1={true}
+>
+  <Nav slot="nav" currentPath="/" />
+
+  <div class="lg-wrap">
+    <div class="lg-inner">
+
+      <nav class="lg-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Editorial Policy</span>
+      </nav>
+
+      <div class="lg-layout">
+
+        <aside class="lg-sidebar" aria-label="Table of contents">
+          <div class="lg-toc">
+            <p class="lg-toc-label">On this page</p>
+            <nav>
+              {sections.map(s => (
+                <a class="lg-toc-link" href={`#${s.id}`}>{s.label}</a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        <main class="lg-content" id="lg-main">
+          <h1 class="lg-title">Editorial Policy</h1>
+          <p class="lg-meta">Last updated June 2026</p>
+
+          <section id="independence">
+            <h2>Independence</h2>
+            <p>Modern Makes accepts no payment for editorial verdicts. No vendor, manufacturer, or affiliate partner can purchase a positive review, a BUY verdict, or favorable placement in a comparison. Our verdicts are formed independently and can change as new information emerges.</p>
+          </section>
+
+          <section id="verdicts">
+            <h2>How We Form Verdicts</h2>
+            <p>We are a curation and discovery publication. We synthesize community consensus from Reddit (r/voroncorexy, r/3Dprinting, r/ratrig), Discord servers, YouTube channels (CNCKitchen, Stefan Hermann's work), and hands-on reports shared publicly. Our credibility comes from knowing the community deeply, not from owning every piece of hardware we cover. We are transparent about this model.</p>
+          </section>
+
+          <section id="affiliate">
+            <h2>Affiliate Relationships</h2>
+            <p>We participate in affiliate programs with: Fabreeko, West3D, KB3D, Amazon Associates, Micro Swiss, and Mellow3D. When you purchase through an affiliate link, we may earn a commission. This never influences which products we recommend or how we rate them. We link to non-affiliate sources when they offer better pricing or availability.</p>
+          </section>
+
+          <section id="sponsored">
+            <h2>Sponsored Content</h2>
+            <p>Sponsored content is always labeled clearly at the top of the article. A sponsorship means a vendor paid to have content produced — it does not mean the content is positive. We decline sponsorships for products we would not cover editorially.</p>
+          </section>
+
+          <section id="corrections">
+            <h2>Corrections</h2>
+            <p>We fix factual errors when they are reported. Corrections are noted inline with a correction notice and the date of the fix. We do not silently edit incorrect information. To report a correction: <a href="mailto:modernmakesco@gmail.com" class="lg-email-link">modernmakesco@gmail.com</a></p>
+          </section>
+
+          <section id="what-we-dont">
+            <h2>What We Do Not Do</h2>
+            <p>We do not accept free hardware in exchange for positive coverage. We do not publish press releases as editorial content. We do not inflate verdicts based on advertiser relationships.</p>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+</Base>
+
+<script>
+(function () {
+  const sections = document.querySelectorAll<HTMLElement>('.lg-content section[id]');
+  const links    = document.querySelectorAll<HTMLAnchorElement>('.lg-toc-link');
+  if (!sections.length || !links.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector<HTMLAnchorElement>(`.lg-toc-link[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+      }
+    }
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(s => obs.observe(s));
+})();
+</script>

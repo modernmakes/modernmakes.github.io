@@ -139,7 +139,6 @@
   { "name": "RatRig",   "slug": "ratrig", "status": "coming", "badge": "Phase 1", "description": "V-Core 4, 3.1, and 3", "href": "/ratrig",  "image": null, "gradient": "linear-gradient(135deg,#1a1008,#100a04)" },
   { "name": "VzBot",    "slug": "vzbot",  "status": "coming", "badge": "Phase 1", "description": "235, 330, Goliath",   "href": "/vzbot",   "image": null, "gradient": "linear-gradient(135deg,#0d1510,#080e0a)" },
   { "name": "HevORT",   "slug": "hevort", "status": "coming", "badge": "Phase 1", "description": "Standard variants",   "href": "/hevort",  "image": null, "gradient": "linear-gradient(135deg,#151020,#0d0a18)" },
-  { "name": "Annex K3", "slug": "k3",     "status": "coming", "badge": "Phase 2", "description": "K3 builds & mods",    "href": "/k3",      "image": null, "gradient": "linear-gradient(135deg,#201510,#180f08)" },
-  { "name": "Bambu Lab","slug": "bambu",  "status": "coming", "badge": "Mods",    "description": "X1C, P1S, H2D",       "href": "/bambu",   "image": null, "gradient": "linear-gradient(135deg,#102020,#081414)" }
+  { "name": "Annex K3", "slug": "k3",     "status": "coming", "badge": "Phase 2", "description": "K3 builds & mods",    "href": "/k3",      "image": null, "gradient": "linear-gradient(135deg,#201510,#180f08)" }
 ]
 }
