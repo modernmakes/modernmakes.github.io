@@ -56,6 +56,53 @@ async function fetchTable(tableId) {
   return records;
 }
 
+const NL_BASE  = 'appjJWszZBOS13e0i';
+const NL_TABLE = 'tblgCX2IZ2e0hHOaD';
+const NL_FIELDS = [
+  'Issue name', 'Subject line', 'Status', 'Issue Number',
+  'Send Date', 'BeeHiiv Issue URL', 'Subscribers at Send', 'Open Rate (%)',
+];
+
+async function fetchNewsletterArchive() {
+  const records = [];
+  let offset;
+
+  do {
+    const url = new URL(`https://api.airtable.com/v0/${NL_BASE}/${NL_TABLE}`);
+    url.searchParams.set('filterByFormula', '{Status}="Sent"');
+    url.searchParams.set('sort[0][field]', 'Issue Number');
+    url.searchParams.set('sort[0][direction]', 'desc');
+    NL_FIELDS.forEach(f => url.searchParams.append('fields[]', f));
+    if (offset) url.searchParams.set('offset', offset);
+
+    const res = await fetch(url.toString(), {
+      headers: { 'Authorization': `Bearer ${TOKEN}` },
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status} — ${await res.text()}`);
+
+    const buffer = await res.arrayBuffer();
+    const data = JSON.parse(new TextDecoder('utf-8').decode(buffer));
+
+    for (const record of data.records) {
+      const f = record.fields;
+      records.push({
+        issueNumber:      f['Issue Number']         ?? 0,
+        issueName:        f['Issue name']            ?? '',
+        subjectLine:      f['Subject line']          ?? '',
+        sendDate:         f['Send Date']             ?? '',
+        beehiivUrl:       f['BeeHiiv Issue URL']     ?? '',
+        subscribersAtSend: f['Subscribers at Send']  ?? 0,
+        openRate:         f['Open Rate (%)']         ?? 0,
+      });
+    }
+
+    offset = data.offset;
+  } while (offset);
+
+  return records;
+}
+
 async function main() {
   if (!TOKEN) {
     console.error('Error: AIRTABLE_TOKEN environment variable is not set.');
@@ -80,7 +127,17 @@ async function main() {
     }
   }
 
-  console.log(`\nExport complete: ${exported}/${TABLES.length} tables exported`);
+  console.log(`\nExport complete: ${exported}/${TABLES.length} hardware tables exported`);
+
+  // Newsletter archive (separate base: appjJWszZBOS13e0i)
+  process.stdout.write('Fetching newsletter-archive... ');
+  try {
+    const nlRecords = await fetchNewsletterArchive();
+    await writeFile('src/data/newsletter-archive.json', JSON.stringify(nlRecords, null, 2), 'utf-8');
+    console.log(`done (${nlRecords.length} records)`);
+  } catch (err) {
+    console.error(`failed: ${err.message}`);
+  }
 }
 
 main();

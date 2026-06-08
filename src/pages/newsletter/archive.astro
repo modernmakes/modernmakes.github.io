@@ -1,0 +1,472 @@
+---
+/* Hallmark · macrostructure: Catalogue · tone: editorial · anchor hue: warm-orange
+ * pre-emit critique: P5 H5 E5 S5 R5 V5
+ * transitions: texts-reveal (18) — card entrance stagger via IntersectionObserver
+ */
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import BeehiivEmbed from '../../components/BeehiivEmbed.astro';
+import issuesRaw from '../../data/newsletter-archive.json';
+
+interface Issue {
+  issueNumber: number;
+  issueName: string;
+  subjectLine: string;
+  sendDate: string;
+  beehiivUrl: string;
+  subscribersAtSend: number;
+  openRate: number;
+}
+
+const issues = (issuesRaw as any[]).map((r: any): Issue => ({
+  issueNumber:       r.issueNumber       ?? 0,
+  issueName:         r.issueName         ?? '',
+  subjectLine:       r.subjectLine       ?? '',
+  sendDate:          r.sendDate          ?? '',
+  beehiivUrl:        r.beehiivUrl        ?? '',
+  subscribersAtSend: r.subscribersAtSend ?? 0,
+  openRate:          r.openRate          ?? 0,
+}));
+
+function formatDate(iso: string): string {
+  if (!iso) return '';
+  try {
+    const d = new Date(iso + 'T12:00:00');
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  } catch { return iso; }
+}
+
+function padIssue(n: number): string {
+  return 'No. ' + String(n).padStart(3, '0');
+}
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Newsletter Archive — The Modern Makes Brief',
+  url: `${siteBase}/newsletter/archive`,
+  description: 'Every issue of The Modern Makes Brief. Prosumer 3D printing news, hardware verdicts, and community highlights.',
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',       item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Newsletter', item: `${siteBase}/newsletter` },
+    { '@type': 'ListItem', position: 3, name: 'Archive',    item: `${siteBase}/newsletter/archive` },
+  ],
+};
+---
+<Base
+  title="Newsletter Archive — The Modern Makes Brief"
+  description="Every issue of The Modern Makes Brief. Prosumer 3D printing news, hardware verdicts, and community highlights."
+  hasPageH1={true}
+  hasHero={true}
+  heroPage={true}
+>
+  <Nav slot="nav" currentPath="/newsletter" />
+
+  <!-- ── HERO ── -->
+  <section class="arch-hero">
+    <div class="arch-hero-inner">
+      <nav class="arch-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <a href="/newsletter">Newsletter</a>
+        <span aria-hidden="true">›</span>
+        <span>Archive</span>
+      </nav>
+      <h1 class="arch-h1">The Modern Makes Brief</h1>
+      <p class="arch-tagline"><em>Every issue, in one place.</em></p>
+      <a href="/newsletter" class="arch-subscribe-nudge">Not subscribed yet? → Join free</a>
+    </div>
+  </section>
+
+  <!-- ── MAIN ── -->
+  <div class="arch-body">
+    <div class="arch-body-inner">
+
+      {issues.length > 0 ? (
+        <>
+          <p class="arch-count">
+            {issues.length} {issues.length === 1 ? 'issue' : 'issues'} &middot; most recent first
+          </p>
+          <div class="arch-grid" id="arch-grid">
+            {issues.map((issue, i) => (
+              <article class="arch-card" style={`--card-i: ${i}`}>
+                <div class="arch-card-meta">
+                  <span class="arch-issue-badge">{padIssue(issue.issueNumber)}</span>
+                  {issue.openRate > 0 && (
+                    <span class="arch-open-chip">{issue.openRate}% open rate</span>
+                  )}
+                </div>
+                {issue.sendDate && (
+                  <time class="arch-date" datetime={issue.sendDate}>
+                    {formatDate(issue.sendDate)}
+                  </time>
+                )}
+                <h2 class="arch-subject">
+                  {issue.subjectLine || issue.issueName || 'Untitled issue'}
+                </h2>
+                {issue.beehiivUrl ? (
+                  <a
+                    href={issue.beehiivUrl}
+                    class="arch-read-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Read issue →</a>
+                ) : (
+                  <span class="arch-coming-soon">Coming soon</span>
+                )}
+              </article>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="arch-empty">
+          <div class="arch-empty-card t-stagger" id="arch-empty-card">
+            <span class="arch-issue-badge t-stagger-line t-stagger-line--1">No.&nbsp;001</span>
+            <h2 class="arch-empty-head t-stagger-line t-stagger-line--2">First issue coming soon.</h2>
+            <p class="arch-empty-sub t-stagger-line t-stagger-line--3">
+              Subscribe to get it in your inbox the moment it drops.
+            </p>
+            <div class="arch-empty-form t-stagger-line t-stagger-line--4">
+              <BeehiivEmbed />
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+</Base>
+
+<script>
+(function () {
+  // ── Card entrance: texts-reveal stagger, one observer per card ──
+  const grid = document.getElementById('arch-grid');
+  if (grid) {
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.arch-card'));
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const card = entry.target as HTMLElement;
+        const i = parseInt(card.style.getPropertyValue('--card-i') || '0', 10);
+        setTimeout(() => card.classList.add('is-shown'), i * 60);
+        obs.unobserve(card);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    cards.forEach(c => obs.observe(c));
+  }
+
+  // ── Empty-state entrance ──
+  const emptyCard = document.getElementById('arch-empty-card');
+  if (emptyCard) {
+    const obs2 = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        emptyCard.classList.add('is-shown');
+        obs2.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs2.observe(emptyCard);
+  }
+})();
+</script>
+
+<style is:global>
+/* Hallmark · macrostructure: Catalogue · tone: editorial · anchor hue: warm-orange */
+
+/* ── Texts-reveal tokens (transitions.dev #18) ── */
+:root {
+  --stagger-dur:      600ms;
+  --stagger-distance: 14px;
+  --stagger-stagger:  55ms;
+  --stagger-blur:     3px;
+  --stagger-ease:     cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── HERO ── */
+.arch-hero {
+  background: var(--dark-bg, #111);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 72px 0 52px;
+}
+.arch-hero-inner {
+  max-width: var(--max-w, 1200px);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.arch-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 28px;
+}
+.arch-breadcrumb a {
+  color: rgba(255,255,255,0.35);
+  transition: color .12s;
+}
+.arch-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.arch-h1 {
+  font-family: var(--fd);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.arch-tagline {
+  font-family: var(--fb);
+  font-size: 17px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 28px;
+}
+.arch-subscribe-nudge {
+  display: inline-block;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--accent);
+  transition: opacity .12s;
+}
+.arch-subscribe-nudge:hover { opacity: .75; }
+
+/* ── BODY ── */
+.arch-body {
+  background: var(--bg, #F7F6F3);
+  min-height: 50vh;
+  padding: 48px 0 80px;
+}
+.arch-body-inner {
+  max-width: var(--max-w, 1200px);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── CATALOGUE INVENTORY HEADER ── */
+.arch-count {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2, #9e9e9e);
+  margin-bottom: 24px;
+}
+
+/* ── CARDS GRID ── */
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* Card — starts hidden; JS adds .is-shown via IntersectionObserver */
+.arch-card {
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #E2E2E0);
+  border-radius: 6px;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(var(--stagger-distance, 14px));
+  filter: blur(var(--stagger-blur, 3px));
+  transition:
+    opacity   var(--stagger-dur, 600ms) var(--stagger-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform var(--stagger-dur, 600ms) var(--stagger-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    filter    var(--stagger-dur, 600ms) var(--stagger-ease, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: transform, opacity, filter;
+}
+.arch-card.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.arch-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.arch-issue-badge {
+  font-family: var(--fm);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.arch-open-chip {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #2e7d32;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+.arch-date {
+  display: block;
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g2, #9e9e9e);
+}
+.arch-subject {
+  font-family: var(--fd);
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 800;
+  color: var(--black, #1A1A1A);
+  line-height: 1.15;
+  letter-spacing: -.2px;
+  flex: 1;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.arch-read-link {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 4px;
+  transition: opacity .12s;
+  white-space: nowrap;
+}
+.arch-read-link:hover { opacity: .75; }
+.arch-coming-soon {
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g2, #9e9e9e);
+  margin-top: 4px;
+}
+
+/* ── EMPTY STATE ── */
+.arch-empty {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+.arch-empty-card {
+  background: var(--dark-bg, #111);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 52px 44px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.arch-empty-card .arch-issue-badge {
+  font-size: 13px;
+  display: block;
+}
+.arch-empty-head {
+  font-family: var(--fd);
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -.3px;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.arch-empty-sub {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  max-width: 360px;
+}
+.arch-empty-form {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* ── Texts-reveal (transitions.dev #18) — empty state lines ── */
+.t-stagger-line {
+  opacity: 0;
+  transform: translateY(var(--stagger-distance, 14px));
+  filter: blur(var(--stagger-blur, 3px));
+  transition:
+    opacity   var(--stagger-dur, 600ms) var(--stagger-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform var(--stagger-dur, 600ms) var(--stagger-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    filter    var(--stagger-dur, 600ms) var(--stagger-ease, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: transform, opacity, filter;
+}
+.t-stagger-line--2 { transition-delay: var(--stagger-stagger, 55ms); }
+.t-stagger-line--3 { transition-delay: calc(var(--stagger-stagger, 55ms) * 2); }
+.t-stagger-line--4 { transition-delay: calc(var(--stagger-stagger, 55ms) * 3); }
+
+.t-stagger.is-shown .t-stagger-line {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+/* Exit: quiet fade, no Y return */
+.t-stagger.is-hiding .t-stagger-line {
+  opacity: 0;
+  transform: translateY(0);
+  filter: blur(0);
+  transition: opacity 200ms ease;
+  transition-delay: 0s;
+}
+
+/* ── Reduced motion — show everything immediately ── */
+@media (prefers-reduced-motion: reduce) {
+  .arch-card,
+  .t-stagger-line {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .arch-hero { padding: 56px 0 44px; }
+  .arch-hero-inner,
+  .arch-body-inner { padding: 0 24px; }
+}
+@media (max-width: 640px) {
+  .arch-grid { grid-template-columns: 1fr; }
+  .arch-hero-inner,
+  .arch-body-inner { padding: 0 20px; }
+  .arch-hero { padding: 48px 0 36px; }
+  .arch-card { padding: 22px 20px 20px; }
+  .arch-empty-card { padding: 36px 24px; }
+}
+@media (max-width: 414px) {
+  .arch-hero-inner,
+  .arch-body-inner { padding: 0 16px; }
+  .arch-h1 { font-size: 32px; }
+}
+</style>
