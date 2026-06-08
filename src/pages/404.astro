@@ -2,96 +2,192 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+
+const recoveryCards = [
+  {
+    label: 'Go Home',
+    description: 'Back to the main feed',
+    href: '/',
+    cta: '← Home',
+  },
+  {
+    label: 'Browse Hardware',
+    description: 'Hotends, extruders, probes, and more',
+    href: '/hardware',
+    cta: 'Hardware →',
+  },
+  {
+    label: 'Read Guides',
+    description: 'Calibration, motion, and build guides',
+    href: '/guides',
+    cta: 'Guides →',
+  },
+];
 ---
 <Base
   title="404 — Page Not Found — Modern Makes"
   description="This page doesn't exist. Browse Modern Makes hardware specs, guides, and calibration tools."
   hasPageH1={true}
+  heroPage={true}
 >
   <Nav slot="nav" currentPath="/" />
 
-  <div class="notfound-wrap">
-    <div class="notfound-inner">
-      <div class="notfound-code">404</div>
-      <h1 class="notfound-headline">This page doesn't exist yet.</h1>
-      <p class="notfound-sub">It might be coming soon, or the URL changed. Try one of these instead.</p>
-      <div class="notfound-ctas">
-        <a href="/" class="notfound-btn-primary">← Back to homepage</a>
-        <a href="/hardware" class="notfound-btn-secondary">Browse hardware →</a>
+  <div class="nf-wrap" id="nf-wrap">
+    <div class="nf-inner">
+
+      <div class="nf-top">
+        <div class="nf-code" aria-hidden="true">404</div>
+        <h1 class="nf-headline">Page not found.</h1>
+        <p class="nf-bom">This part isn't in the BOM.</p>
       </div>
+
+      <div class="nf-cards" id="nf-cards">
+        {recoveryCards.map((card, i) => (
+          <a
+            href={card.href}
+            class="nf-card"
+            style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}
+          >
+            <div class="nf-card-label">{card.label}</div>
+            <div class="nf-card-desc">{card.description}</div>
+            <div class="nf-card-cta">{card.cta}</div>
+          </a>
+        ))}
+      </div>
+
     </div>
   </div>
 
   <Footer slot="footer" />
 </Base>
 
+<script>
+(function () {
+  const cards = document.getElementById('nf-cards');
+  if (!cards) return;
+  /* texts-reveal: trigger immediately since 404 is always visible */
+  requestAnimationFrame(() => {
+    cards.classList.add('nf-cards-visible');
+  });
+})();
+</script>
+
 <style is:global>
-.notfound-wrap {
+/* ── 404 PAGE ────────────────────────────── */
+.nf-wrap {
   background: var(--black);
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 40px;
 }
-.notfound-inner {
+.nf-inner {
   text-align: center;
-  max-width: 520px;
+  max-width: 680px;
+  width: 100%;
 }
-.notfound-code {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(120px, 20vw, 180px);
+
+/* top section */
+.nf-top { margin-bottom: 48px; }
+.nf-code {
+  font-family: var(--fd);
+  font-size: clamp(100px, 18vw, 160px);
   font-weight: 800;
   color: var(--accent);
   line-height: 1;
   letter-spacing: -4px;
   margin-bottom: 0;
+  /* subtle noise via text-shadow */
+  text-shadow: 0 2px 40px rgba(255,90,31,.25);
 }
-.notfound-headline {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(28px, 5vw, 40px);
+.nf-headline {
+  font-family: var(--fd);
+  font-size: clamp(28px, 5vw, 42px);
   font-weight: 800;
   color: #fff;
-  line-height: 1.1;
-  margin: 8px 0 16px;
+  line-height: 1.05;
   letter-spacing: -.5px;
+  margin: 8px 0 10px;
 }
-.notfound-sub {
-  font-family: 'Lora', serif;
-  font-size: 15px;
-  color: rgba(255,255,255,.4);
-  line-height: 1.7;
-  margin-bottom: 36px;
+.nf-bom {
+  font-family: var(--fm);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
 }
-.notfound-ctas {
+
+/* recovery cards */
+.nf-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.nf-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-decoration: none;
   display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 6px;
+  /* texts-reveal entrance */
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease),
+    border-color .15s;
+  will-change: opacity, transform, filter;
 }
-.notfound-btn-primary {
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 28px;
-  background: var(--accent);
+.nf-cards.nf-cards-visible .nf-card {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition: border-color .15s, background .15s;
+}
+.nf-cards.nf-cards-visible .nf-card:hover {
+  border-color: rgba(255,90,31,.5);
+  background: rgba(255,90,31,.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf-card { transition: border-color .15s, background .15s !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+.nf-card-label {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
   color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: opacity .12s;
+  line-height: 1;
 }
-.notfound-btn-primary:hover { opacity: .88; }
-.notfound-btn-secondary {
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
+.nf-card-desc {
+  font-family: var(--fb);
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.5;
+  flex: 1;
+}
+.nf-card-cta {
+  font-family: var(--fu);
+  font-size: 11px;
   font-weight: 700;
-  padding: 12px 28px;
-  background: rgba(255,255,255,.08);
-  color: rgba(255,255,255,.7);
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all .12s;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 4px;
 }
-.notfound-btn-secondary:hover { background: rgba(255,255,255,.14); color: #fff; }
+
+/* responsive */
+@media (max-width: 600px) {
+  .nf-cards { grid-template-columns: 1fr; }
+  .nf-wrap { padding: 40px 24px; }
+}
+@media (max-width: 480px) {
+  .nf-wrap { padding: 40px 20px; }
+}
 </style>

@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Cookie Policy — Modern Makes',
+  url: `${siteBase}/legal/cookie-policy`,
+  description: 'Cookie policy for Modern Makes. We use GA4 analytics only — no advertising or tracking cookies.',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',  item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Legal', item: `${siteBase}/legal/cookie-policy` },
+    { '@type': 'ListItem', position: 3, name: 'Cookie Policy', item: `${siteBase}/legal/cookie-policy` },
+  ],
+};
+
+const sections = [
+  { id: 'what-are-cookies', label: 'What Are Cookies' },
+  { id: 'what-we-use',      label: 'What We Use' },
+  { id: 'no-ad-cookies',    label: 'No Ad Cookies' },
+  { id: 'third-party',      label: 'Third-Party Services' },
+  { id: 'your-choices',     label: 'Your Choices' },
+  { id: 'contact',          label: 'Contact' },
+];
+---
+<Base
+  title="Cookie Policy — Modern Makes"
+  description="Cookie policy for Modern Makes. We use GA4 analytics only — no advertising or tracking cookies."
+  hasPageH1={true}
+>
+  <Nav slot="nav" currentPath="/" />
+
+  <div class="lg-wrap">
+    <div class="lg-inner">
+
+      <nav class="lg-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Cookie Policy</span>
+      </nav>
+
+      <div class="lg-layout">
+
+        <aside class="lg-sidebar" aria-label="Table of contents">
+          <div class="lg-toc">
+            <p class="lg-toc-label">On this page</p>
+            <nav>
+              {sections.map(s => (
+                <a class="lg-toc-link" href={`#${s.id}`}>{s.label}</a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        <main class="lg-content" id="lg-main">
+          <h1 class="lg-title">Cookie Policy</h1>
+          <p class="lg-meta">Effective June 2026 · Jurisdiction: British Columbia, Canada (PIPEDA + CASL)</p>
+
+          <section id="what-are-cookies">
+            <h2>What Are Cookies</h2>
+            <p>Cookies are small text files stored on your device when you visit a website. They can remember your preferences, help websites measure how they're used, and allow third-party services to function. This page explains exactly which cookies Modern Makes uses and why.</p>
+            <p>We keep this simple: we use one analytics service and a newsletter platform. That's it. No advertising networks, no cross-site tracking, no behaviour profiling.</p>
+          </section>
+
+          <section id="what-we-use">
+            <h2>What We Use</h2>
+            <p><strong>Google Analytics 4 (Measurement ID: G-CGR4N532H6)</strong></p>
+            <p>We use Google Analytics 4 to understand how visitors use the Site — which pages get traffic, how long people read articles, and which hardware categories are most useful. GA4 sets the following cookies:</p>
+            <ul>
+              <li><strong>_ga</strong> — distinguishes users. Expires after 2 years. Set by Google.</li>
+              <li><strong>_ga_CGR4N532H6</strong> — maintains session state. Expires after 2 years. Set by Google.</li>
+            </ul>
+            <p>We have configured GA4 with IP anonymization enabled. Data is stored on Google's servers and governed by Google's privacy policy. We do not share GA4 data with any third party.</p>
+          </section>
+
+          <section id="no-ad-cookies">
+            <h2>No Ad Cookies</h2>
+            <p>Modern Makes does not run display advertising networks (Google Ads, programmatic, etc.). We do not place advertising cookies, retargeting pixels, or cross-site tracking cookies of any kind.</p>
+            <p>Affiliate links to Fabreeko, West3D, KB3D, Amazon, Micro Swiss, and Mellow3D are standard hyperlinks — they do not set cookies on the Modern Makes domain. Once you leave our Site and click through to a vendor, that vendor's cookie policy governs what happens on their site.</p>
+          </section>
+
+          <section id="third-party">
+            <h2>Third-Party Services</h2>
+            <p><strong>Beehiiv (newsletter)</strong> — If you subscribe to The Modern Makes Brief, your email address is processed by Beehiiv. Beehiiv may set cookies to track email open rates and link clicks within newsletters. These cookies are set by Beehiiv, not by Modern Makes, and are governed by Beehiiv's privacy policy.</p>
+            <p><strong>Make.com (newsletter webhook)</strong> — When you submit a newsletter sign-up form on this Site, your email is sent to a Make.com webhook for processing. Make.com is a European automation platform governed by EU GDPR. No cookies are set by this integration on the Modern Makes domain.</p>
+            <p>No other third-party services set cookies on modernmakes.github.io.</p>
+          </section>
+
+          <section id="your-choices">
+            <h2>Your Choices</h2>
+            <p>You can control cookies through your browser settings. Most browsers allow you to view, delete, and block cookies. Note that blocking analytics cookies will prevent us from seeing aggregate traffic data, but will not affect your ability to read any content on the Site.</p>
+            <p>To opt out of Google Analytics specifically, you can install the <a href="https://tools.google.com/dlpage/gaoptout" class="lg-email-link">Google Analytics Opt-out Browser Add-on</a>.</p>
+            <p>Modern Makes is a static site with no user accounts, so there is no "cookie preference center" to manage. The only functional requirement for using the Site is standard browser caching — no cookies are required to read content.</p>
+            <p>Under Canadian PIPEDA and CASL, you have the right to know what personal information we hold and to request correction or deletion. Contact us at the address below.</p>
+          </section>
+
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>Questions about this Cookie Policy or data practices:</p>
+            <p><a href="mailto:modernmakesco@gmail.com" class="lg-email-link">modernmakesco@gmail.com</a></p>
+            <p>Modern Makes is operated from British Columbia, Canada.</p>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+</Base>
+
+<script>
+(function () {
+  const sections = document.querySelectorAll<HTMLElement>('.lg-content section[id]');
+  const links    = document.querySelectorAll<HTMLAnchorElement>('.lg-toc-link');
+  if (!sections.length || !links.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector<HTMLAnchorElement>(`.lg-toc-link[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+      }
+    }
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(s => obs.observe(s));
+})();
+</script>

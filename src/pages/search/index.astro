@@ -1,0 +1,439 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import hotends   from '../../data/hardware/hotends.json';
+import extruders from '../../data/hardware/extruders.json';
+import probes    from '../../data/hardware/bed-probes.json';
+
+/* ── build search index at build time ── */
+const toSlug = (name: string) =>
+  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+interface SearchItem {
+  title:    string;
+  excerpt:  string;
+  url:      string;
+  type:     string;
+  category: string;
+}
+
+const items: SearchItem[] = [];
+
+/* news */
+const newsItems = await getCollection('news');
+for (const item of newsItems) {
+  items.push({
+    title:    item.data.title,
+    excerpt:  item.data.excerpt ?? '',
+    url:      `/news/${item.slug}`,
+    type:     'News',
+    category: (item.data.category as string | undefined) ?? 'News',
+  });
+}
+
+/* guides */
+const guideItems = await getCollection('guides');
+for (const item of guideItems) {
+  items.push({
+    title:    item.data.title,
+    excerpt:  item.data.excerpt ?? '',
+    url:      `/guides/${item.slug}`,
+    type:     'Guide',
+    category: (item.data.category as string | undefined) ?? 'Guide',
+  });
+}
+
+/* comparisons */
+const compItems = await getCollection('comparisons');
+for (const item of compItems) {
+  items.push({
+    title:    item.data.title,
+    excerpt:  item.data.excerpt ?? '',
+    url:      `/comparisons/${item.slug}`,
+    type:     'Comparison',
+    category: 'Comparison',
+  });
+}
+
+/* filament */
+const filItems = await getCollection('filament').catch(() => []);
+for (const item of filItems) {
+  items.push({
+    title:    item.data.title ?? String(item.slug).toUpperCase(),
+    excerpt:  item.data.description ?? '',
+    url:      `/filament/${item.slug}`,
+    type:     'Filament',
+    category: 'Filament',
+  });
+}
+
+/* hardware — hotends */
+for (const r of hotends as any[]) {
+  if (!r['Name']) continue;
+  items.push({
+    title:    r['Name'],
+    excerpt:  r['Verdict Label'] ?? r['Description'] ?? `${r['Brand'] ?? ''} hotend — ${r['Verdict'] ?? ''}`.trim(),
+    url:      `/hardware/hotends/${toSlug(r['Name'])}`,
+    type:     'Hardware',
+    category: 'Hotend',
+  });
+}
+
+/* hardware — extruders */
+for (const r of extruders as any[]) {
+  if (!r['Name']) continue;
+  items.push({
+    title:    r['Name'],
+    excerpt:  r['Verdict Label'] ?? r['Description'] ?? `${r['Brand'] ?? ''} extruder`.trim(),
+    url:      `/hardware/extruders/${toSlug(r['Name'])}`,
+    type:     'Hardware',
+    category: 'Extruder',
+  });
+}
+
+/* hardware — bed probes */
+for (const r of probes as any[]) {
+  if (!r['Name']) continue;
+  items.push({
+    title:    r['Name'],
+    excerpt:  r['Description'] ?? `${r['Name']} bed probe`,
+    url:      `/hardware/probes/${toSlug(r['Name'])}`,
+    type:     'Hardware',
+    category: 'Bed Probe',
+  });
+}
+
+const indexJson = JSON.stringify(items);
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Search — Modern Makes',
+  url: `${siteBase}/search`,
+};
+---
+<Base
+  title="Search — Modern Makes"
+  description="Search Modern Makes — hardware specs, guides, news, comparisons, and filament profiles."
+  hasPageH1={true}
+>
+  <Nav slot="nav" currentPath="/search" />
+
+  <div class="srch-wrap">
+    <div class="srch-inner">
+
+      <!-- header -->
+      <div class="srch-header">
+        <h1 class="srch-title">Search</h1>
+        <div class="srch-input-wrap">
+          <input
+            class="srch-input"
+            type="search"
+            id="srch-input"
+            placeholder="Hotends, guides, comparisons…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search Modern Makes"
+          />
+          <span class="srch-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+              <line x1="10" y1="10" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- results count -->
+      <div class="srch-meta" id="srch-meta" aria-live="polite"></div>
+
+      <!-- results -->
+      <div class="srch-results" id="srch-results"></div>
+
+      <!-- empty state -->
+      <div class="srch-empty" id="srch-empty" aria-hidden="true">
+        <p class="srch-empty-title">No results found.</p>
+        <p class="srch-empty-sub">Try a different term — hardware names, materials, or calibration topics work well.</p>
+      </div>
+
+      <!-- initial state -->
+      <div class="srch-prompt" id="srch-prompt">
+        <p>Start typing to search hardware specs, guides, news, and more.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+</Base>
+
+<script define:vars={{ indexJson }}>
+(function () {
+  const INDEX = JSON.parse(indexJson);
+
+  const inputEl   = document.getElementById('srch-input');
+  const resultsEl = document.getElementById('srch-results');
+  const emptyEl   = document.getElementById('srch-empty');
+  const promptEl  = document.getElementById('srch-prompt');
+  const metaEl    = document.getElementById('srch-meta');
+
+  if (!inputEl || !resultsEl) return;
+
+  /* ── check for ?q= param on load ── */
+  const params = new URLSearchParams(window.location.search);
+  const initialQ = params.get('q') ?? '';
+  if (initialQ) {
+    inputEl.value = initialQ;
+    runSearch(initialQ);
+  }
+
+  inputEl.addEventListener('input', () => {
+    const q = inputEl.value.trim();
+    /* update URL param */
+    const url = new URL(window.location.href);
+    if (q) { url.searchParams.set('q', q); } else { url.searchParams.delete('q'); }
+    history.replaceState(null, '', url.toString());
+    runSearch(q);
+  });
+
+  function runSearch(q) {
+    if (!q) {
+      resultsEl.innerHTML = '';
+      emptyEl.setAttribute('aria-hidden', 'true');
+      promptEl.style.display = '';
+      metaEl.textContent = '';
+      return;
+    }
+
+    promptEl.style.display = 'none';
+    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+
+    const scored = INDEX
+      .map(item => {
+        const haystack = (item.title + ' ' + item.excerpt + ' ' + item.category).toLowerCase();
+        let score = 0;
+        for (const t of terms) {
+          if (item.title.toLowerCase().includes(t)) score += 3;
+          else if (haystack.includes(t)) score += 1;
+        }
+        return { item, score };
+      })
+      .filter(x => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 30)
+      .map(x => x.item);
+
+    if (scored.length === 0) {
+      resultsEl.innerHTML = '';
+      emptyEl.setAttribute('aria-hidden', 'false');
+      metaEl.textContent = '';
+      return;
+    }
+
+    emptyEl.setAttribute('aria-hidden', 'true');
+    metaEl.textContent = scored.length + ' result' + (scored.length === 1 ? '' : 's');
+
+    resultsEl.innerHTML = scored.map((item, i) =>
+      `<a class="srch-result" href="${item.url}" style="transition-delay:${i * 40}ms">
+        <div class="srch-result-meta">
+          <span class="srch-type">${escHtml(item.type)}</span>
+          <span class="srch-cat">${escHtml(item.category)}</span>
+        </div>
+        <div class="srch-result-title">${escHtml(item.title)}</div>
+        ${item.excerpt ? `<p class="srch-result-excerpt">${escHtml(item.excerpt)}</p>` : ''}
+      </a>`
+    ).join('');
+
+    /* stagger entrance */
+    requestAnimationFrame(() => {
+      resultsEl.querySelectorAll('.srch-result').forEach(el => {
+        el.classList.add('srch-result-visible');
+      });
+    });
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+})();
+</script>
+
+<style is:global>
+/* ── SEARCH PAGE ──────────────────────────── */
+.srch-wrap {
+  background: var(--bg);
+  min-height: calc(100vh - 80px);
+  padding: 40px 0 80px;
+}
+.srch-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Header */
+.srch-header { margin-bottom: 28px; }
+.srch-title {
+  font-family: var(--fd);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin-bottom: 20px;
+}
+.srch-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.srch-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--g2);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+.srch-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--fu);
+  font-size: 16px;
+  color: var(--black);
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px 14px 42px;
+  outline-color: var(--accent);
+  transition: border-color .15s;
+  appearance: none;
+}
+.srch-input:focus { border-color: var(--accent); }
+.srch-input::placeholder { color: var(--g2); }
+.srch-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+/* Meta */
+.srch-meta {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g2);
+  margin-bottom: 14px;
+  min-height: 16px;
+}
+
+/* Results */
+.srch-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.srch-result {
+  display: block;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  /* entrance */
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .25s ease, transform .25s ease, border-color .12s, box-shadow .12s;
+}
+.srch-result.srch-result-visible {
+  opacity: 1;
+  transform: none;
+}
+.srch-result:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(255,90,31,.07);
+}
+@media (prefers-reduced-motion: reduce) {
+  .srch-result { transition: border-color .12s, box-shadow .12s !important; opacity: 1 !important; transform: none !important; }
+}
+.srch-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+.srch-type {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.srch-cat {
+  font-family: var(--fm);
+  font-size: 9px;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+.srch-result-title {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+  letter-spacing: -.2px;
+  margin-bottom: 4px;
+}
+.srch-result-excerpt {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.65;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Empty / prompt */
+.srch-empty, .srch-prompt {
+  padding: 48px 0;
+  text-align: center;
+}
+.srch-empty[aria-hidden="true"] { display: none; }
+.srch-empty-title {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+.srch-empty-sub {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--g2);
+  line-height: 1.7;
+}
+.srch-prompt p {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g2);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .srch-inner { padding: 0 24px; }
+  .srch-title { font-size: 32px; }
+}
+@media (max-width: 480px) {
+  .srch-inner { padding: 0 20px; }
+}
+</style>

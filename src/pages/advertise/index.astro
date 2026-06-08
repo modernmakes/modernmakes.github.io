@@ -1,0 +1,587 @@
+---
+/* Hallmark · macrostructure: Stat-Led · tone: editorial-direct · anchor hue: warm-orange
+ * transitions: texts-reveal (18) on stat band · staggered card reveals
+ * pre-emit critique: P5 H4 E5 S4 R5 V5
+ */
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Advertise — Modern Makes',
+  url: `${siteBase}/advertise`,
+  description: 'Reach the most serious 3D printing enthusiasts on the internet. Sponsored content, newsletter partnerships, and affiliate programs.',
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',      item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Advertise', item: `${siteBase}/advertise` },
+  ],
+};
+
+const stats = [
+  { value: '10K+',             label: 'Monthly Readers' },
+  { value: '3,400+',           label: 'Newsletter Subscribers' },
+  { value: 'Prosumer',         label: 'Audience Profile' },
+  { value: 'US / CA',          label: 'Primary Market' },
+];
+
+const tracks = [
+  {
+    slug: 'sponsored',
+    label: 'Sponsored Content',
+    body: 'A dedicated long-form article or guide featuring your product, written in our editorial voice. Clearly labeled as sponsored. Included in the weekly newsletter send. Permanent on-site placement.',
+    price: 'Contact for rates',
+    note: 'Min. 2-week lead time',
+  },
+  {
+    slug: 'newsletter',
+    label: 'Newsletter Sponsorship',
+    body: "A dedicated sponsor section inside The Modern Makes Brief — our weekly newsletter to opted-in subscribers. Text + link, matched to the issue's topic where possible.",
+    price: 'Contact for rates',
+    note: 'Slots book 4–6 weeks out',
+  },
+  {
+    slug: 'affiliate',
+    label: 'Affiliate Partnership',
+    body: "Performance-based. We apply to your affiliate program and editorially promote your products on hardware detail pages, guides, and roundups where they're genuinely the right recommendation. No upfront cost.",
+    price: 'No upfront cost',
+    note: 'Editorial editorial only — we choose placement',
+  },
+];
+
+const partners = ['Fabreeko', 'West3D', 'KB3D', 'Amazon', 'Micro Swiss', 'Mellow3D'];
+---
+<Base
+  title="Advertise — Modern Makes"
+  description="Reach the most serious 3D printing enthusiasts on the internet. Sponsored content, newsletter partnerships, and affiliate programs."
+  hasPageH1={true}
+  heroPage={true}
+  hasHero={true}
+>
+  <Nav slot="nav" currentPath="/advertise" />
+
+  <!-- HERO -->
+  <div class="adv-hero">
+    <div class="adv-hero-inner">
+      <nav class="adv-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Advertise</span>
+      </nav>
+      <div class="adv-eyebrow">Work With Us</div>
+      <h1 class="adv-hero-title">Reach the most serious 3D printing enthusiasts on the internet.</h1>
+      <p class="adv-hero-sub">Modern Makes covers the hardware serious builders actually buy. Our readers research before they spend — and they spend significantly.</p>
+    </div>
+  </div>
+
+  <!-- STATS BAND -->
+  <div class="adv-stats-band" id="adv-stats">
+    <div class="adv-stats-inner">
+      {stats.map((s, i) => (
+        <div class="adv-stat" style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}>
+          <div class="adv-stat-value">{s.value}</div>
+          <div class="adv-stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- PARTNERSHIP TRACKS -->
+  <section class="adv-tracks-section">
+    <div class="adv-container">
+      <h2 class="adv-section-title">Partnership tracks</h2>
+      <div class="adv-tracks" id="adv-tracks">
+        {tracks.map((t, i) => (
+          <div
+            class="adv-track-card"
+            style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}
+          >
+            <div class="adv-track-head">
+              <span class="adv-track-label">{t.label}</span>
+              <span class="adv-track-price">{t.price}</span>
+            </div>
+            <p class="adv-track-body">{t.body}</p>
+            <div class="adv-track-note">{t.note}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR STANDARDS -->
+  <section class="adv-standards-section">
+    <div class="adv-container adv-standards-inner">
+      <div class="adv-standards-text">
+        <h2 class="adv-section-title">Our standards</h2>
+        <ul class="adv-standards-list">
+          <li>We decline partnerships that conflict with editorial independence.</li>
+          <li>Sponsored content is always labeled — readers are never deceived about its commercial nature.</li>
+          <li>We don't write positive verdicts in exchange for payment. Ever.</li>
+          <li>Affiliate links are clearly contextual. We link to what we'd link to anyway.</li>
+        </ul>
+        <p class="adv-standards-note">If your ask requires us to hide the relationship or imply an editorial endorsement we don't hold, we'll decline politely. That's not a negotiating position — it's how we've kept reader trust.</p>
+      </div>
+      <div class="adv-standards-partners">
+        <p class="adv-partners-label">Current affiliate partners</p>
+        <div class="adv-partners-chips">
+          {partners.map(p => <span class="adv-partner-chip">{p}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="adv-form-section" id="contact">
+    <div class="adv-container adv-form-wrap" id="adv-form-wrap">
+      <div class="adv-form-head">
+        <h2 class="adv-section-title">Get in touch</h2>
+        <p class="adv-form-sub">Tell us what you're looking for. We respond within 2 business days.</p>
+      </div>
+      <form
+        class="adv-form"
+        action={`mailto:modernmakesco@gmail.com`}
+        method="get"
+        enctype="text/plain"
+        onsubmit="return advSubmit(this)"
+      >
+        <div class="adv-form-row">
+          <div class="adv-form-group">
+            <label class="adv-label" for="adv-name">Name</label>
+            <input class="adv-input" type="text" id="adv-name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="adv-form-group">
+            <label class="adv-label" for="adv-company">Company</label>
+            <input class="adv-input" type="text" id="adv-company" name="company" placeholder="Company or brand" required />
+          </div>
+        </div>
+        <div class="adv-form-row">
+          <div class="adv-form-group">
+            <label class="adv-label" for="adv-email">Email</label>
+            <input class="adv-input" type="email" id="adv-email" name="email" placeholder="you@company.com" required />
+          </div>
+          <div class="adv-form-group">
+            <label class="adv-label" for="adv-type">Partnership type</label>
+            <select class="adv-input" id="adv-type" name="type">
+              <option value="">Select...</option>
+              <option value="sponsored-content">Sponsored Content</option>
+              <option value="newsletter">Newsletter Sponsorship</option>
+              <option value="affiliate">Affiliate Partnership</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="adv-form-group">
+          <label class="adv-label" for="adv-msg">Message</label>
+          <textarea class="adv-input adv-textarea" id="adv-msg" name="body" placeholder="What are you looking for? Budget, timeline, product details..." rows="5" required></textarea>
+        </div>
+        <button class="adv-submit" type="submit">Send inquiry →</button>
+        <p class="adv-form-note">This opens your email client with the details pre-filled. We respond to all inquiries.</p>
+      </form>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+</Base>
+
+<script is:inline>
+function advSubmit(form) {
+  var name    = form.name.value;
+  var company = form.company.value;
+  var email   = form.email.value;
+  var type    = form.type.value;
+  var body    = form.body.value;
+  var subject = encodeURIComponent('Modern Makes Partnership Inquiry — ' + (type || 'General'));
+  var mailBody = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Company: ' + company + '\n' +
+    'Email: ' + email + '\n' +
+    'Type: ' + type + '\n\n' +
+    body
+  );
+  window.location.href = 'mailto:modernmakesco@gmail.com?subject=' + subject + '&body=' + mailBody;
+  return false;
+}
+</script>
+
+<script>
+(function () {
+  /* ── texts-reveal on stats band entrance ── */
+  const statsEl = document.getElementById('adv-stats');
+  if (statsEl) {
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        statsEl.classList.add('adv-stats-visible');
+        obs.disconnect();
+      }
+    }, { threshold: 0.2 });
+    obs.observe(statsEl);
+  }
+
+  /* ── staggered card reveal ── */
+  const tracksEl = document.getElementById('adv-tracks');
+  if (tracksEl) {
+    const obs2 = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        tracksEl.classList.add('adv-tracks-visible');
+        obs2.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs2.observe(tracksEl);
+  }
+})();
+</script>
+
+<style is:global>
+/* ── ADVERTISE PAGE ─────────────────────── */
+
+/* Hero */
+.adv-hero {
+  background: var(--black);
+  padding: 72px 0 64px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.adv-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.adv-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 20px;
+}
+.adv-breadcrumb a { color: rgba(255,255,255,.3); }
+.adv-breadcrumb a:hover { color: rgba(255,255,255,.6); }
+.adv-eyebrow {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.adv-hero-title {
+  font-family: var(--fd);
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -.5px;
+  max-width: 720px;
+  margin-bottom: 20px;
+}
+.adv-hero-sub {
+  font-family: var(--fb);
+  font-size: 17px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+/* Stats band */
+.adv-stats-band {
+  background: var(--surface);
+  border-bottom: 2px solid var(--black);
+}
+.adv-stats-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.adv-stat {
+  padding: 32px 24px;
+  border-right: 1px solid var(--border);
+  /* texts-reveal entrance */
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+}
+.adv-stat:last-child { border-right: none; }
+.adv-stats-band.adv-stats-visible .adv-stat {
+  opacity: 1; transform: none; filter: none;
+}
+.adv-stat-value {
+  font-family: var(--fd);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.adv-stat-label {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .adv-stat { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
+/* Container */
+.adv-container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.adv-section-title {
+  font-family: var(--fd);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -.3px;
+  margin-bottom: 28px;
+  line-height: 1;
+}
+
+/* Tracks */
+.adv-tracks-section {
+  background: var(--bg);
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+}
+.adv-tracks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.adv-track-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* stagger entrance */
+  opacity: 0;
+  transform: translateY(var(--stagger-distance));
+  filter: blur(var(--stagger-blur));
+  transition:
+    opacity   var(--stagger-dur) var(--stagger-ease),
+    transform var(--stagger-dur) var(--stagger-ease),
+    filter    var(--stagger-dur) var(--stagger-ease);
+}
+.adv-tracks.adv-tracks-visible .adv-track-card {
+  opacity: 1; transform: none; filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .adv-track-card { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+.adv-track-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.adv-track-label {
+  font-family: var(--fd);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.1;
+}
+.adv-track-price {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(255,90,31,.08);
+  border: 1px solid rgba(255,90,31,.2);
+  border-radius: 3px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.adv-track-body {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--g1);
+  line-height: 1.75;
+  flex: 1;
+}
+.adv-track-note {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+/* Standards */
+.adv-standards-section {
+  background: var(--surface);
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border);
+}
+.adv-standards-inner {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 56px;
+  align-items: start;
+}
+.adv-standards-list {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.adv-standards-list li {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g1);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+.adv-standards-note {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--g2);
+  font-style: italic;
+  line-height: 1.7;
+  border-left: 2px solid var(--border);
+  padding-left: 14px;
+}
+.adv-partners-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--g2);
+  margin-bottom: 12px;
+}
+.adv-partners-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.adv-partner-chip {
+  font-family: var(--fm);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--black);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+/* Form */
+.adv-form-section {
+  background: var(--bg);
+  padding: 56px 0 80px;
+}
+.adv-form-wrap {
+  max-width: 720px;
+}
+.adv-form-head { margin-bottom: 28px; }
+.adv-form-sub {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g1);
+  line-height: 1.7;
+}
+.adv-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.adv-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.adv-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.adv-label {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+.adv-input {
+  font-family: var(--fu);
+  font-size: 14px;
+  color: var(--black);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 10px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .12s;
+  outline-color: var(--accent);
+}
+.adv-input:focus { border-color: var(--accent); }
+.adv-textarea { resize: vertical; min-height: 120px; }
+.adv-submit {
+  font-family: var(--fd);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity .12s;
+}
+.adv-submit:hover { opacity: .88; }
+.adv-form-note {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  margin-top: -4px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .adv-stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .adv-stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .adv-tracks { grid-template-columns: 1fr; }
+  .adv-standards-inner { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 768px) {
+  .adv-hero-inner, .adv-container { padding: 0 24px; }
+  .adv-form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .adv-hero-inner, .adv-container { padding: 0 20px; }
+  .adv-hero { padding: 48px 0 40px; }
+  .adv-stats-inner { grid-template-columns: 1fr 1fr; }
+}
+</style>

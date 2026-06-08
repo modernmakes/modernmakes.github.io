@@ -1,0 +1,319 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Terms of Service — Modern Makes',
+  url: `${siteBase}/legal/terms-of-service`,
+  description: 'Terms of Service for Modern Makes, effective June 2026. Jurisdiction: British Columbia, Canada.',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',  item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Legal', item: `${siteBase}/legal/terms-of-service` },
+    { '@type': 'ListItem', position: 3, name: 'Terms of Service', item: `${siteBase}/legal/terms-of-service` },
+  ],
+};
+
+const sections = [
+  { id: 'acceptance',    label: 'Acceptance of Terms' },
+  { id: 'service',       label: 'Description of Service' },
+  { id: 'affiliate',     label: 'Affiliate Disclosure' },
+  { id: 'ip',            label: 'Intellectual Property' },
+  { id: 'conduct',       label: 'User Conduct' },
+  { id: 'disclaimer',    label: 'Disclaimer of Warranties' },
+  { id: 'liability',     label: 'Limitation of Liability' },
+  { id: 'links',         label: 'Third-Party Links' },
+  { id: 'newsletter',    label: 'Newsletter Terms' },
+  { id: 'changes',       label: 'Changes to Terms' },
+  { id: 'contact',       label: 'Contact' },
+];
+---
+<Base
+  title="Terms of Service — Modern Makes"
+  description="Terms of Service for Modern Makes, effective June 2026. Jurisdiction: British Columbia, Canada."
+  hasPageH1={true}
+>
+  <Nav slot="nav" currentPath="/" />
+
+  <div class="lg-wrap">
+    <div class="lg-inner">
+
+      <nav class="lg-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Terms of Service</span>
+      </nav>
+
+      <div class="lg-layout">
+
+        <!-- Sidebar TOC -->
+        <aside class="lg-sidebar" aria-label="Table of contents">
+          <div class="lg-toc">
+            <p class="lg-toc-label">On this page</p>
+            <nav>
+              {sections.map(s => (
+                <a class="lg-toc-link" href={`#${s.id}`}>{s.label}</a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="lg-content" id="lg-main">
+          <h1 class="lg-title">Terms of Service</h1>
+          <p class="lg-meta">Effective June 2026 · Jurisdiction: British Columbia, Canada</p>
+
+          <section id="acceptance">
+            <h2>Acceptance of Terms</h2>
+            <p>By accessing or using Modern Makes at modernmakes.github.io (the "Site"), you agree to be bound by these Terms of Service and all applicable laws. If you do not agree with any part of these terms, you must stop using the Site immediately. Your continued use after any changes to these terms constitutes acceptance of those changes.</p>
+          </section>
+
+          <section id="service">
+            <h2>Description of Service</h2>
+            <p>Modern Makes is an editorial publication covering prosumer and enthusiast FDM 3D printing. Content includes hardware specifications, community-synthesized verdicts, calibration guides, news, and tooling references. The Site is a static publication — it does not collect accounts, sell products, or process financial transactions directly.</p>
+            <p>All content is provided for informational purposes. We do not guarantee that hardware specifications remain current after publication, and readers are responsible for verifying specifications with vendors before purchase.</p>
+          </section>
+
+          <section id="affiliate">
+            <h2>Affiliate Disclosure</h2>
+            <p class="lg-callout"><strong>Important:</strong> Modern Makes participates in affiliate advertising programs. Links to products sold through <strong>Fabreeko</strong>, <strong>West3D</strong>, <strong>KB3D</strong>, <strong>Amazon</strong>, <strong>Micro Swiss</strong>, and <strong>Mellow3D</strong> may be affiliate links through which we earn a commission if you make a purchase, at no additional cost to you.</p>
+            <p>Affiliate commissions are one source of revenue that allows us to maintain the Site. They do not influence our editorial verdicts or recommendations. We link to products we believe are genuinely useful — affiliate availability is not a factor in editorial decisions.</p>
+            <p>Not all links to these vendors are affiliate links. Links within editorial copy are selected on merit. Affiliate links within "Where to Buy" sections are clearly contextual to the product being described.</p>
+          </section>
+
+          <section id="ip">
+            <h2>Intellectual Property</h2>
+            <p>All written content, original graphics, design elements, and other original materials published on Modern Makes are the intellectual property of Modern Makes and are protected under Canadian copyright law and applicable international treaties.</p>
+            <p>You may quote up to 200 words from any article with clear attribution to Modern Makes and a link back to the original URL. Republishing full articles, systematic scraping of content, or reproducing content for commercial purposes without written permission is prohibited.</p>
+            <p>Hardware names, brand names, and product names referenced on the Site are trademarks of their respective owners. Modern Makes is not affiliated with Voron Design, Prusa Research, Bambu Lab, or any other manufacturer unless explicitly stated.</p>
+          </section>
+
+          <section id="conduct">
+            <h2>User Conduct</h2>
+            <p>By using the Site, you agree not to:</p>
+            <ul>
+              <li>Scrape, bulk-copy, or systematically download content for redistribution or training AI models without written permission.</li>
+              <li>Submit false or misleading information through any contact or newsletter form.</li>
+              <li>Attempt to probe, scan, or test the vulnerability of any system or network associated with the Site.</li>
+              <li>Use the Site or its content in any manner that violates applicable Canadian, provincial, or local laws.</li>
+              <li>Frame or mirror the Site's content without written permission.</li>
+            </ul>
+          </section>
+
+          <section id="disclaimer">
+            <h2>Disclaimer of Warranties</h2>
+            <p>The Site and all content are provided "as is" and "as available" without warranties of any kind, either express or implied. Modern Makes does not warrant that the Site will be uninterrupted, error-free, or free of viruses. We make no warranty regarding the accuracy, completeness, or timeliness of hardware specifications, pricing information, or editorial verdicts.</p>
+            <p>Community-synthesized verdicts represent editorial judgment based on publicly available information and community discussion. They are not professional engineering advice. Purchase decisions are entirely at your own risk.</p>
+          </section>
+
+          <section id="liability">
+            <h2>Limitation of Liability</h2>
+            <p>To the maximum extent permitted by the laws of British Columbia, Canada, Modern Makes and its contributors shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation damages arising from hardware purchase decisions made in reliance on content published on the Site, inability to access the Site, or errors or omissions in content.</p>
+            <p>Our total liability to you for any claim arising from use of the Site will not exceed CAD $0 — the Site is provided free of charge and without warranty.</p>
+          </section>
+
+          <section id="links">
+            <h2>Links to Third-Party Sites</h2>
+            <p>The Site contains links to vendor websites, manufacturer pages, community resources, and other third-party content. These links are provided for your convenience. Modern Makes does not control, endorse, or assume responsibility for the content, privacy policies, or practices of any third-party sites.</p>
+            <p>A link from Modern Makes to an external site indicates an editorial or commercial relationship as described in context — it does not constitute a general endorsement of that company or all of its products.</p>
+          </section>
+
+          <section id="newsletter">
+            <h2>Newsletter Terms</h2>
+            <p>By subscribing to The Modern Makes Brief, you agree to receive email communications from Modern Makes. You may unsubscribe at any time using the unsubscribe link included in every newsletter. We will not sell your email address to third parties.</p>
+            <p>The newsletter is delivered using Beehiiv. Your subscription data is governed by Beehiiv's privacy policy. We may use webhook integrations (Make.com) to process subscription requests — these services receive your email address solely for the purpose of adding you to the newsletter list.</p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes to Terms</h2>
+            <p>Modern Makes reserves the right to update or modify these Terms of Service at any time without prior individual notice. Changes will be reflected by an updated effective date at the top of this page. Continued use of the Site after any change constitutes your acceptance of the revised terms.</p>
+            <p>We recommend reviewing this page periodically. Material changes that affect affiliate relationships or data use will be noted in the next newsletter issue.</p>
+          </section>
+
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>For questions about these Terms of Service, affiliate disclosures, or any other legal matters, contact us at:</p>
+            <p><a href="mailto:modernmakesco@gmail.com" class="lg-email-link">modernmakesco@gmail.com</a></p>
+            <p>Modern Makes is operated from British Columbia, Canada. These terms are governed by the laws of British Columbia.</p>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+</Base>
+
+<script>
+(function () {
+  const sections = document.querySelectorAll<HTMLElement>('.lg-content section[id]');
+  const links    = document.querySelectorAll<HTMLAnchorElement>('.lg-toc-link');
+  if (!sections.length || !links.length) return;
+
+  const obs = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector<HTMLAnchorElement>(`.lg-toc-link[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+      }
+    }
+  }, { rootMargin: '-15% 0px -75% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+})();
+</script>
+
+<style is:global>
+/* ── LEGAL PAGES ─────────────────────────── */
+.lg-wrap {
+  background: var(--bg);
+  min-height: calc(100vh - 80px);
+  padding: 40px 0 80px;
+}
+.lg-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Breadcrumb */
+.lg-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  margin-bottom: 32px;
+}
+.lg-breadcrumb a { color: var(--g2); }
+.lg-breadcrumb a:hover { color: var(--accent); }
+
+/* Layout */
+.lg-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* Sidebar */
+.lg-sidebar {
+  position: sticky;
+  top: 96px;
+}
+.lg-toc { padding-right: 16px; }
+.lg-toc-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--g2);
+  margin-bottom: 12px;
+}
+.lg-toc-link {
+  display: block;
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--g1);
+  padding: 4px 0 4px 10px;
+  border-left: 2px solid transparent;
+  line-height: 1.45;
+  transition: color .12s, border-color .12s;
+}
+.lg-toc-link:hover { color: var(--black); }
+.lg-toc-link[aria-current="true"] {
+  color: var(--black);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Content */
+.lg-content { min-width: 0; }
+.lg-title {
+  font-family: var(--fd);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin-bottom: 8px;
+}
+.lg-meta {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g2);
+  margin-bottom: 36px;
+}
+.lg-content section {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  margin-bottom: 28px;
+}
+.lg-content h2 {
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 14px;
+  letter-spacing: -.2px;
+}
+.lg-content p, .lg-content li {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--g1);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.lg-content ul {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+.lg-content li { margin-bottom: 6px; }
+.lg-callout {
+  background: rgba(255, 90, 31, .06);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  padding: 14px 18px !important;
+  margin-bottom: 12px !important;
+}
+.lg-callout strong { color: var(--black); }
+.lg-email-link {
+  font-family: var(--fm);
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.lg-email-link:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .lg-layout { grid-template-columns: 1fr; gap: 32px; }
+  .lg-sidebar { position: static; }
+  .lg-toc { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; background: var(--surface); }
+  .lg-toc-label { width: 100%; }
+  .lg-toc-link { padding: 3px 8px; border-left: none; font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .lg-inner { padding: 0 20px; }
+  .lg-title { font-size: 32px; }
+  .lg-wrap { padding: 28px 0 60px; }
+}
+</style>

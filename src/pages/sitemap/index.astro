@@ -1,0 +1,275 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import hotends   from '../../data/hardware/hotends.json';
+import extruders from '../../data/hardware/extruders.json';
+import probes    from '../../data/hardware/bed-probes.json';
+
+const toSlug = (name: string) =>
+  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+/* content collections */
+const newsItems   = await getCollection('news');
+const guideItems  = await getCollection('guides');
+const compItems   = await getCollection('comparisons');
+const filmItems   = await getCollection('filament').catch(() => []);
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Sitemap — Modern Makes',
+  url: `${siteBase}/sitemap`,
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',    item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Sitemap', item: `${siteBase}/sitemap` },
+  ],
+};
+---
+<Base
+  title="Sitemap — Modern Makes"
+  description="Full HTML sitemap for Modern Makes — hardware pages, guides, news, comparisons, filament profiles, and ecosystem hubs."
+  hasPageH1={true}
+>
+  <Nav slot="nav" currentPath="/" />
+
+  <div class="sm-wrap">
+    <div class="sm-inner">
+
+      <nav class="sm-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Sitemap</span>
+      </nav>
+
+      <h1 class="sm-title">Sitemap</h1>
+      <p class="sm-sub">Every page on Modern Makes, organised by section.</p>
+
+      <div class="sm-grid">
+
+        <!-- Main -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">Main</h2>
+          <ul class="sm-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/search">Search</a></li>
+          </ul>
+        </section>
+
+        <!-- Hardware -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">Hardware</h2>
+          <ul class="sm-list">
+            <li><a href="/hardware">Hardware Index</a></li>
+            <li class="sm-sub-head"><a href="/hardware/hotends">Hotends</a></li>
+            {(hotends as any[]).filter(r => r['Name']).map((r: any) => (
+              <li class="sm-indent"><a href={`/hardware/hotends/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
+            ))}
+            <li class="sm-sub-head"><a href="/hardware/extruders">Extruders</a></li>
+            {(extruders as any[]).filter(r => r['Name']).map((r: any) => (
+              <li class="sm-indent"><a href={`/hardware/extruders/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
+            ))}
+            <li class="sm-sub-head"><a href="/hardware/probes">Bed Probes</a></li>
+            {(probes as any[]).filter(r => r['Name']).map((r: any) => (
+              <li class="sm-indent"><a href={`/hardware/probes/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Ecosystems -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">Ecosystems</h2>
+          <ul class="sm-list">
+            <li><a href="/voron">Voron</a></li>
+            <li class="sm-indent"><a href="/voron/origin">Voron Origin</a></li>
+            <li class="sm-indent"><a href="/voron/mods">Voron Mods</a></li>
+            <li class="sm-indent"><a href="/voron/toolheads/stealthburner">Stealthburner</a></li>
+            <li class="sm-indent"><a href="/voron/toolheads/xol">XOL Toolhead</a></li>
+            <li class="sm-indent"><a href="/voron/toolheads/dragon-burner">Dragon Burner</a></li>
+            <li class="sm-indent"><a href="/voron/toolheads/mini-stealthburner">Mini Stealthburner</a></li>
+            <li class="sm-indent"><a href="/voron/toolheads/archetype">Archetype</a></li>
+            <li><a href="/ratrig">RatRig</a></li>
+            <li class="sm-indent"><a href="/ratrig/origin">RatRig Origin</a></li>
+            <li><a href="/vzbot">VzBot</a></li>
+            <li class="sm-indent"><a href="/vzbot/origin">VzBot Origin</a></li>
+            <li><a href="/hevort">HevORT</a></li>
+            <li class="sm-indent"><a href="/hevort/origin">HevORT Origin</a></li>
+          </ul>
+        </section>
+
+        <!-- Guides -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">Guides</h2>
+          <ul class="sm-list">
+            <li><a href="/guides">All Guides</a></li>
+            {guideItems.map(g => (
+              <li class="sm-indent"><a href={`/guides/${g.slug}`}>{g.data.title}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- News -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">News</h2>
+          <ul class="sm-list">
+            <li><a href="/news">All News</a></li>
+            {newsItems.map(n => (
+              <li class="sm-indent"><a href={`/news/${n.slug}`}>{n.data.title}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Comparisons -->
+        {compItems.length > 0 && (
+          <section class="sm-section">
+            <h2 class="sm-section-title">Comparisons</h2>
+            <ul class="sm-list">
+              {compItems.map(c => (
+                <li><a href={`/comparisons/${c.slug}`}>{c.data.title}</a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <!-- Filament -->
+        {filmItems.length > 0 && (
+          <section class="sm-section">
+            <h2 class="sm-section-title">Filament</h2>
+            <ul class="sm-list">
+              <li><a href="/filament">Filament Index</a></li>
+              {filmItems.map(f => (
+                <li class="sm-indent"><a href={`/filament/${f.slug}`}>{(f.data as any).title ?? f.slug.toUpperCase()}</a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <!-- Tools -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">Tools</h2>
+          <ul class="sm-list">
+            <li><a href="/tools">Tools Index</a></li>
+            <li class="sm-indent"><a href="/tools/pressure-advance">Pressure Advance Calculator</a></li>
+          </ul>
+        </section>
+
+        <!-- About / Legal -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">About &amp; Legal</h2>
+          <ul class="sm-list">
+            <li><a href="/about">About</a></li>
+            <li><a href="/editorial-policy">Editorial Policy</a></li>
+            <li><a href="/advertise">Advertise</a></li>
+            <li><a href="/partners">Partner With Us</a></li>
+            <li><a href="/legal/terms-of-service">Terms of Service</a></li>
+            <li><a href="/legal/cookie-policy">Cookie Policy</a></li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+</Base>
+
+<style is:global>
+/* ── HTML SITEMAP ─────────────────────────── */
+.sm-wrap {
+  background: var(--bg);
+  min-height: calc(100vh - 80px);
+  padding: 40px 0 80px;
+}
+.sm-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.sm-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  margin-bottom: 24px;
+}
+.sm-breadcrumb a { color: var(--g2); }
+.sm-breadcrumb a:hover { color: var(--accent); }
+.sm-title {
+  font-family: var(--fd);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin-bottom: 8px;
+}
+.sm-sub {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--g1);
+  margin-bottom: 36px;
+}
+
+/* grid */
+.sm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 40px;
+}
+.sm-section { }
+.sm-section-title {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--black);
+}
+.sm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sm-list a {
+  font-family: var(--fu);
+  font-size: 13px;
+  color: var(--g1);
+  line-height: 1.5;
+  transition: color .12s;
+}
+.sm-list a:hover { color: var(--accent); }
+.sm-sub-head a {
+  font-weight: 700;
+  color: var(--black);
+  margin-top: 8px;
+  display: block;
+}
+.sm-indent { padding-left: 12px; }
+.sm-indent a { font-size: 12px; color: var(--g2); }
+.sm-indent a:hover { color: var(--accent); }
+
+/* responsive */
+@media (max-width: 900px) { .sm-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .sm-inner { padding: 0 24px; } .sm-title { font-size: 32px; } }
+@media (max-width: 600px) { .sm-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .sm-inner { padding: 0 20px; } }
+</style>
