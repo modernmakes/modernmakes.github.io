@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-06-08",
+    "macrostructure": "Catalogue",
+    "theme": "Modern Makes system (warm orange · dark hero · light body)",
+    "enrichment": "none",
+    "brief": "Newsletter archive — back-issue shelf, Airtable-wired, empty state with subscribe CTA"
+  },
+  {
+    "date": "2026-06-06",
+    "macrostructure": "Stat-Led",
+    "theme": "Modern Makes system",
+    "enrichment": "none",
+    "brief": "Advertise page — partnership tiers, stat-led hero"
+  },
+  {
+    "date": "2026-06-06",
+    "macrostructure": "Long Document",
+    "theme": "Modern Makes system",
+    "enrichment": "none",
+    "brief": "Partners, legal pages (ToS, Cookie Policy), Editorial Policy — sticky TOC sidebar"
+  },
+  {
+    "date": "2026-06-05",
+    "macrostructure": "Workbench",
+    "theme": "Modern Makes system",
+    "enrichment": "none",
+    "brief": "Extruder index — tabs-sliding filter, row-list layout"
+  }
+]
