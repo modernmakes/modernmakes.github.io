@@ -474,6 +474,59 @@ main:not(.main-has-hero) { padding-top: 60px; }
   .lg-title { font-size: 32px; }
   .lg-wrap { padding: 28px 0 60px; }
 }
+/* ── LONG DOCUMENT — INLINE FORMS ───────── */
+.lg-form { display: flex; flex-direction: column; gap: 16px; }
+.lg-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.lg-form-group { display: flex; flex-direction: column; gap: 6px; }
+.lg-form-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--g2);
+}
+.lg-form-input {
+  font-family: var(--fu);
+  font-size: 14px;
+  color: var(--black);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 10px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .12s;
+  outline-color: var(--accent);
+}
+.lg-form-input:focus { border-color: var(--accent); }
+.lg-form-textarea { resize: vertical; min-height: 100px; }
+.lg-form-submit {
+  font-family: var(--fd);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity .12s;
+}
+.lg-form-submit:hover { opacity: .88; }
+.lg-form-submit:disabled { opacity: .5; cursor: not-allowed; }
+.lg-form-msg {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g2);
+  margin-top: -4px;
+}
+@media (max-width: 600px) {
+  .lg-form-row { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 768px) {
   main:not(.main-has-hero) { padding-top: 56px; }

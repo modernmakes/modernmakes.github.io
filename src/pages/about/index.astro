@@ -1,170 +1,150 @@
 ---
+/* Hallmark · macrostructure: Long Document (2-col prose + sticky sidebar TOC)
+ * pre-emit critique: P5 H4 E5 S4 R5 V5
+ */
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const sections = [
+  { id: 'what-we-are',      label: 'What We Are' },
+  { id: 'editorial-policy', label: 'Editorial Policy' },
+  { id: 'affiliate',        label: 'Affiliate Disclosure' },
+  { id: 'contact',          label: 'Get in Touch' },
+];
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Modern Makes',
+  description: 'Modern Makes is an independent editorial publication for the 3D printing enthusiast — hardware, software, mods, and the builds that matter.',
+  url: `${siteBase}/about`,
+  isPartOf: { '@type': 'WebSite', url: `${siteBase}` },
+  publisher: { '@type': 'Organization', name: 'Modern Makes' },
+};
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',  item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'About', item: `${siteBase}/about` },
+  ],
+};
 ---
 <Base
   title="About Modern Makes"
   description="Modern Makes is an independent editorial publication for the 3D printing enthusiast — hardware, software, mods, and the builds that matter."
-  heroPage={true}
+  hasPageH1={true}
 >
   <Nav slot="nav" currentPath="/about" />
 
-  <!-- HERO -->
-  <section class="pg-hero">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="eyebrow" style="margin-bottom:12px">Modern Makes</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:16px">
-        About Modern Makes
-      </h1>
-      <p style="font-family:'Lora',serif;font-size:16px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">
-        Independent editorial for people who build, modify, and obsess over 3D printers.
-      </p>
-    </div>
-  </section>
+  <div class="lg-wrap">
+    <div class="lg-inner">
 
-  <!-- WHAT WE ARE -->
-  <section class="section">
-    <div class="container" style="max-width:720px">
+      <nav class="lg-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">›</span>
+        <span>About</span>
+      </nav>
 
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
-        What We Are
-      </h2>
-      <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
-        <p style="margin:0 0 16px">
-          Modern Makes is an editorial publication for the 3D printing enthusiast. We cover hardware, software,
-          mods, and the builds that matter — written by people who actually run the machines.
-        </p>
-        <p style="margin:0 0 16px">
-          Our focus is the enthusiast and builder market: Voron and CoreXY printers, community mods, hotends,
-          extruders, filament, and the software that ties it together. We do long-form analysis, technical guides,
-          and news coverage of the hardware and projects worth paying attention to.
-        </p>
-        <p style="margin:0">
-          Modern Makes is not affiliated with any manufacturer. We are not sponsored by, employed by, or
-          commercially partnered with any printer brand or supplier. Our opinions are our own.
-        </p>
-      </div>
+      <div class="lg-layout">
 
-    </div>
-  </section>
-
-  <!-- EDITORIAL POLICY -->
-  <section class="section" id="editorial" style="background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-    <div class="container" style="max-width:720px">
-
-      <div class="eyebrow" style="margin-bottom:12px">Policy</div>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
-        Editorial Policy
-      </h2>
-      <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
-        <p style="margin:0 0 16px">
-          Modern Makes is a curation and discovery publication. Our verdicts are formed by synthesizing community
-          consensus — Reddit, Discord, YouTube channels, and publicly shared hands-on reports. We do not claim to
-          have personally tested every product we cover. Our credibility comes from knowing the community deeply
-          and having the courage to form a verdict. We never use "we tested" language unless we have genuinely
-          used something ourselves.
-        </p>
-        <p style="margin:0 0 16px">
-          Any material relationship with a manufacturer is disclosed in the relevant content. We do not accept
-          payment for editorial verdicts. Sponsored content, if it ever appears, will be clearly labeled.
-        </p>
-        <p style="margin:0">
-          Corrections are published when we get something wrong. To report a correction, email
-          <a href="mailto:modernmakesco@gmail.com" style="color:var(--accent)">modernmakesco@gmail.com</a>.
-          Read the full <a href="/editorial" style="color:var(--accent)">Editorial Policy</a>.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- AFFILIATE DISCLOSURE -->
-  <section class="section" id="affiliate">
-    <div class="container" style="max-width:720px">
-
-      <div class="eyebrow" style="margin-bottom:12px">Disclosure</div>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:var(--black);margin:0 0 20px;line-height:1">
-        Affiliate Disclosure
-      </h2>
-      <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
-        <p style="margin:0 0 16px">
-          Modern Makes uses affiliate links. When you click a product link on this site and make a purchase through
-          it, we may earn a commission from the retailer — at no extra cost to you.
-        </p>
-        <p style="margin:0 0 16px">
-          Affiliate commissions are how we keep the lights on. They do not influence what we cover, what we
-          recommend, or what verdicts we reach. We link to the best place to buy something — not the highest
-          commission rate.
-        </p>
-        <p style="margin:0">
-          A note on pricing and availability: affiliate links are accurate at the time of publishing, but prices
-          and stock levels change. Always check the current price before purchasing.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CONTACT FORM -->
-  <section class="section" id="contact" style="background:var(--black)">
-    <div class="container" style="max-width:680px">
-      <div class="eyebrow" style="margin-bottom:12px">Get in touch</div>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#fff;margin:0 0 8px;line-height:1">
-        Get in Touch
-      </h2>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;margin:0 0 28px">
-        For press inquiries, partnership proposals, corrections, or general questions.
-      </p>
-
-      <form class="about-contact-form" id="about-contact-form">
-        <div class="about-form-row">
-          <div class="about-form-group">
-            <label class="about-form-label" for="ac-name">Name</label>
-            <input class="about-form-input" type="text" id="ac-name" placeholder="Your name" required />
+        <aside class="lg-sidebar" aria-label="Table of contents">
+          <div class="lg-toc">
+            <p class="lg-toc-label">On this page</p>
+            <nav>
+              {sections.map(s => (
+                <a class="lg-toc-link" href={`#${s.id}`}>{s.label}</a>
+              ))}
+            </nav>
           </div>
-          <div class="about-form-group">
-            <label class="about-form-label" for="ac-email">Email</label>
-            <input class="about-form-input" type="email" id="ac-email" placeholder="you@example.com" required />
-          </div>
-        </div>
-        <div class="about-form-group">
-          <label class="about-form-label" for="ac-subject">Subject</label>
-          <input class="about-form-input" type="text" id="ac-subject" placeholder="What's this about?" required />
-        </div>
-        <div class="about-form-group">
-          <label class="about-form-label" for="ac-message">Message</label>
-          <textarea class="about-form-input about-form-textarea" id="ac-message" rows="4" placeholder="Your message…" required></textarea>
-        </div>
-        <button class="about-form-btn" type="submit" id="ac-btn">Send Message</button>
-        <p class="about-form-msg" id="ac-msg" style="display:none"></p>
-      </form>
+        </aside>
+
+        <main class="lg-content" id="lg-main">
+          <h1 class="lg-title">About Modern Makes</h1>
+          <p class="lg-meta">Independent editorial for prosumer FDM 3D printing enthusiasts</p>
+
+          <section id="what-we-are">
+            <h2>What We Are</h2>
+            <p>Modern Makes is an editorial publication for the 3D printing enthusiast. We cover hardware, software, mods, and the builds that matter — written by people who actually run the machines.</p>
+            <p>Our focus is the enthusiast and builder market: Voron and CoreXY printers, community mods, hotends, extruders, filament, and the software that ties it together. We do long-form analysis, technical guides, and news coverage of the hardware and projects worth paying attention to.</p>
+            <p>Modern Makes is not affiliated with any manufacturer. We are not sponsored by, employed by, or commercially partnered with any printer brand or supplier. Our opinions are our own.</p>
+          </section>
+
+          <section id="editorial-policy">
+            <h2>Editorial Policy</h2>
+            <p>Modern Makes is a curation and discovery publication. Our verdicts are formed by synthesizing community consensus — Reddit, Discord, YouTube channels, and publicly shared hands-on reports. We do not claim to have personally tested every product we cover. Our credibility comes from knowing the community deeply and having the courage to form a verdict. We never use "we tested" language unless we have genuinely used something ourselves.</p>
+            <p>Any material relationship with a manufacturer is disclosed in the relevant content. We do not accept payment for editorial verdicts. Sponsored content, if it ever appears, will be clearly labeled.</p>
+            <p>Corrections are published when we get something wrong. To report a correction, email <a href="mailto:modernmakesco@gmail.com" class="lg-email-link">modernmakesco@gmail.com</a>. Read the full <a href="/editorial" class="lg-email-link">Editorial Policy</a>.</p>
+          </section>
+
+          <section id="affiliate">
+            <h2>Affiliate Disclosure</h2>
+            <p>Modern Makes uses affiliate links. When you click a product link on this site and make a purchase through it, we may earn a commission from the retailer — at no extra cost to you.</p>
+            <p>Affiliate commissions are how we keep the lights on. They do not influence what we cover, what we recommend, or what verdicts we reach. We link to the best place to buy something — not the highest commission rate.</p>
+            <p>A note on pricing and availability: affiliate links are accurate at the time of publishing, but prices and stock levels change. Always check the current price before purchasing.</p>
+          </section>
+
+          <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>For press inquiries, partnership proposals, corrections, or general questions.</p>
+
+            <form class="lg-form" id="about-contact-form">
+              <div class="lg-form-row">
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="ac-name">Name</label>
+                  <input class="lg-form-input" type="text" id="ac-name" placeholder="Your name" required />
+                </div>
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="ac-email">Email</label>
+                  <input class="lg-form-input" type="email" id="ac-email" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div class="lg-form-group">
+                <label class="lg-form-label" for="ac-subject">Subject</label>
+                <input class="lg-form-input" type="text" id="ac-subject" placeholder="What's this about?" required />
+              </div>
+              <div class="lg-form-group">
+                <label class="lg-form-label" for="ac-message">Message</label>
+                <textarea class="lg-form-input lg-form-textarea" id="ac-message" rows="5" placeholder="Your message…" required></textarea>
+              </div>
+              <button class="lg-form-submit" type="submit" id="ac-btn">Send Message</button>
+              <p class="lg-form-msg" id="ac-msg" style="display:none"></p>
+            </form>
+          </section>
+
+        </main>
+      </div>
     </div>
-  </section>
+  </div>
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "AboutPage",
-        "name": "About Modern Makes",
-        "description": "Modern Makes is an independent editorial publication for the 3D printing enthusiast — hardware, software, mods, and the builds that matter.",
-        "url": "https://modernmakes.github.io/about",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.github.io" },
-        "publisher": { "@type": "Organization", "name": "Modern Makes" }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.github.io" },
-          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://modernmakes.github.io/about" }
-        ]
-      }
-    ]
-  })}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
 </Base>
+
+<script>
+(function () {
+  const sections = document.querySelectorAll<HTMLElement>('.lg-content section[id]');
+  const links    = document.querySelectorAll<HTMLAnchorElement>('.lg-toc-link');
+  if (!sections.length || !links.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector<HTMLAnchorElement>(`.lg-toc-link[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+      }
+    }
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(s => obs.observe(s));
+})();
+</script>
 
 <script is:inline>
 (function () {
@@ -186,89 +166,21 @@ import Footer from '../../components/Footer.astro';
     fetch('https://hook.us1.make.com/xxkrs4kgfwvgp0d83ve2oylwy6pntes2', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'contact', name: name, email: email, subject: subject, message: message })
+      body: JSON.stringify({ type: 'contact', name: name, email: email, subject: subject, message: message, page: 'about' })
     })
     .then(function () {
       form.style.display = 'none';
       msg.textContent = 'Message sent. We’ll get back to you at ' + email + ' within a few days.';
-      msg.style.color = 'rgba(255,255,255,.7)';
+      msg.style.color = 'var(--g1)';
       msg.style.display = 'block';
     })
     .catch(function () {
       btn.textContent = 'Send Message';
       btn.disabled = false;
       msg.textContent = 'Something went wrong. Email us directly at modernmakesco@gmail.com';
-      msg.style.color = 'rgba(255,90,31,.9)';
+      msg.style.color = 'var(--accent)';
       msg.style.display = 'block';
     });
   });
 })();
 </script>
-
-<style is:global>
-.about-contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.about-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.about-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.about-form-label {
-  font-family: var(--fm);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-}
-.about-form-input {
-  font-family: var(--fu);
-  font-size: 14px;
-  color: #fff;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 4px;
-  padding: 10px 14px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color .12s;
-  outline: none;
-}
-.about-form-input::placeholder { color: rgba(255,255,255,.3); }
-.about-form-input:focus { border-color: rgba(255,90,31,.6); }
-.about-form-textarea { resize: vertical; min-height: 100px; }
-.about-form-btn {
-  font-family: var(--fd);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  padding: 13px 28px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: opacity .12s;
-}
-.about-form-btn:hover  { opacity: .88; }
-.about-form-btn:disabled { opacity: .5; cursor: not-allowed; }
-.about-form-msg {
-  font-family: var(--fb);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-top: 4px;
-}
-@media (max-width: 600px) {
-  .about-form-row { grid-template-columns: 1fr; }
-}
-</style>

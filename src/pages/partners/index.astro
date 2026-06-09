@@ -1,7 +1,6 @@
 ---
-/* Hallmark · macrostructure: Long Document (vendor-pitch variant) · tone: direct-editorial · anchor hue: warm-orange
- * transitions: texts-reveal (18) on partner chips entrance
- * pre-emit critique: P5 H4 E5 S4 R5 V5 — distinct from /advertise: no hero, no stats band
+/* Hallmark · macrostructure: Long Document (2-col prose + sticky sidebar TOC)
+ * pre-emit critique: P5 H4 E5 S4 R5 V5
  */
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
@@ -10,6 +9,28 @@ import Footer from '../../components/Footer.astro';
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
+
+const sections = [
+  { id: 'model',          label: 'How It Works' },
+  { id: 'what-we-offer',  label: 'What We Offer' },
+  { id: 'what-we-need',   label: 'What We Need' },
+  { id: 'apply',          label: 'Apply' },
+];
+
+const whatWeOffer = [
+  {
+    title: 'Hardware detail page links',
+    body: "Your product appears in the \"Where to Buy\" section on its dedicated hardware page — hotends, extruders, bed probes, and other categories. This is high-intent traffic: readers researching before they buy.",
+  },
+  {
+    title: 'Guide and roundup mentions',
+    body: "When a guide or buying roundup covers a product we're affiliated with, we link to the best vendor. Editorial selection — we pick the right vendor for the reader, not the highest commission.",
+  },
+  {
+    title: 'Newsletter mentions',
+    body: 'The Modern Makes Brief occasionally recommends hardware directly. Affiliate partners with genuinely good pricing or availability are mentioned in context.',
+  },
+];
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -22,31 +43,10 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home',    item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 1, name: 'Home',     item: `${siteBase}/` },
     { '@type': 'ListItem', position: 2, name: 'Partners', item: `${siteBase}/partners` },
   ],
 };
-
-const whatWeOffer = [
-  {
-    title: 'Hardware detail page links',
-    body: 'Your product appears in the "Where to Buy" section on its dedicated hardware page — hotends, extruders, bed probes, and other categories. This is high-intent traffic: readers researching before they buy.',
-  },
-  {
-    title: 'Guide and roundup mentions',
-    body: 'When a guide or buying roundup covers a product we\'re affiliated with, we link to the best vendor. Editorial selection — we pick the right vendor for the reader, not the highest commission.',
-  },
-  {
-    title: 'Newsletter mentions',
-    body: 'The Modern Makes Brief occasionally recommends hardware directly. Affiliate partners with genuinely good pricing or availability are mentioned in context.',
-  },
-];
-
-const whatWeNeed = [
-  'Access to your affiliate program — a direct referral link or account in your affiliate platform.',
-  'Accurate product specifications we can reference on detail pages (gear ratios, weights, temperatures, compatibility).',
-  'Spec sheets or documentation rather than physical samples — we\'re synthesizers, not a test lab.',
-];
 ---
 <Base
   title="Partner With Us — Modern Makes"
@@ -55,115 +55,139 @@ const whatWeNeed = [
 >
   <Nav slot="nav" currentPath="/partners" />
 
-  <!-- HEADER -->
-  <div class="prt-header">
-    <div class="prt-inner">
-      <nav class="prt-breadcrumb" aria-label="Breadcrumb">
+  <div class="lg-wrap">
+    <div class="lg-inner">
+
+      <nav class="lg-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
+        <span aria-hidden="true">›</span>
         <span>Partner With Us</span>
       </nav>
-      <h1 class="prt-title">Partner With Us</h1>
-      <p class="prt-sub">For 3D printing hardware vendors, component makers, and filament brands that want editorial exposure on a publication their customers actually trust.</p>
-    </div>
-  </div>
 
-  <!-- MODEL EXPLANATION -->
-  <section class="prt-section prt-section-white">
-    <div class="prt-inner prt-need-wrap">
-      <h2 class="prt-h2">How our affiliate model works</h2>
-      <p class="prt-model-p">Modern Makes links to products we would recommend anyway. When we have an affiliate relationship with a vendor, their products get purchase links on hardware detail pages. When we don't, those products still get covered editorially — they just don't get buy buttons.</p>
-      <p class="prt-model-p">Affiliate commissions fund the publication. They don't determine which products we recommend. Our readers come to us because our verdicts are independent — the moment we trade that for a commission, the readership disappears. That's not a sacrifice we're willing to make.</p>
-      <p class="prt-model-p">This means we apply to affiliate programs selectively. If a product isn't something we'd link to on merit, we won't apply. If it is, being affiliated makes it easier to give readers a direct purchase path.</p>
-      <p class="prt-model-p">We are actively building our affiliate partner network. If your products are a good fit for our audience, we'd like to hear from you.</p>
-    </div>
-  </section>
+      <div class="lg-layout">
 
-  <!-- WHAT WE OFFER -->
-  <section class="prt-section">
-    <div class="prt-inner">
-      <h2 class="prt-h2">What we offer partners</h2>
-      <div class="prt-offer-grid" id="prt-offers">
-        {whatWeOffer.map((item, i) => (
-          <div
-            class="prt-offer-item"
-            style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}
-          >
-            <h3 class="prt-offer-title">{item.title}</h3>
-            <p class="prt-offer-body">{item.body}</p>
+        <aside class="lg-sidebar" aria-label="Table of contents">
+          <div class="lg-toc">
+            <p class="lg-toc-label">On this page</p>
+            <nav>
+              {sections.map(s => (
+                <a class="lg-toc-link" href={`#${s.id}`}>{s.label}</a>
+              ))}
+            </nav>
           </div>
-        ))}
+        </aside>
+
+        <main class="lg-content" id="lg-main">
+          <h1 class="lg-title">Partner With Us</h1>
+          <p class="lg-meta">For 3D printing hardware vendors, component makers, and filament brands</p>
+
+          <section id="model">
+            <h2>How It Works</h2>
+            <p>Modern Makes links to products we would recommend anyway. When we have an affiliate relationship with a vendor, their products get purchase links on hardware detail pages. When we don't, those products still get covered editorially — they just don't get buy buttons.</p>
+            <p>Affiliate commissions fund the publication. They don't determine which products we recommend. Our readers come to us because our verdicts are independent — the moment we trade that for a commission, the readership disappears. That's not a sacrifice we're willing to make.</p>
+            <p>This means we apply to affiliate programs selectively. If a product isn't something we'd link to on merit, we won't apply. If it is, being affiliated makes it easier to give readers a direct purchase path.</p>
+            <p>We are actively building our affiliate partner network. If your products are a good fit for our audience, we'd like to hear from you.</p>
+          </section>
+
+          <section id="what-we-offer">
+            <h2>What We Offer</h2>
+            <p>Partners with affiliate programs get placement in three areas of the site.</p>
+
+            <div class="prt-offer-list">
+              {whatWeOffer.map(item => (
+                <div class="prt-offer-card">
+                  <p class="prt-offer-title">{item.title}</p>
+                  <p class="prt-offer-body">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="what-we-need">
+            <h2>What We Need</h2>
+            <ul>
+              <li>Access to your affiliate program — a direct referral link or account in your affiliate platform.</li>
+              <li>Accurate product specifications we can reference on detail pages (gear ratios, weights, temperatures, compatibility).</li>
+              <li>Spec sheets or documentation rather than physical samples — we're synthesizers, not a test lab.</li>
+            </ul>
+            <p>We don't require free samples, review units, or anything that creates a reciprocal obligation. The relationship is simple: you run an affiliate program, we apply, and we link editorially where it makes sense.</p>
+          </section>
+
+          <section id="apply">
+            <h2>Apply</h2>
+            <p>Tell us about your product and affiliate program. We review applications within 5 business days.</p>
+
+            <form class="lg-form" id="prt-form">
+              <div class="lg-form-row">
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="prt-company">Company / Brand</label>
+                  <input class="lg-form-input" type="text" id="prt-company" placeholder="Your company name" required />
+                </div>
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="prt-category">Product category</label>
+                  <select class="lg-form-input" id="prt-category">
+                    <option value="">Select...</option>
+                    <option value="hotends">Hotends</option>
+                    <option value="extruders">Extruders</option>
+                    <option value="motion">Motion Systems</option>
+                    <option value="electronics">Electronics / Boards</option>
+                    <option value="filament">Filament</option>
+                    <option value="probes">Bed Probes</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lg-form-row">
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="prt-website">Website</label>
+                  <input class="lg-form-input" type="url" id="prt-website" placeholder="https://yoursite.com" />
+                </div>
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="prt-affiliate-url">Affiliate program URL</label>
+                  <input class="lg-form-input" type="url" id="prt-affiliate-url" placeholder="https://affiliate-platform.com/..." />
+                </div>
+              </div>
+              <div class="lg-form-group">
+                <label class="lg-form-label" for="prt-contact-email">Contact email</label>
+                <input class="lg-form-input" type="email" id="prt-contact-email" placeholder="you@company.com" required />
+              </div>
+              <div class="lg-form-group">
+                <label class="lg-form-label" for="prt-msg">Message</label>
+                <textarea class="lg-form-input lg-form-textarea" id="prt-msg" placeholder="What products are you hoping to get exposure for? Commission structure? Anything else we should know?" rows="4"></textarea>
+              </div>
+              <button class="lg-form-submit" type="submit" id="prt-btn">Send Application</button>
+              <p class="lg-form-msg" id="prt-msg-out" style="display:none"></p>
+            </form>
+          </section>
+
+        </main>
       </div>
     </div>
-  </section>
-
-  <!-- WHAT WE NEED -->
-  <section class="prt-section prt-section-white">
-    <div class="prt-inner prt-need-wrap">
-      <h2 class="prt-h2">What we need from you</h2>
-      <ul class="prt-need-list">
-        {whatWeNeed.map(item => <li>{item}</li>)}
-      </ul>
-      <p class="prt-need-note">We don't require free samples, review units, or anything that creates a reciprocal obligation. The relationship is simple: you run an affiliate program, we apply, and we link editorially where it makes sense.</p>
-    </div>
-  </section>
-
-  <!-- APPLY FORM -->
-  <section class="prt-section prt-section-white" id="apply">
-    <div class="prt-inner prt-form-wrap">
-      <h2 class="prt-h2">Apply to partner</h2>
-      <p class="prt-form-intro">Tell us about your product and affiliate program. We review applications within 5 business days.</p>
-      <form class="prt-form" id="prt-form">
-        <div class="prt-form-row">
-          <div class="prt-form-group">
-            <label class="prt-label" for="prt-company">Company / Brand</label>
-            <input class="prt-input" type="text" id="prt-company" placeholder="Your company name" required />
-          </div>
-          <div class="prt-form-group">
-            <label class="prt-label" for="prt-category">Product category</label>
-            <select class="prt-input" id="prt-category">
-              <option value="">Select...</option>
-              <option value="hotends">Hotends</option>
-              <option value="extruders">Extruders</option>
-              <option value="motion">Motion Systems</option>
-              <option value="electronics">Electronics / Boards</option>
-              <option value="filament">Filament</option>
-              <option value="probes">Bed Probes</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="prt-form-row">
-          <div class="prt-form-group">
-            <label class="prt-label" for="prt-website">Website</label>
-            <input class="prt-input" type="url" id="prt-website" placeholder="https://yoursite.com" />
-          </div>
-          <div class="prt-form-group">
-            <label class="prt-label" for="prt-affiliate-url">Affiliate program URL</label>
-            <input class="prt-input" type="url" id="prt-affiliate-url" placeholder="https://affiliate-platform.com/..." />
-          </div>
-        </div>
-        <div class="prt-form-row">
-          <div class="prt-form-group">
-            <label class="prt-label" for="prt-contact-email">Contact email</label>
-            <input class="prt-input" type="email" id="prt-contact-email" placeholder="you@company.com" required />
-          </div>
-        </div>
-        <div class="prt-form-group">
-          <label class="prt-label" for="prt-msg">Message</label>
-          <textarea class="prt-input prt-textarea" id="prt-msg" placeholder="What products are you hoping to get exposure for? Commission structure? Anything else we should know?" rows="4"></textarea>
-        </div>
-        <button class="prt-submit" type="submit" id="prt-btn">Send application →</button>
-        <p class="prt-form-note" id="prt-msg-out" style="display:none"></p>
-      </form>
-    </div>
-  </section>
+  </div>
 
   <Footer slot="footer" />
 
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
 </Base>
+
+<script>
+(function () {
+  const sections = document.querySelectorAll<HTMLElement>('.lg-content section[id]');
+  const links    = document.querySelectorAll<HTMLAnchorElement>('.lg-toc-link');
+  if (!sections.length || !links.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector<HTMLAnchorElement>(`.lg-toc-link[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+      }
+    }
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(s => obs.observe(s));
+})();
+</script>
 
 <script is:inline>
 (function () {
@@ -174,12 +198,12 @@ const whatWeNeed = [
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var company     = document.getElementById('prt-company').value;
-    var category    = document.getElementById('prt-category').value;
-    var website     = document.getElementById('prt-website').value;
+    var company      = document.getElementById('prt-company').value;
+    var category     = document.getElementById('prt-category').value;
+    var website      = document.getElementById('prt-website').value;
     var affiliateUrl = document.getElementById('prt-affiliate-url').value;
-    var email       = document.getElementById('prt-contact-email').value;
-    var message     = document.getElementById('prt-msg').value;
+    var email        = document.getElementById('prt-contact-email').value;
+    var message      = document.getElementById('prt-msg').value;
 
     btn.textContent = 'Sending…';
     btn.disabled = true;
@@ -187,7 +211,7 @@ const whatWeNeed = [
     fetch('https://hook.us1.make.com/xxkrs4kgfwvgp0d83ve2oylwy6pntes2', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'partner', company: company, category: category, website: website, affiliateUrl: affiliateUrl, email: email, message: message })
+      body: JSON.stringify({ type: 'partner', company: company, category: category, website: website, affiliateUrl: affiliateUrl, email: email, message: message, page: 'partners' })
     })
     .then(function () {
       form.style.display = 'none';
@@ -196,7 +220,7 @@ const whatWeNeed = [
       out.style.display = 'block';
     })
     .catch(function () {
-      btn.textContent = 'Send application →';
+      btn.textContent = 'Send Application';
       btn.disabled = false;
       out.textContent = 'Something went wrong. Email modernmakesco@gmail.com directly.';
       out.style.color = 'var(--accent)';
@@ -206,217 +230,27 @@ const whatWeNeed = [
 })();
 </script>
 
-<script>
-(function () {
-  /* texts-reveal stagger on offer cards */
-  function revealOnEnter(id: string, cls: string) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { el.classList.add(cls); obs.disconnect(); }
-    }, { threshold: 0.15 });
-    obs.observe(el);
-  }
-  revealOnEnter('prt-offers', 'prt-offers-visible');
-})();
-</script>
-
-<style is:global>
-/* ── PARTNERS PAGE ───────────────────────── */
-
-.prt-header {
-  background: var(--surface);
-  border-bottom: 2px solid var(--black);
-  padding: 40px 0 32px;
-}
-.prt-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-.prt-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--fm);
-  font-size: 10px;
-  color: var(--g2);
-  margin-bottom: 16px;
-}
-.prt-breadcrumb a { color: var(--g2); }
-.prt-breadcrumb a:hover { color: var(--accent); }
-.prt-title {
-  font-family: var(--fd);
-  font-size: 44px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1;
-  letter-spacing: -.5px;
-  margin-bottom: 12px;
-}
-.prt-sub {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g1);
-  line-height: 1.75;
-  max-width: 560px;
-}
-
-/* Sections */
-.prt-section { padding: 48px 0; border-bottom: 1px solid var(--border); }
-.prt-section-white { background: var(--surface); }
-.prt-section:not(.prt-section-white) { background: var(--bg); }
-
-.prt-h2 {
-  font-family: var(--fd);
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--black);
-  letter-spacing: -.3px;
-  margin-bottom: 20px;
-  line-height: 1;
-}
-
-/* Model section prose */
-.prt-model-p {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g1);
-  line-height: 1.8;
-  margin-bottom: 14px;
-}
-
-/* Offer grid */
-.prt-offer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.prt-offer-item {
+<style>
+.prt-offer-list { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+.prt-offer-card {
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 20px;
+  padding: 18px;
   background: var(--surface);
-  /* stagger entrance */
-  opacity: 0;
-  transform: translateY(var(--stagger-distance));
-  filter: blur(var(--stagger-blur));
-  transition:
-    opacity   var(--stagger-dur) var(--stagger-ease),
-    transform var(--stagger-dur) var(--stagger-ease),
-    filter    var(--stagger-dur) var(--stagger-ease);
-}
-.prt-offer-grid.prt-offers-visible .prt-offer-item {
-  opacity: 1; transform: none; filter: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .prt-offer-item { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 .prt-offer-title {
   font-family: var(--fd);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 800;
   color: var(--black);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  line-height: 1.2;
 }
 .prt-offer-body {
   font-family: var(--fb);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--g1);
   line-height: 1.75;
-}
-
-/* Need */
-.prt-need-wrap { max-width: 680px; }
-.prt-need-list {
-  padding-left: 20px;
-  margin-bottom: 16px;
-}
-.prt-need-list li {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g1);
-  line-height: 1.8;
-  margin-bottom: 10px;
-}
-.prt-need-note {
-  font-family: var(--fb);
-  font-size: 13px;
-  color: var(--g2);
-  line-height: 1.7;
-  border-left: 2px solid var(--border);
-  padding-left: 14px;
-}
-
-/* Form */
-.prt-form-wrap { max-width: 680px; }
-.prt-form-intro {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g1);
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-.prt-form { display: flex; flex-direction: column; gap: 14px; }
-.prt-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.prt-form-group { display: flex; flex-direction: column; gap: 5px; }
-.prt-label {
-  font-family: var(--fm);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--g2);
-}
-.prt-input {
-  font-family: var(--fu);
-  font-size: 13px;
-  color: var(--black);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 9px 12px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color .12s;
-  outline-color: var(--accent);
-}
-.prt-input:focus { border-color: var(--accent); }
-.prt-textarea { resize: vertical; min-height: 100px; }
-.prt-submit {
-  font-family: var(--fd);
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-  padding: 12px 28px;
-  background: var(--black);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: background .12s;
-}
-.prt-submit:hover { background: var(--accent); }
-.prt-form-note {
-  font-family: var(--fm);
-  font-size: 10px;
-  color: var(--g2);
-  margin-top: -6px;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .prt-offer-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-  .prt-inner { padding: 0 24px; }
-  .prt-form-row { grid-template-columns: 1fr; }
-  .prt-title { font-size: 36px; }
-}
-@media (max-width: 480px) {
-  .prt-inner { padding: 0 20px; }
-  .prt-title { font-size: 30px; }
+  margin-bottom: 0;
 }
 </style>

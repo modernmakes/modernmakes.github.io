@@ -1,6 +1,5 @@
 ---
-/* Hallmark · macrostructure: Stat-Led · tone: editorial-direct · anchor hue: warm-orange
- * transitions: texts-reveal (18) on stat band · staggered card reveals
+/* Hallmark · macrostructure: Long Document (2-col prose + sticky sidebar TOC)
  * pre-emit critique: P5 H4 E5 S4 R5 V5
  */
 import Base from '../../layouts/Base.astro';
@@ -10,6 +9,34 @@ import Footer from '../../components/Footer.astro';
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
+
+const sections = [
+  { id: 'audience',     label: 'Our Audience' },
+  { id: 'partnerships', label: 'Partnership Options' },
+  { id: 'standards',    label: 'Our Standards' },
+  { id: 'contact',      label: 'Get in Touch' },
+];
+
+const tracks = [
+  {
+    label: 'Sponsored Content',
+    body: 'A dedicated long-form article or guide featuring your product, written in our editorial voice. Clearly labeled as sponsored. Included in the weekly newsletter send. Permanent on-site placement.',
+    price: 'Contact for rates',
+    note: 'Min. 2-week lead time',
+  },
+  {
+    label: 'Newsletter Sponsorship',
+    body: "A dedicated sponsor section inside The Modern Makes Brief — our weekly newsletter to opted-in subscribers. Text + link, matched to the issue's topic where possible.",
+    price: 'Contact for rates',
+    note: 'Slots book 4–6 weeks out',
+  },
+  {
+    label: 'Affiliate Partnership',
+    body: "Performance-based. We apply to your affiliate program and editorially promote your products on hardware detail pages, guides, and roundups where they're genuinely the right recommendation. No upfront cost.",
+    price: 'No upfront cost',
+    note: 'Editorial placement only — we choose where',
+  },
+];
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -26,160 +53,145 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 2, name: 'Advertise', item: `${siteBase}/advertise` },
   ],
 };
-
-const stats = [
-  { value: 'Prosumer &amp; Enthusiast', label: 'Audience' },
-  { value: 'Weekly Newsletter',         label: 'Publishing Cadence' },
-  { value: 'Self-Build Focus',          label: 'Voron · RatRig · VzBot · HevORT' },
-  { value: 'British Columbia',          label: 'Canada' },
-];
-
-const tracks = [
-  {
-    slug: 'sponsored',
-    label: 'Sponsored Content',
-    body: 'A dedicated long-form article or guide featuring your product, written in our editorial voice. Clearly labeled as sponsored. Included in the weekly newsletter send. Permanent on-site placement.',
-    price: 'Contact for rates',
-    note: 'Min. 2-week lead time',
-  },
-  {
-    slug: 'newsletter',
-    label: 'Newsletter Sponsorship',
-    body: "A dedicated sponsor section inside The Modern Makes Brief — our weekly newsletter to opted-in subscribers. Text + link, matched to the issue's topic where possible.",
-    price: 'Contact for rates',
-    note: 'Slots book 4–6 weeks out',
-  },
-  {
-    slug: 'affiliate',
-    label: 'Affiliate Partnership',
-    body: "Performance-based. We apply to your affiliate program and editorially promote your products on hardware detail pages, guides, and roundups where they're genuinely the right recommendation. No upfront cost.",
-    price: 'No upfront cost',
-    note: 'Editorial editorial only — we choose placement',
-  },
-];
-
 ---
 <Base
   title="Advertise — Modern Makes"
   description="Reach the most serious 3D printing enthusiasts on the internet. Sponsored content, newsletter partnerships, and affiliate programs."
   hasPageH1={true}
-  heroPage={true}
-  hasHero={true}
 >
   <Nav slot="nav" currentPath="/advertise" />
 
-  <!-- HERO -->
-  <div class="adv-hero">
-    <div class="adv-hero-inner">
-      <nav class="adv-breadcrumb" aria-label="Breadcrumb">
+  <div class="lg-wrap">
+    <div class="lg-inner">
+
+      <nav class="lg-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
+        <span aria-hidden="true">›</span>
         <span>Advertise</span>
       </nav>
-      <div class="adv-eyebrow">Work With Us</div>
-      <h1 class="adv-hero-title">Reach the most serious 3D printing enthusiasts on the internet.</h1>
-      <p class="adv-hero-sub">Modern Makes covers the hardware serious builders actually buy. Our readers research before they spend — and they spend significantly.</p>
-    </div>
-  </div>
 
-  <!-- STATS BAND -->
-  <div class="adv-stats-band" id="adv-stats">
-    <div class="adv-stats-inner">
-      {stats.map((s, i) => (
-        <div class="adv-stat" style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}>
-          <div class="adv-stat-value" set:html={s.value}></div>
-          <div class="adv-stat-label">{s.label}</div>
-        </div>
-      ))}
-    </div>
-    <p class="adv-stats-note">Audience metrics available on request.</p>
-  </div>
+      <div class="lg-layout">
 
-  <!-- PARTNERSHIP TRACKS -->
-  <section class="adv-tracks-section">
-    <div class="adv-container">
-      <h2 class="adv-section-title">Partnership tracks</h2>
-      <div class="adv-tracks" id="adv-tracks">
-        {tracks.map((t, i) => (
-          <div
-            class="adv-track-card"
-            style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}
-          >
-            <div class="adv-track-head">
-              <span class="adv-track-label">{t.label}</span>
-              <span class="adv-track-price">{t.price}</span>
+        <aside class="lg-sidebar" aria-label="Table of contents">
+          <div class="lg-toc">
+            <p class="lg-toc-label">On this page</p>
+            <nav>
+              {sections.map(s => (
+                <a class="lg-toc-link" href={`#${s.id}`}>{s.label}</a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        <main class="lg-content" id="lg-main">
+          <h1 class="lg-title">Advertise</h1>
+          <p class="lg-meta">Reach the most serious 3D printing enthusiasts on the internet</p>
+
+          <section id="audience">
+            <h2>Our Audience</h2>
+            <p>Modern Makes is read by prosumer and enthusiast FDM 3D printing builders — people who buy Voron kits, source hotends from specialty vendors, follow CoreXY development, and care about the difference between a well-tuned and a badly-tuned machine.</p>
+            <p>Our readers research before they spend, and they spend significantly. They are not casual hobbyists looking for cheap beginner printers. They are the community members who post on r/voroncorexy, hang out in Discord build servers, and read teardown threads.</p>
+            <p>Audience metrics available on request.</p>
+          </section>
+
+          <section id="partnerships">
+            <h2>Partnership Options</h2>
+            <p>Three ways to work with us. Each is structured to protect both your commercial goals and our editorial credibility.</p>
+
+            <div class="adv-track-list">
+              {tracks.map(t => (
+                <div class="adv-track-card">
+                  <div class="adv-track-head">
+                    <span class="adv-track-name">{t.label}</span>
+                    <span class="adv-track-price">{t.price}</span>
+                  </div>
+                  <p class="adv-track-body">{t.body}</p>
+                  <div class="adv-track-note">{t.note}</div>
+                </div>
+              ))}
             </div>
-            <p class="adv-track-body">{t.body}</p>
-            <div class="adv-track-note">{t.note}</div>
-          </div>
-        ))}
+          </section>
+
+          <section id="standards">
+            <h2>Our Standards</h2>
+            <p>We decline partnerships that conflict with editorial independence. Every commercial relationship we enter is disclosed to readers — either on the relevant content page or in our affiliate disclosure.</p>
+            <ul>
+              <li>Sponsored content is always labeled. Readers are never deceived about its commercial nature.</li>
+              <li>We don't write positive verdicts in exchange for payment. Ever.</li>
+              <li>Affiliate links are editorial. We link to what we'd link to anyway.</li>
+              <li>We won't take a partnership that requires us to hide the relationship or imply an endorsement we don't hold.</li>
+            </ul>
+            <p>If your ask requires us to hide the relationship or imply an editorial endorsement we don't hold, we'll decline politely. That's not a negotiating position — it's how we've kept reader trust.</p>
+          </section>
+
+          <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>Tell us what you're looking for. We respond within 2 business days.</p>
+
+            <form class="lg-form" id="adv-form">
+              <div class="lg-form-row">
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="adv-name">Name</label>
+                  <input class="lg-form-input" type="text" id="adv-name" placeholder="Your name" required />
+                </div>
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="adv-company">Company</label>
+                  <input class="lg-form-input" type="text" id="adv-company" placeholder="Company or brand" required />
+                </div>
+              </div>
+              <div class="lg-form-row">
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="adv-email">Email</label>
+                  <input class="lg-form-input" type="email" id="adv-email" placeholder="you@company.com" required />
+                </div>
+                <div class="lg-form-group">
+                  <label class="lg-form-label" for="adv-ptype">Partnership type</label>
+                  <select class="lg-form-input" id="adv-ptype">
+                    <option value="">Select...</option>
+                    <option value="Sponsored Content">Sponsored Content</option>
+                    <option value="Newsletter Sponsorship">Newsletter Sponsorship</option>
+                    <option value="Affiliate Partnership">Affiliate Partnership</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="lg-form-group">
+                <label class="lg-form-label" for="adv-msg">Message</label>
+                <textarea class="lg-form-input lg-form-textarea" id="adv-msg" placeholder="What are you looking for? Budget, timeline, product details…" rows="5" required></textarea>
+              </div>
+              <button class="lg-form-submit" type="submit" id="adv-btn">Send Inquiry</button>
+              <p class="lg-form-msg" id="adv-msg-out" style="display:none"></p>
+            </form>
+          </section>
+
+        </main>
       </div>
     </div>
-  </section>
-
-  <!-- OUR STANDARDS -->
-  <section class="adv-standards-section">
-    <div class="adv-container">
-      <h2 class="adv-section-title">Our standards</h2>
-      <ul class="adv-standards-list">
-        <li>We decline partnerships that conflict with editorial independence.</li>
-        <li>Sponsored content is always labeled — readers are never deceived about its commercial nature.</li>
-        <li>We don't write positive verdicts in exchange for payment. Ever.</li>
-        <li>Affiliate links are clearly contextual. We link to what we'd link to anyway.</li>
-      </ul>
-      <p class="adv-standards-note">If your ask requires us to hide the relationship or imply an editorial endorsement we don't hold, we'll decline politely. That's not a negotiating position — it's how we've kept reader trust.</p>
-    </div>
-  </section>
-
-  <!-- CONTACT FORM -->
-  <section class="adv-form-section" id="contact">
-    <div class="adv-container adv-form-wrap">
-      <div class="adv-form-head">
-        <h2 class="adv-section-title">Get in touch</h2>
-        <p class="adv-form-sub">Tell us what you're looking for. We respond within 2 business days.</p>
-      </div>
-      <form class="adv-form" id="adv-form">
-        <div class="adv-form-row">
-          <div class="adv-form-group">
-            <label class="adv-label" for="adv-name">Name</label>
-            <input class="adv-input" type="text" id="adv-name" placeholder="Your name" required />
-          </div>
-          <div class="adv-form-group">
-            <label class="adv-label" for="adv-company">Company</label>
-            <input class="adv-input" type="text" id="adv-company" placeholder="Company or brand" required />
-          </div>
-        </div>
-        <div class="adv-form-row">
-          <div class="adv-form-group">
-            <label class="adv-label" for="adv-email">Email</label>
-            <input class="adv-input" type="email" id="adv-email" placeholder="you@company.com" required />
-          </div>
-          <div class="adv-form-group">
-            <label class="adv-label" for="adv-ptype">Partnership type</label>
-            <select class="adv-input" id="adv-ptype">
-              <option value="">Select...</option>
-              <option value="Sponsored Content">Sponsored Content</option>
-              <option value="Newsletter Sponsorship">Newsletter Sponsorship</option>
-              <option value="Display Advertising">Display Advertising</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="adv-form-group">
-          <label class="adv-label" for="adv-msg">Message</label>
-          <textarea class="adv-input adv-textarea" id="adv-msg" placeholder="What are you looking for? Budget, timeline, product details..." rows="5" required></textarea>
-        </div>
-        <button class="adv-submit" type="submit" id="adv-btn">Send inquiry →</button>
-        <p class="adv-form-note" id="adv-msg-out" style="display:none"></p>
-      </form>
-    </div>
-  </section>
+  </div>
 
   <Footer slot="footer" />
 
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
 </Base>
+
+<script>
+(function () {
+  const sections = document.querySelectorAll<HTMLElement>('.lg-content section[id]');
+  const links    = document.querySelectorAll<HTMLAnchorElement>('.lg-toc-link');
+  if (!sections.length || !links.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector<HTMLAnchorElement>(`.lg-toc-link[href="#${entry.target.id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+      }
+    }
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  sections.forEach(s => obs.observe(s));
+})();
+</script>
 
 <script is:inline>
 (function () {
@@ -202,16 +214,16 @@ const tracks = [
     fetch('https://hook.us1.make.com/xxkrs4kgfwvgp0d83ve2oylwy6pntes2', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'advertise', name: name, company: company, email: email, partnershipType: ptype, message: message })
+      body: JSON.stringify({ type: 'advertise', name: name, company: company, email: email, partnershipType: ptype, message: message, page: 'advertise' })
     })
     .then(function () {
       form.style.display = 'none';
-      out.textContent = 'Inquiry sent. We’ll follow up within a few business days.';
+      out.textContent = 'Inquiry sent. We'll follow up within a few business days.';
       out.style.color = 'var(--g1)';
       out.style.display = 'block';
     })
     .catch(function () {
-      btn.textContent = 'Send inquiry →';
+      btn.textContent = 'Send Inquiry';
       btn.disabled = false;
       out.textContent = 'Something went wrong. Email modernmakesco@gmail.com directly.';
       out.style.color = 'var(--accent)';
@@ -221,184 +233,14 @@ const tracks = [
 })();
 </script>
 
-<script>
-(function () {
-  /* ── texts-reveal on stats band entrance ── */
-  const statsEl = document.getElementById('adv-stats');
-  if (statsEl) {
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        statsEl.classList.add('adv-stats-visible');
-        obs.disconnect();
-      }
-    }, { threshold: 0.2 });
-    obs.observe(statsEl);
-  }
-
-  /* ── staggered card reveal ── */
-  const tracksEl = document.getElementById('adv-tracks');
-  if (tracksEl) {
-    const obs2 = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        tracksEl.classList.add('adv-tracks-visible');
-        obs2.disconnect();
-      }
-    }, { threshold: 0.1 });
-    obs2.observe(tracksEl);
-  }
-})();
-</script>
-
-<style is:global>
-/* ── ADVERTISE PAGE ─────────────────────── */
-
-/* Hero */
-.adv-hero {
-  background: var(--black);
-  padding: 72px 0 64px;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-}
-.adv-hero-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 40px;
-}
-.adv-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--fm);
-  font-size: 10px;
-  color: rgba(255,255,255,.3);
-  margin-bottom: 20px;
-}
-.adv-breadcrumb a { color: rgba(255,255,255,.3); }
-.adv-breadcrumb a:hover { color: rgba(255,255,255,.6); }
-.adv-eyebrow {
-  font-family: var(--fm);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.adv-hero-title {
-  font-family: var(--fd);
-  font-size: clamp(36px, 5vw, 60px);
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.05;
-  letter-spacing: -.5px;
-  max-width: 720px;
-  margin-bottom: 20px;
-}
-.adv-hero-sub {
-  font-family: var(--fb);
-  font-size: 17px;
-  color: rgba(255,255,255,.45);
-  line-height: 1.75;
-  max-width: 520px;
-}
-
-/* Stats band */
-.adv-stats-band {
-  background: var(--surface);
-  border-bottom: 2px solid var(--black);
-}
-.adv-stats-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-.adv-stat {
-  padding: 32px 24px;
-  border-right: 1px solid var(--border);
-  /* texts-reveal entrance */
-  opacity: 0;
-  transform: translateY(var(--stagger-distance));
-  filter: blur(var(--stagger-blur));
-  transition:
-    opacity   var(--stagger-dur) var(--stagger-ease),
-    transform var(--stagger-dur) var(--stagger-ease),
-    filter    var(--stagger-dur) var(--stagger-ease);
-}
-.adv-stat:last-child { border-right: none; }
-.adv-stats-band.adv-stats-visible .adv-stat {
-  opacity: 1; transform: none; filter: none;
-}
-.adv-stat-value {
-  font-family: var(--fd);
-  font-size: clamp(18px, 2.2vw, 28px);
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1.15;
-  margin-bottom: 6px;
-}
-.adv-stat-label {
-  font-family: var(--fm);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--g2);
-}
-@media (prefers-reduced-motion: reduce) {
-  .adv-stat { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
-}
-
-/* Container */
-.adv-container {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 40px;
-}
-.adv-section-title {
-  font-family: var(--fd);
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--black);
-  letter-spacing: -.3px;
-  margin-bottom: 28px;
-  line-height: 1;
-}
-
-/* Tracks */
-.adv-tracks-section {
-  background: var(--bg);
-  padding: 56px 0;
-  border-bottom: 1px solid var(--border);
-}
-.adv-tracks {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+<style>
+.adv-track-list { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
 .adv-track-card {
-  background: var(--surface);
   border: 1px solid var(--border);
   border-top: 3px solid var(--accent);
-  border-radius: 8px;
-  padding: 28px 24px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  /* stagger entrance */
-  opacity: 0;
-  transform: translateY(var(--stagger-distance));
-  filter: blur(var(--stagger-blur));
-  transition:
-    opacity   var(--stagger-dur) var(--stagger-ease),
-    transform var(--stagger-dur) var(--stagger-ease),
-    filter    var(--stagger-dur) var(--stagger-ease);
-}
-.adv-tracks.adv-tracks-visible .adv-track-card {
-  opacity: 1; transform: none; filter: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .adv-track-card { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+  border-radius: 6px;
+  padding: 20px;
+  background: var(--surface);
 }
 .adv-track-head {
   display: flex;
@@ -406,8 +248,9 @@ const tracks = [
   align-items: flex-start;
   gap: 8px;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
-.adv-track-label {
+.adv-track-name {
   font-family: var(--fd);
   font-size: 18px;
   font-weight: 800;
@@ -431,154 +274,13 @@ const tracks = [
   font-size: 14px;
   color: var(--g1);
   line-height: 1.75;
-  flex: 1;
+  margin-bottom: 10px;
 }
 .adv-track-note {
   font-family: var(--fm);
   font-size: 10px;
   color: var(--g2);
   border-top: 1px solid var(--border);
-  padding-top: 10px;
-}
-
-/* Stats note */
-.adv-stats-note {
-  font-family: var(--fm);
-  font-size: 10px;
-  color: var(--g2);
-  text-align: center;
-  padding: 10px 40px 14px;
-}
-
-/* Standards */
-.adv-standards-section {
-  background: var(--surface);
-  padding: 56px 0;
-  border-bottom: 1px solid var(--border);
-}
-.adv-standards-list {
-  padding-left: 20px;
-  margin-bottom: 16px;
-  max-width: 680px;
-}
-.adv-standards-list li {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g1);
-  line-height: 1.75;
-  margin-bottom: 10px;
-}
-.adv-standards-note {
-  font-family: var(--fb);
-  font-size: 13px;
-  color: var(--g2);
-  font-style: italic;
-  line-height: 1.7;
-  border-left: 2px solid var(--border);
-  padding-left: 14px;
-  max-width: 680px;
-}
-/* (partner chip styles removed — no longer used) */
-.adv-unused {
-  font-family: var(--fm);
-  font-size: 11px;
-  color: var(--black);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 4px 10px;
-}
-
-/* Form */
-.adv-form-section {
-  background: var(--bg);
-  padding: 56px 0 80px;
-}
-.adv-form-wrap {
-  max-width: 720px;
-}
-.adv-form-head { margin-bottom: 28px; }
-.adv-form-sub {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g1);
-  line-height: 1.7;
-}
-.adv-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.adv-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.adv-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.adv-label {
-  font-family: var(--fm);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--g2);
-}
-.adv-input {
-  font-family: var(--fu);
-  font-size: 14px;
-  color: var(--black);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 10px 12px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color .12s;
-  outline-color: var(--accent);
-}
-.adv-input:focus { border-color: var(--accent); }
-.adv-textarea { resize: vertical; min-height: 120px; }
-.adv-submit {
-  font-family: var(--fd);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-  padding: 14px 32px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: opacity .12s;
-}
-.adv-submit:hover { opacity: .88; }
-.adv-form-note {
-  font-family: var(--fm);
-  font-size: 10px;
-  color: var(--g2);
-  margin-top: -4px;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .adv-stats-inner { grid-template-columns: repeat(2, 1fr); }
-  .adv-stat { border-right: none; border-bottom: 1px solid var(--border); }
-  .adv-tracks { grid-template-columns: 1fr; }
-  .adv-standards-inner { grid-template-columns: 1fr; gap: 32px; }
-}
-@media (max-width: 768px) {
-  .adv-hero-inner, .adv-container { padding: 0 24px; }
-  .adv-form-row { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .adv-hero-inner, .adv-container { padding: 0 20px; }
-  .adv-hero { padding: 48px 0 40px; }
-  .adv-stats-inner { grid-template-columns: 1fr 1fr; }
+  padding-top: 8px;
 }
 </style>
