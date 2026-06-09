@@ -37,7 +37,7 @@ import Footer from '../../components/Footer.astro';
         </p>
         <p style="margin:0 0 16px">
           Our focus is the enthusiast and builder market: Voron and CoreXY printers, community mods, hotends,
-          extruders, filament, and the software that ties it together. We do long-form reviews, technical guides,
+          extruders, filament, and the software that ties it together. We do long-form analysis, technical guides,
           and news coverage of the hardware and projects worth paying attention to.
         </p>
         <p style="margin:0">
@@ -59,23 +59,20 @@ import Footer from '../../components/Footer.astro';
       </h2>
       <div style="font-family:'Lora',serif;font-size:16px;color:var(--g1);line-height:1.8">
         <p style="margin:0 0 16px">
-          We test what we cover. Verdicts — ratings, recommendations, and conclusions — are based on our own
-          hands-on experience unless explicitly stated otherwise. Where we rely on third-party data or manufacturer
-          specifications, we say so.
+          Modern Makes is a curation and discovery publication. Our verdicts are formed by synthesizing community
+          consensus — Reddit, Discord, YouTube channels, and publicly shared hands-on reports. We do not claim to
+          have personally tested every product we cover. Our credibility comes from knowing the community deeply
+          and having the courage to form a verdict. We never use "we tested" language unless we have genuinely
+          used something ourselves.
         </p>
         <p style="margin:0 0 16px">
-          Any material relationship with a manufacturer is disclosed in the relevant content. This includes review
-          units provided at no cost, loaner hardware, and early access programmes. A disclosed relationship does not
-          mean a positive review is guaranteed — we have declined to publish coverage where we could not give an
-          honest assessment.
-        </p>
-        <p style="margin:0 0 16px">
-          We do not accept payment for editorial coverage. Sponsored content, if it ever appears on the site,
-          will be labelled clearly as sponsored.
+          Any material relationship with a manufacturer is disclosed in the relevant content. We do not accept
+          payment for editorial verdicts. Sponsored content, if it ever appears, will be clearly labeled.
         </p>
         <p style="margin:0">
-          Corrections are published when we get something wrong. If you spot an error, email us at
+          Corrections are published when we get something wrong. To report a correction, email
           <a href="mailto:modernmakesco@gmail.com" style="color:var(--accent)">modernmakesco@gmail.com</a>.
+          Read the full <a href="/editorial" style="color:var(--accent)">Editorial Policy</a>.
         </p>
       </div>
 
@@ -109,22 +106,39 @@ import Footer from '../../components/Footer.astro';
     </div>
   </section>
 
-  <!-- CONTACT CTA -->
+  <!-- CONTACT FORM -->
   <section class="section" id="contact" style="background:var(--black)">
-    <div class="container" style="max-width:720px;text-align:center">
+    <div class="container" style="max-width:680px">
       <div class="eyebrow" style="margin-bottom:12px">Get in touch</div>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#fff;margin:0 0 16px;line-height:1">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#fff;margin:0 0 8px;line-height:1">
         Get in Touch
       </h2>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.5);line-height:1.7;max-width:480px;margin:0 auto 24px">
-        For press inquiries, partnership proposals, or general questions, email us at
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;margin:0 0 28px">
+        For press inquiries, partnership proposals, corrections, or general questions.
       </p>
-      <a
-        href="mailto:modernmakesco@gmail.com"
-        style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:2px solid rgba(255,90,31,.3);padding-bottom:3px;margin-bottom:28px"
-      >
-        modernmakesco@gmail.com
-      </a>
+
+      <form class="about-contact-form" id="about-contact-form">
+        <div class="about-form-row">
+          <div class="about-form-group">
+            <label class="about-form-label" for="ac-name">Name</label>
+            <input class="about-form-input" type="text" id="ac-name" placeholder="Your name" required />
+          </div>
+          <div class="about-form-group">
+            <label class="about-form-label" for="ac-email">Email</label>
+            <input class="about-form-input" type="email" id="ac-email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="about-form-group">
+          <label class="about-form-label" for="ac-subject">Subject</label>
+          <input class="about-form-input" type="text" id="ac-subject" placeholder="What's this about?" required />
+        </div>
+        <div class="about-form-group">
+          <label class="about-form-label" for="ac-message">Message</label>
+          <textarea class="about-form-input about-form-textarea" id="ac-message" rows="4" placeholder="Your message…" required></textarea>
+        </div>
+        <button class="about-form-btn" type="submit" id="ac-btn">Send Message</button>
+        <p class="about-form-msg" id="ac-msg" style="display:none"></p>
+      </form>
     </div>
   </section>
 
@@ -151,3 +165,110 @@ import Footer from '../../components/Footer.astro';
     ]
   })}></script>
 </Base>
+
+<script is:inline>
+(function () {
+  var form = document.getElementById('about-contact-form');
+  var btn  = document.getElementById('ac-btn');
+  var msg  = document.getElementById('ac-msg');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name    = document.getElementById('ac-name').value;
+    var email   = document.getElementById('ac-email').value;
+    var subject = document.getElementById('ac-subject').value;
+    var message = document.getElementById('ac-message').value;
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    fetch('https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'contact', name: name, email: email, subject: subject, message: message })
+    })
+    .then(function () {
+      form.style.display = 'none';
+      msg.textContent = 'Message sent. We’ll get back to you at ' + email + ' within a few days.';
+      msg.style.color = 'rgba(255,255,255,.7)';
+      msg.style.display = 'block';
+    })
+    .catch(function () {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      msg.textContent = 'Something went wrong. Email us directly at modernmakesco@gmail.com';
+      msg.style.color = 'rgba(255,90,31,.9)';
+      msg.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+<style is:global>
+.about-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.about-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.about-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.about-form-label {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+.about-form-input {
+  font-family: var(--fu);
+  font-size: 14px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 4px;
+  padding: 10px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .12s;
+  outline: none;
+}
+.about-form-input::placeholder { color: rgba(255,255,255,.3); }
+.about-form-input:focus { border-color: rgba(255,90,31,.6); }
+.about-form-textarea { resize: vertical; min-height: 100px; }
+.about-form-btn {
+  font-family: var(--fd);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity .12s;
+}
+.about-form-btn:hover  { opacity: .88; }
+.about-form-btn:disabled { opacity: .5; cursor: not-allowed; }
+.about-form-msg {
+  font-family: var(--fb);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+@media (max-width: 600px) {
+  .about-form-row { grid-template-columns: 1fr; }
+}
+</style>

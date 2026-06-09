@@ -21,9 +21,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home',              item: `${siteBase}/` },
-    { '@type': 'ListItem', position: 2, name: 'Legal',             item: `${siteBase}/legal/terms-of-service` },
-    { '@type': 'ListItem', position: 3, name: 'Terms of Service',  item: `${siteBase}/legal/terms-of-service` },
+    { '@type': 'ListItem', position: 1, name: 'Home',             item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'Terms of Service', item: `${siteBase}/legal/terms-of-service` },
   ],
 };
 
@@ -55,9 +54,9 @@ const sections = [
 
       <nav class="lg-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/legal/terms-of-service">Legal</a>
-        <span aria-hidden="true">/</span>
+        <span aria-hidden="true">›</span>
+        <span>Legal</span>
+        <span aria-hidden="true">›</span>
         <span>Terms of Service</span>
       </nav>
 

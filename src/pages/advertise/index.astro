@@ -28,10 +28,10 @@ const breadcrumbSchema = {
 };
 
 const stats = [
-  { value: '10K+',             label: 'Monthly Readers' },
-  { value: '3,400+',           label: 'Newsletter Subscribers' },
-  { value: 'Prosumer',         label: 'Audience Profile' },
-  { value: 'US / CA',          label: 'Primary Market' },
+  { value: 'Prosumer &amp; Enthusiast', label: 'Audience' },
+  { value: 'Weekly Newsletter',         label: 'Publishing Cadence' },
+  { value: 'Self-Build Focus',          label: 'Voron · RatRig · VzBot · HevORT' },
+  { value: 'British Columbia',          label: 'Canada' },
 ];
 
 const tracks = [
@@ -58,7 +58,6 @@ const tracks = [
   },
 ];
 
-const partners = ['Fabreeko', 'West3D', 'KB3D', 'Amazon', 'Micro Swiss', 'Mellow3D'];
 ---
 <Base
   title="Advertise — Modern Makes"
@@ -88,11 +87,12 @@ const partners = ['Fabreeko', 'West3D', 'KB3D', 'Amazon', 'Micro Swiss', 'Mellow
     <div class="adv-stats-inner">
       {stats.map((s, i) => (
         <div class="adv-stat" style={`transition-delay:calc(var(--stagger-stagger) * ${i})`}>
-          <div class="adv-stat-value">{s.value}</div>
+          <div class="adv-stat-value" set:html={s.value}></div>
           <div class="adv-stat-label">{s.label}</div>
         </div>
       ))}
     </div>
+    <p class="adv-stats-note">Audience metrics available on request.</p>
   </div>
 
   <!-- PARTNERSHIP TRACKS -->
@@ -119,72 +119,58 @@ const partners = ['Fabreeko', 'West3D', 'KB3D', 'Amazon', 'Micro Swiss', 'Mellow
 
   <!-- OUR STANDARDS -->
   <section class="adv-standards-section">
-    <div class="adv-container adv-standards-inner">
-      <div class="adv-standards-text">
-        <h2 class="adv-section-title">Our standards</h2>
-        <ul class="adv-standards-list">
-          <li>We decline partnerships that conflict with editorial independence.</li>
-          <li>Sponsored content is always labeled — readers are never deceived about its commercial nature.</li>
-          <li>We don't write positive verdicts in exchange for payment. Ever.</li>
-          <li>Affiliate links are clearly contextual. We link to what we'd link to anyway.</li>
-        </ul>
-        <p class="adv-standards-note">If your ask requires us to hide the relationship or imply an editorial endorsement we don't hold, we'll decline politely. That's not a negotiating position — it's how we've kept reader trust.</p>
-      </div>
-      <div class="adv-standards-partners">
-        <p class="adv-partners-label">Current affiliate partners</p>
-        <div class="adv-partners-chips">
-          {partners.map(p => <span class="adv-partner-chip">{p}</span>)}
-        </div>
-      </div>
+    <div class="adv-container">
+      <h2 class="adv-section-title">Our standards</h2>
+      <ul class="adv-standards-list">
+        <li>We decline partnerships that conflict with editorial independence.</li>
+        <li>Sponsored content is always labeled — readers are never deceived about its commercial nature.</li>
+        <li>We don't write positive verdicts in exchange for payment. Ever.</li>
+        <li>Affiliate links are clearly contextual. We link to what we'd link to anyway.</li>
+      </ul>
+      <p class="adv-standards-note">If your ask requires us to hide the relationship or imply an editorial endorsement we don't hold, we'll decline politely. That's not a negotiating position — it's how we've kept reader trust.</p>
     </div>
   </section>
 
   <!-- CONTACT FORM -->
   <section class="adv-form-section" id="contact">
-    <div class="adv-container adv-form-wrap" id="adv-form-wrap">
+    <div class="adv-container adv-form-wrap">
       <div class="adv-form-head">
         <h2 class="adv-section-title">Get in touch</h2>
         <p class="adv-form-sub">Tell us what you're looking for. We respond within 2 business days.</p>
       </div>
-      <form
-        class="adv-form"
-        action={`mailto:modernmakesco@gmail.com`}
-        method="get"
-        enctype="text/plain"
-        onsubmit="return advSubmit(this)"
-      >
+      <form class="adv-form" id="adv-form">
         <div class="adv-form-row">
           <div class="adv-form-group">
             <label class="adv-label" for="adv-name">Name</label>
-            <input class="adv-input" type="text" id="adv-name" name="name" placeholder="Your name" required />
+            <input class="adv-input" type="text" id="adv-name" placeholder="Your name" required />
           </div>
           <div class="adv-form-group">
             <label class="adv-label" for="adv-company">Company</label>
-            <input class="adv-input" type="text" id="adv-company" name="company" placeholder="Company or brand" required />
+            <input class="adv-input" type="text" id="adv-company" placeholder="Company or brand" required />
           </div>
         </div>
         <div class="adv-form-row">
           <div class="adv-form-group">
             <label class="adv-label" for="adv-email">Email</label>
-            <input class="adv-input" type="email" id="adv-email" name="email" placeholder="you@company.com" required />
+            <input class="adv-input" type="email" id="adv-email" placeholder="you@company.com" required />
           </div>
           <div class="adv-form-group">
-            <label class="adv-label" for="adv-type">Partnership type</label>
-            <select class="adv-input" id="adv-type" name="type">
+            <label class="adv-label" for="adv-ptype">Partnership type</label>
+            <select class="adv-input" id="adv-ptype">
               <option value="">Select...</option>
-              <option value="sponsored-content">Sponsored Content</option>
-              <option value="newsletter">Newsletter Sponsorship</option>
-              <option value="affiliate">Affiliate Partnership</option>
-              <option value="other">Other</option>
+              <option value="Sponsored Content">Sponsored Content</option>
+              <option value="Newsletter Sponsorship">Newsletter Sponsorship</option>
+              <option value="Display Advertising">Display Advertising</option>
+              <option value="Other">Other</option>
             </select>
           </div>
         </div>
         <div class="adv-form-group">
           <label class="adv-label" for="adv-msg">Message</label>
-          <textarea class="adv-input adv-textarea" id="adv-msg" name="body" placeholder="What are you looking for? Budget, timeline, product details..." rows="5" required></textarea>
+          <textarea class="adv-input adv-textarea" id="adv-msg" placeholder="What are you looking for? Budget, timeline, product details..." rows="5" required></textarea>
         </div>
-        <button class="adv-submit" type="submit">Send inquiry →</button>
-        <p class="adv-form-note">This opens your email client with the details pre-filled. We respond to all inquiries.</p>
+        <button class="adv-submit" type="submit" id="adv-btn">Send inquiry →</button>
+        <p class="adv-form-note" id="adv-msg-out" style="display:none"></p>
       </form>
     </div>
   </section>
@@ -196,23 +182,43 @@ const partners = ['Fabreeko', 'West3D', 'KB3D', 'Amazon', 'Micro Swiss', 'Mellow
 </Base>
 
 <script is:inline>
-function advSubmit(form) {
-  var name    = form.name.value;
-  var company = form.company.value;
-  var email   = form.email.value;
-  var type    = form.type.value;
-  var body    = form.body.value;
-  var subject = encodeURIComponent('Modern Makes Partnership Inquiry — ' + (type || 'General'));
-  var mailBody = encodeURIComponent(
-    'Name: ' + name + '\n' +
-    'Company: ' + company + '\n' +
-    'Email: ' + email + '\n' +
-    'Type: ' + type + '\n\n' +
-    body
-  );
-  window.location.href = 'mailto:modernmakesco@gmail.com?subject=' + subject + '&body=' + mailBody;
-  return false;
-}
+(function () {
+  var form = document.getElementById('adv-form');
+  var btn  = document.getElementById('adv-btn');
+  var out  = document.getElementById('adv-msg-out');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name    = document.getElementById('adv-name').value;
+    var company = document.getElementById('adv-company').value;
+    var email   = document.getElementById('adv-email').value;
+    var ptype   = document.getElementById('adv-ptype').value;
+    var message = document.getElementById('adv-msg').value;
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    fetch('https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'advertise', name: name, company: company, email: email, partnershipType: ptype, message: message })
+    })
+    .then(function () {
+      form.style.display = 'none';
+      out.textContent = 'Inquiry sent. We’ll follow up within a few business days.';
+      out.style.color = 'var(--g1)';
+      out.style.display = 'block';
+    })
+    .catch(function () {
+      btn.textContent = 'Send inquiry →';
+      btn.disabled = false;
+      out.textContent = 'Something went wrong. Email modernmakesco@gmail.com directly.';
+      out.style.color = 'var(--accent)';
+      out.style.display = 'block';
+    });
+  });
+})();
 </script>
 
 <script>
@@ -325,10 +331,10 @@ function advSubmit(form) {
 }
 .adv-stat-value {
   font-family: var(--fd);
-  font-size: 36px;
+  font-size: clamp(18px, 2.2vw, 28px);
   font-weight: 800;
   color: var(--black);
-  line-height: 1;
+  line-height: 1.15;
   margin-bottom: 6px;
 }
 .adv-stat-label {
@@ -435,21 +441,25 @@ function advSubmit(form) {
   padding-top: 10px;
 }
 
+/* Stats note */
+.adv-stats-note {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--g2);
+  text-align: center;
+  padding: 10px 40px 14px;
+}
+
 /* Standards */
 .adv-standards-section {
   background: var(--surface);
   padding: 56px 0;
   border-bottom: 1px solid var(--border);
 }
-.adv-standards-inner {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 56px;
-  align-items: start;
-}
 .adv-standards-list {
   padding-left: 20px;
   margin-bottom: 16px;
+  max-width: 680px;
 }
 .adv-standards-list li {
   font-family: var(--fb);
@@ -466,25 +476,12 @@ function advSubmit(form) {
   line-height: 1.7;
   border-left: 2px solid var(--border);
   padding-left: 14px;
+  max-width: 680px;
 }
-.adv-partners-label {
-  font-family: var(--fm);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--g2);
-  margin-bottom: 12px;
-}
-.adv-partners-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.adv-partner-chip {
+/* (partner chip styles removed — no longer used) */
+.adv-unused {
   font-family: var(--fm);
   font-size: 11px;
-  font-weight: 700;
   color: var(--black);
   background: var(--bg);
   border: 1px solid var(--border);

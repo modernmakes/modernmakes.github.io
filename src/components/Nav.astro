@@ -563,6 +563,9 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .nav-links  { display: none; }
     .nav-spacer { display: block; flex: 1; }
     .nav-hamburger { display: flex; }
+
+    /* Push panel content below the fixed nav bar so the first item isn't hidden */
+    .panel-inner { padding-top: 72px; }
   }
 
   /* ─── MOBILE  below 768px ─── */
@@ -575,6 +578,8 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .logo-wordmark   { display: none; }
     .logo-lettermark { display: block; height: 36px; }
     .nav.scrolled .logo-lettermark { height: 30px; }
+
+    .panel-inner { padding-top: 64px; }
   }
 </style>
 
