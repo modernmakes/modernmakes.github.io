@@ -26,6 +26,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Mark JS available before paint. Scroll-reveal sections only hide when they can actually be revealed, so no-JS and crawlers stay visible. -->
+  <script is:inline>document.documentElement.classList.add('js')</script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title} — Modern Makes</title>
   <meta name="description" content={description} />

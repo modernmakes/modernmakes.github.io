@@ -38,59 +38,13 @@
     }
   ],
   "ticker": [
-    { "text": "Prusa CORE One INDX 8-nozzle toolchanger now orderable", "category": "Launch", "href": "/" },
-    { "text": "Bambu PETG HF 1kg at $19.99 — 20% off this week", "category": "Deal", "href": "/" },
-    { "text": "Voron 2.4 BOM costs down 12% year-on-year", "category": "Community", "href": "/" },
-    { "text": "OrcaSlicer 2.3 drops Arachne wall generation", "category": "Update", "href": "/" },
-    { "text": "Running CF-PA12 on a stock printer: what you actually need", "category": "Guide", "href": "/" }
+    { "text": "Bondtech INDX 8-nozzle toolchanger now orderable", "category": "Launch", "href": "/news/bondtech-indx-tool-changer-released" },
+    { "text": "Bambu PETG HF 1kg at $19.99 — 20% off this week", "category": "Deal", "href": null },
+    { "text": "Voron 2.4 BOM costs down 12% year-on-year", "category": "Community", "href": null },
+    { "text": "OrcaSlicer 2.3 drops Arachne wall generation", "category": "Update", "href": "/news/orcslicer-v2-3-2-rc2-released" },
+    { "text": "Running CF-PA12 on a stock printer: what you actually need", "category": "Guide", "href": null }
   ],
-  "latestArticles": [
-    {
-      "type": "review",
-      "category": "Printers",
-      "title": "Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It",
-      "date": "May 24, 2026",
-      "verdict": "rec",
-      "verdictLabel": "✓ Rec",
-      "href": "/printers/prusa-core-one-plus",
-      "image": null,
-      "gradient": "linear-gradient(135deg,#1f2010,#131708)"
-    },
-    {
-      "type": "guide",
-      "category": "Filament",
-      "title": "Best PETG Filament 2026: We've Tracked 14 Spools. These Earn a Spot.",
-      "date": "May 23, 2026",
-      "verdict": "best",
-      "verdictLabel": "✓ Best",
-      "href": "/filament/best-petg-2026",
-      "image": null,
-      "gradient": "linear-gradient(135deg,#0d2020,#061414)"
-    },
-    {
-      "type": "guide",
-      "category": "Accessories",
-      "title": "The Best Bambu Build Plate for Every Filament Type",
-      "date": "May 21, 2026",
-      "price": "From $20",
-      "href": "/accessories/bambu-build-plates",
-      "image": null,
-      "gradient": "linear-gradient(135deg,#1a2828,#0d1818)"
-    },
-    {
-      "type": "news",
-      "category": "Software",
-      "title": "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.",
-      "date": "May 20, 2026",
-      "verdict": "upd",
-      "verdictLabel": "↑ Update",
-      "href": "/software/orcaslicer-2-3",
-      "image": null,
-      "gradient": "linear-gradient(135deg,#1a1520,#0d0d18)"
-    }
-  ]
-,
-"tools": [
+  "tools": [
   {
     "name": "Pressure Advance Calibration",
     "description": "Generate a PA/LA test pattern for Klipper, Marlin, or RepRapFirmware",
@@ -131,7 +85,7 @@
     "status": "live",
     "badge": "Launch",
     "description": "12 subsystem pages. Interactive configurator. Full parts directory for hotends, extruders, motion system, electronics, and more.",
-    "variants": ["2.4 · 300mm", "2.4 · 350mm", "2.4 · 400mm", "Trident · 250mm", "Trident · 300mm", "Trident · 350mm"],
+    "variants": ["2.4 · 250mm", "2.4 · 300mm", "2.4 · 350mm", "Trident · 250mm", "Trident · 300mm", "Trident · 350mm"],
     "href": "/voron",
     "image": null,
     "gradient": "linear-gradient(135deg,#0d1520,#080e18)"

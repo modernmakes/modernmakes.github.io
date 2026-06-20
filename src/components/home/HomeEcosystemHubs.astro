@@ -81,14 +81,13 @@ function bgStyle(eco: any) {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
-    opacity: 0;
-    transform: translateY(14px);
     transition: opacity 400ms cubic-bezier(0.4,0,0.2,1),
                 transform 400ms cubic-bezier(0.4,0,0.2,1);
   }
-  .eco-container.eco-visible {
-    opacity: 1;
-    transform: translateY(0);
+  /* Scroll-reveal: hide only when JS can reveal it and motion is welcome. */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .eco-container { opacity: 0; transform: translateY(14px); }
+    .js .eco-container.eco-visible { opacity: 1; transform: translateY(0); }
   }
 
   /* Header */
@@ -140,8 +139,7 @@ function bgStyle(eco: any) {
     flex-direction: column;
     background: #1e1e1e;
     border: 1px solid rgba(255,90,31,.2);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
@@ -149,9 +147,8 @@ function bgStyle(eco: any) {
   }
   .eco-card:hover {
     border-color: rgba(255,90,31,.45);
-    border-left-color: var(--accent);
     box-shadow: 0 12px 40px rgba(0,0,0,.4);
-    transform: translateX(2px);
+    transform: translateY(-2px);
   }
 
   /* Printer image */
@@ -336,5 +333,7 @@ function bgStyle(eco: any) {
       { threshold: 0.05 }
     );
     observer.observe(container);
+    // Failsafe: if the observer never fires (background tab, headless render), reveal anyway.
+    setTimeout(() => container.classList.add('eco-visible'), 1200);
   }
 </script>

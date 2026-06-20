@@ -8,13 +8,17 @@ const { ticker } = data;
     <span class="ticker-label">Latest</span>
     <div class="ticker-track">
       <div class="ticker-items">
-        {[...ticker, ...ticker].map((item, i) => (
-          <a href={item.href} class="ticker-item">
-            <span class="ticker-cat">{item.category}</span>
-            <span class="ticker-text">{item.text}</span>
-            {i < ticker.length * 2 - 1 && <span class="ticker-dot" aria-hidden="true">·</span>}
-          </a>
-        ))}
+        {[...ticker, ...ticker].map((item, i) => {
+          const hasLink = item.href && item.href !== '/';
+          const Tag = hasLink ? 'a' : 'span';
+          return (
+            <Tag href={hasLink ? item.href : undefined} class:list={['ticker-item', { 'ticker-item--static': !hasLink }]}>
+              <span class="ticker-cat">{item.category}</span>
+              <span class="ticker-text">{item.text}</span>
+              {i < ticker.length * 2 - 1 && <span class="ticker-dot" aria-hidden="true">·</span>}
+            </Tag>
+          );
+        })}
       </div>
     </div>
   </div>
@@ -77,6 +81,10 @@ const { ticker } = data;
 
   .ticker-track:hover .ticker-items {
     animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-items { animation: none; }
   }
 
   @keyframes ticker-scroll {
