@@ -2,6 +2,17 @@
 
 Complete context for Claude Code. Read this before touching anything.
 
+## Wiki Knowledge Base
+
+Path: C:\Users\matty\claude-obsidian
+When you need context not in this project:
+1. Read C:\Users\matty\claude-obsidian\wiki\hot.md first
+2. If not enough, read C:\Users\matty\claude-obsidian\wiki\index.md
+3. For domain specifics, read C:\Users\matty\claude-obsidian\wiki\<domain>\_index.md
+4. Only then read individual wiki pages
+
+Do NOT read the wiki for general coding questions or things already in this project.
+
 ---
 
 ## Commands
@@ -19,14 +30,30 @@ No lint or test commands. The PostToolUse build hook runs `npm run build` automa
 
 ---
 
+## Claude Code Skills
+
+Four skills are installed — invoke them as described:
+
+| Skill | When to use |
+|---|---|
+| `transitions review` | Before building any new component with interactive elements or animations |
+| `transitions apply` | To add specific transitions to existing components |
+| `hallmark` | On all new page builds — picks strong macrostructure, refuses to clone existing page shapes |
+| `impeccable` | Design quality audit — run after page builds |
+| `nanobanana` | AI image generation via Gemini MCP |
+
+**Rule:** Every new page build invokes `hallmark`. Every new component invokes `transitions review` first.
+
+---
+
 ## Project Identity
 
-**Modern Makes** — faceless prosumer FDM 3D printing editorial publication.  
-**Live site:** modernmakes.github.io  
-**Stack:** Astro 4.x, static output, GitHub Pages  
-**Deploy:** Every push to `main` triggers `.github/workflows/deploy.yml` → `astro build` → deploys `dist/`  
-**Pages:** ~100 pages, zero errors required at build  
-**GA4:** `G-CGR4N532H6`  
+**Modern Makes** — faceless prosumer FDM 3D printing editorial publication.
+**Live site:** modernmakes.github.io
+**Stack:** Astro 4.x, static output, GitHub Pages
+**Deploy:** Every push to `main` triggers `.github/workflows/deploy.yml` → `astro build` → deploys `dist/`
+**Pages:** 124 pages, zero errors required at build
+**GA4:** `G-CGR4N532H6`
 **Contact:** `modernmakesco@gmail.com`
 
 ---
@@ -36,8 +63,10 @@ No lint or test commands. The PostToolUse build hook runs `npm run build` automa
 - **Colors:** Electric Orange `#FF5A1F` (`--accent`), dark-first aesthetic
 - **Typography:** Barlow Condensed 800 (display `--fd`), Lora 400 (body `--fb`), JetBrains Mono (`--fm`), Barlow UI (`--fu`)
 - **Voice:** Opinionated enthusiast, editorial "we tested" framing — never "I tested"
-- **Content rule:** No opinions on products the team hasn't used. Factual framing only.
+- **Content rule:** Curation publication — we synthesize community consensus, we do not conduct hands-on reviews. No opinions on products the team hasn't used. Factual framing only.
 - **These are NOT reviews** — never use the word "review" in titles, labels, or badges for hardware pages. Use "specs", "verdict", "where to buy" instead.
+- **No fake metrics** — never fabricate audience numbers. Use honest qualitative descriptors. "Audience metrics available on request."
+- **Bambu Lab** — news and guides only, no ecosystem hub. Ecosystem hubs are self-build printers only.
 
 ---
 
@@ -65,7 +94,9 @@ Key tokens:
 Pre-built utility classes — use before writing new CSS:
 `.container`, `.section`, `.section-lg`, `.section-head`, `.card`, `.product-card`, `.spec-chip`, `.btn-buy`, `.verdict`, `.grid-2/3/4`, `.eyebrow`, `.dark-section`, `.callout-orange`
 
-Component styles live in `<style>` blocks within `.astro` files.  
+The `lg-*` layout rules (two-column editorial: breadcrumb → H1 → sticky sidebar TOC + prose) are defined in `global.css` under `/* ── EDITORIAL LAYOUT (lg-*) ── */`. Use these for all info/legal pages — do not re-implement inline.
+
+Component styles live in `<style>` blocks within `.astro` files.
 **Critical:** Components that interact with JS-toggled classes (like `.scrolled`) need `<style is:global>` — Astro's default scoping breaks them.
 
 ---
@@ -80,7 +111,7 @@ src/
     GuideLayout.astro       — how-to guides with steps, tools, parts
     ComparisonLayout.astro  — VS articles with score bars
     FilamentLayout.astro    — filament material pages
-    ComponentLayout.astro   — hardware component pages (hotends etc)
+    ComponentLayout.astro   — hardware component pages (hotends, extruders, probes)
     MotionSystemLayout.astro — gantry/motion mod pages
   pages/
     index.astro             — homepage (data-driven from homepage.json)
@@ -96,7 +127,24 @@ src/
       hotends/
         index.astro         — hotend card grid, verdict filter tabs
         [slug].astro        — dynamic route, one page per Airtable record
+      extruders/
+        index.astro         — extruder card grid, verdict filter tabs
+        [slug].astro        — dynamic route, one page per Airtable record
+      probes/
+        index.astro         — bed probe card grid, verdict filter tabs
+        [slug].astro        — dynamic route, one page per Airtable record
     guides/, news/, filament/, tools/, press/
+    legal/
+      terms-of-service.astro
+      cookie-policy.astro
+    editorial.astro
+    advertise.astro
+    partners.astro
+    search.astro
+    sitemap.astro
+    newsletter/
+      archive.astro
+    404.astro
   content/
     news/       — .md files for news articles
     guides/     — .md files for guides
@@ -114,11 +162,10 @@ src/
       toolboards.json       — empty
       part-cooling.json     — 1 record (Wonsmart WS9290)
       motors.json           — 1 record (SLM NEMA17 Water Cooler)
-      [other tables]        — empty
   styles/
     global.css              — entire design system
   components/
-    Nav.astro, Footer.astro, AdSlot.astro, [homepage section components]
+    Nav.astro, Footer.astro, AdSlot.astro, BeehiivEmbed.astro, [homepage section components]
 ```
 
 ---
@@ -144,7 +191,7 @@ compatibleToolheads[] — { name, href? }
 compatiblePrinters[]  — { name } (separate from toolheads — different sidebar section)
 relatedComponents[] — { title, category, href }
 heroImageUrl        — used in Product schema image field
-pageTitle           — overrides default "[name] — [brand] [category] Review" title
+pageTitle           — overrides default title
 primaryVendorUrl    — used in Product schema offers.url
 hasPageH1={true}    — always pass this
 ```
@@ -160,30 +207,36 @@ currentPath         — pass ecosystem path for correct nav highlight (e.g. '/vo
 
 ## Airtable Integration
 
-**Hardware DB Base ID:** `appt6uoXxkQJEe3Rp`
+**Hardware DB:** `appt6uoXxkQJEe3Rp`
+**Editorial DB:** `appjJWszZBOS13e0i`
 
-### Tables and IDs
-| Table | ID |
-|---|---|
-| Hotends | tblWYO1fRFXcY6fXF |
-| Extruders | tblTWR36Uq0RM4TB2 |
-| Bed Probes | tblbKbuuUQhCSX38C |
-| Nozzles | tblGOrDOH1cBBjgUv |
-| Build Plates | tblmKDQDt0wHypEjx |
-| Mainboards | tbl7zcODDUtBp63PX |
-| Toolboards | tblPaWOgRQDq6TrwH |
-| Part Cooling | tblCzOd1Crf4K9ZkO |
-| Air Filtration | tblPecAiQBq1Wbuy6 |
-| Enclosure | tbldFKTCpesINRv3n |
-| Filament Dryers | tblAFI1uYCz9ovbJI |
-| Heaters | tbleG8nGHrCiVWPRP |
-| PSUs | tbl8vxrHDWKksQs1e |
-| Gantrys | tblbofl1tnNRRHdaH |
-| Motion System | tbl2CQ6TAnkwprQkX |
-| Lighting & Cameras | tbljCecwZZPXMsSoI |
-| Filament | tblCD21uNiq1db1HC |
-| Printers | tblboLo18BZ2k0E9n |
-| Motors | tblRXZNO0ITQeNg9q |
+### Hardware DB Tables
+| Table | ID | Status |
+|---|---|---|
+| Hotends | tblWYO1fRFXcY6fXF | 12 records, mostly populated |
+| Extruders | tblTWR36Uq0RM4TB2 | 3 records, sparse |
+| Bed Probes | tblbKbuuUQhCSX38C | 5 records, sparse |
+| Nozzles | tblGOrDOH1cBBjgUv | empty |
+| Build Plates | tblmKDQDt0wHypEjx | empty |
+| Mainboards | tbl7zcODDUtBp63PX | 1 record |
+| Toolboards | tblPaWOgRQDq6TrwH | empty |
+| Part Cooling | tblCzOd1Crf4K9ZkO | 1 record |
+| Air Filtration | tblPecAiQBq1Wbuy6 | empty |
+| Enclosure | tbldFKTCpesINRv3n | empty |
+| Filament Dryers | tblAFI1uYCz9ovbJI | empty |
+| Heaters | tbleG8nGHrCiVWPRP | empty |
+| PSUs | tbl8vxrHDWKksQs1e | empty |
+| Gantrys | tblbofl1tnNRRHdaH | empty |
+| Motion System | tbl2CQ6TAnkwprQkX | empty |
+| Lighting & Cameras | tbljCecwZZPXMsSoI | empty |
+| Filament | tblCD21uNiq1db1HC | empty |
+| Printers | tblboLo18BZ2k0E9n | empty |
+| Motors | tblRXZNO0ITQeNg9q | 1 record |
+
+### Editorial DB Tables
+| Table | ID | Status |
+|---|---|---|
+| Newsletter Issues | tblgCX2IZ2e0hHOaD | empty, Status field has "Sent" option |
 
 ### Data sync workflow
 ```bash
@@ -193,10 +246,9 @@ git commit -m "data: [description]"
 # Matt pushes from GitHub Desktop
 ```
 
-**Never hardcode Airtable API tokens** — the token lives in VS Code environment and GitHub Secrets (`AIRTABLE_TOKEN`) only. Never paste it in Claude Code or this chat.
+**Never hardcode Airtable API tokens** — set in plain VS Code terminal only, immediately before use. Never paste into Claude Code or this chat. The token was exposed twice and required rotation each time.
 
-### Hotends JSON field names (most important table)
-Fields match Airtable field names exactly:
+### Hotends JSON field names
 - `Name`, `Brand`, `Type`, `Max Temp (°C)`, `Max Flow (mm³/s)`, `Thermistor`, `Heater Type`
 - `Price (USD)`, `Verdict`, `Verdict Label`, `Description`, `Body`
 - `Pros`, `Cons` (multiline text, one item per line)
@@ -206,6 +258,9 @@ Fields match Airtable field names exactly:
 - `Vendor 1 Name` through `Vendor 5 Name` + `Vendor N URL` + `Vendor N Affiliate`
 - `Related 1 Name` + `Related 1 URL` through `Related 3 Name` + `Related 3 URL`
 - `Image URL`
+
+### Extruders JSON field names
+`Name`, `Brand`, `Gear Ratio`, `Weight (g)`, `Price (USD)`, `Verdict`, `Verdict Label`, `Compatible Printers`, `Compatible Toolheads`, `Pros`, `Cons`, `Description`, `Vendor 1 Name/URL/Affiliate`, `Image URL`, `Updated`
 
 ### Slug generation
 ```js
@@ -217,10 +272,43 @@ function toSlug(name) {
 
 ---
 
+## Make.com Webhooks
+
+### Scenario 1 — Beehiiv Newsletter Subscribe
+- **Webhook:** `https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4`
+- **Flow:** Custom Webhook → HTTP (Beehiiv API) → Webhook Response
+- **Beehiiv endpoint:** `POST https://api.beehiiv.com/v2/publications/pub_1e077e32-a7aa-4f8e-87f8-da9d0db45b44/subscriptions`
+- **Payload fields:** `email`, `utm_source`, `utm_medium`, `utm_campaign`
+- **Status:** Active, tested
+
+### Scenario 2 — Contact Form Handler
+- **Webhook:** `https://hook.us1.make.com/xxkrs4kgfwvgp0d83ve2oylwy6pntes2`
+- **Flow:** Custom Webhook → Gmail Send → Webhook Response
+- **Routes to:** modernmakesco@gmail.com
+- **Form types:** `contact` (about), `advertise`, `partner`
+- **Payload always includes:** `type`, `page`, relevant form fields
+- **Status:** Active, tested
+
+### BeehiivEmbed.astro UTM sources
+- HomeNewsletterCTA: `utm_campaign=homepage_cta`
+- Article pages: `utm_campaign=article_footer__[slug]`
+- Guide pages: `utm_campaign=guide_footer__[slug]`
+- Newsletter archive empty state: `utm_campaign=archive_empty_state`
+
+---
+
+## Beehiiv
+
+**Publication ID:** `pub_1e077e32-a7aa-4f8e-87f8-da9d0db45b44`
+**Welcome email:** configured at Settings → Emails → Welcome Email (not Automations — paywalled)
+**Footer address:** placeholder — update in Beehiiv Settings → Publication Details once Canadian mailbox obtained
+
+---
+
 ## SEO & Schema
 
 ### Double H1 prevention
-Every layout that renders a visible H1 passes `hasPageH1={true}` to Base.astro. This suppresses the sr-only fallback H1. Never create a page with two H1s.
+Every layout that renders a visible H1 passes `hasPageH1={true}` to Base.astro. Never create a page with two H1s.
 
 ### Title format by page type
 - Hardware detail: `"[Name] Hotend — Specs, Verdict & Where to Buy — Modern Makes"`
@@ -230,7 +318,7 @@ Every layout that renders a visible H1 passes `hasPageH1={true}` to Base.astro. 
 - Origin story: `"How [Brand] Started: [Subtitle] — Modern Makes"`
 
 ### Schema by layout
-- `ComponentLayout` → Product + BreadcrumbList (injected automatically)
+- `ComponentLayout` → Product + BreadcrumbList
 - `ArticleLayout` → NewsArticle + BreadcrumbList
 - `GuideLayout` → HowTo + BreadcrumbList
 - `ComparisonLayout` → Article + BreadcrumbList
@@ -239,35 +327,26 @@ Every layout that renders a visible H1 passes `hasPageH1={true}` to Base.astro. 
 - Hardware index → ItemList
 - Ecosystem hubs → CollectionPage + BreadcrumbList
 
-Schema is injected via `<script type="application/ld+json" slot="head">` — Base.astro has `<slot name="head" />` in `<head>`.
+Schema injected via `<script type="application/ld+json" slot="head">` — Base.astro has `<slot name="head" />` in `<head>`.
 
 ---
 
 ## Known Patterns & Gotchas
 
-### Astro scoped styles + JS class toggling
-If JS toggles a class on an element, its styles must be in `<style is:global>` — Astro's default scoping hashes class names at build time, breaking runtime JS class matching.
-
-### CSS hysteresis for nav
-Nav snaps solid at 80px scroll down, unsnaps at 60px scroll up — eliminates flicker at threshold.
-
-### Image paths on GitHub Pages
-Case-sensitive. Voron images are at `public/Media/ecosystems/Voron/` (capital V). Wrong case = broken image in production even if it works locally on Windows.
-
-### GitHub Pages base URL
-`Astro.site` is set in `astro.config.mjs`. Use it for absolute URLs in schema: `new URL(Astro.site).href.replace(/\/$/, '')`.
-
-### fetch-data script
-`scripts/fetch-airtable.mjs` requires `AIRTABLE_TOKEN` env var. Run from VS Code terminal where the token is set. The GitHub Actions workflow also runs it nightly.
-
-### Node.js version
-**Deadline: June 16, 2026** — update `fetch-airtable.yml` and `deploy.yml` from Node 20 to Node 24 to avoid GitHub Actions deprecation failures.
-
-### AdSlot component
-`<AdSlot slotName="slot-name" />` renders nothing when `"active": false` in `ads.json`. Safe to place anywhere.
-
-### Newsletter forms
-Any `<form data-nl>` with `<input type="email">` and `<button type="submit">` gets wired automatically by Base.astro inline JS.
+- **`<style is:global>`** required for any styles that interact with JS-toggled classes — Astro's default scoping hashes class names at build time
+- **`toSlug`** must be defined inside `getStaticPaths` AND again in the frontmatter render section separately — it is not accessible across both due to Astro hoisting
+- **Case-sensitive file paths** on Linux/GitHub Pages — Windows dev doesn't catch mismatches; 404s on existing images almost always trace to case mismatch. Voron images: `public/Media/ecosystems/Voron/` (capital V)
+- **`typecast: true`** required on all Airtable write operations (update_records, create_records) — without it, singleSelect fields with new values fail silently
+- **Field IDs** (format `fldXXXXXXXXXXXXXX`) required when field names contain UTF-8 special characters (degree symbols, superscripts) — names cause silent API failures
+- **UTF-8 encoding** — add explicit `'utf8'` to `writeFile` calls to prevent garbled degree/cubed symbols in JSON
+- **Make.com blueprint imports** — header key names always blank after import, enter manually. Hook IDs reference numbers that don't exist in importing account — re-select webhook from dropdown. Gmail module needs re-authorization after every import
+- **Make.com `Run once`** — must be triggered by a live form submission before dynamic variables like `{{1.utm_source}}` become mappable in subsequent modules
+- **Astro `z.string().optional()`** required for any frontmatter field not present in all files in a collection — missing required fields cause silent build failures
+- **CSS nav hysteresis** — nav snaps solid at 80px scroll down, unsnaps at 60px scroll up — eliminates flicker at threshold
+- **`Astro.site`** — set in `astro.config.mjs`. Use for absolute URLs in schema: `new URL(Astro.site).href.replace(/\/$/, '')`
+- **`fetch-data` script** — `scripts/fetch-airtable.mjs` requires `AIRTABLE_TOKEN` env var. Run from VS Code terminal where token is set. GitHub Actions also runs nightly
+- **AdSlot component** — `<AdSlot slotName="slot-name" />` renders nothing when `"active": false` in `ads.json`
+- **Newsletter forms** — any `<form data-nl>` with `<input type="email">` and `<button type="submit">` gets wired automatically by Base.astro inline JS
 
 ---
 
@@ -275,73 +354,82 @@ Any `<form data-nl>` with `<input type="email">` and `<button type="submit">` ge
 
 ```
 src/content/
-  news/       → /news/[slug]       → ArticleLayout
-  guides/     → /guides/[slug]     → GuideLayout
+  news/        → /news/[slug]        → ArticleLayout
+  guides/      → /guides/[slug]      → GuideLayout
   comparisons/ → /comparisons/[slug] → ComparisonLayout
 ```
 
-Frontmatter schemas defined in `src/content/config.ts`. Dynamic routes in `src/pages/news/[slug].astro` etc select layout from collection.
+Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/news/[slug].astro` etc.
 
 ---
 
-## Voron Ecosystem — Specific Notes
+## Voron Ecosystem
 
 - **Printed parts color:** Red (not orange)
-- **Build sizes:** 250/300/350mm (no 400mm variant exists)
-- **Model selector:** Two buttons (Voron 2.4 / Trident) — JS swaps subsystem cards, spec strip, hero image, and "Now browsing" context bar using `localStorage` + `data-models` attributes
-- **Community mods:** 18 mods at `/voron/mods` with category filter (Toolhead, Gantry, Motion, Electronics, Bed, Filtration, Cosmetic, QOL) and model filter
-- **Toolhead pages:** `/voron/toolheads/` — Stealthburner, XOL, Dragon Burner, Mini Stealthburner, Archetype
-- **Origin page:** `/voron/origin` — editorial history, ArticleLayout, category "HISTORY"
+- **Build sizes:** 250/300/350mm (no 400mm variant)
+- **Model selector:** Voron 2.4 / Trident — JS swaps subsystem cards, spec strip, hero image, "Now browsing" bar using `localStorage` + `data-models` attributes
+- **Community mods:** 18 mods at `/voron/mods` — category filter (Toolhead, Gantry, Motion, Electronics, Bed, Filtration, Cosmetic, QOL) + model filter
+- **Toolhead pages:** Stealthburner, XOL, Dragon Burner, Mini Stealthburner, Archetype
+- **Origin page:** `/voron/origin` — Maksim Zolin, 2015, open-source spec, 15k+ serial numbers
 
 ---
 
-## Hardware Section — Specific Notes
+## Hardware Section
 
-- **Hardware index** (`/hardware`) — category grid with dynamic counts from JSON `.length`. No "Motion Mods" card — that content lives at `/voron/mods`.
-- **Hotend index** (`/hardware/hotends`) — verdict filter tabs (BUY / CONSIDER / SKIP / UPDATED) matching guides page filter pattern. Count badges on each tab.
-- **Hotend detail** (`/hardware/hotends/[slug]`) — fully data-driven from Airtable JSON. One page per record. Redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`.
-- **Verdict values:** `BUY`, `CONSIDER`, `SKIP`, `UPDATED` — used for filter tabs and verdict badges
-- **Verdict badge colors:** BUY = green, CONSIDER = blue, SKIP = grey, UPDATED = orange (defined in `global.css`)
+- **Hardware index** (`/hardware`) — category grid, dynamic counts from JSON `.length`. No Motion Mods card — lives at `/voron/mods`
+- **Verdict values:** `BUY`, `CONSIDER`, `SKIP`, `UPDATED`
+- **Verdict badge colors:** BUY = green, CONSIDER = blue, SKIP = grey, UPDATED = orange (in `global.css`)
+- **Hotend detail** (`/hardware/hotends/[slug]`) — redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`
 
 ---
 
 ## Origin Story Pages
 
-Four editorial history pages:
 - `/voron/origin` — Maksim Zolin, 2015, open-source spec, 15k+ serial numbers
-- `/ratrig/origin` — Portuguese extrusion supplier → CoreXY kits
+- `/ratrig/origin` — Portuguese extrusion supplier → CoreXY kits, V-Core lineage
 - `/vzbot/origin` — Simon Vez, TronXY X5S, AWD, 2020
-- `/hevort/origin` — MirageC, triple independent Z ball screws, mechanical precision
+- `/hevort/origin` — MirageC, triple independent Z ball screws, mechanical precision first
 
-All use `ArticleLayout`, `category="HISTORY"`, `currentPath` set to their ecosystem path.
+All use `ArticleLayout`, `category="HISTORY"`, `currentPath` set to ecosystem path.
 
 ---
 
-## Tools Section
+## Tools
 
-**Internal tools (Astro pages):**
-- `/tools/pressure-advance` — Klipper/Marlin/RRF G-code generator with printer presets
+**Native tools (Astro pages):**
+- `/tools/pressure-advance` — G-code generator, Klipper/Marlin/RRF, printer presets
+- `/tools/flowrate` — volumetric flow rate calculator with hotend tier recommendation
+- `/tools/cost` — filament + electricity print cost estimator
+- `/tools/filament-converter` — bidirectional g↔m, PLA/PETG/ABS/ASA/PA-CF/TPU, spool remaining %
+- `/tools/pa-calculator` — speed/accel grid, OrcaSlicer import, per-cell copy
+- `/tools/pin-mapper` — Klipper pin reference, 7 boards (Octopus Pro, Octopus, Manta M8P v1/v2, SKR 3, Spider v2.2, Leviathan v1.2)
+- `/tools/motor-simulator` — full physics simulation, 45-motor database, Chart.js torque curves
+- `/tools/pa-tuner` — AI-powered PA analysis via Anthropic API, optional photo upload
 
-**External tools (link out, `target="_blank"`):**
-- Motor Simulator — https://tools.excit3d.shop/motor-sym/
-- Pin Mapper — https://tools.excit3d.shop/pin-mapper/
-- PA Calculator — https://tools.excit3d.shop/pa-calc/
-- PA Tuner — https://tools.excit3d.shop/pa-tuner/
+All tool cards are internal links — no external tool cards on tools index.
 
-External tool cards show `↗ External tool` chip and open in new tab.
+---
+
+## Hero Images
+
+Gradient fallbacks on all hotend pages and several articles. Workflow:
+1. Generate in Ideogram.ai or via `nanobanana` MCP
+2. **Lunar studio prompt:** product on moon surface, Earth visible, dramatic rim lighting, electric orange glow
+3. Save to `public/Media/articles/YYYY/MM/[slug]/hero.webp`
+4. For hotends: add Image URL in Airtable → run `npm run fetch-data`
+5. For articles/guides: add `heroImage` to frontmatter
 
 ---
 
 ## Pending Work (priority order)
 
-1. **Verdict filter on hotend index** — tabs matching guides page filter pattern (in progress)
-2. **Beehiiv newsletter capture** — embed on homepage CTA + bottom of every article/guide layout
-3. **Node.js 20 → 24 upgrade** — deadline June 16, 2026 in `fetch-airtable.yml` and `deploy.yml`
-4. **Hero images** — hotend pages all showing gradient fallback (no Image URL in Airtable records). Generate in Ideogram.ai, upload to `public/`, add paths to Airtable Image URL field, run fetch-data.
-5. **Extruder pages** — wire extruders.json to `/hardware/extruders/[slug]` (same pattern as hotends)
-6. **Bed probe pages** — wire bed-probes.json to `/hardware/probes/[slug]`
-7. **GA4 custom events** — tool_click and newsletter_signup events on tools pages
-8. **Content sprint** — RatRig pre-assembled, Bambu neXt, Prusa HT Hotend, AtomForm Palette 300
-9. **Make.com automations** — 8 designed, none built (idea-to-brief, publish triggers, newsletter scaffold, stale alerts, repurposing, affiliate expiry, revenue log, sponsor alerts)
-10. **Domain** — `modernmakes.io` recommended, schema URLs need updating after purchase
-11. **og-default.jpg** — still needed for pages without hero images
+1. **Canadian virtual mailbox** — BC address for Beehiiv footer CASL compliance. Options: iPostal1, Anytime Mailbox, UPS Store box
+2. **Hero images** — all hotend pages + several articles still showing gradient fallback
+3. **Extruder Airtable records** — 3 records exist (Fysetc Sherpa V3, SLM Sherpa Micro, Lite Pro Slim Repack) but all sparse
+4. **Bed probe Airtable records** — 5 records exist but sparse
+5. **Content sprint** — RatRig pre-assembled, Bambu neXt, Prusa HT Hotend, AtomForm Palette 300, Bambu cloud slowdown (3–4/week target)
+6. **Make.com automations** — 8 designed, none built: Newsletter Scaffold (needs Published Date field in Articles table), Idea-to-Brief, Stale Content Alerts, Publish Trigger, Sponsor Deal Alerts, Affiliate Link Expiry, Short-form Repurposing, Monthly Revenue Log
+7. **Voron subsystem stub pages** — biggest SEO gap, all stubs with no content
+8. **Domain** — `modernmakes.io` recommended; schema URLs need updating after purchase
+9. **GA4 custom events** — `tool_click` and `newsletter_signup` partially wired
+10. **og-default.jpg** — exists at `public/og-default.jpg` but verify it's wired correctly
