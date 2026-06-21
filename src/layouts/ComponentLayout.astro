@@ -42,7 +42,7 @@ interface Props {
   brand: string;
   price: { usd: number; cad?: number };
   verdict: string;
-  verdictLabel: 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL';
+  verdictLabel: 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED';
   heroImage?: string;
   maxTemp?: number;
   maxFlow?: number;
@@ -90,12 +90,12 @@ const {
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
 
 const verdictColors: Record<string, { bg: string; text: string; border: string }> = {
-  BUY:         { bg: '#E8F5E9', text: '#2E7D32', border: '#A5D6A7' },
-  SKIP:        { bg: '#FFEBEE', text: '#C62828', border: '#FFCDD2' },
-  WAIT:        { bg: '#FFF8E1', text: '#E65100', border: '#FFE082' },
-  CONDITIONAL: { bg: '#E3F2FD', text: '#1565C0', border: '#90CAF9' },
+  BUY:      { bg: 'rgba(34,197,94,.12)',  text: '#16a34a', border: 'rgba(34,197,94,.3)' },
+  CONSIDER: { bg: 'rgba(59,130,246,.12)', text: '#1565c0', border: 'rgba(59,130,246,.3)' },
+  SKIP:     { bg: 'rgba(140,140,140,.14)', text: '#5a5a5a', border: 'var(--border-s)' },
+  UPDATED:  { bg: 'rgba(255,90,31,.12)',  text: '#c93b08', border: 'rgba(255,90,31,.3)' },
 };
-const vc = verdictColors[verdictLabel] ?? verdictColors.BUY;
+const vc = verdictColors[verdictLabel] ?? verdictColors.CONSIDER;
 
 const regionFlags: Record<string, string> = {
   us: '🇺🇸',
@@ -155,7 +155,7 @@ const breadcrumbSchema = {
 };
 ---
 <Base
-  title={pageTitle ?? `${title} — ${brand} ${category} Review`}
+  title={pageTitle ?? `${title} — ${brand} ${category} Specs & Verdict`}
   description={excerpt || verdict}
   heroPage={true}
   hasHero={true}
@@ -168,7 +168,7 @@ const breadcrumbSchema = {
     <div class="comp-hero-inner">
       <div class="comp-hero-image">
         {heroImage
-          ? <img src={heroImage} alt={title} loading="lazy" class="comp-hero-img" />
+          ? <img src={heroImage} alt={title} loading="eager" fetchpriority="high" class="comp-hero-img" />
           : <div class="comp-hero-placeholder">
               <span class="comp-hero-placeholder-cat">{category}</span>
             </div>
@@ -500,7 +500,7 @@ const breadcrumbSchema = {
 .comp-breadcrumb span {
   font-family: var(--fm);
   font-size: 11px;
-  color: rgba(255,255,255,.3);
+  color: rgba(255,255,255,.55);
   transition: color .15s;
 }
 .comp-breadcrumb a:hover { color: var(--accent); }
@@ -564,7 +564,7 @@ const breadcrumbSchema = {
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.35);
+  color: rgba(255,255,255,.55);
 }
 .comp-stat-val {
   font-family: var(--fd);
@@ -646,7 +646,7 @@ const breadcrumbSchema = {
 .comp-spec-label {
   font-family: var(--fm);
   font-size: 10px;
-  color: var(--g2);
+  color: var(--g1);
   text-transform: uppercase;
   letter-spacing: .04em;
   flex-shrink: 0;
@@ -821,7 +821,7 @@ const breadcrumbSchema = {
 .comp-flow-ref-label {
   font-family: var(--fm);
   font-size: 9px;
-  color: var(--g2);
+  color: var(--g1);
   text-align: center;
   display: block;
   white-space: nowrap;
@@ -859,13 +859,13 @@ const breadcrumbSchema = {
   justify-content: space-between;
   font-family: var(--fm);
   font-size: 10px;
-  color: var(--g2);
+  color: var(--g1);
 }
 .comp-flow-note {
   font-family: var(--fb);
   font-size: 12px;
   font-style: italic;
-  color: var(--g2);
+  color: var(--g1);
   margin: 0;
   line-height: 1.6;
 }
@@ -904,7 +904,7 @@ const breadcrumbSchema = {
 .comp-specs-note {
   display: block;
   font-size: 11px;
-  color: var(--g2);
+  color: var(--g1);
   margin-top: 2px;
   font-family: var(--fu);
 }
@@ -977,8 +977,6 @@ const breadcrumbSchema = {
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
-.comp-pros { border-top: 3px solid #2E7D32; }
-.comp-cons { border-top: 3px solid #C62828; }
 .comp-pros-head, .comp-cons-head {
   font-family: var(--fd);
   font-size: 14px;
@@ -988,8 +986,8 @@ const breadcrumbSchema = {
   padding: 12px 18px;
   border-bottom: 1px solid var(--border);
 }
-.comp-pros-head { color: #2E7D32; }
-.comp-cons-head { color: #C62828; }
+.comp-pros-head { color: #2E7D32; background: rgba(46,125,50,.08); }
+.comp-cons-head { color: #C62828; background: rgba(198,40,40,.08); }
 .comp-pros-list, .comp-cons-list {
   list-style: none;
   padding: 12px 18px 16px;
