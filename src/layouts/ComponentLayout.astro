@@ -241,7 +241,7 @@ const breadcrumbSchema = {
                   {flowBenchmarks.map(b => (
                     <div class="comp-flow-ref" style={`left:${(b.value / FLOW_MAX) * 100}%`}>
                       <div class="comp-flow-ref-line"></div>
-                      <span class="comp-flow-ref-label">{b.label}<br/>{b.value}</span>
+                      <span class="comp-flow-ref-label"><span class="comp-flow-ref-name">{b.label}</span>{b.value}</span>
                     </div>
                   ))}
                   <div class="comp-flow-fill" style={`width:${Math.min((maxFlow / FLOW_MAX) * 100, 100)}%`}></div>
@@ -828,6 +828,7 @@ const breadcrumbSchema = {
   margin-top: 4px;
   line-height: 1.3;
 }
+.comp-flow-ref-name { display: block; }
 .comp-flow-marker {
   position: absolute;
   top: -6px;
@@ -1127,5 +1128,21 @@ const breadcrumbSchema = {
   .comp-vendors-grid { grid-template-columns: 1fr; }
   .comp-key-stats { gap: 16px; }
   .comp-stat-val { font-size: 18px; }
+}
+
+/* ── TOUCH ADAPTATION — enlarge tap targets on coarse pointers (keeps the
+   dense desktop sidebar dense for mouse users) ── */
+@media (pointer: coarse) {
+  .comp-breadcrumb { gap: 12px; }
+  .comp-breadcrumb a { padding: 6px 2px; }
+  .comp-verdict-badge { padding: 9px 16px; }
+  .comp-toolhead-chip { padding: 11px 16px; }
+  .comp-vendor-quick { padding: 13px 0; }
+}
+
+/* ── Flow-bar benchmarks: drop the wide words on narrow screens so adjacent
+   labels and the marker value can't collide; the numeric scale stays ── */
+@media (max-width: 560px) {
+  .comp-flow-ref-name { display: none; }
 }
 </style>
