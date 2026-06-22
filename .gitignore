@@ -17,3 +17,6 @@ Thumbs.db
 
 # Editor
 .vscode/settings.json
+
+# Playwright MCP scratch (screenshots, snapshots, console logs)
+.playwright-mcp/
