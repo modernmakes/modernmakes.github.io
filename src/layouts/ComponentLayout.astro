@@ -64,7 +64,6 @@ interface Props {
 const {
   title,
   category,
-  componentType,
   brand,
   price,
   verdict,
@@ -97,19 +96,26 @@ const verdictColors: Record<string, { bg: string; text: string; border: string }
 };
 const vc = verdictColors[verdictLabel] ?? verdictColors.CONSIDER;
 
-const regionFlags: Record<string, string> = {
-  us: '🇺🇸',
-  ca: '🇨🇦',
-  eu: '🇪🇺',
-  global: '🌐',
+const regionLabels: Record<string, string> = {
+  us: 'US',
+  ca: 'CA',
+  eu: 'EU',
+  global: 'Global',
 };
 
-const FLOW_MAX = 70;
+// Flow-rate scale. Ceiling matches the real top of the hotend catalogue
+// (water-cooled blocks reach ~100 mm³/s) so a 75 and a 100 don't pin to the
+// same spot — the marker position stays honest across the whole range.
+const FLOW_MAX = 100;
 const flowBenchmarks = [
-  { label: 'Standard', value: 15 },
-  { label: 'High Flow', value: 30 },
-  { label: 'Volcano', value: 45 },
+  { label: 'Standard',  value: 15 },
+  { label: 'High-Flow', value: 30 },
+  { label: 'Volcano',   value: 45 },
+  { label: 'Ultra',     value: 70 },
 ];
+const flowPct = maxFlow ? Math.min((maxFlow / FLOW_MAX) * 100, 100) : 0;
+// Anchor the readout so it never spills past either end of the track.
+const flowAnchor = flowPct >= 88 ? 'end' : flowPct <= 12 ? 'start' : 'mid';
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -236,22 +242,37 @@ const breadcrumbSchema = {
           <section class="comp-section comp-flow-section" aria-labelledby="flow-heading">
             <h2 class="comp-section-title" id="flow-heading">Flow Rate Reference</h2>
             <div class="comp-flow-box">
-              <div class="comp-flow-track-wrap">
-                <div class="comp-flow-track">
+              <p class="sr-only">
+                Rated max flow {maxFlow} mm³/s on a 0 to {FLOW_MAX} mm³/s scale.
+                Reference tiers: {flowBenchmarks.map(b => `${b.label} ${b.value}`).join(', ')} mm³/s.
+              </p>
+              <div class="comp-flow-graph" aria-hidden="true">
+                <!-- reference tiers sit ABOVE the track so the fill never hides them -->
+                <div class="comp-flow-marks">
                   {flowBenchmarks.map(b => (
-                    <div class="comp-flow-ref" style={`left:${(b.value / FLOW_MAX) * 100}%`}>
-                      <div class="comp-flow-ref-line"></div>
-                      <span class="comp-flow-ref-label"><span class="comp-flow-ref-name">{b.label}</span>{b.value}</span>
+                    <div class="comp-flow-mark" style={`left:${(b.value / FLOW_MAX) * 100}%`}>
+                      <span class="comp-flow-mark-name">{b.label}</span>
+                      <span class="comp-flow-mark-num">{b.value}</span>
                     </div>
                   ))}
-                  <div class="comp-flow-fill" style={`width:${Math.min((maxFlow / FLOW_MAX) * 100, 100)}%`}></div>
-                  <div class="comp-flow-marker" style={`left:${Math.min((maxFlow / FLOW_MAX) * 100, 100)}%`}>
-                    <div class="comp-flow-marker-val">{maxFlow} mm³/s</div>
+                </div>
+                <div class="comp-flow-track">
+                  {flowBenchmarks.map(b => (
+                    <span class="comp-flow-gridline" style={`left:${(b.value / FLOW_MAX) * 100}%`}></span>
+                  ))}
+                  <div class="comp-flow-fill" style={`width:${flowPct}%`}></div>
+                  <div class="comp-flow-dot" style={`left:${flowPct}%`}></div>
+                </div>
+                <!-- this product's value sits BELOW the track, anchored away from the edges -->
+                <div class="comp-flow-readout-row">
+                  <div class={`comp-flow-readout comp-flow-readout-${flowAnchor}`} style={`left:${flowPct}%`}>
+                    <span class="comp-flow-readout-num">{maxFlow}</span>
+                    <span class="comp-flow-readout-unit">mm³/s</span>
                   </div>
                 </div>
                 <div class="comp-flow-axis">
                   <span>0</span>
-                  <span>{FLOW_MAX}+ mm³/s</span>
+                  <span>{FLOW_MAX} mm³/s</span>
                 </div>
               </div>
               <p class="comp-flow-note">
@@ -347,10 +368,10 @@ const breadcrumbSchema = {
                   aria-label={`Buy from ${v.name}`}
                 >
                   {v.primary && <span class="comp-vendor-primary-badge">Best Option</span>}
-                  <div class="comp-vendor-flag">{regionFlags[v.region] ?? '🌐'}</div>
+                  <span class="comp-vendor-region">{regionLabels[v.region] ?? 'Global'}</span>
                   <div class="comp-vendor-name">{v.name}</div>
-                  <div class="comp-vendor-price">{v.price}</div>
-                  <div class="comp-vendor-arrow">→</div>
+                  {v.price && <div class="comp-vendor-price">{v.price}</div>}
+                  <div class="comp-vendor-arrow" aria-hidden="true">→</div>
                 </a>
               ))}
             </div>
@@ -756,9 +777,18 @@ const breadcrumbSchema = {
   align-self: flex-start;
   margin-bottom: 2px;
 }
-.comp-vendor-flag {
-  font-size: 18px;
-  line-height: 1;
+.comp-vendor-region {
+  align-self: flex-start;
+  font-family: var(--fm);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--g1);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 7px;
+  line-height: 1.3;
 }
 .comp-vendor-name {
   font-family: var(--fd);
@@ -779,23 +809,67 @@ const breadcrumbSchema = {
   align-self: flex-end;
 }
 
-/* ── FLOW RATE BOX ── */
+/* ── FLOW RATE BOX ──
+   Reference tiers ride ABOVE the track; the product fill + dot sit on it; the
+   product's own value sits BELOW. Keeping the scale and the marker on opposite
+   sides of the bar means the orange fill can never obscure the tier labels —
+   the legibility problem on high-flow hotends where the bar runs full. */
 .comp-flow-box {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px 28px;
 }
-.comp-flow-track-wrap {
-  margin-bottom: 16px;
+.comp-flow-graph {
+  position: relative;
 }
+
+/* Reference tiers — above the track */
+.comp-flow-marks {
+  position: relative;
+  height: 32px;
+  margin-bottom: 7px;
+}
+.comp-flow-mark {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+.comp-flow-mark-name {
+  display: block;
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--g2);
+  line-height: 1.4;
+}
+.comp-flow-mark-num {
+  display: block;
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--g1);
+  line-height: 1.1;
+}
+
+/* Track + fill + dot */
 .comp-flow-track {
   position: relative;
-  height: 14px;
+  height: 10px;
   background: var(--border);
-  border-radius: 7px;
-  margin-bottom: 32px;
-  overflow: visible;
+  border-radius: 5px;
+}
+.comp-flow-gridline {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--border-s);
+  transform: translateX(-50%);
+  z-index: 1;
 }
 .comp-flow-fill {
   position: absolute;
@@ -803,71 +877,69 @@ const breadcrumbSchema = {
   top: 0;
   height: 100%;
   background: var(--accent);
-  border-radius: 7px;
-  transition: width .6s ease;
-}
-.comp-flow-ref {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
+  border-radius: 5px;
   z-index: 2;
+  transition: width .6s cubic-bezier(.22,1,.36,1);
 }
-.comp-flow-ref-line {
-  width: 1px;
-  height: 22px;
-  background: rgba(0,0,0,.2);
-  margin: 0 auto;
-}
-.comp-flow-ref-label {
-  font-family: var(--fm);
-  font-size: 9px;
-  color: var(--g1);
-  text-align: center;
-  display: block;
-  white-space: nowrap;
-  margin-top: 4px;
-  line-height: 1.3;
-}
-.comp-flow-ref-name { display: block; }
-.comp-flow-marker {
+.comp-flow-dot {
   position: absolute;
-  top: -6px;
-  transform: translateX(-50%);
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  background: var(--accent);
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px var(--accent);
   z-index: 3;
 }
-.comp-flow-marker::before {
-  content: '';
-  display: block;
-  width: 26px;
-  height: 26px;
-  background: var(--accent);
-  border: 3px solid #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--accent);
-  margin: 0 auto;
+
+/* This product's value — below the track */
+.comp-flow-readout-row {
+  position: relative;
+  height: 22px;
+  margin-top: 9px;
 }
-.comp-flow-marker-val {
+.comp-flow-readout {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.comp-flow-readout-start { transform: translateX(0); }
+.comp-flow-readout-end   { transform: translateX(-100%); }
+.comp-flow-readout-num {
+  font-family: var(--fd);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+.comp-flow-readout-unit {
   font-family: var(--fm);
   font-size: 10px;
   font-weight: 700;
-  color: var(--accent);
-  text-align: center;
-  margin-top: 6px;
-  white-space: nowrap;
+  color: var(--accent-dk);
 }
 .comp-flow-axis {
   display: flex;
   justify-content: space-between;
   font-family: var(--fm);
   font-size: 10px;
-  color: var(--g1);
+  color: var(--g2);
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
 }
 .comp-flow-note {
   font-family: var(--fb);
   font-size: 12px;
   font-style: italic;
   color: var(--g1);
-  margin: 0;
+  margin: 16px 0 0;
   line-height: 1.6;
 }
 
@@ -1140,9 +1212,26 @@ const breadcrumbSchema = {
   .comp-vendor-quick { padding: 13px 0; }
 }
 
-/* ── Flow-bar benchmarks: drop the wide words on narrow screens so adjacent
-   labels and the marker value can't collide; the numeric scale stays ── */
+/* ── Flow-bar tiers: drop the wide words on narrow screens so adjacent tier
+   labels can't collide; the numeric scale stays ── */
 @media (max-width: 560px) {
-  .comp-flow-ref-name { display: none; }
+  .comp-flow-mark-name { display: none; }
+  .comp-flow-marks { height: 16px; }
+}
+
+/* ── Reduced motion: no global reset exists in global.css, so this layout
+   honours the preference for its own motion (the flow-fill reveal and the
+   one-pixel hover lifts) ── */
+@media (prefers-reduced-motion: reduce) {
+  .comp-flow-fill { transition: none; }
+  .comp-vendor-card,
+  .comp-related-card,
+  .comp-toolhead-chip,
+  .comp-breadcrumb a,
+  .comp-vendor-quick-name,
+  .comp-vendor-quick-arrow,
+  .comp-related-all { transition: none; }
+  .comp-vendor-card:hover,
+  .comp-related-card:hover { transform: none; }
 }
 </style>
