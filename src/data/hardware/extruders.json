@@ -10,6 +10,7 @@
     "Verdict Label": "An SLM-printed Sherpa Micro with the 6T motor — lighter and cooler-running than aluminum alternatives.",
     "Verdict": "CONSIDER",
     "Weight (g)": 12,
+    "Image URL": "https://lettucehead3d.com/wp-content/uploads/2025/01/Side-view-Sherpa-Micro-800x769.jpg",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -18,11 +19,169 @@
     ],
     "Vendor 1 Name": "Lettucehead3D",
     "Name": "SLM Sherpa Micro",
-    "Gear Ratio": "Sherpa Micro RC2",
+    "Gear Ratio": "50:17",
     "Vendor 1 URL": "https://lettucehead3d.com/product/slm-sherpa-micro/",
     "Brand": "Luke's Lab",
     "Price (USD)": 35,
     "Pros": "SLM (Selective Laser Melting) metal printing — near-tool-steel density\nBased on Sherpa Micro RC2 — latest revision with 6T motor\n6T motor runs cooler than 8T — less heat transferred to filament\nSmallest and lightest extruder in the SLM lineup\nDirect from Lettucehead3D — quality-controlled production"
+  },
+  {
+    "id": "rec9Fq24nvvWxTZKC",
+    "Cons": "Community mod with less formal documentation, specific to modified AntHead setups",
+    "Compatible Printers": [
+      "Voron 0",
+      "Printers for Ants"
+    ],
+    "Description": "Community-modified variant of the G2 WristWatch AntHead, with additional tweaks to geometry or mounting for improved fitment or compatibility in specific small-format printer builds. Open-source, print-it-yourself.",
+    "Image URL": "https://github.com/JaredC01/Galileo2/raw/main/images/g2extruder.png",
+    "Compatible Toolheads": [
+      "AntHead (modified)"
+    ],
+    "Vendor 1 Name": "JaredC01",
+    "Name": "G2 WW AntHead Modified",
+    "Gear Ratio": "9:1",
+    "Vendor 1 URL": "https://github.com/JaredC01/G2",
+    "Brand": "JaredC01",
+    "Price (USD)": 0,
+    "Pros": "Community-refined fit, retains full 9:1 G2 torque"
+  },
+  {
+    "id": "recCR1IajplB0nffv",
+    "Cons": "Requires compatible LDO motor, plastic gearbox housing can be fragile under heavy load, no hands-on community data yet on long-term durability vs v2.0",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Voron 0",
+      "RatRig",
+      "VzBot",
+      "most CoreXY printers"
+    ],
+    "Description": "Evolution of the Orbiter v2.0 featuring a knurled spider-shaft design that reduces eccentricity to 20-30µm (vs 50-140µm on v2.0), and flat-bottom wide-cut RNC nano-coated gears (HRC60+). Uses the same body and firmware settings as the v2.0 — rotation_distance 4.69, 690 steps/mm @ 16 microsteps. Upgrade kit available for existing v2.0 owners.",
+    "Weight (g)": 18,
+    "Image URL": "https://www.orbiterprojects.com/wp-content/uploads/2024/10/Orbiter-v2.5-showoff-v2.png",
+    "Vendor 1 Name": "Orbiter Projects",
+    "Name": "Orbiter v2.5",
+    "Gear Ratio": "7.5:1",
+    "Vendor 1 URL": "https://www.orbiterprojects.com/orbiter-v2-5/",
+    "Brand": "Orbiter Projects",
+    "Price (USD)": 95.19,
+    "Pros": "Exceptionally precise drive gear contact, very lightweight at 18g, upgrade path from v2.0, widely supported across toolheads, planetary gearbox reliability"
+  },
+  {
+    "id": "recDEgvnXLs00ob4D",
+    "Cons": "Requires specific pinion stepper motor, plastic body less rigid than CNC alternatives, older design showing age vs newer competitors",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Voron 0",
+      "RatRig",
+      "VzBot",
+      "most CoreXY"
+    ],
+    "Description": "Dual-geared hobbed filament extruder designed by Anlin / Annex Engineering. Gear-driven design for high torque with near-silent operation. Release 2 adds Bondtech RIDGA v2 compatibility and a stronger idler arm. Requires a pinion-equipped pancake stepper (Nema 14). Print-it-yourself open-source design with commercial gear kits available.",
+    "Weight (g)": 25,
+    "Image URL": "https://github.com/Annex-Engineering/Sherpa_Mini_Extruder/raw/master/Images/sherpa_mini_rc1.jpg",
+    "Compatible Toolheads": [
+      "StealthBurner",
+      "Dragon Burner",
+      "Xol Toolhead",
+      "A4T",
+      "XOL2",
+      "Mailbox",
+      "and most community toolheads"
+    ],
+    "Vendor 1 Name": "Annex Engineering",
+    "Name": "Sherpa Mini",
+    "Gear Ratio": "50:17",
+    "Vendor 1 URL": "https://github.com/Annex-Engineering/Sherpa_Mini-Extruder",
+    "Brand": "Annex Engineering",
+    "Price (USD)": 0,
+    "Pros": "Extremely light (~25g without motor), massive toolhead ecosystem support, near-silent operation, print-it-yourself with accessible gear kits"
+  },
+  {
+    "id": "recDO9OSJi8Bae9J5",
+    "Cons": "Smaller body means reduced gear contact patch, limited to micro-format toolheads, less toolhead ecosystem support than Sherpa Mini",
+    "Compatible Printers": [
+      "Voron 0",
+      "Printers for Ants",
+      "micro-format printers"
+    ],
+    "Description": "Smaller sibling of the Sherpa Mini, designed for ultra-compact toolheads and Printers for Ants (V0-scale). Maintains the same 50:17 dual-gear drive ratio in a significantly reduced footprint. Open-source, print-it-yourself.",
+    "Weight (g)": 18,
+    "Image URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder/raw/main/Images/sherpa_micro_pr.jpg",
+    "Compatible Toolheads": [
+      "AntHead",
+      "Mini-AfterSherpa"
+    ],
+    "Vendor 1 Name": "Annex Engineering",
+    "Name": "Sherpa Micro",
+    "Gear Ratio": "50:17",
+    "Vendor 1 URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder",
+    "Brand": "Annex Engineering",
+    "Price (USD)": 0,
+    "Pros": "Extremely compact and lightweight (~18g without motor), purpose-built for V0-scale builds, proven Annex Engineering design heritage"
+  },
+  {
+    "id": "recGLCZyZl3wJDPpi",
+    "Cons": "Still a printed-plastic body, less established than Sherpa or Orbiter in the community",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "most CoreXY"
+    ],
+    "Description": "Updated version of the ProtoXtruder with refined geometry, improved idler arm, and better component compatibility. Print-it-yourself open-source design on Printables. Community-driven improvements over v1 with wider hardware compatibility.",
+    "Weight (g)": 39.5,
+    "Image URL": "https://github.com/nhchiu/3DPrinter-Designs/raw/main/ProtoXtruder_2.0/Images/Thumbnail.jpg",
+    "Vendor 1 Name": "nhchiu",
+    "Name": "ProtoXtruder 2.0",
+    "Gear Ratio": "44:10, 37:17",
+    "Vendor 1 URL": "https://www.printables.com/model/436425-protoxtruder",
+    "Brand": "ProtoTypist",
+    "Price (USD)": 0,
+    "Pros": "Free to print, improved over v1 with better idler and geometry, active community support"
+  },
+  {
+    "id": "recH3VO0VklTut3wn",
+    "Cons": "Requires specific toolhead compatibility, smaller motor means slightly reduced max current",
+    "Compatible Printers": [
+      "Voron 0",
+      "Mini printers",
+      "Printers for Ants"
+    ],
+    "Description": "Compact variant of the Galileo 2 gearbox redesigned for small-format printers and V0-scale toolheads. Maintains the 9:1 planetary gear ratio in a significantly smaller footprint. Community name 'WristWatch' refers to its compact round profile. Print-it-yourself open-source design.",
+    "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
+    "Compatible Toolheads": [
+      "AntHead",
+      "Mini-AfterSherpa"
+    ],
+    "Vendor 1 Name": "JaredC01",
+    "Name": "G2 WristWatch (G2 WW)",
+    "Gear Ratio": "9:1",
+    "Vendor 1 URL": "https://github.com/JaredC01/G2",
+    "Brand": "JaredC01",
+    "Price (USD)": 0,
+    "Pros": "Full 9:1 G2 torque in a compact package, ideal for V0 and small toolheads, open-source"
+  },
+  {
+    "id": "recIAYfrLCGkaIrJA",
+    "Cons": "Specific to AntHead toolhead, limited standalone use",
+    "Compatible Printers": [
+      "Voron 0",
+      "Printers for Ants"
+    ],
+    "Description": "WristWatch G2 variant specifically adapted for the AntHead toolhead. Uses the same 9:1 G2 planetary gearbox in the WristWatch compact format, mounted to the AntHead body. Open-source, print-it-yourself.",
+    "Image URL": "https://github.com/JaredC01/Galileo2/raw/main/images/g2extruder.png",
+    "Compatible Toolheads": [
+      "AntHead"
+    ],
+    "Vendor 1 Name": "JaredC01",
+    "Name": "G2 WW AntHead",
+    "Gear Ratio": "9:1",
+    "Vendor 1 URL": "https://github.com/JaredC01/G2",
+    "Brand": "JaredC01",
+    "Price (USD)": 0,
+    "Pros": "Full G2 torque, purpose-designed AntHead integration, open-source"
   },
   {
     "id": "recKZWr538a7kJVVy",
@@ -36,6 +195,7 @@
     "Verdict Label": "The most refined CNC Sherpa available — PEEK gears and inserts solve the TPU heat creep problem.",
     "Verdict": "BUY",
     "Weight (g)": 18,
+    "Image URL": "https://www.fysetc.com/cdn/shop/files/1_32e2d749-5ef6-4212-87a2-9aa26e256378.jpg?v=1744440462",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -51,6 +211,87 @@
     "Pros": "PEEK (30% GF) gears replace POM — dramatically better thermal isolation from motor\nPEEK inserts added to further block motor heat transfer\nCNC aviation aluminum body — lightweight and stiff\nNano-coated mold steel drive gears — durable and precise\nMoons 36 pancake motor included\nSupports both 8T and 10T configurations\nDirect and Bowden compatible"
   },
   {
+    "id": "recMAQQlGX2ZPCHsw",
+    "Cons": "Requires Galileo 2 compatible toolhead mount, slightly heavier than ultra-light options",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Voron 0",
+      "RatRig",
+      "VzBot"
+    ],
+    "Description": "Full redesign over Galileo 1, moving to a 9:1 planetary gear ratio. Uses a custom 9T stepper with 20% higher contact surface area than 10T designs, and proper 3-planet meshing (9T sun / 3 planets) for even loading and better wear. Klipper: rotation_distance 47.088, gear_ratio 9:1, run_current 0.6A. Open-sourced by JaredC01.",
+    "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
+    "Compatible Toolheads": [
+      "Galileo 2 Toolhead (G2Z)",
+      "Xol Toolhead"
+    ],
+    "Vendor 1 Name": "3D Lab Tech",
+    "Name": "Galileo 2 Extruder (G2E)",
+    "Gear Ratio": "9:1",
+    "Vendor 1 URL": "https://www.3dlabtech.ca/product/ldo-galileo-2-extruder/",
+    "Brand": "JaredC01",
+    "Price (USD)": 45,
+    "Pros": "High torque 9:1 ratio, excellent gear meshing, open-source design with LDO quality manufacturing, proven reliability across Voron community"
+  },
+  {
+    "id": "recQ8tSrgDUucEGGY",
+    "Cons": "Printed plastic body less precise than CNC alternatives, v1 superseded by v2.0",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "most CoreXY"
+    ],
+    "Description": "Open-source print-it-yourself extruder from Printables designed for prosumer CoreXY builds. Uses standard Bondtech-style dual gears. Intended as a more accessible alternative to commercial extruders with a focus on simple assembly and widely available hardware.",
+    "Weight (g)": 46.4,
+    "Image URL": "https://github.com/nhchiu/VoronMods/raw/main/Extruders/ProtoXtruder/Images/Thumbnail.jpg",
+    "Vendor 1 Name": "nhchiu",
+    "Name": "ProtoXtruder v1",
+    "Gear Ratio": "44:10, 37:17",
+    "Vendor 1 URL": "https://www.printables.com/model/822947-protoxtruder-20",
+    "Brand": "ProtoTypist",
+    "Price (USD)": 0,
+    "Pros": "Free to print, standard hardware BOM, good community support on Printables"
+  },
+  {
+    "id": "recZFXMlrzNUmW4kQ",
+    "Cons": "Fewer toolhead-native integrations than G2E, slightly less community documentation for standalone builds",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "custom builds"
+    ],
+    "Description": "Galileo 2 extruder configured as a pure standalone unit — uses the same G2 gearbox (9:1, 9T sun/3 planets) but mounts independently without requiring a specific toolhead carriage integration. Shares BOM and printed parts with the G2E kit. Klipper config identical to G2E. Open-sourced by JaredC01.",
+    "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
+    "Vendor 1 Name": "JaredC01",
+    "Name": "G2 Standalone (G2SA)",
+    "Gear Ratio": "9:1",
+    "Vendor 1 URL": "https://github.com/JaredC01/G2",
+    "Brand": "JaredC01",
+    "Price (USD)": 45,
+    "Pros": "Flexible mounting, high 9:1 torque, interchangeable with G2E hardware, open-source"
+  },
+  {
+    "id": "recbwhTIDgqVhejO9",
+    "Cons": "Heavy at 310g (adds significant toolhead mass), expensive at $225 USD, motor-dependent rotation distance, overkill for most home builds",
+    "Compatible Printers": [
+      "VzBot",
+      "RatRig",
+      "Voron 2.4",
+      "large-format CoreXY"
+    ],
+    "Description": "CNC-machined aluminum body extruder with monolithic steel fixed-gear drive. No planetary gearbox — the motor drives directly through a fixed reduction. Rotation distance varies by motor: 7.39 (FXD Pro Motor), 5.29 (Moons N14 10T), 4.23 (LDO 8T N14). Premium build quality targeting high-cycle precision printing.",
+    "Weight (g)": 310,
+    "Image URL": "https://advanced3dprinting.com/cdn/shop/files/fxd1.1.jpg",
+    "Vendor 1 Name": "A3DP",
+    "Name": "FXD v1.1",
+    "Vendor 1 URL": "https://advanced3dprinting.com/products/fxd-v1-1-extruder-fixed-gear-drive",
+    "Brand": "A3DP",
+    "Price (USD)": 225,
+    "Pros": "CNC aluminum body for maximum rigidity, monolithic steel gears for durability, no plastic gearbox to crack or wear, premium feel"
+  },
+  {
     "id": "recz1G5OzR9hhHnmH",
     "Cons": "Newer product with smaller community install base\nLimited documentation compared to Sherpa Mini\nNiche form factor — most builders don't need this slim profile",
     "Compatible Printers": [
@@ -61,6 +302,7 @@
     "Verdict Label": "A slim, high-ratio compact extruder for space-constrained toolheads — Lettucehead3D's production repack.",
     "Verdict": "CONSIDER",
     "Weight (g)": 20,
+    "Image URL": "https://lettucehead3d.com/wp-content/uploads/2025/01/Lite-Pro-SLiM-800x928.png",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -68,7 +310,7 @@
     ],
     "Vendor 1 Name": "Lettucehead3D",
     "Name": "Lite Pro Slim Repack",
-    "Gear Ratio": "High ratio compact",
+    "Gear Ratio": "7.5:1",
     "Vendor 1 URL": "https://lettucehead3d.com/product/lite-pro-slim-repack/",
     "Brand": "Luke's Lab",
     "Price (USD)": 55,
