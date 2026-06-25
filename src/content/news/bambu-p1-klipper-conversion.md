@@ -2,7 +2,7 @@
 title: "Someone Built a Full Klipper Conversion for the Bambu P1 — and Documented Every Step"
 excerpt: "ChazMakes' Bambu Klipper Conversion project gives P1 owners a documented exit ramp from the cloud — swapping the stock mainboard for a BTT Manta M5P and running full Klipper locally."
 category: "NEWS"
-date: "2025-06-25"
+date: "2026-06-25"
 readTime: "4 min read"
 heroImage: "/Media/articles/2025/06/bambu-p1-klipper-conversion/hero.webp"
 currentPath: "/news"
