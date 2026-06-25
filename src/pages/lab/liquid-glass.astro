@@ -1,193 +1,188 @@
 ---
 // Internal design lab — NOT linked from nav, NOT indexed, NOT for production.
-// Tests dashersw/liquid-glass-js (WebGL + html2canvas refraction) against the
-// Modern Makes dark aesthetic. All deps load from CDN; nothing is npm-installed.
+// Pure-CSS frosted glass via backdrop-filter. Zero external deps, no WebGL,
+// no html2canvas, nothing npm-installed. A fixed decorative background gives
+// the glass something to blur; cards scroll over it in real time.
 import Base from '../../layouts/Base.astro';
 ---
 <Base
   title="Design Lab — Liquid Glass Test"
-  description="Internal design lab — testing the liquid-glass-js refraction library on the Modern Makes dark aesthetic. Not for production."
+  description="Internal design lab — pure-CSS backdrop-filter frosted glass on the Modern Makes dark aesthetic. Not for production."
   hasPageH1={true}
   heroPage={true}
 >
-  <!-- head injections -->
   <meta name="robots" content="noindex, nofollow" slot="head" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@main/styles.css" slot="head" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@main/glass.css" slot="head" />
 
-  <!-- ── Refraction field: gives the glass something to bend ── -->
+  <!-- ── Fixed background field: the blur source ── -->
   <div class="lab-bg" aria-hidden="true">
     <div class="lab-bg-stripes"></div>
-    <div class="lab-bg-glow"></div>
-    <div class="lab-bg-ghost lab-bg-ghost--1">RAPIDO · CHUBE · GOLIATH · TRICORN</div>
-    <div class="lab-bg-ghost lab-bg-ghost--2">55 mm³/s · 360°C · BI-METAL · M6</div>
-    <div class="lab-bg-ghost lab-bg-ghost--3">VORON · RATRIG · VZBOT · HEVORT</div>
+    <div class="lab-bg-glow lab-bg-glow--1"></div>
+    <div class="lab-bg-glow lab-bg-glow--2"></div>
+    <div class="lab-bg-glow lab-bg-glow--3"></div>
+    <span class="lab-ghost lab-ghost--a">RAPIDO</span>
+    <span class="lab-ghost lab-ghost--b">CHUBE</span>
+    <span class="lab-ghost lab-ghost--c">VORON</span>
+    <span class="lab-ghost lab-ghost--d">RATRIG</span>
+    <span class="lab-ghost lab-ghost--e">VZBOT</span>
+    <span class="lab-ghost lab-ghost--f">RAPIDO</span>
   </div>
 
-  <div class="lab-warn" role="note">⚠️ Lab page — not for production. Test at /lab/liquid-glass</div>
+  <div class="lab-warn glass" role="note">⚠️ Lab page — not for production. Test at /lab/liquid-glass</div>
 
-  <div class="lab-page">
+  <div class="lab-content">
     <header class="lab-hero">
-      <p class="lab-eyebrow">Internal · liquid-glass-js × Modern Makes</p>
+      <p class="lab-eyebrow">Internal · backdrop-filter × Modern Makes</p>
       <h1 class="lab-title">Design Lab — Liquid&nbsp;Glass Test</h1>
       <p class="lab-sub">
-        Three glass surfaces over a refracting orange field. Scroll, drag your eye across the
-        stripes, and watch the bend. Rendered with WebGL + html2canvas — no backdrop-filter.
+        Pure CSS frosted glass — no WebGL, no libraries. Scroll the page and watch the
+        orange glow and ghost wordmarks blur through each card in real time.
       </p>
+      <p class="lab-scrollcue">Scroll ↓</p>
     </header>
 
     <section class="lab-stage" aria-label="Glass component tests">
-      <div class="lab-slot" id="slot-card"></div>
-      <div class="lab-slot" id="slot-modal"></div>
-    </section>
+      <!-- 1 — Verdict card -->
+      <article class="lab-row lab-row--left">
+        <div class="glass card-content">
+          <span class="g-badge g-buy">BUY</span>
+          <h2 class="g-name">Rapido 2 UHF</h2>
+          <p class="g-brand">Phaetus · ultra-high-flow hotend</p>
+          <div class="g-price">$84</div>
+        </div>
+      </article>
 
-    <p class="lab-fallback" id="lab-fallback" hidden>
-      Glass library failed to load from CDN. The refraction field still renders beneath —
-      check the console for the error.
-    </p>
+      <!-- 2 — Spec panel -->
+      <article class="lab-row lab-row--right">
+        <div class="glass modal-content">
+          <div class="g-modal-head">
+            <span class="g-eyebrow">Specs</span>
+            <h2 class="g-name">Rapido 2 UHF</h2>
+          </div>
+          <table class="g-spec"><tbody>
+            <tr><th>Max temp</th><td>360 °C</td></tr>
+            <tr><th>Max flow</th><td>55 mm³/s</td></tr>
+            <tr><th>Heat break</th><td>Bi-metal</td></tr>
+            <tr><th>Nozzle thread</th><td>M6</td></tr>
+            <tr><th>Weight</th><td>38 g</td></tr>
+          </tbody></table>
+        </div>
+      </article>
+
+      <!-- 3 — Community verdict -->
+      <article class="lab-row lab-row--center">
+        <div class="glass note-content">
+          <span class="g-eyebrow">Community Verdict</span>
+          <h2 class="g-name">What the builders say</h2>
+          <p class="g-body">
+            Placeholder copy for the glass lab. Drop-in body text sits on the frosted
+            surface to check legibility while the background scrolls underneath. Lorem-free
+            filler so we can judge contrast, line length, and how the blur reads against
+            warm orange glow versus flat dark zones as the card travels up the viewport.
+          </p>
+        </div>
+      </article>
+    </section>
   </div>
 
-  <!-- floating glass nav, populated by JS -->
-  <div class="lab-navwrap" id="slot-nav" aria-label="Glass nav test"></div>
+  <!-- ── Floating glass nav ── -->
+  <nav class="lab-nav glass" aria-label="Glass nav test">
+    <button type="button" class="lab-pill is-active" data-pill="0">Hotends</button>
+    <button type="button" class="lab-pill" data-pill="1">Extruders</button>
+    <button type="button" class="lab-pill" data-pill="2">Toolheads</button>
+  </nav>
 
-  <!-- ── Library: classic global scripts, must run in order ── -->
-  <script is:inline src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script is:inline src="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@main/container.js"></script>
-  <script is:inline src="https://cdn.jsdelivr.net/gh/dashersw/liquid-glass-js@main/button.js"></script>
   <script is:inline>
-    // Build glass AFTER load so html2canvas captures the finished background field.
-    window.addEventListener('load', () => {
-      var fallback = document.getElementById('lab-fallback');
-      if (typeof Container === 'undefined' || typeof Button === 'undefined') {
-        if (fallback) fallback.hidden = false;
-        return;
-      }
-
-      // Append content (never innerHTML) so the library's WebGL canvas survives.
-      function fill(container, html, cls) {
-        var c = document.createElement('div');
-        c.className = 'glass-content ' + cls;
-        c.innerHTML = html;
-        container.element.appendChild(c);
-        return container.element;
-      }
-
-      try {
-        // 1 — Hardware verdict card
-        var card = new Container({ borderRadius: 20, type: 'rounded', tintOpacity: 0.1 });
-        card.element.classList.add('lab-glass');
-        document.getElementById('slot-card').appendChild(
-          fill(card,
-            '<span class="g-badge g-buy">BUY</span>' +
-            '<h2 class="g-name">Rapido 2 UHF</h2>' +
-            '<p class="g-brand">Phaetus · ultra-high-flow hotend</p>' +
-            '<div class="g-price">$84</div>',
-            'card-content')
-        );
-
-        // 2 — Spec panel / modal
-        var modal = new Container({ borderRadius: 18, type: 'rounded', tintOpacity: 0.1 });
-        modal.element.classList.add('lab-glass');
-        document.getElementById('slot-modal').appendChild(
-          fill(modal,
-            '<div class="g-modal-head"><span class="g-eyebrow">Specs</span>' +
-            '<h2 class="g-name">Rapido 2 UHF</h2></div>' +
-            '<table class="g-spec"><tbody>' +
-            '<tr><th>Max temp</th><td>360 °C</td></tr>' +
-            '<tr><th>Max flow</th><td>55 mm³/s</td></tr>' +
-            '<tr><th>Heat break</th><td>Bi-metal</td></tr>' +
-            '<tr><th>Nozzle thread</th><td>M6</td></tr>' +
-            '<tr><th>Weight</th><td>38 g</td></tr>' +
-            '</tbody></table>',
-            'modal-content')
-        );
-
-        // 3 — Floating glass nav with three pill buttons
-        var nav = new Container({ borderRadius: 999, type: 'pill', tintOpacity: 0.12 });
-        nav.element.classList.add('lab-glass', 'lab-nav');
-        var labels = ['Hotends', 'Extruders', 'Toolheads'];
-        var pills = [];
-        labels.forEach(function (label, i) {
-          var btn = new Button({
-            text: label,
-            size: 16,
-            type: 'pill',
-            onClick: function () {
-              pills.forEach(function (p, j) { p.classList.toggle('is-active', i === j); });
-            }
-          });
-          btn.element.classList.add('lab-pill');
-          if (i === 0) btn.element.classList.add('is-active');
-          pills.push(btn.element);
-          nav.addChild(btn);
+    (function () {
+      var pills = document.querySelectorAll('.lab-pill');
+      pills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          pills.forEach(function (p) { p.classList.remove('is-active'); });
+          pill.classList.add('is-active');
         });
-        document.getElementById('slot-nav').appendChild(nav.element);
-      } catch (err) {
-        console.error('[liquid-glass lab]', err);
-        if (fallback) fallback.hidden = false;
-      }
-    });
+      });
+    })();
   </script>
 </Base>
 
 <style is:global>
-  /* Hallmark · component-lab: liquid-glass test · genre: atmospheric · theme: brand-dark
+  /* Hallmark · component-lab: backdrop-filter glass · genre: atmospheric · theme: brand-dark
    * pre-emit critique: P5 H4 E5 S5 R4 V4
    * scope: this style block ships only on /lab/liquid-glass */
 
-  /* This page is dark-first; override the site's off-white body just here. */
+  /* Dark-first page; override the site's off-white body just here. */
   html, body { background: var(--dark-bg); overflow-x: clip; }
 
-  /* ── Refraction field ─────────────────────────────────────────── */
+  /* ── Fixed background field (what the glass blurs) ───────────────── */
   .lab-bg {
     position: fixed; inset: 0; z-index: 0; overflow: hidden;
-    background: var(--dark-bg);
+    pointer-events: none; background: var(--dark-bg);
   }
   .lab-bg-stripes {
     position: absolute; inset: -20%;
-    background:
-      repeating-linear-gradient(135deg,
-        transparent 0 46px,
-        rgba(255, 90, 31, 0.055) 46px 92px),
-      repeating-linear-gradient(135deg,
-        transparent 0 200px,
-        rgba(255, 122, 69, 0.04) 200px 204px);
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 60px,
+      rgba(255, 90, 31, 0.15) 60px 120px);
   }
   .lab-bg-glow {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(60% 55% at 30% 30%, rgba(255, 90, 31, 0.30), transparent 60%),
-      radial-gradient(55% 50% at 78% 72%, rgba(201, 59, 8, 0.26), transparent 62%);
+    position: absolute; border-radius: 50%; filter: blur(10px);
   }
-  .lab-bg-ghost {
-    position: absolute; left: 50%; white-space: nowrap;
+  .lab-bg-glow--1 {
+    width: 70vw; height: 70vw; top: -10vh; left: -15vw;
+    background: radial-gradient(circle, rgba(255, 90, 31, 0.38), transparent 60%);
+  }
+  .lab-bg-glow--2 {
+    width: 60vw; height: 60vw; top: 38vh; right: -18vw;
+    background: radial-gradient(circle, rgba(201, 59, 8, 0.42), transparent 62%);
+  }
+  .lab-bg-glow--3 {
+    width: 65vw; height: 65vw; bottom: -18vh; left: 20vw;
+    background: radial-gradient(circle, rgba(255, 122, 69, 0.30), transparent 60%);
+  }
+  .lab-ghost {
+    position: absolute; white-space: nowrap;
     font-family: var(--fd); font-weight: 800; letter-spacing: -2px;
-    font-size: clamp(48px, 11vw, 150px); line-height: 1;
-    color: rgba(255, 255, 255, 0.045);
-    transform: translateX(-50%) rotate(-4deg);
+    line-height: 1; color: rgba(255, 255, 255, 0.06);
+    font-size: clamp(56px, 12vw, 170px);
   }
-  .lab-bg-ghost--1 { top: 12%; }
-  .lab-bg-ghost--2 { top: 46%; color: rgba(255, 90, 31, 0.07); }
-  .lab-bg-ghost--3 { top: 78%; }
+  .lab-ghost--a { top: 6%;  left: 4%;   transform: rotate(-5deg); }
+  .lab-ghost--b { top: 24%; right: 6%;  transform: rotate(4deg); }
+  .lab-ghost--c { top: 46%; left: 8%;   transform: rotate(-3deg); color: rgba(255, 90, 31, 0.07); }
+  .lab-ghost--d { top: 64%; right: 4%;  transform: rotate(6deg); }
+  .lab-ghost--e { top: 82%; left: 10%;  transform: rotate(-4deg); }
+  .lab-ghost--f { top: 92%; right: 12%; transform: rotate(3deg); color: rgba(255, 90, 31, 0.06); }
 
-  /* ── Page chrome ──────────────────────────────────────────────── */
+  /* ── Shared frosted-glass treatment ─────────────────────────────── */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* ── Warning banner ─────────────────────────────────────────────── */
   .lab-warn {
     position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
     z-index: 40; max-width: calc(100vw - 24px); text-align: center;
     font-family: var(--fm); font-size: 12px; letter-spacing: 0.2px;
-    color: #ffd9c9; background: rgba(201, 59, 8, 0.32);
-    border: 1px solid rgba(255, 90, 31, 0.5); border-radius: 999px;
-    padding: 7px 16px; backdrop-filter: blur(6px); white-space: nowrap;
-    overflow: hidden; text-overflow: ellipsis;
+    color: #ffd9c9; border-radius: 999px; padding: 8px 18px; white-space: nowrap;
   }
 
-  .lab-page {
+  /* ── Scrollable content layer ───────────────────────────────────── */
+  .lab-content {
     position: relative; z-index: 1;
-    max-width: 920px; margin: 0 auto;
-    padding: 96px 20px 160px; min-height: 100vh;
+    max-width: 1000px; margin: 0 auto;
+    padding: 0 20px 200px;
   }
 
-  .lab-hero { text-align: center; margin-bottom: 56px; }
+  .lab-hero {
+    min-height: 78vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+  }
   .lab-eyebrow {
     font-family: var(--fm); font-size: 11px; text-transform: uppercase;
     letter-spacing: 2px; color: var(--accent-mid); margin: 0 0 14px;
@@ -195,39 +190,33 @@ import Base from '../../layouts/Base.astro';
   .lab-title {
     font-family: var(--fd); font-weight: 800; letter-spacing: -1px;
     line-height: 1.02; color: #fff; margin: 0;
-    font-size: clamp(38px, 8vw, 76px);
+    font-size: clamp(40px, 8vw, 80px);
     overflow-wrap: anywhere; min-width: 0;
   }
   .lab-sub {
-    font-family: var(--fu); color: rgba(255, 255, 255, 0.62);
-    max-width: 46ch; margin: 18px auto 0; line-height: 1.55; font-size: 15px;
+    font-family: var(--fu); color: rgba(255, 255, 255, 0.66);
+    max-width: 48ch; margin: 18px auto 0; line-height: 1.55; font-size: 15px;
   }
+  .lab-scrollcue {
+    font-family: var(--fm); font-size: 12px; letter-spacing: 1px;
+    color: var(--accent-mid); margin-top: 34px; text-transform: uppercase;
+    animation: lab-bob 1.8s var(--ease-in-out, ease-in-out) infinite;
+  }
+  @keyframes lab-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-  /* ── Stage ────────────────────────────────────────────────────── */
-  .lab-stage {
-    display: flex; flex-wrap: wrap; gap: 32px;
-    align-items: flex-start; justify-content: center;
-  }
-  .lab-slot { display: flex; }
+  /* ── Card rows — spread vertically so cards travel through the glow ── */
+  .lab-row { min-height: 76vh; display: flex; align-items: center; }
+  .lab-row--left   { justify-content: flex-start; }
+  .lab-row--right  { justify-content: flex-end; }
+  .lab-row--center { justify-content: center; }
 
-  .lab-fallback {
-    margin: 48px auto 0; max-width: 44ch; text-align: center;
-    font-family: var(--fu); font-size: 14px; color: #ffb59c;
+  .card-content, .modal-content, .note-content {
+    color: #fff; font-family: var(--fu);
   }
+  .card-content { width: 300px; padding: 22px 24px 26px; }
+  .modal-content { width: 320px; padding: 22px 24px 18px; }
+  .note-content { width: 360px; max-width: 100%; padding: 24px 26px 26px; }
 
-  /* ── Glass content (sits above the library's z-index:-1 canvas) ── */
-  .glass-content {
-    position: relative; z-index: 1;
-    font-family: var(--fu); color: #fff;
-    /* faint warm tint + light scrim — low enough to keep refraction visible */
-    background: linear-gradient(135deg, rgba(255, 90, 31, 0.06), rgba(26, 26, 26, 0.16));
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  }
-
-  .card-content {
-    width: 280px; padding: 22px 24px 24px; border-radius: 20px;
-  }
   .g-badge {
     display: inline-block; font-family: var(--fm); font-size: 11px;
     font-weight: 700; letter-spacing: 1px; padding: 3px 9px;
@@ -239,69 +228,66 @@ import Base from '../../layouts/Base.astro';
   }
   .g-name {
     font-family: var(--fd); font-weight: 800; font-size: 26px;
-    line-height: 1.05; margin: 0; color: #fff; overflow-wrap: anywhere;
+    line-height: 1.06; margin: 0; color: #fff; overflow-wrap: anywhere;
   }
   .g-brand {
     font-family: var(--fu); font-size: 13px; margin: 6px 0 0;
-    color: rgba(255, 255, 255, 0.62);
+    color: rgba(255, 255, 255, 0.66);
   }
   .g-price {
     font-family: var(--fm); font-size: 22px; font-weight: 500;
     color: var(--accent-mid); margin-top: 18px;
   }
-
-  .modal-content {
-    width: 300px; padding: 22px 24px 18px; border-radius: 18px;
-  }
   .g-modal-head { margin-bottom: 14px; }
   .g-eyebrow {
     font-family: var(--fm); font-size: 10px; text-transform: uppercase;
-    letter-spacing: 2px; color: var(--accent-mid); display: block; margin-bottom: 4px;
+    letter-spacing: 2px; color: var(--accent-mid); display: block; margin-bottom: 6px;
   }
   .g-spec { width: 100%; border-collapse: collapse; }
   .g-spec th, .g-spec td {
     text-align: left; padding: 9px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 13px;
   }
   .g-spec tr:last-child th, .g-spec tr:last-child td { border-bottom: 0; }
-  .g-spec th {
-    font-family: var(--fu); font-weight: 400; color: rgba(255, 255, 255, 0.6);
-  }
-  .g-spec td {
-    font-family: var(--fm); color: #fff; text-align: right; white-space: nowrap;
+  .g-spec th { font-family: var(--fu); font-weight: 400; color: rgba(255, 255, 255, 0.66); }
+  .g-spec td { font-family: var(--fm); color: #fff; text-align: right; white-space: nowrap; }
+  .g-body {
+    font-family: var(--fb); font-size: 14px; line-height: 1.65;
+    color: rgba(255, 255, 255, 0.78); margin: 12px 0 0;
   }
 
-  /* ── Floating glass nav ───────────────────────────────────────── */
-  .lab-navwrap {
-    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
-    z-index: 30; max-width: calc(100vw - 24px);
-  }
+  /* ── Floating glass nav ─────────────────────────────────────────── */
   .lab-nav {
-    display: flex; gap: 6px; padding: 7px; align-items: center;
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+    z-index: 30; display: flex; gap: 6px; padding: 7px;
+    border-radius: 999px; max-width: calc(100vw - 24px);
   }
   .lab-pill {
-    font-family: var(--fu); font-size: 14px; color: rgba(255, 255, 255, 0.78);
-    cursor: pointer; transition: color 0.18s ease, opacity 0.18s ease;
+    font-family: var(--fu); font-size: 14px; color: rgba(255, 255, 255, 0.8);
+    background: transparent; border: 1px solid transparent; border-radius: 999px;
+    padding: 8px 18px; cursor: pointer;
+    transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
   }
-  .lab-pill:hover { color: #fff; }
-  .lab-pill.is-active { color: #fff; }
-  .lab-pill.is-active::after {
-    content: ""; display: block; height: 2px; margin-top: 3px; border-radius: 2px;
-    background: var(--accent);
+  .lab-pill:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+  .lab-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .lab-pill.is-active {
+    color: #fff;
+    background: rgba(255, 90, 31, 0.3);
+    border-color: rgba(255, 90, 31, 0.5);
   }
 
   @media (max-width: 560px) {
-    .lab-page { padding-top: 96px; }
-    .card-content, .modal-content { width: min(86vw, 320px); }
-    /* let the full note wrap on mobile instead of truncating */
+    .lab-content { padding-bottom: 160px; }
+    .card-content, .modal-content, .note-content { width: min(86vw, 340px); }
+    .lab-row--left, .lab-row--right, .lab-row--center { justify-content: center; }
     .lab-warn {
-      font-size: 11px; padding: 6px 12px;
-      white-space: normal; text-overflow: clip; line-height: 1.35;
+      font-size: 11px; padding: 7px 14px;
+      white-space: normal; line-height: 1.35; border-radius: 16px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .lab-scrollcue { animation: none; }
     .lab-pill { transition: none; }
   }
 </style>
