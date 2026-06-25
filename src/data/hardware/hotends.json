@@ -29,6 +29,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-rapido-hotend-2-plus-1203166802.jpg?v=1762424050",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -81,6 +82,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-uhf-blue-1-75mm-rapido-plus-hotend-1203167092.png?v=1762424284",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -133,6 +135,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-rapido-hotend-2-1203166968.png?v=1762424161",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -186,6 +189,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-rapido-hotend-2-1203166968.png?v=1762424161",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -240,6 +244,7 @@
     "Nozzle Thread": "M6 Volcano (UHF) / M6 V6 via adapter",
     "Heater Type": "Cartridge",
     "Heat Block": "Plated copper extended",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-uhf-blue-1-75mm-rapido-hotend-1203167094.png?v=1762422485",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -251,8 +256,10 @@
     "Part Number": "RA2-UHF",
     "Vendor 5 Name": "Triangle Lab (AliExpress)",
     "Thermistor": "NTC100K",
+    "Vendor 1 Name": "Phaetus Official",
     "Name": "Rapido 2 UHF",
     "Type": "All-metal",
+    "Vendor 1 URL": "https://www.phaetus.com/products/rapido-2-uhf",
     "Brand": "Phaetus",
     "Mount Style": "Groove mount",
     "Heat Break": "Titanium",
@@ -284,6 +291,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0574/8129/8105/files/20241107_143927_2_1.jpg?v=1759948102",
     "Compatible Toolheads": [
       "Takeoff",
       "Custom community mounts"
@@ -323,6 +331,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0596/0692/5480/files/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled-west3d-3d-printing-supplies-mellow-5874929.jpg?v=1752698776",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -363,6 +372,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0596/0692/5480/files/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled-west3d-3d-printing-supplies-mellow-5874929.jpg?v=1752698776",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -404,6 +414,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper",
+    "Image URL": "https://excit3d.shop/uploads/1774104591129-402034.jpeg",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -447,6 +458,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper",
+    "Image URL": "https://excit3d.shop/uploads/1774104591129-402034.jpeg",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -469,6 +481,45 @@
     "Related 1 URL": "/hardware/hotends/tricorn-conduction"
   },
   {
+    "id": "rech7SSLjkyKP1SzQ",
+    "Cons": "Limited community build data vs Goliath line, price and detailed specs not available from product page (JS-rendered), niche product for large-format builds",
+    "Compatible Printers": [
+      "Large-format CoreXY",
+      "VzBot",
+      "RatRig V-Core"
+    ],
+    "Description": "Mellow3D all-metal integrated hotend designed for large-format and high-speed 3D printers. The 'Air' designation indicates air-cooled heatsink (vs water-cooled). 'Lite' indicates a reduced-weight variant. Part of the DualVelo product family. All-metal construction with no PTFE in the melt zone.",
+    "Max Temp (°C)": 300,
+    "Vendor 1 Name": "Mellow3D",
+    "Name": "DualVelo Air Lite",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-dualvelo-air-lite-all-metal-hotend-extruder-for-large-format-3d-printers-high-speed-diy-3d-printing",
+    "Brand": "Mellow3D",
+    "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation"
+  },
+  {
+    "id": "recs3UEj9CCrYKDsT",
+    "Cons": "Longer heat block can cause stringing with slow retraction, requires Volcano nozzles (larger selection than V6 but still limited), community price page returned 404 — price needs verification",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "VzBot",
+      "RatRig",
+      "large-format CoreXY"
+    ],
+    "Description": "Triangle Lab's Compact High Conduction XL — a Volcano-format all-metal hotend. Extends the CHC Pro design with a longer heat block for higher flow using large-format or Volcano nozzles. All-metal construction with no PTFE in the melt zone. Compatible with standard V6 heaters and cartridges. Popular in the VzBot community for high-temp, high-flow printing.",
+    "Max Temp (°C)": 300,
+    "Nozzle Thread": "V6",
+    "Heater Type": "MCH Ceramic",
+    "Heat Block": "CHC WR (Wear Resistant)",
+    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPAT/UPAT086/2503/13/photo/cbff87002c.jpg",
+    "Thermistor": "PT1000",
+    "Vendor 1 Name": "West3D",
+    "Name": "CHC XL",
+    "Vendor 1 URL": "https://west3d.com/products/chc-xl-extreme-high-flow-hot-end-wear-resistant-air-or-water-cooled",
+    "Brand": "Triangle Lab",
+    "Price (USD)": 128,
+    "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing"
+  },
+  {
     "id": "recy7WC7NNzNHzUqW",
     "Cons": "Newer brand with smaller community footprint than Phaetus or E3D\nLimited reseller network\nAir cooling requires fan mounting solution not included\nFewer documented Klipper config examples",
     "Compatible Printers": [
@@ -489,6 +540,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0574/8129/8105/files/20250619_104751_1_2.jpg?v=1759948052",
     "Compatible Toolheads": [
       "Takeoff",
       "Custom community mounts"
@@ -506,6 +558,26 @@
     "Pros": "500°C max temp — highest ceiling in its class\nV6 nozzle compatibility — use your existing stock\nM3 hardware throughout — no tiny screws to strip\nStandard 3x15mm thermistor cartridge\n6x20–22mm heater cartridge compatibility\n42mm meltzone length",
     "Related 1 URL": "/hardware/hotends/chube-conduction",
     "Related 2 URL": "/hardware/hotends/chube-compact"
+  },
+  {
+    "id": "recyv2pbsnYW5hoNl",
+    "Cons": "Preorder / limited initial availability, performance data still emerging from community, premium price vs Rapido 2 line",
+    "Fan Size": "4010",
+    "Max Flow (mm³/s)": 100,
+    "Description": "Phaetus' next-generation high-flow hotend successor to the Rapido 2. Features an EndCoat titanium alloy heatbreak for reduced heat creep, copper alloy heating block for improved thermal mass, and an aluminum heatsink. Rated for over 100 mm³/s flow and up to 1300 mm/s print speeds per Phaetus claims. V6 nozzle compatible.",
+    "Max Temp (°C)": 300,
+    "Nozzle Thread": "V6",
+    "Heater Type": "60W Ceramic",
+    "Heat Block": "Copper Alloy",
+    "Image URL": "https://www.fabreeko.com/cdn/shop/files/no_background.png?v=1781649910",
+    "Thermistor": "PT1000",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Rapido X",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/phaetus-rapido-x",
+    "Brand": "Phaetus",
+    "Heat Break": "EndCoat Titanium Alloy",
+    "Price (USD)": 89.99,
+    "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation"
   },
   {
     "id": "reczz9oIVsXB06Bg1",
@@ -527,6 +599,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
+    "Image URL": "https://cdn.shopify.com/s/files/1/0574/8129/8105/files/7P7A4660.jpg?v=1778684512",
     "Compatible Toolheads": [
       "Stealthburner",
       "Dragon Burner"
