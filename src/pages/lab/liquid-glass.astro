@@ -1,19 +1,18 @@
 ---
 // Internal design lab — NOT linked from nav, NOT indexed, NOT for production.
-// Pure-CSS frosted glass via backdrop-filter. Zero external deps, no WebGL,
-// no html2canvas, nothing npm-installed. A fixed decorative background gives
-// the glass something to blur; cards scroll over it in real time.
+// Pure-CSS frosted glass via backdrop-filter over a fixed background field.
+// Zero external deps. Showcases three reusable glass UI patterns on one scroll.
 import Base from '../../layouts/Base.astro';
 ---
 <Base
   title="Design Lab — Liquid Glass Test"
-  description="Internal design lab — pure-CSS backdrop-filter frosted glass on the Modern Makes dark aesthetic. Not for production."
+  description="Internal design lab — three production-ready backdrop-filter glass patterns on the Modern Makes dark aesthetic. Not for production."
   hasPageH1={true}
   heroPage={true}
 >
   <meta name="robots" content="noindex, nofollow" slot="head" />
 
-  <!-- ── Fixed background field: the blur source ── -->
+  <!-- ── Fixed background field: the blur source for every glass surface ── -->
   <div class="lab-bg" aria-hidden="true">
     <div class="lab-bg-stripes"></div>
     <div class="lab-bg-glow lab-bg-glow--1"></div>
@@ -34,53 +33,138 @@ import Base from '../../layouts/Base.astro';
       <p class="lab-eyebrow">Internal · backdrop-filter × Modern Makes</p>
       <h1 class="lab-title">Design Lab — Liquid&nbsp;Glass Test</h1>
       <p class="lab-sub">
-        Pure CSS frosted glass — no WebGL, no libraries. Scroll the page and watch the
-        orange glow and ghost wordmarks blur through each card in real time.
+        Three production-ready frosted-glass patterns, pure CSS. Scroll the whole page —
+        the orange field blurs through every surface in real time.
       </p>
-      <p class="lab-scrollcue">Scroll ↓</p>
     </header>
 
-    <section class="lab-stage" aria-label="Glass component tests">
-      <!-- 1 — Verdict card -->
-      <article class="lab-row lab-row--left">
-        <div class="glass card-content">
-          <span class="g-badge g-buy">BUY</span>
-          <h2 class="g-name">Rapido 2 UHF</h2>
-          <p class="g-brand">Phaetus · ultra-high-flow hotend</p>
-          <div class="g-price">$84</div>
-        </div>
-      </article>
-
-      <!-- 2 — Spec panel -->
-      <article class="lab-row lab-row--right">
-        <div class="glass modal-content">
-          <div class="g-modal-head">
-            <span class="g-eyebrow">Specs</span>
-            <h2 class="g-name">Rapido 2 UHF</h2>
-          </div>
-          <table class="g-spec"><tbody>
-            <tr><th>Max temp</th><td>360 °C</td></tr>
-            <tr><th>Max flow</th><td>55 mm³/s</td></tr>
-            <tr><th>Heat break</th><td>Bi-metal</td></tr>
-            <tr><th>Nozzle thread</th><td>M6</td></tr>
-            <tr><th>Weight</th><td>38 g</td></tr>
-          </tbody></table>
-        </div>
-      </article>
-
-      <!-- 3 — Community verdict -->
-      <article class="lab-row lab-row--center">
-        <div class="glass note-content">
-          <span class="g-eyebrow">Community Verdict</span>
-          <h2 class="g-name">What the builders say</h2>
-          <p class="g-body">
-            Placeholder copy for the glass lab. Drop-in body text sits on the frosted
-            surface to check legibility while the background scrolls underneath. Lorem-free
-            filler so we can judge contrast, line length, and how the blur reads against
-            warm orange glow versus flat dark zones as the card travels up the viewport.
+    <!-- ════ PATTERN 01 — Hardware Detail Sidebar ════ -->
+    <section class="lab-section">
+      <p class="sec-eyebrow">Pattern 01 — Hardware Sidebar</p>
+      <div class="p01-grid">
+        <div class="p01-prose">
+          <h2 class="p01-name">Rapido 2 UHF</h2>
+          <p class="p01-lede">
+            The Rapido 2 UHF is where most ultra-high-flow builds end up. It pairs a
+            bi-metal heat break with a beefy 75 W heater to push melt rates that comfortably
+            outrun a 0.6 mm nozzle, and the community consensus has settled: if you are
+            chasing volumetric throughput on a CoreXY, this is the safe default.
+          </p>
+          <p>
+            Rated to 55 mm³/s, real-world numbers land lower once you account for filament,
+            slicer, and cooling — but the headroom is the point. The bi-metal break keeps the
+            transition zone short, which is the single biggest lever against heat creep on
+            long high-temp prints. Builders running ABS and ASA in an enclosure report the
+            fewest jams of any hotend in this class.
+          </p>
+          <p>
+            The M6 nozzle thread keeps it compatible with the enormous Volcano-adjacent
+            ecosystem, so swapping between a hardened 0.4 mm for everyday PLA and a 0.6 mm
+            for fast drafts is a two-minute job. The 3010 fan mount is a touch unusual, but
+            replacement blowers are cheap and quiet, and the stock unit moves enough air to
+            keep the heat break cool at the flow rates people actually run.
+          </p>
+          <p>
+            Where it loses points: the price creeps above budget hotends, and the proprietary
+            cartridge means you are buying into Phaetus consumables rather than generic
+            spares. For a high-flow toolhead that has to just work for years, most builders
+            decide that trade is worth making — and so do we.
           </p>
         </div>
-      </article>
+
+        <aside class="p01-aside">
+          <div class="glass p01-side">
+            <span class="sub-eyebrow">Specs</span>
+            <dl class="spec-list">
+              <div class="spec-row"><dt>Max temp</dt><dd>360 °C</dd></div>
+              <div class="spec-row"><dt>Max flow</dt><dd>55 mm³/s</dd></div>
+              <div class="spec-row"><dt>Heat break</dt><dd>Bi-metal</dd></div>
+              <div class="spec-row"><dt>Nozzle thread</dt><dd>M6</dd></div>
+              <div class="spec-row"><dt>Weight</dt><dd>38 g</dd></div>
+              <div class="spec-row"><dt>Fan size</dt><dd>3010</dd></div>
+            </dl>
+            <hr class="side-divider" />
+            <div class="side-price">$84</div>
+            <button type="button" class="btn-primary btn-full">Buy</button>
+            <p class="side-also">Also available at</p>
+            <p class="side-vendors">
+              <a href="#" rel="noopener">West3D</a>
+              <span aria-hidden="true">·</span>
+              <a href="#" rel="noopener">Fabreeko</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ════ PATTERN 02 — Verdict & Buy Box ════ -->
+    <section class="lab-section">
+      <p class="sec-eyebrow">Pattern 02 — Verdict &amp; Buy Box</p>
+      <div class="glass p02-box">
+        <div class="p02-head">
+          <span class="big-badge bb-buy">BUY</span>
+          <div class="p02-id">
+            <h2 class="p02-name">Rapido 2 UHF</h2>
+            <p class="p02-brand">Phaetus</p>
+            <p class="p02-verdict">The default high-flow hotend for prosumer CoreXY builds.</p>
+          </div>
+        </div>
+        <div class="p02-actions">
+          <div class="p02-price">$84</div>
+          <button type="button" class="btn-primary">Buy now</button>
+          <button type="button" class="btn-ghost">Compare</button>
+        </div>
+        <div class="p02-chips">
+          <span class="chip">360 °C</span>
+          <span class="chip">55 mm³/s</span>
+          <span class="chip">38 g</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════ PATTERN 03 — Homepage Feature Cards ════ -->
+    <section class="lab-section">
+      <p class="sec-eyebrow">Pattern 03 — Homepage Feature Cards</p>
+      <div class="p03-grid">
+        <article class="glass feat-card">
+          <div class="feat-band band-orange"></div>
+          <div class="feat-body">
+            <span class="sub-eyebrow">Hotend</span>
+            <h3 class="feat-name">Rapido 2 UHF</h3>
+            <p class="feat-desc">Bi-metal high-flow workhorse for fast, hot prints.</p>
+            <div class="feat-foot">
+              <span class="badge badge-buy">BUY</span>
+              <span class="feat-price">$84</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass feat-card">
+          <div class="feat-band band-steel"></div>
+          <div class="feat-body">
+            <span class="sub-eyebrow">Extruder</span>
+            <h3 class="feat-name">Sherpa V3</h3>
+            <p class="feat-desc">Lightweight dual-gear drive with a strong grip on TPU.</p>
+            <div class="feat-foot">
+              <span class="badge badge-consider">CONSIDER</span>
+              <span class="feat-price">$46</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass feat-card">
+          <div class="feat-band band-sand"></div>
+          <div class="feat-body">
+            <span class="sub-eyebrow">Toolhead</span>
+            <h3 class="feat-name">Stealthburner</h3>
+            <p class="feat-desc">The Voron standard — great cooling, endless mod support.</p>
+            <div class="feat-foot">
+              <span class="badge badge-buy">BUY</span>
+              <span class="feat-price">$39</span>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
   </div>
 
@@ -105,14 +189,13 @@ import Base from '../../layouts/Base.astro';
 </Base>
 
 <style is:global>
-  /* Hallmark · component-lab: backdrop-filter glass · genre: atmospheric · theme: brand-dark
-   * pre-emit critique: P5 H4 E5 S5 R4 V4
+  /* Hallmark · component-lab: backdrop-filter glass ×3 patterns · genre: atmospheric · theme: brand-dark
+   * pre-emit critique: P5 H5 E5 S5 R4 V4
    * scope: this style block ships only on /lab/liquid-glass */
 
-  /* Dark-first page; override the site's off-white body just here. */
   html, body { background: var(--dark-bg); overflow-x: clip; }
 
-  /* ── Fixed background field (what the glass blurs) ───────────────── */
+  /* ── Fixed background field (blur source) ───────────────────────── */
   .lab-bg {
     position: fixed; inset: 0; z-index: 0; overflow: hidden;
     pointer-events: none; background: var(--dark-bg);
@@ -120,19 +203,15 @@ import Base from '../../layouts/Base.astro';
   .lab-bg-stripes {
     position: absolute; inset: -20%;
     background: repeating-linear-gradient(
-      135deg,
-      transparent 0 60px,
-      rgba(255, 90, 31, 0.15) 60px 120px);
+      135deg, transparent 0 60px, rgba(255, 90, 31, 0.15) 60px 120px);
   }
-  .lab-bg-glow {
-    position: absolute; border-radius: 50%; filter: blur(10px);
-  }
+  .lab-bg-glow { position: absolute; border-radius: 50%; filter: blur(10px); }
   .lab-bg-glow--1 {
     width: 70vw; height: 70vw; top: -10vh; left: -15vw;
     background: radial-gradient(circle, rgba(255, 90, 31, 0.38), transparent 60%);
   }
   .lab-bg-glow--2 {
-    width: 60vw; height: 60vw; top: 38vh; right: -18vw;
+    width: 60vw; height: 60vw; top: 40vh; right: -18vw;
     background: radial-gradient(circle, rgba(201, 59, 8, 0.42), transparent 62%);
   }
   .lab-bg-glow--3 {
@@ -145,11 +224,11 @@ import Base from '../../layouts/Base.astro';
     line-height: 1; color: rgba(255, 255, 255, 0.06);
     font-size: clamp(56px, 12vw, 170px);
   }
-  .lab-ghost--a { top: 6%;  left: 4%;   transform: rotate(-5deg); }
-  .lab-ghost--b { top: 24%; right: 6%;  transform: rotate(4deg); }
-  .lab-ghost--c { top: 46%; left: 8%;   transform: rotate(-3deg); color: rgba(255, 90, 31, 0.07); }
-  .lab-ghost--d { top: 64%; right: 4%;  transform: rotate(6deg); }
-  .lab-ghost--e { top: 82%; left: 10%;  transform: rotate(-4deg); }
+  .lab-ghost--a { top: 5%;  left: 4%;   transform: rotate(-5deg); }
+  .lab-ghost--b { top: 22%; right: 6%;  transform: rotate(4deg); }
+  .lab-ghost--c { top: 44%; left: 8%;   transform: rotate(-3deg); color: rgba(255, 90, 31, 0.07); }
+  .lab-ghost--d { top: 62%; right: 4%;  transform: rotate(6deg); }
+  .lab-ghost--e { top: 80%; left: 10%;  transform: rotate(-4deg); }
   .lab-ghost--f { top: 92%; right: 12%; transform: rotate(3deg); color: rgba(255, 90, 31, 0.06); }
 
   /* ── Shared frosted-glass treatment ─────────────────────────────── */
@@ -172,16 +251,15 @@ import Base from '../../layouts/Base.astro';
     color: #ffd9c9; border-radius: 999px; padding: 8px 18px; white-space: nowrap;
   }
 
-  /* ── Scrollable content layer ───────────────────────────────────── */
+  /* ── Content layer ──────────────────────────────────────────────── */
   .lab-content {
     position: relative; z-index: 1;
-    max-width: 1000px; margin: 0 auto;
-    padding: 0 20px 200px;
+    max-width: 1080px; margin: 0 auto;
+    padding: 0 24px 220px;
   }
-
   .lab-hero {
-    min-height: 78vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
+    min-height: 64vh; display: flex; flex-direction: column;
+    justify-content: center; text-align: center; align-items: center;
   }
   .lab-eyebrow {
     font-family: var(--fm); font-size: 11px; text-transform: uppercase;
@@ -190,71 +268,151 @@ import Base from '../../layouts/Base.astro';
   .lab-title {
     font-family: var(--fd); font-weight: 800; letter-spacing: -1px;
     line-height: 1.02; color: #fff; margin: 0;
-    font-size: clamp(40px, 8vw, 80px);
-    overflow-wrap: anywhere; min-width: 0;
+    font-size: clamp(40px, 8vw, 80px); overflow-wrap: anywhere; min-width: 0;
   }
   .lab-sub {
     font-family: var(--fu); color: rgba(255, 255, 255, 0.66);
-    max-width: 48ch; margin: 18px auto 0; line-height: 1.55; font-size: 15px;
+    max-width: 50ch; margin: 18px auto 0; line-height: 1.55; font-size: 15px;
   }
-  .lab-scrollcue {
-    font-family: var(--fm); font-size: 12px; letter-spacing: 1px;
-    color: var(--accent-mid); margin-top: 34px; text-transform: uppercase;
-    animation: lab-bob 1.8s var(--ease-in-out, ease-in-out) infinite;
-  }
-  @keyframes lab-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-  /* ── Card rows — spread vertically so cards travel through the glow ── */
-  .lab-row { min-height: 76vh; display: flex; align-items: center; }
-  .lab-row--left   { justify-content: flex-start; }
-  .lab-row--right  { justify-content: flex-end; }
-  .lab-row--center { justify-content: center; }
+  /* section rhythm — generous gaps so the glass reads between patterns */
+  .lab-section { margin-top: 160px; }
+  .sec-eyebrow {
+    font-family: var(--fu); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2.5px;
+    color: var(--accent); margin: 0 0 28px;
+  }
+  .sub-eyebrow {
+    display: block; font-family: var(--fm); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--accent-mid); margin-bottom: 8px;
+  }
 
-  .card-content, .modal-content, .note-content {
-    color: #fff; font-family: var(--fu);
+  /* ════ PATTERN 01 — Hardware sidebar ════ */
+  .p01-grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px;
+    align-items: start;
   }
-  .card-content { width: 300px; padding: 22px 24px 26px; }
-  .modal-content { width: 320px; padding: 22px 24px 18px; }
-  .note-content { width: 360px; max-width: 100%; padding: 24px 26px 26px; }
+  .p01-prose { color: rgba(255, 255, 255, 0.82); }
+  .p01-name {
+    font-family: var(--fd); font-weight: 800; font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.04; letter-spacing: -0.5px; color: #fff; margin: 0 0 20px;
+    overflow-wrap: anywhere;
+  }
+  .p01-prose p { font-family: var(--fb); font-size: 16px; line-height: 1.7; margin: 0 0 18px; }
+  .p01-lede { color: #fff; font-size: 18px !important; }
 
-  .g-badge {
-    display: inline-block; font-family: var(--fm); font-size: 11px;
-    font-weight: 700; letter-spacing: 1px; padding: 3px 9px;
-    border-radius: 5px; margin-bottom: 14px;
+  .p01-aside { align-self: start; }
+  .p01-side { position: sticky; top: 100px; padding: 24px; color: #fff; }
+  .spec-list { margin: 0; }
+  .spec-row {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .g-buy {
-    color: #7dffa8; background: rgba(34, 197, 94, 0.18);
-    border: 1px solid rgba(34, 197, 94, 0.4);
+  .spec-row:last-child { border-bottom: 0; }
+  .spec-row dt { font-family: var(--fu); font-size: 13px; color: rgba(255, 255, 255, 0.66); margin: 0; }
+  .spec-row dd { font-family: var(--fm); font-size: 13px; color: #fff; margin: 0; white-space: nowrap; }
+  .side-divider { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.12); margin: 18px 0; }
+  .side-price {
+    font-family: var(--fd); font-weight: 800; font-size: 40px;
+    color: var(--accent); line-height: 1; margin-bottom: 16px;
   }
-  .g-name {
-    font-family: var(--fd); font-weight: 800; font-size: 26px;
-    line-height: 1.06; margin: 0; color: #fff; overflow-wrap: anywhere;
+  .side-also {
+    font-family: var(--fu); font-size: 12px; color: rgba(255, 255, 255, 0.55);
+    margin: 18px 0 4px;
   }
-  .g-brand {
-    font-family: var(--fu); font-size: 13px; margin: 6px 0 0;
-    color: rgba(255, 255, 255, 0.66);
+  .side-vendors { margin: 0; font-family: var(--fu); font-size: 14px; }
+  .side-vendors a { color: var(--accent-mid); text-decoration: none; }
+  .side-vendors a:hover { text-decoration: underline; }
+  .side-vendors span { color: rgba(255, 255, 255, 0.4); margin: 0 6px; }
+
+  /* ════ PATTERN 02 — Verdict & buy box ════ */
+  .p02-box {
+    max-width: 600px; margin: 0 auto; padding: 28px; color: #fff;
   }
-  .g-price {
-    font-family: var(--fm); font-size: 22px; font-weight: 500;
-    color: var(--accent-mid); margin-top: 18px;
+  .p02-head { display: flex; gap: 20px; align-items: center; }
+  .big-badge {
+    flex: none; font-family: var(--fu); font-weight: 800; font-size: 20px;
+    letter-spacing: 1px; padding: 14px 22px; border-radius: 999px;
   }
-  .g-modal-head { margin-bottom: 14px; }
-  .g-eyebrow {
-    font-family: var(--fm); font-size: 10px; text-transform: uppercase;
-    letter-spacing: 2px; color: var(--accent-mid); display: block; margin-bottom: 6px;
+  .bb-buy {
+    color: #7dffa8; background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.45);
   }
-  .g-spec { width: 100%; border-collapse: collapse; }
-  .g-spec th, .g-spec td {
-    text-align: left; padding: 9px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 13px;
+  .p02-name {
+    font-family: var(--fd); font-weight: 800; font-size: 30px; line-height: 1.05;
+    margin: 0; color: #fff; overflow-wrap: anywhere;
   }
-  .g-spec tr:last-child th, .g-spec tr:last-child td { border-bottom: 0; }
-  .g-spec th { font-family: var(--fu); font-weight: 400; color: rgba(255, 255, 255, 0.66); }
-  .g-spec td { font-family: var(--fm); color: #fff; text-align: right; white-space: nowrap; }
-  .g-body {
-    font-family: var(--fb); font-size: 14px; line-height: 1.65;
-    color: rgba(255, 255, 255, 0.78); margin: 12px 0 0;
+  .p02-brand { font-family: var(--fu); font-size: 13px; color: var(--accent-mid); margin: 4px 0 0; }
+  .p02-verdict { font-family: var(--fb); font-size: 15px; color: rgba(255, 255, 255, 0.74); margin: 8px 0 0; }
+  .p02-actions {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin: 24px 0 4px;
   }
+  .p02-price { font-family: var(--fd); font-weight: 800; font-size: 32px; color: var(--accent); }
+  .p02-actions .btn-primary { flex: 1 1 auto; }
+  .p02-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+  .chip {
+    font-family: var(--fm); font-size: 12px; color: rgba(255, 255, 255, 0.86);
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* ════ PATTERN 03 — Feature cards ════ */
+  .p03-grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
+  }
+  .feat-card {
+    overflow: hidden; padding: 0; color: #fff;
+    transition: transform 0.2s var(--ease-out, ease-out),
+                box-shadow 0.2s var(--ease-out, ease-out),
+                border-color 0.2s var(--ease-out, ease-out);
+  }
+  .feat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .feat-band { height: 96px; }
+  .band-orange { background: linear-gradient(135deg, var(--accent), var(--accent-dk)); }
+  .band-steel  { background: linear-gradient(135deg, #3a4654, #222a33); }
+  .band-sand   { background: linear-gradient(135deg, #6b5a48, #3a3026); }
+  .feat-body { padding: 20px 22px 22px; }
+  .feat-name {
+    font-family: var(--fd); font-weight: 800; font-size: 24px; line-height: 1.08;
+    margin: 0 0 8px; color: #fff; overflow-wrap: anywhere;
+  }
+  .feat-desc { font-family: var(--fb); font-size: 14px; line-height: 1.55; color: rgba(255, 255, 255, 0.72); margin: 0 0 18px; }
+  .feat-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .feat-price { font-family: var(--fm); font-size: 15px; font-weight: 500; color: var(--accent); }
+
+  .badge {
+    font-family: var(--fm); font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    padding: 3px 9px; border-radius: 5px;
+  }
+  .badge-buy { color: #7dffa8; background: rgba(34, 197, 94, 0.18); border: 1px solid rgba(34, 197, 94, 0.4); }
+  .badge-consider { color: #8ab4ff; background: rgba(59, 130, 246, 0.18); border: 1px solid rgba(59, 130, 246, 0.4); }
+
+  /* ── Buttons ────────────────────────────────────────────────────── */
+  .btn-primary {
+    font-family: var(--fu); font-weight: 700; font-size: 15px; color: #fff;
+    background: var(--accent); border: 1px solid transparent; border-radius: 12px;
+    padding: 12px 20px; cursor: pointer;
+    transition: background 0.18s var(--ease-out, ease-out);
+  }
+  .btn-primary:hover { background: var(--accent-dk); }
+  .btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .btn-full { display: block; width: 100%; margin-top: 4px; }
+  .btn-ghost {
+    font-family: var(--fu); font-weight: 600; font-size: 15px; color: #fff;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px; padding: 12px 20px; cursor: pointer;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transition: border-color 0.18s var(--ease-out, ease-out), background 0.18s var(--ease-out, ease-out);
+  }
+  .btn-ghost:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.28); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   /* ── Floating glass nav ─────────────────────────────────────────── */
   .lab-nav {
@@ -271,15 +429,22 @@ import Base from '../../layouts/Base.astro';
   .lab-pill:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
   .lab-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .lab-pill.is-active {
-    color: #fff;
-    background: rgba(255, 90, 31, 0.3);
-    border-color: rgba(255, 90, 31, 0.5);
+    color: #fff; background: rgba(255, 90, 31, 0.3); border-color: rgba(255, 90, 31, 0.5);
+  }
+
+  /* ── Responsive ─────────────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .p03-grid { grid-template-columns: minmax(0, 1fr); }
+    .p01-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    /* sidebar drops below prose and stops sticking on mobile */
+    .p01-side { position: static; top: auto; }
   }
 
   @media (max-width: 560px) {
-    .lab-content { padding-bottom: 160px; }
-    .card-content, .modal-content, .note-content { width: min(86vw, 340px); }
-    .lab-row--left, .lab-row--right, .lab-row--center { justify-content: center; }
+    .lab-content { padding-bottom: 170px; }
+    .lab-section { margin-top: 104px; }
+    .p02-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .p02-actions .btn-primary, .p02-actions .btn-ghost { flex: 1 1 100%; }
     .lab-warn {
       font-size: 11px; padding: 7px 14px;
       white-space: normal; line-height: 1.35; border-radius: 16px;
@@ -287,7 +452,7 @@ import Base from '../../layouts/Base.astro';
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .lab-scrollcue { animation: none; }
-    .lab-pill { transition: none; }
+    .feat-card, .btn-primary, .btn-ghost, .lab-pill { transition: none; }
+    .feat-card:hover { transform: none; }
   }
 </style>
