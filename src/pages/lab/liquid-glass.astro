@@ -292,9 +292,13 @@ import Base from '../../layouts/Base.astro';
   }
 
   @media (max-width: 560px) {
-    .lab-page { padding-top: 84px; }
+    .lab-page { padding-top: 96px; }
     .card-content, .modal-content { width: min(86vw, 320px); }
-    .lab-warn { font-size: 11px; padding: 6px 12px; }
+    /* let the full note wrap on mobile instead of truncating */
+    .lab-warn {
+      font-size: 11px; padding: 6px 12px;
+      white-space: normal; text-overflow: clip; line-height: 1.35;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
