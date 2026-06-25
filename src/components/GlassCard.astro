@@ -1,0 +1,144 @@
+---
+// GlassCard — reusable frosted backdrop-filter feature card.
+// The whole card is a link; hover lift is CSS-only and reduced-motion safe.
+// Needs a dark backdrop behind it for backdrop-filter to have anything to blur.
+interface Props {
+  category: string;
+  name: string;
+  description: string;
+  verdict: 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED';
+  price: number;
+  href: string;
+  /** CSS gradient/colour string for the top band */
+  topColor: string;
+}
+const { category, name, description, verdict, price, href, topColor } = Astro.props;
+---
+<a class="glass-card" href={href}>
+  <div class="gc-band" style={`background: ${topColor};`} aria-hidden="true"></div>
+  <div class="gc-body">
+    <p class="gc-category">{category}</p>
+    <h3 class="gc-name">{name}</h3>
+    <p class="gc-desc">{description}</p>
+    <div class="gc-foot">
+      <span class:list={['gc-verdict', `gc-verdict--${verdict.toLowerCase()}`]}>{verdict}</span>
+      <span class="gc-price">${price}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  /* Hallmark · component: glass-card · genre: atmospheric · theme: brand-dark
+   * states: default · hover · focus-visible · active  (disabled/loading/error/success N/A — content link)
+   * pre-emit critique: P5 H5 E5 S5 R5 V4 · contrast: pass */
+
+  .glass-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden; /* clips the top band to the card's rounded corners */
+    /* Smooth ease-out (transitions.dev motion token), exact props — never `all` */
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  .glass-card:active { transform: translateY(-2px); }
+  .glass-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .gc-band {
+    height: 120px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .gc-body { padding: 20px; }
+  .gc-category {
+    font-family: var(--fu);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .gc-name {
+    font-family: var(--fd);
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 6px;
+    overflow-wrap: anywhere;
+  }
+  .gc-desc {
+    font-family: var(--fu);
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .gc-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .gc-verdict {
+    font-family: var(--fu);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .gc-verdict--buy {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+  }
+  .gc-verdict--consider {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #60a5fa;
+  }
+  .gc-verdict--skip {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .gc-verdict--updated {
+    background: rgba(255, 90, 31, 0.15);
+    border: 1px solid rgba(255, 90, 31, 0.4);
+    color: #FF5A1F;
+  }
+  .gc-price {
+    font-family: var(--fd);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glass-card { transition: none; }
+    .glass-card:hover, .glass-card:active { transform: none; }
+  }
+</style>

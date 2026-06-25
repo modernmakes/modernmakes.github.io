@@ -10,13 +10,56 @@ import HomeEcosystemHubs from '../components/home/HomeEcosystemHubs.astro';
 import HomeBuilds from '../components/home/HomeBuilds.astro';
 import HomeToolsTeaser from '../components/home/HomeToolsTeaser.astro';
 import AdSlot from '../components/AdSlot.astro';
+import GlassCard from '../components/GlassCard.astro';
+import hotends from '../data/hardware/hotends.json';
 const currentPath = '/';
+
+// Slug + first-sentence helpers (defined inline per project convention)
+function toSlug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+function firstSentence(text: string) {
+  const m = (text ?? '').match(/^.*?[.!?](\s|$)/);
+  return m ? m[0].trim() : (text ?? '');
+}
+
+// Top three hotends → featured glass cards
+const featuredHotends = (hotends as any[]).slice(0, 3);
+const featuredTopColors = [
+  'linear-gradient(135deg, #FF5A1F 0%, #C93B08 100%)',
+  'linear-gradient(135deg, #2a2a2a 0%, #FF5A1F22 100%)',
+  'linear-gradient(135deg, #1a1a2e 0%, #FF5A1F11 100%)',
+];
 ---
 <Base title="The 3D Printing Enthusiast's Publication" description="Modern Makes — editorial coverage of 3D printers, filament, mods, and the builds that matter." heroPage={true} hasHero={true}>
   <Nav slot="nav" currentPath={currentPath} />
   <HomeHero />
   <HomeTicker />
   <HomeLatestArticles />
+  <section class="fhw" aria-labelledby="fhw-heading">
+    <div class="fhw-container">
+      <header class="fhw-header">
+        <div class="fhw-header-text">
+          <p class="fhw-eyebrow">Featured Hardware</p>
+          <h2 id="fhw-heading" class="fhw-headline">Hotends worth building around.</h2>
+        </div>
+        <a href="/hardware/hotends" class="fhw-all">All hotends →</a>
+      </header>
+      <div class="fhw-grid">
+        {featuredHotends.map((rec: any, i: number) => (
+          <GlassCard
+            category="HOTEND"
+            name={rec.Name}
+            description={firstSentence(rec.Description)}
+            verdict={(rec.Verdict ?? '').toUpperCase() as 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED'}
+            price={rec['Price (USD)']}
+            href={`/hardware/hotends/${toSlug(rec.Name)}`}
+            topColor={featuredTopColors[i]}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
   <HomeEcosystemHubs />
   <HomeNewsletterCTA />
   <HomeToolsTeaser />
@@ -38,3 +81,78 @@ const currentPath = '/';
     }
   })}></script>
 </Base>
+
+<style>
+  /* Featured hardware — dark band so the GlassCards' backdrop-filter has depth to blur */
+  .fhw {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark-bg);
+    padding: 64px 0;
+  }
+  .fhw::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(55% 55% at 50% 35%, rgba(255, 90, 31, 0.08), transparent 70%);
+  }
+  .fhw-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .fhw-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .fhw-eyebrow {
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .fhw-headline {
+    font-family: var(--fd);
+    font-size: clamp(22px, 2vw + 10px, 32px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.3px;
+    line-height: 1.05;
+    margin: 0;
+  }
+  .fhw-all {
+    font-family: var(--fu);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+  }
+  .fhw-all:hover { color: var(--accent-mid); }
+  .fhw-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  @media (max-width: 1024px) {
+    .fhw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fhw-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+  @media (max-width: 768px) {
+    .fhw-container { padding: 0 20px; }
+  }
+  @media (max-width: 560px) {
+    .fhw-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
