@@ -72,31 +72,59 @@ No lint or test commands. The PostToolUse build hook runs `npm run build` automa
 
 
 
-Four skills are installed — invoke them as described:
+\### Design Skill Routing
 
 
 
-| Skill | When to use |
+| Task | Primary Skill | Secondary |
 
-|---|---|
+|---|---|---|
 
-| `transitions review` | Before building any new component with interactive elements or animations |
+| New page build | `hallmark` | `stitch-design-taste` |
 
-| `transitions apply` | To add specific transitions to existing components |
+| New component with animation | `transitions review` | `design-motion-principles` |
 
-| `hallmark` | On all new page builds — picks strong macrostructure, refuses to clone existing page shapes |
+| Add transitions to existing component | `transitions apply` | — |
 
-| `impeccable` | Design quality audit — run after page builds |
+| Design quality audit | `impeccable` | `web-design-guidelines` |
 
-| `nanobanana` | AI image generation via Gemini MCP |
+| Catch AI-slop patterns | `hallmark` | — |
+
+| Agency-grade polish pass | `high-end-visual-design` | — |
+
+| Visual direction / opinionated taste | `@design-taste-frontend` | — |
+
+| Image → code (screenshot/mockup) | `image-to-code` | — |
+
+| Generate hero image | `nanobanana` | — |
+
+| YouTube thumbnail | `youtube-thumbnail-design` | — |
 
 
 
-\*\*Rule:\*\* Every new page build invokes `hallmark`. Every new component invokes `transitions review` first.
+\### Rules
+
+\- \*\*Every new page build\*\* → invoke `hallmark` first
+
+\- \*\*Every new component\*\* → invoke `transitions review` first
+
+\- Never stack more than 2 design skills on a single task
+
+\- Explicit invocation (`@agent` or `/skill-name`) beats auto-selection for design tasks
+
+\- `frontend-design` is always active as baseline — no need to invoke explicitly
 
 
 
-\---
+\### Project-specific exceptions
+
+\- Modern Makes uses \*\*no Tailwind\*\* — skip any skill output that uses utility classes; translate to CSS custom properties from `global.css`
+
+\- Motion/animation must respect the existing CSS nav hysteresis pattern (80px down / 60px up)
+
+\- Never output `<style>` blocks without checking if `is:global` is needed first
+
+\--
 
 
 
@@ -160,31 +188,31 @@ Key tokens:
 
 ```css
 
-\--accent: #FF5A1F       /\* electric orange \*/
+\\\\--accent: #FF5A1F       /\\\\\\\* electric orange \\\\\\\*/
 
-\--black: #1A1A1A
+\\\\--black: #1A1A1A
 
-\--bg: #F7F6F3           /\* off-white \*/
+\\\\--bg: #F7F6F3           /\\\\\\\* off-white \\\\\\\*/
 
-\--surface: #FFFFFF
+\\\\--surface: #FFFFFF
 
-\--border: #E2E2E0
+\\\\--border: #E2E2E0
 
-\--g1, --g2              /\* grey scale \*/
+\\\\--g1, --g2              /\\\\\\\* grey scale \\\\\\\*/
 
-\--dark-bg, --dark-surface, --dark-border
+\\\\--dark-bg, --dark-surface, --dark-border
 
-\--fd                    /\* Barlow Condensed — display \*/
+\\\\--fd                    /\\\\\\\* Barlow Condensed — display \\\\\\\*/
 
-\--fb                    /\* Lora — body prose \*/
+\\\\--fb                    /\\\\\\\* Lora — body prose \\\\\\\*/
 
-\--fu                    /\* Barlow — UI \*/
+\\\\--fu                    /\\\\\\\* Barlow — UI \\\\\\\*/
 
-\--fm                    /\* JetBrains Mono — specs/code \*/
+\\\\--fm                    /\\\\\\\* JetBrains Mono — specs/code \\\\\\\*/
 
-\--max-w: 1200px
+\\\\--max-w: 1200px
 
-\--article-w: 720px
+\\\\--article-w: 720px
 
 ```
 
@@ -196,7 +224,7 @@ Pre-built utility classes — use before writing new CSS:
 
 
 
-The `lg-\*` layout rules (two-column editorial: breadcrumb → H1 → sticky sidebar TOC + prose) are defined in `global.css` under `/\* ── EDITORIAL LAYOUT (lg-\*) ── \*/`. Use these for all info/legal pages — do not re-implement inline.
+The `lg-\\\\\\\*` layout rules (two-column editorial: breadcrumb → H1 → sticky sidebar TOC + prose) are defined in `global.css` under `/\\\\\\\* ── EDITORIAL LAYOUT (lg-\\\\\\\*) ── \\\\\\\*/`. Use these for all info/legal pages — do not re-implement inline.
 
 
 
@@ -218,127 +246,127 @@ Component styles live in `<style>` blocks within `.astro` files.
 
 src/
 
-&#x20; layouts/
+\\\&#x20; layouts/
 
-&#x20;   Base.astro              — wraps every page. hasPageH1, hasHero, heroPage props
+\\\&#x20;   Base.astro              — wraps every page. hasPageH1, hasHero, heroPage props
 
-&#x20;   ArticleLayout.astro     — news articles. currentPath prop for nav highlight
+\\\&#x20;   ArticleLayout.astro     — news articles. currentPath prop for nav highlight
 
-&#x20;   GuideLayout.astro       — how-to guides with steps, tools, parts
+\\\&#x20;   GuideLayout.astro       — how-to guides with steps, tools, parts
 
-&#x20;   ComparisonLayout.astro  — VS articles with score bars
+\\\&#x20;   ComparisonLayout.astro  — VS articles with score bars
 
-&#x20;   FilamentLayout.astro    — filament material pages
+\\\&#x20;   FilamentLayout.astro    — filament material pages
 
-&#x20;   ComponentLayout.astro   — hardware component pages (hotends, extruders, probes)
+\\\&#x20;   ComponentLayout.astro   — hardware component pages (hotends, extruders, probes)
 
-&#x20;   MotionSystemLayout.astro — gantry/motion mod pages
+\\\&#x20;   MotionSystemLayout.astro — gantry/motion mod pages
 
-&#x20; pages/
+\\\&#x20; pages/
 
-&#x20;   index.astro             — homepage (data-driven from homepage.json)
+\\\&#x20;   index.astro             — homepage (data-driven from homepage.json)
 
-&#x20;   voron/
+\\\&#x20;   voron/
 
-&#x20;     index.astro           — Voron hub (model selector, subsystem grid)
+\\\&#x20;     index.astro           — Voron hub (model selector, subsystem grid)
 
-&#x20;     mods/index.astro      — 18 community mods with category/model filter
+\\\&#x20;     mods/index.astro      — 18 community mods with category/model filter
 
-&#x20;     toolheads/            — 5 toolhead pages (stealthburner, xol, etc)
+\\\&#x20;     toolheads/            — 5 toolhead pages (stealthburner, xol, etc)
 
-&#x20;     origin.astro          — Voron history editorial page
+\\\&#x20;     origin.astro          — Voron history editorial page
 
-&#x20;     \[subsystem pages]     — extruders, motion-system, electronics, etc
+\\\&#x20;     \\\\\\\[subsystem pages]     — extruders, motion-system, electronics, etc
 
-&#x20;   ratrig/, vzbot/, hevort/ — ecosystem hubs + origin.astro pages
+\\\&#x20;   ratrig/, vzbot/, hevort/ — ecosystem hubs + origin.astro pages
 
-&#x20;   hardware/
+\\\&#x20;   hardware/
 
-&#x20;     index.astro           — hardware category grid (dynamic counts from JSON)
+\\\&#x20;     index.astro           — hardware category grid (dynamic counts from JSON)
 
-&#x20;     hotends/
+\\\&#x20;     hotends/
 
-&#x20;       index.astro         — hotend card grid, verdict filter tabs
+\\\&#x20;       index.astro         — hotend card grid, verdict filter tabs
 
-&#x20;       \[slug].astro        — dynamic route, one page per Airtable record
+\\\&#x20;       \\\\\\\[slug].astro        — dynamic route, one page per Airtable record
 
-&#x20;     extruders/
+\\\&#x20;     extruders/
 
-&#x20;       index.astro         — extruder card grid, verdict filter tabs
+\\\&#x20;       index.astro         — extruder card grid, verdict filter tabs
 
-&#x20;       \[slug].astro        — dynamic route, one page per Airtable record
+\\\&#x20;       \\\\\\\[slug].astro        — dynamic route, one page per Airtable record
 
-&#x20;     probes/
+\\\&#x20;     probes/
 
-&#x20;       index.astro         — bed probe card grid, verdict filter tabs
+\\\&#x20;       index.astro         — bed probe card grid, verdict filter tabs
 
-&#x20;       \[slug].astro        — dynamic route, one page per Airtable record
+\\\&#x20;       \\\\\\\[slug].astro        — dynamic route, one page per Airtable record
 
-&#x20;   guides/, news/, filament/, tools/, press/
+\\\&#x20;   guides/, news/, filament/, tools/, press/
 
-&#x20;   legal/
+\\\&#x20;   legal/
 
-&#x20;     terms-of-service.astro
+\\\&#x20;     terms-of-service.astro
 
-&#x20;     cookie-policy.astro
+\\\&#x20;     cookie-policy.astro
 
-&#x20;   editorial.astro
+\\\&#x20;   editorial.astro
 
-&#x20;   advertise.astro
+\\\&#x20;   advertise.astro
 
-&#x20;   partners.astro
+\\\&#x20;   partners.astro
 
-&#x20;   search.astro
+\\\&#x20;   search.astro
 
-&#x20;   sitemap.astro
+\\\&#x20;   sitemap.astro
 
-&#x20;   newsletter/
+\\\&#x20;   newsletter/
 
-&#x20;     archive.astro
+\\\&#x20;     archive.astro
 
-&#x20;   404.astro
+\\\&#x20;   404.astro
 
-&#x20; content/
+\\\&#x20; content/
 
-&#x20;   news/       — .md files for news articles
+\\\&#x20;   news/       — .md files for news articles
 
-&#x20;   guides/     — .md files for guides
+\\\&#x20;   guides/     — .md files for guides
 
-&#x20;   comparisons/ — .md files for comparisons
+\\\&#x20;   comparisons/ — .md files for comparisons
 
-&#x20; data/
+\\\&#x20; data/
 
-&#x20;   homepage.json           — drives every homepage section
+\\\&#x20;   homepage.json           — drives every homepage section
 
-&#x20;   ads.json                — ad slot config
+\\\&#x20;   ads.json                — ad slot config
 
-&#x20;   hardware/               — JSON files fetched from Airtable
+\\\&#x20;   hardware/               — JSON files fetched from Airtable
 
-&#x20;     hotends.json          — 12 records (Rapido 2 family, Chube, Goliath, Tricorn)
+\\\&#x20;     hotends.json          — 12 records (Rapido 2 family, Chube, Goliath, Tricorn)
 
-&#x20;     extruders.json        — 3 records (Fysetc Sherpa V3, SLM Sherpa Micro, Lite Pro)
+\\\&#x20;     extruders.json        — 3 records (Fysetc Sherpa V3, SLM Sherpa Micro, Lite Pro)
 
-&#x20;     bed-probes.json       — 5 records
+\\\&#x20;     bed-probes.json       — 5 records
 
-&#x20;     nozzles.json          — empty
+\\\&#x20;     nozzles.json          — empty
 
-&#x20;     build-plates.json     — empty
+\\\&#x20;     build-plates.json     — empty
 
-&#x20;     mainboards.json       — 1 record (StrideMax Dual FD)
+\\\&#x20;     mainboards.json       — 1 record (StrideMax Dual FD)
 
-&#x20;     toolboards.json       — empty
+\\\&#x20;     toolboards.json       — empty
 
-&#x20;     part-cooling.json     — 1 record (Wonsmart WS9290)
+\\\&#x20;     part-cooling.json     — 1 record (Wonsmart WS9290)
 
-&#x20;     motors.json           — 1 record (SLM NEMA17 Water Cooler)
+\\\&#x20;     motors.json           — 1 record (SLM NEMA17 Water Cooler)
 
-&#x20; styles/
+\\\&#x20; styles/
 
-&#x20;   global.css              — entire design system
+\\\&#x20;   global.css              — entire design system
 
-&#x20; components/
+\\\&#x20; components/
 
-&#x20;   Nav.astro, Footer.astro, AdSlot.astro, BeehiivEmbed.astro, \[homepage section components]
+\\\&#x20;   Nav.astro, Footer.astro, AdSlot.astro, BeehiivEmbed.astro, \\\\\\\[homepage section components]
 
 ```
 
@@ -376,17 +404,17 @@ Always pass `hasPageH1={true}` from layouts that render their own H1 to avoid du
 
 title, brand, category, excerpt, verdict, price: { usd }
 
-specs\[]             — { label, value } array for specs table
+specs\\\\\\\[]             — { label, value } array for specs table
 
-quickSpecs\[]        — { label, value } array for sidebar
+quickSpecs\\\\\\\[]        — { label, value } array for sidebar
 
-vendors\[]           — { name, url, price, region, primary, affiliate }
+vendors\\\\\\\[]           — { name, url, price, region, primary, affiliate }
 
-compatibleToolheads\[] — { name, href? }
+compatibleToolheads\\\\\\\[] — { name, href? }
 
-compatiblePrinters\[]  — { name } (separate from toolheads — different sidebar section)
+compatiblePrinters\\\\\\\[]  — { name } (separate from toolheads — different sidebar section)
 
-relatedComponents\[] — { title, category, href }
+relatedComponents\\\\\\\[] — { title, category, href }
 
 heroImageUrl        — used in Product schema image field
 
@@ -492,9 +520,9 @@ npm run fetch-data
 
 git add src/data/hardware/
 
-git commit -m "data: \[description]"
+git commit -m "data: \\\\\\\[description]"
 
-\# Matt pushes from GitHub Desktop
+\\\\# Matt pushes from GitHub Desktop
 
 ```
 
@@ -538,7 +566,7 @@ git commit -m "data: \[description]"
 
 function toSlug(name) {
 
-&#x20; return name.toLowerCase().replace(/\[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+\\\&#x20; return name.toLowerCase().replace(/\\\\\\\[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 }
 
@@ -562,9 +590,9 @@ function toSlug(name) {
 
 \- \*\*Flow:\*\* Custom Webhook → HTTP (Beehiiv API) → Webhook Response
 
-\- \*\*Beehiiv endpoint:\*\* `POST https://api.beehiiv.com/v2/publications/pub\_1e077e32-a7aa-4f8e-87f8-da9d0db45b44/subscriptions`
+\- \*\*Beehiiv endpoint:\*\* `POST https://api.beehiiv.com/v2/publications/pub\\\\\\\_1e077e32-a7aa-4f8e-87f8-da9d0db45b44/subscriptions`
 
-\- \*\*Payload fields:\*\* `email`, `utm\_source`, `utm\_medium`, `utm\_campaign`
+\- \*\*Payload fields:\*\* `email`, `utm\\\\\\\_source`, `utm\\\\\\\_medium`, `utm\\\\\\\_campaign`
 
 \- \*\*Status:\*\* Active, tested
 
@@ -588,13 +616,13 @@ function toSlug(name) {
 
 \### BeehiivEmbed.astro UTM sources
 
-\- HomeNewsletterCTA: `utm\_campaign=homepage\_cta`
+\- HomeNewsletterCTA: `utm\\\\\\\_campaign=homepage\\\\\\\_cta`
 
-\- Article pages: `utm\_campaign=article\_footer\_\_\[slug]`
+\- Article pages: `utm\\\\\\\_campaign=article\\\\\\\_footer\\\\\\\_\\\\\\\_\\\\\\\[slug]`
 
-\- Guide pages: `utm\_campaign=guide\_footer\_\_\[slug]`
+\- Guide pages: `utm\\\\\\\_campaign=guide\\\\\\\_footer\\\\\\\_\\\\\\\_\\\\\\\[slug]`
 
-\- Newsletter archive empty state: `utm\_campaign=archive\_empty\_state`
+\- Newsletter archive empty state: `utm\\\\\\\_campaign=archive\\\\\\\_empty\\\\\\\_state`
 
 
 
@@ -606,7 +634,7 @@ function toSlug(name) {
 
 
 
-\*\*Publication ID:\*\* `pub\_1e077e32-a7aa-4f8e-87f8-da9d0db45b44`
+\*\*Publication ID:\*\* `pub\\\\\\\_1e077e32-a7aa-4f8e-87f8-da9d0db45b44`
 
 \*\*Welcome email:\*\* configured at Settings → Emails → Welcome Email (not Automations — paywalled)
 
@@ -630,15 +658,15 @@ Every layout that renders a visible H1 passes `hasPageH1={true}` to Base.astro. 
 
 \### Title format by page type
 
-\- Hardware detail: `"\[Name] Hotend — Specs, Verdict \& Where to Buy — Modern Makes"`
+\- Hardware detail: `"\\\\\\\[Name] Hotend — Specs, Verdict \\\\\\\& Where to Buy — Modern Makes"`
 
-\- Hardware index: `"Best FDM Hotends for Voron \& Prosumer Printers — Modern Makes"`
+\- Hardware index: `"Best FDM Hotends for Voron \\\\\\\& Prosumer Printers — Modern Makes"`
 
-\- Article: `"\[Headline] — Modern Makes"`
+\- Article: `"\\\\\\\[Headline] — Modern Makes"`
 
-\- Guide: `"\[Title] — Modern Makes"`
+\- Guide: `"\\\\\\\[Title] — Modern Makes"`
 
-\- Origin story: `"How \[Brand] Started: \[Subtitle] — Modern Makes"`
+\- Origin story: `"How \\\\\\\[Brand] Started: \\\\\\\[Subtitle] — Modern Makes"`
 
 
 
@@ -688,15 +716,15 @@ Schema injected via `<script type="application/ld+json" slot="head">` — Base.a
 
 \- \*\*Make.com blueprint imports\*\* — header key names always blank after import, enter manually. Hook IDs reference numbers that don't exist in importing account — re-select webhook from dropdown. Gmail module needs re-authorization after every import
 
-\- \*\*Make.com `Run once`\*\* — must be triggered by a live form submission before dynamic variables like `{{1.utm\_source}}` become mappable in subsequent modules
+\- \*\*Make.com `Run once`\*\* — must be triggered by a live form submission before dynamic variables like `{{1.utm\\\\\\\_source}}` become mappable in subsequent modules
 
 \- \*\*Astro `z.string().optional()`\*\* required for any frontmatter field not present in all files in a collection — missing required fields cause silent build failures
 
 \- \*\*CSS nav hysteresis\*\* — nav snaps solid at 80px scroll down, unsnaps at 60px scroll up — eliminates flicker at threshold
 
-\- \*\*`Astro.site`\*\* — set in `astro.config.mjs`. Use for absolute URLs in schema: `new URL(Astro.site).href.replace(/\\/$/, '')`
+\- \*\*`Astro.site`\*\* — set in `astro.config.mjs`. Use for absolute URLs in schema: `new URL(Astro.site).href.replace(/\\\\\\\\/$/, '')`
 
-\- \*\*`fetch-data` script\*\* — `scripts/fetch-airtable.mjs` requires `AIRTABLE\_TOKEN` env var. Run from VS Code terminal where token is set. GitHub Actions also runs nightly
+\- \*\*`fetch-data` script\*\* — `scripts/fetch-airtable.mjs` requires `AIRTABLE\\\\\\\_TOKEN` env var. Run from VS Code terminal where token is set. GitHub Actions also runs nightly
 
 \- \*\*AdSlot component\*\* — `<AdSlot slotName="slot-name" />` renders nothing when `"active": false` in `ads.json`
 
@@ -716,17 +744,17 @@ Schema injected via `<script type="application/ld+json" slot="head">` — Base.a
 
 src/content/
 
-&#x20; news/        → /news/\[slug]        → ArticleLayout
+\\\&#x20; news/        → /news/\\\\\\\[slug]        → ArticleLayout
 
-&#x20; guides/      → /guides/\[slug]      → GuideLayout
+\\\&#x20; guides/      → /guides/\\\\\\\[slug]      → GuideLayout
 
-&#x20; comparisons/ → /comparisons/\[slug] → ComparisonLayout
+\\\&#x20; comparisons/ → /comparisons/\\\\\\\[slug] → ComparisonLayout
 
 ```
 
 
 
-Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/news/\[slug].astro` etc.
+Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/news/\\\\\\\[slug].astro` etc.
 
 
 
@@ -766,7 +794,7 @@ Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/new
 
 \- \*\*Verdict badge colors:\*\* BUY = green, CONSIDER = blue, SKIP = grey, UPDATED = orange (in `global.css`)
 
-\- \*\*Hotend detail\*\* (`/hardware/hotends/\[slug]`) — redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`
+\- \*\*Hotend detail\*\* (`/hardware/hotends/\\\\\\\[slug]`) — redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`
 
 
 
@@ -838,7 +866,7 @@ Gradient fallbacks on all hotend pages and several articles. Workflow:
 
 2\. \*\*Lunar studio prompt:\*\* product on moon surface, Earth visible, dramatic rim lighting, electric orange glow
 
-3\. Save to `public/Media/articles/YYYY/MM/\[slug]/hero.webp`
+3\. Save to `public/Media/articles/YYYY/MM/\\\\\\\[slug]/hero.webp`
 
 4\. For hotends: add Image URL in Airtable → run `npm run fetch-data`
 
@@ -870,7 +898,7 @@ Gradient fallbacks on all hotend pages and several articles. Workflow:
 
 8\. \*\*Domain\*\* — `modernmakes.io` recommended; schema URLs need updating after purchase
 
-9\. \*\*GA4 custom events\*\* — `tool\_click` and `newsletter\_signup` partially wired
+9\. \*\*GA4 custom events\*\* — `tool\\\\\\\_click` and `newsletter\\\\\\\_signup` partially wired
 
 10\. \*\*og-default.jpg\*\* — exists at `public/og-default.jpg` but verify it's wired correctly
 

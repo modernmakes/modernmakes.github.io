@@ -20,3 +20,7 @@ Thumbs.db
 
 # Playwright MCP scratch (screenshots, snapshots, console logs)
 .playwright-mcp/
+
+# Installed agent skills (tooling, not site content)
+.agents/
+.claude/skills/
