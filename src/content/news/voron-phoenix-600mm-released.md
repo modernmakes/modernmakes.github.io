@@ -1,47 +1,48 @@
 ---
-title: "Voron Phoenix Arrives: 600mm Build Volume, Octopus 10 Max Required"
+title: "Voron Phoenix: The 600mm IDEX Voron Is Coming — But It's Not Released Yet"
 category: "HARDWARE"
-date: 2026-05-02
+date: 2026-06-25
 readTime: "3 min read"
-excerpt: "The Voron Phoenix brings a 600mm build volume to the Voron ecosystem, requiring the Octopus 10 Max board as the only controller with enough stepper drivers to run it."
+excerpt: "The Voron Phoenix is a large-format IDEX CoreXY machine that's been shown at SMRRF and runs as an internal beta — but as of mid-2026 there's still no public CAD, BOM, or manual. Here's what the community development threads actually show."
 summary:
-  - "600mm build volume — largest in the Voron lineup"
-  - "Requires Octopus 10 Max — the only board supporting 10 stepper drivers"
-  - "Community-designed, open source as with all Voron printers"
-  - "Announced May 2, 2026 with 'the wait is over' community post"
-  - "Competes with FYSETC Venture XL in the large-format DIY space"
+  - "Large-format IDEX CoreXY — Voron's first dual-independent-extruder design"
+  - "Roughly 600 × 600 × 550 mm build volume, with four separate heated beds"
+  - "Still in internal beta — no public CAD, BOM, or manual as of mid-2026"
+  - "Shown publicly at SMRRF; release is 'done when it's done'"
+  - "Specs are community-preview and not finalized"
 ---
 
-<p class="art-lead">The Voron Design team has announced the Voron Phoenix, a new large-format CoreXY printer with a 600mm build volume — the largest in the Voron lineup — and a hard dependency on the Octopus 10 Max controller board, currently the only option with sufficient stepper driver outputs to run it.</p>
+<p class="art-lead">The Voron Phoenix is the most ambitious machine the Voron community has previewed: a large-format CoreXY printer with independent dual extrusion (IDEX) and a build volume well beyond the 350mm ceiling of the Voron 2.4. It has been shown publicly and is running as an internal beta — but as of mid-2026 it has not been officially released, and there is no public CAD, BOM, or manual yet.</p>
 
-## The Announcement
+## Status: Beta, Not Released
 
-Voron Design published the Phoenix on May 2, 2026, with a community post carrying the phrase "the wait is over" — a reference to long-running speculation that the team was working on a machine beyond the Voron 2.4's 350mm maximum. The release was accompanied by the full BOM, CAD files, and configuration examples in the Voron Design GitHub repository, consistent with the project's open-source model.
+We want to be clear up front, because there's been confusion in the community: the Phoenix is **not** a finished, downloadable Voron design. Development threads on the official VORON forum and Team FDM describe an internal beta with a handful of operational units, a manual that is still being written, and a BOM still being error-checked. The team's public framing has been the familiar open-hardware line — "done when it's done" — with no committed release date.
 
-The announcement generated immediate discussion across r/voroncorexy and the official Voron Discord server, where the reaction centred primarily on the Octopus 10 Max requirement and the parts cost at 600mm scale.
+The Phoenix was originally floated for late 2023 / early 2024 and has slipped repeatedly. It has appeared at events like SMRRF, which is where most of the photos and video circulating online come from. What does not yet exist is the thing that actually makes a Voron buildable: published CAD files, a finalized bill of materials, and a build manual.
 
-## Build Volume and Frame
+> Treat everything below as community-preview information. Specifications for an unreleased machine change, and nothing here is final until Voron Design publishes the files.
 
-The Phoenix uses a standard CoreXY motion system scaled to 600mm×600mm×600mm. The frame follows the established Voron 2.4 design language — aluminium extrusion, ACM panels, printed ABS structural components — but at a scale that requires longer extrusions and a significantly heavier gantry assembly.
+## What the Previews Show
 
-Voron Design recommends the 2020 extrusion profile for the Phoenix rather than the 2040 used in the larger Voron 2.4 variants, citing weight distribution considerations at this scale. The full BOM is available in the GitHub repository with sourcing notes.
+Based on the public showings and community development threads, the Phoenix is shaping up as a genuinely different machine from the rest of the Voron lineup:
 
-## The Octopus 10 Max Requirement
+- **IDEX** — independent dual extruders, a first for an official Voron design. This is the headline feature, enabling true dual-material and mirror/copy modes at scale.
+- **Large format** — roughly 600 × 600 mm in X/Y, with about 550 mm of Z travel.
+- **Four separate heated beds** — the print area is split into independently heated zones rather than one monolithic plate.
+- **CANBUS on the toolhead** and **Nema 23 motors** to move the heavier large-format gantry.
+- A **revised Tap** using two cross-roller rails instead of a single MGN9 for more stable probing, paired with an updated toolhead, and cable chains rather than umbilicals for rigidity.
+- **Dual filament runout sensors** — one at the toolhead, one at the spool entry.
 
-The Voron Phoenix requires the BTT Octopus 10 Max mainboard. The reason is driver count: a 600mm CoreXY at this complexity requires 10 independent stepper motor outputs. The standard Octopus Pro supports 8 drivers, which is sufficient for the Voron 2.4 up to 350mm. The Octopus 10 Max adds two additional driver slots specifically to serve configurations like the Phoenix.
-
-As of the announcement, the Octopus 10 Max is available but not widely stocked. West3D, Fabreeko, and several international suppliers carry it, with pricing around $85–95. Builders planning a Phoenix should factor board availability into their timeline, as supply is constrained relative to standard Octopus variants.
-
-Klipper configuration files for the Phoenix on the Octopus 10 Max have been contributed to the Voron repository alongside the mechanical files.
+As with every Voron, the project is open source and self-sourced: when the files land, builders will assemble from a published BOM rather than buy a single sealed product.
 
 ## Where It Fits in the Voron Ecosystem
 
-The Voron lineup has historically topped out at 350mm with the 2.4 and Trident. The Phoenix fills a gap for builders who need larger print volumes but want to stay within the Voron design philosophy: open source, community-supported, self-sourced, and highly modifiable.
+The Voron lineup has historically topped out around 350mm with the 2.4 and Trident. The Phoenix targets builders who need substantially more volume — and, with IDEX, more multi-material capability — while staying inside the Voron philosophy: open source, community-supported, self-sourced, and highly modifiable.
 
-The Phoenix is not a beginner build. At 600mm, parts cost is substantially higher — a rough BOM estimate based on current sourcing puts a complete Phoenix at $900–1,300 depending on component quality, not including tools. Build time is estimated at 25–35 hours for experienced Voron builders.
+It is emphatically not a first build. Large-format IDEX adds mechanical complexity, cost, and tuning surface on top of an already advanced platform, and the absence of a finished manual means early adopters will be doing real engineering, not following a guide.
 
-## Competition
+## What We Don't Know Yet
 
-The closest direct competitor in the large-format DIY printer space is the FYSETC Venture XL, which offers a similar CoreXY architecture at 500mm and ships as a partial kit rather than a full self-source build. The Venture XL is generally available for around $600–700 fully kitted. The Phoenix, as a pure self-source design, will likely land at similar or higher all-in cost but with the degree of customisation and community support that Voron builds are known for.
+Plenty remains genuinely open: the release date, the finalized BOM and realistic all-in cost, the recommended control electronics, and whether the established Voron kit vendors will offer Phoenix kits. We're not going to put numbers on those until Voron Design does.
 
-Voron Design has not indicated plans for an official kit vendor programme for the Phoenix, though third-party kit providers that currently supply Voron 2.4 components are expected to add Phoenix kits to their catalogues.
+When the files are published, we'll cover the real build. Until then, the Phoenix is a preview — an exciting one, but a preview.
