@@ -1,49 +1,46 @@
 ---
-title: "Bondtech INDX Tool-Changer Is Now Shipping"
+title: "Bondtech INDX: 8-Material Tool-Changing Lands on the Prusa CORE One"
 category: "HARDWARE"
 date: 2026-05-26
 readTime: "3 min read"
-excerpt: "Bondtech's INDX automatic tool-changing system has begun shipping after delays from Q1 2026, bringing wireless induction heating and up to 8 nozzles to prosumer printers."
+excerpt: "Bondtech's INDX is an induction-heated tool-changer that swaps near-massless nozzles with almost no purge waste — and it's an upgrade kit built exclusively for the Prusa CORE One, in 4-tool ($749) and 8-tool ($999) versions."
 summary:
-  - "INDX uses wireless induction heating — no physical connectors between toolhead and carriage"
-  - "Supports up to 8 individual nozzle assemblies per machine"
-  - "Printhead priced at $250–300, nozzle assemblies at $35 each"
-  - "Compatible with Prusa CORE One confirmed, Voron compatibility being explored by community"
-  - "Near-zero waste multi-material printing is the primary design goal"
+  - "Induction heating — the near-massless nozzle is the heating element; no heater block, no connectors"
+  - "Exclusive to the Prusa CORE One / CORE One+ as a conversion kit (not a universal add-on)"
+  - "Two versions: 4-tool at $749 / €669 and 8-tool at $999 / €899 (first batch, tariffs/VAT incl.)"
+  - "~0.013g purge per swap — wipe tower eliminated entirely"
+  - "First batch sold out in 48 hours; Founders Edition shipped early May, Prusa Edition June–August 2026"
 ---
 
-<p class="art-lead">Bondtech's INDX automatic tool-changing system has entered active shipping after being pushed back from its original Q1 2026 target, bringing a wireless induction heating architecture and support for up to 8 nozzle assemblies to prosumer FDM machines.</p>
+<p class="art-lead">Bondtech's INDX is an automatic tool-changer built around induction heating and near-massless nozzles, delivering true multi-material printing with almost no purge waste. It is not a universal accessory: INDX ships as an upgrade kit built exclusively for the Prusa CORE One and CORE One+.</p>
 
 ## What INDX Is
 
-INDX is Bondtech's entry into the automatic tool-changer category for desktop and prosumer FDM printers. Rather than switching spools or merging filaments, INDX physically swaps entire nozzle assemblies mid-print, giving each material its own dedicated hotend. The result is true multi-material printing without the purge towers, wipe towers, or filament waste associated with single-nozzle multi-material systems.
+INDX swaps entire nozzle tools mid-print, giving each material its own dedicated nozzle. The result is multi-material printing without the purge towers, wipe towers, or filament waste of single-nozzle multi-material systems. It is a joint Bondtech–Prusa product, sold as a conversion kit for the CORE One platform; Bondtech has said availability for the CORE One L and fully assembled printers is planned later in 2026.
 
-The system consists of two main components: a carriage-mounted printhead unit and individual nozzle assemblies that dock and undock automatically during a print job. Users configure which nozzle to use for each object or layer in their slicer, and INDX handles the mechanical swap without pausing beyond the time required to complete the exchange.
+The system comes in two configurations: a **4-tool (4T)** version and an **8-tool (8T)** version. Default tools are hardened high-flow 0.4mm nozzles, with other diameters slated to follow.
 
-## Wireless Induction Heating
+## Induction Heating
 
-The defining technical feature of INDX is that there are no physical electrical connectors between the carriage and the nozzle assembly. Heating is delivered via wireless induction — a coil in the carriage transfers power to a receiver coil in the nozzle assembly when docked. Thermistor readings are passed back through the same inductive coupling.
+INDX's defining feature is that the nozzle itself is the heating element. When the carriage picks up a tool, it generates a high-frequency magnetic field that heats the nozzle from cold to printing temperature in seconds. There is no separate heater block, and there are no physical electrical connectors between the carriage and the tool — heating and contactless temperature sensing happen inductively.
 
-This approach eliminates a class of reliability problems common in tool-changing printers: connector wear, contact oxidation, and alignment sensitivity. Bondtech says the connection is rated for hundreds of thousands of dock and undock cycles. The tradeoff is that induction heating is slightly less efficient than direct resistance heating, though Bondtech has not published comparative heat-up time data.
+Because the nozzles are nearly massless, they heat and cool almost instantly, which is what makes fast tool swaps and very low waste possible. Bondtech also offers CHT nozzles, which split filament into multiple strands for higher flow, and hardened-steel tools for abrasive carbon- and glass-filled filaments.
 
-## Capacity and Configuration
+## Near-Zero Waste
 
-A single INDX-equipped machine can host up to 8 nozzle assemblies, stored in a dock that typically mounts to the side or rear of the printer frame. Each assembly contains its own heater block, heat break, thermistor, and nozzle. Users can mix nozzle diameters and materials across assemblies — running a 0.4mm brass nozzle for PLA alongside a 0.6mm hardened steel nozzle for abrasive CF filaments on the same machine.
-
-Assemblies are user-swappable. Bondtech designed them to be cleaned, re-tipped, or replaced individually without affecting the rest of the system.
+The headline efficiency number is purge waste of roughly **0.013g per material swap** — which Bondtech frames as about five times less than the most efficient competing systems. The wipe tower is eliminated entirely. For multi-color prints with frequent changes, that is the difference between tens of grams of waste and effectively none.
 
 ## Pricing
 
-The INDX printhead unit, which mounts to the carriage and contains the induction coupling and docking mechanism, is priced between $250 and $300 depending on configuration. Individual nozzle assemblies are $35 each. A base configuration with two assemblies and the printhead runs approximately $320–370.
+First-batch pricing (tariffs and VAT included):
 
-By comparison, other multi-material add-ons for existing printers typically range from $250 for filament-multiplexer systems to $600 and above for full automatic tool-changer kits from other vendors.
+- **4-tool (4T):** $749 USD / €669 EUR
+- **8-tool (8T):** $999 USD / €899 EUR
 
-## Compatibility
+That positions INDX as a premium upgrade to an already-premium open printer, rather than a budget multi-material bolt-on.
 
-Bondtech has confirmed compatibility with the Prusa CORE One as a supported platform. The INDX printhead is designed around a standardised carriage interface, and the company has published mounting dimensions publicly to encourage third-party compatibility work.
+## Compatibility and Shipping
 
-Community members have been exploring INDX compatibility with Voron 2.4 and Trident toolhead systems. As of shipping date, no official Voron mount has been released, but several toolhead adapter designs have appeared on Printables and the Voron Users Discord. Bondtech has not confirmed or denied plans for an official Voron compatibility kit.
+INDX is **exclusive to the Prusa CORE One / CORE One+** at launch — there is no universal carriage version and no Voron support; treat any claim otherwise with skepticism. Future expansion to the CORE One L and assembled machines is planned for later in 2026.
 
-## Shipping Status
-
-INDX began fulfilling pre-orders in the final week of May 2026 after a slip from the original Q1 2026 ship date. Bondtech attributed the delay to supply chain issues affecting the induction coil components. New orders placed now are quoted at a 3–4 week lead time. The system ships with the printhead unit, two nozzle assemblies, and a dock frame, with additional assemblies available as standalone add-ons.
+Pre-sales opened at Formnext in November 2025. Bondtech's Founders Edition began shipping in early May 2026 (a slip from its original date), with Prusa Edition kits shipping from June 2026 and completing by August. The first batch sold out within 48 hours; Bondtech and Prusa are running watchlist notifications for the next run.
