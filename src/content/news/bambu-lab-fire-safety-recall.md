@@ -1,61 +1,65 @@
 ---
-title: "Bambu Lab Confirms Free Board Replacement After Fire Reports"
+title: "Bambu Lab A1 Fire Hazard: The AC-Board NTC Defect, Explained"
 category: "SAFETY"
-date: 2026-05-28
+date: 2026-06-26
 readTime: "4 min read"
 heroImage: "/Media/articles/2026/05/bambu-lab-fire-safety/hero.webp"
-excerpt: "Bambu Lab is offering free AC power board replacements after nearly 70 reported fire incidents linked to a faulty NTC component in printers shipped Q3 2025."
+excerpt: "A defective NTC thermistor on the AC board of early Bambu Lab A1 and A1 Mini printers can overheat and, in multiple reported cases, cause melting and fire. Units built before the Q3 2025 board redesign are the ones at risk — here's how to check and what to do."
 featured: true
 summary:
-  - "~70 fire incidents reported globally since late April 2026"
-  - "Root cause: faulty NTC thermistor on the AC power board"
-  - "Only units with 'A' as the 6th character of the serial number are affected"
-  - "Printers manufactured and shipped in Q3 2025 carry the suspect component"
-  - "Bambu Lab is offering free AC board replacement — no proof of purchase required"
+  - "Affects A1-series printers (A1, A1 Mini) made roughly June 2024–Q2 2025, before the Q3 2025 board redesign"
+  - "Root cause: an under-spec NTC thermistor on the AC board that limits heated-bed inrush current"
+  - "It can overheat to ~140°C (160°C on damaged units), melting nearby plastic; several fires reported"
+  - "Bambu redesigned the board in Q3 2025 to remove the part — later units are not affected by this defect"
+  - "No CPSC recall for this issue; Bambu offers AC-board replacement — confirm eligibility with your serial number via support"
 ---
 
-<p class="art-lead">Bambu Lab has confirmed a free replacement program for the AC power boards of affected printers after approximately 70 fire incidents were linked to a faulty NTC thermistor component in units manufactured during Q3 2025.</p>
+<p class="art-lead">A defective component on the AC power board of early Bambu Lab A1-series printers can overheat badly enough to melt the chassis and, in multiple reported cases, start a fire. The issue is confined to units built before a Q3 2025 board redesign. If you own an A1 or A1 Mini from that window, it's worth acting on.</p>
 
-## How Reports Surfaced
+## What's Affected
 
-Accounts of overheating and small fires originating from the internal electrical enclosures of certain Bambu Lab desktop printers began appearing on community forums and the r/BambuLab subreddit in late April 2026. Users described burning odors, visible smoke, and in multiple cases open flames, all tracing back to the printer's AC power board.
+The defect involves the **Bambu Lab A1 and A1 Mini** (including A1 Combo bundles). The at-risk units were manufactured roughly **June 2024 through Q2 2025** — that is, *before* the Q3 2025 board revision. Bambu removed the offending component in the redesigned board, so A1-series printers produced after that change are not affected, and other Bambu models are not part of this specific issue.
 
-Bambu Lab acknowledged the reports publicly and launched an internal engineering investigation. Within weeks the company identified a root cause and moved to a voluntary, no-cost replacement program covering all confirmed affected units worldwide.
+This is the key point that early coverage often got backwards: **Q3 2025 is when the problem was fixed, not when affected units shipped.**
 
-## The Cause: A Faulty NTC Thermistor
+## The Defect
 
-Bambu Lab identified a defective NTC (negative temperature coefficient) thermistor on the AC power board as the source of the failures. The component is responsible for monitoring the board's operating temperature. When the thermistor fails to read accurately, the power board can exceed safe thermal limits without triggering a protective shutdown.
+The culprit is an **NTC (negative-temperature-coefficient) thermistor on the AC distribution board**, whose job is to limit inrush current to the heated bed. According to community teardown reporting, Bambu used an under-spec NTC that didn't meet requirements. In affected units the component can overheat to roughly **140°C** by independent measurement — and Bambu has acknowledged that damaged parts can reach about **160°C**, hot enough to soften and melt surrounding plastic and wiring. Reports include real, sustained flames, not just discoloration.
 
-In the roughly 70 documented incidents, this condition caused localized overheating severe enough to ignite surrounding materials inside the printer enclosure. The company has not publicly named the component supplier. No injuries have been reported by Bambu Lab in its communications to date.
+For context, this is a *different* problem from the June 2024 heatbed-cable recall (CPSC 24-264, ~12,800 units). The AC-board NTC defect has **not** been the subject of a formal CPSC recall.
 
-## Which Units Are Affected
+## Timeline and Bambu's Response
 
-The issue is limited to a specific production batch from Q3 2025 — not every printer manufactured in that period contains the defective component. Bambu Lab has confirmed that the affected batch can be identified by a single character in the printer's serial number: units where the **6th character of the serial number is the letter A** are from the affected run and should be treated as potentially unsafe until the board is replaced.
+- Reports of melting AC boards surfaced in late 2025.
+- Tom's Hardware published an investigation on **January 2, 2026**.
+- Bambu **acknowledged the defect on January 5, 2026**, attributing failures to abnormal power surges and overvoltage events (such as lightning) and to regional voltage differences, and stated a failure rate "well below 0.1%."
+- Incident reports nonetheless continued through 2026, and some owners described friction obtaining remedies — including offers of store credit rather than cash refunds.
+
+We'd flag the gap between Bambu's "well below 0.1%" framing and the steady stream of community incident reports. Treat the low figure as the company's stated rate, not an independently verified one.
+
+## How to Check Whether You're Affected
 
 <div class="art-affected-box">
   <div class="art-affected-box-label">Are you affected?</div>
-  <p>To determine whether your printer contains the faulty AC power board, locate and read your serial number:</p>
+  <p>There is <strong>no public "read a specific character of your serial number" shortcut</strong> — ignore any such claim. Confirm eligibility properly:</p>
   <ol>
-    <li>Find the serial number label on the <strong>rear panel</strong> or <strong>underside</strong> of your printer.</li>
-    <li>Count along the serial number string to the <strong>6th character</strong>.</li>
-    <li>If the 6th character is the letter <strong>A</strong>, your unit is from the affected production batch and is eligible for a free replacement board.</li>
-    <li>If the 6th character is any other letter or digit, your unit does not contain the faulty component.</li>
+    <li>Do you own an <strong>A1 or A1 Mini</strong>? Other Bambu models are not part of this defect.</li>
+    <li>Was it manufactured <strong>before the Q3 2025 board redesign</strong> (roughly June 2024–Q2 2025)? Those are the at-risk units.</li>
+    <li>To confirm definitively, give <strong>Bambu support your serial number</strong> — they can tell you whether your printer has the affected board revision.</li>
   </ol>
-  <p class="art-affected-example">Example: a serial number reading <code>BL1F3A8...</code> would be affected — the 6th character is <strong>A</strong>.</p>
+  <p class="art-affected-example">Watch for warning signs: a hot-plastic or burning smell, or discoloration and heat damage near the power board.</p>
 </div>
 
-## The Fix: Free AC Power Board Replacement
+## What To Do
 
-Bambu Lab is providing a no-cost replacement of the AC power board for all verified affected units. The program does not require proof of purchase and is open to owners worldwide regardless of whether the printer was bought directly from Bambu Lab or through a third-party reseller.
+If your unit falls in the affected window, the cautious course is to **stop running unattended prints** until the board is addressed — an overheating AC board is a fire risk, and these printers are often left running for hours.
 
-Bambu Lab has advised owners of potentially affected units to stop using their printers until the replacement is completed. The company has not issued guidance on any temporary mitigations and recommends discontinuing use as the only safe course of action pending the repair.
+To request the remedy:
 
-## How to Request a Replacement
+1. Confirm your model and production timing using the checks above.
+2. Open a support ticket through the [Bambu Lab support portal](https://support.bambulab.com) with your serial number, and ask about the AC-board replacement for the A1.
+3. Bambu publishes an official A1 AC-board replacement procedure on its wiki; support can direct you to it or arrange the repair.
 
-1. Confirm your unit is affected using the serial number check above.
-2. Open a support ticket through the [Bambu Lab official support portal](https://support.bambulab.com), referencing the AC power board replacement program.
-3. Provide your serial number and shipping address. A Bambu Lab support agent will verify eligibility and arrange dispatch of a replacement board.
+## Bottom Line
 
-Bambu Lab has stated that the free replacement program will not have an arbitrary end date applied to it, and that safety-related repairs will be honoured on an ongoing basis. Response times from support may be extended in some regions due to the volume of requests.
-
-For the most current instructions, region-specific support contact details, and any updates to the replacement process, visit [Bambu Lab's official support page](https://support.bambulab.com) directly. The company has not filed a formal product recall with national consumer product safety agencies as of the date this article was published.
+This is a real, documented fire hazard on early A1-series printers — not a theoretical one. But it is narrower than some coverage implies: it's the **A1 line, built before the Q3 2025 redesign**, and the remedy is a board replacement. Later A1 printers and other Bambu models are not affected by this defect. For the most current guidance and region-specific contacts, check [Bambu Lab's official support page](https://support.bambulab.com) directly.
