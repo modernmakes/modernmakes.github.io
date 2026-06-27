@@ -29,6 +29,12 @@
   --dark-surface:  #222222;
   --dark-border:   rgba(255,255,255,0.08);
 
+  /* Semantic feedback (status + callouts) */
+  --danger:        #C62828;
+  --danger-t:      #FFF5F5;
+  --danger-border: #FFCDD2;
+  --accent-border: #FFCFBD;
+
   /* Typography */
   --fd: 'Barlow Condensed', sans-serif;
   --fb: 'Lora', serif;
