@@ -8,7 +8,7 @@
   height: 520px;
   overflow: hidden;
   flex-shrink: 0;
-  background-color: #0a0a0a;
+  background-color: var(--ink-deep);
   display: block;    /* prevent any gap from inline-block default */
   margin: 0;
 }
@@ -50,7 +50,7 @@
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--surface);
   background: var(--accent);
   padding: 3px 10px;
   border-radius: 3px;
@@ -162,8 +162,6 @@
   color: var(--black);
   font-weight: 500;
   margin-bottom: 32px;
-  border-left: 3px solid var(--accent);
-  padding-left: 20px;
 }
 
 .art-content p {
@@ -216,14 +214,14 @@
 .art-content code {
   font-family: var(--fm);
   font-size: 13px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 3px;
   padding: 1px 6px;
   color: var(--black);
 }
 .art-content pre {
-  background: #1a1a1a;
+  background: var(--black);
   border-radius: var(--radius-md);
   padding: 20px 24px;
   margin: 24px 0;
@@ -232,7 +230,7 @@
 .art-content pre code {
   background: none;
   border: none;
-  color: #e8e8e4;
+  color: var(--code-ink);
   font-size: 13px;
   padding: 0;
 }
@@ -257,7 +255,7 @@
   font-weight: 700;
   letter-spacing: .07em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.6);
+  color: color-mix(in srgb, var(--surface) 60%, transparent);
   text-align: left;
 }
 .art-content td {
@@ -268,7 +266,7 @@
   vertical-align: top;
 }
 .art-content tbody tr:last-child td { border-bottom: none; }
-.art-content tbody tr:hover { background: #fafaf9; }
+.art-content tbody tr:hover { background: var(--bg); }
 
 /* ── INLINE IMAGES ── */
 .art-content img {
@@ -277,7 +275,7 @@
   max-width: 100%;
   height: auto;
   object-fit: contain;
-  background: #111;
+  background: var(--ink-deep);
   border-radius: var(--radius-md);
   margin: 28px 0;
 }
@@ -296,7 +294,7 @@
   color: var(--g2);
   text-align: center;
   padding: 8px 16px 10px;
-  background: #111;
+  background: var(--ink-deep);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   line-height: 1.5;
 }
@@ -324,9 +322,8 @@
 
 /* ── AFFECTED BOX (safety/news callout) ── */
 .art-affected-box {
-  background: #fff8f0;
-  border: 1.5px solid #FFCFBD;
-  border-left: 4px solid var(--accent);
+  background: var(--accent-t);
+  border: 1.5px solid var(--accent-border);
   border-radius: var(--radius-md);
   padding: 20px 24px;
   margin: 32px 0;
@@ -527,7 +524,7 @@
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.5);
+  color: color-mix(in srgb, var(--surface) 50%, transparent);
   padding-left: 14px;
 }
 .art-related-card-body {
@@ -595,7 +592,6 @@
 @media (max-width: 480px) {
   .art-hero { height: 220px; }
   .art-headline { font-size: 24px; }
-  .art-lead { padding-left: 14px; }
 }
 
 
