@@ -6,8 +6,13 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Community Rating": 4,
     "Description": "The SLM Sherpa Micro is Lettucehead3D's SLM metal-printed version of the Sherpa Micro RC2, using the 6T motor variant. SLM printing produces near-solid metal density without the porosity of cast or sintered parts. The 6T motor runs cooler than the 8T, reducing heat transfer into the filament path.",
-    "Verdict Label": "An SLM-printed Sherpa Micro with the 6T motor — lighter and cooler-running than aluminum alternatives.",
+    "Verdict Label": "SLM-printed near-solid-metal density in the smallest Sherpa format — cooler-running 6T motor is the real differentiator.",
+    "Ecosystem": [
+      "Voron",
+      "Annex Engineering"
+    ],
     "Verdict": "CONSIDER",
     "Weight (g)": 12,
     "Image URL": "https://lettucehead3d.com/wp-content/uploads/2025/01/Side-view-Sherpa-Micro-800x769.jpg",
@@ -22,8 +27,118 @@
     "Gear Ratio": "50:17",
     "Vendor 1 URL": "https://lettucehead3d.com/product/slm-sherpa-micro/",
     "Brand": "Luke's Lab",
+    "Drive Type": "Dual",
     "Price (USD)": 35,
-    "Pros": "SLM (Selective Laser Melting) metal printing — near-tool-steel density\nBased on Sherpa Micro RC2 — latest revision with 6T motor\n6T motor runs cooler than 8T — less heat transferred to filament\nSmallest and lightest extruder in the SLM lineup\nDirect from Lettucehead3D — quality-controlled production"
+    "Pros": "SLM (Selective Laser Melting) metal printing — near-tool-steel density\nBased on Sherpa Micro RC2 — latest revision with 6T motor\n6T motor runs cooler than 8T — less heat transferred to filament\nSmallest and lightest extruder in the SLM lineup\nDirect from Lettucehead3D — quality-controlled production",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
+  },
+  {
+    "id": "rec12wsEH2TiUKRHF",
+    "Cons": "Same $312 price as standard Pro Metal but HT motor is the only meaningful differentiator; extremely niche — only needed in true heated enclosure builds; heavy and large",
+    "Community Rating": 3,
+    "Description": "Thermal-hardened variant of the LGX Pro Metal, designed for heated chamber 3D printers. The key differentiator from the standard LGX Pro Metal 1.75 is the High Temperature Nema17 30mm HT pancake motor that maintains reliable performance at elevated ambient temperatures. Aluminum housing throughout (vs PA12 GF polymer on LGX PRO). Full hardened steel drive train. Same $312.38 price as the standard Pro Metal. Luke's Lab specifically recommends this extruder paired with the Chube conduction hotend for heated chamber builds. Not needed for standard enclosed printers.",
+    "Verdict Label": "Niche Pick",
+    "Ecosystem": [
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech LGX Pro Metal HT",
+    "Gear Ratio": "3:1",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-pro-metal-ht-175-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 312.38,
+    "Pros": "Aluminum housing (fully metal body); HT high-temperature Nema17 30mm motor designed for heated chamber operation; full hardened steel drive train; maximum thermal resistance of any LGX extruder; recommended by Luke's Lab for Chube hotend pairings",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
+  },
+  {
+    "id": "rec1KPKbUBjWaKNxf",
+    "Cons": "$70-96 USD is expensive vs. a printed Sherpa Mini; motor sold separately; same 50:17 gear ratio as older designs",
+    "Community Rating": 5,
+    "Description": "The official Annex Engineering CNC Sherpa Mini v3 design, manufactured by Fysetc. Ditches the printed body for CNC machined aluminum throughout, adds a PEEK filament path and PEEK GF30 reinforced spur gear. Drop-in replacement for any Sherpa Mini toolhead with significant durability and precision gains. Note: different product from the Fysetc Sherpa V3 (Fysetc's own printed-body design).",
+    "Verdict Label": "Best-in-class Sherpa Mini — CNC precision with PEEK filament path",
+    "Ecosystem": [
+      "Voron",
+      "Annex Engineering",
+      "Universal"
+    ],
+    "Verdict": "BUY",
+    "Weight (g)": 45,
+    "Vendor 1 Name": "NorthPrint3D",
+    "Name": "CNC Sherpa Mini v3 (Annex/Fysetc)",
+    "Gear Ratio": "50:17",
+    "Vendor 1 URL": "https://northprint3d.ca/product/annex-engineering-cnc-sherpa-mini-v3-by-fysetc/",
+    "Brand": "Annex Engineering",
+    "Drive Type": "Dual",
+    "Price (USD)": 70,
+    "Pros": "Fully CNC machined aluminum body; PEEK GF30 50t spur gear; nano-coated drive gears; PEEK filament path; metal ECAS inlet; 45g without motor; drop-in for any Sherpa Mini toolhead",
+    "Updated": "2026-06-27",
+    "Mount": "Sherpa Mini"
+  },
+  {
+    "id": "rec2QjYTkDkDzBB7Q",
+    "Cons": "Bowden only — not suitable for direct drive toolheads; introduces filament lag compared to direct drive; larger and heavier than DD extruders; less common in modern Voron builds",
+    "Community Rating": 3,
+    "Description": "VoronDesign's official remote extruder, designed for Bowden or multi-material setups where the extruder mounts to the frame rather than the toolhead. Strong gear reduction handles long filament paths reliably. The standard choice when building a Voron with a remote drive or multi-material system.",
+    "Verdict Label": "Bowden/Remote Drive — Official Voron for frame-mounted or multi-material setups",
+    "Ecosystem": [
+      "Voron"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "GitHub (VoronDesign)",
+    "Name": "Voron M4 (Möbius 4)",
+    "Vendor 1 URL": "https://github.com/VoronDesign/Mobius-Extruder",
+    "Brand": "VoronDesign",
+    "Drive Type": "Dual",
+    "Pros": "Official VoronDesign extruder; purpose-built for remote/Bowden drive; strong grip for long filament paths; free/OSS; well-documented; standard for MMU/multi-material Voron configurations",
+    "Updated": "2026-06-27",
+    "Mount": "Universal"
+  },
+  {
+    "id": "rec59SN9ei6UGLjpo",
+    "Cons": "$312 USD is very expensive; large and heavy form factor; limited Voron-specific toolhead mount support; overkill for unenclosed or standard-temp builds",
+    "Community Rating": 3,
+    "Description": "Bondtech's all-metal extruder with full steel drive gears and CNC metal housing, designed for sustained high-temperature chamber printing where plastic bodies would soften or deform. Highlighted by Luke's Lab as a strong pairing with the Chube conduction hotend in heated chamber enclosures. Available in 1.75mm and 2.85mm variants.",
+    "Verdict Label": "All-Metal Premium — Heated chamber builds, CHT/Chube hotend pairing",
+    "Ecosystem": [
+      "Voron",
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech LGX Pro Metal",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-pro-metal-1-75-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 312,
+    "Pros": "Full steel drive train; all-metal body engineered for sustained high-temp chamber use; large LGX gear ratio; no plastic parts to soften at elevated temps; 2.85mm variant available; highlighted by Luke's Lab for Chube conduction hotend pairing",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
+  },
+  {
+    "id": "rec82A3dwioyD0B5p",
+    "Cons": "Ecosystem-specific — designed for VzBot/HevORT custom mounts\nSingle-drive twirl gear — less filament grip than dual BMG-style\nLimited toolhead support outside VzBot ecosystem\nFewer guides and less documentation than Voron-standard extruders",
+    "Community Rating": 4,
+    "Description": "CNC-machined 6061 aluminum extruder originally designed by MirageC as the HextrudORT, adapted for VzBot by the VzBoT3D community. Uses a single-drive twirl gear: 60T main gear with 8T pinion (7.5:1) or 10T pinion (6:1). Available in Standard, PLUS (larger 60T gear), and Low/WC (low center of gravity) variants. Commercial versions manufactured by Mellow3D and distributed through West3D and Fabreeko. Drive type: Single. Mount: VzBot custom — not Voron-standard. Ecosystem: VzBot 330, VZ235, HevORT.",
+    "Verdict Label": "The definitive VzBot/HevORT extruder — excellent CNC quality, but ecosystem-locked.",
+    "Ecosystem": [
+      "VzBot",
+      "HevORT"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "West3D (Mellow CNC)",
+    "Name": "Vz-HextrudORT",
+    "Gear Ratio": "7.5:1 (8T) / 6:1 (10T)",
+    "Vendor 1 URL": "https://west3d.com/products/vz-hextrudort-cnc-lightweight-extruder-by-vzbot-mellow",
+    "Brand": "Mellow3D",
+    "Drive Type": "Single",
+    "Price (USD)": 55,
+    "Pros": "CNC 6061 aluminum body — extremely rigid and light\nLow center of gravity variant improves dynamic print quality\nOpen-source with active VzBoT community iteration\nMultiple variants (Standard, PLUS, Low/WC) for different build requirements\nMellow3D commercial version available through major US/EU resellers",
+    "Updated": "2026-06-27",
+    "Mount": "VzBot Custom"
   },
   {
     "id": "rec9Fq24nvvWxTZKC",
@@ -32,7 +147,11 @@
       "Voron 0",
       "Printers for Ants"
     ],
+    "Community Rating": 3,
     "Description": "Community-modified variant of the G2 WristWatch AntHead, with additional tweaks to geometry or mounting for improved fitment or compatibility in specific small-format printer builds. Open-source, print-it-yourself.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Image URL": "https://github.com/JaredC01/Galileo2/raw/main/images/g2extruder.png",
     "Compatible Toolheads": [
       "AntHead (modified)"
@@ -42,8 +161,53 @@
     "Gear Ratio": "9:1",
     "Vendor 1 URL": "https://github.com/JaredC01/G2",
     "Brand": "JaredC01",
+    "Drive Type": "Planetary",
     "Price (USD)": 0,
-    "Pros": "Community-refined fit, retains full 9:1 G2 torque"
+    "Pros": "Community-refined fit, retains full 9:1 G2 torque",
+    "Mount": "Galileo 2"
+  },
+  {
+    "id": "recABo5M0h9psLxBz",
+    "Cons": "Large form factor not suited to compact toolheads; $187 is steep when LGX Lite PRO exists for $149; limited community adoption vs Lite platform",
+    "Community Rating": 3,
+    "Description": "Industrial-targeted evolution of the base LGX. Upgrades the motor from 25mm to a stronger 30mm Nema17 pancake and includes the full hardened steel drive train stock (no separate purchase needed). PA12 GF glass-filled polymer housing provides higher thermal resistance than standard LGX. A free aluminum interface plug accommodates longer hotends. Tagged by Bondtech as industrial/PROduction-grade. Sits between the base LGX ($123) and Pro Metal ($312) in price and specification.",
+    "Verdict Label": "Solid Choice",
+    "Ecosystem": [
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech LGX PRO",
+    "Gear Ratio": "3:1",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-pro-large-gears-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 187.38,
+    "Pros": "Stronger 30mm Nema17 motor vs base LGX; full hardened steel drive train included from factory; PA12 GF housing for higher thermal resistance; free aluminum interface plug supports longer hotends",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
+  },
+  {
+    "id": "recBmrGHWJWHWaePD",
+    "Cons": "75g without motor is heavy by modern standards; $100 is expensive for what you get; superseded on weight and price by community designs that use its own gear set",
+    "Community Rating": 4,
+    "Description": "The BMG popularized dual-drive on desktop 3D printers. Its 50:17 gear ratio and precision hardened steel drive gears set the standard every subsequent extruder is compared against. Still sold and supported, but at $100 and 75g it has been outclassed by lighter designs like the Sherpa Mini and Orbiter using the same gearing.",
+    "Verdict Label": "Legacy Classic — Reliable but heavy vs. modern alternatives",
+    "Ecosystem": [
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Weight (g)": 75,
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech BMG",
+    "Gear Ratio": "50:17",
+    "Vendor 1 URL": "https://www.bondtech.se/product/bmg-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 100,
+    "Pros": "Proven dual-drive technology; 50:17 gear ratio baseline used by dozens of community designs; bowden or direct drive; wide mount compatibility; abundant community support and documentation",
+    "Updated": "2026-06-27",
+    "Mount": "Universal"
   },
   {
     "id": "recCR1IajplB0nffv",
@@ -56,16 +220,23 @@
       "VzBot",
       "most CoreXY printers"
     ],
-    "Description": "Evolution of the Orbiter v2.0 featuring a knurled spider-shaft design that reduces eccentricity to 20-30µm (vs 50-140µm on v2.0), and flat-bottom wide-cut RNC nano-coated gears (HRC60+). Uses the same body and firmware settings as the v2.0 — rotation_distance 4.69, 690 steps/mm @ 16 microsteps. Upgrade kit available for existing v2.0 owners.",
+    "Community Rating": 5,
+    "Description": "Refined successor to the Orbiter v2.0. Key improvements: knurled spider shaft reduces eccentricity to 20-30µm (vs. 50-140µm on v2.0); wide-cut flat-bottom RNC-coated gears at HRC60+; new MF679ZZ bearing (9mm inner bore vs. MF148ZZ on v2.0). Same 7.5:1 gear ratio and identical Klipper settings to v2.0 — firmware-transparent upgrade. Available as an upgrade kit for genuine LDO Orbiter v2.0 units.",
+    "Ecosystem": [
+      "Voron",
+      "Universal"
+    ],
     "Weight (g)": 18,
     "Image URL": "https://www.orbiterprojects.com/wp-content/uploads/2024/10/Orbiter-v2.5-showoff-v2.png",
     "Vendor 1 Name": "Orbiter Projects",
     "Name": "Orbiter v2.5",
     "Gear Ratio": "7.5:1",
-    "Vendor 1 URL": "https://www.orbiterprojects.com/orbiter-v2-5/",
+    "Vendor 1 URL": "https://orbiterprojects.com/orbiter-v2-5/",
     "Brand": "Orbiter Projects",
+    "Drive Type": "Dual",
     "Price (USD)": 95.19,
-    "Pros": "Exceptionally precise drive gear contact, very lightweight at 18g, upgrade path from v2.0, widely supported across toolheads, planetary gearbox reliability"
+    "Pros": "Exceptionally precise drive gear contact, very lightweight at 18g, upgrade path from v2.0, widely supported across toolheads, planetary gearbox reliability",
+    "Mount": "Orbiter"
   },
   {
     "id": "recDEgvnXLs00ob4D",
@@ -78,7 +249,15 @@
       "VzBot",
       "most CoreXY"
     ],
+    "Community Rating": 5,
     "Description": "Dual-geared hobbed filament extruder designed by Anlin / Annex Engineering. Gear-driven design for high torque with near-silent operation. Release 2 adds Bondtech RIDGA v2 compatibility and a stronger idler arm. Requires a pinion-equipped pancake stepper (Nema 14). Print-it-yourself open-source design with commercial gear kits available.",
+    "Verdict Label": "The print-it-yourself lightweight dual-drive standard — massive toolhead support, near-silent operation, and free to build.",
+    "Ecosystem": [
+      "Voron",
+      "Annex Engineering",
+      "Universal"
+    ],
+    "Verdict": "BUY",
     "Weight (g)": 25,
     "Image URL": "https://github.com/Annex-Engineering/Sherpa_Mini_Extruder/raw/master/Images/sherpa_mini_rc1.jpg",
     "Compatible Toolheads": [
@@ -90,13 +269,16 @@
       "Mailbox",
       "and most community toolheads"
     ],
-    "Vendor 1 Name": "Annex Engineering",
+    "Vendor 1 Name": "Annex Engineering (GitHub)",
     "Name": "Sherpa Mini",
     "Gear Ratio": "50:17",
     "Vendor 1 URL": "https://github.com/Annex-Engineering/Sherpa_Mini-Extruder",
     "Brand": "Annex Engineering",
+    "Drive Type": "Dual",
     "Price (USD)": 0,
-    "Pros": "Extremely light (~25g without motor), massive toolhead ecosystem support, near-silent operation, print-it-yourself with accessible gear kits"
+    "Pros": "Extremely light (~25g without motor), massive toolhead ecosystem support, near-silent operation, print-it-yourself with accessible gear kits",
+    "Updated": "2026-06-27",
+    "Mount": "Sherpa Mini"
   },
   {
     "id": "recDO9OSJi8Bae9J5",
@@ -106,7 +288,13 @@
       "Printers for Ants",
       "micro-format printers"
     ],
+    "Community Rating": 4,
     "Description": "Smaller sibling of the Sherpa Mini, designed for ultra-compact toolheads and Printers for Ants (V0-scale). Maintains the same 50:17 dual-gear drive ratio in a significantly reduced footprint. Open-source, print-it-yourself.",
+    "Ecosystem": [
+      "Voron",
+      "Annex Engineering",
+      "Universal"
+    ],
     "Weight (g)": 18,
     "Image URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder/raw/main/Images/sherpa_micro_pr.jpg",
     "Compatible Toolheads": [
@@ -118,8 +306,10 @@
     "Gear Ratio": "50:17",
     "Vendor 1 URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder",
     "Brand": "Annex Engineering",
+    "Drive Type": "Dual",
     "Price (USD)": 0,
-    "Pros": "Extremely compact and lightweight (~18g without motor), purpose-built for V0-scale builds, proven Annex Engineering design heritage"
+    "Pros": "Extremely compact and lightweight (~18g without motor), purpose-built for V0-scale builds, proven Annex Engineering design heritage",
+    "Mount": "Custom"
   },
   {
     "id": "recGLCZyZl3wJDPpi",
@@ -130,16 +320,22 @@
       "RatRig",
       "most CoreXY"
     ],
+    "Community Rating": 3,
     "Description": "Updated version of the ProtoXtruder with refined geometry, improved idler arm, and better component compatibility. Print-it-yourself open-source design on Printables. Community-driven improvements over v1 with wider hardware compatibility.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Weight (g)": 39.5,
     "Image URL": "https://github.com/nhchiu/3DPrinter-Designs/raw/main/ProtoXtruder_2.0/Images/Thumbnail.jpg",
     "Vendor 1 Name": "nhchiu",
     "Name": "ProtoXtruder 2.0",
     "Gear Ratio": "44:10, 37:17",
-    "Vendor 1 URL": "https://www.printables.com/model/436425-protoxtruder",
+    "Vendor 1 URL": "https://www.printables.com/model/822947-protoxtruder-20",
     "Brand": "ProtoTypist",
+    "Drive Type": "Dual",
     "Price (USD)": 0,
-    "Pros": "Free to print, improved over v1 with better idler and geometry, active community support"
+    "Pros": "Free to print, improved over v1 with better idler and geometry, active community support",
+    "Mount": "Sherpa Mini"
   },
   {
     "id": "recH3VO0VklTut3wn",
@@ -149,7 +345,11 @@
       "Mini printers",
       "Printers for Ants"
     ],
+    "Community Rating": 4,
     "Description": "Compact variant of the Galileo 2 gearbox redesigned for small-format printers and V0-scale toolheads. Maintains the 9:1 planetary gear ratio in a significantly smaller footprint. Community name 'WristWatch' refers to its compact round profile. Print-it-yourself open-source design.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
     "Compatible Toolheads": [
       "AntHead",
@@ -160,8 +360,10 @@
     "Gear Ratio": "9:1",
     "Vendor 1 URL": "https://github.com/JaredC01/G2",
     "Brand": "JaredC01",
+    "Drive Type": "Planetary",
     "Price (USD)": 0,
-    "Pros": "Full 9:1 G2 torque in a compact package, ideal for V0 and small toolheads, open-source"
+    "Pros": "Full 9:1 G2 torque in a compact package, ideal for V0 and small toolheads, open-source",
+    "Mount": "Galileo 2"
   },
   {
     "id": "recIAYfrLCGkaIrJA",
@@ -170,7 +372,11 @@
       "Voron 0",
       "Printers for Ants"
     ],
+    "Community Rating": 4,
     "Description": "WristWatch G2 variant specifically adapted for the AntHead toolhead. Uses the same 9:1 G2 planetary gearbox in the WristWatch compact format, mounted to the AntHead body. Open-source, print-it-yourself.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Image URL": "https://github.com/JaredC01/Galileo2/raw/main/images/g2extruder.png",
     "Compatible Toolheads": [
       "AntHead"
@@ -180,8 +386,33 @@
     "Gear Ratio": "9:1",
     "Vendor 1 URL": "https://github.com/JaredC01/G2",
     "Brand": "JaredC01",
+    "Drive Type": "Planetary",
     "Price (USD)": 0,
-    "Pros": "Full G2 torque, purpose-designed AntHead integration, open-source"
+    "Pros": "Full G2 torque, purpose-designed AntHead integration, open-source",
+    "Mount": "Galileo 2"
+  },
+  {
+    "id": "recJ65kR9jtXqJb7R",
+    "Cons": "Superseded by v2.5 for new builds (tighter gear tolerances)\nHigher gear eccentricity than v2.5 (50–140µm vs 20–30µm)\nRequires matched motor from LDO or equivalent — not universal stepper",
+    "Community Rating": 4,
+    "Description": "The Orbiter v2.0 is a lightweight dual-drive direct extruder by Claude Remy / Orbiter Projects. Uses a 7.5:1 gear reduction with hardened BMG-quality drive gears gripping filament from both sides. Klipper: rotation_distance 4.69, gear_ratio 7.5:1, 16 microsteps. LDO Motors produces an official kit including a matched pancake stepper. The v2.5 improves gear eccentricity (20–30µm vs 50–140µm) but uses identical firmware settings — both share the same BOM. Drive type: Dual. Ecosystem: Voron/CoreXY universal.",
+    "Verdict Label": "The extruder that set the lightweight high-ratio standard for Voron — still excellent, v2.5 is the precision upgrade.",
+    "Ecosystem": [
+      "Voron",
+      "Universal"
+    ],
+    "Verdict": "BUY",
+    "Weight (g)": 18,
+    "Vendor 1 Name": "West3D (LDO Kit)",
+    "Name": "Orbiter v2.0",
+    "Gear Ratio": "7.5:1",
+    "Vendor 1 URL": "https://west3d.com/products/ldo-orbiter-extruder-v2-0",
+    "Brand": "Orbiter Projects",
+    "Drive Type": "Dual",
+    "Price (USD)": 35,
+    "Pros": "Exceptionally lightweight at 18g body\nMassive toolhead compatibility across Voron ecosystem\nHardened dual-drive gears for reliable grip\nLDO kit available with matched pancake motor\nDirect upgrade path to v2.5\nExtensive community documentation and Klipper profiles",
+    "Updated": "2026-06-27",
+    "Mount": "Orbiter"
   },
   {
     "id": "recKZWr538a7kJVVy",
@@ -191,8 +422,13 @@
       "Voron Trident",
       "RatRig V-Core 3"
     ],
+    "Community Rating": 5,
     "Description": "The Fysetc Sherpa V3 is the third-generation CNC version of the Sherpa Mini extruder. The key upgrade over V2 is the replacement of POM gears with PEEK (30% glass fiber) gears and PEEK motor inserts, specifically solving the heat creep and TPU clogging issue that affected earlier all-metal Sherpa builds. CNC aviation aluminum body, Moons 36 motor, nano-coated steel drive gears.",
     "Verdict Label": "The most refined CNC Sherpa available — PEEK gears and inserts solve the TPU heat creep problem.",
+    "Ecosystem": [
+      "Voron",
+      "Universal"
+    ],
     "Verdict": "BUY",
     "Weight (g)": 18,
     "Image URL": "https://www.fysetc.com/cdn/shop/files/1_32e2d749-5ef6-4212-87a2-9aa26e256378.jpg?v=1744440462",
@@ -202,13 +438,16 @@
       "Dragon Burner",
       "A4T"
     ],
-    "Vendor 1 Name": "Excit3D",
+    "Vendor 1 Name": "Fysetc",
     "Name": "Sherpa V3",
     "Gear Ratio": "50:10 (10T) or 50:8 (8T)",
-    "Vendor 1 URL": "https://excit3d.shop/shop/fysetc-cnc-sherpa-v3",
+    "Vendor 1 URL": "https://www.fysetc.com/products/fysetc-sherpa-extruder",
     "Brand": "Fysetc",
+    "Drive Type": "Dual",
     "Price (USD)": 45,
-    "Pros": "PEEK (30% GF) gears replace POM — dramatically better thermal isolation from motor\nPEEK inserts added to further block motor heat transfer\nCNC aviation aluminum body — lightweight and stiff\nNano-coated mold steel drive gears — durable and precise\nMoons 36 pancake motor included\nSupports both 8T and 10T configurations\nDirect and Bowden compatible"
+    "Pros": "PEEK (30% GF) gears replace POM — dramatically better thermal isolation from motor\nPEEK inserts added to further block motor heat transfer\nCNC aviation aluminum body — lightweight and stiff\nNano-coated mold steel drive gears — durable and precise\nMoons 36 pancake motor included\nSupports both 8T and 10T configurations\nDirect and Bowden compatible",
+    "Updated": "2026-06-27",
+    "Mount": "Sherpa Mini"
   },
   {
     "id": "recMAQQlGX2ZPCHsw",
@@ -220,19 +459,45 @@
       "RatRig",
       "VzBot"
     ],
+    "Community Rating": 5,
     "Description": "Full redesign over Galileo 1, moving to a 9:1 planetary gear ratio. Uses a custom 9T stepper with 20% higher contact surface area than 10T designs, and proper 3-planet meshing (9T sun / 3 planets) for even loading and better wear. Klipper: rotation_distance 47.088, gear_ratio 9:1, run_current 0.6A. Open-sourced by JaredC01.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
     "Compatible Toolheads": [
       "Galileo 2 Toolhead (G2Z)",
       "Xol Toolhead"
     ],
-    "Vendor 1 Name": "3D Lab Tech",
+    "Vendor 1 Name": "3DLabTech (LDO Kit)",
     "Name": "Galileo 2 Extruder (G2E)",
     "Gear Ratio": "9:1",
-    "Vendor 1 URL": "https://www.3dlabtech.ca/product/ldo-galileo-2-extruder/",
+    "Vendor 1 URL": "https://3dlabtech.ca/product/ldo-galileo-2-extruder/",
     "Brand": "JaredC01",
+    "Drive Type": "Planetary",
     "Price (USD)": 45,
-    "Pros": "High torque 9:1 ratio, excellent gear meshing, open-source design with LDO quality manufacturing, proven reliability across Voron community"
+    "Pros": "High torque 9:1 ratio, excellent gear meshing, open-source design with LDO quality manufacturing, proven reliability across Voron community",
+    "Mount": "Galileo 2"
+  },
+  {
+    "id": "recOWIqrARnM2b0CR",
+    "Cons": "Printed body; gear kit must be purchased separately; four sub-variants adds selection overhead; open design less protected than enclosed extruders",
+    "Community Rating": 3,
+    "Description": "An open-air printed extruder body series from chirpy2605 that reuses gear sets from other extruders. Four variants: LGX Lite, Trianglelab TBG, Orbiter v1.5, and Orbiter v2.0. The open design makes gear mesh inspection and backlash adjustment straightforward. All variants are free/OSS on GitHub.",
+    "Verdict Label": "Open-Air Design — 4 gear variants, easy inspection and backlash tuning",
+    "Ecosystem": [
+      "Voron",
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Name": "RoundTrip",
+    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundTrip",
+    "Brand": "chirpy2605",
+    "Drive Type": "Dual",
+    "Pros": "Open air design lets you see and inspect gear mesh directly; four variants (LGX Lite, TBG Lite, Orbiter v1.5, Orbiter v2.0 gears); backlash adjustment on LGX and TBG variants; from chirpy2605 (Dragon Burner designer); free/OSS",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
   },
   {
     "id": "recQ8tSrgDUucEGGY",
@@ -242,16 +507,66 @@
       "Voron Trident",
       "most CoreXY"
     ],
+    "Community Rating": 2,
     "Description": "Open-source print-it-yourself extruder from Printables designed for prosumer CoreXY builds. Uses standard Bondtech-style dual gears. Intended as a more accessible alternative to commercial extruders with a focus on simple assembly and widely available hardware.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Weight (g)": 46.4,
     "Image URL": "https://github.com/nhchiu/VoronMods/raw/main/Extruders/ProtoXtruder/Images/Thumbnail.jpg",
     "Vendor 1 Name": "nhchiu",
     "Name": "ProtoXtruder v1",
     "Gear Ratio": "44:10, 37:17",
-    "Vendor 1 URL": "https://www.printables.com/model/822947-protoxtruder-20",
+    "Vendor 1 URL": "https://www.printables.com/model/436425-protoxtruder",
     "Brand": "ProtoTypist",
+    "Drive Type": "Dual",
     "Price (USD)": 0,
-    "Pros": "Free to print, standard hardware BOM, good community support on Printables"
+    "Pros": "Free to print, standard hardware BOM, good community support on Printables",
+    "Mount": "Sherpa Mini"
+  },
+  {
+    "id": "recTw6wbqWfD1Kyam",
+    "Cons": "Nema14 limits max torque vs Nema17 options; LGX Lite mount requires compatible toolhead bracket",
+    "Community Rating": 4,
+    "Description": "Updated LGX Lite featuring Bondtech's Steel Drive Train (2022 hardened steel gears) installed from factory, and PA12 GF glass-filled polymer housing for improved thermal resistance. Same compact Nema14 20mm pancake form factor and 44:10 gear ratio as the original LGX Lite, but ships ready to run without the $43 steel drive train upgrade purchase. At $116.25 it's $16 less than the LGX Lite PRO with a solid featureset for most builds. Strong choice for Voron, RatRig, and other LGX-Lite-compatible toolheads.",
+    "Verdict Label": "Top Pick",
+    "Ecosystem": [
+      "Voron",
+      "RatRig",
+      "Universal"
+    ],
+    "Verdict": "BUY",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech LGX Lite V2",
+    "Gear Ratio": "44:10",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-lite-v2-extruder-with-steel-drive-train/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 116.25,
+    "Pros": "Steel Drive Train pre-installed from factory (vs $43 upgrade on base Lite); PA12 GF housing for better thermal tolerance; complete kit with Nema14 20mm pancake included; compact LGX Lite footprint",
+    "Updated": "2026-06-27",
+    "Mount": "LGX Lite"
+  },
+  {
+    "id": "recUZVev7Z1DS5IwJ",
+    "Cons": "Steel drive train costs $43 extra (not included); 25mm motor weaker than PRO; large form factor vs compact alternatives",
+    "Community Rating": 4,
+    "Description": "The original Bondtech LGX (Large Gears eXtruder), introduced 2021 as Gen3 dual-drive platform. Uses physically larger drive gears than BMG for improved filament grip. Comes with a custom Nema17 25mm pancake motor and supports both bowden and direct drive. Steel Drive Train is a $43.63 optional upgrade (pre-installed on LGX Lite V2 and LGX PRO). Extensive upgrade kit ecosystem covers most popular printers. At $123.75 it's the entry point to the full-size LGX platform.",
+    "Verdict Label": "Solid Choice",
+    "Ecosystem": [
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech LGX",
+    "Gear Ratio": "3:1",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-large-gears-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 123.75,
+    "Pros": "Gen3 large dual-drive gears for improved grip; includes Nema17 25mm pancake; bowden or direct drive; massive ecosystem of printer-specific upgrade kits",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
   },
   {
     "id": "recZFXMlrzNUmW4kQ",
@@ -262,15 +577,42 @@
       "RatRig",
       "custom builds"
     ],
+    "Community Rating": 5,
     "Description": "Galileo 2 extruder configured as a pure standalone unit — uses the same G2 gearbox (9:1, 9T sun/3 planets) but mounts independently without requiring a specific toolhead carriage integration. Shares BOM and printed parts with the G2E kit. Klipper config identical to G2E. Open-sourced by JaredC01.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
     "Vendor 1 Name": "JaredC01",
-    "Name": "G2 Standalone (G2SA)",
+    "Name": "Galileo 2 Standalone (Hartk)",
     "Gear Ratio": "9:1",
     "Vendor 1 URL": "https://github.com/JaredC01/G2",
     "Brand": "JaredC01",
+    "Drive Type": "Planetary",
     "Price (USD)": 45,
-    "Pros": "Flexible mounting, high 9:1 torque, interchangeable with G2E hardware, open-source"
+    "Pros": "Flexible mounting, high 9:1 torque, interchangeable with G2E hardware, open-source",
+    "Updated": "2026-06-27",
+    "Mount": "Galileo 2"
+  },
+  {
+    "id": "recbGNDRlceGQdWWS",
+    "Cons": "This is a gear assembly, not a complete extruder — requires a compatible extruder body\nHigher cost than standard BMG gear replacements\nLimited to specific extruder body compatibility\nMost builders won't need this vs standard Annex/Bondtech gear kits",
+    "Community Rating": 4,
+    "Description": "NOTE: The RIDGA v2 is an OEM gear assembly kit, not a complete extruder. Reversed Integrated Drive Gear Assembly v2 by Bondtech. Designed as an upgrade/replacement for standard BMG-style dual-drive gear sets used in extruders like the Sherpa Mini. Features an improved reversed idler geometry for better filament engagement and reduced eccentricity. Compatible with 8T or 10T motor pinion gears. Drive type: Dual. Used as an upgrade in: Sherpa Mini, custom builds. Ecosystem: Universal.",
+    "Verdict Label": "Bondtech's precision dual-drive gear assembly — an upgrade kit, not a standalone extruder.",
+    "Ecosystem": [
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech RIDGA v2",
+    "Gear Ratio": "50:17",
+    "Vendor 1 URL": "https://www.bondtech.se/product/oem-ridga-reverse-integrated-drive-gear-assembly-v2/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Pros": "Bondtech precision-machined hardened steel gears\nImproved reversed idler geometry vs standard BMG\nCompatible with 8T and 10T motor gears\nDrop-in upgrade for Sherpa Mini and BMG-style extruders\nAll-metal construction — no plastic gear components",
+    "Updated": "2026-06-27",
+    "Mount": "Universal"
   },
   {
     "id": "recbwhTIDgqVhejO9",
@@ -281,15 +623,107 @@
       "Voron 2.4",
       "large-format CoreXY"
     ],
+    "Community Rating": 3,
     "Description": "CNC-machined aluminum body extruder with monolithic steel fixed-gear drive. No planetary gearbox — the motor drives directly through a fixed reduction. Rotation distance varies by motor: 7.39 (FXD Pro Motor), 5.29 (Moons N14 10T), 4.23 (LDO 8T N14). Premium build quality targeting high-cycle precision printing.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Weight (g)": 310,
     "Image URL": "https://advanced3dprinting.com/cdn/shop/files/fxd1.1.jpg",
     "Vendor 1 Name": "A3DP",
     "Name": "FXD v1.1",
     "Vendor 1 URL": "https://advanced3dprinting.com/products/fxd-v1-1-extruder-fixed-gear-drive",
     "Brand": "A3DP",
+    "Drive Type": "Dual",
     "Price (USD)": 225,
-    "Pros": "CNC aluminum body for maximum rigidity, monolithic steel gears for durability, no plastic gearbox to crack or wear, premium feel"
+    "Pros": "CNC aluminum body for maximum rigidity, monolithic steel gears for durability, no plastic gearbox to crack or wear, premium feel",
+    "Mount": "Custom"
+  },
+  {
+    "id": "reccAjIgCgLRwtcqs",
+    "Cons": "Heavier than Orbiter/Sherpa alternatives — not ideal for mass-optimized CoreXY toolheads\nBulkier body limits compatibility in tight toolhead designs\nHigher price than open-source alternatives\nLGX Lite V2 now available — this version slightly dated\n1.75mm only — no 2.85mm support",
+    "Community Rating": 4,
+    "Description": "Compact version of Bondtech's Large Gears eXtruder (LGX), designed for direct-drive setups. Uses Bondtech's dual-drive large gear technology. Includes a matched 36mm round stepper motor with 10T motor gear. Supports 1.75mm filament only. Brand: Bondtech. Drive type: Dual (large BMG-style gears). Klipper: gear_ratio 44:10. LGX Lite V2 available as incremental update. Ecosystem: Multi — Prusa MK3/4 retrofit, Voron, CoreXY.",
+    "Verdict Label": "Bondtech build quality in a compact form — reliable dual-drive but heavier than Orbiter/Sherpa alternatives.",
+    "Ecosystem": [
+      "Voron",
+      "Prusa",
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Weight (g)": 68,
+    "Vendor 1 Name": "Bondtech",
+    "Name": "LGX Lite",
+    "Gear Ratio": "44:10, 37:17",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-lite-large-gears-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 65,
+    "Pros": "Bondtech build quality with hardened dual-drive large gears\nIncludes matched 36mm round stepper motor\nProven reliability across Prusa and Voron ecosystems\nWidely stocked through Bondtech global reseller network\nKnown-good idler tension system — reliable long-term",
+    "Updated": "2026-06-27",
+    "Mount": "LGX Lite"
+  },
+  {
+    "id": "recfdgGAB8rGmmOqF",
+    "Cons": "Requires Galileo 2 gear kit purchased separately; less community testing than WristWatch BMG; niche application",
+    "Community Rating": 4,
+    "Description": "Combines the proven 9:1 planetary gearing from the Galileo 2 with the Orbiter 2 mounting footprint. Designed by @bythorsthunder, repository maintained by tetsu97. A bridge between two popular extruder families — useful when your toolhead has an Orbiter mount but you want planetary reduction.",
+    "Verdict Label": "Niche Planetary — Galileo 2 guts in an Orbiter mount footprint",
+    "Ecosystem": [
+      "Voron"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "GitHub (tetsu97)",
+    "Name": "WristWatch G2",
+    "Gear Ratio": "9:1",
+    "Vendor 1 URL": "https://github.com/tetsu97/WristWatch-G2-Extruder",
+    "Brand": "bythorsthunder",
+    "Drive Type": "Planetary",
+    "Pros": "Galileo 2 planetary internals (9:1 reduction); Orbiter 2 mount pattern; free and open source; compact; bridges two popular extruder families",
+    "Updated": "2026-06-27",
+    "Mount": "Orbiter"
+  },
+  {
+    "id": "recsBvQstRmglwF1m",
+    "Cons": "Requires BMG gear kit purchased separately; printed body; HevORT-specific mount limits cross-platform compatibility",
+    "Community Rating": 4,
+    "Description": "The original HextrudORT by MirageC79, designed for the HevORT printer's carriage. Uses Bondtech BMG gearing (50:17 dual drive) in an ultra-compact printed body. The Vz-HextrudORT in this database is the VzBot community's adaptation — for HevORT builds, this is the reference design.",
+    "Verdict Label": "HevORT-Native — BMG gearing in an ultra-light HevORT carriage mount",
+    "Ecosystem": [
+      "HevORT"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "GitHub (MirageC79)",
+    "Name": "HextrudORT",
+    "Gear Ratio": "50:17",
+    "Vendor 1 URL": "https://miragec79.github.io/HextrudORT/",
+    "Brand": "MirageC79",
+    "Drive Type": "Dual",
+    "Pros": "Designed specifically for HevORT carriage; BMG-derived dual drive (50:17); ultra-light printed body; free/OSS; source design for the popular VzBot community adaptation",
+    "Updated": "2026-06-27",
+    "Mount": "Custom"
+  },
+  {
+    "id": "rectO0o6ndqe359Lw",
+    "Cons": "Requires HGX-Lite gear kit — additional cost on top of printed parts\nSmaller community install base vs Sherpa Mini or Orbiter\nPrinted plastic body — less rigid than CNC alternatives\nFewer pre-built toolhead integrations than LGX Lite or Sherpa",
+    "Community Rating": 4,
+    "Description": "Print-it-yourself compact direct drive extruder by nhchiu (also the designer of ProtoXtruder). Uses HGX-Lite large drive gears (44:10, 37:17 ratio) in a compact body with the same mounting footprint as the Bondtech LGX Lite. Features a thickened idler arm vs original design to prevent flex under load. Supports 3 types of 4mm OD PTFE tube retainers. Available on Printables and GitHub (nhchiu/VoronMods). Drive type: Dual (HGX-Lite gears). Ecosystem: Voron / CoreXY.",
+    "Verdict Label": "Free-to-print LGX Lite-footprint extruder using HGX-Lite gears — strong dual-drive grip, zero cost beyond the gear kit.",
+    "Ecosystem": [
+      "Voron"
+    ],
+    "Verdict": "CONSIDER",
+    "Weight (g)": 25,
+    "Vendor 1 Name": "Printables (nhchiu)",
+    "Name": "Hummingbird",
+    "Gear Ratio": "44:10, 37:17",
+    "Vendor 1 URL": "https://www.printables.com/model/367706-hummingbird-extruder",
+    "Brand": "nhchiu",
+    "Drive Type": "Dual",
+    "Price (USD)": 0,
+    "Pros": "LGX Lite mounting footprint — wide toolhead compatibility\nHGX-Lite gears provide strong dual-drive grip at high ratio\nThickened idler arm prevents flex under sustained load\nPrint-it-yourself — zero cost beyond HGX-Lite gear kit\nBy nhchiu — active Voron community contributor (ProtoXtruder designer)",
+    "Updated": "2026-06-27",
+    "Mount": "LGX Lite"
   },
   {
     "id": "recz1G5OzR9hhHnmH",
@@ -298,8 +732,12 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Community Rating": 4,
     "Description": "The Lite Pro Slim Repack is Lettucehead3D's production version of the Lite Pro extruder in a slimmed-down repackaged form factor. Designed for toolhead builds where standard extruder body depth is a constraint.",
     "Verdict Label": "A slim, high-ratio compact extruder for space-constrained toolheads — Lettucehead3D's production repack.",
+    "Ecosystem": [
+      "Voron"
+    ],
     "Verdict": "CONSIDER",
     "Weight (g)": 20,
     "Image URL": "https://lettucehead3d.com/wp-content/uploads/2025/01/Lite-Pro-SLiM-800x928.png",
@@ -313,7 +751,33 @@
     "Gear Ratio": "7.5:1",
     "Vendor 1 URL": "https://lettucehead3d.com/product/lite-pro-slim-repack/",
     "Brand": "Luke's Lab",
+    "Drive Type": "Dual",
     "Price (USD)": 55,
-    "Pros": "Slim profile fits tight toolhead designs\nProduction quality from Lettucehead3D\nHigh gear ratio for increased extrusion torque\nLightweight design reduces toolhead moving mass"
+    "Pros": "Slim profile fits tight toolhead designs\nProduction quality from Lettucehead3D\nHigh gear ratio for increased extrusion torque\nLightweight design reduces toolhead moving mass",
+    "Updated": "2026-06-27",
+    "Mount": "Sherpa Mini"
+  },
+  {
+    "id": "reczMspdZhZtfFk6n",
+    "Cons": "$150 is expensive vs. community alternatives; heavier than plastic-body LGX Lite; overkill for non-heated-chamber builds",
+    "Community Rating": 4,
+    "Description": "The all-CNC aluminum version of the Bondtech LGX Lite. Eliminates body flex under high acceleration or elevated chamber temperatures. Same gear ratio and LGX Lite mount compatibility makes it a direct upgrade from the standard LGX Lite. The practical choice when printing at sustained high temps where a plastic body would creep or deform.",
+    "Verdict Label": "Premium LGX Lite — CNC aluminum for heated chamber and high-speed builds",
+    "Ecosystem": [
+      "Voron",
+      "Prusa",
+      "Universal"
+    ],
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech LGX Lite PRO",
+    "Gear Ratio": "44:10",
+    "Vendor 1 URL": "https://www.bondtech.se/product/lgx-lite-pro-extruder/",
+    "Brand": "Bondtech",
+    "Drive Type": "Dual",
+    "Price (USD)": 149.88,
+    "Pros": "CNC aluminum body eliminates plastic flex under heat or high acceleration; same gear ratio and LGX Lite mount as the standard LGX Lite; direct drop-in upgrade; Bondtech reliability and support",
+    "Updated": "2026-06-27",
+    "Mount": "LGX Lite"
   }
 ]

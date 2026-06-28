@@ -1,22 +1,214 @@
 [
   {
     "id": "rec3ETdwkpZBGOxga",
-    "Name": "Beacon"
+    "Verdict": "BUY",
+    "Accuracy (mm)": "0.5µm resolution; <350nm typical std dev (documented by Beacon3D)",
+    "Price (USD)": 81.5,
+    "Pros": "Sub-micron resolution (0.5µm); full bed mesh in ~20 seconds without Z motion; integrated ADXL accelerometer rated to 115°C; Contact probe mode (<30g force) for automatic Z-offset without additional hardware; low thermal drift with active temperature compensation; 3.3g lightweight; Normal and Low Profile form factors for different toolheads",
+    "Updated": "2026-06-27",
+    "Description": "Eddy current surface scanner and contact probe combo. RevH is the current production revision with high-temp accelerometer (115°C standby), improved ESD and reverse-polarity protection, and -40% thermal drift vs prior revisions. Scans at 1kHz bandwidth at up to 500mm/s. Contact probe feature uses direct nozzle-touch sensing (<30g) for auto Z-offset with no additional hardware. Ships in Normal (Stealthburner/Annex) and Low Profile (VzBot/RatRig/K3 Frostbite) form factors. Firmware: Klipper and Kalico.",
+    "Verdict Label": "Voron community standard for precision meshing and auto Z-offset",
+    "Klipper Native": true,
+    "Cons": "Requires conductive bed surface (steel/WHAM BAM/PEI-laminated, ≥400µm); incompatible with large fixed magnets in bed stack; BTT Pi and BTT Manta SBCs require inline USB hub (violates warranty otherwise); $80+ price point is highest among common Voron probes",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig VCore 3"
+    ],
+    "Installation Complexity": "Medium",
+    "Vendor 1 Name": "Beacon3D",
+    "Name": "Beacon RevH",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://beacon3d.com/product/beacon-h/",
+    "Brand": "Beacon3D"
+  },
+  {
+    "id": "recFWD12nFASMSZuG",
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "Accuracy not published; ADXL345-based; probe specs unconfirmed",
+    "Pros": "Integrates ADXL345 accelerometer with eddy current probe functionality; BTT-ecosystem-adjacent with Fly3D CAN toolhead boards; Klipper native; compact form factor suited to Fly SHT and SB2040-series toolhead boards",
+    "Updated": "2026-06-27",
+    "Description": "ADXL345-based probe module from Mellow (Fly3D), a Chinese Klipper hardware manufacturer. Mellow produces CAN toolhead boards (Fly-SHT36, Fly-SB2040) that include integrated ADXL345 sensors. The Fly-ADXL product combines accelerometer (for input shaping) with probe functionality for bed meshing. Details on standalone probe performance are sparse in Western community sources. Requires verification against current Mellow product lineup before recommending — Mellow's product naming evolves rapidly.",
+    "Verdict Label": "Niche Klipper ecosystem option; limited English documentation — needs verification",
+    "Klipper Native": true,
+    "Cons": "Limited English-language documentation; smaller install base than Beacon, Cartographer, or BTT Eddy; product specifications not independently verified; Mellow Fly ecosystem is less common in Western Voron community; record needs spec verification",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig VCore 3"
+    ],
+    "Installation Complexity": "Medium",
+    "Vendor 1 Name": "Mellow / Fly3D",
+    "Name": "Mellow Fly ADXL",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1069528",
+    "Brand": "Mellow / Fly3D"
+  },
+  {
+    "id": "recVMRZJcx5QUzwJB",
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "Eddy current displacement; accuracy not independently published by BTT",
+    "Pros": "Budget-friendly eddy current in the BTT ecosystem; USB and CAN bus versions available; integrates with BTT toolhead boards; Klipper support via BTT's open source firmware; competitive price vs Cartographer",
+    "Updated": "2026-06-27",
+    "Description": "BTT's eddy current displacement sensor for bed meshing and homing. Part of BigTreeTech's ecosystem of Klipper hardware. Available in USB and CAN variants. Targets the same use case as Beacon and Cartographer at a budget price point. BTT maintains open source firmware. Community adoption is growing but lags significantly behind Beacon RevH and Cartographer V3/V4 in documented installations and community guides. Requires conductive bed surface.",
+    "Verdict Label": "Budget eddy current option; Cartographer is better established at similar price",
+    "Klipper Native": true,
+    "Cons": "Requires conductive bed; accuracy specs not published; mixed community reception on reliability; BTT hardware RF interference with BTT Pi and Manta boards (same issue as Beacon — likely worse given BTT hardware pairing); smaller community and documentation base than Beacon or Cartographer; newer/less field-proven",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig VCore 3"
+    ],
+    "Installation Complexity": "Medium",
+    "Vendor 1 Name": "BIQU / BigTreeTech",
+    "Name": "BTT Eddy",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://biqu.equipment/products/btt-eddy-series",
+    "Brand": "BigTreeTech"
+  },
+  {
+    "id": "recXapknE4yE6ByP4",
+    "Verdict": "SKIP",
+    "Accuracy (mm)": "±0.005mm (5µm) standard deviation (documented by ANTCLABS)",
+    "Pros": "Works with all bed materials (glass, metal, wood, PEI); widely supported across Klipper and Marlin; self-test and alarm functions on power-up; blue/red LED wiring diagnostics; well-documented with printer-specific wiring guides; no bed conductivity requirement",
+    "Updated": "2026-06-27",
+    "Description": "Hall effect auto bed leveling sensor using a solenoid-actuated push pin and hall sensor. BLTouch Smart V3.1 is the current production version, made by ANTCLABS (Seoul, South Korea). Works with all bed materials by sensing pin retraction rather than bed conductivity. Industry standard on entry-level Cartesian printers (Ender series, CR-10, etc.). Largely replaced by Tap, Klicky, and eddy probes in the self-build CoreXY community.",
+    "Verdict Label": "Viable on Cartesian printers; outclassed in CoreXY/Voron builds",
+    "Klipper Native": true,
+    "Cons": "Servo mechanism subject to wear over time; less repeatable than eddy current or magnetic dock probes; not a standard in Voron/CoreXY builds; widespread counterfeiting (3D Touch, TL Touch clones — genuine requires QR code on PCB); must be mounted exactly perpendicular to bed",
+    "Compatible Printers": [
+      "Ender 3",
+      "Creality CR-10",
+      "Most Cartesian FDM"
+    ],
+    "Installation Complexity": "Easy",
+    "Vendor 1 Name": "ANTCLABS",
+    "Name": "BL Touch",
+    "Type": "Hall Effect",
+    "Vendor 1 URL": "https://www.antclabs.com/bltouch-v3",
+    "Brand": "ANTCLABS"
   },
   {
     "id": "recZAu52HTB8xaQPa",
-    "Name": "Klicky PCB"
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "<0.025mm range; ~0.01mm std dev (per project README; community-measured)",
+    "Pros": "Extremely low cost (<$15 self-build BOM); fully open source (GPL-3.0); no bed material restrictions; automated dock/undock via Klipper macros; 1.4k GitHub stars, active community; KlickyNG variant adds self-aligning enclosed magnets (no glue required); compatible with klipper_z_calibration plugin",
+    "Updated": "2026-06-27",
+    "Description": "Magnetically attached microswitch probe for CoreXY printers. Uses 6x3mm neodymium magnets for both mechanical attachment and electrical contact. Klicky PCB is the PCB-based variant for improved repeatability. KlickyNG is the current recommended revision with self-aligning, enclosed magnet slots that don't require glue. Klipper macros automate probe attach and detach sequences during homing. Voron community staple since ~2021, increasingly superseded by Beacon RevH in new builds.",
+    "Verdict Label": "Best-value probe for Voron builds; community staple with proven reliability",
+    "Klipper Native": true,
+    "Cons": "Requires printed dock, toolhead mount, and dock mount specific to each printer model; Klipper macro configuration overhead; slower than eddy probes (sequential point-by-point probing); losing popularity to Beacon RevH in new Voron builds; needs recalibration after printer geometry changes",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Voron V1.8",
+      "Voron V0",
+      "RatRig VCore 3"
+    ],
+    "Open Source": true,
+    "Installation Complexity": "Medium",
+    "Vendor 1 Name": "GitHub (Community Build / DIY)",
+    "Name": "Klicky PCB",
+    "Type": "Hall Effect",
+    "Vendor 1 URL": "https://github.com/jlas1/Klicky-Probe",
+    "Brand": "Open Source / Community"
   },
   {
     "id": "receKP1YdCZsdh1iw",
-    "Name": "Cartographer"
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "Eddy current displacement; accuracy not independently published by manufacturer",
+    "Price (USD)": 29.99,
+    "Pros": "Budget-friendly eddy current (~$30 V3, ~$40 V4); USB+CAN dual protocol; built-in ADXL345 for input shaping; Survey Touch contact probe mode (V3+); multiple form factors (standard, flat-pack, low-profile, right-angle); V4 AIO integrates all features in one revised board",
+    "Updated": "2026-06-27",
+    "Description": "Eddy current induction sensor for bed meshing and homing. V3 ($29.99) ships with ADXL345 and dual USB/CAN support. Survey Touch (contact probe mode) added in V3 for nozzle-touch Z-offset. V4 ($39.99) is a revised AIO board. Form factors include Standard, Flat Pack, Low Profile, and Right-Angle to suit VzBot, RatRig, and Voron toolheads. Uses a Klipper plugin for firmware integration. Strong budget alternative to Beacon RevH.",
+    "Verdict Label": "Best-value eddy current probe; strong Beacon alternative at ~1/3 the price",
+    "Klipper Native": true,
+    "Cons": "Requires conductive bed; accuracy specs not officially published; Survey Touch calibration adds setup steps; mixed community reports on edge-of-bed accuracy; V4 is newer and less field-proven than V3; smaller install base than Beacon",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig VCore 3"
+    ],
+    "Installation Complexity": "Medium",
+    "Vendor 1 Name": "Cartographer3D",
+    "Name": "Cartographer",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://cartographer3d.com/products/cartographer-probe-v3-with-adxl345-standard",
+    "Brand": "Cartographer3D"
   },
   {
     "id": "rechYkIx8Jo58yATW",
-    "Name": "Euclid"
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "Microswitch-based; accuracy not independently published by manufacturer",
+    "Pros": "PCB with screw-attached magnets ensures dimensional accuracy and repeatable attachment; works with all bed materials and surface treatments regardless of temperature or magnetism; multi-firmware support (Klipper, Marlin, RRF2, RRF3, Smoothie); high-temp variant rated to 125°C+ for enclosed hot chambers; 5V and 24V native versions; well-documented printer-specific dock and mount guides",
+    "Updated": "2026-06-27",
+    "Description": "Magnetically coupled microswitch Z-probe for 3D printers, lasers, and CNC machines. PCB uses screw-attached magnets for both mechanical coupling and electrical contacts, delivering more precise and reliable attachment than printed magnet holders. Works regardless of bed material, magnetism, or surface treatment. Rated to 80°C natively; high-temp variants rated to 125°C+ available directly. Available as DIY build or kit via authorized resellers. Supports Klipper, Marlin, RRF2/3, and Smoothie.",
+    "Verdict Label": "Solid alternative to Klicky; better hardware finish but smaller Voron community footprint",
+    "Klipper Native": true,
+    "Cons": "Less Voron-community-centric than Klicky; requires dock, wiring, and macro configuration; slower than eddy probes; project development pace is notably slower; CC BY-NC-SA license restricts commercial use of designs; smaller reseller network than Klicky",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig VCore 3",
+      "Ender 3",
+      "RailCore"
+    ],
+    "Open Source": true,
+    "Installation Complexity": "Medium",
+    "Vendor 1 Name": "Euclid Probe",
+    "Name": "Euclid Probe",
+    "Type": "Hall Effect",
+    "Vendor 1 URL": "https://euclidprobe.github.io/00-getting.html",
+    "Brand": "Euclid Probe"
+  },
+  {
+    "id": "reclm5cB7iOXVlMql",
+    "Verdict": "SKIP",
+    "Accuracy (mm)": "Optical switch-based; accuracy not independently published; similar to BLTouch in practice",
+    "Pros": "Drop-in upgrade for Creality printers; uses metal probe pin vs BLTouch's plastic pin (more durable); optical sensor vs hall effect (less susceptible to magnetic interference); works with all bed materials; cheaper than BLTouch; Klipper support via bltouch config section",
+    "Updated": "2026-06-27",
+    "Description": "Creality's proprietary bed leveling probe, functionally similar to BLTouch. Uses an optical sensor to detect pin retraction rather than a hall effect sensor. Metal push pin is more durable than BLTouch's engineering plastic pin. Designed as an OEM upgrade for Creality printers (Ender 3 V2, CR-10 series, etc.). Configures in Klipper via the bltouch configuration section. Rarely used outside of Creality-ecosystem builds; irrelevant for Voron, RatRig, or VzBot builds.",
+    "Verdict Label": "Creality ecosystem only; irrelevant for Voron/RatRig/VzBot builds",
+    "Klipper Native": true,
+    "Cons": "Creality-ecosystem focused — limited mount options for CoreXY/Voron builds; not meaningful for self-build prosumer printers; Creality-branded and primarily shipped with Creality printers; lacks the established community documentation of BLTouch for third-party use",
+    "Compatible Printers": [
+      "Ender 3",
+      "Creality CR-10",
+      "Creality K-series"
+    ],
+    "Installation Complexity": "Easy",
+    "Vendor 1 Name": "Creality",
+    "Name": "CR Touch",
+    "Type": "Optical",
+    "Vendor 1 URL": "https://www.creality.com/products/cr-touch-auto-leveling-kit",
+    "Brand": "Creality"
   },
   {
     "id": "reczSuDbczbQtYGD0",
-    "Name": "Voron Tap"
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "Direct nozzle-touch; repeatability not published; community-measured ~1-5µm std dev typical",
+    "Pros": "Direct nozzle contact = zero probe offset from nozzle tip; works with any bed surface (textured PEI, smooth, magnetic sheets); fully integrated into Stealthburner/CW2 toolhead; open source Voron project; r2 revision resolved documented r1 PCB reliability issues; no separate probe dock required",
+    "Updated": "2026-06-27",
+    "Description": "Optical endstop triggered by nozzle deflection, integrated into the Stealthburner toolhead for Voron 2.4 and Trident. XY linear rails allow the toolhead to physically travel downward when the nozzle contacts the bed, triggering an internal optical sensor. r1 was the original release with documented PCB issues; r2 is the current recommended revision with improved PCB and updated magnet arrangement. Voron community verdict: Tap delivers accurate Z-offset via direct nozzle sensing, but Beacon RevH is now preferred by most new builders for combined eddy mesh + contact Z calibration with less setup complexity.",
+    "Verdict Label": "Accurate nozzle-touch Z; installation complexity has pushed most new Voron builders to Beacon",
+    "Compatible Toolheads": [
+      "Stealthburner / Clockwork 2"
+    ],
+    "Klipper Native": true,
+    "Cons": "Requires Stealthburner toolhead — not compatible with other toolhead designs (Xol, Dragon Burner, etc.); installation involves precise spring tensioning and gantry configuration; nozzle thermal expansion causes Z reading drift unless compensated; r1 PCBs had documented optical sensor failures; slower bed mesh than eddy probes (sequential point-by-point); cumulative nozzle wear from repeated touch cycles",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Open Source": true,
+    "Installation Complexity": "Hard",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Voron Tap",
+    "Type": "Contact",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-tap-pcb-kit-r2-by-voron-design",
+    "Brand": "Voron Design"
   }
 ]
