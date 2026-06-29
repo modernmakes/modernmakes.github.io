@@ -1,1 +1,430 @@
-[]
+[
+  {
+    "id": "rec0tIX7L0c3HQDN5",
+    "Brand Tier": "OEM",
+    "Description": "Gates 2GT toothed idlers are used at the inner XY belt path reversal points in Voron CoreXY builds where the belt wraps with the tooth side inward. Outer belt reversals use smooth F695 bearings instead. Mismatching toothed and smooth idler positions causes belt noise and eventual skipping.",
+    "Verdict Label": "OEM toothed idler — used where belt reversal requires tooth engagement",
+    "Tooth Profile": "2GT",
+    "Verdict": "BUY",
+    "Cons": "Only used at specific inner belt path reversal points — most idler positions use smooth F695 bearings",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Gates 2GT Toothed Idler",
+    "Type": "Idler",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Gates",
+    "Price (USD)": 8,
+    "Pros": "OEM tooth profile matched to Gates belt — zero pitch mismatch at tooth reversal points\nUsed at belt path reversal points where a smooth idler would cause belt tooth rotation and skip\nPre-assembled with integrated bearing"
+  },
+  {
+    "id": "rec1AOqhI51ryna3W",
+    "Brand Tier": "Quality Clone",
+    "Description": "Trianglelab’s 2GT 20T drive pulley is a reliable quality clone for most builds. At normal and moderate acceleration, it performs indistinguishably from Gates. For a performance build chasing every marginal improvement, Gates is still correct.",
+    "Verdict Label": "Reliable quality clone pulley — works well in practice, sold by trusted ecosystem vendors",
+    "Tooth Profile": "2GT",
+    "Verdict": "CONSIDER",
+    "Cons": "Tooth profile is close to 2GT spec but not manufacturer-certified — slight mesh variation possible\nFor maximum performance builds, Gates pulley matched to Gates belt eliminates one variable",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Trianglelab (AliExpress)",
+    "Name": "Trianglelab 2GT 20T Drive Pulley",
+    "Type": "Pulley",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1457330",
+    "Brand": "Trianglelab",
+    "Price (USD)": 3,
+    "Pros": "Trianglelab has a track record of acceptable dimensional accuracy on motion components\nConsiderably cheaper than Gates — meaningful savings for AWD builds needing 4 pulleys\nSold through Trianglelab’s AliExpress store with some vendor accountability"
+  },
+  {
+    "id": "rec21GNGnStXFEZYE",
+    "Brand Tier": "OEM",
+    "Description": "The Gates 2GT 20T drive pulley is the XY motor pulley specified in Voron BOM and used in all prosumer CoreXY builds. OEM match for Gates LL-2GT belt. Bore is typically 5mm for standard NEMA17 motor shafts.",
+    "Verdict Label": "OEM pulley for all Voron and CoreXY XY motor drives — machined to 2GT spec",
+    "Tooth Profile": "2GT",
+    "Verdict": "BUY",
+    "Cons": "Requires correct bore size for motor shaft diameter — double-check 5mm bore before ordering",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Gates 2GT 20T Drive Pulley",
+    "Type": "Pulley",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Gates",
+    "Price (USD)": 8,
+    "Pros": "Manufactured to match Gates LL-2GT belt precisely — tooth mesh geometry is designed as a matched set\n20 tooth count is the Voron and CoreXY standard — all BOM and speed calculations assume 20T\nFlanged to retain belt lateral position on the motor shaft"
+  },
+  {
+    "id": "rec6a0V3IkgRRwbxY",
+    "Diameter (mm)": 8,
+    "Length (mm)": 300,
+    "Brand Tier": "Budget Clone",
+    "Description": "T8x8 300mm lead screws serve 250mm Voron 2.4 builds and all Voron Trident Z axes. Trident uses 3 lead screws for independent Z leveling (Quad Gantry Leveling equivalent). All other characteristics are the same as the 400mm variant.",
+    "Verdict Label": "Z lead screw for 250mm Voron V2.4 and Voron Trident",
+    "Verdict": "CONSIDER",
+    "Lead (mm)": 8,
+    "Cons": "Same lead screw limitations as 400mm variant — belted Z is the upgrade path for V2.4; Trident uses screws by design",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Name": "T8 Lead Screw 8mm Lead 300mm",
+    "Type": "Lead Screw",
+    "Brand": "Generic",
+    "Price (USD)": 5,
+    "Pros": "Correct length for 250mm V2.4 and Voron Trident (3 screws) — shorter span reduces lead screw whip at higher Z speeds\nSame T8x8 spec as 400mm — all documentation and hardware is interchangeable except length"
+  },
+  {
+    "id": "recCqJ7iQO6TjMpKb",
+    "Belt Width (mm)": 6,
+    "Brand Tier": "OEM",
+    "Description": "Gates LL-2GT 6mm belt is the specified XY drive belt for Voron Design printers and is the de facto standard for all prosumer CoreXY self-builds. The 6mm width fits standard V2.4, Trident, 0.2, VzBot, and HevORT drive configurations. Gates is the OEM; all clone belts are measured against its dimensional accuracy and elasticity.",
+    "Verdict Label": "The standard XY drive belt for all Voron and most prosumer CoreXY builds",
+    "Tooth Profile": "2GT",
+    "Verdict": "BUY",
+    "Cons": "Requires cutting to length from bulk roll — sold per meter, not pre-sized\nSlightly more expensive per meter than eSUN or generic alternatives",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Gates 2GT Belt 6mm",
+    "Type": "Belt",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Gates",
+    "Price (USD)": 15,
+    "Pros": "Gates LL-2GT is the OEM belt specification for Voron, RatRig, and VzBot — it is what the pulleys and idlers are sized for\nPolyurethane construction with fiberglass tension members — consistent stretch coefficient and lifetime under tension\nNo quality lottery — all Gates belt is manufactured to the same spec"
+  },
+  {
+    "id": "recCsDdM53vugY0Ee",
+    "Belt Width (mm)": 6,
+    "Brand Tier": "Quality Clone",
+    "Description": "eSUN 2GT 6mm belt is the most popular alternative to Gates in Voron community builds. It fits standard 2GT pulleys and idlers and works acceptably for most builds. At high acceleration, the slightly higher stretch coefficient relative to Gates becomes noticeable. For a budget build or a first build, eSUN is a defensible choice. For a performance-optimized build, Gates is correct.",
+    "Verdict Label": "Acceptable belt at lower cost — most commonly used budget alternative to Gates in Voron builds",
+    "Tooth Profile": "2GT",
+    "Verdict": "CONSIDER",
+    "Cons": "Stretch coefficient is slightly higher than Gates under equivalent tension — documented in community comparison testing\nNot the OEM spec — for builders chasing maximum performance, the marginal belt quality matters at high acceleration\nQLity control is less consistent than Gates batch-to-batch",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Name": "eSUN 2GT Belt 6mm",
+    "Type": "Belt",
+    "Brand": "eSUN",
+    "Price (USD)": 8,
+    "Pros": "Widely used in Voron builds with satisfactory results — not a fringe budget option\nSignificantly cheaper than Gates per meter — meaningful savings on a full build\nDimensional tolerances are close enough to 2GT spec that standard pulleys and idlers work correctly"
+  },
+  {
+    "id": "recGSOC4JJfpUYQTj",
+    "Belt Width (mm)": 6,
+    "Brand Tier": "Budget Clone",
+    "Description": "Generic 2GT 6mm belts from unknown manufacturers have no guaranteed tooth profile accuracy. Even minor pitch variation produces resonance artifacts that Input Shaper cannot correct. eSUN is only marginally more expensive and is a substantial quality improvement.",
+    "Verdict Label": "Unknown manufacturer belt — tooth profile accuracy is untested and resonance behavior is unpredictable",
+    "Tooth Profile": "2GT",
+    "Verdict": "SKIP",
+    "Cons": "Tooth pitch accuracy is not guaranteed — pitch variation causes ghost ringing that Input Shaper cannot fully correct\nStretch characteristics are unknown — belt tension calibration becomes guesswork\neSUN is available at a small premium and is a meaningful quality step up",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Name": "Generic 2GT Belt 6mm",
+    "Type": "Belt",
+    "Brand": "Generic",
+    "Pros": "Lowest cost option — occasionally used by budget builders who accept the trade-offs"
+  },
+  {
+    "id": "recHdOq8p9C9jDpuE",
+    "Brand Tier": "OEM",
+    "Description": "LDO is a Taiwanese linear motion manufacturer that produces MGN-profile rails to a quality level equivalent to Hiwin, and is sold by Voron-community-approved vendors as the expected alternative. For Voron builds, LDO rails are interchangeable with Hiwin and are the default recommendation when Hiwin is out of stock or unavailable.",
+    "Verdict Label": "Licensed OEM supplier — consistently recommended alongside Hiwin by Voron-affiliated vendors",
+    "Verdict": "BUY",
+    "Cons": "Slightly softer brand recognition than Hiwin in wider motion control contexts — Hiwin remains the benchmark name\nAvailability depends on Voron-ecosystem vendors — not available through Misumi or standard industrial distributors",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "KB3D",
+    "Name": "LDO MGN9H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Vendor 1 URL": "https://kb-3d.com",
+    "Brand": "LDO",
+    "Pros": "LDO is a licensed manufacturer — not a quality clone, but a separate first-tier supplier approved by the Voron community\nSold by KB3D, Fabreeko, and Voron-official kit vendors as the expected rail choice\nConsistently smooth with correct preload — community comparison builds show it matches Hiwin results",
+    "Rail Profile": "MGN9"
+  },
+  {
+    "id": "recIW1sIZdZ0rJBXz",
+    "Brand Tier": "Quality Clone",
+    "Description": "Mellow is a Chinese linear motion manufacturer with an above-average reputation in the Voron and CoreXY community for quality clone rails. MGN9H from Mellow has a reasonable community track record, but buyers should budget time to clean and re-lube on arrival, and should expect to inspect and potentially reject an individual rail.",
+    "Verdict Label": "Upper-tier quality clone — generally smooth, but you’re buying a quality distribution, not a guaranteed unit",
+    "Verdict": "CONSIDER",
+    "Cons": "Still a quality distribution, not a specification — individual rails may have binding points or inconsistent preload\nRequires cleaning and re-lubing on arrival regardless of seller claims\nCannot be returned easily from AliExpress if a defective rail arrives",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Mellow (AliExpress)",
+    "Name": "Mellow MGN9H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1047297",
+    "Brand": "Mellow",
+    "Pros": "Mellow has a positive reputation in the AliExpress ecosystem — fewer dead-on-arrival reports than generic alternatives\nMore affordable than Hiwin or LDO — meaningful cost savings on a 5-rail V2.4 build\nCommunity has documented satisfactory results with Mellow rails on Voron builds\nSold pre-cleaned and lightly lubricated in most listings",
+    "Rail Profile": "MGN9"
+  },
+  {
+    "id": "recRq9fXrD8W3mKYk",
+    "Brand Tier": "Budget Clone",
+    "Description": "Generic MGN9H rails from unspecified AliExpress sellers are a quality gamble. The lower price is offset by inconsistent preload, possible binding, and no path for returns on defective units. For a build where linear rail quality directly determines print quality, the savings do not justify the risk when Mellow (CONSIDER) and LDO/Hiwin (BUY) are available.",
+    "Verdict Label": "Quality lottery — unknown manufacturer sourcing means no consistency guarantee",
+    "Verdict": "SKIP",
+    "Cons": "No manufacturer accountability — quality varies not just by seller but by production batch\nBinding, inconsistent preload, and corrosion have all been documented on unknown-brand AliExpress rails\nCosts time to inspect, clean, and potentially return — savings often disappear in the hidden labor cost\nNot worth the risk when Mellow or LDO are available at modest cost premium",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Name": "Generic MGN9H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Brand": "Generic",
+    "Pros": "Cheapest way to source linear rails — meaningful savings if you happen to get a good batch\nSome builders have had acceptable results and are willing to inspect and return bad units",
+    "Rail Profile": "MGN9"
+  },
+  {
+    "id": "recS1mILSZiWJcp2a",
+    "Brand Tier": "OEM",
+    "Description": "Hiwin MGN12H is used on the Voron 2.4 and Trident gantry Y rails and Z axes where span length and lateral load require the wider 12mm profile. The V2.4 uses MGN12H on both Y gantry rails and all four Z rails. Combined with titanium backers, MGN12H provides a rigid, repeatable foundation for the gantry.",
+    "Verdict Label": "OEM 12mm rail — standard for V2.4 and Trident gantry and Z axis",
+    "Verdict": "BUY",
+    "Cons": "MGN12H is noticeably heavier than MGN9H — matters for X axis where carriage mass affects resonance frequency\nMore expensive per rail than MGN9 — a 4-rail V2.4 Z set is a significant BOM cost",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Hiwin MGN12H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Hiwin",
+    "Pros": "MGN12 is stiffer than MGN9 at equivalent length — correct choice for longer gantry spans and Z axes\nH carriage preload handles lateral gantry forces during high-acceleration printing\nFull Hiwin quality guarantees — no variance between rails in a matched set",
+    "Rail Profile": "MGN12"
+  },
+  {
+    "id": "recZ2ipWXMxpDjmLS",
+    "Diameter (mm)": 8,
+    "Length (mm)": 400,
+    "Brand Tier": "Budget Clone",
+    "Description": "T8x8 400mm lead screws are used in the stock Voron 2.4 Z axis for 300mm and 350mm builds (4 screws). They work but are the most common first upgrade target. Belted Z is the official Voron Design upgrade path.",
+    "Verdict Label": "Stock Z lead screw for 300mm and 350mm Voron V2.4 builds — functional but belted Z is the community upgrade",
+    "Verdict": "CONSIDER",
+    "Lead (mm)": 8,
+    "Cons": "Slower Z than belted Z — meaningful impact on multi-material and probing workflows\nRing resonance from lead screw whip is a documented problem at higher Z travel speeds\nRequires Oldham couplers and periodic lubrication\nBelted Z is the community-preferred upgrade",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "Name": "T8 Lead Screw 8mm Lead 400mm",
+    "Type": "Lead Screw",
+    "Brand": "Generic",
+    "Price (USD)": 6,
+    "Pros": "Simple, well-understood Z motion — fully documented in V2.4 build guides\nLow cost and easy to source in correct lengths\nWorks adequately for standard print speeds"
+  },
+  {
+    "id": "recbloEvRGfjGshpW",
+    "Description": "The Voron 2.4 Belted Z is an official Voron Design upgrade replacing stock lead screws with belt-driven Z. Each corner Z motor drives a belt loop, eliminating lead screws entirely. Result is faster Z travel, elimination of screw-induced ringing, and lower maintenance. Considered effectively mandatory for any performance-focused V2.4 build.",
+    "Verdict Label": "Official V2.4 Z upgrade — eliminates lead screw ringing and dramatically improves Z speed",
+    "Verdict": "BUY",
+    "Cons": "More complex installation than lead screws — belt tension must be set correctly on 4 independent Z belt paths\nRequires Klipper firmware awareness — INPUT_SHAPER must account for changed Z resonance characteristics",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "Open Source": true,
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Voron 2.4 Belted Z",
+    "Type": "Belted Z",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Voron Design",
+    "Pros": "Eliminates Z lead screw ringing — no more resonance artifacts from screw whip at higher Z speeds\nDramatically faster Z moves — meaningful improvement in multi-material and first-layer probing workflows\nOpen source, officially designed by Voron Design — full documentation, well-documented installation\nReuses most existing V2.4 motor hardware"
+  },
+  {
+    "id": "recdHqyyaCvZcIafe",
+    "Belt Width (mm)": 9,
+    "Brand Tier": "OEM",
+    "Description": "Gates LL-2GT 9mm belt is used in AWD CoreXY builds (RatRig V-Core 4, some VzBot configurations) where the wider belt handles the aggregate tension from 4 independent motor drives. The 9mm width is required when using 9mm pulleys and idlers; it is not a drop-in substitute for 6mm hardware.",
+    "Verdict Label": "9mm Gates belt for AWD builds — wider belt handles the higher forces of 4-motor drive",
+    "Tooth Profile": "2GT",
+    "Verdict": "BUY",
+    "Cons": "9mm pulleys and idlers are required — cannot mix 6mm hardware with 9mm belt\nLarger belt profile adds marginal mass to the gantry",
+    "Compatible Printers": [
+      "RatRig V-Core 4",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Gates 2GT Belt 9mm",
+    "Type": "Belt",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Gates",
+    "Price (USD)": 20,
+    "Pros": "Higher belt tension capacity than 6mm — appropriate for AWD drives where all 4 motor torques route through the belt simultaneously\nSame Gates quality as 6mm — OEM specification, consistent stretch\nRequired for RatRig V-Core 4 AWD configuration — 6mm belt is undersized for 4-motor AWD tension"
+  },
+  {
+    "id": "reciNaWQ6UP4ZUNJ1",
+    "Brand Tier": "OEM",
+    "Description": "The RatRig V-Core 4 uses belted Z as its stock design — there are no lead screws to upgrade away from. A 3-point kinematic bed mount with independent belt-driven Z motors provides fast Z travel, automatic bed leveling via Z_TILT_ADJUST, and eliminates all lead screw maintenance. This is an engineering advantage of the V-Core 4 over the V2.4 stock configuration.",
+    "Verdict Label": "Stock belted Z for the V-Core 4 — lead screws are not part of the V-Core 4 design at all",
+    "Verdict": "BUY",
+    "Cons": "Belt tension on Z requires periodic checking — Z belts can loosen over time under thermal cycling\nRequires correct Klipper Z_TILT_ADJUST configuration for the 3-point kinematic — not plug-and-play out of the box for firmware beginners",
+    "Compatible Printers": [
+      "RatRig V-Core 4"
+    ],
+    "Open Source": true,
+    "Vendor 1 Name": "RatRig",
+    "Name": "RatRig V-Core 4 Belted Z",
+    "Type": "Belted Z",
+    "Vendor 1 URL": "https://ratrig.com/rat-rig-v-core-4.html",
+    "Brand": "RatRig",
+    "Pros": "Belted Z is the stock design — no lead screws to upgrade away from\n3-point kinematic bed mount on belt drive provides independent Z leveling equivalent to Voron Trident design\nFast Z travel is native — the V-Core 4 can probe, first-layer, and retract at speeds impossible with lead screw Z\nRatRig-designed and kit-supplied — no DIY engineering required"
+  },
+  {
+    "id": "recipb38sZofw7p65",
+    "Description": "F695 2RS flanged bearings are used at all smooth idler positions in Voron CoreXY belt paths — outer reversals where the belt’s flat back contacts the bearing. 5mm bore fits the M5 idler post and the flange retains belt laterally. Voron BOM specifies F695 2RS; note that quality varies significantly by source.",
+    "Verdict Label": "Standard smooth idler for all Voron CoreXY belt path outer reversals",
+    "Verdict": "BUY",
+    "Cons": "Quality varies significantly by source — random AliExpress F695 may have gritty feel and short lifespan\nShould be sourced from known vendors (Misumi, KB3D, Fabreeko) or confirmed reputable bearing suppliers",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "F695 2RS Smooth Idler Bearing",
+    "Type": "Bearing",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Generic",
+    "Price (USD)": 1,
+    "Pros": "F695 2RS is the correct bearing spec — 5mm bore, 13mm OD, flanged\nFlange retains the belt’s lateral position without a separate washer\nStandard industrial bearing spec — available from reputable vendors at low cost"
+  },
+  {
+    "id": "recvIILzOefQWCXc1",
+    "Brand Tier": "OEM",
+    "Description": "LDO MGN12H is the Voron-community-approved 12mm rail for V2.4 and Trident gantry and Z axes. It performs identically to Hiwin MGN12H at the same price point and is sold by the same Voron-affiliated vendors. Either LDO or Hiwin is the correct answer for a V2.4 MGN12H spec.",
+    "Verdict Label": "Licensed OEM-quality 12mm rail — recommended for V2.4/Trident gantry and Z axis",
+    "Verdict": "BUY",
+    "Cons": "Same weight and cost tradeoffs as Hiwin MGN12H — no meaningful difference in cons",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "KB3D",
+    "Name": "LDO MGN12H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Vendor 1 URL": "https://kb-3d.com",
+    "Brand": "LDO",
+    "Pros": "Same quality tier as Hiwin MGN12H from a licensed manufacturer — correct preload, consistent motion\nApproved by Voron community vendor network — KB3D and Fabreeko ship LDO MGN12H in kit builds\nDirect substitute for Hiwin MGN12H in all V2.4 and Trident configurations",
+    "Rail Profile": "MGN12"
+  },
+  {
+    "id": "recwHWo1r7t2bUyBE",
+    "Brand Tier": "OEM",
+    "Description": "The RatRig V-Core 4 uses MGN15H rails on its Z axes to handle the higher loads imposed by large-format bed sizes (300mm, 400mm, 500mm). MGN15 provides higher dynamic load ratings than MGN12, which matters on the V-Core 4 where a large aluminum kinematic bed sits on these rails.",
+    "Verdict Label": "Right-sized rail for V-Core 4 — 15mm profile handles the higher loads of the larger bed and gantry",
+    "Verdict": "BUY",
+    "Cons": "Heavier than MGN9/12 — higher moving mass on Z axis, though this matters less for Z than for XY\nNot interchangeable with smaller printers — this is a V-Core 4 specific spec",
+    "Compatible Printers": [
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "RatRig",
+    "Name": "RatRig MGN15H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Vendor 1 URL": "https://ratrig.com",
+    "Brand": "RatRig",
+    "Pros": "MGN15 provides greater rigidity than MGN12 at equivalent span — appropriate for V-Core 4’s 300–500mm build volumes\nHigher load rating accommodates the heavier gantry and heated bed of large-format builds\nSold as part of the RatRig V-Core 4 kit — no sourcing guesswork",
+    "Rail Profile": "MGN15"
+  },
+  {
+    "id": "recxcw6tBNLrFJRaf",
+    "Description": "Oldham couplers are required at the motor-to-lead-screw junction on all Voron lead screw Z axes. They allow lateral float to accommodate shaft misalignment while transmitting rotation. Rigid shaft couplers are not a substitute — they will bind and cause Z banding.",
+    "Verdict Label": "Essential companion to lead screw Z — eliminates Z binding from shaft misalignment",
+    "Verdict": "BUY",
+    "Cons": "Center disc wears over time and requires periodic inspection\nIrrelevant if switching to belted Z",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Oldham Coupler",
+    "Type": "Coupler",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Generic",
+    "Price (USD)": 5,
+    "Pros": "Allows lateral float between motor shaft and lead screw — corrects for inevitable misalignment in assembled frames\nWithout Oldham couplers, misalignment binds Z and causes Z banding artifacts\nCheap, reliable, and non-negotiable on lead screw Z builds"
+  },
+  {
+    "id": "recxi0DJQV9mmSwqj",
+    "Brand Tier": "OEM",
+    "Description": "Bondtech manufactures 2GT drive pulleys to precision tolerances. A CONSIDER for XY drive applications — the precision is genuine but provides no practical advantage over Gates at the XY motor position. Bondtech pulleys are most commonly used in extruder drive applications.",
+    "Verdict Label": "Precision drive pulley from a respected motion component vendor",
+    "Tooth Profile": "2GT",
+    "Verdict": "CONSIDER",
+    "Cons": "More expensive than Gates or Trianglelab for equivalent XY drive duty — precision doesn’t add meaningful performance at the XY motor position\nBondtech’s primary product line is extruder gears, not XY drive pulleys",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "Bondtech",
+    "Name": "Bondtech 2GT Drive Pulley",
+    "Type": "Pulley",
+    "Vendor 1 URL": "https://www.bondtech.se",
+    "Brand": "Bondtech",
+    "Price (USD)": 12,
+    "Pros": "Bondtech is a precision motion company — their pulleys meet or exceed Gates dimensional tolerances\nOften already on hand if using Bondtech extruder hardware"
+  },
+  {
+    "id": "recyStrlO1KwMrFuQ",
+    "Brand Tier": "OEM",
+    "Description": "Hiwin MGN9H is the reference standard for linear motion in prosumer CoreXY printers. The 9mm profile is used on XY axes where low mass matters (Voron 0.2 on all axes, V2.4 and Trident on the X carriage). H carriages have factory-set preload that is consistent and reliable. All clone rail quality is benchmarked against Hiwin performance.",
+    "Verdict Label": "The OEM reference standard — tight tolerances, consistent preload, zero quality lottery",
+    "Verdict": "BUY",
+    "Cons": "Expensive relative to clone options — a full Voron 2.4 rail set is a meaningful cost\nLead times and availability vary — Misumi cut-to-length is more reliably stocked than Hiwin direct",
+    "Compatible Printers": [
+      "Voron 0.2",
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Hiwin MGN9H Linear Rail",
+    "Carriage Type": "H",
+    "Type": "Linear Rail",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Hiwin",
+    "Pros": "Factory-set preload is consistent across the carriage — no binding at any point on the rail\nH carriage (high preload) provides rigidity without being over-constrained\nTight machining tolerances — Hiwin is the benchmark all clone rails are measured against\nSatisfied community documentation goes back years — well-understood failure modes",
+    "Rail Profile": "MGN9"
+  }
+]

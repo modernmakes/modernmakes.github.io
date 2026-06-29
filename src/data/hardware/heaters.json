@@ -45,6 +45,34 @@
     "Size": "Proprietary (Revo format)"
   },
   {
+    "id": "recBmKamKvBRwGKuy",
+    "Verdict Label": "Standard 40W cartridge from a trusted vendor — adequate for most printing, but 50W+ is preferred for high-speed builds",
+    "Verdict": "CONSIDER",
+    "Type": "Heater Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1457330",
+    "Brand": "Trianglelab",
+    "Price (USD)": 5,
+    "Pros": "40W is the standard baseline wattage — adequate for print speeds up to moderate Voron levels\nTrianglelab produces cartridges for their hotend lineup with better QC than unbranded alternatives\nVery affordable — the included cartridge in most Dragon and Dragonfly hotend kits",
+    "Wattage (W)": 40,
+    "Description": "The Trianglelab 40W 24V heater cartridge is the standard cartridge shipped with Dragon and Dragonfly hotends. It works correctly for typical printing at speeds up to moderate Voron levels. For builders targeting high-speed printing or frequently printing at elevated temperatures, upgrading to 50W (Slice Engineering) or 60W (Phaetus) is worthwhile.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Dragon",
+      "Dragonfly",
+      "Rapido"
+    ],
+    "Cons": "40W shows thermal sag under high-speed printing at elevated temperatures — heat-up and recovery is slower than 50W or 60W alternatives\nNot the upgrade recommendation — if buying a separate cartridge, 50W (Slice) or 60W (Phaetus) is better for the marginal cost difference",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "Trianglelab (AliExpress)",
+    "Name": "Trianglelab 40W 24V Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
     "id": "recEmv7INSGorBKyw",
     "Verdict Label": "Voron Trident 250mm BOM standard — the community's first-choice silicone bed heater at this size",
     "Verdict": "TOP",
@@ -86,6 +114,34 @@
     "Vendor 1 Name": "Keenovo / AliExpress",
     "Name": "Keenovo Silicone Bed Heater 300×300mm 750W",
     "Size": "300×300mm"
+  },
+  {
+    "id": "recJ89orpQTZsilqu",
+    "Verdict Label": "Highest-wattage standard cartridge in the prosumer ecosystem — 60W for maximum thermal headroom at high-speed printing",
+    "Verdict": "BUY",
+    "Type": "Heater Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1457330",
+    "Brand": "Phaetus",
+    "Price (USD)": 12,
+    "Pros": "60W is the highest wattage available in a standard 6×20mm cartridge — maximum thermal recovery capacity for aggressive printing\nPhaetus produces heater cartridges designed for their own hotend lineup — quality control is better than generic alternatives\nFits any hotend accepting a standard 6mm bore cartridge",
+    "Wattage (W)": 60,
+    "Description": "The Phaetus 60W 24V heater cartridge provides maximum wattage in a standard 6×20mm form factor, making it the choice for builders who are running very high print speeds or printing at elevated temperatures where thermal recovery is a bottleneck. It fits any compatible hotend but requires careful PID tuning in Klipper to prevent overshoot.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Dragon",
+      "Rapido",
+      "Dragonfly"
+    ],
+    "Cons": "At 60W, the thermal runaway protection threshold needs to be calibrated correctly in Klipper — the cartridge can overshoot if PID is not properly tuned\nOverkill for standard 200–250°C printing — the wattage advantage is most relevant at high-speed and high-temperature applications",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "Trianglelab (AliExpress)",
+    "Name": "Phaetus 60W 24V Heater Cartridge",
+    "Size": "6×20mm"
   },
   {
     "id": "recNUVSfDqJCANJ0x",
@@ -134,6 +190,53 @@
     ],
     "Vendor 1 Name": "AliExpress (various)",
     "Name": "Generic 24V 40W Heater Cartridge 6×20mm",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recTAVYv8mLjkQpop",
+    "Verdict Label": "Quality clone 50W cartridge from Mellow — competitive with Slice Engineering at a lower price, but with less community track record",
+    "Verdict": "CONSIDER",
+    "Type": "Heater Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1047297",
+    "Brand": "Mellow",
+    "Price (USD)": 8,
+    "Pros": "50W wattage matches Slice Engineering’s recommended spec at a lower price point\nMellow is a recognized brand in the Voron/AliExpress ecosystem — better accountability than generic sellers\nStandard 6×20mm format — fits any compatible hotend",
+    "Wattage (W)": 50,
+    "Description": "Mellow’s NF-Crazy 50W heater cartridge is the included cartridge in their NF-Crazy hotend and is also available separately. At 50W and 24V in a standard 6×20mm format, it is a reasonable alternative to Slice Engineering’s cartridge at a lower price. For builders who prioritize cost or are already using Mellow hardware, it is a defensible choice.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Mellow NF-Crazy",
+      "Dragon",
+      "Dragonfly"
+    ],
+    "Cons": "Less community testing data than Slice Engineering — fewer long-term build reports at high wattage\nMellow QC is generally good but not at the level of a dedicated component manufacturer like Slice\nFor the small price premium over Slice Engineering, Slice is the cleaner choice",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Mellow (AliExpress)",
+    "Name": "Mellow NF-Crazy 50W 24V Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recTR9HG4KwFZXpCn",
+    "Verdict Label": "60W from unknown manufacturer compounds the fire risk — higher wattage with unknown insulation quality is worse, not better",
+    "Verdict": "SKIP",
+    "Type": "Heater Cartridge",
+    "Brand": "Generic",
+    "Price (USD)": 3,
+    "Pros": "60W wattage is attractive on paper — thermal recovery should theoretically be excellent",
+    "Wattage (W)": 60,
+    "Description": "Generic 24V 60W heater cartridges from unknown manufacturers have the same safety risks as generic 40W cartridges, compounded by higher wattage. If insulation fails at 60W, there is more thermal energy available to cause damage. The Phaetus 60W cartridge from a known vendor is the correct choice for any builder wanting 60W; the generic version is not.",
+    "Voltage": "24V",
+    "Cons": "Same fire risk as generic 40W but at higher wattage — more energy available if insulation fails\nActual wattage output is unverified — may not be 60W\nPID tuning for a cartridge with unknown wattage is unreliable — thermal runaway protection is harder to configure correctly\nPhaetus 60W cartridge is available from a known vendor at a small premium with actual QC",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Name": "Generic 24V 60W 6×20mm Heater Cartridge",
     "Size": "6×20mm"
   },
   {
@@ -205,6 +308,31 @@
     "Size": "Standard DIN/panel mount"
   },
   {
+    "id": "receE0bS6fNHXTPZZ",
+    "Verdict Label": "Standard E3D cartridge for V6-family hotends — correct spec for any E3D-compatible block",
+    "Verdict": "CONSIDER",
+    "Type": "Heater Cartridge",
+    "Vendor 1 URL": "https://e3d-online.com",
+    "Brand": "E3D",
+    "Price (USD)": 10,
+    "Pros": "E3D’s own heater cartridge for V6-pattern heater blocks — guaranteed fit and spec match\nStandard 6mm bore, 20mm length — compatible with any hotend accepting a standard V6-format cartridge",
+    "Wattage (W)": 40,
+    "Description": "The E3D V6 40W 24V heater cartridge is E3D’s own replacement cartridge for V6-family heater blocks. It uses the standard 6×20mm format shared by most modern hotends. For new Voron builds, this cartridge is less relevant as the V6 hotend has been largely replaced by Dragon/Rapido variants — but it is the correct part for any V6-format block.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "E3D V6",
+      "Dragonfly BMO"
+    ],
+    "Cons": "40W is the standard wattage — same thermal recovery limitations as other 40W cartridges\nAt the E3D price point, the Slice Engineering 50W cartridge at a similar cost is a better buy for new builds\nLargely legacy for Voron builds — most builders are on Dragon/Rapido-family hotends that accept the same cartridge",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "E3D Online",
+    "Name": "E3D V6 40W 24V Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
     "id": "receq4L42JMqvBpaF",
     "Verdict Label": "DC 24V bed heater — no SSR required, but thermal ceiling is lower than AC alternatives",
     "Verdict": "MID",
@@ -246,6 +374,35 @@
     "Cons": "Premium price for 40W vs. equivalent community alternatives at half the cost\n40W leaves limited headroom for high-flow ASA+ or sustained PA printing\nV6-platform hotends are becoming secondary to Dragon/Rapido in Voron community builds — lower relevance for new builds",
     "Vendor 1 Name": "E3D Online",
     "Name": "E3D V6 40W Heater Cartridge (24V)",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recpNdyhQY4vuv546",
+    "Verdict Label": "The Voron community’s high-wattage standard — 50W ensures fast heat-up and thermal recovery at aggressive print speeds",
+    "Verdict": "BUY",
+    "Type": "Heater Cartridge",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Slice Engineering",
+    "Price (USD)": 18,
+    "Pros": "50W vs standard 40W — faster heat-up, better thermal recovery under high-speed extrusion\nFits standard 6×20mm heater block bore — direct replacement for any hotend that accepts a 6mm cartridge\nSlice Engineering’s build quality is well-regarded — consistent wattage output and insulation\nWidely recommended in Voron community — the default high-wattage upgrade recommendation",
+    "Wattage (W)": 50,
+    "Description": "The Slice Engineering 50W 24V heater cartridge is the most commonly recommended heater cartridge upgrade in the Voron community. The 25% wattage increase over standard 40W cartridges provides faster thermal recovery during high-speed printing and better temperature stability during rapid extrusion changes. It fits any hotend that accepts a standard 6×20mm heater cartridge.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Dragon",
+      "Dragonfly",
+      "Rapido",
+      "Goliath"
+    ],
+    "Cons": "More expensive than generic cartridges — but the quality differential justifies the cost\nMust verify hotend block supports 6mm bore — most modern hotends do, but some proprietary blocks differ",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Slice Engineering 50W 24V Heater Cartridge",
     "Size": "6×20mm"
   },
   {
@@ -316,6 +473,25 @@
     "Size": "6×20mm"
   },
   {
+    "id": "recsrRx0mc1kIBWPG",
+    "Verdict Label": "Unverified manufacturer cartridge — thermal runaway events from substandard cartridges are documented; not worth the $3 savings",
+    "Verdict": "SKIP",
+    "Type": "Heater Cartridge",
+    "Brand": "Generic",
+    "Price (USD)": 2,
+    "Pros": "Absolute lowest cost option — cheapest way to have a heater cartridge in hand",
+    "Wattage (W)": 40,
+    "Description": "Generic 24V 40W 6×20mm heater cartridges from unknown AliExpress manufacturers are a known fire risk in the 3D printing community. Substandard lead insulation can crack or fray at temperature, and the actual wattage output is not guaranteed. Klipper’s thermal runaway protection provides a safety net but does not fully mitigate the risk of cartridge insulation failure. There is no scenario where saving $3 over a Trianglelab cartridge is worth this trade-off.",
+    "Voltage": "24V",
+    "Cons": "Unknown insulation quality — fraying leads and cracked insulation at temperature have been documented\nActual wattage may not match specified — output variance is common from unknown manufacturers\nKlipper’s thermal runaway protection can catch failures, but a cartridge with poor insulation is a fire risk before the protection triggers\nTrianglelab’s 40W cartridge is only slightly more expensive and is a significant quality step up",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Name": "Generic 24V 40W 6×20mm Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
     "id": "rectXKQoQVOYnmzIh",
     "Verdict Label": "Western-stocked Keenovo alternative — ships from USA, same AC silicone spec",
     "Verdict": "TOP",
@@ -381,5 +557,31 @@
     "Vendor 1 Name": "AliExpress (PTC element) + local electrical supply",
     "Name": "PTC Ceramic Fan Heater Mod (Chamber)",
     "Size": "Varies (builder-specific mounting)"
+  },
+  {
+    "id": "reczmafTfkAAhaInh",
+    "Verdict Label": "Integrated heater and thermistor module for the Revo ecosystem — excellent engineering but locks you into E3D’s nozzle system",
+    "Verdict": "CONSIDER",
+    "Thermistor Included": true,
+    "Type": "Heater Core",
+    "Vendor 1 URL": "https://e3d-online.com",
+    "Brand": "E3D",
+    "Price (USD)": 22,
+    "Pros": "Integrated heater+thermistor in one swappable module — no separate wiring for heater and thermistor\nNozzle changes at temperature without tools — the Revo ecosystem’s primary feature\nE3D quality control — the heater core is consistently manufactured",
+    "Wattage (W)": 40,
+    "Description": "The E3D Revo Heater Core is not a traditional heater cartridge. It is an integrated module that combines the heater element and thermistor into a single replaceable unit, designed specifically for the Revo ecosystem of hotends. The key benefit is tool-free nozzle changes at temperature. The trade-off is complete ecosystem lock-in and higher replacement costs compared to standard cartridges.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "E3D Revo Voron",
+      "E3D Revo Six"
+    ],
+    "Cons": "Proprietary to Revo ecosystem — does not fit any non-Revo hotend\nExpensive replacement part — if the core fails out of warranty, it’s a significant cost vs. a standard 6×20mm cartridge at $5\nRevo nozzles are more expensive than standard nozzles — the ecosystem lock extends to consumables\n40W wattage — not the highest-wattage option for aggressive printing",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "E3D Online",
+    "Name": "E3D Revo Heater Core",
+    "Size": "Proprietary"
   }
 ]
