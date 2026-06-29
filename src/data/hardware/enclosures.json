@@ -1,1 +1,320 @@
-[]
+[
+  {
+    "id": "rec0GWwzm8kn6Lqgv",
+    "Verdict": "BUY",
+    "Type": "Panel Vendor",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Fabreeko",
+    "Pros": "Voron-specialist vendor — panel kits are stocked for V2.4 and Trident in multiple materials\nOne-stop sourcing alongside rails, motors, hardware, and other Voron components\nVendor accountability — Fabreeko has a positive Voron community reputation for addressing order issues\nKits include panel clips and hardware",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "Fabreeko is a Voron-community-endorsed vendor in the US that stocks pre-cut panel kits for V2.4 and Trident in acrylic and polycarbonate. For US builders who want Voron-specific panels alongside other hardware (rails, motors, etc.) from a single order, Fabreeko is the community standard recommendation.",
+    "Verdict Label": "US Voron-focused vendor with stock panel kits and components — one-stop shop for panels and all Voron hardware",
+    "Cons": "US-based shipping — international orders face significant shipping costs\nPanel stock availability varies — popular kits can sell out around high-demand periods",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Fabreeko Voron Panel Service"
+  },
+  {
+    "id": "rec2jXItBYbbccgsu",
+    "Verdict": "CONSIDER",
+    "Type": "Panel Material",
+    "Brand": "Generic",
+    "Pros": "Dual-wall corrugated structure provides significantly better thermal insulation than single-layer panels\nHigher temperature rating than acrylic — same polycarbonate base material as solid PC panels\nCheaper than solid polycarbonate per panel — twinwall is a greenhouse/signage material and is widely available\nLighter than solid plastic panels due to corrugated air core",
+    "Material": "Twinwall Polycarbonate",
+    "Thickness (mm)": 6,
+    "Max Chamber Temp (°C)": 80,
+    "Description": "Twinwall polycarbonate (greenhouse-grade corrugated PC) is used by cost-conscious Voron builders who want better chamber insulation than single-layer panels provide. The air gap between the two polycarbonate layers acts as thermal insulation, slowing chamber heat loss. The trade-off is reduced visibility (translucent, not clear), slightly lower rigidity, and a non-standard panel thickness that requires print adjustments to panel clips.",
+    "Verdict Label": "Corrugated dual-wall PC for improved chamber insulation — better heat retention than single-layer panels at low cost",
+    "Cons": "Translucent rather than clear — opaque enough to limit print visibility\nLower rigidity than solid panels — may flex at larger panel spans without additional support\nThicker profile requires adjustment of panel clip tolerances — standard 3mm clips will not fit 6mm twinwall\nAesthetic is less polished than solid panel builds",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "Local greenhouse/building supply",
+    "Name": "Twinwall Polycarbonate Panels"
+  },
+  {
+    "id": "rec5cy7t0zsoY2WTn",
+    "Verdict": "CONSIDER",
+    "Type": "Enclosure Kit",
+    "Brand": "Generic",
+    "Price (USD)": 60,
+    "Pros": "Lowest cost route to a complete panel set — panels arrive cut and ready, no additional cutting needed\nMany AliExpress listings are made by Voron-aware sellers who know the spec dimensions\nFrequently includes clip hardware in the same listing",
+    "Material": "Acrylic",
+    "Max Chamber Temp (°C)": 50,
+    "Description": "AliExpress Voron 2.4 panel sets from generic sellers are the budget entry point for Voron enclosure panels. The best listings are from Voron-aware sellers who provide dimensionally correct panels; the worst have off-spec cuts that require manual adjustment. Inspect dimensions carefully before ordering. For builders willing to do some fitting work, this is a cost-effective route. For those who prefer verified fit with vendor accountability, LDO or Fabreeko panel kits are the better choice.",
+    "Verdict Label": "Budget panel set from unverified vendors — dimensional accuracy varies; fit often requires manual adjustment",
+    "Cons": "Dimensional accuracy is not guaranteed — panels may be slightly off-spec, requiring edge trimming or sanding to fit\nAcrylic thickness tolerance is inconsistent — clips sized for true 3mm may not grip undersized panels correctly\nNo vendor accountability if dimensions are wrong — returns and disputes on AliExpress orders can be slow\nQuality of panel edges varies — chipped or hazy edges are common on budget listings",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "Vendor 1 Name": "Various AliExpress sellers",
+    "Name": "AliExpress Voron 2.4 Panel Set"
+  },
+  {
+    "id": "rec5iiauuGY4ZTB47",
+    "Verdict": "BUY",
+    "Type": "Panel Vendor",
+    "Vendor 1 URL": "https://kb-3d.com",
+    "Brand": "KB3D",
+    "Pros": "Stocks LDO panel kits — the Voron-community-approved panel source with verified dimensions\nBroad Voron hardware inventory — panels can be ordered alongside rails, motors, and all other components\nKB3D is a known and trusted community vendor with consistent fulfillment",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "KB3D (KB-3D) is a US Voron-community vendor that stocks LDO panel kits alongside a full range of Voron hardware. For builders sourcing a full V2.4 or Trident BOM, KB3D offers LDO-quality panels as part of the same order as rails, motors, and hardware.",
+    "Verdict Label": "US Voron-endorsed vendor with LDO panel kits and broad Voron hardware inventory",
+    "Cons": "US-based; international shipping costs apply\nLDO panel kits may not be in stock continuously — plan ahead if ordering as part of a kit build",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "KB3D",
+    "Name": "KB3D Voron Panel Kits"
+  },
+  {
+    "id": "rec7lcjgWJtJF11FV",
+    "Verdict": "BUY",
+    "Type": "Enclosure Kit",
+    "Vendor 1 URL": "https://ratrig.com",
+    "Brand": "RatRig",
+    "Price (USD)": 180,
+    "Pros": "Designed by RatRig specifically for the V-Core 4 — panel dimensions, mounting hardware, and clip geometry are engineered rather than adapted\nPolycarbonate panels are rated for 80°C+ chamber temperatures — appropriate for ABS and ASA printing\nSold as a complete kit with all required hardware — no sourcing individual parts\nFull installation documentation from RatRig — no community guesswork",
+    "Material": "Polycarbonate",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "The RatRig V-Core 4 Enclosure Kit is the official enclosure solution for the V-Core 4. It uses polycarbonate panels sized and cut for the printer, with RatRig-designed mounting hardware. For V-Core 4 builders who want a fully engineered enclosure rather than community-adapted panels, this is the correct choice.",
+    "Verdict Label": "Official RatRig V-Core 4 enclosure — engineered fit, polycarbonate panels, documented installation",
+    "Cons": "More expensive than DIY panel alternatives\nAvailable in limited color/material variants — builders wanting custom aesthetics need to look elsewhere\nRatRig’s supply chain can have stock delays",
+    "Compatible Printers": [
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "RatRig",
+    "Name": "RatRig V-Core 4 Enclosure Kit"
+  },
+  {
+    "id": "recAGN6kRXBD05SiI",
+    "Verdict": "CONSIDER",
+    "Type": "Panel Vendor",
+    "Vendor 1 URL": "https://www.etsy.com",
+    "Brand": "Community",
+    "Pros": "Etsy has multiple Voron-community sellers who cut panels to spec — useful for regions where Fabreeko and KB3D shipping is expensive\nCustom orders and unusual sizes are often possible through Etsy sellers\nSome sellers specialize in specific regions (EU, UK, AU) and offer local shipping",
+    "Description": "Etsy hosts a range of Voron-specific panel sellers who cut and ship panels to the standard Voron DXF dimensions. This channel is most useful for non-US builders who face expensive shipping from Fabreeko and KB3D, or for builders needing custom materials or sizes. Research the specific seller’s reviews and documentation before ordering.",
+    "Verdict Label": "Community panel sellers on Etsy — useful for non-US builders or custom orders, but no standardized quality",
+    "Cons": "Quality and dimensional accuracy varies by seller — no platform-wide quality standard\nNo single vendor recommendation — requires research into specific seller reputation before ordering\nPricing is inconsistent — some Etsy sellers price above Fabreeko/KB3D equivalents without quality justification",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Various Etsy sellers",
+    "Name": "Etsy Voron Panel Sellers"
+  },
+  {
+    "id": "recBsZnE0uTjVCLi8",
+    "Verdict": "BUY",
+    "Type": "Enclosure Kit",
+    "Vendor 1 URL": "https://kb-3d.com",
+    "Brand": "LDO",
+    "Price (USD)": 120,
+    "Pros": "LDO is a Voron-community-approved vendor — panel dimensions are verified against the V2.4 CAD\nACM side/top/back panels with clear polycarbonate front door and top visibility panel — the standard V2.4 panel configuration\nKnown vendor with accountability for defective or misfitted panels\nSold by KB3D and Fabreeko alongside Voron kits — easy one-stop sourcing",
+    "Material": "ACM",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "LDO’s Voron 2.4 panel kit is the most straightforward panel sourcing option for V2.4 builders who want verified panel dimensions and known vendor accountability. ACM panels are used for non-visibility positions, polycarbonate for the front door and top, and all panels are cut to the V2.4 spec. Available from KB3D and Fabreeko as part of V2.4 kit packages.",
+    "Verdict Label": "Community-approved Voron 2.4 panel kit from LDO — ACM side panels with clear front/top, correct fit guaranteed",
+    "Cons": "More expensive than AliExpress panel alternatives\nACM side panels are opaque — front/top visibility requires the clear panels included in the kit\nDoesn’t include foam sealing by default — EVA foam door seal is a separate purchase",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "Vendor 1 Name": "KB3D",
+    "Name": "LDO Voron 2.4 Panel Kit"
+  },
+  {
+    "id": "recCT9ESuSvDfshQ5",
+    "Verdict": "CONSIDER",
+    "Type": "Panel Material",
+    "Vendor 1 URL": "https://sendcutsend.com",
+    "Brand": "Generic",
+    "Pros": "No temperature limit concern at any realistic chamber temperature — aluminum handles 100°C+ indefinitely\nMaximum rigidity — solid aluminum panels will not flex, bow, or deform\nProfessional finish when anodized or powder coated\nIdeal for any panel position that doesn’t require print visibility",
+    "Material": "Aluminum",
+    "Thickness (mm)": 2,
+    "Max Chamber Temp (°C)": 100,
+    "Description": "Solid aluminum panels are the choice for builders who want maximum rigidity and unlimited temperature headroom. At 2mm thickness, aluminum is stiffer than any plastic alternative and has no practical temperature limit at chamber operating ranges. The trade-offs are cost, weight, and thermal conductivity — aluminum will conduct some chamber heat to the exterior faster than plastic panels. Custom sizes require laser or waterjet cutting.",
+    "Verdict Label": "Highest-quality opaque panel option — rigid, no thermal limits, professional finish",
+    "Cons": "More expensive than ACM or acrylic\nHeavy — adds mass to the enclosure; not relevant for Voron (floor-mounted) but worth noting\nRequires a metal laser cutter or waterjet for custom sizes — not available from standard plastic panel vendors\nNo thermal insulation value — aluminum conducts heat out of the chamber, which is the opposite of insulation",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE"
+    ],
+    "Vendor 1 Name": "SendCutSend",
+    "Name": "2mm Aluminum Sheet Panels"
+  },
+  {
+    "id": "recDNNTQcy8wIvhQc",
+    "Verdict": "BUY",
+    "Type": "Panel Material",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Generic",
+    "Pros": "Aluminum composite material handles chamber temperatures well above acrylic — rated for 80°C+ continuous\nOpaque by default — reduces visible artifacts and provides a professional enclosure aesthetic\nAvailable in multiple colors from signage supply shops — the Voron default is black\nStiff and flat without warping under heat — better dimensional stability than acrylic",
+    "Material": "ACM",
+    "Thickness (mm)": 3,
+    "Max Chamber Temp (°C)": 80,
+    "Description": "ACM (Aluminum Composite Material) consists of two thin aluminum faces bonded to a polyethylene core. For Voron enclosure panels, ACM is the standard recommendation for non-viewing panels (top, sides, back, bottom) because it handles chamber heat better than acrylic, is rigid, and provides an opaque professional finish. Front doors are usually clear acrylic or polycarbonate for print visibility. ACM is available from signage supply shops pre-cut or via panel vendors.",
+    "Verdict Label": "The community’s preferred opaque panel material — aluminum face with polyethylene core, heat-resistant and rigid",
+    "Cons": "Opaque — no chamber visibility unless a window panel (acrylic or PC) is used on the front door\nCore material is polyethylene which softens above ~80°C continuous — adequate for typical chamber temps but not for extreme applications\nCutting ACM requires appropriate tooling — standard CNC routers or table saws work but blades must be suited for aluminum",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "3mm ACM Panels (Aluminum Composite)"
+  },
+  {
+    "id": "recI24lTsmkV4YHND",
+    "Verdict": "BUY",
+    "Type": "Panel Vendor",
+    "Vendor 1 URL": "https://sendcutsend.com",
+    "Brand": "SendCutSend",
+    "Pros": "Upload DXF from Voron GitHub directly — no manual measurement needed\nWide material selection including ACM, acrylic, polycarbonate, and aluminum — all panel material options from one vendor\nPrecision laser/waterjet cutting — dimensional tolerances are tight and consistent\nAvailable in the US with fast turnaround — typically 3–5 business days",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "SendCutSend is the primary custom panel cutting vendor for US-based Voron and self-build printer builders. DXF files for V2.4, Trident, and other printers are available in their respective GitHub repositories and upload directly to the SendCutSend ordering system. Material options include acrylic, polycarbonate, ACM, aluminum, and more. For builders who want precise fit with material choice freedom, this is the recommended route.",
+    "Verdict Label": "Best custom panel vendor for US builders — upload DXF, choose material, receive precision-cut panels",
+    "Cons": "US-only service with limited international availability\nMinimum order requirements may make single-panel orders uneconomical\nShipping is reasonable but adds to cost vs. buying a pre-made kit",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE",
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "SendCutSend",
+    "Name": "SendCutSend Custom Panel Cutting"
+  },
+  {
+    "id": "recKGb3GFMKsPWIeF",
+    "Verdict": "CONSIDER",
+    "Type": "Panel Material",
+    "Brand": "Generic",
+    "Pros": "Highest thermal insulation value of any panel option — 10mm XPS significantly outperforms solid plastic panels for chamber heat retention\nAluminum-faced XPS is available from HVAC suppliers and reflects radiant heat back into the chamber\nVery cheap — available from building supply stores\nCommonly used as a permanent outer layer over standard panels to add insulation without rebuilding",
+    "Material": "XPS Foam",
+    "Thickness (mm)": 10,
+    "Max Chamber Temp (°C)": 70,
+    "Description": "XPS (extruded polystyrene) foam panels are the budget insulation upgrade for Voron builders who want to improve chamber temperature retention. Often used as an outer layer over existing ACM or acrylic panels, adding insulation without replacing the structural panel. Aluminum-faced XPS available from HVAC suppliers is the most common variant. The limit is ~70°C continuous exposure before the foam begins to compress and degrade.",
+    "Verdict Label": "Best insulation R-value per dollar — extruded polystyrene foam with aluminum facing for budget high-temp chamber retention",
+    "Cons": "XPS softens around 70–75°C continuous — not suitable for extreme chamber temperatures\nNot a structural panel — requires another panel layer or rigid frame for mounting\nOpaque — no print visibility\nAesthetic is not polished — typically used for functional builds, not showpiece printers",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "Local hardware/HVAC supply",
+    "Name": "XPS Foam Insulation Panels"
+  },
+  {
+    "id": "recVuqqmsaW2REPZm",
+    "Verdict": "BUY",
+    "Type": "Sealing",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Generic",
+    "Price (USD)": 8,
+    "Pros": "Creates an airtight gasket at panel door edges — meaningfully improves chamber temperature stability vs. unfoamed gaps\nSelf-adhesive backing — adhesive to the extrusion or panel edge without additional hardware\nAvailable in the correct cross-section dimensions for Voron frame clearances (5×5mm is common)\nVoron BOM specifies EVA foam door seal — it is the community standard for chamber sealing",
+    "Material": "EVA Foam",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "EVA foam door seal is the Voron BOM-specified sealing solution for the front door and panel edges. A compressible foam strip with self-adhesive backing applied to the inner door extrusion face creates a gasket that seals the chamber when the door is closed. Without foam sealing, convective heat loss through door gaps can make ABS/ASA temperature targets difficult to sustain. Available from Fabreeko, KB3D, and AliExpress.",
+    "Verdict Label": "The standard door seal for Voron — self-adhesive EVA foam compressible strip that creates a chamber-sealing gasket",
+    "Cons": "EVA foam compresses over time with repeated door cycling — will eventually need replacing (typically 1–2 years of regular use)\nAdhesive degrades at sustained high chamber temperatures — may lift at door edges over time",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "EVA Foam Door Seal"
+  },
+  {
+    "id": "recYR6T6bqEKVu5Qq",
+    "Verdict": "BUY",
+    "Type": "Panel Material",
+    "Vendor 1 URL": "https://kb-3d.com",
+    "Brand": "Generic",
+    "Pros": "Polycarbonate is rated for 100–120°C before deformation vs. 60–70°C for acrylic — handles sustained high-temperature chambers\nRemains clear for print visibility, unlike ACM\nMore impact-resistant than acrylic — less prone to installation stress cracks\nRequired for ABS/ASA printing at 60°C+ chamber temperatures",
+    "Material": "Polycarbonate",
+    "Thickness (mm)": 3,
+    "Max Chamber Temp (°C)": 80,
+    "Description": "3mm clear polycarbonate is the recommended panel material for Voron builds targeting sustained ABS, ASA, or other high-temperature material printing. Where acrylic begins to deform above 60–70°C, polycarbonate remains stable to 100–120°C. It is more expensive than acrylic but provides the same visual clarity with substantially better thermal tolerance. For any build intending to run 60°C+ chambers regularly, polycarbonate is the correct panel choice.",
+    "Verdict Label": "The high-temp alternative to acrylic — stays clear and dimensionally stable up to 80°C chamber temperature",
+    "Cons": "More expensive than acrylic — a full V2.4 PC panel set costs meaningfully more than acrylic\nPC scratches more easily than acrylic — handle with care during installation\nYellows slowly over UV exposure from the heated chamber, though more slowly than acrylic",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE"
+    ],
+    "Vendor 1 Name": "KB3D",
+    "Name": "3mm Clear Polycarbonate Panels"
+  },
+  {
+    "id": "recjvFwgSTsmYN40x",
+    "Verdict": "CONSIDER",
+    "Type": "Panel Material",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Generic",
+    "Pros": "Cheapest clear panel option — standard 3mm acrylic is available from Voron community vendors and local plastic shops\nEasy to cut, drill, and edge-finish\nClear for visibility of the print chamber",
+    "Material": "Acrylic",
+    "Thickness (mm)": 3,
+    "Max Chamber Temp (°C)": 50,
+    "Description": "3mm clear acrylic is the most commonly used Voron panel material — it is affordable, widely available, and gets the enclosure built for minimal cost. The primary limitation is temperature: acrylic deforms above 60–70°C, which limits sustained chamber temperature to ~50°C. For builders printing PLA and PETG, this is a non-issue. For ABS and ASA, consider polycarbonate panels instead.",
+    "Verdict Label": "Standard starter panel material — cheap and easy to source, but temperature-limited and yellows over time",
+    "Cons": "Acrylic begins to deform around 60–70°C — limits chamber temperature to ~50°C maximum sustained\nYellows with UV exposure from the heated chamber over time\nBrittle compared to polycarbonate — panel stress cracks are common during installation if over-torqued\nNot suitable for high-temp chamber printing (ABS, ASA at 60°C+) unless temperatures are carefully managed",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "3mm Clear Acrylic Panels"
+  },
+  {
+    "id": "recpLuQC4E9opEaRP",
+    "Verdict": "CONSIDER",
+    "Type": "Enclosure Kit",
+    "Vendor 1 URL": "https://www.formbot3d.com",
+    "Brand": "Formbot",
+    "Price (USD)": 0,
+    "Pros": "Included at no extra cost in the Formbot V2.4 kit — the enclosure is covered on day one without additional sourcing\nDimensionally correct for the Formbot frame — panels fit the Formbot V2.4 variant without adjustment",
+    "Material": "Acrylic",
+    "Max Chamber Temp (°C)": 50,
+    "Description": "Formbot includes acrylic enclosure panels in their Voron 2.4 kit. The panels are dimensionally correct for the Formbot frame, get the enclosure sealed on day one, and are functional for PLA and PETG printing. For builders targeting ABS and ASA at 60°C+ chamber temperatures, upgrading to polycarbonate panels is a common and documented next step. Price noted as $0 as these are kit-included.",
+    "Verdict Label": "Included in the Formbot V2.4 kit — functional acrylic panels that get the enclosure built, but upgrading to PC is a common follow-on",
+    "Cons": "Acrylic panels with a 50°C chamber temperature limit — acceptable for PLA and PETG but limiting for ABS/ASA printing\nFormbot’s acrylic quality is functional but not premium — many kit builders upgrade to polycarbonate after the initial build\nDimensioned for the Formbot frame which has minor dimensional differences from true Voron CAD — may not be interchangeable with standard V2.4 panels",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "Vendor 1 Name": "Formbot (kit-included)",
+    "Name": "Formbot Voron 2.4 Kit Panels"
+  },
+  {
+    "id": "recuZZctaxx1cak7j",
+    "Verdict": "CONSIDER",
+    "Type": "Sealing",
+    "Vendor 1 URL": "https://fabreeko.com",
+    "Brand": "Generic",
+    "Price (USD)": 5,
+    "Pros": "Seals the gap between panel edges and the frame extrusion faces — reduces air leakage at all non-door panel positions\nSelf-adhesive, cheap, and available from hardware stores\nWorks at typical chamber temperatures (up to 80°C) without adhesive failure",
+    "Material": "Foam",
+    "Max Chamber Temp (°C)": 80,
+    "Description": "Self-adhesive foam tape applied to panel edges where they contact the frame extrusion provides a secondary seal for static panel positions (sides, back, top, bottom). The door seal (EVA foam) is the primary thermal seal; panel edge tape is supplementary. Together, they reduce the convective heat loss that makes chamber temperature targets harder to sustain.",
+    "Verdict Label": "Self-adhesive foam tape for sealing panel edges against extrusion faces — the secondary seal for non-door panel gaps",
+    "Cons": "Primarily a supplementary seal — standard panel clips already provide some compression against the frame, and foam tape provides marginal additional sealing\nAdds time to panel installation — must be applied before final panel mounting\nOver-application makes panel removal more difficult for maintenance",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "HevORT HRE"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Foam Tape Panel Seal (Self-Adhesive)"
+  }
+]
