@@ -1,0 +1,381 @@
+---
+// Reusable hardware category index — the exact /hardware/hotends grid pattern
+// (dark hero, sticky verdict filter, count summary, card grid, ItemList schema,
+// fade-filter script). Every hardware category renders through this so the UI
+// stays identical without copy-pasting ~350 lines of CSS per page.
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import { VERDICT_ORDER, toSlug } from '../lib/hardware';
+
+interface Props {
+  records: any[];
+  route: string;          // e.g. 'extruders' (under /hardware/)
+  categoryLabel: string;  // card image label, e.g. 'EXTRUDER'
+  crumb: string;          // breadcrumb + h1 text, e.g. 'Extruders'
+  heading: string;        // visible H1
+  sub: string;            // hero subtitle
+  nounSingular: string;   // count text, e.g. 'extruder'
+  nounPlural: string;     // count text, e.g. 'extruders'
+  title: string;          // <title> / meta
+  description: string;    // meta description
+  schemaName: string;     // ItemList schema name
+  gradient?: string;      // card image gradient
+  chips?: (r: any) => string[];        // spec chips per card
+  excerptOf?: (r: any) => string;      // card excerpt
+}
+
+const {
+  records: raw,
+  route,
+  categoryLabel,
+  crumb,
+  heading,
+  sub,
+  nounSingular,
+  nounPlural,
+  title,
+  description,
+  schemaName,
+  gradient = 'linear-gradient(135deg,#1a0e0a,#0d1520)',
+  chips = () => [],
+  excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
+} = Astro.props;
+
+const VERDICT_BADGE: Record<string, { cls: string; label: string }> = {
+  BUY:            { cls: 'verdict-best', label: 'Buy' },
+  CONSIDER:       { cls: 'verdict-rec',  label: 'Consider' },
+  SKIP:           { cls: 'verdict-skip', label: 'Skip' },
+  UPDATED:        { cls: 'verdict-upd',  label: 'Updated' },
+  'Top Pick':     { cls: 'verdict-best', label: 'Top Pick' },
+  'Solid Choice': { cls: 'verdict-rec',  label: 'Solid Choice' },
+  'Niche Pick':   { cls: 'verdict-upd',  label: 'Niche Pick' },
+};
+
+const records = (raw as any[])
+  .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
+  .sort((a: any, b: any) => {
+    const ai = VERDICT_ORDER.indexOf(a['Verdict'] ?? '');
+    const bi = VERDICT_ORDER.indexOf(b['Verdict'] ?? '');
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+
+const verdictCounts: Record<string, number> = { all: records.length };
+for (const v of VERDICT_ORDER) {
+  const n = records.filter((r: any) => r['Verdict'] === v).length;
+  if (n > 0) verdictCounts[v] = n;
+}
+const activeVerdicts = VERDICT_ORDER.filter((v) => (verdictCounts[v] ?? 0) > 0);
+
+const noun = (n: number) => (n === 1 ? nounSingular : nounPlural);
+
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: schemaName,
+  url: `${siteBase}/hardware/${route}`,
+  itemListElement: records.map((r: any, i: number) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: r['Name'] as string,
+    url: `${siteBase}/hardware/${route}/${toSlug(r['Name'] as string)}`,
+    description: (r['Verdict Label'] as string | undefined) ?? (r['Description'] as string | undefined) ?? '',
+  })),
+};
+---
+<Base title={title} description={description} heroPage={false} hasPageH1={true}>
+  <Nav slot="nav" currentPath="/hardware" />
+
+  <header class="hot-hero">
+    <div class="hot-hero-inner">
+      <nav class="hot-hero-crumbs" aria-label="Breadcrumb">
+        <a href="/hardware">Hardware</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{crumb}</span>
+      </nav>
+      <h1 class="hot-hero-title">{heading}</h1>
+      <p class="hot-hero-sub">{sub}</p>
+    </div>
+  </header>
+
+  <!-- VERDICT FILTER BAR -->
+  <div class="gf-bar">
+    <div class="gf-bar-inner">
+      <div class="gf-cats" role="group" aria-label="Filter by verdict">
+        <button class="gf-tab is-active" data-verdict="all" data-slug="all" aria-pressed="true">
+          All
+          <span class="gf-badge">{records.length}</span>
+        </button>
+        {activeVerdicts.map((v) => (
+          <button class="gf-tab" data-verdict={v.toLowerCase()} data-slug={v.toLowerCase().replace(/\s+/g, '-')} aria-pressed="false">
+            {v}
+            <span class="gf-badge">{verdictCounts[v]}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <p class="gf-summary" id="hw-count" aria-live="polite" aria-atomic="true"
+         data-noun-singular={nounSingular} data-noun-plural={nounPlural}>
+        Showing {records.length} of {records.length} {noun(records.length)}
+      </p>
+      {records.length > 0 ? (
+        <div class="grid-3" id="hw-grid">
+          {records.map((r: any) => {
+            const slug = toSlug(r['Name']);
+            const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
+            return (
+              <a href={`/hardware/${route}/${slug}`} class="card gf-card" data-verdict={r['Verdict']?.toLowerCase() ?? ''}>
+                <div class="card-img" style={`background:${gradient}`}>
+                  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+                  <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">{categoryLabel}</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-cat">{r['Brand'] ?? ''}</div>
+                  <h2 class="card-title">{r['Name']}</h2>
+                  <div class="product-card-specs" style="margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap">
+                    {chips(r).map((c) => <span class="spec-chip">{c}</span>)}
+                  </div>
+                  <p class="card-excerpt">{excerptOf(r)}</p>
+                  <div class="card-footer">
+                    {badge.label && <span class={`verdict ${badge.cls}`}>{badge.label}</span>}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      ) : (
+        <p style="font-family:var(--fb);font-size:15px;color:var(--g2);padding:40px 0">
+          No {nounPlural} listed yet — check back after the next Airtable sync.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
+</Base>
+
+<script>
+  let activeVerdict = 'all';
+
+  const allCards = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
+  const total    = allCards.length;
+  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
+  const countEl  = document.getElementById('hw-count');
+  const nounS    = countEl?.dataset.nounSingular ?? 'item';
+  const nounP    = countEl?.dataset.nounPlural ?? 'items';
+
+  function showCard(card: HTMLElement) {
+    if (!card.classList.contains('gf-hidden')) return;
+    card.classList.remove('gf-hidden');
+    card.style.opacity = '0';
+    void card.offsetHeight;
+    card.style.opacity = '1';
+  }
+
+  function hideCard(card: HTMLElement) {
+    if (card.classList.contains('gf-hidden')) return;
+    card.style.opacity = '0';
+    const done = () => card.classList.add('gf-hidden');
+    card.addEventListener('transitionend', done, { once: true });
+    setTimeout(done, 180);
+  }
+
+  function applyFilter() {
+    let visible = 0;
+    allCards.forEach((card) => {
+      const match = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
+      if (match) { showCard(card); visible++; }
+      else        { hideCard(card); }
+    });
+    if (countEl) {
+      countEl.textContent = `Showing ${visible} of ${total} ${total === 1 ? nounS : nounP}`;
+    }
+    pushHash();
+  }
+
+  function pushHash() {
+    if (activeVerdict === 'all') {
+      history.replaceState(null, '', location.pathname);
+    } else {
+      const tab = tabs.find((t) => t.dataset.verdict === activeVerdict);
+      const slug = tab?.dataset.slug ?? activeVerdict.replace(/\s+/g, '-');
+      history.replaceState(null, '', `#${slug}`);
+    }
+  }
+
+  function parseHash() {
+    const rawHash = location.hash.slice(1);
+    if (!rawHash) return;
+    const matched = tabs.find((t) => t.dataset.slug === rawHash);
+    if (matched) activeVerdict = matched.dataset.verdict ?? 'all';
+  }
+
+  function syncTabs() {
+    tabs.forEach((t) => {
+      const on = t.dataset.verdict === activeVerdict;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-pressed', String(on));
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      activeVerdict = tab.dataset.verdict ?? 'all';
+      syncTabs();
+      applyFilter();
+    });
+  });
+
+  parseHash();
+  syncTabs();
+  if (activeVerdict !== 'all') applyFilter();
+</script>
+
+<style is:global>
+/* ── DARK PAGE HEADER ── tokenised; white text kept ≥4.5:1 on --black ── */
+.hot-hero {
+  background: var(--black);
+  padding: 48px 0 44px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.hot-hero-inner {
+  max-width: var(--max-w, 1200px);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.hot-hero-crumbs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+  font-family: var(--fm);
+  font-size: 11px;
+}
+.hot-hero-crumbs a {
+  color: rgba(255,255,255,.62);
+  transition: color .15s;
+}
+.hot-hero-crumbs a:hover { color: var(--accent); }
+.hot-hero-crumbs span[aria-current] { color: rgba(255,255,255,.72); }
+.hot-hero-crumbs span[aria-hidden] { color: rgba(255,255,255,.3); }
+.hot-hero-title {
+  font-family: var(--fd);
+  font-size: 48px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -.5px;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.hot-hero-sub {
+  font-family: var(--fb);
+  font-size: 15px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0;
+}
+
+/* card titles are <h2> for heading navigation — neutralise UA margins */
+.gf-card .card-title { margin-top: 0; }
+
+/* ── HARDWARE FILTER BAR — uses shared gf-* classes from guides pattern ── */
+.gf-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+}
+.gf-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.gf-cats {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.gf-cats::-webkit-scrollbar { display: none; }
+.gf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--g1);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-bottom: -1px;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.gf-tab:hover { color: var(--black); background: var(--bg); }
+.gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
+.gf-badge {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--g1);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.gf-tab.is-active .gf-badge {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.gf-summary {
+  font-family: var(--fm);
+  font-size: 12px;
+  color: var(--g1);
+  padding: 16px 0 12px;
+  margin: 0;
+}
+.gf-card {
+  opacity: 1;
+  transition: opacity 0.15s ease, border-color .15s, transform .15s;
+}
+.gf-card.gf-hidden { display: none; }
+@media (max-width: 768px) {
+  .hot-hero { padding: 36px 0 32px; }
+  .hot-hero-inner { padding: 0 20px; }
+  .hot-hero-title { font-size: 36px; }
+  .gf-bar-inner { padding: 0 20px; }
+  /* 14px vertical padding keeps the tap target ≥44px on touch */
+  .gf-tab { padding: 14px 16px; font-size: 11px; }
+}
+
+/* ── Reduced motion: global.css has no global reset, so this page honours the
+   preference for its own filter motion (card fade + tab/badge transitions).
+   hideCard's setTimeout fallback still flips display, so filtering stays correct ── */
+@media (prefers-reduced-motion: reduce) {
+  .gf-card,
+  .gf-tab,
+  .gf-badge { transition: none; }
+}
+</style>

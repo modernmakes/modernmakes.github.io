@@ -1,0 +1,41 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/printers.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+// Printers are the hero content — build volume and difficulty are surfaced as
+// prominent hero tag chips (above the fold) and lead the quick-specs + full
+// spec table. BOM Cost falls back into the price slot when no list price exists.
+const config: DetailConfig = {
+  categoryLabel: 'PRINTER',
+  componentType: 'Printer',
+  titleNoun: 'Printer',
+  priceFields: ['Price (USD)', 'BOM Cost'],
+  tags: [
+    { label: 'Build Volume', fields: ['Build Volume'] },
+    { label: 'Difficulty', fields: ['Difficulty'] },
+    { label: 'Motion System', fields: ['Motion System'] },
+  ],
+  quickSpecs: [
+    { label: 'Build Volume', fields: ['Build Volume'] },
+    { label: 'Motion System', fields: ['Motion System'] },
+    { label: 'Difficulty', fields: ['Difficulty'] },
+  ],
+  specs: [
+    { label: 'Motion System', fields: ['Motion System'] },
+    { label: 'Build Volume', fields: ['Build Volume'] },
+    { label: 'Frame', fields: ['Frame'] },
+    { label: 'Enclosure', fields: ['Enclosure'] },
+    { label: 'BOM Cost', fields: ['BOM Cost', 'Price (USD)'], fmt: (v) => `$${v}` },
+    { label: 'Difficulty', fields: ['Difficulty'] },
+    { label: 'Community Size', fields: ['Community Size'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

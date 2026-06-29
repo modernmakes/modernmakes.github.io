@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/motion-system.json';
+
+const chips = (r: any) => [
+  r['Type'] ? String(r['Type']) : null,
+  (r['Size/Spec'] ?? r['Spec'] ?? r['Size']) ? String(r['Size/Spec'] ?? r['Spec'] ?? r['Size']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="motion-system"
+  categoryLabel="MOTION"
+  crumb="Motion System"
+  heading="Motion System"
+  sub="Linear rails, belts, pulleys, and lead screws. Type, spec, length, and brand tier."
+  nounSingular="part"
+  nounPlural="parts"
+  title="Best Motion System Parts for Voron & CoreXY Printers"
+  description="Motion system specs, type, spec, length, and where to buy — linear rails, belts, pulleys, and lead screws for Voron and CoreXY builds."
+  schemaName="Best Motion System Parts for Voron & CoreXY Printers"
+  chips={chips}
+/>

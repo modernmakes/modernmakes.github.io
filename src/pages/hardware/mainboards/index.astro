@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/mainboards.json';
+
+const chips = (r: any) => [
+  (r['Driver Slots'] ?? r['Driver Count']) != null ? `${r['Driver Slots'] ?? r['Driver Count']} drivers` : null,
+  r['Voltage'] ? String(r['Voltage']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="mainboards"
+  categoryLabel="MAINBOARD"
+  crumb="Mainboards"
+  heading="Mainboards"
+  sub="Controller boards for Klipper and RRF. MCU, driver slots, CAN, and voltage support."
+  nounSingular="mainboard"
+  nounPlural="mainboards"
+  title="Best Controller Boards for Voron & Klipper Printers"
+  description="Mainboard specs, driver count, CAN support, and where to buy — controller boards for Voron, RatRig, and CoreXY builds."
+  schemaName="Best Controller Boards for Voron & Klipper Printers"
+  chips={chips}
+/>

@@ -1,0 +1,30 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/motion-system.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'MOTION',
+  componentType: 'Motion Component',
+  titleNoun: 'Motion Component',
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Size / Spec', fields: ['Size/Spec', 'Spec', 'Size'] },
+    { label: 'Length', fields: ['Length', 'Length (mm)'] },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Size / Spec', fields: ['Size/Spec', 'Spec', 'Size'] },
+    { label: 'Length', fields: ['Length', 'Length (mm)'] },
+    { label: 'Brand Tier', fields: ['Brand Tier'] },
+    { label: 'Quantity Per Printer', fields: ['Quantity Per Printer', 'Qty Per Printer'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

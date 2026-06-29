@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/nozzles.json';
+
+const chips = (r: any) => [
+  r['Material'] ? String(r['Material']) : null,
+  (r['Diameter'] ?? r['Diameter (mm)']) != null ? String(r['Diameter'] ?? r['Diameter (mm)']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="nozzles"
+  categoryLabel="NOZZLE"
+  crumb="Nozzles"
+  heading="Nozzles"
+  sub="Hardened steel, brass, ruby, and specialty nozzles for every filament type."
+  nounSingular="nozzle"
+  nounPlural="nozzles"
+  title="Best Nozzles for Voron & Prosumer 3D Printers"
+  description="Nozzle specs, thread, material, and where to buy — hardened steel, brass, ruby, and specialty nozzles for every filament type."
+  schemaName="Best Nozzles for Voron & Prosumer 3D Printers"
+  chips={chips}
+/>

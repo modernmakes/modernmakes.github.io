@@ -1,0 +1,39 @@
+---
+// Thin wrapper around ComponentLayout for the hotend-derived detail pattern.
+// getStaticPaths must live in each [slug].astro, so this component only takes a
+// resolved record + category config, builds the prop bundle via buildDetailProps,
+// and renders the layout (including the editorial body paragraphs).
+import ComponentLayout from '../layouts/ComponentLayout.astro';
+import { buildDetailProps, type DetailConfig } from '../lib/hardware';
+
+interface Props {
+  record: any;
+  config: DetailConfig;
+}
+
+const { record, config } = Astro.props;
+const p = buildDetailProps(record, config);
+---
+<ComponentLayout
+  title={p.title}
+  category={p.category}
+  componentType={p.componentType}
+  brand={p.brand}
+  price={p.price}
+  verdict={p.verdict}
+  verdictLabel={p.verdictLabel}
+  excerpt={p.excerpt}
+  tags={p.tags}
+  pros={p.pros}
+  cons={p.cons}
+  quickSpecs={p.quickSpecs}
+  compatibleToolheads={p.compatibleToolheads}
+  specs={p.specs}
+  vendors={p.vendors}
+  relatedComponents={p.relatedComponents}
+  pageTitle={p.pageTitle}
+  primaryVendorUrl={p.primaryVendorUrl}
+  heroImageUrl={p.heroImageUrl}
+>
+  {p.bodyParagraphs.map((para: string) => <p>{para}</p>)}
+</ComponentLayout>

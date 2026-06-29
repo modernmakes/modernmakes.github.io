@@ -1,0 +1,31 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/toolboards.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'TOOLBOARD',
+  componentType: 'Toolboard',
+  titleNoun: 'Toolboard',
+  quickSpecs: [
+    { label: 'MCU', fields: ['MCU'] },
+    { label: 'Driver', fields: ['Driver'] },
+    { label: 'CAN Bus', fields: ['CAN Bus', 'CAN'] },
+  ],
+  specs: [
+    { label: 'CAN Bus', fields: ['CAN Bus', 'CAN'] },
+    { label: 'USB Fallback', fields: ['USB Fallback', 'USB'] },
+    { label: 'MCU', fields: ['MCU'] },
+    { label: 'Driver', fields: ['Driver'] },
+    { label: 'Accelerometer', fields: ['Accelerometer'] },
+    { label: 'Neopixel', fields: ['Neopixel'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

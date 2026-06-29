@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/psus.json';
+
+const chips = (r: any) => [
+  (r['Wattage'] ?? r['Wattage (W)']) != null ? `${r['Wattage'] ?? r['Wattage (W)']}W` : null,
+  r['Voltage'] ? String(r['Voltage']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="psus"
+  categoryLabel="PSU"
+  crumb="Power Supplies"
+  heading="Power Supplies"
+  sub="Power supplies for prosumer builds. Wattage, voltage, certification, and cooling."
+  nounSingular="PSU"
+  nounPlural="PSUs"
+  title="Best Power Supplies for Voron & 3D Printer Builds"
+  description="PSU specs, wattage, voltage, safety certification, and where to buy — power supplies for Voron, RatRig, and CoreXY 3D printer builds."
+  schemaName="Best Power Supplies for Voron & 3D Printer Builds"
+  chips={chips}
+/>

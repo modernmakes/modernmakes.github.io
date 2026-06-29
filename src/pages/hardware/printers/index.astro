@@ -1,0 +1,30 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/printers.json';
+
+const chips = (r: any) => [
+  r['Build Volume'] ? String(r['Build Volume']) : null,
+  r['Motion System'] ? String(r['Motion System']) : null,
+  (r['Price (USD)'] ?? r['BOM Cost']) != null ? `~$${r['Price (USD)'] ?? r['BOM Cost']}` : null,
+].filter(Boolean) as string[];
+
+// Printers are hero content — lead each card with build volume + motion system.
+const excerptOf = (r: any) =>
+  r['Verdict Label'] ?? r['Description'] ?? (r['Build Volume'] ? `${r['Build Volume']} build volume self-build printer.` : '');
+---
+<HardwareIndex
+  records={records}
+  route="printers"
+  categoryLabel="PRINTER"
+  crumb="Printers"
+  heading="Printers"
+  sub="Self-build and kit CoreXY printers. Build volume, frame, BOM cost, and difficulty."
+  nounSingular="printer"
+  nounPlural="printers"
+  title="Best Self-Build CoreXY 3D Printers"
+  description="Self-build printer specs, build volume, frame, BOM cost, and difficulty — Voron, RatRig, VzBot, and HevORT CoreXY printer builds compared."
+  schemaName="Best Self-Build CoreXY 3D Printers"
+  gradient="linear-gradient(135deg,#101520,#0d0d18)"
+  chips={chips}
+  excerptOf={excerptOf}
+/>

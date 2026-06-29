@@ -2,63 +2,50 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import hotendsData    from '../../data/hardware/hotends.json';
-import extrudersData  from '../../data/hardware/extruders.json';
-import mainboardsData from '../../data/hardware/mainboards.json';
-import toolboardsData from '../../data/hardware/toolboards.json';
-import buildPlatesData from '../../data/hardware/build-plates.json';
-import nozzlesData    from '../../data/hardware/nozzles.json';
+import hotendsData        from '../../data/hardware/hotends.json';
+import extrudersData      from '../../data/hardware/extruders.json';
+import bedProbesData      from '../../data/hardware/bed-probes.json';
+import nozzlesData        from '../../data/hardware/nozzles.json';
+import mainboardsData     from '../../data/hardware/mainboards.json';
+import toolboardsData     from '../../data/hardware/toolboards.json';
+import partCoolingData    from '../../data/hardware/part-cooling.json';
+import buildPlatesData    from '../../data/hardware/build-plates.json';
+import psusData           from '../../data/hardware/psus.json';
+import motorsData         from '../../data/hardware/motors.json';
+import heatersData        from '../../data/hardware/heaters.json';
+import filamentDryersData from '../../data/hardware/filament-dryers.json';
+import airFiltrationData  from '../../data/hardware/air-filtration.json';
+import lightingCamerasData from '../../data/hardware/lighting-cameras.json';
+import gantrysData        from '../../data/hardware/gantrys.json';
+import motionSystemData   from '../../data/hardware/motion-system.json';
+import enclosuresData     from '../../data/hardware/enclosures.json';
+import printersData       from '../../data/hardware/printers.json';
 
-const counts = {
-  hotends:    (hotendsData    as any[]).length,
-  extruders:  (extrudersData  as any[]).length,
-  electronics:(mainboardsData as any[]).length + (toolboardsData as any[]).length,
-  buildSurfaces: (buildPlatesData as any[]).length,
-  nozzles:    (nozzlesData    as any[]).length,
-};
+const len = (d: unknown) => (Array.isArray(d) ? d.length : 0);
 
+// Every hardware category maps to a live /hardware/<route> index. Counts are
+// dynamic from each JSON file's length — a category with no records yet still
+// links through to its (empty-state) index.
 const categories = [
-  {
-    name: 'Hotends',
-    description: 'High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.',
-    href: '/hardware/hotends',
-    live: true,
-    count: counts.hotends,
-    icon: '🔥',
-  },
-  {
-    name: 'Extruders',
-    description: 'Direct-drive and Bowden extruders — gear ratios, weight, and toolhead fit.',
-    href: '/hardware/extruders',
-    live: false,
-    count: counts.extruders,
-    icon: '⚙️',
-  },
-  {
-    name: 'Electronics',
-    description: 'Controller boards, toolhead PCBs, accelerometers, and wiring guides.',
-    href: '/hardware/electronics',
-    live: false,
-    count: counts.electronics,
-    icon: '🔌',
-  },
-  {
-    name: 'Build Surfaces',
-    description: 'PEI, textured, and smooth bed surfaces — adhesion, release, and longevity.',
-    href: '/hardware/build-surfaces',
-    live: false,
-    count: counts.buildSurfaces,
-    icon: '🧲',
-  },
-  {
-    name: 'Nozzles',
-    description: 'Hardened steel, brass, ruby, and specialty nozzles for every filament type.',
-    href: '/hardware/nozzles',
-    live: false,
-    count: counts.nozzles,
-    icon: '💧',
-  },
-];
+  { name: 'Hotends',            description: 'High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.', href: '/hardware/hotends',          count: len(hotendsData),        icon: '🔥' },
+  { name: 'Extruders',          description: 'Direct-drive and Bowden extruders — gear ratios, weight, and toolhead fit.',         href: '/hardware/extruders',        count: len(extrudersData),      icon: '⚙️' },
+  { name: 'Bed Probes',         description: 'Inductive, nozzle-contact, and eddy-current probes — repeatability and Klipper fit.', href: '/hardware/probes',           count: len(bedProbesData),      icon: '🎯' },
+  { name: 'Nozzles',            description: 'Hardened steel, brass, ruby, and specialty nozzles for every filament type.',         href: '/hardware/nozzles',          count: len(nozzlesData),        icon: '💧' },
+  { name: 'Mainboards',         description: 'Controller boards for Klipper and RRF — MCU, driver slots, CAN, and voltage.',        href: '/hardware/mainboards',       count: len(mainboardsData),     icon: '🧠' },
+  { name: 'Toolboards',         description: 'CAN-bus toolhead boards — MCU, onboard driver, accelerometer, and Neopixel.',         href: '/hardware/toolboards',       count: len(toolboardsData),     icon: '🔧' },
+  { name: 'Part Cooling',       description: 'Blowers and fans for part cooling — airflow, static pressure, and toolhead fit.',     href: '/hardware/part-cooling',     count: len(partCoolingData),    icon: '🌀' },
+  { name: 'Build Plates',       description: 'PEI, textured, and smooth build surfaces — adhesion, release, and longevity.',        href: '/hardware/build-plates',     count: len(buildPlatesData),    icon: '🧲' },
+  { name: 'Power Supplies',     description: 'PSUs for prosumer builds — wattage, voltage, certification, and cooling.',            href: '/hardware/psus',             count: len(psusData),           icon: '⚡' },
+  { name: 'Stepper Motors',     description: 'Motion and extrusion steppers — torque, current, frame size, and use case.',          href: '/hardware/motors',           count: len(motorsData),         icon: '🔄' },
+  { name: 'Heaters',            description: 'Cartridge heaters, bed heaters, and silicone pads — wattage, voltage, and control.',  href: '/hardware/heaters',          count: len(heatersData),        icon: '🌡️' },
+  { name: 'Filament Dryers',    description: 'Active and passive dryers — capacity, temperature, and print-while-dry support.',     href: '/hardware/filament-dryers',  count: len(filamentDryersData), icon: '♨️' },
+  { name: 'Air Filtration',     description: 'VOC and particulate filtration — media type, fan size, and printer fit.',            href: '/hardware/air-filtration',   count: len(airFiltrationData),  icon: '🌬️' },
+  { name: 'Lighting & Cameras', description: 'Chamber lighting and monitoring cameras — interface, resolution, and Klipper fit.',  href: '/hardware/lighting-cameras', count: len(lightingCamerasData),icon: '💡' },
+  { name: 'Gantrys',            description: 'Gantry kits and conversions — kinematics, extrusion size, and motor count.',         href: '/hardware/gantrys',          count: len(gantrysData),        icon: '🏗️' },
+  { name: 'Motion System',      description: 'Linear rails, belts, pulleys, and lead screws — type, spec, and brand tier.',         href: '/hardware/motion-system',    count: len(motionSystemData),   icon: '🛤️' },
+  { name: 'Enclosures',         description: 'Kit and DIY enclosures — material, thickness, and chamber temperature.',            href: '/hardware/enclosures',       count: len(enclosuresData),     icon: '📦' },
+  { name: 'Printers',           description: 'Self-build and kit CoreXY printers — build volume, frame, BOM cost, and difficulty.', href: '/hardware/printers',         count: len(printersData),       icon: '🖨️' },
+].map((c) => ({ ...c, live: true }));
 
 const featured = [
   {

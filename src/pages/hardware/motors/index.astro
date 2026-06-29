@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/motors.json';
+
+const chips = (r: any) => [
+  (r['Size'] ?? r['Frame Size']) ? String(r['Size'] ?? r['Frame Size']) : null,
+  (r['Holding Torque'] ?? r['Holding Torque (Ncm)']) ? String(r['Holding Torque'] ?? r['Holding Torque (Ncm)']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="motors"
+  categoryLabel="MOTOR"
+  crumb="Stepper Motors"
+  heading="Stepper Motors"
+  sub="Stepper motors for motion and extrusion. Torque, current, frame size, and use case."
+  nounSingular="motor"
+  nounPlural="motors"
+  title="Best Stepper Motors for Voron & CoreXY Printers"
+  description="Stepper motor specs, holding torque, current, and where to buy — NEMA 17 and pancake motors for Voron and CoreXY motion and extrusion."
+  schemaName="Best Stepper Motors for Voron & CoreXY Printers"
+  chips={chips}
+/>

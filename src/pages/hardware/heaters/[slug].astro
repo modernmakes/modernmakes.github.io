@@ -1,0 +1,31 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/heaters.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'HEATER',
+  componentType: 'Heater',
+  titleNoun: 'Heater',
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Wattage', fields: ['Wattage', 'Wattage (W)'], fmt: (v) => `${v}W` },
+    { label: 'Voltage', fields: ['Voltage'] },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Wattage', fields: ['Wattage', 'Wattage (W)'], fmt: (v) => `${v}W` },
+    { label: 'Voltage', fields: ['Voltage'] },
+    { label: 'Size', fields: ['Size', 'Size (mm)'] },
+    { label: 'Thermistor Included', fields: ['Thermistor Included', 'Thermistor'] },
+    { label: 'SSR Required', fields: ['SSR Required', 'SSR'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

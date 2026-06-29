@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/lighting-cameras.json';
+
+const chips = (r: any) => [
+  r['Type'] ? String(r['Type']) : null,
+  r['Interface'] ? String(r['Interface']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="lighting-cameras"
+  categoryLabel="LIGHTING & CAMERAS"
+  crumb="Lighting & Cameras"
+  heading="Lighting & Cameras"
+  sub="Chamber lighting and monitoring cameras. Interface, resolution, and Klipper support."
+  nounSingular="device"
+  nounPlural="devices"
+  title="Best Lighting & Cameras for 3D Printer Enclosures"
+  description="Chamber lighting and camera specs, interface, resolution, and where to buy — Klipper-compatible monitoring cameras and enclosure lighting."
+  schemaName="Best Lighting & Cameras for 3D Printer Enclosures"
+  chips={chips}
+/>

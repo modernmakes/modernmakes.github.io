@@ -1,0 +1,32 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/lighting-cameras.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'LIGHTING & CAMERAS',
+  componentType: 'Lighting & Camera',
+  titleNoun: 'Lighting & Camera',
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Interface', fields: ['Interface'] },
+    { label: 'Resolution', fields: ['Resolution'] },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Interface', fields: ['Interface'] },
+    { label: 'Klipper Compatible', fields: ['Klipper Compatible'] },
+    { label: 'Resolution', fields: ['Resolution'] },
+    { label: 'Field of View', fields: ['FOV', 'Field of View'] },
+    { label: 'Color Temp', fields: ['Color Temp', 'Colour Temp'] },
+    { label: 'Addressable', fields: ['Addressable'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

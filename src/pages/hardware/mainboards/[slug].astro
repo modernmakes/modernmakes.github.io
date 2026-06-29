@@ -1,0 +1,32 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/mainboards.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'MAINBOARD',
+  componentType: 'Mainboard',
+  titleNoun: 'Mainboard',
+  quickSpecs: [
+    { label: 'MCU', fields: ['MCU'] },
+    { label: 'Driver Slots', fields: ['Driver Slots', 'Driver Count'] },
+    { label: 'Voltage', fields: ['Voltage'] },
+  ],
+  specs: [
+    { label: 'MCU', fields: ['MCU'] },
+    { label: 'Driver Slots', fields: ['Driver Slots', 'Driver Count'] },
+    { label: 'Driver Types', fields: ['Driver Types', 'Driver - A/B', 'Drivers'] },
+    { label: 'USB-C', fields: ['USB-C', 'USB'] },
+    { label: 'CAN Bus', fields: ['CAN Bus', 'CAN'] },
+    { label: 'Dimensions', fields: ['Dimensions', 'Size', 'Size (mm)'] },
+    { label: 'Voltage', fields: ['Voltage'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

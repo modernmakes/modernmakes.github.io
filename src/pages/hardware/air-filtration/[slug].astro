@@ -1,0 +1,30 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/air-filtration.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'AIR FILTRATION',
+  componentType: 'Air Filter',
+  titleNoun: 'Air Filter',
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Filter Media', fields: ['Filter Media', 'Media'] },
+    { label: 'Fan Size', fields: ['Fan Size'] },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Filter Media', fields: ['Filter Media', 'Media'] },
+    { label: 'Printed Parts Required', fields: ['Printed Parts Required'] },
+    { label: 'Fan Size', fields: ['Fan Size'] },
+    { label: 'Carbon Capacity', fields: ['Carbon Capacity'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

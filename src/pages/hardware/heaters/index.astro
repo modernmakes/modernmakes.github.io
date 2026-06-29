@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/heaters.json';
+
+const chips = (r: any) => [
+  r['Type'] ? String(r['Type']) : null,
+  (r['Wattage'] ?? r['Wattage (W)']) != null ? `${r['Wattage'] ?? r['Wattage (W)']}W` : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="heaters"
+  categoryLabel="HEATER"
+  crumb="Heaters"
+  heading="Heaters"
+  sub="Cartridge heaters, bed heaters, and silicone pads. Wattage, voltage, and control needs."
+  nounSingular="heater"
+  nounPlural="heaters"
+  title="Best Heaters for Voron & Prosumer 3D Printers"
+  description="Heater specs, wattage, voltage, and where to buy — cartridge heaters, silicone bed pads, and heater blocks for Voron and CoreXY builds."
+  schemaName="Best Heaters for Voron & Prosumer 3D Printers"
+  chips={chips}
+/>

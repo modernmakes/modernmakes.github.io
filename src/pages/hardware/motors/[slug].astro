@@ -1,0 +1,32 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/motors.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'MOTOR',
+  componentType: 'Stepper Motor',
+  titleNoun: 'Stepper Motor',
+  quickSpecs: [
+    { label: 'Size', fields: ['Size', 'Frame Size'] },
+    { label: 'Holding Torque', fields: ['Holding Torque', 'Holding Torque (Ncm)'] },
+    { label: 'Current', fields: ['Current', 'Rated Current'] },
+  ],
+  specs: [
+    { label: 'Size', fields: ['Size', 'Frame Size'] },
+    { label: 'Length', fields: ['Length', 'Length (mm)'] },
+    { label: 'Holding Torque', fields: ['Holding Torque', 'Holding Torque (Ncm)'] },
+    { label: 'Current', fields: ['Current', 'Rated Current'] },
+    { label: 'Steps Per Rev', fields: ['Steps Per Rev', 'Steps/Rev'] },
+    { label: 'Integrated Lead Screw', fields: ['Integrated Lead Screw', 'Lead Screw'] },
+    { label: 'Use Case', fields: ['Use Case'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

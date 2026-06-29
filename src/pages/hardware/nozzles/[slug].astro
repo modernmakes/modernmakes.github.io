@@ -1,0 +1,31 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/nozzles.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'NOZZLE',
+  componentType: 'Nozzle',
+  titleNoun: 'Nozzle',
+  quickSpecs: [
+    { label: 'Thread', fields: ['Thread', 'Nozzle Thread'] },
+    { label: 'Diameter', fields: ['Diameter', 'Diameter (mm)'] },
+    { label: 'Material', fields: ['Material'] },
+  ],
+  specs: [
+    { label: 'Thread', fields: ['Thread', 'Nozzle Thread'] },
+    { label: 'Material', fields: ['Material'] },
+    { label: 'Diameter', fields: ['Diameter', 'Diameter (mm)'] },
+    { label: 'Max Temperature', fields: ['Max Temp', 'Max Temp (°C)'], fmt: (v) => `${v}°C` },
+    { label: 'Abrasive Safe', fields: ['Abrasive Safe'] },
+    { label: 'Bore', fields: ['Bore'] },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/filament-dryers.json';
+
+const chips = (r: any) => [
+  r['Capacity'] ? String(r['Capacity']) : null,
+  (r['Max Temp'] ?? r['Max Temp (°C)']) != null ? `${r['Max Temp'] ?? r['Max Temp (°C)']}°C` : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="filament-dryers"
+  categoryLabel="FILAMENT DRYER"
+  crumb="Filament Dryers"
+  heading="Filament Dryers"
+  sub="Active and passive filament dryers. Capacity, temperature, and print-while-drying support."
+  nounSingular="dryer"
+  nounPlural="dryers"
+  title="Best Filament Dryers for Prosumer 3D Printing"
+  description="Filament dryer specs, capacity, max temperature, and where to buy — active-circulation dryers and print-while-dry boxes for engineering filaments."
+  schemaName="Best Filament Dryers for Prosumer 3D Printing"
+  chips={chips}
+/>

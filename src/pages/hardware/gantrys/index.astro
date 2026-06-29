@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/gantrys.json';
+
+const chips = (r: any) => [
+  (r['Kinematic'] ?? r['Kinematics']) ? String(r['Kinematic'] ?? r['Kinematics']) : null,
+  r['Extrusion Size'] ? String(r['Extrusion Size']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="gantrys"
+  categoryLabel="GANTRY"
+  crumb="Gantrys"
+  heading="Gantrys"
+  sub="Gantry kits and conversions. Kinematics, extrusion size, motor count, and fit."
+  nounSingular="gantry"
+  nounPlural="gantries"
+  title="Best Gantry Kits & Conversions for CoreXY Printers"
+  description="Gantry specs, kinematics, extrusion size, motor count, and where to buy — gantry kits and AWD conversions for Voron and CoreXY builds."
+  schemaName="Best Gantry Kits & Conversions for CoreXY Printers"
+  chips={chips}
+/>

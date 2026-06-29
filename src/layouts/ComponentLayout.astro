@@ -124,6 +124,10 @@ const canonicalUrl = siteBase + Astro.url.pathname;
 const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 const segLabels: Record<string, string> = {
   hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',
+  nozzles: 'Nozzles', mainboards: 'Mainboards', toolboards: 'Toolboards', 'part-cooling': 'Part Cooling',
+  'build-plates': 'Build Plates', psus: 'Power Supplies', motors: 'Stepper Motors', heaters: 'Heaters',
+  'filament-dryers': 'Filament Dryers', 'air-filtration': 'Air Filtration', 'lighting-cameras': 'Lighting & Cameras',
+  gantrys: 'Gantrys', 'motion-system': 'Motion System', enclosures: 'Enclosures', printers: 'Printers',
 };
 const breadcrumbItems = [
   { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteBase}/` },

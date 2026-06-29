@@ -1,0 +1,24 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/build-plates.json';
+
+const chips = (r: any) => [
+  r['Surface'] ? String(r['Surface']) : null,
+  (r['Size'] ?? r['Size (mm)']) ? String(r['Size'] ?? r['Size (mm)']) : null,
+  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="build-plates"
+  categoryLabel="BUILD PLATE"
+  crumb="Build Plates"
+  heading="Build Plates"
+  sub="PEI, textured, smooth, and specialty build surfaces. Adhesion, release, and size."
+  nounSingular="build plate"
+  nounPlural="build plates"
+  title="Best Build Plates & Surfaces for Voron & CoreXY Printers"
+  description="Build plate specs, surface type, magnetic mounting, and where to buy — PEI, textured, and smooth surfaces for Voron and CoreXY builds."
+  schemaName="Best Build Plates & Surfaces for Voron & CoreXY Printers"
+  chips={chips}
+/>
