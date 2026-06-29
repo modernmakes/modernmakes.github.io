@@ -1,1 +1,385 @@
-[]
+[
+  {
+    "id": "rec1pzx3SkVIwgur9",
+    "Verdict Label": "Common BOM SSR with documented counterfeit risk — verify authenticity before use in any mains application",
+    "Verdict": "MID",
+    "Type": "SSR",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/filter/solid-state-relays/534",
+    "Brand": "Fotek",
+    "Price (USD)": 8,
+    "Pros": "Widely available — stocked by most 3D printing BOM vendors and AliExpress\nFotek's genuine SSR-40DA is a legitimate industrial relay when sourced from verified channels\nCompatible with Klipper's standard SSR configuration — DC 3-32V control, AC load",
+    "Wattage (W)": 9600,
+    "Description": "The Fotek SSR-40DA is the most common solid-state relay in 3D printer BOMs, but it carries a well-documented safety risk: counterfeit units are prevalent across AliExpress and have appeared even through Amazon and mainstream channels. Counterfeit Foteks have failed under normal bed heater loads, causing printer fires. If you use a Fotek SSR, purchase exclusively from Fotek's authorized industrial distributors. The safer community recommendation is the Omron G3NB-210B sourced from Digi-Key or Mouser, where industrial-grade components are reliably authenticated.",
+    "Voltage": "AC",
+    "Cons": "⚠️ KNOWN COMMUNITY SAFETY ISSUE: The Fotek SSR-40DA is one of the most-counterfeited components in 3D printing BOMs. Counterfeit units have failed catastrophically at loads well below the 40A rating, causing fires in the 3D printing community.\nCounterfeit Foteks are indistinguishable by appearance — the internal components are substandard and may fail under sustained bed heating loads\nPurchasing from Fotek's authorized distributors reduces but does not eliminate counterfeit risk due to supply chain contamination\nOmron G3NB-210B is the community-recommended alternative — buy from Digi-Key or Mouser where counterfeits are not prevalent",
+    "Compatible Printers": [
+      "Universal (AC bed/chamber heaters)"
+    ],
+    "Vendor 1 Name": "Authorized distributors only",
+    "Name": "Fotek SSR-40DA",
+    "Size": "Standard DIN/panel mount"
+  },
+  {
+    "id": "rec9q8SqHHhhGbjtg",
+    "Verdict Label": "Revo-only heater — integrated thermistor is the critical differentiator; not interchangeable with standard cartridges",
+    "Verdict": "MID",
+    "Thermistor Included": true,
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://e3d-online.com/products/revo-heater-core",
+    "Brand": "E3D",
+    "Price (USD)": 20,
+    "Pros": "Thermistor is integrated into the heater core — single replacement part swaps both heater and temperature sensor simultaneously\nNo separate thermistor wire management — cleaner wiring, one connection to the toolboard\nE3D-certified spec — resistance and sensor characteristics are tightly controlled\nGenuine E3D product — no counterfeit risk through authorised channels",
+    "Wattage (W)": 40,
+    "Max Temp (°C)": 300,
+    "Description": "The E3D Revo Heater Core differs fundamentally from standard hotend cartridges: it integrates both the heating element and the thermistor into a single ceramic unit. This means a single wiring connection covers both functions, but it also means the thermistor is not independently replaceable — a sensor failure requires replacing the whole core. For Revo builds, this is the correct and only compatible heater. Not interchangeable with any non-Revo hotend.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "E3D Revo Six",
+      "E3D Revo Voron",
+      "E3D Revo Micro",
+      "E3D Revo CR"
+    ],
+    "Cons": "Revo-ecosystem only — will not fit V6, Dragon, Rapido, or any other hotend platform\nReplacing just the thermistor is not possible — a failed sensor means replacing the entire heater core\nHigher per-unit cost than a standard 40W cartridge + separate thermistor\n40W rating is not upgradeable within the Revo ecosystem — no 50W or 60W Revo Core option at standard Voron configs",
+    "Vendor 1 Name": "E3D Online",
+    "Name": "E3D Revo Heater Core",
+    "Size": "Proprietary (Revo format)"
+  },
+  {
+    "id": "recEmv7INSGorBKyw",
+    "Verdict Label": "Voron Trident 250mm BOM standard — the community's first-choice silicone bed heater at this size",
+    "Verdict": "TOP",
+    "Type": "Bed",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/429608",
+    "Brand": "Keenovo",
+    "Price (USD)": 32,
+    "Pros": "500W at AC line voltage reaches 110°C reliably in an enclosed printer — thermal headroom for ABS, ASA, PA\nOEM-grade silicone construction — even heat distribution across the full 250mm bed surface\nBuilt-in overheat thermal fuse — independent safety redundancy beyond the SSR and Klipper\nKeenovo is the reference supplier for Voron project heaters — extensive community build logs\nAvailable in both 110V and 220V variants — order the correct voltage for your mains supply",
+    "Wattage (W)": 500,
+    "Description": "The Keenovo 500W 250×250mm silicone bed heater is the Voron Trident 250mm BOM reference. At AC mains voltage it reaches and holds 110°C reliably without the thermal limitations of a 24V DC bed heater. The factory-installed overheat thermal fuse adds an independent safety layer beyond Klipper's thermal runaway protection. Available in 110V and 220V variants — specify at order time. Requires SSR switching controlled by Klipper.",
+    "Voltage": "AC",
+    "Cons": "Requires SSR (solid state relay) for switching — AC mains wiring is not optional\nInstallation requires basic electrical safety knowledge — AC at mains voltage inside the printer\nMains voltage heaters require a safety ground connection to the printer frame\nLead time from Keenovo can be 2-4 weeks — not available for same-day sourcing",
+    "Compatible Printers": [
+      "Voron Trident",
+      "Voron 2.4"
+    ],
+    "SSR Required": true,
+    "Vendor 1 Name": "Keenovo / AliExpress",
+    "Name": "Keenovo Silicone Bed Heater 250×250mm 500W",
+    "Size": "250×250mm"
+  },
+  {
+    "id": "recG5bKVF29JMXa9h",
+    "Verdict Label": "Voron 2.4 300mm BOM standard — 750W at AC reaches 110°C+ quickly and holds it under print load",
+    "Verdict": "TOP",
+    "Type": "Bed",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/429608",
+    "Brand": "Keenovo",
+    "Price (USD)": 42,
+    "Pros": "750W at AC line voltage has substantial headroom — reaches 110°C fast and recovers quickly from bed opening\nOEM Keenovo quality — even silicone heating element, consistent watt density across the pad\nBuilt-in overheat thermal fuse as standard — same safety spec as the 250mm variant\nThe V2.4 BOM reference heater — community build guides, PID values, and wiring diagrams are written around this unit\nAvailable in 110V and 220V",
+    "Wattage (W)": 750,
+    "Description": "The Keenovo 750W 300×300mm bed heater is the Voron 2.4 300mm BOM reference and the most-documented silicone bed heater in the self-build ecosystem. At 750W it drives the aluminum bed to 110°C comfortably and recovers quickly from the thermal penalty of opening the door mid-print. The thermal fuse, even watt density, and Keenovo's consistent quality make it the default recommendation for any V2.4 300mm build.",
+    "Voltage": "AC",
+    "Cons": "750W requires an SSR rated for the load — verify SSR current spec (40A SSR has substantial headroom at typical mains amperage)\nAC mains wiring required inside the printer — ground the frame, protect conductors from pinch points\nLead time from Keenovo AliExpress store can extend 2-4 weeks\n300×300mm pad size is specific to V2.4 300 — not a stock size for RatRig or VzBot without customization",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "SSR Required": true,
+    "Vendor 1 Name": "Keenovo / AliExpress",
+    "Name": "Keenovo Silicone Bed Heater 300×300mm 750W",
+    "Size": "300×300mm"
+  },
+  {
+    "id": "recNUVSfDqJCANJ0x",
+    "Verdict Label": "60W OEM cartridge for Rapido 2 — highest stock wattage in this comparison",
+    "Verdict": "TOP",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/912794874",
+    "Brand": "Phaetus",
+    "Price (USD)": 15,
+    "Pros": "60W is the highest wattage in this comparison — fastest heat-up and highest sustained power at 24V\nOEM cartridge for the Rapido 2 BOM — matched impedance, no compatibility guesswork\n6×20mm standard form factor — broadly compatible beyond just Rapido\nReasonable price for an OEM-spec high-wattage cartridge",
+    "Wattage (W)": 60,
+    "Max Temp (°C)": 450,
+    "Description": "The Phaetus 60W cartridge is the OEM heater shipped with the Rapido 2 and is the highest-wattage cartridge in this reference. At 60W and 24V, it draws roughly 2.5A and can push the Rapido 2 to its maximum volumetric throughput. It fits any 6×20mm hotend block, making it a viable high-wattage upgrade for Dragon or V6-based setups as well.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Phaetus Rapido",
+      "Phaetus Rapido 2",
+      "Phaetus Rapido 2 Pro"
+    ],
+    "Cons": "60W draws ~2.5A at 24V — ensure your mainboard heater output is rated accordingly (most Voron-spec boards handle this)\nHigher wattage means faster thermal response — PID tuning is mandatory, not optional\nNot stocked at most Western retailers — AliExpress or direct from Phaetus typically",
+    "Vendor 1 Name": "AliExpress / Phaetus Store",
+    "Name": "Phaetus Rapido 60W Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recRpnhI03BKtbFFE",
+    "Verdict Label": "BOM fallback at minimal cost — measure resistance before installing, buy extras",
+    "Verdict": "BUDGET",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-40w-24v-heater-cartridge.html",
+    "Brand": "Generic / AliExpress",
+    "Price (USD)": 2,
+    "Pros": "Sub-$2 per unit — the cost floor for hotend heater cartridges\nFits any 6×20mm bore hotend block — universal form factor\nAcceptable as a BOM placeholder or emergency spare\nAvailable from hundreds of sellers with fast domestic shipping in some markets",
+    "Wattage (W)": 40,
+    "Max Temp (°C)": 300,
+    "Description": "Generic 24V 40W cartridges are the BOM fallback for self-build printers on a budget. They work and are acceptable as temporary or backup heaters, but the actual wattage and resistance should be verified with a multimeter before installation — labeled specs are unreliable. The community standard recommendation is to measure resistance (40W at 24V = 14.4Ω), accept units within ±10%, and always buy a pack of several so you have verified spares on hand.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "E3D V6-compatible",
+      "Dragon",
+      "Most 6mm bore hotends"
+    ],
+    "Cons": "Actual wattage varies from labeled spec — measure resistance with a multimeter (40W at 24V = 14.4Ω; accept units within ±10%)\nNo quality control or batch consistency — same listing may ship different units at different times\nShort lifespan is common with cheapest units — buy a pack, not a single\nNot suitable as the only spare for a machine running high-temp or abrasive materials continuously",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Vendor 1 Name": "AliExpress (various)",
+    "Name": "Generic 24V 40W Heater Cartridge 6×20mm",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recUSi38wRhPhmzvw",
+    "Verdict Label": "High-wattage clone — fast heat-up but verify resistance before use; batch quality is variable",
+    "Verdict": "BUDGET",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-60w-24v-heater-cartridge.html",
+    "Brand": "Generic / AliExpress",
+    "Price (USD)": 3,
+    "Pros": "60W provides the fastest heat-up times available in the 6×20mm cartridge format\nLower cost than OEM 60W (Phaetus) by a significant margin\nDirect-swap upgrade for any Dragon, V6, or compatible block wanting more wattage\nHigh-wattage means faster recovery during purge/prime operations",
+    "Wattage (W)": 60,
+    "Max Temp (°C)": 300,
+    "Description": "Generic 60W 24V cartridges offer the wattage of the Phaetus OEM at sub-$3 prices, but with the same quality caveats as all generic heater cartridges. The higher wattage (2.5A at 24V) demands that you verify your mainboard's heater output rating before installing — many entry-level boards have FETs rated for 40W continuous rather than 60W. Measure resistance (9.6Ω for genuine 60W), buy in packs, and cross-reference your board specs before switching.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Most 6mm bore hotends"
+    ],
+    "Cons": "Same quality lottery as generic 40W — measure resistance (60W at 24V = 9.6Ω) before installation\n60W draws ~2.5A at 24V — verify your mainboard heater output FET and trace rating before installing\nInconsistent labeling is common — a '60W' clone may actually be 40W with an incorrect label\nNot suitable as the only spare — buy a pack and verify each unit",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Vendor 1 Name": "AliExpress (various)",
+    "Name": "Generic 24V 60W Heater Cartridge 6×20mm",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recVRzww98Q28Z4Ga",
+    "Verdict Label": "OEM 40W cartridge for Dragon family hotends — standard spec, dependable",
+    "Verdict": "MID",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/302347",
+    "Brand": "Trianglelab",
+    "Price (USD)": 8,
+    "Pros": "OEM cartridge matched to the Dragon heater block geometry and resistance spec\nTrianglelab brand has reasonable quality control vs. generic AliExpress blanks\n40W handles PLA through ABS and most engineering filaments without issue\nWidely stocked — available from most Dragon hotend vendors",
+    "Wattage (W)": 40,
+    "Max Temp (°C)": 300,
+    "Description": "The Trianglelab 40W cartridge is the OEM heater for the Dragon family hotends. At 40W and 24V it covers the standard range of print materials from PLA through ABS and most engineering filaments. Builders targeting sustained PA or PC printing at high volumetric throughput may find benefit upgrading to a 50W or 60W alternative in the same 6×20mm form factor.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Dragon HF",
+      "Dragon ST",
+      "Dragon UHF",
+      "Dragon Ace"
+    ],
+    "Cons": "40W is adequate but not headroom-rich for sustained PA or PC printing at maximum throughput\nNot the same as a 50W cartridge — heat-up is slower and PID ceiling is lower\nSame price point as some generic clones that offer 50W — wattage trade-off exists",
+    "Vendor 1 Name": "Trianglelab Store / AliExpress",
+    "Name": "Trianglelab Dragon 40W Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recaKJNbP2sr5ZPpD",
+    "Verdict Label": "Community's preferred SSR — authentic Omron from Digi-Key or Mouser eliminates counterfeit risk",
+    "Verdict": "TOP",
+    "Type": "SSR",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/omron-automation-and-safety/G3NB-210B-1-DC5-24/1829889",
+    "Brand": "Omron",
+    "Price (USD)": 22,
+    "Pros": "Omron's industrial manufacturing quality is consistent — genuine units perform to rated spec\nDistributed through Digi-Key and Mouser — both have rigorous supply chain controls that make counterfeit Omrons rare vs. AliExpress Foteks\n10A rating is more than adequate for Voron bed heaters (500W at 120V = ~4.2A; 750W at 240V = ~3.1A)\nThe explicit community safety recommendation — widely cited in Voron documentation and Discord as the alternative to Fotek",
+    "Wattage (W)": 2400,
+    "Description": "The Omron G3NB-210B is the Voron community's documented replacement recommendation for the Fotek SSR-40DA. Sourced from Digi-Key or Mouser, genuine Omrons are not subject to the counterfeit risk that plagues the Fotek supply chain. At 10A, it handles standard Voron bed heater loads comfortably (a 750W heater at 240V draws approximately 3.1A). The premium over a Fotek is meaningful insurance for a component that sits between mains voltage and your printer — buy it from a verified distributor and don't look for a cheaper option.",
+    "Voltage": "AC",
+    "Cons": "Higher price than the Fotek SSR — premium for authentic industrial sourcing\n10A rated (not 40A like the Fotek) — adequate for standard 250/300mm beds but verify your heater's actual draw before installation\nBulkier than some panel-mount alternatives — requires appropriate DIN rail or chassis mounting",
+    "Compatible Printers": [
+      "Universal (AC bed/chamber heaters)"
+    ],
+    "Vendor 1 Name": "Digi-Key / Mouser",
+    "Name": "Omron G3NB-210B",
+    "Size": "Standard DIN/panel mount"
+  },
+  {
+    "id": "receq4L42JMqvBpaF",
+    "Verdict Label": "DC 24V bed heater — no SSR required, but thermal ceiling is lower than AC alternatives",
+    "Verdict": "MID",
+    "Type": "Bed",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-24v-silicone-bed-heater-235x235.html",
+    "Brand": "Generic / AliExpress",
+    "Price (USD)": 15,
+    "Pros": "Runs at 24V DC — no SSR, no mains wiring, connects directly to mainboard bed output\nLower barrier to entry — simpler wiring and no AC safety requirements\nAcceptable for PLA and PETG beds — reaches 60-70°C reliably at 24V\nLower cost and simpler sourcing than an AC heater + SSR combination",
+    "Wattage (W)": 200,
+    "Description": "Generic 24V DC silicone bed heaters are the entry-level option for self-build printers where AC mains wiring is not desired or feasible. At ~200W they reach 60-70°C reliably for PLA and PETG, but struggle to maintain 100-110°C consistently for ABS or ASA printing in an enclosed printer. For any build targeting high-temp materials, an AC heater (Keenovo or Fabreeko) with SSR is the correct path. 24V beds are adequate for open-frame or beginner builds where simplicity outweighs thermal performance.",
+    "Voltage": "24V",
+    "Cons": "~200W at 24V is the practical limit — reaching 110°C for ABS/ASA is slow and often inconsistent in an open frame\n24V bed heaters draw 8-10A continuously — that's a significant portion of most 24V PSU headroom\nNot recommended for sustained high-temp printing (ABS, ASA, PA, PC) where an AC heater is clearly superior\nGeneric quality control issues apply — pad adhesion and silicone consistency vary by source",
+    "Compatible Printers": [
+      "Generic Voron builds",
+      "Ender-derived printers"
+    ],
+    "Vendor 1 Name": "AliExpress (various)",
+    "Name": "Generic DC Silicone Bed Heater 235×235mm 24V",
+    "Size": "235×235mm"
+  },
+  {
+    "id": "rechpVz8UgUJ5l0Tk",
+    "Verdict Label": "OEM E3D cartridge for V6 family — trustworthy spec, premium priced vs generics",
+    "Verdict": "MID",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://e3d-online.com/products/v6-heater-cartridge",
+    "Brand": "E3D",
+    "Price (USD)": 12,
+    "Pros": "Genuine E3D manufacturing spec — resistance and wattage are what the label says\nCompatible across the entire V6-class ecosystem — V6, Hemera, Titan, and V6-clone blocks\n40W is sufficient for 90% of build scenarios from PLA through ABS\nDirect from E3D or authorised resellers — no counterfeit risk if purchased through proper channels",
+    "Wattage (W)": 40,
+    "Max Temp (°C)": 300,
+    "Description": "The E3D 40W 24V cartridge is the OEM heater for the V6 family, bought directly from E3D or authorised distributors. Genuine E3D cartridges carry certified resistance specs, removing the quality lottery common to AliExpress alternatives. For any active V6 platform build, this is the correct replacement cartridge. For new builds, consider whether the V6 platform itself is still the right choice before investing in OEM spares.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "E3D V6",
+      "E3D Hemera",
+      "E3D Titan"
+    ],
+    "Cons": "Premium price for 40W vs. equivalent community alternatives at half the cost\n40W leaves limited headroom for high-flow ASA+ or sustained PA printing\nV6-platform hotends are becoming secondary to Dragon/Rapido in Voron community builds — lower relevance for new builds",
+    "Vendor 1 Name": "E3D Online",
+    "Name": "E3D V6 40W Heater Cartridge (24V)",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recqtxzW2TF1znxtp",
+    "Verdict Label": "750W USA-stocked V2.4 300mm alternative to Keenovo — same spec, faster shipping for North America",
+    "Verdict": "TOP",
+    "Type": "Bed",
+    "Vendor 1 URL": "https://www.fabreeko.com/collections/heaters",
+    "Brand": "Fabreeko",
+    "Price (USD)": 36,
+    "Pros": "Ships from USA — ideal for North American V2.4 300mm builders who want to avoid AliExpress lead times\n750W AC matches the Keenovo spec — equivalent thermal performance for the V2.4 300mm bed\nBuilt-in thermal fuse — consistent with Keenovo's safety feature set\nFabreeko is a known, community-trusted vendor in Voron circles — support is responsive",
+    "Wattage (W)": 750,
+    "Description": "The Fabreeko 750W 300×300mm heater is the go-to recommendation for North American Voron 2.4 300mm builders who want equivalent AC bed heater quality without the 2-4 week AliExpress wait. Performance and safety specs are equivalent to Keenovo's 750W variant. Verify current availability — the 300mm size sometimes sells out faster than 250mm.",
+    "Voltage": "AC",
+    "Cons": "SSR required — all AC bed heaters share this electrical constraint\nLess reference documentation than Keenovo in community build logs and guides\nCheck the Fabreeko site for current stock — 250mm is more commonly in stock than 300mm",
+    "Compatible Printers": [
+      "Voron 2.4"
+    ],
+    "SSR Required": true,
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Fabreeko Silicone Heater 300×300mm 750W",
+    "Size": "300×300mm"
+  },
+  {
+    "id": "recrHW6ltxGmo4ZPw",
+    "Verdict Label": "50W at 24V — high-wattage OEM cartridge for the Mosquito ecosystem",
+    "Verdict": "TOP",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://www.sliceengineering.com/products/heater-cartridge",
+    "Brand": "Slice Engineering",
+    "Price (USD)": 24,
+    "Pros": "50W exceeds the standard 40W rating — faster heat-up and better sustained throughput at high temps\nSlice Engineering OEM spec — wattage and resistance verified, no clone quality lottery\nRated to 450°C operating temperature — suitable for high-temp materials without marginal headroom\nSame 6×20mm form factor as standard cartridges — no special block modifications required",
+    "Wattage (W)": 50,
+    "Max Temp (°C)": 450,
+    "Description": "The Slice Engineering 50W cartridge is the OEM heater for the Mosquito and Mosquito Magnum family. At 50W versus the standard 40W, it delivers faster heat-up times and better maintained temperature under high-flow printing conditions. Slice publishes verified resistance and wattage specs — no AliExpress quality lottery. The recommended replacement and upgrade path for any Mosquito build.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Mosquito",
+      "Mosquito Magnum",
+      "Mosquito Magnum+"
+    ],
+    "Cons": "Premium price vs. generic 50W clones — you pay for verified quality\nMosquito-specific heater block geometry required — not compatible with V6 or Dragon blocks\nRequires appropriate Klipper PID tuning after installation",
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "Slice Engineering Mosquito 50W Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "recsVNCelNgp89vXI",
+    "Verdict Label": "50W OEM cartridge for NF-Crazy and NF-Zone — higher wattage than standard, reasonable price",
+    "Verdict": "MID",
+    "Type": "Hotend Cartridge",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/2090093",
+    "Brand": "Mellow",
+    "Price (USD)": 12,
+    "Pros": "50W vs. the standard 40W — better heat-up performance and sustained throughput headroom\nOEM match for NF-Crazy and NF-Zone heater block geometries\nMellow's build quality control is generally solid for the price tier\n6×20mm form factor works across non-Mellow hotends with matching block bore",
+    "Wattage (W)": 50,
+    "Max Temp (°C)": 450,
+    "Description": "The Mellow 50W cartridge is the OEM heater for the NF-Crazy and NF-Zone hotend family. At 50W it offers the same wattage as Slice Engineering's cartridge at a lower price point. The 6×20mm form factor means it can be used as a 50W upgrade in any compatible hotend block, not just Mellow's own. A straightforward choice for NF-Crazy builders and a reasonable upgrade option for anyone on a Dragon or V6 looking for more wattage.",
+    "Voltage": "24V",
+    "Compatible Hotends": [
+      "Mellow NF-Crazy",
+      "Mellow NF-Zone",
+      "Mellow NF-Wind"
+    ],
+    "Cons": "Primarily sourced from AliExpress — less accessible than E3D or Slice from Western retailers\nMellow hotend ecosystem is smaller than Dragon/Rapido in the Voron community — narrower primary use case\nCommunity documentation for NF-Crazy builds is thinner than Dragon or Rapido",
+    "Vendor 1 Name": "Mellow Store / AliExpress",
+    "Name": "Mellow NF-Crazy 50W Heater Cartridge",
+    "Size": "6×20mm"
+  },
+  {
+    "id": "rectXKQoQVOYnmzIh",
+    "Verdict Label": "Western-stocked Keenovo alternative — ships from USA, same AC silicone spec",
+    "Verdict": "TOP",
+    "Type": "Bed",
+    "Vendor 1 URL": "https://www.fabreeko.com/collections/heaters",
+    "Brand": "Fabreeko",
+    "Price (USD)": 29,
+    "Pros": "Ships from USA — no 2-4 week Keenovo AliExpress lead time for North American builders\nCompetitive price to Keenovo with similar silicone quality at 500W AC\nBuilt-in thermal fuse — same independent safety redundancy as Keenovo pads\nFabreeko community reputation is strong — common alternative recommendation in Voron Discord",
+    "Wattage (W)": 500,
+    "Description": "Fabreeko is the most-cited Western alternative to Keenovo for self-build silicone bed heaters. The 500W 250×250mm pad ships from the USA, eliminating the 2-4 week AliExpress wait common with Keenovo orders. Quality is comparable — silicone construction, built-in thermal fuse, same AC mains requirement. Preferred by North American builders who want fast sourcing without compromising on spec.",
+    "Voltage": "AC",
+    "Cons": "SSR required — AC mains wiring, same electrical considerations as Keenovo\nFabreeko-specific sizing — verify pad dimensions match your specific aluminum bed before ordering\nNot as extensively documented in community build guides as Keenovo (fewer build log references)",
+    "Compatible Printers": [
+      "Voron Trident",
+      "Voron 2.4"
+    ],
+    "SSR Required": true,
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Fabreeko Silicone Heater 250×250mm 500W",
+    "Size": "250×250mm"
+  },
+  {
+    "id": "recumcOOtOFAv1OLB",
+    "Verdict Label": "Clean silicone panel heater approach for chamber heating — lower wattage than PTC but tidier installation",
+    "Verdict": "MID",
+    "Type": "Chamber",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/429608",
+    "Brand": "Keenovo",
+    "Price (USD)": 35,
+    "Pros": "Thin silicone pad adheres directly to an aluminum panel (enclosure wall) — cleaner, lower-profile installation than a fan heater mod\nKeenovo quality is consistent — same silicone and overheat thermal fuse as bed heaters\nCan be custom-ordered in any size to match your enclosure panel dimensions\nPassive heat distribution into the panel — no fan noise from the heater itself",
+    "Wattage (W)": 150,
+    "Description": "The Keenovo panel heater approach uses a flat silicone heating pad adhered to an interior aluminum panel of the printer enclosure. It's a tidier alternative to the PTC fan mod — no fan, no bulky element, just a pad bonded to a panel and wired to an SSR. The trade-off is wattage: at ~150W it heats the chamber more slowly than a 300-500W PTC mod. Best suited to smaller enclosed builds or builders who prioritize clean installation over fastest heat-up time.",
+    "Voltage": "AC",
+    "Cons": "Lower wattage (~150W typical) means slower chamber heat-up vs. a 300-500W PTC fan mod\nSSR required for Klipper control — same AC mains wiring considerations as bed heaters\nHeat distribution across the enclosure is slower without a fan pushing air — works better in smaller enclosures or when the part cooling fan provides secondary circulation\nCustom sizing adds lead time from Keenovo — not a stock off-the-shelf product in panel form",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "RatRig V-Core 4"
+    ],
+    "SSR Required": true,
+    "Vendor 1 Name": "Keenovo / AliExpress",
+    "Name": "Keenovo Panel Heater (Chamber)",
+    "Size": "Custom (panel-matched)"
+  },
+  {
+    "id": "recxvst8PQ7PL0yqr",
+    "Verdict Label": "Community AC chamber heating mod — effective but requires AC mains wiring inside the printer",
+    "Verdict": "MID",
+    "Type": "Chamber",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-ptc-ceramic-heater-element.html",
+    "Brand": "Generic / Community",
+    "Price (USD)": 30,
+    "Pros": "PTC elements are self-limiting — resistance rises sharply above the Curie point, preventing thermal runaway at the element level\n300-500W pushes chamber temps to 50-60°C efficiently — better than any 24V chamber solution\nLow component cost — PTC heating elements are $20-40 from AliExpress; add a 5015 blower fan and SSR\nWidely documented in VzBot and HevORT communities",
+    "Wattage (W)": 300,
+    "Description": "The PTC ceramic fan heater mod is the community-standard approach to chamber heating on VzBot and HevORT builds. A PTC heating element (typically 300-500W, AC mains) paired with a 5015 blower fan and controlled via an SSR in Klipper can push chamber temperatures to 50-60°C — sufficient for ABS, ASA, and most engineering filaments. PTC elements are self-limiting at the element level, which provides inherent protection against runaway if the SSR fails closed, but this doesn't eliminate the need for Klipper thermal monitoring and proper mains safety practices.",
+    "Voltage": "AC",
+    "Cons": "AC mains voltage inside the printer enclosure — requires careful wire routing, strain relief, and a proper grounded chassis\nSSR required for Klipper control — adds cost and wiring complexity\nRequires a chamber thermistor for closed-loop temperature control in Klipper\nNot a drop-in mod — requires drilling, mounting, and custom Klipper configuration\nNo printed parts exist universally — mounting solutions are builder-specific",
+    "Compatible Printers": [
+      "VzBot",
+      "HevORT",
+      "Voron 2.4"
+    ],
+    "SSR Required": true,
+    "Vendor 1 Name": "AliExpress (PTC element) + local electrical supply",
+    "Name": "PTC Ceramic Fan Heater Mod (Chamber)",
+    "Size": "Varies (builder-specific mounting)"
+  }
+]

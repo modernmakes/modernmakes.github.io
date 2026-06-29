@@ -1,1 +1,173 @@
-[]
+[
+  {
+    "id": "rec1Y6gXzRRY5cFbk",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 100,
+    "UL Certified": true,
+    "Description": "The LRS-100-24 is the compact variant of the Mean Well LRS family, right-sized for Voron V0 builds without a full-power bed upgrade, secondary electronics-only supply rails, or benchtop tool controllers. At 100W / 4.2A, it cannot sustain a standard 120W heated bed plus stepper load. Community context: sometimes used as a dedicated SBC + electronics PSU alongside a separate higher-wattage unit for the heated bed, cleanly isolating the two power domains.",
+    "Verdict Label": "Compact accessory PSU — underpowered for full builds, correct for specific use cases",
+    "Form Factor": "Open Frame",
+    "Cons": "100W / 4.2A cannot handle a standard 24V heated bed + stepper load simultaneously\nNot suitable as primary PSU for Voron, RatRig, or any CoreXY with a standard heated bed\nTemperature-controlled fan still present — not silent",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Name": "Mean Well LRS-100-24",
+    "Vendor 1 Name": "Digi-Key",
+    "Output Voltage": "24V",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/LRS-100-24/7705046",
+    "Brand": "Mean Well",
+    "Price (USD)": 24.99,
+    "Pros": "Compact footprint — fits tight spaces where LRS-200-24 won’t\nUL 62368-1 and CE certified — same reliability tier as larger LRS series\nInexpensive entry point\nGood as secondary PSU for SBC + electronics, independent from heated bed supply"
+  },
+  {
+    "id": "recDDnjlfzSMfXLTn",
+    "Verdict": "BUY",
+    "Wattage (W)": 200,
+    "UL Certified": true,
+    "Description": "The Mean Well LRS-200-24 is the BOM-specified PSU for Voron 2.4 and Trident 250mm builds. It outputs 24V at up to 8.4A (200W) through a temperature-controlled internal fan that stays nearly silent at typical print loads. UL 62368-1 and CE certified. If you have a 250mm build with no heated chamber, this is the right PSU — no deliberation required.",
+    "Verdict Label": "Voron BOM standard — the correct spec for 250mm heated bed builds",
+    "Form Factor": "Open Frame",
+    "Cons": "200W headroom gets tight when adding heated chamber + accessories\nFan audible under sustained full load\nNot right-sized for 300mm or 350mm builds",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig"
+    ],
+    "Name": "Mean Well LRS-200-24",
+    "Vendor 1 Name": "Digi-Key",
+    "Output Voltage": "24V",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/LRS-200-24/7705022",
+    "Brand": "Mean Well",
+    "Price (USD)": 39.99,
+    "Pros": "Voron Design BOM-specified for all 250mm builds\nUL 62368-1 and CE certified — industrial-grade reliability\nTemperature-controlled fan quiet at typical print loads\nWide input range (90–264 VAC) — works worldwide\nThousands of successful Voron builds documented on this exact unit"
+  },
+  {
+    "id": "recENtT8s3hz1tdY7",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 300,
+    "UL Certified": true,
+    "Description": "The Silverstone SST-ST30SF is an SFX-format 300W ATX PSU used in some VzBot builds where compact form factor is the priority. ATX PSUs output 12V as the primary rail (plus 5V and 3.3V auxiliaries), so most VzBot builds using this unit pair it with a dedicated 24V Mean Well for heated bed and main stepper power, using the ST30SF for the SBC, electronics, and low-voltage accessories. Non-modular cable routing requires care in the compact VzBot bay. Budget-tier SFX option if the SF750 is out of reach.",
+    "Verdict Label": "Budget SFX pick for VzBot — fits the compact bay, tradeoffs to know",
+    "Form Factor": "SFX",
+    "Cons": "Non-modular — unneeded cables require management in tight VzBot bay\n12V primary rail — requires step-up converter or secondary 24V PSU for heated bed and stepper power\n300W ceiling limits expansion headroom\n80+ Bronze is the lowest efficiency tier in this comparison\nNot specified in any standard BOM — narrower community adoption",
+    "Compatible Printers": [
+      "VzBot"
+    ],
+    "Name": "Silverstone SST-ST30SF",
+    "Vendor 1 Name": "Silverstone",
+    "Output Voltage": "12V (multi-rail)",
+    "Vendor 1 URL": "https://www.silverstonetek.com/en/product/power-supplies/sfx-sfx-l/ST30SF/",
+    "Brand": "Silverstone",
+    "Price (USD)": 64.99,
+    "Pros": "SFX form factor fits VzBot electronics bay without modification\n300W sufficient for VzBot SBC + electronics (separate 24V PSU handles heated bed)\n80+ Bronze certified\nUL certified — safe for enclosed printer use\nLess expensive than SF750 or EVGA 650 GM"
+  },
+  {
+    "id": "recG5emjKryrM5NjZ",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 650,
+    "UL Certified": true,
+    "Description": "The EVGA SuperNOVA 650 GM is the mid-range SFX-L pick for VzBot builds — 80+ Gold efficiency, fully modular cables, and 650W headroom at a price between the budget ST30SF and the premium SF750. SFX-L form factor is longer than SFX spec (100mm vs 63.5mm depth), so verify chassis clearance before ordering. Community considers the 650 GM a cleaner choice than the ST30SF due to modular cabling, making it easier to route only what you need in a compact electronics bay. Same 12V rail caveats apply — dedicated 24V supply still recommended for the heated bed.",
+    "Verdict Label": "Modular SFX-L for VzBot — good value between ST30SF and SF750",
+    "Form Factor": "SFX-L",
+    "Cons": "SFX-L form factor is longer than SFX (100mm deep vs 63.5mm) — confirm chassis fit before ordering\n12V primary rail — same 24V adaptation requirement as other ATX units\nEVGA exited the GPU market — long-term warranty support may be slower to navigate\nNot widely stocked vs. Corsair — harder to find locally",
+    "Compatible Printers": [
+      "VzBot"
+    ],
+    "Name": "EVGA SuperNOVA 650 GM",
+    "Vendor 1 Name": "Amazon / Newegg",
+    "Output Voltage": "12V (multi-rail)",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=EVGA+SuperNOVA+650+GM",
+    "Brand": "EVGA",
+    "Price (USD)": 99.99,
+    "Pros": "Fully modular — clean cable routing in compact enclosures, only run what you need\n80+ Gold efficiency — good balance of heat and cost\n650W / 54A on 12V rail — sufficient headroom for most VzBot configurations\nLower price than Corsair SF750 at comparable quality tier\nUL certified"
+  },
+  {
+    "id": "recIWYmQd7ElRI1Qi",
+    "Verdict": "BUY",
+    "Wattage (W)": 500,
+    "UL Certified": true,
+    "Description": "The UHP-500-24 is Mean Well's ultra-high-density fanless PSU and the community's go-to for zero-noise builds. It outputs 24V at 20.8A (500W) with no internal fan, conducting heat through the chassis mounting surface. Requires deliberate enclosure design: the PSU must mount flush against a metal panel, which acts as the heatsink. Community consensus on Voron Discord is that the UHP is the premium silent-build spec — but not a drop-in replacement for LRS units. You must plan the thermal path or risk derating.",
+    "Verdict Label": "Community pick for silent builds — 500W with zero fan noise",
+    "Form Factor": "Open Frame",
+    "Cons": "MUST be chassis-mounted with solid metal contact — not suitable for floating or poorly ventilated installs\nRequires deliberate thermal design in electronics enclosure\nMore expensive than RSP-500-24 at equivalent wattage\nWill derate under sustained full load without adequate chassis heatsinking",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "HevORT"
+    ],
+    "Fanless": true,
+    "Name": "Mean Well UHP-500-24",
+    "Vendor 1 Name": "Digi-Key",
+    "Output Voltage": "24V",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/UHP-500-24/9405499",
+    "Brand": "Mean Well",
+    "Price (USD)": 109.99,
+    "Pros": "Completely silent — no fan, no noise under any load\n500W / 20.8A — adequate for 350mm builds and heated chambers\nSlim 40mm profile fits compact electronics bays cleanly\nUL 62368-1 and CE certified\nHeat conducts to chassis — PSU enclosure acts as heatsink"
+  },
+  {
+    "id": "recPnPtYjsIIUbMJ8",
+    "Verdict": "BUY",
+    "Wattage (W)": 500,
+    "UL Certified": true,
+    "Description": "The RSP-500-24 is the choice for 350mm Voron 2.4 builds or any build running a heated chamber alongside a large heated bed. At 500W / 20.8A, it delivers full rated output without derating under sustained multi-load conditions. Unlike the LRS series' temperature-controlled fan, the RSP uses forced-air cooling (always-on fan) — consistently at full power, but audible. PFC is included, making it cleaner on noisy or international mains supply.",
+    "Verdict Label": "350mm+ and heated chambers — full headroom, no derating",
+    "Form Factor": "Open Frame",
+    "Cons": "Always-on fan is audible at all times — not quiet-build friendly\nLarger physical footprint than LRS series — requires more enclosure space\nOverkill for 250mm or 300mm builds without chamber heating",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "RatRig",
+      "HevORT"
+    ],
+    "Name": "Mean Well RSP-500-24",
+    "Vendor 1 Name": "Digi-Key",
+    "Output Voltage": "24V",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/RSP-500-24/2268234",
+    "Brand": "Mean Well",
+    "Price (USD)": 99.99,
+    "Pros": "500W / 20.8A — handles 350mm bed, chamber heater, and 5 steppers simultaneously\nUL 62368-1 and CE certified\nForced-air cooling maintains full rated output at ambient temps\nActive PFC — cleaner operation on noisy or international mains"
+  },
+  {
+    "id": "recTxQoW7q2QMDdbB",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 750,
+    "UL Certified": true,
+    "Description": "The Corsair SF750 is the premium SFX option for VzBot builders who want modular cables, 80+ Platinum efficiency, and maximum 12V rail headroom. The fully modular design significantly reduces cable clutter in the compact VzBot electronics bay — only route the cables you need. Like all ATX PSUs, the 12V primary rail means 24V-native components require a boost converter or a separate 24V supply. Zero-RPM fan mode keeps it silent at low loads. Community pick when builders want a single-PSU solution with top build quality and the cleanest possible cable routing.",
+    "Verdict Label": "Top-tier SFX for high-wattage VzBot — premium price, premium build quality",
+    "Form Factor": "SFX",
+    "Cons": "Most expensive PSU in this comparison\n12V primary rail still requires 24V conversion or separate PSU for heated bed and 24V stepper systems\nSlightly larger than the ST30SF — fit check required for specific VzBot chassis variants\nHigh price hard to justify over dedicated 24V Mean Well for most builders",
+    "Compatible Printers": [
+      "VzBot"
+    ],
+    "Name": "Corsair SF750",
+    "Vendor 1 Name": "Corsair",
+    "Output Voltage": "12V (multi-rail)",
+    "Vendor 1 URL": "https://www.corsair.com/us/en/p/psu/cp-9020186-na/sf-series-sf750-750-watt-80-plus-platinum-certified-high-performance-sfx-psu-cp-9020186-na",
+    "Brand": "Corsair",
+    "Price (USD)": 169.99,
+    "Pros": "750W / 62.5A on 12V rail — extreme headroom for accessory-heavy VzBot builds\nFully modular — only needed cables in the run, cleaner enclosure routing\n80+ Platinum efficiency — less heat output, quieter fan under load\nZero-RPM fan mode at low loads — completely silent during standby and light printing\nUL certified"
+  },
+  {
+    "id": "recrxTHwgMqPs4s2w",
+    "Verdict": "BUY",
+    "Wattage (W)": 350,
+    "UL Certified": true,
+    "Description": "The LRS-350-24 is the recommended PSU for 300mm Voron 2.4 and Trident builds, and the sensible upgrade for 250mm builds that add a chamber heater or substantial accessory load. Outputs 24V at up to 14.6A (350W) in the same mounting footprint as the LRS-200-24. Community consensus: spec the 350W over the 200W for any build running a PTC or silicone bed heater with simultaneous chamber heating — you never want to hit the ceiling under combined loads.",
+    "Verdict Label": "Right-sized for 300mm builds and accessory-heavy configs",
+    "Form Factor": "Open Frame",
+    "Cons": "Overkill for a stock 250mm build with no chamber heater\nFan noisier than LRS-200-24 at sustained high loads\nSlightly more expensive than the 200W unit",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig",
+      "HevORT"
+    ],
+    "Name": "Mean Well LRS-350-24",
+    "Vendor 1 Name": "Digi-Key",
+    "Output Voltage": "24V",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/LRS-350-24/7705108",
+    "Brand": "Mean Well",
+    "Price (USD)": 59.99,
+    "Pros": "Headroom for 300mm bed, chamber heater, and stepper load simultaneously\nSame mounting footprint as LRS-200-24 — drop-in upgrade\nUL 62368-1 and CE certified\nTemperature-controlled fan stays quiet at moderate loads\nCommunity-recommended upgrade path for 250mm builds adding a chamber heater"
+  }
+]
