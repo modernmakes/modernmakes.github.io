@@ -194,6 +194,29 @@
     "Rail Profile": "MGN9"
   },
   {
+    "id": "recLZiqD6BaXbOV38",
+    "Belt Width (mm)": 6,
+    "Updated": "2026-06-29",
+    "Description": "Anti-VFA belt conversion kit for CoreXY printers using GT1.5 (1.5mm pitch) belts instead of the standard GT2 (2mm pitch). The finer pitch halves the frequency interval between belt resonance harmonics, directly attacking variable frequency artifacts in print surface quality. Available in EPDM rubber (standard, from €69) and Powergrip rubber (premium, €139). Requires GT1.5-compatible pulleys and idlers — BRS sells matching printed PA12-CF hardware or you can use open-source files from their GitHub. BRS Engineering has official RatRig partnership.",
+    "Verdict Label": "from €69 EUR | best anti-VFA belt upgrade available for RatRig/Voron",
+    "Tooth Profile": "GT1.5",
+    "Verdict": "BUY",
+    "Cons": "Not a drop-in swap — requires compatible GT1.5 pulleys and idlers (printed or purchased)\nHigher price point than GT2 replacement belts\nCommunity still smaller than GT2 ecosystem\nEU-based, lead times apply",
+    "Compatible Printers": [
+      "RatRig V-Core 3",
+      "RatRig V-Core 4",
+      "Voron 2.4 R2",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "BRS GT1.5 Anti-VFA Belt Conversion Kit",
+    "Type": "Belt Kit",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/belts",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 69,
+    "Pros": "GT1.5 pitch (1.5mm) vs standard GT2 (2mm) — half the resonance frequency interval\nDirectly reduces variable frequency artifacts (VFA/salmon skin) in prints\nAvailable in EPDM (standard, from €69) and Powergrip rubber (premium, €139)\nOpen-source printed pulleys and idlers available from BRS GitHub\nOfficial RatRig compatibility, community-proven on Voron builds"
+  },
+  {
     "id": "recRq9fXrD8W3mKYk",
     "Brand Tier": "Budget Clone",
     "Description": "Generic MGN9H rails from unspecified AliExpress sellers are a quality gamble. The lower price is offset by inconsistent preload, possible binding, and no path for returns on defective units. For a build where linear rail quality directly determines print quality, the savings do not justify the risk when Mellow (CONSIDER) and LDO/Hiwin (BUY) are available.",
@@ -327,6 +350,24 @@
     "Brand": "Generic",
     "Price (USD)": 1,
     "Pros": "F695 2RS is the correct bearing spec — 5mm bore, 13mm OD, flanged\nFlange retains the belt’s lateral position without a separate washer\nStandard industrial bearing spec — available from reputable vendors at low cost"
+  },
+  {
+    "id": "recu6UTO7pho4oYkF",
+    "Updated": "2026-06-29",
+    "Description": "Ballscrew-based Z axis upgrade for RatRig V-Core 4.0 (version 4.0b). Replaces the stock leadscrew Z system with precision ballscrews — eliminating leadscrew wobble artifacts in the Z direction and improving positional repeatability. Available as hardware-only kit (€149, for builders with a printer) or full kit with PA12-CF printed parts (€262). Open-source printed part files on BRS GitHub. BRS Engineering has official RatRig partnership agreement.",
+    "Verdict Label": "from €149 | significant improvement, non-trivial install",
+    "Verdict": "CONSIDER",
+    "Cons": "Non-trivial installation — V-Core 4 Z frame disassembly required\nFull kit €262 is a significant investment\nSmall install base compared to stock Z — less community troubleshooting documentation\nEU-based, one-man shop — lead times apply",
+    "Compatible Printers": [
+      "RatRig V-Core 4"
+    ],
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "BRS Z-Upgrade 4.0b Ballscrew System",
+    "Type": "Z Upgrade Kit",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/z-upgrade",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 149,
+    "Pros": "Ballscrew Z axis — eliminates leadscrew backlash and wobble artifacts\nSignificant improvement in Z-axis positional accuracy and repeatability\nAvailable hardware-only (€149) or full kit with PA12-CF printed parts (€262)\nOfficial RatRig partnership — confirmed V-Core 4 compatibility\nOpen-source printed parts on BRS GitHub"
   },
   {
     "id": "recvIILzOefQWCXc1",

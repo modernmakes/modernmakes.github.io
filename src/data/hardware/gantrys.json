@@ -1,118 +1,48 @@
 [
   {
-    "id": "rec5cjbMOknZPijJl",
+    "id": "recDvOnRiej9rHz2R",
     "Verdict": "BUY",
-    "Pros": "AWD by default — 4 motors drive each corner independently, maximizing torque delivery and eliminating belt tension asymmetry\nGantry geometry is engineered around Input Shaper optimization — resonance peaks are higher than any 2020 2-motor CoreXY\nMinimum moving mass — every component choice trades weight against stiffness in favor of lower inertia\nOpen source — all design files on GitHub; community has documented full builds",
+    "Price (USD)": 60,
+    "Pros": "Dramatically reduced X-axis moving mass vs aluminum extrusion\nHollow CF tube provides excellent vibration damping\nOpen-source printed end brackets (PA12-CF available from BRS)\nOfficial RatRig partnership — confirmed compatibility\nSignificant resonance improvement for high-speed printing",
     "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/VzBot-3d-Printer/VzBot",
-    "Description": "The VzBot AWD gantry is the defining component of the VzBot ecosystem — a 4-motor CoreXY (AWD) gantry on 2020 extrusion, engineered from the ground up for high-acceleration Klipper printing. Every geometry decision exists to minimize mass and maximize resonance frequency. AWD is not an optional feature; it is the VzBot’s core identity.",
-    "Verdict Label": "Purpose-built for maximum acceleration — AWD 4-motor gantry with minimum moving mass and optimized belt geometry",
+    "Updated": "2026-06-29",
+    "GitHub / Source URL": "https://github.com/Florent-BRS",
+    "Description": "Carbon fiber tube X-gantry beam for RatRig V-Core 4.0/4.1. Replaces stock X-axis extrusion with a hollow CF tube — dramatically lower moving mass and better resonance damping vs aluminum. Printed PA12-CF end brackets required (open-source files on GitHub; printed parts sold by BRS). BRS Engineering has an official RatRig partnership agreement. Tube from €60.",
+    "Verdict Label": "from €60 EUR",
     "Extrusion Size": "2020",
-    "Motor Count": 4,
-    "Open Source": true,
-    "Kinematic": "AWD-CoreXY",
-    "Compatible Toolheads": [
-      "VzBot Toolhead"
-    ],
-    "Cons": "Expert-level build — AWD gantry assembly requires precise alignment of 4 motor positions\nKlipper hybrid_corexy configuration required — not plug-and-play with standard CoreXY configs\nNot enclosed by default — high acceleration builds with open frames have thermal consistency trade-offs\nVery small community relative to Voron — fewer documented build references",
+    "Kinematic": "CoreXY",
+    "Cons": "Requires printed end brackets (not a true bolt-on swap)\nEU-based — lead times due to one-man manufacturing operation\nCF tube must be purchased (self-sourcing possible but sizing critical)",
     "Compatible Printers": [
-      "VzBot"
+      "RatRig V-Core 4"
     ],
-    "Name": "VzBot AWD Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "VzBot"
+    "Name": "BRS X-Gantry CF Tube — V-Core 4",
+    "Vendor 1 Name": "BRS Engineering",
+    "Material": "Carbon Fiber",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/x-gantry-tube",
+    "Brand": "BRS Engineering"
   },
   {
-    "id": "recHCGquNIJb0GTpN",
+    "id": "reccaFieUGI1gp5Yr",
     "Verdict": "BUY",
-    "Pros": "Corrects the asymmetric belt path geometry in the stock V2.4 gantry — documented improvement in motion linearity\nImproved idler tower geometry reduces the flex that limits stock acceleration\nOpen source, community-maintained, well-documented upgrade path from stock\nHighly compatible — uses the same extrusion size and motor positions as stock",
+    "Price (USD)": 65,
+    "Pros": "Reduced X-axis moving mass vs stock Voron aluminum extrusion\nVibration damping advantage from hollow CF tube construction\nPA12-CF printed end brackets available from BRS\nOpen-source printed parts files on GitHub",
     "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/VoronDesign/VoronUsers",
-    "Description": "The Pandora Gantry is a community-designed replacement for the Voron 2.4 stock XY gantry that addresses the stock design’s belt geometry asymmetry and idler tower rigidity. It is the most widely adopted V2.4 gantry upgrade in the Voron community — with extensive build documentation and Input Shaper comparison data available. New printed parts are required; extrusion and motors remain from stock.",
-    "Verdict Label": "The community’s most-recommended V2.4 gantry upgrade — corrects stock belt geometry and adds measurable rigidity",
+    "Updated": "2026-06-29",
+    "GitHub / Source URL": "https://github.com/Florent-BRS",
+    "Description": "Carbon fiber tube X-gantry beam for Voron 2.4 R2 and Trident. Replaces the stock X-axis extrusion with a hollow CF tube for reduced moving mass and improved resonance characteristics. Printed PA12-CF end brackets required (open source; available from BRS). From €65.",
+    "Verdict Label": "from €65 EUR",
     "Extrusion Size": "2020",
-    "Motor Count": 2,
-    "Open Source": true,
     "Kinematic": "CoreXY",
-    "Compatible Toolheads": [
-      "Stealthburner"
-    ],
-    "Cons": "Not a drop-in replacement — requires reprinting motor mounts and idler towers\nStill uses 2020 extrusion; for maximum rigidity, Titanium Backers are a complementary follow-on\nInstallation requires full gantry disassembly and belt re-routing",
+    "Cons": "Requires printed end brackets — not a drop-in swap\nEU-based, lead times apply\nLess community data than Voron-native community mods",
     "Compatible Printers": [
-      "Voron 2.4"
+      "Voron 2.4 R2",
+      "Voron Trident"
     ],
-    "Name": "Pandora Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "Community"
-  },
-  {
-    "id": "recIbCNPTVy05Apzq",
-    "Verdict": "CONSIDER",
-    "Pros": "Designed around dimensional accuracy and repeatability — the gantry geometry prioritizes motion linearity over maximum acceleration\nKinematic design reduces accumulated positioning error — suited for precision engineering parts\nOpen source — all design files on GitHub\nFully enclosed by design — thermal consistency is built into the platform architecture",
-    "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/MirageC79/HevORT",
-    "Description": "The HevORT HRE gantry is a 2020/2040 aluminum extrusion CoreXY gantry designed for dimensional precision and repeatability. Unlike VzBot (which optimizes for speed) or Voron (which optimizes for community ecosystem), HevORT’s gantry prioritizes motion linearity and long-term positional accuracy. The community is small and primarily European; this is not a gantry for builders new to self-build.",
-    "Verdict Label": "Precision-first CoreXY gantry — engineered for dimensional accuracy and repeatability over speed, small community",
-    "Extrusion Size": "2020",
-    "Motor Count": 2,
-    "Open Source": true,
-    "Kinematic": "HevORT Hybrid",
-    "Compatible Toolheads": [
-      "HevORT Toolhead"
-    ],
-    "Cons": "Very small community — limited build documentation, fewer reference builds to compare against\nNo kit available — self-sourcing all gantry components is required, often from European vendors\nNot optimized for speed — if print rate is the priority, VzBot or RatRig V-Core 4 are better choices\nFirmware tuning resources are sparse relative to Voron or RatRig",
-    "Compatible Printers": [
-      "HevORT HRE"
-    ],
-    "Name": "HevORT HRE Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "HevORT"
-  },
-  {
-    "id": "recR7OIJIwAS9y12X",
-    "Verdict": "CONSIDER",
-    "Pros": "Fully documented on vorondesign.com — build guides, CAD, and Klipper configs all assume this gantry\nWell-understood failure modes and tuning strategies — the community has years of Input Shaper data for this specific design\nDirect CAD and BOM integration — no compatibility guesswork",
-    "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/VoronDesign/Voron-2",
-    "Description": "The Voron 2.4 stock gantry is a 2020 aluminum extrusion CoreXY with 2 XY motors and printed idler towers and motor mounts. It works well out of the box and is the baseline all V2.4 documentation assumes. The community has iterated significantly on it; aftermarket upgrades like Pandora and Titanium Backers address its main limitations.",
-    "Verdict Label": "Functional baseline — community consistently upgrades it, but it works and the documentation is thorough",
-    "Extrusion Size": "2020",
-    "Motor Count": 2,
-    "Open Source": true,
-    "Kinematic": "CoreXY",
-    "Compatible Toolheads": [
-      "Stealthburner"
-    ],
-    "Cons": "Belt geometry is not perfectly symmetric in the stock design — community mods (Pandora, Archetype) address this\nAluminum extrusion flex at temperature is meaningful — Titanium Backers are a common follow-on upgrade\n4-hole idler towers are a known weak point at high acceleration",
-    "Compatible Printers": [
-      "Voron 2.4"
-    ],
-    "Name": "Voron 2.4 Stock Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "Voron Design"
-  },
-  {
-    "id": "recURoUMC5e49lXXQ",
-    "Verdict": "BUY",
-    "Pros": "1515 extrusion keeps mass low — the 0.2 gantry is inherently lighter than any 2020 design\nNo significant community demand to upgrade it — the stock design is well-regarded for its size class\nFully documented; same Voron community support as full-size variants",
-    "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/VoronDesign/Voron-0",
-    "Description": "The Voron 0.2 mini gantry uses 1515 aluminum extrusion rather than the 2020 used in V2.4 and Trident — appropriate for the 120mm build volume where 2020 would add unnecessary mass. The design is considered well-matched to the printer’s scale, and unlike the full-size Voron gantries, the community has not produced significant aftermarket alternatives.",
-    "Verdict Label": "Well-engineered compact gantry — 1515 extrusion scales the CoreXY design correctly to the 0.2’s 120mm build volume",
-    "Extrusion Size": "1515",
-    "Motor Count": 2,
-    "Open Source": true,
-    "Kinematic": "CoreXY",
-    "Compatible Toolheads": [
-      "Mini Stealthburner"
-    ],
-    "Cons": "1515 extrusion is harder to source than 2020 — Misumi and LDO are primary vendors\n1515 is less rigid per unit length than 2020 — but the short span of a 120mm gantry makes this a non-issue in practice\nPrinted idler towers on a small gantry require careful assembly for belt tension consistency",
-    "Compatible Printers": [
-      "Voron 0.2"
-    ],
-    "Name": "Voron 0.2 Mini Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "Voron Design"
+    "Name": "BRS X-Gantry CF Tube — Voron 2.4 R2/Trident",
+    "Vendor 1 Name": "BRS Engineering",
+    "Material": "Carbon Fiber",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-voron-2-4-r2-trident",
+    "Brand": "BRS Engineering"
   },
   {
     "id": "recceKxa8EdT0RbDB",
@@ -139,74 +69,91 @@
     "Brand": "Community"
   },
   {
-    "id": "recoCT9pi82vYM8wA",
+    "id": "recd0P7ci7ZQ72sYb",
     "Verdict": "BUY",
-    "Pros": "3030 extrusion is substantially stiffer than 2020 — belt geometry and gantry rigidity are better at the same span length\nAWD (4-motor) XY drive eliminates conventional CoreXY belt tension asymmetry — each corner is independently driven\nIDEX-capable by design — the gantry supports dual carriages without modification\nOfficial RatRig product — engineered and tested rather than community-iterated\nNo aftermarket gantry upgrade needed — the stock gantry is the community benchmark",
-    "GitHub / Source URL": "https://github.com/Rat-Rig/V-core-4",
-    "IDEX": true,
-    "Description": "The RatRig V-Core 4 gantry is the stock AWD CoreXY gantry of the V-Core 4 — a 3030 aluminum extrusion frame with 4 independent XY stepper motors (one per corner). AWD eliminates belt tension asymmetry, the 3030 extrusion provides exceptional rigidity, and IDEX dual-carriage operation is supported by the gantry design without modification. It is the most mechanically refined stock gantry in the prosumer self-build ecosystem.",
-    "Verdict Label": "Most refined stock gantry in the prosumer ecosystem — 3030 extrusion, 4-motor AWD, and IDEX-capable by design",
-    "Extrusion Size": "3030",
-    "Motor Count": 4,
-    "Open Source": true,
-    "Kinematic": "AWD-CoreXY",
-    "Compatible Toolheads": [
-      "RatRig EVA 3"
+    "Price (USD)": 40,
+    "Pros": "Precision EN AW-7075 extrusion replacement\nSignificant weight reduction vs stock 2020 extrusion (68–119g depending on size)\nDrop-in fit, no additional hardware needed\n±0.01mm machining tolerances\nMade in Austria, QA-certified",
+    "Weight (g)": 86,
+    "Updated": "2026-06-29",
+    "Drop-in Replacement": true,
+    "Description": "Precision-milled EN AW-7075 aluminum X-axis gantry extrusion replacement for RatRig V-Core 3 (200/300/400/500mm builds). Roughly half the weight of the stock 2020 aluminum profile — 68g for 200mm build up to 119g for 500mm. Drop-in bolt-on replacement using existing hardware. CNC-machined in Austria by Spannsysteme. Order through BRS Engineering, now the exclusive EU reseller for all Spannsysteme products.",
+    "Verdict Label": "from €40 EUR (size-dependent)",
+    "Extrusion Size": "2020",
+    "Kinematic": "CoreXY",
+    "Cons": "EU purchasing only (via BRS Engineering, exclusive EU reseller)\nSize-specific SKU — must order correct build size\nAvailability subject to batch production lead times",
+    "Compatible Printers": [
+      "RatRig V-Core 3"
     ],
-    "Cons": "3030 extrusion is more expensive and harder to source than 2020 — not a DIY-compatible upgrade path\nAWD requires 4 stepper drivers and correct firmware configuration (Klipper hybrid_corexy)\n3030 gantry is heavier than 2020 equivalents — the tradeoff for rigidity is moving mass",
+    "Name": "Spannsysteme X-Gantry — V-Core 3",
+    "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
+    "Material": "Aluminum 7075",
+    "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
+    "Brand": "Spannsysteme"
+  },
+  {
+    "id": "recfk8NiHZrS0djeH",
+    "Verdict": "BUY",
+    "Price (USD)": 35,
+    "Pros": "Precision EN AW-7075 X-beam replacement\nDrop-in installation, no printed parts needed\nAvailable for all Voron 2.4 build sizes (330/380/430mm)\nMade in Austria",
+    "Updated": "2026-06-29",
+    "Drop-in Replacement": true,
+    "Description": "Precision-milled EN AW-7075 aluminum X-axis gantry extrusion replacement for Voron 2.4 R2 and Trident (330/380/430mm build sizes). Drop-in installation using existing hardware. CNC-machined in Austria by Spannsysteme, now sold exclusively via BRS Engineering in EU.",
+    "Verdict Label": "from €35 EUR (size-dependent)",
+    "Extrusion Size": "2020",
+    "Kinematic": "CoreXY",
+    "Cons": "EU purchasing only via BRS Engineering\nSize-specific SKU",
+    "Compatible Printers": [
+      "Voron 2.4 R2",
+      "Voron Trident"
+    ],
+    "Name": "Spannsysteme X-Gantry — Voron 2.4 R2/Trident",
+    "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
+    "Material": "Aluminum 7075",
+    "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
+    "Brand": "Spannsysteme"
+  },
+  {
+    "id": "recftNkczLVdpTr0Q",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 0,
+    "Pros": "Fully open source — download and print for free\nCF tube can be self-sourced for lower cost\nCommunity-proven Wide Boy design",
+    "Printed Parts Required": true,
+    "Updated": "2026-06-29",
+    "GitHub / Source URL": "https://github.com/Florent-BRS",
+    "Description": "Fully open-source CF tube X-gantry design for RatRig V-Core 3 (Wide Boy variant). Design files freely available via BRS Engineering GitHub. Users source their own CF tube and self-print all end brackets. Zero purchase required from BRS — complete DIY option. Part of BRS Engineering's open-source 3D printer mod ecosystem.",
+    "Verdict Label": "OSS — hardware self-sourced",
+    "Extrusion Size": "2020",
+    "Open Source": true,
+    "Kinematic": "CoreXY",
+    "Cons": "Full DIY — requires sourcing CF tube and printing all brackets\nLess turnkey than retail BRS kits for VC4/Voron\nLess active community vs VC4 variant",
+    "Compatible Printers": [
+      "RatRig V-Core 3"
+    ],
+    "Name": "BRS X-Gantry CF Tube — V-Core 3 Wide Boy (OSS)",
+    "Vendor 1 Name": "BRS Engineering (open source)",
+    "Material": "Carbon Fiber",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/x-gantry-tube",
+    "Brand": "BRS Engineering"
+  },
+  {
+    "id": "recx26cUqRaONqo2c",
+    "Verdict": "BUY",
+    "Price (USD)": 40,
+    "Pros": "Precision EN AW-7075 machined X-beam replacement\nLighter than stock V-Core 4 X-axis extrusion\nDrop-in replacement, no additional hardware needed\nMade in Austria, QA-certified",
+    "Updated": "2026-06-29",
+    "Drop-in Replacement": true,
+    "Description": "Precision-milled EN AW-7075 aluminum X-axis gantry replacement for RatRig V-Core 4.0/4.1 (525/625/725mm builds). Drop-in replacement for stock V-Core 4 X-rail extrusion. CNC-machined in Austria by Spannsysteme. Now sold exclusively via BRS Engineering in EU.",
+    "Verdict Label": "from €40 EUR (size-dependent)",
+    "Extrusion Size": "2020",
+    "Kinematic": "CoreXY",
+    "Cons": "EU purchasing only via BRS Engineering\nSize-specific SKU (525/625/725mm)",
     "Compatible Printers": [
       "RatRig V-Core 4"
     ],
-    "Name": "RatRig V-Core 4 Gantry",
-    "Vendor 1 Name": "RatRig",
-    "Material": "Aluminum extrusion",
-    "Vendor 1 URL": "https://ratrig.com/rat-rig-v-core-4.html",
-    "Brand": "RatRig"
-  },
-  {
-    "id": "reczAZu17AgmPDRx7",
-    "Verdict": "CONSIDER",
-    "Pros": "Fixed gantry — the XY frame never moves in Z, which eliminates a whole class of gantry mass and resonance issues vs V2.4\nSame documentation and community support as V2.4 — all Voron tuning resources apply\nCompatible with the same toolhead ecosystem as V2.4",
-    "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/VoronDesign/Voron-Trident",
-    "Description": "The Voron Trident stock gantry is a fixed-in-Z 2020 extrusion CoreXY — unlike the V2.4, the gantry doesn’t move during printing, which reduces one source of resonance. It uses the same 2-motor XY motion, printed idler towers, and belt routing as the V2.4 with the same community-documented limitations.",
-    "Verdict Label": "Solid fixed gantry — simpler than V2.4 because it never moves in Z, but same belt geometry limitations apply",
-    "Extrusion Size": "2020",
-    "Motor Count": 2,
-    "Open Source": true,
-    "Kinematic": "CoreXY",
-    "Compatible Toolheads": [
-      "Stealthburner"
-    ],
-    "Cons": "Same belt geometry limitations as V2.4 stock gantry — idler positioning is not optimally symmetric\nTitanium Backers are still a recommended follow-on for the same thermal expansion reasons as V2.4\nPrinted idler towers are the same weak point as V2.4 at high acceleration",
-    "Compatible Printers": [
-      "Voron Trident"
-    ],
-    "Name": "Voron Trident Stock Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "Voron Design"
-  },
-  {
-    "id": "reczDIAhalvMKPda5",
-    "Verdict": "BUY",
-    "Pros": "Designed around reducing gantry moving mass — lower resonance peaks allow higher Input Shaper acceleration limits\nOpen source community project with documented performance improvements\nCompatible with V2.4 extrusion and motor positions — reuses existing hardware",
-    "Printed Parts Required": true,
-    "GitHub / Source URL": "https://github.com/VoronDesign/VoronUsers",
-    "Description": "The Archetype Gantry is a community-designed Voron 2.4 gantry upgrade that prioritizes reduction in moving mass to push Input Shaper resonance peaks higher. Where the Pandora focuses on geometry correction and rigidity, the Archetype trades some of that rigidity for lighter printed components — the tradeoff that makes sense for builders chasing maximum acceleration.",
-    "Verdict Label": "Lightweight performance-oriented V2.4 gantry upgrade — prioritizes mass reduction for higher acceleration headroom",
-    "Extrusion Size": "2020",
-    "Motor Count": 2,
-    "Open Source": true,
-    "Kinematic": "CoreXY",
-    "Compatible Toolheads": [
-      "Stealthburner"
-    ],
-    "Cons": "Not a drop-in replacement — requires new printed parts and full gantry teardown\nMass reduction focus means some structural compromises vs heavier reinforced alternatives like Pandora\nSmaller builder base than Pandora — fewer documented builds to reference during installation",
-    "Compatible Printers": [
-      "Voron 2.4"
-    ],
-    "Name": "Archetype Gantry",
-    "Material": "Aluminum extrusion",
-    "Brand": "Community"
+    "Name": "Spannsysteme X-Gantry — V-Core 4",
+    "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
+    "Material": "Aluminum 7075",
+    "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
+    "Brand": "Spannsysteme"
   }
 ]
