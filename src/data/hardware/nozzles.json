@@ -346,25 +346,6 @@
     "Max Temp (°C)": 300
   },
   {
-    "id": "recub91v2PqZ3nugj",
-    "Vendor 1 URL": "https://e3d-online.com/products/e3d-creality-high-flow-brass-unicorn-nozzles",
-    "Material": "Brass",
-    "Brand": "Creality",
-    "Style": "High Flow",
-    "Price (USD)": 10,
-    "Diameter (mm)": "0.4 / 0.6",
-    "Pros": "High-flow geometry designed for Creality's speed-optimized printers\nProprietary Unicorn thread ensures correct fit with K1/Ender 3 V3 hotends\nE3D also offers Unicorn-threaded ObXidian and DiamondBack variants for abrasive work",
-    "Verdict": "Solid Choice",
-    "Cons": "Proprietary Unicorn thread — only works with Creality K1/Ender 3 V3 series hotends\nNot abrasive-safe (brass)\nMore expensive than M6 equivalents for the same print speed",
-    "Vendor 1 Name": "E3D Online",
-    "Name": "Creality Unicorn High Flow Nozzle",
-    "Updated": "2026-06-27",
-    "Description": "Creality's Unicorn-threaded nozzle designed for their high-speed K1 and Ender 3 V3 series. The high-flow multi-bore internal design increases volumetric throughput for the speeds these printers target out-of-the-box. E3D also produces Unicorn-threaded nozzles in ObXidian-coated (abrasion-resistant, £49.50) and DiamondBack PCD (extreme wear, £99.50) variants for users running abrasive filaments on these printers. Standard M6 nozzles are NOT compatible with Unicorn-equipped hotends.",
-    "Thread": "Unicorn",
-    "Verdict Label": "Required upgrade for K1/Ender 3 V3 high-speed builds",
-    "Max Temp (°C)": 300
-  },
-  {
     "id": "recy0xBeh9WxIUYYZ",
     "Vendor 1 URL": "https://e3d-online.com/products/e3d-v6-obxidian-nozzles",
     "Material": "Hardened Steel",

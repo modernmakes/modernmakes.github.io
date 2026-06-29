@@ -1,1 +1,200 @@
-[]
+[
+  {
+    "id": "rec16oMjiIzA470Tv",
+    "Temperature Display": true,
+    "Pros": "80°C max temp — highest in this comparison, genuinely effective for PA/nylon, PC, and PVDF\nHolds 2 spools simultaneously — dual feed ports for multi-material workflows\nTimer function\nTemperature display",
+    "Cons": "No humidity sensor — no moisture level feedback during drying cycle\nMore expensive than single-spool alternatives\nLess community coverage than Sunlu or EIBOS — fewer build guides and troubleshooting docs\nBulkier than single-spool options",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 2,
+    "Vendor 1 Name": "PrintDry / Amazon",
+    "Name": "PrintDry Pro 2.0",
+    "Timer": true,
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=PrintDry+Pro+2.0",
+    "Brand": "PrintDry",
+    "Price (USD)": 74.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 80,
+    "Description": "The PrintDry Pro 2.0 earns its place on max temperature alone — at 80°C it’s the only dedicated dryer in this comparison that meets the recommended drying temperature for PA/nylon (75–80°C), PC (80°C+), and exotic filaments like PVDF. The two-spool capacity is a workflow advantage for multi-material builds. The absence of a humidity sensor is the main gap — you’re running on time rather than feedback. Community context: underrepresented in mainstream dryer discussions but consistently recommended by PA and engineering filament builders who know their temperature requirements.",
+    "Verdict Label": "Highest max temp in this comparison — the right pick for PA/PC/PVDF builders",
+    "Verdict": "Solid Choice"
+  },
+  {
+    "id": "rec1oXx6f3zNhfIK3",
+    "Temperature Display": true,
+    "Pros": "Polymaker brand credibility — designed by the company that makes the filament, built to their drying specs\nClean, well-constructed design vs. budget alternatives\nFeed port, humidity indicator, temperature display\n70°C max — matches the Sunlu S2 at the top of this performance tier\nGood integration with Polymaker’s published filament drying guidelines",
+    "Humidity Display": true,
+    "Cons": "More expensive than Sunlu S2 for equivalent drying performance\nSingle spool only\n70°C ceiling still limits PA/PC optimal drying\nLimited retail distribution — Polymaker store or Amazon only",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 1,
+    "Vendor 1 Name": "Amazon / Polymaker",
+    "Name": "Polymaker PolyDryer Box",
+    "Timer": true,
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=Polymaker+PolyDryer+Box",
+    "Brand": "Polymaker",
+    "Price (USD)": 44.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 70,
+    "Description": "The Polymaker PolyDryer Box is built by the company that makes PolyLite, PolyMax, and PolyFlex — the drying specs reflect Polymaker’s own filament requirements. Performance is equivalent to the Sunlu S2 at 70°C with active fan and humidity indicator. Community view: worth the premium if you’re deep in the Polymaker ecosystem and want the manufacturer’s explicit endorsement, or if build quality over the S2’s budget construction matters. Hard to justify over the S2 on pure specs-per-dollar for most builders.",
+    "Verdict Label": "Clean design from a trusted filament brand — priced above S2 for equivalent specs",
+    "Verdict": "Solid Choice"
+  },
+  {
+    "id": "rec69rIzgPw48d579",
+    "Temperature Display": true,
+    "Pros": "Built-in filament weight scale — tracks remaining spool weight without opening the box\nFeed port for print-while-dry\nHumidity sensor and temperature display\nReliable eSUN brand — established in the filament community",
+    "Humidity Display": true,
+    "Cons": "55°C max temp — noticeably lower than S2 (70°C) and EIBOS (75°C)\nIneffective for PA/nylon, PC, or other engineering filaments at this temperature\nMore expensive than Sunlu S2 for less drying performance\nOlder product design — community has moved toward S2/EIBOS at same price tier",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 1,
+    "Vendor 1 Name": "Amazon",
+    "Name": "eSUN eBOX Pro",
+    "Timer": true,
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=eSUN+eBOX+Pro",
+    "Brand": "eSUN",
+    "Price (USD)": 39.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 55,
+    "Description": "The eSUN eBOX Pro is distinguished by its built-in filament weight scale, letting you track remaining spool weight without pulling it out mid-print. Feed port, humidity sensor, and temp display are all present. The critical limitation is the 55°C ceiling — well below what PA/nylon (75–80°C) and PC (80°C+) require. Community consensus: the scale is genuinely useful, but the temp ceiling makes this a PLA/PETG-only dryer. If you don’t regularly need the scale, the Sunlu S2 outperforms it for less money.",
+    "Verdict Label": "Built-in filament scale is genuinely useful — but the 55°C ceiling limits what it can dry",
+    "Verdict": "Solid Choice"
+  },
+  {
+    "id": "recEEf2Cw108PkCup",
+    "Temperature Display": true,
+    "Pros": "Best active circulation design in this comparison — convection heating produces measurably more even temperature distribution\n75°C max — reaches optimal PA/nylon drying range where S2 falls short\nHumidity sensor with display — know when drying is complete\nFeed port for print-while-dry\nNoticeably better build quality vs. budget options — lid seal, material consistency\nTimer function",
+    "Humidity Display": true,
+    "Cons": "Approximately 2× the price of Sunlu S2\nSingle spool only — no multi-spool option\nPremium hard to justify for casual PLA/PETG drying\nAliExpress pricing is best but adds lead time vs. Amazon S2",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 1,
+    "Vendor 1 Name": "Amazon / AliExpress",
+    "Name": "EIBOS Cyclopes",
+    "Timer": true,
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=EIBOS+Cyclopes+filament+dryer",
+    "Brand": "EIBOS",
+    "Price (USD)": 64.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 75,
+    "Description": "The EIBOS Cyclopes is the performance pick in this category. Its convection heating design produces more even temperature distribution than the budget alternatives, and the 75°C ceiling enters the effective drying range for PA/nylon where the S2 falls short. Community verdict is clear: Sunlu S2 for value-conscious builders who primarily dry PLA and PETG; EIBOS for anyone printing hygroscopic engineering filaments regularly and wanting confidence in the result. At roughly 2× the S2 price, the upgrade justifies itself once PA, moisture-sensitive TPU, or ASA that’s been sitting open are part of your regular rotation.",
+    "Verdict Label": "Performance benchmark — the upgrade from S2 when drying quality matters",
+    "Verdict": "Top Pick"
+  },
+  {
+    "id": "recFbxuzRZm9LQI3P",
+    "Temperature Display": true,
+    "Pros": "Higher max temp than most dedicated dryers — Cosori ~72°C, Excalibur ~74°C+\nOften cheaper than purpose-built dryers for equivalent or greater capacity\nRound dehydrators (Cosori) fit 1–2 standard 1kg spools; Excalibur holds 2–4\nWidely available — Amazon, local kitchen stores, Costco\nDecades of community documentation — well-understood method with no surprises\nExcalibur has exceptionally even airflow — better temperature uniformity than most dedicated dryers",
+    "Cons": "No PTFE feed port by default — requires drilling + bowden fitting modification\nNo humidity sensor — no moisture feedback during drying cycle\nSpools may not sit flat depending on tray geometry and spool diameter — test before relying on it\nLess ergonomic than purpose-built dryers\nCosori 70–72°C ceiling is real — verify your specific unit before committing to PA drying",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 2,
+    "Vendor 1 Name": "Amazon (Cosori / Excalibur)",
+    "Name": "DIY Food Dehydrator (Cosori / Excalibur)",
+    "Timer": true,
+    "Type": "Active",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=cosori+food+dehydrator",
+    "Brand": "Community / DIY",
+    "Price (USD)": 49.99,
+    "Max Temp (°C)": 75,
+    "Description": "Before purpose-built filament dryers existed, the 3D printing community adopted food dehydrators — and the approach still holds up. Cosori (round stackable trays, $50–70, ~72°C max) and Excalibur (rectangular, $150+, excellent even airflow, ~74°C+) are the most cited models. Remove the center post, place the spool in the tray, run at 65–70°C for 4–6 hours. Feed port requires drilling a small hole in the housing and installing a bowden coupler — community tutorials widely available. Excalibur in particular has more even temperature distribution than most dedicated filament dryers. Best choice if you already own one, or want the highest temp ceiling at the lowest cost per spool.",
+    "Verdict Label": "The original community method — high temp, cheap, effective, needs a DIY feed port",
+    "Verdict": "Solid Choice"
+  },
+  {
+    "id": "recMq9crW4KWGhdjS",
+    "Temperature Display": true,
+    "Pros": "Cheapest active entry point on the list\nFeed port for print-while-dry\nCompact and lightweight\nFine for PLA maintenance drying and dry storage between uses",
+    "Cons": "45°C max temp — barely above ambient for any serious moisture removal\nNo humidity sensor — no moisture level feedback\nNo timer\nNot effective for PETG, PA, or any engineering filament with significant moisture exposure\nMore ‘heated storage’ than ‘active drying’",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 1,
+    "Vendor 1 Name": "Amazon",
+    "Name": "eSUN eBOX Lite",
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=eSUN+eBOX+Lite",
+    "Brand": "eSUN",
+    "Price (USD)": 19.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 45,
+    "Description": "The eSUN eBOX Lite is the budget floor — functional for keeping recently-opened PLA and PETG from absorbing ambient moisture, but with a 45°C ceiling it cannot rescue filament that has already absorbed significant moisture. Think of it as a heated dry box rather than a dryer. Community context: adequate for maintaining filament condition between print sessions; not the right tool if you’re starting with wet filament or printing hygroscopic engineering materials.",
+    "Verdict Label": "Budget dry-storage box with slight warmth — maintenance drying only",
+    "Verdict": "Solid Choice"
+  },
+  {
+    "id": "recbTjrGDKhZn0EOJ",
+    "Temperature Display": true,
+    "Pros": "Dries up to 4 spools simultaneously — significant time savings for multi-material builds\nFour independent PTFE feed ports — can feed AMS, toolchanger, or four printers at once\nSame proven S2 heating and fan system, scaled up\nHumidity sensor and temperature display\nSingle power brick — cleaner than running four S2 units",
+    "Humidity Display": true,
+    "Cons": "Same 70°C ceiling as S2 — PA/PC builders still thermally limited\nBulky footprint — needs dedicated shelf space\nRoughly same cost as buying four S2 units — not substantially cheaper per spool\nFan noise compounds at full 4-spool capacity",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 4,
+    "Vendor 1 Name": "Amazon",
+    "Name": "Sunlu FilaDryer S4",
+    "Timer": true,
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=Sunlu+FilaDryer+S4",
+    "Brand": "Sunlu",
+    "Price (USD)": 74.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 70,
+    "Description": "The Sunlu S4 scales the S2’s proven active drying system to four simultaneous spools. Aimed at multi-material builders running an AMS, toolchanger, or high-volume print farms — the four independent feed ports let you print from any slot while the others dry. At $75 the per-spool cost is roughly equivalent to four individual S2 units, but the integrated form factor and single power connection is meaningfully cleaner. Same 70°C ceiling as the S2 applies throughout.",
+    "Verdict Label": "Four-spool simultaneous drying — right pick for multi-material and high-volume builders",
+    "Verdict": "Solid Choice"
+  },
+  {
+    "id": "reclTNW5ohcOOy8qW",
+    "Pros": "Integrates seamlessly into Bambu multi-material workflow — X1C, P1P, A1 compatibility\nFour-spool capacity with managed buffer system\nSealed enclosure keeps filament drier than open-air storage between sessions",
+    "Cons": "No heating element — cannot actively dry wet filament\nBambu ecosystem only — no value outside Bambu printers\nPrice reflects the full AMS system, not a standalone dryer\nWet filament must be dried in a separate dryer before loading",
+    "Compatible Printers": [
+      "Bambu"
+    ],
+    "Spool Capacity": 4,
+    "Vendor 1 Name": "Bambu Lab",
+    "Name": "Bambu AMS Dry Box",
+    "Type": "Passive",
+    "Vendor 1 URL": "https://bambulab.com/en/product/ams",
+    "Brand": "Bambu",
+    "Price (USD)": 249.99,
+    "Feed Port": true,
+    "Description": "The Bambu AMS is not a filament dryer — it’s a multi-spool buffer and sealed storage system integrated with Bambu’s multi-material printing workflow. It keeps loaded filament drier than open-air exposure but has no heating element and cannot rescue moisture-laden filament. Documented here as a reference and comparison point for crossover builders evaluating ecosystems: if your filament is already wet, you need a dedicated dryer before it goes into the AMS. Not a self-build ecosystem product.",
+    "Verdict Label": "Bambu-only dry storage system — not a dryer, a sealed multi-spool buffer",
+    "Verdict": "Niche Pick"
+  },
+  {
+    "id": "recuM7XeVzCgeN6j7",
+    "Temperature Display": true,
+    "Pros": "Sub-$30 price point — most accessible dryer on the market\nFeed port allows printing directly from the dryer without opening\nHumidity sensor + temperature display — know when drying is complete\nActive fan ensures even heat distribution across the spool\nAmazon Prime availability — no lead time",
+    "Humidity Display": true,
+    "Cons": "Single spool only\n70°C ceiling insufficient for optimal PA/nylon or PC drying (ideal is 80°C+)\nBudget-tier build quality — lid seal degrades with repeated use\nNo filament weight sensor",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Spool Capacity": 1,
+    "Vendor 1 Name": "Amazon",
+    "Name": "Sunlu FilaDryer S2",
+    "Timer": true,
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://www.amazon.com/s?k=Sunlu+FilaDryer+S2",
+    "Brand": "Sunlu",
+    "Price (USD)": 29.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 70,
+    "Description": "The Sunlu FilaDryer S2 is the community’s default recommendation when budget is the constraint. For under $30 it delivers a PTFE feed port, active fan circulation, humidity sensor, and temperature display — all the features that matter. It performs well for PLA, PETG, and TPU within its 70°C ceiling. Community consensus: buy it if you’re starting out or need to dry occasional spools; upgrade to EIBOS when engineering filaments (PA, PC) are in regular rotation and drying quality is non-negotiable.",
+    "Verdict Label": "Best value filament dryer — the community default under $30",
+    "Verdict": "Top Pick"
+  }
+]

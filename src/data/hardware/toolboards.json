@@ -1,1 +1,228 @@
-[]
+[
+  {
+    "id": "rec7bm8uci7h0RnTX",
+    "Hotend Connector": "JST-XH 2.54 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Custom builds"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "Nitehawk 36 (LDO)",
+    "Vendor 1 Name": "Fabreeko",
+    "Description": "The 36mm companion to the Nitehawk SB, sharing the same RP2040 MCU, USB-first approach, and LDO build quality. Where the Nitehawk SB targets Stealthburner specifically, the Nitehawk 36 fits the broader 36mm toolboard mount ecosystem. Ideal for non-SB toolhead designs that accept 36mm boards when you want to avoid CAN bus infrastructure. All the same trade-offs as the Nitehawk SB apply — simplicity and quality at a premium, with less community documentation than the EBB36 path.",
+    "Verdict Label": "USB simplicity in 36mm form factor",
+    "Verdict": "BUY",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "36mm toolhead mounts",
+      "Custom toolheads"
+    ],
+    "Cons": "- USB only: same interface limitation as Nitehawk SB\n- Fewer purpose-built toolhead mounts than SB variant\n- Higher price than CAN alternatives at equivalent specs\n- 36mm community toolhead ecosystem smaller than Stealthburner ecosystem",
+    "Connection": "USB",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/nitehawk-36-toolboard-by-ldo",
+    "Brand": "LDO Motors",
+    "Neopixel Support": true,
+    "Price (USD)": 35,
+    "Pros": "- Same USB-first philosophy as Nitehawk SB: no CAN infrastructure needed\n- 36mm form factor accommodates toolheads where Stealthburner won't fit\n- RP2040 dual-core 133MHz with ADXL345 onboard\n- Neopixel outputs, dual fans\n- LDO build quality throughout",
+    "MCU": "RP2040 133MHz dual-core"
+  },
+  {
+    "id": "recExh4qF7BdZyXP0",
+    "Hotend Connector": "N/A",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core",
+      "Any Klipper printer"
+    ],
+    "Name": "BTT U2C v2.1",
+    "Vendor 1 Name": "BIQU Equipment",
+    "Description": "The BTT U2C is not a toolboard — it's a USB-to-CAN bridge adapter. It connects to the Pi/host via USB and provides a CAN bus port for toolboards like the EBB36. If your mainboard lacks a native CAN transceiver (SKR 3 EZ, older Octopus v1.0, Fysetc S6), the U2C is the standard way to add CAN capability. If you're running an Octopus Pro v1.1, Manta M8P v2, or Leviathan, you don't need one — those boards have native CAN. Included here for context as a common companion to toolboards in Voron CAN builds.",
+    "Verdict Label": "Essential bridge for non-CAN mainboards",
+    "Verdict": "CONSIDER",
+    "Fan Outputs": 0,
+    "Compatible Toolheads": [
+      "N/A — bridge device, not a toolboard"
+    ],
+    "Cons": "- Not a toolboard — provides zero extruder, hotend, or fan control\n- Mainboards with native CAN (Octopus Pro v1.1, Manta M8P v2, Leviathan) don't need this\n- Adds a USB device to manage and an extra cable to route\n- Known RF interference issues with BTT Pi or Manta CB1 near Beacon probes — inline USB hub required as workaround",
+    "Connection": "USB-to-CAN Bridge",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-u2c-v2-1",
+    "Brand": "BTT",
+    "Price (USD)": 8,
+    "Pros": "- Enables full CAN bus toolboard setup on any mainboard with a free USB port\n- Small and inexpensive (~$8) — lowest cost path to CAN bus\n- Plug-and-play with EBB36 and most BTT toolboards\n- Supported by Klipper's USB-CAN bridge mode",
+    "MCU": "STM32F072C8T6 48MHz"
+  },
+  {
+    "id": "recZ7e4tsmq1J1TkU",
+    "Hotend Connector": "JST-PH 2.0 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "Mellow FLY SHT36 v2",
+    "Vendor 1 Name": "Mellow (AliExpress)",
+    "Description": "Mellow's toolboard answer to the BTT EBB36, using the same STM32G0B1CBT6 chip with FDCAN bus support. Hardware specs are essentially equivalent: TMC2209, ADXL345, Neopixel, USB-C fallback. The SHT36 v2 integrates well with the broader Mellow/Fly ecosystem (Fly-Super8, FLY-Gemini, etc.). A solid option if you're already using Mellow mainboards and want a consistent vendor stack, or if EBB36 stock is constrained.",
+    "Verdict Label": "Solid EBB36 alternative from Mellow",
+    "Verdict": "CONSIDER",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Clockwork 2",
+      "Sherpa Mini"
+    ],
+    "Cons": "- Fewer Voron-specific guides than EBB36\n- Mellow documentation is primarily in Chinese — English translations available but sometimes lag\n- Community config files less widely shared than BTT equivalents",
+    "Connection": "CAN + USB",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1103443/search?SearchText=SHT36",
+    "Brand": "Mellow",
+    "Neopixel Support": true,
+    "Price (USD)": 18,
+    "Pros": "- Same STM32G0B1CBT6 MCU as EBB36 v1.2 — identical CAN and Klipper support\n- USB-C fallback for flashing\n- ADXL345 and Neopixel onboard\n- Active Mellow ecosystem and Fly-OS integration",
+    "USB Fallback": true,
+    "MCU": "STM32G0B1CBT6 64MHz FDCAN"
+  },
+  {
+    "id": "recewFzdI5OQCqm7z",
+    "Hotend Connector": "JST-PH 2.0 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "Fysetc SB2040 Pro",
+    "Vendor 1 Name": "Fysetc",
+    "Description": "Fysetc's Stealthburner-specific toolboard built around the RP2040 dual-core MCU rather than the STM32 used by EBB36. The RP2040's ADC is notably faster than the STM32G0B1's, which is a tangible benefit for ADXL345 resonance testing accuracy. Supports CAN bus primary with USB-C fallback, onboard TMC2209, and Neopixel outputs. The main argument against it: the EBB36 has a larger config library and more Voron community familiarity, which matters when something goes wrong at midnight.",
+    "Verdict Label": "SB-specific, RP2040 MCU",
+    "Verdict": "CONSIDER",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "Stealthburner"
+    ],
+    "Cons": "- RP2040 CAN support in Klipper historically less mature than STM32 — mostly resolved now but community muscle memory favors EBB\n- Smaller community than EBB36: fewer configs, fewer documented build logs\n- Fysetc support and documentation quality is variable",
+    "Connection": "CAN + USB",
+    "Vendor 1 URL": "https://www.fysetc.com/products/fysetc-sb2040-v2",
+    "Brand": "Fysetc",
+    "Neopixel Support": true,
+    "Price (USD)": 20,
+    "Pros": "- RP2040 dual-core 133MHz — faster ADC sampling benefits ADXL345 resonance testing\n- Designed specifically for Stealthburner geometry: clean integration\n- CAN bus + USB-C fallback\n- ADXL345 and Neopixel support onboard",
+    "USB Fallback": true,
+    "MCU": "RP2040 133MHz dual-core"
+  },
+  {
+    "id": "recpZ9yxtexGhVAXm",
+    "Hotend Connector": "JST-XH 2.54 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 4"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "Nitehawk SB (LDO)",
+    "Vendor 1 Name": "Fabreeko",
+    "Description": "LDO's Stealthburner toolboard built around the premise that USB is simpler and more accessible than CAN for most builders. The Nitehawk SB uses USB as its primary and only interface — you route a standard USB cable to the toolhead, bypassing CAN bus setup entirely. The RP2040 dual-core provides fast ADXL345 sampling for resonance testing. LDO's component quality and QC noticeably exceed typical BTT AliExpress batches. The EBB36 vs Nitehawk debate is real: CAN (EBB36) is the Voron community default with more configs and guides, but the Nitehawk SB is compelling for builders who want fewer infrastructure dependencies and are willing to pay a premium for it.",
+    "Verdict Label": "Simplest setup — no CAN infrastructure",
+    "Verdict": "BUY",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "Stealthburner"
+    ],
+    "Cons": "- USB only: some builders prefer CAN for cleaner toolhead wiring\n- Higher price than EBB36 (~$35 vs ~$15)\n- USB is not a \"fallback\" here — it's the only interface; no CAN option if you later want it\n- CAN remains de facto Voron community recommendation; Nitehawk adoption is growing but EBB configs are more plentiful",
+    "Connection": "USB",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/nitehawk-sb-toolboard-by-ldo",
+    "Brand": "LDO Motors",
+    "Neopixel Support": true,
+    "Price (USD)": 35,
+    "Pros": "- USB-only: eliminates CAN bus infrastructure entirely — no U2C, no CAN wiring, no CANFD config headaches\n- Runs over existing USB cable — simpler toolhead wiring than CAN at longer toolhead distances\n- RP2040 dual-core MCU with fast ADXL345 sampling\n- LDO build quality: notably better component selection and QC than BTT AliExpress stock\n- ADXL345, Neopixel, dual fans in a purpose-built Stealthburner form factor",
+    "MCU": "RP2040 133MHz dual-core"
+  },
+  {
+    "id": "rectQxjOL0wlIbYBC",
+    "Hotend Connector": "JST-PH 2.0 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Voron 0"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "BTT EBB36 CAN v1.2",
+    "Vendor 1 Name": "BIQU Equipment",
+    "Description": "The de facto standard Voron toolboard. EBB36 CAN v1.2 uses the STM32G0B1CBT6 with FDCAN support, giving it better CAN bus performance than the older F0-based v1.0. The v1.2 revision fixes a DFU mode issue that inadvertently powered the hotend during firmware flashing. Combines TMC2209 extruder driver, ADXL345 for resonance compensation, USB-C fallback, and dual fan outputs in a 36mm package. The community has built out a comprehensive config and mount ecosystem around this board — if you're building a Voron and don't have a strong reason to use something else, this is the pick.",
+    "Verdict Label": "Voron community standard",
+    "Verdict": "BUY",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Clockwork 2"
+    ],
+    "Cons": "- Requires CAN bus infrastructure: mainboard with native CAN or a BTT U2C bridge\n- Initial CAN setup has steeper learning curve than USB toolboards\n- BTT has documented RF interference issues with their Pi/CB1 boards near Beacon probes",
+    "Connection": "CAN + USB",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-ebb-36-42-can-bus-for-connecting-klipper-expansion-device",
+    "Brand": "BTT",
+    "Neopixel Support": true,
+    "Price (USD)": 15,
+    "Pros": "- STM32G0B1 with FDCAN — best CAN implementation for toolboards\n- ADXL345 onboard for resonance tuning via Klipper\n- USB fallback for flashing and debugging without full CAN setup\n- Massive community support: guides, configs, mounts for every Voron variant\n- v1.2 fixes DFU mode heating bug (hotend IO moved PA2→PB13)",
+    "USB Fallback": true,
+    "MCU": "STM32G0B1CBT6 64MHz FDCAN"
+  },
+  {
+    "id": "recw6fvow9xKfDIgN",
+    "Hotend Connector": "Molex Micro-Fit 3.0 2×4",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Custom builds"
+    ],
+    "Name": "Huvud",
+    "Vendor 1 Name": "GitHub (open source)",
+    "Description": "The original community-designed CAN toolboard, created by Pontus Borg (bananas-blender) and a key reason CAN toolboards became mainstream in the Voron community. Runs on the STM32F103C8T6 — the same 'blue pill' chip used in early reprap boards. CAN-only with no USB fallback, and lacks an onboard ADXL345. Both are significant omissions by current standards. Still operational and supported by Klipper, but the EBB36 v1.2 and Nitehawk boards have made it obsolete for new builds. If you have one running, keep it — don't spec it for new builds.",
+    "Verdict Label": "Superseded — skip for new builds",
+    "Verdict": "SKIP",
+    "Fan Outputs": 1,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "Various toolheads"
+    ],
+    "Cons": "- No ADXL345 onboard — resonance tuning requires external probe or skipping\n- CAN only: no USB fallback makes initial flashing and debugging significantly harder\n- STM32F103C8T6 is older and slower (72MHz) with limited flash\n- Community has moved on: EBB36 and Nitehawk offer more features at similar or lower cost\n- Design is effectively frozen — no active development",
+    "Connection": "CAN",
+    "Vendor 1 URL": "https://github.com/bananas-blender/HUVUD",
+    "Brand": "Community (Bananas-blender)",
+    "Pros": "- Pioneered the CAN toolboard concept for prosumer FDM — historically significant\n- Open source design: PCB files, BOM, and documentation on GitHub\n- Compact form factor\n- Proven CAN bus reliability in early Voron community builds",
+    "MCU": "STM32F103C8T6 72MHz"
+  },
+  {
+    "id": "recwUeRV2oawefjn3",
+    "Hotend Connector": "JST-PH 2.0 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "VzBot",
+      "Custom builds"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "BTT EBB42 CAN v1.1",
+    "Vendor 1 Name": "BIQU Equipment",
+    "Description": "The larger sibling of the EBB36, sharing identical MCU, driver, and peripheral specs in a 42mm form factor. Runs the same STM32G0B1CBT6 with FDCAN bus support. The 42mm footprint fits some toolhead designs that can't accommodate 36mm boards, and some builders prefer the slightly larger PCB for connector access. If you're building a Stealthburner, the EBB36 has more mount options — EBB42 is worth considering for custom or 42mm-native toolhead designs.",
+    "Verdict Label": "EBB36 sibling, 42mm form factor",
+    "Verdict": "CONSIDER",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "42mm toolhead mounts",
+      "Custom toolheads"
+    ],
+    "Cons": "- 42mm format has fewer pre-designed Stealthburner/Clockwork 2 mounts than EBB36\n- Same CAN infrastructure requirements as EBB36\n- Less community documentation compared to the 36mm variant\n- Choose EBB36 unless you specifically need 42mm PCB footprint",
+    "Connection": "CAN + USB",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-ebb-36-42-can-bus-for-connecting-klipper-expansion-device",
+    "Brand": "BTT",
+    "Neopixel Support": true,
+    "Price (USD)": 16,
+    "Pros": "- Identical electronics to EBB36 v1.2: same STM32G0B1CBT6 MCU, TMC2209, ADXL345\n- 42mm format fits some toolheads better — particularly on non-SB designs\n- USB-C fallback for flashing\n- FDCAN bus for reliable high-speed CAN communication",
+    "USB Fallback": true,
+    "MCU": "STM32G0B1CBT6 64MHz FDCAN"
+  }
+]

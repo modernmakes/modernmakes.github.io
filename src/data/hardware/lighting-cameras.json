@@ -1,1 +1,198 @@
-[]
+[
+  {
+    "id": "rec3IQFEDIFufwDPF",
+    "Interface": "Data",
+    "Description": "WS2812B is the protocol underpinning Klipper LED integration across the self-build ecosystem. The Stealthburner logo LED and disco LED mounts are built around it, and the Voron configuration macro library provides STATUS_PRINTING, STATUS_HEATING, STATUS_ERROR, and STATUS_COMPLETE effects out of the box. For anything beyond basic on/off enclosure lighting — print state feedback, animations, idle indicators — WS2812B is the starting point. Use RGBW variants (SK6812) if you need accurate white output for print monitoring.",
+    "Verdict Label": "Stealthburner logo and Klipper effects standard — native [neopixel] support in Klipper, extensive community macro library",
+    "Vendor 1 Name": "AliExpress (various) / Adafruit",
+    "Name": "WS2812B Neopixel LED Strip",
+    "Type": "LED",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-ws2812b-led-strip.html",
+    "Brand": "Generic / Community",
+    "Price (USD)": 8,
+    "Color Temp (K)": "RGB (full color, variable)",
+    "Pros": "Individually addressable RGB — each LED is independently controllable for print status effects and animations\nNative Klipper [neopixel] configuration support — STATUS_PRINTING, STATUS_HEATING, STATUS_ERROR macros are pre-built in Voron configs\nStealthburner logo and disco LED integrations are designed specifically around WS2812B protocol\n5V signal from most toolboards works without level shifting\nCommunity macro library is extensive — Voron-owned macros, Ellis config, and third-party packages all support WS2812B",
+    "Addressable": true,
+    "Klipper Compatible": true,
+    "Verdict": "BUY",
+    "Compatible Toolheads": [
+      "Stealthburner"
+    ],
+    "Voltage": "5V",
+    "Cons": "5V over long runs (2m+) causes voltage drop — power injection at strip intervals is required for consistent color at far ends\nHeat sensitivity — WS2812B ICs degrade above ~60°C, limiting direct placement inside hot chamber environments\nData signal degrades over long cable runs — a 330Ω series resistor on the data line is community-standard practice\nCannot produce neutral white light — RGB mixing always has a color cast; not ideal as primary print illumination without RGBW variants",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ]
+  },
+  {
+    "id": "recIXKTkwKaYTOCZq",
+    "Interface": "PWM",
+    "Description": "COB LED strips at 24V are the practical first choice for enclosure lighting on self-build printers. Running directly from the printer's main PSU, they need no separate power supply and connect with two wires to any spare output. COB technology produces even, diffused illumination — better for print monitoring than individual-dot strips. They're not addressable and can't integrate with Klipper LED macros, but for the purpose of seeing inside your printer clearly, nothing matches COB strips for simplicity and value.",
+    "Verdict Label": "Simplest enclosure lighting upgrade — runs from the 24V printer PSU, even illumination, no controller needed",
+    "Vendor 1 Name": "AliExpress (various)",
+    "Name": "COB LED Strip 24V White (Enclosure)",
+    "Type": "LED",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-24v-cob-led-strip-white.html",
+    "Brand": "Generic / AliExpress",
+    "Price (USD)": 10,
+    "Color Temp (K)": "6000–6500K (cool white) or 4000K (neutral white)",
+    "Pros": "Runs directly from the printer's 24V PSU — no separate power supply, tap into existing wiring\nCOB (Chip on Board) technology produces uniform, diffused light with no hot spots — better for print monitoring photography than dot-matrix strips\nSimple two-wire installation — connect to a spare fan output for PWM dimming, or a MOSFET board\nHigh CRI (90+) options available at low cost — important for accurate color in print monitoring or video\nVery high lumen output per dollar compared to individual LED strips",
+    "Verdict": "BUY",
+    "Voltage": "24V",
+    "Cons": "Not addressable — cannot create lighting effects or integrate with Klipper LED status macros\nAlways-on unless wired to a PWM-capable output or relay — basic installations run at full brightness constantly\n24V COB variants are less common than 12V — verify voltage spec carefully before ordering from AliExpress listings\nHigh-density COB strips generate some heat — factor into enclosure thermal design for small chambers",
+    "Compatible Printers": [
+      "Universal"
+    ]
+  },
+  {
+    "id": "recPcHHI9sWVAAMTu",
+    "Interface": "HDMI",
+    "Description": "The BTT HDMI5 camera module is primarily marketed as a display-out camera for BTT Pi-based builds, but it functions as a USB webcam in most Crowsnest configurations. At $18 it's the budget option in this table — the 160° FOV is a genuine advantage, but limited community documentation means more self-troubleshooting vs. established alternatives. Best suited for BTT-centric builds where ecosystem consistency matters.",
+    "Verdict Label": "Budget wide-angle camera — USB webcam mode works but Crowsnest documentation is sparse vs. Pi Camera or C920",
+    "Vendor 1 Name": "BigTreeTech / AliExpress",
+    "Name": "BTT HDMI5 Camera Module",
+    "Resolution": "1080p",
+    "Type": "Camera",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/2090093",
+    "Brand": "BigTreeTech",
+    "Price (USD)": 18,
+    "Pros": "160° wide FOV — broadest angle of any camera in this comparison, covers large enclosed build areas\nLowest price point in this comparison — budget entry for print monitoring\nCompact footprint — easier to mount in tight enclosure corners\nUSB webcam mode works with Crowsnest without additional hardware",
+    "FOV": "160°",
+    "Klipper Compatible": true,
+    "Verdict": "CONSIDER",
+    "Voltage": "5V",
+    "Cons": "Sparse Crowsnest documentation relative to Pi Camera v3 or Logitech C920 — fewer community build logs and config examples\nHDMI capture mode requires a capture card for host use, adding cost and complexity\nImage quality in USB webcam mode is average — adequate for print monitoring, poor for quality timelapse\nLimited community track record in Voron/Klipper builds",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 4"
+    ]
+  },
+  {
+    "id": "recTrqxYDxTvuSyJi",
+    "Interface": "WiFi",
+    "Description": "WLED running on an ESP32 (available pre-flashed from Athom) is the community's preferred approach for standalone addressable LED control on 3D printers. The Moonraker integration plugin allows Klipper to push print state changes directly to WLED, triggering effects on print start, heating, completion, and error without modifying Klipper macros. It supports virtually all common addressable strip types and can be controlled from any browser. The trade-off vs. direct Klipper [neopixel] is added network complexity, but the benefit is richer effects and independence from the Klipper restart cycle.",
+    "Verdict Label": "Go-to standalone LED controller for Voron lighting — Moonraker plugin integrates WLED effects with Klipper print state",
+    "Vendor 1 Name": "Athom / AliExpress",
+    "Name": "WLED Controller (ESP32-based)",
+    "Type": "Controller",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005003183746547.html",
+    "Brand": "Athom / Generic ESP32",
+    "Price (USD)": 12,
+    "Pros": "WLED firmware on ESP32 supports WS2812B, SK6812 (RGBW), WS2815 (12V), and many other addressable strip types\nMoonraker plugin links Klipper print state to WLED effects — print start, heating, complete, and error states trigger LED changes automatically\nWeb UI, HTTP API, MQTT, and WebSocket control — integrates into Home Assistant, Homebridge, or custom dashboards\nPre-flashed Athom units available — plug-and-play, no soldering or firmware flashing required\nDecouples LED control from the Klipper host — LED strips stay on during Klipper restarts or updates",
+    "Klipper Compatible": true,
+    "Verdict": "BUY",
+    "Voltage": "5V",
+    "Cons": "Requires WiFi access inside the printer chassis — signal strength can be marginal inside fully metal enclosures\nMoonraker plugin requires manual installation and configuration — not zero-config\nAdds a network device to your setup — more complexity vs. direct Klipper GPIO neopixel control\nWLED configuration has a learning curve for users new to home automation-style tools",
+    "Compatible Printers": [
+      "Universal"
+    ]
+  },
+  {
+    "id": "recUlzXYbxslSN5m2",
+    "Interface": "CSI",
+    "Description": "The Raspberry Pi Camera v3 Wide is the community's default recommendation for Klipper print monitoring. Its 12MP IMX708 sensor and 120° wide-angle optic cover the full build area of enclosed printers in a single frame, while the CSI interface integrates directly with Crowsnest without driver configuration. Phase-detection autofocus means you mount it once and forget the focus. The only hard constraint is Raspberry Pi host dependency — if your build runs a CB1 or other SBC, verify libcamera support before ordering.",
+    "Verdict Label": "Community top pick for Klipper — CSI interface, 12MP, Crowsnest native, autofocus out of the box",
+    "Vendor 1 Name": "Raspberry Pi / authorized resellers",
+    "Name": "Raspberry Pi Camera v3 Wide",
+    "Resolution": "12MP",
+    "Type": "Camera",
+    "Vendor 1 URL": "https://www.raspberrypi.com/products/camera-module-3/",
+    "Brand": "Raspberry Pi",
+    "Price (USD)": 25,
+    "Pros": "12MP IMX708 sensor — sharp, low-noise output for print monitoring and timelapse\n120° wide FOV covers the full build area of an enclosed printer without corner mounting\nCSI connection to the Pi host — no USB bandwidth competition with host controllers or Manta\nCrowsnest natively supports Pi Camera v3 — zero-config setup, no manual stream driver installation\nPhase-detection autofocus — adapts automatically to different camera positions without manual tuning\nBest image quality per dollar in the Klipper camera ecosystem",
+    "FOV": "120°",
+    "Klipper Compatible": true,
+    "Verdict": "BUY",
+    "Voltage": "5V",
+    "Cons": "CSI ribbon cable is limited in length — typically 30cm stock, up to ~1m with quality flex cables before signal degradation; long runs inside enclosures require care\nRequires a Raspberry Pi host — does not work with Raspberry Pi alternatives (CB1, BTT Manta SBC mode) unless using libcamera-compatible OS\nCamera cable routing inside a hot enclosed printer can stress the ribbon connector",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 4",
+      "VzBot"
+    ]
+  },
+  {
+    "id": "recXbUsFKYhIakMd1",
+    "Interface": "PWM",
+    "Description": "Voron Daylight on a Stick is the community PCB designed to slot into Stealthburner and AfterBurner mounts and provide close-in, bright white illumination at the toolhead level. Running at 24V from the main PSU, it needs no separate power management. The PCB format keeps wiring clean and the LEDs position precisely where light is most useful — directly adjacent to the nozzle. Included in LDO and many other Voron kits by default. Not addressable, but that's by design — toolhead lighting is about illumination, not effects.",
+    "Verdict Label": "Community-designed compact 24V toolhead LED PCB — the standard lighting solution for Stealthburner and AfterBurner",
+    "Vendor 1 Name": "LDO / Fabreeko / West3D",
+    "Name": "Voron Daylight on a Stick PCB",
+    "Type": "LED",
+    "Vendor 1 URL": "https://www.fabreeko.com/search?q=daylight+on+a+stick",
+    "Brand": "LDO / Voron Community",
+    "Price (USD)": 20,
+    "Color Temp (K)": "5000–6500K (daylight white)",
+    "Pros": "Community-designed PCB purpose-built for Voron toolhead mounting — dimensions match Stealthburner and AfterBurner mounts\nRuns at 24V from the printer PSU — no separate voltage regulation or power supply\nCompact stick-format PCB keeps the light source as close to the nozzle as possible without interfering with print cooling\nHigh CRI daylight-white LEDs — neutral, accurate illumination for toolhead-level print monitoring and photography\nLDO Voron kits include Daylight on a Stick by default — if you're buying a Voron kit, you likely already have these",
+    "Verdict": "BUY",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "AfterBurner"
+    ],
+    "Voltage": "24V",
+    "Cons": "Not addressable — on/off or PWM dimming only; no RGB effects or Klipper color macros\nVoron-specific dimensions — mounting on non-Voron toolheads requires community-adapted mount designs\nRequires PWM-capable output or manual wiring for dimming; basic installations run at constant brightness\nNot stocked at all vendors — availability tied to Voron kit restocks from LDO, Formbot, and similar",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ]
+  },
+  {
+    "id": "reca3VaKcwHsp6G4w",
+    "Interface": "USB",
+    "Description": "The nozzle camera is a category of community mods rather than a specific product — builders mount inexpensive USB macro cameras at toolhead level to observe the nozzle and first layer in real time. When paired with Obico or a Klipper camera stream, this enables early failure detection and diagnostics that a standard overhead camera cannot provide. The limiting factor is standardization: mounting solutions, heat shielding, and camera selection are all builder-specific, and community consensus on a recommended solution hasn't solidified.",
+    "Verdict Label": "Emerging community mod category — nozzle-level inspection adds real diagnostic value but no production-ready solution exists yet",
+    "Vendor 1 Name": "AliExpress (various macro USB cameras)",
+    "Name": "Nozzle Camera (Generic Macro USB)",
+    "Resolution": "~2MP typical",
+    "Type": "Camera",
+    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-usb-endoscope-camera-macro.html",
+    "Brand": "Generic / Community",
+    "Price (USD)": 20,
+    "Pros": "Real-time nozzle-level inspection — enables early identification of first-layer adhesion issues, partial clogs, and stringing before they cause print failures\nLow component cost — generic USB macro cameras work for this purpose\nCompatible with Obico (formerly Spaghetti Detective) for AI-assisted failure detection\nCommunity-designed mounts exist for Stealthburner and similar toolheads",
+    "FOV": "Macro / close-up",
+    "Klipper Compatible": true,
+    "Verdict": "CONSIDER",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "AfterBurner"
+    ],
+    "Voltage": "5V",
+    "Cons": "No standardized production mount — each implementation is builder-specific (Voron Discord threads, GitHub, Printables)\nExtreme heat proximity to the nozzle degrades camera optics and sensor lifespan — heat shielding and careful positioning are required\nCalibration and framing are finicky — small positioning errors change what the camera captures significantly\nNo polished plug-and-play solution yet — this is a hobbyist frontier, not a finished product category",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 4",
+      "VzBot"
+    ]
+  },
+  {
+    "id": "recjpNqH5iN0dGZDO",
+    "Interface": "USB",
+    "Description": "The Logitech C920 is the default recommendation for Klipper users who aren't running a Raspberry Pi host, or who want USB simplicity over CSI performance. It's extensively documented in Crowsnest and works reliably across all SBC types. The trade-offs vs. Pi Camera v3 are real — 78° FOV, lower resolution, and a higher price — but for builds running anything other than an RPi, it's the straightforward choice.",
+    "Verdict Label": "Reliable USB timelapse classic — works with any Klipper host but image quality and FOV lag behind Pi Camera v3",
+    "Vendor 1 Name": "Amazon / Best Buy / B&H",
+    "Name": "Logitech C920 HD Webcam",
+    "Resolution": "1080p / 2MP",
+    "Type": "Camera",
+    "Vendor 1 URL": "https://www.amazon.com/Logitech-C920x-Pro-HD-Webcam/dp/B085TFF7M1",
+    "Brand": "Logitech",
+    "Price (USD)": 70,
+    "Pros": "USB plug-and-play — works with any Klipper host (Pi, CB1, BTT Manta SBC, BIGTREETECH Pi) regardless of SBC type\nExtensively documented in Crowsnest — widely deployed, dozens of working Klipper config examples\nH.264 hardware encoding onboard — lower CPU load on the host vs. MJPEG software encoding\nBroad retail availability — from electronics stores, not just 3D printing vendors",
+    "FOV": "78°",
+    "Klipper Compatible": true,
+    "Verdict": "CONSIDER",
+    "Voltage": "5V",
+    "Cons": "78° FOV is noticeably narrower than the Pi Camera v3 Wide — may miss corners on larger enclosed builds without repositioning\nAutofocus less reliable for close-distance enclosure mounting — manual focus lock mod often recommended by the community\nUSB competes for bandwidth on the same host hub as the Klipper USB connection\nHigher price than Pi Camera v3 for lower resolution and narrower FOV in this context",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core 4",
+      "VzBot",
+      "HevORT"
+    ]
+  }
+]
