@@ -1,252 +1,33 @@
 ---
-/* Hallmark · component: hardware-detail · genre: editorial · theme: Modern-Makes-native
- * transitions: texts-reveal (18) on hero · staggered pros/cons entrance
- * states: default · hover · focus (vendor cards) · n/a for static content rows
- * pre-emit critique: P5 H4 E5 S4 R5 V5 — structurally distinct from hotend pages
- */
-import ComponentLayout from '../../../layouts/ComponentLayout.astro';
-import extruders from '../../../data/hardware/extruders.json';
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/extruders.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
 
-const toSlug = (name: string) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+const joinList = (v: any) => (Array.isArray(v) ? v.join(', ') : String(v));
 
-const VERDICT_MAP: Record<string, 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL'> = {
-  'BUY':          'BUY',
-  'CONSIDER':     'CONDITIONAL',
-  'SKIP':         'SKIP',
-  'UPDATED':      'WAIT',
-  'Top Pick':     'BUY',
-  'Solid Choice': 'CONDITIONAL',
-  'Niche Pick':   'WAIT',
-};
-
-const TOOLHEAD_HREFS: Record<string, string> = {
-  'Stealthburner':      '/voron/toolheads/stealthburner',
-  'XOL':                '/voron/toolheads/xol',
-  'Dragon Burner':      '/voron/toolheads/dragon-burner',
-  'Archetype':          '/voron/toolheads/archetype',
-  'Mini Stealthburner': '/voron/toolheads/mini-stealthburner',
-};
-
-const PRINTER_HREFS: Record<string, string> = {
-  'Voron 2.4':       '/voron',
-  'Voron Trident':   '/voron',
-  'Voron 0.2':       '/voron',
-  'RatRig V-Core 3': '/ratrig',
-  'RatRig':          '/ratrig',
-  'VZBot':           '/vzbot',
-  'HevORT':          '/hevort',
-  'K3':              '/k3',
+const config: DetailConfig = {
+  categoryLabel: 'EXTRUDER',
+  componentType: 'Extruder',
+  titleNoun: 'Extruder',
+  quickSpecs: [
+    { label: 'Gear Ratio', fields: ['Gear Ratio'] },
+    { label: 'Weight', fields: ['Weight (g)'], fmt: (v) => `${v}g` },
+    { label: 'Mount', fields: ['Mount', 'Mount Style'] },
+    { label: 'Ecosystem', fields: ['Ecosystem'], fmt: joinList },
+  ],
+  specs: [
+    { label: 'Gear Ratio', fields: ['Gear Ratio'] },
+    { label: 'Weight', fields: ['Weight (g)'], fmt: (v) => `${v}g` },
+    { label: 'Mount', fields: ['Mount', 'Mount Style'] },
+    { label: 'Drive Type', fields: ['Drive Type', 'Drive'] },
+    { label: 'Ecosystem', fields: ['Ecosystem'], fmt: joinList },
+  ],
 };
 
 export function getStaticPaths() {
-  const toSlug = (name: string) =>
-    name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-  return (extruders as any[])
-    .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
-    .map((r: any) => ({
-      params: { slug: toSlug(r['Name']) },
-      props: { record: r },
-    }));
+  return staticPathsFor(records as any[]);
 }
 
 const { record } = Astro.props as { record: any };
-
-const verdictLabel: 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL' =
-  VERDICT_MAP[record['Verdict']] ?? 'CONDITIONAL';
-
-const pros: string[] = (record['Pros'] ?? '')
-  .split('\n').map((s: string) => s.trim()).filter(Boolean);
-
-const cons: string[] = (record['Cons'] ?? '')
-  .split('\n').map((s: string) => s.trim()).filter(Boolean);
-
-const toolheadNames: string[] = Array.isArray(record['Compatible Toolheads'])
-  ? record['Compatible Toolheads'] : [];
-const toolheadLinks = toolheadNames
-  .map((n: string) => n.trim()).filter(Boolean)
-  .map((n) => ({ name: n, href: TOOLHEAD_HREFS[n] ?? '/hardware' }));
-
-const printerNames: string[] = Array.isArray(record['Compatible Printers'])
-  ? record['Compatible Printers'] : [];
-const printerLinks = printerNames
-  .map((n: string) => n.trim()).filter(Boolean)
-  .map((n) => ({ name: n, href: PRINTER_HREFS[n] ?? '/hardware' }));
-
-const compatibleToolheads = [...toolheadLinks, ...printerLinks];
-
-const quickSpecs = ([
-  record['Gear Ratio']   ? { label: 'Gear Ratio', value: record['Gear Ratio'] }               : null,
-  record['Weight (g)']  != null ? { label: 'Weight',     value: `${record['Weight (g)']}g` }  : null,
-  record['Price (USD)'] != null ? { label: 'Price',      value: `~$${record['Price (USD)']} USD` } : null,
-] as ({ label: string; value: string } | null)[]).filter((s): s is { label: string; value: string } => s !== null);
-
-const specs = ([
-  record['Gear Ratio']   ? { label: 'Gear Ratio',  value: record['Gear Ratio'] }                  : null,
-  record['Weight (g)']  != null ? { label: 'Weight',      value: `${record['Weight (g)']}g` }     : null,
-  record['Price (USD)'] != null ? { label: 'Price (USD)', value: `$${record['Price (USD)']}` }    : null,
-] as ({ label: string; value: string } | null)[]).filter((s): s is { label: string; value: string } => s !== null);
-
-type VendorEntry = { name: string; url: string; price: string; region: 'us'; primary: boolean };
-const vendors: VendorEntry[] = [];
-[1, 2, 3, 4, 5].forEach((n, idx) => {
-  const name = record[`Vendor ${n} Name`] as string | undefined;
-  const url  = record[`Vendor ${n} URL`]  as string | undefined;
-  if (name?.trim()) {
-    vendors.push({ name: name.trim(), url: url ?? '#', price: '', region: 'us', primary: idx === 0 });
-  }
-});
-
-const pageTitle = `${record['Name']} Extruder — Specs, Verdict & Where to Buy — Modern Makes`;
-const primaryVendorUrl = vendors[0]?.url ?? '';
-const heroImageUrl = (record['Image URL'] as string | undefined) ?? '';
-
-type RelatedEntry = { title: string; category: string; href: string };
-const relatedComponents: RelatedEntry[] = [];
-[1, 2, 3].forEach((n) => {
-  const name = record[`Related ${n} Name`] as string | undefined;
-  const href = record[`Related ${n} URL`]  as string | undefined;
-  if (name?.trim()) {
-    relatedComponents.push({ title: name.trim(), category: 'Hardware', href: href ?? '/hardware' });
-  }
-});
-
-const bodyText: string = record['Body'] ?? '';
-const bodyParagraphs: string[] = bodyText
-  .split(/\n\n+/).map((p: string) => p.trim()).filter(Boolean);
-
-const rawDesc: string = record['Description'] ?? '';
-const excerpt = rawDesc.match(/^[^.!?]+[.!?]/) ? rawDesc.match(/^[^.!?]+[.!?]/)![0] : rawDesc;
 ---
-
-<!-- Mark this page for scoped hero-reveal CSS — inline so it's synchronous -->
-<script is:inline>
-  document.documentElement.setAttribute('data-ext-page', 'extruder');
-</script>
-
-<ComponentLayout
-  title={record['Name']}
-  category="EXTRUDER"
-  componentType="Extruder"
-  brand={record['Brand'] ?? ''}
-  price={{ usd: Number(record['Price (USD)']) || 0 }}
-  verdict={record['Verdict Label'] ?? ''}
-  verdictLabel={verdictLabel}
-  excerpt={excerpt}
-  pros={pros}
-  cons={cons}
-  quickSpecs={quickSpecs}
-  compatibleToolheads={compatibleToolheads}
-  specs={specs}
-  vendors={vendors}
-  relatedComponents={relatedComponents}
-  pageTitle={pageTitle}
-  primaryVendorUrl={primaryVendorUrl}
-  heroImageUrl={heroImageUrl}
->
-  {bodyParagraphs.map((para: string) => <p>{para}</p>)}
-</ComponentLayout>
-
-<!-- ── TEXTS-REVEAL + PROS/CONS STAGGER — scoped to extruder pages only ── -->
-<style is:global>
-/* Scope to extruder detail pages only via the inline-set attribute */
-
-/* ── hero entrance — texts reveal (18) ── */
-:root[data-ext-page="extruder"] .comp-brand,
-:root[data-ext-page="extruder"] .comp-title,
-:root[data-ext-page="extruder"] .comp-verdict-row,
-:root[data-ext-page="extruder"] .comp-key-stats {
-  opacity: 0;
-  transform: translateY(var(--stagger-distance));
-  filter: blur(var(--stagger-blur));
-  transition:
-    opacity   var(--stagger-dur) var(--stagger-ease),
-    transform var(--stagger-dur) var(--stagger-ease),
-    filter    var(--stagger-dur) var(--stagger-ease);
-  will-change: opacity, transform, filter;
-}
-
-:root[data-ext-page="extruder"] .comp-hero-info.ext-hero-revealed .comp-brand {
-  opacity: 1; transform: none; filter: none;
-  transition-delay: 0ms;
-}
-:root[data-ext-page="extruder"] .comp-hero-info.ext-hero-revealed .comp-title {
-  opacity: 1; transform: none; filter: none;
-  transition-delay: calc(var(--stagger-stagger) * 1);
-}
-:root[data-ext-page="extruder"] .comp-hero-info.ext-hero-revealed .comp-verdict-row {
-  opacity: 1; transform: none; filter: none;
-  transition-delay: calc(var(--stagger-stagger) * 2);
-}
-:root[data-ext-page="extruder"] .comp-hero-info.ext-hero-revealed .comp-key-stats {
-  opacity: 1; transform: none; filter: none;
-  transition-delay: calc(var(--stagger-stagger) * 3);
-}
-
-/* ── pros/cons staggered entrance ── */
-:root[data-ext-page="extruder"] .comp-pros-list li,
-:root[data-ext-page="extruder"] .comp-cons-list li {
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 350ms ease, transform 350ms ease;
-}
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li,
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li {
-  opacity: 1;
-  transform: translateX(0);
-}
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li:nth-child(1),
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li:nth-child(1) { transition-delay: 0ms; }
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li:nth-child(2),
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li:nth-child(2) { transition-delay: 50ms; }
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li:nth-child(3),
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li:nth-child(3) { transition-delay: 100ms; }
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li:nth-child(4),
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li:nth-child(4) { transition-delay: 150ms; }
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li:nth-child(5),
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li:nth-child(5) { transition-delay: 200ms; }
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-pros-list li:nth-child(n+6),
-:root[data-ext-page="extruder"] .comp-proscons-grid.ext-pc-visible .comp-cons-list li:nth-child(n+6) { transition-delay: 250ms; }
-
-@media (prefers-reduced-motion: reduce) {
-  :root[data-ext-page="extruder"] .comp-brand,
-  :root[data-ext-page="extruder"] .comp-title,
-  :root[data-ext-page="extruder"] .comp-verdict-row,
-  :root[data-ext-page="extruder"] .comp-key-stats,
-  :root[data-ext-page="extruder"] .comp-pros-list li,
-  :root[data-ext-page="extruder"] .comp-cons-list li {
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-}
-</style>
-
-<!-- ── ANIMATION TRIGGERS ── -->
-<script>
-(function () {
-  /* hero reveal — runs on DOMContentLoaded */
-  const heroInfo = document.querySelector('.comp-hero-info') as HTMLElement | null;
-  if (heroInfo) {
-    /* small delay so the page has painted before the animation fires */
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        heroInfo.classList.add('ext-hero-revealed');
-      });
-    });
-  }
-
-  /* pros/cons stagger — IntersectionObserver on the grid */
-  const pcGrid = document.querySelector('.comp-proscons-grid') as HTMLElement | null;
-  if (pcGrid) {
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        pcGrid.classList.add('ext-pc-visible');
-        obs.disconnect();
-      }
-    }, { threshold: 0.15 });
-    obs.observe(pcGrid);
-  }
-})();
-</script>
+<HardwareDetail record={record} config={config} />

@@ -1,141 +1,33 @@
 ---
-/* Hallmark · component: hardware-detail · genre: editorial · theme: Modern-Makes-native
- * transitions: texts-reveal (18) on component header
- * all Airtable fields optional — sparse bed-probes.json data
- */
-import ComponentLayout from '../../../layouts/ComponentLayout.astro';
-import probes from '../../../data/hardware/bed-probes.json';
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/bed-probes.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
 
-const toSlug = (name: string) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+const yesNo = (v: any) => (v === true ? 'Yes' : v === false ? 'No' : String(v));
 
-const VERDICT_MAP: Record<string, 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL'> = {
-  'BUY':      'BUY',
-  'CONSIDER': 'CONDITIONAL',
-  'SKIP':     'SKIP',
-  'UPDATED':  'WAIT',
-};
-
-const TOOLHEAD_HREFS: Record<string, string> = {
-  'Stealthburner':      '/voron/toolheads/stealthburner',
-  'XOL':                '/voron/toolheads/xol',
-  'Dragon Burner':      '/voron/toolheads/dragon-burner',
-  'Archetype':          '/voron/toolheads/archetype',
-  'Mini Stealthburner': '/voron/toolheads/mini-stealthburner',
-};
-
-const PRINTER_HREFS: Record<string, string> = {
-  'Voron 2.4':       '/voron',
-  'Voron Trident':   '/voron',
-  'Voron 0.2':       '/voron',
-  'RatRig V-Core 3': '/ratrig',
-  'RatRig':          '/ratrig',
-  'VZBot':           '/vzbot',
-  'HevORT':          '/hevort',
+const config: DetailConfig = {
+  categoryLabel: 'BED PROBE',
+  componentType: 'Bed Probe',
+  titleNoun: 'Bed Probe',
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Repeatability', fields: ['Repeatability', 'Accuracy (mm)'] },
+    { label: 'Klipper Native', fields: ['Klipper Native'], fmt: yesNo },
+    { label: 'Install Complexity', fields: ['Installation Complexity', 'Install Complexity'] },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Repeatability', fields: ['Repeatability', 'Accuracy (mm)'] },
+    { label: 'Klipper Native', fields: ['Klipper Native'], fmt: yesNo },
+    { label: 'Installation Complexity', fields: ['Installation Complexity', 'Install Complexity'] },
+    { label: 'Open Source', fields: ['Open Source'], fmt: yesNo },
+  ],
 };
 
 export function getStaticPaths() {
-  const toSlug = (name: string) =>
-    name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-  return (probes as any[])
-    .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
-    .map((r: any) => ({
-      params: { slug: toSlug(r['Name'] as string) },
-      props:  { record: r },
-    }));
+  return staticPathsFor(records as any[]);
 }
 
 const { record } = Astro.props as { record: any };
-
-const name:    string = record['Name'] as string;
-const brand:   string = (record['Brand'] as string | undefined) ?? '';
-const verdict: string = (record['Verdict'] as string | undefined) ?? '';
-
-const verdictLabel: 'BUY' | 'SKIP' | 'WAIT' | 'CONDITIONAL' =
-  VERDICT_MAP[verdict] ?? 'CONDITIONAL';
-
-const excerpt: string =
-  (record['Excerpt'] ?? record['Description'] as string | undefined) ??
-  `${name} bed probe — specs, compatibility, and community verdict for Voron and CoreXY builds.`;
-
-/* pros / cons — newline-delimited or absent */
-const pros: string[] = ((record['Pros'] as string | undefined) ?? '')
-  .split('\n').map((s: string) => s.trim()).filter(Boolean);
-const cons: string[] = ((record['Cons'] as string | undefined) ?? '')
-  .split('\n').map((s: string) => s.trim()).filter(Boolean);
-
-/* toolheads + printers combined into one array */
-const toolheadNames: string[] = Array.isArray(record['Compatible Toolheads'])
-  ? record['Compatible Toolheads'] : [];
-const printerNames: string[] = Array.isArray(record['Compatible Printers'])
-  ? record['Compatible Printers'] : [];
-
-const compatibleToolheads = [
-  ...toolheadNames.map((n: string) => ({ name: n.trim(), href: TOOLHEAD_HREFS[n.trim()] ?? '/hardware' })),
-  ...printerNames.map((n: string)  => ({ name: n.trim(), href: PRINTER_HREFS[n.trim()]  ?? '/hardware' })),
-].filter(x => x.name);
-
-/* specs table */
-const specs: { label: string; value: string }[] = [];
-if (record['Probe Type'])    specs.push({ label: 'Probe Type',    value: String(record['Probe Type']) });
-if (record['Max Z Offset'])  specs.push({ label: 'Max Z Offset',  value: String(record['Max Z Offset']) });
-if (record['Sampling Rate']) specs.push({ label: 'Sampling Rate', value: String(record['Sampling Rate']) });
-if (record['Interface'])     specs.push({ label: 'Interface',     value: String(record['Interface']) });
-if (record['Mount Style'])   specs.push({ label: 'Mount Style',   value: String(record['Mount Style']) });
-if (record['Weight (g)'])    specs.push({ label: 'Weight',        value: `${record['Weight (g)']}g` });
-if (record['Part Number'])   specs.push({ label: 'Part Number',   value: String(record['Part Number']) });
-
-/* quick specs sidebar */
-const quickSpecs: { label: string; value: string }[] = [
-  record['Probe Type']  ? { label: 'Type',  value: String(record['Probe Type']) }               : null,
-  record['Price (USD)'] != null ? { label: 'Price', value: `$${record['Price (USD)']} USD` }    : null,
-].filter((x): x is { label: string; value: string } => x !== null);
-
-/* vendors */
-const vendors: { name: string; url: string; price: string; region: 'us' | 'ca' | 'eu' | 'global'; primary?: boolean }[] = [];
-for (let n = 1; n <= 5; n++) {
-  const vName = record[`Vendor ${n} Name`] as string | undefined;
-  const vUrl  = record[`Vendor ${n} URL`]  as string | undefined;
-  if (vName && vUrl) {
-    vendors.push({
-      name:   vName,
-      url:    vUrl,
-      price:  (record[`Vendor ${n} Price`] as string | undefined) ?? '',
-      region: (record[`Vendor ${n} Region`] as 'us' | 'ca' | 'eu' | 'global' | undefined) ?? 'global',
-      primary: n === 1,
-    });
-  }
-}
-
-/* related */
-const relatedComponents: { title: string; category: string; href: string }[] = [];
-for (let n = 1; n <= 3; n++) {
-  const rName = record[`Related ${n} Name`] as string | undefined;
-  const rUrl  = record[`Related ${n} URL`]  as string | undefined;
-  if (rName && rUrl) relatedComponents.push({ title: rName, category: 'Hardware', href: rUrl });
-}
-
-const priceUsd = record['Price (USD)'] as number | undefined;
-const heroImageUrl = record['Image URL'] as string | undefined;
-const primaryVendorUrl = vendors[0]?.url;
 ---
-<ComponentLayout
-  title={name}
-  brand={brand}
-  category="Bed Probe"
-  componentType="Bed Probe"
-  excerpt={excerpt}
-  verdict={verdict}
-  verdictLabel={verdictLabel}
-  price={priceUsd != null ? { usd: priceUsd } : { usd: 0 }}
-  specs={specs}
-  quickSpecs={quickSpecs}
-  vendors={vendors}
-  compatibleToolheads={compatibleToolheads}
-  relatedComponents={relatedComponents}
-  heroImageUrl={heroImageUrl}
-  primaryVendorUrl={primaryVendorUrl}
-  pageTitle={`${name} Bed Probe — Specs, Verdict & Where to Buy — Modern Makes`}
-  pros={pros}
-  cons={cons}
-/>
+<HardwareDetail record={record} config={config} />
