@@ -524,6 +524,7 @@
       "RatRig V-Core"
     ],
     "Description": "Mellow3D all-metal integrated hotend designed for large-format and high-speed 3D printers. The 'Air' designation indicates air-cooled heatsink (vs water-cooled). 'Lite' indicates a reduced-weight variant. Part of the DualVelo product family. All-metal construction with no PTFE in the melt zone.",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 300,
     "Image URL": "/media/hardware/hotends/dualvelo-air-lite.webp",
     "Vendor 1 Name": "Mellow3D",
@@ -532,7 +533,7 @@
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-dualvelo-air-lite-all-metal-hotend-extruder-for-large-format-3d-printers-high-speed-diy-3d-printing",
     "Brand": "Mellow3D",
     "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:54:23.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",
@@ -544,6 +545,7 @@
       "large-format CoreXY"
     ],
     "Description": "Triangle Lab's Compact High Conduction XL — a Volcano-format all-metal hotend. Extends the CHC Pro design with a longer heat block for higher flow using large-format or Volcano nozzles. All-metal construction with no PTFE in the melt zone. Compatible with standard V6 heaters and cartridges. Popular in the VzBot community for high-temp, high-flow printing.",
+    "Verdict": "Workhorse",
     "Max Temp (°C)": 300,
     "Nozzle Thread": "V6",
     "Heater Type": "MCH Ceramic",
@@ -557,7 +559,7 @@
     "Brand": "Triangle Lab",
     "Price (USD)": 128,
     "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:54:19.000Z"
   },
   {
     "id": "recy7WC7NNzNHzUqW",
@@ -606,6 +608,7 @@
     "Fan Size": "4010",
     "Max Flow (mm³/s)": 100,
     "Description": "Phaetus' next-generation high-flow hotend successor to the Rapido 2. Features an EndCoat titanium alloy heatbreak for reduced heat creep, copper alloy heating block for improved thermal mass, and an aluminum heatsink. Rated for over 100 mm³/s flow and up to 1300 mm/s print speeds per Phaetus claims. V6 nozzle compatible.",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 300,
     "Nozzle Thread": "V6",
     "Heater Type": "60W Ceramic",
@@ -620,7 +623,7 @@
     "Heat Break": "EndCoat Titanium Alloy",
     "Price (USD)": 89.99,
     "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation",
-    "Updated": "2026-06-30T00:15:49.000Z"
+    "Updated": "2026-06-30T03:54:29.000Z"
   },
   {
     "id": "reczz9oIVsXB06Bg1",
