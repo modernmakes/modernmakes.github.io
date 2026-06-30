@@ -29,7 +29,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-rapido-hotend-2-plus-1203166802.jpg?v=1762424050",
+    "Image URL": "/media/hardware/hotends/rapido-2-plus-hf.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -82,7 +82,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-uhf-blue-1-75mm-rapido-plus-hotend-1203167092.png?v=1762424284",
+    "Image URL": "/media/hardware/hotends/rapido-2-plus-uhf.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -135,7 +135,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0767/1421/3653/files/phaetus-store-hotend-rapido-hotend-2-1203166968.png?v=1762424161",
+    "Image URL": "/media/hardware/hotends/rapido-2f.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -189,7 +189,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "/media/hardware/hotends/Rapido-2-HF.webp",
+    "Image URL": "/media/hardware/hotends/rapido-2-hf.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -273,7 +273,7 @@
     "Nozzle Thread": "M6 Volcano (UHF) / M6 V6 via adapter",
     "Heater Type": "Cartridge",
     "Heat Block": "Plated copper extended",
-    "Image URL": "/media/hardware/hotends/Rapido-2-UHF.webp",
+    "Image URL": "/media/hardware/hotends/rapido-2-uhf.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
@@ -320,7 +320,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0574/8129/8105/files/20241107_143927_2_1.jpg?v=1759948102",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Takeoff",
       "Custom community mounts"
@@ -360,7 +360,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0596/0692/5480/files/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled-west3d-3d-printing-supplies-mellow-5874929.jpg?v=1752698776",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -401,7 +401,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0596/0692/5480/files/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled-west3d-3d-printing-supplies-mellow-5874929.jpg?v=1752698776",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -443,7 +443,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper",
-    "Image URL": "https://excit3d.shop/uploads/1774104591129-402034.jpeg",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -487,7 +487,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper",
-    "Image URL": "https://excit3d.shop/uploads/1774104591129-402034.jpeg",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -540,7 +540,7 @@
     "Nozzle Thread": "V6",
     "Heater Type": "MCH Ceramic",
     "Heat Block": "CHC WR (Wear Resistant)",
-    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPAT/UPAT086/2503/13/photo/cbff87002c.jpg",
+    "Image URL": "/media/hardware/hotends/",
     "Thermistor": "PT1000",
     "Vendor 1 Name": "West3D",
     "Name": "CHC XL",
@@ -571,7 +571,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0574/8129/8105/files/20250619_104751_1_2.jpg?v=1759948052",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Takeoff",
       "Custom community mounts"
@@ -600,7 +600,7 @@
     "Nozzle Thread": "V6",
     "Heater Type": "60W Ceramic",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://www.fabreeko.com/cdn/shop/files/no_background.png?v=1781649910",
+    "Image URL": "/media/hardware/hotends/rapido-x.webp",
     "Thermistor": "PT1000",
     "Vendor 1 Name": "Fabreeko",
     "Name": "Rapido X",
@@ -631,7 +631,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "https://cdn.shopify.com/s/files/1/0574/8129/8105/files/7P7A4660.jpg?v=1778684512",
+    "Image URL": "/media/hardware/hotends/",
     "Compatible Toolheads": [
       "Stealthburner",
       "Dragon Burner"
