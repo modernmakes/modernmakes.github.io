@@ -105,10 +105,13 @@ const itemListSchema = {
             const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
             return (
               <a href={`/hardware/hotends/${slug}`} class="card gf-card" data-verdict={r['Verdict']?.toLowerCase() ?? ''}>
-                <div class="card-img" style="background:linear-gradient(135deg,#1a0e0a,#0d1520)">
-                  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
-                  <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">HOTEND</span>
-                </div>
+                {r['Image URL'] && (
+                  <div class="card-img" style="background:linear-gradient(135deg,#1a0e0a,#0d1520)">
+                    <img src={r['Image URL']} alt={r['Name']} loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+                    <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">HOTEND</span>
+                  </div>
+                )}
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
                   <h2 class="card-title">{r['Name']}</h2>
