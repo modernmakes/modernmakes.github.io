@@ -706,7 +706,9 @@ Schema injected via `<script type="application/ld+json" slot="head">` — Base.a
 
 \- \*\*`toSlug`\*\* must be defined inside `getStaticPaths` AND again in the frontmatter render section separately — it is not accessible across both due to Astro hoisting
 
-\- \*\*Case-sensitive file paths\*\* on Linux/GitHub Pages — Windows dev doesn't catch mismatches; 404s on existing images almost always trace to case mismatch. Voron images: `public/Media/ecosystems/Voron/` (capital V)
+\- \*\*Case-sensitive file paths\*\* on Linux/GitHub Pages — Windows dev doesn't catch mismatches; 404s on existing images almost always trace to case mismatch. All media lives under lowercase, hyphenated paths: `public/media/ecosystems/voron/`, `public/media/articles/`, `public/media/hardware/[category]/`
+
+\- \*\*Media path rule\*\* — All paths under `public/media/` are lowercase, hyphenated, no spaces — GitHub Pages is case-sensitive (Linux). This applies to folder names, filenames, and every reference to them in code or content.
 
 \- \*\*`typecast: true`\*\* required on all Airtable write operations (update\_records, create\_records) — without it, singleSelect fields with new values fail silently
 

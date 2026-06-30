@@ -4,7 +4,7 @@ category: "PRINTER"
 date: 2026-06-01
 readTime: "6 min read"
 excerpt: "Bambu Lab's A2L brings 330×320×325mm build volume and hybrid accessory rail to the A-series lineup at $469. The hardware is solid. The 'second generation' branding is debatable."
-heroImage: "/Media/articles/2026/06/bambu-lab-a2l-released/hero.webp"
+heroImage: "/media/articles/2026/06/bambu-lab-a2l-released/hero.webp"
 featured: true
 summary:
   - "Build volume: 330×320×325mm — roughly twice the A1, similar to H-series machines"
