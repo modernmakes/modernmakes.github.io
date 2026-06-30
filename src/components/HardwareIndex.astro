@@ -20,9 +20,10 @@ interface Props {
   title: string;          // <title> / meta
   description: string;    // meta description
   schemaName: string;     // ItemList schema name
-  gradient?: string;      // card image gradient
+  gradient?: string;      // card image gradient (shown behind the image when one exists)
   chips?: (r: any) => string[];        // spec chips per card
   excerptOf?: (r: any) => string;      // card excerpt
+  imageOf?: (r: any) => string | null | undefined;  // card image URL source
 }
 
 const {
@@ -40,6 +41,7 @@ const {
   gradient = 'linear-gradient(135deg,#1a0e0a,#0d1520)',
   chips = () => [],
   excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
+  imageOf = (r: any) => r['Image URL'] ?? r['Hero Image'] ?? null,
 } = Astro.props;
 
 const VERDICT_BADGE: Record<string, { cls: string; label: string }> = {
@@ -131,12 +133,17 @@ const itemListSchema = {
           {records.map((r: any) => {
             const slug = toSlug(r['Name']);
             const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
+            const imgSrc = imageOf(r);
+            const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
             return (
               <a href={`/hardware/${route}/${slug}`} class="card gf-card" data-verdict={r['Verdict']?.toLowerCase() ?? ''}>
-                <div class="card-img" style={`background:${gradient}`}>
-                  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
-                  <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">{categoryLabel}</span>
-                </div>
+                {hasImg && (
+                  <div class="card-img" style={`background:${gradient}`}>
+                    <img src={imgSrc} alt={r['Name']} loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+                    <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">{categoryLabel}</span>
+                  </div>
+                )}
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
                   <h2 class="card-title">{r['Name']}</h2>
