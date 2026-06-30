@@ -21,7 +21,7 @@
     "Related 3 URL": "/hardware/hotends/rapido-2f",
     "Vendor 3 Affiliate": true,
     "Weight (g)": 75,
-    "Verdict": "Buy",
+    "Verdict": "Workhorse",
     "Max Temp (°C)": 350,
     "Related 3 Name": "Rapido 2F",
     "Vendor 4 Affiliate": true,
@@ -49,7 +49,7 @@
     "Price (USD)": 99,
     "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
-    "Updated": "2026-06-30T00:15:23.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
@@ -74,7 +74,7 @@
     "Related 3 URL": "/hardware/hotends/rapido-2f",
     "Vendor 3 Affiliate": true,
     "Weight (g)": 75,
-    "Verdict": "Buy",
+    "Verdict": "Workhorse",
     "Max Temp (°C)": 350,
     "Related 3 Name": "Rapido 2F",
     "Vendor 4 Affiliate": true,
@@ -102,7 +102,7 @@
     "Price (USD)": 109,
     "Pros": "75 mm³/s — highest flow in the Rapido 2 family\n350°C ceiling for all exotic materials\nPT1000 for accurate high-temp readings\nFull toolhead ecosystem compatibility\nBest pick for speed-focused enclosed builds",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-06-30T00:15:34.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -127,7 +127,7 @@
     "Related 3 URL": "/hardware/hotends/rapido-2-uhf",
     "Vendor 3 Affiliate": true,
     "Weight (g)": 58,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 350,
     "Related 3 Name": "Rapido 2 UHF",
     "Vendor 4 Affiliate": true,
@@ -156,7 +156,7 @@
     "Price (USD)": 75,
     "Pros": "350°C ceiling with PT1000 for exotic materials\nMost compact form factor in the Rapido 2 family\nLightest weight — benefits high-acceleration toolheads\nLowest price in the lineup at $75\nGood fit for bowden or light-duty direct drive setups",
     "Related 1 URL": "/hardware/hotends/rapido-2-hf",
-    "Updated": "2026-06-30T00:15:43.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -181,7 +181,7 @@
     "Related 3 URL": "/hardware/hotends/rapido-2f",
     "Vendor 3 Affiliate": true,
     "Weight (g)": 75,
-    "Verdict": "Buy",
+    "Verdict": "Workhorse",
     "Max Temp (°C)": 290,
     "Related 3 Name": "Rapido 2F",
     "Vendor 4 Affiliate": true,
@@ -209,7 +209,7 @@
     "Price (USD)": 89,
     "Pros": "Excellent flow for standard filaments\nWell-documented community support\nCompatible with all major Voron toolheads\nAffordable entry into the Rapido 2 family\nPT100 upgrade available via Plus variant",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-06-30T00:14:11.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -224,7 +224,7 @@
     "Description": "Boutique all-steel water-cooled hotend by a solo designer. The filament path uses a proprietary hardened steel surface (not CVD) that the designer claims is as hard as tungsten carbide — enabling elastic sealing while resisting abrasive filament indefinitely. 550°C max, 39.5mm meltzone, 46g, 4x M3 Ø16mm mounting. Sold in small production batches direct via email. Currently sold out.",
     "Verdict Label": "$220 USD | currently sold out | water cooling required",
     "Weight (g)": 46,
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 550,
     "Nozzle Thread": "M6x1 — 7mm thread engagement",
     "Heater Type": "Ø6x cartridge (20–35mm)",
@@ -240,7 +240,7 @@
     "Heat Break": "Steel, Ø2.00mm bore, proprietary hardened surface",
     "Price (USD)": 220,
     "Pros": "All-steel construction with proprietary hardened surface — harder than abrasive filament fiber, never wears\nMeltzone dimensions remain constant after 1000kg of filled filament\n550°C max temp — highest of any currently available hotend\n39.5mm meltzone length enables extremely high flow rates\nSpring rate >1500N/mm — exceptionally stiff, eliminates flex artifacts\nStandard M6x1 nozzle thread, 4x M3 Ø16mm mounting (Voron standard)\nFree integration STEP/STL files on website",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:49:04.000Z"
   },
   {
     "id": "recPc9uC0INefKqim",
@@ -265,7 +265,7 @@
     "Related 3 URL": "/hardware/extruders/orbiter-v2",
     "Vendor 3 Affiliate": true,
     "Weight (g)": 53.6,
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Max Temp (°C)": 290,
     "Related 3 Name": "Orbiter Extruder v2",
     "Vendor 4 Affiliate": true,
@@ -296,7 +296,7 @@
     "Price (USD)": 99,
     "Pros": "75 mm³/s max flow, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
     "Related 1 URL": "/hardware/hotends/phaetus-dragon-hf",
-    "Updated": "2026-06-30T00:14:21.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Vendor 5 Affiliate": true,
     "Related 2 URL": "/hardware/hotends/e3d-revo-voron"
   },
@@ -315,7 +315,7 @@
     "Description": "The Chube Conduction is the flagship of the Chube lineup, using thermal conduction through the mount structure to cool the hotend rather than a dedicated fan. This allows a longer 52mm meltzone and the highest flow rate in the family. It targets builders running enclosed, high-chamber-temp setups where fan-based cooling is a liability.",
     "Verdict Label": "The highest-flow Chube variant — conduction cooling removes the fan bottleneck entirely.",
     "Weight (g)": 85,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
     "Body": "The Conduction variant is where Chube's design philosophy gets most ambitious. By removing the fan and relying on thermal conduction through the mounting hardware, it eliminates one of the consistent failure points in high-chamber-temp builds: the hotend cooling fan.\n\nIn an enclosed printer running 60–70°C chamber temps, fan-cooled hotends work harder and can develop heat creep issues at sustained high flow. The Conduction sidesteps this entirely — the mount structure becomes the heatsink. The tradeoff is that this only works if your toolhead and mount are designed to conduct heat away efficiently, which limits compatible configurations compared to the Air variant.\n\nAt 52mm meltzone and support for up to 47.5mm heater cartridges (higher wattage options), the Conduction has the highest theoretical flow ceiling in the Chube lineup. For the right enclosed build — Voron 2.4 or Trident with a properly spec'd toolhead — it's a genuinely interesting alternative to water cooling.",
     "Nozzle Thread": "V6 (M6)",
@@ -338,7 +338,7 @@
     "Price (USD)": 95,
     "Pros": "Conduction cooling eliminates fan dependency\nHighest flow ceiling in the Chube lineup\n500°C max temp\nV6 nozzle compatibility\nM3 hardware throughout\n52mm meltzone — longest in the family\nUp to 47.5mm heater cartridge support for higher wattage",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-06-30T00:45:55.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -356,7 +356,7 @@
     "Verdict Label": "A VzBoT-designed extreme-flow hotend — unmatched meltzone at this price, but not a beginner install.",
     "Vendor 2 URL": "https://northprint3d.ca/product/vzbot-mellow-goliath-lsd-hotend/",
     "Weight (g)": 95,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 550,
     "Body": "The Goliath is the hotend the VzBoT team built because nothing else was fast enough for their printer. A 50mm meltzone paired with a 100W nichrome heater and a 550°C ceiling puts it in a different category than anything Phaetus or E3D offers at this price point. On AliExpress it regularly lands under $35.\n\nThe Dragon-compatible mount pattern is the key to its wide adoption. It drops into Stealthburner, XOL, Dragon Burner, and most toolheads with minimal modification. That's a significant advantage for a hotend with this kind of spec.\n\nThe installation experience is less polished than a Rapido 2. The nichrome wire needs to be routed and bent carefully — do it wrong and the wire fatigues and breaks. The PT1000 M3 thread strips easily if you overtighten. The fan is not included and needs to be sourced and mounted separately. These are manageable for an experienced builder but worth knowing before you order.\n\nFor VzBoT users it's the obvious choice. For Voron builders willing to do the setup work, it's one of the best value high-flow options available.",
     "Nozzle Thread": "V6 (M6)",
@@ -381,7 +381,7 @@
     "Price (USD)": 30,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
     "Related 1 URL": "/hardware/hotends/goliath-water",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:49:04.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -398,7 +398,7 @@
     "Verdict Label": "The water-cooled Goliath unlocks the full meltzone potential — for builds already running liquid cooling.",
     "Vendor 2 URL": "https://northprint3d.ca/product/vzbot-mellow-goliath-lsd-hotend/",
     "Weight (g)": 105,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 550,
     "Body": "The Goliath Water is the same hotend as the Air variant with the heatsink swapped out for a water block and fittings. Everything else — meltzone, heater, heatbreak, nozzle thread, mount pattern — is identical.\n\nThe reason to choose it over the Air is sustained high-speed printing. Air cooling works until chamber temps climb or print speeds push sustained flow rates past what the heatsink can dissipate. Water cooling removes that ceiling. For VzBoT builds or any printer already running a water cooling loop, it's the natural choice.\n\nFor standard Voron builds that aren't already water-cooled, the infrastructure cost is significant. A pump, reservoir, radiator, tubing, and fittings add complexity and cost that most builders don't have headroom for. The Air variant covers the vast majority of use cases. The Water variant is for builds where it doesn't.",
     "Nozzle Thread": "V6 (M6)",
@@ -423,7 +423,7 @@
     "Price (USD)": 45,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:49:04.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -441,7 +441,7 @@
     "Verdict Label": "Same Tricorn hardware, fan dependency removed — best for high-temperature enclosed builds.",
     "Vendor 2 URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
     "Weight (g)": 65,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
     "Body": "The Tricorn Conduction is the same hotend as the Air variant with the active heatsink replaced by a conduction cooling block that transfers heat through the toolhead mount structure. For builders running high-chamber-temperature enclosures — 60°C and above — it eliminates the most common thermal failure mode: the heatsink fan struggling against ambient heat.\n\nThe tradeoff is that conduction cooling only works as well as the mount design allows. The toolhead and carriage need to be spec'd for it. There are fewer validated configurations than the air variant, and the community examples are more sparse. This is a more specialized install than the standard Tricorn Air.\n\nWhere it earns its place is exactly where the Chube Conduction earns its: enclosed Voron builds with elevated chamber temps and a builder who wants to eliminate the fan as a variable. At roughly the same price as other conduction-cooled options from more established brands, the Tricorn Conduction offers a genuinely novel heatbreak geometry that competitors don't match.",
     "Nozzle Thread": "V6 (M6)",
@@ -468,7 +468,7 @@
     "Price (USD)": 95,
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:49:04.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -486,7 +486,7 @@
     "Verdict Label": "An open-source hotend that re-thinks the heat block from first principles — and mostly gets it right.",
     "Vendor 2 URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
     "Weight (g)": 65,
-    "Verdict": "Buy",
+    "Verdict": "Workhorse",
     "Max Temp (°C)": 500,
     "Body": "The Tricorn gets noticed because it does something unusual: it inverts the heatbreak so the threads sit outside the melt zone rather than inside it. The practical result is better thermal isolation and a cleaner boundary between the cold and hot zones. It's not a marginal improvement — it changes the geometry of heat transfer in a way that most conventional hotend designs don't address.\n\nThe heater arrangement is equally unconventional. Three 40W 4mm cartridges instead of one 6mm cartridge. The combined surface area is higher, the wattage headroom is substantial, and if one cartridge fails you still have two. 4mm cartridges are less commonly stocked at general electronics suppliers, which is the main sourcing consideration.\n\nThe M3/M4 hardware-only rule is a quality-of-life decision that experienced builders will appreciate immediately. No M2.5 screws to strip. No M1.6 anything. Every fastener on the unit is a size that most builders already own drivers for.\n\nThe air-cooled variant is the standard install. The conduction variant is for enclosed high-temperature builds where chamber temperatures make fan-cooled heatsinks work harder than they should. Both share the same Dragon-compatible mount, so existing toolhead mounts work without modification.\n\nThe project is open-source under CC BY-NC 4.0, manufactured by Excit3D, Fabreeko, and Lettucehead3D. Physical units are vendor-specific in some details — check your vendor's spec sheet before ordering.",
     "Nozzle Thread": "V6 (M6)",
@@ -513,7 +513,7 @@
     "Price (USD)": 85,
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
-    "Updated": "2026-06-30T00:45:55.000Z"
+    "Updated": "2026-06-30T03:49:04.000Z"
   },
   {
     "id": "rech7SSLjkyKP1SzQ",
@@ -574,7 +574,7 @@
     "Description": "The Chube Air is a high-flow, air-cooled hotend from Luke's Lab designed around V6 nozzle compatibility and all M3 hardware. With a 500°C max temp ceiling and a 42mm meltzone, it targets prosumer builders who want extreme temperature headroom without proprietary nozzle lock-in.",
     "Verdict Label": "A genuinely original high-flow design — impressive specs, but ecosystem support is still maturing.",
     "Weight (g)": 80,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
     "Body": "The Chube Air makes a strong first impression on paper: 500°C ceiling, V6 nozzle compatibility, all M3 hardware, and a 42mm meltzone. For builders frustrated by proprietary nozzle systems or tiny M2.5 screws that strip on the third swap, Chube's design philosophy directly addresses real pain points.\n\nThe V6 compatibility is the most practically meaningful feature. Your existing nozzle library works. Brass, hardened, CHT variants — they all thread in. The same applies to heater cartridges and the 3x15mm thermistor sensor, which is the standard form factor most Voron builders already stock.\n\nThe gap right now is ecosystem maturity. Phaetus and E3D have years of community configs, mounting solutions, and documented quirks. Chube is newer, the reseller network is thinner, and there are fewer Klipper config examples to pull from. For early adopters willing to do some groundwork, the hardware is legitimately interesting. For builders who want a plug-and-play experience, the Rapido 2 family is still the safer bet.",
     "Nozzle Thread": "V6 (M6)",
@@ -597,7 +597,7 @@
     "Price (USD)": 85,
     "Pros": "500°C max temp — highest ceiling in its class\nV6 nozzle compatibility — use your existing stock\nM3 hardware throughout — no tiny screws to strip\nStandard 3x15mm thermistor cartridge\n6x20–22mm heater cartridge compatibility\n42mm meltzone length",
     "Related 1 URL": "/hardware/hotends/chube-conduction",
-    "Updated": "2026-06-30T00:45:55.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -636,7 +636,7 @@
     "Description": "The Chube Compact is the smallest member of the Chube family, with a 22.23mm OD and 48.5mm length. It uses a 6x16mm heater cartridge (upgradeable to 6x20mm) and a 33mm meltzone. Designed for toolhead designs where space and mass are a constraint but 500°C headroom is still desired.",
     "Verdict Label": "A compact V6-compatible hotend with 500°C headroom — best for weight-sensitive toolheads.",
     "Weight (g)": 55,
-    "Verdict": "Consider",
+    "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
     "Body": "The Chube Compact occupies the same niche as the Rapido 2F — small, light, still capable of high temperatures — but with V6 nozzle compatibility as the differentiator. At 22.23mm OD it fits toolhead designs that the larger Air and Conduction variants can't.\n\nThe 33mm meltzone and 45 mm³/s ceiling are real limitations. This isn't a high-throughput hotend. But if your use case is a compact toolhead on a Voron running standard materials at moderate speed with occasional high-temp filament (PA, PC), the 500°C ceiling gives you that headroom without needing a larger body.\n\nAt $65 it's the entry point into the Chube family and the easiest to justify as a trial. If Chube's V6-native approach appeals to you, the Compact is the lowest-risk way to evaluate it before committing to the Air or Conduction variants.",
     "Nozzle Thread": "V6 (M6)",
@@ -659,7 +659,7 @@
     "Price (USD)": 65,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-06-30T00:45:55.000Z",
+    "Updated": "2026-06-30T03:49:04.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]
