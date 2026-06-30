@@ -49,7 +49,7 @@
     "Price (USD)": 99,
     "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
-    "Updated": "2026-06-02",
+    "Updated": "2026-06-30T00:15:23.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
@@ -102,7 +102,7 @@
     "Price (USD)": 109,
     "Pros": "75 mm³/s — highest flow in the Rapido 2 family\n350°C ceiling for all exotic materials\nPT1000 for accurate high-temp readings\nFull toolhead ecosystem compatibility\nBest pick for speed-focused enclosed builds",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-06-02",
+    "Updated": "2026-06-30T00:15:34.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -156,7 +156,7 @@
     "Price (USD)": 75,
     "Pros": "350°C ceiling with PT1000 for exotic materials\nMost compact form factor in the Rapido 2 family\nLightest weight — benefits high-acceleration toolheads\nLowest price in the lineup at $75\nGood fit for bowden or light-duty direct drive setups",
     "Related 1 URL": "/hardware/hotends/rapido-2-hf",
-    "Updated": "2026-06-02",
+    "Updated": "2026-06-30T00:15:43.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -209,7 +209,7 @@
     "Price (USD)": 89,
     "Pros": "Excellent flow for standard filaments\nWell-documented community support\nCompatible with all major Voron toolheads\nAffordable entry into the Rapido 2 family\nPT100 upgrade available via Plus variant",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-06-02",
+    "Updated": "2026-06-30T00:14:11.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -239,7 +239,7 @@
     "Heat Break": "Steel, Ø2.00mm bore, proprietary hardened surface",
     "Price (USD)": 220,
     "Pros": "All-steel construction with proprietary hardened surface — harder than abrasive filament fiber, never wears\nMeltzone dimensions remain constant after 1000kg of filled filament\n550°C max temp — highest of any currently available hotend\n39.5mm meltzone length enables extremely high flow rates\nSpring rate >1500N/mm — exceptionally stiff, eliminates flex artifacts\nStandard M6x1 nozzle thread, 4x M3 Ø16mm mounting (Voron standard)\nFree integration STEP/STL files on website",
-    "Updated": "2026-06-29"
+    "Updated": "2026-06-29T22:42:52.000Z"
   },
   {
     "id": "recPc9uC0INefKqim",
@@ -295,7 +295,7 @@
     "Price (USD)": 99,
     "Pros": "75 mm³/s max flow, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
     "Related 1 URL": "/hardware/hotends/phaetus-dragon-hf",
-    "Updated": "2026-06-02",
+    "Updated": "2026-06-30T00:14:21.000Z",
     "Vendor 5 Affiliate": true,
     "Related 2 URL": "/hardware/hotends/e3d-revo-voron"
   },
@@ -337,6 +337,7 @@
     "Price (USD)": 95,
     "Pros": "Conduction cooling eliminates fan dependency\nHighest flow ceiling in the Chube lineup\n500°C max temp\nV6 nozzle compatibility\nM3 hardware throughout\n52mm meltzone — longest in the family\nUp to 47.5mm heater cartridge support for higher wattage",
     "Related 1 URL": "/hardware/hotends/chube-air",
+    "Updated": "2026-06-30T00:14:51.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -378,7 +379,8 @@
     "Heat Break": "Copper-Zirconia Bi-Material",
     "Price (USD)": 30,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
-    "Related 1 URL": "/hardware/hotends/goliath-water"
+    "Related 1 URL": "/hardware/hotends/goliath-water",
+    "Updated": "2026-06-30T00:14:54.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -419,7 +421,8 @@
     "Heat Break": "Copper-Zirconia Bi-Material",
     "Price (USD)": 45,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
-    "Related 1 URL": "/hardware/hotends/goliath-air"
+    "Related 1 URL": "/hardware/hotends/goliath-air",
+    "Updated": "2026-06-30T00:14:56.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -463,7 +466,8 @@
     "Heat Break": "Inverted Bi-Metal",
     "Price (USD)": 95,
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
-    "Related 1 URL": "/hardware/hotends/tricorn-air"
+    "Related 1 URL": "/hardware/hotends/tricorn-air",
+    "Updated": "2026-06-30T00:14:59.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -507,7 +511,8 @@
     "Heat Break": "Inverted Bi-Metal",
     "Price (USD)": 85,
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
-    "Related 1 URL": "/hardware/hotends/tricorn-conduction"
+    "Related 1 URL": "/hardware/hotends/tricorn-conduction",
+    "Updated": "2026-06-30T00:14:57.000Z"
   },
   {
     "id": "rech7SSLjkyKP1SzQ",
@@ -524,7 +529,8 @@
     "Type": "All-metal",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-dualvelo-air-lite-all-metal-hotend-extruder-for-large-format-3d-printers-high-speed-diy-3d-printing",
     "Brand": "Mellow3D",
-    "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation"
+    "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation",
+    "Updated": "2026-06-29T23:39:42.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",
@@ -548,7 +554,8 @@
     "Vendor 1 URL": "https://west3d.com/products/chc-xl-extreme-high-flow-hot-end-wear-resistant-air-or-water-cooled",
     "Brand": "Triangle Lab",
     "Price (USD)": 128,
-    "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing"
+    "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
+    "Updated": "2026-06-30T00:15:00.000Z"
   },
   {
     "id": "recy7WC7NNzNHzUqW",
@@ -588,6 +595,7 @@
     "Price (USD)": 85,
     "Pros": "500°C max temp — highest ceiling in its class\nV6 nozzle compatibility — use your existing stock\nM3 hardware throughout — no tiny screws to strip\nStandard 3x15mm thermistor cartridge\n6x20–22mm heater cartridge compatibility\n42mm meltzone length",
     "Related 1 URL": "/hardware/hotends/chube-conduction",
+    "Updated": "2026-06-30T00:14:49.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -609,7 +617,8 @@
     "Brand": "Phaetus",
     "Heat Break": "EndCoat Titanium Alloy",
     "Price (USD)": 89.99,
-    "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation"
+    "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation",
+    "Updated": "2026-06-30T00:15:49.000Z"
   },
   {
     "id": "reczz9oIVsXB06Bg1",
@@ -648,6 +657,7 @@
     "Price (USD)": 65,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
+    "Updated": "2026-06-30T00:14:53.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]
