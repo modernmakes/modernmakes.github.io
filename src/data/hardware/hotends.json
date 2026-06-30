@@ -189,7 +189,7 @@
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "/media/hardware/hotends/Rapido-2-HF.webp",
+    "Image URL": "/media/hardware/hotends/apido-2-HF.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
