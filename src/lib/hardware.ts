@@ -29,6 +29,65 @@ const VERDICT_MAP: Record<string, Verdict> = {
 export const canonicalVerdict = (raw: unknown): Verdict =>
   (typeof raw === 'string' && VERDICT_MAP[raw]) || 'CONSIDER';
 
+// ── Verdict taxonomy ─────────────────────────────────────────────────────────
+// The site's verdict taxonomy is Workhorse / Bleeding Edge / Skip. A record's
+// stored "Verdict" may use that, the prior Buy / Consider / Skip values, or
+// legacy Top Pick / Solid Choice / Niche Pick labels — across inconsistent
+// casing, and only Hotends has been migrated in Airtable so far. resolveVerdict
+// maps any of these (case-insensitive) onto a display bucket; any other
+// non-empty token passes through as its own neutral badge/tab so categories
+// with their own values (e.g. Budget / Mid / Top) still render and filter.
+export interface VerdictBucket {
+  key: string;   // stable, lowercase, hyphenated — used for filter matching
+  label: string; // display text
+  cls: string;   // badge css class (defined in global.css)
+}
+
+export const VERDICT_BUCKETS: VerdictBucket[] = [
+  { key: 'workhorse',     label: 'Workhorse',     cls: 'verdict-best' },
+  { key: 'bleeding-edge', label: 'Bleeding Edge', cls: 'verdict-rec' },
+  { key: 'skip',          label: 'Skip',          cls: 'verdict-skip' },
+];
+
+const VERDICT_ALIAS: Record<string, string> = {
+  workhorse: 'workhorse',
+  buy: 'workhorse',
+  'top pick': 'workhorse',
+  'bleeding edge': 'bleeding-edge',
+  consider: 'bleeding-edge',
+  'solid choice': 'bleeding-edge',
+  'niche pick': 'bleeding-edge',
+  skip: 'skip',
+};
+
+const titleCase = (s: string) => s.trim().replace(/\b\w/g, (c) => c.toUpperCase());
+
+export const resolveVerdict = (raw: unknown): VerdictBucket | null => {
+  if (typeof raw !== 'string' || !raw.trim()) return null;
+  const known = VERDICT_ALIAS[raw.trim().toLowerCase()];
+  if (known) return VERDICT_BUCKETS.find((b) => b.key === known) ?? null;
+  // Unknown but present — keep it visible rather than dropping the record.
+  return { key: raw.trim().toLowerCase().replace(/\s+/g, '-'), label: titleCase(raw), cls: 'verdict-rec' };
+};
+
+// Ordered, counted verdict tabs present in a record set: canonical buckets
+// first (in defined order), then any passthrough tokens by frequency.
+export const buildVerdictTabs = (records: any[]): (VerdictBucket & { count: number })[] => {
+  const seen = new Map<string, VerdictBucket & { count: number }>();
+  for (const r of records) {
+    const t = resolveVerdict(r?.['Verdict']);
+    if (!t) continue;
+    const cur = seen.get(t.key);
+    if (cur) cur.count++;
+    else seen.set(t.key, { ...t, count: 1 });
+  }
+  const rank = (k: string) => {
+    const i = VERDICT_BUCKETS.findIndex((b) => b.key === k);
+    return i === -1 ? 99 : i;
+  };
+  return [...seen.values()].sort((a, b) => rank(a.key) - rank(b.key) || b.count - a.count);
+};
+
 // Known ecosystem links — shared by every category's sidebar chips.
 export const TOOLHEAD_HREFS: Record<string, string> = {
   Stealthburner: '/voron/toolheads/stealthburner',
@@ -98,7 +157,7 @@ const splitLines = (raw: unknown): string[] =>
  * mirroring the proven /hardware/hotends/[slug] mapping exactly.
  */
 export function buildDetailProps(record: any, config: DetailConfig) {
-  const verdictLabel = canonicalVerdict(record['Verdict']);
+  const verdictLabel = resolveVerdict(record['Verdict'])?.label ?? 'Bleeding Edge';
 
   const pros = splitLines(record['Pros']);
   const cons = splitLines(record['Cons']);

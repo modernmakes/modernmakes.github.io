@@ -42,7 +42,7 @@ interface Props {
   brand: string;
   price: { usd: number; cad?: number };
   verdict: string;
-  verdictLabel: 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED';
+  verdictLabel: string;
   heroImage?: string;
   maxTemp?: number;
   maxFlow?: number;
@@ -88,13 +88,18 @@ const {
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
 
+// Keyed by display label (current taxonomy) with the prior tokens kept for
+// back-compat. Lookup is case-insensitive so "WORKHORSE"/"Workhorse" both hit.
 const verdictColors: Record<string, { bg: string; text: string; border: string }> = {
-  BUY:      { bg: 'rgba(34,197,94,.12)',  text: '#16a34a', border: 'rgba(34,197,94,.3)' },
-  CONSIDER: { bg: 'rgba(59,130,246,.12)', text: '#1565c0', border: 'rgba(59,130,246,.3)' },
-  SKIP:     { bg: 'rgba(140,140,140,.14)', text: '#5a5a5a', border: 'var(--border-s)' },
-  UPDATED:  { bg: 'rgba(255,90,31,.12)',  text: '#c93b08', border: 'rgba(255,90,31,.3)' },
+  workhorse:       { bg: 'rgba(34,197,94,.12)',  text: '#16a34a', border: 'rgba(34,197,94,.3)' },
+  'bleeding edge': { bg: 'rgba(59,130,246,.12)', text: '#1565c0', border: 'rgba(59,130,246,.3)' },
+  skip:            { bg: 'rgba(140,140,140,.14)', text: '#5a5a5a', border: 'var(--border-s)' },
+  // Back-compat with the prior verdict tokens.
+  buy:      { bg: 'rgba(34,197,94,.12)',  text: '#16a34a', border: 'rgba(34,197,94,.3)' },
+  consider: { bg: 'rgba(59,130,246,.12)', text: '#1565c0', border: 'rgba(59,130,246,.3)' },
+  updated:  { bg: 'rgba(255,90,31,.12)',  text: '#c93b08', border: 'rgba(255,90,31,.3)' },
 };
-const vc = verdictColors[verdictLabel] ?? verdictColors.CONSIDER;
+const vc = verdictColors[String(verdictLabel).toLowerCase()] ?? verdictColors['bleeding edge'];
 
 const regionLabels: Record<string, string> = {
   us: 'US',

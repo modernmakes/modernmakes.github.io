@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { toSlug } from '../../lib/hardware';
 import hotendsData        from '../../data/hardware/hotends.json';
 import extrudersData      from '../../data/hardware/extruders.json';
 import bedProbesData      from '../../data/hardware/bed-probes.json';
@@ -47,14 +48,24 @@ const categories = [
   { name: 'Printers',           description: 'Self-build and kit CoreXY printers — build volume, frame, BOM cost, and difficulty.', href: '/hardware/printers',         count: len(printersData),       icon: '🖨️' },
 ].map((c) => ({ ...c, live: true }));
 
+// Pull the featured hotend's product image straight from its record so the
+// card matches the hotends index/detail (same "Image URL" field).
+const hotendImage = (slug: string): string | null => {
+  const rec = (hotendsData as any[]).find(
+    (r) => typeof r['Name'] === 'string' && toSlug(r['Name']) === slug,
+  );
+  return (rec?.['Image URL'] as string | undefined) ?? null;
+};
+
 const featured = [
   {
     title: 'Phaetus Rapido 2 UHF',
     category: 'Hotend',
-    verdict: 'BUY',
+    verdict: 'WORKHORSE',
     verdictColor: '#2E7D32',
     verdictBg: '#E8F5E9',
     href: '/hardware/hotends/rapido-2-uhf',
+    image: hotendImage('rapido-2-uhf'),
     description: '60 mm³/s max flow. The benchmark high-flow hotend for CoreXY builds in 2026.',
     gradient: 'linear-gradient(135deg, #1a0e0a, #0d1520)',
   },
@@ -65,6 +76,7 @@ const featured = [
     verdictColor: '#1565C0',
     verdictBg: '#E3F2FD',
     href: '/hardware/motion/mammoth-awd-gantry-300',
+    image: null,
     description: 'All-wheel-drive gantry conversion for Voron 2.4. Adds two additional stepper motors for dramatically improved belt tension consistency and higher cornering speeds. Designed by @mammoth-3D-DevTeam.',
     gradient: 'linear-gradient(135deg, #0d1520, #1a1510)',
   },
@@ -75,6 +87,7 @@ const featured = [
     verdictColor: '#5A5A5A',
     verdictBg: '#F5F5F5',
     href: '/hardware/motion/corexy',
+    image: null,
     description: 'How CoreXY kinematics work and which printers use this motion architecture.',
     gradient: 'linear-gradient(135deg, #101520, #0d0d18)',
   },
@@ -110,6 +123,8 @@ const featured = [
         {featured.map(f => (
           <a href={f.href} class="hw-feat-card">
             <div class="hw-feat-img" style={`background:${f.gradient}`}>
+              {f.image && <img src={f.image} alt={f.title} loading="lazy" decoding="async" class="hw-feat-img-el" />}
+              {f.image && <div class="hw-feat-img-scrim" aria-hidden="true"></div>}
               <span class="hw-feat-cat">{f.category}</span>
             </div>
             <div class="hw-feat-body">
@@ -233,12 +248,28 @@ const featured = [
 }
 .hw-feat-card:hover { border-color: var(--border-s); transform: translateY(-2px); }
 .hw-feat-img {
+  position: relative;
+  overflow: hidden;
   aspect-ratio: 16/9;
   display: flex;
   align-items: flex-end;
   padding: 12px 14px;
 }
+.hw-feat-img-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hw-feat-img-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.5), transparent 60%);
+}
 .hw-feat-cat {
+  position: relative;
+  z-index: 1;
   font-family: var(--fu);
   font-size: 9px;
   font-weight: 700;

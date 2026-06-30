@@ -6,7 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
-import { VERDICT_ORDER, toSlug } from '../lib/hardware';
+import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug } from '../lib/hardware';
 
 interface Props {
   records: any[];
@@ -44,30 +44,20 @@ const {
   imageOf = (r: any) => r['Image URL'] ?? r['Hero Image'] ?? null,
 } = Astro.props;
 
-const VERDICT_BADGE: Record<string, { cls: string; label: string }> = {
-  BUY:            { cls: 'verdict-best', label: 'Buy' },
-  CONSIDER:       { cls: 'verdict-rec',  label: 'Consider' },
-  SKIP:           { cls: 'verdict-skip', label: 'Skip' },
-  UPDATED:        { cls: 'verdict-upd',  label: 'Updated' },
-  'Top Pick':     { cls: 'verdict-best', label: 'Top Pick' },
-  'Solid Choice': { cls: 'verdict-rec',  label: 'Solid Choice' },
-  'Niche Pick':   { cls: 'verdict-upd',  label: 'Niche Pick' },
+// Verdict badges/tabs resolve through the shared taxonomy helper so every
+// category renders Workhorse / Bleeding Edge / Skip consistently, while any
+// other stored token (legacy or category-specific) still passes through.
+const verdictRank = (rawV: any) => {
+  const t = resolveVerdict(rawV);
+  const i = t ? VERDICT_BUCKETS.findIndex((b) => b.key === t.key) : -1;
+  return i === -1 ? 99 : i;
 };
 
 const records = (raw as any[])
   .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
-  .sort((a: any, b: any) => {
-    const ai = VERDICT_ORDER.indexOf(a['Verdict'] ?? '');
-    const bi = VERDICT_ORDER.indexOf(b['Verdict'] ?? '');
-    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-  });
+  .sort((a: any, b: any) => verdictRank(a['Verdict']) - verdictRank(b['Verdict']));
 
-const verdictCounts: Record<string, number> = { all: records.length };
-for (const v of VERDICT_ORDER) {
-  const n = records.filter((r: any) => r['Verdict'] === v).length;
-  if (n > 0) verdictCounts[v] = n;
-}
-const activeVerdicts = VERDICT_ORDER.filter((v) => (verdictCounts[v] ?? 0) > 0);
+const verdictTabs = buildVerdictTabs(records);
 
 const noun = (n: number) => (n === 1 ? nounSingular : nounPlural);
 
@@ -112,10 +102,10 @@ const itemListSchema = {
           All
           <span class="gf-badge">{records.length}</span>
         </button>
-        {activeVerdicts.map((v) => (
-          <button class="gf-tab" data-verdict={v.toLowerCase()} data-slug={v.toLowerCase().replace(/\s+/g, '-')} aria-pressed="false">
-            {v}
-            <span class="gf-badge">{verdictCounts[v]}</span>
+        {verdictTabs.map((t) => (
+          <button class="gf-tab" data-verdict={t.key} data-slug={t.key} aria-pressed="false">
+            {t.label}
+            <span class="gf-badge">{t.count}</span>
           </button>
         ))}
       </div>
@@ -132,11 +122,11 @@ const itemListSchema = {
         <div class="grid-3" id="hw-grid">
           {records.map((r: any) => {
             const slug = toSlug(r['Name']);
-            const badge = VERDICT_BADGE[r['Verdict']] ?? { cls: 'verdict-rec', label: r['Verdict'] ?? '' };
+            const v = resolveVerdict(r['Verdict']);
             const imgSrc = imageOf(r);
             const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
             return (
-              <a href={`/hardware/${route}/${slug}`} class="card gf-card" data-verdict={r['Verdict']?.toLowerCase() ?? ''}>
+              <a href={`/hardware/${route}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''}>
                 {hasImg && (
                   <div class="card-img" style={`background:${gradient}`}>
                     <img src={imgSrc} alt={r['Name']} loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
@@ -152,7 +142,7 @@ const itemListSchema = {
                   </div>
                   <p class="card-excerpt">{excerptOf(r)}</p>
                   <div class="card-footer">
-                    {badge.label && <span class={`verdict ${badge.cls}`}>{badge.label}</span>}
+                    {v && <span class={`verdict ${v.cls}`}>{v.label}</span>}
                   </div>
                 </div>
               </a>

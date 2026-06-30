@@ -1,16 +1,10 @@
 ---
 import ComponentLayout from '../../../layouts/ComponentLayout.astro';
 import hotends from '../../../data/hardware/hotends.json';
+import { resolveVerdict } from '../../../lib/hardware';
 
 const toSlug = (name: string) =>
   name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-
-const VERDICT_MAP: Record<string, 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED'> = {
-  'Top Pick':     'BUY',
-  'Solid Choice': 'CONSIDER',
-  'Niche Pick':   'CONSIDER',
-  'Skip':         'SKIP',
-};
 
 const TOOLHEAD_HREFS: Record<string, string> = {
   'Stealthburner': '/voron/toolheads/stealthburner',
@@ -42,8 +36,7 @@ export function getStaticPaths() {
 
 const { record } = Astro.props as { record: any };
 
-const verdictLabel: 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED' =
-  VERDICT_MAP[record['Verdict']] ?? 'CONSIDER';
+const verdictLabel = resolveVerdict(record['Verdict'])?.label ?? 'Bleeding Edge';
 
 const pros: string[] = (record['Pros'] ?? '')
   .split(/\r?\n/).map((s: string) => s.trim()).filter(Boolean);
