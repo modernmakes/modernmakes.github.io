@@ -229,6 +229,7 @@
     "Nozzle Thread": "M6x1 — 7mm thread engagement",
     "Heater Type": "Ø6x cartridge (20–35mm)",
     "Heat Block": "Steel, water-cooled block with barb fittings (3mm / 1/8\" tubing)",
+    "Image URL": "/media/hardware/hotends/v9.webp",
     "Thermistor": "Custom Ø3x15mm cartridge",
     "Vendor 1 Name": "V9 Hotend (direct, via email)",
     "Name": "V9 Hotend v9.2",
@@ -239,7 +240,7 @@
     "Heat Break": "Steel, Ø2.00mm bore, proprietary hardened surface",
     "Price (USD)": 220,
     "Pros": "All-steel construction with proprietary hardened surface — harder than abrasive filament fiber, never wears\nMeltzone dimensions remain constant after 1000kg of filled filament\n550°C max temp — highest of any currently available hotend\n39.5mm meltzone length enables extremely high flow rates\nSpring rate >1500N/mm — exceptionally stiff, eliminates flex artifacts\nStandard M6x1 nozzle thread, 4x M3 Ø16mm mounting (Voron standard)\nFree integration STEP/STL files on website",
-    "Updated": "2026-06-29T22:42:52.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "recPc9uC0INefKqim",
@@ -320,7 +321,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/chube-conduction.webp",
     "Compatible Toolheads": [
       "Takeoff",
       "Custom community mounts"
@@ -337,7 +338,7 @@
     "Price (USD)": 95,
     "Pros": "Conduction cooling eliminates fan dependency\nHighest flow ceiling in the Chube lineup\n500°C max temp\nV6 nozzle compatibility\nM3 hardware throughout\n52mm meltzone — longest in the family\nUp to 47.5mm heater cartridge support for higher wattage",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-06-30T00:14:51.000Z",
+    "Updated": "2026-06-30T00:45:55.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -361,7 +362,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/goliath-air.webp",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -380,7 +381,7 @@
     "Price (USD)": 30,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
     "Related 1 URL": "/hardware/hotends/goliath-water",
-    "Updated": "2026-06-30T00:14:54.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -403,7 +404,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Nichrome Wire",
     "Heat Block": "Nickel-Plated Copper",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/goliath-water.webp",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -422,7 +423,7 @@
     "Price (USD)": 45,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
-    "Updated": "2026-06-30T00:14:56.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -446,7 +447,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/tricorn-conduction.webp",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -467,7 +468,7 @@
     "Price (USD)": 95,
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
-    "Updated": "2026-06-30T00:14:59.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -491,7 +492,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/tricorn-air.webp",
     "Compatible Toolheads": [
       "Stealthburner (Dragon printhead)",
       "Dragon Burner",
@@ -512,7 +513,7 @@
     "Price (USD)": 85,
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
-    "Updated": "2026-06-30T00:14:57.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "rech7SSLjkyKP1SzQ",
@@ -524,13 +525,14 @@
     ],
     "Description": "Mellow3D all-metal integrated hotend designed for large-format and high-speed 3D printers. The 'Air' designation indicates air-cooled heatsink (vs water-cooled). 'Lite' indicates a reduced-weight variant. Part of the DualVelo product family. All-metal construction with no PTFE in the melt zone.",
     "Max Temp (°C)": 300,
+    "Image URL": "/media/hardware/hotends/dualvelo-air-lite.webp",
     "Vendor 1 Name": "Mellow3D",
     "Name": "DualVelo Air Lite",
     "Type": "All-metal",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-dualvelo-air-lite-all-metal-hotend-extruder-for-large-format-3d-printers-high-speed-diy-3d-printing",
     "Brand": "Mellow3D",
     "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation",
-    "Updated": "2026-06-29T23:39:42.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",
@@ -546,7 +548,7 @@
     "Nozzle Thread": "V6",
     "Heater Type": "MCH Ceramic",
     "Heat Block": "CHC WR (Wear Resistant)",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/chc-xl.webp",
     "Thermistor": "PT1000",
     "Vendor 1 Name": "West3D",
     "Name": "CHC XL",
@@ -555,7 +557,7 @@
     "Brand": "Triangle Lab",
     "Price (USD)": 128,
     "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
-    "Updated": "2026-06-30T00:15:00.000Z"
+    "Updated": "2026-06-30T00:45:55.000Z"
   },
   {
     "id": "recy7WC7NNzNHzUqW",
@@ -578,7 +580,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/chube-air.webp",
     "Compatible Toolheads": [
       "Takeoff",
       "Custom community mounts"
@@ -595,7 +597,7 @@
     "Price (USD)": 85,
     "Pros": "500°C max temp — highest ceiling in its class\nV6 nozzle compatibility — use your existing stock\nM3 hardware throughout — no tiny screws to strip\nStandard 3x15mm thermistor cartridge\n6x20–22mm heater cartridge compatibility\n42mm meltzone length",
     "Related 1 URL": "/hardware/hotends/chube-conduction",
-    "Updated": "2026-06-30T00:14:49.000Z",
+    "Updated": "2026-06-30T00:45:55.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -640,7 +642,7 @@
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
-    "Image URL": "/media/hardware/hotends/",
+    "Image URL": "/media/hardware/hotends/chube-compact.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "Dragon Burner"
@@ -657,7 +659,7 @@
     "Price (USD)": 65,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-06-30T00:14:53.000Z",
+    "Updated": "2026-06-30T00:45:55.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]
