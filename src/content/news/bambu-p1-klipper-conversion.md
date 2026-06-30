@@ -4,7 +4,6 @@ excerpt: "ChazMakes' Bambu Klipper Conversion project gives P1 owners a document
 category: "NEWS"
 date: "2026-06-25"
 readTime: "4 min read"
-heroImage: "/media/articles/2025/06/bambu-p1-klipper-conversion/hero.webp"
 currentPath: "/news"
 ---
 
