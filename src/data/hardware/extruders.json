@@ -684,26 +684,6 @@
     "Mount": "Orbiter"
   },
   {
-    "id": "recsBvQstRmglwF1m",
-    "Cons": "Requires BMG gear kit purchased separately; printed body; HevORT-specific mount limits cross-platform compatibility",
-    "Community Rating": 4,
-    "Description": "The original HextrudORT by MirageC79, designed for the HevORT printer's carriage. Uses Bondtech BMG gearing (50:17 dual drive) in an ultra-compact printed body. The Vz-HextrudORT in this database is the VzBot community's adaptation — for HevORT builds, this is the reference design.",
-    "Verdict Label": "HevORT-Native — BMG gearing in an ultra-light HevORT carriage mount",
-    "Ecosystem": [
-      "HevORT"
-    ],
-    "Verdict": "CONSIDER",
-    "Vendor 1 Name": "GitHub (MirageC79)",
-    "Name": "HextrudORT",
-    "Gear Ratio": "50:17",
-    "Vendor 1 URL": "https://miragec79.github.io/HextrudORT/",
-    "Brand": "MirageC79",
-    "Drive Type": "Dual",
-    "Pros": "Designed specifically for HevORT carriage; BMG-derived dual drive (50:17); ultra-light printed body; free/OSS; source design for the popular VzBot community adaptation",
-    "Updated": "2026-06-27",
-    "Mount": "Custom"
-  },
-  {
     "id": "rectO0o6ndqe359Lw",
     "Cons": "Requires HGX-Lite gear kit — additional cost on top of printed parts\nSmaller community install base vs Sherpa Mini or Orbiter\nPrinted plastic body — less rigid than CNC alternatives\nFewer pre-built toolhead integrations than LGX Lite or Sherpa",
     "Community Rating": 4,
