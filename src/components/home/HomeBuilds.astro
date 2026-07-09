@@ -7,31 +7,31 @@
   <div class="builds-inner">
 
     <header class="builds-head">
-      <span class="builds-eyebrow">Builds &amp; Prosumer</span>
-      <h2 id="builds-heading" class="builds-title">For the people who read the BOM twice.</h2>
-      <a href="/guides" class="builds-all">All build content →</a>
+      <span class="builds-eyebrow" data-reveal>Builds &amp; Prosumer</span>
+      <h2 id="builds-heading" class="builds-title" data-reveal data-reveal-delay="80">For the people who read the BOM twice.</h2>
+      <a href="/guides" class="builds-all" data-reveal data-reveal-delay="160">All build content <span class="arrow">→</span></a>
     </header>
 
     <div class="builds-grid">
 
       <!-- Feature article -->
-      <a href="/voron/builds/voron-24-bom-2026" class="build-feature" aria-label="Feature build article">
+      <a href="/voron/builds/voron-24-bom-2026" class="build-feature" data-reveal data-reveal-delay="120" aria-label="Feature build article">
         <article>
-          <div class="build-feature-img" aria-hidden="true">
+          <div class="build-feature-img" data-reveal="trigger" aria-hidden="true">
             <div class="build-feature-img-inner">
               <svg width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                <rect x="30" y="30" width="140" height="140" rx="4" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <rect x="55" y="55" width="90" height="90" rx="3" stroke="#FF5A1F" stroke-width=".75" stroke-dasharray="4 3" opacity=".4"/>
-                <circle cx="100" cy="100" r="22" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
-                <circle cx="100" cy="100" r="6" fill="#FF5A1F" opacity=".5"/>
-                <line x1="30" y1="100" x2="55" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <line x1="145" y1="100" x2="170" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <line x1="100" y1="30" x2="100" y2="55" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <line x1="100" y1="145" x2="100" y2="170" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-                <rect x="30" y="30" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
-                <rect x="162" y="30" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
-                <rect x="30" y="162" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
-                <rect x="162" y="162" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect class="bp-outer" x="30" y="30" width="140" height="140" rx="4" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <rect class="bp-inner" x="55" y="55" width="90" height="90" rx="3" stroke="#FF5A1F" stroke-width=".75" stroke-dasharray="4 3" opacity=".4"/>
+                <circle class="bp-ring" cx="100" cy="100" r="22" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+                <circle class="bp-dot" cx="100" cy="100" r="6" fill="#FF5A1F" opacity=".5"/>
+                <line class="bp-line" x1="30" y1="100" x2="55" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <line class="bp-line" x1="145" y1="100" x2="170" y2="100" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <line class="bp-line" x1="100" y1="30" x2="100" y2="55" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <line class="bp-line" x1="100" y1="145" x2="100" y2="170" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+                <rect class="bp-corner" x="30" y="30" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect class="bp-corner" x="162" y="30" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect class="bp-corner" x="30" y="162" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
+                <rect class="bp-corner" x="162" y="162" width="8" height="8" rx="1" fill="rgba(255,90,31,.25)"/>
               </svg>
             </div>
             <div class="build-feature-img-overlay"></div>
@@ -51,7 +51,7 @@
       <!-- Side cards -->
       <div class="build-cards">
 
-        <a href="/voron/hotends#rapido-2" class="build-card">
+        <a href="/voron/hotends#rapido-2" class="build-card" data-reveal="right" data-reveal-delay="200">
           <article>
             <div class="build-card-img img-rapido" aria-hidden="true"></div>
             <div class="build-card-body">
@@ -66,7 +66,7 @@
           </article>
         </a>
 
-        <a href="/guides/cf-pa12" class="build-card">
+        <a href="/guides/cf-pa12" class="build-card" data-reveal="right" data-reveal-delay="280">
           <article>
             <div class="build-card-img img-pa12" aria-hidden="true"></div>
             <div class="build-card-body">
@@ -81,7 +81,7 @@
           </article>
         </a>
 
-        <a href="/guides/galileo-2-vs-orbiter-2" class="build-card">
+        <a href="/guides/galileo-2-vs-orbiter-2" class="build-card" data-reveal="right" data-reveal-delay="360">
           <article>
             <div class="build-card-img img-mod-hotend" aria-hidden="true"></div>
             <div class="build-card-body">
@@ -162,17 +162,23 @@
   align-items: stretch;
 }
 
-/* Feature article */
-.build-feature {
+/* Feature article — section-scoped (0,2,0) so this transition wins over the
+   shared reveal utility's :where() transition; hover stays crisp while
+   opacity + filter carry the 600ms reveal. */
+.builds .build-feature {
   display: block;
   background: #1c1c1c;
   border: 1px solid rgba(255,255,255,.07);
   border-radius: 10px;
   overflow: hidden;
-  transition: border-color .15s, transform .15s;
+  transition:
+    border-color .15s var(--stagger-ease),
+    transform    .15s var(--stagger-ease),
+    opacity      var(--stagger-dur) var(--stagger-ease),
+    filter       var(--stagger-dur) var(--stagger-ease);
   height: 100%;
 }
-.build-feature:hover {
+.builds .build-feature:hover {
   border-color: rgba(255,255,255,.18);
   transform: translateY(-2px);
 }
@@ -262,16 +268,20 @@
   gap: 8px;
   height: 100%;
 }
-.build-card {
+.builds .build-card {
   display: block;
   background: #222;
   border: 1px solid rgba(255,255,255,.07);
   border-radius: 10px;
   overflow: hidden;
-  transition: border-color .15s, transform .15s;
+  transition:
+    border-color .15s var(--stagger-ease),
+    transform    .15s var(--stagger-ease),
+    opacity      var(--stagger-dur) var(--stagger-ease),
+    filter       var(--stagger-dur) var(--stagger-ease);
   flex: 1;
 }
-.build-card:hover {
+.builds .build-card:hover {
   border-color: rgba(255,255,255,.18);
   transform: translateX(2px);
 }
@@ -328,6 +338,38 @@
   background: rgba(255,255,255,.2);
   flex-shrink: 0;
 }
+
+/* ── Blueprint draw-on (M6, signature moment) ──────────────────────────
+   When the SVG container reveals, the technical drawing draws itself:
+   strokes trace on, the center dot pulses like a status LED, corner squares
+   pop. Gated behind .js (so no-JS/crawlers see the finished drawing) and
+   prefers-reduced-motion. Fixed dasharray values measured from the paths. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .build-feature-img .bp-outer  { stroke-dasharray: 560; stroke-dashoffset: 560; }
+  .js .build-feature-img .bp-ring   { stroke-dasharray: 139; stroke-dashoffset: 139; }
+  .js .build-feature-img .bp-line   { stroke-dasharray: 25;  stroke-dashoffset: 25; }
+  .js .build-feature-img .bp-inner  { opacity: 0; }
+  .js .build-feature-img .bp-dot    { opacity: 0; }
+  .js .build-feature-img .bp-corner { transform: scale(0); transform-box: fill-box; transform-origin: center; }
+
+  .build-feature-img.is-revealed .bp-outer  { animation: bp-draw 1.4s var(--stagger-ease) forwards; }
+  .build-feature-img.is-revealed .bp-inner  { animation: bp-fade 600ms ease-in-out 200ms forwards; }
+  .build-feature-img.is-revealed .bp-ring   { animation: bp-draw 1s var(--stagger-ease) 400ms forwards; }
+  .build-feature-img.is-revealed .bp-line   { animation: bp-draw 500ms var(--stagger-ease) 550ms forwards; }
+  .build-feature-img.is-revealed .bp-dot    { animation: bp-dot-in 500ms ease 900ms forwards, bp-pulse 3s ease-in-out 1400ms infinite; }
+  .build-feature-img.is-revealed .bp-corner { animation: bp-pop 200ms var(--stagger-ease) forwards; }
+  /* Corners are the 3rd–6th <rect> (after bp-outer, bp-inner) */
+  .build-feature-img.is-revealed .bp-corner:nth-of-type(3) { animation-delay: 1000ms; }
+  .build-feature-img.is-revealed .bp-corner:nth-of-type(4) { animation-delay: 1060ms; }
+  .build-feature-img.is-revealed .bp-corner:nth-of-type(5) { animation-delay: 1120ms; }
+  .build-feature-img.is-revealed .bp-corner:nth-of-type(6) { animation-delay: 1180ms; }
+}
+@keyframes bp-draw   { to { stroke-dashoffset: 0; } }
+@keyframes bp-fade   { from { opacity: 0; } to { opacity: .4; } }
+@keyframes bp-dot-in { from { opacity: 0; } to { opacity: .5; } }
+/* Status-LED breathe */
+@keyframes bp-pulse  { 0%, 100% { opacity: .5; } 50% { opacity: .85; } }
+@keyframes bp-pop    { to { transform: scale(1); } }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {

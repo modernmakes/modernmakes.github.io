@@ -127,6 +127,9 @@ img { display: block; max-width: 100%; height: auto; }
   }
   /* Axis variant — slide in from the right for vertical rails (Builds side cards) */
   .js [data-reveal="right"]:not(.is-revealed) { transform: translateX(12px); }
+  /* Silent trigger — receives .is-revealed to drive child animations (e.g. the
+     Builds blueprint draw-on) without any visual hidden state of its own. */
+  .js [data-reveal="trigger"]:not(.is-revealed) { opacity: 1; transform: none; filter: none; }
 }
 
 /* ── ARROW HOVER (M8 — standardized) ──────────────────────────────────
