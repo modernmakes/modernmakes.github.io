@@ -83,11 +83,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     // IO scripts. Elements only start hidden under .js + prefers-reduced-motion.
     const revealEls = document.querySelectorAll('[data-reveal]');
     if (revealEls.length) {
+      // Compress staggers on narrow viewports so single-column reveals don't drag.
+      const delayScale = window.innerWidth <= 640 ? 0.5 : 1;
       const io = new IntersectionObserver((entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
           const el = e.target as HTMLElement;
-          const delay = Number(el.getAttribute('data-reveal-delay') ?? 0);
+          const delay = Number(el.getAttribute('data-reveal-delay') ?? 0) * delayScale;
           setTimeout(() => el.classList.add('is-revealed'), delay);
           io.unobserve(el);
         }
