@@ -48,7 +48,7 @@ function bgStyle(slide: any) {
           <h2 class="hero-title">{defaultSlide.title}</h2>
           <p class="hero-excerpt">{defaultSlide.excerpt}</p>
           <div class="hero-meta">
-            <span class="hero-read-cta">Read article →</span>
+            <span class="hero-read-cta">Read article <span class="arrow">→</span></span>
           </div>
         </div>
       </a>
@@ -62,13 +62,6 @@ function bgStyle(slide: any) {
     width: 100%;
     height: 620px;
     overflow: hidden;
-    opacity: 0;
-    animation: hero-enter 600ms 80ms cubic-bezier(0.4,0,0.2,1) forwards;
-  }
-
-  @keyframes hero-enter {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
   }
 
   .hero-slides {
@@ -97,13 +90,45 @@ function bgStyle(slide: any) {
     background-repeat: no-repeat;
   }
 
-  .hero-bg.kb-active {
-    animation: ken-burns 7s ease-out forwards;
+  /* Entrance choreography + perpetual ambient drift (M2).
+     Gated behind no-preference; under reduce the bg + copy sit at rest.
+     Above the fold, so keyframes + animation-delay drive it — not IO. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-bg.kb-active {
+      /* entrance fade/settle hands off seamlessly (scale 1.04) to the loop */
+      animation:
+        hero-bg-in 900ms var(--stagger-ease) both,
+        ken-burns  36s ease-in-out 900ms infinite alternate;
+      will-change: transform;
+    }
+    .hero-cat     { animation: hero-rise var(--stagger-dur) var(--stagger-ease) 250ms both; }
+    .hero-title   { animation: hero-rise var(--stagger-dur) var(--stagger-ease) 330ms both; }
+    .hero-excerpt { animation: hero-rise var(--stagger-dur) var(--stagger-ease) 410ms both; }
+    .hero-meta    { animation: hero-rise var(--stagger-dur) var(--stagger-ease) 490ms both; }
   }
 
+  @keyframes hero-bg-in {
+    from { opacity: 0; transform: scale(1.06); }
+    to   { opacity: 1; transform: scale(1.04); }
+  }
+
+  /* 36s alternate = never a visible loop seam, never dead (fixes F2) */
   @keyframes ken-burns {
-    from { transform: scale(1); }
-    to   { transform: scale(1.04); }
+    from { transform: scale(1.04) translate(0, 0); }
+    to   { transform: scale(1.08) translate(-1.2%, 0.8%); }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--stagger-distance));
+      filter: blur(var(--stagger-blur));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
   }
 
   .hero-overlay {
@@ -185,13 +210,18 @@ function bgStyle(slide: any) {
     font-weight: 600;
     color: rgba(255,255,255,.55);
     letter-spacing: .04em;
+    transition: color 200ms var(--stagger-ease);
   }
+
+  /* Hover response on the full-bleed link (was inert) — CTA colour + arrow slide.
+     Arrow slide is driven by the global `a:hover .arrow` rule. */
+  .hero-content:hover .hero-read-cta,
+  .hero-content:focus-visible .hero-read-cta { color: var(--accent); }
 
   /* ── REDUCED MOTION ── */
   @media (prefers-reduced-motion: reduce) {
-    .hero { animation: none; opacity: 1; transform: none; }
-    .hero-bg.kb-active { animation: none; }
     .hero-slide { transition: none; }
+    .hero-read-cta { transition: none; }
   }
 
   /* ── ULTRAWIDE ── */
