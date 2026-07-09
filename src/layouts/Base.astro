@@ -78,6 +78,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </main>
   <slot name="footer" />
   <script>
+    // Shared scroll-reveal (M1) — one observer for every [data-reveal] on the page.
+    // Adds .is-revealed, staggered by data-reveal-delay. Replaces the per-section
+    // IO scripts. Elements only start hidden under .js + prefers-reduced-motion.
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if (revealEls.length) {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          const delay = Number(el.getAttribute('data-reveal-delay') ?? 0);
+          setTimeout(() => el.classList.add('is-revealed'), delay);
+          io.unobserve(el);
+        }
+      }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+      revealEls.forEach((el) => io.observe(el));
+      // Failsafe: background tab / headless render / observer never fires.
+      setTimeout(() => revealEls.forEach((el) => el.classList.add('is-revealed')), 1600);
+    }
+  </script>
+  <script>
     document.querySelectorAll('form[data-nl]').forEach(form => {
       form.addEventListener('submit', e => {
         e.preventDefault();

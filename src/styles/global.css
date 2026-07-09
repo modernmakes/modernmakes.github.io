@@ -103,6 +103,41 @@ img { display: block; max-width: 100%; height: auto; }
   outline-offset: 2px;
 }
 
+/* ── SCROLL REVEAL (M1 — shared utility) ──────────────────────────────
+   [data-reveal] elements rise + de-blur into place. One IntersectionObserver
+   in Base.astro adds .is-revealed (staggered via data-reveal-delay). Hidden
+   only under .js + prefers-reduced-motion, so no-JS, crawlers, and reduce
+   users see everything instantly. Reuses the "texts reveal (18)" tokens.
+   1600ms failsafe reveal lives in the observer. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(var(--stagger-distance));
+    filter: blur(var(--stagger-blur));
+    transition:
+      opacity   var(--stagger-dur) var(--stagger-ease),
+      transform var(--stagger-dur) var(--stagger-ease),
+      filter    var(--stagger-dur) var(--stagger-ease);
+  }
+  /* Axis variant — slide in from the right for vertical rails (Builds side cards) */
+  .js [data-reveal="right"] { transform: translateX(12px); }
+  .js [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ── ARROW HOVER (M8 — standardized) ──────────────────────────────────
+   Wrap trailing → glyphs in <span class="arrow">; slides on link hover. */
+.arrow {
+  display: inline-block;
+  transition: transform 200ms var(--stagger-ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrow { transition: none; }
+}
+
 /* ── TYPOGRAPHY ── */
 .display    { font-family: var(--fd); font-weight: 800; letter-spacing: -0.4px; line-height: 1.05; }
 .body-prose { font-family: var(--fb); font-size: 15px; line-height: 1.8; color: var(--g1); }
