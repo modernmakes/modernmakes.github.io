@@ -11,10 +11,17 @@ interface Props {
   href: string;
   /** CSS gradient/colour string for the top band */
   topColor: string;
+  /** When set, the card joins the shared scroll-reveal with this stagger delay (ms) */
+  revealDelay?: number;
 }
-const { category, name, description, verdict, price, href, topColor } = Astro.props;
+const { category, name, description, verdict, price, href, topColor, revealDelay } = Astro.props;
 ---
-<a class="glass-card" href={href}>
+<a
+  class="glass-card"
+  href={href}
+  data-reveal={revealDelay !== undefined ? '' : undefined}
+  data-reveal-delay={revealDelay}
+>
   <div class="gc-band" style={`background: ${topColor};`} aria-hidden="true"></div>
   <div class="gc-body">
     <p class="gc-category">{category}</p>
@@ -34,6 +41,7 @@ const { category, name, description, verdict, price, href, topColor } = Astro.pr
 
   .glass-card {
     display: block;
+    position: relative; /* anchors the specular sweep pseudo */
     text-decoration: none;
     color: inherit;
     background: rgba(255, 255, 255, 0.04);
@@ -57,6 +65,27 @@ const { category, name, description, verdict, price, href, topColor } = Astro.pr
   .glass-card:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
+  }
+
+  /* Specular sweep — a skewed light strip crosses the glass face on hover.
+     Clipped by the card's overflow:hidden; the "glass" payoff moment (M3). */
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+    transform: translateX(-140%) skewX(-16deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .glass-card:hover::after { animation: gc-sweep 650ms ease; }
+  @keyframes gc-sweep {
+    0%   { opacity: 0;   transform: translateX(-140%) skewX(-16deg); }
+    30%  { opacity: 0.35; }
+    100% { opacity: 0;   transform: translateX(260%)  skewX(-16deg); }
   }
 
   .gc-band {
@@ -140,5 +169,6 @@ const { category, name, description, verdict, price, href, topColor } = Astro.pr
   @media (prefers-reduced-motion: reduce) {
     .glass-card { transition: none; }
     .glass-card:hover, .glass-card:active { transform: none; }
+    .glass-card:hover::after { animation: none; }
   }
 </style>

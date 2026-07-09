@@ -40,10 +40,10 @@ const featuredTopColors = [
     <div class="fhw-container">
       <header class="fhw-header">
         <div class="fhw-header-text">
-          <p class="fhw-eyebrow">Featured Hardware</p>
-          <h2 id="fhw-heading" class="fhw-headline">Hotends worth building around.</h2>
+          <p class="fhw-eyebrow" data-reveal>Featured Hardware</p>
+          <h2 id="fhw-heading" class="fhw-headline" data-reveal data-reveal-delay="80">Hotends worth building around.</h2>
         </div>
-        <a href="/hardware/hotends" class="fhw-all">All hotends →</a>
+        <a href="/hardware/hotends" class="fhw-all" data-reveal data-reveal-delay="160">All hotends <span class="arrow">→</span></a>
       </header>
       <div class="fhw-grid">
         {featuredHotends.map((rec: any, i: number) => (
@@ -55,6 +55,7 @@ const featuredTopColors = [
             price={rec['Price (USD)']}
             href={`/hardware/hotends/${toSlug(rec.Name)}`}
             topColor={featuredTopColors[i]}
+            revealDelay={200 + i * 90}
           />
         ))}
       </div>
@@ -96,6 +97,14 @@ const featuredTopColors = [
     inset: 0;
     pointer-events: none;
     background: radial-gradient(55% 55% at 50% 35%, rgba(255, 90, 31, 0.08), transparent 70%);
+  }
+  /* Living glow — a slow breathe makes the whole band feel alive (M3) */
+  @media (prefers-reduced-motion: no-preference) {
+    .fhw::before { animation: glow-breathe 9s ease-in-out infinite alternate; }
+  }
+  @keyframes glow-breathe {
+    from { opacity: 0.65; transform: scale(1); }
+    to   { opacity: 1;    transform: scale(1.15); }
   }
   .fhw-container {
     position: relative;
