@@ -325,5 +325,31 @@ function bgStyle(slide: any) {
       img.src = match[1];
     }
   }
+
+  // Scroll parallax — hero content sinks + dims as the page scrolls over it,
+  // reading as depth (M2 optional). rAF-throttled, transform/opacity only,
+  // and skipped entirely under reduced motion. The Ken Burns bg is left
+  // untouched (its transform is owned by the running animation).
+  if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const content = heroEl.querySelector('.hero-content');
+    if (content) {
+      const heroHeight = heroEl.offsetHeight || 620;
+      let ticking = false;
+      const update = function () {
+        const y = window.scrollY || window.pageYOffset || 0;
+        if (y <= heroHeight) {
+          content.style.transform = 'translateY(' + (y * 0.15) + 'px)';
+          content.style.opacity = String(Math.max(0, 1 - y / 500));
+        }
+        ticking = false;
+      };
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      }, { passive: true });
+      update();
+    }
+  }
 }());
 </script>
