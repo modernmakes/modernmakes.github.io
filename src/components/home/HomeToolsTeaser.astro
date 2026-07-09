@@ -16,19 +16,21 @@ const icons: Record<string, string> = {
 
     <header class="tools-header">
       <div class="tools-header-text">
-        <p class="tools-eyebrow">Free Tools</p>
-        <h2 id="tools-heading" class="tools-headline">Calculators built for serious printers.</h2>
-        <p class="tools-sub">No sign-up. No fluff. Just the numbers you need.</p>
+        <p class="tools-eyebrow" data-reveal>Free Tools</p>
+        <h2 id="tools-heading" class="tools-headline" data-reveal data-reveal-delay="80">Calculators built for serious printers.</h2>
+        <p class="tools-sub" data-reveal data-reveal-delay="160">No sign-up. No fluff. Just the numbers you need.</p>
       </div>
-      <a href="/tools" class="tools-all-link">View all tools →</a>
+      <a href="/tools" class="tools-all-link" data-reveal data-reveal-delay="160">View all tools <span class="arrow">→</span></a>
     </header>
 
     <div class="tools-grid">
-      {tools.map((tool: any) => (
+      {tools.map((tool: any, i: number) => (
         <a
           href={tool.href}
           class="tool-card"
           data-tool={tool.href}
+          data-reveal
+          data-reveal-delay={220 + i * 70}
           aria-label={`${tool.name} — ${tool.description}`}
         >
           <div class="tool-card-icon" aria-hidden="true" set:html={icons[tool.icon] ?? icons.flow} />
@@ -116,7 +118,10 @@ const icons: Record<string, string> = {
     gap: 16px;
   }
 
-  .tool-card {
+  /* Section-scoped (0,2,0) so this transition wins over the shared reveal
+     utility's :where() transition — the benchmark hover stays crisp while
+     opacity + filter carry the 600ms reveal. */
+  .tools-section .tool-card {
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -126,7 +131,13 @@ const icons: Record<string, string> = {
     padding: 24px;
     text-decoration: none;
     color: inherit;
-    transition: border-color .15s, background .15s, transform .15s, box-shadow .15s;
+    transition:
+      border-color .15s var(--stagger-ease),
+      background   .15s var(--stagger-ease),
+      transform    .15s var(--stagger-ease),
+      box-shadow   .15s var(--stagger-ease),
+      opacity      var(--stagger-dur) var(--stagger-ease),
+      filter       var(--stagger-dur) var(--stagger-ease);
     position: relative;
     overflow: hidden;
   }

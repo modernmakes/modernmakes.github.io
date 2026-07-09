@@ -1,7 +1,7 @@
 ---
 ---
 
-<footer class="footer" role="contentinfo">
+<footer class="footer" role="contentinfo" data-reveal>
   <div class="footer-inner">
     <div class="footer-top">
 
@@ -64,16 +64,7 @@
 </footer>
 
 <style is:global>
-  /* ─── FOOTER ENTRANCE ─── */
-  .footer {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 500ms ease, transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .footer.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Entrance is handled by the shared [data-reveal] observer in Base.astro (M1). */
 
   /* ─── SHELL ─── */
   .footer {
@@ -204,20 +195,3 @@
     .footer-cats { grid-template-columns: 1fr 1fr; }
   }
 </style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const footer = document.querySelector('.footer') as HTMLElement | null;
-    if (!footer) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          footer.classList.add('visible');
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.05 }
-    );
-    obs.observe(footer);
-  });
-</script>

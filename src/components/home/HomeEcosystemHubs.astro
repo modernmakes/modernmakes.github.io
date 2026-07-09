@@ -14,17 +14,17 @@ function bgStyle(eco: any) {
   <div class="eco-container">
 
     <header class="eco-header">
-      <p class="eco-eyebrow">Printer Ecosystems</p>
-      <h2 class="eco-headline">Build your printer.<br/>We've mapped every part.</h2>
-      <p class="eco-sub">Complete self-build resources for the most capable CoreXY printers. Parts directories, configurators, subsystem guides, and community mods — all in one place.</p>
+      <p class="eco-eyebrow" data-reveal>Printer Ecosystems</p>
+      <h2 class="eco-headline" data-reveal data-reveal-delay="80">Build your printer.<br/>We've mapped every part.</h2>
+      <p class="eco-sub" data-reveal data-reveal-delay="160">Complete self-build resources for the most capable CoreXY printers. Parts directories, configurators, subsystem guides, and community mods — all in one place.</p>
     </header>
 
     <div class="eco-content">
 
       <!-- Live ecosystem cards -->
       <div class="eco-live">
-        {live.map((eco: any) => (
-          <a href={eco.href} class="eco-card" aria-label={`Explore the ${eco.name} ecosystem`}>
+        {live.map((eco: any, i: number) => (
+          <a href={eco.href} class="eco-card" data-reveal data-reveal-delay={240 + i * 120} aria-label={`Explore the ${eco.name} ecosystem`}>
             <!-- Printer image area -->
             <div class="eco-card-img" style={bgStyle(eco)}>
               <div class="eco-card-img-overlay"></div>
@@ -45,7 +45,7 @@ function bgStyle(eco: any) {
               )}
               <p class="eco-desc">{eco.description}</p>
               <div class="eco-card-footer">
-                <span class="eco-cta">Explore the ecosystem →</span>
+                <span class="eco-cta">Explore the ecosystem <span class="arrow">→</span></span>
               </div>
             </div>
           </a>
@@ -53,7 +53,7 @@ function bgStyle(eco: any) {
       </div>
 
       <!-- Coming soon panel -->
-      <div class="eco-coming">
+      <div class="eco-coming" data-reveal data-reveal-delay="500">
         <p class="eco-coming-label">On the roadmap</p>
         {coming.map((eco: any) => (
           <div class="eco-coming-item">
@@ -81,13 +81,6 @@ function bgStyle(eco: any) {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
-    transition: opacity 400ms cubic-bezier(0.4,0,0.2,1),
-                transform 400ms cubic-bezier(0.4,0,0.2,1);
-  }
-  /* Scroll-reveal: hide only when JS can reveal it and motion is welcome. */
-  @media (prefers-reduced-motion: no-preference) {
-    .js .eco-container { opacity: 0; transform: translateY(14px); }
-    .js .eco-container.eco-visible { opacity: 1; transform: translateY(0); }
   }
 
   /* Header */
@@ -134,7 +127,10 @@ function bgStyle(eco: any) {
     gap: 16px;
   }
 
-  .eco-card {
+  /* Section-scoped (0,2,0) so this transition wins over the shared reveal
+     utility's :where() transition — keeps hover crisp while opacity + filter
+     carry the 600ms reveal. */
+  .eco-section .eco-card {
     display: flex;
     flex-direction: column;
     background: #1e1e1e;
@@ -143,9 +139,14 @@ function bgStyle(eco: any) {
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: border-color 200ms, box-shadow 200ms, transform 200ms;
+    transition:
+      border-color 200ms var(--stagger-ease),
+      box-shadow   200ms var(--stagger-ease),
+      transform    200ms var(--stagger-ease),
+      opacity      var(--stagger-dur) var(--stagger-ease),
+      filter       var(--stagger-dur) var(--stagger-ease);
   }
-  .eco-card:hover {
+  .eco-section .eco-card:hover {
     border-color: rgba(255,90,31,.45);
     box-shadow: 0 12px 40px rgba(0,0,0,.4);
     transform: translateY(-2px);
@@ -161,7 +162,12 @@ function bgStyle(eco: any) {
     display: flex;
     align-items: flex-end;
     flex-shrink: 0;
+    /* Signature editorial hover — slow image zoom (F7). Card clips it.
+       Origin right: images are right-positioned. */
+    transition: transform 600ms var(--stagger-ease);
+    transform-origin: center right;
   }
+  .eco-section .eco-card:hover .eco-card-img { transform: scale(1.04); }
   .eco-card-img-overlay {
     position: absolute;
     inset: 0;
@@ -178,8 +184,11 @@ function bgStyle(eco: any) {
     color: rgba(255,255,255,.08);
     padding: 16px 24px;
     letter-spacing: -.5px;
+    transition: color 400ms var(--stagger-ease);
     /* Visible only when no image — acts as watermark */
   }
+  /* Subliminal watermark lift on hover (M4) */
+  .eco-section .eco-card:hover .eco-card-img-label { color: rgba(255,255,255,.14); }
 
   /* Card content */
   .eco-card-body {
@@ -318,22 +327,13 @@ function bgStyle(eco: any) {
   @media (max-width: 480px) {
     .eco-card-img { height: 140px; }
   }
+
+  /* Image zoom + watermark lift are motion — hold still for reduce users. */
+  @media (prefers-reduced-motion: reduce) {
+    .eco-card-img { transition: none; }
+    .eco-section .eco-card:hover .eco-card-img { transform: none; }
+    .eco-card-img-label { transition: none; }
+  }
 </style>
 
-<script>
-  const container = document.querySelector('.eco-container');
-  if (container) {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          container.classList.add('eco-visible');
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(container);
-    // Failsafe: if the observer never fires (background tab, headless render), reveal anyway.
-    setTimeout(() => container.classList.add('eco-visible'), 1200);
-  }
-</script>
+<!-- Entrance is handled by the shared [data-reveal] observer in Base.astro (M1). -->

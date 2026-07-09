@@ -58,12 +58,12 @@ function formatDate(date: Date) {
 <section class="la-section" aria-label="Latest articles">
   <div class="la-container">
     <div class="la-head">
-      <span class="la-label">Latest</span>
-      <a href="/news" class="la-all-link">All articles →</a>
+      <span class="la-label" data-reveal>Latest</span>
+      <a href="/news" class="la-all-link" data-reveal data-reveal-delay="60">All articles <span class="arrow">→</span></a>
     </div>
     <div class="la-grid">
       {latestArticles.map((article, i) => (
-        <a href={article.href} class="la-card" data-index={i} aria-label={article.title}>
+        <a href={article.href} class="la-card" data-reveal data-reveal-delay={i * 60} aria-label={article.title}>
           <div class="la-card-img" style={bgStyle(article.heroImage)}>
             <div class="la-card-img-overlay"></div>
             <span class="la-card-img-cat">{article.category}</span>
@@ -120,7 +120,10 @@ function formatDate(date: Date) {
     gap: 16px;
   }
 
-  .la-card {
+  /* Section-scoped (0,2,0) so this transition wins over the shared reveal
+     utility's :where() transition — keeps the hover lift/shadow/border crisp
+     while opacity + filter carry the 600ms reveal. */
+  .la-section .la-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -129,18 +132,14 @@ function formatDate(date: Date) {
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    transition: transform 200ms cubic-bezier(0.4,0,0.2,1),
-                box-shadow 200ms cubic-bezier(0.4,0,0.2,1),
-                border-color 200ms cubic-bezier(0.4,0,0.2,1),
-                opacity 380ms cubic-bezier(0.4,0,0.2,1);
+    transition:
+      transform    200ms var(--stagger-ease),
+      box-shadow   200ms var(--stagger-ease),
+      border-color 200ms var(--stagger-ease),
+      opacity      var(--stagger-dur) var(--stagger-ease),
+      filter       var(--stagger-dur) var(--stagger-ease);
   }
-  /* Scroll-reveal: hide only when JS can reveal it and motion is welcome.
-     No-JS, crawlers, and reduced-motion users see the cards immediately. */
-  @media (prefers-reduced-motion: no-preference) {
-    .js .la-card { opacity: 0; transform: translateY(16px); }
-    .js .la-card.card-visible { opacity: 1; transform: translateY(0); }
-  }
-  .la-card:hover {
+  .la-section .la-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(0,0,0,.08);
     border-color: var(--border-s);
@@ -156,7 +155,10 @@ function formatDate(date: Date) {
     flex-shrink: 0;
     background-size: cover;
     background-position: center;
+    /* Signature editorial hover — slow image zoom (F7). Card clips it. */
+    transition: transform 500ms var(--stagger-ease);
   }
+  .la-section .la-card:hover .la-card-img { transform: scale(1.05); }
   .la-card-img-overlay {
     position: absolute;
     inset: 0;
@@ -197,7 +199,9 @@ function formatDate(date: Date) {
     line-height: 1.15;
     margin-bottom: 10px;
     flex: 1;
+    transition: color 200ms var(--stagger-ease);
   }
+  .la-section .la-card:hover .la-card-title { color: var(--accent-dk); }
   .la-card-footer {
     display: flex;
     align-items: center;
@@ -242,28 +246,14 @@ function formatDate(date: Date) {
     .la-card-img { aspect-ratio: 16/7; }
     .la-card-title { font-size: 17px; }
   }
+
+  /* Reveal + image zoom are motion — never move for reduce users. */
+  @media (prefers-reduced-motion: reduce) {
+    .la-card-img { transition: none; }
+    .la-section .la-card:hover .la-card-img { transform: none; }
+    .la-card-title { transition: none; }
+  }
 </style>
 
-<script>
-  // Staggered entrance with IntersectionObserver
-  const cards = document.querySelectorAll('.la-card');
-  if (cards.length) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Number((entry.target as HTMLElement).dataset.index ?? 0);
-            setTimeout(() => {
-              entry.target.classList.add('card-visible');
-            }, idx * 60);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
-    );
-    cards.forEach((card) => observer.observe(card));
-    // Failsafe: if the observer never fires (background tab, headless render), reveal anyway.
-    setTimeout(() => cards.forEach((card) => card.classList.add('card-visible')), 1200);
-  }
-</script>
+<!-- Entrance is handled by the shared [data-reveal] observer in Base.astro (M1). -->
+

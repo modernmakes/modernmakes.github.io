@@ -110,22 +110,23 @@ img { display: block; max-width: 100%; height: auto; }
    users see everything instantly. Reuses the "texts reveal (18)" tokens.
    1600ms failsafe reveal lives in the observer. */
 @media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(var(--stagger-distance));
-    filter: blur(var(--stagger-blur));
+  /* Transition at :where() zero-specificity so a revealed element's own hover
+     transitions (lift, shadow, border) are never clobbered by the utility. */
+  .js :where([data-reveal]) {
     transition:
       opacity   var(--stagger-dur) var(--stagger-ease),
       transform var(--stagger-dur) var(--stagger-ease),
       filter    var(--stagger-dur) var(--stagger-ease);
   }
-  /* Axis variant — slide in from the right for vertical rails (Builds side cards) */
-  .js [data-reveal="right"] { transform: translateX(12px); }
-  .js [data-reveal].is-revealed {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+  /* Hidden state via :not(.is-revealed) so once revealed the element carries NO
+     utility transform — hover transforms (translateY lifts) stay crisp. */
+  .js [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(var(--stagger-distance));
+    filter: blur(var(--stagger-blur));
   }
+  /* Axis variant — slide in from the right for vertical rails (Builds side cards) */
+  .js [data-reveal="right"]:not(.is-revealed) { transform: translateX(12px); }
 }
 
 /* ── ARROW HOVER (M8 — standardized) ──────────────────────────────────
