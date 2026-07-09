@@ -90,6 +90,9 @@ const featuredTopColors = [
     overflow: hidden;
     background: var(--dark-bg);
     padding: 64px 0;
+    /* Orange seam glow ties dark-band edges to the brand identity (M8) */
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgba(255, 90, 31, 0.35), transparent) 1;
   }
   .fhw::before {
     content: '';

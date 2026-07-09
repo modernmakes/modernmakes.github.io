@@ -75,7 +75,9 @@ function bgStyle(eco: any) {
   .eco-section {
     background: #161616;
     padding: 56px 0;
-    border-top: 1px solid rgba(255,255,255,.06);
+    /* Orange seam glow ties dark-band edges to the brand identity (M8) */
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgba(255,90,31,.35), transparent) 1;
   }
   .eco-container {
     max-width: 1200px;

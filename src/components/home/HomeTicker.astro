@@ -69,6 +69,9 @@ const { ticker } = data;
     height: 100%;
     display: flex;
     align-items: center;
+    /* Edge fade masks — marquee dissolves at both ends instead of hard-clipping (M8) */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
   }
 
   .ticker-items {
@@ -85,6 +88,7 @@ const { ticker } = data;
 
   @media (prefers-reduced-motion: reduce) {
     .ticker-items { animation: none; }
+    .ticker-text { transition: none; }
   }
 
   @keyframes ticker-scroll {
@@ -114,7 +118,9 @@ const { ticker } = data;
     font-size: 11px;
     color: rgba(255,255,255,.5);
     flex-shrink: 0;
+    transition: color 150ms var(--stagger-ease);
   }
+  .ticker-item:hover .ticker-text { color: rgba(255,255,255,.85); }
 
   .ticker-dot {
     font-size: 13px;

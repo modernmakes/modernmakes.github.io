@@ -109,7 +109,9 @@
 /* ── HomeBuilds ── */
 .builds {
   background: #0a0a0a;
-  border-top: 1px solid rgba(255,255,255,.05);
+  /* Orange seam glow ties dark-band edges to the brand identity (M8) */
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(255,90,31,.35), transparent) 1;
   padding: 52px 0;
 }
 .builds-inner {
