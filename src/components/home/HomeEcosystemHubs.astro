@@ -26,7 +26,8 @@ function bgStyle(eco: any) {
         {live.map((eco: any, i: number) => (
           <a href={eco.href} class="eco-card" data-reveal data-reveal-delay={240 + i * 120} aria-label={`Explore the ${eco.name} ecosystem`}>
             <!-- Printer image area -->
-            <div class="eco-card-img" style={bgStyle(eco)}>
+            <div class="eco-card-img">
+              <div class="eco-card-img-bg" style={bgStyle(eco)}></div>
               <div class="eco-card-img-overlay"></div>
               <span class="eco-card-img-label">{eco.name}</span>
             </div>
@@ -159,17 +160,23 @@ function bgStyle(eco: any) {
     width: 100%;
     height: 200px;
     position: relative;
-    background-size: cover;
-    background-position: center right;
     display: flex;
     align-items: flex-end;
     flex-shrink: 0;
-    /* Signature editorial hover — slow image zoom (F7). Card clips it.
-       Origin right: images are right-positioned. */
+    overflow: hidden;
+  }
+  /* Signature editorial hover — slow zoom on the bg layer only, so the
+     watermark label stays pinned (F7 / M4). Card + this element clip it.
+     Origin right: images are right-positioned. */
+  .eco-card-img-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center right;
     transition: transform 600ms var(--stagger-ease);
     transform-origin: center right;
   }
-  .eco-section .eco-card:hover .eco-card-img { transform: scale(1.04); }
+  .eco-section .eco-card:hover .eco-card-img-bg { transform: scale(1.04); }
   .eco-card-img-overlay {
     position: absolute;
     inset: 0;
@@ -332,8 +339,8 @@ function bgStyle(eco: any) {
 
   /* Image zoom + watermark lift are motion — hold still for reduce users. */
   @media (prefers-reduced-motion: reduce) {
-    .eco-card-img { transition: none; }
-    .eco-section .eco-card:hover .eco-card-img { transform: none; }
+    .eco-card-img-bg { transition: none; }
+    .eco-section .eco-card:hover .eco-card-img-bg { transform: none; }
     .eco-card-img-label { transition: none; }
   }
 </style>
