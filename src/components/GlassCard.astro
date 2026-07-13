@@ -6,7 +6,10 @@ interface Props {
   category: string;
   name: string;
   description: string;
-  verdict: 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED';
+  /** Display label from the verdict taxonomy, e.g. "Workhorse" */
+  verdict: string;
+  /** Stable taxonomy key (workhorse | bleeding-edge | skip) — drives the badge colour */
+  verdictKey: string;
   price: number;
   href: string;
   /** CSS gradient/colour string for the top band */
@@ -14,7 +17,7 @@ interface Props {
   /** When set, the card joins the shared scroll-reveal with this stagger delay (ms) */
   revealDelay?: number;
 }
-const { category, name, description, verdict, price, href, topColor, revealDelay } = Astro.props;
+const { category, name, description, verdict, verdictKey, price, href, topColor, revealDelay } = Astro.props;
 ---
 <a
   class="glass-card"
@@ -28,7 +31,7 @@ const { category, name, description, verdict, price, href, topColor, revealDelay
     <h3 class="gc-name">{name}</h3>
     <p class="gc-desc">{description}</p>
     <div class="gc-foot">
-      <span class:list={['gc-verdict', `gc-verdict--${verdict.toLowerCase()}`]}>{verdict}</span>
+      <span class:list={['gc-verdict', `gc-verdict--${verdictKey}`]}>{verdict}</span>
       <span class="gc-price">${price}</span>
     </div>
   </div>
@@ -139,12 +142,15 @@ const { category, name, description, verdict, price, href, topColor, revealDelay
     border-radius: 6px;
     white-space: nowrap;
   }
-  .gc-verdict--buy {
+  /* Verdict taxonomy: Workhorse (green), Bleeding Edge (blue), Skip (grey).
+     Tuned for the dark glass backdrop — brighter fills than the light-mode
+     index badges, same semantic hues. */
+  .gc-verdict--workhorse {
     background: rgba(34, 197, 94, 0.15);
     border: 1px solid rgba(34, 197, 94, 0.4);
     color: #4ade80;
   }
-  .gc-verdict--consider {
+  .gc-verdict--bleeding-edge {
     background: rgba(59, 130, 246, 0.15);
     border: 1px solid rgba(59, 130, 246, 0.4);
     color: #60a5fa;
@@ -153,11 +159,6 @@ const { category, name, description, verdict, price, href, topColor, revealDelay
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: rgba(255, 255, 255, 0.5);
-  }
-  .gc-verdict--updated {
-    background: rgba(255, 90, 31, 0.15);
-    border: 1px solid rgba(255, 90, 31, 0.4);
-    color: #FF5A1F;
   }
   .gc-price {
     font-family: var(--fd);

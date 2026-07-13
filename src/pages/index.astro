@@ -11,6 +11,7 @@ import HomeBuilds from '../components/home/HomeBuilds.astro';
 import HomeToolsTeaser from '../components/home/HomeToolsTeaser.astro';
 import AdSlot from '../components/AdSlot.astro';
 import GlassCard from '../components/GlassCard.astro';
+import { resolveVerdict } from '../lib/hardware';
 import hotends from '../data/hardware/hotends.json';
 const currentPath = '/';
 
@@ -46,18 +47,22 @@ const featuredTopColors = [
         <a href="/hardware/hotends" class="fhw-all" data-reveal data-reveal-delay="160">All hotends <span class="arrow">→</span></a>
       </header>
       <div class="fhw-grid">
-        {featuredHotends.map((rec: any, i: number) => (
-          <GlassCard
-            category="HOTEND"
-            name={rec.Name}
-            description={firstSentence(rec.Description)}
-            verdict={(rec.Verdict ?? '').toUpperCase() as 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED'}
-            price={rec['Price (USD)']}
-            href={`/hardware/hotends/${toSlug(rec.Name)}`}
-            topColor={featuredTopColors[i]}
-            revealDelay={200 + i * 90}
-          />
-        ))}
+        {featuredHotends.map((rec: any, i: number) => {
+          const v = resolveVerdict(rec.Verdict);
+          return (
+            <GlassCard
+              category="HOTEND"
+              name={rec.Name}
+              description={firstSentence(rec.Description)}
+              verdict={v?.label ?? ''}
+              verdictKey={v?.key ?? ''}
+              price={rec['Price (USD)']}
+              href={`/hardware/hotends/${toSlug(rec.Name)}`}
+              topColor={featuredTopColors[i]}
+              revealDelay={200 + i * 90}
+            />
+          );
+        })}
       </div>
     </div>
   </section>

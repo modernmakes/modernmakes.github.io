@@ -59,7 +59,7 @@ const FILTER_TABS = [
 function verdictClass(v: string): string {
   const u = v.toUpperCase();
   if (u === 'BEST IN CLASS' || u === 'BEST')    return 'verdict-best';
-  if (u === 'AVOID' || u === 'NOT RECOMMENDED') return 'verdict-skip';
+  if (u === 'AVOID' || u === 'NOT RECOMMENDED') return 'verdict-avoid';
   return 'verdict-rec';
 }
 

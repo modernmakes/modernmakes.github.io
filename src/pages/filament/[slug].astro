@@ -25,7 +25,7 @@ const {
 function verdictClass(v: string): string {
   const upper = v.toUpperCase();
   if (upper === 'BEST IN CLASS' || upper === 'BEST')     return 'verdict-best';
-  if (upper === 'AVOID' || upper === 'NOT RECOMMENDED')  return 'verdict-skip';
+  if (upper === 'AVOID' || upper === 'NOT RECOMMENDED')  return 'verdict-avoid';
   return 'verdict-rec';
 }
 

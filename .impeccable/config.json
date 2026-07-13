@@ -1,0 +1,116 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-color",
+        "value": "rgba(34,197,94,.12)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:39.508Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(34,197,94,.25)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:39.625Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#16a34a",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:39.769Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(34, 197, 94, 0.15)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:39.910Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(34, 197, 94, 0.4)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.068Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#4ade80",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.226Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(59,130,246,.12)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.370Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(59,130,246,.25)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.503Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#1565c0",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.663Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(59, 130, 246, 0.15)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.803Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(59, 130, 246, 0.4)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:40.942Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#60a5fa",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.106Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(140,140,140,.14)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.237Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(140,140,140,.28)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.374Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#5a5a5a",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.500Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#fff3e0",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.629Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(230,81,0,.25)",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.749Z"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#e65100",
+        "reason": "Confirmed intentional verdict status color (Workhorse/Bleeding Edge/Skip badges + filament AVOID); semantic, deliberately outside brand palette, matched between index and detail pages",
+        "createdAt": "2026-07-13T23:22:41.865Z"
+      }
+    ]
+  }
+}

@@ -6,28 +6,8 @@
 // and spec mapping here means every category behaves exactly like /hardware/hotends.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type Verdict = 'BUY' | 'CONSIDER' | 'SKIP' | 'UPDATED';
-
 export const toSlug = (name: string): string =>
   name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-
-// Primary Airtable verdict values, then legacy fallbacks for older records.
-export const VERDICT_ORDER = ['BUY', 'CONSIDER', 'SKIP', 'UPDATED', 'Top Pick', 'Solid Choice', 'Niche Pick'];
-
-// Maps any legacy label onto one of the four canonical verdict buckets.
-const VERDICT_MAP: Record<string, Verdict> = {
-  BUY: 'BUY',
-  CONSIDER: 'CONSIDER',
-  SKIP: 'SKIP',
-  UPDATED: 'UPDATED',
-  'Top Pick': 'BUY',
-  'Solid Choice': 'CONSIDER',
-  'Niche Pick': 'CONSIDER',
-  Skip: 'SKIP',
-};
-
-export const canonicalVerdict = (raw: unknown): Verdict =>
-  (typeof raw === 'string' && VERDICT_MAP[raw]) || 'CONSIDER';
 
 // ── Verdict taxonomy ─────────────────────────────────────────────────────────
 // The site's verdict taxonomy is Workhorse / Bleeding Edge / Skip. A record's
