@@ -91,6 +91,8 @@ not publish-ready — confirm claims still hold before writing the final article
 
 ## Brand & Voice
 
+See BRAND.md for full brand reference (voice, verdict taxonomy, tokens, tagline pool, positioning).
+
 - **Colors:** Electric Orange `#FF5A1F` (`--accent`), dark-first aesthetic
 - **Typography:** Barlow Condensed 800 (display `--fd`), Lora 400 (body `--fb`), JetBrains Mono (`--fm`), Barlow UI (`--fu`)
 - **Voice:** Opinionated enthusiast, editorial "we tested" framing — never "I tested"
