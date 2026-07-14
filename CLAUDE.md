@@ -73,7 +73,7 @@ No lint or test commands. The PostToolUse build hook runs `npm run build` automa
 **Live site:** modernmakes.github.io
 **Stack:** Astro 4.x, static output, GitHub Pages
 **Deploy:** Every push to `main` triggers `.github/workflows/deploy.yml` → `astro build` → deploys `dist/`
-**Pages:** 124 pages, zero errors required at build
+**Pages:** 361 pages, zero errors required at build
 **GA4:** `G-CGR4N532H6`
 **Contact:** `modernmakesco@gmail.com`
 
@@ -186,15 +186,25 @@ src/
     homepage.json           — drives every homepage section
     ads.json                — ad slot config
     hardware/               — JSON files fetched from Airtable
-      hotends.json          — 12 records (Rapido 2 family, Chube, Goliath, Tricorn)
-      extruders.json        — 3 records (Fysetc Sherpa V3, SLM Sherpa Micro, Lite Pro)
-      bed-probes.json       — 5 records
-      nozzles.json          — empty
-      build-plates.json     — empty
-      mainboards.json       — 1 record (StrideMax Dual FD)
-      toolboards.json       — empty
-      part-cooling.json     — 1 record (Wonsmart WS9290)
-      motors.json           — 1 record (SLM NEMA17 Water Cooler)
+      hotends.json          — 16 records
+      extruders.json        — 30 records
+      bed-probes.json       — 9 records
+      nozzles.json          — 20 records
+      build-plates.json     — 12 records
+      mainboards.json       — 10 records
+      toolboards.json       — 8 records
+      part-cooling.json     — 11 records
+      air-filtration.json   — 8 records
+      enclosures.json       — 16 records
+      filament-dryers.json  — 9 records
+      heaters.json          — 25 records
+      psus.json             — 8 records
+      gantrys.json          — 7 records
+      motion-system.json    — 23 records
+      lighting-cameras.json — 8 records
+      motors.json           — 12 records
+      printers.json         — 8 records
+      filament.json         — empty
   styles/
     global.css              — entire design system
   components/
@@ -251,25 +261,25 @@ currentPath         — pass ecosystem path for correct nav highlight (e.g. '/vo
 
 | Table | ID | Status |
 |---|---|---|
-| Hotends | tblWYO1fRFXcY6fXF | 12 records, mostly populated |
-| Extruders | tblTWR36Uq0RM4TB2 | 3 records, sparse |
-| Bed Probes | tblbKbuuUQhCSX38C | 5 records, sparse |
-| Nozzles | tblGOrDOH1cBBjgUv | empty |
-| Build Plates | tblmKDQDt0wHypEjx | empty |
-| Mainboards | tbl7zcODDUtBp63PX | 1 record |
-| Toolboards | tblPaWOgRQDq6TrwH | empty |
-| Part Cooling | tblCzOd1Crf4K9ZkO | 1 record |
-| Air Filtration | tblPecAiQBq1Wbuy6 | empty |
-| Enclosure | tbldFKTCpesINRv3n | empty |
-| Filament Dryers | tblAFI1uYCz9ovbJI | empty |
-| Heaters | tbleG8nGHrCiVWPRP | empty |
-| PSUs | tbl8vxrHDWKksQs1e | empty |
-| Gantrys | tblbofl1tnNRRHdaH | empty |
-| Motion System | tbl2CQ6TAnkwprQkX | empty |
-| Lighting & Cameras | tbljCecwZZPXMsSoI | empty |
+| Hotends | tblWYO1fRFXcY6fXF | 16 records — only table fully migrated to Workhorse/Bleeding Edge/Skip |
+| Extruders | tblTWR36Uq0RM4TB2 | 30 records |
+| Bed Probes | tblbKbuuUQhCSX38C | 9 records |
+| Nozzles | tblGOrDOH1cBBjgUv | 20 records |
+| Build Plates | tblmKDQDt0wHypEjx | 12 records |
+| Mainboards | tbl7zcODDUtBp63PX | 10 records |
+| Toolboards | tblPaWOgRQDq6TrwH | 8 records |
+| Part Cooling | tblCzOd1Crf4K9ZkO | 11 records |
+| Air Filtration | tblPecAiQBq1Wbuy6 | 8 records |
+| Enclosure | tbldFKTCpesINRv3n | 16 records |
+| Filament Dryers | tblAFI1uYCz9ovbJI | 9 records |
+| Heaters | tbleG8nGHrCiVWPRP | 25 records |
+| PSUs | tbl8vxrHDWKksQs1e | 8 records |
+| Gantrys | tblbofl1tnNRRHdaH | 7 records |
+| Motion System | tbl2CQ6TAnkwprQkX | 23 records |
+| Lighting & Cameras | tbljCecwZZPXMsSoI | 8 records |
 | Filament | tblCD21uNiq1db1HC | empty |
-| Printers | tblboLo18BZ2k0E9n | empty |
-| Motors | tblRXZNO0ITQeNg9q | 1 record |
+| Printers | tblboLo18BZ2k0E9n | 8 records |
+| Motors | tblRXZNO0ITQeNg9q | 12 records |
 
 ### Editorial DB Tables
 
@@ -428,8 +438,8 @@ Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/new
 ## Hardware Section
 
 - **Hardware index** (`/hardware`) — category grid, dynamic counts from JSON `.length`. No Motion Mods card — lives at `/voron/mods`
-- **Verdict values:** `BUY`, `CONSIDER`, `SKIP`, `UPDATED`
-- **Verdict badge colors:** BUY = green, CONSIDER = blue, SKIP = grey, UPDATED = orange (in `global.css`)
+- **Verdict values:** `Workhorse`, `Bleeding Edge`, `Skip` (canonical taxonomy). Legacy `Buy`/`Top Pick` alias to Workhorse; `Consider`/`Solid Choice`/`Niche Pick` alias to Bleeding Edge — resolved case-insensitively by `resolveVerdict()` in `src/lib/hardware.ts`. Any other non-empty token passes through as its own neutral (blue) badge/tab, so category-specific values (e.g. Part Cooling TOP/MID) still render and filter. Only Hotends is fully migrated in Airtable; other categories may still store legacy values.
+- **Verdict badge colors:** Workhorse = green (`.verdict-best`), Bleeding Edge = blue (`.verdict-rec`), Skip = grey (`.verdict-skip`) — defined in `global.css`. Passthrough/unknown tokens reuse the blue `.verdict-rec` style.
 - **Hotend detail** (`/hardware/hotends/[slug]`) — redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`
 
 ---
@@ -478,8 +488,8 @@ Gradient fallbacks on all hotend pages and several articles. Workflow:
 
 1. **Canadian virtual mailbox** — BC address for Beehiiv footer CASL compliance. Options: iPostal1, Anytime Mailbox, UPS Store box
 2. **Hero images** — all hotend pages + several articles still showing gradient fallback
-3. **Extruder Airtable records** — 3 records exist (Fysetc Sherpa V3, SLM Sherpa Micro, Lite Pro Slim Repack) but all sparse
-4. **Bed probe Airtable records** — 5 records exist but sparse
+3. **Verdict migration** — only Hotends uses the canonical Workhorse/Bleeding Edge/Skip taxonomy in Airtable. Extruders, Bed Probes, Mainboards, Motors had verdicts set manually 2026-07-14; remaining categories still store legacy/passthrough values. `resolveVerdict()` normalises all of them, but migrate the source data table-by-table for consistency.
+4. **Hardware record quality** — most tables are now populated (see Airtable DB Tables) but many records are still sparse; audit field completeness before promoting a category's index page.
 5. **Content sprint** — RatRig pre-assembled, Bambu neXt, Prusa HT Hotend, AtomForm Palette 300, Bambu cloud slowdown (3–4/week target)
 6. **Make.com automations** — Newsletter Scaffold (needs Published Date field in Articles table), Idea-to-Brief, Stale Content Alerts *(this one already exists as a built scenario in Make.com, currently inactive — confirmed 2026-07-13, don't treat as unbuilt)*, Publish Trigger, Sponsor Deal Alerts, Affiliate Link Expiry, Short-form Repurposing, Monthly Revenue Log
 7. **Voron subsystem stub pages** — 5 left (confirmed 2026-07-13, not 8): `/voron/configurator`, `/voron/bed`, `/voron/gantry`, `/voron/toolhead`, `/voron/z-system`. **Before writing content for `bed` or `toolhead`:** confirm what `index.astro` actually links to — `bed.astro` may be an orphaned duplicate of the already-built `bed-surfaces.astro`, and `toolhead.astro` may duplicate the already-built `toolhead-mounts.astro` + `toolheads/` directory. `configurator`, `gantry`, and `z-system` have no such ambiguity — briefs for these three are already drafted in Cowork's `briefs\` folder.
