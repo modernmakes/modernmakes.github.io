@@ -10,7 +10,7 @@
         <a href="/" class="footer-logo" aria-label="Modern Makes home">
           <img src="/images/wordmark.svg" alt="Modern Makes" class="footer-wordmark" />
         </a>
-        <p class="footer-tagline">The editorial voice of the 3D printing enthusiast.</p>
+        <p class="footer-tagline" id="footer-tagline">Never stop tinkering.</p>
       </div>
 
       <!-- Link columns -->
@@ -195,3 +195,29 @@
     .footer-cats { grid-template-columns: 1fr 1fr; }
   }
 </style>
+
+<script>
+  const taglines = [
+    "Never stop tinkering.",
+    "Still calibrating. Always will be.",
+    "We read the changelogs so you don't have to.",
+    "Chasing the next 0.1mm.",
+    "Built for people who never call a print \"finished.\"",
+    "For people who read Discord before bed.",
+    "Always one upgrade away from done.",
+    "Never satisfied with stock firmware.",
+    "The build is never actually finished.",
+    "Made for people with too many nozzles.",
+    "Print first, sleep later.",
+    "Still tuning. Still tinkering.",
+    "For the ones who source their own BOM.",
+    "Obsessed with the details nobody else covers."
+  ];
+
+  const ROTATION_HOURS = 4;
+  const bucket = Math.floor(Date.now() / (ROTATION_HOURS * 60 * 60 * 1000));
+  const index = bucket % taglines.length;
+
+  const el = document.getElementById('footer-tagline');
+  if (el) el.textContent = taglines[index];
+</script>
