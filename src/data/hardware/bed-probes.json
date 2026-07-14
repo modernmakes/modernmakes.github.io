@@ -1,7 +1,7 @@
 [
   {
     "id": "rec3ETdwkpZBGOxga",
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Accuracy (mm)": "0.5µm resolution; <350nm typical std dev (documented by Beacon3D)",
     "Price (USD)": 81.5,
     "Pros": "Sub-micron resolution (0.5µm); full bed mesh in ~20 seconds without Z motion; integrated ADXL accelerometer rated to 115°C; Contact probe mode (<30g force) for automatic Z-offset without additional hardware; low thermal drift with active temperature compensation; 3.3g lightweight; Normal and Low Profile form factors for different toolheads",
@@ -25,7 +25,7 @@
   },
   {
     "id": "recFWD12nFASMSZuG",
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Accuracy (mm)": "Accuracy not published; ADXL345-based; probe specs unconfirmed",
     "Pros": "Integrates ADXL345 accelerometer with eddy current probe functionality; BTT-ecosystem-adjacent with Fly3D CAN toolhead boards; Klipper native; compact form factor suited to Fly SHT and SB2040-series toolhead boards",
     "Updated": "2026-06-27",
@@ -47,7 +47,7 @@
   },
   {
     "id": "recVMRZJcx5QUzwJB",
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Accuracy (mm)": "Eddy current displacement; accuracy not independently published by BTT",
     "Pros": "Budget-friendly eddy current in the BTT ecosystem; USB and CAN bus versions available; integrates with BTT toolhead boards; Klipper support via BTT's open source firmware; competitive price vs Cartographer",
     "Updated": "2026-06-27",
@@ -70,7 +70,7 @@
   },
   {
     "id": "recXapknE4yE6ByP4",
-    "Verdict": "SKIP",
+    "Verdict": "Skip",
     "Accuracy (mm)": "±0.005mm (5µm) standard deviation (documented by ANTCLABS)",
     "Pros": "Works with all bed materials (glass, metal, wood, PEI); widely supported across Klipper and Marlin; self-test and alarm functions on power-up; blue/red LED wiring diagnostics; well-documented with printer-specific wiring guides; no bed conductivity requirement",
     "Updated": "2026-06-27",
@@ -92,7 +92,7 @@
   },
   {
     "id": "recZAu52HTB8xaQPa",
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Accuracy (mm)": "<0.025mm range; ~0.01mm std dev (per project README; community-measured)",
     "Pros": "Extremely low cost (<$15 self-build BOM); fully open source (GPL-3.0); no bed material restrictions; automated dock/undock via Klipper macros; 1.4k GitHub stars, active community; KlickyNG variant adds self-aligning enclosed magnets (no glue required); compatible with klipper_z_calibration plugin",
     "Updated": "2026-06-27",
@@ -117,7 +117,7 @@
   },
   {
     "id": "receKP1YdCZsdh1iw",
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Accuracy (mm)": "Eddy current displacement; accuracy not independently published by manufacturer",
     "Price (USD)": 29.99,
     "Pros": "Budget-friendly eddy current (~$30 V3, ~$40 V4); USB+CAN dual protocol; built-in ADXL345 for input shaping; Survey Touch contact probe mode (V3+); multiple form factors (standard, flat-pack, low-profile, right-angle); V4 AIO integrates all features in one revised board",
@@ -141,7 +141,7 @@
   },
   {
     "id": "rechYkIx8Jo58yATW",
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Accuracy (mm)": "Microswitch-based; accuracy not independently published by manufacturer",
     "Pros": "PCB with screw-attached magnets ensures dimensional accuracy and repeatable attachment; works with all bed materials and surface treatments regardless of temperature or magnetism; multi-firmware support (Klipper, Marlin, RRF2, RRF3, Smoothie); high-temp variant rated to 125°C+ for enclosed hot chambers; 5V and 24V native versions; well-documented printer-specific dock and mount guides",
     "Updated": "2026-06-27",
@@ -166,7 +166,7 @@
   },
   {
     "id": "reclm5cB7iOXVlMql",
-    "Verdict": "SKIP",
+    "Verdict": "Skip",
     "Accuracy (mm)": "Optical switch-based; accuracy not independently published; similar to BLTouch in practice",
     "Pros": "Drop-in upgrade for Creality printers; uses metal probe pin vs BLTouch's plastic pin (more durable); optical sensor vs hall effect (less susceptible to magnetic interference); works with all bed materials; cheaper than BLTouch; Klipper support via bltouch config section",
     "Updated": "2026-06-27",
@@ -188,7 +188,7 @@
   },
   {
     "id": "reczSuDbczbQtYGD0",
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Accuracy (mm)": "Direct nozzle-touch; repeatability not published; community-measured ~1-5µm std dev typical",
     "Pros": "Direct nozzle contact = zero probe offset from nozzle tip; works with any bed surface (textured PEI, smooth, magnetic sheets); fully integrated into Stealthburner/CW2 toolhead; open source Voron project; r2 revision resolved documented r1 PCB reliability issues; no separate probe dock required",
     "Updated": "2026-06-27",

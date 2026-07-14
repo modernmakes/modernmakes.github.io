@@ -13,7 +13,7 @@
       "Voron",
       "Annex Engineering"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Weight (g)": 12,
     "Image URL": "https://lettucehead3d.com/wp-content/uploads/2025/01/Side-view-Sherpa-Micro-800x769.jpg",
     "Compatible Toolheads": [
@@ -38,11 +38,11 @@
     "Cons": "Same $312 price as standard Pro Metal but HT motor is the only meaningful differentiator; extremely niche — only needed in true heated enclosure builds; heavy and large",
     "Community Rating": 3,
     "Description": "Thermal-hardened variant of the LGX Pro Metal, designed for heated chamber 3D printers. The key differentiator from the standard LGX Pro Metal 1.75 is the High Temperature Nema17 30mm HT pancake motor that maintains reliable performance at elevated ambient temperatures. Aluminum housing throughout (vs PA12 GF polymer on LGX PRO). Full hardened steel drive train. Same $312.38 price as the standard Pro Metal. Luke's Lab specifically recommends this extruder paired with the Chube conduction hotend for heated chamber builds. Not needed for standard enclosed printers.",
-    "Verdict Label": "Niche Pick",
+    "Verdict Label": "Bleeding Edge",
     "Ecosystem": [
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech LGX Pro Metal HT",
     "Gear Ratio": "3:1",
@@ -65,7 +65,7 @@
       "Annex Engineering",
       "Universal"
     ],
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Weight (g)": 45,
     "Vendor 1 Name": "NorthPrint3D",
     "Name": "CNC Sherpa Mini v3 (Annex/Fysetc)",
@@ -87,7 +87,7 @@
     "Ecosystem": [
       "Voron"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Vendor 1 Name": "GitHub (VoronDesign)",
     "Name": "Voron M4 (Möbius 4)",
     "Vendor 1 URL": "https://github.com/VoronDesign/Mobius-Extruder",
@@ -107,7 +107,7 @@
       "Voron",
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech LGX Pro Metal",
     "Vendor 1 URL": "https://www.bondtech.se/product/lgx-pro-metal-1-75-extruder/",
@@ -128,7 +128,7 @@
       "VzBot",
       "HevORT"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Vendor 1 Name": "West3D (Mellow CNC)",
     "Name": "Vz-HextrudORT",
     "Gear Ratio": "7.5:1 (8T) / 6:1 (10T)",
@@ -171,11 +171,11 @@
     "Cons": "Large form factor not suited to compact toolheads; $187 is steep when LGX Lite PRO exists for $149; limited community adoption vs Lite platform",
     "Community Rating": 3,
     "Description": "Industrial-targeted evolution of the base LGX. Upgrades the motor from 25mm to a stronger 30mm Nema17 pancake and includes the full hardened steel drive train stock (no separate purchase needed). PA12 GF glass-filled polymer housing provides higher thermal resistance than standard LGX. A free aluminum interface plug accommodates longer hotends. Tagged by Bondtech as industrial/PROduction-grade. Sits between the base LGX ($123) and Pro Metal ($312) in price and specification.",
-    "Verdict Label": "Solid Choice",
+    "Verdict Label": "Workhorse",
     "Ecosystem": [
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech LGX PRO",
     "Gear Ratio": "3:1",
@@ -196,7 +196,7 @@
     "Ecosystem": [
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Weight (g)": 75,
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech BMG",
@@ -257,7 +257,7 @@
       "Annex Engineering",
       "Universal"
     ],
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Weight (g)": 25,
     "Image URL": "https://github.com/Annex-Engineering/Sherpa_Mini_Extruder/raw/master/Images/sherpa_mini_rc1.jpg",
     "Compatible Toolheads": [
@@ -401,7 +401,7 @@
       "Voron",
       "Universal"
     ],
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Weight (g)": 18,
     "Vendor 1 Name": "West3D (LDO Kit)",
     "Name": "Orbiter v2.0",
@@ -429,7 +429,7 @@
       "Voron",
       "Universal"
     ],
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Weight (g)": 18,
     "Image URL": "https://www.fysetc.com/cdn/shop/files/1_32e2d749-5ef6-4212-87a2-9aa26e256378.jpg?v=1744440462",
     "Compatible Toolheads": [
@@ -489,7 +489,7 @@
       "Voron",
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Vendor 1 Name": "GitHub (chirpy2605)",
     "Name": "RoundTrip",
     "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundTrip",
@@ -529,13 +529,13 @@
     "Cons": "Nema14 limits max torque vs Nema17 options; LGX Lite mount requires compatible toolhead bracket",
     "Community Rating": 4,
     "Description": "Updated LGX Lite featuring Bondtech's Steel Drive Train (2022 hardened steel gears) installed from factory, and PA12 GF glass-filled polymer housing for improved thermal resistance. Same compact Nema14 20mm pancake form factor and 44:10 gear ratio as the original LGX Lite, but ships ready to run without the $43 steel drive train upgrade purchase. At $116.25 it's $16 less than the LGX Lite PRO with a solid featureset for most builds. Strong choice for Voron, RatRig, and other LGX-Lite-compatible toolheads.",
-    "Verdict Label": "Top Pick",
+    "Verdict Label": "Workhorse",
     "Ecosystem": [
       "Voron",
       "RatRig",
       "Universal"
     ],
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech LGX Lite V2",
     "Gear Ratio": "44:10",
@@ -552,11 +552,11 @@
     "Cons": "Steel drive train costs $43 extra (not included); 25mm motor weaker than PRO; large form factor vs compact alternatives",
     "Community Rating": 4,
     "Description": "The original Bondtech LGX (Large Gears eXtruder), introduced 2021 as Gen3 dual-drive platform. Uses physically larger drive gears than BMG for improved filament grip. Comes with a custom Nema17 25mm pancake motor and supports both bowden and direct drive. Steel Drive Train is a $43.63 optional upgrade (pre-installed on LGX Lite V2 and LGX PRO). Extensive upgrade kit ecosystem covers most popular printers. At $123.75 it's the entry point to the full-size LGX platform.",
-    "Verdict Label": "Solid Choice",
+    "Verdict Label": "Workhorse",
     "Ecosystem": [
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech LGX",
     "Gear Ratio": "3:1",
@@ -603,7 +603,7 @@
     "Ecosystem": [
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech RIDGA v2",
     "Gear Ratio": "50:17",
@@ -650,7 +650,7 @@
       "Prusa",
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Weight (g)": 68,
     "Vendor 1 Name": "Bondtech",
     "Name": "LGX Lite",
@@ -672,7 +672,7 @@
     "Ecosystem": [
       "Voron"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Vendor 1 Name": "GitHub (tetsu97)",
     "Name": "WristWatch G2",
     "Gear Ratio": "9:1",
@@ -692,7 +692,7 @@
     "Ecosystem": [
       "Voron"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Weight (g)": 25,
     "Vendor 1 Name": "Printables (nhchiu)",
     "Name": "Hummingbird",
@@ -718,7 +718,7 @@
     "Ecosystem": [
       "Voron"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Weight (g)": 20,
     "Image URL": "https://lettucehead3d.com/wp-content/uploads/2025/01/Lite-Pro-SLiM-800x928.png",
     "Compatible Toolheads": [
@@ -748,7 +748,7 @@
       "Prusa",
       "Universal"
     ],
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Vendor 1 Name": "Bondtech",
     "Name": "Bondtech LGX Lite PRO",
     "Gear Ratio": "44:10",

@@ -2,7 +2,7 @@
   {
     "id": "rec1jvMkyLrPRQ9gI",
     "Total Driver Slots": 8,
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32F446ZET6",
@@ -28,7 +28,7 @@
   {
     "id": "rec32EcV5KZ37nOE4",
     "Total Driver Slots": 8,
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32H723ZET6",
@@ -54,7 +54,7 @@
   {
     "id": "rec7Laf1OdAHi9gmS",
     "Total Driver Slots": 6,
-    "Verdict": "SKIP",
+    "Verdict": "Skip",
     "Driver - A/B": "TMC2209",
     "Updated": "2026-06-28",
     "MCU": "STM32F446ZET6",
@@ -78,7 +78,7 @@
   {
     "id": "recN1rHeCo40QtN2d",
     "Total Driver Slots": 8,
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32F446ZET6 / STM32H723ZET6",
@@ -105,7 +105,7 @@
   {
     "id": "recR192Tu7lFQiboo",
     "Total Driver Slots": 5,
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Driver - A/B": "TMC2209",
     "Updated": "2026-06-28",
     "MCU": "STM32H743VI 480MHz",
@@ -131,7 +131,7 @@
   {
     "id": "recTWnaw0qR6J1JKK",
     "Total Driver Slots": 8,
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32H723ZET6 + CB1 / CM4",
@@ -157,7 +157,7 @@
   {
     "id": "recUIlFdN1TMud1sr",
     "Total Driver Slots": 8,
-    "Verdict": "BUY",
+    "Verdict": "Workhorse",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32H723ZET6",
@@ -184,7 +184,7 @@
   {
     "id": "recVtazoG2mfkj1WW",
     "Total Driver Slots": 8,
-    "Verdict": "CONSIDER",
+    "Verdict": "Workhorse",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32F446ZET6",
@@ -210,7 +210,7 @@
   {
     "id": "recfhZ3cbhNBg6PVA",
     "Total Driver Slots": 8,
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-28",
     "MCU": "STM32F407ZGT6",
@@ -235,7 +235,7 @@
   },
   {
     "id": "recg3F9WrQ5UqEPF6",
-    "Verdict": "CONSIDER",
+    "Verdict": "Bleeding Edge",
     "Driver - A/B": "TMC5160",
     "Updated": "2026-06-03",
     "Description": "The StrideMax Dual FD is a dual TMC5160 expansion board built around the RP2040 microcontroller. It adds two high-current stepper channels to an existing Klipper or RRF setup via CAN, CANFD, or USB. Each channel supports up to 10A continuous and 60V max, making it the standard solution for adding AWD motor channels or upgrading to 48V on a Voron 2.4 or VzBoT build without replacing the main control board.",
