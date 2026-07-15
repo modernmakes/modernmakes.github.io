@@ -59,8 +59,8 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
+    border: 1px solid var(--dark-border);
+    border-radius: var(--radius-2xl);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     overflow: hidden; /* clips the top band to the card's rounded corners */
     /* Smooth ease-out (transitions.dev motion token), exact props — never `all` */
@@ -102,8 +102,8 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
 
   .gc-band {
     height: 120px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: var(--radius-2xl);
+    border-top-right-radius: var(--radius-2xl);
   }
 
   /* Product-shot panel. Same 120px height as .gc-band so swapping between the
@@ -116,8 +116,8 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     padding: 12px;
     background: var(--surface-media);
     border-bottom: 1px solid var(--dark-border);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: var(--radius-2xl);
+    border-top-right-radius: var(--radius-2xl);
   }
   .gc-media-img {
     display: block;
@@ -168,7 +168,7 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     font-weight: 700;
     letter-spacing: 0.06em;
     padding: 4px 10px;
-    border-radius: 6px;
+    border-radius: var(--radius-badge);
     white-space: nowrap;
   }
   /* Verdict taxonomy: Workhorse (green), Bleeding Edge (blue), Skip (grey).

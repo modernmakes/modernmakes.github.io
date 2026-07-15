@@ -38,6 +38,22 @@
   --danger-t:      #FFF5F5;
   --danger-border: #FFCDD2;
   --accent-border: #FFCFBD;
+  --accent-ink:    #7A2E0A;   /* deep orange-brown — text on accent tints (callout-orange) */
+
+  /* Community-contributed content — green. Printables/STL actions and the
+     COMMUNITY mod badge. Not a success/status colour: green leads here only to
+     mark work contributed by the community. Distinct from the violet
+     --verdict-comm-* badge below, which is the verdict, not the source. */
+  --community:        #2E7D32;
+  --community-t:      #E8F5E9;
+  --community-t-dk:   #C8E6C9;   /* hover fill */
+  --community-border: #A5D6A7;
+
+  /* COMMUNITY verdict badge — violet. The text and the washes derive from two
+     different violets; --verdict-comm-tone is the lighter one the 12%/25%
+     background and border are mixed from. Keep both or the badge shifts hue. */
+  --verdict-comm:      #7C3AED;
+  --verdict-comm-tone: #8B5CF6;
 
   /* Typography */
   --fd: 'Barlow Condensed', sans-serif;
@@ -57,9 +73,11 @@
   --max-w:        1200px;
   --article-w:    720px;
   --radius-sm:    4px;
+  --radius-badge: 6px;   /* verdict badges; also the model context bar and mobile TOC box */
   --radius-md:    8px;
-  --radius-lg:    10px;
+  --radius-lg:    10px;  /* the editorial card (.card, .product-card) */
   --radius-xl:    12px;
+  --radius-2xl:   20px;  /* glass feature cards — deliberately larger than --radius-lg */
 
   /* transitions-dev — texts reveal (18) */
   --stagger-dur:      600ms;
@@ -223,7 +241,11 @@ a:hover .arrow { transform: translateX(4px); }
 /* Filament AVOID / NOT RECOMMENDED — keeps a warning tone (hardware Skip is now neutral grey). */
 .verdict-avoid { background: #FFF3E0; border: 1px solid rgba(230,81,0,.25); color: #E65100; }
 .verdict-upd  { background: rgba(255,90,31,.12);  border: 1px solid rgba(255,90,31,.25);  color: var(--accent); }
-.verdict-comm { background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.25); color: #7c3aed; }
+.verdict-comm {
+  background: color-mix(in srgb, var(--verdict-comm-tone) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--verdict-comm-tone) 25%, transparent);
+  color: var(--verdict-comm);
+}
 
 /* ── VERDICT BADGE (top-of-card pill used on subsystem pages) ── */
 .verdict-badge {
@@ -293,16 +315,16 @@ a:hover .arrow { transform: translateX(4px); }
 .community-badge {
   display: inline-flex; align-items: center; gap: 4px;
   font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7;
+  background: var(--community-t); color: var(--community); border: 1px solid var(--community-border);
   padding: 2px 8px; border-radius: 3px; margin-bottom: 6px;
 }
 .btn-printables {
-  background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7;
+  background: var(--community-t); color: var(--community); border: 1px solid var(--community-border);
   font-size: 12px; font-weight: 700; padding: 6px 14px;
   border-radius: 4px; cursor: pointer; font-family: var(--fu);
   transition: background .15s; white-space: nowrap; display: inline-block;
 }
-.btn-printables:hover { background: #C8E6C9; }
+.btn-printables:hover { background: var(--community-t-dk); }
 
 /* ── CARD GRIDS ── */
 .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
@@ -329,7 +351,7 @@ a:hover .arrow { transform: translateX(4px); }
   font-size: 13px; line-height: 1.65;
 }
 .callout-orange {
-  background: var(--accent-t); border: 1px solid #FFCFBD; color: #7A2E0A;
+  background: var(--accent-t); border: 1px solid var(--accent-border); color: var(--accent-ink);
 }
 .callout-orange strong {
   display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
@@ -365,7 +387,7 @@ a:hover .arrow { transform: translateX(4px); }
   padding: 6px 14px;
   background: rgba(255,90,31,.08);
   border: 1px solid rgba(255,90,31,.2);
-  border-radius: 6px;
+  border-radius: var(--radius-badge);
   font-size: 13px;
 }
 .model-context-label { color: var(--g2); font-family: var(--fu); }
@@ -521,7 +543,7 @@ main:not(.main-has-hero) { padding-top: 60px; }
 @media (max-width: 900px) {
   .lg-layout { grid-template-columns: 1fr; gap: 32px; }
   .lg-sidebar { position: static; }
-  .lg-toc { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; background: var(--surface); }
+  .lg-toc { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-badge); padding: 12px 16px; background: var(--surface); }
   .lg-toc-label { width: 100%; }
   .lg-toc-link { padding: 3px 8px; border-left: none; font-size: 11px; width: 100%; }
 }
