@@ -29,6 +29,8 @@
   --dark-surface:  #222222;
   --dark-border:   rgba(255,255,255,0.08);
   --ink-deep:      #0A0A0A;   /* deepest black — media/image letterbox backgrounds */
+  --surface-media: #101118;   /* product-shot backdrop — sampled from the hardware WebPs;
+                                 image panels must use this so contain-letterboxing is seamless */
   --code-ink:      #E8E8E4;   /* light text on dark code blocks */
 
   /* Semantic feedback (status + callouts) */

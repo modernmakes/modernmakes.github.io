@@ -13,6 +13,8 @@ import AdSlot from '../components/AdSlot.astro';
 import GlassCard from '../components/GlassCard.astro';
 import { resolveVerdict } from '../lib/hardware';
 import hotends from '../data/hardware/hotends.json';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 const currentPath = '/';
 
 // Slug + first-sentence helpers (defined inline per project convention)
@@ -31,6 +33,21 @@ const featuredTopColors = [
   'linear-gradient(135deg, #2a2a2a 0%, #FF5A1F22 100%)',
   'linear-gradient(135deg, #1a1a2e 0%, #FF5A1F11 100%)',
 ];
+
+// The record already carries the resolved product-shot path (Image URL, e.g.
+// /media/hardware/hotends/rapido-2f.webp) — same field /hardware/hotends reads,
+// so no slug→path derivation is needed here. Verify the file is actually on disk
+// at build time; a record pointing at a missing asset falls back to its gradient
+// band rather than shipping a broken image. Note this check is case-sensitive on
+// the Linux CI runner but not on Windows dev, so a case-mismatched path would
+// silently degrade to the gradient in production — the paths are verified
+// lowercase today, and `npm run fetch-data` writes them from Airtable.
+const publicDir = join(process.cwd(), 'public');
+const featuredImages = featuredHotends.map((rec: any) => {
+  const url = typeof rec['Image URL'] === 'string' ? rec['Image URL'].trim() : '';
+  if (!url.startsWith('/')) return null;
+  return existsSync(join(publicDir, url)) ? url : null;
+});
 ---
 <Base title="The 3D Printing Enthusiast's Publication" description="Modern Makes — editorial coverage of 3D printers, filament, mods, and the builds that matter." heroPage={true} hasHero={true}>
   <Nav slot="nav" currentPath={currentPath} />
@@ -59,6 +76,7 @@ const featuredTopColors = [
               price={rec['Price (USD)']}
               href={`/hardware/hotends/${toSlug(rec.Name)}`}
               topColor={featuredTopColors[i]}
+              imageSrc={featuredImages[i]}
               revealDelay={200 + i * 90}
             />
           );

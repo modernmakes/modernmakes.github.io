@@ -12,12 +12,15 @@ interface Props {
   verdictKey: string;
   price: number;
   href: string;
-  /** CSS gradient/colour string for the top band */
+  /** CSS gradient/colour string for the top band — the fallback when no image resolves */
   topColor: string;
+  /** Product-shot URL. Callers pass this only once they've confirmed the file exists,
+   *  so an absent/missing image falls back to the topColor band rather than a broken img. */
+  imageSrc?: string | null;
   /** When set, the card joins the shared scroll-reveal with this stagger delay (ms) */
   revealDelay?: number;
 }
-const { category, name, description, verdict, verdictKey, price, href, topColor, revealDelay } = Astro.props;
+const { category, name, description, verdict, verdictKey, price, href, topColor, imageSrc, revealDelay } = Astro.props;
 ---
 <a
   class="glass-card"
@@ -25,7 +28,13 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
   data-reveal={revealDelay !== undefined ? '' : undefined}
   data-reveal-delay={revealDelay}
 >
-  <div class="gc-band" style={`background: ${topColor};`} aria-hidden="true"></div>
+  {imageSrc ? (
+    <div class="gc-media">
+      <img class="gc-media-img" src={imageSrc} alt={name} loading="lazy" decoding="async" />
+    </div>
+  ) : (
+    <div class="gc-band" style={`background: ${topColor};`} aria-hidden="true"></div>
+  )}
   <div class="gc-body">
     <p class="gc-category">{category}</p>
     <h3 class="gc-name">{name}</h3>
@@ -95,6 +104,26 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     height: 120px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+  }
+
+  /* Product-shot panel. Same 120px height as .gc-band so swapping between the
+     two never shifts the card's layout. The panel background is the colour the
+     product WebPs are shot on, so `contain` letterboxing reads as one surface
+     rather than an image sitting on a mismatched field. Hairline rule separates
+     the panel from the glass body — no overlay, the shot carries itself. */
+  .gc-media {
+    height: 120px;
+    padding: 12px;
+    background: var(--surface-media);
+    border-bottom: 1px solid var(--dark-border);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .gc-media-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .gc-body { padding: 20px; }
