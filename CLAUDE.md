@@ -498,3 +498,15 @@ Gradient fallbacks on all hotend pages and several articles. Workflow:
 8. **Domain** — `modernmakes.io` recommended; schema URLs need updating after purchase
 9. **GA4 custom events** — `tool_click` and `newsletter_signup` partially wired
 10. **og-default.jpg** — exists at `public/og-default.jpg` but verify it's wired correctly
+
+## Caveman skill scope
+Caveman mode (compressed responses) applies to conversational replies and 
+general Claude Code output only. It is suspended for:
+- Any content that ships to the live site (blog posts, hardware page copy, 
+  buying guides, newsletter copy — anything in src/content/ or similar)
+- Commit messages (caveman-commit already removed)
+- Code review output (caveman-review already removed)
+
+When drafting or editing anything destined for publication, write in full 
+Modern Makes editorial voice (see BRAND.md / editorial standards) — never 
+caveman-compressed.

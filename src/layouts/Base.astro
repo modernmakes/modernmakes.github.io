@@ -14,12 +14,14 @@ interface Props {
 const {
   title,
   description = "The editorial voice of the 3D printing enthusiast. Printers, filament, mods, and the culture that matters.",
-  ogImage = "/images/og-default.jpg",
+  ogImage = "/og-default.jpg",
   heroPage = false,
   hasHero  = false,
   hasPageH1 = false,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site).href;
+const siteURL = new URL('/', Astro.site).href;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -34,29 +36,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <link rel="canonical" href={canonicalURL} />
   <meta property="og:title" content={`${title} — Modern Makes`} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content={ogImageURL} />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Modern Makes",
-    "url": "https://modernmakes.com",
+    "url": siteURL,
     "description": "Editorial coverage of 3D printers, filament, mods, and builds that matter.",
     "publisher": {
       "@type": "Organization",
       "name": "Modern Makes",
-      "url": "https://modernmakes.com",
+      "url": siteURL,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://modernmakes.com/images/wordmark.svg"
+        "url": new URL('/images/wordmark.svg', Astro.site).href
       }
     },
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://modernmakes.com/search?q={search_term_string}"
+        "urlTemplate": `${new URL('/search', Astro.site).href}?q={search_term_string}`
       },
       "query-input": "required name=search_term_string"
     }

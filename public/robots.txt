@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://modernmakes.github.io/sitemap-index.xml
