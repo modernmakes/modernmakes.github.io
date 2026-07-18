@@ -95,12 +95,12 @@ const featuredImages = featuredHotends.map((rec: any) => {
     "@type": "WebPage",
     "name": "Modern Makes — The 3D Printing Enthusiast's Publication",
     "description": "Editorial coverage of 3D printers, filament, mods, and builds that matter.",
-    "url": "https://modernmakes.com",
-    "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" },
+    "url": new URL('/', Astro.site).href,
+    "isPartOf": { "@type": "WebSite", "url": new URL('/', Astro.site).href },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).href }
       ]
     }
   })}></script>
