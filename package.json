@@ -9,7 +9,7 @@
     "fetch-data": "node scripts/fetch-airtable.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/sitemap": "3.2.1",
     "@astrojs/tailwind": "^5.1.0",
     "@perplexity-ai/perplexity_ai": "^0.33.0",
     "astro": "^4.15.0",
