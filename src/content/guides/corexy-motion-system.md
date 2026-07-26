@@ -26,7 +26,7 @@ The engineering advantage is that the two heaviest moving components — the ste
 
 ### Belt Routing
 
-Each belt originates at one motor, wraps around a series of idlers on the gantry perimeter, and connects to one side of the toolhead carriage. The two belts cross each other in the middle of the gantry — this crossing pattern ensures the vector sum of both motors maps correctly to XY toolhead motion.
+Each belt originates at one motor, wraps around a series of idlers on the gantry perimeter, and connects to one side of the toolhead carriage. The two belts cross each other in the middle of the gantry. This crossing pattern ensures the vector sum of both motors maps correctly to XY toolhead motion.
 
 Getting this routing exactly right — both belts at equal tension and perfectly parallel at shared idler points — is the primary assembly challenge. Unequal tension causes different resonant frequencies on A and B axes, which shows up as asymmetric ringing even after input shaper compensation.
 

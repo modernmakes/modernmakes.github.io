@@ -73,8 +73,8 @@ cons:
   - "Not as stiff as PA-CF or PC-CF"
 ---
 
-PETG-CF sits in the sweet spot between ease and performance for reinforced materials. You get 80°C heat resistance, genuine stiffness from the carbon fibre loading, and PETG's characteristic toughness — all without the enclosure requirement that makes PA-CF and PC a headache. If PLA-CF is too brittle for your application and PA-CF feels like too much work, PETG-CF is the right move.
+PETG-CF sits in the sweet spot between ease and performance for reinforced materials. You get 80°C heat resistance, genuine stiffness from the carbon fibre loading, and PETG's characteristic toughness, all without the enclosure requirement that makes PA-CF and PC a headache. If PLA-CF is too brittle for your application and PA-CF feels like too much work, PETG-CF is the right move.
 
-Printing it is straightforward if you've printed regular PETG before. Run temperatures 10–15°C hotter than unfilled PETG to ensure the CF particles distribute properly in the melt. Reduce fan to 30–40% — PETG-CF needs heat for good layer bonding. Textured PEI at 80°C is the correct bed surface; smooth PEI has the same over-adhesion problems as unfilled PETG.
+Printing it is straightforward if you've printed regular PETG before. Run temperatures 10–15°C hotter than unfilled PETG to ensure the CF particles distribute properly in the melt. Reduce fan to 30–40%; PETG-CF needs heat for good layer bonding. Textured PEI at 80°C is the correct bed surface; smooth PEI has the same over-adhesion problems as unfilled PETG.
 
-The hardened nozzle is non-negotiable. CF materials eat brass nozzles fast — you'll see dimensional drift within 200g and outright blockages within a spool. Fit a hardened steel nozzle once and print CF materials indefinitely. Don't try to save the brass nozzle.
+The hardened nozzle is non-negotiable. CF materials eat brass nozzles fast: you'll see dimensional drift within 200g and outright blockages within a spool. Fit a hardened steel nozzle once and print CF materials indefinitely. Don't try to save the brass nozzle.

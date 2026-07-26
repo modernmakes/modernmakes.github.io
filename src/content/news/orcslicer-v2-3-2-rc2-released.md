@@ -33,7 +33,7 @@ OrcaSlicer 2.3.2 is available from the **official OrcaSlicer GitHub releases pag
 flatpak install flathub com.orcaslicer.OrcaSlicer
 ```
 
-Stable releases can be updated through the built-in update checker. As always, prefer the official GitHub releases over third-party mirror sites to be sure you're getting an untampered build — especially relevant given this update is itself a security fix.
+Stable releases can be updated through the built-in update checker. As always, prefer the official GitHub releases over third-party mirror sites to be sure you're getting an untampered build, especially relevant given this update is itself a security fix.
 
 ## Context
 

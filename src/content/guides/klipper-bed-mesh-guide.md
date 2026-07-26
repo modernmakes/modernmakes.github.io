@@ -27,7 +27,7 @@ Every print bed has some variation across its surface. The causes are structural
 
 **Manufacturing tolerance**: Even high-quality borosilicate glass and precision-ground aluminum tooling plates have surface variation measured in hundredths of a millimeter. Spring steel PEI sheets add their own variation depending on how evenly they're attached to the magnetic base.
 
-**Thermal expansion**: Aluminum expands approximately 23 micrometers per meter per degree Celsius. A 300mm aluminum bed heating from 20°C to 100°C expands ~1.6mm across its length. But it doesn't expand uniformly — the center heats faster than the edges, causing the bed to bow convex (center rises) or concave (edges rise) depending on the heater distribution and bed material.
+**Thermal expansion**: Aluminum expands approximately 23 micrometers per meter per degree Celsius. A 300mm aluminum bed heating from 20°C to 100°C expands ~1.6mm across its length. But it doesn't expand uniformly. The center heats faster than the edges, causing the bed to bow convex (center rises) or concave (edges rise) depending on the heater distribution and bed material.
 
 **Frame compliance**: On CoreXY printers like the Voron 2.4, the bed is fixed, but the frame itself can flex slightly under thermal load. The Z rails, gantry, and frame extrusions all have some compliance.
 
@@ -93,7 +93,7 @@ When complete, view the mesh in Mainsail or Fluidd's bed mesh visualization. A h
 
 - **Total variation under 0.5mm**: Normal for most quality beds at print temperature. The mesh will handle this easily.
 - **Total variation 0.5–1.5mm**: The mesh will compensate, but you might want to check that your bed is properly seated and that your Z leveling screws are adjusted to minimize coarse tilt.
-- **Total variation over 2mm or sharp peaks**: This usually indicates a hardware problem — a screw protruding through the bed, a warp from thermal damage, or an incorrect probe trigger. Investigate before printing.
+- **Total variation over 2mm or sharp peaks**: This usually indicates a hardware problem: a screw protruding through the bed, a warp from thermal damage, or an incorrect probe trigger. Investigate before printing.
 
 <div class="callout-tip">
 <strong>Tip:</strong> If the visualization shows a consistent tilt across the whole bed (high on one side, low on the other), use your Z leveling screws to correct the coarse tilt first, then re-run BED_MESH_CALIBRATE. The mesh is better at handling complex warps than simple tilts.

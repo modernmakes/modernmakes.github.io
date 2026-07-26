@@ -98,7 +98,7 @@ cons:
 
 ABS has a narrower use case than it used to. ASA replaced it for outdoor work. PETG replaced it for functional parts that don't need acetone post-processing. What ABS still owns: acetone smoothing for watertight or cosmetic parts, acetone welding for joining printed sections, and the vast library of designs made before ASA became widely available.
 
-If you're printing Voron parts, note that many spec ABS — the thermal properties are part of the design. Follow spec.
+If you're printing Voron parts, note that many spec ABS. The thermal properties are part of the design. Follow spec.
 
 If you're designing new parts and ABS isn't specified, choose ASA instead. Better UV stability, less warping, functionally identical heat resistance.
 

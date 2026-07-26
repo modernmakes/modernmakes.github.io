@@ -51,12 +51,12 @@ The most common accelerometer for Klipper input shaper calibration is the ADXL34
 | SDO (MISO)  | BCM9  (SPI MISO)  | Pin 21       |
 | CS          | BCM8  (SPI CE0)   | Pin 24       |
 
-Mount the accelerometer securely to your toolhead for X-axis measurement. The mounting must be rigid — any flex between the accelerometer and the toolhead introduces error. A printed mount with an M3 screw directly into the carriage is typical for Stealthburner builds.
+Mount the accelerometer securely to your toolhead for X-axis measurement. The mounting must be rigid; any flex between the accelerometer and the toolhead introduces error. A printed mount with an M3 screw directly into the carriage is typical for Stealthburner builds.
 
 For Y-axis calibration, you'll need to remount the accelerometer to the bed carriage (on a bed-slinger) or to a static bed point (on a Voron 2.4 with a fixed bed). On a Voron 2.4, X and Y calibration both happen at the toolhead since the bed doesn't move in XY.
 
 <div class="callout-tip">
-<strong>Tip:</strong> Many toolhead PCBs (EBB36, KNOMI, Mellow SHT36) have an onboard ADXL345 or LIS2DW accelerometer. If yours does, you don't need external wiring — just enable the accelerometer section in your Klipper config.
+<strong>Tip:</strong> Many toolhead PCBs (EBB36, KNOMI, Mellow SHT36) have an onboard ADXL345 or LIS2DW accelerometer. If yours does, you don't need external wiring, just enable the accelerometer section in your Klipper config.
 </div>
 
 ## Klipper Configuration
@@ -78,7 +78,7 @@ probe_points:
     150, 150, 20  # Center of your bed, 20mm above
 ```
 
-If you're connecting via an EBB36 or similar CAN toolhead board, the configuration differs — consult your board's documentation for the correct `cs_pin` and SPI bus values.
+If you're connecting via an EBB36 or similar CAN toolhead board, the configuration differs; consult your board's documentation for the correct `cs_pin` and SPI bus values.
 
 After adding the config, run `RESTART` from the Klipper console to load the changes. Verify the accelerometer is working with:
 
@@ -96,7 +96,7 @@ With the accelerometer verified, home your printer and move the toolhead to the 
 SHAPER_CALIBRATE
 ```
 
-Klipper will now drive the toolhead through a series of resonance-probing moves at increasing frequencies on each axis. This takes 2–3 minutes per axis. You'll hear the motion sound unusual — that's normal. The printer is deliberately driving frequencies to measure the response.
+Klipper will now drive the toolhead through a series of resonance-probing moves at increasing frequencies on each axis. This takes 2–3 minutes per axis. You'll hear the motion sound unusual. That's normal. The printer is deliberately driving frequencies to measure the response.
 
 When complete, the console will show output like:
 
@@ -125,7 +125,7 @@ Klipper's recommendation balances low vibrations against acceptable smoothing. T
 - If your maximum acceleration is limited by other factors, the shaper choice matters less — just take the recommendation
 
 <div class="callout-warning">
-<strong>Warning:</strong> If the recommended frequency is below 25 Hz, your printer likely has a mechanical issue — loose belts, loose pulleys, flex in the frame, or an improperly seated carriage. Fix the mechanical issue before tuning shaper values. Input shaper cannot fully compensate for structural problems.
+<strong>Warning:</strong> If the recommended frequency is below 25 Hz, your printer likely has a mechanical issue: loose belts, loose pulleys, flex in the frame, or an improperly seated carriage. Fix the mechanical issue before tuning shaper values. Input shaper cannot fully compensate for structural problems.
 </div>
 
 ## Applying Your Settings

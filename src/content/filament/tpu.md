@@ -101,11 +101,11 @@ cons:
   - "Poor bridging — flexible material sags more than rigid alternatives"
 ---
 
-TPU is irreplaceable. If a part needs to flex, grip, absorb impact, or seal against something, TPU is the answer — there's no rigid-filament substitute. Phone cases, cable boots, gaskets, vibration dampeners, TPU flex couplings, gripper pads, protective bumpers — the use cases are everywhere.
+TPU is irreplaceable. If a part needs to flex, grip, absorb impact, or seal against something, TPU is the answer; there's no rigid-filament substitute. Phone cases, cable boots, gaskets, vibration dampeners, TPU flex couplings, gripper pads, protective bumpers: the use cases are everywhere.
 
-The hardness number matters. 95A is the default — flexible enough for most uses, stiff enough to print without constant trouble. 85A prints like soft rubber and requires a very dialed direct-drive setup. 98A is almost rigid and processes more like PETG than rubber.
+The hardness number matters. 95A is the default: flexible enough for most uses, stiff enough to print without constant trouble. 85A prints like soft rubber and requires a very dialed direct-drive setup. 98A is almost rigid and processes more like PETG than rubber.
 
-Disable pressure advance in Klipper when running TPU. The algorithm fights the material's natural compliance and causes under-extrusion artifacts. Same for input shaping — don't run it at TPU speeds.
+Disable pressure advance in Klipper when running TPU. The algorithm fights the material's natural compliance and causes under-extrusion artifacts. Same for input shaping; don't run it at TPU speeds.
 
 Use it for: phone cases and grips, cable management and organizers, vibration dampening mounts, flexible hinges, gaskets, protective bumpers, conveyor belt parts, shoe insoles, prosthetic sockets.
 

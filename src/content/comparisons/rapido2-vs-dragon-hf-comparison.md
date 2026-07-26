@@ -72,11 +72,11 @@ scores:
     b: 8.5
 ---
 
-<p class="art-lead">Phaetus builds both of these hotends, which makes this an unusual comparison — you're not choosing between brands but between a company's two distinct product philosophies. The Dragon HF is a refined standard-format hotend. The Rapido 2 UHF is a dedicated high-speed machine built around an extended melt zone that simply does not exist in standard-format designs.</p>
+<p class="art-lead">Phaetus builds both of these hotends, which makes this an unusual comparison: you're not choosing between brands but between a company's two distinct product philosophies. The Dragon HF is a refined standard-format hotend. The Rapido 2 UHF is a dedicated high-speed machine built around an extended melt zone that simply does not exist in standard-format designs.</p>
 
 ## Why These Two?
 
-The Dragon HF and Rapido 2 UHF sit at an interesting price crossover in 2026. Both are Phaetus products, both ship to US and Canadian customers without painful import delays, and both are commonly specified in Voron 2.4 and Trident BOM variants. The difference is that they serve different printers — or more precisely, different *speeds*.
+The Dragon HF and Rapido 2 UHF sit at an interesting price crossover in 2026. Both are Phaetus products, both ship to US and Canadian customers without painful import delays, and both are commonly specified in Voron 2.4 and Trident BOM variants. The difference is that they serve different printers, or more precisely, different *speeds*.
 
 If you're building a Voron 2.4 and plan to print at 100mm/s or under, the Dragon HF does everything you need at a meaningfully lower price. If you're targeting 200mm/s+ with 0.4mm nozzles, only the Rapido 2 UHF will keep up with your motion system.
 

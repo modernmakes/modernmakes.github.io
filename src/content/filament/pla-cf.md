@@ -74,8 +74,8 @@ cons:
   - "Same heat resistance as PLA — still fails above 60°C"
 ---
 
-PLA-CF is what you reach for when standard PLA feels plasticky and you want something that holds its shape under load and looks the part. The short carbon fibre strands mixed into the PLA matrix significantly increase stiffness — not strength in the impact-resistance sense, but rigidity. Parts deflect less. Tolerances hold better. The surface comes out looking like brushed carbon, matte and premium.
+PLA-CF is what you reach for when standard PLA feels plasticky and you want something that holds its shape under load and looks the part. The short carbon fibre strands mixed into the PLA matrix significantly increase stiffness: not strength in the impact-resistance sense, but rigidity. Parts deflect less. Tolerances hold better. The surface comes out looking like brushed carbon, matte and premium.
 
 The setup requirements are minimal. No enclosure. No chamber heater. Print temperatures are the same as standard PLA or a few degrees higher. The only non-negotiable is the nozzle: brass won't survive CF materials, full stop. Fit a hardened steel nozzle before you load the first metre.
 
-Use it for: tool handles, duct brackets, camera mounts, anything where you'd normally reach for PLA but want it stiffer and better-looking. Don't use it for: snap fits, living hinges, or any part that needs to flex — the CF makes it brittle. Don't use it for anything above 60°C — it's still PLA under the hood.
+Use it for: tool handles, duct brackets, camera mounts, anything where you'd normally reach for PLA but want it stiffer and better-looking. Don't use it for: snap fits, living hinges, or any part that needs to flex; the CF makes it brittle. Don't use it for anything above 60°C — it's still PLA under the hood.

@@ -120,7 +120,7 @@ One test print gives you a starting point. Fine-tune by:
 
 ## PA Values by Setup (Starting Points)
 
-These are community starting points — always verify with your own test:
+These are community starting points; always verify with your own test:
 
 | Setup | Typical PA Range |
 |---|---|

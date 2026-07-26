@@ -12,7 +12,7 @@ summary:
   - "Specs are community-preview and not finalized"
 ---
 
-<p class="art-lead">The Voron Phoenix is the most ambitious machine the Voron community has previewed: a large-format CoreXY printer with independent dual extrusion (IDEX) and a build volume well beyond the 350mm ceiling of the Voron 2.4. It has been shown publicly and is running as an internal beta — but as of mid-2026 it has not been officially released, and there is no public CAD, BOM, or manual yet.</p>
+<p class="art-lead">The Voron Phoenix is the most ambitious machine the Voron community has previewed: a large-format CoreXY printer with independent dual extrusion (IDEX) and a build volume well beyond the 350mm ceiling of the Voron 2.4. It has been shown publicly and is running as an internal beta, but as of mid-2026 it has not been officially released, and there is no public CAD, BOM, or manual yet.</p>
 
 ## Status: Beta, Not Released
 
@@ -24,7 +24,7 @@ The Phoenix was originally floated for late 2023 / early 2024 and has slipped re
 
 ## What the Previews Show
 
-Based on the public showings and community development threads, the Phoenix is shaping up as a genuinely different machine from the rest of the Voron lineup:
+Based on the public showings and community development threads, the Phoenix is shaping up as a very different machine from the rest of the Voron lineup:
 
 - **IDEX** — independent dual extruders, a first for an official Voron design. This is the headline feature, enabling true dual-material and mirror/copy modes at scale.
 - **Large format** — roughly 600 × 600 mm in X/Y, with about 550 mm of Z travel.
@@ -43,6 +43,6 @@ It is emphatically not a first build. Large-format IDEX adds mechanical complexi
 
 ## What We Don't Know Yet
 
-Plenty remains genuinely open: the release date, the finalized BOM and realistic all-in cost, the recommended control electronics, and whether the established Voron kit vendors will offer Phoenix kits. We're not going to put numbers on those until Voron Design does.
+Plenty remains open: the release date, the finalized BOM and realistic all-in cost, the recommended control electronics, and whether the established Voron kit vendors will offer Phoenix kits. We're not going to put numbers on those until Voron Design does.
 
-When the files are published, we'll cover the real build. Until then, the Phoenix is a preview — an exciting one, but a preview.
+When the files are published, we'll cover the real build. Until then, the Phoenix is a preview: an exciting one, but a preview.

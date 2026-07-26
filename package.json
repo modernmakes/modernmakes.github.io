@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fetch-data": "node scripts/fetch-airtable.mjs"
+    "fetch-data": "node scripts/fetch-airtable.mjs",
+    "tells": "node scripts/content-tells.mjs",
+    "tells:strict": "node scripts/content-tells.mjs --strict"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.2.1",

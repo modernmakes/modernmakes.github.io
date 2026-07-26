@@ -101,7 +101,7 @@ cons:
 
 PETG is the filament you reach for when PLA isn't tough enough but you don't want to deal with ABS. Better heat resistance, better impact strength, prints on the same machines with minimal changes. The catch: it strings, it sticks too aggressively to smooth surfaces, and it drinks moisture faster than PLA.
 
-Get a textured PEI sheet if you don't have one. Keep retraction short — PETG doesn't like long pulls. And dry it before any print that matters. Do those three things and PETG is nearly as easy as PLA.
+Get a textured PEI sheet if you don't have one. Keep retraction short; PETG doesn't like long pulls. And dry it before any print that matters. Do those three things and PETG is nearly as easy as PLA.
 
 Use it for: tool holders, cable clips, brackets, anything in a car or garage, functional enclosures, parts that need to survive dishwashers.
 

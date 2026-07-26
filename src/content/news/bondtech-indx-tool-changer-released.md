@@ -22,13 +22,13 @@ The system comes in two configurations: a **4-tool (4T)** version and an **8-too
 
 ## Induction Heating
 
-INDX's defining feature is that the nozzle itself is the heating element. When the carriage picks up a tool, it generates a high-frequency magnetic field that heats the nozzle from cold to printing temperature in seconds. There is no separate heater block, and there are no physical electrical connectors between the carriage and the tool — heating and contactless temperature sensing happen inductively.
+INDX's defining feature is that the nozzle itself is the heating element. When the carriage picks up a tool, it generates a high-frequency magnetic field that heats the nozzle from cold to printing temperature in seconds. There is no separate heater block, and there are no physical electrical connectors between the carriage and the tool; heating and contactless temperature sensing happen inductively.
 
 Because the nozzles are nearly massless, they heat and cool almost instantly, which is what makes fast tool swaps and very low waste possible. Bondtech also offers CHT nozzles, which split filament into multiple strands for higher flow, and hardened-steel tools for abrasive carbon- and glass-filled filaments.
 
 ## Near-Zero Waste
 
-The headline efficiency number is purge waste of roughly **0.013g per material swap** — which Bondtech frames as about five times less than the most efficient competing systems. The wipe tower is eliminated entirely. For multi-color prints with frequent changes, that is the difference between tens of grams of waste and effectively none.
+The headline efficiency number is purge waste of roughly **0.013g per material swap**, which Bondtech frames as about five times less than the most efficient competing systems. The wipe tower is eliminated entirely. For multi-color prints with frequent changes, that is the difference between tens of grams of waste and effectively none.
 
 ## Pricing
 
@@ -41,6 +41,6 @@ That positions INDX as a premium upgrade to an already-premium open printer, rat
 
 ## Compatibility and Shipping
 
-INDX is **exclusive to the Prusa CORE One / CORE One+** at launch — there is no universal carriage version and no Voron support; treat any claim otherwise with skepticism. Future expansion to the CORE One L and assembled machines is planned for later in 2026.
+INDX is **exclusive to the Prusa CORE One / CORE One+** at launch. There is no universal carriage version and no Voron support; treat any claim otherwise with skepticism. Future expansion to the CORE One L and assembled machines is planned for later in 2026.
 
 Pre-sales opened at Formnext in November 2025. Bondtech's Founders Edition began shipping in early May 2026 (a slip from its original date), with Prusa Edition kits shipping from June 2026 and completing by August. The first batch sold out within 48 hours; Bondtech and Prusa are running watchlist notifications for the next run.

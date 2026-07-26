@@ -26,11 +26,41 @@ npm run dev          # Dev server at http://localhost:4321
 npm run build        # Production build → dist/
 npm run preview      # Preview production build
 npm run fetch-data   # Pull Airtable → src/data/hardware/ JSON files
+npm run tells        # Scan src/content for AI-writing tells (pre-publish check)
+npm run tells:strict # Same, exit 1 if any file trips a threshold
 ```
 
 No lint or test commands. The PostToolUse build hook runs `npm run build` automatically after every file edit — watch for build errors in the output before proceeding.
 
 **Git workflow:** All commits are made via Claude Code (`git add` + `git commit`). Matt pushes from GitHub Desktop only — never run `git push` from terminal.
+
+---
+
+## Content Publishing — Humanizer Pass (required before ship)
+
+Every new or edited article in `src/content/**` gets a two-pass humanizer treatment **before commit**. AI-writing tells are the fastest way the publication reads as machine-written.
+
+**Order — surface first, then structure:**
+
+1. **Surface pass (`humanizer`)** — words and punctuation: em-dash overuse, banned words (`game-changer`, `revolutionary`, `best-in-class`, `seamless`, plus the hedge `genuinely`), rule-of-three, negative parallelism.
+2. **Structural pass (`structural-humanizer`)** — discourse shape: stated lessons / moralized closers, over-explanation ("which is the whole reason…"), the "it isn't really about X — it's about Y" ending, and same-shape-every-time convergence.
+
+**Voice guardrails — do not break these while humanizing:**
+
+- Faceless editorial **"we"**, never "I". Do **not** apply the structural-humanizer's first-person or embodied-emotion interventions; they violate the brand voice.
+- **No invented metrics.** Style only. Never add, sharpen, or fabricate a spec, number, price, or claim to satisfy "reference specificity."
+- **Never touch frontmatter** (title, excerpt, summary, specs, verdict, brands, etc.) — Astro schemas break the build silently. Body prose only. Keep links, code blocks, and tables intact.
+
+**Deterministic gate:**
+
+```bash
+npm run tells          # report grep-able tells in src/content
+npm run tells:strict   # exit 1 if any file trips a threshold (run before commit)
+```
+
+`scripts/content-tells.mjs` catches the mechanical slice only — lone dramatic em dashes, banned/hedge words, dash-antithesis closers. A clean scan is necessary, not sufficient: still read for over-explanation, moralized closers, and shape, which the scanner can't see. The recurring tell in this repo's back catalogue was **em-dash overuse** — when in doubt, a period or colon reads more human than a dash. (Appositive pairs `— … —` and bullet lead-in dashes are fine; the scanner ignores them.)
+
+The two humanizer skills live in Cowork; the checks above are inlined here so a Claude Code session can apply them without the skill installed locally.
 
 ---
 

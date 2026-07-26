@@ -13,13 +13,13 @@ summary:
   - "For self-build owners, it's the clearest case yet for open firmware and self-build exit ramps"
 ---
 
-<p class="art-lead">When two of the most-watched names in hardware media each put $10,000 behind a single developer's legal defense, the dispute has stopped being a niche licensing argument. That's where Bambu Lab finds itself in mid-2026: under formal investigation by the Software Freedom Conservancy for AGPLv3 violations, with GamersNexus and Louis Rossmann bankrolling the other side. Here's how a firmware update turned into an open-source crisis — and what it means if you build your own machines.</p>
+<p class="art-lead">When two of the most-watched names in hardware media each put $10,000 behind a single developer's legal defense, the dispute has stopped being a niche licensing argument. That's where Bambu Lab finds itself in mid-2026: under formal investigation by the Software Freedom Conservancy for AGPLv3 violations, with GamersNexus and Louis Rossmann bankrolling the other side. Here's how a firmware update turned into an open-source crisis, and what it means if you build your own machines.</p>
 
 ## What Authorization Control Did
 
 The roots go back to January 2025, when Bambu Lab announced that future firmware would add an authorization and authentication layer to its printers, citing security. In practice, "Authorization Control" gated core printer functions — print start, motion control, fan and hotend control, AMS configuration, calibration, and remote video — behind a Bambu-issued authentication path, and blocked communication from unofficial third-party software.
 
-The most visible casualty was **OrcaSlicer**, the open-source slicer that had worked closely with Bambu hardware; its developer declined to adopt Bambu's gateway, calling it no meaningful benefit to users. Accessories like BIQU's Panda Touch broke too. Bambu justified the lockdown by citing what it said were up to 30 million unauthorized requests per day to its servers, plus DDoS attacks — a figure the company has stated but that critics dispute.
+The most visible casualty was **OrcaSlicer**, the open-source slicer that had worked closely with Bambu hardware; its developer declined to adopt Bambu's gateway, calling it no meaningful benefit to users. Accessories like BIQU's Panda Touch broke too. Bambu justified the lockdown by citing what it said were up to 30 million unauthorized requests per day to its servers, plus DDoS attacks. The company has stated that figure; critics dispute it.
 
 ## Why It Became an AGPLv3 Problem
 
@@ -45,6 +45,6 @@ The clearest beneficiary is **Prusa Research**. Its Core One leans on exactly th
 
 ## Why This Matters for Self-Builders
 
-If you run a Voron, a RatRig, or any Klipper machine, none of this can happen to you — that's the whole point. Your firmware is open, your slicer is your choice, and no authentication server stands between you and your own printer.
+If you run a Voron, a RatRig, or any Klipper machine, none of this can happen to you. That's the whole point. Your firmware is open, your slicer is your choice, and no authentication server stands between you and your own printer.
 
-We've kept our ecosystem hubs deliberately self-build-only for this reason: a printer you fully own can't have features revoked in a firmware update. For Bambu owners feeling boxed in, the practical response is the same one the community has been documenting all year — open firmware and self-build exit ramps, including [full Klipper conversions of closed machines](/news/bambu-p1-klipper-conversion). The Bambu crisis isn't really a story about one company's legal trouble. It's a reminder of what ownership actually means in 3D printing — and why the people who build their own machines keep turning out to be right about it.
+We've kept our ecosystem hubs deliberately self-build-only for this reason: a printer you fully own can't have features revoked in a firmware update. For Bambu owners feeling boxed in, the practical response is the one the community has documented all year: open firmware and self-build exit ramps, including [full Klipper conversions of closed machines](/news/bambu-p1-klipper-conversion). A printer you build yourself is one no update can take back.

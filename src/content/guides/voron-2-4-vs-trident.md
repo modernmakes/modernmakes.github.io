@@ -17,7 +17,7 @@ summary:
 featured: false
 ---
 
-<p class="art-lead">The Voron 2.4 and Trident are the two flagship printers from the Voron Design community. They produce the same quality of prints. The differences are mechanical and procedural — how they move in Z, how complex they are to build, and how they scale to different sizes. This guide explains those differences clearly so you can pick the right one.</p>
+<p class="art-lead">The Voron 2.4 and Trident are the two flagship printers from the Voron Design community. They produce the same quality of prints. The differences are mechanical and procedural: how they move in Z, how complex they are to build, and how they scale to different sizes. This guide explains those differences clearly so you can pick the right one.</p>
 
 ## The Short Answer
 
@@ -31,21 +31,21 @@ Both produce excellent print quality. The differences are mechanical, not in out
 
 This is the most significant mechanical difference.
 
-**Voron 2.4:** Four-point Z with independent motors at each corner. The gantry rises on Z moves — the bed stays fixed. Four-point levelling gives more adjustment points but requires all four motors to be kept in sync. QGL (Quad Gantry Level) is the routine that does this automatically in Klipper.
+**Voron 2.4:** Four-point Z with independent motors at each corner. The gantry rises on Z moves; the bed stays fixed. Four-point levelling gives more adjustment points but requires all four motors to be kept in sync. QGL (Quad Gantry Level) is the routine that does this automatically in Klipper.
 
-**Trident:** Three-point belt-driven Z with motors at three corners. The bed rises on Z moves — the gantry stays fixed (hence "fixed gantry"). Three-point levelling is self-determining — three points define a plane uniquely, so there's no over-constrained levelling issue. Z_TILT_ADJUST in Klipper handles this.
+**Trident:** Three-point belt-driven Z with motors at three corners. The bed rises on Z moves; the gantry stays fixed (hence "fixed gantry"). Three-point levelling is self-determining: three points define a plane uniquely, so there's no over-constrained levelling issue. Z_TILT_ADJUST in Klipper handles this.
 
 **Practical difference:** The Trident's Z system is simpler to build and tune. The 2.4's flying gantry is more complex but scales better to large format.
 
 ### Build Size
 
-**Voron 2.4:** 250mm, 300mm, and 350mm variants. The flying gantry design scales better to larger formats — the 350mm 2.4 is the most common large-format community build.
+**Voron 2.4:** 250mm, 300mm, and 350mm variants. The flying gantry design scales better to larger formats. The 350mm 2.4 is the most common large-format community build.
 
-**Trident:** 250mm, 300mm, and 350mm variants. Same size range, but the fixed-gantry design is more efficient at smaller sizes — the 250mm Trident is a popular compact build.
+**Trident:** 250mm, 300mm, and 350mm variants. Same size range, but the fixed-gantry design is more efficient at smaller sizes. The 250mm Trident is a popular compact build.
 
 ### Build Complexity
 
-**Voron 2.4:** More complex. The flying gantry requires precise assembly — the four Z drives must be aligned correctly or QGL will struggle. More components, more alignment steps, longer build time (40–60 hours typical).
+**Voron 2.4:** More complex. The flying gantry requires precise assembly. The four Z drives must be aligned correctly or QGL will struggle. More components, more alignment steps, longer build time (40–60 hours typical).
 
 **Trident:** Simpler. Fixed gantry means fewer alignment dependencies. The three-point Z is more forgiving. Shorter build time (30–45 hours typical). Generally recommended for first-time Voron builders.
 

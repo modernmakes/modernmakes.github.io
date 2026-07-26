@@ -21,15 +21,15 @@ summary:
 featured: false
 ---
 
-<p class="art-lead">Wet filament is not a minor inconvenience — it is a print-ruining condition. Moisture trapped in hygroscopic filament converts to steam inside the hotend, causing bubbling, hissing, random stringing, and weak layer adhesion that looks like underextrusion but doesn't respond to flow rate adjustments. The fix is straightforward. The mistake is not recognizing the problem until you've wasted hours of print time on it.</p>
+<p class="art-lead">Wet filament isn't a minor inconvenience. It's a print-ruining condition. Moisture trapped in hygroscopic filament converts to steam inside the hotend, causing bubbling, hissing, random stringing, and weak layer adhesion that looks like underextrusion but doesn't respond to flow rate adjustments. The fix is straightforward. The mistake is not recognizing the problem until you've wasted hours of print time on it.</p>
 
 ## How Moisture Gets into Filament
 
-Most common 3D printing filaments are made from hygroscopic polymers — materials that absorb water vapor from ambient air at the molecular level. This is not surface moisture that you can wipe off. The water bonds into the polymer chains themselves.
+Most common 3D printing filaments are made from hygroscopic polymers: materials that absorb water vapor from ambient air at the molecular level. This is not surface moisture that you can wipe off. The water bonds into the polymer chains themselves.
 
 The rate of absorption depends on three factors: the material's inherent affinity for water, the relative humidity of the storage environment, and the exposure time. A spool of nylon left open at 60% relative humidity for 24 hours can absorb enough moisture to cause visible print problems. PLA at the same conditions might take two weeks to show obvious symptoms.
 
-Once absorbed, moisture doesn't leave on its own at room temperature. You need elevated heat to drive it back out — which is what a filament dryer does.
+Once absorbed, moisture doesn't leave on its own at room temperature. You need elevated heat to drive it back out, which is what a filament dryer does.
 
 ## Which Materials Are Most at Risk
 
@@ -68,7 +68,7 @@ Visible signs in the print:
 
 ## Drying Temperatures and Times
 
-The goal is to heat the filament above the boiling point of water (100°C) at the polymer surface level — but below the glass transition temperature of the material, which would cause the spool to deform or layers to fuse together.
+The goal is to heat the filament above the boiling point of water (100°C) at the polymer surface level, but below the glass transition temperature of the material, which would cause the spool to deform or layers to fuse together.
 
 | Material | Drying Temp | Minimum Time | Optimal Time |
 |---|---|---|---|
@@ -96,7 +96,7 @@ Recommended models in 2026:
 - **Creality Filament Dryer Pro** — faster heat-up, better airflow, ~$45
 - **ESUN eBOX** — older design but proven reliability, doubles as a storage solution
 
-**Food dehydrators** are a popular DIY alternative. A basic 5-tray dehydrator at 50°C works well for PLA and PETG. The limitation is temperature accuracy — many food dehydrators run hotter than their thermostat indicates, which is problematic for PLA. Verify your dehydrator's actual temperature with a thermometer before using it.
+**Food dehydrators** are a popular DIY alternative. A basic 5-tray dehydrator at 50°C works well for PLA and PETG. The limitation is temperature accuracy: many food dehydrators run hotter than their thermostat indicates, which is problematic for PLA. Verify your dehydrator's actual temperature with a thermometer before using it.
 
 **Kitchen ovens** can work but are generally impractical. Most home ovens are inaccurate at low temperatures and cycle significantly above and below their set point, risking spool damage. Use only if nothing else is available, and monitor closely.
 

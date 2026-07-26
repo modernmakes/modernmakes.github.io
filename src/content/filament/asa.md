@@ -100,7 +100,7 @@ ASA is the correct material for anything living outside. UV stability that actua
 
 The Nevermore filter is not optional if you're running a Voron or any enclosed machine with ASA regularly. Styrene off-gassing is real and the enclosed environment concentrates it.
 
-Chamber temp matters more than people think. Get it to 45–50°C before the print starts — not during. Most warping failures trace back to printing into a cold chamber.
+Chamber temp matters more than people think. Get it to 45–50°C before the print starts, not during. Most warping failures trace back to printing into a cold chamber.
 
 Use it for: outdoor brackets, garden tools, automotive parts, anything mounted in a car or truck, exterior-facing enclosures, signs and labels.
 

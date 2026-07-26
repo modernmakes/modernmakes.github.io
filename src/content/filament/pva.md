@@ -75,6 +75,6 @@ cons:
 
 PVA has one job: be the support material that disappears in water. It does that job better than any alternative. Where break-away supports leave witness marks and require peeling forces that can damage delicate surfaces, PVA interfaces cleanly with PLA and leaves nothing behind after soaking. The supported surface looks like it printed on air.
 
-The limitation is absolute: PVA is only meaningful if you have a multi-material system. AMS on Bambu printers, MMU3 on Prusa MK4, ERCF on Voron — any of these work. Without the ability to print support material in a different filament, PVA has no use case at all.
+The limitation is absolute: PVA is only meaningful if you have a multi-material system. AMS on Bambu printers, MMU3 on Prusa MK4, ERCF on Voron: any of these work. Without the ability to print support material in a different filament, PVA has no use case at all.
 
 Moisture handling is the operational discipline that makes PVA work or fail. PVA absorbs water from ambient air faster than any other common filament. An open spool in a humid room can be unusable within hours. Keep it sealed with fresh desiccant when not printing, run it from a dry box during printing, and replace it if it's been open for more than a day in anything above 50% relative humidity. Get the moisture handling right and PVA becomes a reliable, repeatable tool for printing parts that would otherwise require extensive manual support cleanup.

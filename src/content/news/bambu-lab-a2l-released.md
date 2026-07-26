@@ -16,13 +16,13 @@ summary:
 
 Bambu Lab's latest printer is the A2L — a large-format bed slinger positioned between the A1 and the H series on price and capability. At $469 for the standalone unit and $569 in the combo version with AMS Lite, it targets builders who want significant build volume without the cost of an H-series machine.
 
-The build volume is 330×320×325mm, roughly twice the A1's footprint and close to what the H2C and H2S offer. Unlike those machines, the A2L uses a single nozzle and a moving bed — no dual toolheads, no enclosed chamber. The material range is limited to PLA, PETG, and TPU as a result, with the bed heating to a maximum of 80°C.
+The build volume is 330×320×325mm, roughly twice the A1's footprint and close to what the H2C and H2S offer. Unlike those machines, the A2L uses a single nozzle and a moving bed: no dual toolheads, no enclosed chamber. The material range is limited to PLA, PETG, and TPU as a result, with the bed heating to a maximum of 80°C.
 
 ## What's Actually New
 
-The A2L ships with a servo motor on the extruder, matching what Bambu introduced on its second-generation H-series machines. This provides higher torque and gives the printer additional data for jam and clog detection — a meaningful upgrade from the stepper-driven extruder on the A1.
+The A2L ships with a servo motor on the extruder, matching what Bambu introduced on its second-generation H-series machines. This provides higher torque and gives the printer additional data for jam and clog detection, a meaningful upgrade from the stepper-driven extruder on the A1.
 
-The front rail system from the H-series also appears here for the first time on an A-series printer. This is what enables the cut and draw module ($60, sold separately), which the H-series has supported for some time. On the larger A2L platform, the accessory makes more practical sense than it did on the H-series — the 300×300mm cutting area covers A4-sized sheets, and the machine's accessibility makes the learning curve more approachable for casual users.
+The front rail system from the H-series also appears here for the first time on an A-series printer. This is what enables the cut and draw module ($60, sold separately), which the H-series has supported for some time. On the larger A2L platform, the accessory makes more practical sense than it did on the H-series. The 300×300mm cutting area covers A4-sized sheets, and the machine's accessibility makes the learning curve more approachable for casual users.
 
 A blob detection sensor has been added to the purge station. If material accumulates on the nozzle during a failed print, the blob triggers a flap when the head moves to purge position. Whether this activates during single-color prints — where the head may not visit the purge station — is unclear from Bambu's documentation.
 
@@ -30,7 +30,7 @@ A blob detection sensor has been added to the purge station. If material accumul
 
 The camera is the same unit from the A1 and A1 Mini: low frame rate, poor positioning, limited night visibility. Remote print monitoring will require an external camera for anything beyond basic checks.
 
-The AMS Lite is unchanged. The multicolor system remains a single-nozzle multiplexing approach with purge waste at each color change. For large multicolor prints this accumulates significantly — one reviewer reported 99g of purge material on a 200g print.
+The AMS Lite is unchanged. The multicolor system remains a single-nozzle multiplexing approach with purge waste at each color change. For large multicolor prints this accumulates significantly: one reviewer reported 99g of purge material on a 200g print.
 
 The touchscreen interface is effectively identical to the A1's, with limited color options and the same layout.
 
@@ -44,11 +44,11 @@ The granular damper in the top frame — metal balls in internal chambers that a
 
 The A2L needs approximately 600mm of width and 650mm of depth for full bed movement. Add the AMS Lite placed beside the printer and width extends to around 800mm. The H2C build plate fits the A2L directly, providing access to an existing accessory ecosystem including third-party surfaces.
 
-The printer arrives partially assembled. Frame-to-base assembly takes under 30 minutes with careful attention to the manual — fasteners come in multiple sizes and lengths.
+The printer arrives partially assembled. Frame-to-base assembly takes under 30 minutes with careful attention to the manual; fasteners come in multiple sizes and lengths.
 
 ## Pricing and Positioning
 
-At $469, the A2L is substantially cheaper than the H-series. Three A2Ls can be purchased for the price of one H2S. Against competition from Elegoo, Creality, and Anycubic in the large-format Cartesian segment, the A2L commands a premium — partially justified by Bambu's ecosystem integration and print profile quality, partially by brand positioning.
+At $469, the A2L is substantially cheaper than the H-series. Three A2Ls can be purchased for the price of one H2S. Against competition from Elegoo, Creality, and Anycubic in the large-format Cartesian segment, the A2L commands a premium, partially justified by Bambu's ecosystem integration and print-profile quality and partially by brand positioning.
 
 The standalone A2L ships without multicolor capability. The $100 premium for the AMS Lite combo adds four-spool support, which is useful not only for multicolor but also for automatic spool switching on long single-color prints.
 
@@ -56,7 +56,7 @@ The standalone A2L ships without multicolor capability. The $100 premium for the
 
 The A2L launch arrives during an ongoing dispute between Bambu Lab and parts of the 3D printing community over open-source licensing compliance. Bambu Studio is built on open-source software under the AGPL license; the network plugin enabling cloud connectivity has remained closed source. Bambu recently took legal action against a developer who restored cloud communication in an OrcaSlicer fork.
 
-This context affects how the A2L is positioned in the market. The printer can be used in LAN-only mode without a Bambu account — OrcaSlicer can send print jobs over the local network, and firmware updates can be applied from the included SD card. Moving outside Bambu's ecosystem reduces convenience; the app, remote monitoring, and automatic filament recognition all depend on cloud connectivity.
+This context affects how the A2L is positioned in the market. The printer can be used in LAN-only mode without a Bambu account. OrcaSlicer can send print jobs over the local network, and firmware updates can be applied from the included SD card. Moving outside Bambu's ecosystem reduces convenience; the app, remote monitoring, and automatic filament recognition all depend on cloud connectivity.
 
 ## Specifications
 
@@ -78,7 +78,7 @@ This context affects how the A2L is positioned in the market. The printer can be
 
 The A2L is a capable large-format printer for PLA, PETG, and TPU at a price point that makes the H-series look expensive. Print quality from early testing is reported as excellent for the category. The cut and draw module integration is the most distinctive differentiator from any direct competitor.
 
-The hardware is genuinely good. Whether the "second generation" designation is earned by a servo motor and a blob sensor is a reasonable question — the camera, AMS Lite, touchscreen, and core motion system are unchanged from the A1. The more accurate framing may be a large-format A1 with targeted upgrades rather than a ground-up second-generation design.
+The hardware is good. Whether the "second generation" designation is earned by a servo motor and a blob sensor is a reasonable question — the camera, AMS Lite, touchscreen, and core motion system are unchanged from the A1. The more accurate framing may be a large-format A1 with targeted upgrades rather than a ground-up second-generation design.
 
 For builders who primarily use PLA and PETG, want significant build volume, and are comfortable inside Bambu's ecosystem, the A2L is a competitive option. For builders who need engineering materials, prefer open-source toolchains, or want to minimise cloud dependency, the hardware limitations and current company context are both relevant factors.
 

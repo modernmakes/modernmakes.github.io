@@ -23,7 +23,7 @@ featured: false
 
 ## What Z Offset Actually Controls
 
-When your printer homes to Z, it moves the nozzle to whatever position the firmware considers Z=0. The actual Z offset is a correction applied on top of that home position — a small negative or positive value that shifts the nozzle down or up by a precise amount before the first layer begins.
+When your printer homes to Z, it moves the nozzle to whatever position the firmware considers Z=0. The actual Z offset is a correction applied on top of that home position: a small negative or positive value that shifts the nozzle down or up by a precise amount before the first layer begins.
 
 A correct Z offset means the first layer is squished slightly into the bed surface: not so hard that the nozzle drags, not so light that the line is round and doesn't bond. You're looking for a flat, slightly wider-than-normal line with good contact area on the bed.
 
@@ -50,7 +50,7 @@ With the nozzle hot (printing temperature), slide a standard 80gsm sheet of prin
 TESTZ Z=-0.1
 ```
 
-Keep lowering until you feel slight resistance when moving the paper — the nozzle should drag gently on the paper without tearing it or locking it in place. That drag is the correct Z offset position.
+Keep lowering until you feel slight resistance when moving the paper. The nozzle should drag gently on the paper without tearing it or locking it in place. That drag is the correct Z offset position.
 
 Once you find it, note the position shown in your web interface and set the offset:
 
@@ -97,7 +97,7 @@ Klipper writes the calibrated offset to the `[probe]` section's `z_offset` value
 
 ## Live Z Adjust During Printing
 
-The calibrated offset is a starting point — real fine-tuning happens while watching an actual first layer print. Start a single-layer calibration square or a full skirt-only print and watch the lines as they go down.
+The calibrated offset is a starting point. Real fine-tuning happens while watching an actual first layer print. Start a single-layer calibration square or a full skirt-only print and watch the lines as they go down.
 
 Signs the offset needs adjustment:
 

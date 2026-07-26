@@ -99,7 +99,7 @@ cons:
   - "Brittle compared to unfilled nylon — CF improves stiffness but reduces impact resistance"
 ---
 
-PA-CF is a genuinely impressive material when processed correctly. Parts that feel close to injection-molded nylon, dramatically lighter than equivalent PETG parts, with heat resistance that makes ABS look modest. The engineering tradeoffs are significant but they're all manageable with the right setup.
+PA-CF is an impressive material when processed correctly. Parts that feel close to injection-molded nylon, dramatically lighter than equivalent PETG parts, with heat resistance that makes ABS look modest. The engineering tradeoffs are significant but they're all manageable with the right setup.
 
 The non-negotiables: hardened steel nozzle, active drying, enclosed chamber. Everything else is tuning.
 

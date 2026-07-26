@@ -12,17 +12,17 @@ summary:
   - "Ran a limited beta from September 2025 before opening more widely"
 ---
 
-<p class="art-lead">Chroma Canvas is Bambu Lab's tool for turning ordinary images into multi-color filament "paintings" — flat relief prints that reproduce a picture using the filament loaded in an AMS. It runs as a MakerWorld tool, not as a feature inside Bambu Studio, and is openly modeled on the established HueForge workflow.</p>
+<p class="art-lead">Chroma Canvas is Bambu Lab's tool for turning ordinary images into multi-color filament "paintings": flat relief prints that reproduce a picture using the filament loaded in an AMS. It runs as a MakerWorld tool, not as a feature inside Bambu Studio, and is openly modeled on the established HueForge workflow.</p>
 
 ## What Chroma Canvas Does
 
 Chroma Canvas takes an image and converts it into a printable multi-color object by mapping the image's colors onto pre-set filament palettes. Users can isolate and recolor specific details — applying different palettes to a subject and its background — and preview the result before printing. The output is a flat relief where each color region is reproduced with the corresponding filament, with no need to model anything in 3D.
 
-The pitch is accessibility. Community reactions have framed it as "much, much easier than HueForge" — likely more limited, but far quicker to get a usable result from. Bambu Lab has explicitly credited HueForge as the inspiration.
+The pitch is accessibility. Community reactions have framed it as "much, much easier than HueForge." It's likely more limited, but far quicker to get a usable result from. Bambu Lab has explicitly credited HueForge as the inspiration.
 
 ## Where It Runs
 
-Chroma Canvas lives on **MakerWorld** (Bambu's MakerLab), as a browser-based tool — it is not bundled into a specific Bambu Studio version. You generate the colorized model in Chroma Canvas, then print it on a multi-material Bambu machine.
+Chroma Canvas lives on **MakerWorld** (Bambu's MakerLab), as a browser-based tool. It is not bundled into a specific Bambu Studio version. You generate the colorized model in Chroma Canvas, then print it on a multi-material Bambu machine.
 
 ## What You Need
 

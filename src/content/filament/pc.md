@@ -80,8 +80,8 @@ cons:
   - "Not beginner-friendly under any conditions"
 ---
 
-Polycarbonate is the end of the road for heat resistance on a desktop printer. Nothing you can print on a standard CoreXY will survive higher sustained temperatures — 115°C before deflection, 130°C on some grades. If you're printing parts that live inside an enclosure, near electronics, or in any environment that would destroy PETG or ASA, PC is the answer.
+Polycarbonate is the end of the road for heat resistance on a desktop printer. Nothing you can print on a standard CoreXY will survive higher sustained temperatures: 115°C before deflection, 130°C on some grades. If you're printing parts that live inside an enclosure, near electronics, or in any environment that would destroy PETG or ASA, PC is the answer.
 
 The processing requirements are real. You need a hotend that can sustain 300–320°C without degrading — all-metal only, no PTFE lining. You need a chamber that actively heats to 65–70°C before the print starts, or you'll get delamination on tall parts. Bed adhesion requires either Garolite sheet or PEI with a thin layer of glue stick. Skip any of these and you'll spend a day watching parts warp and peel.
 
-Moisture is the silent killer. PC absorbs water faster than nylon and produces far worse results — bubbling, rough surfaces, catastrophic layer failure. Dry every spool at 80°C for 8–12 hours before a print. Print from an active dryer. Never leave an open spool overnight in a humid environment. Do those things and PC is a reliable, repeatable material on the right machine.
+Moisture is the silent killer. PC absorbs water faster than nylon and produces far worse results: bubbling, rough surfaces, catastrophic layer failure. Dry every spool at 80°C for 8–12 hours before a print. Print from an active dryer. Never leave an open spool overnight in a humid environment. Do those things and PC is a reliable, repeatable material on the right machine.

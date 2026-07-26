@@ -73,8 +73,8 @@ cons:
   - "Not suitable for any structural purpose"
 ---
 
-TPE is the material you reach for when TPU is still too stiff. Where 95A TPU feels springy and firm, 82–90A TPE is genuinely soft and rubber-like. The applications are specific: tool grips that conform to hand pressure, vibration dampening feet under heavy equipment, gaskets that need to compress and seal. For those uses, nothing else gets as close to real rubber while still being printable.
+TPE is the material you reach for when TPU is still too stiff. Where 95A TPU feels springy and firm, 82–90A TPE is soft and rubber-like. The applications are specific: tool grips that conform to hand pressure, vibration dampening feet under heavy equipment, gaskets that need to compress and seal. For those uses, nothing else gets as close to real rubber while still being printable.
 
-The difficulty level is real. TPE is far less forgiving than TPU. It requires direct drive — no bowden printer will feed it reliably. Speed must stay at or below 20mm/s or the material coils and jams before it reaches the nozzle. Zero retraction or near-zero, because pulling back on TPE just causes it to fold inside the extruder. Pressure advance must be disabled entirely.
+The difficulty level is real. TPE is far less forgiving than TPU. It requires direct drive; no bowden printer will feed it reliably. Speed must stay at or below 20mm/s or the material coils and jams before it reaches the nozzle. Zero retraction or near-zero, because pulling back on TPE just causes it to fold inside the extruder. Pressure advance must be disabled entirely.
 
 If you've printed TPU successfully before, TPE is the next logical step for softer applications. If you haven't printed flexible materials before, start with 95A TPU to understand the process, then work down in hardness once you're confident in your setup. The softer you go, the less margin for error.

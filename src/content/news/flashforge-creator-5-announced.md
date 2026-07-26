@@ -18,7 +18,7 @@ summary:
 
 The Creator 5 is a CoreXY FDM printer offered in two configurations: an open-frame model and the enclosed Creator 5 Pro, which adds a heated chamber for engineering filaments. Build volume on both variants is **256 × 256 × 256mm**.
 
-The defining feature is Flashforge's **FlashSwap** system, a gantry that carries four separate toolheads, each with its own hotend, extruder, and thermistor. Unlike filament-multiplexer approaches that share one nozzle, each toolhead can be loaded with a different filament, temperature, and nozzle — so multi-material and multi-color jobs run without a shared melt zone to purge.
+The defining feature is Flashforge's **FlashSwap** system, a gantry that carries four separate toolheads, each with its own hotend, extruder, and thermistor. Unlike filament-multiplexer approaches that share one nozzle, each toolhead can be loaded with a different filament, temperature, and nozzle, so multi-material and multi-color jobs run without a shared melt zone to purge.
 
 During a print, the machine parks unused toolheads and activates the one required for each segment. Because each material keeps its own nozzle, there is no purge block: Flashforge cites a Rubik's-cube test finishing in 2.6 hours and 47.5g of filament versus roughly 16 hours and 290g on a conventional purge-based multi-color system.
 
@@ -32,7 +32,7 @@ The four toolheads use Flashforge's own hotend modules and ship with hardened-st
 
 ## Who It Is Aimed At
 
-At under $800 during the launch window, the Creator 5 sits in the prosumer segment and competes with single-toolhead machines like the Bambu Lab P1S on price while offering genuine four-toolhead multi-material capability. The enclosed Creator 5 Pro adds a heated chamber up to **65°C**, an **H13 HEPA + coconut-carbon dual-layer filtration** system, and a quoted 55dB noise level — positioning it for engineering materials in a way the open-frame model is not.
+At under $800 during the launch window, the Creator 5 sits in the prosumer segment and competes with single-toolhead machines like the Bambu Lab P1S on price while offering true four-toolhead multi-material capability. The enclosed Creator 5 Pro adds a heated chamber up to **65°C**, an **H13 HEPA + coconut-carbon dual-layer filtration** system, and a quoted 55dB noise level, positioning it for engineering materials in a way the open-frame model is not.
 
 On capability it lines up against tool-changer systems like the Bondtech INDX for the Prusa CORE One, which command higher all-in costs. At Creator 5 launch pricing, four-toolhead printing becomes accessible to a much wider range of hobbyists and small studios than previous tool-changer options allowed.
 

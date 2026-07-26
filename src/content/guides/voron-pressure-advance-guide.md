@@ -29,7 +29,7 @@ guideCategory: "Calibration"
 
 ## Understanding Pressure Advance
 
-Before touching any numbers, it's worth understanding what pressure advance actually does — because the mental model matters when you're analyzing your test prints.
+Before touching any numbers, it's worth understanding what pressure advance actually does, because the mental model matters when you're analyzing your test prints.
 
 When your extruder motor decelerates going into a corner, the molten filament inside the hotend is still under pressure from the previous extrusion. That pressure wants to keep flowing even as the motor stops, resulting in a blob of extra material at the corner. When the motor reverses or changes direction, it takes a moment for fresh pressure to build back up, which causes under-extrusion at the start of the next move.
 
