@@ -5,6 +5,9 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
 const currentPath = '/news';
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 
 const allNews = await getCollection('news');
 const sorted = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -22,7 +25,7 @@ function cardBg(entry: (typeof sorted)[number]) {
 
 const counts = { all: sorted.length };
 ---
-<Base
+<Base hasPageH1={true}
   title="News"
   description="Latest 3D printing news — product launches, firmware updates, safety notices, and industry moves."
   heroPage={true}
@@ -97,8 +100,8 @@ const counts = { all: sorted.length };
         "@type": "CollectionPage",
         "name": "3D Printing News — Modern Makes",
         "description": "Latest news in 3D printing — product launches, firmware updates, community developments, and industry moves.",
-        "url": "https://modernmakes.com/news",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/news`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       }
     ]
   })}></script>

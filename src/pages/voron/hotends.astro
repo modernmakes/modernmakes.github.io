@@ -4,6 +4,9 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import hotendsData from '../../data/products/hotends.json';
 const currentPath = '/voron/hotends';
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 const voronHotends = hotendsData.products.filter(p =>
   p.compatibility.some(c => c.startsWith('voron'))
 );
@@ -17,7 +20,7 @@ const badges: Record<string, { label: string; cls: string }> = {
   'bambu-hardened-nozzle': { label: 'BAMBU ONLY',  cls: 'verdict-skip' },
 };
 ---
-<Base title="Best Hotends for Voron 2.4 & Trident" description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links.">
+<Base hasPageH1={true} title="Best Hotends for Voron 2.4 & Trident" description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links.">
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- HEADER -->
@@ -214,7 +217,7 @@ const badges: Record<string, { label: string; cls: string }> = {
       {
         "@type": "ItemList",
         "name": "Best Hotends for Voron 2.4 and Trident 2026",
-        "url": "https://modernmakes.com/voron/hotends",
+        "url": `${siteBase}/voron/hotends`,
         "numberOfItems": 5,
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Rapido 2" },

@@ -4,6 +4,9 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import voronData from '../../data/products/voron-variants.json';
 const currentPath = '/voron';
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 
 const partCounts: Record<string, { a: number; t: number }> = {
   'hotends':        { a: 8,  t: 8  },
@@ -19,7 +22,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
   'lighting':       { a: 6,  t: 6  },
 };
 ---
-<Base title="Voron Upgrades, Mods & Parts" description="The complete resource for Voron 2.4 and Trident builders. Every hotend, extruder, motion system, electronics, and more — with affiliate links and community mod picks.">
+<Base hasPageH1={true} title="Voron Upgrades, Mods & Parts" description="The complete resource for Voron 2.4 and Trident builders. Every hotend, extruder, motion system, electronics, and more — with affiliate links and community mod picks.">
   <Nav slot="nav" currentPath={currentPath} />
 
   <!-- ── 1. DARK HERO ── -->
@@ -351,14 +354,14 @@ const partCounts: Record<string, { a: number; t: number }> = {
         "@type": "CollectionPage",
         "name": "Voron Printer Ecosystem — Modern Makes",
         "description": "The complete resource for Voron 2.4 and Trident builds. Parts directory, configurator, subsystem guides, and community mods.",
-        "url": "https://modernmakes.com/voron",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/voron`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "Voron", "item": "https://modernmakes.com/voron" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": siteBase },
+          { "@type": "ListItem", "position": 2, "name": "Voron", "item": `${siteBase}/voron` }
         ]
       }
     ]

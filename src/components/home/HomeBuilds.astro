@@ -1,6 +1,21 @@
 ---
 // HomeBuilds.astro
 // Dark-register prosumer section. Feature article left, 3 build cards right.
+//
+// Feature + first two build cards pull real title/excerpt/date/readTime from
+// their content collection entries (previously hardcoded placeholder text
+// pointing at articles that were never published, 404ing on every visit).
+// The third card links to a real hardware detail page, not a content
+// collection entry, so its copy stays hand-authored — that link was never dead.
+import { getEntry } from 'astro:content';
+
+const featureEntry = await getEntry('guides', 'voron-2-4-vs-trident');
+const cardEntryA = await getEntry('guides', 'corexy-motion-system');
+const cardEntryB = await getEntry('comparisons', 'rapido2-vs-dragon-hf-comparison');
+
+function formatCardDate(d: Date) {
+  return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+}
 ---
 
 <section class="builds" aria-labelledby="builds-heading">
@@ -15,7 +30,7 @@
     <div class="builds-grid">
 
       <!-- Feature article -->
-      <a href="/voron/builds/voron-24-bom-2026" class="build-feature" data-reveal data-reveal-delay="120" aria-label="Feature build article">
+      <a href={`/guides/${featureEntry.slug}`} class="build-feature" data-reveal data-reveal-delay="120" aria-label="Feature build article">
         <article>
           <div class="build-feature-img" data-reveal="trigger" aria-hidden="true">
             <div class="build-feature-img-inner">
@@ -38,11 +53,11 @@
             <span class="build-feature-tag">Voron · Build guide</span>
           </div>
           <div class="build-feature-body">
-            <h3 class="build-feature-title">What a $1,400 Voron 2.4 BOM Actually Looks Like in 2026</h3>
-            <p class="build-feature-excerpt">Parts costs are down 12% year-on-year. LDO kits, where to source extrusions, and whether the Formbot kit is still worth it. We mapped four realistic build paths.</p>
+            <h3 class="build-feature-title">{featureEntry.data.title}</h3>
+            <p class="build-feature-excerpt">{featureEntry.data.excerpt}</p>
             <span class="build-feature-meta">
-              <span class="build-feature-date">May 22, 2026</span>
-              <span class="build-feature-read">18 min</span>
+              <span class="build-feature-date">{formatCardDate(featureEntry.data.date)}</span>
+              <span class="build-feature-read">{featureEntry.data.readTime}</span>
             </span>
           </div>
         </article>
@@ -66,31 +81,31 @@
           </article>
         </a>
 
-        <a href="/guides/cf-pa12" class="build-card" data-reveal="right" data-reveal-delay="280">
+        <a href={`/guides/${cardEntryA.slug}`} class="build-card" data-reveal="right" data-reveal-delay="280">
           <article>
             <div class="build-card-img img-pa12" aria-hidden="true"></div>
             <div class="build-card-body">
-              <span class="build-card-cat">Materials · Guide</span>
-              <h3 class="build-card-title">Running CF-PA12 on a Stock Printer vs an Enclosed Voron: What You Actually Need</h3>
+              <span class="build-card-cat">Motion · Guide</span>
+              <h3 class="build-card-title">{cardEntryA.data.title}</h3>
               <div class="build-card-meta">
-                <span>May 14, 2026</span>
+                <span>{formatCardDate(cardEntryA.data.date)}</span>
                 <span class="build-card-dot" aria-hidden="true"></span>
-                <span>11 min</span>
+                <span>{cardEntryA.data.readTime}</span>
               </div>
             </div>
           </article>
         </a>
 
-        <a href="/guides/galileo-2-vs-orbiter-2" class="build-card" data-reveal="right" data-reveal-delay="360">
+        <a href={`/comparisons/${cardEntryB.slug}`} class="build-card" data-reveal="right" data-reveal-delay="360">
           <article>
             <div class="build-card-img img-mod-hotend" aria-hidden="true"></div>
             <div class="build-card-body">
-              <span class="build-card-cat">Extruders · Comparison</span>
-              <h3 class="build-card-title">Galileo 2 vs Orbiter 2.0: The Community Has Spoken</h3>
+              <span class="build-card-cat">Hotends · Comparison</span>
+              <h3 class="build-card-title">{cardEntryB.data.title}</h3>
               <div class="build-card-meta">
-                <span>May 12, 2026</span>
+                <span>{formatCardDate(cardEntryB.data.date)}</span>
                 <span class="build-card-dot" aria-hidden="true"></span>
-                <span>8 min</span>
+                <span>{cardEntryB.data.readTime}</span>
               </div>
             </div>
           </article>

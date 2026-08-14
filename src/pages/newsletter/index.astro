@@ -3,8 +3,11 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const label = 'newsletter'.charAt(0).toUpperCase() + 'newsletter'.slice(1);
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 ---
-<Base title={label}>
+<Base hasPageH1={true} title={label}>
   <Nav slot="nav" currentPath={'/newsletter'} />
   <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
     <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
@@ -21,14 +24,14 @@ const label = 'newsletter'.charAt(0).toUpperCase() + 'newsletter'.slice(1);
         "@type": "WebPage",
         "name": "The Modern Makes Weekly Briefing — Subscribe Free",
         "description": "The Modern Makes newsletter — 3D printing launches, deals, and community finds every Tuesday. Free, no spam.",
-        "url": "https://modernmakes.com/newsletter",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/newsletter`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "Newsletter", "item": "https://modernmakes.com/newsletter" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": siteBase },
+          { "@type": "ListItem", "position": 2, "name": "Newsletter", "item": `${siteBase}/newsletter` }
         ]
       }
     ]

@@ -4,8 +4,11 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/hevort';
 const label = 'hevort'.toUpperCase();
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 ---
-<Base title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
+<Base hasPageH1={true} title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
   <Nav slot="nav" currentPath={currentPath} />
   <section style="background:var(--black);padding:80px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px;text-align:center">
@@ -23,14 +26,14 @@ const label = 'hevort'.toUpperCase();
         "@type": "CollectionPage",
         "name": "HevORT Printer Ecosystem — Modern Makes",
         "description": "HevORT self-build resources, toolchanger compatibility, and high-temp printing guides.",
-        "url": "https://modernmakes.com/hevort",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/hevort`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "HevORT", "item": "https://modernmakes.com/hevort" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": siteBase },
+          { "@type": "ListItem", "position": 2, "name": "HevORT", "item": `${siteBase}/hevort` }
         ]
       }
     ]

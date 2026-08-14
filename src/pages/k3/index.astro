@@ -4,8 +4,11 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/k3';
 const label = 'k3'.toUpperCase();
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 ---
-<Base title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
+<Base hasPageH1={true} title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
   <Nav slot="nav" currentPath={currentPath} />
   <section style="background:var(--black);padding:80px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px;text-align:center">
@@ -23,14 +26,14 @@ const label = 'k3'.toUpperCase();
         "@type": "CollectionPage",
         "name": "Annex K3 Printer Ecosystem — Modern Makes",
         "description": "Annex K3 build guides, parts sourcing, and community mods.",
-        "url": "https://modernmakes.com/k3",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/k3`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "Annex K3", "item": "https://modernmakes.com/k3" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": siteBase },
+          { "@type": "ListItem", "position": 2, "name": "Annex K3", "item": `${siteBase}/k3` }
         ]
       }
     ]

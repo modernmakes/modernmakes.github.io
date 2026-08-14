@@ -252,13 +252,17 @@ const breadcrumbItems = [
 
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": title,
+    "@type": "TechArticle",
+    "headline": title,
     "description": excerpt,
-    "totalTime": timeRequired ? `PT${timeRequired.replace(/\D/g, '')}M` : undefined,
-    "supply": parts.map(p => ({ "@type": "HowToSupply", "name": p })),
-    "tool": tools.map(t => ({ "@type": "HowToTool", "name": t })),
-    "publisher": { "@type": "Organization", "name": "Modern Makes", "url": "https://modernmakes.com" }
+    "url": `${siteBase}${Astro.url.pathname}`,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Modern Makes",
+      "url": siteBase,
+      "logo": { "@type": "ImageObject", "url": `${siteBase}/images/wordmark.svg` }
+    },
+    "isPartOf": { "@type": "WebSite", "url": siteBase }
   })}></script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",

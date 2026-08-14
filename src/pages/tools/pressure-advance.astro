@@ -3,8 +3,11 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/tools';
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 ---
-<Base
+<Base hasPageH1={true}
   title="Pressure Advance Calibration Tool — Klipper, Marlin, RRF, Bambu"
   description="Generate a PA/LA test pattern for Klipper, Marlin, RepRapFirmware, or Bambu. Supports Voron, Bambu, Prusa, and Ender presets. Free, no sign-up."
 >
@@ -372,18 +375,18 @@ M84</textarea>
         "@type": "SoftwareApplication",
         "name": "Pressure Advance Calibration Tool",
         "description": "Generate PA/LA test pattern G-code for Klipper, Marlin, RepRapFirmware, or Bambu.",
-        "url": "https://modernmakes.com/tools/pressure-advance",
+        "url": `${siteBase}/tools/pressure-advance`,
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Web",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://modernmakes.com/tools" },
-          { "@type": "ListItem", "position": 3, "name": "Pressure Advance", "item": "https://modernmakes.com/tools/pressure-advance" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": siteBase },
+          { "@type": "ListItem", "position": 2, "name": "Tools", "item": `${siteBase}/tools` },
+          { "@type": "ListItem", "position": 3, "name": "Pressure Advance", "item": `${siteBase}/tools/pressure-advance` }
         ]
       }
     ]

@@ -4,8 +4,11 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const currentPath = '/vzbot';
 const label = 'vzbot'.toUpperCase();
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 ---
-<Base title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
+<Base hasPageH1={true} title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
   <Nav slot="nav" currentPath={currentPath} />
   <section style="background:var(--black);padding:80px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px;text-align:center">
@@ -23,14 +26,14 @@ const label = 'vzbot'.toUpperCase();
         "@type": "CollectionPage",
         "name": "VzBot Printer Ecosystem — Modern Makes",
         "description": "VzBot 235, 330, and Goliath build resources. Speed-focused CoreXY builds.",
-        "url": "https://modernmakes.com/vzbot",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/vzbot`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://modernmakes.com" },
-          { "@type": "ListItem", "position": 2, "name": "VzBot", "item": "https://modernmakes.com/vzbot" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": siteBase },
+          { "@type": "ListItem", "position": 2, "name": "VzBot", "item": `${siteBase}/vzbot` }
         ]
       }
     ]

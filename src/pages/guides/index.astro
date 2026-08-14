@@ -5,6 +5,9 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 
 const currentPath = '/guides';
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
 
 const allGuides = await getCollection('guides');
 const sorted = allGuides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -57,7 +60,7 @@ const difficultyColors: Record<string, string> = {
   Advanced:     '#C62828',
 };
 ---
-<Base
+<Base hasPageH1={true}
   title="Guides"
   description="Calibration guides, how-tos, and step-by-step tutorials for 3D printing — pressure advance, input shaping, bed levelling, and more."
   heroPage={true}
@@ -189,8 +192,8 @@ const difficultyColors: Record<string, string> = {
         "@type": "CollectionPage",
         "name": "3D Printing Guides — Modern Makes",
         "description": "Calibration guides, how-tos, and step-by-step tutorials for 3D printing.",
-        "url": "https://modernmakes.com/guides",
-        "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+        "url": `${siteBase}/guides`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
       }
     ]
   })}></script>

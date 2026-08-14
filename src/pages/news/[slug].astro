@@ -29,15 +29,19 @@ const formattedDate = date.toLocaleDateString('en-US', {
   day: 'numeric',
   timeZone: 'UTC',
 });
+const dateISO = date.toISOString().slice(0, 10);
 ---
 <ArticleLayout
   title={title}
   category={category}
   date={formattedDate}
+  dateISO={dateISO}
   readTime={readTime}
   heroImage={heroImage}
   excerpt={excerpt}
   summary={summary}
+  currentCollection="news"
+  currentSlug={entry.slug}
 >
   <Content />
 </ArticleLayout>

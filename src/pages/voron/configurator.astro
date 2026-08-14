@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 const currentPath = '/voron/configurator';
 const label = 'configurator'.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 ---
-<Base title={`Voron ${label}`} description={`The complete guide to ${label.toLowerCase()} for Voron 2.4 and Trident builds.`}>
+<Base hasPageH1={true} title={`Voron ${label}`} description={`The complete guide to ${label.toLowerCase()} for Voron 2.4 and Trident builds.`}>
   <Nav slot="nav" currentPath={currentPath} />
   <section style="background:var(--black);padding:60px 0 40px">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">

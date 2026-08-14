@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { getRelatedContent, type RelatedCollection } from '../lib/related-content';
 import '../styles/article.css';
 
 interface SpecRow {
@@ -21,6 +22,7 @@ interface Props {
   title: string;
   category: string;
   date: string;
+  dateISO?: string;
   readTime: string;
   heroImage?: string;
   excerpt?: string;
@@ -30,12 +32,14 @@ interface Props {
   verdictText?: string;
   specs?: SpecRow[];
   scores?: ScoreRow[];
+  currentSlug?: string;
 }
 
 const {
   title,
   category,
   date,
+  dateISO,
   readTime,
   heroImage,
   excerpt = '',
@@ -45,22 +49,14 @@ const {
   verdictText,
   specs = [],
   scores = [],
+  currentSlug,
 } = Astro.props;
 
 const itemA = items[0] ?? 'Product A';
 const itemB = items[1] ?? 'Product B';
 
-const moreNews = [
-  { category: 'News',   title: 'Bambu Announces AMS Pro: 16 Spools, Active Drying', href: '/news/bambu-ams-pro-announced', date: 'May 19, 2026' },
-  { category: 'Update', title: 'OrcaSlicer 2.3 Drops Arachne Wall Generation',       href: '/software/orcaslicer-2-3',      date: 'May 20, 2026' },
-  { category: 'Guide',  title: 'Voron Pressure Advance Calibration Guide',           href: '/guides/voron-pressure-advance-guide', date: 'May 10, 2026' },
-];
-
-const relatedArticles = [
-  { category: 'News',     title: 'Bambu Announces AMS Pro: 16 Spools, Active Drying, Ships Q3', href: '/news/bambu-ams-pro-announced', date: 'May 19, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
-  { category: 'Printers', title: 'Prusa CORE One+: The Fully Enclosed CoreXY Finally Worth It', href: '/printers/prusa-core-one-plus',  date: 'May 24, 2026', gradient: 'linear-gradient(135deg,#1f2010,#131708)' },
-  { category: 'Software', title: "OrcaSlicer 2.3 Drops Arachne Wall Generation. Here's What Actually Changed.", href: '/software/orcaslicer-2-3', date: 'May 20, 2026', gradient: 'linear-gradient(135deg,#1a1520,#0d0d18)' },
-];
+const relatedArticles = await getRelatedContent('comparisons', currentSlug, 3);
+const moreNews = relatedArticles;
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -309,16 +305,17 @@ const breadcrumbItems = [
     "@type": "Article",
     "headline": title,
     "description": excerpt,
-    "datePublished": date,
+    "datePublished": dateISO || date,
+    "dateModified": dateISO || date,
     "articleSection": "Comparison",
     "about": items.map(item => ({ "@type": "Product", "name": item })),
     "publisher": {
       "@type": "Organization",
       "name": "Modern Makes",
-      "url": "https://modernmakes.com",
-      "logo": { "@type": "ImageObject", "url": "https://modernmakes.com/images/wordmark.svg" }
+      "url": siteBase,
+      "logo": { "@type": "ImageObject", "url": `${siteBase}/images/wordmark.svg` }
     },
-    "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+    "isPartOf": { "@type": "WebSite", "url": siteBase }
   })}></script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",

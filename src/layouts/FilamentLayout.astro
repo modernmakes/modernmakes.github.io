@@ -404,10 +404,10 @@ const breadcrumbItems = [
     "publisher": {
       "@type": "Organization",
       "name": "Modern Makes",
-      "url": "https://modernmakes.com",
-      "logo": { "@type": "ImageObject", "url": "https://modernmakes.com/images/wordmark.svg" }
+      "url": siteBase,
+      "logo": { "@type": "ImageObject", "url": `${siteBase}/images/wordmark.svg` }
     },
-    "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.com" }
+    "isPartOf": { "@type": "WebSite", "url": siteBase }
   })}></script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",

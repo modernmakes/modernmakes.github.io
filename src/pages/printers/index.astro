@@ -4,7 +4,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 const label = 'printers'.charAt(0).toUpperCase() + 'printers'.slice(1);
 ---
-<Base title={label}>
+<Base hasPageH1={true} title={label}>
   <Nav slot="nav" currentPath={'/printers'} />
   <section style="padding:80px 40px;max-width:1200px;margin:0 auto;text-align:center">
     <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
