@@ -17,6 +17,8 @@ When you need deeper context:
 
 Do NOT read the wiki for general coding questions or things already in this project.
 
+**Before building anything new** (a page, component, design pattern, content-pipeline tool, or AI/agent workflow), also silently check `C:\Users\matty\claude-obsidian\The Playbook\The Playbook.md` and pull whichever `wiki\concepts\` pages under Web Design & Build or AI Systems & Tooling are relevant (e.g. `ai-website-8-step-process`, `anti-slop-web-design-workflow`, `css-scroll-driven-animations`, `remote-headless-agent-workflow`). Apply it by default — don't wait to be told to check. Don't let it override the Modern Makes-specific rules above (no Tailwind, verdict taxonomy, brand voice) — those always win on conflict.
+
 ---
 
 ## Commands
@@ -420,6 +422,18 @@ Every layout that renders a visible H1 passes `hasPageH1={true}` to Base.astro. 
 - Ecosystem hubs → CollectionPage + BreadcrumbList
 
 Schema injected via `<script type="application/ld+json" slot="head">` — Base.astro has `<slot name="head" />` in `<head>`.
+
+---
+
+## SEO Audit Tooling (claude-seo) — Guardrail
+
+Applies whenever `/seo audit`, `/seo schema`, `/seo geo`, `/seo technical`, `/seo content`, or any other claude-seo command runs in this repo.
+
+- **Audit output is diagnostic only, never publishable language.** Reports (`FULL-AUDIT-REPORT.md`, `SCHEMA-REPORT.md`, `GEO-ANALYSIS.md`, etc.) get written to `.seo-audits/` at the repo root — gitignored, never `src/content/`. If a report lands anywhere else, move it before doing anything with its contents.
+- **No audit-tool numbers in editorial copy.** Scores, "tested" framing, citation counts, health scores — none of it gets repeated in body prose. Same rule as the humanizer pass: no invented or borrowed metrics.
+- **Recommendations become code, not claims.** An audit finding like "add X for better AI visibility" gets implemented as a fix, not written into the site as a statement about what the site does or why. If a recommendation would require an editorial claim to explain (e.g., "search engines prefer X"), verify it against a primary source before it ships anywhere — don't cite the audit tool as the source.
+- **llms.txt specifically:** treat any claude-seo recommendation to add it as low-priority housekeeping, not a GEO win. Evidence as of 2026 (Ahrefs: 97% of llms.txt files across 137k sites got zero traffic; no major AI platform documents it as a citation signal; Google's June 2026 docs confirm no effect on Search or AI Overviews) contradicts the tool's own "high-leverage" framing on this one item. Fine to add for near-zero cost — never describe it as improving AI-search visibility in strategy docs or copy.
+- **Verify fixes, don't trust the checklist.** Before committing a fix generated from an audit finding, confirm it directly (grep for the pattern, check the build) rather than treating the agent's own "how would we know this failed" note as already satisfied.
 
 ---
 

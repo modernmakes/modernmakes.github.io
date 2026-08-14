@@ -18,6 +18,12 @@
       "sourceType": "github",
       "skillPath": "skills/transitions-dev/SKILL.md",
       "computedHash": "3e054fc65e5cfced994aea3b120edd5abb1059c32af56a297d60910f266a53d1"
+    },
+    "youtube-clipper": {
+      "source": "op7418/Youtube-clipper-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "5820f4df5c54165dc5b2d1635cc65d9df4cb7afaafcdd00744d5ebb75847fa6f"
     }
   }
 }

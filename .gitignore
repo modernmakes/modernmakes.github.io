@@ -24,3 +24,6 @@ Thumbs.db
 # Installed agent skills (tooling, not site content)
 .agents/
 .claude/skills/
+
+# claude-seo audit output (diagnostic only, never publishable)
+.seo-audits/
