@@ -38,6 +38,12 @@ No lint or test commands. The PostToolUse build hook runs `npm run build` automa
 
 ---
 
+## Capabilities Registry
+
+This repo's full list of installed skills, plugins, and MCP connectors — both Claude Code and Cowork — lives in `docs/capabilities-registry.md`. Check it before assuming a task needs custom work, and add a line there whenever a new skill/plugin/MCP gets installed.
+
+---
+
 ## Content Publishing — Humanizer Pass (required before ship)
 
 Every new or edited article in `src/content/**` gets a two-pass humanizer treatment **before commit**. AI-writing tells are the fastest way the publication reads as machine-written.
