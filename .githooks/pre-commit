@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Pre-commit guard against committing Airtable/Beehiiv token leaks.
+# Activate once per clone: git config core.hooksPath .githooks
+
+set -euo pipefail
+
+diff="$(git diff --cached -U0 -- . ':(exclude).githooks/pre-commit')"
+
+if [ -z "$diff" ]; then
+  exit 0
+fi
+
+# Only inspect added lines, not context/removed lines.
+added="$(printf '%s\n' "$diff" | grep -E '^\+' | grep -Ev '^\+\+\+')"
+
+if [ -z "$added" ]; then
+  exit 0
+fi
+
+fail=0
+
+# Airtable Personal Access Token pattern: pat<14 chars>.<64 hex chars>
+if printf '%s\n' "$added" | grep -qEi 'pat[A-Za-z0-9]{14}\.[a-f0-9]{64}'; then
+  echo "error: staged diff contains what looks like an Airtable Personal Access Token." >&2
+  fail=1
+fi
+
+# Any 40+ char string assigned to a variable/key containing TOKEN, SECRET, or API_KEY.
+if printf '%s\n' "$added" | grep -qEi '(TOKEN|SECRET|API_KEY)[A-Za-z0-9_]*[[:space:]]*[:=][[:space:]]*["'"'"']?[A-Za-z0-9._-]{40,}'; then
+  echo "error: staged diff contains what looks like a token/secret/API key assignment." >&2
+  fail=1
+fi
+
+if [ "$fail" -eq 1 ]; then
+  echo "" >&2
+  echo "Commit aborted. Remove the credential from the staged diff before committing." >&2
+  echo "If this is a false positive, review the match and adjust .githooks/pre-commit." >&2
+  exit 1
+fi
+
+exit 0

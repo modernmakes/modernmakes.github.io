@@ -460,6 +460,7 @@ Applies whenever `/seo audit`, `/seo schema`, `/seo geo`, `/seo technical`, `/se
 - **`fetch-data` script** — `scripts/fetch-airtable.mjs` requires `AIRTABLE_TOKEN` env var. Run from VS Code terminal where token is set. GitHub Actions also runs nightly
 - **AdSlot component** — `<AdSlot slotName="slot-name" />` renders nothing when `"active": false` in `ads.json`
 - **Newsletter forms** — any `<form data-nl>` with `<input type="email">` and `<button type="submit">` gets wired automatically by Base.astro inline JS
+- **Pre-commit token guard** — `.githooks/pre-commit` scans the staged diff for Airtable PAT patterns and TOKEN/SECRET/API_KEY-shaped assignments. Hooks in `.git/hooks` aren't version-controlled, so after every fresh clone run `git config core.hooksPath .githooks` once to activate it.
 
 ---
 
