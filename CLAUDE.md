@@ -539,6 +539,8 @@ Gradient fallbacks on all hotend pages and several articles. Workflow:
 
 ## Pending Work (priority order)
 
+**Checkpoint duty:** whenever this section changes, also update `C:\Users\matty\claude-command-center\modern-makes.md` to match — same Status / Next 3 / Blocked on / Last touched shape as here, not a full copy.
+
 1. **Canadian virtual mailbox** — BC address for Beehiiv footer CASL compliance. Options: iPostal1, Anytime Mailbox, UPS Store box
 2. **Hero images** — all hotend pages + several articles still showing gradient fallback
 3. **Verdict migration** — only Hotends uses the canonical Workhorse/Bleeding Edge/Skip taxonomy in Airtable. Extruders, Bed Probes, Mainboards, Motors had verdicts set manually 2026-07-14; remaining categories still store legacy/passthrough values. `resolveVerdict()` normalises all of them, but migrate the source data table-by-table for consistency.
