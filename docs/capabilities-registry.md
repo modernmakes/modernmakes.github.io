@@ -1,6 +1,6 @@
 # Capabilities Registry — Matt's Claude Setup
 
-**Last updated:** 2026-08-18 · **Maintained by:** whichever session (Claude Code or Cowork) installs something new
+**Last updated:** 2026-09-02 · **Maintained by:** whichever session (Claude Code or Cowork) installs something new
 
 ---
 
@@ -71,6 +71,8 @@ Before assuming a task needs custom work or that "there's no tool for this," che
 **Recently added (previously missing from the catalog):**
 - `gauntlet-loop` — fans out worker + critic subagents, loops until a concrete quality bar is met. Trigger: "gauntlet this," "polish until it's great," iterating thumbnails/scripts/hooks/copy/landing pages to a real bar.
 - `webwright` — see Part 1.
+- `ponytail` — marketplace: `DietrichGebert/ponytail`. Enforces minimal/lazy code via a decision ladder (does this need to exist? → already in codebase? → standard library? → native platform feature? → installed dependency? → one-line fix? → only then write new code) before adding anything. Installed 2026-09-01. Relevant to every Astro/component change in this repo.
+- `war-council` — source: `zapier/wade-skills`, installed manually (just this one skill, not the full marketplace), global at `~/.claude/skills/war-council/SKILL.md` — available in every Claude Code project. Decision-stress-test: state a decision + stakes, it assembles 4 fixed personas (Ruthless CFO, Contrarian Board Member, Customer Obsessive, Wartime Operator) plus 2-3 experts generated for the specific problem, each forced to take a position and place a real-dollar bet with a confidence level. Installed 2026-09-02.
 
 > Most skills fire from natural phrasing — exact slash-command form is rarely required. `find-skills` locates/installs new ones; `skill-creator` builds custom ones.
 
