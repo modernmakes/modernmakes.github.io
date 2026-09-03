@@ -1,6 +1,6 @@
 # Capabilities Registry — Matt's Claude Setup
 
-**Last updated:** 2026-09-02 · **Maintained by:** whichever session (Claude Code or Cowork) installs something new
+**Last updated:** 2026-09-02 (added SkillSpector) · **Maintained by:** whichever session (Claude Code or Cowork) installs something new
 
 ---
 
@@ -61,6 +61,8 @@ Before assuming a task needs custom work or that "there's no tool for this," che
 **Automation, Deploy & Performance:** `agent-browser` (browser automation CLI) · `deploy-to-vercel` · `vercel-optimize` · `vercel-react-best-practices` · `elevenlabs-tts:` (setup/config/start/stop/status)
 
 **Accessibility** (`accesslint:` plugin) — `scan` `audit` `diff`
+
+**Security:** `skillspector` (NVIDIA SkillSpector, global CLI + user-scope MCP server, installed 2026-09-02) — scans third-party skills/plugins for prompt injection, data exfiltration, and supply-chain risk before install. `skillspector scan <path-or-repo-url>` runs full analysis (LLM-assisted + static/YARA); `skillspector scan --no-llm <path-or-repo-url>` runs static-only, no data sent to an LLM provider. **Standing rule: scan any new third-party skill or plugin with SkillSpector before installing it, going forward.** Installed via `uv tool install "skillspector[mcp] @ git+https://github.com/NVIDIA/skillspector.git"` (the `[mcp]` extra is required for the MCP server; a plain install errors on `skillspector mcp`); registered with `claude mcp add skillspector -s user -- skillspector mcp` so it's available in every Claude Code project on this machine, not just this repo. `uv`-tool binaries live in `~/.local/bin`, added to the user PATH.
 
 **YouTube Pipeline** (custom, also used by the separate YouTube-portfolio business) — `playlist-pull` · `youtube-capture` · `drive-pull` · `airtable-push` · `humanizer`
 
