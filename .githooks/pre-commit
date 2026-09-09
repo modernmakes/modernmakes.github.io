@@ -1,8 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Pre-commit guard against committing Airtable/Beehiiv token leaks.
 # Activate once per clone: git config core.hooksPath .githooks
+#
+# Shebang is /bin/sh, not bash: GitHub Desktop bundles a minimal git with no
+# bash.exe, and `env bash` falls through to Windows' broken WSL bash.exe stub
+# (System32\bash.exe) instead. /bin/sh resolves through git's own MSYS root
+# to its bundled sh/dash, which every git-for-windows build ships. The script
+# has no bashisms below, so this is a pure interpreter swap.
 
-set -euo pipefail
+set -eu
 
 diff="$(git diff --cached -U0 -- . ':(exclude).githooks/pre-commit')"
 
