@@ -111,7 +111,7 @@ The two humanizer skills live in Cowork; the checks above are inlined here so a 
 **Live site:** modernmakes.github.io
 **Stack:** Astro 4.x, static output, GitHub Pages
 **Deploy:** Every push to `main` triggers `.github/workflows/deploy.yml` → `astro build` → deploys `dist/`
-**Pages:** 361 pages, zero errors required at build
+**Pages:** 360 pages, zero errors required at build
 **GA4:** `G-CGR4N532H6`
 **Contact:** `modernmakesco@gmail.com`
 
