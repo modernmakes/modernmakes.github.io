@@ -153,7 +153,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">9 parts →</div>
                 </div>
               </a>,
-              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none;min-width:0;overflow:hidden">
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
                   <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
@@ -191,7 +191,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,90,31,.5)">5 parts →</div>
                 </div>
               </a>,
-              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="display:none;min-width:0;overflow:hidden">
+              <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
                   <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
@@ -344,6 +344,75 @@ const partCounts: Record<string, { a: number; t: number }> = {
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    // ── MODEL RESTORE — blocking, runs before this page's first paint ──
+    // Reads the saved model choice and applies it synchronously so a returning
+    // Trident visitor never sees a flash of the 2.4 default. The 2.4 case needs
+    // no work: server-rendered markup already defaults to it. The interactive
+    // click-to-switch logic (and its own re-application of this state) lives in
+    // the deferred script further down, unchanged. Placed here (inside the
+    // default slot, after the hero + subsystem markup) so it's inside <body>
+    // and the elements it restores already exist by the time it runs.
+    (function () {
+      var model;
+      try {
+        model = localStorage.getItem('voron-model');
+      } catch (e) {
+        return;
+      }
+      if (model !== 'trident') return;
+
+      document.documentElement.setAttribute('data-voron-model', 'trident');
+
+      var TRIDENT = {
+        src: '/media/ecosystems/voron/voron-trident.webp',
+        label: 'Trident',
+        sizes: '250mm · 300mm · 350mm',
+        z: '3-point belt driven',
+        size: '350mm³',
+        build: '30–45 hrs',
+        diff: 'Beginner-friendly',
+        tagline: 'Fixed gantry, three-point self-levelling. Faster to build, easier to tune, excellent for 250–300mm work.',
+      };
+
+      var printerImg = document.getElementById('printer-img');
+      var mobileImg  = document.getElementById('printer-img-mobile');
+      var infoName   = document.getElementById('model-info-name');
+      var infoSizes  = document.getElementById('model-info-sizes');
+      var specZ      = document.getElementById('spec-z');
+      var specSize   = document.getElementById('spec-size');
+      var specBuild  = document.getElementById('spec-build');
+      var specDiff   = document.getElementById('spec-diff');
+      var taglineEl  = document.getElementById('model-tagline');
+      var mcbModel   = document.getElementById('mcb-model');
+      var subHead    = document.getElementById('subsystem-heading');
+
+      if (printerImg) { printerImg.src = TRIDENT.src; printerImg.alt = TRIDENT.label; }
+      if (mobileImg)  { mobileImg.src  = TRIDENT.src; mobileImg.alt  = TRIDENT.label; }
+      if (infoName)  infoName.textContent  = TRIDENT.label;
+      if (infoSizes) infoSizes.textContent = TRIDENT.sizes;
+      if (specZ)     specZ.textContent     = TRIDENT.z;
+      if (specSize)  specSize.textContent  = TRIDENT.size;
+      if (specBuild) specBuild.textContent = TRIDENT.build;
+      if (specDiff)  specDiff.textContent  = TRIDENT.diff;
+      if (taglineEl) taglineEl.textContent = TRIDENT.tagline;
+      if (mcbModel)  mcbModel.textContent  = TRIDENT.label;
+      if (subHead)   subHead.textContent   = TRIDENT.label + ' — Browse by subsystem';
+
+      document.querySelectorAll('.model-btn').forEach(function (btn) {
+        var active = btn.getAttribute('data-model') === 'trident';
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+
+      document.querySelectorAll('.subsystem-card[data-parts24]').forEach(function (card) {
+        var count = card.getAttribute('data-parts-trident');
+        var countEl = card.querySelector('.subsystem-parts');
+        if (countEl && count) countEl.textContent = count + ' parts →';
+      });
+    })();
+  </script>
 
   <Footer slot="footer" />
 
@@ -750,6 +819,17 @@ const partCounts: Record<string, { a: number; t: number }> = {
 }
 @media (max-width: 480px) {
   .subsystem-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Model-variant visibility, keyed off data-voron-model on <html>. Set synchronously
+   by the blocking restore script below (before this markup paints) so a returning
+   Trident visitor never sees a flash of 2.4-only cards. Default (no attribute, JS
+   disabled) matches the server-rendered 2.4 default. */
+:root:not([data-voron-model="trident"]) [data-models]:not([data-models*="2.4"]) {
+  display: none;
+}
+:root[data-voron-model="trident"] [data-models]:not([data-models*="trident"]) {
+  display: none;
 }
 
 /* ── RESPONSIVE ── */
