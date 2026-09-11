@@ -3,12 +3,37 @@ import data from '../../data/homepage.json';
 const ecosystems = (data as any).ecosystems ?? [];
 const live = ecosystems.filter((e: any) => e.status === 'live');
 const coming = ecosystems.filter((e: any) => e.status === 'coming');
+// Allow-list for the ?ref= referral param, derived from the actual data so it
+// can't drift from the real slugs. Baked into the blocking script below via
+// define:vars — never trust the raw query-string value against anything else.
+const validEcoSlugs = ecosystems.map((e: any) => e.slug).filter(Boolean);
 
 function bgStyle(eco: any) {
   if (eco.image) return `background-image:url('${eco.image}');background-size:cover;background-position:center right;`;
   return `background:${eco.gradient};`;
 }
 ---
+
+<script is:inline define:vars={{ validEcoSlugs }}>
+  // ── ECOSYSTEM REFERRAL PROMOTION — blocking, runs before this section paints ──
+  // Reads ?ref= from the URL, validates it against the real ecosystem slugs
+  // (passed in at build time, not hand-copied), and sets a data attribute on
+  // <html> that CSS uses to set `order` on the matching card/row below. No
+  // persistence (no cookie, no localStorage) — this is per-pageview only.
+  // DOM order never changes, only the CSS `order` used to paint it, so every
+  // request renders byte-identical markup for crawlers.
+  (function () {
+    var ref;
+    try {
+      ref = new URLSearchParams(location.search).get('ref');
+    } catch (e) {
+      return;
+    }
+    if (ref && validEcoSlugs.indexOf(ref) !== -1) {
+      document.documentElement.setAttribute('data-ref-ecosystem', ref);
+    }
+  })();
+</script>
 
 <section class="eco-section" aria-label="Printer ecosystem hubs">
   <div class="eco-container">
@@ -24,7 +49,7 @@ function bgStyle(eco: any) {
       <!-- Live ecosystem cards -->
       <div class="eco-live">
         {live.map((eco: any, i: number) => (
-          <a href={eco.href} class="eco-card" data-reveal data-reveal-delay={240 + i * 120} aria-label={`Explore the ${eco.name} ecosystem`}>
+          <a href={eco.href} class="eco-card" data-eco-slug={eco.slug} data-reveal data-reveal-delay={240 + i * 120} aria-label={`Explore the ${eco.name} ecosystem`}>
             <!-- Printer image area -->
             <div class="eco-card-img">
               <div class="eco-card-img-bg" style={bgStyle(eco)}></div>
@@ -57,7 +82,7 @@ function bgStyle(eco: any) {
       <div class="eco-coming" data-reveal data-reveal-delay="500">
         <p class="eco-coming-label">On the roadmap</p>
         {coming.map((eco: any) => (
-          <div class="eco-coming-item">
+          <div class="eco-coming-item" data-eco-slug={eco.slug}>
             <div class="eco-coming-item-left">
               <span class="eco-coming-name">{eco.name}</span>
               <span class="eco-coming-desc">{eco.description}</span>
@@ -266,6 +291,10 @@ function bgStyle(eco: any) {
   /* Coming soon panel */
   .eco-coming {
     padding-top: 4px;
+    /* Flex column so the referral `order` rules below can promote a row —
+       visual position only, DOM order is untouched. */
+    display: flex;
+    flex-direction: column;
   }
   .eco-coming-label {
     font-family: var(--fu);
@@ -274,7 +303,13 @@ function bgStyle(eco: any) {
     letter-spacing: .1em;
     text-transform: uppercase;
     color: rgba(255,255,255,.2);
-    margin: 0 0 14px;
+    margin: 0 0 7px;
+    padding-bottom: 7px;
+    /* Was a :first-of-type border-top on .eco-coming-item — moved here so the
+       divider always sits above the list regardless of which row is
+       reordered to the front (order: -2 always keeps this label first). */
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    order: -2;
   }
   .eco-coming-item {
     display: flex;
@@ -285,7 +320,6 @@ function bgStyle(eco: any) {
     border-bottom: 1px solid rgba(255,255,255,.05);
     opacity: 0.45;
   }
-  .eco-coming-item:first-of-type { border-top: 1px solid rgba(255,255,255,.05); }
   .eco-coming-item-left {
     display: flex;
     flex-direction: column;
@@ -343,6 +377,17 @@ function bgStyle(eco: any) {
     .eco-section .eco-card:hover .eco-card-img-bg { transform: none; }
     .eco-card-img-label { transition: none; }
   }
+
+  /* Referral promotion (Phase 1 personalization) — `order` only, never
+     display/DOM. data-ref-ecosystem is set synchronously (before this
+     section paints) by the blocking script above, from a validated ?ref=
+     query param. Every request still renders the same DOM in the same
+     order, so crawlers see identical markup regardless of the param. */
+  :root[data-ref-ecosystem="voron"]  [data-eco-slug="voron"]  { order: -1; }
+  :root[data-ref-ecosystem="ratrig"] [data-eco-slug="ratrig"] { order: -1; }
+  :root[data-ref-ecosystem="vzbot"]  [data-eco-slug="vzbot"]  { order: -1; }
+  :root[data-ref-ecosystem="hevort"] [data-eco-slug="hevort"] { order: -1; }
+  :root[data-ref-ecosystem="k3"]     [data-eco-slug="k3"]     { order: -1; }
 </style>
 
 <!-- Entrance is handled by the shared [data-reveal] observer in Base.astro (M1). -->
