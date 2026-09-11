@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Robot Building Kits for a 12-Year-Old Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #fbf7ef;
+    --bg-alt: #ffffff;
+    --ink: #1c1a2e;
+    --ink-soft: #4a4762;
+    --line: #e7e0d0;
+    --card: #ffffff;
+    --shadow: 0 8px 24px rgba(28,26,46,0.08);
+    --shadow-lg: 0 16px 40px rgba(28,26,46,0.14);
+
+    --coral: #ff5a5f;
+    --coral-ink: #7a1f22;
+    --teal: #14b8a6;
+    --teal-ink: #0a4f47;
+    --gold: #ffb400;
+    --gold-ink: #6b4a00;
+    --indigo: #4f46e5;
+    --indigo-ink: #2a2470;
+    --pink: #ec4899;
+    --pink-ink: #7a1a52;
+    --grass: #22c55e;
+    --grass-ink: #14532d;
+
+    --radius: 20px;
+    --radius-sm: 12px;
+    font-size: 16px;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #15131f;
+      --bg-alt: #1c1a2b;
+      --ink: #f4f1ea;
+      --ink-soft: #c7c2d9;
+      --line: #34304a;
+      --card: #201e30;
+      --shadow: 0 8px 24px rgba(0,0,0,0.35);
+      --shadow-lg: 0 16px 40px rgba(0,0,0,0.5);
+    }
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 40px;
+  }
+  img{ max-width:100%; }
+  h1,h2,h3,h4{ font-family:'Baloo 2', system-ui, sans-serif; margin:0 0 .4em; line-height:1.15; }
+  a{ color: inherit; }
+  .wrap{ max-width: 900px; margin:0 auto; padding: 0 20px; }
+  code, .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding: 56px 0 44px;
+    background:
+      radial-gradient(circle at 12% 20%, rgba(255,90,95,0.16), transparent 45%),
+      radial-gradient(circle at 88% 10%, rgba(79,70,229,0.16), transparent 40%),
+      radial-gradient(circle at 70% 90%, rgba(20,184,166,0.14), transparent 45%);
+    overflow:hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .wrap{ position:relative; z-index:2; }
+  .hero h1{
+    font-size: clamp(2.1rem, 6vw, 3.1rem);
+    max-width: 16ch;
+  }
+  .hero p.lede{ font-size: 1.08rem; color: var(--ink-soft); max-width: 56ch; margin-top: 10px; }
+  .hero-nav{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 22px; }
+  .hero-nav a{
+    font-size: 0.86rem; font-weight:600; text-decoration:none;
+    background: var(--bg-alt); border:1px solid var(--line); padding: 8px 14px; border-radius: 999px;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease;
+  }
+  .hero-nav a:hover{ transform: translateY(-2px); }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 46px 0; }
+  .section-head{ margin-bottom: 22px; }
+  .kicker{
+    font-family:'Inter', sans-serif; font-size:.85rem; font-weight:600;
+    color: var(--ink-soft);
+  }
+  @media (prefers-color-scheme: dark){ .kicker{ color:#9b93ff; } }
+  section h2{ font-size: clamp(1.5rem, 4vw, 2rem); margin-top:4px; }
+  section > .wrap > p.section-sub{ color: var(--ink-soft); max-width: 62ch; }
+
+  /* ---------- TL;DR ---------- */
+  .tldr{
+    background: var(--card); border:1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 20px; box-shadow: var(--shadow);
+    position:relative;
+  }
+  .tldr::before{
+    content:"TL;DR"; position:absolute; top:-12px; left:18px;
+    background: var(--coral); color:#fff; font-family:'JetBrains Mono',monospace;
+    font-weight:700; font-size:.72rem; letter-spacing:.06em; padding:4px 10px; border-radius:999px;
+    box-shadow: var(--shadow);
+  }
+  .tldr p{ margin: 6px 0; }
+  .tldr strong{ color: var(--coral); }
+
+  /* ---------- Filter chips ---------- */
+  .filters{ display:flex; flex-wrap:wrap; gap:8px; margin: 18px 0 26px; }
+  .chip{
+    font-family:'JetBrains Mono', monospace; font-size:.78rem; font-weight:700;
+    border:2px solid var(--line); background: var(--bg-alt); color: var(--ink);
+    padding: 9px 15px; border-radius: 999px; cursor:pointer; user-select:none;
+    transition: all .15s ease;
+  }
+  .chip:hover{ border-color: var(--indigo); }
+  .chip.active{ background: var(--indigo); border-color: var(--indigo); color:#fff; }
+
+  /* ---------- Kit cards ---------- */
+  .cards{ display:grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 720px){ .cards{ grid-template-columns: 1fr 1fr; } }
+
+  .card{
+    background: var(--card); border:1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+    transition: box-shadow .2s ease, transform .2s ease;
+  }
+  .card.is-hidden{ display:none; }
+  .card:hover{ box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+  .card-top{ padding: 20px 20px 14px; position:relative; }
+  .card-icon{
+    width:52px; height:52px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; margin-bottom: 12px;
+  }
+  .badge{
+    position:absolute; top:16px; right:16px; font-family:'JetBrains Mono',monospace;
+    font-size:.68rem; font-weight:700; letter-spacing:.03em; padding:5px 10px; border-radius:999px;
+    color:#fff; text-align:right; line-height:1.3; max-width: 46%;
+  }
+  .card h3{ font-size:1.3rem; margin-bottom:2px; }
+  .card .price{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; }
+  .card .price small{ font-weight:500; color: var(--ink-soft); font-family:'Inter',sans-serif; }
+  .card .verdict{ margin-top:10px; font-size:.96rem; }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .tag{
+    font-size:.72rem; font-weight:600; background: var(--bg); border:1px solid var(--line);
+    padding:4px 9px; border-radius:8px; color: var(--ink-soft);
+  }
+
+  .card-details{
+    border-top: 1px dashed var(--line); padding: 0 20px; max-height:0; overflow:hidden;
+    transition: max-height .3s ease, padding .3s ease;
+  }
+  .card-details.open{ max-height: 600px; padding: 16px 20px 20px; }
+  .card-details h4{ font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; color: var(--ink-soft); margin: 12px 0 6px; }
+  .card-details h4:first-child{ margin-top:0; }
+  .card-details ul{ margin:0; padding-left: 1.1em; font-size:.92rem; }
+  .card-details li{ margin-bottom:4px; }
+  .flag{
+    background: rgba(255,180,0,0.14); border:1px solid rgba(255,180,0,0.4);
+    border-radius: var(--radius-sm); padding: 10px 12px; font-size:.88rem; margin-top:10px;
+  }
+  .flag strong{ color: var(--gold-ink); }
+  @media (prefers-color-scheme: dark){ .flag strong{ color: var(--gold); } }
+
+  .card-actions{
+    margin-top: auto; padding: 14px 20px 20px; display:flex; gap:10px; align-items:center;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:700; font-size:.88rem;
+    padding: 10px 16px; border-radius: 999px; border:2px solid transparent; cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .btn-primary{ background: var(--ink); color: var(--bg); }
+  @media (prefers-color-scheme: dark){ .btn-primary{ background:#f4f1ea; color:#15131f; } }
+  .btn-ghost{ background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn:hover{ opacity:.85; }
+  .toggle-more{ font-size:.82rem; font-weight:700; background:none; border:none; color: var(--indigo); cursor:pointer; padding:0; }
+  @media (prefers-color-scheme: dark){ .toggle-more{ color:#9b93ff; } }
+
+  /* ---------- Compare table ---------- */
+  .table-scroll{ overflow-x:auto; border-radius: var(--radius); border:1px solid var(--line); box-shadow: var(--shadow); }
+  table{ width:100%; border-collapse: collapse; min-width: 640px; background: var(--card); }
+  th, td{ text-align:left; padding: 12px 14px; font-size:.88rem; border-bottom:1px solid var(--line); }
+  thead th{ background: var(--bg); font-family:'JetBrains Mono',monospace; font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color: var(--ink-soft); }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background: var(--bg); }
+  td.name{ font-weight:700; }
+
+  /* ---------- Path timeline ---------- */
+  .path{ display:flex; flex-direction:column; gap:0; }
+  .path-step{ display:flex; gap:16px; position:relative; padding-bottom: 30px; }
+  .path-step:last-child{ padding-bottom:0; }
+  .path-dot{
+    width:38px; height:38px; border-radius:50%; flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-family:'Baloo 2',sans-serif; color:#fff; font-size:1rem; box-shadow: var(--shadow);
+  }
+  .path-line{
+    position:absolute; left:19px; top:38px; bottom:0; width:2px; background: var(--line);
+  }
+  .path-step:last-child .path-line{ display:none; }
+  .path-body h4{ margin:0 0 4px; font-family:'Baloo 2',sans-serif; font-size:1.12rem; }
+  .path-body p{ margin:0; color: var(--ink-soft); font-size:.94rem; }
+
+  /* ---------- Tip callout ---------- */
+  .tip{
+    background: rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.35); border-radius: var(--radius);
+    padding: 18px 20px; display:flex; gap:14px; align-items:flex-start;
+  }
+  .tip .icon{ font-size:1.6rem; }
+  .tip h4{ margin:0 0 4px; font-family:'Baloo 2',sans-serif; }
+  .tip p{ margin:0; color: var(--ink-soft); font-size:.94rem; }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{ border-bottom:1px solid var(--line); padding: 16px 0; }
+  .faq-item:first-child{ padding-top:0; }
+  .faq-q{
+    display:flex; justify-content:space-between; align-items:center; cursor:pointer;
+    font-weight:700; font-family:'Baloo 2',sans-serif; font-size:1.05rem;
+  }
+  .faq-q .plus{ font-size:1.3rem; transition: transform .2s ease; flex:0 0 auto; margin-left: 12px; }
+  .faq-item.open .plus{ transform: rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition: max-height .3s ease; }
+  .faq-item.open .faq-a{ max-height: 300px; }
+  .faq-a p{ margin: 10px 0 0; color: var(--ink-soft); font-size:.94rem; }
+
+  footer{ padding: 30px 0 10px; color: var(--ink-soft); font-size:.82rem; text-align:center; }
+  footer .src{ font-size:.76rem; opacity:.75; margin-top:14px; max-width:60ch; margin-left:auto; margin-right:auto; }
+  footer a{ color: var(--indigo); text-decoration:underline; }
+  @media (prefers-color-scheme: dark){ footer a{ color:#9b93ff; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Here's that list of robot kits</h1>
+    <p class="lede">I looked into a handful of options for a 12 year old who's ready to move past drag and drop coding. These are the ones I'd actually consider, picked for real sensors and a real path into Python or C++, plus a next step that pairs well with 3D printing.</p>
+    <nav class="hero-nav">
+      <a href="#tldr">TL;DR</a>
+      <a href="#kits">The kits</a>
+      <a href="#compare">Compare</a>
+      <a href="#path">The path</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<section id="tldr">
+  <div class="wrap">
+    <div class="tldr">
+      <p>If you don't want to read the whole thing: start with the <strong>mBot2</strong> or the <strong>ELEGOO Smart Robot Car Kit</strong>. Both bridge block coding into real code with actual sensors, not just motors.</p>
+      <p><strong>Then, down the line:</strong> once he wants to design his own robot bodies, the <strong>Arduino Starter Kit</strong> is the natural next step, and it pairs great with 3D printed parts.</p>
+      <p><strong>One thing I'd watch for</strong> in any kit: does it teach sensors, not just motors? Cameras and distance sensors are what bridge toy robots into real robotics. I'd skip anything that's drag and drop only. Sounds like he's already past that stage.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kits">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The shortlist</span>
+      <h2>Five kits, picked for a kid who's past the toy stage</h2>
+      <p class="section-sub">Tap a filter to narrow it down, tap any card for the full breakdown.</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="budget">Budget-friendly</button>
+      <button class="chip" data-filter="bridge">Bridge to real code</button>
+      <button class="chip" data-filter="deep">Go deep</button>
+      <button class="chip" data-filter="mech">Mechanical-first</button>
+    </div>
+
+    <div class="cards" id="cards">
+
+      <!-- mBot2 -->
+      <article class="card" data-tags="budget bridge">
+        <div class="card-top">
+          <span class="badge" style="background:var(--coral)">WHERE I'D START</span>
+          <div class="card-icon" style="background:rgba(255,90,95,.14)">🐾</div>
+          <h3>Makeblock mBot2</h3>
+          <div class="price">$149.99 <small>list $177.99</small></div>
+          <p class="verdict">The classic pick for good reason. Assemble the chassis, wire up five or more sensors, code in Scratch-style blocks first, then graduate to Python as skills grow.</p>
+          <div class="tag-row">
+            <span class="tag">Ages 8-14+</span>
+            <span class="tag">Blocks → Python</span>
+            <span class="tag">20+ sensors</span>
+          </div>
+        </div>
+        <div class="card-details">
+          <h4>Why it fits him</h4>
+          <ul>
+            <li>Teaches loops, conditionals, and sensor-driven variables through hands-on building, not a screen-only course.</li>
+            <li>Huge community and tutorial base, so it's easy to self-teach past the manual.</li>
+            <li>The onboard AI module (voice, vision-ready) gives him real room to grow into.</li>
+          </ul>
+          <h4>Sensors / hardware</h4>
+          <ul>
+            <li>Ultrasonic, quad RGB, gyroscope and accelerometer, microphone, IR emitter and receiver, light sensor, and more.</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://www.makeblock.com/products/buy-mbot2" target="_blank" rel="noopener">Official store ↗</a>
+          <button class="toggle-more">More detail</button>
+        </div>
+      </article>
+
+      <!-- ELEGOO -->
+      <article class="card" data-tags="budget bridge deep">
+        <div class="card-top">
+          <span class="badge" style="background:var(--teal)">ALSO REALLY SOLID</span>
+          <div class="card-icon" style="background:rgba(20,184,166,.14)">🚗</div>
+          <h3>ELEGOO Smart Robot Car Kit V4.0</h3>
+          <div class="price">~$55-70 <small>varies by retailer</small></div>
+          <p class="verdict">Probably the closest thing to a real robot at this price. Arduino-compatible hardware with 24 modules, so it's a genuine microcontroller-based build, not a simplified toy.</p>
+          <div class="tag-row">
+            <span class="tag">Ages 8-16+</span>
+            <span class="tag">Arduino C/C++</span>
+            <span class="tag">24 modules</span>
+          </div>
+        </div>
+        <div class="card-details">
+          <h4>Why it fits him</h4>
+          <ul>
+            <li>Since he's already done block coding, this is a natural step up into real code on real hardware.</li>
+            <li>Obstacle avoidance, line tracking, IR remote, Bluetooth and app control: a solid spread of sensors, not just motors.</li>
+            <li>The camera variant adds FPV video for a bit more headroom.</li>
+          </ul>
+          <h4>Watch for</h4>
+          <ul>
+            <li>Documentation is functional but not as polished as Makeblock's, so expect a bit more troubleshooting along the way. Honestly, that's good practice for him anyway.</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://www.elegoo.com/products/elegoo-smart-robot-car-kit-v-4-0" target="_blank" rel="noopener">Official store ↗</a>
+          <button class="toggle-more">More detail</button>
+        </div>
+      </article>
+
+      <!-- Arduino Starter Kit -->
+      <article class="card" data-tags="deep">
+        <div class="card-top">
+          <span class="badge" style="background:var(--indigo)">LEVEL-UP KIT</span>
+          <div class="card-icon" style="background:rgba(79,70,229,.14)">🔧</div>
+          <h3>Arduino Starter Kit (Official)</h3>
+          <div class="price">~$125 <small>€117 direct, ~$90-110 on Amazon</small></div>
+          <p class="verdict">Not a robot out of the box. It's the foundational electronics and code toolkit, and it pairs unusually well with a kid who already 3D prints.</p>
+          <div class="tag-row">
+            <span class="tag">No experience needed</span>
+            <span class="tag">C/C++</span>
+            <span class="tag">15 projects</span>
+          </div>
+        </div>
+        <div class="card-details">
+          <h4>What's in the box</h4>
+          <ul>
+            <li>Arduino UNO board, breadboard, 70 jumper wires, DC and servo motors.</li>
+            <li>Sensors: phototransistors, temperature, tilt, potentiometers, pushbuttons, a 16x2 LCD, and 28 LEDs.</li>
+            <li>A 170-page project book with 15 guided builds that teach electronics fundamentals from zero.</li>
+          </ul>
+          <h4>Why it's the next step, not the first</h4>
+          <ul>
+            <li>Once he wants to design his own robot instead of following a kit's blueprint, this is the toolkit that lets him do it, especially paired with custom 3D-printed chassis and mounts.</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://store.arduino.cc/products/arduino-starter-kit-multi-language" target="_blank" rel="noopener">Official store ↗</a>
+          <button class="toggle-more">More detail</button>
+        </div>
+      </article>
+
+      <!-- Raspberry Pi -->
+      <article class="card" data-tags="deep budget">
+        <div class="card-top">
+          <span class="badge" style="background:var(--pink)">GO DEEP</span>
+          <div class="card-icon" style="background:rgba(236,72,153,.14)">🖥️</div>
+          <h3>Freenove / SunFounder Pi Robot Kits</h3>
+          <div class="price">$69.99 kit <small>+ Raspberry Pi board, not included</small></div>
+          <p class="verdict">Pairs a Raspberry Pi with a motor controller, chassis, and sensors to build a fully programmable robot running real Python on a full Linux computer.</p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Real Linux OS</span>
+            <span class="tag">Research-grade hardware</span>
+          </div>
+        </div>
+        <div class="card-details">
+          <div class="flag"><strong>Budget note:</strong> the kit itself is $69.99, but it does not include the Raspberry Pi board or batteries. Budget another $50 to $80 for a Pi board, plus rechargeable batteries. Total cost lands closer to the mid-tier kits above.</div>
+          <h4>Why it's different</h4>
+          <ul>
+            <li>The Pi's full Linux OS opens up possibilities beyond robotics. It's genuinely the same category of hardware used in real robotics prototyping.</li>
+            <li>Best for a kid who's already comfortable with Arduino-style building and wants more computing headroom.</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://store.freenove.com/products/fnk0077" target="_blank" rel="noopener">Freenove store ↗</a>
+          <button class="toggle-more">More detail</button>
+        </div>
+      </article>
+
+      <!-- Thames & Kosmos -->
+      <article class="card" data-tags="mech budget">
+        <div class="card-top">
+          <span class="badge" style="background:var(--grass)">MECHANICAL-FIRST</span>
+          <div class="card-icon" style="background:rgba(34,197,94,.14)">⚙️</div>
+          <h3>Thames &amp; Kosmos Robotics Workshop</h3>
+          <div class="price">~$150-220 <small>varies by edition/retailer</small></div>
+          <p class="verdict">The most mechanical-engineering-heavy option here, with 10 buildable robot designs and real gearing and sensor wiring.</p>
+          <div class="tag-row">
+            <span class="tag">100+ building pieces</span>
+            <span class="tag">Blockly / micro:bit</span>
+            <span class="tag">10 robot builds</span>
+          </div>
+        </div>
+        <div class="card-details">
+          <div class="flag"><strong>Quick correction:</strong> this one isn't actually code-free. Both current editions control the robots through a companion app, either Google Blockly block coding on a tablet or PC, or a micro:bit programmed with MakeCode (blocks, Python, or JavaScript). If you want something with zero screens, just switches and gears, this isn't it. It's better described as mechanical-heavy with light coding than no code at all.</div>
+          <h4>Still worth it for</h4>
+          <ul>
+            <li>Reinforcing gear ratios, motor placement, and mechanical cause and effect before diving back into text-based code.</li>
+            <li>It comes with a build manual and online guides for all 10 robot designs.</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-ghost" href="https://roboticsworkshop.thamesandkosmos.com/" target="_blank" rel="noopener">Product site ↗</a>
+          <button class="toggle-more">More detail</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Side by side</span>
+      <h2>Quick comparison</h2>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Kit</th>
+            <th>Price</th>
+            <th>Coding</th>
+            <th>Needs a device?</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">mBot2</td>
+            <td>$149.99</td>
+            <td>Blocks → Python</td>
+            <td>Yes (app)</td>
+            <td>Best overall bridge kit</td>
+          </tr>
+          <tr>
+            <td class="name">ELEGOO Smart Robot Car V4</td>
+            <td>~$55-70</td>
+            <td>Arduino C/C++</td>
+            <td>PC for programming</td>
+            <td>Cheapest real-code robot</td>
+          </tr>
+          <tr>
+            <td class="name">Arduino Starter Kit</td>
+            <td>~$125</td>
+            <td>C/C++</td>
+            <td>PC</td>
+            <td>Designing his own robots</td>
+          </tr>
+          <tr>
+            <td class="name">Freenove/SunFounder Pi kit</td>
+            <td>$70 + Pi board</td>
+            <td>Python (Linux)</td>
+            <td>PC / phone</td>
+            <td>Max ceiling, higher cost</td>
+          </tr>
+          <tr>
+            <td class="name">Thames &amp; Kosmos Robotics Workshop</td>
+            <td>~$150-220</td>
+            <td>Blockly / MakeCode</td>
+            <td>Tablet, PC, or micro:bit</td>
+            <td>Mechanical intuition first</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="path">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The recommended route</span>
+      <h2>A path, not just a purchase</h2>
+      <p class="section-sub">Given his age, and that he already 3D prints, this is the sequence that gets the most mileage.</p>
+    </div>
+    <div class="path">
+      <div class="path-step">
+        <div class="path-line"></div>
+        <div class="path-dot" style="background:var(--coral)">1</div>
+        <div class="path-body">
+          <h4>Start: mBot2 or ELEGOO Smart Robot Car</h4>
+          <p>Bridges block coding into real code with actual sensors. Pick mBot2 for the smoother onramp and the support ecosystem, or ELEGOO if budget is the priority and he's ready to jump straight into Arduino syntax.</p>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="path-line"></div>
+        <div class="path-dot" style="background:var(--indigo)">2</div>
+        <div class="path-body">
+          <h4>Level up: Arduino Starter Kit</h4>
+          <p>Once he wants to design his own robot instead of following a kit's blueprint. This is where the 3D printing background becomes a real advantage. He can print custom chassis, mounts, and enclosures around the electronics.</p>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="path-body">
+          <h4>Go deep: Raspberry Pi robotics</h4>
+          <p>When Arduino's limits start to show (vision, more complex logic, networking), a Pi-based robot is the next real ceiling, running actual Python on a full computer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tip-section">
+  <div class="wrap">
+    <div class="tip">
+      <div class="icon">💡</div>
+      <div>
+        <h4>The one thing that actually matters</h4>
+        <p>Look for kits that teach sensors, not just motors. The ability to add cameras and distance sensors is what bridges toy robots into real robotics concepts. It's the difference between "the wheels turn" and "the robot reacts to the world." Avoid anything that's drag and drop only. He's already past that stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Quick answers</span>
+      <h2>FAQ</h2>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do I need to buy the "next step" kit right away? <span class="plus">+</span></div>
+      <div class="faq-a"><p>No. mBot2 or the ELEGOO kit alone is easily months of material for a 12 year old: sensors, obstacle courses, remixed builds. Let him ask for more before you buy more.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if he wants to join a robotics competition team later? <span class="plus">+</span></div>
+      <div class="faq-a"><p>I wouldn't buy a specific platform for that now. Most competitive robotics clubs already have their own hardware and standardize on one system, so it makes more sense to join first and see what they actually use before spending on anything.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if he's still mostly doing drag and drop Scratch? <span class="plus">+</span></div>
+      <div class="faq-a"><p>mBot2 is still the right pick. It starts in Scratch-style blocks and grows into Python on the same hardware, so there's no need to re-buy anything once he's ready for real code.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Where did these prices come from? <span class="plus">+</span></div>
+      <div class="faq-a"><p>Pulled directly from each brand's official store in September 2026 where possible (mBot2, ELEGOO, Arduino, Freenove), with third-party pricing for Thames &amp; Kosmos. Prices move, so check the linked store before buying.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>I'm not sponsored by or affiliated with any of these brands. Just did the homework so you don't have to.</p>
+    <p class="src">Sources: <a href="https://www.makeblock.com/products/buy-mbot2" target="_blank" rel="noopener">Makeblock</a>, <a href="https://www.elegoo.com/products/elegoo-smart-robot-car-kit-v-4-0" target="_blank" rel="noopener">ELEGOO</a>, <a href="https://store.arduino.cc/products/arduino-starter-kit-multi-language" target="_blank" rel="noopener">Arduino</a>, <a href="https://store.freenove.com/products/fnk0077" target="_blank" rel="noopener">Freenove</a>, <a href="https://www.thamesandkosmos.co.uk/product/robotics-workshop/" target="_blank" rel="noopener">Thames &amp; Kosmos</a>. Last checked September 2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Filter chips
+  var chips = document.querySelectorAll('.chip');
+  var cards = document.querySelectorAll('#cards .card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var f = chip.getAttribute('data-filter');
+      cards.forEach(function(card){
+        if (f === 'all' || (card.getAttribute('data-tags') || '').split(' ').indexOf(f) !== -1) {
+          card.classList.remove('is-hidden');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+
+  // Card detail toggles
+  document.querySelectorAll('.toggle-more').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var details = btn.closest('.card').querySelector('.card-details');
+      var open = details.classList.toggle('open');
+      btn.textContent = open ? 'Less detail' : 'More detail';
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      item.classList.toggle('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
