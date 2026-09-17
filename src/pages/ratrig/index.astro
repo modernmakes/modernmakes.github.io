@@ -2,30 +2,182 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import ratrigData from '../../data/ratrigData.json';
+
 const currentPath = '/ratrig';
-const label = 'ratrig'.toUpperCase();
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
+
+const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ratrigData;
 ---
-<Base hasPageH1={true} title={`${label} Upgrades & Mods`} description={`The complete mod and upgrade resource for ${label} builders.`}>
+<Base hasPageH1={true} title="RatRig V-Core 4 — AWD CoreXY Upgrades & Parts" description="The RatRig V-Core 4 ecosystem hub: AWD CoreXY flagship, motion system parts, and precision frame upgrades from Spannsysteme and BRS Engineering.">
   <Nav slot="nav" currentPath={currentPath} />
-  <section style="background:var(--black);padding:80px 0">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px;text-align:center">
-      <div class="eyebrow" style="margin-bottom:12px">Coming soon</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">{label}</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7;max-width:480px;margin:0 auto 24px">The {label} ecosystem hub is being built. Launch content coming soon.</p>
-      <a href="/" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--accent)">← Back to homepage</a>
+
+  <!-- ── 1. DARK HERO ── -->
+  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">RatRig</span>
+      </div>
+      <div class="hero-content-grid">
+        <div>
+          <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
+          <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">RatRig</h1>
+          <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">The commercial kit with an open-hardware commitment. The V-Core 4 pairs AWD CoreXY motion — four independent XY motors instead of the usual two — with a 3030 aluminum frame and official RatRig documentation, in 300mm, 400mm, and 500mm build volumes.</p>
+          <a href="/ratrig/origin" class="ratrig-story-link">The RatRig Story →</a>
+        </div>
+      </div>
+      <div class="size-badge-row">
+        {flagship.buildVolumes.map((s: string) => <span class="size-badge">{s}</span>)}
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. FLAGSHIP STRIP ── -->
+  <section style="background:#0d0d0d;padding:32px 0;border-top:3px solid var(--accent)">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="flagship-strip">
+        <div class="flagship-name-col">
+          <div class="flagship-eyebrow">Flagship</div>
+          <h2 class="flagship-name">{flagship.name}</h2>
+          <span class="verdict verdict-best">{flagship.verdictLabel.split(' — ')[0]}</span>
+        </div>
+        <div class="flagship-spec-strip">
+          <div class="mspec-item">
+            <span class="mspec-label">Motion</span>
+            <span class="mspec-val">{flagship.motion}</span>
+          </div>
+          <div class="mspec-item">
+            <span class="mspec-label">Frame</span>
+            <span class="mspec-val">{flagship.frame}</span>
+          </div>
+          <div class="mspec-item">
+            <span class="mspec-label">Toolhead</span>
+            <span class="mspec-val">{flagship.toolhead}</span>
+          </div>
+          <div class="mspec-item">
+            <span class="mspec-label">Z System</span>
+            <span class="mspec-val">{flagship.zSystem}</span>
+          </div>
+        </div>
+        <a href={flagship.href} class="flagship-cta">See full specs →</a>
+      </div>
+      <p class="flagship-tagline">{flagship.verdictLabel}</p>
     </div>
   </section>
+
+  <!-- ── 3. V-MINION DISCONTINUATION CALLOUT ── -->
+  <section class="section" aria-label="V-Minion status">
+    <div class="container">
+      <div class="skip-callout">
+        <span class="verdict verdict-skip">Skip</span>
+        <h2 class="skip-callout-title">{discontinued.name}: Discontinued</h2>
+        <p class="skip-callout-body">{discontinued.note}</p>
+        <div class="skip-callout-alts">
+          <span class="skip-callout-alts-label">Look at instead:</span>
+          {discontinued.alternatives.map((a: { name: string; href: string }) => (
+            <a href={a.href} class="skip-callout-alt-link">{a.name} →</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. WHAT'S LIVE FOR RATRIG ── -->
+  <section class="section" style="padding-top:0" aria-label="RatRig subsystems">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Browse by subsystem</h2>
+      </div>
+      <div class="ratrig-subsystem-grid">
+        {subsystems.map((sub: { id: string; label: string; icon: string; description: string; href: string; partCount: number }) => (
+          <a href={sub.href}>
+            <div class="subsystem-card-light">
+              <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+              <div class="subsystem-card-title">{sub.label}</div>
+              <div class="subsystem-card-desc">{sub.description}</div>
+              <div class="subsystem-card-count">{sub.partCount} RatRig-tagged parts →</div>
+            </div>
+          </a>
+        ))}
+        <div class="subsystem-card-light subsystem-card-note">
+          <div style="font-size:20px;margin-bottom:8px">💻</div>
+          <div class="subsystem-card-title">Mainboards</div>
+          <div class="subsystem-card-desc">No RatRig-specific mainboard picks in our database yet. AWD needs at least 8 driver slots for the 4 independent XY motors, plus Z and extruder — we'll add RatRig-tested boards as this hub grows.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. FRAME & PRECISION PARTS ── -->
+  <section class="section" style="background:#fff;border-top:1px solid var(--border)" aria-label="Frame and precision parts">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Frame & precision parts</h2>
+        <span class="verdict verdict-rec">Vendor · BRS Engineering</span>
+      </div>
+      <div class="grid-3">
+        {framePrecisionParts.map((p: { name: string; vendor: string; price: string; verdictLabel: string; verdictClass: string; desc: string; href: string }) => (
+          <a href={p.href} target="_blank" rel="noopener">
+            <div class="product-card community">
+              <div class="product-card-img" style="background:linear-gradient(135deg,#181818,#0d0d0d);height:80px"></div>
+              <div class="product-card-body">
+                <span class="community-badge">{p.vendor} · {p.price}</span>
+                <div class="product-card-name">{p.name}</div>
+                <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin:6px 0 10px">{p.desc}</div>
+                <div class="product-card-footer">
+                  <span class={`verdict ${p.verdictClass}`}>{p.verdictLabel}</span>
+                  <span class="btn-printables">View at vendor →</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. TOP PICKS FOR RATRIG ── -->
+  <section class="section" aria-label="Top picks for RatRig">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-head-label">Top picks for RatRig</h2>
+      </div>
+      <div class="grid-4">
+        {topPicks.map((p: { name: string; brand: string; spec: string; price: string; verdictLabel: string; verdictClass: string; href: string; bg: string }) => (
+          <a href={p.href} target={p.href.startsWith('http') ? '_blank' : undefined} rel={p.href.startsWith('http') ? 'noopener' : undefined}>
+            <div class="product-card">
+              <div class="product-card-img" style={`background:${p.bg};height:120px`}></div>
+              <div class="product-card-body">
+                <div class="product-card-brand">{p.brand}</div>
+                <div class="product-card-name">{p.name}</div>
+                <div class="product-card-specs">
+                  <span class="spec-chip">{p.spec}</span>
+                </div>
+                <div class="product-card-footer">
+                  <span class="product-card-price">{p.price}</span>
+                  <span class={`verdict ${p.verdictClass}`}>{p.verdictLabel}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "CollectionPage",
         "name": "RatRig Printer Ecosystem — Modern Makes",
-        "description": "V-Core 4, 3.1, and 3 build resources, parts directory, and upgrade guides. Coming soon.",
+        "description": "RatRig V-Core 4 AWD CoreXY hub — flagship specs, motion system parts, and precision frame upgrades from Spannsysteme and BRS Engineering.",
         "url": `${siteBase}/ratrig`,
         "isPartOf": { "@type": "WebSite", "url": siteBase }
       },
@@ -39,3 +191,176 @@ const siteBase = Astro.site
     ]
   })}></script>
 </Base>
+
+<style is:global>
+/* ── STORY LINK ── */
+.ratrig-story-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.35);
+  text-decoration: none;
+  transition: color .15s;
+}
+.ratrig-story-link:hover { color: rgba(255,255,255,.75); }
+
+.hero-content-grid { display: grid; grid-template-columns: 1fr; }
+
+/* ── SIZE BADGES ── */
+.size-badge-row { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+.size-badge {
+  font-family: var(--fm);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--radius-badge);
+  padding: 6px 12px;
+}
+
+/* ── FLAGSHIP STRIP ── */
+.flagship-strip {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.flagship-name-col { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; flex-shrink: 0; }
+.flagship-eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.flagship-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+}
+.flagship-spec-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 16px 24px;
+  flex: 1;
+  padding: 12px 0;
+  border-left: 1px solid rgba(255,255,255,.1);
+  padding-left: 32px;
+}
+.flagship-cta {
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.flagship-cta:hover { color: #fff; }
+.flagship-tagline {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  margin: 20px 0 0;
+  max-width: 720px;
+}
+
+/* ── SKIP CALLOUT ── */
+.skip-callout {
+  background: #f4f4f2;
+  border-left: 3px solid #8c8c8c;
+  border-radius: 8px;
+  padding: 24px 28px;
+}
+.skip-callout-title {
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--black);
+  margin: 10px 0 8px;
+}
+.skip-callout-body {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--g1);
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 0 16px;
+}
+.skip-callout-alts {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.skip-callout-alts-label {
+  font-family: var(--fm);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--g2);
+}
+.skip-callout-alt-link {
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.skip-callout-alt-link:hover { color: var(--black); }
+
+/* ── SUBSYSTEM GRID (light) ── */
+.ratrig-subsystem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .ratrig-subsystem-grid { grid-template-columns: 1fr; }
+}
+.subsystem-card-light {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+  transition: border-color .15s;
+}
+a:hover .subsystem-card-light { border-color: var(--accent); }
+.subsystem-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.subsystem-card-desc {
+  font-family: var(--fb);
+  font-size: 12.5px;
+  color: var(--g1);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.subsystem-card-count {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--accent);
+}
+.subsystem-card-note { cursor: default; }
+.subsystem-card-note:hover { border-color: var(--border); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .flagship-strip { gap: 20px; }
+  .flagship-spec-strip { border-left: none; padding-left: 0; grid-template-columns: repeat(2, 1fr); width: 100%; }
+}
+</style>

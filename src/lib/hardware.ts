@@ -84,6 +84,7 @@ export const PRINTER_HREFS: Record<string, string> = {
   'Voron 0.2': '/voron',
   RatRig: '/ratrig',
   'RatRig V-Core 3': '/ratrig',
+  'RatRig V-Core 4': '/ratrig',
   VZBot: '/vzbot',
   VzBot: '/vzbot',
   VzBoT: '/vzbot',

@@ -1,0 +1,123 @@
+{
+  "printer": "ratrig",
+  "printerLabel": "RatRig",
+  "flagship": {
+    "name": "RatRig V-Core 4",
+    "href": "/hardware/printers/ratrig-v-core-4",
+    "buildVolumes": ["300mm", "400mm", "500mm"],
+    "frame": "3030 aluminum extrusion",
+    "motion": "CoreXY — AWD (4 independent XY motors)",
+    "toolhead": "RatRig EVA 3",
+    "zSystem": "Belted Z — 3-point kinematic bed mount",
+    "priceUsd": 1400,
+    "verdictLabel": "Best-supported self-build kit — AWD CoreXY, 3030 frame rigidity, official documentation and RatRig community backing"
+  },
+  "discontinued": {
+    "name": "RatRig V-Minion",
+    "verdictLabel": "Discontinued — RatRig no longer supports the V-Minion; no active kit, no documentation updates",
+    "note": "RatRig discontinued the V-Minion due to supply chain issues and limited demand, then released its CAD and STLs publicly and sold remaining toolheads at cost.",
+    "alternatives": [
+      { "name": "RatRig V-Core 4", "href": "/hardware/printers/ratrig-v-core-4" },
+      { "name": "Voron 0.2", "href": "/hardware/printers/voron-02" }
+    ]
+  },
+  "subsystems": [
+    {
+      "id": "motion-system",
+      "label": "Motion System",
+      "icon": "🔩",
+      "description": "AWD drive belts, MGN15 gantry rails, stock belted Z, GT1.5 anti-VFA upgrade",
+      "href": "/hardware/motion-system",
+      "partCount": 5
+    }
+  ],
+  "framePrecisionParts": [
+    {
+      "name": "Spannsysteme 3030 Corner Joining Plate",
+      "vendor": "BRS Engineering",
+      "price": "€25–31",
+      "verdictLabel": "BUY",
+      "verdictClass": "verdict-best",
+      "desc": "EN AW-7075 CNC-machined corner connection for 3030-profile frames — replaces printed/plastic corners on the V-Core 3 and V-Core 4.",
+      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/"
+    },
+    {
+      "name": "Spannsysteme Diagonal Frame Brace",
+      "vendor": "BRS Engineering",
+      "price": "€19–25",
+      "verdictLabel": "BUY",
+      "verdictClass": "verdict-best",
+      "desc": "Triangulates corner connections to cut frame racking — directly reduces ringing at higher print speeds on 3030-profile printers.",
+      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/"
+    },
+    {
+      "name": "Spannsysteme Aluminum Idler Spacer",
+      "vendor": "BRS Engineering",
+      "price": "€3",
+      "verdictLabel": "BUY",
+      "verdictClass": "verdict-best",
+      "desc": "Precision-machined 14mm idler spacer — tighter tolerance than printed spacers, reducing belt-path slop and VFA.",
+      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/"
+    },
+    {
+      "name": "Spannsysteme Cast Tooling Plate",
+      "vendor": "BRS Engineering",
+      "price": "€355",
+      "verdictLabel": "CONSIDER",
+      "verdictClass": "verdict-rec",
+      "desc": "EN AW-5083 cast aluminum bed plate, 10mm thick, CMM-certified ±0.05mm — 300mm build size only; currently sold out at BRS.",
+      "href": "https://store.brs-engineering.com/en/products/bed-plate-for-ratrig-v-core-3-0-3-1-400"
+    },
+    {
+      "name": "Spannsysteme Ergonomic Frame Handle",
+      "vendor": "BRS Engineering",
+      "price": "€25–31",
+      "verdictLabel": "CONSIDER",
+      "verdictClass": "verdict-rec",
+      "desc": "CNC aluminum carry handle for 2020/3030 extrusion — won't flex or creep like printed handles on an enclosure moved often.",
+      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/"
+    }
+  ],
+  "topPicks": [
+    {
+      "name": "RatRig V-Core 4",
+      "brand": "RatRig",
+      "spec": "AWD CoreXY · 300–500mm",
+      "price": "$1,400",
+      "verdictLabel": "Workhorse",
+      "verdictClass": "verdict-best",
+      "href": "/hardware/printers/ratrig-v-core-4",
+      "bg": "linear-gradient(135deg,#1a1008,#100a04)"
+    },
+    {
+      "name": "V-Core 4 Belted Z",
+      "brand": "RatRig",
+      "spec": "3-point kinematic · Z_TILT_ADJUST",
+      "price": "Stock",
+      "verdictLabel": "Workhorse",
+      "verdictClass": "verdict-best",
+      "href": "/hardware/motion-system/ratrig-v-core-4-belted-z",
+      "bg": "linear-gradient(135deg,#101820,#080e18)"
+    },
+    {
+      "name": "MGN15H Linear Rail",
+      "brand": "RatRig",
+      "spec": "15mm profile · H carriage",
+      "price": "Kit-supplied",
+      "verdictLabel": "Workhorse",
+      "verdictClass": "verdict-best",
+      "href": "/hardware/motion-system/ratrig-mgn15h-linear-rail",
+      "bg": "linear-gradient(135deg,#102010,#081408)"
+    },
+    {
+      "name": "Diagonal Frame Brace",
+      "brand": "Spannsysteme",
+      "spec": "EN AW-7075 · 3030 profile",
+      "price": "€19–25",
+      "verdictLabel": "Workhorse",
+      "verdictClass": "verdict-best",
+      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/",
+      "bg": "linear-gradient(135deg,#201520,#140e18)"
+    }
+  ]
+}

@@ -44,6 +44,14 @@ This repo's full list of installed skills, plugins, and MCP connectors — both 
 
 ---
 
+## Agent Activity Log
+
+Write a record to Airtable base `appMiv1h5Ws9QVuDE`, table **Agent Activity Log** (`tblQ65KnuikPlxN0q`) at session checkpoints — a decision made, a blocker hit, or session end. Opt-in and for Matt's own review, not stakeholder-facing; skip it for trivial one-shot asks, but use it for anything with real reasoning behind it (an approach chosen over alternatives, a scope cut, a discovery that changes future work).
+
+Fields: `Summary` (one-line what-happened), `Agent` (`Claude Code`), `Event Type` (Read / Create / Update / Delete / Decision / Blocker / Question / Completion / Error), `Reasoning` (what was intended and why, including alternatives considered and rejected), `Outcome` (Completed / Partial / Failed / Blocked), `Status` (Open / Acknowledged / Resolved / Stale), `Session ID` (ties related events in one session together — reuse it across checkpoints in the same thread), `Target Type` (Git commit / Vault doc / Airtable record / PRD-spec doc / Other), `Target URL` (deep link to the touched commit, vault doc, Airtable record, etc.).
+
+---
+
 ## Content Publishing — Humanizer Pass (required before ship)
 
 Every new or edited article in `src/content/**` gets a two-pass humanizer treatment **before commit**. AI-writing tells are the fastest way the publication reads as machine-written.
