@@ -2,25 +2,441 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import ToolheadPicker from '../../components/configurator/ToolheadPicker.astro';
+import SubsystemGrid from '../../components/configurator/SubsystemGrid.astro';
+import BuildSummary from '../../components/configurator/BuildSummary.astro';
+import type { Machine } from '../../lib/configurator-engine';
+
+import toolheads from '../../data/hardware/toolheads.json';
+import hotends from '../../data/hardware/hotends.json';
+import nozzles from '../../data/hardware/nozzles.json';
+import heaters from '../../data/hardware/heaters.json';
+import extruders from '../../data/hardware/extruders.json';
+import motionSystem from '../../data/hardware/motion-system.json';
+import mainboards from '../../data/hardware/mainboards.json';
+import toolboards from '../../data/hardware/toolboards.json';
+import bedProbes from '../../data/hardware/bed-probes.json';
+import psus from '../../data/hardware/psus.json';
+import partCooling from '../../data/hardware/part-cooling.json';
+
 const currentPath = '/voron/configurator';
-const label = 'configurator'.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+// Default state for the first (server-rendered) pass — Voron 2.4, no
+// toolhead or hotend picked yet. The client script re-renders compat state
+// from here on, but this default matches /voron's own 2.4-first convention
+// so a fresh visitor's first paint is never empty.
+const defaultMachine: Machine = { model: '2.4' };
+
+const subsystems = [
+  { id: 'hotend', label: 'Hotend', stepNumber: '03', records: hotends, routeBase: '/hardware/hotends', crossLink: null },
+  { id: 'nozzle', label: 'Nozzle', stepNumber: '04', records: nozzles, routeBase: '/hardware/nozzles', crossLink: 'nozzle' as const },
+  { id: 'heater', label: 'Heater', stepNumber: '05', records: heaters, routeBase: '/hardware/heaters', crossLink: 'heater' as const },
+  { id: 'extruder', label: 'Extruder', stepNumber: '06', records: extruders, routeBase: '/hardware/extruders', crossLink: null },
+  { id: 'motion-system', label: 'Motion System', stepNumber: '07', records: motionSystem, routeBase: '/hardware/motion-system', crossLink: null },
+  { id: 'mainboard', label: 'Mainboard', stepNumber: '08', records: mainboards, routeBase: '/hardware/mainboards', crossLink: null },
+  { id: 'toolboard', label: 'Toolboard', stepNumber: '09', records: toolboards, routeBase: '/hardware/toolboards', crossLink: null },
+  { id: 'bed-probe', label: 'Bed Probe', stepNumber: '10', records: bedProbes, routeBase: '/hardware/probes', crossLink: null },
+  { id: 'psu', label: 'PSU', stepNumber: '11', records: psus, routeBase: '/hardware/psus', crossLink: null },
+  { id: 'part-cooling', label: 'Part Cooling', stepNumber: '12', records: partCooling, routeBase: '/hardware/part-cooling', crossLink: null },
+];
 ---
-<Base hasPageH1={true} title={`Voron ${label}`} description={`The complete guide to ${label.toLowerCase()} for Voron 2.4 and Trident builds.`}>
+<Base hasPageH1={true} heroPage={true} title="Voron Configurator — Build Your Parts List" description="Pick your Voron model and toolhead, then build a compatible parts list across hotends, extruders, motion system, electronics, and more.">
   <Nav slot="nav" currentPath={currentPath} />
-  <section style="background:var(--black);padding:60px 0 40px">
+
+  <div style="background:var(--black);padding:56px 0 32px;border-bottom:3px solid var(--accent)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
         <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
         <a href="/voron" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Voron</a>
         <span style="color:rgba(255,255,255,.2)">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">{label}</span>
+        <span style="font-size:11px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace">Configurator</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px">Voron · {label}</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Voron {label}</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7">This page is being built. Product data and editorial content coming soon.</p>
-      <a href="/voron" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent)">← Back to Voron hub</a>
+      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Voron · Build Planner</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Configurator</h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">Pick your model and toolhead first — they filter every part list below to what actually fits. Everything here is session-only; nothing is saved.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:32px">
+    <div class="container">
+      <div class="cfg-subsystem-head" style="margin-bottom:6px">
+        <span class="cfg-step-number">01</span>
+        <h2 class="cfg-subsystem-title" id="cfg-heading-machine">Printer</h2>
+      </div>
+      <div class="cfg-model-selector" role="group" aria-label="Choose your Voron model">
+        <button class="cfg-model-btn active" data-model="2.4" aria-pressed="true">
+          <span class="cfg-model-btn-name">Voron 2.4</span>
+          <span class="cfg-model-btn-sub">250 · 300 · 350mm</span>
+        </button>
+        <button class="cfg-model-btn" data-model="trident" aria-pressed="false">
+          <span class="cfg-model-btn-name">Trident</span>
+          <span class="cfg-model-btn-sub">250 · 300 · 350mm</span>
+        </button>
+      </div>
     </div>
   </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container cfg-layout">
+      <div class="cfg-main">
+        <ToolheadPicker toolheads={toolheads as any[]} machine={defaultMachine} />
+        {subsystems.map((s) => (
+          <SubsystemGrid
+            id={s.id}
+            label={s.label}
+            stepNumber={s.stepNumber}
+            records={s.records as any[]}
+            routeBase={s.routeBase}
+            machine={defaultMachine}
+            toolheadName={null}
+            selectedHotend={null}
+            crossLink={s.crossLink}
+          />
+        ))}
+      </div>
+      <div class="cfg-sidebar">
+        <BuildSummary />
+      </div>
+    </div>
+  </section>
+
   <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Voron Configurator — Modern Makes',
+    description: 'Interactive parts-compatibility planner for Voron 2.4 and Trident builds.',
+    url: `${siteBase}/voron/configurator`,
+    isPartOf: { '@type': 'WebSite', url: siteBase },
+  })}></script>
+
+  <script is:inline>
+    // ── MODEL RESTORE — blocking, runs before this page's first paint ──
+    // Shares the exact 'voron-model' localStorage key and data-voron-model
+    // attribute /voron uses, so a Trident visitor arriving here never sees
+    // a flash of the 2.4 default. Full re-render (compat recompute) still
+    // happens in the deferred script below once the DOM is interactive.
+    (function () {
+      var model;
+      try {
+        model = localStorage.getItem('voron-model');
+      } catch (e) {
+        return;
+      }
+      if (model !== 'trident') return;
+      document.documentElement.setAttribute('data-voron-model', 'trident');
+      document.querySelectorAll('.cfg-model-btn').forEach(function (btn) {
+        var active = btn.getAttribute('data-model') === 'trident';
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+    })();
+  </script>
 </Base>
+
+<style is:global>
+  .cfg-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .cfg-layout { grid-template-columns: 1fr; }
+  }
+  .cfg-step-number {
+    font-family: var(--fm);
+    font-size: 12px;
+    color: var(--g2);
+  }
+  .cfg-subsystem-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .cfg-subsystem-title {
+    font-family: var(--fd);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--black);
+    margin: 0;
+  }
+  .cfg-model-selector {
+    display: flex;
+    gap: 10px;
+  }
+  .cfg-model-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .15s, background .15s;
+  }
+  .cfg-model-btn.active {
+    border-color: var(--accent);
+    background: var(--bg);
+  }
+  .cfg-model-btn-name {
+    font-family: var(--fu);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--black);
+  }
+  .cfg-model-btn-sub {
+    font-family: var(--fm);
+    font-size: 11px;
+    color: var(--g2);
+  }
+</style>
+
+<script>
+  import {
+    evaluateCompatibility,
+    machineCheck,
+    toolheadCheck,
+    nozzleThreadCheck,
+    heaterHotendCheck,
+    nozzleMatchesHotend,
+    heaterMatchesHotend,
+    type Machine,
+    type PartRecord,
+  } from '../../lib/configurator-engine';
+
+  const STORAGE_KEY = 'voron-model';
+
+  interface Selection {
+    subsystem: string;
+    label: string;
+    record: PartRecord;
+  }
+
+  const selections = new Map<string, Selection>();
+  let machine: Machine = { model: '2.4' };
+
+  const modelBtns = document.querySelectorAll<HTMLButtonElement>('.cfg-model-btn');
+  const grids = document.querySelectorAll<HTMLElement>('[data-subsystem-grid]');
+
+  function readPart(card: HTMLElement): PartRecord {
+    try {
+      return JSON.parse(card.dataset.part ?? '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function selectedHotend(): PartRecord | null {
+    return selections.get('hotend')?.record ?? null;
+  }
+
+  function selectedToolheadName(): string | null {
+    return selections.get('toolhead')?.record?.Name ?? null;
+  }
+
+  function checksFor(subsystemId: string): ((r: PartRecord) => string | null)[] {
+    const checks = [machineCheck(machine), toolheadCheck(selectedToolheadName())];
+    if (subsystemId === 'nozzle') checks.push(nozzleThreadCheck(selectedHotend()));
+    if (subsystemId === 'heater') checks.push(heaterHotendCheck(selectedHotend()));
+    return checks;
+  }
+
+  function matchTagFor(subsystemId: string, record: PartRecord): string | null {
+    if (subsystemId === 'nozzle' && nozzleMatchesHotend(record, selectedHotend())) {
+      return selectedHotend()?.Name ?? null;
+    }
+    if (subsystemId === 'heater' && heaterMatchesHotend(record, selectedHotend())) {
+      return selectedHotend()?.Name ?? null;
+    }
+    return null;
+  }
+
+  function applyCardState(card: HTMLElement, reasons: string[], matchTag: string | null) {
+    const incompatible = reasons.length > 0;
+    card.classList.toggle('cfg-card--incompatible', incompatible);
+
+    let reasonEl = card.querySelector<HTMLElement>('.cfg-reason');
+    if (incompatible) {
+      if (!reasonEl) {
+        reasonEl = document.createElement('p');
+        reasonEl.className = 'cfg-reason';
+        card.appendChild(reasonEl);
+      }
+      reasonEl.textContent = reasons.join(' · ');
+    } else if (reasonEl) {
+      reasonEl.remove();
+    }
+
+    let tagEl = card.querySelector<HTMLElement>('.cfg-match-tag');
+    if (matchTag && !incompatible) {
+      if (!tagEl) {
+        tagEl = document.createElement('p');
+        tagEl.className = 'cfg-match-tag';
+        card.insertBefore(tagEl, card.querySelector('.cfg-card-price'));
+      }
+      tagEl.textContent = `Matches your ${matchTag}`;
+    } else if (tagEl) {
+      tagEl.remove();
+    }
+
+    const btn = card.querySelector<HTMLButtonElement>('.cfg-select-btn');
+    if (btn) {
+      btn.disabled = incompatible;
+      if (incompatible) {
+        btn.textContent = 'Not compatible';
+        card.classList.remove('cfg-selected');
+      } else if (!btn.textContent || btn.textContent === 'Not compatible') {
+        btn.textContent = card.classList.contains('cfg-selected') ? 'Remove from build' : 'Add to build';
+      }
+    }
+  }
+
+  function recomputeGrid(grid: HTMLElement) {
+    const subsystemId = grid.dataset.subsystemGrid ?? '';
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-part-card]'));
+    const checks = checksFor(subsystemId);
+
+    cards.forEach((card) => {
+      const record = readPart(card);
+      const reasons = checks.map((check) => check(record)).filter((r): r is string => r !== null);
+      applyCardState(card, reasons, matchTagFor(subsystemId, record));
+
+      // If this card is the current selection for its subsystem and it just
+      // went incompatible, drop it from the build.
+      const current = selections.get(subsystemId);
+      if (current && current.record.Name === record.Name && reasons.length > 0) {
+        selections.delete(subsystemId);
+        card.classList.remove('cfg-selected');
+      }
+    });
+  }
+
+  function recomputeAll() {
+    grids.forEach(recomputeGrid);
+    renderSummary();
+  }
+
+  function renderSummary() {
+    const list = document.querySelector<HTMLElement>('[data-summary-list]');
+    const empty = document.querySelector<HTMLElement>('[data-summary-empty]');
+    const totalWrap = document.querySelector<HTMLElement>('[data-summary-total]');
+    const totalValue = document.querySelector<HTMLElement>('[data-summary-total-value]');
+    if (!list || !empty || !totalWrap || !totalValue) return;
+
+    list.innerHTML = '';
+    let total = 0;
+    let count = 0;
+
+    selections.forEach((sel, subsystemId) => {
+      count++;
+      const price = typeof sel.record['Price (USD)'] === 'number' ? sel.record['Price (USD)'] : 0;
+      total += price;
+
+      const li = document.createElement('li');
+      li.className = 'cfg-summary-item';
+      li.innerHTML = `
+        <span>
+          <span class="cfg-summary-item-label">${sel.label}</span>
+          <span class="cfg-summary-item-name"></span>
+        </span>
+        <button type="button" class="cfg-summary-item-remove" aria-label="Remove ${sel.label}">Remove</button>
+      `;
+      li.querySelector('.cfg-summary-item-name')!.textContent = sel.record.Name ?? '';
+      li.querySelector('.cfg-summary-item-remove')!.addEventListener('click', () => {
+        deselect(subsystemId);
+      });
+      list.appendChild(li);
+    });
+
+    empty.hidden = count > 0;
+    totalWrap.hidden = count === 0;
+    totalValue.textContent = total > 0 ? `~$${total.toFixed(0)} USD` : '$0';
+  }
+
+  function deselect(subsystemId: string) {
+    selections.delete(subsystemId);
+    document.querySelectorAll<HTMLElement>(`[data-part-card][data-subsystem="${subsystemId}"]`).forEach((c) => {
+      c.classList.remove('cfg-selected');
+      const btn = c.querySelector<HTMLButtonElement>('.cfg-select-btn');
+      if (btn && !btn.disabled) btn.textContent = 'Add to build';
+    });
+    if (subsystemId === 'hotend' || subsystemId === 'toolhead') recomputeAll();
+    else renderSummary();
+  }
+
+  function select(card: HTMLElement) {
+    const subsystemId = card.dataset.subsystem ?? '';
+    const label = card.dataset.subsystemLabel ?? subsystemId;
+    const record = readPart(card);
+
+    // Toggle off if re-selecting the same card.
+    const current = selections.get(subsystemId);
+    if (current && current.record.Name === record.Name) {
+      deselect(subsystemId);
+      return;
+    }
+
+    // Single-select per subsystem — clear any sibling selection's visual state.
+    document.querySelectorAll<HTMLElement>(`[data-part-card][data-subsystem="${subsystemId}"]`).forEach((c) => {
+      c.classList.remove('cfg-selected');
+      const btn = c.querySelector<HTMLButtonElement>('.cfg-select-btn');
+      if (btn && !btn.disabled) btn.textContent = 'Add to build';
+    });
+
+    selections.set(subsystemId, { subsystem: subsystemId, label, record });
+    card.classList.add('cfg-selected');
+    const btn = card.querySelector<HTMLButtonElement>('.cfg-select-btn');
+    if (btn) btn.textContent = 'Remove from build';
+
+    // Hotend and toolhead selections gate other grids.
+    if (subsystemId === 'hotend' || subsystemId === 'toolhead') recomputeAll();
+    else renderSummary();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-part-card]').forEach((card) => {
+    const btn = card.querySelector<HTMLButtonElement>('.cfg-select-btn');
+    btn?.addEventListener('click', () => {
+      if (btn.disabled) return;
+      select(card);
+    });
+  });
+
+  function setModel(model: Machine['model']) {
+    machine = { model };
+    try {
+      localStorage.setItem(STORAGE_KEY, model);
+    } catch {
+      // ignore — private mode / blocked storage
+    }
+    document.documentElement.setAttribute('data-voron-model', model === 'trident' ? 'trident' : '');
+    modelBtns.forEach((btn) => {
+      const active = btn.dataset.model === model;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+    recomputeAll();
+  }
+
+  modelBtns.forEach((btn) => {
+    btn.addEventListener('click', () => setModel((btn.dataset.model as Machine['model']) ?? '2.4'));
+  });
+
+  const saved = (() => {
+    try {
+      return localStorage.getItem(STORAGE_KEY);
+    } catch {
+      return null;
+    }
+  })();
+  if (saved === 'trident') machine = { model: 'trident' };
+
+  recomputeAll();
+</script>

@@ -1,0 +1,200 @@
+---
+// One selectable part card, shared by every subsystem grid and the toolhead
+// picker. Compatibility is computed by the caller (server-side on first
+// render, client-side on re-selection) via src/lib/configurator-engine.ts —
+// this component only renders whatever compat state it's handed.
+import { resolveVerdict, toSlug } from '../../lib/hardware';
+
+interface Props {
+  record: Record<string, any>;
+  subsystemId: string;
+  subsystemLabel: string;
+  routeBase?: string | null;
+  reasons?: string[];
+  matchTag?: string | null;
+}
+
+const {
+  record,
+  subsystemId,
+  subsystemLabel,
+  routeBase = null,
+  reasons = [],
+  matchTag = null,
+} = Astro.props as Props;
+
+const name: string = record['Name'] ?? 'Unnamed part';
+const verdict = resolveVerdict(record['Verdict']);
+const priceRaw = record['Price (USD)'];
+const priceDisplay = typeof priceRaw === 'number' && priceRaw > 0 ? `~$${priceRaw} USD` : 'Free / DIY';
+const href = routeBase ? `${routeBase}/${toSlug(name)}` : null;
+const incompatible = reasons.length > 0;
+
+// Trimmed field set the client-side engine re-evaluates on every selection
+// change — kept to exactly what src/lib/configurator-engine.ts reads.
+const enginePayload = {
+  Name: name,
+  'Compatible Printers': record['Compatible Printers'],
+  'Compatible Toolheads': record['Compatible Toolheads'],
+  'Nozzle Thread': record['Nozzle Thread'],
+  Thread: record['Thread'],
+  'Compatible Hotends': record['Compatible Hotends'],
+  'Price (USD)': priceRaw,
+  Verdict: record['Verdict'],
+};
+
+// Vendor 1–5 Name/URL/Affiliate. Toolheads store the URL directly in the
+// "Vendor N Name" field (no separate URL/Affiliate columns) — degrade to
+// treating the name itself as the link in that case.
+const vendors = [1, 2, 3, 4, 5]
+  .map((i) => {
+    const vName = record[`Vendor ${i} Name`];
+    const vUrl = record[`Vendor ${i} URL`];
+    const affiliate = Boolean(record[`Vendor ${i} Affiliate`]);
+    if (!vName) return null;
+    if (typeof vName === 'string' && vName.startsWith('http')) {
+      return { label: `Vendor ${i}`, url: vName, affiliate };
+    }
+    if (!vUrl) return null;
+    return { label: vName as string, url: vUrl as string, affiliate };
+  })
+  .filter((v): v is { label: string; url: string; affiliate: boolean } => v !== null);
+---
+<article
+  class:list={['cfg-card', { 'cfg-card--incompatible': incompatible }]}
+  data-part-card
+  data-subsystem={subsystemId}
+  data-subsystem-label={subsystemLabel}
+  data-part={JSON.stringify(enginePayload)}
+>
+  <div class="cfg-card-top">
+    {href ? (
+      <a href={href} class="cfg-card-name">{name}</a>
+    ) : (
+      <span class="cfg-card-name">{name}</span>
+    )}
+    {verdict && <span class={`verdict ${verdict.cls}`}>{verdict.label}</span>}
+  </div>
+
+  {matchTag && !incompatible && <p class="cfg-match-tag">Matches your {matchTag}</p>}
+
+  <p class="cfg-card-price">{priceDisplay}</p>
+
+  {vendors.length > 0 && (
+    <div class="cfg-vendors">
+      {vendors.map((v) => (
+        <a href={v.url} target="_blank" rel="noopener" class="cfg-vendor-link">
+          {v.label}{v.affiliate && <span class="cfg-affiliate-tag" title="Affiliate link">Aff</span>}
+        </a>
+      ))}
+    </div>
+  )}
+
+  {incompatible && (
+    <p class="cfg-reason">{reasons.join(' · ')}</p>
+  )}
+
+  <button type="button" class="cfg-select-btn" data-part-select disabled={incompatible}>
+    {incompatible ? 'Not compatible' : 'Add to build'}
+  </button>
+</article>
+
+<style>
+  .cfg-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: opacity .15s, filter .15s, border-color .15s;
+  }
+  .cfg-card--incompatible {
+    opacity: .55;
+    filter: grayscale(.4);
+  }
+  .cfg-card.cfg-selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .cfg-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .cfg-card-name {
+    font-family: var(--fu);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.3;
+  }
+  a.cfg-card-name:hover { color: var(--accent); }
+  .cfg-match-tag {
+    font-family: var(--fu);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .cfg-card-price {
+    font-family: var(--fm);
+    font-size: 12px;
+    color: var(--g1);
+    margin: 0;
+  }
+  .cfg-vendors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .cfg-vendor-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--fu);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 3px 8px;
+  }
+  .cfg-affiliate-tag {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    color: var(--g2);
+    background: var(--bg);
+    border-radius: 3px;
+    padding: 1px 4px;
+  }
+  .cfg-reason {
+    font-family: var(--fb);
+    font-size: 12px;
+    color: var(--g2);
+    font-style: italic;
+    margin: 0;
+  }
+  .cfg-select-btn {
+    margin-top: 4px;
+    font-family: var(--fu);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: #fff;
+    background: var(--black);
+    border: none;
+    border-radius: var(--radius-badge);
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .cfg-select-btn:hover:not(:disabled) { background: var(--accent); }
+  .cfg-select-btn:disabled { background: var(--g2); cursor: not-allowed; }
+  .cfg-card.cfg-selected .cfg-select-btn { background: var(--accent); }
+</style>

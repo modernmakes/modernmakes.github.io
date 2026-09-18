@@ -9,6 +9,7 @@ const OUT_DIR = 'src/data/hardware';
 const TABLES = [
   { name: 'hotends',          id: 'tblWYO1fRFXcY6fXF' },
   { name: 'extruders',        id: 'tblTWR36Uq0RM4TB2' },
+  { name: 'toolheads',        id: 'tblfmSZtQvt4XQetS' },
   { name: 'bed-probes',       id: 'tblbKbuuUQhCSX38C' },
   { name: 'nozzles',          id: 'tblGOrDOH1cBBjgUv' },
   { name: 'build-plates',     id: 'tblmKDQDt0wHypEjx' },

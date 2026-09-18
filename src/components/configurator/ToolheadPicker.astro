@@ -1,0 +1,72 @@
+---
+// Toolhead is its own step right after machine selection, since it gates
+// every other subsystem's Compatible Toolheads filter. Toolheads have no
+// detail route on the site yet (no src/pages/hardware/toolheads/[slug]),
+// so cards never link internally — routeBase is intentionally omitted.
+import PartCard from './PartCard.astro';
+import { evaluateCompatibility, machineCheck, type Machine, type PartRecord } from '../../lib/configurator-engine';
+
+interface Props {
+  toolheads: PartRecord[];
+  machine: Machine;
+}
+
+const { toolheads, machine } = Astro.props as Props;
+
+const { incompatible } = evaluateCompatibility(toolheads, [machineCheck(machine)]);
+const incompatibleMap = new Map(incompatible.map((i) => [i.record, i.reasons]));
+---
+<section class="cfg-subsystem" data-subsystem-section="toolhead" aria-labelledby="cfg-heading-toolhead">
+  <div class="cfg-subsystem-head">
+    <span class="cfg-step-number">02</span>
+    <h2 class="cfg-subsystem-title" id="cfg-heading-toolhead">Toolhead</h2>
+  </div>
+  <p class="cfg-subsystem-sub">Pick the toolhead first — it filters which hotends, extruders, and other parts fit.</p>
+  <div class="cfg-grid" data-subsystem-grid="toolhead">
+    {toolheads.map((record) => (
+      <PartCard
+        record={record}
+        subsystemId="toolhead"
+        subsystemLabel="Toolhead"
+        routeBase={null}
+        reasons={incompatibleMap.get(record) ?? []}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .cfg-subsystem {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cfg-subsystem-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .cfg-step-number {
+    font-family: var(--fm);
+    font-size: 12px;
+    color: var(--g2);
+  }
+  .cfg-subsystem-title {
+    font-family: var(--fd);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--black);
+    margin: 0;
+  }
+  .cfg-subsystem-sub {
+    font-family: var(--fb);
+    font-size: 13px;
+    color: var(--g1);
+    margin: 0 0 14px;
+  }
+  .cfg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+// One subsystem's part grid. Compatibility for the initial (server-rendered)
+// pass runs through the same pure engine the client-side script re-runs on
+// every selection change — src/lib/configurator-engine.ts — so first paint
+// already matches what JS would compute, keeping this filter-free of layout
+// shift on hydration.
+import PartCard from './PartCard.astro';
+import {
+  evaluateCompatibility,
+  machineCheck,
+  toolheadCheck,
+  nozzleThreadCheck,
+  heaterHotendCheck,
+  nozzleMatchesHotend,
+  heaterMatchesHotend,
+  type Machine,
+  type PartRecord,
+} from '../../lib/configurator-engine';
+
+interface Props {
+  id: string;
+  label: string;
+  records: PartRecord[];
+  routeBase: string | null;
+  machine: Machine;
+  toolheadName: string | null;
+  selectedHotend: PartRecord | null;
+  crossLink?: 'nozzle' | 'heater' | null;
+  stepNumber: string;
+}
+
+const {
+  id,
+  label,
+  records,
+  routeBase,
+  machine,
+  toolheadName,
+  selectedHotend,
+  crossLink = null,
+  stepNumber,
+} = Astro.props as Props;
+
+const checks = [machineCheck(machine), toolheadCheck(toolheadName)];
+if (crossLink === 'nozzle') checks.push(nozzleThreadCheck(selectedHotend));
+if (crossLink === 'heater') checks.push(heaterHotendCheck(selectedHotend));
+
+const { incompatible } = evaluateCompatibility(records, checks);
+const incompatibleMap = new Map(incompatible.map((i) => [i.record, i.reasons]));
+
+const matchTagFor = (record: PartRecord): string | null => {
+  if (crossLink === 'nozzle' && nozzleMatchesHotend(record, selectedHotend)) {
+    return selectedHotend?.['Name'] ?? null;
+  }
+  if (crossLink === 'heater' && heaterMatchesHotend(record, selectedHotend)) {
+    return selectedHotend?.['Name'] ?? null;
+  }
+  return null;
+};
+---
+<section class="cfg-subsystem" data-subsystem-section={id} aria-labelledby={`cfg-heading-${id}`}>
+  <div class="cfg-subsystem-head">
+    <span class="cfg-step-number">{stepNumber}</span>
+    <h2 class="cfg-subsystem-title" id={`cfg-heading-${id}`}>{label}</h2>
+  </div>
+  {records.length === 0 ? (
+    <p class="cfg-empty">No {label.toLowerCase()} data yet — check back after the next Airtable sync.</p>
+  ) : (
+    <div class="cfg-grid" data-subsystem-grid={id}>
+      {records.map((record) => (
+        <PartCard
+          record={record}
+          subsystemId={id}
+          subsystemLabel={label}
+          routeBase={routeBase}
+          reasons={incompatibleMap.get(record) ?? []}
+          matchTag={matchTagFor(record)}
+        />
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+  .cfg-subsystem {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cfg-subsystem-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .cfg-step-number {
+    font-family: var(--fm);
+    font-size: 12px;
+    color: var(--g2);
+  }
+  .cfg-subsystem-title {
+    font-family: var(--fd);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--black);
+    margin: 0;
+  }
+  .cfg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .cfg-empty {
+    font-family: var(--fb);
+    font-size: 14px;
+    color: var(--g2);
+  }
+</style>
