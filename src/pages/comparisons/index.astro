@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const currentPath = '/comparisons';
+const siteBase = Astro.site
+  ? new URL(Astro.site).href.replace(/\/$/, '')
+  : 'https://modernmakes.github.io';
+
+const allComparisons = await getCollection('comparisons');
+const sorted = allComparisons.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+function cardBg(entry: (typeof sorted)[number]) {
+  if (entry.data.heroImage) {
+    return `background-color:#1a1520;background-image:url('${entry.data.heroImage}');background-size:cover;background-position:center`;
+  }
+  return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
+}
+
+const counts = { all: sorted.length };
+---
+<Base hasPageH1={true}
+  title="Comparisons"
+  description="Head-to-head hardware comparisons — flow rates, pricing, and verdicts to help you pick between two builds."
+  heroPage={true}
+>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HEADER -->
+  <div class="ni-page-hero pg-hero">
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
+      <div class="eyebrow" style="margin-bottom:10px">Modern Makes</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">
+        Comparisons
+      </h1>
+      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:520px">
+        Head-to-head breakdowns of hardware that's competing for the same slot in your build — specs, pricing, and a clear verdict.
+      </p>
+    </div>
+  </div>
+
+  <!-- ARTICLE COUNT BAR -->
+  <div class="ni-tabs-bar">
+    <div class="ni-tabs-inner">
+      <span class="ni-tab active">
+        All
+        <span class="ni-tab-count">{counts.all}</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ARTICLES -->
+  <section class="section" aria-label="Comparison articles">
+    <div class="container">
+      {sorted.length === 0 ? (
+        <p style="font-family:'Lora',serif;color:var(--g1);font-size:15px;text-align:center;padding:40px 0">
+          No comparisons published yet.
+        </p>
+      ) : (
+        <div class="grid-3" id="comparisons-grid">
+          {sorted.map(entry => (
+            <a
+              href={`/comparisons/${entry.slug}`}
+              class="card"
+              aria-label={entry.data.title}
+            >
+              <div class="card-img" style={cardBg(entry)}>
+                <div class="news-img-overlay"></div>
+                <span class="news-img-cat">{entry.data.category}</span>
+              </div>
+              <div class="card-body">
+                <div class="card-cat">{entry.data.category}</div>
+                <div class="card-title">{entry.data.title}</div>
+                <p class="card-excerpt">{entry.data.excerpt}</p>
+                <div class="card-footer">
+                  <time class="card-date">{formatDate(entry.data.date)}</time>
+                  <span class="card-date" style="margin-left:auto">{entry.data.readTime}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "Hardware Comparisons — Modern Makes",
+        "description": "Head-to-head hardware comparisons — flow rates, pricing, and verdicts to help you pick between two builds.",
+        "url": `${siteBase}/comparisons`,
+        "isPartOf": { "@type": "WebSite", "url": siteBase }
+      }
+    ]
+  })}></script>
+</Base>
+
+
+<style is:global>
+/* Isolate hero from nav backdrop-filter repaint cascade — same fix as news/index */
+.ni-page-hero {
+  will-change: transform;
+  transform: translateZ(0);
+}
+.card-img {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+.news-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.5), transparent 60%);
+}
+.news-img-cat {
+  position: relative;
+  z-index: 1;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  padding: 0 14px 10px;
+}
+.ni-tabs-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.ni-tabs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+}
+.ni-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 20px;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--g1);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+  margin-bottom: -1px;
+}
+.ni-tab:hover { color: var(--black); }
+.ni-tab.active { color: var(--black); border-bottom-color: var(--accent); }
+.ni-tab-count {
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--g2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 7px;
+}
+.ni-tab.active .ni-tab-count { background: var(--accent); color: #fff; border-color: var(--accent); }
+@media (max-width: 768px) {
+  .ni-tabs-inner { padding: 0 16px; }
+  .ni-tab { padding: 12px 14px; font-size: 11px; }
+}
+</style>

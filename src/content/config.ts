@@ -114,14 +114,4 @@ const filament = defineCollection({
   }),
 });
 
-const hardware = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    excerpt: z.string(),
-    category: z.string().optional(),
-    featured: z.boolean().optional().default(false),
-  }),
-});
-
-export const collections = { news, guides, comparisons, filament, hardware };
+export const collections = { news, guides, comparisons, filament };
