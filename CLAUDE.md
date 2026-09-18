@@ -364,13 +364,18 @@ git commit -m "data: [description]"
 
 ### Slug generation
 
+Single source of truth: `toSlug()` in `src/lib/hardware.ts`. Every hardware href is built by
+calling it at build time — never hand-typed, never read from Airtable's own `Slug` formula
+field (see Known Patterns & Gotchas below).
+
 ```js
-function toSlug(name) {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
+export const toSlug = (name) =>
+  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 ```
 
-"Rapido 2 UHF" → `rapido-2-uhf`, "Chube Air" → `chube-air`
+"Rapido 2 UHF" → `rapido-2-uhf`, "Chube Air" → `chube-air`, "Voron 0.2" → `voron-02`
+(punctuation is stripped, not converted to a dash — this is where a hand-rolled or
+misremembered version of this function tends to drift).
 
 ---
 
@@ -469,6 +474,7 @@ Applies whenever `/seo audit`, `/seo schema`, `/seo geo`, `/seo technical`, `/se
 - **AdSlot component** — `<AdSlot slotName="slot-name" />` renders nothing when `"active": false` in `ads.json`
 - **Newsletter forms** — any `<form data-nl>` with `<input type="email">` and `<button type="submit">` gets wired automatically by Base.astro inline JS
 - **Pre-commit token guard** — `.githooks/pre-commit` scans the staged diff for Airtable PAT patterns and TOKEN/SECRET/API_KEY-shaped assignments. Hooks in `.git/hooks` aren't version-controlled, so after every fresh clone run `git config core.hooksPath .githooks` once to activate it.
+- **Airtable's `Slug` field is a display value only — never build an href from it.** Every hardware table now has an auto-derived `Slug` formula field ("Auto-derived URL slug from Name. Used to predict the site path for Image URL"), but its formula disagrees with the site's `toSlug()` on punctuation: for "Voron 0.2" the Airtable formula produces `voron-0-2` while `toSlug()` produces `voron-02`. This exact mismatch caused a dead link caught pre-commit on the RatRig hub (see commit `4cd4db9`). The field isn't in `src/data/hardware/*.json` yet (fetch-airtable.mjs pulls all fields unfiltered, so it will appear on the next `npm run fetch-data`) — when it does, do not wire it into any href. Every internal link is built by calling `toSlug()` at build time, full stop.
 
 ---
 
