@@ -40,7 +40,7 @@ No lint or test commands. The PostToolUse build hook runs `npm run build` automa
 
 ## Capabilities Registry
 
-This repo's full list of installed skills, plugins, and MCP connectors — both Claude Code and Cowork — lives in `docs/capabilities-registry.md`. Check it before assuming a task needs custom work, and add a line there whenever a new skill/plugin/MCP gets installed.
+The full list of installed skills, plugins, and MCP connectors — both Claude Code and Cowork, shared across all projects — lives in the vault at `C:\Users\matty\claude-obsidian\wiki\meta\capabilities-registry.md` (`docs/capabilities-registry.md` is only a pointer to it). Check it before assuming a task needs custom work, and add a line there whenever a new skill/plugin/MCP gets installed.
 
 ---
 
