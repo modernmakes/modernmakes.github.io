@@ -17,7 +17,8 @@ if [ -z "$diff" ]; then
 fi
 
 # Only inspect added lines, not context/removed lines.
-added="$(printf '%s\n' "$diff" | grep -E '^\+' | grep -Ev '^\+\+\+')"
+# `|| true`: a deletion-only diff has no added lines, and grep's exit 1 would abort under set -e.
+added="$(printf '%s\n' "$diff" | grep -E '^\+' | grep -Ev '^\+\+\+' || true)"
 
 if [ -z "$added" ]; then
   exit 0
