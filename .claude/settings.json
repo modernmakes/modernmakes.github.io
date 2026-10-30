@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd \"d:\\Work\\Modern Makes\\2026\\modernmakes-astro-project\\modernmakes.github.io\" && npm run build 2>&1 | tail -20"
+            "command": "cd \"d:\\Work\\Modern Makes\\2026\\modernmakes-astro-project\\modernmakes.github.io\" && node scripts/build-hook.mjs"
           }
         ]
       }

@@ -32,7 +32,7 @@ npm run tells        # Scan src/content for AI-writing tells (pre-publish check)
 npm run tells:strict # Same, exit 1 if any file trips a threshold
 ```
 
-No lint or test commands. The PostToolUse build hook runs `npm run build` automatically after every file edit — watch for build errors in the output before proceeding.
+No lint or test commands. The PostToolUse build hook (`scripts/build-hook.mjs`) runs `npm run build` automatically only when an edit touches `src/`, `public/`, `scripts/` or a config file (`astro.config.mjs`, `package.json`, `tsconfig.json`) — watch for build errors in the output before proceeding.
 
 **Git workflow:** All commits are made via Claude Code (`git add` + `git commit`). Matt pushes from GitHub Desktop only — never run `git push` from terminal.
 
