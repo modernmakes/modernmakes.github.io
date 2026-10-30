@@ -27,3 +27,6 @@ Thumbs.db
 
 # claude-seo audit output (diagnostic only, never publishable)
 .seo-audits/
+
+# Local scratch (screenshots, throwaway files)
+scratch/
