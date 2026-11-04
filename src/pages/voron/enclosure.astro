@@ -154,7 +154,7 @@ const products = [
           </div>
         ))}
       </div>
-      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent-dk)">See disclosure.</a></p>
     </div>
   </section>
 
@@ -182,7 +182,7 @@ const products = [
             ].map((row, i) => (
               <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
                 <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
-                <td style={`text-align:center;padding:10px 12px;color:${row.heat.startsWith('✓✓') ? 'var(--accent)' : row.heat.startsWith('✓') ? '#2E7D32' : '#E65100'};font-weight:600`}>{row.heat}</td>
+                <td style={`text-align:center;padding:10px 12px;color:${row.heat.startsWith('✓✓') ? 'var(--accent-dk)' : row.heat.startsWith('✓') ? '#2E7D32' : '#E65100'};font-weight:600`}>{row.heat}</td>
                 <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.temp}</td>
                 <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.wt}</td>
                 <td style="text-align:center;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g1)">{row.cost}</td>

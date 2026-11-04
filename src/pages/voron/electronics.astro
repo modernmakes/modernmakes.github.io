@@ -145,7 +145,7 @@ const products = [
                 {product.specs.map(s => <span class="spec-chip">{s}</span>)}
               </div>
               {product.primaryNote && (
-                <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--accent);margin-bottom:8px">{product.primaryNote}</div>
+                <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--accent-dk);margin-bottom:8px">{product.primaryNote}</div>
               )}
               <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
               <a href={product.vendorUrl} class="btn-buy" target="_blank" rel="noopener sponsored">
@@ -161,7 +161,7 @@ const products = [
           </div>
         ))}
       </div>
-      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent)">See disclosure.</a></p>
+      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent-dk)">See disclosure.</a></p>
     </div>
   </section>
 
@@ -191,8 +191,8 @@ const products = [
                 <td style="text-align:center;padding:10px 12px;font-weight:600;color:var(--black)">{row.drivers}</td>
                 <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.can}</td>
                 <td style="text-align:center;padding:10px 12px;color:var(--g1)">{row.host}</td>
-                <td style={`text-align:center;padding:10px 12px;color:${row.v24.includes('Primary') ? 'var(--accent)' : '#2E7D32'};font-weight:600`}>{row.v24}</td>
-                <td style={`text-align:center;padding:10px 12px;color:${row.tri.includes('Primary') ? 'var(--accent)' : '#2E7D32'};font-weight:600`}>{row.tri}</td>
+                <td style={`text-align:center;padding:10px 12px;color:${row.v24.includes('Primary') ? 'var(--accent-dk)' : '#2E7D32'};font-weight:600`}>{row.v24}</td>
+                <td style={`text-align:center;padding:10px 12px;color:${row.tri.includes('Primary') ? 'var(--accent-dk)' : '#2E7D32'};font-weight:600`}>{row.tri}</td>
               </tr>
             ))}
           </tbody>

@@ -229,7 +229,7 @@ const currentPath = '/tools';
   background: rgba(255,90,31,.06); border: 1px solid rgba(255,90,31,.2);
   border-radius: 6px; padding: 12px 14px; margin-bottom: 2px;
 }
-.ms-computed-label { font-family: var(--fm); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.ms-computed-label { font-family: var(--fm); font-size: 10px; color: var(--accent-dk); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
 .ms-computed-val { font-family: var(--fd); font-size: 24px; font-weight: 800; color: var(--black); line-height: 1.1; }
 .ms-computed-note { font-family: var(--fm); font-size: 10px; color: var(--g2); margin-top: 4px; }
 
@@ -248,12 +248,12 @@ const currentPath = '/tools';
 @media (hover: hover) and (pointer: fine) {
   .ms-motor-item:hover { border-color: var(--border); background: var(--surface); }
 }
-.ms-motor-item.selected { border-color: var(--accent); background: rgba(255,90,31,.07); color: var(--accent); }
+.ms-motor-item.selected { border-color: var(--accent); background: rgba(255,90,31,.07); color: var(--accent-dk); }
 .ms-motor-item-brand { font-size: 9px; color: var(--g2); display: block; }
-.ms-motor-item.selected .ms-motor-item-brand { color: rgba(255,90,31,.6); }
+.ms-motor-item.selected .ms-motor-item-brand { color: var(--accent-ink); }
 
 .ms-max-msg {
-  font-family: var(--fm); font-size: 11px; color: var(--accent);
+  font-family: var(--fm); font-size: 11px; color: var(--accent-dk);
   margin-top: 8px; opacity: 0; transition: opacity .2s; min-height: 16px;
 }
 .ms-max-msg.visible { opacity: 1; }
@@ -287,7 +287,7 @@ const currentPath = '/tools';
 .ms-speed-val { font-family: var(--fd); font-size: 16px; font-weight: 800; }
 .ms-speed-val.capped { color: var(--g2); }
 .ms-48v-ok   { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(74,222,128,.12); color: #22c55e; }
-.ms-48v-good { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(255,90,31,.12); color: var(--accent); }
+.ms-48v-good { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(255,90,31,.12); color: var(--accent-ink); }
 .ms-48v-not  { font-family: var(--fm); font-size: 11px; padding: 2px 7px; border-radius: 3px; background: rgba(156,163,175,.12); color: #9ca3af; }
 
 .ms-specs-details { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 4px 0; }
@@ -305,7 +305,7 @@ const currentPath = '/tools';
   font-family: var(--fu); font-size: 11px; color: var(--g2); line-height: 1.6;
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px;
 }
-.ms-attribution a { color: var(--accent); text-decoration: none; }
+.ms-attribution a { color: var(--accent-dk); text-decoration: none; }
 @media (hover: hover) and (pointer: fine) {
   .ms-attribution a:hover { text-decoration: underline; }
 }

@@ -160,7 +160,7 @@ const products = [
               <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
                 <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
                 {[row.sb, row.xol, row.db, row.msb].map(val => (
-                  <td style={`text-align:center;padding:10px 12px;color:${val.startsWith('✓') ? '#2E7D32' : val==='✗' ? 'var(--accent)' : '#E65100'};font-weight:${val.startsWith('✓') ? '600' : '400'}`}>{val}</td>
+                  <td style={`text-align:center;padding:10px 12px;color:${val.startsWith('✓') ? '#2E7D32' : val==='✗' ? 'var(--accent-dk)' : '#E65100'};font-weight:${val.startsWith('✓') ? '600' : '400'}`}>{val}</td>
                 ))}
               </tr>
             ))}

@@ -518,7 +518,7 @@ a:not([class]):active { opacity: .6; }
 }
 .callout-orange strong {
   display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--accent-dk); margin-bottom: 5px;
+  text-transform: uppercase; color: var(--accent-ink); margin-bottom: 5px;
 }
 
 /* ── DARK SECTION ── */
