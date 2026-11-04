@@ -80,9 +80,25 @@ It is not a tutorial channel, not a personal maker journal, and not a broad DIY 
 
 ## 5. Verdict Taxonomy
 
-Locked: **Workhorse / Bleeding Edge / Skip**
+**Four verdicts: Benchmark / Workhorse / Bleeding Edge / Skip.** Updated 2026-11-04 (replaces the three-verdict set).
 
-All verdict logic routes through `resolveVerdict()` in `src/lib/hardware.ts`. Never invent new verdict labels. Never use the word "review" in titles, labels, or badges for hardware pages — use "specs," "verdict," "where to buy" instead.
+A verdict is our call on whether to buy, judged against other hardware **in the same class** (for hotends, the flow class below). Verdicts synthesise community consensus (Reddit, Discord, YouTube, CNC Kitchen data); they never imply hands-on testing.
+
+| Verdict | Meaning | The test it must pass |
+|---|---|---|
+| **Benchmark** | The one we'd point a friend to in its class | Community default for the class, mounts on the major toolheads, no unresolved widespread failures. **One per class.** |
+| **Workhorse** | Proven and safe, just not the pick | Shipping 12+ months with a broad base of documented builds and no failure pattern. Loses to the Benchmark on price, performance or support. |
+| **Bleeding Edge** | Newest or most experimental; buy it if you'll tune it | Shipping under 12 months, or too few documented builds to call it proven yet. Hardware graduates once the community catches up (the Goliath is the reference case). |
+| **Skip** | Don't | Something in the same class does the job better for similar money, or there's a recurring failure pattern. |
+
+**Rules:**
+- Setup needs (water cooling, PT1000 firmware changes, custom mounts) are listed on the part, never folded into the verdict.
+- Every verdict cites the consensus sources behind it, in the record's Verdict Label/notes.
+- A class is re-checked whenever new hardware enters it; only one Benchmark may hold a class at a time.
+
+**Hotend flow class** (from listed max flow): **Standard** under 50 mm³/s · **High** 50–79 mm³/s · **Extreme** 80 mm³/s and up. Other hardware categories need their own class axis defined here before they adopt the four verdicts; until then they keep their current verdicts.
+
+All verdict logic routes through `resolveVerdict()` in `src/lib/hardware.ts`; the Benchmark bucket is added there in the site-code phase. Never invent verdict labels beyond these four. Never use the word "review" in titles, labels, or badges for hardware pages — use "specs," "verdict," "where to buy" instead.
 
 ---
 
@@ -163,3 +179,4 @@ Footer tagline rotates from a fixed pool every 4 hours (same tagline shown site-
 | Date | Change |
 |---|---|
 | 2026-07-14 | Consolidated brand-guide_1.md, brand-guidelines.html voice/color/type sections, and footer tagline decision into this single canonical file |
+| 2026-11-04 | Verdicts expanded to Benchmark / Workhorse / Bleeding Edge / Skip with pass/fail tests, judged within class; hotend flow classes added (Standard / High / Extreme) |
