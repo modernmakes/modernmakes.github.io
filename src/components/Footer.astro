@@ -1,4 +1,8 @@
 ---
+import data from '../data/homepage.json';
+
+// Same ecosystem list as HomeEcosystemHubs: an entry becomes a link when its status flips to "live".
+const ecosystems = (data as any).ecosystems ?? [];
 ---
 
 <footer class="footer" role="contentinfo" data-reveal>
@@ -16,8 +20,17 @@
       <!-- Link columns -->
       <div class="footer-cats">
         <div>
-          <div class="footer-cat-label">Printers</div>
-          <a href="/voron" class="footer-link">Voron</a>
+          <div class="footer-cat-label">3D Printers</div>
+          {ecosystems.map((eco: any) => eco.status === 'live'
+            ? <a href={eco.href} class="footer-link">{eco.name}</a>
+            : (
+              <span class="footer-link footer-soon">
+                {eco.name}<span class="sr-only">, coming soon</span>
+                <span class="footer-soon-hover" aria-hidden="true">Coming soon</span>
+                <span class="footer-soon-tag" aria-hidden="true">Soon</span>
+              </span>
+            )
+          )}
         </div>
         <div>
           <div class="footer-cat-label">Editorial</div>
@@ -143,6 +156,41 @@
     .footer-link:hover { color: rgba(255, 255, 255, 0.8); }
   }
   .footer-link-email { font-family: var(--fm); font-size: 11px; margin-top: 6px; }
+
+  /* ─── COMING-SOON ENTRIES (plain text, not focusable) ─── */
+  .footer-soon { position: relative; width: fit-content; cursor: default; }
+  @media (hover: hover) and (pointer: fine) {
+    .footer-link.footer-soon:hover { color: var(--on-dark-muted); }
+  }
+  .footer-soon-hover,
+  .footer-soon-tag {
+    font-family: var(--fm);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-left: 8px;
+  }
+  /* Touch / no-hover: a static tag so it never reads as a broken link. */
+  .footer-soon-hover { display: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .footer-soon-tag { display: none; }
+    .footer-soon-hover {
+      display: inline;
+      position: absolute; /* out of flow: no layout shift */
+      left: 100%;
+      top: 50%;
+      margin-left: 0;
+      transform: translateY(-50%);
+      padding-left: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity var(--dur-fast) var(--ease-out);
+    }
+    .footer-soon:hover .footer-soon-hover { opacity: 1; }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+    .footer-soon-hover { transition: none; }
+  }
 
   /* ─── BOTTOM BAR ─── */
   .footer-bottom {
