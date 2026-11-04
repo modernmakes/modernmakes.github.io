@@ -426,9 +426,10 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     transition: transform 220ms ease, opacity 150ms ease;
     transform-origin: 10px 10px;
   }
-  .nav-hamburger.is-open .h-top { transform: rotate(45deg); }
+  /* Slide each outer bar onto the centre line (y=10), then rotate about the centre. */
+  .nav-hamburger.is-open .h-top { transform: rotate(45deg) translateY(5px); }
   .nav-hamburger.is-open .h-mid { opacity: 0; }
-  .nav-hamburger.is-open .h-bot { transform: rotate(-45deg); }
+  .nav-hamburger.is-open .h-bot { transform: rotate(-45deg) translateY(-5px); }
 
   /* ─── SLIDE-DOWN PANEL ─── */
   @keyframes link-enter {

@@ -110,45 +110,6 @@ const featured = [
     </div>
   </section>
 
-  <!-- FEATURED -->
-  <section class="section" aria-labelledby="featured-heading">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-head-label" id="featured-heading">Featured</span>
-        <a href="#cats-heading" class="section-head-link">Browse by Category</a>
-      </div>
-      <div class="grid-3">
-        {featured.map(f => (
-          <a href={f.href} class="hw-feat-card">
-            <div class="hw-feat-img">
-              {f.image ? (
-                <>
-                  <img src={f.image} alt={f.title} loading="lazy" decoding="async" class="hw-feat-img-el" />
-                  <div class="hw-feat-img-scrim" aria-hidden="true"></div>
-                  <span class="hw-feat-cat">{f.category}</span>
-                </>
-              ) : (
-                <TypeCover eyebrow={f.category} title={f.title} />
-              )}
-            </div>
-            <div class="hw-feat-body">
-              <div class="hw-feat-top">
-                <span class="hw-feat-title">{f.title}</span>
-                <span
-                  class="hw-feat-verdict"
-                  style={`background:${f.verdictBg};color:${f.verdictColor}`}
-                >
-                  {f.verdict}
-                </span>
-              </div>
-              <p class="hw-feat-desc">{f.description}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- CATEGORIES -->
   <section class="section-lg hw-cats-section" aria-labelledby="cats-heading">
     <div class="container">
@@ -183,6 +144,45 @@ const featured = [
                 </div>
               </div>
             )
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="section" aria-labelledby="featured-heading">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-head-label" id="featured-heading">Featured</span>
+        <a href="#cats-heading" class="section-head-link">Browse by Category</a>
+      </div>
+      <div class="grid-3">
+        {featured.map(f => (
+          <a href={f.href} class="hw-feat-card">
+            <div class="hw-feat-img">
+              {f.image ? (
+                <>
+                  <img src={f.image} alt={f.title} loading="lazy" decoding="async" class="hw-feat-img-el" />
+                  <div class="hw-feat-img-scrim" aria-hidden="true"></div>
+                  <span class="hw-feat-cat">{f.category}</span>
+                </>
+              ) : (
+                <TypeCover eyebrow={f.category} title={f.title} />
+              )}
+            </div>
+            <div class="hw-feat-body">
+              <div class="hw-feat-top">
+                <span class="hw-feat-title">{f.title}</span>
+                <span
+                  class="hw-feat-verdict"
+                  style={`background:${f.verdictBg};color:${f.verdictColor}`}
+                >
+                  {f.verdict}
+                </span>
+              </div>
+              <p class="hw-feat-desc">{f.description}</p>
+            </div>
+          </a>
         ))}
       </div>
     </div>
