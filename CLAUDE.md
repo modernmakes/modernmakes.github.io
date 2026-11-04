@@ -309,7 +309,7 @@ currentPath         — pass ecosystem path for correct nav highlight (e.g. '/vo
 
 | Table | ID | Status |
 |---|---|---|
-| Hotends | tblWYO1fRFXcY6fXF | 16 records — only table fully migrated to Workhorse/Bleeding Edge/Skip |
+| Hotends | tblWYO1fRFXcY6fXF | 16 records — only table fully migrated to the verdict taxonomy (Workhorse/Bleeding Edge/Skip; no Benchmark assigned yet) |
 | Extruders | tblTWR36Uq0RM4TB2 | 30 records |
 | Bed Probes | tblbKbuuUQhCSX38C | 9 records |
 | Nozzles | tblGOrDOH1cBBjgUv | 20 records |
@@ -507,8 +507,8 @@ Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/new
 ## Hardware Section
 
 - **Hardware index** (`/hardware`) — category grid, dynamic counts from JSON `.length`. No Motion Mods card — lives at `/voron/mods`
-- **Verdict values:** `Workhorse`, `Bleeding Edge`, `Skip` (canonical taxonomy). Legacy `Buy`/`Top Pick` alias to Workhorse; `Consider`/`Solid Choice`/`Niche Pick` alias to Bleeding Edge — resolved case-insensitively by `resolveVerdict()` in `src/lib/hardware.ts`. Any other non-empty token passes through as its own neutral (blue) badge/tab, so category-specific values (e.g. Part Cooling TOP/MID) still render and filter. Only Hotends is fully migrated in Airtable; other categories may still store legacy values.
-- **Verdict badge colors:** Workhorse = green (`.verdict-best`), Bleeding Edge = blue (`.verdict-rec`), Skip = grey (`.verdict-skip`) — defined in `global.css`. Passthrough/unknown tokens reuse the blue `.verdict-rec` style.
+- **Verdict values:** `Benchmark`, `Workhorse`, `Bleeding Edge`, `Skip` — four verdicts, source of truth BRAND.md §5 (Benchmark = the one pick per class; hotend classes by max flow: Standard <50, High 50–79, Extreme 80+ mm³/s). Benchmark is only ever set deliberately in Airtable — no legacy label aliases to it, and no record holds it yet. Legacy `Buy`/`Top Pick` alias to Workhorse; `Consider`/`Solid Choice`/`Niche Pick` alias to Bleeding Edge — resolved case-insensitively by `resolveVerdict()` in `src/lib/hardware.ts`. Any other non-empty token passes through as its own neutral (blue) badge/tab, so category-specific values (e.g. Part Cooling TOP/MID) still render and filter. Only Hotends is fully migrated in Airtable; other categories may still store legacy values.
+- **Verdict badge colors:** Benchmark = ink (`.verdict-benchmark`, `--black` bg, white text), Workhorse = green (`.verdict-best`), Bleeding Edge = blue (`.verdict-rec`), Skip = burnt orange per DESIGN.md (`.verdict-skip`, `--verdict-skip*` tokens; text uses the darker `--verdict-skip-ink` for AA) — defined in `global.css`, mirrored in `ComponentLayout.astro`'s detail badge map and `GlassCard.astro`. Passthrough/unknown tokens reuse the blue `.verdict-rec` style.
 - **Hotend detail** (`/hardware/hotends/[slug]`) — redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`
 
 ---
@@ -559,7 +559,7 @@ Gradient fallbacks on all hotend pages and several articles. Workflow:
 
 1. **Canadian virtual mailbox** — BC address for Beehiiv footer CASL compliance. Options: iPostal1, Anytime Mailbox, UPS Store box
 2. **Hero images** — all hotend pages + several articles still showing gradient fallback
-3. **Verdict migration** — only Hotends uses the canonical Workhorse/Bleeding Edge/Skip taxonomy in Airtable. Extruders, Bed Probes, Mainboards, Motors had verdicts set manually 2026-07-14; remaining categories still store legacy/passthrough values. `resolveVerdict()` normalises all of them, but migrate the source data table-by-table for consistency.
+3. **Verdict migration** — the taxonomy is now four verdicts (Benchmark / Workhorse / Bleeding Edge / Skip, BRAND.md §5); the code supports Benchmark but no record holds it yet — assigning one per hotend flow class is an editorial call. Only Hotends uses the canonical taxonomy in Airtable; other categories need their own class axis in BRAND.md before adopting Benchmark. Extruders, Bed Probes, Mainboards, Motors had verdicts set manually 2026-07-14; remaining categories still store legacy/passthrough values. `resolveVerdict()` normalises all of them, but migrate the source data table-by-table for consistency.
 4. **Hardware record quality** — most tables are now populated (see Airtable DB Tables) but many records are still sparse; audit field completeness before promoting a category's index page.
 5. **Content sprint** — RatRig pre-assembled, Bambu neXt, Prusa HT Hotend, AtomForm Palette 300, Bambu cloud slowdown (3–4/week target)
 6. **Make.com automations** — Newsletter Scaffold (needs Published Date field in Articles table), Idea-to-Brief, Stale Content Alerts *(this one already exists as a built scenario in Make.com, currently inactive — confirmed 2026-07-13, don't treat as unbuilt)*, Publish Trigger, Sponsor Deal Alerts, Affiliate Link Expiry, Short-form Repurposing, Monthly Revenue Log

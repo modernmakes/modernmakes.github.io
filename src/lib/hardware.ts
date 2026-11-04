@@ -10,13 +10,18 @@ export const toSlug = (name: string): string =>
   name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
 // ── Verdict taxonomy ─────────────────────────────────────────────────────────
-// The site's verdict taxonomy is Workhorse / Bleeding Edge / Skip. A record's
-// stored "Verdict" may use that, the prior Buy / Consider / Skip values, or
-// legacy Top Pick / Solid Choice / Niche Pick labels — across inconsistent
-// casing, and only Hotends has been migrated in Airtable so far. resolveVerdict
-// maps any of these (case-insensitive) onto a display bucket; any other
-// non-empty token passes through as its own neutral badge/tab so categories
-// with their own values (e.g. Budget / Mid / Top) still render and filter.
+// Four verdicts, source of truth BRAND.md section 5:
+//   Benchmark     — the one we'd point a friend to in its class (one per class)
+//   Workhorse     — proven and safe, just not the pick
+//   Bleeding Edge — newest or most experimental; buy it if you'll tune it
+//   Skip          — don't
+// A record's stored "Verdict" may use these, the prior Buy / Consider / Skip
+// values, or legacy Top Pick / Solid Choice / Niche Pick labels, in any casing;
+// only Hotends has been migrated in Airtable so far. resolveVerdict maps any
+// of these (case-insensitive) onto a display bucket; any other non-empty token
+// passes through as its own neutral badge/tab so categories with their own
+// values (e.g. Budget / Mid / Top) still render and filter. Benchmark is only
+// ever set deliberately in Airtable: no legacy label aliases to it.
 export interface VerdictBucket {
   key: string;   // stable, lowercase, hyphenated — used for filter matching
   label: string; // display text
@@ -24,12 +29,14 @@ export interface VerdictBucket {
 }
 
 export const VERDICT_BUCKETS: VerdictBucket[] = [
+  { key: 'benchmark',     label: 'Benchmark',     cls: 'verdict-benchmark' },
   { key: 'workhorse',     label: 'Workhorse',     cls: 'verdict-best' },
   { key: 'bleeding-edge', label: 'Bleeding Edge', cls: 'verdict-rec' },
   { key: 'skip',          label: 'Skip',          cls: 'verdict-skip' },
 ];
 
 const VERDICT_ALIAS: Record<string, string> = {
+  benchmark: 'benchmark',
   workhorse: 'workhorse',
   buy: 'workhorse',
   'top pick': 'workhorse',

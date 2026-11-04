@@ -8,7 +8,7 @@ interface Props {
   description: string;
   /** Display label from the verdict taxonomy, e.g. "Workhorse" */
   verdict: string;
-  /** Stable taxonomy key (workhorse | bleeding-edge | skip) — drives the badge colour */
+  /** Stable taxonomy key (benchmark | workhorse | bleeding-edge | skip) — drives the badge colour */
   verdictKey: string;
   price: number;
   href: string;
@@ -175,9 +175,14 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     border-radius: var(--radius-badge);
     white-space: nowrap;
   }
-  /* Verdict taxonomy: Workhorse (green), Bleeding Edge (blue), Skip (grey).
-     Tuned for the dark glass backdrop — brighter fills than the light-mode
-     index badges, same semantic hues. */
+  /* Verdict taxonomy: Benchmark (ink, inverted to white on glass), Workhorse
+     (green), Bleeding Edge (blue), Skip (burnt orange). Tuned for the dark
+     glass backdrop — brighter fills than the light-mode index badges, same hues. */
+  .gc-verdict--benchmark {
+    background: var(--surface);
+    border: 1px solid var(--surface);
+    color: var(--black);
+  }
   .gc-verdict--workhorse {
     background: rgba(34, 197, 94, 0.15);
     border: 1px solid rgba(34, 197, 94, 0.4);
@@ -189,9 +194,9 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     color: #60a5fa;
   }
   .gc-verdict--skip {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.5);
+    background: color-mix(in srgb, var(--verdict-skip) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--verdict-skip) 40%, transparent);
+    color: color-mix(in srgb, var(--verdict-skip) 55%, white);
   }
   .gc-price {
     font-family: var(--fd);
