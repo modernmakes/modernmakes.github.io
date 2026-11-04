@@ -37,3 +37,9 @@ Run back to back with a fresh re-run of the baseline build, same machine and ser
 **Accessibility (accesslint, serious and above).** 161 serious issues before, about 124 after, 0 critical. Fixed in Phase 1: the keyboard-reachable closed mobile menu (36 instances), label-in-name mismatches on the eco hub, feature build and vendor cards, placeholder-only newsletter inputs, the roadmap rows. Every remaining issue is colour contrast from the existing palette (`--g2` grey on white 3.36:1, small Electric Orange text 3.12:1, Workhorse green badge text 2.97:1, low-opacity white on the Voron hub). Fixing those changes brand colours, which the PRD puts out of scope; it needs a decision before it ships.
 
 Screenshots at 390, 768 and 1440 px: `scratch/after/`, diffs in `scratch/diff/` (gitignored). Every visual change traced to intended work: typographic covers, the article hero, ticker items, roadmap contrast and `text-wrap` line breaks.
+
+## Accessibility after the contrast pass (4 Nov 2026)
+
+accesslint, serious and above, on the six gate pages: **0** (from 161 at baseline, about 124 after the first Phase 1 pass). Lower-severity findings remaining: 1 per page, 3 on `/tools/flowrate/`. Text that accesslint skips because it is still mid scroll-reveal (footer, homepage sections) was checked separately with a forced-reveal contrast scan: no AA failures left apart from colour emoji and text over hero images, which are false positives.
+
+How it was fixed: token changes in `global.css` (see DESIGN.md, "The Small-Orange Rule"): `--g2` darkened to `#6F6F6F`, small orange text on light surfaces on `--accent-dk` / `--accent-ink`, ink labels on orange fills (`--on-accent`), Workhorse text on `--verdict-wh-ink`, faint white on the dark planes on `--on-dark-muted`.

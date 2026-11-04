@@ -144,27 +144,12 @@ const icons: Record<string, string> = {
     position: relative;
     overflow: hidden;
   }
-  .tool-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .2s ease;
-  }
   @media (hover: hover) and (pointer: fine) {
     .tool-card:hover {
       border-color: var(--accent);
       background: var(--accent-t);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(255,90,31,.1);
-    }
-    .tool-card:hover::before {
-      transform: scaleX(1);
     }
     .tool-card:hover .tool-card-arrow {
       color: var(--accent);
