@@ -554,6 +554,11 @@
   margin-top: auto;
 }
 
+/* Title-less hero (no image): a short band, not a tall empty block. The element
+   stays so the card-to-article transition has a target. Image heroes keep their
+   height; the band rules come last in each query so they win on specificity. */
+.art-hero.art-hero--band { height: clamp(140px, 22vw, 220px); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1023px) {
   .art-hero { height: 400px; }

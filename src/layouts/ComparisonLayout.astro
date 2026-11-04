@@ -77,7 +77,7 @@ const breadcrumbItems = [
   <Nav slot="nav" currentPath="/news" />
 
   <!-- ── HERO ── -->
-  <div class="art-hero">
+  <div class:list={['art-hero', { 'art-hero--band': !heroImage }]}>
     {heroImage
       ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
       : <TypeCover size="hero" eyebrow={category} title={title} date={date} />
