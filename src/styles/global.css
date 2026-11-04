@@ -3,7 +3,7 @@
    Brand tokens, reset, typography, utilities
    ───────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+@import './fonts.css';
 
 /* ── TOKENS ── */
 :root {
@@ -56,10 +56,10 @@
   --verdict-comm-tone: #8B5CF6;
 
   /* Typography */
-  --fd: 'Barlow Condensed', sans-serif;
-  --fb: 'Lora', serif;
-  --fu: 'Barlow', sans-serif;
-  --fm: 'JetBrains Mono', monospace;
+  --fd: 'Barlow Condensed', 'Barlow Condensed Fallback', sans-serif;
+  --fb: 'Lora', 'Lora Fallback', serif;
+  --fu: 'Barlow', 'Barlow Fallback', sans-serif;
+  --fm: 'JetBrains Mono', 'JetBrains Mono Fallback', monospace;
 
   /* Spacing scale */
   --sp-xs:  4px;
