@@ -82,8 +82,10 @@ const { ticker } = data;
     padding-left: 20px;
   }
 
-  .ticker-track:hover .ticker-items {
-    animation-play-state: paused;
+  @media (hover: hover) and (pointer: fine) {
+    .ticker-track:hover .ticker-items {
+      animation-play-state: paused;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -120,7 +122,9 @@ const { ticker } = data;
     flex-shrink: 0;
     transition: color 150ms var(--stagger-ease);
   }
-  .ticker-item:hover .ticker-text { color: rgba(255,255,255,.85); }
+  @media (hover: hover) and (pointer: fine) {
+    .ticker-item:hover .ticker-text { color: rgba(255,255,255,.85); }
+  }
 
   .ticker-dot {
     font-size: 13px;

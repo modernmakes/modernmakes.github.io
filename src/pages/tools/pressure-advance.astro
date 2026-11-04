@@ -464,7 +464,9 @@ M84</textarea>
   background: var(--surface);
   transition: background .12s;
 }
-.pa-section-head:hover { background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .pa-section-head:hover { background: var(--bg); }
+}
 .pa-section-head::-webkit-details-marker { display: none; }
 .pa-section-arrow {
   font-size: 11px;
@@ -628,10 +630,14 @@ M84</textarea>
   transition: background .12s, opacity .12s;
 }
 .pa-btn-copy { background: var(--black); color: #fff; }
-.pa-btn-copy:hover:not(:disabled) { background: #333; }
+@media (hover: hover) and (pointer: fine) {
+  .pa-btn-copy:hover:not(:disabled) { background: #333; }
+}
 .pa-btn-copy.copied { background: #1a7a1a; }
 .pa-btn-download { background: var(--accent); color: #fff; }
-.pa-btn-download:hover:not(:disabled) { background: var(--accent-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .pa-btn-download:hover:not(:disabled) { background: var(--accent-dk); }
+}
 .pa-btn-copy:disabled, .pa-btn-download:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* G-code display */

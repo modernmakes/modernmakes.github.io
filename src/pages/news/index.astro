@@ -197,7 +197,9 @@ const counts = { all: sorted.length };
   transition: color .15s, border-color .15s;
   margin-bottom: -1px;
 }
-.ni-tab:hover { color: var(--black); }
+@media (hover: hover) and (pointer: fine) {
+  .ni-tab:hover { color: var(--black); }
+}
 .ni-tab.active { color: var(--black); border-bottom-color: var(--accent); }
 .ni-tab-count {
   font-family: var(--fm);

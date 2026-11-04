@@ -114,7 +114,9 @@
     transition: background 150ms;
     flex-shrink: 0;
   }
-  .beehiiv-fallback-form button[type="submit"]:hover { background: var(--accent-dk); }
+  @media (hover: hover) and (pointer: fine) {
+    .beehiiv-fallback-form button[type="submit"]:hover { background: var(--accent-dk); }
+  }
   .nlcta-note {
     font-size: 11px;
     color: var(--grey-2);

@@ -405,7 +405,9 @@ M84</textarea>
   text-transform: uppercase; list-style: none; user-select: none;
   background: var(--surface); transition: background .12s;
 }
-.pa-section-head:hover { background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .pa-section-head:hover { background: var(--bg); }
+}
 .pa-section-head::-webkit-details-marker { display: none; }
 .pa-section-arrow { font-size: 11px; color: var(--g2); transition: transform .15s; display: inline-block; }
 .pa-section-body { padding: 4px 20px 16px; }
@@ -441,10 +443,14 @@ M84</textarea>
 .pa-actions { display: flex; gap: 10px; }
 .pa-btn-copy, .pa-btn-download { font-family: var(--fu); font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; transition: background .12s, opacity .12s; }
 .pa-btn-copy { background: var(--black); color: #fff; }
-.pa-btn-copy:hover:not(:disabled) { background: #333; }
+@media (hover: hover) and (pointer: fine) {
+  .pa-btn-copy:hover:not(:disabled) { background: #333; }
+}
 .pa-btn-copy.copied { background: #1a7a1a; }
 .pa-btn-download { background: var(--accent); color: #fff; }
-.pa-btn-download:hover:not(:disabled) { background: var(--accent-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .pa-btn-download:hover:not(:disabled) { background: var(--accent-dk); }
+}
 .pa-btn-copy:disabled, .pa-btn-download:disabled { opacity: 0.4; cursor: not-allowed; }
 .pa-code-wrap { background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 8px; overflow: hidden; }
 .pa-code { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.7; color: #ccc; padding: 20px 24px; overflow-x: auto; overflow-y: auto; max-height: 520px; white-space: pre; margin: 0; }

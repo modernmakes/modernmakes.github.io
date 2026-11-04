@@ -468,7 +468,9 @@ const difficultyColors: Record<string, string> = {
   margin-bottom: -1px;
   transition: color .15s, background .15s, border-color .15s;
 }
-.gf-tab:hover { color: var(--black); background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .gf-tab:hover { color: var(--black); background: var(--bg); }
+}
 .gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
 .gf-badge {
   font-family: var(--fm);
@@ -517,7 +519,9 @@ const difficultyColors: Record<string, string> = {
   margin-bottom: -1px;
   transition: color .15s, border-color .15s;
 }
-.gf-diff-tab:hover { color: var(--g1); }
+@media (hover: hover) and (pointer: fine) {
+  .gf-diff-tab:hover { color: var(--g1); }
+}
 .gf-diff-tab.is-active { color: var(--black); border-bottom-color: var(--black); }
 .gf-diff-badge {
   font-family: var(--fm);
@@ -585,7 +589,9 @@ const difficultyColors: Record<string, string> = {
   text-underline-offset: 3px;
   padding: 4px 0;
 }
-.gf-reset:hover { color: var(--accent-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .gf-reset:hover { color: var(--accent-dk); }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {

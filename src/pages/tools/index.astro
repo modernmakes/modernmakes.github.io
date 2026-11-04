@@ -196,13 +196,17 @@ const iconSvgs: Record<string, string> = {
   transform-origin: left;
   transition: transform .2s ease;
 }
-.tools-idx-card:hover {
-  border-color: var(--accent);
-  background: var(--accent-t);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255,90,31,.1);
+@media (hover: hover) and (pointer: fine) {
+  .tools-idx-card:hover {
+    border-color: var(--accent);
+    background: var(--accent-t);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,90,31,.1);
+  }
 }
-.tools-idx-card:hover::before { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .tools-idx-card:hover::before { transform: scaleX(1); }
+}
 .tools-idx-icon { color: var(--accent); display: flex; align-items: center; width: 22px; }
 .tools-idx-body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
 .tools-idx-cat {
@@ -247,7 +251,9 @@ const iconSvgs: Record<string, string> = {
   color: var(--g2);
   transition: color .15s, transform .15s;
 }
-.tools-idx-card:hover .tools-idx-arrow { color: var(--accent); transform: translateX(3px); }
+@media (hover: hover) and (pointer: fine) {
+  .tools-idx-card:hover .tools-idx-arrow { color: var(--accent); transform: translateX(3px); }
+}
 .tools-idx-ext-label {
   font-family: var(--fm);
   font-size: 10px;

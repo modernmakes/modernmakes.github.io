@@ -135,7 +135,9 @@ const currentPath = '/tools';
 }
 .pm-table td { padding: 9px 16px; border-bottom: 1px solid var(--border); }
 .pm-table tbody tr:last-child td { border-bottom: none; }
-.pm-table tbody tr:hover { background: rgba(255,90,31,.03); }
+@media (hover: hover) and (pointer: fine) {
+  .pm-table tbody tr:hover { background: rgba(255,90,31,.03); }
+}
 .pm-func { font-family: var(--fu); font-size: 13px; color: var(--black); font-weight: 600; }
 .pm-key { font-family: var(--fm); font-size: 11px; color: var(--g2); }
 .pm-pin {
@@ -150,7 +152,9 @@ const currentPath = '/tools';
   background: var(--bg); color: var(--g2); border: 1px solid var(--border); border-radius: 3px;
   cursor: pointer; transition: all .12s; white-space: nowrap;
 }
-.pm-copy-pin:hover { border-color: var(--accent); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .pm-copy-pin:hover { border-color: var(--accent); color: var(--accent); }
+}
 .pm-copy-pin.copied { background: rgba(74,222,128,.12); color: #22c55e; border-color: rgba(74,222,128,.3); }
 .pm-section-row td { background: var(--bg); }
 .pm-section-row .pm-section-label { font-family: var(--fu); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--g2); }
@@ -161,7 +165,9 @@ const currentPath = '/tools';
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px;
 }
 .pm-disclaimer a { color: var(--accent); text-decoration: none; }
-.pm-disclaimer a:hover { text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) {
+  .pm-disclaimer a:hover { text-decoration: underline; }
+}
 
 @media (max-width: 768px) { .pm-wrap { padding: 20px 0 48px; } .pm-inner { padding: 0 20px; } .pm-controls { flex-direction: column; } }
 </style>

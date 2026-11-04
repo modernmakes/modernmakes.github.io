@@ -99,7 +99,9 @@
     opacity: 0.9;
     transition: opacity 150ms ease;
   }
-  .footer-wordmark:hover { opacity: 1; }
+  @media (hover: hover) and (pointer: fine) {
+    .footer-wordmark:hover { opacity: 1; }
+  }
 
   /* ─── TAGLINE ─── */
   .footer-tagline {
@@ -137,7 +139,9 @@
     transition: color 150ms ease;
     line-height: 1.5;
   }
-  .footer-link:hover { color: rgba(255, 255, 255, 0.8); }
+  @media (hover: hover) and (pointer: fine) {
+    .footer-link:hover { color: rgba(255, 255, 255, 0.8); }
+  }
   .footer-link-email { font-family: var(--fm); font-size: 11px; margin-top: 6px; }
 
   /* ─── BOTTOM BAR ─── */
@@ -165,7 +169,9 @@
     text-underline-offset: 2px;
     transition: color 150ms ease;
   }
-  .footer-legal a:hover { color: rgba(255, 255, 255, 0.5); }
+  @media (hover: hover) and (pointer: fine) {
+    .footer-legal a:hover { color: rgba(255, 255, 255, 0.5); }
+  }
 
   .footer-disclosure {
     font-family: var(--fu);

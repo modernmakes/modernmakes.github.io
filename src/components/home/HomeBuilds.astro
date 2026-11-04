@@ -169,7 +169,9 @@ function formatCardDate(d: Date) {
   transition: color .15s;
   white-space: nowrap;
 }
-.builds-all:hover { color: rgba(255,255,255,.7); }
+@media (hover: hover) and (pointer: fine) {
+  .builds-all:hover { color: rgba(255,255,255,.7); }
+}
 
 /* 2-col grid: feature left (wider), cards right (narrower) */
 .builds-grid {
@@ -192,12 +194,15 @@ function formatCardDate(d: Date) {
     border-color .15s var(--stagger-ease),
     transform    .15s var(--stagger-ease),
     opacity      var(--stagger-dur) var(--stagger-ease),
-    filter       var(--stagger-dur) var(--stagger-ease);
+    filter       var(--stagger-dur) var(--stagger-ease),
+    var(--press-release);
   height: 100%;
 }
-.builds .build-feature:hover {
-  border-color: rgba(255,255,255,.18);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .builds .build-feature:hover {
+    border-color: rgba(255,255,255,.18);
+    transform: translateY(-2px);
+  }
 }
 .build-feature article {
   height: 100%;
@@ -295,12 +300,15 @@ function formatCardDate(d: Date) {
     border-color .15s var(--stagger-ease),
     transform    .15s var(--stagger-ease),
     opacity      var(--stagger-dur) var(--stagger-ease),
-    filter       var(--stagger-dur) var(--stagger-ease);
+    filter       var(--stagger-dur) var(--stagger-ease),
+    var(--press-release);
   flex: 1;
 }
-.builds .build-card:hover {
-  border-color: rgba(255,255,255,.18);
-  transform: translateX(2px);
+@media (hover: hover) and (pointer: fine) {
+  .builds .build-card:hover {
+    border-color: rgba(255,255,255,.18);
+    transform: translateX(2px);
+  }
 }
 .build-card article {
   display: grid;

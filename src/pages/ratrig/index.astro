@@ -205,7 +205,9 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   text-decoration: none;
   transition: color .15s;
 }
-.ratrig-story-link:hover { color: rgba(255,255,255,.75); }
+@media (hover: hover) and (pointer: fine) {
+  .ratrig-story-link:hover { color: rgba(255,255,255,.75); }
+}
 
 .hero-content-grid { display: grid; grid-template-columns: 1fr; }
 
@@ -263,7 +265,9 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   white-space: nowrap;
   flex-shrink: 0;
 }
-.flagship-cta:hover { color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .flagship-cta:hover { color: #fff; }
+}
 .flagship-tagline {
   font-family: 'Lora', serif;
   font-style: italic;
@@ -316,7 +320,9 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   font-weight: 700;
   color: var(--accent);
 }
-.skip-callout-alt-link:hover { color: var(--black); }
+@media (hover: hover) and (pointer: fine) {
+  .skip-callout-alt-link:hover { color: var(--black); }
+}
 
 /* ── SUBSYSTEM GRID (light) ── */
 .ratrig-subsystem-grid {
@@ -335,7 +341,9 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   height: 100%;
   transition: border-color .15s;
 }
-a:hover .subsystem-card-light { border-color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  a:hover .subsystem-card-light { border-color: var(--accent); }
+}
 .subsystem-card-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 19px;
@@ -356,7 +364,9 @@ a:hover .subsystem-card-light { border-color: var(--accent); }
   color: var(--accent);
 }
 .subsystem-card-note { cursor: default; }
-.subsystem-card-note:hover { border-color: var(--border); }
+@media (hover: hover) and (pointer: fine) {
+  .subsystem-card-note:hover { border-color: var(--border); }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {

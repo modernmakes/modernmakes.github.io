@@ -95,7 +95,9 @@
   color: var(--g2);
   transition: color .15s;
 }
-.art-breadcrumb a:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .art-breadcrumb a:hover { color: var(--accent); }
+}
 .art-cat-badge {
   font-family: var(--fu);
   font-size: 10px;
@@ -210,7 +212,9 @@
   text-underline-offset: 3px;
   transition: color .15s;
 }
-.art-content a:hover { color: var(--accent-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .art-content a:hover { color: var(--accent-dk); }
+}
 .art-content code {
   font-family: var(--fm);
   font-size: 13px;
@@ -266,7 +270,9 @@
   vertical-align: top;
 }
 .art-content tbody tr:last-child td { border-bottom: none; }
-.art-content tbody tr:hover { background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .art-content tbody tr:hover { background: var(--bg); }
+}
 
 /* ── INLINE IMAGES ── */
 .art-content img {
@@ -426,7 +432,9 @@
   transition: background .15s;
 }
 .art-sb-more-item:last-child { border-bottom: none; }
-.art-sb-more-item:hover { background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .art-sb-more-item:hover { background: var(--bg); }
+}
 .art-sb-more-cat {
   font-family: var(--fu);
   font-size: 9px;
@@ -483,7 +491,9 @@
   transition: color .15s;
   font-family: var(--fu);
 }
-.art-related-all:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .art-related-all:hover { color: var(--accent); }
+}
 .art-related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -499,9 +509,11 @@
   transition: border-color .15s, transform .15s;
   will-change: transform;
 }
-.art-related-card:hover {
-  border-color: var(--border-s);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .art-related-card:hover {
+    border-color: var(--border-s);
+    transform: translateY(-2px);
+  }
 }
 .art-related-card-img {
   width: 100%;

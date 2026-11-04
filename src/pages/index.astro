@@ -174,7 +174,9 @@ const featuredImages = featuredHotends.map((rec: any) => {
     flex-shrink: 0;
     transition: color 0.15s ease;
   }
-  .fhw-all:hover { color: var(--accent-mid); }
+  @media (hover: hover) and (pointer: fine) {
+    .fhw-all:hover { color: var(--accent-mid); }
+  }
   .fhw-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

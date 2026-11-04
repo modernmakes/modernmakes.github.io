@@ -246,7 +246,9 @@ const featured = [
   flex-direction: column;
   transition: border-color .15s, transform .15s;
 }
-.hw-feat-card:hover { border-color: var(--border-s); transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .hw-feat-card:hover { border-color: var(--border-s); transform: translateY(-2px); }
+}
 .hw-feat-img {
   position: relative;
   overflow: hidden;
@@ -323,7 +325,9 @@ const featured = [
   transition: border-color .15s, transform .15s;
 }
 .hw-cat-live { cursor: pointer; }
-.hw-cat-live:hover { border-color: var(--accent); transform: translateY(-1px); }
+@media (hover: hover) and (pointer: fine) {
+  .hw-cat-live:hover { border-color: var(--accent); transform: translateY(-1px); }
+}
 .hw-cat-soon { opacity: .6; cursor: default; }
 .hw-cat-icon { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
 .hw-cat-icon-dim { filter: grayscale(1); }
@@ -358,7 +362,9 @@ const featured = [
   gap: 16px;
   transition: border-color .15s, transform .15s;
 }
-.hw-wiki-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+@media (hover: hover) and (pointer: fine) {
+  .hw-wiki-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+}
 .hw-wiki-icon { font-size: 22px; flex-shrink: 0; }
 .hw-wiki-body { flex: 1; min-width: 0; }
 .hw-wiki-title { font-family: var(--fd); font-size: 16px; font-weight: 800; color: var(--black); margin-bottom: 4px; }

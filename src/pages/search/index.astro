@@ -352,9 +352,11 @@ const pageSchema = {
   opacity: 1;
   transform: none;
 }
-.srch-result:hover {
-  border-color: var(--accent);
-  box-shadow: 0 2px 12px rgba(255,90,31,.07);
+@media (hover: hover) and (pointer: fine) {
+  .srch-result:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(255,90,31,.07);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .srch-result { transition: border-color .12s, box-shadow .12s !important; opacity: 1 !important; transform: none !important; }

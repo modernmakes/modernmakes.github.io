@@ -109,7 +109,9 @@ const icons: Record<string, string> = {
     transition: color .15s;
     padding-bottom: 2px;
   }
-  .tools-all-link:hover { color: var(--accent-dk); }
+  @media (hover: hover) and (pointer: fine) {
+    .tools-all-link:hover { color: var(--accent-dk); }
+  }
 
   /* Tool cards grid */
   .tools-grid {
@@ -137,7 +139,8 @@ const icons: Record<string, string> = {
       transform    .15s var(--stagger-ease),
       box-shadow   .15s var(--stagger-ease),
       opacity      var(--stagger-dur) var(--stagger-ease),
-      filter       var(--stagger-dur) var(--stagger-ease);
+      filter       var(--stagger-dur) var(--stagger-ease),
+      var(--press-release);
     position: relative;
     overflow: hidden;
   }
@@ -153,14 +156,20 @@ const icons: Record<string, string> = {
     transform-origin: left;
     transition: transform .2s ease;
   }
-  .tool-card:hover {
-    border-color: var(--accent);
-    background: var(--accent-t);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(255,90,31,.1);
-  }
-  .tool-card:hover::before {
-    transform: scaleX(1);
+  @media (hover: hover) and (pointer: fine) {
+    .tool-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-t);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,90,31,.1);
+    }
+    .tool-card:hover::before {
+      transform: scaleX(1);
+    }
+    .tool-card:hover .tool-card-arrow {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
   }
 
   .tool-card-icon {
@@ -219,10 +228,6 @@ const icons: Record<string, string> = {
     font-size: 16px;
     color: var(--grey-2);
     transition: color .15s, transform .15s;
-  }
-  .tool-card:hover .tool-card-arrow {
-    color: var(--accent);
-    transform: translateX(3px);
   }
 
   /* Responsive */

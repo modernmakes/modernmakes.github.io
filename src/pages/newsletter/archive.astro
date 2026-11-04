@@ -219,7 +219,9 @@ const breadcrumbSchema = {
   color: rgba(255,255,255,0.35);
   transition: color .12s;
 }
-.arch-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+@media (hover: hover) and (pointer: fine) {
+  .arch-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+}
 .arch-h1 {
   font-family: var(--fd);
   font-size: clamp(36px, 5vw, 64px);
@@ -246,7 +248,9 @@ const breadcrumbSchema = {
   color: var(--accent);
   transition: opacity .12s;
 }
-.arch-subscribe-nudge:hover { opacity: .75; }
+@media (hover: hover) and (pointer: fine) {
+  .arch-subscribe-nudge:hover { opacity: .75; }
+}
 
 /* ── BODY ── */
 .arch-body {
@@ -357,7 +361,9 @@ const breadcrumbSchema = {
   transition: opacity .12s;
   white-space: nowrap;
 }
-.arch-read-link:hover { opacity: .75; }
+@media (hover: hover) and (pointer: fine) {
+  .arch-read-link:hover { opacity: .75; }
+}
 .arch-coming-soon {
   font-family: var(--fu);
   font-size: 12px;

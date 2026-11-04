@@ -279,7 +279,9 @@ const difficultyColor: Record<string, string> = {
   color: rgba(255,255,255,.3);
 }
 .fil-breadcrumb a { color: rgba(255,255,255,.35); transition: color .12s; }
-.fil-breadcrumb a:hover { color: rgba(255,255,255,.7); }
+@media (hover: hover) and (pointer: fine) {
+  .fil-breadcrumb a:hover { color: rgba(255,255,255,.7); }
+}
 .fil-breadcrumb span { color: rgba(255,255,255,.2); }
 .fil-breadcrumb span:last-child { color: rgba(255,255,255,.5); }
 
@@ -603,7 +605,9 @@ const difficultyColor: Record<string, string> = {
   transition: background .12s, color .12s;
 }
 .fil-sidebar-link:last-child { border-bottom: none; }
-.fil-sidebar-link:hover { background: var(--bg); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .fil-sidebar-link:hover { background: var(--bg); color: var(--accent); }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {

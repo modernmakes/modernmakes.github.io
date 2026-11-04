@@ -534,7 +534,9 @@ const breadcrumbItems = [
   border-bottom: 1px solid var(--border);
 }
 .cmp-row:last-child { border-bottom: none; }
-.cmp-row:hover { background: #fafaf9; }
+@media (hover: hover) and (pointer: fine) {
+  .cmp-row:hover { background: #fafaf9; }
+}
 .cmp-row-key {
   background: #fafaf9;
 }

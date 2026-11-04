@@ -89,6 +89,33 @@
   /* transitions-dev — tabs sliding (16) */
   --tabs-dur:         200ms;
   --tabs-ease:        cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Motion & interaction tokens (native-feel PRD). Components use these and
+     never set their own durations or curves. No ease-in anywhere. */
+  --dur-press: 80ms;     /* press-down response */
+  --dur-fast:  150ms;    /* colour, hover, reduced-motion crossfades */
+  --dur-base:  220ms;    /* popovers, toasts, tab indicator */
+  --dur-page:  280ms;    /* cross-page transitions */
+  --dur-sheet: 450ms;    /* sheet open (prototype sign-off value) */
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);   /* entering / responding */
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1);   /* moving between two on-screen positions */
+  --spring-snap:  var(--ease-out);   /* linear() springs below where supported */
+  --spring-sheet: var(--ease-out);
+  --scale-press-btn:  0.97;
+  --scale-press-card: 0.985;
+  --scale-press-chip: 0.96;
+  --scale-press-icon: 0.92;
+  --scale-enter:      0.96;   /* popovers, toasts: never from 0 */
+  --stagger:          40ms;   /* low-frequency lists only, max 6 items */
+  /* Release half of the press system. Any component that writes its own
+     `transition` appends this so the press scale springs back. */
+  --press-release: scale 300ms var(--spring-snap);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --spring-snap: linear(0, 0.0138, 0.0497, 0.1006, 0.161, 0.2268, 0.2947, 0.3624, 0.4281, 0.4907, 0.5494, 0.6037, 0.6534, 0.6985, 0.7391, 0.7753, 0.8074, 0.8358, 0.8606, 0.8822, 0.9009, 0.9171, 0.931, 0.9429, 0.953, 0.9615, 0.9687, 0.9747, 0.9798, 0.9839, 0.9874, 0.9902, 0.9925, 0.9944, 0.9959, 0.9971, 1);
+    --spring-sheet: linear(0, 0.0216, 0.0768, 0.1537, 0.2428, 0.3369, 0.4308, 0.5206, 0.6039, 0.6791, 0.7456, 0.8032, 0.852, 0.8927, 0.926, 0.9526, 0.9734, 0.9893, 1.001, 1.0092, 1.0147, 1.018, 1.0196, 1.0199, 1.0193, 1.0181, 1.0165, 1.0147, 1.0129, 1.011, 1.0092, 1.0076, 1.0061, 1.0048, 1.0037, 1.0028, 1);
+  }
 }
 
 /* ── RESET ── */
@@ -103,6 +130,13 @@ body {
 }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; height: auto; }
+
+/* Typography details: balanced headings, no orphaned last words in prose,
+   digits that line up in every spec, price and table. */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+table, [class*="price"], [class*="spec"], [class*="count"], .gf-badge { font-variant-numeric: tabular-nums; }
+::selection { background: var(--accent-t); color: var(--black); }
 
 /* Screen-reader only */
 .sr-only {
@@ -158,10 +192,45 @@ img { display: block; max-width: 100%; height: auto; }
   display: inline-block;
   transition: transform 200ms var(--stagger-ease);
 }
-a:hover .arrow { transform: translateX(4px); }
+@media (hover: hover) and (pointer: fine) {
+  a:hover .arrow { transform: translateX(4px); }
+}
 @media (prefers-reduced-motion: reduce) {
   .arrow { transition: none; }
   a:hover .arrow { transform: none; }
+}
+
+/* ── PRESS SYSTEM ─────────────────────────────────────────────────────
+   Every control answers the instant it is touched. Press uses the `scale`
+   property (not `transform`) so it stacks on top of any hover lift.
+   Down: --dur-press ease-out. Release: --press-release (spring), which each
+   target's own `transition` must include. Hover lifts stay behind
+   (hover: hover) and (pointer: fine) so taps never leave a stuck hover. */
+/* Our press states replace the grey tap flash; manipulation drops the
+   double-tap-zoom delay on controls. */
+a, button, summary, label, select, [role="button"] { -webkit-tap-highlight-color: transparent; }
+a, button, summary, [role="button"] { touch-action: manipulation; }
+/* Plain prose links have no component press state, so they dim instead of
+   going silent now that the tap flash is off. */
+a:not([class]):active { opacity: .6; }
+:is(.btn-buy, .btn-printables, .lg-form-submit,
+    .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card,
+    .gf-tab, .nav-search-btn, .nav-hamburger):active {
+  /* !important: component `transition` shorthands load after this file and
+     would otherwise stretch the press-down to their release timing. */
+  transition-duration: var(--dur-press) !important;
+  transition-timing-function: var(--ease-out) !important;
+}
+:is(.btn-buy, .btn-printables, .lg-form-submit):active { scale: var(--scale-press-btn); }
+:is(.card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: var(--scale-press-card); }
+/* Light-plane cards only; dark cards keep their own border on press. */
+:is(.card, .product-card, .la-card, .tool-card):active { border-color: var(--border-s); }
+.gf-tab:active { scale: var(--scale-press-chip); }
+:is(.nav-search-btn, .nav-hamburger):active { scale: var(--scale-press-icon); }
+/* Reduced motion: no scale, but the press still answers with a dim. */
+@media (prefers-reduced-motion: reduce) {
+  :is(.btn-buy, .btn-printables, .lg-form-submit, .gf-tab, .nav-search-btn, .nav-hamburger,
+      .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: none; opacity: .72; }
 }
 
 /* ── TYPOGRAPHY ── */
@@ -192,7 +261,9 @@ a:hover .arrow { transform: translateX(4px); }
   margin-left: auto; display: flex; align-items: center; gap: 3px;
   transition: color .15s;
 }
-.section-head-link:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .section-head-link:hover { color: var(--accent); }
+}
 .section-head-link::after { content: '→'; font-size: 13px; }
 
 /* ── ARTICLE CARDS ── */
@@ -200,9 +271,12 @@ a:hover .arrow { transform: translateX(4px); }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-lg); overflow: hidden;
   display: flex; flex-direction: column;
-  transition: border-color .15s, transform .15s; cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), var(--press-release);
+  cursor: pointer;
 }
-.card:hover { border-color: var(--border-s); transform: translateY(-1px); }
+@media (hover: hover) and (pointer: fine) {
+  .card:hover { border-color: var(--border-s); transform: translateY(-1px); }
+}
 .card-img {
   width: 100%; aspect-ratio: 4/3; overflow: hidden; flex-shrink: 0;
   position: relative; display: flex; align-items: flex-end;
@@ -260,15 +334,19 @@ a:hover .arrow { transform: translateX(4px); }
   display: inline-block; margin-top: 8px; margin-left: 12px;
   font-size: 12px; color: var(--g2); text-decoration: none; font-family: var(--fm);
 }
-.btn-review:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-review:hover { color: var(--accent); }
+}
 
 /* ── PRODUCT CARDS (ecosystem pages) ── */
 .product-card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-lg); overflow: hidden;
-  transition: border-color .15s, transform .15s;
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), var(--press-release);
 }
-.product-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+}
 .product-card-img {
   width: 100%; aspect-ratio: 4/3;
   background: var(--bg); overflow: hidden;
@@ -303,10 +381,14 @@ a:hover .arrow { transform: translateX(4px); }
   background: var(--accent); color: #fff;
   font-size: 12px; font-weight: 700; padding: 6px 14px;
   border-radius: 4px; border: none; cursor: pointer;
-  font-family: var(--fu); transition: background .15s; white-space: nowrap;
+  font-family: var(--fu); white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
   display: inline-block;
 }
-.btn-buy:hover { background: var(--accent-dk); }
+.btn-buy:active { background: var(--accent-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-buy:hover { background: var(--accent-dk); }
+}
 
 /* Community mod card variant */
 .product-card.community {
@@ -322,9 +404,13 @@ a:hover .arrow { transform: translateX(4px); }
   background: var(--community-t); color: var(--community); border: 1px solid var(--community-border);
   font-size: 12px; font-weight: 700; padding: 6px 14px;
   border-radius: 4px; cursor: pointer; font-family: var(--fu);
-  transition: background .15s; white-space: nowrap; display: inline-block;
+  transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
+  white-space: nowrap; display: inline-block;
 }
-.btn-printables:hover { background: var(--community-t-dk); }
+.btn-printables:active { background: var(--community-t-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-printables:hover { background: var(--community-t-dk); }
+}
 
 /* ── CARD GRIDS ── */
 .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
@@ -363,7 +449,9 @@ a:hover .arrow { transform: translateX(4px); }
 .dark-section .section-head-label { color: #fff; }
 .dark-section .section-head { border-bottom-color: rgba(255,255,255,.12); }
 .dark-section .section-head-link { color: rgba(255,255,255,.3); }
-.dark-section .section-head-link:hover { color: rgba(255,255,255,.7); }
+@media (hover: hover) and (pointer: fine) {
+  .dark-section .section-head-link:hover { color: rgba(255,255,255,.7); }
+}
 
 /* ── RESPONSIVE ── */
 @media(max-width: 1024px) {
@@ -407,7 +495,9 @@ a:hover .arrow { transform: translateX(4px); }
   font-family: var(--fu);
 }
 
-.model-context-switch:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .model-context-switch:hover { color: var(--accent); }
+}
 
 /* ── PAGE HERO UTILITY ── */
 .page-hero {
@@ -453,7 +543,9 @@ main:not(.main-has-hero) { padding-top: 60px; }
   margin-bottom: 32px;
 }
 .lg-breadcrumb a { color: var(--g2); }
-.lg-breadcrumb a:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .lg-breadcrumb a:hover { color: var(--accent); }
+}
 .lg-layout {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -481,7 +573,9 @@ main:not(.main-has-hero) { padding-top: 60px; }
   line-height: 1.45;
   transition: color .12s, border-color .12s;
 }
-.lg-toc-link:hover { color: var(--black); }
+@media (hover: hover) and (pointer: fine) {
+  .lg-toc-link:hover { color: var(--black); }
+}
 .lg-toc-link[aria-current="true"] {
   color: var(--black);
   border-left-color: var(--accent);
@@ -539,7 +633,9 @@ main:not(.main-has-hero) { padding-top: 60px; }
   color: var(--accent);
   font-weight: 700;
 }
-.lg-email-link:hover { text-decoration: underline; }
+@media (hover: hover) and (pointer: fine) {
+  .lg-email-link:hover { text-decoration: underline; }
+}
 @media (max-width: 900px) {
   .lg-layout { grid-template-columns: 1fr; gap: 32px; }
   .lg-sidebar { position: static; }
@@ -592,9 +688,11 @@ main:not(.main-has-hero) { padding-top: 60px; }
   border-radius: 5px;
   cursor: pointer;
   align-self: flex-start;
-  transition: opacity .12s;
+  transition: opacity var(--dur-fast) var(--ease-out), var(--press-release);
 }
-.lg-form-submit:hover { opacity: .88; }
+@media (hover: hover) and (pointer: fine) {
+  .lg-form-submit:hover { opacity: .88; }
+}
 .lg-form-submit:disabled { opacity: .5; cursor: not-allowed; }
 .lg-form-msg {
   font-family: var(--fm);

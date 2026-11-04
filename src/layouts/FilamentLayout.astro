@@ -593,7 +593,9 @@ const breadcrumbItems = [
   color: var(--g1);
   transition: color .15s;
 }
-.fil-breadcrumb a:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .fil-breadcrumb a:hover { color: var(--accent); }
+}
 .fil-breadcrumb span[aria-hidden] { color: var(--border-s); }
 
 /* ── VERDICT BLOCK ── */
@@ -808,7 +810,9 @@ const breadcrumbItems = [
   border-bottom: 1px solid var(--border);
 }
 .fil-compat-table tbody tr:last-child { border-bottom: none; }
-.fil-compat-table tbody tr:hover { background: #fafaf9; }
+@media (hover: hover) and (pointer: fine) {
+  .fil-compat-table tbody tr:hover { background: #fafaf9; }
+}
 .fil-compat-item {
   padding: 13px 18px;
   font-size: 13px;
@@ -1026,7 +1030,9 @@ const breadcrumbItems = [
   color: var(--accent);
   transition: opacity .15s;
 }
-.fil-related-all:hover { opacity: .75; }
+@media (hover: hover) and (pointer: fine) {
+  .fil-related-all:hover { opacity: .75; }
+}
 .fil-related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1041,9 +1047,11 @@ const breadcrumbItems = [
   overflow: hidden;
   transition: transform .2s, border-color .2s;
 }
-.fil-related-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,.14);
+@media (hover: hover) and (pointer: fine) {
+  .fil-related-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,.14);
+  }
 }
 .fil-related-card-img {
   position: relative;

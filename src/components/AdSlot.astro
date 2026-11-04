@@ -166,7 +166,9 @@ function withUTM(href: string, config: any): string {
   display: block;
   transition: opacity .15s;
 }
-.adslot-banner-link:hover { opacity: .85; }
+@media (hover: hover) and (pointer: fine) {
+  .adslot-banner-link:hover { opacity: .85; }
+}
 .adslot-banner-link img {
   max-width: 100%;
   height: auto;
@@ -191,9 +193,11 @@ function withUTM(href: string, config: any): string {
   text-decoration: none;
   color: inherit;
 }
-.adslot-text-link:hover {
-  border-color: var(--border-s);
-  border-left-color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .adslot-text-link:hover {
+    border-color: var(--border-s);
+    border-left-color: var(--accent);
+  }
 }
 
 .adslot-text-eyebrow {
@@ -242,9 +246,11 @@ function withUTM(href: string, config: any): string {
   text-decoration: none;
   color: inherit;
 }
-.adslot-card-link:hover {
-  border-color: var(--border-s);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .adslot-card-link:hover {
+    border-color: var(--border-s);
+    transform: translateY(-2px);
+  }
 }
 
 .adslot-card-inner {

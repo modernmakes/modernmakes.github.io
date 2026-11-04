@@ -323,7 +323,9 @@ import Base from '../../layouts/Base.astro';
   }
   .side-vendors { margin: 0; font-family: var(--fu); font-size: 14px; }
   .side-vendors a { color: var(--accent-mid); text-decoration: none; }
-  .side-vendors a:hover { text-decoration: underline; }
+  @media (hover: hover) and (pointer: fine) {
+    .side-vendors a:hover { text-decoration: underline; }
+  }
   .side-vendors span { color: rgba(255, 255, 255, 0.4); margin: 0 6px; }
 
   /* ════ PATTERN 02 — Verdict & buy box ════ */
@@ -368,10 +370,12 @@ import Base from '../../layouts/Base.astro';
                 box-shadow 0.2s var(--ease-out, ease-out),
                 border-color 0.2s var(--ease-out, ease-out);
   }
-  .feat-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  @media (hover: hover) and (pointer: fine) {
+    .feat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
   }
   .feat-band { height: 96px; }
   .band-orange { background: linear-gradient(135deg, var(--accent), var(--accent-dk)); }
@@ -400,7 +404,9 @@ import Base from '../../layouts/Base.astro';
     padding: 12px 20px; cursor: pointer;
     transition: background 0.18s var(--ease-out, ease-out);
   }
-  .btn-primary:hover { background: var(--accent-dk); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover { background: var(--accent-dk); }
+  }
   .btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .btn-full { display: block; width: 100%; margin-top: 4px; }
   .btn-ghost {
@@ -411,7 +417,9 @@ import Base from '../../layouts/Base.astro';
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: border-color 0.18s var(--ease-out, ease-out), background 0.18s var(--ease-out, ease-out);
   }
-  .btn-ghost:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.28); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.28); }
+  }
   .btn-ghost:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   /* ── Floating glass nav ─────────────────────────────────────────── */
@@ -426,7 +434,9 @@ import Base from '../../layouts/Base.astro';
     padding: 8px 18px; cursor: pointer;
     transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
   }
-  .lab-pill:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+  @media (hover: hover) and (pointer: fine) {
+    .lab-pill:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+  }
   .lab-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .lab-pill.is-active {
     color: #fff; background: rgba(255, 90, 31, 0.3); border-color: rgba(255, 90, 31, 0.5);

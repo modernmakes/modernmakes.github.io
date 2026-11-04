@@ -182,7 +182,9 @@ const currentPath = '/tools';
   padding: 7px 12px; background: var(--bg); border: 1px solid var(--border);
   border-radius: 5px; cursor: pointer; color: var(--g1); transition: all .12s;
 }
-.tc-preset-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,90,31,.04); }
+@media (hover: hover) and (pointer: fine) {
+  .tc-preset-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,90,31,.04); }
+}
 
 .tc-result-dark {
   background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 10px;
@@ -197,7 +199,9 @@ const currentPath = '/tools';
   padding: 7px 16px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.6);
   border: 1px solid rgba(255,255,255,.14); border-radius: 5px; cursor: pointer; transition: all .12s;
 }
-.tc-copy-btn:hover { background: rgba(255,255,255,.13); }
+@media (hover: hover) and (pointer: fine) {
+  .tc-copy-btn:hover { background: rgba(255,255,255,.13); }
+}
 .tc-copy-btn.copied { background: rgba(74,222,128,.15); color: #4ade80; border-color: rgba(74,222,128,.3); }
 
 .tc-tier-card {

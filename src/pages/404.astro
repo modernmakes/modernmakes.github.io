@@ -151,9 +151,11 @@ const recoveryCards = [
   filter: none;
   transition: border-color .15s, background .15s;
 }
-.nf-cards.nf-cards-visible .nf-card:hover {
-  border-color: rgba(255,90,31,.5);
-  background: rgba(255,90,31,.06);
+@media (hover: hover) and (pointer: fine) {
+  .nf-cards.nf-cards-visible .nf-card:hover {
+    border-color: rgba(255,90,31,.5);
+    background: rgba(255,90,31,.06);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .nf-card { transition: border-color .15s, background .15s !important; opacity: 1 !important; transform: none !important; filter: none !important; }

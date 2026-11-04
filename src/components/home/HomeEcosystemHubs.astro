@@ -172,12 +172,17 @@ function bgStyle(eco: any) {
       box-shadow   200ms var(--stagger-ease),
       transform    200ms var(--stagger-ease),
       opacity      var(--stagger-dur) var(--stagger-ease),
-      filter       var(--stagger-dur) var(--stagger-ease);
+      filter       var(--stagger-dur) var(--stagger-ease),
+      var(--press-release);
   }
-  .eco-section .eco-card:hover {
-    border-color: rgba(255,90,31,.45);
-    box-shadow: 0 12px 40px rgba(0,0,0,.4);
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .eco-section .eco-card:hover {
+      border-color: rgba(255,90,31,.45);
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+      transform: translateY(-2px);
+    }
+    .eco-section .eco-card:hover .eco-card-img-bg { transform: scale(1.04); }
+    .eco-section .eco-card:hover .eco-card-img-label { color: rgba(255,255,255,.14); }
   }
 
   /* Printer image */
@@ -201,7 +206,6 @@ function bgStyle(eco: any) {
     transition: transform 600ms var(--stagger-ease);
     transform-origin: center right;
   }
-  .eco-section .eco-card:hover .eco-card-img-bg { transform: scale(1.04); }
   .eco-card-img-overlay {
     position: absolute;
     inset: 0;
@@ -221,8 +225,7 @@ function bgStyle(eco: any) {
     transition: color 400ms var(--stagger-ease);
     /* Visible only when no image — acts as watermark */
   }
-  /* Subliminal watermark lift on hover (M4) */
-  .eco-section .eco-card:hover .eco-card-img-label { color: rgba(255,255,255,.14); }
+  /* Subliminal watermark lift on hover (M4) lives in the hover-gated block above. */
 
   /* Card content */
   .eco-card-body {

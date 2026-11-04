@@ -173,20 +173,26 @@ const currentPath = '/tools';
   border: 1px solid rgba(255,255,255,.12); border-radius: 3px; cursor: pointer; flex-shrink: 0;
   transition: all .12s; white-space: nowrap;
 }
-.pac-copy-row-btn:hover { background: rgba(255,255,255,.14); color: rgba(255,255,255,.8); }
+@media (hover: hover) and (pointer: fine) {
+  .pac-copy-row-btn:hover { background: rgba(255,255,255,.14); color: rgba(255,255,255,.8); }
+}
 .pac-copy-row-btn.copied { background: rgba(74,222,128,.15); color: #4ade80; border-color: rgba(74,222,128,.3); }
 
 .pac-btn-copy-all {
   font-family: var(--fu); font-size: 12px; font-weight: 700; padding: 8px 18px;
   background: var(--black); color: #fff; border: none; border-radius: 5px; cursor: pointer; transition: background .12s;
 }
-.pac-btn-copy-all:hover { background: #333; }
+@media (hover: hover) and (pointer: fine) {
+  .pac-btn-copy-all:hover { background: #333; }
+}
 .pac-btn-copy-all.copied { background: #1a7a1a; }
 .pac-btn-ghost {
   font-family: var(--fu); font-size: 11px; font-weight: 600; padding: 6px 12px;
   background: transparent; color: var(--g2); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; transition: all .12s;
 }
-.pac-btn-ghost:hover { border-color: var(--g1); color: var(--g1); }
+@media (hover: hover) and (pointer: fine) {
+  .pac-btn-ghost:hover { border-color: var(--g1); color: var(--g1); }
+}
 
 .pac-textarea {
   font-family: var(--fm); font-size: 12px; color: var(--black); background: var(--bg);
@@ -199,7 +205,9 @@ const currentPath = '/tools';
   background: var(--accent); color: #fff; border: none; border-radius: 5px; cursor: pointer;
   margin-top: 10px; transition: opacity .12s;
 }
-.pac-btn-import:hover { opacity: .88; }
+@media (hover: hover) and (pointer: fine) {
+  .pac-btn-import:hover { opacity: .88; }
+}
 .pac-import-status { margin-top: 8px; font-family: var(--fm); font-size: 11px; color: var(--g2); }
 .pac-code { font-family: var(--fm); font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent); }
 

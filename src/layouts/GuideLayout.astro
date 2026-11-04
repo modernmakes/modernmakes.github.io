@@ -548,7 +548,9 @@ const breadcrumbItems = [
   transition: background .12s;
   border-left: 2px solid transparent;
 }
-.guide-prog-btn:hover { background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .guide-prog-btn:hover { background: var(--bg); }
+}
 .guide-prog-item.active .guide-prog-btn {
   border-left-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 4%, transparent);

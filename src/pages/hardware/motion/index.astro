@@ -161,7 +161,9 @@ const comingSoon = [
   transition: border-color .15s, transform .15s;
   cursor: pointer;
 }
-.mm-card:hover:not(.mm-card-soon) { border-color: var(--border-s); transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .mm-card:hover:not(.mm-card-soon) { border-color: var(--border-s); transform: translateY(-2px); }
+}
 .mm-card-soon { opacity: .65; cursor: default; }
 .mm-card-img {
   aspect-ratio: 16/9;
@@ -205,7 +207,9 @@ const comingSoon = [
 }
 .mm-soon-chip { font-family: var(--fm); font-size: 9px; color: var(--g2); background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 2px 7px; }
 .mm-creator { font-family: var(--fm); font-size: 11px; color: var(--accent); transition: opacity .15s; align-self: flex-start; }
-.mm-creator:hover { opacity: .7; }
+@media (hover: hover) and (pointer: fine) {
+  .mm-creator:hover { opacity: .7; }
+}
 .mm-creator-dim { color: var(--g2); pointer-events: none; }
 
 .mm-wiki-callout {
@@ -233,5 +237,7 @@ const comingSoon = [
   transition: background .15s, color .15s;
   flex-shrink: 0;
 }
-.mm-wiki-link:hover { background: var(--accent); color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .mm-wiki-link:hover { background: var(--accent); color: #fff; }
+}
 </style>

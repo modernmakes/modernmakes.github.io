@@ -533,7 +533,9 @@ const breadcrumbSchema = {
   color: rgba(255,255,255,.55);
   transition: color .15s;
 }
-.comp-breadcrumb a:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .comp-breadcrumb a:hover { color: var(--accent); }
+}
 .comp-brand {
   font-family: var(--fu);
   font-size: 11px;
@@ -707,7 +709,9 @@ const breadcrumbSchema = {
   text-decoration: none;
   transition: border-color .12s, color .12s;
 }
-.comp-toolhead-chip:hover { border-color: var(--accent); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .comp-toolhead-chip:hover { border-color: var(--accent); color: var(--accent); }
+}
 
 /* Compact vendor quick-links */
 .comp-vendor-quick {
@@ -731,8 +735,12 @@ const breadcrumbSchema = {
   color: var(--g2);
   transition: color .12s;
 }
-.comp-vendor-quick:hover .comp-vendor-quick-name { color: var(--accent); }
-.comp-vendor-quick:hover .comp-vendor-quick-arrow { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .comp-vendor-quick:hover .comp-vendor-quick-name { color: var(--accent); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .comp-vendor-quick:hover .comp-vendor-quick-arrow { color: var(--accent); }
+}
 
 /* ── SECTIONS ── */
 .comp-section {
@@ -766,9 +774,11 @@ const breadcrumbSchema = {
   transition: border-color .15s, transform .15s;
   overflow: hidden;
 }
-.comp-vendor-card:hover {
-  border-color: var(--border-s);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .comp-vendor-card:hover {
+    border-color: var(--border-s);
+    transform: translateY(-2px);
+  }
 }
 .comp-vendor-primary {
   border-color: var(--accent) !important;
@@ -1130,7 +1140,9 @@ const breadcrumbSchema = {
   color: var(--g1);
   transition: color .15s;
 }
-.comp-related-all:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .comp-related-all:hover { color: var(--accent); }
+}
 .comp-related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1145,9 +1157,11 @@ const breadcrumbSchema = {
   flex-direction: column;
   transition: border-color .15s, transform .15s;
 }
-.comp-related-card:hover {
-  border-color: var(--border-s);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .comp-related-card:hover {
+    border-color: var(--border-s);
+    transform: translateY(-2px);
+  }
 }
 .comp-related-card-img {
   aspect-ratio: 16/9;

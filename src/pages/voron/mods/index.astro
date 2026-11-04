@@ -149,7 +149,9 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   font-size: 11px;
 }
 .mods-breadcrumb a { color: rgba(255,255,255,.3); }
-.mods-breadcrumb a:hover { color: rgba(255,255,255,.6); }
+@media (hover: hover) and (pointer: fine) {
+  .mods-breadcrumb a:hover { color: rgba(255,255,255,.6); }
+}
 .mods-breadcrumb span { color: rgba(255,255,255,.2); }
 .mods-breadcrumb span:last-child { color: rgba(255,255,255,.55); }
 .mods-title {
@@ -200,7 +202,9 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   transition: all 0.15s;
   font-family: var(--fu);
 }
-.mf-btn:hover { border-color: var(--accent); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .mf-btn:hover { border-color: var(--accent); color: var(--accent); }
+}
 .mf-btn.active {
   background: var(--accent);
   border-color: var(--accent);
@@ -222,7 +226,9 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   transition: all 0.15s;
   font-family: var(--fu);
 }
-.cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .cat-pill:hover { border-color: var(--accent); color: var(--accent); }
+}
 .cat-pill.active {
   background: var(--black);
   border-color: var(--black);
@@ -259,9 +265,11 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   gap: 10px;
   transition: border-color 0.15s, transform 0.15s;
 }
-.mod-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .mod-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
 }
 .mod-card-header {
   display: flex;
@@ -342,7 +350,9 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   text-decoration: none;
   white-space: nowrap;
 }
-.mod-source-btn:hover { color: var(--accent-dk); }
+@media (hover: hover) and (pointer: fine) {
+  .mod-source-btn:hover { color: var(--accent-dk); }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {

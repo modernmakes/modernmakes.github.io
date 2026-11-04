@@ -165,10 +165,12 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   .nav.nav-transparent .nav-dd-btn {
     color: rgba(255, 255, 255, 0.85);
   }
-  .nav.nav-transparent .nav-link:hover,
-  .nav.nav-transparent .nav-dd-btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.08);
+  @media (hover: hover) and (pointer: fine) {
+    .nav.nav-transparent .nav-link:hover,
+    .nav.nav-transparent .nav-dd-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
   }
   .nav.nav-transparent .nav-search-btn,
   .nav.nav-transparent .nav-hamburger {
@@ -237,11 +239,16 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     border-bottom: 2px solid transparent;
     transition: color 150ms ease, background 150ms ease, transform 120ms ease;
   }
-  .nav-link:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
   }
+  /* Press: no scale on text links, just the 6% wash (native-feel press table) */
+  .nav-link:active,
+  .nav-dd-btn:active { color: #fff; background: rgba(255, 255, 255, 0.06); }
   .nav-link.active {
     color: #fff;
     border-bottom: 2px solid var(--accent);
@@ -268,10 +275,12 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     border-bottom: 2px solid transparent;
     transition: color 150ms ease, background 150ms ease, transform 120ms ease;
   }
-  .nav-dd-btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateY(-1px);
+  @media (hover: hover) and (pointer: fine) {
+    .nav-dd-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
   }
   .nav-dd-btn.active {
     color: #fff;
@@ -307,7 +316,9 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     transition: background 150ms ease;
     line-height: 1.2;
   }
-  .nav-dd-item:hover { background: rgba(255, 255, 255, 0.05); }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-dd-item:hover { background: rgba(255, 255, 255, 0.05); }
+  }
 
   .nav-dd-item strong {
     font-family: var(--fd, 'Barlow Condensed', sans-serif);
@@ -372,9 +383,15 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     color: rgba(255, 255, 255, 0.45);
     border-radius: 4px;
     flex-shrink: 0;
-    transition: color 150ms ease, background 150ms ease;
+    position: relative;
+    transition: color 150ms ease, background 150ms ease, var(--press-release);
   }
-  .nav-search-btn:hover { color: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.06); }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-search-btn:hover { color: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.06); }
+  }
+  /* Invisible 44 x 44 hit area (Apple HIG) without changing the visible size */
+  .nav-search-btn::after,
+  .nav-hamburger::after { content: ''; position: absolute; inset: -6px; }
   .nav-search-wrap.open .nav-search-btn { color: var(--accent); }
 
   @media (max-width: 1023px) {
@@ -394,9 +411,13 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     color: rgba(255, 255, 255, 0.6);
     border-radius: 4px;
     flex-shrink: 0;
-    transition: color 150ms ease, background 150ms ease;
+    position: relative;
+    transition: color 150ms ease, background 150ms ease, var(--press-release);
   }
-  .nav-hamburger:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+  .nav-hamburger::after { inset: -4px; }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-hamburger:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+  }
 
   .h-line {
     stroke: currentColor;
@@ -458,7 +479,9 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     padding: 10px 24px 10px 36px;
     transition: color 150ms ease, background 150ms ease;
   }
-  .panel-eco-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
+  @media (hover: hover) and (pointer: fine) {
+    .panel-eco-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
+  }
   .panel-eco-link.active { color: #fff; }
 
   .panel-divider {
@@ -475,7 +498,9 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     padding: 13px 24px;
     transition: color 150ms ease, background 150ms ease;
   }
-  .panel-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
+  @media (hover: hover) and (pointer: fine) {
+    .panel-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
+  }
   .panel-link.active { color: #fff; }
 
   /* ─── MOBILE SEARCH OVERLAY ─── */
@@ -544,7 +569,9 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     cursor: pointer;
     transition: background 150ms ease;
   }
-  .search-overlay-submit:hover { background: var(--accent-dk); }
+  @media (hover: hover) and (pointer: fine) {
+    .search-overlay-submit:hover { background: var(--accent-dk); }
+  }
 
   @media (min-width: 1024px) {
     .search-overlay { display: none !important; }

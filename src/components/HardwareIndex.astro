@@ -262,7 +262,9 @@ const itemListSchema = {
   color: rgba(255,255,255,.62);
   transition: color .15s;
 }
-.hot-hero-crumbs a:hover { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .hot-hero-crumbs a:hover { color: var(--accent); }
+}
 .hot-hero-crumbs span[aria-current] { color: rgba(255,255,255,.72); }
 .hot-hero-crumbs span[aria-hidden] { color: rgba(255,255,255,.3); }
 .hot-hero-title {
@@ -312,6 +314,7 @@ const itemListSchema = {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  min-height: 44px; /* hit target (Apple HIG) */
   padding: 14px 20px;
   font-family: var(--fu);
   font-size: 12px;
@@ -326,9 +329,11 @@ const itemListSchema = {
   white-space: nowrap;
   flex-shrink: 0;
   margin-bottom: -1px;
-  transition: color .15s, background .15s, border-color .15s;
+  transition: color .15s, background .15s, border-color .15s, var(--press-release);
 }
-.gf-tab:hover { color: var(--black); background: var(--bg); }
+@media (hover: hover) and (pointer: fine) {
+  .gf-tab:hover { color: var(--black); background: var(--bg); }
+}
 .gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
 .gf-badge {
   font-family: var(--fm);
@@ -355,7 +360,7 @@ const itemListSchema = {
 }
 .gf-card {
   opacity: 1;
-  transition: opacity 0.15s ease, border-color .15s, transform .15s;
+  transition: opacity 0.15s ease, border-color .15s, transform .15s, var(--press-release);
 }
 .gf-card.gf-hidden { display: none; }
 @media (max-width: 768px) {

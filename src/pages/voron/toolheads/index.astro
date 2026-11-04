@@ -230,6 +230,8 @@ const toolheads = [
   transition: all 0.15s;
   font-family: var(--fu);
 }
-.th-filter:hover { border-color: var(--accent); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .th-filter:hover { border-color: var(--accent); color: var(--accent); }
+}
 .th-filter.active { background: var(--black); border-color: var(--black); color: #fff; }
 </style>

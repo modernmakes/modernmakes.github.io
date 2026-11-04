@@ -234,9 +234,11 @@ const totalCount = sorted.length;
   transition: background .12s, color .12s, border-color .12s;
   white-space: nowrap;
 }
-.fil-filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .fil-filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 .fil-filter-btn.active {
   background: var(--accent);
@@ -301,12 +303,16 @@ const totalCount = sorted.length;
   transform-origin: left;
   transition: transform .2s ease;
 }
-.fil-index-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255,90,31,.08);
+@media (hover: hover) and (pointer: fine) {
+  .fil-index-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,90,31,.08);
+  }
 }
-.fil-index-card:hover::before { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .fil-index-card:hover::before { transform: scaleX(1); }
+}
 .fil-index-card[style*="display:none"] { transform: none !important; }
 
 .fil-index-card-head {
@@ -372,7 +378,9 @@ const totalCount = sorted.length;
   color: var(--g2);
   transition: color .15s, transform .15s;
 }
-.fil-index-card:hover .fil-index-arrow { color: var(--accent); transform: translateX(3px); }
+@media (hover: hover) and (pointer: fine) {
+  .fil-index-card:hover .fil-index-arrow { color: var(--accent); transform: translateX(3px); }
+}
 
 @media (max-width: 1024px) {
   .fil-index-grid { grid-template-columns: repeat(2, 1fr); }

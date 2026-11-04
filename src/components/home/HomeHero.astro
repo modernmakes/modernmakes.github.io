@@ -215,8 +215,10 @@ function bgStyle(slide: any) {
 
   /* Hover response on the full-bleed link (was inert) — CTA colour + arrow slide.
      Arrow slide is driven by the global `a:hover .arrow` rule. */
-  .hero-content:hover .hero-read-cta,
   .hero-content:focus-visible .hero-read-cta { color: var(--accent); }
+  @media (hover: hover) and (pointer: fine) {
+    .hero-content:hover .hero-read-cta { color: var(--accent); }
+  }
 
   /* ── REDUCED MOTION ── */
   @media (prefers-reduced-motion: reduce) {

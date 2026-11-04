@@ -450,7 +450,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   text-decoration: none;
   transition: color .15s;
 }
-.voron-story-link:hover { color: rgba(255,255,255,.75); }
+@media (hover: hover) and (pointer: fine) {
+  .voron-story-link:hover { color: rgba(255,255,255,.75); }
+}
 
 /* ── HERO CONTENT GRID ── */
 .hero-content-grid {
@@ -518,7 +520,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   transition: border-color .15s, background .15s, box-shadow .15s;
   min-width: 160px;
 }
-.model-btn:hover { border-color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .model-btn:hover { border-color: var(--accent); }
+}
 .model-btn.active {
   border-color: var(--accent);
   background: rgba(255,90,31,.15);
@@ -783,7 +787,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
   font-family: var(--fu);
   letter-spacing: .02em;
 }
-.mc-full-link:hover { color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .mc-full-link:hover { color: #fff; }
+}
 
 /* ── MOBILE PRINTER IMAGE ── */
 .model-img-mobile {
