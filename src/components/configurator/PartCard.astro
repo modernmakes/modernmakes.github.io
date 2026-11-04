@@ -197,8 +197,8 @@ const vendors = [1, 2, 3, 4, 5]
     transition: background .15s;
   }
   @media (hover: hover) and (pointer: fine) {
-    .cfg-select-btn:hover:not(:disabled) { background: var(--accent); }
+    .cfg-select-btn:hover:not(:disabled) { background: var(--accent); color: var(--on-accent); }
   }
   .cfg-select-btn:disabled { background: var(--g2); cursor: not-allowed; }
-  .cfg-card.cfg-selected .cfg-select-btn { background: var(--accent); }
+  .cfg-card.cfg-selected .cfg-select-btn { background: var(--accent); color: var(--on-accent); }
 </style>

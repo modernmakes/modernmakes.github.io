@@ -16,8 +16,10 @@
      - Small orange text (< 18.66px bold / 24px regular) on light surfaces uses
        --accent-dk (5.1:1 white, 4.7:1 --bg); on orange tints use --accent-ink.
      - --accent stays for fills, large text, and text on the dark planes.
-     - Labels on an --accent fill use --on-accent (ink, 5.6:1); their hover
-       fill is --accent-mid (6.7:1), never --accent-dk (3.4:1 with ink). */
+     - Text and icons on an orange fill are --on-accent (ink), at every size
+       and in every state: 5.6:1 on --accent, 6.7:1 on --accent-mid. Hover and
+       press go to --accent-mid, never --accent-dk (3.4:1 with ink) and never
+       opacity (ink + fill fade together below 4.5:1). */
   --on-accent:     var(--black);
 
   /* Neutrals */
@@ -258,8 +260,12 @@ a:not([class]):active { opacity: .6; }
 :is(.nav-search-btn, .nav-hamburger):active { scale: var(--scale-press-icon); }
 /* Reduced motion: no scale, but the press still answers with a dim. */
 @media (prefers-reduced-motion: reduce) {
-  :is(.btn-buy, .btn-printables, .lg-form-submit, .gf-tab, .nav-search-btn, .nav-hamburger,
+  :is(.btn-printables, .nav-search-btn, .nav-hamburger,
       .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: none; opacity: .72; }
+  /* Orange fills (and chips holding an orange badge) answer with a fill change
+     instead: opacity would fade ink on orange below AA. */
+  :is(.btn-buy, .lg-form-submit):active { scale: none; }
+  .gf-tab:active { scale: none; background: var(--bg); }
 }
 
 /* ── TYPOGRAPHIC COVER ────────────────────────────────────────────────
@@ -759,10 +765,11 @@ main:not(.main-has-hero) { padding-top: 60px; }
   border-radius: 5px;
   cursor: pointer;
   align-self: flex-start;
-  transition: opacity var(--dur-fast) var(--ease-out), var(--press-release);
+  transition: background var(--dur-fast) var(--ease-out), var(--press-release);
 }
+.lg-form-submit:active { background: var(--accent-mid); }
 @media (hover: hover) and (pointer: fine) {
-  .lg-form-submit:hover { opacity: .88; }
+  .lg-form-submit:hover { background: var(--accent-mid); }
 }
 .lg-form-submit:disabled { opacity: .5; cursor: not-allowed; }
 .lg-form-msg {

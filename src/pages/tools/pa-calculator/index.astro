@@ -203,10 +203,10 @@ const currentPath = '/tools';
 .pac-btn-import {
   font-family: var(--fu); font-size: 12px; font-weight: 700; padding: 9px 20px;
   background: var(--accent); color: var(--on-accent); border: none; border-radius: 5px; cursor: pointer;
-  margin-top: 10px; transition: opacity .12s;
+  margin-top: 10px; transition: background .12s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .pac-btn-import:hover { opacity: .88; }
+  .pac-btn-import:hover { background: var(--accent-mid); }
 }
 .pac-import-status { margin-top: 8px; font-family: var(--fm); font-size: 11px; color: var(--g2); }
 .pac-code { font-family: var(--fm); font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent); }

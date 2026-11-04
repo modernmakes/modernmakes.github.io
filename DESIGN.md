@@ -79,13 +79,13 @@ spacing:
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
-    textColor: "#FFFFFF"
+    textColor: "{colors.on-accent}"
     rounded: "{rounded.sm}"
     padding: "6px 14px"
     typography: "{typography.ui}"
   button-primary-hover:
-    backgroundColor: "{colors.accent-deep}"
-    textColor: "#FFFFFF"
+    backgroundColor: "{colors.accent-mid}"
+    textColor: "{colors.on-accent}"
     rounded: "{rounded.sm}"
     padding: "6px 14px"
   card:
@@ -134,7 +134,7 @@ A restrained near-monochrome stage (warm off-white in light, near-black in dark)
 - **Orange Deep** (`#C93B08`, `--accent-dk`): Small orange *text* on light surfaces (eyebrows, card categories, inline links), and the hover/pressed step for orange text. 5.1:1 on white, 4.7:1 on the page.
 - **Orange Mid** (`#FF7A45`, `--accent-mid`): Hover/pressed fill for orange buttons with ink labels, and small orange text on dark orange tints.
 - **Orange Ink** (`#7A2E0A`, `--accent-ink`): Orange text on orange tints (pills, callouts), where Orange Deep is under 4.5:1.
-- **On Accent** (`--on-accent` = Ink): Labels on an Electric Orange fill. White on `#FF5A1F` is 3.1:1, so small labels are ink (5.6:1); only large text (24px, or 18.66px bold) may stay white.
+- **On Accent** (`--on-accent` = Ink): All text and icons on an orange fill, at every size. See the Ink-on-Orange Rule.
 - **Orange Tint** (`#FFE9E1`): The wash behind `callout-orange` blocks; orange at whisper volume.
 
 ### Neutral (light register)
@@ -160,7 +160,13 @@ A restrained near-monochrome stage (warm off-white in light, near-black in dark)
 ### Named Rules
 **The Pointer Rule.** Electric Orange is a pointer, not a paint. It appears on ≤10% of any screen — one CTA, one active state, one verdict. Its scarcity is what makes it read as "look here." A page where orange covers a third of the surface has lost the plot.
 
-**The Small-Orange Rule.** Orange *text* under 18.66px bold / 24px regular never uses `--accent` on a light surface (3.1:1): it uses `--accent-dk`, or `--accent-ink` on an orange tint. `--accent` stays for fills, large text, and text on the dark planes. Labels on an orange fill are ink (`--on-accent`). Change these through the tokens in `global.css`, not per component.
+**The Small-Orange Rule.** Orange *text* under 18.66px bold / 24px regular never uses `--accent` on a light surface (3.1:1): it uses `--accent-dk`, or `--accent-ink` on an orange tint. `--accent` stays for fills, large text, and text on the dark planes. Change these through the tokens in `global.css`, not per component.
+
+**The Ink-on-Orange Rule.** Text and icons on an orange fill are ink (`--on-accent`), with no size exceptions: buttons, badges, counts, step numbers, CTA bands, icons (`stroke="currentColor"` with the container set to `--on-accent`). White on `--accent` is 3.1:1 and does not appear. The rule holds in every state:
+- **Hover and pressed** change the fill to `--accent-mid` (ink 6.7:1). Never `--accent-dk` (ink 3.4:1), and never `opacity`, which fades the ink and the fill together (ink at 88% opacity is 4.4:1). Reduced motion uses the same fill change in place of the scale.
+- **Focus** keeps the standard orange ring outside the control. Anything focusable *inside* an orange band gets an ink ring (`outline-color: var(--on-accent)`), because an orange ring on orange is invisible.
+- **Children** of an orange fill stay at full ink: no `opacity` dimming on counts or meta.
+- Disabled controls (`opacity: .4–.5`) are exempt, as WCAG exempts inactive components.
 
 **The Body-Grey Floor.** Body prose never goes lighter than Body Grey (`#5A5A5A`) on the off-white page. "Elegant light grey" is the single fastest way to fail AA contrast; if it's close, push toward Ink.
 
@@ -206,10 +212,10 @@ The component feel is **precise & confident**: flat surfaces, hairline borders, 
 
 ### Buttons
 - **Shape:** Gently squared (4px radius, `--radius-sm`). Never pill-rounded.
-- **Primary** (`btn-buy`): Electric Orange background, white text, Barlow 700, `6px 14px` padding. The "where to buy" / action button.
-- **Hover / Focus:** Background deepens to Orange Deep (`#C93B08`), 150ms. Focus-visible ring is `2px solid var(--accent)` at `2px` offset (global).
+- **Primary** (`btn-buy`): Electric Orange background, ink text (`--on-accent`), Barlow 700, `6px 14px` padding. The "where to buy" / action button.
+- **Hover / Pressed:** Background lifts to Orange Mid (`#FF7A45`), ink stays (Ink-on-Orange Rule). **Focus:** Focus-visible ring is `2px solid var(--accent)` at `2px` offset (global).
 - **Secondary (Printables)** (`btn-printables`): Community-green fill (`#E8F5E9` / `#2E7D32` / border `#A5D6A7`) for "download STL" actions — the one place green leads.
-- **Submit** (`lg-form-submit`): Barlow Condensed 800 uppercase, orange, larger `13px 28px`; the editorial form CTA.
+- **Submit** (`lg-form-submit`): Barlow Condensed 800 uppercase, orange with ink text, Orange Mid on hover/press, larger `13px 28px`; the editorial form CTA.
 
 ### Chips
 - **Spec Chip** (`spec-chip`): JetBrains Mono 10px on page-bg fill, 1px border, 3px radius, `2px 7px`. Tabular spec tokens on product cards.

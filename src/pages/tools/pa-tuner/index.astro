@@ -234,10 +234,10 @@ const currentPath = '/tools';
 .pt-btn-analyze {
   font-family: var(--fu); font-size: 14px; font-weight: 700; padding: 12px 24px;
   background: var(--accent); color: var(--on-accent); border: none; border-radius: 6px; cursor: pointer;
-  transition: opacity .12s; margin-top: 8px; width: 100%;
+  transition: background .12s; margin-top: 8px; width: 100%;
 }
 @media (hover: hover) and (pointer: fine) {
-  .pt-btn-analyze:hover { opacity: .88; }
+  .pt-btn-analyze:hover { background: var(--accent-mid); }
 }
 .pt-btn-analyze:disabled { opacity: .4; cursor: not-allowed; }
 .pt-analyze-error { font-family: var(--fm); font-size: 11px; color: #ef4444; margin-top: 6px; }
