@@ -38,11 +38,11 @@
     }
   ],
   "ticker": [
+    { "text": "Bambu Lab's open source crisis, explained", "category": "News", "href": "/news/bambu-lab-open-source-crisis" },
+    { "text": "Voron Phoenix: the 600mm IDEX Voron, previewed (not released yet)", "category": "Preview", "href": "/news/voron-phoenix-idex-preview" },
+    { "text": "A full Klipper conversion for the Bambu P1, documented step by step", "category": "Mod", "href": "/news/bambu-p1-klipper-conversion" },
     { "text": "Bondtech INDX 8-nozzle toolchanger now orderable", "category": "Launch", "href": "/news/bondtech-indx-tool-changer-released" },
-    { "text": "Bambu PETG HF 1kg at $19.99 — 20% off this week", "category": "Deal", "href": null },
-    { "text": "Voron 2.4 BOM costs down 12% year-on-year", "category": "Community", "href": null },
-    { "text": "OrcaSlicer 2.3 drops Arachne wall generation", "category": "Update", "href": "/news/orcslicer-v2-3-2-rc2-released" },
-    { "text": "Running CF-PA12 on a stock printer: what you actually need", "category": "Guide", "href": null }
+    { "text": "OrcaSlicer 2.3.2 patches a 3MF path-traversal flaw", "category": "Update", "href": "/news/orcslicer-v2-3-2-rc2-released" }
   ],
   "tools": [
   {

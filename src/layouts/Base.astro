@@ -108,25 +108,5 @@ const siteURL = new URL('/', Astro.site).href;
       setTimeout(() => revealEls.forEach((el) => el.classList.add('is-revealed')), 1600);
     }
   </script>
-  <script>
-    document.querySelectorAll('form[data-nl]').forEach(form => {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const input = form.querySelector('input[type="email"]') as HTMLInputElement;
-        const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-        if (input && input.value.includes('@')) {
-          const orig = btn.textContent;
-          btn.textContent = 'Subscribed ✓';
-          btn.style.background = '#2E7D32';
-          input.value = '';
-          input.placeholder = "You're on the list";
-          setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 3000);
-        } else if (input) {
-          input.style.borderColor = 'rgba(255,90,31,.7)';
-          setTimeout(() => input.style.borderColor = '', 1000);
-        }
-      });
-    });
-  </script>
 </body>
 </html>

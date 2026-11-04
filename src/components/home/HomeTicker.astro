@@ -1,6 +1,13 @@
 ---
 import data from '../../data/homepage.json';
-const { ticker } = data;
+
+// Honesty rule: a ticker item only ships if it links to one of our own pages.
+// Unlinked or external items are dropped at build time, loudly.
+const isOwnPage = (href: string | null) => typeof href === 'string' && href.startsWith('/') && !href.startsWith('//');
+const ticker = data.ticker.filter(item => isOwnPage(item.href));
+for (const item of data.ticker.filter(item => !isOwnPage(item.href))) {
+  console.warn(`[HomeTicker] dropped ticker item without an on-site link: "${item.text}" (href: ${item.href})`);
+}
 ---
 
 <div class="ticker" role="marquee" aria-label="Latest news">
@@ -8,17 +15,13 @@ const { ticker } = data;
     <span class="ticker-label">Latest</span>
     <div class="ticker-track">
       <div class="ticker-items">
-        {[...ticker, ...ticker].map((item, i) => {
-          const hasLink = item.href && item.href !== '/';
-          const Tag = hasLink ? 'a' : 'span';
-          return (
-            <Tag href={hasLink ? item.href : undefined} class:list={['ticker-item', { 'ticker-item--static': !hasLink }]}>
-              <span class="ticker-cat">{item.category}</span>
-              <span class="ticker-text">{item.text}</span>
-              {i < ticker.length * 2 - 1 && <span class="ticker-dot" aria-hidden="true">·</span>}
-            </Tag>
-          );
-        })}
+        {[...ticker, ...ticker].map((item, i) => (
+          <a href={item.href} class="ticker-item">
+            <span class="ticker-cat">{item.category}</span>
+            <span class="ticker-text">{item.text}</span>
+            {i < ticker.length * 2 - 1 && <span class="ticker-dot" aria-hidden="true">·</span>}
+          </a>
+        ))}
       </div>
     </div>
   </div>
@@ -104,6 +107,7 @@ const { ticker } = data;
     gap: 6px;
     text-decoration: none;
     padding: 0 4px;
+    min-height: 24px; /* WCAG 2.2 target size; every item is a link now */
   }
 
   .ticker-cat {
