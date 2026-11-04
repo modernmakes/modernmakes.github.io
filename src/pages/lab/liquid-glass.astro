@@ -399,13 +399,13 @@ import Base from '../../layouts/Base.astro';
 
   /* ── Buttons ────────────────────────────────────────────────────── */
   .btn-primary {
-    font-family: var(--fu); font-weight: 700; font-size: 15px; color: #fff;
+    font-family: var(--fu); font-weight: 700; font-size: 15px; color: var(--on-accent);
     background: var(--accent); border: 1px solid transparent; border-radius: 12px;
     padding: 12px 20px; cursor: pointer;
     transition: background 0.18s var(--ease-out, ease-out);
   }
   @media (hover: hover) and (pointer: fine) {
-    .btn-primary:hover { background: var(--accent-dk); }
+    .btn-primary:hover { background: var(--accent-mid); }
   }
   .btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .btn-full { display: block; width: 100%; margin-top: 4px; }

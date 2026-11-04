@@ -232,7 +232,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     font-family: var(--fu, 'Barlow', sans-serif);
     font-size: 13px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--on-dark-muted);
     padding: 6px 10px;
     border-radius: 4px;
     white-space: nowrap;
@@ -265,7 +265,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     font-family: var(--fu, 'Barlow', sans-serif);
     font-size: 13px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--on-dark-muted);
     padding: 6px 10px;
     border-radius: 4px;
     border: none;
@@ -327,8 +327,8 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     color: #fff;
     white-space: nowrap;
   }
-  .sep  { color: rgba(255, 255, 255, 0.2); font-size: 13px; }
-  .desc { font-family: var(--fm, 'JetBrains Mono', monospace); font-size: 11px; color: rgba(255, 255, 255, 0.4); }
+  .sep  { color: var(--on-dark-muted); font-size: 13px; }
+  .desc { font-family: var(--fm, 'JetBrains Mono', monospace); font-size: 11px; color: var(--on-dark-muted); }
 
   /* ─── RIGHT RAIL ─── */
   .nav-right {
@@ -365,7 +365,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     outline-color: transparent;
     caret-color: var(--accent);
   }
-  .nav-search-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+  .nav-search-input::placeholder { color: var(--on-dark-muted); }
   .nav-search-input:focus {
     border-color: rgba(255, 90, 31, 0.5);
     background: rgba(255, 255, 255, 0.1);
@@ -380,7 +380,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     background: transparent;
     border: none;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--on-dark-muted);
     border-radius: 4px;
     flex-shrink: 0;
     position: relative;
@@ -467,7 +467,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--on-dark-muted);
     padding: 12px 24px 4px;
   }
 
@@ -475,7 +475,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     font-family: var(--fu, 'Barlow', sans-serif);
     font-size: 13px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--on-dark-muted);
     padding: 10px 24px 10px 36px;
     transition: color 150ms ease, background 150ms ease;
   }
@@ -550,7 +550,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     outline-color: transparent;
     caret-color: var(--accent);
   }
-  .search-overlay-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+  .search-overlay-input::placeholder { color: var(--on-dark-muted); }
   .search-overlay-input:focus {
     border-color: rgba(255, 90, 31, 0.5);
     background: rgba(255, 255, 255, 0.08);
@@ -560,7 +560,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     width: 100%;
     height: 44px;
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     font-family: var(--fu, 'Barlow', sans-serif);
     font-size: 14px;
     font-weight: 700;
@@ -570,7 +570,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     transition: background 150ms ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .search-overlay-submit:hover { background: var(--accent-dk); }
+    .search-overlay-submit:hover { background: var(--accent-mid); }
   }
 
   @media (min-width: 1024px) {

@@ -164,13 +164,13 @@ function formatCardDate(d: Date) {
   font-family: var(--fu);
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255,255,255,.3);
+  color: var(--on-dark-muted);
   margin-left: auto;
   transition: color .15s;
   white-space: nowrap;
 }
 @media (hover: hover) and (pointer: fine) {
-  .builds-all:hover { color: rgba(255,255,255,.7); }
+  .builds-all:hover { color: var(--on-dark-soft); }
 }
 
 /* 2-col grid: feature left (wider), cards right (narrower) */
@@ -265,7 +265,7 @@ function formatCardDate(d: Date) {
 .build-feature-excerpt {
   font-family: var(--fb);
   font-size: 13px;
-  color: rgba(255,255,255,.42);
+  color: var(--on-dark-muted);
   line-height: 1.7;
   margin: 0 0 16px;
   flex: 1;
@@ -276,7 +276,7 @@ function formatCardDate(d: Date) {
   gap: 10px;
   font-family: var(--fm);
   font-size: 10px;
-  color: rgba(255,255,255,.25);
+  color: var(--on-dark-muted);
 }
 .build-feature-read::before {
   content: '·';
@@ -337,7 +337,6 @@ function formatCardDate(d: Date) {
   letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--accent);
-  opacity: .8;
 }
 .build-card-title {
   font-family: var(--fd);
@@ -350,7 +349,7 @@ function formatCardDate(d: Date) {
 .build-card-meta {
   font-family: var(--fm);
   font-size: 10px;
-  color: rgba(255,255,255,.25);
+  color: var(--on-dark-muted);
   display: flex;
   align-items: center;
   gap: 6px;

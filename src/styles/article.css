@@ -50,7 +50,7 @@
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--surface);
+  color: var(--on-accent);
   background: var(--accent);
   padding: 3px 10px;
   border-radius: 3px;
@@ -104,7 +104,7 @@
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-dk);
   margin-bottom: 12px;
 }
 .art-headline {
@@ -207,13 +207,13 @@
   color: var(--black);
 }
 .art-content a {
-  color: var(--accent);
+  color: var(--accent-dk);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color .15s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .art-content a:hover { color: var(--accent-dk); }
+  .art-content a:hover { color: var(--accent-ink); }
 }
 .art-content code {
   font-family: var(--fm);
@@ -441,7 +441,7 @@
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-dk);
 }
 .art-sb-more-title {
   font-family: var(--fd);
@@ -534,7 +534,7 @@
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-dk);
   margin-bottom: 6px;
   font-family: var(--fu);
 }

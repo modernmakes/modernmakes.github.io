@@ -8,15 +8,21 @@ colors:
   accent-tint: "#FFE9E1"
   ink: "#1A1A1A"
   body-grey: "#5A5A5A"
-  muted-grey: "#8C8C8C"
+  muted-grey: "#6F6F6F"
   page-bg: "#F7F6F3"
   surface: "#FFFFFF"
   border: "#E2E2E0"
   border-strong: "#C8C8C5"
   dark-bg: "#1A1A1A"
   dark-surface: "#222222"
+  on-accent: "#1A1A1A"
+  on-dark-soft: "rgba(255,255,255,0.78)"
+  on-dark-muted: "rgba(255,255,255,0.62)"
   verdict-buy: "#16A34A"
+  verdict-workhorse-ink: "#117D39"
   verdict-skip: "#E65100"
+  verdict-skip-ink: "#B23C00"
+  caution-ink: "#AA5D05"
   verdict-updated: "#3B82F6"
   verdict-community: "#7C3AED"
 typography:
@@ -125,30 +131,36 @@ A restrained near-monochrome stage (warm off-white in light, near-black in dark)
 
 ### Primary
 - **Electric Orange** (`#FF5A1F`): The single brand voice. CTAs (`btn-buy`), active nav underlines, eyebrows, links on hover, the "BUY/BEST" verdict, focus rings, the orange-tinted hover glow. It points the reader at the next action or the key fact.
-- **Orange Deep** (`#C93B08`): The pressed/hover state of every orange surface. Never used at rest.
-- **Orange Mid** (`#FF7A45`): Secondary orange for gradients and lighter accents on dark.
+- **Orange Deep** (`#C93B08`, `--accent-dk`): Small orange *text* on light surfaces (eyebrows, card categories, inline links), and the hover/pressed step for orange text. 5.1:1 on white, 4.7:1 on the page.
+- **Orange Mid** (`#FF7A45`, `--accent-mid`): Hover/pressed fill for orange buttons with ink labels, and small orange text on dark orange tints.
+- **Orange Ink** (`#7A2E0A`, `--accent-ink`): Orange text on orange tints (pills, callouts), where Orange Deep is under 4.5:1.
+- **On Accent** (`--on-accent` = Ink): Labels on an Electric Orange fill. White on `#FF5A1F` is 3.1:1, so small labels are ink (5.6:1); only large text (24px, or 18.66px bold) may stay white.
 - **Orange Tint** (`#FFE9E1`): The wash behind `callout-orange` blocks; orange at whisper volume.
 
 ### Neutral (light register)
 - **Ink** (`#1A1A1A`): Headlines and primary text on light surfaces. Also the dark-section background — the same value does double duty.
 - **Body Grey** (`#5A5A5A`): Serif body prose. This is the floor for body text; never go lighter than this on the off-white page (contrast discipline).
-- **Muted Grey** (`#8C8C8C`): Timestamps, meta, mono dates, secondary labels only. Never body copy.
+- **Muted Grey** (`#6F6F6F`, `--g2`): Timestamps, meta, mono dates, secondary labels only. Never body copy. Was `#8C8C8C` (3.4:1); darkened to clear AA on white (5.0:1) and the page (4.65:1).
 - **Page BG** (`#F7F6F3`): The warm off-white canvas. A true near-neutral — its warmth is barely there, carried by type and accent instead.
 - **Surface** (`#FFFFFF`): Cards, panels, inputs — the article "paper" lifted off the page.
 - **Border** (`#E2E2E0`) / **Border Strong** (`#C8C8C5`): Hairline dividers and card outlines; border-strong is the rest→hover deepening.
 
 ### Neutral (dark register)
-- **Dark BG** (`#1A1A1A`) / **Dark Surface** (`#222222`): The builder/prosumer dark sections, hero headers (`pg-hero`), and the glass nav. White text sits at 50–85% opacity, never pure white for body.
+- **Dark BG** (`#1A1A1A`) / **Dark Surface** (`#222222`): The builder/prosumer dark sections, hero headers (`pg-hero`), and the glass nav. Secondary text uses `--on-dark-muted` (62% white, ≥ 6.2:1 on every dark plane) or `--on-dark-soft` (78%, hover/emphasis); never lower than 62% for text, never pure white for body. Dimming text with `opacity` is not allowed: dim with the colour token so contrast holds.
 - **Dark Border** (`rgba(255,255,255,0.08)`): Hairline separators on dark.
 
 ### Tertiary — Verdict Semantics (badges only)
-- **Verdict Buy / Recommended** (`#16A34A` on `rgba(34,197,94,.12)`): green.
-- **Verdict Skip** (`#E65100` on `#FFF3E0`): burnt orange-amber.
+- **Verdict Benchmark** (Ink background, white text): the one pick per class (BRAND.md §5).
+- **Verdict Workhorse** (text `#117D39` `--verdict-wh-ink` on `rgba(34,197,94,.12)`): green. The tint hue stays `#16A34A`; the text is darkened to 4.7:1 on the tint.
+- **Verdict Skip** (`#E65100` hue on `#FFF3E0`): burnt orange-amber. Fill and border use `#E65100`; the text uses `#B23C00` (`--verdict-skip-ink`, 5.4:1) because `#E65100` on `#FFF3E0` is only 3.5:1.
+- **On the dark planes** (detail hero, glass cards) verdict text uses `--verdict-wh-on-dark` `#4ADE80`, `--verdict-be-on-dark` `#60A5FA`, `--verdict-skip-on-dark`; Benchmark inverts to white with ink text.
 - **Verdict Updated** (`#3B82F6` on `rgba(59,130,246,.12)`): blue.
 - **Verdict Community** (`#7C3AED` on `rgba(139,92,246,.12)`): violet, for community-mod content.
 
 ### Named Rules
 **The Pointer Rule.** Electric Orange is a pointer, not a paint. It appears on ≤10% of any screen — one CTA, one active state, one verdict. Its scarcity is what makes it read as "look here." A page where orange covers a third of the surface has lost the plot.
+
+**The Small-Orange Rule.** Orange *text* under 18.66px bold / 24px regular never uses `--accent` on a light surface (3.1:1): it uses `--accent-dk`, or `--accent-ink` on an orange tint. `--accent` stays for fills, large text, and text on the dark planes. Labels on an orange fill are ink (`--on-accent`). Change these through the tokens in `global.css`, not per component.
 
 **The Body-Grey Floor.** Body prose never goes lighter than Body Grey (`#5A5A5A`) on the off-white page. "Elegant light grey" is the single fastest way to fail AA contrast; if it's close, push toward Ink.
 
@@ -216,7 +228,7 @@ The component feel is **precise & confident**: flat surfaces, hairline borders, 
 - **Disabled:** `opacity: .5`, `cursor: not-allowed` (submit buttons).
 
 ### Navigation
-- **Style:** Fixed top, dark glass at rest (`rgba(20,20,20,0.85)` + `blur(20px)`), Barlow 600 13px links at 50% white opacity.
+- **Style:** Fixed top, dark glass at rest (`rgba(20,20,20,0.85)` + `blur(20px)`), Barlow 600 13px links at `--on-dark-muted` (62% white; 50% failed AA over the glass on light pages).
 - **States:** Hover → full white + faint white wash + 1px lift. Active → white with a 2px Electric Orange bottom border. Dropdown chevron rotates 180° on open.
 - **Scroll behavior:** Solidifies to opaque `#1A1A1A` and shrinks 80px→56px at 80px scroll, restores below 60px (hysteresis kills flicker). On hero pages, starts fully transparent and transitions to glass after 50px.
 - **Mobile:** Collapses to a hamburger slide-down panel (staggered link entrance) below 1024px; wordmark swaps to lettermark below 768px. Search becomes a centered overlay dialog.

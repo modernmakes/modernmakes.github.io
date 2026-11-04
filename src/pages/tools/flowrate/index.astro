@@ -14,18 +14,18 @@ const currentPath = '/tools';
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
-        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
-        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
-        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Flow Rate Calculator</span>
+        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
+        <span style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Flow Rate Calculator</span>
       </div>
       <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calculator</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Flow Rate Calculator</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Enter your print settings to calculate the volumetric flow rate your hotend must sustain. Compare the result against your hotend's rated maximum.</p>
+      <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:600px">Enter your print settings to calculate the volumetric flow rate your hotend must sustain. Compare the result against your hotend's rated maximum.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">mm³/s</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Hotend Matching</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Hotend Matching</span>
       </div>
     </div>
   </div>
@@ -190,10 +190,10 @@ const currentPath = '/tools';
   background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 10px;
   padding: 28px 32px;
 }
-.tc-result-eyebrow { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: 8px; }
+.tc-result-eyebrow { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--on-dark-muted); margin-bottom: 8px; }
 .tc-result-num { font-family: var(--fd); font-size: 72px; font-weight: 800; color: var(--accent); line-height: 1; }
-.tc-result-unit { font-family: var(--fm); font-size: 18px; color: rgba(255,255,255,.4); }
-.tc-formula { font-family: var(--fm); font-size: 11px; color: rgba(255,255,255,.3); margin-top: 10px; }
+.tc-result-unit { font-family: var(--fm); font-size: 18px; color: var(--on-dark-muted); }
+.tc-formula { font-family: var(--fm); font-size: 11px; color: var(--on-dark-muted); margin-top: 10px; }
 .tc-copy-btn {
   font-family: var(--fu); font-size: 11px; font-weight: 700; margin-top: 14px;
   padding: 7px 16px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.6);
@@ -224,10 +224,10 @@ const currentPath = '/tools';
 .tc-ref-table tr:last-child td { border-bottom: none; }
 .tc-ref-table td:first-child { font-family: var(--fm); font-size: 12px; color: var(--black); }
 .tc-badge { font-family: var(--fm); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; }
-.tc-badge-ok      { background: rgba(74,222,128,.12); color: #22c55e; }
-.tc-badge-mid     { background: rgba(251,191,36,.12); color: #d97706; }
-.tc-badge-high    { background: rgba(255,90,31,.12); color: var(--accent); }
-.tc-badge-extreme { background: rgba(239,68,68,.12); color: #ef4444; }
+.tc-badge-ok      { background: rgba(74,222,128,.12); color: var(--verdict-wh-ink); }
+.tc-badge-mid     { background: rgba(251,191,36,.12); color: var(--caution-ink); }
+.tc-badge-high    { background: rgba(255,90,31,.12); color: var(--accent-ink); }
+.tc-badge-extreme { background: rgba(239,68,68,.12); color: var(--danger); }
 
 @media (max-width: 860px)  { .tc-inner { grid-template-columns: 1fr; } }
 @media (max-width: 768px)  { .tc-wrap { padding: 20px 0 48px; } .tc-inner { padding: 0 20px; } }

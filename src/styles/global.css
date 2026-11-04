@@ -12,11 +12,18 @@
   --accent-dk:     #C93B08;
   --accent-mid:    #FF7A45;
   --accent-t:      #FFE9E1;
+  /* Text-colour rules for orange (AA, 4.5:1):
+     - Small orange text (< 18.66px bold / 24px regular) on light surfaces uses
+       --accent-dk (5.1:1 white, 4.7:1 --bg); on orange tints use --accent-ink.
+     - --accent stays for fills, large text, and text on the dark planes.
+     - Labels on an --accent fill use --on-accent (ink, 5.6:1); their hover
+       fill is --accent-mid (6.7:1), never --accent-dk (3.4:1 with ink). */
+  --on-accent:     var(--black);
 
   /* Neutrals */
   --black:         #1A1A1A;
   --g1:            #5A5A5A;
-  --g2:            #8C8C8C;
+  --g2:            #6F6F6F;   /* AA: 5.0:1 on white, 4.65:1 on --bg (was #8C8C8C, 3.4:1) */
   --grey-1:        var(--g1);
   --grey-2:        var(--g2);
   --bg:            #F7F6F3;
@@ -59,6 +66,16 @@
   /* Skip verdict (DESIGN.md): burnt orange-amber on a warm tint. The text uses
      a deeper ink of the same hue: DESIGN.md's #E65100 on #FFF3E0 is ~3.5:1,
      under AA for 10px badge text; --verdict-skip-ink is ~5.5:1. */
+  /* Workhorse badge text: same hue as the old #16a34a, darkened for AA
+     (5.2:1 white, 4.7:1 on its 12% tint). */
+  --verdict-wh-ink:      #117D39;
+  /* Verdict text on the dark planes (detail hero, glass cards). */
+  --verdict-wh-on-dark:  #4ADE80;
+  --verdict-be-on-dark:  #60A5FA;
+  --verdict-skip-on-dark: color-mix(in srgb, var(--verdict-skip) 55%, white);
+  /* Amber status text (tool tier badges): #D97706 darkened for AA on its tint. */
+  --caution-ink:         #AA5D05;
+
   --verdict-skip:        #E65100;
   --verdict-skip-ink:    #B23C00;
   --verdict-skip-t:      #FFF3E0;
@@ -316,7 +333,7 @@ a:not([class]):active { opacity: .6; }
   transition: color .15s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .section-head-link:hover { color: var(--accent); }
+  .section-head-link:hover { color: var(--accent-dk); }
 }
 .section-head-link::after { content: '→'; font-size: 13px; }
 
@@ -338,7 +355,7 @@ a:not([class]):active { opacity: .6; }
 .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
 .card-cat {
   font-size: 9px; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 5px;
+  text-transform: uppercase; color: var(--accent-dk); margin-bottom: 5px;
 }
 .card-title {
   font-family: var(--fd); font-size: 17px; font-weight: 800;
@@ -365,11 +382,11 @@ a:not([class]):active { opacity: .6; }
    fallback (blue), verdict-skip = Skip (burnt orange, DESIGN.md). Colours match
    the detail-page badge map in ComponentLayout.astro so index and detail agree. */
 .verdict-benchmark { background: var(--black); border: 1px solid var(--black); color: var(--surface); }
-.verdict-best { background: rgba(34,197,94,.12);  border: 1px solid rgba(34,197,94,.25);  color: #16a34a; }
+.verdict-best { background: rgba(34,197,94,.12);  border: 1px solid rgba(34,197,94,.25);  color: var(--verdict-wh-ink); }
 .verdict-rec  { background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.25); color: #1565c0; }
 .verdict-skip,
 .verdict-avoid { background: var(--verdict-skip-t); border: 1px solid var(--verdict-skip-border); color: var(--verdict-skip-ink); }
-.verdict-upd  { background: rgba(255,90,31,.12);  border: 1px solid rgba(255,90,31,.25);  color: var(--accent); }
+.verdict-upd  { background: rgba(255,90,31,.12);  border: 1px solid rgba(255,90,31,.25);  color: var(--accent-ink); }
 .verdict-comm {
   background: color-mix(in srgb, var(--verdict-comm-tone) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--verdict-comm-tone) 25%, transparent);
@@ -390,7 +407,7 @@ a:not([class]):active { opacity: .6; }
   font-size: 12px; color: var(--g2); text-decoration: none; font-family: var(--fm);
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-review:hover { color: var(--accent); }
+  .btn-review:hover { color: var(--accent-dk); }
 }
 
 /* ── PRODUCT CARDS (ecosystem pages) ── */
@@ -434,16 +451,16 @@ a:not([class]):active { opacity: .6; }
   font-family: var(--fm); font-size: 13px; font-weight: 500; color: var(--black);
 }
 .btn-buy {
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--on-accent);
   font-size: 12px; font-weight: 700; padding: 6px 14px;
   border-radius: 4px; border: none; cursor: pointer;
   font-family: var(--fu); white-space: nowrap;
   transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
   display: inline-block;
 }
-.btn-buy:active { background: var(--accent-dk); }
+.btn-buy:active { background: var(--accent-mid); }
 @media (hover: hover) and (pointer: fine) {
-  .btn-buy:hover { background: var(--accent-dk); }
+  .btn-buy:hover { background: var(--accent-mid); }
 }
 
 /* Community mod card variant */
@@ -539,7 +556,7 @@ a:not([class]):active { opacity: .6; }
   font-family: var(--fu);
   font-weight: 800;
   font-size: 14px;
-  color: var(--accent);
+  color: var(--accent-dk);
 }
 .model-context-switch {
   color: var(--g2);
@@ -552,7 +569,7 @@ a:not([class]):active { opacity: .6; }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .model-context-switch:hover { color: var(--accent); }
+  .model-context-switch:hover { color: var(--accent-dk); }
 }
 
 /* ── PAGE HERO UTILITY ── */
@@ -600,7 +617,7 @@ main:not(.main-has-hero) { padding-top: 60px; }
 }
 .lg-breadcrumb a { color: var(--g2); }
 @media (hover: hover) and (pointer: fine) {
-  .lg-breadcrumb a:hover { color: var(--accent); }
+  .lg-breadcrumb a:hover { color: var(--accent-dk); }
 }
 .lg-layout {
   display: grid;
@@ -686,7 +703,7 @@ main:not(.main-has-hero) { padding-top: 60px; }
 .lg-email-link {
   font-family: var(--fm);
   font-size: 14px;
-  color: var(--accent);
+  color: var(--accent-dk);
   font-weight: 700;
 }
 @media (hover: hover) and (pointer: fine) {
@@ -739,7 +756,7 @@ main:not(.main-has-hero) { padding-top: 60px; }
   text-transform: uppercase;
   padding: 13px 28px;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   border: none;
   border-radius: 5px;
   cursor: pointer;

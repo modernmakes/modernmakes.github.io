@@ -91,15 +91,16 @@ const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
 
 // Keyed by display label (current taxonomy) with the prior tokens kept for
 // back-compat. Lookup is case-insensitive so "WORKHORSE"/"Workhorse" both hit.
+// The badge sits on the dark .comp-hero, so text uses the on-dark verdict tokens.
 const verdictColors: Record<string, { bg: string; text: string; border: string }> = {
-  benchmark:       { bg: 'var(--black)', text: 'var(--surface)', border: 'var(--black)' },
-  workhorse:       { bg: 'rgba(34,197,94,.12)',  text: '#16a34a', border: 'rgba(34,197,94,.3)' },
-  'bleeding edge': { bg: 'rgba(59,130,246,.12)', text: '#1565c0', border: 'rgba(59,130,246,.3)' },
-  skip:            { bg: 'var(--verdict-skip-t)', text: 'var(--verdict-skip-ink)', border: 'var(--verdict-skip-border)' },
+  benchmark:       { bg: 'var(--surface)', text: 'var(--black)', border: 'var(--surface)' },
+  workhorse:       { bg: 'rgba(34,197,94,.12)',  text: 'var(--verdict-wh-on-dark)', border: 'rgba(34,197,94,.3)' },
+  'bleeding edge': { bg: 'rgba(59,130,246,.12)', text: 'var(--verdict-be-on-dark)', border: 'rgba(59,130,246,.3)' },
+  skip:            { bg: 'color-mix(in srgb, var(--verdict-skip) 15%, transparent)', text: 'var(--verdict-skip-on-dark)', border: 'color-mix(in srgb, var(--verdict-skip) 40%, transparent)' },
   // Back-compat with the prior verdict tokens.
-  buy:      { bg: 'rgba(34,197,94,.12)',  text: '#16a34a', border: 'rgba(34,197,94,.3)' },
-  consider: { bg: 'rgba(59,130,246,.12)', text: '#1565c0', border: 'rgba(59,130,246,.3)' },
-  updated:  { bg: 'rgba(255,90,31,.12)',  text: '#c93b08', border: 'rgba(255,90,31,.3)' },
+  buy:      { bg: 'rgba(34,197,94,.12)',  text: 'var(--verdict-wh-on-dark)', border: 'rgba(34,197,94,.3)' },
+  consider: { bg: 'rgba(59,130,246,.12)', text: 'var(--verdict-be-on-dark)', border: 'rgba(59,130,246,.3)' },
+  updated:  { bg: 'rgba(255,90,31,.12)',  text: 'var(--accent-mid)', border: 'rgba(255,90,31,.3)' },
 };
 const vc = verdictColors[String(verdictLabel).toLowerCase()] ?? verdictColors['bleeding edge'];
 
@@ -776,7 +777,7 @@ const breadcrumbSchema = {
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--on-accent);
   background: var(--accent);
   padding: 2px 7px;
   border-radius: 3px;
