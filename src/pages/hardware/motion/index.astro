@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../../../components/TypeCover.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
@@ -13,7 +14,6 @@ const live = [
     difficultyColor: "#C62828",
     creator: "@mammoth-3D-DevTeam",
     creatorUrl: "https://github.com/mammoth-3D",
-    gradient: "linear-gradient(135deg, #0d1520, #1a0e08)",
   },
 ];
 
@@ -25,7 +25,6 @@ const comingSoon = [
     difficulty: "Advanced",
     difficultyColor: "#C62828",
     creator: "@mammoth-3D-DevTeam",
-    gradient: "linear-gradient(135deg, #1a0e08, #0d1520)",
   },
   {
     title: "Pandora Gantry",
@@ -34,7 +33,6 @@ const comingSoon = [
     difficulty: "Intermediate",
     difficultyColor: "#E65100",
     creator: "@MasturMynd",
-    gradient: "linear-gradient(135deg, #0d1a10, #1a1208)",
   },
   {
     title: "VT.850 Motion System",
@@ -43,7 +41,6 @@ const comingSoon = [
     difficulty: "Advanced",
     difficultyColor: "#C62828",
     creator: "@VoronTech",
-    gradient: "linear-gradient(135deg, #101020, #0a0d1a)",
   },
 ];
 ---
@@ -78,8 +75,8 @@ const comingSoon = [
       <div class="grid-3">
         {live.map(mod => (
           <a href={mod.href} class="mm-card" aria-label={mod.title}>
-            <div class="mm-card-img" style={`background:${mod.gradient}`}>
-              <span class="mm-motion-badge">{mod.motionType}</span>
+            <div class="mm-card-img">
+              <TypeCover eyebrow={mod.motionType} title={mod.title} />
             </div>
             <div class="mm-card-body">
               <div class="mm-card-title">{mod.title}</div>
@@ -117,8 +114,8 @@ const comingSoon = [
       <div class="grid-3">
         {comingSoon.map(mod => (
           <div class="mm-card mm-card-soon" aria-label={`${mod.title} — coming soon`}>
-            <div class="mm-card-img mm-card-img-dim" style={`background:${mod.gradient}`}>
-              <span class="mm-motion-badge mm-motion-badge-dim">{mod.motionType}</span>
+            <div class="mm-card-img mm-card-img-dim">
+              <TypeCover eyebrow={mod.motionType} title={mod.title} />
             </div>
             <div class="mm-card-body">
               <div class="mm-card-title mm-title-dim">{mod.title}</div>
@@ -173,23 +170,6 @@ const comingSoon = [
   padding: 10px 14px;
 }
 .mm-card-img-dim { filter: grayscale(.4); }
-.mm-motion-badge {
-  font-family: var(--fu);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(255,90,31,.15);
-  border: 1px solid rgba(255,90,31,.25);
-  border-radius: 3px;
-  padding: 2px 8px;
-}
-.mm-motion-badge-dim {
-  color: rgba(255,255,255,.4);
-  background: rgba(255,255,255,.06);
-  border-color: rgba(255,255,255,.1);
-}
 .mm-card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; }
 .mm-card-title { font-family: var(--fd); font-size: 17px; font-weight: 800; color: var(--black); line-height: 1.15; }
 .mm-title-dim { color: var(--g1); }

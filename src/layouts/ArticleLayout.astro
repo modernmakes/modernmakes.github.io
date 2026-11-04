@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -58,14 +59,18 @@ const breadcrumbItems = [
   <div class="art-hero">
     {heroImage
       ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
-      : <div class="art-hero-bg" style="background: linear-gradient(160deg, #1a0e0a, #0d1520 55%, #1a1520)"></div>
+      : <TypeCover size="hero" eyebrow={category} title={title} date={date} />
     }
-    <div class="art-hero-overlay"></div>
-    <div class="art-hero-foot">
-      <div class="art-hero-container">
-        <span class="art-hero-cat">{category}</span>
-      </div>
-    </div>
+    {heroImage && (
+      <>
+        <div class="art-hero-overlay"></div>
+        <div class="art-hero-foot">
+          <div class="art-hero-container">
+            <span class="art-hero-cat">{category}</span>
+          </div>
+        </div>
+      </>
+    )}
   </div>
 
   <!-- ── ARTICLE HEADER ── -->
@@ -134,9 +139,8 @@ const breadcrumbItems = [
       <div class="art-related-grid">
         {relatedArticles.map(card => (
           <a href={card.href} class="art-related-card">
-            <div class="art-related-card-img" style={`background: ${card.gradient}`}>
-              <div class="art-related-card-overlay"></div>
-              <span class="art-related-card-cat-overlay">{card.category}</span>
+            <div class="art-related-card-img">
+              <TypeCover eyebrow={card.category} title={card.title} date={card.date} />
             </div>
             <div class="art-related-card-body">
               <div class="art-related-card-cat">{card.category}</div>

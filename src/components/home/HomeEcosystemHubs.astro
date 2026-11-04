@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../TypeCover.astro';
 import data from '../../data/homepage.json';
 const ecosystems = (data as any).ecosystems ?? [];
 const live = ecosystems.filter((e: any) => e.status === 'live');
@@ -9,8 +10,7 @@ const coming = ecosystems.filter((e: any) => e.status === 'coming');
 const validEcoSlugs = ecosystems.map((e: any) => e.slug).filter(Boolean);
 
 function bgStyle(eco: any) {
-  if (eco.image) return `background-image:url('${eco.image}');background-size:cover;background-position:center right;`;
-  return `background:${eco.gradient};`;
+  return `background-image:url('${eco.image}');background-size:cover;background-position:center right;`;
 }
 ---
 
@@ -52,9 +52,15 @@ function bgStyle(eco: any) {
           <a href={eco.href} class="eco-card" data-eco-slug={eco.slug} data-reveal data-reveal-delay={240 + i * 120} aria-label={`Explore the ${eco.name} ecosystem`}>
             <!-- Printer image area -->
             <div class="eco-card-img">
-              <div class="eco-card-img-bg" style={bgStyle(eco)}></div>
-              <div class="eco-card-img-overlay"></div>
-              <span class="eco-card-img-label">{eco.name}</span>
+              {eco.image ? (
+                <>
+                  <div class="eco-card-img-bg" style={bgStyle(eco)}></div>
+                  <div class="eco-card-img-overlay"></div>
+                  <span class="eco-card-img-label">{eco.name}</span>
+                </>
+              ) : (
+                <TypeCover eyebrow="Printer ecosystem" title={eco.name} />
+              )}
             </div>
             <!-- Card content -->
             <div class="eco-card-body">

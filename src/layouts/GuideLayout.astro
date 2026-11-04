@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -49,8 +50,8 @@ const moreNews = [
 ];
 
 const relatedArticles = [
-  { category: 'News',     title: 'Bondtech INDX: 8-Material Tool-Changing for the Prusa CORE One', href: '/news/bondtech-indx-tool-changer-released', date: 'May 22, 2026', gradient: 'linear-gradient(135deg,#0d1520,#1a1008)' },
-  { category: 'Printers', title: 'Voron Phoenix: The 600mm IDEX Voron, Not Released Yet', href: '/news/voron-phoenix-idex-preview',  date: 'May 21, 2026', gradient: 'linear-gradient(135deg,#1f2010,#131708)' },
+  { category: 'News',     title: 'Bondtech INDX: 8-Material Tool-Changing for the Prusa CORE One', href: '/news/bondtech-indx-tool-changer-released', date: 'May 22, 2026' },
+  { category: 'Printers', title: 'Voron Phoenix: The 600mm IDEX Voron, Not Released Yet', href: '/news/voron-phoenix-idex-preview',  date: 'May 21, 2026' },
 ];
 
 const siteBase = Astro.site
@@ -221,9 +222,8 @@ const breadcrumbItems = [
       <div class="art-related-grid">
         {relatedArticles.map(card => (
           <a href={card.href} class="art-related-card">
-            <div class="art-related-card-img" style={`background: ${card.gradient}`}>
-              <div class="art-related-card-overlay"></div>
-              <span class="art-related-card-cat-overlay">{card.category}</span>
+            <div class="art-related-card-img">
+              <TypeCover eyebrow={card.category} title={card.title} date={card.date} />
             </div>
             <div class="art-related-card-body">
               <div class="art-related-card-cat">{card.category}</div>

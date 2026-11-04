@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../TypeCover.astro';
 import { getCollection } from 'astro:content';
 
 const [newsEntries, guideEntries, comparisonEntries] = await Promise.all([
@@ -44,10 +45,7 @@ const latestArticles = allArticles
   .slice(0, 4);
 
 function bgStyle(heroImage?: string) {
-  if (heroImage) {
-    return `background-image:url('${heroImage}');background-size:cover;background-position:center;`;
-  }
-  return `background:var(--dark-bg);`;
+  return heroImage ? `background-image:url('${heroImage}');` : undefined;
 }
 
 function formatDate(date: Date) {
@@ -65,8 +63,14 @@ function formatDate(date: Date) {
       {latestArticles.map((article, i) => (
         <a href={article.href} class="la-card" data-reveal data-reveal-delay={i * 60} aria-label={article.title}>
           <div class="la-card-img" style={bgStyle(article.heroImage)}>
-            <div class="la-card-img-overlay"></div>
-            <span class="la-card-img-cat">{article.category}</span>
+            {article.heroImage ? (
+              <>
+                <div class="la-card-img-overlay"></div>
+                <span class="la-card-img-cat">{article.category}</span>
+              </>
+            ) : (
+              <TypeCover eyebrow={article.category} title={article.title} date={formatDate(article.date)} />
+            )}
           </div>
           <div class="la-card-body">
             <div class="la-card-cat">{article.category}</div>

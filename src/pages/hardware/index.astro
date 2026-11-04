@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../../components/TypeCover.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -67,7 +68,6 @@ const featured = [
     href: '/hardware/hotends/rapido-2-uhf',
     image: hotendImage('rapido-2-uhf'),
     description: '60 mm³/s max flow. The benchmark high-flow hotend for CoreXY builds in 2026.',
-    gradient: 'linear-gradient(135deg, #1a0e0a, #0d1520)',
   },
   {
     title: 'Mammoth3D',
@@ -78,7 +78,6 @@ const featured = [
     href: '/hardware/motion/mammoth-awd-gantry-300',
     image: null,
     description: 'All-wheel-drive gantry conversion for Voron 2.4. Adds two additional stepper motors for dramatically improved belt tension consistency and higher cornering speeds. Designed by @mammoth-3D-DevTeam.',
-    gradient: 'linear-gradient(135deg, #0d1520, #1a1510)',
   },
   {
     title: 'CoreXY Reference',
@@ -89,7 +88,6 @@ const featured = [
     href: '/hardware/motion/corexy',
     image: null,
     description: 'How CoreXY kinematics work and which printers use this motion architecture.',
-    gradient: 'linear-gradient(135deg, #101520, #0d0d18)',
   },
 ];
 ---
@@ -122,10 +120,16 @@ const featured = [
       <div class="grid-3">
         {featured.map(f => (
           <a href={f.href} class="hw-feat-card">
-            <div class="hw-feat-img" style={`background:${f.gradient}`}>
-              {f.image && <img src={f.image} alt={f.title} loading="lazy" decoding="async" class="hw-feat-img-el" />}
-              {f.image && <div class="hw-feat-img-scrim" aria-hidden="true"></div>}
-              <span class="hw-feat-cat">{f.category}</span>
+            <div class="hw-feat-img">
+              {f.image ? (
+                <>
+                  <img src={f.image} alt={f.title} loading="lazy" decoding="async" class="hw-feat-img-el" />
+                  <div class="hw-feat-img-scrim" aria-hidden="true"></div>
+                  <span class="hw-feat-cat">{f.category}</span>
+                </>
+              ) : (
+                <TypeCover eyebrow={f.category} title={f.title} />
+              )}
             </div>
             <div class="hw-feat-body">
               <div class="hw-feat-top">

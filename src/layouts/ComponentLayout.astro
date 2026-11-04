@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -184,9 +185,7 @@ const breadcrumbSchema = {
       <div class="comp-hero-image">
         {heroImage
           ? <img src={heroImage} alt={title} loading="eager" fetchpriority="high" class="comp-hero-img" />
-          : <div class="comp-hero-placeholder">
-              <span class="comp-hero-placeholder-cat">{category}</span>
-            </div>
+          : <div class="comp-hero-placeholder"><TypeCover eyebrow={category} title={title} /></div>
         }
       </div>
       <div class="comp-hero-info">
@@ -451,8 +450,8 @@ const breadcrumbSchema = {
         <div class="comp-related-grid">
           {relatedComponents.map(r => (
             <a href={r.href} class="comp-related-card">
-              <div class="comp-related-card-img" style={r.gradient ? `background:${r.gradient}` : 'background:linear-gradient(135deg,#1a1520,#0d0d18)'}>
-                <span class="comp-related-card-cat">{r.category}</span>
+              <div class="comp-related-card-img">
+                <TypeCover eyebrow={r.category} title={r.title} />
               </div>
               <div class="comp-related-card-body">
                 <div class="comp-related-card-title">{r.title}</div>
@@ -505,20 +504,9 @@ const breadcrumbSchema = {
   display: block;
 }
 .comp-hero-placeholder {
+  position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #1a1520, #0d0d18);
-}
-.comp-hero-placeholder-cat {
-  font-family: var(--fd);
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.2);
 }
 .comp-breadcrumb {
   display: flex;
@@ -1169,14 +1157,6 @@ const breadcrumbSchema = {
   display: flex;
   align-items: flex-end;
   padding: 12px;
-}
-.comp-related-card-cat {
-  font-family: var(--fu);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.5);
 }
 .comp-related-card-body {
   padding: 14px 16px 18px;

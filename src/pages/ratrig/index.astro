@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../../components/TypeCover.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -123,7 +124,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
         {framePrecisionParts.map((p: { name: string; vendor: string; price: string; verdictLabel: string; verdictClass: string; desc: string; href: string }) => (
           <a href={p.href} target="_blank" rel="noopener">
             <div class="product-card community">
-              <div class="product-card-img" style="background:linear-gradient(135deg,#181818,#0d0d0d);height:80px"></div>
+              <div class="product-card-img" style="height:80px"><TypeCover eyebrow={p.vendor} title={p.name} /></div>
               <div class="product-card-body">
                 <span class="community-badge">{p.vendor} · {p.price}</span>
                 <div class="product-card-name">{p.name}</div>
@@ -147,10 +148,10 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
         <h2 class="section-head-label">Top picks for RatRig</h2>
       </div>
       <div class="grid-4">
-        {topPicks.map((p: { name: string; brand: string; spec: string; price: string; verdictLabel: string; verdictClass: string; href: string; bg: string }) => (
+        {topPicks.map((p: { name: string; brand: string; spec: string; price: string; verdictLabel: string; verdictClass: string; href: string }) => (
           <a href={p.href} target={p.href.startsWith('http') ? '_blank' : undefined} rel={p.href.startsWith('http') ? 'noopener' : undefined}>
             <div class="product-card">
-              <div class="product-card-img" style={`background:${p.bg};height:120px`}></div>
+              <div class="product-card-img" style="height:120px"><TypeCover eyebrow={p.brand} title={p.name} /></div>
               <div class="product-card-body">
                 <div class="product-card-brand">{p.brand}</div>
                 <div class="product-card-name">{p.name}</div>

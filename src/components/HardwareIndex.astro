@@ -1,4 +1,5 @@
 ---
+import TypeCover from './TypeCover.astro';
 // Reusable hardware category index — the exact /hardware/hotends grid pattern
 // (dark hero, sticky verdict filter, count summary, card grid, ItemList schema,
 // fade-filter script). Every hardware category renders through this so the UI
@@ -20,7 +21,6 @@ interface Props {
   title: string;          // <title> / meta
   description: string;    // meta description
   schemaName: string;     // ItemList schema name
-  gradient?: string;      // card image gradient (shown behind the image when one exists)
   chips?: (r: any) => string[];        // spec chips per card
   excerptOf?: (r: any) => string;      // card excerpt
   imageOf?: (r: any) => string | null | undefined;  // card image URL source
@@ -38,7 +38,6 @@ const {
   title,
   description,
   schemaName,
-  gradient = 'linear-gradient(135deg,#1a0e0a,#0d1520)',
   chips = () => [],
   excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
   imageOf = (r: any) => r['Image URL'] ?? r['Hero Image'] ?? null,
@@ -127,13 +126,17 @@ const itemListSchema = {
             const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
             return (
               <a href={`/hardware/${route}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''}>
-                {hasImg && (
-                  <div class="card-img" style={`background:${gradient}`}>
-                    <img src={imgSrc} alt={r['Name']} loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
-                    <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">{categoryLabel}</span>
-                  </div>
-                )}
+                <div class="card-img">
+                  {/* Cover is the base layer: it shows while the image loads and if a hotlinked image fails. */}
+                  <TypeCover eyebrow={categoryLabel} title={r['Name']} />
+                  {hasImg && (
+                    <>
+                      <img src={imgSrc} alt={r['Name']} loading="lazy" decoding="async" onerror="this.parentElement.classList.add('card-img--failed')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
+                      <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:0 14px 10px">{categoryLabel}</span>
+                    </>
+                  )}
+                </div>
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
                   <h2 class="card-title">{r['Name']}</h2>

@@ -1,4 +1,5 @@
 ---
+import TypeCover from '../../../components/TypeCover.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
@@ -19,7 +20,6 @@ const toolheads = [
     compatible: '2.4,trident',
     href: '/voron/toolheads/stealthburner',
     githubUrl: 'https://github.com/VoronDesign/Voron-Stealthburner',
-    bg: 'linear-gradient(135deg,#1a0e0a,#0d1520)',
   },
   {
     name: 'Xol Toolhead',
@@ -35,7 +35,6 @@ const toolheads = [
     compatible: '2.4,trident',
     href: '/voron/toolheads/xol',
     githubUrl: 'https://github.com/Armchair-Engineering/Xol-Toolhead',
-    bg: 'linear-gradient(135deg,#0d1a10,#1a1008)',
   },
   {
     name: 'Dragon Burner',
@@ -51,7 +50,6 @@ const toolheads = [
     compatible: '2.4,trident',
     href: '/voron/toolheads/dragon-burner',
     githubUrl: 'https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner',
-    bg: 'linear-gradient(135deg,#1f2010,#131708)',
   },
   {
     name: 'Mini-Stealthburner',
@@ -67,7 +65,6 @@ const toolheads = [
     compatible: '2.4,trident',
     href: '/voron/toolheads/mini-stealthburner',
     githubUrl: 'https://github.com/VoronDesign/Voron-0',
-    bg: 'linear-gradient(135deg,#1a1520,#0d0d18)',
   },
   {
     name: 'Archetype',
@@ -83,7 +80,6 @@ const toolheads = [
     compatible: '2.4,trident',
     href: '/voron/toolheads/archetype',
     githubUrl: 'https://github.com/Armchair-Engineering/Archetype',
-    bg: 'linear-gradient(135deg,#101820,#0d0d14)',
   },
 ];
 ---
@@ -138,11 +134,8 @@ const toolheads = [
       <div class="grid-3">
         {toolheads.map(th => (
           <div class="product-card" data-compatible={th.compatible} data-tags={th.tags}>
-            <div class="product-card-img" style={`background:${th.bg};height:120px;display:flex;align-items:center;justify-content:center`}>
-              <div style="text-align:center">
-                <div style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:rgba(255,255,255,.15);letter-spacing:-.5px">{th.name}</div>
-                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.08);text-transform:uppercase;letter-spacing:.08em">Toolhead</div>
-              </div>
+            <div class="product-card-img" style="height:120px">
+              <TypeCover eyebrow="Toolhead" title={th.name} />
             </div>
             <div class="product-card-body">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
