@@ -374,7 +374,6 @@ const breadcrumbSchema = {
                   class={`comp-vendor-card${v.primary ? ' comp-vendor-primary' : ''}`}
                   target="_blank"
                   rel="noopener sponsored"
-                  aria-label={`Buy from ${v.name}`}
                 >
                   {v.primary && <span class="comp-vendor-primary-badge">Best Option</span>}
                   <span class="comp-vendor-region">{regionLabels[v.region] ?? 'Global'}</span>
@@ -425,7 +424,6 @@ const breadcrumbSchema = {
                   class="comp-vendor-quick"
                   target="_blank"
                   rel="noopener sponsored"
-                  aria-label={`Buy from ${v.name}`}
                 >
                   <span class="comp-vendor-quick-name">{v.name}</span>
                   <span class="comp-vendor-quick-arrow">→</span>

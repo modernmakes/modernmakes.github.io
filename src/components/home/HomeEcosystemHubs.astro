@@ -49,7 +49,7 @@ function bgStyle(eco: any) {
       <!-- Live ecosystem cards -->
       <div class="eco-live">
         {live.map((eco: any, i: number) => (
-          <a href={eco.href} class="eco-card" data-eco-slug={eco.slug} data-reveal data-reveal-delay={240 + i * 120} aria-label={`Explore the ${eco.name} ecosystem`}>
+          <a href={eco.href} class="eco-card" data-eco-slug={eco.slug} data-reveal data-reveal-delay={240 + i * 120}>
             <!-- Printer image area -->
             <div class="eco-card-img">
               {eco.image ? (

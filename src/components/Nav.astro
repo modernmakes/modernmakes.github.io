@@ -80,7 +80,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 </nav>
 
 <!-- Sibling of <nav> — participates in normal document flow to push content down -->
-<div class="nav-panel" id="nav-panel" aria-hidden="true">
+<div class="nav-panel" id="nav-panel" inert>
   <div class="panel-inner">
 
     <div class="panel-eco-group">
@@ -688,14 +688,14 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     /* ── Hamburger panel ── */
     function closePanel() {
       panel.classList.remove('open');
-      panel.setAttribute('aria-hidden', 'true');
+      panel.inert = true; // inert: hidden from assistive tech and out of the tab order
       hamburger.classList.remove('is-open');
       hamburger.setAttribute('aria-expanded', 'false');
       hamburger.setAttribute('aria-label', 'Open menu');
     }
     function openPanel() {
       panel.classList.add('open');
-      panel.setAttribute('aria-hidden', 'false');
+      panel.inert = false;
       hamburger.classList.add('is-open');
       hamburger.setAttribute('aria-expanded', 'true');
       hamburger.setAttribute('aria-label', 'Close menu');
