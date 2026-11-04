@@ -77,6 +77,8 @@
   --verdict-skip-on-dark: color-mix(in srgb, var(--verdict-skip) 55%, white);
   /* Amber status text (tool tier badges): #D97706 darkened for AA on its tint. */
   --caution-ink:         #AA5D05;
+  /* Printables brand orange (#FF6C00) darkened same-hue for AA on white (4.58:1); distinct from --accent-dk. */
+  --printables-ink:      #C45300;
 
   --verdict-skip:        #E65100;
   --verdict-skip-ink:    #B23C00;
