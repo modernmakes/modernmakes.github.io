@@ -72,10 +72,10 @@ const {
 } = Astro.props;
 
 const difficultyColor = {
-  Beginner:     '#2E7D32',
-  Intermediate: '#E65100',
-  Advanced:     '#C62828',
-}[difficulty] ?? '#E65100';
+  Beginner:     '#4ADE80',
+  Intermediate: '#FBA23C',
+  Advanced:     '#F87171',
+}[difficulty] ?? '#FBA23C';
 
 const verdictStyles = {
   ESSENTIAL:   { bg: 'rgba(255,90,31,.12)',  border: 'rgba(255,90,31,.35)',  text: 'var(--accent-ink)' },
@@ -488,7 +488,7 @@ const breadcrumbItems = [
   font-family: var(--fu);
   font-size: 16px;
   font-weight: 500;
-  color: rgba(255,255,255,.45);
+  color: var(--on-dark-muted);
   letter-spacing: .04em;
   text-transform: uppercase;
   margin-bottom: 18px;
@@ -534,7 +534,7 @@ const breadcrumbItems = [
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.35);
+  color: var(--on-dark-muted);
 }
 .fil-stat-value {
   font-family: var(--fm);
@@ -562,7 +562,7 @@ const breadcrumbItems = [
 }
 .fil-chip-opt {
   background: rgba(255,255,255,.07);
-  color: rgba(255,255,255,.5);
+  color: var(--on-dark-muted);
   border: 1px solid rgba(255,255,255,.12);
 }
 
@@ -801,7 +801,7 @@ const breadcrumbItems = [
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.5);
+  color: var(--on-dark-muted);
   text-align: left;
 }
 .fil-compat-table tbody tr {
@@ -1074,7 +1074,7 @@ const breadcrumbItems = [
 .fil-related-card-desc {
   font-family: var(--fu);
   font-size: 12px;
-  color: rgba(255,255,255,.45);
+  color: var(--on-dark-muted);
   line-height: 1.55;
   flex: 1;
 }
@@ -1085,7 +1085,7 @@ const breadcrumbItems = [
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.25);
+  color: var(--on-dark-muted);
   border: 1px solid rgba(255,255,255,.12);
   border-radius: 3px;
   padding: 3px 8px;

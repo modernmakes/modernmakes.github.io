@@ -148,12 +148,12 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   font-family: var(--fm);
   font-size: 11px;
 }
-.mods-breadcrumb a { color: rgba(255,255,255,.3); }
+.mods-breadcrumb a { color: var(--on-dark-muted); }
 @media (hover: hover) and (pointer: fine) {
-  .mods-breadcrumb a:hover { color: rgba(255,255,255,.6); }
+  .mods-breadcrumb a:hover { color: var(--on-dark-soft); }
 }
-.mods-breadcrumb span { color: rgba(255,255,255,.2); }
-.mods-breadcrumb span:last-child { color: rgba(255,255,255,.55); }
+.mods-breadcrumb span { color: var(--on-dark-muted); }
+.mods-breadcrumb span:last-child { color: var(--on-dark-muted); }
 .mods-title {
   font-family: var(--fd);
   font-size: clamp(36px, 5vw, 48px);
@@ -166,7 +166,7 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
 .mods-subtitle {
   font-family: var(--fb);
   font-size: 15px;
-  color: rgba(255,255,255,.45);
+  color: var(--on-dark-muted);
   line-height: 1.7;
   max-width: 560px;
 }

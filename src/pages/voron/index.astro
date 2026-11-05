@@ -148,7 +148,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
             return [
               <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
-                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div aria-hidden="true" style="font-size:20px;margin-bottom:8px;color:var(--on-dark-muted)">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                   <div style="font-size:11px;color:var(--on-dark-muted);line-height:1.45;margin-bottom:8px">4 leadscrews, Z joints, gantry-mounted motors</div>
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent)">9 parts →</div>
@@ -156,7 +156,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
               </a>,
               <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
-                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div aria-hidden="true" style="font-size:20px;margin-bottom:8px;color:var(--on-dark-muted)">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                   <div style="font-size:11px;color:var(--on-dark-muted);line-height:1.45;margin-bottom:8px">3-point belt-driven levelling, simpler Z mechanics</div>
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent)">6 parts →</div>
@@ -173,7 +173,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                      data-parts24={String(pc.a)}
                      data-parts-trident={String(pc.t)}
                      style={cardStyle}>
-                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div aria-hidden="true" style="font-size:20px;margin-bottom:8px;color:var(--on-dark-muted)">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                   <div style="font-size:11px;color:var(--on-dark-muted);line-height:1.45;margin-bottom:8px">Stealthburner, Xol, Dragon Burner — full toolhead comparisons and compatibility</div>
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent)">{pc.a} parts →</div>
@@ -186,7 +186,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
             return [
               <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="2.4" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
-                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div aria-hidden="true" style="font-size:20px;margin-bottom:8px;color:var(--on-dark-muted)">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                   <div style="font-size:11px;color:var(--on-dark-muted);line-height:1.45;margin-bottom:8px">Flying gantry — rises with Z. Aluminum or CF options</div>
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent)">5 parts →</div>
@@ -194,7 +194,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
               </a>,
               <a href={baseLink} data-subsystem-link="" data-href={baseLink} data-models="trident" style="min-width:0;overflow:hidden">
                 <div class="subsystem-card" style={cardStyle}>
-                  <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                  <div aria-hidden="true" style="font-size:20px;margin-bottom:8px;color:var(--on-dark-muted)">{sub.icon}</div>
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                   <div style="font-size:11px;color:var(--on-dark-muted);line-height:1.45;margin-bottom:8px">Fixed gantry — bed drops. Simpler mechanics, faster tramming</div>
                   <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent)">4 parts →</div>
@@ -209,7 +209,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                    data-parts24={String(pc.a)}
                    data-parts-trident={String(pc.t)}
                    style={cardStyle}>
-                <div style="font-size:20px;margin-bottom:8px">{sub.icon}</div>
+                <div aria-hidden="true" style="font-size:20px;margin-bottom:8px;color:var(--on-dark-muted)">{sub.icon}</div>
                 <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">{sub.label}</div>
                 <div style="font-size:11px;color:var(--on-dark-muted);line-height:1.45;margin-bottom:8px">{sub.description}</div>
                 <div class="subsystem-parts" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent)">{pc.a} parts →</div>
@@ -755,7 +755,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 }
 .mc-traits li {
   font-size: 13px;
-  color: rgba(255,255,255,.6);
+  color: var(--on-dark-muted);
   line-height: 1.4;
   padding-left: 14px;
   position: relative;

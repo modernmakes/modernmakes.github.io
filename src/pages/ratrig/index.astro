@@ -19,15 +19,15 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
-        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">RatRig</span>
+        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
+        <span style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">RatRig</span>
       </div>
       <div class="hero-content-grid">
         <div>
           <div class="eyebrow" style="margin-bottom:10px">Printer ecosystem</div>
           <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">RatRig</h1>
-          <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px">The commercial kit with an open-hardware commitment. The V-Core 4 pairs AWD CoreXY motion — four independent XY motors instead of the usual two — with a 3030 aluminum frame and official RatRig documentation, in 300mm, 400mm, and 500mm build volumes.</p>
+          <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:560px">The commercial kit with an open-hardware commitment. The V-Core 4 pairs AWD CoreXY motion — four independent XY motors instead of the usual two — with a 3030 aluminum frame and official RatRig documentation, in 300mm, 400mm, and 500mm build volumes.</p>
           <a href="/ratrig/origin" class="ratrig-story-link">The RatRig Story →</a>
         </div>
       </div>
@@ -202,7 +202,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .06em;
-  color: rgba(255,255,255,.35);
+  color: var(--on-dark-muted);
   text-decoration: none;
   transition: color .15s;
 }
@@ -249,6 +249,10 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   line-height: 1;
   margin: 0;
 }
+.flagship-name-col .verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--verdict-wh-on-dark); }
+.mspec-item { display: flex; flex-direction: column; gap: 4px; }
+.mspec-label { font-family: var(--fu); font-size: 10px; font-weight: 600; color: var(--on-dark-muted); text-transform: uppercase; letter-spacing: .1em; }
+.mspec-val { font-family: var(--fd); font-size: 20px; font-weight: 700; color: rgba(255,255,255,.9); }
 .flagship-spec-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(120px, 1fr));
@@ -273,7 +277,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   font-family: 'Lora', serif;
   font-style: italic;
   font-size: 13px;
-  color: rgba(255,255,255,.45);
+  color: var(--on-dark-muted);
   margin: 20px 0 0;
   max-width: 720px;
 }

@@ -59,6 +59,11 @@ const difficultyColor =
   difficulty === 'Beginner'     ? '#2E7D32' :
   difficulty === 'Intermediate' ? '#E65100' : '#C62828';
 
+// Hero badge sits on the dark plane: lighter tones clear 4.5:1 there
+const difficultyOnDark =
+  difficulty === 'Beginner'     ? '#4ADE80' :
+  difficulty === 'Intermediate' ? '#FBA23C' : '#F87171';
+
 const resourceStyles: Record<string, string> = {
   GitHub:        'rgba(36,41,47,.85)',
   BOM:           '#2E7D32',
@@ -111,7 +116,7 @@ const breadcrumbItems = [
         <span class="ms-hero-type-badge">{motionType}</span>
         <span
           class="ms-hero-diff-badge"
-          style={`background:${difficultyColor}22;color:${difficultyColor};border-color:${difficultyColor}44`}
+          style={`background:${difficultyOnDark}22;color:${difficultyOnDark};border-color:${difficultyOnDark}44`}
         >
           {difficulty}
         </span>
@@ -465,7 +470,7 @@ const breadcrumbItems = [
   display: inline-block;
   font-family: var(--fm);
   font-size: 13px;
-  color: rgba(255,255,255,.45);
+  color: var(--on-dark-muted);
   margin-bottom: 28px;
   transition: color .15s;
 }
@@ -484,7 +489,7 @@ const breadcrumbItems = [
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.3);
+  color: var(--on-dark-muted);
 }
 .ms-hero-stat-val {
   font-family: var(--fm);

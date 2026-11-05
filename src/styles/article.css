@@ -231,6 +231,8 @@
   margin: 24px 0;
   overflow-x: auto;
 }
+/* Shiki github-dark comments (#6A737D) are 3.05:1 on the code plane; lift to AA. */
+.astro-code span[style*="#6A737D"] { color: #9DA7B3 !important; }
 .art-content pre code {
   background: none;
   border: none;

@@ -46,9 +46,9 @@ function ratingStyle(rating: string): string {
 }
 
 const difficultyColor: Record<string, string> = {
-  Beginner:     '#16a34a',
-  Intermediate: '#d97706',
-  Advanced:     '#dc2626',
+  Beginner:     '#4ADE80',
+  Intermediate: '#FBA23C',
+  Advanced:     '#F87171',
 };
 ---
 <Base hasPageH1={true}
@@ -276,14 +276,14 @@ const difficultyColor: Record<string, string> = {
   margin-bottom: 24px;
   font-family: var(--fm);
   font-size: 11px;
-  color: rgba(255,255,255,.3);
+  color: var(--on-dark-muted);
 }
-.fil-breadcrumb a { color: rgba(255,255,255,.35); transition: color .12s; }
+.fil-breadcrumb a { color: var(--on-dark-muted); transition: color .12s; }
 @media (hover: hover) and (pointer: fine) {
   .fil-breadcrumb a:hover { color: rgba(255,255,255,.7); }
 }
-.fil-breadcrumb span { color: rgba(255,255,255,.2); }
-.fil-breadcrumb span:last-child { color: rgba(255,255,255,.5); }
+.fil-breadcrumb span { color: var(--on-dark-muted); }
+.fil-breadcrumb span:last-child { color: var(--on-dark-muted); }
 
 .fil-hero-layout {
   display: grid;
@@ -294,7 +294,7 @@ const difficultyColor: Record<string, string> = {
 .fil-material-full {
   font-family: var(--fm);
   font-size: 11px;
-  color: rgba(255,255,255,.3);
+  color: var(--on-dark-muted);
   text-transform: uppercase;
   letter-spacing: .1em;
   margin-bottom: 8px;
@@ -314,16 +314,20 @@ const difficultyColor: Record<string, string> = {
   gap: 12px;
   margin-bottom: 20px;
 }
+/* Badge sits on the dark hero: use the on-dark verdict tones */
+.fil-verdict-row .verdict-rec { background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); color: var(--verdict-be-on-dark); }
+.fil-verdict-row .verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--verdict-wh-on-dark); }
+.fil-verdict-row .verdict-avoid { color: var(--verdict-skip-on-dark); }
 .fil-verdict-label {
   font-family: var(--fu);
   font-size: 13px;
-  color: rgba(255,255,255,.5);
+  color: var(--on-dark-muted);
   font-style: italic;
 }
 .fil-summary {
   font-family: var(--fb);
   font-size: 16px;
-  color: rgba(255,255,255,.6);
+  color: var(--on-dark-muted);
   line-height: 1.75;
   max-width: 640px;
 }
@@ -358,7 +362,7 @@ const difficultyColor: Record<string, string> = {
 .fil-stat-label {
   font-family: var(--fm);
   font-size: 10px;
-  color: rgba(255,255,255,.35);
+  color: var(--on-dark-muted);
   text-transform: uppercase;
   letter-spacing: .06em;
   flex-shrink: 0;
@@ -373,7 +377,7 @@ const difficultyColor: Record<string, string> = {
 .fil-stats-meta {
   font-family: var(--fm);
   font-size: 10px;
-  color: rgba(255,255,255,.2);
+  color: var(--on-dark-muted);
   margin-top: 14px;
   padding-top: 10px;
   border-top: 1px solid rgba(255,255,255,.06);
@@ -556,7 +560,7 @@ const difficultyColor: Record<string, string> = {
 }
 .fil-compat-table th {
   background: var(--black);
-  color: rgba(255,255,255,.5);
+  color: var(--on-dark-muted);
   font-family: var(--fm);
   font-size: 9px;
   text-transform: uppercase;

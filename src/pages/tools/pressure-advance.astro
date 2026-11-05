@@ -17,20 +17,20 @@ const siteBase = Astro.site
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Home</a>
-        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
-        <a href="/tools" style="font-size:11px;color:rgba(255,255,255,.3);font-family:'JetBrains Mono',monospace">Tools</a>
-        <span style="color:rgba(255,255,255,.2);font-size:11px">/</span>
-        <span style="font-size:11px;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace">Pressure Advance</span>
+        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
+        <a href="/tools" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Tools</a>
+        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
+        <span style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Pressure Advance</span>
       </div>
       <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calibration Tool</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Pressure Advance Calibration</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:600px">Generate a corner-test G-code pattern for Klipper (PA), Marlin (LA/K), RepRapFirmware, or Bambu. Configure your printer, download the file, and read the cleanest corner.</p>
+      <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:600px">Generate a corner-test G-code pattern for Klipper (PA), Marlin (LA/K), RepRapFirmware, or Bambu. Configure your printer, download the file, and read the cleanest corner.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
         <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Marlin 1.1.9+</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">RepRapFirmware 3+</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Bambu (X1C/P1S/A1)</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Marlin 1.1.9+</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">RepRapFirmware 3+</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Bambu (X1C/P1S/A1)</span>
       </div>
     </div>
   </div>
@@ -660,7 +660,7 @@ M84</textarea>
   white-space: pre;
   margin: 0;
 }
-.pa-code .gc-comment { color: #5a5a5a; }
+.pa-code .gc-comment { color: var(--on-dark-muted); }
 .pa-code .gc-cmd    { color: var(--accent); font-weight: 700; }
 .pa-code .gc-val    { color: #e0e0e0; }
 .pa-code .gc-pa     { color: #4fc3f7; }
@@ -711,7 +711,7 @@ M84</textarea>
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: .08em;
-  color: #666;
+  color: var(--on-dark-muted);
   margin-bottom: 10px;
 }
 .pa-diagram-art {

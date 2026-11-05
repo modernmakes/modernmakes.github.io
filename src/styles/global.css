@@ -502,7 +502,7 @@ a:not([class]):active { opacity: .6; }
   border-radius: 5px; padding: 10px 16px; font-size: 14px; color: #fff;
   font-family: var(--fu); outline-color: transparent; transition: border-color .15s; width: 100%;
 }
-.nl-input::placeholder { color: rgba(255,255,255,.45); }
+.nl-input::placeholder { color: var(--on-dark-muted); }
 .nl-input:focus { border-color: rgba(255,255,255,.6); }
 .nl-input.light {
   background: var(--surface); border-color: var(--border); color: var(--black);
@@ -527,7 +527,7 @@ a:not([class]):active { opacity: .6; }
 .dark-section { background: var(--dark-bg); }
 .dark-section .section-head-label { color: #fff; }
 .dark-section .section-head { border-bottom-color: rgba(255,255,255,.12); }
-.dark-section .section-head-link { color: rgba(255,255,255,.3); }
+.dark-section .section-head-link { color: var(--on-dark-muted); }
 @media (hover: hover) and (pointer: fine) {
   .dark-section .section-head-link:hover { color: rgba(255,255,255,.7); }
 }
