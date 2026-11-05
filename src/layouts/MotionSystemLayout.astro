@@ -151,7 +151,7 @@ const breadcrumbItems = [
   <!-- ── BREADCRUMB ── -->
   <div class="ms-breadcrumb-bar">
     <div class="ms-breadcrumb-inner">
-      <nav class="ms-breadcrumb" aria-label="Breadcrumb">
+      <nav class="breadcrumb ms-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span>/</span>
         <a href="/hardware">Hardware</a>
@@ -518,8 +518,6 @@ const breadcrumbItems = [
 }
 .ms-breadcrumb a,
 .ms-breadcrumb span {
-  font-family: var(--fm);
-  font-size: 11px;
   color: var(--g2);
   transition: color .15s;
 }
@@ -597,7 +595,7 @@ const breadcrumbItems = [
   color: #fff;
   border-radius: var(--radius-md);
   padding: 12px 18px;
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 12px;
   font-weight: 700;
   transition: background .15s;
@@ -654,7 +652,7 @@ const breadcrumbItems = [
   padding: 5px 14px;
 }
 .ms-toolhead-note {
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 10px;
   color: var(--g2);
   font-weight: 400;
@@ -800,7 +798,7 @@ const breadcrumbItems = [
   .ms-sb-proj-btn:hover { background: #333; }
 }
 .ms-sb-tags { padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 5px; }
-.ms-sb-tag { font-family: var(--fm); font-size: 9px; color: var(--g1); background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 2px 7px; }
+.ms-sb-tag { font-family: var(--fu); font-size: 9px; color: var(--g1); background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 2px 7px; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {

@@ -14,19 +14,14 @@ const currentPath = '/tools';
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
         <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <a href="/tools" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Tools</a>
+        <a href="/tools" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Tools</a>
         <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <span style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">PA Calculator</span>
+        <span style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">PA Calculator</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Calibration Tool</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">PA Calculator</h1>
       <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:600px">Map your Pressure Advance values across a grid of speeds and accelerations. Paste OrcaSlicer PA sweep output to auto-fill.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper PA</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">OrcaSlicer Import</span>
-      </div>
     </div>
   </div>
 
@@ -127,7 +122,7 @@ const currentPath = '/tools';
   padding: 20px; display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;
 }
 .pac-field-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 120px; }
-.pac-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.pac-label { font-family: var(--fu); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
 .pac-input {
   font-family: var(--fm); font-size: 13px; color: var(--black);
   background: var(--bg); border: 1px solid var(--border); border-radius: 5px;

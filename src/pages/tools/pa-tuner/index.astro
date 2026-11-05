@@ -14,20 +14,14 @@ const currentPath = '/tools';
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
         <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <a href="/tools" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Tools</a>
+        <a href="/tools" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Tools</a>
         <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <span style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">PA Tuner</span>
+        <span style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">PA Tuner</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">AI Tool</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">PA Tuner</h1>
       <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:600px">AI-powered Pressure Advance analysis. Describe your setup, enter your PA data, and optionally upload a photo of your test print for specific, actionable recommendations.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">Klipper PA</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Claude AI</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">Vision analysis</span>
-      </div>
     </div>
   </div>
 
@@ -194,7 +188,7 @@ const currentPath = '/tools';
 .pt-section-note { font-family: var(--fu); font-size: 11px; color: var(--g2); line-height: 1.55; margin-bottom: 10px; }
 .pt-section-note a { color: var(--accent-dk); text-decoration: none; }
 .pt-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
-.pt-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.pt-label { font-family: var(--fu); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
 .pt-input, .pt-select, .pt-textarea {
   font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg);
   border: 1px solid var(--border); border-radius: 5px; padding: 8px 10px; width: 100%; transition: border-color .12s;

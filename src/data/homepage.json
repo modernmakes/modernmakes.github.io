@@ -79,15 +79,15 @@
     "name": "Voron",
     "slug": "voron",
     "status": "live",
-    "badge": "Launch",
+   
     "description": "12 subsystem pages. Interactive configurator. Full parts directory for hotends, extruders, motion system, electronics, and more.",
     "variants": ["2.4 · 250mm", "2.4 · 300mm", "2.4 · 350mm", "Trident · 250mm", "Trident · 300mm", "Trident · 350mm"],
     "href": "/voron",
     "image": null
   },
-  { "name": "Rat Rig", "slug": "ratrig", "status": "coming", "badge": "Phase 1", "description": "V-Core 4, 3.1, and 3", "href": "/ratrig",  "image": null },
-  { "name": "VzBot",    "slug": "vzbot",  "status": "coming", "badge": "Phase 1", "description": "235, 330, Goliath",   "href": "/vzbot",   "image": null },
-  { "name": "HevORT",   "slug": "hevort", "status": "coming", "badge": "Phase 1", "description": "Standard variants",   "href": "/hevort",  "image": null },
-  { "name": "Annex K3", "slug": "k3",     "status": "coming", "badge": "Phase 2", "description": "K3 builds & mods",    "href": "/k3",      "image": null }
+  { "name": "Rat Rig", "slug": "ratrig", "status": "coming", "description": "V-Core 4, 3.1, and 3", "href": "/ratrig",  "image": null },
+  { "name": "VzBot",    "slug": "vzbot",  "status": "coming", "description": "235, 330, Goliath",   "href": "/vzbot",   "image": null },
+  { "name": "HevORT",   "slug": "hevort", "status": "coming", "description": "Standard variants",   "href": "/hevort",  "image": null },
+  { "name": "Annex K3", "slug": "k3",     "status": "coming", "description": "K3 builds & mods",    "href": "/k3",      "image": null }
 ]
 }

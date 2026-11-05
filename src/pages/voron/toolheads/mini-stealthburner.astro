@@ -12,20 +12,19 @@ const currentPath = '/voron/toolheads';
   <div style="background:var(--black);padding:40px 0">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
         <span style="color:var(--on-dark-muted)">/</span>
-        <a href="/voron" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Voron</a>
+        <a href="/voron" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Voron</a>
         <span style="color:var(--on-dark-muted)">/</span>
-        <a href="/voron/toolheads" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Toolheads</a>
+        <a href="/voron/toolheads" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Toolheads</a>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px">Voron · Toolhead</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:8px">Mini-Stealthburner</h1>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--on-dark-muted);margin-bottom:16px">Official Voron Design</div>
+      <div style="font-family:var(--fu);font-size:12px;color:var(--on-dark-muted);margin-bottom:16px">Official Voron Design</div>
       <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:560px;margin-bottom:20px">Scaled-down Stealthburner for smaller builds and lighter hotends. Primarily used on Voron 0.</p>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         {(v => v && <span class={`verdict ${v.cls}`} style="font-size:10px;letter-spacing:.06em">{v.label}</span>)(handBadge('SITUATIONAL'))}
         <a href="https://github.com/VoronDesign/Voron-0" target="_blank" rel="noopener" style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent)">View on GitHub →</a>
-        <a href="/voron/toolheads" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--on-dark-muted)">← All Toolheads</a>
+        <a href="/voron/toolheads" style="font-family:var(--fu);font-size:12px;color:var(--on-dark-muted)">← All Toolheads</a>
       </div>
     </div>
   </div>

@@ -76,12 +76,12 @@ const breadcrumbItems = [
   <!-- ── ARTICLE HEADER ── -->
   <div class="art-header" id="art-header">
     <div class="art-header-container">
-      <nav class="art-breadcrumb" aria-label="Breadcrumb">
+      <nav class="breadcrumb art-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span aria-hidden="true">/</span>
         <a href="/news">News</a>
         <span aria-hidden="true">/</span>
-        <span>{category}</span>
+        <span>{category.charAt(0) + category.slice(1).toLowerCase()}</span>
       </nav>
       <div class="art-cat-badge">{category}</div>
       <h1 class="art-headline">{title}</h1>
@@ -205,7 +205,7 @@ const breadcrumbItems = [
   text-align: center;
 }
 .newsletter-capture__label {
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -219,7 +219,6 @@ const breadcrumbItems = [
   font-weight: 800;
   color: #fff;
   line-height: 1.05;
-  letter-spacing: -.3px;
   margin: 0 0 10px;
 }
 .newsletter-capture__sub {

@@ -15,20 +15,14 @@ const currentPath = '/tools';
   <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Home</a>
+        <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
         <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <a href="/tools" style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Tools</a>
+        <a href="/tools" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Tools</a>
         <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <span style="font-size:11px;color:var(--on-dark-muted);font-family:'JetBrains Mono',monospace">Motor Simulator</span>
+        <span style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Motor Simulator</span>
       </div>
-      <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Physics Simulator</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Motor Simulator</h1>
       <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:600px">Real physics simulation — inductance, back-EMF, and coil impedance — to plot delivered torque across speeds. Compare up to 4 motors at 24V or 48V.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">45 motors</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">24V · 48V</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,255,255,.06);color:var(--on-dark-muted);border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:3px">LDO · Moons · OMC · Fysetc</span>
-      </div>
     </div>
   </div>
 
@@ -207,7 +201,7 @@ const currentPath = '/tools';
 }
 .ms-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 .ms-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
-.ms-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
+.ms-label { font-family: var(--fu); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
 .ms-input {
   font-family: var(--fm); font-size: 13px; color: var(--black); background: var(--bg);
   border: 1px solid var(--border); border-radius: 5px; padding: 7px 10px; width: 100%;
@@ -231,7 +225,7 @@ const currentPath = '/tools';
 }
 .ms-computed-label { font-family: var(--fm); font-size: 10px; color: var(--accent-dk); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
 .ms-computed-val { font-family: var(--fd); font-size: 24px; font-weight: 800; color: var(--black); line-height: 1.1; }
-.ms-computed-note { font-family: var(--fm); font-size: 10px; color: var(--g2); margin-top: 4px; }
+.ms-computed-note { font-family: var(--fu); font-size: 10px; color: var(--g2); margin-top: 4px; }
 
 .ms-motor-list {
   display: flex; flex-direction: column; gap: 3px; margin-top: 8px;

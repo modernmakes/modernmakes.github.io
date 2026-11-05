@@ -283,7 +283,7 @@ a:not([class]):active { opacity: .6; }
   overflow: hidden;
 }
 .type-cover-eyebrow {
-  font-family: var(--fm); font-size: 10px; font-weight: 500;
+  font-family: var(--fu); font-size: 10px; font-weight: 500;
   letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent);
 }
@@ -311,7 +311,7 @@ a:not([class]):active { opacity: .6; }
 }
 
 /* ── TYPOGRAPHY ── */
-.display    { font-family: var(--fd); font-weight: 800; letter-spacing: -0.4px; line-height: 1.05; }
+.display    { font-family: var(--fd); font-weight: 800; letter-spacing: -0.01em; line-height: 1.05; }
 .body-prose { font-family: var(--fb); font-size: 15px; line-height: 1.8; color: var(--g1); }
 .mono       { font-family: var(--fm); }
 .eyebrow    {
@@ -410,7 +410,7 @@ a:not([class]):active { opacity: .6; }
 /* ── REVIEW LINK ── */
 .btn-review {
   display: inline-block; margin-top: 8px; margin-left: 12px;
-  font-size: 12px; color: var(--g2); text-decoration: none; font-family: var(--fm);
+  font-size: 12px; color: var(--g2); text-decoration: none; font-family: var(--fu);
 }
 @media (hover: hover) and (pointer: fine) {
   .btn-review:hover { color: var(--accent-dk); }
@@ -612,12 +612,20 @@ main:not(.main-has-hero) { padding-top: 60px; }
   margin: 0 auto;
   padding: 0 40px;
 }
+/* Shared breadcrumb type: Barlow 12px, never mono, never caps. Layout and colour stay with each context. */
+.breadcrumb,
+.breadcrumb a,
+.breadcrumb span {
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
 .lg-breadcrumb {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--fm);
-  font-size: 10px;
   color: var(--g2);
   margin-bottom: 32px;
 }
@@ -677,7 +685,6 @@ main:not(.main-has-hero) { padding-top: 60px; }
   margin-bottom: 36px;
 }
 .lg-content section {
-  border-top: 1px solid var(--border);
   padding-top: 28px;
   margin-bottom: 28px;
 }
@@ -687,7 +694,6 @@ main:not(.main-has-hero) { padding-top: 60px; }
   font-weight: 800;
   color: var(--black);
   margin-bottom: 14px;
-  letter-spacing: -.2px;
 }
 .lg-content p, .lg-content li {
   font-family: var(--fb);
@@ -707,7 +713,7 @@ main:not(.main-has-hero) { padding-top: 60px; }
 }
 .lg-callout strong { color: var(--black); }
 .lg-email-link {
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 14px;
   color: var(--accent-dk);
   font-weight: 700;
@@ -732,7 +738,7 @@ main:not(.main-has-hero) { padding-top: 60px; }
 .lg-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .lg-form-group { display: flex; flex-direction: column; gap: 6px; }
 .lg-form-label {
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: .1em;

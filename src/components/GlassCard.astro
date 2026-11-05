@@ -59,17 +59,14 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--dark-border);
     border-radius: var(--radius-2xl);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     overflow: hidden; /* clips the top band to the card's rounded corners */
     /* Smooth ease-out (transitions.dev motion token), exact props — never `all` */
     transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
                 border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   @media (hover: hover) and (pointer: fine) {
     .glass-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
       border-color: rgba(255, 255, 255, 0.14);
     }
   }

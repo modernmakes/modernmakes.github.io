@@ -56,14 +56,13 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   <!-- HERO -->
   <div class="mods-hero">
     <div class="mods-hero-inner">
-      <nav class="mods-breadcrumb" aria-label="Breadcrumb">
+      <nav class="breadcrumb mods-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span>/</span>
         <a href="/voron">Voron</a>
         <span>/</span>
         <span>Community Mods</span>
       </nav>
-      <div class="eyebrow" style="margin-bottom:10px">Voron · Community</div>
       <h1 class="mods-title">Community Mods</h1>
       <p class="mods-subtitle">The best user-designed upgrades for Voron 2.4 and Trident. Sourced from Printables, GitHub, and the Voron Discord.</p>
     </div>
@@ -97,9 +96,8 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
             <div class="mod-card-header">
               <div>
                 <h3 class="mod-name">{mod.name}</h3>
-                <p class="mod-creator">by @{mod.creator}</p>
+                <p class="mod-creator">by @{mod.creator} · {mod.category}</p>
               </div>
-              <span class="mod-cat-tag">{mod.category}</span>
             </div>
             <p class="mod-desc">{mod.description}</p>
             <div class="mod-card-footer">
@@ -145,8 +143,6 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
-  font-family: var(--fm);
-  font-size: 11px;
 }
 .mods-breadcrumb a { color: var(--on-dark-muted); }
 @media (hover: hover) and (pointer: fine) {
@@ -290,18 +286,6 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
   font-size: 11px;
   color: var(--g2);
 }
-.mod-cat-tag {
-  font-size: 10px;
-  font-weight: 700;
-  font-family: var(--fm);
-  color: var(--g2);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 2px 7px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
 .mod-desc {
   font-family: var(--fb);
   font-size: 13px;
@@ -325,7 +309,7 @@ const categories = ['All', 'Toolhead', 'Gantry', 'Motion', 'Electronics', 'Bed',
 }
 .mod-model-pill {
   font-size: 10px;
-  font-family: var(--fm);
+  font-family: var(--fu);
   color: var(--g1);
   background: var(--bg);
   border: 1px solid var(--border);

@@ -191,7 +191,7 @@ const breadcrumbSchema = {
         }
       </div>
       <div class="comp-hero-info">
-        <nav class="comp-breadcrumb" aria-label="Breadcrumb">
+        <nav class="breadcrumb comp-breadcrumb" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span>›</span>
           <a href="/hardware">Hardware</a>
@@ -477,7 +477,6 @@ const breadcrumbSchema = {
   background: var(--black);
   /* padding-top: 80px nav clearance + 48px design spacing */
   padding: 128px 0 48px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .comp-hero-inner {
   max-width: 1200px;
@@ -516,8 +515,6 @@ const breadcrumbSchema = {
 }
 .comp-breadcrumb a,
 .comp-breadcrumb span {
-  font-family: var(--fm);
-  font-size: 11px;
   color: var(--on-dark-muted);
   transition: color .15s;
 }
@@ -599,7 +596,7 @@ const breadcrumbSchema = {
   gap: 6px;
 }
 .comp-tag {
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 10px;
   color: var(--on-dark-muted);
   background: rgba(255,255,255,.06);
@@ -1091,7 +1088,6 @@ const breadcrumbSchema = {
 .comp-prose {
   margin-top: 40px;
   padding-top: 40px;
-  border-top: 1px solid var(--border);
 }
 .comp-prose:empty { display: none; }
 

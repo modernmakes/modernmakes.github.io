@@ -74,7 +74,7 @@ const breadcrumbSchema = {
   <!-- ── HERO ── -->
   <section class="arch-hero">
     <div class="arch-hero-inner">
-      <nav class="arch-breadcrumb" aria-label="Breadcrumb">
+      <nav class="breadcrumb arch-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span aria-hidden="true">›</span>
         <a href="/newsletter">Newsletter</a>
@@ -210,8 +210,6 @@ const breadcrumbSchema = {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--fm);
-  font-size: 10px;
   color: var(--on-dark-muted);
   margin-bottom: 28px;
 }
@@ -322,7 +320,7 @@ const breadcrumbSchema = {
   white-space: nowrap;
 }
 .arch-open-chip {
-  font-family: var(--fm);
+  font-family: var(--fu);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .04em;
@@ -345,7 +343,6 @@ const breadcrumbSchema = {
   font-weight: 800;
   color: var(--black, #1A1A1A);
   line-height: 1.15;
-  letter-spacing: -.2px;
   flex: 1;
   overflow-wrap: anywhere;
   min-width: 0;

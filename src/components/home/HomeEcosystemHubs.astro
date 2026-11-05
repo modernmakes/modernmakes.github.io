@@ -39,7 +39,6 @@ function bgStyle(eco: any) {
   <div class="eco-container">
 
     <header class="eco-header">
-      <p class="eco-eyebrow" data-reveal>Printer Ecosystems</p>
       <h2 class="eco-headline" data-reveal data-reveal-delay="80">Build your printer<br/>We've mapped every part</h2>
       <p class="eco-sub" data-reveal data-reveal-delay="160">Complete self-build resources for the most capable CoreXY printers. Parts directories, configurators, subsystem guides, and community mods — all in one place.</p>
     </header>
@@ -66,7 +65,6 @@ function bgStyle(eco: any) {
             <div class="eco-card-body">
               <div class="eco-card-top">
                 <span class="eco-card-name">{eco.name}</span>
-                <span class="eco-badge">{eco.badge}</span>
               </div>
               {eco.variants && (
                 <div class="eco-variants">
@@ -93,7 +91,6 @@ function bgStyle(eco: any) {
               <span class="eco-coming-name">{eco.name}</span>
               <span class="eco-coming-desc">{eco.description}</span>
             </div>
-            <span class="eco-coming-badge">{eco.badge}</span>
           </div>
         ))}
       </div>
@@ -116,22 +113,13 @@ function bgStyle(eco: any) {
 
   /* Header */
   .eco-header { margin-bottom: 36px; }
-  .eco-eyebrow {
-    font-family: var(--fu);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 12px;
-  }
   .eco-headline {
     font-family: var(--fd);
     font-size: clamp(26px, 2.5vw + 12px, 40px);
     font-weight: 800;
     color: #fff;
     line-height: 1.0;
-    letter-spacing: -.4px;
+    letter-spacing: -0.01em;
     margin: 0 0 12px;
   }
   .eco-sub {
@@ -224,7 +212,7 @@ function bgStyle(eco: any) {
     font-weight: 800;
     color: rgba(255,255,255,.08);
     padding: 16px 24px;
-    letter-spacing: -.5px;
+    letter-spacing: -0.01em;
     transition: color 400ms var(--stagger-ease);
     /* Visible only when no image — acts as watermark */
   }
@@ -248,19 +236,6 @@ function bgStyle(eco: any) {
     font-size: clamp(20px, 1.8vw + 8px, 26px);
     font-weight: 800;
     color: #fff;
-  }
-  .eco-badge {
-    font-size: 9px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 3px;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    background: rgba(255,90,31,.18);
-    color: var(--accent-mid);
-    border: 1px solid rgba(255,90,31,.25);
-    flex-shrink: 0;
   }
   .eco-variants {
     display: flex;
@@ -339,25 +314,12 @@ function bgStyle(eco: any) {
     white-space: nowrap;
   }
   .eco-coming-desc {
-    font-family: var(--fm);
+    font-family: var(--fu);
     font-size: 10px;
     color: var(--on-dark-muted); /* AA on #161616 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-  .eco-coming-badge {
-    font-size: 9px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 3px;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    background: rgba(255,255,255,.04);
-    color: var(--on-dark-muted); /* AA on #161616 */
-    border: 1px solid rgba(255,255,255,.07);
-    white-space: nowrap;
-    flex-shrink: 0;
   }
 
   /* Responsive */
