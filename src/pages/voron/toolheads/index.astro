@@ -135,7 +135,7 @@ const toolheads = [
             <div class="product-card-body">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
                 {(v => v && <span class={`verdict ${v.cls}`} style="font-size:9px;letter-spacing:.06em">{v.label}</span>)(handBadge(th.verdict))}
-                <span style={`font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:3px;${th.difficulty === 'Advanced' ? 'background:rgba(239,68,68,.1);color:#dc2626' : 'background:rgba(59,130,246,.1);color:#2563eb'}`}>{th.difficulty}</span>
+                <span style={`font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:3px;${th.difficulty === 'Advanced' ? 'background:var(--danger-t);color:var(--danger)' : 'background:rgba(59,130,246,.1);color:#1565c0'}`}>{th.difficulty}</span>
               </div>
               <div class="product-card-name" style="font-size:18px;margin-bottom:2px">{th.name}</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--g2);margin-bottom:8px">{th.creatorLabel}</div>

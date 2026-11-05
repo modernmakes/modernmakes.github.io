@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import TypeCover from '../../components/TypeCover.astro';
 import { handBadge } from '../../lib/hardware';
 const currentPath = '/voron/motion-system';
 
@@ -109,12 +110,7 @@ const products = [
       <div class="grid-3">
         {products.map(product => (
           <div class="product-card" data-compatible={product.compatible}>
-            <div class="product-card-img" style="background:var(--dark-surface);height:140px;display:flex;align-items:center;justify-content:center">
-              <div style="text-align:center">
-                <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
-                <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
-              </div>
-            </div>
+            <div class="product-card-img" style="height:140px"><TypeCover eyebrow={product.brand} title={product.name} /></div>
             <div class="product-card-body">
               {(v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(product.badge.label, product.record))}
               <div class="product-card-brand">{product.brand}</div>
@@ -184,7 +180,7 @@ const products = [
     <div class="container">
       <div class="section-head">
         <h2 class="section-head-label">Community mods</h2>
-        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:var(--verdict-wh-ink);border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
       </div>
       <div class="grid-3">
         {[

@@ -71,6 +71,7 @@
   /* Workhorse badge text: same hue as the old #16a34a, darkened for AA
      (5.2:1 white, 4.7:1 on its 12% tint). */
   --verdict-wh-ink:      #117D39;
+  --verdict-wh-ink-dk:   #0E6B2F; /* green pill text on a green tint over the off-white zebra row (4.26:1 with --verdict-wh-ink) */
   /* Verdict text on the dark planes (detail hero, glass cards). */
   --verdict-wh-on-dark:  #4ADE80;
   --verdict-be-on-dark:  #60A5FA;
@@ -391,6 +392,10 @@ a:not([class]):active { opacity: .6; }
 .verdict-skip,
 .verdict-avoid { background: var(--verdict-skip-t); border: 1px solid var(--verdict-skip-border); color: var(--verdict-skip-ink); }
 .verdict-upd  { background: rgba(255,90,31,.12);  border: 1px solid rgba(255,90,31,.25);  color: var(--accent-ink); }
+/* Badge on a dark plane (hero bands): on-dark tones keep text >= 4.5:1. Add alongside .verdict-*. */
+.verdict-on-dark.verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--verdict-wh-on-dark); }
+.verdict-on-dark.verdict-rec  { background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); color: var(--verdict-be-on-dark); }
+.verdict-on-dark.verdict-skip { color: var(--verdict-skip-on-dark); }
 .verdict-comm {
   background: color-mix(in srgb, var(--verdict-comm-tone) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--verdict-comm-tone) 25%, transparent);
