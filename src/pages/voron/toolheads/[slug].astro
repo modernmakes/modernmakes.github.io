@@ -1,0 +1,256 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import { handBadge } from '../../../lib/hardware';
+import toolheads from '../../../data/toolheads.json';
+
+export function getStaticPaths() {
+  return Object.entries(toolheads).map(([slug, t]) => ({ params: { slug }, props: { t } }));
+}
+
+const { t } = Astro.props as { t: any };
+const currentPath = '/voron/toolheads';
+const pill = (ok: boolean | null) => (ok === true ? 'is-ok' : ok === false ? 'is-no' : 'is-limited');
+const tables = [
+  { heading: 'Hotend Compatibility', cols: ['Hotend', 'Max Temp', 'Flow'], rows: t.hotends.map((r: any) => ({ ...r, cells: [r.temp, r.flow] })) },
+  { heading: 'Extruder Compatibility', cols: ['Extruder', 'Gear Ratio', 'Weight'], rows: t.extruders.map((r: any) => ({ ...r, cells: [r.ratio, r.weight] })) },
+];
+---
+<Base hasPageH1={true} title={t.title} description={t.description}>
+  <Nav slot="nav" currentPath={currentPath} />
+
+  <!-- HERO -->
+  <div class="th-hero">
+    <div class="th-wrap">
+      <div class="th-crumbs">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/voron">Voron</a>
+        <span>/</span>
+        <a href="/voron/toolheads">Toolheads</a>
+      </div>
+      <h1 class="th-title">{t.name}</h1>
+      <div class="th-creator">{t.creatorLabel}</div>
+      <p class="th-tagline">{t.tagline}</p>
+      <div class="th-actions">
+        {(v => v && <span class={`verdict ${v.cls} verdict-on-dark th-badge`}>{v.label}</span>)(handBadge(t.badge))}
+        <a href={t.github} target="_blank" rel="noopener" class="th-gh">View on GitHub →</a>
+        <a href="/voron/toolheads" class="th-back">← All Toolheads</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL CONTEXT BAR -->
+  <div class="th-modelbar">
+    <div class="th-wrap">
+      <div class="model-context-bar">
+        <span class="model-context-label">Showing parts for:</span>
+        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
+        <a href="/voron" class="model-context-switch">Switch model →</a>
+      </div>
+    </div>
+  </div>
+
+  {t.callout && (
+    <div class="th-callout-band">
+      <div class="th-wrap">
+        <div class="callout callout-orange th-callout">
+          <strong>{t.callout.title}</strong>
+          {t.callout.body}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- MAIN CONTENT -->
+  <div class="section th-section">
+    <div class="th-wrap th-main">
+      <div class="th-body">
+        <section class="th-sec th-overview">
+          <h2 class="th-h2">Overview</h2>
+          {t.overview.map((p: string) => <p class="th-prose">{p}</p>)}
+        </section>
+
+        <section class="th-sec">
+          <h2 class="th-h2">Printed Parts</h2>
+          <ul class="th-list">
+            {t.parts.map((part: string) => <li class="th-li"><span class="th-mark th-mark--part">▸</span>{part}</li>)}
+          </ul>
+          <p class="th-stl"><a href={t.github} target="_blank" rel="noopener">{t.stlLabel} →</a></p>
+        </section>
+
+        <section class="th-sec">
+          <h2 class="th-h2">Required Hardware</h2>
+          <ul class="th-list">
+            {t.hardware.map((hw: string) => <li class="th-li"><span class="th-mark">·</span>{hw}</li>)}
+          </ul>
+        </section>
+
+        {tables.map((tb) => (
+          <section class="th-sec">
+            <h2 class="th-h2">{tb.heading}</h2>
+            <div class="th-table-wrap">
+              <table class="th-table">
+                <thead>
+                  <tr>
+                    {[...tb.cols, 'Status'].map((c, i) => <th class={i === 0 ? 'th-first' : ''}>{c}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tb.rows.map((row: any) => (
+                    <tr>
+                      <td class="th-name">{row.name}</td>
+                      {row.cells.map((c: string) => <td class="th-mono">{c}</td>)}
+                      <td><span class={`th-pill ${pill(row.ok)}`}>{row.status}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="th-aside">
+        <div class="th-box th-specs">
+          <div class="th-box-head">Quick Specs</div>
+          <div class="th-kv">
+            {t.specs.map((row: any) => (
+              <div class="th-kv-row">
+                <span class="th-k">{row.k}</span>
+                <span class="th-v">{row.v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="th-box">
+          <div class="th-box-head">Compatible Hotends</div>
+          <div class="th-box-list">
+            {t.sidebarHotends.map((h: string) => (
+              <div class="th-box-row th-box-row--check"><span>{h}</span><span class="th-check">✓</span></div>
+            ))}
+          </div>
+          <div class="th-box-foot"><a href="/voron/hotends">Browse all hotends →</a></div>
+        </div>
+
+        {t.alternatives ? (
+          <div class="th-box">
+            <div class="th-box-head">Better Alternatives</div>
+            <div class="th-alts">
+              {t.alternatives.map((a: any) => <a href={a.href}>{a.label} →</a>)}
+            </div>
+          </div>
+        ) : (
+          <div class="th-box">
+            <div class="th-box-head">Compatible Extruders</div>
+            <div class="th-box-list">
+              {t.sidebarExtruders.map((e: string) => <div class="th-box-row">{e}</div>)}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
+  </div>
+
+  <Footer slot="footer" />
+</Base>
+
+<script>
+  (function() {
+    const STORAGE_KEY = 'voron-model';
+    const params = new URLSearchParams(window.location.search);
+    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
+    localStorage.setItem(STORAGE_KEY, model);
+    const label = document.getElementById('active-model-label');
+    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
+  })();
+</script>
+
+<style>
+  .th-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  /* Hero */
+  .th-hero { background: var(--black); padding: 40px 0; }
+  .th-crumbs { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; color: var(--on-dark-muted); }
+  .th-crumbs a { font-size: 12px; color: var(--on-dark-muted); font-family: var(--fu); }
+  .th-title { font-family: var(--fd); font-size: 56px; font-weight: 800; color: var(--surface); line-height: 1; letter-spacing: -.5px; margin-bottom: 8px; }
+  .th-creator { font-family: var(--fu); font-size: 12px; color: var(--on-dark-muted); margin-bottom: 16px; }
+  .th-tagline { font-family: var(--fb); font-size: 15px; color: var(--on-dark-muted); line-height: 1.7; max-width: 560px; margin-bottom: 20px; }
+  .th-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .th-badge { font-size: 10px; letter-spacing: .06em; }
+  .th-gh { font-family: var(--fu); font-size: 13px; font-weight: 700; color: var(--accent); }
+  .th-back { font-family: var(--fu); font-size: 12px; color: var(--on-dark-muted); }
+
+  .th-modelbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 0; }
+  .th-callout-band { background: #f0efe9; border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .th-callout { margin: 0; }
+
+  /* Main grid */
+  .th-section { background: var(--bg); }
+  .th-main { display: grid; grid-template-columns: 1fr 280px; gap: 48px; align-items: start; }
+  .th-sec { margin-bottom: 40px; }
+  .th-h2 { font-family: var(--fd); font-size: 26px; font-weight: 800; color: var(--black); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .th-prose { font-family: var(--fb); font-size: 16px; line-height: 1.8; color: var(--g1); margin-bottom: 16px; }
+  .th-prose:last-child { margin-bottom: 0; }
+
+  .th-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .th-li { font-family: var(--fu); font-size: 14px; color: var(--g1); display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+  .th-mark { color: var(--g2); flex-shrink: 0; }
+  .th-mark--part { color: var(--accent-dk); margin-top: 1px; }
+  .th-stl { margin-top: 12px; }
+  .th-stl a { font-family: var(--fu); font-size: 12px; font-weight: 700; color: var(--accent-dk); }
+
+  /* Compatibility tables */
+  .th-table-wrap { background: var(--surface); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .th-table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: var(--fu); }
+  .th-table thead tr { background: var(--black); }
+  .th-table th { text-align: center; padding: 10px 12px; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-muted); }
+  .th-table th.th-first { text-align: left; padding: 10px 16px; }
+  .th-table tbody tr { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .th-table tbody tr:nth-child(even) { background: var(--bg); }
+  .th-table td { text-align: center; padding: 10px 12px; }
+  .th-table td.th-name { text-align: left; padding: 10px 16px; font-weight: 600; color: var(--black); }
+  .th-mono { color: var(--g1); font-family: var(--fm); font-size: 12px; }
+  .th-pill { font-size: 10px; font-weight: 700; font-family: var(--fm); padding: 2px 8px; border-radius: 3px; }
+  .th-pill.is-ok { background: rgba(46,125,50,.1); color: var(--verdict-wh-ink-dk); }
+  .th-pill.is-no { background: var(--danger-t); color: var(--danger); }
+  .th-pill.is-limited { background: var(--verdict-skip-t); color: var(--verdict-skip-ink); }
+
+  /* Sidebar */
+  .th-aside { position: sticky; top: 80px; align-self: start; display: flex; flex-direction: column; gap: 20px; }
+  .th-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .th-box-head { font-family: var(--fu); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g2); padding: 13px 18px 12px; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .th-kv { padding: 12px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .th-kv-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .th-k { font-family: var(--fu); font-size: 11px; color: var(--g2); }
+  .th-v { font-family: var(--fm); font-size: 11px; font-weight: 700; color: var(--black); }
+  .th-box-list { padding: 8px 0; }
+  .th-box-row { padding: 8px 18px; border-bottom: 1px solid var(--border); font-family: var(--fu); font-size: 13px; color: var(--g1); }
+  .th-box-row--check { display: flex; align-items: center; justify-content: space-between; }
+  .th-check { font-size: 10px; color: var(--verdict-wh-ink); }
+  .th-box-foot { padding: 10px 18px; }
+  .th-box-foot a { font-family: var(--fu); font-size: 11px; font-weight: 700; color: var(--accent-dk); }
+  .th-alts { padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .th-alts a { font-family: var(--fu); font-size: 13px; color: var(--accent-dk); font-weight: 700; }
+
+  /* Mobile: one column. Title, badge and overview, then the quick specs as a
+     2-column grid of boxes, then the rest of the content and sidebar boxes. */
+  @media (max-width: 719.98px) {
+    .th-wrap { padding: 0 20px; }
+    .th-title { font-size: 40px; }
+    .th-main { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .th-body, .th-aside { display: contents; }
+    .th-sec { order: 3; margin-bottom: 32px; }
+    .th-box { order: 4; margin-bottom: 20px; }
+    .th-overview { order: 1; }
+    .th-box.th-specs { order: 2; margin-bottom: 32px; background: none; border: 0; border-radius: 0; overflow: visible; }
+    .th-specs .th-box-head { background: none; border: 0; padding: 0 0 10px; }
+    .th-specs .th-kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0; }
+    .th-specs .th-kv-row { flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+    .th-table-wrap { overflow-x: auto; }
+    .th-table th, .th-table td { padding-left: 8px; padding-right: 8px; }
+  }
+</style>

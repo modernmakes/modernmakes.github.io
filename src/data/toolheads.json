@@ -1,0 +1,285 @@
+{
+  "stealthburner": {
+    "title": "Stealthburner — Official Voron Toolhead Guide",
+    "description": "Complete guide to the Stealthburner: printed parts, hardware list, hotend and extruder compatibility tables, and build notes for Voron 2.4 and Trident.",
+    "name": "Stealthburner",
+    "creatorLabel": "Official Voron Design",
+    "tagline": "The official Voron toolhead. Integrated LED lighting, wide hotend support, proven in millions of builds.",
+    "badge": "COMMUNITY STANDARD",
+    "github": "https://github.com/VoronDesign/Voron-Stealthburner",
+    "stlLabel": "All STLs on Voron Design GitHub",
+    "overview": [
+      "The Stealthburner is the official Voron toolhead — designed by the Voron Design team as the default assembly for Voron 2.4 and Trident. It replaced the Afterburner in 2022 and has since become the most widely built toolhead in the Voron ecosystem.",
+      "The design priorities are broad hotend compatibility, integrated LED lighting (Neopixel), and a rigid mounting system that keeps the toolhead stable at high accelerations. The LEDs are wired through the toolhead PCB and controlled via Klipper's led_effect plugin.",
+      "Clockwork 2 is the official extruder for Stealthburner. Orbiter v2 and Galileo 2 are popular community alternatives that mount with the same interface. The hotend mount is modular — different hotend cowls are printed for each supported hotend."
+    ],
+    "parts": [
+      "Stealthburner main body",
+      "Clockwork 2 extruder body (or alternative extruder mount)",
+      "Hotend-specific cowl (one per hotend model)",
+      "LED carrier",
+      "ADXL345 mount (for input shaping)"
+    ],
+    "hardware": [
+      "M3 heat inserts (standard Voron BOM)",
+      "M3 × 8, M3 × 16, M3 × 25 SHCS",
+      "Neopixel LEDs (2× front, 1× logo)",
+      "Toolhead PCB (Hartk or similar)",
+      "ADXL345 accelerometer (for input shaping)"
+    ],
+    "sidebarHotends": [
+      "Rapido 2",
+      "Dragon HF",
+      "Revo Voron",
+      "NF-Crazy"
+    ],
+    "sidebarExtruders": [
+      "Clockwork 2 (official)",
+      "Orbiter v2",
+      "Galileo 2"
+    ],
+    "hotends": [
+      {"name":"Rapido 2 UHF","temp":"320°C","flow":"32mm³/s","status":"SUPPORTED · primary","ok":true},
+      {"name":"Dragon HF","temp":"300°C","flow":"25mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Revo Voron","temp":"300°C","flow":"20mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"NF-Crazy","temp":"450°C","flow":"30mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Bambu Hotend","temp":"300°C","flow":"—","status":"NOT COMPATIBLE","ok":false}
+    ],
+    "extruders": [
+      {"name":"Clockwork 2","ratio":"50:17","weight":"210g","status":"SUPPORTED · official","ok":true},
+      {"name":"Orbiter v2","ratio":"7.5:1","weight":"175g","status":"SUPPORTED","ok":true},
+      {"name":"Galileo 2","ratio":"9:1","weight":"180g","status":"SUPPORTED","ok":true},
+      {"name":"Sherpa Mini","ratio":"5:1","weight":"85g","status":"LIMITED","ok":null}
+    ],
+    "specs": [
+      {"k":"Difficulty","v":"Intermediate"},
+      {"k":"Creator","v":"Voron Design"},
+      {"k":"Type","v":"Official"},
+      {"k":"Printed Parts","v":"Yes"},
+      {"k":"License","v":"GPL v3"}
+    ]
+  },
+  "xol": {
+    "title": "Xol Toolhead — Lightweight Voron Toolhead Guide",
+    "description": "Complete guide to the Xol Toolhead: printed parts, hardware list, hotend and extruder compatibility, and build notes for Voron 2.4 and Trident.",
+    "name": "Xol Toolhead",
+    "creatorLabel": "Community mod by @Armchairengineer",
+    "tagline": "Lightweight Stealthburner alternative. Lower moving mass means better input shaping results at high speed.",
+    "badge": "RECOMMENDED",
+    "github": "https://github.com/Armchair-Engineering/Xol-Toolhead",
+    "stlLabel": "All STLs on Armchair Engineering GitHub",
+    "overview": [
+      "Xol is a community-developed Stealthburner alternative focused on reducing toolhead mass. By shaving weight from the main body and optimising the geometry, Xol achieves lower effective moving mass — which translates directly to better input shaping results and higher achievable print speeds.",
+      "The Xol project is maintained by Armchair Engineering and is one of the most actively developed community toolheads. It uses a modular carriage system called Xol-Carriage that separates the toolhead from the gantry mount, making hotend swaps faster.",
+      "For builders printing above 300mm/s regularly, Xol's mass advantage over Stealthburner is measurable. At standard speeds the difference is marginal — choose Xol if you're optimising for speed, choose Stealthburner if you want maximum community support and documentation."
+    ],
+    "parts": [
+      "Xol main body",
+      "Xol-Carriage (gantry mount)",
+      "Hotend-specific duct",
+      "Extruder mount (varies by extruder)"
+    ],
+    "hardware": [
+      "M3 heat inserts",
+      "M3 fasteners per BOM",
+      "CAN bus toolhead board recommended (EBB36 or similar)",
+      "ADXL345 or ADXL345 on toolhead PCB"
+    ],
+    "sidebarHotends": [
+      "Rapido 2",
+      "Dragon HF",
+      "NF-Crazy"
+    ],
+    "sidebarExtruders": [
+      "Orbiter v2 (recommended)",
+      "Galileo 2",
+      "Sherpa Mini"
+    ],
+    "hotends": [
+      {"name":"Rapido 2 UHF","temp":"320°C","flow":"32mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Dragon HF","temp":"300°C","flow":"25mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"NF-Crazy","temp":"450°C","flow":"30mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Revo Voron","temp":"300°C","flow":"20mm³/s","status":"LIMITED","ok":null}
+    ],
+    "extruders": [
+      {"name":"Orbiter v2","ratio":"7.5:1","weight":"175g","status":"SUPPORTED","ok":true},
+      {"name":"Galileo 2","ratio":"9:1","weight":"180g","status":"SUPPORTED","ok":true},
+      {"name":"Sherpa Mini","ratio":"5:1","weight":"85g","status":"SUPPORTED","ok":true},
+      {"name":"Clockwork 2","ratio":"50:17","weight":"210g","status":"LIMITED · heavier","ok":null}
+    ],
+    "specs": [
+      {"k":"Difficulty","v":"Intermediate"},
+      {"k":"Creator","v":"Armchair Engineering"},
+      {"k":"Type","v":"Community"},
+      {"k":"Printed Parts","v":"Yes"},
+      {"k":"License","v":"GPL v3"}
+    ]
+  },
+  "dragon-burner": {
+    "title": "Dragon Burner — Compact Voron Toolhead Guide",
+    "description": "Complete guide to the Dragon Burner toolhead: printed parts, hardware list, hotend and extruder compatibility, and build notes for Voron 2.4 and Trident.",
+    "name": "Dragon Burner",
+    "creatorLabel": "Community mod by @chirpy2605",
+    "tagline": "Compact toolhead designed around the Dragon and Rapido hotend family. Excellent at speed.",
+    "badge": "RECOMMENDED",
+    "github": "https://github.com/chirpy2605/voron-user-mods/tree/main/Dragon_Burner",
+    "stlLabel": "All STLs on chirpy2605 GitHub",
+    "overview": [
+      "Dragon Burner is a compact, community-designed toolhead by chirpy2605 built specifically around the Dragon and Rapido hotend family. Where Stealthburner and Xol prioritise broad hotend compatibility, Dragon Burner optimises the geometry for these specific hotends — resulting in a tighter, more rigid assembly.",
+      "The compact form factor reduces frontal mass and improves cooling duct geometry around the specific hotends it supports. For builders committed to Dragon or Rapido hotends, Dragon Burner often produces better overhang and bridge quality than more generalist toolheads due to the tighter fan duct integration.",
+      "Dragon Burner has active development and a responsive community. Updates regularly track new hotend releases."
+    ],
+    "parts": [
+      "Dragon Burner main body",
+      "Hotend-specific front piece",
+      "Extruder mount",
+      "Fan duct (40mm or dual 25mm variants)"
+    ],
+    "hardware": [
+      "M3 heat inserts",
+      "M3 fasteners",
+      "40mm axial fan or dual 25mm fans",
+      "Toolhead PCB (optional but recommended)"
+    ],
+    "sidebarHotends": [
+      "Dragon HF (primary)",
+      "Rapido 2 (primary)",
+      "NF-Crazy"
+    ],
+    "sidebarExtruders": [
+      "Orbiter v2 (recommended)",
+      "LGX Lite",
+      "Sherpa Mini",
+      "Galileo 2"
+    ],
+    "hotends": [
+      {"name":"Dragon HF","temp":"300°C","flow":"25mm³/s","status":"SUPPORTED · primary","ok":true},
+      {"name":"Rapido 2 UHF","temp":"320°C","flow":"32mm³/s","status":"SUPPORTED · primary","ok":true},
+      {"name":"NF-Crazy","temp":"450°C","flow":"30mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Revo Voron","temp":"300°C","flow":"20mm³/s","status":"LIMITED","ok":null}
+    ],
+    "extruders": [
+      {"name":"Orbiter v2","ratio":"7.5:1","weight":"175g","status":"SUPPORTED · recommended","ok":true},
+      {"name":"LGX Lite","ratio":"3:1","weight":"130g","status":"SUPPORTED","ok":true},
+      {"name":"Sherpa Mini","ratio":"5:1","weight":"85g","status":"SUPPORTED","ok":true},
+      {"name":"Galileo 2","ratio":"9:1","weight":"180g","status":"SUPPORTED","ok":true}
+    ],
+    "specs": [
+      {"k":"Difficulty","v":"Intermediate"},
+      {"k":"Creator","v":"chirpy2605"},
+      {"k":"Type","v":"Community"},
+      {"k":"Printed Parts","v":"Yes"},
+      {"k":"License","v":"GPL v3"}
+    ]
+  },
+  "mini-stealthburner": {
+    "title": "Mini-Stealthburner — Official Voron Toolhead Guide",
+    "description": "Complete guide to the Mini-Stealthburner: printed parts, hardware list, hotend and extruder compatibility, and build notes for Voron 2.4 and Trident.",
+    "name": "Mini-Stealthburner",
+    "creatorLabel": "Official Voron Design",
+    "tagline": "Scaled-down Stealthburner for smaller builds and lighter hotends. Primarily used on Voron 0.",
+    "badge": "SITUATIONAL",
+    "github": "https://github.com/VoronDesign/Voron-0",
+    "stlLabel": "All STLs on Voron Design GitHub (Voron-0 repo)",
+    "callout": {"title":"Primarily a Voron 0 toolhead","body":"Mini-Stealthburner is designed for Voron 0. It works on 2.4 and Trident but offers limited advantages over standard Stealthburner — narrower hotend compatibility and documentation almost entirely focused on V0. Most builders on 2.4 or Trident should use Stealthburner or Xol instead."},
+    "overview": [
+      "Mini-Stealthburner is the official scaled-down toolhead from Voron Design, originally designed for the Voron 0 (a compact CoreXY printer with a 120mm build volume). It is occasionally used on 2.4 and Trident builds where weight reduction is the primary goal, but this is uncommon.",
+      "On a full-size Voron 2.4 or Trident, Mini-Stealthburner offers limited advantages over standard Stealthburner — the weight savings are real but the hotend compatibility is narrower and the community documentation is almost entirely focused on Voron 0. Most builders on 2.4 or Trident should use standard Stealthburner or Xol instead.",
+      "Mini-Stealthburner is included here because it works on 2.4 and Trident and some builders choose it for specific lightweight configurations."
+    ],
+    "parts": [
+      "Mini-Stealthburner body",
+      "Hotend mount",
+      "Fan shroud",
+      "Extruder mount"
+    ],
+    "hardware": [
+      "M3 and M2 heat inserts (smaller hardware than full SB)",
+      "Smaller fasteners",
+      "25mm fans"
+    ],
+    "sidebarHotends": [
+      "Dragon HF",
+      "Revo Micro"
+    ],
+    "hotends": [
+      {"name":"Dragon HF","temp":"300°C","flow":"25mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Revo Micro","temp":"300°C","flow":"15mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Rapido HF","temp":"300°C","flow":"28mm³/s","status":"LIMITED","ok":null},
+      {"name":"Rapido 2 UHF","temp":"320°C","flow":"32mm³/s","status":"NOT COMPATIBLE","ok":false}
+    ],
+    "extruders": [
+      {"name":"Orbiter v2","ratio":"7.5:1","weight":"175g","status":"SUPPORTED","ok":true},
+      {"name":"Sherpa Mini","ratio":"5:1","weight":"85g","status":"SUPPORTED · recommended","ok":true},
+      {"name":"Clockwork 2","ratio":"50:17","weight":"210g","status":"NOT COMPATIBLE","ok":false}
+    ],
+    "specs": [
+      {"k":"Difficulty","v":"Intermediate"},
+      {"k":"Creator","v":"Voron Design"},
+      {"k":"Type","v":"Official"},
+      {"k":"Primary Use","v":"Voron 0"},
+      {"k":"Printed Parts","v":"Yes"}
+    ],
+    "alternatives": [
+      {"label":"Stealthburner","href":"/voron/toolheads/stealthburner"},
+      {"label":"Xol Toolhead","href":"/voron/toolheads/xol"}
+    ]
+  },
+  "archetype": {
+    "title": "Archetype — Modular Voron Toolhead Guide",
+    "description": "Complete guide to the Archetype modular toolhead: printed parts, hardware list, hotend and extruder compatibility, and build notes for Voron 2.4 and Trident.",
+    "name": "Archetype",
+    "creatorLabel": "Community mod by @Armchairengineer",
+    "tagline": "Modular toolhead system. Swap hotend mounts without reprinting the entire toolhead. Best for builders who frequently change hotends.",
+    "badge": "ENTHUSIAST",
+    "github": "https://github.com/Armchair-Engineering/Archetype",
+    "stlLabel": "All STLs on Armchair Engineering GitHub",
+    "callout": {"title":"Not recommended as a first toolhead","body":"Archetype is designed for builders who regularly swap hotends. It is more complex to build than Stealthburner or Xol. Additional mechanical interfaces add assembly precision requirements. Start with Stealthburner if this is your first Voron build."},
+    "overview": [
+      "Archetype is a modular toolhead system by Armchair Engineering designed for builders who regularly swap hotends. Where most toolheads require printing a new hotend-specific cowl or front piece for each hotend, Archetype uses a standardised hotend mount interface — swap the hotend mount, not the entire toolhead.",
+      "This modularity comes at a cost: Archetype is more complex to build and tune than Stealthburner or Xol. The additional mechanical interfaces add potential failure points and require precise assembly. It is not recommended as a first toolhead.",
+      "For builders with a collection of hotends who want to test different configurations without a full rebuild, Archetype is the purpose-built solution. The hotend library covers all major Voron-ecosystem hotends."
+    ],
+    "parts": [
+      "Archetype main body",
+      "Universal carriage",
+      "Hotend-specific mount (one per hotend — small prints)",
+      "Extruder adapter"
+    ],
+    "hardware": [
+      "M3 heat inserts",
+      "Precision M3 fasteners (tolerance-critical assembly)",
+      "Toolhead PCB recommended",
+      "CAN bus recommended (reduces wiring on modular system)"
+    ],
+    "sidebarHotends": [
+      "Rapido 2",
+      "Dragon HF",
+      "Revo Voron",
+      "NF-Crazy"
+    ],
+    "sidebarExtruders": [
+      "Orbiter v2",
+      "Galileo 2",
+      "Sherpa Mini"
+    ],
+    "hotends": [
+      {"name":"Rapido 2 UHF","temp":"320°C","flow":"32mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Dragon HF","temp":"300°C","flow":"25mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"Revo Voron","temp":"300°C","flow":"20mm³/s","status":"SUPPORTED","ok":true},
+      {"name":"NF-Crazy","temp":"450°C","flow":"30mm³/s","status":"SUPPORTED","ok":true}
+    ],
+    "extruders": [
+      {"name":"Orbiter v2","ratio":"7.5:1","weight":"175g","status":"SUPPORTED","ok":true},
+      {"name":"Galileo 2","ratio":"9:1","weight":"180g","status":"SUPPORTED","ok":true},
+      {"name":"Sherpa Mini","ratio":"5:1","weight":"85g","status":"SUPPORTED","ok":true}
+    ],
+    "specs": [
+      {"k":"Difficulty","v":"Advanced"},
+      {"k":"Creator","v":"Armchair Engineering"},
+      {"k":"Type","v":"Community"},
+      {"k":"Printed Parts","v":"Yes (modular)"},
+      {"k":"License","v":"GPL v3"}
+    ]
+  }
+}
