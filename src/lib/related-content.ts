@@ -15,7 +15,6 @@ export interface RelatedCard {
   title: string;
   href: string;
   date: string;
-  gradient: string;
 }
 
 const COLLECTION_BASE: Record<RelatedCollection, string> = {
@@ -23,12 +22,6 @@ const COLLECTION_BASE: Record<RelatedCollection, string> = {
   guides: '/guides',
   comparisons: '/comparisons',
 };
-
-const GRADIENTS = [
-  'linear-gradient(135deg,#1a1520,#0d0d18)',
-  'linear-gradient(135deg,#1f2010,#131708)',
-  'linear-gradient(135deg,#101a20,#08131a)',
-];
 
 interface PoolItem {
   collection: RelatedCollection;
@@ -64,11 +57,10 @@ export async function getRelatedContent(
     .filter(item => item.collection !== currentCollection)
     .sort(byDateDesc);
 
-  return [...sameCollection, ...rest].slice(0, limit).map((item, i) => ({
+  return [...sameCollection, ...rest].slice(0, limit).map((item) => ({
     category: item.category,
     title: item.title,
     href: `${COLLECTION_BASE[item.collection]}/${item.slug}`,
     date: item.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
-    gradient: GRADIENTS[i % GRADIENTS.length],
   }));
 }

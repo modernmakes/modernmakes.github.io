@@ -122,9 +122,8 @@ const currentPath = '/press';
       </p>
       <a
         href="mailto:modernmakesco@gmail.com"
+        class="press-mail-cta"
         style="display:inline-flex;align-items:center;gap:10px;background:var(--surface);color:var(--black);font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;padding:18px 36px;border-radius:100px;text-decoration:none;transition:opacity 150ms ease"
-        onmouseover="this.style.opacity='0.9'"
-        onmouseout="this.style.opacity='1'"
       >
         modernmakesco@gmail.com
       </a>
@@ -146,6 +145,9 @@ const currentPath = '/press';
   /* The default orange focus ring vanishes on the orange band. */
   .press-cta :focus-visible { outline-color: var(--on-accent); }
   /* ── Audience stat cards ── */
+  @media (hover: hover) and (pointer: fine) {
+    .press-mail-cta:hover { opacity: .9; }
+  }
   .press-stat-card {
     background: #fff;
     border: 1px solid var(--border);

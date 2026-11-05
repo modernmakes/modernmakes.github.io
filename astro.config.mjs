@@ -4,10 +4,15 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://modernmakes.github.io',
   output: 'static',
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/lab/') })],
   redirects: {
     '/hardware/hotends/rapido-2': '/hardware/hotends/rapido-2-uhf',
     '/news/voron-phoenix-600mm-released': '/news/voron-phoenix-idex-preview',
     '/voron/toolhead': '/voron/toolheads',
+    '/hotends': '/hardware/hotends',
+    '/extruders': '/hardware',
+    '/electronics': '/hardware',
+    '/motion-system': '/hardware/motion',
+    '/build-surfaces': '/hardware',
   },
 });

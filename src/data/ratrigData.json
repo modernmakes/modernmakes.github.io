@@ -86,8 +86,7 @@
       "price": "$1,400",
       "verdictLabel": "Workhorse",
       "verdictClass": "verdict-best",
-      "href": "/hardware/printers/ratrig-v-core-4",
-      "bg": "linear-gradient(135deg,#1a1008,#100a04)"
+      "href": "/hardware/printers/ratrig-v-core-4"
     },
     {
       "name": "V-Core 4 Belted Z",
@@ -96,8 +95,7 @@
       "price": "Stock",
       "verdictLabel": "Workhorse",
       "verdictClass": "verdict-best",
-      "href": "/hardware/motion-system/ratrig-v-core-4-belted-z",
-      "bg": "linear-gradient(135deg,#101820,#080e18)"
+      "href": "/hardware/motion-system/ratrig-v-core-4-belted-z"
     },
     {
       "name": "MGN15H Linear Rail",
@@ -106,8 +104,7 @@
       "price": "Kit-supplied",
       "verdictLabel": "Workhorse",
       "verdictClass": "verdict-best",
-      "href": "/hardware/motion-system/ratrig-mgn15h-linear-rail",
-      "bg": "linear-gradient(135deg,#102010,#081408)"
+      "href": "/hardware/motion-system/ratrig-mgn15h-linear-rail"
     },
     {
       "name": "Diagonal Frame Brace",
@@ -116,8 +113,7 @@
       "price": "€19–25",
       "verdictLabel": "Workhorse",
       "verdictClass": "verdict-best",
-      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/",
-      "bg": "linear-gradient(135deg,#201520,#140e18)"
+      "href": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/"
     }
   ]
 }

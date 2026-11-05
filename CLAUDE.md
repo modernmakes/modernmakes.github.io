@@ -119,7 +119,7 @@ The two humanizer skills live in Cowork; the checks above are inlined here so a 
 **Live site:** modernmakes.github.io
 **Stack:** Astro 4.x, static output, GitHub Pages
 **Deploy:** Every push to `main` triggers `.github/workflows/deploy.yml` → `astro build` → deploys `dist/`
-**Pages:** 360 pages, zero errors required at build
+**Pages:** 356 pages, zero errors required at build
 **GA4:** `G-CGR4N532H6`
 **Contact:** `modernmakesco@gmail.com`
 
@@ -151,7 +151,7 @@ See BRAND.md for full brand reference (voice, verdict taxonomy, tokens, tagline 
 
 ## Design System
 
-**No Tailwind** — the package is installed but unused. Use CSS custom properties from `src/styles/global.css`.
+**No Tailwind** — the packages were removed (Nov 2026). Use CSS custom properties from `src/styles/global.css`.
 
 Key tokens:
 
@@ -172,7 +172,7 @@ Key tokens:
 ```
 
 Pre-built utility classes — use before writing new CSS:
-`.container`, `.section`, `.section-lg`, `.section-head`, `.card`, `.product-card`, `.spec-chip`, `.btn-buy`, `.verdict`, `.grid-2/3/4`, `.eyebrow`, `.dark-section`, `.callout-orange`
+`.container`, `.section`, `.section-lg`, `.section-head`, `.card`, `.product-card`, `.spec-chip`, `.btn-buy`, `.verdict`, `.grid-3/4`, `.eyebrow`, `.callout-orange`, `.breadcrumb`
 
 The `lg-*` layout rules (two-column editorial: breadcrumb → H1 → sticky sidebar TOC + prose) are defined in `global.css` under `/* ── EDITORIAL LAYOUT (lg-*) ── */`. Use these for all info/legal pages — do not re-implement inline.
 
@@ -252,7 +252,6 @@ src/
       lighting-cameras.json — 8 records
       motors.json           — 12 records
       printers.json         — 8 records
-      filament.json         — empty
   styles/
     global.css              — entire design system
   components/
