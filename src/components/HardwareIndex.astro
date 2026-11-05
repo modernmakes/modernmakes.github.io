@@ -303,55 +303,6 @@ const itemListSchema = {
   margin: 0 auto;
   padding: 0 40px;
 }
-.gf-cats {
-  display: flex;
-  gap: 2px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.gf-cats::-webkit-scrollbar { display: none; }
-.gf-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 44px; /* hit target (Apple HIG) */
-  padding: 14px 20px;
-  font-family: var(--fu);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--g1);
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-bottom: -1px;
-  transition: color .15s, background .15s, border-color .15s, var(--press-release);
-}
-@media (hover: hover) and (pointer: fine) {
-  .gf-tab:hover { color: var(--black); background: var(--bg); }
-}
-.gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
-.gf-badge {
-  font-family: var(--fm);
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--g1);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1px 7px;
-  transition: background .15s, color .15s, border-color .15s;
-}
-.gf-tab.is-active .gf-badge {
-  background: var(--accent);
-  color: var(--on-accent);
-  border-color: var(--accent);
-}
 .gf-summary {
   font-family: var(--fm);
   font-size: 12px;
@@ -369,16 +320,12 @@ const itemListSchema = {
   .hot-hero-inner { padding: 0 20px; }
   .hot-hero-title { font-size: 36px; }
   .gf-bar-inner { padding: 0 20px; }
-  /* 14px vertical padding keeps the tap target ≥44px on touch */
-  .gf-tab { padding: 14px 16px; font-size: 11px; }
 }
 
 /* ── Reduced motion: global.css has no global reset, so this page honours the
    preference for its own filter motion (card fade + tab/badge transitions).
    hideCard's setTimeout fallback still flips display, so filtering stays correct ── */
 @media (prefers-reduced-motion: reduce) {
-  .gf-card,
-  .gf-tab,
-  .gf-badge { transition: none; }
+  .gf-card { transition: none; }
 }
 </style>

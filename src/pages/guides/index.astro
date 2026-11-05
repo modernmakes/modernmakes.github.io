@@ -401,54 +401,6 @@ const difficultyColors: Record<string, string> = {
   top: 56px; /* pins below the scrolled nav height */
   z-index: 10;
 }
-.gf-cats {
-  display: flex;
-  gap: 2px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.gf-cats::-webkit-scrollbar { display: none; }
-.gf-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 14px 20px;
-  font-family: var(--fu);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--g1);
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-bottom: -1px;
-  transition: color .15s, background .15s, border-color .15s;
-}
-@media (hover: hover) and (pointer: fine) {
-  .gf-tab:hover { color: var(--black); background: var(--bg); }
-}
-.gf-tab.is-active { color: var(--black); border-bottom-color: var(--accent); }
-.gf-badge {
-  font-family: var(--fm);
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--g2);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1px 7px;
-  transition: background .15s, color .15s, border-color .15s;
-}
-.gf-tab.is-active .gf-badge {
-  background: var(--accent);
-  color: var(--on-accent);
-  border-color: var(--accent);
-}
 
 /* ── DIFFICULTY ROW ── */
 .gf-diff-bar {
@@ -557,7 +509,6 @@ const difficultyColors: Record<string, string> = {
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .gf-bar-inner { padding: 0 20px; }
-  .gf-tab { padding: 12px 14px; font-size: 11px; }
   .gf-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 }
 @media (max-width: 480px) {

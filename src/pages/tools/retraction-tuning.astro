@@ -1,4 +1,5 @@
 ---
+import '../../styles/tools-gcode.css';
 import ToolHero from '../../components/ToolHero.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
@@ -343,113 +344,8 @@ M84</textarea>
 </Base>
 
 <style is:global>
-/* ── TOOL WRAP (shared with PA tool — duplicated for page independence) ── */
-.pa-tool-wrap {
-  background: var(--bg);
-  min-height: 60vh;
-  padding: 32px 0 64px;
-}
-.pa-tool-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 32px;
-  align-items: start;
-}
-.pa-sidebar {
-  position: sticky;
-  top: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-}
-.pa-sidebar::-webkit-scrollbar { width: 4px; }
-.pa-sidebar::-webkit-scrollbar-track { background: transparent; }
-.pa-sidebar::-webkit-scrollbar-thumb { background: var(--border-s); border-radius: 2px; }
-.pa-sidebar > .pa-form-group { padding: 16px 20px; background: var(--bg); }
-.pa-modified-badge { display: none; font-size: 10px; color: var(--g2); font-family: var(--fm); margin-top: 4px; }
-.pa-section { border-top: 1px solid var(--border); }
-.pa-section[open] .pa-section-arrow { transform: rotate(0deg); }
-.pa-section:not([open]) .pa-section-arrow { transform: rotate(-90deg); }
-.pa-section-head {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px; cursor: pointer; font-family: var(--fu);
-  font-size: 12px; font-weight: 700; color: var(--black); letter-spacing: .03em;
-  text-transform: uppercase; list-style: none; user-select: none;
-  background: var(--surface); transition: background .12s;
-}
-@media (hover: hover) and (pointer: fine) {
-  .pa-section-head:hover { background: var(--bg); }
-}
-.pa-section-head::-webkit-details-marker { display: none; }
-.pa-section-arrow { font-size: 11px; color: var(--g2); transition: transform .15s; display: inline-block; }
-.pa-section-body { padding: 4px 20px 16px; }
-.pa-form-group { display: flex; flex-direction: column; gap: 5px; }
-.pa-label { font-family: var(--fm); font-size: 10px; color: var(--g2); text-transform: uppercase; letter-spacing: .07em; }
-.pa-input, .pa-select, .pa-textarea {
-  font-family: var(--fm); font-size: 13px; color: var(--black);
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 5px; padding: 7px 10px; transition: border-color .12s; width: 100%;
-}
-.pa-input:focus, .pa-select:focus, .pa-textarea:focus { outline: none; border-color: var(--accent); }
-.pa-textarea { resize: vertical; font-size: 11px; line-height: 1.6; }
-.pa-select { appearance: none; cursor: pointer; padding-right: 24px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238C8C8C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
-.pa-radio-group { display: flex; flex-direction: column; gap: 6px; }
-.pa-radio { display: flex; align-items: center; gap: 7px; font-family: var(--fu); font-size: 13px; color: var(--black); cursor: pointer; }
-.pa-radio input[type="radio"] { accent-color: var(--accent); width: 14px; height: 14px; flex-shrink: 0; }
-.pa-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.pa-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-.pa-pattern-count { margin-top: 8px; font-family: var(--fm); font-size: 11px; color: var(--accent-dk); background: rgba(255,90,31,.07); border: 1px solid rgba(255,90,31,.18); border-radius: 4px; padding: 6px 10px; }
 #towerCountNum { font-weight: 700; font-size: 13px; }
-.input-error { border-color: #ef4444 !important; }
-.pa-field-error { display: none; font-size: 11px; color: #ef4444; font-family: var(--fm); }
-.pa-inline-error { font-size: 12px; color: #ef4444; font-family: var(--fm); margin-top: 6px; }
-.pa-inline-warn  { font-size: 12px; color: #f59e0b; font-family: var(--fm); margin-top: 6px; }
-.pa-output { display: flex; flex-direction: column; gap: 16px; }
-.pa-stats-bar { display: flex; align-items: center; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; flex-wrap: wrap; position: relative; }
-.pa-stat { display: flex; flex-direction: column; gap: 3px; padding: 12px 20px; flex: 1; min-width: 100px; }
-.pa-stat-label { font-family: var(--fm); font-size: 9px; text-transform: uppercase; letter-spacing: .1em; color: var(--g2); }
-.pa-stat-val { font-family: var(--fd); font-size: 20px; font-weight: 800; color: var(--black); line-height: 1; }
-.pa-stat-div { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
-.pa-updating { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-family: var(--fm); font-size: 10px; color: var(--accent-dk); opacity: 0; transition: opacity .15s; pointer-events: none; }
-.pa-updating.visible { opacity: 1; }
-.pa-actions { display: flex; gap: 10px; }
-.pa-btn-copy, .pa-btn-download { font-family: var(--fu); font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; transition: background .12s, opacity .12s; }
-.pa-btn-copy { background: var(--black); color: #fff; }
-@media (hover: hover) and (pointer: fine) {
-  .pa-btn-copy:hover:not(:disabled) { background: #333; }
-}
-.pa-btn-copy.copied { background: #1a7a1a; }
-.pa-btn-download { background: var(--accent); color: var(--on-accent); }
-@media (hover: hover) and (pointer: fine) {
-  .pa-btn-download:hover:not(:disabled) { background: var(--accent-mid); }
-}
-.pa-btn-copy:disabled, .pa-btn-download:disabled { opacity: 0.4; cursor: not-allowed; }
-.pa-code-wrap { background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 8px; overflow: hidden; }
-.pa-code { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.7; color: #ccc; padding: 20px 24px; overflow-x: auto; overflow-y: auto; max-height: 520px; white-space: pre; margin: 0; }
-.pa-code .gc-comment { color: var(--on-dark-muted); }
-.pa-code .gc-cmd    { color: var(--accent); font-weight: 700; }
 .pa-code .gc-retract { color: #4fc3f7; }
-.pa-howto { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
-.pa-howto-title { font-family: var(--fd); font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 14px; }
-.pa-howto-steps { font-family: var(--fb); font-size: 14px; color: var(--g1); line-height: 1.7; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-.pa-howto-steps strong { color: var(--black); font-family: var(--fu); }
-.pa-howto-steps code { font-family: var(--fm); font-size: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent-dk); }
-.pa-diagram { background: #0d0d0d; border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
-.pa-diagram-title { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--on-dark-muted); margin-bottom: 10px; }
-.pa-diagram-art { font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; color: #aaa; margin: 0; white-space: pre; overflow-x: auto; }
-.pa-howto-note { font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.7; padding-top: 14px; border-top: 1px solid var(--border); }
-.pa-howto-note code { font-family: var(--fm); font-size: 11px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent-dk); }
-
-/* ── RETRACTION-SPECIFIC ── */
 .rt-range-note {
   margin-top: 8px;
   font-family: var(--fu);
@@ -457,12 +353,6 @@ M84</textarea>
   color: var(--g2);
   padding: 5px 0;
 }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) { .pa-tool-inner { grid-template-columns: 300px 1fr; gap: 24px; } }
-@media (max-width: 860px)  { .pa-tool-inner { grid-template-columns: 1fr; } .pa-sidebar { position: static; max-height: none; } }
-@media (max-width: 768px)  { .pa-tool-wrap { padding: 20px 0 48px; } .pa-tool-inner { padding: 0 20px; } .pa-row-2, .pa-row-3 { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px)  { .pa-row-3 { grid-template-columns: 1fr; } .pa-stats-bar { flex-direction: column; align-items: stretch; } .pa-stat-div { width: 100%; height: 1px; } .pa-actions { flex-direction: column; } }
 </style>
 
 <script>
