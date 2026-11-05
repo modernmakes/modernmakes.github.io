@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import TypeCover from '../../components/TypeCover.astro';
 
 const currentPath = '/guides';
 const siteBase = Astro.site
@@ -51,7 +52,7 @@ function cardBg(entry: (typeof sorted)[number]): string {
   if (entry.data.heroImage) {
     return `background-color:#0a1a14;background-image:url('${entry.data.heroImage}');background-size:cover;background-position:center`;
   }
-  return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
+  return '';
 }
 
 const difficultyColors: Record<string, string> = {
@@ -136,15 +137,21 @@ const difficultyColors: Record<string, string> = {
             aria-label={entry.data.title}
           >
             <div class="card-img" style={cardBg(entry)}>
-              <div class="gi-overlay"></div>
-              <span class="gi-cat">{entry.data.category}</span>
-              {entry.data.difficulty && (
-                <span
-                  class="gi-diff-badge"
-                  style={`background:${(difficultyColors[entry.data.difficulty] ?? '#E65100')}dd`}
-                >
-                  {entry.data.difficulty}
-                </span>
+              {entry.data.heroImage ? (
+                <>
+                  <div class="gi-overlay"></div>
+                  <span class="gi-cat">{entry.data.category}</span>
+                  {entry.data.difficulty && (
+                    <span
+                      class="gi-diff-badge"
+                      style={`background:${(difficultyColors[entry.data.difficulty] ?? '#E65100')}dd`}
+                    >
+                      {entry.data.difficulty}
+                    </span>
+                  )}
+                </>
+              ) : (
+                <TypeCover eyebrow={entry.data.category} title={entry.data.title} />
               )}
             </div>
             <div class="card-body">

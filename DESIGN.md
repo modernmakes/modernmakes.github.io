@@ -168,6 +168,8 @@ A restrained near-monochrome stage (warm off-white in light, near-black in dark)
 - **Children** of an orange fill stay at full ink: no `opacity` dimming on counts or meta.
 - Disabled controls (`opacity: .4–.5`) are exempt, as WCAG exempts inactive components.
 
+**Retired motif M8, the orange seam.** The gradient orange hairline on dark-band edges is gone (Nov 2026): orange is a pointer, not decoration, and Phase 2's extrusion line is the signature orange motion. Bands meet on the tonal plane change alone; the hero, breathing glow and card shine sweeps went with it.
+
 **The Body-Grey Floor.** Body prose never goes lighter than Body Grey (`#5A5A5A`) on the off-white page. "Elegant light grey" is the single fastest way to fail AA contrast; if it's close, push toward Ink.
 
 ## 3. Typography
@@ -261,4 +263,5 @@ The verdict badge is the editorial spine of the hardware section. It encodes the
 - **Don't** lighten body text "for elegance" below Body Grey — it fails AA on the off-white bg.
 - **Don't** set prose in Barlow Condensed or data in Lora; don't use JetBrains Mono as decorative "tech costume" for non-data text.
 - **Don't** add ambient drop shadows to resting cards, or glassmorphism anywhere except the established nav glass.
+- **Don't** decorate dark bands with orange seams, radial glows, shine sweeps or blueprint drawings. Orange marks the one pointer on a screen (retired motif M8).
 - **Don't** fabricate audience metrics or hands-on test claims — "Audience metrics available on request," and verdicts synthesize community consensus.

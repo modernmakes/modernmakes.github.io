@@ -25,7 +25,7 @@ function bgStyle(slide: any) {
   if (slide.resolvedImage) {
     return `background-image: url('${slide.resolvedImage}'); background-size: cover; background-position: center 15%;`;
   }
-  return `background: ${slide.gradient};`;
+  return `background: var(--dark-bg);`;
 }
 ---
 
@@ -39,7 +39,7 @@ function bgStyle(slide: any) {
       <div
         class="hero-bg kb-active"
         style={bgStyle(defaultSlide)}
-        data-fallback={defaultSlide.gradient}
+        data-fallback="var(--dark-bg)"
       ></div>
       <div class:list={['hero-overlay', { 'hero-overlay--photo': !!defaultSlide.resolvedImage }]}></div>
       <a href={defaultSlide.url} class="hero-content" tabindex="0">
@@ -134,9 +134,8 @@ function bgStyle(slide: any) {
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to top,  rgba(0,0,0,.90) 0%, rgba(0,0,0,.4) 40%, rgba(0,0,0,.15) 70%, transparent 100%),
-      linear-gradient(to right, rgba(0,0,0,.3) 0%, transparent 60%);
+    /* No scrim on the solid fallback; the photo variant below adds one for legibility */
+    background: none;
   }
 
   .hero-overlay--photo {
@@ -306,10 +305,10 @@ function bgStyle(slide: any) {
         bgEl.style.cssText = "background-image:url('" + active.resolvedImage + "');background-size:cover;background-position:center 15%;";
         if (overlayEl) overlayEl.classList.add('hero-overlay--photo');
       } else {
-        bgEl.style.cssText = 'background:' + active.gradient + ';';
+        bgEl.style.cssText = 'background:var(--dark-bg);';
         if (overlayEl) overlayEl.classList.remove('hero-overlay--photo');
       }
-      bgEl.dataset.fallback = active.gradient;
+      bgEl.dataset.fallback = 'var(--dark-bg)';
     }
   }
 

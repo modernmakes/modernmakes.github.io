@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import TypeCover from '../../components/TypeCover.astro';
 
 const currentPath = '/comparisons';
 const siteBase = Astro.site
@@ -20,7 +21,7 @@ function cardBg(entry: (typeof sorted)[number]) {
   if (entry.data.heroImage) {
     return `background-color:#1a1520;background-image:url('${entry.data.heroImage}');background-size:cover;background-position:center`;
   }
-  return 'background:linear-gradient(135deg,#1a1520,#0d0d18)';
+  return '';
 }
 
 const counts = { all: sorted.length };
@@ -71,8 +72,14 @@ const counts = { all: sorted.length };
               aria-label={entry.data.title}
             >
               <div class="card-img" style={cardBg(entry)}>
-                <div class="news-img-overlay"></div>
-                <span class="news-img-cat">{entry.data.category}</span>
+                {entry.data.heroImage ? (
+                  <>
+                    <div class="news-img-overlay"></div>
+                    <span class="news-img-cat">{entry.data.category}</span>
+                  </>
+                ) : (
+                  <TypeCover eyebrow={entry.data.category} title={entry.data.title} />
+                )}
               </div>
               <div class="card-body">
                 <div class="card-cat">{entry.data.category}</div>

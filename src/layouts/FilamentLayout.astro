@@ -426,14 +426,8 @@ const breadcrumbItems = [
 .fil-hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, #10080a 0%, #0d0d14 45%, #0a1210 100%);
+  background: var(--dark-bg);
   pointer-events: none;
-}
-.fil-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 15% 40%, rgba(255,90,31,.07) 0%, transparent 70%);
 }
 .fil-hero-content {
   position: relative;
@@ -606,7 +600,7 @@ const breadcrumbItems = [
   display: flex;
   align-items: center;
   gap: 24px;
-  background: linear-gradient(135deg, #fff8f0, #fff2e8);
+  background: var(--accent-t);
   border: 1.5px solid #FFCFBD;
   border-left: 4px solid var(--accent);
   border-radius: var(--radius-lg);

@@ -12,15 +12,13 @@ interface Props {
   verdictKey: string;
   price: number;
   href: string;
-  /** CSS gradient/colour string for the top band — the fallback when no image resolves */
-  topColor: string;
   /** Product-shot URL. Callers pass this only once they've confirmed the file exists,
-   *  so an absent/missing image falls back to the topColor band rather than a broken img. */
+   *  so an absent/missing image falls back to the solid band rather than a broken img. */
   imageSrc?: string | null;
   /** When set, the card joins the shared scroll-reveal with this stagger delay (ms) */
   revealDelay?: number;
 }
-const { category, name, description, verdict, verdictKey, price, href, topColor, imageSrc, revealDelay } = Astro.props;
+const { category, name, description, verdict, verdictKey, price, href, imageSrc, revealDelay } = Astro.props;
 ---
 <a
   class="glass-card"
@@ -33,7 +31,7 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
       <img class="gc-media-img" src={imageSrc} alt={name} loading="lazy" decoding="async" />
     </div>
   ) : (
-    <div class="gc-band" style={`background: ${topColor};`} aria-hidden="true"></div>
+    <div class="gc-band" aria-hidden="true"></div>
   )}
   <div class="gc-body">
     <p class="gc-category">{category}</p>
@@ -53,7 +51,7 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
 
   .glass-card {
     display: block;
-    position: relative; /* anchors the specular sweep pseudo */
+    position: relative;
     text-decoration: none;
     color: inherit;
     background: rgba(255, 255, 255, 0.04);
@@ -81,31 +79,9 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
     outline-offset: 3px;
   }
 
-  /* Specular sweep — a skewed light strip crosses the glass face on hover.
-     Clipped by the card's overflow:hidden; the "glass" payoff moment (M3). */
-  .glass-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 45%;
-    background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
-    transform: translateX(-140%) skewX(-16deg);
-    opacity: 0;
-    pointer-events: none;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .glass-card:hover::after { animation: gc-sweep 650ms ease; }
-  }
-  @keyframes gc-sweep {
-    0%   { opacity: 0;   transform: translateX(-140%) skewX(-16deg); }
-    30%  { opacity: 0.35; }
-    100% { opacity: 0;   transform: translateX(260%)  skewX(-16deg); }
-  }
-
   .gc-band {
     height: 120px;
+    background: var(--dark-surface);
     border-top-left-radius: var(--radius-2xl);
     border-top-right-radius: var(--radius-2xl);
   }
@@ -208,6 +184,5 @@ const { category, name, description, verdict, verdictKey, price, href, topColor,
   @media (prefers-reduced-motion: reduce) {
     .glass-card { transition: none; }
     .glass-card:hover, .glass-card:active { transform: none; }
-    .glass-card:hover::after { animation: none; }
   }
 </style>

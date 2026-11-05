@@ -105,7 +105,7 @@ const products = [
       <div class="grid-3">
         {products.map(product => (
           <div class="product-card" data-compatible={product.compatible}>
-            <div class="product-card-img" style="background:linear-gradient(135deg,#1e1e1e,#111);height:140px;display:flex;align-items:center;justify-content:center">
+            <div class="product-card-img" style="background:var(--dark-surface);height:140px;display:flex;align-items:center;justify-content:center">
               <div style="text-align:center">
                 <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:rgba(255,255,255,.15)">{product.brand}</div>
                 <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:rgba(255,255,255,.1)">{product.name}</div>
