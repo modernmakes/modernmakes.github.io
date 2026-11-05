@@ -1,11 +1,9 @@
 ---
-import Base from '../../layouts/Base.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
+import VoronSubsystemLayout from '../../layouts/VoronSubsystemLayout.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
 import TypeCover from '../../components/TypeCover.astro';
 import { handBadge, type RecordRef } from '../../lib/hardware';
 import hotendsData from '../../data/products/hotends.json';
-const currentPath = '/voron/hotends';
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
@@ -22,35 +20,13 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
   'bambu-hardened-nozzle': { label: 'BAMBU ONLY' },
 };
 ---
-<Base hasPageH1={true} title="Best Hotends for Voron 2.4 & Trident" description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links.">
-  <Nav slot="nav" currentPath={currentPath} />
-
-  <!-- HEADER -->
-  <div style="background:var(--black);padding:40px 0">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <!-- Breadcrumb -->
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-        <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
-        <span style="color:var(--on-dark-muted)">/</span>
-        <a href="/voron" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Voron</a>
-        <span style="color:var(--on-dark-muted)">/</span>
-        <span style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Hotends</span>
-      </div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Hotends for Voron 2.4 &amp; Trident</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:560px;margin-bottom:20px">The hotend is the most consequential upgrade on a Voron build. Max temp, flow rate, and toolhead compatibility all matter. The community has largely settled on the Rapido 2 as the default — but the right choice depends on your use case.</p>
-    </div>
-  </div>
-
-  <!-- MODEL CONTEXT BAR (Step 2) -->
-  <div style="background:var(--surface);border-bottom:1px solid var(--border);padding:12px 0">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div class="model-context-bar" id="model-context">
-        <span class="model-context-label">Showing parts for:</span>
-        <span id="active-model-label" class="model-context-value">Voron 2.4</span>
-        <a href="/voron" class="model-context-switch">Switch model →</a>
-      </div>
-    </div>
-  </div>
+<VoronSubsystemLayout
+  title="Best Hotends for Voron 2.4 & Trident"
+  description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links."
+  crumb="Hotends"
+  heading="Hotends for Voron 2.4 & Trident"
+  intro="The hotend is the most consequential upgrade on a Voron build. Max temp, flow rate, and toolhead compatibility all matter. The community has largely settled on the Rapido 2 as the default — but the right choice depends on your use case."
+>
 
   <!-- CONTEXT CALLOUT -->
   <div style="background:#f0efe9;border-bottom:1px solid var(--border);padding:20px 0">
@@ -127,7 +103,7 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
           );
         })}
       </div>
-      <p style="font-size:11px;color:var(--g2);margin-top:20px;font-family:'Barlow',sans-serif">Affiliate links used — Modern Makes may earn a commission on purchases. This doesn't affect our recommendations. <a href="/about#affiliate" style="color:var(--accent-dk)">See disclosure.</a></p>
+      <AffiliateDisclosure />
     </div>
   </section>
 
@@ -199,8 +175,6 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
     </div>
   </section>
 
-  <Footer slot="footer" />
-
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -219,22 +193,5 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
       }
     ]
   })}></script>
-</Base>
+</VoronSubsystemLayout>
 
-<script>
-  // ── Model-aware: reads ?model= and syncs localStorage ──
-  (function() {
-    const STORAGE_KEY = 'voron-model';
-    const params = new URLSearchParams(window.location.search);
-    const model = params.get('model') || localStorage.getItem(STORAGE_KEY) || '2.4';
-    localStorage.setItem(STORAGE_KEY, model);
-
-    const label = document.getElementById('active-model-label');
-    if (label) label.textContent = model === '2.4' ? 'Voron 2.4' : 'Voron Trident';
-
-    document.querySelectorAll<HTMLElement>('[data-compatible]').forEach(el => {
-      const compatible = (el.dataset.compatible ?? '').split(',');
-      el.style.display = compatible.includes(model) ? '' : 'none';
-    });
-  })();
-</script>
