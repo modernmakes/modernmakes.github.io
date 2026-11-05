@@ -271,7 +271,7 @@ const breadcrumbSchema = {
                   {flowBenchmarks.map(b => (
                     <span class="comp-flow-gridline" style={`left:${(b.value / FLOW_MAX) * 100}%`}></span>
                   ))}
-                  <div class="comp-flow-fill" style={`width:${flowPct}%`}></div>
+                  <div class="comp-flow-fill" style={`transform:scaleX(${flowPct / 100})`}></div>
                   <div class="comp-flow-dot" style={`left:${flowPct}%`}></div>
                 </div>
                 <!-- this product's value sits BELOW the track, anchored away from the edges -->
@@ -880,11 +880,13 @@ const breadcrumbSchema = {
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
   height: 100%;
   background: var(--accent);
   border-radius: 5px;
   z-index: 2;
-  transition: width .6s cubic-bezier(.22,1,.36,1);
+  transform-origin: left;
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
 }
 .comp-flow-dot {
   position: absolute;

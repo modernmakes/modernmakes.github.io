@@ -65,14 +65,14 @@ function verdictClass(v: string): string {
 
 const difficultyColor: Record<string, string> = {
   Beginner:     'var(--verdict-wh-ink-dk)',
-  Intermediate: '#92400e',
-  Advanced:     '#b91c1c',
+  Intermediate: 'var(--caution-ink)',
+  Advanced:     'var(--danger)',
 };
 
 const totalCount = sorted.length;
 ---
 <Base hasPageH1={true}
-  title="Filament Guides & Material Guides — Modern Makes"
+  title="Filament Guides"
   description="Independent filament guides and material guides — PETG, ASA, ABS, PA-CF, TPU and more. Real settings and verdicts from community print data."
   heroPage={true}
 >
@@ -294,25 +294,12 @@ const totalCount = sorted.length;
   position: relative;
   overflow: hidden;
 }
-.fil-index-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .2s ease;
-}
 @media (hover: hover) and (pointer: fine) {
   .fil-index-card:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(255,90,31,.08);
   }
-}
-@media (hover: hover) and (pointer: fine) {
-  .fil-index-card:hover::before { transform: scaleX(1); }
 }
 .fil-index-card[style*="display:none"] { transform: none !important; }
 

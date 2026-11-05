@@ -84,9 +84,7 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
                 <div class="product-card-specs">
                   {product.maxTemp && <span class="spec-chip">{product.maxTemp}°C max</span>}
                   {product.maxFlow && <span class="spec-chip">{product.maxFlow}mm³/s</span>}
-                  {product.thermistor && <span class="spec-chip">{product.thermistor}</span>}
-                  {badge?.label === 'BAMBU ONLY' && <span class="spec-chip">Bambu only</span>}
-                </div>
+                  {product.thermistor && <span class="spec-chip">{product.thermistor}</span>}                </div>
                 <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
                 {product.toolheads && product.toolheads.length > 0 && (
                   <div style="margin-bottom:12px">
