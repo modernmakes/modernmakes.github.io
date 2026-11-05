@@ -54,7 +54,7 @@ export const resolveVerdict = (raw: unknown): VerdictBucket | null => {
   const known = VERDICT_ALIAS[raw.trim().toLowerCase()];
   if (known) return VERDICT_BUCKETS.find((b) => b.key === known) ?? null;
   // Unknown but present — keep it visible rather than dropping the record.
-  return { key: raw.trim().toLowerCase().replace(/\s+/g, '-'), label: titleCase(raw), cls: 'verdict-rec' };
+  return { key: raw.trim().toLowerCase().replace(/\s+/g, '-'), label: titleCase(raw), cls: 'verdict-neutral' };
 };
 
 // ── Hand-written badges on the Voron pages ──────────────────────────────────
@@ -62,7 +62,8 @@ export const resolveVerdict = (raw: unknown): VerdictBucket | null => {
 // They route through resolveVerdict so the badge is always one of the shared
 // classes. A product that has a hardware record with a verdict shows that
 // verdict. Otherwise: RECOMMENDED / TOP PICK / COMMUNITY STANDARD -> Workhorse,
-// ENTHUSIAST -> Bleeding Edge, SITUATIONAL / BUDGET (PICK) -> no badge. Nothing
+// ENTHUSIAST -> Bleeding Edge, SITUATIONAL / BUDGET (PICK) / POPULAR / COMMUNITY FAV
+// / BAMBU ONLY -> no badge. Nothing
 // maps to Benchmark: that is only ever set deliberately in Airtable.
 import bedProbes from '../data/hardware/bed-probes.json';
 import extruders from '../data/hardware/extruders.json';
@@ -84,6 +85,9 @@ const HAND_LABEL: Record<string, string | null> = {
   SITUATIONAL: null,
   'BUDGET PICK': null,
   BUDGET: null,
+  POPULAR: null,
+  'COMMUNITY FAV': null,
+  'BAMBU ONLY': null, // shown as a plain spec chip, not a verdict
 };
 
 export const handBadge = (label: string, ref?: RecordRef): VerdictBucket | null => {

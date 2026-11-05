@@ -64,16 +64,16 @@ function verdictClass(v: string): string {
 }
 
 const difficultyColor: Record<string, string> = {
-  Beginner:     '#16a34a',
-  Intermediate: '#d97706',
-  Advanced:     '#dc2626',
+  Beginner:     'var(--verdict-wh-ink-dk)',
+  Intermediate: '#92400e',
+  Advanced:     '#b91c1c',
 };
 
 const totalCount = sorted.length;
 ---
 <Base hasPageH1={true}
-  title="Filament Reviews & Material Guides — Modern Makes"
-  description="Independent filament reviews and material guides — PETG, ASA, ABS, PA-CF, TPU and more. Real settings, real prints, real verdicts."
+  title="Filament Guides & Material Guides — Modern Makes"
+  description="Independent filament guides and material guides — PETG, ASA, ABS, PA-CF, TPU and more. Real settings and verdicts from community print data."
   heroPage={true}
 >
   <Nav slot="nav" currentPath="/filament" />
@@ -194,8 +194,8 @@ const totalCount = sorted.length;
     "@graph": [
       {
         "@type": "CollectionPage",
-        "name": "Filament Reviews & Guides — Modern Makes",
-        "description": "Independent filament reviews, buying guides, and comparisons for PETG, ASA, ABS, PA-CF, TPU and more.",
+        "name": "Filament Guides — Modern Makes",
+        "description": "Independent filament guides, buying guides, and comparisons for PETG, ASA, ABS, PA-CF, TPU and more.",
         "url": "https://modernmakes.github.io/filament",
         "isPartOf": { "@type": "WebSite", "url": "https://modernmakes.github.io" },
       },

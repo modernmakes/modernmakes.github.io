@@ -101,7 +101,9 @@ const verdictColors: Record<string, { bg: string; text: string; border: string }
   consider: { bg: 'rgba(59,130,246,.12)', text: 'var(--verdict-be-on-dark)', border: 'rgba(59,130,246,.3)' },
   updated:  { bg: 'rgba(255,90,31,.12)',  text: 'var(--accent-mid)', border: 'rgba(255,90,31,.3)' },
 };
-const vc = verdictColors[String(verdictLabel).toLowerCase()] ?? verdictColors['bleeding edge'];
+// Any other token is a passthrough: neutral grey, never the Bleeding Edge blue.
+const neutralVc = { bg: 'rgba(255,255,255,.08)', text: 'rgba(255,255,255,.75)', border: 'rgba(255,255,255,.2)' };
+const vc = verdictColors[String(verdictLabel).toLowerCase()] ?? neutralVc;
 
 const regionLabels: Record<string, string> = {
   us: 'US',
@@ -285,7 +287,7 @@ const breadcrumbSchema = {
                 </div>
               </div>
               <p class="comp-flow-note">
-                Max flow tested at 250°C with standard PLA/PETG. Actual performance varies by filament, nozzle diameter, and temperature.
+                Max flow at 250°C, from published test data, with standard PLA/PETG. Actual performance varies by filament, nozzle diameter, and temperature.
               </p>
             </div>
           </section>
