@@ -1,4 +1,5 @@
 ---
+import ToolHero from '../../../components/ToolHero.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
@@ -10,23 +11,7 @@ const currentPath = '/tools';
 >
   <Nav slot="nav" currentPath={currentPath} />
 
-  <!-- HERO -->
-  <div style="background:var(--black);padding:64px 0 40px;border-bottom:1px solid rgba(255,255,255,.1)">
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
-        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <a href="/tools" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Tools</a>
-        <span style="color:var(--on-dark-muted);font-size:11px">/</span>
-        <span style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Flow Rate Calculator</span>
-      </div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Flow Rate Calculator</h1>
-      <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:600px">Enter your print settings to calculate the volumetric flow rate your hotend must sustain. Compare the result against your hotend's rated maximum.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,90,31,.15);color:var(--accent);border:1px solid rgba(255,90,31,.3);padding:3px 10px;border-radius:3px">mm³/s</span>
-      </div>
-    </div>
-  </div>
+  <ToolHero title="Flow Rate Calculator" intro="Enter your print settings to calculate the volumetric flow rate your hotend must sustain. Compare the result against your hotend's rated maximum." unit="mm³/s" />
 
   <!-- TOOL BODY -->
   <div class="tc-wrap">
