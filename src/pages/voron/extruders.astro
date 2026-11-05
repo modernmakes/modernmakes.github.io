@@ -2,11 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { handBadge } from '../../lib/hardware';
 const currentPath = '/voron/extruders';
 
 const products = [
   {
     id: 'orbiter-v2',
+    record: ['extruders','Orbiter v2.0'],
     name: 'Orbiter v2.0',
     brand: 'LDO',
     price: 45,
@@ -19,6 +21,7 @@ const products = [
   },
   {
     id: 'galileo-2',
+    record: ['extruders','Galileo 2 Standalone (Hartk)'],
     name: 'Galileo 2 Standalone',
     brand: 'Annex Engineering',
     price: 65,
@@ -31,6 +34,7 @@ const products = [
   },
   {
     id: 'sherpa-mini',
+    record: ['extruders','Sherpa Mini'],
     name: 'Sherpa Mini',
     brand: 'Annex Engineering',
     price: 35,
@@ -55,6 +59,7 @@ const products = [
   },
   {
     id: 'vz-hextrudort',
+    record: ['extruders','Vz-HextrudORT'],
     name: 'Vz-HextrudORT',
     brand: 'VzBoT Community',
     price: 55,
@@ -124,7 +129,7 @@ const products = [
               </div>
             </div>
             <div class="product-card-body">
-              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              {(v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(product.badge.label, product.record))}
               <div class="product-card-brand">{product.brand}</div>
               <div class="product-card-name">{product.name}</div>
               <div class="product-card-specs">

@@ -2,11 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { handBadge } from '../../lib/hardware';
 const currentPath = '/voron/probe-system';
 
 const products = [
   {
     id: 'voron-tap',
+    record: ['bedProbes','Voron Tap'],
     name: 'Voron Tap',
     brand: 'VoronDesign',
     price: 20,
@@ -20,6 +22,7 @@ const products = [
   },
   {
     id: 'klicky-pcb',
+    record: ['bedProbes','Klicky PCB'],
     name: 'Klicky PCB',
     brand: 'jlas1 / Community',
     price: 8,
@@ -33,6 +36,7 @@ const products = [
   },
   {
     id: 'euclid-probe',
+    record: ['bedProbes','Euclid Probe'],
     name: 'Euclid Probe',
     brand: 'Euclid / Community',
     price: 15,
@@ -46,6 +50,7 @@ const products = [
   },
   {
     id: 'beacon',
+    record: ['bedProbes','Beacon RevH'],
     name: 'Beacon',
     brand: 'Beacon3D',
     price: 60,
@@ -115,7 +120,7 @@ const products = [
               </div>
             </div>
             <div class="product-card-body">
-              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              {(v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(product.badge.label, product.record))}
               <div class="product-card-brand">{product.brand}</div>
               <div class="product-card-name">{product.name}</div>
               <div class="product-card-specs">

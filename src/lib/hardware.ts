@@ -57,6 +57,45 @@ export const resolveVerdict = (raw: unknown): VerdictBucket | null => {
   return { key: raw.trim().toLowerCase().replace(/\s+/g, '-'), label: titleCase(raw), cls: 'verdict-rec' };
 };
 
+// ── Hand-written badges on the Voron pages ──────────────────────────────────
+// Product lists on /voron/* carry hand-written labels (RECOMMENDED, TOP PICK ...).
+// They route through resolveVerdict so the badge is always one of the shared
+// classes. A product that has a hardware record with a verdict shows that
+// verdict. Otherwise: RECOMMENDED / TOP PICK / COMMUNITY STANDARD -> Workhorse,
+// ENTHUSIAST -> Bleeding Edge, SITUATIONAL / BUDGET (PICK) -> no badge. Nothing
+// maps to Benchmark: that is only ever set deliberately in Airtable.
+import bedProbes from '../data/hardware/bed-probes.json';
+import extruders from '../data/hardware/extruders.json';
+import mainboards from '../data/hardware/mainboards.json';
+import toolboards from '../data/hardware/toolboards.json';
+import psus from '../data/hardware/psus.json';
+import enclosures from '../data/hardware/enclosures.json';
+import hotends from '../data/hardware/hotends.json';
+import buildPlates from '../data/hardware/build-plates.json';
+
+const RECORD_TABLES: Record<string, any[]> = { bedProbes, extruders, mainboards, toolboards, psus, enclosures, hotends, buildPlates };
+export type RecordRef = [keyof typeof RECORD_TABLES, string];
+
+const HAND_LABEL: Record<string, string | null> = {
+  RECOMMENDED: 'Workhorse',
+  'TOP PICK': 'Workhorse',
+  'COMMUNITY STANDARD': 'Workhorse',
+  ENTHUSIAST: 'Bleeding Edge',
+  SITUATIONAL: null,
+  'BUDGET PICK': null,
+  BUDGET: null,
+};
+
+export const handBadge = (label: string, ref?: RecordRef): VerdictBucket | null => {
+  if (ref) {
+    const rec = RECORD_TABLES[ref[0]]?.find((r) => r.Name === ref[1]);
+    const fromData = resolveVerdict(rec?.Verdict);
+    if (fromData) return fromData;
+  }
+  const key = label.trim().toUpperCase();
+  return resolveVerdict(key in HAND_LABEL ? HAND_LABEL[key] : label);
+};
+
 // Ordered, counted verdict tabs present in a record set: canonical buckets
 // first (in defined order), then any passthrough tokens by frequency.
 export const buildVerdictTabs = (records: any[]): (VerdictBucket & { count: number })[] => {

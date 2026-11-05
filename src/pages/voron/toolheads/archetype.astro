@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import { handBadge } from '../../../lib/hardware';
 const currentPath = '/voron/toolheads';
 ---
 <Base hasPageH1={true} title="Archetype — Modular Voron Toolhead Guide" description="Complete guide to the Archetype modular toolhead: printed parts, hardware list, hotend and extruder compatibility, and build notes for Voron 2.4 and Trident.">
@@ -22,7 +23,7 @@ const currentPath = '/voron/toolheads';
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--on-dark-muted);margin-bottom:16px">Community mod by @Armchairengineer</div>
       <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:560px;margin-bottom:20px">Modular toolhead system. Swap hotend mounts without reprinting the entire toolhead. Best for builders who frequently change hotends.</p>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <span class="verdict verdict-upd" style="color:var(--accent-mid);font-size:10px;letter-spacing:.06em">ENTHUSIAST</span>
+        {(v => v && <span class={`verdict ${v.cls}`} style="font-size:10px;letter-spacing:.06em">{v.label}</span>)(handBadge('ENTHUSIAST'))}
         <a href="https://github.com/Armchair-Engineering/Archetype" target="_blank" rel="noopener" style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;color:var(--accent)">View on GitHub →</a>
         <a href="/voron/toolheads" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--on-dark-muted)">← All Toolheads</a>
       </div>

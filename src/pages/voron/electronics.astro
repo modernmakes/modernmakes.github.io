@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { handBadge } from '../../lib/hardware';
 const currentPath = '/voron/electronics';
 
 const products = [
@@ -20,6 +21,7 @@ const products = [
   },
   {
     id: 'manta-m8p',
+    record: ['mainboards','BTT Manta M8P v2'],
     name: 'Manta M8P',
     brand: 'BIGTREETECH',
     price: 75,
@@ -33,6 +35,7 @@ const products = [
   },
   {
     id: 'ebb36-can',
+    record: ['toolboards','BTT EBB36 CAN v1.2'],
     name: 'EBB36 CAN Toolboard',
     brand: 'BIGTREETECH',
     price: 35,
@@ -69,6 +72,7 @@ const products = [
   },
   {
     id: 'meanwell-lrs200-24',
+    record: ['psus','Mean Well LRS-200-24'],
     name: 'LRS-200-24',
     brand: 'Mean Well',
     price: 25,
@@ -138,7 +142,7 @@ const products = [
               </div>
             </div>
             <div class="product-card-body">
-              <span class={`verdict-badge ${product.badge.cls}`}>{product.badge.label}</span>
+              {(v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(product.badge.label, product.record))}
               <div class="product-card-brand">{product.brand}</div>
               <div class="product-card-name">{product.name}</div>
               <div class="product-card-specs">

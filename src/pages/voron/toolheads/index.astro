@@ -3,6 +3,7 @@ import TypeCover from '../../../components/TypeCover.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import { handBadge } from '../../../lib/hardware';
 const currentPath = '/voron/toolheads';
 
 const toolheads = [
@@ -12,7 +13,6 @@ const toolheads = [
     creator: 'Voron Design',
     creatorLabel: 'Official Voron Design',
     verdict: 'COMMUNITY STANDARD',
-    verdictClass: 'verdict-best',
     description: 'The official Voron toolhead. Integrated LED lighting, wide hotend support, proven in millions of builds.',
     hotends: ['Rapido 2', 'Dragon HF', 'Revo Voron', 'NF-Crazy'],
     extruders: ['Clockwork 2', 'Orbiter v2', 'Galileo 2'],
@@ -27,7 +27,6 @@ const toolheads = [
     creator: '@Armchairengineer',
     creatorLabel: 'Community · Armchair Engineering',
     verdict: 'RECOMMENDED',
-    verdictClass: 'verdict-rec',
     description: 'Lightweight Stealthburner alternative. Lower moving mass means better input shaping results at high speed.',
     hotends: ['Rapido 2', 'Dragon HF', 'NF-Crazy'],
     extruders: ['Orbiter v2', 'Galileo 2', 'Sherpa Mini'],
@@ -42,7 +41,6 @@ const toolheads = [
     creator: '@chirpy2605',
     creatorLabel: 'Community · chirpy2605',
     verdict: 'RECOMMENDED',
-    verdictClass: 'verdict-rec',
     description: 'Compact toolhead designed around the Dragon and Rapido hotend family. Excellent at speed.',
     hotends: ['Dragon HF', 'Rapido 2', 'NF-Crazy'],
     extruders: ['Orbiter v2', 'LGX Lite', 'Sherpa Mini'],
@@ -57,7 +55,6 @@ const toolheads = [
     creator: 'Voron Design',
     creatorLabel: 'Official Voron Design',
     verdict: 'SITUATIONAL',
-    verdictClass: 'verdict-upd',
     description: 'Scaled-down Stealthburner for smaller builds and lighter hotends. Primarily used on Voron 0.',
     hotends: ['Dragon HF', 'Revo Micro'],
     extruders: ['Orbiter v2', 'Sherpa Mini'],
@@ -72,7 +69,6 @@ const toolheads = [
     creator: '@Armchairengineer',
     creatorLabel: 'Community · Armchair Engineering',
     verdict: 'ENTHUSIAST',
-    verdictClass: 'verdict-upd',
     description: 'Modular toolhead system. Swap hotend mounts without reprinting the entire toolhead.',
     hotends: ['Rapido 2', 'Dragon HF', 'Revo Voron', 'NF-Crazy'],
     extruders: ['Orbiter v2', 'Galileo 2'],
@@ -139,7 +135,7 @@ const toolheads = [
             </div>
             <div class="product-card-body">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                <span class={`verdict ${th.verdictClass}`} style="font-size:9px;letter-spacing:.06em">{th.verdict}</span>
+                {(v => v && <span class={`verdict ${v.cls}`} style="font-size:9px;letter-spacing:.06em">{v.label}</span>)(handBadge(th.verdict))}
                 <span style={`font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:3px;${th.difficulty === 'Advanced' ? 'background:rgba(239,68,68,.1);color:#dc2626' : 'background:rgba(59,130,246,.1);color:#2563eb'}`}>{th.difficulty}</span>
               </div>
               <div class="product-card-name" style="font-size:18px;margin-bottom:2px">{th.name}</div>

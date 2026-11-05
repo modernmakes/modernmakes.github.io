@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { handBadge, type RecordRef } from '../../lib/hardware';
 import hotendsData from '../../data/products/hotends.json';
 const currentPath = '/voron/hotends';
 const siteBase = Astro.site
@@ -11,13 +12,13 @@ const voronHotends = hotendsData.products.filter(p =>
   p.compatibility.some(c => c.startsWith('voron'))
 );
 
-// Verdict badges for top of each card
-const badges: Record<string, { label: string; cls: string }> = {
-  'rapido-2':              { label: 'OUR PICK',    cls: 'verdict-best' },
-  'dragon-hf':             { label: 'RECOMMENDED', cls: 'verdict-rec'  },
-  'revo-voron':            { label: 'RECOMMENDED', cls: 'verdict-rec'  },
-  'nf-crazy':              { label: 'BUDGET',      cls: 'verdict-upd'  },
-  'bambu-hardened-nozzle': { label: 'BAMBU ONLY',  cls: 'verdict-skip' },
+// Hand-written labels per card; handBadge routes them (or the hardware record) through resolveVerdict.
+const badges: Record<string, { label: string; record?: RecordRef }> = {
+  'rapido-2':              { label: 'OUR PICK', record: ['hotends', 'Rapido 2 UHF'] },
+  'dragon-hf':             { label: 'RECOMMENDED' },
+  'revo-voron':            { label: 'RECOMMENDED' },
+  'nf-crazy':              { label: 'BUDGET' },
+  'bambu-hardened-nozzle': { label: 'BAMBU ONLY' },
 };
 ---
 <Base hasPageH1={true} title="Best Hotends for Voron 2.4 & Trident" description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links.">
@@ -82,9 +83,7 @@ const badges: Record<string, { label: string; cls: string }> = {
               </div>
               <div class="product-card-body">
                 {/* Verdict badge at top of card */}
-                {badge && (
-                  <span class={`verdict-badge ${badge.cls}`}>{badge.label}</span>
-                )}
+                {badge && (v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(badge.label, badge.record))}
                 <div class="product-card-brand">{product.brand}</div>
                 <div class="product-card-name">{product.name}</div>
                 <div class="product-card-specs">
@@ -120,9 +119,6 @@ const badges: Record<string, { label: string; cls: string }> = {
                     <span class="product-card-price">${product.price}</span>
                     <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
                   </div>
-                  {product.verdict && (
-                    <span class={`verdict verdict-${product.verdict}`}>{product.verdictLabel}</span>
-                  )}
                 </div>
                 {product.vendors.length > 1 && (
                   <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">

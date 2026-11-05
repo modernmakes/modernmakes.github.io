@@ -3,6 +3,7 @@ import TypeCover from '../../components/TypeCover.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { handBadge, type RecordRef } from '../../lib/hardware';
 import voronData from '../../data/products/voron-variants.json';
 const currentPath = '/voron';
 const siteBase = Astro.site
@@ -320,10 +321,10 @@ const partCounts: Record<string, { a: number; t: number }> = {
       </div>
       <div class="grid-4">
         {[
-          { name:'Rapido 2', brand:'Phaetus', spec:'320°C · 32mm³/s', price:'$69', verdict:'rec', verdictLabel:'Community standard', href:'/voron/hotends#rapido-2' },
-          { name:'Galileo 2', brand:'Hartk', spec:'9:1 gear ratio · 180g', price:'~$45', verdict:'best', verdictLabel:'Best extruder', href:'/voron/extruders#galileo-2' },
-          { name:'Beacon Rev H', brand:'Beacon', spec:'Eddy current · 0.2μm', price:'$70', verdict:'rec', verdictLabel:'Best probe', href:'/voron/probe-system#beacon' },
-          { name:'Mandala Rose Works PEI', brand:'MRW', spec:'Spring steel · textured', price:'$45+', verdict:'rec', verdictLabel:'Best surface', href:'/voron/bed#mrw-pei' }
+          { name:'Rapido 2', brand:'Phaetus', spec:'320°C · 32mm³/s', price:'$69', ref:['hotends','Rapido 2 UHF'], href:'/voron/hotends#rapido-2' },
+          { name:'Galileo 2', brand:'Hartk', spec:'9:1 gear ratio · 180g', price:'~$45', ref:['extruders','Galileo 2 Standalone (Hartk)'], href:'/voron/extruders#galileo-2' },
+          { name:'Beacon Rev H', brand:'Beacon', spec:'Eddy current · 0.2μm', price:'$70', ref:['bedProbes','Beacon RevH'], href:'/voron/probe-system#beacon' },
+          { name:'Mandala Rose Works PEI', brand:'MRW', spec:'Spring steel · textured', price:'$45+', ref:['buildPlates','Mandala Rose Works Magnetic Build System (250mm)'], href:'/voron/bed#mrw-pei' }
         ].map(p => (
           <a href={p.href}>
             <div class="product-card">
@@ -336,7 +337,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
                 </div>
                 <div class="product-card-footer">
                   <span class="product-card-price">{p.price}</span>
-                  <span class={`verdict verdict-${p.verdict}`}>{p.verdictLabel}</span>
+                  {(v => v && <span class={`verdict ${v.cls}`}>{v.label}</span>)(handBadge('', p.ref as RecordRef))}
                 </div>
               </div>
             </div>
