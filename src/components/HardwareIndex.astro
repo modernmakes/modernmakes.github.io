@@ -11,7 +11,10 @@ import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug } from '../li
 
 interface Props {
   records: any[];
-  route: string;          // e.g. 'extruders' (under /hardware/)
+  route: string;          // e.g. 'extruders' (under /hardware/ unless basePath is set)
+  basePath?: string;      // index/detail URL prefix; default `/hardware/${route}`
+  navPath?: string;       // Nav currentPath; default '/hardware'
+  parent?: { label: string; href: string }; // breadcrumb parent; default Hardware
   categoryLabel: string;  // card image label, e.g. 'EXTRUDER'
   crumb: string;          // breadcrumb + h1 text, e.g. 'Extruders'
   heading: string;        // visible H1
@@ -29,6 +32,9 @@ interface Props {
 const {
   records: raw,
   route,
+  basePath = `/hardware/${route}`,
+  navPath = '/hardware',
+  parent = { label: 'Hardware', href: '/hardware' },
   categoryLabel,
   crumb,
   heading,
@@ -68,23 +74,23 @@ const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: schemaName,
-  url: `${siteBase}/hardware/${route}`,
+  url: `${siteBase}${basePath}`,
   itemListElement: records.map((r: any, i: number) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: r['Name'] as string,
-    url: `${siteBase}/hardware/${route}/${toSlug(r['Name'] as string)}`,
+    url: `${siteBase}${basePath}/${toSlug(r['Name'] as string)}`,
     description: (r['Verdict Label'] as string | undefined) ?? (r['Description'] as string | undefined) ?? '',
   })),
 };
 ---
 <Base title={title} description={description} heroPage={false} hasPageH1={true}>
-  <Nav slot="nav" currentPath="/hardware" />
+  <Nav slot="nav" currentPath={navPath} />
 
   <header class="hot-hero">
     <div class="hot-hero-inner">
       <nav class="breadcrumb hot-hero-crumbs" aria-label="Breadcrumb">
-        <a href="/hardware">Hardware</a>
+        <a href={parent.href}>{parent.label}</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{crumb}</span>
       </nav>
@@ -92,6 +98,8 @@ const itemListSchema = {
       <p class="hot-hero-sub">{sub}</p>
     </div>
   </header>
+
+  <slot name="intro" />
 
   <!-- VERDICT FILTER BAR -->
   <div class="gf-bar">
@@ -125,7 +133,7 @@ const itemListSchema = {
             const imgSrc = imageOf(r);
             const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
             return (
-              <a href={`/hardware/${route}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''}>
+              <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''}>
                 <div class="card-img">
                   {/* Cover is the base layer: it shows while the image loads and if a hotlinked image fails. */}
                   <TypeCover eyebrow={categoryLabel} title={r['Name']} />
