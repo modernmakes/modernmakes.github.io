@@ -81,6 +81,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 </nav>
 
 <!-- Sibling of <nav> — participates in normal document flow to push content down -->
+<div class="nav-scrim" id="nav-scrim" aria-hidden="true"></div>
 <div class="nav-panel" id="nav-panel" inert>
   <div class="panel-inner">
 
@@ -438,18 +439,54 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* Overlay: fixed, so opening it never changes document layout (no scroll anchoring, no scrollY shift).
+     The nav bar (z 1000) stays above it; panel-inner padding-top clears the bar. */
   .nav-panel {
-    overflow-anchor: none;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 320ms cubic-bezier(0.4, 0, 0, 1);
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 999;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--black);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform  var(--dur-sheet) var(--ease-out),
+      opacity    var(--dur-base)  var(--ease-out),
+      visibility 0s linear var(--dur-sheet);
   }
-  .nav-panel.open { max-height: 480px; }
+  .nav-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .nav-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+  .nav-scrim.open { opacity: 1; pointer-events: auto; }
+
+  /* Page scroll is locked while the menu is open. */
+  html.nav-open { overflow: hidden; scrollbar-gutter: stable; }
+
+  @media (min-width: 1024px) {
+    .nav-panel, .nav-scrim { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-panel, .nav-scrim { transition: none; }
+    .nav-panel.open .panel-link { animation: none; }
+  }
 
   .nav-panel.open .panel-link:nth-child(1) { animation: link-enter 200ms  40ms both; }
   .nav-panel.open .panel-link:nth-child(2) { animation: link-enter 200ms  80ms both; }
@@ -689,28 +726,36 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     });
 
     /* ── Hamburger panel ── */
-    function closePanel() {
+    const scrim = document.getElementById('nav-scrim') as HTMLElement;
+    function closePanel(restoreFocus = false) {
+      const wasOpen = panel.classList.contains('open');
       panel.classList.remove('open');
+      scrim.classList.remove('open');
+      document.documentElement.classList.remove('nav-open');
       panel.inert = true; // inert: hidden from assistive tech and out of the tab order
       hamburger.classList.remove('is-open');
       hamburger.setAttribute('aria-expanded', 'false');
       hamburger.setAttribute('aria-label', 'Open menu');
+      if (wasOpen && restoreFocus) hamburger.focus();
     }
-    let openY = 0;
     function openPanel() {
-      openY = window.scrollY; // iOS scroll anchoring can shift scrollY when the panel opens
       panel.classList.add('open');
+      scrim.classList.add('open');
+      document.documentElement.classList.add('nav-open');
       panel.inert = false;
       hamburger.classList.add('is-open');
       hamburger.setAttribute('aria-expanded', 'true');
       hamburger.setAttribute('aria-label', 'Close menu');
+      (panel.querySelector('a') as HTMLElement | null)?.focus({ preventScroll: true });
     }
 
     hamburger.addEventListener('click', () => {
-      panel.classList.contains('open') ? closePanel() : openPanel();
+      panel.classList.contains('open') ? closePanel(true) : openPanel();
     });
 
+    scrim.addEventListener('click', () => closePanel(true));
     panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closePanel()));
+
 
     /* ── Desktop search ── */
     const searchWrap  = document.getElementById('nav-search-wrap')  as HTMLElement;
@@ -784,28 +829,12 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 
     /* ── Escape closes everything ── */
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closePrinters(); closePanel(); closeSearchOverlay(); }
+      if (e.key === 'Escape') { closePrinters(); closePanel(true); closeSearchOverlay(); }
     });
 
     /* ── Auto-close on resize to desktop ── */
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024) closePanel();
-    });
-
-    /* ── Close panel on scroll ── */
-    window.addEventListener('scroll', () => {
-      if (panel.classList.contains('open') && Math.abs(window.scrollY - openY) > 40) closePanel();
-    }, { passive: true });
-
-    /* ── Close panel on click/tap outside ── */
-    document.addEventListener('click', e => {
-      if (
-        panel.classList.contains('open') &&
-        !panel.contains(e.target as Node) &&
-        !hamburger.contains(e.target as Node)
-      ) {
-        closePanel();
-      }
     });
   });
 </script>
