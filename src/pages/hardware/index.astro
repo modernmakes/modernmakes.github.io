@@ -21,7 +21,6 @@ import lightingCamerasData from '../../data/hardware/lighting-cameras.json';
 import gantrysData        from '../../data/hardware/gantrys.json';
 import motionSystemData   from '../../data/hardware/motion-system.json';
 import enclosuresData     from '../../data/hardware/enclosures.json';
-import printersData       from '../../data/hardware/printers.json';
 
 const len = (d: unknown) => (Array.isArray(d) ? d.length : 0);
 
@@ -46,7 +45,6 @@ const categories = [
   { name: 'Gantrys',            description: 'Gantry kits and conversions — kinematics, extrusion size, and motor count.',         href: '/hardware/gantrys',          count: len(gantrysData),        icon: '🏗️' },
   { name: 'Motion System',      description: 'Linear rails, belts, pulleys, and lead screws — type, spec, and brand tier.',         href: '/hardware/motion-system',    count: len(motionSystemData),   icon: '🛤️' },
   { name: 'Enclosures',         description: 'Kit and DIY enclosures — material, thickness, and chamber temperature.',            href: '/hardware/enclosures',       count: len(enclosuresData),     icon: '📦' },
-  { name: 'Printers',           description: 'Self-build and kit CoreXY printers — build volume, frame, BOM cost, and difficulty.', href: '/hardware/printers',         count: len(printersData),       icon: '🖨️' },
 ].map((c) => ({ ...c, live: true }));
 
 // Pull the featured hotend's product image straight from its record so the

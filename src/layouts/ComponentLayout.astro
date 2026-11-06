@@ -131,6 +131,8 @@ const siteBase = Astro.site
   : 'https://modernmakes.github.io';
 const canonicalUrl = siteBase + Astro.url.pathname;
 const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+// Printers live at /printers/<slug>, outside /hardware, so they get their own breadcrumb trail and nav highlight.
+const isPrinter = pathSegments[0] === 'printers';
 const segLabels: Record<string, string> = {
   hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',
   nozzles: 'Nozzles', mainboards: 'Mainboards', toolboards: 'Toolboards', 'part-cooling': 'Part Cooling',
@@ -180,7 +182,7 @@ const breadcrumbSchema = {
   hasHero={true}
   hasPageH1={true}
 >
-  <Nav slot="nav" currentPath="/hardware" />
+  <Nav slot="nav" currentPath={isPrinter ? '/printers' : '/hardware'} />
 
   <!-- ── COMPONENT HERO ── -->
   <section class="comp-hero">
@@ -195,9 +197,13 @@ const breadcrumbSchema = {
         <nav class="breadcrumb comp-breadcrumb" aria-label="Breadcrumb">
           <a href="/">Home</a>
           <span>›</span>
-          <a href="/hardware">Hardware</a>
-          <span>›</span>
-          <a href={`/hardware/${pathSegments[1]}`}>{segLabels[pathSegments[1]] ?? (pathSegments[1].charAt(0).toUpperCase() + pathSegments[1].slice(1))}</a>
+          {isPrinter
+            ? <a href="/printers">Printers</a>
+            : <>
+                <a href="/hardware">Hardware</a>
+                <span>›</span>
+                <a href={`/hardware/${pathSegments[1]}`}>{segLabels[pathSegments[1]] ?? (pathSegments[1].charAt(0).toUpperCase() + pathSegments[1].slice(1))}</a>
+              </>}
           <span>›</span>
           <span>{title}</span>
         </nav>

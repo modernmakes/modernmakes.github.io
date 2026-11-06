@@ -3,7 +3,7 @@
   "printerLabel": "RatRig",
   "flagship": {
     "name": "RatRig V-Core 4",
-    "href": "/hardware/printers/ratrig-v-core-4",
+    "href": "/printers/ratrig-v-core-4",
     "buildVolumes": ["300mm", "400mm", "500mm"],
     "frame": "3030 aluminum extrusion",
     "motion": "CoreXY — AWD (4 independent XY motors)",
@@ -17,8 +17,8 @@
     "verdictLabel": "Discontinued — RatRig no longer supports the V-Minion; no active kit, no documentation updates",
     "note": "RatRig discontinued the V-Minion due to supply chain issues and limited demand, then released its CAD and STLs publicly and sold remaining toolheads at cost.",
     "alternatives": [
-      { "name": "RatRig V-Core 4", "href": "/hardware/printers/ratrig-v-core-4" },
-      { "name": "Voron 0.2", "href": "/hardware/printers/voron-02" }
+      { "name": "RatRig V-Core 4", "href": "/printers/ratrig-v-core-4" },
+      { "name": "Voron 0.2", "href": "/printers/voron-02" }
     ]
   },
   "subsystems": [
@@ -86,7 +86,7 @@
       "price": "$1,400",
       "verdictLabel": "Workhorse",
       "verdictClass": "verdict-best",
-      "href": "/hardware/printers/ratrig-v-core-4"
+      "href": "/printers/ratrig-v-core-4"
     },
     {
       "name": "V-Core 4 Belted Z",
