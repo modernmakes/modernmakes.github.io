@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -29,6 +29,28 @@ const TABLES = [
   { name: 'printers',         id: 'tblboLo18BZ2k0E9n' },
 ];
 
+function httpError(res, body) {
+  const err = new Error(`HTTP ${res.status} — ${body}`);
+  err.status = res.status;
+  return err;
+}
+
+// Write only after a successful fetch. A fetch that "succeeds" with 0 records over a file that
+// has data is treated as a failure too, so a bad filter or lost permission can't blank the site.
+async function saveJson(path, records) {
+  if (records.length === 0 && existsSync(path)) {
+    try {
+      const prev = JSON.parse(await readFile(path, 'utf-8'));
+      if (Array.isArray(prev) && prev.length > 0) {
+        throw new Error(`returned 0 records but ${path} has ${prev.length}; keeping the existing file`);
+      }
+    } catch (err) {
+      if (err instanceof SyntaxError) { /* unreadable old file: fine to replace */ } else throw err;
+    }
+  }
+  await writeFile(path, JSON.stringify(records, null, 2), 'utf-8');
+}
+
 async function fetchTable(tableId) {
   const records = [];
   let offset;
@@ -41,9 +63,7 @@ async function fetchTable(tableId) {
       headers: { 'Authorization': `Bearer ${TOKEN}` },
     });
 
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status} — ${await res.text()}`);
-    }
+    if (!res.ok) throw httpError(res, await res.text());
 
     const buffer = await res.arrayBuffer();
     const data = JSON.parse(new TextDecoder('utf-8').decode(buffer));
@@ -81,7 +101,7 @@ async function fetchNewsletterArchive() {
       headers: { 'Authorization': `Bearer ${TOKEN}` },
     });
 
-    if (!res.ok) throw new Error(`HTTP ${res.status} — ${await res.text()}`);
+    if (!res.ok) throw httpError(res, await res.text());
 
     const buffer = await res.arrayBuffer();
     const data = JSON.parse(new TextDecoder('utf-8').decode(buffer));
@@ -116,29 +136,43 @@ async function main() {
   }
 
   let exported = 0;
+  const failures = []; // { name, status, message }
 
   for (const table of TABLES) {
     process.stdout.write(`Fetching ${table.name}... `);
     try {
       const records = await fetchTable(table.id);
-      await writeFile(join(OUT_DIR, `${table.name}.json`), JSON.stringify(records, null, 2), 'utf-8');
+      await saveJson(join(OUT_DIR, `${table.name}.json`), records);
       console.log(`done (${records.length} records)`);
       exported++;
     } catch (err) {
       console.error(`failed: ${err.message}`);
+      failures.push({ name: table.name, status: err.status ?? 'n/a', message: err.message.slice(0, 200) });
     }
   }
 
-  console.log(`\nExport complete: ${exported}/${TABLES.length} hardware tables exported`);
+  console.log(`
+Export complete: ${exported}/${TABLES.length} hardware tables exported`);
 
   // Newsletter archive (separate base: appjJWszZBOS13e0i)
   process.stdout.write('Fetching newsletter-archive... ');
   try {
     const nlRecords = await fetchNewsletterArchive();
-    await writeFile('src/data/newsletter-archive.json', JSON.stringify(nlRecords, null, 2), 'utf-8');
+    await saveJson('src/data/newsletter-archive.json', nlRecords);
     console.log(`done (${nlRecords.length} records)`);
   } catch (err) {
     console.error(`failed: ${err.message}`);
+    failures.push({ name: 'newsletter-archive', status: err.status ?? 'n/a', message: err.message.slice(0, 200) });
+  }
+
+  if (failures.length > 0) {
+    console.error(`
+SYNC FAILED: ${failures.length} source(s) did not update (existing JSON files left untouched):`);
+    for (const f of failures) console.error(`  - ${f.name}: HTTP ${f.status}`);
+    if (failures.some(f => f.status === 401 || f.status === 403)) {
+      console.error('401/403 usually means the AIRTABLE_TOKEN secret is missing, expired or lacks access.');
+    }
+    process.exitCode = 1;
   }
 }
 
