@@ -42,12 +42,20 @@ const voronHotends = (hotends as any[])
   })
   .filter((p) => p.models.length > 0);
 
+// Matrix columns: every toolhead named by a shown hotend. Fixed order first, the rest A-Z.
+const TOOLHEAD_ORDER = ['stealthburner', 'xol', 'dragon burner', 'mini stealthburner'];
+const toolheadCols = [...new Set(voronHotends.flatMap((p) => p.toolheads))].sort((a, b) => {
+  const ia = TOOLHEAD_ORDER.indexOf(a.toLowerCase()), ib = TOOLHEAD_ORDER.indexOf(b.toLowerCase());
+  if (ia !== -1 || ib !== -1) return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  return a.localeCompare(b);
+});
+
 const relOf = (v: { affiliate: boolean }) => (v.affiliate ? 'sponsored noopener' : 'noopener');
 const fmtPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
 ---
 <VoronSubsystemLayout
   title="Best Hotends for Voron 2.4 & Trident"
-  description="Every Voron 2.4 and Trident compatible hotend we track: Rapido 2 variants, Chube, Goliath, Tricorn, and more. Specs, toolhead fit, verdicts, and where to buy."
+  description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links."
   crumb="Hotends"
   heading="Hotends for Voron 2.4 & Trident"
   intro="The hotend is the most consequential upgrade on a Voron build. Max temp, flow rate, and toolhead compatibility all matter. The community has largely settled on the Rapido 2 as the default — but the right choice depends on your use case."
@@ -132,34 +140,30 @@ const fmtPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2))
       <div class="section-head">
         <h2 class="section-head-label">Toolhead compatibility</h2>
       </div>
-      <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+      <div style="background:var(--bg);border-radius:10px;border:1px solid var(--border);overflow-x:auto;position:relative" tabindex="0" role="region" aria-label="Toolhead compatibility table">
         <table style="width:100%;border-collapse:collapse;font-size:12px;font-family:'Barlow',sans-serif">
           <thead>
             <tr style="background:var(--black)">
-              <th style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-muted);border-right:1px solid rgba(255,255,255,.08)">Hotend</th>
-              {['Stealthburner','Xol','Dragon Burner','Mini-SB'].map(th => (
-                <th style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-muted)">{th}</th>
+              <th scope="col" style="text-align:left;padding:10px 16px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-muted);border-right:1px solid rgba(255,255,255,.08);white-space:nowrap">Hotend</th>
+              {toolheadCols.map(th => (
+                <th scope="col" style="text-align:center;padding:10px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-muted);white-space:nowrap">{th}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {[
-              { name:'Rapido 2', sb:'✓ Native', xol:'✓', db:'✓', msb:'✗' },
-              { name:'Dragon HF', sb:'✓ Native', xol:'✓', db:'✓', msb:'✓' },
-              { name:'Revo Voron', sb:'✓ Native', xol:'Adapter', db:'Adapter', msb:'✗' },
-              { name:'NF-Crazy', sb:'✓', xol:'✓', db:'✓', msb:'✗' }
-            ].map((row, i) => (
+            {voronHotends.map((p, i) => (
               <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
-                <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
-                {[row.sb, row.xol, row.db, row.msb].map(val => (
-                  <td style={`text-align:center;padding:10px 12px;color:${val.startsWith('✓') ? 'var(--verdict-wh-ink)' : val === '✗' ? 'var(--accent-dk)' : 'var(--verdict-skip-ink)'};font-weight:${val.startsWith('✓') ? '600' : '400'}`}>{val}</td>
-                ))}
+                <th scope="row" style="text-align:left;padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border);white-space:nowrap">{p.name}</th>
+                {toolheadCols.map(th => {
+                  const yes = p.toolheads.includes(th);
+                  return <td style={`text-align:center;padding:10px 12px;color:${yes ? 'var(--verdict-wh-ink)' : 'var(--g2)'};font-weight:${yes ? '600' : '400'}`}><span aria-hidden="true">{yes ? '✓' : '—'}</span><span class="sr-only">{yes ? 'Compatible' : 'Not listed'}</span></td>;
+                })}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p style="font-size:11px;color:var(--g2);margin-top:10px">✓ Native = fits without adapter. Adapter = community-printed adapter required. ✗ = not compatible.</p>
+      <p style="font-size:11px;color:var(--g2);margin-top:10px">✓ = listed as compatible in the hotend's record. — = not listed.</p>
     </div>
   </section>
 

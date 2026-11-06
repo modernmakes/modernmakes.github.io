@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import hotends   from '../../data/hardware/hotends.json';
 import extruders from '../../data/hardware/extruders.json';
 import probes    from '../../data/hardware/bed-probes.json';
+import printers  from '../../data/hardware/printers.json';
 
 const toSlug = (name: string) =>
   name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -82,6 +83,17 @@ const breadcrumbSchema = {
             <li class="sm-sub-head"><a href="/hardware/probes">Bed Probes</a></li>
             {(probes as any[]).filter(r => r['Name']).map((r: any) => (
               <li class="sm-indent"><a href={`/hardware/probes/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Printers -->
+        <section class="sm-section">
+          <h2 class="sm-section-title">Printers</h2>
+          <ul class="sm-list">
+            <li><a href="/printers">All printers</a></li>
+            {(printers as any[]).filter(r => r['Name']).map((r: any) => (
+              <li class="sm-indent"><a href={`/printers/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
             ))}
           </ul>
         </section>

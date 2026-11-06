@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import hotends   from '../../data/hardware/hotends.json';
 import extruders from '../../data/hardware/extruders.json';
 import probes    from '../../data/hardware/bed-probes.json';
+import printers  from '../../data/hardware/printers.json';
 
 /* ── build search index at build time ── */
 const toSlug = (name: string) =>
@@ -102,6 +103,25 @@ for (const r of probes as any[]) {
     url:      `/hardware/probes/${toSlug(r['Name'])}`,
     type:     'Hardware',
     category: 'Bed Probe',
+  });
+}
+
+/* printers (live at /printers, not /hardware) */
+items.push({
+  title:    'Printers',
+  excerpt:  'Self-build printer ecosystems and every printer model: build volume, frame, BOM cost, difficulty.',
+  url:      '/printers',
+  type:     'Hardware',
+  category: 'Printer',
+});
+for (const r of printers as any[]) {
+  if (!r['Name']) continue;
+  items.push({
+    title:    r['Name'],
+    excerpt:  r['Verdict Label'] ?? r['Description'] ?? `${r['Brand'] ?? ''} printer`.trim(),
+    url:      `/printers/${toSlug(r['Name'])}`,
+    type:     'Hardware',
+    category: 'Printer',
   });
 }
 

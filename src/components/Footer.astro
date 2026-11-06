@@ -126,13 +126,19 @@ const ecosystems = (data as any).ecosystems ?? [];
   }
 
   /* ─── LOGO ─── */
-  .footer-logo { display: inline-block; line-height: 0; }
+  /* wordmark.svg has ~31% empty space left of the glyphs; crop to the glyph box
+     (x 313, y 60, 556x79 of 1000x200) so the wordmark lines up with the tagline and the content column. */
+  .footer-logo {
+    --wm-h: 18px;
+    display: block; line-height: 0; margin-bottom: 16px;
+    height: var(--wm-h); width: calc(var(--wm-h) * 556 / 79); overflow: hidden;
+  }
 
   .footer-wordmark {
-    height: 28px;
-    width: auto;
+    height: calc(var(--wm-h) * 200 / 79);
+    width: auto; max-width: none;
     display: block;
-    margin-bottom: 16px;
+    transform: translate(calc(var(--wm-h) * -313 / 79), calc(var(--wm-h) * -60 / 79));
     opacity: 0.9;
     transition: opacity 150ms ease;
   }
@@ -270,13 +276,8 @@ const ecosystems = (data as any).ecosystems ?? [];
 
     /* Brand band: full-bleed, so the wordmark lines up with the 20px content column. */
     .footer-brand { margin: 0 -20px; padding: 28px 20px; background: var(--dark-surface); }
-    /* wordmark.svg has ~31% empty space left of the glyphs; crop to the glyph box (x 313, y 60, 556x79 of 1000x200). */
-    .footer-logo { --wm-h: 18px; height: var(--wm-h); width: calc(var(--wm-h) * 556 / 79); overflow: hidden; }
-    .footer-wordmark {
-      height: calc(var(--wm-h) * 200 / 79); max-width: none; margin: 0;
-      transform: translate(calc(var(--wm-h) * -313 / 79), calc(var(--wm-h) * -60 / 79));
-    }
-    .footer-tagline { margin-top: 14px; font-size: 14px; }
+    .footer-logo { margin-bottom: 14px; }
+    .footer-tagline { margin-top: 0; font-size: 14px; }
 
     /* Collapsible sections: one hairline between rows. Height tweens via ::details-content (progressive; instant elsewhere). */
     .footer-cats { display: block; }
