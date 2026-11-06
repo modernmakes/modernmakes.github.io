@@ -2,31 +2,52 @@
 import VoronSubsystemLayout from '../../layouts/VoronSubsystemLayout.astro';
 import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
 import TypeCover from '../../components/TypeCover.astro';
-import { handBadge, toSlug, type RecordRef } from '../../lib/hardware';
-import hotendsData from '../../data/products/hotends.json';
-import hardwareHotends from '../../data/hardware/hotends.json';
-// Only link a card when its reviewPath is a real built page (or a redirect target); the rest stay plain.
-const builtPaths = new Set(hardwareHotends.map(r => `/hardware/hotends/${toSlug(r.Name)}`));
-const cardHref = (p: { reviewPath?: string }) => (p.reviewPath && builtPaths.has(p.reviewPath) ? p.reviewPath : null);
+import { resolveVerdict, toSlug } from '../../lib/hardware';
+import hotends from '../../data/hardware/hotends.json';
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
-const voronHotends = hotendsData.products.filter(p =>
-  p.compatibility.some(c => c.startsWith('voron'))
-);
 
-// Hand-written labels per card; handBadge routes them (or the hardware record) through resolveVerdict.
-const badges: Record<string, { label: string; record?: RecordRef }> = {
-  'rapido-2':              { label: 'OUR PICK', record: ['hotends', 'Rapido 2 UHF'] },
-  'dragon-hf':             { label: 'RECOMMENDED' },
-  'revo-voron':            { label: 'RECOMMENDED' },
-  'nf-crazy':              { label: 'BUDGET' },
-  'bambu-hardened-nozzle': { label: 'BAMBU ONLY' },
+// Airtable "Compatible Printers" name -> the model token VoronSubsystemLayout filters on.
+// Universal and Voron 0 (no model button of its own) show for every model.
+const MODEL_TOKENS: Record<string, string[]> = {
+  'Voron 2.4': ['2.4'],
+  'Voron Trident': ['trident'],
+  'Voron 0': ['2.4', 'trident'],
+  Universal: ['2.4', 'trident'],
 };
+const num = (v: unknown) => (typeof v === 'number' && v > 0 ? v : null);
+
+const voronHotends = (hotends as any[])
+  .filter((r) => typeof r.Name === 'string' && r.Name.trim())
+  .map((r) => {
+    const models = [...new Set(((r['Compatible Printers'] ?? []) as string[]).flatMap((p) => MODEL_TOKENS[p] ?? []))];
+    const vendors = [1, 2, 3, 4, 5]
+      .map((i) => ({ name: r[`Vendor ${i} Name`], url: r[`Vendor ${i} URL`], affiliate: r[`Vendor ${i} Affiliate`] === true }))
+      .filter((v) => v.name && v.url);
+    return {
+      slug: toSlug(r.Name),
+      name: r.Name as string,
+      brand: r.Brand as string | undefined,
+      maxTemp: num(r['Max Temp (°C)']),
+      maxFlow: num(r['Max Flow (mm³/s)']),
+      thermistor: r.Thermistor as string | undefined,
+      description: r.Description as string | undefined,
+      toolheads: (r['Compatible Toolheads'] ?? []) as string[],
+      price: num(r['Price (USD)']),
+      verdict: resolveVerdict(r.Verdict), // blank verdict -> null -> no badge
+      models,
+      vendors,
+    };
+  })
+  .filter((p) => p.models.length > 0);
+
+const relOf = (v: { affiliate: boolean }) => (v.affiliate ? 'sponsored noopener' : 'noopener');
+const fmtPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
 ---
 <VoronSubsystemLayout
   title="Best Hotends for Voron 2.4 & Trident"
-  description="Every hotend worth considering for Voron 2.4 and Trident builds — Rapido 2, Dragon HF, Revo Voron, and more. Compatibility matrix, community consensus, and affiliate links."
+  description="Every Voron 2.4 and Trident compatible hotend we track: Rapido 2 variants, Chube, Goliath, Tricorn, and more. Specs, toolhead fit, verdicts, and where to buy."
   crumb="Hotends"
   heading="Hotends for Voron 2.4 & Trident"
   intro="The hotend is the most consequential upgrade on a Voron build. Max temp, flow rate, and toolhead compatibility all matter. The community has largely settled on the Rapido 2 as the default — but the right choice depends on your use case."
@@ -51,23 +72,21 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
       </div>
       <div class="grid-3">
         {voronHotends.map(product => {
-          const badge = badges[product.id];
-          const href = cardHref(product);
-          const buyVendor = product.primaryVendor ?? product.vendors.find(v => v.primary) ?? product.vendors[0];
+          const buyVendor = product.vendors[0];
           return (
-            <div class="product-card product-card--link" data-compatible={product.compatible.join(',')}>
-              <div class="product-card-img" style="height:140px"><TypeCover eyebrow={product.brand} title={product.name} /></div>
+            <div class="product-card product-card--link" id={product.slug} data-compatible={product.models.join(',')}>
+              <div class="product-card-img" style="height:140px"><TypeCover eyebrow={product.brand ?? ''} title={product.name} /></div>
               <div class="product-card-body">
-                {/* Verdict badge at top of card */}
-                {badge && (v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(badge.label, badge.record))}
-                <div class="product-card-brand">{product.brand}</div>
-                <div class="product-card-name">{href ? <a href={href} class="product-card-link">{product.name}</a> : product.name}</div>
+                {product.verdict && <span class={`verdict-badge ${product.verdict.cls}`}>{product.verdict.label}</span>}
+                {product.brand && <div class="product-card-brand">{product.brand}</div>}
+                <div class="product-card-name"><a href={`/hardware/hotends/${product.slug}`} class="product-card-link">{product.name}</a></div>
                 <div class="product-card-specs">
                   {product.maxTemp && <span class="spec-chip">{product.maxTemp}°C max</span>}
                   {product.maxFlow && <span class="spec-chip">{product.maxFlow}mm³/s</span>}
-                  {product.thermistor && <span class="spec-chip">{product.thermistor}</span>}                </div>
-                <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>
-                {product.toolheads && product.toolheads.length > 0 && (
+                  {product.thermistor && <span class="spec-chip">{product.thermistor}</span>}
+                </div>
+                {product.description && <p style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.65;margin-bottom:10px">{product.description}</p>}
+                {product.toolheads.length > 0 && (
                   <div style="margin-bottom:12px">
                     <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Fits</div>
                     <div style="display:flex;flex-wrap:wrap;gap:4px">
@@ -77,26 +96,24 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
                     </div>
                   </div>
                 )}
-                {/* Primary buy CTA */}
-                <a href={buyVendor?.url ?? '#'}
-                   class="btn-buy"
-                   target="_blank"
-                   rel="noopener sponsored"
-                   style="position:relative;z-index:1">
-                  Buy at {buyVendor?.name ?? 'vendor'} →
-                </a>
-                <!-- Footer: price + verdict -->
-                <div class="product-card-footer" style="margin-top:12px">
-                  <div>
-                    <span class="product-card-price">${product.price}</span>
-                    <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
+                {buyVendor && (
+                  <a href={buyVendor.url} class="btn-buy" target="_blank" rel={relOf(buyVendor)} style="position:relative;z-index:1">
+                    Buy at {buyVendor.name} →
+                  </a>
+                )}
+                {product.price && (
+                  <div class="product-card-footer" style="margin-top:12px">
+                    <div>
+                      <span class="product-card-price">${fmtPrice(product.price)}</span>
+                      <span style="font-size:10px;color:var(--g2);margin-left:4px">USD</span>
+                    </div>
                   </div>
-                </div>
+                )}
                 {product.vendors.length > 1 && (
                   <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
                     <span style="font-size:10px;color:var(--g2);margin-right:6px">Also at:</span>
-                    {product.vendors.filter(v => !v.primary).map(vendor => (
-                      <a href={vendor.url} style="position:relative;z-index:1;font-size:10px;color:var(--accent-dk);margin-right:10px;font-family:'JetBrains Mono',monospace" target="_blank" rel="noopener nofollow">{vendor.name}</a>
+                    {product.vendors.slice(1).map(vendor => (
+                      <a href={vendor.url} style="position:relative;z-index:1;font-size:10px;color:var(--accent-dk);margin-right:10px;font-family:'JetBrains Mono',monospace" target="_blank" rel={relOf(vendor)}>{vendor.name}</a>
                     ))}
                   </div>
                 )}
@@ -184,14 +201,8 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
         "@type": "ItemList",
         "name": "Best Hotends for Voron 2.4 and Trident 2026",
         "url": `${siteBase}/voron/hotends`,
-        "numberOfItems": 5,
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Rapido 2" },
-          { "@type": "ListItem", "position": 2, "name": "Dragon HF" },
-          { "@type": "ListItem", "position": 3, "name": "Revo Voron" },
-          { "@type": "ListItem", "position": 4, "name": "NF-Crazy" },
-          { "@type": "ListItem", "position": 5, "name": "Bambu Hardened Nozzle Kit" }
-        ]
+        "numberOfItems": voronHotends.length,
+        "itemListElement": voronHotends.map((p, i) => ({ "@type": "ListItem", "position": i + 1, "name": p.name, "url": `${siteBase}/hardware/hotends/${p.slug}` }))
       }
     ]
   })}></script>
