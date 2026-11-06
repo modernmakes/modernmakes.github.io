@@ -17,13 +17,15 @@
       "Extruder"
     ],
     "Frame Size": "NEMA14",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "West3D",
     "Name": "LDO-35STH52-1504AH",
     "Step Angle": "1.8°",
-    "Vendor 1 URL": "https://www.fabreeko.com/collections/motors",
+    "Vendor 1 URL": "https://west3d.com/products/ldo-motors-ldo-35sth52-1504ahvrn-nema14-motor",
     "Brand": "LDO",
     "Price (USD)": 20,
     "Pros": "LDO quality in a compact NEMA14 package — consistent performance across units\n1.5A winding provides ample torque for high-flow extruder use\n52mm body fits Orbiter v2.0, Sherpa Mini, Galileo 2, LGX Lite\nD-cut 5mm shaft matches mounting geometry on all above extruders\nStocked by Fabreeko, West3D, and other Voron ecosystem vendors",
+    "Holding Torque (N·cm)": 37,
+    "Slug": "ldo-35sth52-1504ah",
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-35STH52-1504AH"
   },
@@ -38,6 +40,7 @@
     "Verdict Label": "Voron BOM 0.9° A/B alternative — Moons quality, 400 steps/rev native resolution",
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
+    "Motor Length (mm)": 48.3,
     "Use Case": [
       "XY"
     ],
@@ -47,8 +50,11 @@
     "Step Angle": "0.9°",
     "Vendor 1 URL": "https://west3d.com/collections/motors",
     "Brand": "Moons",
-    "Price (USD)": 20,
+    "Price (USD)": 46.3,
     "Pros": "Listed on the Voron BOM as a validated alternative to LDO A/B motors\n0.9° step angle = 400 steps/rev native — finer base resolution than 1.8° motors\nMoons is a reputable industrial motor brand with consistent quality\nCommunity-validated in high-speed CoreXY builds",
+    "Holding Torque (N·cm)": 53,
+    "Slug": "moons-ms17ha6p4200",
+    "Shaft Diameter (mm)": 5,
     "Part Number": "MS17HA6P4200"
   },
   {
@@ -60,12 +66,14 @@
     ],
     "Description": "The Moons CSE14RA1L410A-01 is the Voron Stealthburner CW2 BOM extruder motor — a 36mm NEMA14 at 0.9° step angle. It's the correct spec for CW2 and the community's universal recommendation for Stealthburner builds. The 0.9° winding gives 400 base steps per revolution, providing finer extruder resolution than a 1.8° equivalent. The community Klipper CW2 config is tuned around this motor's spec — swapping to a different NEMA14 will require recalibrating rotation_distance. Get this for Stealthburner; get the LDO-35STH52 for everything else.",
     "Verdict Label": "Voron Stealthburner CW2 BOM extruder motor — 0.9° NEMA14 36mm, community standard for Stealthburner",
+    "Rated Current (A)": 1,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 36,
     "Use Case": [
       "Extruder"
     ],
     "Frame Size": "NEMA14",
+    "Body": "Encapsulated plastic (encapsulation-moulded winding/frame, no aluminium end caps)",
     "Vendor 1 Name": "Fabreeko",
     "Name": "Moons CSE14RA1L410A-01",
     "Step Angle": "0.9°",
@@ -73,7 +81,9 @@
     "Brand": "Moons",
     "Price (USD)": 22,
     "Pros": "The specified extruder motor for Voron Stealthburner / CW2 — exact BOM match\n0.9° step angle = 400 steps/rev native — finer base resolution for extruder calibration\n36mm body fits CW2 mounting exactly; no adapter required\nMoons quality tier — consistent unit-to-unit performance\nWell-documented in community Klipper configs for CW2",
-    "Part Number": "CSE14RA1L410A-01"
+    "Holding Torque (N·cm)": 10,
+    "Slug": "moons-cse14ra1l410a-01",
+    "Part Number": "CSE14HRA1L410A-01"
   },
   {
     "id": "rec9K85xNfAksphYu",
@@ -87,17 +97,21 @@
     "Verdict Label": "Budget A/B alternative — widely used, lower cost than LDO, quality less consistent",
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
+    "Motor Length (mm)": 48,
     "Use Case": [
       "XY"
     ],
     "Frame Size": "NEMA17",
     "Vendor 1 Name": "StepperOnline",
     "Name": "OMC 17HM19-2004S1",
-    "Step Angle": "1.8°",
-    "Vendor 1 URL": "https://www.omc-stepperonline.com",
+    "Step Angle": "0.9°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/full-d-cut-shaft-nema-17-bipolar-0-9deg-46ncm-65-1oz-in-2a-2-9v-42x42x48mm-4-wires-17hm19-2004s1",
     "Brand": "OMC",
-    "Price (USD)": 14,
+    "Price (USD)": 10.76,
     "Pros": "Significantly lower price than LDO equivalent (~$12–15 vs $20–25)\nWidely used by budget Voron builders with generally good results\n2.0A winding adequate for standard CoreXY A/B use at typical Klipper run currents",
+    "Holding Torque (N·cm)": 46,
+    "Slug": "omc-17hm19-2004s1",
+    "Shaft Diameter (mm)": 5,
     "Part Number": "17HM19-2004S1"
   },
   {
@@ -119,7 +133,9 @@
     "Step Angle": "1.8°",
     "Brand": "Generic",
     "Price (USD)": 10,
-    "Pros": "Lowest cost entry point for A/B motors ($8–12)\nMany units perform adequately in standard print-speed builds\nWidely available through AliExpress storefronts"
+    "Pros": "Lowest cost entry point for A/B motors ($8–12)\nMany units perform adequately in standard print-speed builds\nWidely available through AliExpress storefronts",
+    "Slug": "generic-nema17-48mm-stepper",
+    "Shaft Diameter (mm)": 5
   },
   {
     "id": "recJan0LMJ3Yta9Nm",
@@ -144,6 +160,7 @@
     "Brand": "LDO",
     "Price (USD)": 38,
     "Pros": "Voron Trident BOM-specified Z motor — exact match to build documentation\n300mm integrated T8 lead screw, 8mm lead (4-start × 2mm pitch) — correct for Trident kinematics\n1.68A winding runs cool at typical Z current settings (0.4–0.8A RMS)\nLDO quality: straight shaft, smooth lead nut, consistent thread pitch",
+    "Slug": "ldo-42sth40-1684l300e",
     "Integrated Lead Screw": true,
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-42STH40-1684L300E"
@@ -152,8 +169,7 @@
     "id": "recMuJxUwk76AsDgK",
     "Cons": "Lower holding torque than 42STH48-2504AC due to shorter body and lower 2A winding\nFor maximum A/B performance, the 48mm variant is the stronger choice",
     "Compatible Printers": [
-      "Voron 2.4",
-      "Voron Trident"
+      "Voron 2.4"
     ],
     "Description": "The LDO-42STH40-2004MAH is the standard-length A/B motor on the Voron BOM — a 40mm NEMA17 at 2.0A. It performs well within Klipper's typical run current limits and carries the same LDO build quality as the longer 48mm variant. The 48mm 42STH48-2504AC has more torque headroom for sustained high-speed runs, but the 40mm is a solid choice for standard builds.",
     "Verdict Label": "Voron BOM standard 40mm A/B motor — LDO quality, lighter than 42STH48",
@@ -166,11 +182,12 @@
     "Frame Size": "NEMA17",
     "Vendor 1 Name": "Fabreeko",
     "Name": "LDO-42STH40-2004MAH",
-    "Step Angle": "1.8°",
+    "Step Angle": "0.9°",
     "Vendor 1 URL": "https://www.fabreeko.com/collections/motors",
     "Brand": "LDO",
     "Price (USD)": 18,
     "Pros": "Voron BOM-listed motor with verified LDO quality\nLighter and shorter than 42STH48 — marginal weight reduction on moving gantry\nSame LDO reliability at slightly lower price point\nAvailable through Fabreeko, West3D, and other major Voron vendors",
+    "Slug": "ldo-42sth40-2004mah",
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-42STH40-2004MAH"
   },
@@ -192,30 +209,8 @@
     "Brand": "Generic",
     "Price (USD)": 15,
     "Pros": "Lowest cost Z motor option ($12–18 including lead screw)\nAdequate for low-speed Z use or budget-first machines\nReadily available in required lengths from AliExpress",
+    "Slug": "generic-t8-integrated-lead-screw-nema17",
     "Integrated Lead Screw": true
-  },
-  {
-    "id": "reckgdZrFfsCd7vsm",
-    "Cons": "1.8° step angle = 200 steps/rev vs Moons CSE14's 400 — requires adjusting rotation_distance in Klipper if swapping from BOM motor\nNot the Voron BOM specification — Moons CSE14 is the defined CW2 motor\nTrianglelab quality is mid-tier — generally functional but inconsistent across batches\nNot validated to the same community standard as LDO or Moons",
-    "Compatible Printers": [
-      "Voron 2.4",
-      "Voron Trident"
-    ],
-    "Description": "The Trianglelab NEMA14 36mm stepper is a budget alternative for extruders designed around the 36mm NEMA14 form factor, particularly Stealthburner CW2. Key trade-off vs. the Moons CSE14 BOM motor: it's 1.8° (200 steps/rev) rather than 0.9° (400 steps/rev), requiring a rotation_distance adjustment in Klipper. Trianglelab products are mid-tier — they function but have more batch-to-batch variance than LDO or Moons. For builders prioritizing budget over BOM compliance, workable; for best results on Stealthburner, get the Moons.",
-    "Verdict Label": "Budget NEMA14 extruder option — fits CW2 footprint, but 1.8° vs Moons 0.9° BOM spec",
-    "Verdict": "Workhorse",
-    "Motor Length (mm)": 36,
-    "Use Case": [
-      "Extruder"
-    ],
-    "Frame Size": "NEMA14",
-    "Vendor 1 Name": "Trianglelab AliExpress Store",
-    "Name": "Trianglelab NEMA14 36mm Stepper",
-    "Step Angle": "1.8°",
-    "Vendor 1 URL": "https://www.aliexpress.com/store/1651473",
-    "Brand": "Trianglelab",
-    "Price (USD)": 13,
-    "Pros": "Available from Trianglelab at budget pricing\n36mm body fits Stealthburner CW2 mounting geometry\nAccessible price point for budget builds ($12–15)"
   },
   {
     "id": "reclSVvefxWhqk5VT",
@@ -244,6 +239,7 @@
     "Price (USD)": 22,
     "Pros": "Voron BOM-specified motor with strong community track record\n59 N·cm holding torque — significant headroom at Voron's typical 1.0–1.4A RMS run current\nConsistent LDO quality — no binning lottery unlike budget clones\nD-cut shaft fits GT2 pulleys with no modification\nStocked by all major Voron sourcing vendors",
     "Holding Torque (N·cm)": 59,
+    "Slug": "ldo-42sth48-2504ac",
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-42STH48-2504AC"
   },
@@ -266,14 +262,32 @@
     "Step Angle": "1.8°",
     "Vendor 1 URL": "https://lettucehead3d.com/product/slm-nema17-watercooler/",
     "Brand": "Luke's Lab",
-    "Pros": "Enables running significantly higher sustained motor current than air-cooled equivalents\nPrevents thermal throttling during aggressive high-speed printing\nAligns with HevORT and VzBot high-performance build philosophy\nWater jacket allows direct integration with printer water cooling loops"
+    "Pros": "Enables running significantly higher sustained motor current than air-cooled equivalents\nPrevents thermal throttling during aggressive high-speed printing\nAligns with HevORT and VzBot high-performance build philosophy\nWater jacket allows direct integration with printer water cooling loops",
+    "Slug": "slm-nema17-water-cooler"
+  },
+  {
+    "id": "recn4S0bDschwr7s6",
+    "Description": "LDO 48mm 1.8 deg NEMA17 'Super Motor', evolution of the 2504 high-speed motor with higher rated current (2.8A vs 2.5A). S55 = 55mm ultra-long shaft (vs 40mm standard), giving extra bearing support at the far end to reduce shaft bending at high speed. AH = high-temperature motor, Class H 180C: stable while ambient + motor temperature is within 180C, for sealed-chamber high-speed printing. Sold by Mellow for Doomcube / modified Voron / VzBot large-frame DIY printers.",
+    "Rated Current (A)": 2.8,
+    "Motor Length (mm)": 48,
+    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2606/02/products/800-1-1649517599.jpg",
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "3D Mellow",
+    "Name": "Mellow Nema 17 LDO Super Motor 42STH48-2804AH (S55) High Torque High Temp (Voron VzBoT)",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-nema17-ldo-42sth48-2804ah-s55-high-temp-high-torque-stepper-motor-for-voron-vzbot",
+    "Brand": "Mellow 3D",
+    "Price (USD)": 38,
+    "Slug": "mellow-nema-17-ldo-super-motor-42sth48-2804ah-s55-high-torque-high-temp-voron-vzbot",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "LDO-42STH48-2804AH(S55)"
   },
   {
     "id": "recwbpzt1ffjdldUF",
     "Cons": "V2.4 requires 4 of these — Z motor set totals ~$160–170\n350mm screw matched to V2.4 geometry — not interchangeable with Trident (300mm) without modification",
-    "Compatible Printers": [
-      "Voron 2.4"
-    ],
     "Description": "The LDO-42STH40-1684CL350ET is the Voron 2.4 Z motor: NEMA17 with 350mm integrated T8 lead screw at 8mm lead (4-start, 2mm pitch). The V2.4 uses 4 of these — one per Z axis. Set rotation_distance to 8.0 in Klipper. Thread consistency is measurably better than budget alternatives — Z banding from pitch variation is a real issue on cheap lead screws, particularly visible on tall prints. The 'ET' suffix denotes a Voron-specific variant with geometry matched to V2.4 frame dimensions.",
     "Verdict Label": "Voron 2.4 BOM Z motor — 350mm integrated T8 lead screw, 8mm lead. Requires 4 per V2.4 build.",
     "Rated Current (A)": 1.68,
@@ -291,8 +305,9 @@
     "Brand": "LDO",
     "Price (USD)": 42,
     "Pros": "Voron 2.4 BOM-specified Z motor — exact match to V2.4 build documentation\n350mm integrated T8 lead screw, 8mm lead — correct for V2.4 kinematics\n1.68A winding well within typical Klipper Z current limits\nLDO quality: consistent thread pitch, smooth lead nut, low Z banding risk",
+    "Slug": "ldo-42sth40-1684cl350et",
     "Integrated Lead Screw": true,
-    "Shaft Diameter (mm)": 5,
+    "Shaft Diameter (mm)": 8,
     "Part Number": "LDO-42STH40-1684CL350ET"
   }
 ]

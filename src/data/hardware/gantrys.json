@@ -2,7 +2,8 @@
   {
     "id": "recDvOnRiej9rHz2R",
     "Verdict": "BUY",
-    "Price (USD)": 60,
+    "Slug": "brs-x-gantry-cf-tube-v-core-4",
+    "Price (USD)": 67.4,
     "Pros": "Dramatically reduced X-axis moving mass vs aluminum extrusion\nHollow CF tube provides excellent vibration damping\nOpen-source printed end brackets (PA12-CF available from BRS)\nOfficial RatRig partnership — confirmed compatibility\nSignificant resonance improvement for high-speed printing",
     "Printed Parts Required": true,
     "Updated": "2026-06-29",
@@ -22,55 +23,51 @@
     "Brand": "BRS Engineering"
   },
   {
-    "id": "reccaFieUGI1gp5Yr",
-    "Verdict": "BUY",
-    "Price (USD)": 65,
-    "Pros": "Reduced X-axis moving mass vs stock Voron aluminum extrusion\nVibration damping advantage from hollow CF tube construction\nPA12-CF printed end brackets available from BRS\nOpen-source printed parts files on GitHub",
-    "Printed Parts Required": true,
-    "Updated": "2026-06-29",
-    "GitHub / Source URL": "https://github.com/Florent-BRS",
-    "Description": "Carbon fiber tube X-gantry beam for Voron 2.4 R2 and Trident. Replaces the stock X-axis extrusion with a hollow CF tube for reduced moving mass and improved resonance characteristics. Printed PA12-CF end brackets required (open source; available from BRS). From €65.",
-    "Verdict Label": "from €65 EUR",
-    "Extrusion Size": "2020",
+    "id": "recVL62LG5BMckD5e",
+    "Slug": "mellow-custom-vzbot-x-gantry-rail-square-tube-lightweight-high-flatness-vzbot-235-330",
+    "Price (USD)": 31,
+    "Drop-in Replacement": true,
+    "Description": "Mellow's redesigned X-axis aluminum square tube for the VzBoT 235/330, machined from 23mm stock down to 21mm at the ends and 20mm in the middle for flatness within +/-0.1mm. The revised design avoids thread damage from the guide rail screws and provides better fastening force; it is stress tested and authorized by the VzBoT team.",
+    "Motor Count": 2,
     "Kinematic": "CoreXY",
-    "Cons": "Requires printed end brackets — not a drop-in swap\nEU-based, lead times apply\nLess community data than Voron-native community mods",
     "Compatible Printers": [
-      "Voron 2.4 R2",
-      "Voron Trident"
+      "VzBot"
     ],
-    "Name": "BRS X-Gantry CF Tube — Voron 2.4 R2/Trident",
-    "Vendor 1 Name": "BRS Engineering",
-    "Material": "Carbon Fiber",
-    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-voron-2-4-r2-trident",
-    "Brand": "BRS Engineering"
+    "Name": "Mellow Custom VZBOT X-Gantry Rail Square Tube Lightweight High Flatness (VzBoT 235/330)",
+    "Vendor 1 Name": "3D Mellow",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-custom-vzbot-x-gantry-rail-square-tube-lightweight-high-flatness-suitable-for-vzbot-235-330-3d-printer",
+    "Brand": "Mellow 3D"
   },
   {
     "id": "recceKxa8EdT0RbDB",
     "Verdict": "BUY",
+    "Slug": "titanium-backers",
     "Price (USD)": 40,
     "Pros": "Eliminates gantry bow caused by differential thermal expansion between aluminum extrusion and steel linear rails — a real and measurable print quality issue at chamber temp\nTitanium’s coefficient of thermal expansion closely matches the linear rail steel — this is why titanium specifically, not aluminum\nSold pre-cut by Fabreeko, KB3D, and others — hardware-only installation, no printing required\nWidely considered mandatory by experienced V2.4 builders running enclosed hot chambers",
+    "Weight (g)": 203.3,
+    "Drop-in Replacement": true,
+    "GitHub / Source URL": "https://github.com/VoronDesign/VoronUsers/tree/main/printer_mods/whoppingpochard/extrusion_backers",
     "Description": "Titanium Backers are thin strips of titanium inserted between the gantry’s MGN12H linear rails and the 2020 extrusion. Aluminum expands more with heat than steel rails, which causes the gantry to bow at chamber temperature and introduces first-layer errors. Titanium’s expansion rate is close enough to steel to prevent this. Considered one of the most impactful V2.4 and Trident upgrades per dollar.",
     "Verdict Label": "The single most cost-effective V2.4 and Trident upgrade — titanium strips that eliminate gantry bow from thermal expansion",
     "Extrusion Size": "2020",
     "Motor Count": 2,
+    "Open Source": true,
     "Kinematic": "CoreXY",
-    "Compatible Toolheads": [
-      "Stealthburner"
-    ],
     "Cons": "Not a drop-in — requires removing linear rails from the extrusion, inserting backers, and reinstalling\nNot cheap for what they are — but the price is justified by the improvement\nStainless steel backers exist as a budget alternative but have slightly worse thermal expansion match than titanium",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
     ],
     "Name": "Titanium Backers",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "3D Maker Parts",
     "Material": "Titanium",
-    "Vendor 1 URL": "https://fabreeko.com",
+    "Vendor 1 URL": "https://3dmakerparts.com/products/titanium-extrusion-backers-v2-4-trident",
     "Brand": "Community"
   },
   {
     "id": "recd0P7ci7ZQ72sYb",
     "Verdict": "BUY",
+    "Slug": "spannsysteme-x-gantry-v-core-3",
     "Price (USD)": 40,
     "Pros": "Precision EN AW-7075 extrusion replacement\nSignificant weight reduction vs stock 2020 extrusion (68–119g depending on size)\nDrop-in fit, no additional hardware needed\n±0.01mm machining tolerances\nMade in Austria, QA-certified",
     "Weight (g)": 86,
@@ -93,7 +90,8 @@
   {
     "id": "recfk8NiHZrS0djeH",
     "Verdict": "BUY",
-    "Price (USD)": 35,
+    "Slug": "spannsysteme-x-gantry-voron-2-4-r2-trident",
+    "Price (USD)": 73,
     "Pros": "Precision EN AW-7075 X-beam replacement\nDrop-in installation, no printed parts needed\nAvailable for all Voron 2.4 build sizes (330/380/430mm)\nMade in Austria",
     "Updated": "2026-06-29",
     "Drop-in Replacement": true,
@@ -109,12 +107,13 @@
     "Name": "Spannsysteme X-Gantry — Voron 2.4 R2/Trident",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Material": "Aluminum 7075",
-    "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-voron-2-4-r2-trident",
     "Brand": "Spannsysteme"
   },
   {
     "id": "recftNkczLVdpTr0Q",
     "Verdict": "CONSIDER",
+    "Slug": "brs-x-gantry-cf-tube-v-core-3-wide-boy-oss",
     "Price (USD)": 0,
     "Pros": "Fully open source — download and print for free\nCF tube can be self-sourced for lower cost\nCommunity-proven Wide Boy design",
     "Printed Parts Required": true,
@@ -138,6 +137,7 @@
   {
     "id": "recx26cUqRaONqo2c",
     "Verdict": "BUY",
+    "Slug": "spannsysteme-x-gantry-v-core-4",
     "Price (USD)": 40,
     "Pros": "Precision EN AW-7075 machined X-beam replacement\nLighter than stock V-Core 4 X-axis extrusion\nDrop-in replacement, no additional hardware needed\nMade in Austria, QA-certified",
     "Updated": "2026-06-29",
