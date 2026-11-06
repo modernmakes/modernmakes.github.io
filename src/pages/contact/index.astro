@@ -26,7 +26,7 @@ import Footer from '../../components/Footer.astro';
   <section class="section">
     <div class="container" style="max-width:960px">
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px">
+      <div class="contact-grid">
 
         <!-- General Questions -->
         <div style="border:1px solid var(--border);border-radius:10px;padding:32px 28px;background:var(--surface)">
@@ -88,6 +88,6 @@ import Footer from '../../components/Footer.astro';
 </Base>
 
 <style>
-  @media (max-width: 768px) {
-  }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-bottom: 48px; }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>

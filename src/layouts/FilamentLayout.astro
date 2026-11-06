@@ -649,7 +649,7 @@ const breadcrumbItems = [
 /* ── BEST USES GRID ── */
 .fil-uses-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 .fil-use-item {
@@ -703,7 +703,7 @@ const breadcrumbItems = [
 /* ── BRAND BREAKDOWN ── */
 .fil-brands-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 .fil-brand-card {
@@ -890,7 +890,7 @@ const breadcrumbItems = [
 /* ── PROS & CONS ── */
 .fil-procon-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 .fil-procon-col {
@@ -1026,7 +1026,7 @@ const breadcrumbItems = [
 }
 .fil-related-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 .fil-related-card {
@@ -1088,7 +1088,7 @@ const breadcrumbItems = [
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .fil-brands-grid { grid-template-columns: repeat(2, 1fr); }
+  .fil-brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 768px) {
@@ -1102,14 +1102,14 @@ const breadcrumbItems = [
     padding: 12px 0;
     gap: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .fil-stat { padding: 8px 16px; }
   .fil-stat-sep { display: none; }
-  .fil-uses-grid { grid-template-columns: 1fr; }
-  .fil-brands-grid { grid-template-columns: 1fr; }
-  .fil-procon-grid { grid-template-columns: 1fr; }
-  .fil-related-grid { grid-template-columns: 1fr; }
+  .fil-uses-grid { grid-template-columns: minmax(0, 1fr); }
+  .fil-brands-grid { grid-template-columns: minmax(0, 1fr); }
+  .fil-procon-grid { grid-template-columns: minmax(0, 1fr); }
+  .fil-related-grid { grid-template-columns: minmax(0, 1fr); }
   .fil-verdict-block { flex-direction: column; align-items: flex-start; gap: 12px; }
   .fil-compat-table th:last-child,
   .fil-compat-note { display: none; }

@@ -184,7 +184,7 @@ const difficultyColor: Record<string, string> = {
         <!-- Printer Compatibility -->
         <div class="fil-section">
           <div class="fil-section-head">Printer Compatibility</div>
-          <table class="fil-compat-table">
+          <div class="fil-table-scroll" tabindex="0" role="region" aria-label="Printer compatibility table"><table class="fil-compat-table">
             <thead>
               <tr>
                 <th>Printer</th>
@@ -201,7 +201,7 @@ const difficultyColor: Record<string, string> = {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
         </div>
 
       </article>
@@ -285,7 +285,7 @@ const difficultyColor: Record<string, string> = {
 
 .fil-hero-layout {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: minmax(0, 1fr) 280px;
   gap: 48px;
   align-items: start;
 }
@@ -383,7 +383,7 @@ const difficultyColor: Record<string, string> = {
 /* ── BODY GRID ── */
 .fil-body-grid {
   display: grid;
-  grid-template-columns: 1fr 220px;
+  grid-template-columns: minmax(0, 1fr) 220px;
   gap: 40px;
   align-items: start;
   padding-top: 40px;
@@ -416,7 +416,7 @@ const difficultyColor: Record<string, string> = {
 /* ── PROS / CONS ── */
 .fil-proscons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 .fil-pc-head {
@@ -524,7 +524,7 @@ const difficultyColor: Record<string, string> = {
 }
 .fil-failure-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
 }
 .fil-failure-block {
@@ -547,6 +547,7 @@ const difficultyColor: Record<string, string> = {
 }
 
 /* ── COMPATIBILITY TABLE ── */
+.fil-table-scroll { overflow-x: auto; max-width: 100%; }
 .fil-compat-table {
   width: 100%;
   border-collapse: collapse;
@@ -612,20 +613,20 @@ const difficultyColor: Record<string, string> = {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .fil-hero-layout { grid-template-columns: 1fr 240px; gap: 32px; }
-  .fil-body-grid   { grid-template-columns: 1fr; }
-  .fil-sidebar     { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fil-hero-layout { grid-template-columns: minmax(0, 1fr) 240px; gap: 32px; }
+  .fil-body-grid   { grid-template-columns: minmax(0, 1fr); }
+  .fil-sidebar     { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
   .fil-sidebar-card { margin-top: 0 !important; }
 }
 @media (max-width: 768px) {
   .fil-hero { padding-top: 96px; padding-bottom: 40px; }
   .fil-hero-inner  { padding: 0 20px; }
-  .fil-hero-layout { grid-template-columns: 1fr; gap: 24px; }
+  .fil-hero-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .fil-hero-title  { font-size: 52px; }
   .fil-body-grid   { padding: 24px 20px 48px; gap: 32px; }
-  .fil-proscons    { grid-template-columns: 1fr; }
-  .fil-failure-row { grid-template-columns: 1fr; }
-  .fil-sidebar     { grid-template-columns: 1fr; }
+  .fil-proscons    { grid-template-columns: minmax(0, 1fr); }
+  .fil-failure-row { grid-template-columns: minmax(0, 1fr); }
+  .fil-sidebar     { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 480px) {
   .fil-hero-title { font-size: 40px; }

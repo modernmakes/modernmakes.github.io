@@ -172,7 +172,7 @@ const currentPath = '/tools';
 .ms-wrap { background: var(--bg); padding: 40px 0 64px; }
 .ms-inner {
   max-width: 1200px; margin: 0 auto; padding: 0 40px;
-  display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start;
+  display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start;
 }
 
 /* Sidebar */
@@ -292,7 +292,7 @@ const currentPath = '/tools';
   .ms-attribution a:hover { text-decoration: underline; }
 }
 
-@media (max-width: 960px)  { .ms-inner { grid-template-columns: 1fr; } .ms-sidebar { position: static; max-height: none; } }
+@media (max-width: 960px)  { .ms-inner { grid-template-columns: minmax(0, 1fr); } .ms-sidebar { position: static; max-height: none; } }
 @media (max-width: 768px)  { .ms-wrap { padding: 20px 0 48px; } .ms-inner { padding: 0 20px; } .ms-canvas-wrap { height: 280px; } }
 </style>
 
