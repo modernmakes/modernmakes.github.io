@@ -1,7 +1,7 @@
 [
   {
     "id": "rec7bm8uci7h0RnTX",
-    "Hotend Connector": "JST-XH 2.54 4-pin",
+    "Hotend Connector": "HE0 E0506 Ferrule",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -26,6 +26,7 @@
     "Neopixel Support": true,
     "Price (USD)": 35,
     "Pros": "- Same USB-first philosophy as Nitehawk SB: no CAN infrastructure needed\n- 36mm form factor accommodates toolheads where Stealthburner won't fit\n- RP2040 dual-core 133MHz with ADXL345 onboard\n- Neopixel outputs, dual fans\n- LDO build quality throughout",
+    "Slug": "nitehawk-36-ldo",
     "MCU": "RP2040 133MHz dual-core"
   },
   {
@@ -52,7 +53,38 @@
     "Brand": "BTT",
     "Price (USD)": 8,
     "Pros": "- Enables full CAN bus toolboard setup on any mainboard with a free USB port\n- Small and inexpensive (~$8) — lowest cost path to CAN bus\n- Plug-and-play with EBB36 and most BTT toolboards\n- Supported by Klipper's USB-CAN bridge mode",
+    "Slug": "btt-u2c-v2-1",
     "MCU": "STM32F072C8T6 48MHz"
+  },
+  {
+    "id": "recHYpETz7CEB0BaP",
+    "Hotend Connector": "HEAT0 (10A)",
+    "Name": "Mellow Fly SHT36 V3 Klipper Compatible Board (Canbus RS232, Max Plus LDC1612 Eddy)",
+    "Vendor 1 Name": "3D Mellow",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2604/30/products/e6636bbec2.jpg",
+    "Connection": "CAN",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-sht36-v3-klipper-compatible-3d-printer-klipper-rrf-canbus-rs232-board-max-plus-ldc1612-eddy-for-nema14-17-motor",
+    "Brand": "Mellow 3D",
+    "Price (USD)": 12.84,
+    "Slug": "mellow-fly-sht36-v3-klipper-compatible-board-canbus-rs232-max-plus-ldc1612-eddy",
+    "MCU": "RP2040, dual-core ARM Cortex-M0+ @ 133MHz"
+  },
+  {
+    "id": "recXyiky4ht55ZMKk",
+    "ADXL345 Onboard": true,
+    "Name": "Newest Mellow LDO Orbitool O2S USB Tool Heat Board",
+    "Vendor 1 Name": "3D Mellow",
+    "Description": "A USB toolboard for the Orbiter v2 / v2.5 extruder with STM32F072 MCU, TMC2240 driver, onboard ADXL345 accelerometer and part + hotend fan outputs, communicating with the host over USB.",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2240",
+    "Connection": "USB",
+    "Vendor 1 URL": "https://3dmellow.com/products/newest-mellow-ldo-orbitool-o2s-usb-tool-heat-board-for-orbiter-extruder-v25-o2-usb-klipper-voron-diy-3d-printer-parts",
+    "Brand": "Mellow 3D",
+    "Neopixel Support": true,
+    "Slug": "newest-mellow-ldo-orbitool-o2s-usb-tool-heat-board",
+    "MCU": "STM32F072 48MHz"
   },
   {
     "id": "recZ7e4tsmq1J1TkU",
@@ -83,6 +115,7 @@
     "Price (USD)": 18,
     "Pros": "- Same STM32G0B1CBT6 MCU as EBB36 v1.2 — identical CAN and Klipper support\n- USB-C fallback for flashing\n- ADXL345 and Neopixel onboard\n- Active Mellow ecosystem and Fly-OS integration",
     "USB Fallback": true,
+    "Slug": "mellow-fly-sht36-v2",
     "MCU": "STM32G0B1CBT6 64MHz FDCAN"
   },
   {
@@ -93,9 +126,9 @@
       "Voron Trident"
     ],
     "ADXL345 Onboard": true,
-    "Name": "Fysetc SB2040 Pro",
-    "Vendor 1 Name": "Fysetc",
-    "Description": "Fysetc's Stealthburner-specific toolboard built around the RP2040 dual-core MCU rather than the STM32 used by EBB36. The RP2040's ADC is notably faster than the STM32G0B1's, which is a tangible benefit for ADXL345 resonance testing accuracy. Supports CAN bus primary with USB-C fallback, onboard TMC2209, and Neopixel outputs. The main argument against it: the EBB36 has a larger config library and more Voron community familiarity, which matters when something goes wrong at midnight.",
+    "Name": "Mellow Fly SB2040 V3 Pro",
+    "Vendor 1 Name": "3D Mellow",
+    "Description": "Mellow's Stealthburner-specific toolboard built around the RP2040 dual-core MCU rather than the STM32 used by EBB36. The RP2040's ADC is notably faster than the STM32G0B1's, which is a tangible benefit for ADXL345 resonance testing accuracy. Supports CAN bus primary with USB-C fallback, onboard TMC2209, and Neopixel outputs. The main argument against it: the EBB36 has a larger config library and more Voron community familiarity, which matters when something goes wrong at midnight.",
     "Verdict Label": "SB-specific, RP2040 MCU",
     "Verdict": "CONSIDER",
     "Fan Outputs": 2,
@@ -105,17 +138,18 @@
     ],
     "Cons": "- RP2040 CAN support in Klipper historically less mature than STM32 — mostly resolved now but community muscle memory favors EBB\n- Smaller community than EBB36: fewer configs, fewer documented build logs\n- Fysetc support and documentation quality is variable",
     "Connection": "CAN + USB",
-    "Vendor 1 URL": "https://www.fysetc.com/products/fysetc-sb2040-v2",
-    "Brand": "Fysetc",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-sb2040-v3-board-for-voron-24-r2-trident-stealthburner-cw2-extruder-klipper-rrf-eddy-canbus-headtool-pt1000-pt100",
+    "Brand": "Mellow 3D",
     "Neopixel Support": true,
-    "Price (USD)": 20,
+    "Price (USD)": 36.22,
     "Pros": "- RP2040 dual-core 133MHz — faster ADC sampling benefits ADXL345 resonance testing\n- Designed specifically for Stealthburner geometry: clean integration\n- CAN bus + USB-C fallback\n- ADXL345 and Neopixel support onboard",
     "USB Fallback": true,
+    "Slug": "mellow-fly-sb2040-v3-pro",
     "MCU": "RP2040 133MHz dual-core"
   },
   {
     "id": "recpZ9yxtexGhVAXm",
-    "Hotend Connector": "JST-XH 2.54 4-pin",
+    "Hotend Connector": "E0506 Ferrule (heater); JST-PH2.0 2P (thermistor)",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -139,7 +173,18 @@
     "Neopixel Support": true,
     "Price (USD)": 35,
     "Pros": "- USB-only: eliminates CAN bus infrastructure entirely — no U2C, no CAN wiring, no CANFD config headaches\n- Runs over existing USB cable — simpler toolhead wiring than CAN at longer toolhead distances\n- RP2040 dual-core MCU with fast ADXL345 sampling\n- LDO build quality: notably better component selection and QC than BTT AliExpress stock\n- ADXL345, Neopixel, dual fans in a purpose-built Stealthburner form factor",
+    "Slug": "nitehawk-sb-ldo",
     "MCU": "RP2040 133MHz dual-core"
+  },
+  {
+    "id": "recrvAL0oZc5z5ZvL",
+    "Name": "Mellow Fly Tool Lite Toolhead Board (Klipper Canbus RS232, Nema14/17)",
+    "Vendor 1 Name": "3D Mellow",
+    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2607/09/products/800-1-151506ce9a.jpg",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-tool-lite-toolhead-board-–-can-rs232-hotend-board-for-klipper-diy-3d-printer",
+    "Brand": "Mellow 3D",
+    "Price (USD)": 13.92,
+    "Slug": "mellow-fly-tool-lite-toolhead-board-klipper-canbus-rs232-nema14-17"
   },
   {
     "id": "rectQxjOL0wlIbYBC",
@@ -169,6 +214,7 @@
     "Price (USD)": 15,
     "Pros": "- STM32G0B1 with FDCAN — best CAN implementation for toolboards\n- ADXL345 onboard for resonance tuning via Klipper\n- USB fallback for flashing and debugging without full CAN setup\n- Massive community support: guides, configs, mounts for every Voron variant\n- v1.2 fixes DFU mode heating bug (hotend IO moved PA2→PB13)",
     "USB Fallback": true,
+    "Slug": "btt-ebb36-can-v1-2",
     "MCU": "STM32G0B1CBT6 64MHz FDCAN"
   },
   {
@@ -193,6 +239,7 @@
     "Vendor 1 URL": "https://github.com/bananas-blender/HUVUD",
     "Brand": "Community (Bananas-blender)",
     "Pros": "- Pioneered the CAN toolboard concept for prosumer FDM — historically significant\n- Open source design: PCB files, BOM, and documentation on GitHub\n- Compact form factor\n- Proven CAN bus reliability in early Voron community builds",
+    "Slug": "huvud",
     "MCU": "STM32F103C8T6 72MHz"
   },
   {
@@ -223,6 +270,7 @@
     "Price (USD)": 16,
     "Pros": "- Identical electronics to EBB36 v1.2: same STM32G0B1CBT6 MCU, TMC2209, ADXL345\n- 42mm format fits some toolheads better — particularly on non-SB designs\n- USB-C fallback for flashing\n- FDCAN bus for reliable high-speed CAN communication",
     "USB Fallback": true,
-    "MCU": "STM32G0B1CBT6 64MHz FDCAN"
+    "Slug": "btt-ebb42-can-v1-1",
+    "MCU": "STM32G0B1RET6 64MHz"
   }
 ]

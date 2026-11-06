@@ -2,8 +2,8 @@
   {
     "id": "recFPP2PiY8tLqqrK",
     "Brand": "Delta Electronics",
-    "Price (USD)": 22,
-    "Noise (dBA)": "~50 dBA at full speed",
+    "Price (USD)": 18.26,
+    "Noise (dBA)": "45.0 dBA",
     "Pros": "- Highest static pressure and CFM among conventional 5015 blowers\n- Industrial-grade ball bearing — rated 50,000+ hours MTTF\n- Consistent specs — Delta is a major OEM supplier to server and telecom industry\n- Significantly better overhang performance vs GDStime at aggressive print speeds\n- Available through Digi-Key and Mouser — not dependent on AliExpress supply chain",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -21,18 +21,19 @@
     "Vendor 1 Name": "Digi-Key",
     "Type": "Blower",
     "Vendor 1 URL": "https://www.digikey.com/en/products/detail/delta-electronics/BFB0524HH/1014447",
+    "Slug": "delta-electronics-bfb0524hh-5015",
     "Bearing Type": "Ball Bearing",
     "Description": "The Delta BFB0524HH is the maximum-performance 5015 blower for Voron toolheads. Its industrial ball-bearing construction and high-pressure impeller design give it roughly double the static pressure of the GDStime BOM fan. The trade-off is noise — at full speed it’s noticeably louder than either GDStime or Sunon. Community consensus: worth it for high-speed printing (300+ mm/s), overkill for standard builds. Available from proper electronics distributors, not just AliExpress.",
     "Verdict Label": "Highest static pressure 5015 — best for high-speed demanding prints",
     "Size (mm)": "5015",
     "Verdict": "TOP",
-    "CFM / Static Pressure": "~7.0 CFM / ~600 Pa"
+    "CFM / Static Pressure": "4.59 CFM / 216 Pa (22.00 mmH2O / 0.866 inH2O)"
   },
   {
     "id": "recKvNE6CymmkeLaa",
     "Brand": "Sunon",
     "Price (USD)": 14,
-    "Noise (dBA)": "~35 dBA at full speed",
+    "Noise (dBA)": "42.2 dBA",
     "Pros": "- MagLev (magnetic levitation) bearing — no contact wear, extremely long lifespan\n- Quieter than GDStime at equivalent PWM settings (~35 dBA vs ~42 dBA)\n- Higher static pressure than sleeve-bearing alternatives at same RPM\n- Consistent spec performance across batches — Sunon is a proper Taiwanese OEM\n- Drop-in 5015 replacement: same mounting holes, same connector pinout",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -47,17 +48,18 @@
       "Voron 0",
       "RatRig V-Core"
     ],
-    "Voltage": "24V",
+    "Voltage": "12V",
     "Name": "Sunon MF50151VX 5015",
     "Vendor 1 Name": "Digi-Key",
     "Type": "Blower",
-    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/sunon-fans/MF50151VX-B00U-A99/8563521",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/sunon-fans/MF50151VX-B00U-A99/259-1829-ND/7691033",
+    "Slug": "sunon-mf50151vx-5015",
     "Bearing Type": "MagLev",
     "Description": "The Sunon MF50151VX (MagLev series) is the community’s most-recommended 5015 upgrade from the GDStime BOM fan. MagLev bearing means zero sliding contact — the rotor floats magnetically, delivering longer lifespan and noticeably quieter operation. At ~$12–15 it’s 3–4× more expensive than GDStime but less than a Delta, making it the pragmatic middle ground. Flows slightly more air than GDStime at the same PWM percentage and does so more quietly.",
     "Verdict Label": "Go-to upgrade — quieter, longer-lasting, better consistency than GDStime",
     "Size (mm)": "5015",
     "Verdict": "TOP",
-    "CFM / Static Pressure": "~4.5 CFM / ~180 Pa"
+    "CFM / Static Pressure": "5.4 CFM / 241.6 Pa (0.97 inH2O)"
   },
   {
     "id": "recTaPOLTzH3M69oZ",
@@ -81,6 +83,7 @@
     "Vendor 1 Name": "Digi-Key",
     "Type": "Blower",
     "Vendor 1 URL": "https://www.digikey.com/en/products/filter/dc-fans/217",
+    "Slug": "delta-bfb0424hh-4020-blower",
     "Bearing Type": "Ball Bearing",
     "Description": "The Delta BFB0424HH is a 24V centrifugal blower in a compact 40×20mm footprint, suited for toolhead designs too tight for a 5015. Some Dragon Burner and XOL variants use a 4020 blower where mounting geometry prevents 5015 placement. Ball bearing construction gives it industrial longevity over generic sleeve-bearing alternatives, and Delta’s supply chain means it’s sourced through Digi-Key or Mouser rather than AliExpress.",
     "Verdict Label": "Compact 24V blower for tight toolhead layouts where a 5015 won’t fit",
@@ -91,8 +94,8 @@
   {
     "id": "recTgCIc3fCvvfxk4",
     "Brand": "Trianglelab",
-    "Price (USD)": 8,
-    "Noise (dBA)": "~40 dBA (community estimate)",
+    "Price (USD)": 3.83,
+    "Noise (dBA)": "33 dBA at full speed (24V)",
     "Pros": "- Ball bearing variant — better lifespan than standard GDStime sleeve\n- Conveniently sourced alongside Trianglelab hotends and Sherpa/TBG extruders in one order\n- Slightly better airflow than GDStime in community comparisons\n- Competitively priced (~$6–10)",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -107,9 +110,10 @@
     ],
     "Voltage": "24V",
     "Name": "Trianglelab 5015 Turbo Blower",
-    "Vendor 1 Name": "Trianglelab (AliExpress)",
+    "Vendor 1 Name": "Trianglelab",
     "Type": "Blower",
-    "Vendor 1 URL": "https://www.aliexpress.com/store/302218/search?SearchText=5015+blower",
+    "Vendor 1 URL": "https://www.trianglelab.net/products/5015-blower-fan",
+    "Slug": "trianglelab-5015-turbo-blower",
     "Bearing Type": "Ball Bearing",
     "Description": "The Trianglelab 5015 turbo blower is a common sight in builds where the builder sourced it alongside a Dragon or CHC hotend from Trianglelab. It’s a competent ball-bearing 5015 that performs better than the GDStime BOM fan. ‘Turbo’ is marketing nomenclature — the actual advantage over the Sunon MF50151VX is modest at best. Fine if it’s in a kit you’re already buying; don’t source it independently when the Sunon is available for similar money.",
     "Verdict Label": "Decent rebranded 5015 — acceptable if bundled, no reason to seek it out independently",
@@ -121,7 +125,7 @@
     "id": "recTlUKX5RHwzgtQd",
     "Brand": "GDStime",
     "Price (USD)": 4,
-    "Noise (dBA)": "~42 dBA at full speed",
+    "Noise (dBA)": "36.7 dBA",
     "Pros": "- Voron official BOM fan — universally specified and supported\n- Extremely cheap (~$3–5 each) — stock spares without guilt\n- Available from every 3D printing vendor including LDO kit suppliers\n- Adequate airflow for PLA, PETG, and Flex at normal print speeds",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -141,13 +145,14 @@
     "Name": "GDStime 5015 Blower",
     "Vendor 1 Name": "Amazon",
     "Type": "Blower",
-    "Vendor 1 URL": "https://www.amazon.com/s?k=GDStime+5015+blower+24V",
+    "Vendor 1 URL": "https://www.amazon.com/dp/B0DLKNMH5R",
+    "Slug": "gdstime-5015-blower",
     "Bearing Type": "Sleeve Bearing",
     "Description": "The GDStime 5015 blower is the Voron BOM default for part cooling — it works, it’s cheap, and every Voron config has been tested with one. The sleeve bearing is the primary weakness in enclosed printers where chamber temps accelerate wear. At $3–5 each it’s not worth engineering around; just keep spares. For builders wanting better reliability or quieter operation, the Sunon MF50151VX or Delta BFB0524HH are the natural next steps.",
     "Verdict Label": "Voron BOM default — functional, buy spares",
     "Size (mm)": "5015",
     "Verdict": "MID",
-    "CFM / Static Pressure": "~3.5 CFM / ~150 Pa"
+    "CFM / Static Pressure": "3.34 CFM / 0.41 inH2O (~102 Pa)"
   },
   {
     "id": "recYQ9hPemC31jyDs",
@@ -173,17 +178,19 @@
     "Vendor 1 Name": "Amazon",
     "Type": "Axial",
     "Vendor 1 URL": "https://www.amazon.com/Noctua-NF-A4x10-Premium-Quiet-100x10mm/dp/B009NQLT0M",
+    "Slug": "noctua-nf-a4x10-flx",
     "Bearing Type": "SSO2 Bearing",
     "Description": "Noctua’s NF-A4x10 FLX is the quietest 4010 available and the standard recommendation for builders building silent machines. At 17.9 dBA it’s barely audible next to the GDStime’s 35 dBA. The SSO2 bearing delivers exceptional longevity. The catch: 24V Voron systems need a step-down converter — the community has well-documented wiring guides for this. If you’d rather run 24V natively without extra electronics, the Sanyo 9GA0412P3K001 is a strong alternative.",
     "Verdict Label": "Quietest 4010 available — needs 12V step-down on 24V Voron builds",
     "Size (mm)": "4010",
     "Verdict": "TOP",
-    "CFM / Static Pressure": "2.35 CFM / 1.38 mmH₂O"
+    "CFM / Static Pressure": "4.83 CFM / 1.78 mmH2O"
   },
   {
     "id": "rech12AlWChrWbb6P",
+    "Brand": "Wonsmart",
     "Price (USD)": 45,
-    "Noise (dBA)": "~65 dBA at full speed (remote mount essential)",
+    "Noise (dBA)": "73 dBA",
     "Pros": "47 m³/h max airflow at 0 kPa\n12.5 kPa max static pressure (24V) / 14 kPa (48V)\nDramatically outperforms any 5015 blower fan\n3-phase brushless DC motor with NMB ball bearings\n20,000+ hour MTTF\nPWM speed control compatible\nAvailable in 24V and 48V variants",
     "Compatible Toolheads": [
       "CN3D Y-CPAP Toolhead",
@@ -200,6 +207,7 @@
     "Vendor 1 Name": "Excit3D",
     "Type": "CPAP Blower",
     "Vendor 1 URL": "https://excit3d.shop/shop/wonsmart-ws9290",
+    "Slug": "wonsmart-ws9290",
     "Bearing Type": "NMB Ball Bearing",
     "Description": "The Wonsmart WS9290 is the CPAP blower used in most remote part-cooling builds for high-performance Voron toolheads. Originally designed for medical CPAP machines, it delivers 47 m³/h airflow at 0 kPa and up to 12.5 kPa static pressure in the 24V variant. At full speed it produces substantially more airflow than any conventional 5015 blower fan, at the cost of being too large and heavy to mount on the toolhead itself.",
     "Verdict Label": "Best-in-class CPAP blower for remote high-flow builds",
@@ -211,7 +219,7 @@
     "id": "rechZbz1OXbLgtldg",
     "Brand": "Wonsmart",
     "Price (USD)": 30,
-    "Noise (dBA)": "~60 dBA at full speed (remote mount essential)",
+    "Noise (dBA)": "65 dBA",
     "Pros": "- 70×40mm centrifugal motor delivers CPAP-grade airflow via hose to the toolhead\n- Orders of magnitude more airflow than any 5015 blower — enables 500+ mm/s part cooling\n- Brushless 3-phase motor: no brush wear, 30,000+ hour design life\n- De facto VzBot community standard for part cooling\n- Enables demanding overhangs and cooling at print speeds where 5015 blowers saturate",
     "Compatible Toolheads": [
       "VzBot toolheads",
@@ -223,6 +231,7 @@
     "Compatible Printers": [
       "VzBot",
       "HevORT",
+      "Voron 2.4",
       "Custom high-speed builds"
     ],
     "Voltage": "24V",
@@ -230,18 +239,19 @@
     "Vendor 1 Name": "AliExpress (various sellers)",
     "Type": "CPAP Blower",
     "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-WS7040-24V.html",
-    "Bearing Type": "Brushless 3-phase",
+    "Slug": "wonsmart-ws7040-cpap-blower",
+    "Bearing Type": "NMB Ball Bearing",
     "Description": "The Wonsmart WS7040 is the part cooling system used in VzBot and other extreme-speed platforms where conventional 5015 blowers can’t deliver enough airflow for high-speed dynamics. The 70×40mm motor mounts remotely (typically rear frame), routing air through a CPAP tube to a custom duct at the toolhead. This architecture is fundamentally different from standard Voron cooling — plan the entire toolhead and duct system together if adopting it. On VzBot it’s the established community standard and well-supported; on other platforms it requires significant custom work.",
     "Verdict Label": "VzBot’s native cooler — extreme airflow for extreme print speeds",
     "Size (mm)": "7040",
     "Verdict": "TOP",
-    "CFM / Static Pressure": "~20+ CFM through duct / very high static pressure"
+    "CFM / Static Pressure": "25.5 m3/h (15.0 CFM) / 6.5 kPa"
   },
   {
     "id": "recmaCnCd91icR1Hf",
     "Brand": "Sanyo Denki",
-    "Price (USD)": 15,
-    "Noise (dBA)": "~22 dBA at 24V (community reported)",
+    "Price (USD)": 21.09,
+    "Noise (dBA)": "61 dBA",
     "Pros": "- 24V native — no step-down converter required (unlike Noctua NF-A4x10)\n- Very quiet (~22 dBA) for a 24V ball-bearing axial — dramatic improvement over GDStime\n- Sanyo Denki ball bearing: industrial quality, long MTTF, consistent factory specs\n- Drop-in 4010 physical footprint and JST connector\n- Preferred by builders who want quiet operation without voltage conversion complexity",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -256,17 +266,18 @@
       "Voron 0",
       "RatRig V-Core"
     ],
-    "Voltage": "24V",
+    "Voltage": "12V",
     "Name": "Sanyo 9GA0412P3K001",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Digi-Key",
     "Type": "Axial",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/sanyo-9ga0412p3k001-24v-fan",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/sanyo-denki-america-inc/9GA0412P3K01/6192260",
+    "Slug": "sanyo-9ga0412p3k001",
     "Bearing Type": "Ball Bearing",
     "Description": "The Sanyo Denki 9GA0412P3K001 is the community’s preferred 24V hotend cooling fan for builders wanting quiet operation without voltage conversion complexity. Running natively at 24V, it drops into any Voron fan port without modification and delivers ~22 dBA — meaningfully quieter than GDStime’s 35 dBA. Sanyo Denki manufactures for industrial and server markets; quality and batch consistency are well above AliExpress-tier alternatives. Sits slightly above the Noctua NF-A4x10 for installation convenience (24V, no converter) and slightly below it for ultimate noise floor.",
     "Verdict Label": "Best 24V hotend fan — Noctua-quiet without the step-down converter",
-    "Size (mm)": "4010",
+    "Size (mm)": "4028",
     "Verdict": "TOP",
-    "CFM / Static Pressure": "~2.2 CFM / ~100 Pa"
+    "CFM / Static Pressure": "28.6 CFM / 799 Pa"
   },
   {
     "id": "recvoTUxpgpBwIgCw",
@@ -289,21 +300,22 @@
     ],
     "Voltage": "24V",
     "Name": "Gdstime 4010 Axial",
-    "Vendor 1 Name": "Amazon",
+    "Vendor 1 Name": "Hotend.eu",
     "Type": "Axial",
-    "Vendor 1 URL": "https://www.amazon.com/s?k=Gdstime+4010+24V+fan",
+    "Vendor 1 URL": "https://www.hotend.eu/p/gdstime-axial-fan-4010-24v-dual-ball-1?srsltid=AfmBOopToGnxUn-VHVSGK5_OIPD81kYcMFx3UswwkcQ3s2x999Aemw3P",
+    "Slug": "gdstime-4010-axial",
     "Bearing Type": "Sleeve Bearing",
     "Description": "The Gdstime 4010 axial is the standard hotend cooling fan for Voron builds — its job is keeping the cold zone of the hotend cold, and it does that. The sleeve bearing is the weak point in sealed enclosures where ambient temps hit 50–60°C; plan to replace it annually in heavy-use enclosed builds. At $2–3 it’s entirely disposable. Builders sensitive to noise or running hot chambers should look at the Noctua NF-A4x10 or Sanyo 9GA0412P3K001.",
     "Verdict Label": "BOM hotend cooling fan — works fine, plan to replace eventually",
     "Size (mm)": "4010",
     "Verdict": "MID",
-    "CFM / Static Pressure": "~1.5 CFM / ~90 Pa"
+    "CFM / Static Pressure": "7.3 CFM / ~45 Pa"
   },
   {
     "id": "reczkgSG98zsshVvW",
     "Brand": "Mellow",
-    "Price (USD)": 10,
-    "Noise (dBA)": "~38 dBA (community estimate)",
+    "Price (USD)": 15.55,
+    "Noise (dBA)": "43.3 dBA",
     "Pros": "- Noticeably better than GDStime based on community build comparisons\n- Ball bearing variant available — better lifespan than GDStime sleeve\n- Convenient to source alongside other Mellow/FLY components in a single AliExpress order\n- Reasonably priced (~$8–12)",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -320,12 +332,13 @@
     "Name": "Mellow 5015 High-Flow Blower",
     "Vendor 1 Name": "Mellow (AliExpress)",
     "Type": "Blower",
-    "Vendor 1 URL": "https://www.aliexpress.com/store/1103443/search?SearchText=5015+blower",
+    "Vendor 1 URL": "https://www.aliexpress.com/i/4000865202504.html",
+    "Slug": "mellow-5015-high-flow-blower",
     "Bearing Type": "Ball Bearing",
     "Description": "Mellow’s 5015 high-flow blower is commonly bundled with Mellow FLY boards and Sherpa extruder kits, making it a natural pairing in the Mellow ecosystem. Community feedback puts it above GDStime in airflow consistency and build quality, but Mellow doesn’t publish specs so comparisons rely on community testing. If you’re already ordering from Mellow, it’s a sensible pick. Otherwise the Sunon MF50151VX is better validated at a similar price.",
     "Verdict Label": "Above GDStime, below Sunon in validation — fine if you’re already ordering from Mellow",
     "Size (mm)": "5015",
     "Verdict": "MID",
-    "CFM / Static Pressure": "~4.5 CFM / ~180 Pa (community estimate — no published spec)"
+    "CFM / Static Pressure": "4.2 CFM / ~130 Pa"
   }
 ]

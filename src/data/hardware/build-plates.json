@@ -9,7 +9,9 @@
     "Vendor 1 URL": "https://biqu.equipment/products/spring-steel-sheet",
     "Brand": "BIGTREETECH",
     "Price (USD)": 19.99,
+    "Thickness (mm)": 0.8,
     "Pros": "Dual-sided textured+smooth on most variants\nWide availability via BTT official store and resellers\nConsistent quality for a budget plate\nCompatible with standard magnetic bases",
+    "Slug": "btt-pei-spring-steel",
     "Spring Steel Included": true,
     "Best For": [
       "Voron 2.4",
@@ -26,53 +28,25 @@
       "Voron 2.4 ",
       "Voron Trident",
       "RatRig"
-    ]
-  },
-  {
-    "id": "rec1ioksqUX1C219q",
-    "Description": "The budget smooth PEI option for builders on a tight BOM. Functional for PLA and PETG but community consensus is that smooth Energetic is the weakest of the four budget plate variants. Coating longevity is the main complaint. Worth considering only as a temporary surface before upgrading to textured PEI or Fabreeko HoneyBadger.",
-    "Verdict Label": "Budget smooth PEI — fine for PLA/PETG on a tight build budget",
-    "Vendor 1 Name": "Amazon / Energetic",
-    "Name": "Energetic PEI Spring Steel Sheet (smooth)",
-    "Surface Type": "Smooth PEI",
-    "Vendor 1 URL": "https://www.amazon.com/s?k=energetic+smooth+pei+spring+steel",
-    "Brand": "Energetic",
-    "Price (USD)": 16.99,
-    "Pros": "Very low cost entry point\nSmooth surface finish on PLA/PETG prints\nAmazon availability",
-    "Spring Steel Included": true,
-    "Best For": [
-      "Voron 2.4",
-      "Voron Trident",
-      "RatRig"
     ],
-    "Max Temp (°C)": 110,
-    "Verdict": "Solid Choice",
-    "Sizes Available": [
-      "250"
-    ],
-    "Cons": "Highly variable batch quality — adhesion inconsistency across surface common\nCoating wears through faster than premium smooth PEI options\nNot recommended for ABS/ASA — adhesion requires dangerous cleaning with IPA repeatedly\nMagnetic base not included",
-    "Compatible Printers": [
-      "Voron 2.4 ",
-      "Voron Trident",
-      "RatRig"
-    ]
+    "Magnetic Base Included": true
   },
   {
     "id": "recFU700pGtgzXQ0I",
     "Description": "Fabreeko's HoneyBadger textured PEI spring steel sheet is the most recommended US-stocked alternative to Mandala Rose Works. Aggressive texture pattern gives excellent first-layer adhesion for ABS, ASA, and PA. Requires a separate magnetic base. Community rates it ahead of budget Chinese alternatives (Energetic, Fysetc) for flatness consistency and surface longevity.",
     "Verdict Label": "Strong US-based alternative to MRW at a lower price",
     "Vendor 1 Name": "Fabreeko",
-    "Name": "Fabreeko HoneyBadger PEI (textured — 250mm)",
-    "Surface Type": "Textured PEI",
+    "Name": "Fabreeko HoneyBadger PEI (dual-sided — 250mm)",
+    "Surface Type": "Dual-Sided",
     "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-pei-sheets",
     "Brand": "Fabreeko",
     "Price (USD)": 32.99,
     "Pros": "US-stocked, fast shipping vs. AliExpress alternatives\nHeavy-texture finish outperforms smooth PEI for ABS/ASA adhesion\nGood flatness for price point\nFabreeko customer service is well-regarded in community\nWorks with standard magnetic bases",
+    "Slug": "fabreeko-honeybadger-pei-dual-sided-250mm",
     "Spring Steel Included": true,
     "Best For": [
       "Voron 2.4",
-      "Voron Trident",
-      "RatRig"
+      "Voron Trident"
     ],
     "Max Temp (°C)": 120,
     "Verdict": "Top Pick",
@@ -82,8 +56,7 @@
     "Cons": "Magnetic base sold separately\nSlightly thicker coating than MRW — different release feel\nTextured surface can over-grip some TPU",
     "Compatible Printers": [
       "Voron 2.4 ",
-      "Voron Trident",
-      "RatRig"
+      "Voron Trident"
     ]
   },
   {
@@ -91,29 +64,30 @@
     "Description": "Energetic is the standard budget recommendation for builders not ready to invest in MRW or Fabreeko. Available on Amazon Prime with fast shipping. Community consensus: acceptable for builds where you're still dialing in settings, or as a first sheet before upgrading. Edge curl at the corners is a known issue on some batches — mesh bed leveling (Klipper) compensates well.",
     "Verdict Label": "Best budget textured PEI — acceptable flatness for price",
     "Vendor 1 Name": "Amazon / Energetic",
-    "Name": "Energetic PEI Spring Steel Sheet (textured)",
-    "Surface Type": "Textured PEI",
+    "Name": "Energetic PEI Spring Steel Sheet (dual-sided smooth/textured)",
+    "Surface Type": "Dual-Sided",
     "Vendor 1 URL": "https://www.amazon.com/s?k=energetic+pei+spring+steel",
     "Brand": "Energetic",
     "Price (USD)": 18.99,
     "Pros": "Substantially cheaper than MRW/Fabreeko/Whambam\nReadily available on Amazon and AliExpress\nDecent flatness for price — works fine for most builds\nGood ABS/ASA adhesion with textured surface",
+    "Slug": "energetic-pei-spring-steel-sheet-dual-sided-smooth-textured",
     "Spring Steel Included": true,
     "Best For": [
       "Voron 2.4",
-      "Voron Trident",
-      "RatRig"
+      "Voron Trident"
     ],
     "Max Temp (°C)": 120,
     "Verdict": "Solid Choice",
     "Sizes Available": [
-      "250"
+      "250",
+      "300"
     ],
     "Cons": "Edge curl common — may need mesh bed leveling compensation\nPEI coating lifespan shorter than premium options\nMagnetic base not included\nBatch quality varies — some sheets arrive warped",
     "Compatible Printers": [
       "Voron 2.4 ",
-      "Voron Trident",
-      "RatRig"
-    ]
+      "Voron Trident"
+    ],
+    "Magnetic Base Included": true
   },
   {
     "id": "recNGvW1Ds4H57byP",
@@ -122,28 +96,24 @@
     "Vendor 1 Name": "Whambam Systems",
     "Name": "Whambam PEX System 250mm",
     "Surface Type": "PEX",
-    "Vendor 1 URL": "https://whambamsystems.com/products/flex-plate-system-250x250",
+    "Vendor 1 URL": "https://www.whambamsystems.com/products/pex-build-surface-254-x-254-voron-2-4-250-and-tronxy-xy-2-pro_",
     "Brand": "Whambam",
     "Price (USD)": 49.99,
+    "Thickness (mm)": 0.35,
     "Pros": "PEX surface releases prints without cooling — often pops off at temp\nExtremely durable surface — outlasts PEI coatings significantly\nMagnetic base included in system\nWorks for wide material range\nUS-based company, good support",
-    "Spring Steel Included": true,
+    "Slug": "whambam-pex-system-250mm",
     "Best For": [
-      "Voron 2.4",
-      "Voron Trident",
-      "RatRig"
+      "Voron 2.4"
     ],
-    "Max Temp (°C)": 110,
+    "Max Temp (°C)": 150,
     "Verdict": "Top Pick",
     "Sizes Available": [
       "250"
     ],
     "Cons": "Lower max temp than PEI (110°C sustained) — marginal for high-temp ABS/ASA printing\nMore expensive than budget PEI options\nPEX surface texture is unique — some users prefer more aggressive PEI grip",
     "Compatible Printers": [
-      "Voron 2.4 ",
-      "Voron Trident",
-      "RatRig"
-    ],
-    "Magnetic Base Included": true
+      "Voron 2.4 "
+    ]
   },
   {
     "id": "recOmeOjhGlDJUTIo",
@@ -156,11 +126,11 @@
     "Brand": "Mandala Rose Works",
     "Price (USD)": 59.99,
     "Pros": "Strongest magnetic retention in class\nPrecise flatness — minimal warping out of the box\nTextured PEI side gives excellent ABS/ASA/PA adhesion\nSmooth underside works for PLA/PETG\nMade in USA — reliable quality control batch to batch",
+    "Slug": "mandala-rose-works-magnetic-build-system-250mm",
     "Spring Steel Included": true,
     "Best For": [
       "Voron 2.4",
-      "Voron Trident",
-      "RatRig"
+      "Voron Trident"
     ],
     "Max Temp (°C)": 120,
     "Verdict": "Top Pick",
@@ -170,8 +140,7 @@
     "Cons": "Premium price vs. Chinese alternatives\nMagnetic base requires separate purchase if not in kit\n250mm format only covers 250x250 build area",
     "Compatible Printers": [
       "Voron 2.4 ",
-      "Voron Trident",
-      "RatRig"
+      "Voron Trident"
     ],
     "Magnetic Base Included": true
   },
@@ -186,6 +155,7 @@
     "Brand": "Mandala Rose Works",
     "Price (USD)": 74.99,
     "Pros": "Same class-leading flatness and magnetic retention as 250mm\nDual-surface PEI handles full material range\nConsistently flat at 300mm — most budget alternatives show edge curl at this size\nUS-made quality control",
+    "Slug": "mandala-rose-works-magnetic-build-system-300mm",
     "Spring Steel Included": true,
     "Best For": [
       "Voron 2.4",
@@ -204,59 +174,24 @@
     "Magnetic Base Included": true
   },
   {
-    "id": "recVMYXB0eDNKhjso",
-    "Description": "The 235x235mm borosilicate glass plate appeared in early Voron 2.4 BOMs before spring steel PEI became community standard. Included here as a reference/comparison point. Functional for PLA with glue stick, but requires adhesion promoter for ABS/ASA and prints must fully cool before removal. Community consensus is to skip straight to spring steel PEI on any new build. Only worth sourcing if you have a specific reason to avoid magnetic systems.",
-    "Verdict Label": "Legacy BOM reference — most builders upgrade immediately",
-    "Vendor 1 Name": "Amazon / local glass supplier",
-    "Name": "Voron BOM Glass Plate (235mm)",
-    "Surface Type": "Glass",
-    "Vendor 1 URL": "https://www.amazon.com/s?k=235mm+borosilicate+glass+plate+3d+printer",
-    "Brand": "Voron Design",
-    "Price (USD)": 12.99,
-    "Thickness (mm)": 4,
-    "Pros": "Inexpensive and widely available\nBorosilicate glass resists thermal warping\nGood for PLA with glue stick or hairspray\nIncluded as baseline in early Voron BOM specs",
-    "Best For": [
-      "Voron 2.4",
-      "Voron Trident"
-    ],
-    "Max Temp (°C)": 110,
-    "Verdict": "Niche Pick",
-    "Sizes Available": [
-      "235"
-    ],
-    "Cons": "No spring steel — prints must cool before removal\nRequires adhesion promoter (glue stick/hairspray) for ABS/ASA\nHeavy compared to spring steel\nNo magnetic mounting — clips required\nBuild community has largely moved past glass",
-    "Compatible Printers": [
-      "Voron 2.4 "
-    ]
-  },
-  {
     "id": "recdcP11q23iVMqxd",
     "Description": "Prusa's satin-finish PEI spring steel sheet produces a distinctive mid-gloss bottom surface finish that many builders prefer over full texture or full gloss. Relevant for RatRig builders who already own Prusa hardware, or crossover builders who want Prusa's quality control on a 250mm footprint. The main friction is magnetic base compatibility — Prusa's magnet pattern doesn't match standard Voron/RatRig magnetic bases without adaptation. Satin surface is limited to 100°C sustained, which rules it out for serious ABS/ASA enclosure printing. Best for PLA/PETG workflows in the RatRig ecosystem.",
     "Verdict Label": "Excellent surface but cross-ecosystem sourcing friction",
     "Vendor 1 Name": "Prusa Research",
     "Name": "Prusa Satin Sheet (250mm)",
     "Surface Type": "Satin",
-    "Vendor 1 URL": "https://www.prusa3d.com/product/prusament-satin-sheet/",
+    "Vendor 1 URL": "https://www.prusa3d.com/product/satin-powder-coated-print-sheet/",
     "Brand": "Prusa",
-    "Price (USD)": 34.99,
+    "Price (USD)": 43.99,
     "Pros": "Satin finish produces attractive mid-gloss bottom surface on prints\nExcellent first-layer adhesion for PLA and PETG\nPrusa quality control is among the best in the industry\nGood for builders already in the Prusa ecosystem",
+    "Slug": "prusa-satin-sheet-250mm",
     "Spring Steel Included": true,
-    "Best For": [
-      "RatRig",
-      "Voron 2.4",
-      "Voron Trident"
-    ],
     "Max Temp (°C)": 100,
     "Verdict": "Niche Pick",
     "Sizes Available": [
       "250"
     ],
-    "Cons": "100°C sustained max temp — not suitable for high-temp ABS/ASA enclosure printing\nProietary Prusa magnet spacing — requires adapter or DIY magnetic base for Voron/RatRig\nPremium price for what's effectively a mid-tier surface on self-build printers\nMoistly designed for MK4/XL — size adaptation needed",
-    "Compatible Printers": [
-      "RatRig",
-      "Voron 2.4 ",
-      "Voron Trident"
-    ]
+    "Cons": "100°C sustained max temp — not suitable for high-temp ABS/ASA enclosure printing\nProietary Prusa magnet spacing — requires adapter or DIY magnetic base for Voron/RatRig\nPremium price for what's effectively a mid-tier surface on self-build printers\nMoistly designed for MK4/XL — size adaptation needed"
   },
   {
     "id": "recf5J8htZMMEM3Iv",
@@ -265,16 +200,18 @@
     "Vendor 1 Name": "Whambam Systems",
     "Name": "Whambam PEX System 300mm",
     "Surface Type": "PEX",
-    "Vendor 1 URL": "https://whambamsystems.com/products/flex-plate-system-300x300",
+    "Vendor 1 URL": "https://www.whambamsystems.com/products/flexi-plate-with-pre-installed-pex-build-surface-305-x-305-voron-2-4-300-and-voron-trident-300_",
     "Brand": "Whambam",
-    "Price (USD)": 59.99,
+    "Price (USD)": 49,
+    "Thickness (mm)": 0.75,
     "Pros": "Same PEX release characteristics at 300mm\nMagnetic base included\nGood flatness at 300mm\nDurable surface coating — long service life",
+    "Slug": "whambam-pex-system-300mm",
     "Spring Steel Included": true,
     "Best For": [
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Max Temp (°C)": 110,
+    "Max Temp (°C)": 150,
     "Verdict": "Top Pick",
     "Sizes Available": [
       "300"
@@ -283,63 +220,6 @@
     "Compatible Printers": [
       "Voron 2.4 ",
       "Voron Trident"
-    ],
-    "Magnetic Base Included": true
-  },
-  {
-    "id": "recgssSJqklWnsTT5",
-    "Description": "Fysetc's spring steel PEI sheet is typically included with Fysetc printer kits (Voron kit alternatives). As a standalone purchase it competes with Energetic in the budget tier. Community considers it interchangeable with Energetic — neither is a standout. Most builders replace the bundled Fysetc sheet with MRW or Fabreeko after the first few months.",
-    "Verdict Label": "Acceptable budget plate — often bundled with Fysetc kits",
-    "Vendor 1 Name": "Fysetc / AliExpress",
-    "Name": "Fysetc Spring Steel PEI",
-    "Surface Type": "Textured PEI",
-    "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-fysetc-pei-spring-steel.html",
-    "Brand": "Fysetc",
-    "Price (USD)": 17.99,
-    "Pros": "Low cost\nOften included in Fysetc printer kits\nDual-sided (textured + smooth) on most variants\nCompatible with standard magnetic bases",
-    "Spring Steel Included": true,
-    "Best For": [
-      "Voron 2.4",
-      "Voron Trident"
-    ],
-    "Max Temp (°C)": 120,
-    "Verdict": "Solid Choice",
-    "Sizes Available": [
-      "250"
-    ],
-    "Cons": "Edge curl more pronounced than Energetic on some batches\nPEI coating less durable than premium options\nMagnetic base not included separately\nLimited availability outside kit bundles",
-    "Compatible Printers": [
-      "Voron 2.4 ",
-      "Voron Trident"
-    ]
-  },
-  {
-    "id": "recyMlOnDRTZCl2N5",
-    "Description": "Fabreeko's smooth PEI variant for builders who prioritize a glassy bottom surface on prints. Smooth PEI has a narrower sweet spot than textured — typically needs a cooler bed temp for clean release. Community recommends pairing with textured PEI on the same magnetic base (swapping sheets) rather than using smooth as primary surface for ABS/ASA.",
-    "Verdict Label": "Best for PLA/PETG — smooth bottom finish on prints",
-    "Vendor 1 Name": "Fabreeko",
-    "Name": "Fabreeko HoneyBadger PEI (smooth — 250mm)",
-    "Surface Type": "Smooth PEI",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-pei-sheets",
-    "Brand": "Fabreeko",
-    "Price (USD)": 29.99,
-    "Pros": "Mirror-smooth bottom surface on finished prints\nExcellent for PLA and PETG\nUS-stocked, reliable quality\nWorks with standard magnetic bases",
-    "Spring Steel Included": true,
-    "Best For": [
-      "Voron 2.4",
-      "Voron Trident",
-      "RatRig"
-    ],
-    "Max Temp (°C)": 110,
-    "Verdict": "Solid Choice",
-    "Sizes Available": [
-      "250"
-    ],
-    "Cons": "Over-adheres to ABS/ASA — requires careful bed temp tuning for release\nNot ideal for high-temp enclosure printing vs. textured PEI\nMagnetic base sold separately",
-    "Compatible Printers": [
-      "Voron 2.4 ",
-      "Voron Trident",
-      "RatRig"
     ]
   }
 ]
