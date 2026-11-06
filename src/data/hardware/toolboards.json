@@ -39,7 +39,7 @@
       "Any Klipper printer"
     ],
     "Name": "BTT U2C v2.1",
-    "Vendor 1 Name": "BIQU Equipment",
+    "Vendor 1 Name": "Kamami",
     "Description": "The BTT U2C is not a toolboard — it's a USB-to-CAN bridge adapter. It connects to the Pi/host via USB and provides a CAN bus port for toolboards like the EBB36. If your mainboard lacks a native CAN transceiver (SKR 3 EZ, older Octopus v1.0, Fysetc S6), the U2C is the standard way to add CAN capability. If you're running an Octopus Pro v1.1, Manta M8P v2, or Leviathan, you don't need one — those boards have native CAN. Included here for context as a common companion to toolboards in Voron CAN builds.",
     "Verdict Label": "Essential bridge for non-CAN mainboards",
     "Verdict": "CONSIDER",
@@ -49,9 +49,8 @@
     ],
     "Cons": "- Not a toolboard — provides zero extruder, hotend, or fan control\n- Mainboards with native CAN (Octopus Pro v1.1, Manta M8P v2, Leviathan) don't need this\n- Adds a USB device to manage and an extra cable to route\n- Known RF interference issues with BTT Pi or Manta CB1 near Beacon probes — inline USB hub required as workaround",
     "Connection": "USB-to-CAN Bridge",
-    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-u2c-v2-1",
+    "Vendor 1 URL": "https://kamami.pl/en/electronics/1188442-bigtreetech-u2c-v21-adapter-can-bus-5902186333789.html",
     "Brand": "BTT",
-    "Price (USD)": 8,
     "Pros": "- Enables full CAN bus toolboard setup on any mainboard with a free USB port\n- Small and inexpensive (~$8) — lowest cost path to CAN bus\n- Plug-and-play with EBB36 and most BTT toolboards\n- Supported by Klipper's USB-CAN bridge mode",
     "Slug": "btt-u2c-v2-1",
     "MCU": "STM32F072C8T6 48MHz"
@@ -61,13 +60,18 @@
     "Hotend Connector": "HEAT0 (10A)",
     "Name": "Mellow Fly SHT36 V3 Klipper Compatible Board (Canbus RS232, Max Plus LDC1612 Eddy)",
     "Vendor 1 Name": "3D Mellow",
+    "Description": "CAN/RS232 toolboard for 3D printer extruder heads (36mm / NEMA14/17 motors) with onboard TMC2209, LIS2DW accelerometer and two controllable fans; the Max version adds an LDC1612 eddy-current chip for bed-mesh probing and works with both Klipper and RRF.",
+    "Verdict Label": "Strong EBB36 alternative — RP2040, LIS2DW, and an eddy-probe option",
+    "Verdict": "CONSIDER",
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
     "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2604/30/products/e6636bbec2.jpg",
+    "Cons": "Many variants (V3 / Plus / Eddy / Max) — easy to buy the wrong one\nBoard-only price varies by variant and is hard to pin down\nRS232 mode needs a separate UTOR adapter\nMellow documentation is primarily in Chinese",
     "Connection": "CAN",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-sht36-v3-klipper-compatible-3d-printer-klipper-rrf-canbus-rs232-board-max-plus-ldc1612-eddy-for-nema14-17-motor",
     "Brand": "Mellow 3D",
     "Price (USD)": 12.84,
+    "Pros": "RP2040 133MHz dual-core MCU with CAN FD support\nOnboard TMC2209 stepper driver\nLIS2DW accelerometer for Klipper input shaping\nTwo controllable fan outputs\nCAN + RS232 + USB connectivity, Klipper and RRF support\nMax variant adds an LDC1612 eddy-current probe for bed-mesh scanning",
     "Slug": "mellow-fly-sht36-v3-klipper-compatible-board-canbus-rs232-max-plus-ldc1612-eddy",
     "MCU": "RP2040, dual-core ARM Cortex-M0+ @ 133MHz"
   },
@@ -77,12 +81,16 @@
     "Name": "Newest Mellow LDO Orbitool O2S USB Tool Heat Board",
     "Vendor 1 Name": "3D Mellow",
     "Description": "A USB toolboard for the Orbiter v2 / v2.5 extruder with STM32F072 MCU, TMC2240 driver, onboard ADXL345 accelerometer and part + hotend fan outputs, communicating with the host over USB.",
+    "Verdict Label": "USB toolboard purpose-built for the Orbiter extruder",
+    "Verdict": "Niche Pick",
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2240",
+    "Cons": "Orbiter-only — not a general-purpose toolboard\nUSB-only, no CAN option\nList price ($91.80) is steep; the $50.49 street price is a flash sale\nHotend connector type is undocumented",
     "Connection": "USB",
     "Vendor 1 URL": "https://3dmellow.com/products/newest-mellow-ldo-orbitool-o2s-usb-tool-heat-board-for-orbiter-extruder-v25-o2-usb-klipper-voron-diy-3d-printer-parts",
     "Brand": "Mellow 3D",
     "Neopixel Support": true,
+    "Pros": "Onboard TMC2240 stepper driver\nADXL345 accelerometer for Klipper input shaping\nPurpose-built for the Orbiter v2 / v2.5 extruder\nUSB connection — no CAN bus infrastructure needed\nTwo fan outputs (part + hotend)",
     "Slug": "newest-mellow-ldo-orbitool-o2s-usb-tool-heat-board",
     "MCU": "STM32F072 48MHz"
   },
@@ -219,7 +227,6 @@
   },
   {
     "id": "recw6fvow9xKfDIgN",
-    "Hotend Connector": "Molex Micro-Fit 3.0 2×4",
     "Compatible Printers": [
       "Voron 2.4",
       "Custom builds"

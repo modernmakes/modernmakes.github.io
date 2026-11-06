@@ -22,7 +22,8 @@
     ],
     "Vendor 1 Name": "https://west3d.com/products/jabberwocky-complete-toolhead-with-filament-cutter-and-extruder-for-3d-printers-and-multi-filament-setups",
     "Cons": "Higher cost than DIY options; Conch hotend limits future hotend swaps; NEMA14 motor may require retuning",
-    "Updated": "2026-11-05T09:16:47.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:13.000Z",
     "Slug": "jabberwocky",
     "Type": "Commercial Kit",
     "Multi-Material Ready": true,
@@ -37,7 +38,6 @@
     "Name": "Mailbox",
     "Included Hotend": "Hotend-agnostic (mounts available for most common hotends)",
     "Brand / Designer": "chirpy2605",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -51,8 +51,10 @@
       "Voron 2.4",
       "Printers for Ants"
     ],
+    "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Mailbox",
     "Cons": "5015 fan modification requires careful disassembly\nMay tap door/tophat on V0.1\nLess cooling symmetry than dual 4010 designs",
-    "Updated": "2026-06-23T23:16:51.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:13.000Z",
     "Slug": "mailbox",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -81,7 +83,8 @@
     ],
     "Vendor 1 Name": "https://excit3d.shop",
     "Cons": "Price and availability depend on Excit3D stock; smaller community than Voron Design toolheads; specs need verification from vendor page (JS-rendered, not fetchable)",
-    "Updated": "2026-11-05T09:16:13.000Z",
+    "Verdict": "Consider",
+    "Updated": "2026-11-06T11:05:14.000Z",
     "Slug": "peregrine",
     "Type": "Commercial",
     "Part Cooling Fans": [
@@ -95,7 +98,6 @@
     "Name": "Archetype",
     "Included Hotend": "Multiple via modular mount system",
     "Brand / Designer": "Armchair Heavy Industries",
-    "Price (USD)": 0,
     "Vendor 2 Name": "https://jb3d.uk/product/archetype-printed-parts-kit-abs-and-pccf/",
     "Compatible Motion Systems": [
       "CoreXY"
@@ -107,9 +109,10 @@
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Vendor 1 Name": "https://github.com/JaredC01/Archetype",
+    "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/Archetype",
     "Cons": "Community mod — verify current development status; source URL needs confirmation",
-    "Updated": "2026-11-05T09:16:17.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:14.000Z",
     "Slug": "archetype",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -123,7 +126,6 @@
     "Name": "Yavoth",
     "Included Hotend": "High-flow and UHF hotends (Dragon, Rapido, Revo Voron, and UHF variants)",
     "Brand / Designer": "chirpy2605",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -136,8 +138,10 @@
       "Voron 2.4",
       "Printers for Ants"
     ],
+    "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Yavoth",
     "Cons": "UHF variants lose 8.5mm Z height\nNo probe mounts integrated (use carriage-mounted probes)\nMay tap front door on some V0.2 installations",
-    "Updated": "2026-06-23T22:51:14.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:15.000Z",
     "Slug": "yavoth",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -151,7 +155,6 @@
     "Name": "Dragon Burner (V0.2 / Printers for Ants)",
     "Included Hotend": "Most standard hotends (Dragon, Rapido HF, Revo Voron, V6, Volcano, and more — not UHF)",
     "Brand / Designer": "chirpy2605",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -168,7 +171,8 @@
     ],
     "Vendor 1 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
     "Cons": "V0.2 X-carriage only — V0.1 users must use Dragon Burner v4\nDoes not support UHF hotends (use Rapid Burner instead)",
-    "Updated": "2026-11-05T09:16:19.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:16.000Z",
     "Slug": "dragon-burner-v0-2-printers-for-ants",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -182,13 +186,12 @@
     "Name": "AntHead",
     "Included Hotend": "Dragon-compatible hotend, Revo Voron, Rapido, TZV6 with or without V6 nozzle",
     "Brand / Designer": "PrintersForAnts",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY (micro-format)"
     ],
     "Hotend Mount Style": "V0-format compact mounts",
     "Filament Cutter": true,
-    "Source URL": "https://github.com/PrintersForAnts",
+    "Source URL": "https://github.com/PrintersForAnts/AntHead",
     "Description": "Ultra-compact toolhead designed for the Voron V0 ecosystem and other micro-format CoreXY printers. Optimized for the tight constraints of V0 build volumes. Print-it-yourself design, maintained by the PrintersForAnts community mod collective.",
     "Compatible Printers": [
       "Voron V0.1",
@@ -196,9 +199,10 @@
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Vendor 1 Name": "https://github.com/PrintersForAnts",
+    "Vendor 1 Name": "https://github.com/PrintersForAnts/AntHead",
     "Cons": "Limited to micro-format printers; specific source URL needs verification; limited hotend options vs larger toolheads",
-    "Updated": "2026-11-05T09:16:21.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:16.000Z",
     "Slug": "anthead",
     "Type": "Print-it-yourself",
     "Multi-Material Ready": true,
@@ -213,7 +217,6 @@
     "Name": "Rapid Burner (chirpy2605, UHF)",
     "Included Hotend": "Rapido UHF, Dragon UHF, Goliath Air, Goliath Water",
     "Brand / Designer": "chirpy2605",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -230,7 +233,8 @@
     ],
     "Vendor 1 Name": "https://www.etsy.com/listing/1503463243/rapid-burner-latest-version-3d-printed",
     "Cons": "UHF and Goliath hotends only — not for standard or HF hotends\nV0.2 X-carriage only (V0.1 use Rapid Burner v4)\nGoliath nichrome wires require specific routing to avoid stress damage",
-    "Updated": "2026-11-05T09:16:24.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:17.000Z",
     "Slug": "rapid-burner-chirpy2605-uhf",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -244,7 +248,6 @@
     "Name": "A4T",
     "Included Hotend": "Dragon HF recommended (Triangle Lab ZS-MZE-HF); alternatives Chube Compact, Dragon UHF/UHF-Mini, Dragon Ace, Rapido HF/UHF, NF-Crazy Volcano, Revo-Voron, Bambulab, TZ-V6-2.0",
     "Brand / Designer": "Armchair Heavy Industries (DW-Tas)",
-    "Price (USD)": 0,
     "Vendor 2 Name": "https://www.onetwo3d.co.uk/product/a4t-fastener-kit/",
     "Compatible Motion Systems": [
       "CoreXY"
@@ -258,7 +261,8 @@
     ],
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/A4T",
     "Cons": "Complex setup requiring MMU system; more bulk than single-material heads; less community support than Jabberwocky; source URL needs verification",
-    "Updated": "2026-11-05T09:16:25.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:17.000Z",
     "Slug": "a4t",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -272,7 +276,6 @@
     "Name": "Mini-AfterSherpa",
     "Included Hotend": "Hotend-agnostic (inherits Mini Afterburner hotend mounts)",
     "Brand / Designer": "PrintersForAnts",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -283,8 +286,10 @@
       "Voron V0.1",
       "Printers for Ants"
     ],
+    "Vendor 1 Name": "https://github.com/PrintersForAnts/Mini-AfterSherpa",
     "Cons": "Older V0.1-focused design — V0.2 users should consider Dragon Burner\nLimited part cooling compared to newer dual-fan designs",
-    "Updated": "2026-11-05T09:27:11.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:18.000Z",
     "Slug": "mini-aftersherpa",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -299,7 +304,6 @@
     "Name": "StealthBurner",
     "Included Hotend": "Dragon HF, Dragon UHF, Revo Voron, Rapido HF, NF-Crazy (via adapters)",
     "Brand / Designer": "Voron Design",
-    "Price (USD)": 0,
     "Vendor 2 Name": "https://www.fabreeko.com/collections/voron/products/stealthburner-kit-for-voron-by-fystec",
     "Compatible Motion Systems": [
       "CoreXY"
@@ -313,7 +317,8 @@
     ],
     "Vendor 1 Name": "https://github.com/VoronDesign/Voron-Stealthburner",
     "Cons": "Bulkier than newer community designs; no filament cutter by default; not multi-material ready without mods; CW2 has more parts than some alternatives",
-    "Updated": "2026-11-05T09:16:30.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:19.000Z",
     "Slug": "stealthburner",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -327,7 +332,6 @@
     "Name": "Dragon Burner (2.4 / Trident / V0)",
     "Included Hotend": "Dragon HF/UHF, Rapido HF/UHF, NF-Crazy, Revo Voron, CHC Pro, Bambu X1C hotend, DropEffect XG (and many others)",
     "Brand / Designer": "chirpy2605",
-    "Price (USD)": 0,
     "Vendor 2 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
     "Compatible Motion Systems": [
       "CoreXY"
@@ -340,9 +344,10 @@
       "Voron Trident",
       "Voron V0"
     ],
-    "Vendor 1 Name": "https://github.com/chirpy2605/voron-user-mods",
+    "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Dragon_Burner",
     "Cons": "GitHub repo appears archived/deleted as of mid-2026 — verify current source; 4010 fans may underperform 5015 on demanding overhangs",
-    "Updated": "2026-11-05T09:17:04.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:20.000Z",
     "Slug": "dragon-burner-2-4-trident-v0",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -357,7 +362,6 @@
     "Name": "Xol Toolhead",
     "Included Hotend": "Rapido HF/UHF, Dragon HF/UHF, DropEffect XG, NF-Crazy, Revo Voron, Chube Compact",
     "Brand / Designer": "Armchair Heavy Industries (DW-Tas)",
-    "Price (USD)": 0,
     "Vendor 2 Name": "https://www.fabreeko.com/collections/vendors/products/xol-2-toolhead-by-armchair-engineering",
     "Compatible Motion Systems": [
       "CoreXY"
@@ -371,7 +375,8 @@
     ],
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/Xol-Toolhead",
     "Cons": "Dual 4010 fans provide less static pressure than 5015 blowers — may underperform on dense overhangs; less plug-and-play than CW2-based designs; no filament cutter native",
-    "Updated": "2026-11-05T09:16:35.000Z",
+    "Verdict": "Buy",
+    "Updated": "2026-11-06T11:05:20.000Z",
     "Slug": "xol-toolhead",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -385,7 +390,6 @@
     "Name": "BreakNeck",
     "Included Hotend": "Hotend-agnostic (modular hotend block system)",
     "Brand / Designer": "leddhedd",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -396,8 +400,10 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Vendor 1 Name": "https://github.com/leddhedd/BreakNeck",
     "Cons": "Superseded by ARMPITHEIGHT — active development has moved on\nCPAP hose routing adds complexity\nExperimental filament path not proven in production use",
-    "Updated": "2026-06-23T23:17:02.000Z",
+    "Verdict": "Consider",
+    "Updated": "2026-11-06T11:05:21.000Z",
     "Slug": "breakneck",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -411,19 +417,19 @@
     "Name": "A5T",
     "Included Hotend": "None included — user-supplied; A4T-compatible (Dragon HF/UHF, Rapido HF/UHF, Chube Compact, Revo Voron, Bambulab, TZ-V6-2.0)",
     "Brand / Designer": "Suzu0071",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
-    "Source URL": "https://www.printables.com/@VzBoT3D",
+    "Source URL": "https://github.com/Suzu0071/A5T",
     "Description": "Single A4T-derived toolhead using 5015 part-cooling fan(s) instead of the A4T's dual 4010 blowers. Currently in testing.",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Vendor 1 Name": "https://www.printables.com/@VzBoT3D",
+    "Vendor 1 Name": "https://github.com/Suzu0071/A5T",
     "Cons": "Complex multi-material setup; primarily tuned for VzBot; source URL needs verification; limited community outside VzBot ecosystem",
-    "Updated": "2026-11-05T09:27:09.000Z",
+    "Verdict": "Consider",
+    "Updated": "2026-11-06T11:05:22.000Z",
     "Slug": "a5t",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -436,7 +442,6 @@
     "Name": "FiberStream",
     "Included Hotend": "Hotend-agnostic (modular mounts)",
     "Brand / Designer": "Smolboi",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
@@ -448,8 +453,10 @@
       "Voron Trident",
       "Voron 2.4"
     ],
+    "Vendor 1 Name": "https://www.printables.com/model/1219174-fiberstream-toolhead",
     "Cons": "Sheetmetal X carriage version offers little benefit on printed gantries\nOngoing project — parts may change\nLimited documentation compared to established toolheads",
-    "Updated": "2026-06-23T23:17:02.000Z",
+    "Verdict": "Consider",
+    "Updated": "2026-11-06T11:05:22.000Z",
     "Slug": "fiberstream",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -463,7 +470,6 @@
     "Name": "Angry Tool Head",
     "Included Hotend": "Hotend-agnostic",
     "Brand / Designer": "Shamoon78",
-    "Price (USD)": 0,
     "Compatible Motion Systems": [
       "Cross Gantry"
     ],
@@ -474,8 +480,10 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Vendor 1 Name": "https://github.com/Shamoon78/Angry_Tool_Head/",
     "Cons": "Monolith gantry required — not for standard CoreXY setups\nLimited documentation and community testing data compared to established toolheads\nActive development — design may change",
-    "Updated": "2026-11-05T09:16:41.000Z",
+    "Verdict": "Consider",
+    "Updated": "2026-11-06T11:05:23.000Z",
     "Slug": "angry-tool-head",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [

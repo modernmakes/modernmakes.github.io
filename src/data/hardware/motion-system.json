@@ -21,6 +21,7 @@
     "Price (USD)": 8,
     "Pros": "OEM tooth profile matched to Gates belt — zero pitch mismatch at tooth reversal points\nUsed at belt path reversal points where a smooth idler would cause belt tooth rotation and skip\nPre-assembled with integrated bearing",
     "Slug": "gates-2gt-toothed-idler",
+    "Rail Profile": "N/A",
     "Material": "Aluminum"
   },
   {
@@ -46,6 +47,7 @@
     "Price (USD)": 3,
     "Pros": "Trianglelab has a track record of acceptable dimensional accuracy on motion components\nConsiderably cheaper than Gates — meaningful savings for AWD builds needing 4 pulleys\nSold through Trianglelab’s AliExpress store with some vendor accountability",
     "Slug": "trianglelab-2gt-20t-drive-pulley",
+    "Rail Profile": "N/A",
     "Material": "Aluminum"
   },
   {
@@ -72,6 +74,7 @@
     "Price (USD)": 8,
     "Pros": "Manufactured to match Gates LL-2GT belt precisely — tooth mesh geometry is designed as a matched set\n20 tooth count is the Voron and CoreXY standard — all BOM and speed calculations assume 20T\nFlanged to retain belt lateral position on the motor shaft",
     "Slug": "gates-2gt-20t-drive-pulley",
+    "Rail Profile": "N/A",
     "Material": "Aluminum"
   },
   {
@@ -81,18 +84,21 @@
     "Brand Tier": "Budget Clone",
     "Description": "T8x8 300mm lead screws serve 250mm Voron 2.4 builds and all Voron Trident Z axes. Trident uses 3 lead screws for independent Z leveling (Quad Gantry Leveling equivalent). All other characteristics are the same as the 400mm variant.",
     "Verdict Label": "Z lead screw for 250mm Voron V2.4 and Voron Trident",
+    "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
     "Lead (mm)": 8,
     "Cons": "Same lead screw limitations as 400mm variant — belted Z is the upgrade path for V2.4; Trident uses screws by design",
     "Compatible Printers": [
       "Voron Trident"
     ],
+    "Vendor 1 Name": "Unknown",
     "Name": "T8 Lead Screw 8mm Lead 300mm",
     "Type": "Lead Screw",
     "Brand": "Generic",
     "Price (USD)": 5,
     "Pros": "Correct length for 250mm V2.4 and Voron Trident (3 screws) — shorter span reduces lead screw whip at higher Z speeds\nSame T8x8 spec as 400mm — all documentation and hardware is interchangeable except length",
     "Slug": "t8-lead-screw-8mm-lead-300mm",
+    "Rail Profile": "N/A",
     "Material": "Stainless"
   },
   {
@@ -119,6 +125,7 @@
     "Price (USD)": 15,
     "Pros": "Gates LL-2GT is the OEM belt specification for Voron, RatRig, and VzBot — it is what the pulleys and idlers are sized for\nPolyurethane construction with fiberglass tension members — consistent stretch coefficient and lifetime under tension\nNo quality lottery — all Gates belt is manufactured to the same spec",
     "Slug": "gates-2gt-belt-6mm",
+    "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
@@ -135,11 +142,13 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Vendor 1 Name": "Unknown",
     "Name": "Generic 2GT Belt 6mm",
     "Type": "Belt",
     "Brand": "Generic",
     "Pros": "Lowest cost option — occasionally used by budget builders who accept the trade-offs",
     "Slug": "generic-2gt-belt-6mm",
+    "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
@@ -213,7 +222,9 @@
     "Brand": "BRS Engineering",
     "Price (USD)": 69,
     "Pros": "GT1.5 pitch (1.5mm) vs standard GT2 (2mm) — half the resonance frequency interval\nDirectly reduces variable frequency artifacts (VFA/salmon skin) in prints\nAvailable in EPDM (standard, from €69) and Powergrip rubber (premium, €139)\nOpen-source printed pulleys and idlers available from BRS GitHub\nOfficial RatRig compatibility, community-proven on Voron builds",
-    "Slug": "brs-gt1-5-anti-vfa-belt-conversion-kit"
+    "Slug": "brs-gt1-5-anti-vfa-belt-conversion-kit",
+    "Rail Profile": "N/A",
+    "Material": "N/A"
   },
   {
     "id": "recRq9fXrD8W3mKYk",
@@ -228,6 +239,7 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Vendor 1 Name": "Unknown",
     "Name": "Generic MGN9H Linear Rail",
     "Carriage Type": "MGN9H",
     "Type": "Linear Rail",
@@ -267,15 +279,18 @@
     "Brand Tier": "Budget Clone",
     "Description": "T8x8 400mm lead screws are used in the stock Voron 2.4 Z axis for 300mm and 350mm builds (4 screws). They work but are the most common first upgrade target. Belted Z is the official Voron Design upgrade path.",
     "Verdict Label": "Stock Z lead screw for 300mm and 350mm Voron V2.4 builds — functional but belted Z is the community upgrade",
+    "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
     "Lead (mm)": 8,
     "Cons": "Slower Z than belted Z — meaningful impact on multi-material and probing workflows\nRing resonance from lead screw whip is a documented problem at higher Z travel speeds\nRequires Oldham couplers and periodic lubrication\nBelted Z is the community-preferred upgrade",
+    "Vendor 1 Name": "Unknown",
     "Name": "T8 Lead Screw 8mm Lead 400mm",
     "Type": "Lead Screw",
     "Brand": "Generic",
     "Price (USD)": 6,
     "Pros": "Simple, well-understood Z motion — fully documented in V2.4 build guides\nLow cost and easy to source in correct lengths\nWorks adequately for standard print speeds",
     "Slug": "t8-lead-screw-8mm-lead-400mm",
+    "Rail Profile": "N/A",
     "Material": "Stainless"
   },
   {
@@ -298,6 +313,7 @@
     "Brand": "Voron Design",
     "Pros": "Eliminates Z lead screw ringing — no more resonance artifacts from screw whip at higher Z speeds\nDramatically faster Z moves — meaningful improvement in multi-material and first-layer probing workflows\nOpen source, officially designed by Voron Design — full documentation, well-documented installation\nReuses most existing V2.4 motor hardware",
     "Slug": "voron-2-4-belted-z",
+    "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
@@ -321,6 +337,7 @@
     "Price (USD)": 20,
     "Pros": "Higher belt tension capacity than 6mm — appropriate for AWD drives where all 4 motor torques route through the belt simultaneously\nSame Gates quality as 6mm — OEM specification, consistent stretch\nRequired for RatRig V-Core 4 AWD configuration — 6mm belt is undersized for 4-motor AWD tension",
     "Slug": "gates-2gt-belt-9mm",
+    "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
@@ -328,7 +345,10 @@
     "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2606/16/products/800-3-132831e919.jpg",
     "Brand Tier": "Quality Clone",
     "Description": "Genuine GATES LL-1.5GT timing belt and pulley kit with CNC-machined aluminium drive and idler pulleys (27T/21T, 5mm bore) for 6/9/10/12mm belts; 1.5mm tooth pitch gives higher positioning precision and lower backlash than GT2.",
+    "Verdict Label": "Genuine Gates GT1.5 belt and pulley kit — the best-verified value in the table",
     "Tooth Profile": "GT1.5",
+    "Verdict": "BUY",
+    "Cons": "Pulleys are Mellow’s own, not Gates — only the belts are genuine Gates\nKit spans four belt widths, so you must pick the right variant\nGT1.5 is a niche standard — fewer guides and less community usage than GT2",
     "Compatible Printers": [
       "Universal"
     ],
@@ -338,6 +358,7 @@
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-3d-printer-part-gates-ll-15gt-gear-synchronous-belt-timing-pulley-idler-pulley-gt15-for-6mm-9mm-10mm-12mm-timing-be",
     "Brand": "Mellow 3D",
     "Price (USD)": 12.5,
+    "Pros": "Genuine GATES LL-1.5GT belts, not clones\nCNC-machined aluminium drive and idler pulleys (27T/21T, 5mm bore)\n1.5mm tooth pitch gives higher positioning precision and lower backlash than GT2\nOne kit covers 6/9/10/12mm belts\n2.50 in stock at 3D Mellow",
     "Slug": "mellow-3d-printer-part-gates-ll-1-5gt-gear-synchronous-belt-timing-pulley-idler-pulley-kit-6-9-10-12mm",
     "Rail Profile": "N/A",
     "Material": "Aluminum"
@@ -348,6 +369,7 @@
     "Brand Tier": "Budget Clone",
     "Description": "F695 2RS flanged bearings are used at all smooth idler positions in Voron CoreXY belt paths — outer reversals where the belt’s flat back contacts the bearing. 5mm bore fits the M5 idler post and the flange retains belt laterally. Voron BOM specifies F695 2RS; note that quality varies significantly by source.",
     "Verdict Label": "Standard smooth idler for all Voron CoreXY belt path outer reversals",
+    "Tooth Profile": "N/A",
     "Verdict": "BUY",
     "Cons": "Quality varies significantly by source — random AliExpress F695 may have gritty feel and short lifespan\nShould be sourced from known vendors (Misumi, KB3D, Fabreeko) or confirmed reputable bearing suppliers",
     "Compatible Printers": [
@@ -363,7 +385,8 @@
     "Brand": "Generic",
     "Price (USD)": 2.87,
     "Pros": "F695 2RS is the correct bearing spec — 5mm bore, 13mm OD, flanged\nFlange retains the belt’s lateral position without a separate washer\nStandard industrial bearing spec — available from reputable vendors at low cost",
-    "Slug": "f695-2rs-smooth-idler-bearing"
+    "Slug": "f695-2rs-smooth-idler-bearing",
+    "Rail Profile": "N/A"
   },
   {
     "id": "recu6UTO7pho4oYkF",
@@ -371,6 +394,7 @@
     "Updated": "2026-06-29",
     "Description": "Ballscrew-based Z axis upgrade for RatRig V-Core 4.0 (version 4.0b). Replaces the stock leadscrew Z system with precision ballscrews — eliminating leadscrew wobble artifacts in the Z direction and improving positional repeatability. Available as hardware-only kit (€149, for builders with a printer) or full kit with PA12-CF printed parts (€262). Open-source printed part files on BRS GitHub. BRS Engineering has official RatRig partnership agreement.",
     "Verdict Label": "from €149 | significant improvement, non-trivial install",
+    "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
     "Lead (mm)": 4,
     "Cons": "Non-trivial installation — V-Core 4 Z frame disassembly required\nFull kit €262 is a significant investment\nSmall install base compared to stock Z — less community troubleshooting documentation\nEU-based, one-man shop — lead times apply",
@@ -385,7 +409,9 @@
     "Brand": "BRS Engineering",
     "Price (USD)": 149,
     "Pros": "Ballscrew Z axis — eliminates leadscrew backlash and wobble artifacts\nSignificant improvement in Z-axis positional accuracy and repeatability\nAvailable hardware-only (€149) or full kit with PA12-CF printed parts (€262)\nOfficial RatRig partnership — confirmed V-Core 4 compatibility\nOpen-source printed parts on BRS GitHub",
-    "Slug": "brs-z-upgrade-4-0b-ballscrew-system"
+    "Slug": "brs-z-upgrade-4-0b-ballscrew-system",
+    "Rail Profile": "N/A",
+    "Material": "N/A"
   },
   {
     "id": "recvIILzOefQWCXc1",
@@ -415,6 +441,7 @@
     "Brand Tier": "Budget Clone",
     "Description": "Oldham couplers are required at the motor-to-lead-screw junction on all Voron lead screw Z axes. They allow lateral float to accommodate shaft misalignment while transmitting rotation. Rigid shaft couplers are not a substitute — they will bind and cause Z banding.",
     "Verdict Label": "Essential companion to lead screw Z — eliminates Z binding from shaft misalignment",
+    "Tooth Profile": "N/A",
     "Verdict": "BUY",
     "Cons": "Center disc wears over time and requires periodic inspection\nIrrelevant if switching to belted Z",
     "Vendor 1 Name": "Fabreeko",
@@ -424,7 +451,8 @@
     "Brand": "Generic",
     "Price (USD)": 5,
     "Pros": "Allows lateral float between motor shaft and lead screw — corrects for inevitable misalignment in assembled frames\nWithout Oldham couplers, misalignment binds Z and causes Z banding artifacts\nCheap, reliable, and non-negotiable on lead screw Z builds",
-    "Slug": "oldham-coupler"
+    "Slug": "oldham-coupler",
+    "Rail Profile": "N/A"
   },
   {
     "id": "recyStrlO1KwMrFuQ",
