@@ -827,3 +827,6 @@ main:not(.main-has-hero) { padding-top: 60px; }
   main:not(.main-has-hero) { padding-top: 56px; }
   .pg-hero { padding-top: 96px; padding-bottom: 40px; }
 }
+
+/* Inline links inside running text carry a non-colour cue (WCAG 1.4.1). Classed links (buttons, cards) opt out. */
+main p a:not([class]) { text-decoration: underline; text-underline-offset: 2px; }

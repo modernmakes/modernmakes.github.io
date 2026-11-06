@@ -31,7 +31,7 @@ function verdictClass(v: string): string {
 
 // Map tier to badge styles
 function tierStyle(tier: string): string {
-  if (tier === 'TOP')    return 'background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7';
+  if (tier === 'TOP')    return 'background:#E8F5E9;color:#0E6B2F;border:1px solid #A5D6A7';
   if (tier === 'MID')    return 'background:rgba(59,130,246,.1);color:#1d4ed8;border:1px solid rgba(59,130,246,.25)';
   if (tier === 'BUDGET') return 'background:rgba(255,255,255,.06);color:var(--g2);border:1px solid var(--border-s)';
   return 'background:var(--bg);color:var(--g2);border:1px solid var(--border)';
@@ -39,10 +39,10 @@ function tierStyle(tier: string): string {
 
 // Map compatibility rating to colour
 function ratingStyle(rating: string): string {
-  if (rating === 'EXCELLENT') return 'color:#16a34a';
+  if (rating === 'EXCELLENT') return 'color:var(--verdict-wh-ink-dk)';
   if (rating === 'GOOD')      return 'color:#2563eb';
-  if (rating === 'LIMITED')   return 'color:#d97706';
-  return 'color:#dc2626';
+  if (rating === 'LIMITED')   return 'color:var(--caution-ink)';
+  return 'color:var(--danger)';
 }
 
 const difficultyColor: Record<string, string> = {
@@ -429,8 +429,8 @@ const difficultyColor: Record<string, string> = {
   border-radius: 5px 5px 0 0;
   margin-bottom: 0;
 }
-.fil-pc-head--pro { background: #E8F5E9; color: #2E7D32; }
-.fil-pc-head--con { background: #FFF3E0; color: #E65100; }
+.fil-pc-head--pro { background: #E8F5E9; color: #0E6B2F; }
+.fil-pc-head--con { background: #FFF3E0; color: #B23C00; }
 .fil-pc-list {
   list-style: none;
   padding: 0;

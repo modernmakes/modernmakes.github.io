@@ -65,8 +65,8 @@
 .pa-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 .pa-pattern-count { margin-top: 8px; font-family: var(--fm); font-size: 11px; color: var(--accent-dk); background: rgba(255,90,31,.07); border: 1px solid rgba(255,90,31,.18); border-radius: 4px; padding: 6px 10px; }
 .input-error { border-color: #ef4444 !important; }
-.pa-field-error { display: none; font-size: 11px; color: #ef4444; font-family: var(--fm); }
-.pa-inline-error { font-size: 12px; color: #ef4444; font-family: var(--fm); margin-top: 6px; }
+.pa-field-error { display: none; font-size: 11px; color: var(--danger); font-family: var(--fm); }
+.pa-inline-error { font-size: 12px; color: var(--danger); font-family: var(--fm); margin-top: 6px; }
 .pa-inline-warn  { font-size: 12px; color: #f59e0b; font-family: var(--fm); margin-top: 6px; }
 .pa-output { display: flex; flex-direction: column; gap: 16px; }
 .pa-stats-bar { display: flex; align-items: center; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; flex-wrap: wrap; position: relative; }
@@ -97,7 +97,7 @@
 .pa-howto-steps { font-family: var(--fb); font-size: 14px; color: var(--g1); line-height: 1.7; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
 .pa-howto-steps strong { color: var(--black); font-family: var(--fu); }
 .pa-howto-steps code { font-family: var(--fm); font-size: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--accent-dk); }
-.pa-diagram { background: #0d0d0d; border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
+.pa-diagram { color: var(--code-ink); background: #0d0d0d; border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
 .pa-diagram-title { font-family: var(--fm); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--on-dark-muted); margin-bottom: 10px; }
 .pa-diagram-art { font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6; color: #aaa; margin: 0; white-space: pre; overflow-x: auto; }
 .pa-howto-note { font-family: var(--fu); font-size: 12px; color: var(--g2); line-height: 1.7; padding-top: 14px; border-top: 1px solid var(--border); }

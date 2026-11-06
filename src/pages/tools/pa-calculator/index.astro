@@ -67,7 +67,7 @@ const currentPath = '/tools';
         <p style="font-family:var(--fb);font-size:13px;color:var(--g1);margin:0 0 12px;line-height:1.6">
           Paste PA sweep triplets from OrcaSlicer — one per line in format: <code class="pac-code">pa_value, flow_mm3s, accel</code>
         </p>
-        <textarea class="pac-textarea" id="importPaste" rows="5" placeholder="0.020, 8.0, 2000&#10;0.022, 12.0, 2000&#10;0.025, 8.0, 3000"></textarea>
+        <textarea class="pac-textarea" id="importPaste" aria-label="Paste pressure advance results, one per line" rows="5" placeholder="0.020, 8.0, 2000&#10;0.022, 12.0, 2000&#10;0.025, 8.0, 3000"></textarea>
         <button class="pac-btn-import" id="importBtn">Import & auto-fill grid</button>
         <div id="importStatus" class="pac-import-status"></div>
       </div>
@@ -218,7 +218,7 @@ function renderGrid() {
 
   let html = '<thead><tr><th class="pac-th-accel">Accel (mm/s²)</th>';
   for (const s of speeds) {
-    html += `<th>${s} mm/s<br><span style="font-size:9px;color:#aaa">${flow(s)} mm³/s</span></th>`;
+    html += `<th>${s} mm/s<br><span style="font-size:9px;color:var(--g2)">${flow(s)} mm³/s</span></th>`;
   }
   html += '</tr></thead><tbody>';
 
@@ -227,7 +227,7 @@ function renderGrid() {
     for (let si = 0; si < speeds.length; si++) {
       const key = cellKey(ai, si);
       const val = gridData[key] ?? '';
-      html += `<td><input class="pac-cell-input${val ? ' has-value' : ''}" type="number" step="0.001" min="0" max="2" placeholder="PA" data-key="${key}" value="${val}"></td>`;
+      html += `<td><input class="pac-cell-input${val ? ' has-value' : ''}" type="number" step="0.001" min="0" max="2" placeholder="PA" aria-label="Pressure advance at ${accels[ai].toLocaleString()} mm/s² and ${speeds[si]} mm/s" data-key="${key}" value="${val}"></td>`;
     }
     html += '</tr>';
   }

@@ -63,7 +63,7 @@ const currentPath = '/tools';
 
         <div class="ms-divider"></div>
         <div class="ms-section-label">Select Motors (up to 4)</div>
-        <input class="ms-input" type="text" id="motorSearch" placeholder="Search brand or model…" autocomplete="off">
+        <input class="ms-input" type="text" id="motorSearch" aria-label="Search motors by brand or model" placeholder="Search brand or model…" autocomplete="off">
         <div class="ms-motor-list" id="motorList"></div>
         <div class="ms-max-msg" id="maxMsg">Max 4 motors selected</div>
 
@@ -86,7 +86,7 @@ const currentPath = '/tools';
         <!-- Max speed summary -->
         <div class="ms-table-card">
           <div class="ms-table-title">Performance Summary</div>
-          <div style="overflow-x:auto">
+          <div style="overflow-x:auto" tabindex="0" role="region" aria-label="Motor specifications table">
             <table class="ms-table" id="summaryTable">
               <thead>
                 <tr>
@@ -108,7 +108,7 @@ const currentPath = '/tools';
         <details class="ms-specs-details">
           <summary class="ms-specs-summary">Motor specs ▾</summary>
           <div class="ms-table-card" style="margin-top:8px">
-            <div style="overflow-x:auto">
+            <div style="overflow-x:auto" tabindex="0" role="region" aria-label="Motor specifications detail table">
               <table class="ms-table" id="specTable">
                 <thead>
                   <tr>
@@ -353,6 +353,8 @@ const MOTORS: Motor[] = [
 ];
 
 const COLORS = ['#FF5A1F', '#3B82F6', '#10B981', '#8B5CF6'];
+// Same hues as COLORS, darkened to clear 4.5:1 as text on white.
+const TEXT_COLORS = ['#C93B08', '#1D4ED8', '#047857', '#6D28D9'];
 const SPEED_MAX = 1200;
 const SPEED_STEP = 20;
 const SPEED_LABELS = Array.from({ length: SPEED_MAX / SPEED_STEP + 1 }, (_, i) => i * SPEED_STEP);
@@ -563,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const t300idx = Math.round(300 / SPEED_STEP);
       const spdLabel = maxSpd === null ? '<span class="ms-speed-val capped">&gt;1200 mm/s</span>' :
                        maxSpd === 0    ? '<span class="ms-speed-val capped">— (below req.)</span>' :
-                       `<span class="ms-speed-val" style="color:${COLORS[i]}">${maxSpd.toFixed(0)} mm/s</span>`;
+                       `<span class="ms-speed-val" style="color:${TEXT_COLORS[i]}">${maxSpd.toFixed(0)} mm/s</span>`;
       return `<tr>
         <td><span class="ms-motor-dot" style="background:${COLORS[i]}"></span>${m.brand} ${m.model}</td>
         <td>${spdLabel}</td>

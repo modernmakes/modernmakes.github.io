@@ -248,7 +248,7 @@ const siteBase = Astro.site
           <div class="pa-section-body">
             <div class="pa-form-group">
               <label class="pa-label" for="startGcode">Tokens: [BED_TEMP] [HOTEND_TEMP] [TOTAL_LAYER_COUNT]</label>
-              <textarea class="pa-textarea" id="startGcode" rows="7">SET_PRINT_STATS_INFO TOTAL_LAYER=[TOTAL_LAYER_COUNT]
+              <textarea class="pa-textarea" id="startGcode" tabindex="0" rows="7">SET_PRINT_STATS_INFO TOTAL_LAYER=[TOTAL_LAYER_COUNT]
 G28
 G90
 M190 S[BED_TEMP]
@@ -312,7 +312,7 @@ M84</textarea>
 
         <!-- G-code output -->
         <div class="pa-code-wrap">
-          <pre class="pa-code" id="gcodeOutput" aria-label="Generated G-code"></pre>
+          <pre class="pa-code" id="gcodeOutput" aria-label="Generated G-code" tabindex="0"></pre>
         </div>
 
         <!-- How to use -->
@@ -326,7 +326,7 @@ M84</textarea>
           </ol>
           <div class="pa-diagram">
             <div class="pa-diagram-title">Reading the test pattern</div>
-            <pre class="pa-diagram-art">  Too low (PA=0)      Correct           Too high
+            <pre class="pa-diagram-art" tabindex="0">  Too low (PA=0)      Correct           Too high
   ┌──────┐           ┌──────┐           ┌──────┐
   │  ╔══╗│           │  ┌──┐│           │  ╔══╗│
   │◀▶║  ║│           │  │  ││           │◀▶║  ║│

@@ -56,8 +56,8 @@ const {
 } = Astro.props;
 
 const difficultyColor =
-  difficulty === 'Beginner'     ? '#2E7D32' :
-  difficulty === 'Intermediate' ? '#E65100' : '#C62828';
+  difficulty === 'Beginner'     ? '#0E6B2F' :
+  difficulty === 'Intermediate' ? '#B23C00' : '#C62828';
 
 // Hero badge sits on the dark plane: lighter tones clear 4.5:1 there
 const difficultyOnDark =
@@ -654,7 +654,7 @@ const breadcrumbItems = [
 .ms-toolhead-note {
   font-family: var(--fu);
   font-size: 10px;
-  color: var(--g2);
+  color: var(--g1);
   font-weight: 400;
 }
 
@@ -757,8 +757,8 @@ const breadcrumbItems = [
   .ms-related-browse:hover { border-color: var(--accent); }
 }
 .ms-related-browse-label { font-family: var(--fd); font-size: 14px; font-weight: 800; color: rgba(255,255,255,.8); text-align: center; }
-.ms-related-soon { opacity: .5; cursor: default; }
-.ms-related-soon-label { font-family: var(--fd); font-size: 15px; font-weight: 800; color: var(--black); }
+.ms-related-soon { cursor: default; }
+.ms-related-soon-label { font-family: var(--fd); font-size: 15px; font-weight: 800; color: var(--g1); }
 .ms-related-soon-tag { font-family: var(--fm); font-size: 9px; font-weight: 700; color: var(--g2); text-transform: uppercase; letter-spacing: .08em; }
 
 /* ── SIDEBAR ── */

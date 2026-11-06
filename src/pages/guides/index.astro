@@ -56,8 +56,8 @@ function cardBg(entry: (typeof sorted)[number]): string {
 }
 
 const difficultyColors: Record<string, string> = {
-  Beginner:     '#2E7D32',
-  Intermediate: '#E65100',
+  Beginner:     '#0E6B2F',
+  Intermediate: '#B23C00',
   Advanced:     '#C62828',
 };
 ---
@@ -148,7 +148,7 @@ const difficultyColors: Record<string, string> = {
                 {entry.data.difficulty && (
                   <span
                     class="gi-diff-chip"
-                    style={`color:${difficultyColors[entry.data.difficulty] ?? '#E65100'};border-color:${difficultyColors[entry.data.difficulty] ?? '#E65100'}44;background:${difficultyColors[entry.data.difficulty] ?? '#E65100'}0d`}
+                    style={`color:${difficultyColors[entry.data.difficulty] ?? '#B23C00'};border-color:${difficultyColors[entry.data.difficulty] ?? '#B23C00'}44;background:${difficultyColors[entry.data.difficulty] ?? '#B23C00'}0d`}
                   >
                     {entry.data.difficulty}
                   </span>
