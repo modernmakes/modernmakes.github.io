@@ -4,7 +4,7 @@ interface Props {
 }
 const { currentPath = '/' } = Astro.props;
 
-const printersActive  = currentPath.startsWith('/voron');
+const printersActive  = currentPath.startsWith('/voron') || currentPath.startsWith('/printers');
 const hardwareActive  = currentPath.startsWith('/hardware');
 ---
 
@@ -33,6 +33,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
             </svg>
           </button>
           <div class="nav-dd-panel" id="printers-panel" role="menu" aria-labelledby="printers-btn">
+            <a href="/printers" class="nav-dd-item" role="menuitem"><strong>All printers</strong></a>
             <a href="/voron" class="nav-dd-item" role="menuitem"><strong>Voron</strong><span class="sep"> · </span><span class="desc">2.4, Trident</span></a>
           </div>
         </div>
@@ -85,6 +86,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 
     <div class="panel-eco-group">
       <span class="panel-eco-label">Printers</span>
+      <a href="/printers" class:list={['panel-eco-link', { active: currentPath.startsWith('/printers') }]}>All printers</a>
       <a href="/voron" class:list={['panel-eco-link', { active: currentPath.startsWith('/voron') }]}>Voron</a>
     </div>
 
