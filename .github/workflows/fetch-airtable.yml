@@ -23,14 +23,21 @@ jobs:
       - name: Fetch Airtable data
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
-        run: node scripts/fetch-airtable.mjs
+        # Don't stop here on failure: commit whatever tables did fetch, then fail the job below.
+        run: node scripts/fetch-airtable.mjs || echo "FETCH_FAILED=1" >> "$GITHUB_ENV"
 
       - name: Commit updated data files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/hardware/
+          git add src/data/hardware/ src/data/newsletter-archive.json
           git diff --staged --quiet || git commit -m "chore: sync Airtable hardware data"
 
       - name: Push changes
         run: git push
+
+      - name: Fail the run if any table failed to fetch
+        if: env.FETCH_FAILED == '1'
+        run: |
+          echo "::error::Airtable fetch had failures (see the fetch step summary). Partial results were committed. Check the AIRTABLE_TOKEN secret first."
+          exit 1

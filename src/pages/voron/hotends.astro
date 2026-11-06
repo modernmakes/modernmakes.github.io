@@ -44,7 +44,11 @@ const voronHotends = (hotends as any[])
 
 // Matrix columns: every toolhead named by a shown hotend. Fixed order first, the rest A-Z.
 const TOOLHEAD_ORDER = ['stealthburner', 'xol', 'dragon burner', 'mini stealthburner'];
-const toolheadCols = [...new Set(voronHotends.flatMap((p) => p.toolheads))].sort((a, b) => {
+// "Custom community mounts" is a catch-all in the records, not a toolhead, so it gets no column.
+const NOT_TOOLHEADS = new Set(['custom community mounts']);
+const toolheadCols = [...new Set(voronHotends.flatMap((p) => p.toolheads))]
+  .filter((t) => !NOT_TOOLHEADS.has(t.toLowerCase()))
+  .sort((a, b) => {
   const ia = TOOLHEAD_ORDER.indexOf(a.toLowerCase()), ib = TOOLHEAD_ORDER.indexOf(b.toLowerCase());
   if (ia !== -1 || ib !== -1) return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
   return a.localeCompare(b);
