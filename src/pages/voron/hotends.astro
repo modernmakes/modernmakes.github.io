@@ -2,8 +2,12 @@
 import VoronSubsystemLayout from '../../layouts/VoronSubsystemLayout.astro';
 import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
 import TypeCover from '../../components/TypeCover.astro';
-import { handBadge, type RecordRef } from '../../lib/hardware';
+import { handBadge, toSlug, type RecordRef } from '../../lib/hardware';
 import hotendsData from '../../data/products/hotends.json';
+import hardwareHotends from '../../data/hardware/hotends.json';
+// Only link a card when its reviewPath is a real built page (or a redirect target); the rest stay plain.
+const builtPaths = new Set(hardwareHotends.map(r => `/hardware/hotends/${toSlug(r.Name)}`));
+const cardHref = (p: { reviewPath?: string }) => (p.reviewPath && builtPaths.has(p.reviewPath) ? p.reviewPath : null);
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
@@ -48,15 +52,16 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
       <div class="grid-3">
         {voronHotends.map(product => {
           const badge = badges[product.id];
+          const href = cardHref(product);
           const buyVendor = product.primaryVendor ?? product.vendors.find(v => v.primary) ?? product.vendors[0];
           return (
-            <div class="product-card" data-compatible={product.compatible.join(',')}>
+            <div class="product-card product-card--link" data-compatible={product.compatible.join(',')}>
               <div class="product-card-img" style="height:140px"><TypeCover eyebrow={product.brand} title={product.name} /></div>
               <div class="product-card-body">
                 {/* Verdict badge at top of card */}
                 {badge && (v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(badge.label, badge.record))}
                 <div class="product-card-brand">{product.brand}</div>
-                <div class="product-card-name">{product.name}</div>
+                <div class="product-card-name">{href ? <a href={href} class="product-card-link">{product.name}</a> : product.name}</div>
                 <div class="product-card-specs">
                   {product.maxTemp && <span class="spec-chip">{product.maxTemp}°C max</span>}
                   {product.maxFlow && <span class="spec-chip">{product.maxFlow}mm³/s</span>}
@@ -76,12 +81,9 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
                 <a href={buyVendor?.url ?? '#'}
                    class="btn-buy"
                    target="_blank"
-                   rel="noopener sponsored">
+                   rel="noopener sponsored"
+                   style="position:relative;z-index:1">
                   Buy at {buyVendor?.name ?? 'vendor'} →
-                </a>
-                {/* Full review link */}
-                <a href={product.reviewPath} class="btn-review">
-                  Full verdict →
                 </a>
                 <!-- Footer: price + verdict -->
                 <div class="product-card-footer" style="margin-top:12px">
@@ -94,7 +96,7 @@ const badges: Record<string, { label: string; record?: RecordRef }> = {
                   <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
                     <span style="font-size:10px;color:var(--g2);margin-right:6px">Also at:</span>
                     {product.vendors.filter(v => !v.primary).map(vendor => (
-                      <a href={vendor.url} style="font-size:10px;color:var(--accent-dk);margin-right:10px;font-family:'JetBrains Mono',monospace" target="_blank" rel="noopener nofollow">{vendor.name}</a>
+                      <a href={vendor.url} style="position:relative;z-index:1;font-size:10px;color:var(--accent-dk);margin-right:10px;font-family:'JetBrains Mono',monospace" target="_blank" rel="noopener nofollow">{vendor.name}</a>
                     ))}
                   </div>
                 )}

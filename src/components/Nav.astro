@@ -437,6 +437,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   }
 
   .nav-panel {
+    overflow-anchor: none;
     overflow: hidden;
     max-height: 0;
     transition: max-height 320ms cubic-bezier(0.4, 0, 0, 1);
@@ -693,7 +694,9 @@ const hardwareActive  = currentPath.startsWith('/hardware');
       hamburger.setAttribute('aria-expanded', 'false');
       hamburger.setAttribute('aria-label', 'Open menu');
     }
+    let openY = 0;
     function openPanel() {
+      openY = window.scrollY; // iOS scroll anchoring can shift scrollY when the panel opens
       panel.classList.add('open');
       panel.inert = false;
       hamburger.classList.add('is-open');
@@ -789,7 +792,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 
     /* ── Close panel on scroll ── */
     window.addEventListener('scroll', () => {
-      if (panel.classList.contains('open')) closePanel();
+      if (panel.classList.contains('open') && Math.abs(window.scrollY - openY) > 40) closePanel();
     }, { passive: true });
 
     /* ── Close panel on click/tap outside ── */

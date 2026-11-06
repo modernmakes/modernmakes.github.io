@@ -421,6 +421,12 @@ a:not([class]):active { opacity: .6; }
   .btn-review:hover { color: var(--accent-dk); }
 }
 
+/* Stretched link: the name link's ::after covers the card; Buy/vendor links sit above (z-index:1). */
+.product-card--link { position: relative; }
+.product-card-link { color: inherit; text-decoration: none; }
+.product-card-link::after { content: ''; position: absolute; inset: 0; }
+.product-card--link:has(.product-card-link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 /* ── PRODUCT CARDS (ecosystem pages) ── */
 .product-card {
   background: var(--surface); border: 1px solid var(--border);
