@@ -1,6 +1,7 @@
 ---
 // Base layout — wraps every page on the site
 import '../styles/global.css';
+import pageMotion from '../scripts/page-motion.js?raw';
 interface Props {
   title: string;
   description?: string;
@@ -27,6 +28,9 @@ const siteURL = new URL('/', Astro.site).href;
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Cross-document view transition opt-in. Inline and first: Chrome checks it before
+       Astro's stylesheet links (end of <head>) arrive, and skips the transition if it's late. -->
+  <style is:inline>@view-transition { navigation: auto; }</style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Browser chrome blends into the nav: value is --black / --dark-bg (#1A1A1A) in global.css. Meta tags can't read CSS vars. -->
   <meta name="theme-color" content="#1A1A1A" />
@@ -37,6 +41,8 @@ const siteURL = new URL('/', Astro.site).href;
   <script is:inline>document.documentElement.classList.add('js')</script>
   <!-- iOS Safari only fires :active (our press states) once the page has a touch listener. -->
   <script is:inline>document.addEventListener('touchstart', () => {}, { passive: true })</script>
+  <!-- Page transitions: must be a classic head script so pagereveal is caught before first render. -->
+  <script is:inline set:html={pageMotion}></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title} — Modern Makes</title>
   <meta name="description" content={description} />

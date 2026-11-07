@@ -239,6 +239,32 @@ table, [class*="price"], [class*="spec"], [class*="count"], .gf-badge { font-var
   a:hover .arrow { transform: none; }
 }
 
+/* ── PAGE TRANSITIONS (cross-document view transitions, Phase 2B) ──────
+   Unsupported browsers ignore all of this and navigate normally. The nav is
+   one shared element that never animates: it stays pinned while the content
+   underneath pushes (forward) or reverses (back). Direction comes from the
+   'push' / 'back' view-transition types set in src/scripts/page-motion.js. */
+/* The @view-transition opt-in itself is inline at the top of Base.astro's <head>. */
+.nav { view-transition-name: site-nav; }
+::view-transition-group(site-nav) { animation: none; z-index: 10; }
+::view-transition-old(site-nav) { display: none; }
+::view-transition-new(site-nav) { animation: none; }
+html.vt-arrived .nav { animation: none; }
+@keyframes mm-push-in   { from { opacity: 0; transform: translateX(24px); } }
+@keyframes mm-push-out  { to   { opacity: 0; transform: translateX(-8px); } }
+@keyframes mm-back-in   { from { opacity: 0; transform: translateX(-24px); } }
+@keyframes mm-back-out  { to   { opacity: 0; transform: translateX(8px); } }
+@media (prefers-reduced-motion: no-preference) {
+  html:active-view-transition-type(push)::view-transition-old(root) { animation: var(--dur-page) var(--ease-move) both mm-push-out; }
+  html:active-view-transition-type(push)::view-transition-new(root) { animation: var(--dur-page) var(--ease-move) both mm-push-in; }
+  html:active-view-transition-type(back)::view-transition-old(root) { animation: var(--dur-page) var(--ease-move) both mm-back-out; }
+  html:active-view-transition-type(back)::view-transition-new(root) { animation: var(--dur-page) var(--ease-move) both mm-back-in; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* No movement: the UA crossfade, capped at --dur-fast. */
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: var(--dur-fast); }
+}
+
 /* ── PRESS SYSTEM ─────────────────────────────────────────────────────
    Every control answers the instant it is touched. Press uses the `scale`
    property (not `transform`) so it stacks on top of any hover lift.
