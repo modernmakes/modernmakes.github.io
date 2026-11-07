@@ -48,6 +48,10 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 
       <div class="nav-spacer" aria-hidden="true"></div>
 
+      <!-- Page title, shown under 1024px once the page's H1 scrolls under the nav.
+           The H1 stays the real heading; this is a visual echo, so hidden from AT. -->
+      <div class="nav-title" aria-hidden="true"><span></span></div>
+
       <div class="nav-right">
         <div class="nav-search-wrap" id="nav-search-wrap">
           <div class="nav-search-field" id="nav-search-field">
@@ -189,6 +193,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 
   /* ─── INNER LAYOUT ─── */
   .nav-inner {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
@@ -617,6 +622,44 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .search-overlay { display: none !important; }
   }
 
+  /* ─── PAGE TITLE IN NAV (under 1024px) ─── */
+  .nav-title { display: none; }
+  @media (max-width: 1023px) {
+    .nav-title {
+      display: flex;
+      position: absolute;
+      top: 0; bottom: 0; left: 240px; right: 240px;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fd);
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      color: #fff;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+      pointer-events: none;
+    }
+    .nav-title span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .nav.show-title .nav-title { opacity: 1; transform: none; }
+    /* The logo fades out as the title arrives. visibility drops it from the tab
+       order once it is gone; it flips straight back to visible on the way in. */
+    .nav-logo { transition: opacity var(--dur-base) var(--ease-out), visibility 0s; }
+    .nav.show-title .nav-logo {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--dur-base) var(--ease-out), visibility 0s linear var(--dur-base);
+    }
+  }
+  @media (max-width: 767px) {
+    .nav-title { left: 112px; right: 112px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-title { transform: none; transition: opacity var(--dur-fast) var(--ease-out); }
+  }
+
   /* ─── TABLET  768px–1023px ─── */
   @media (max-width: 1023px) {
     .nav-bar { height: 72px; }
@@ -705,6 +748,20 @@ const hardwareActive  = currentPath.startsWith('/hardware');
         });
       }
     }, { passive: true });
+
+    /* ── Page title in nav: IntersectionObserver on the opted-in H1 (no scroll
+       listener). The H1 counts as "under the nav" once it is fully above the
+       compact nav height; CSS decides whether that shows (under 1024px). ── */
+    const pageH1  = document.querySelector<HTMLElement>('h1[data-nav-title]');
+    const titleEl = nav.querySelector('.nav-title span');
+    if (pageH1 && titleEl) {
+      titleEl.textContent = pageH1.dataset.navTitle || (pageH1.textContent ?? '').replace(/\s+/g, ' ').trim();
+      const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+      new IntersectionObserver(
+        ([e]) => nav.classList.toggle('show-title', !e.isIntersecting && e.boundingClientRect.height > 0 && e.boundingClientRect.bottom <= navH),
+        { rootMargin: `-${navH}px 0px 0px 0px` },
+      ).observe(pageH1);
+    }
 
     /* ── Printers dropdown ── */
     function closePrinters() {
