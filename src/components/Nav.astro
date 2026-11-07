@@ -185,7 +185,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     height: 80px;
     transition: height 180ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .nav.scrolled .nav-bar { height: 56px; }
+  .nav.scrolled .nav-bar { height: var(--nav-h); }
 
   /* ─── INNER LAYOUT ─── */
   .nav-inner {
@@ -620,7 +620,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   /* ─── TABLET  768px–1023px ─── */
   @media (max-width: 1023px) {
     .nav-bar { height: 72px; }
-    .nav.scrolled .nav-bar { height: 52px; }
+    .nav.scrolled .nav-bar { height: var(--nav-h); }
 
     .nav-inner { gap: 16px; }
 
@@ -638,7 +638,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   /* ─── MOBILE  below 768px ─── */
   @media (max-width: 767px) {
     .nav-bar { height: 64px; }
-    .nav.scrolled .nav-bar { height: 48px; }
+    .nav.scrolled .nav-bar { height: var(--nav-h); }
 
     .nav-inner { padding: 0 20px; gap: 12px; }
 

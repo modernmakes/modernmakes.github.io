@@ -7,7 +7,7 @@ import TypeCover from './TypeCover.astro';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
-import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass } from '../lib/hardware';
+import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES } from '../lib/hardware';
 
 interface Props {
   records: any[];
@@ -66,6 +66,14 @@ const records = (raw as any[])
 
 const verdictTabs = buildVerdictTabs(records);
 
+// Flow row only exists when the category has flow data (today: Hotends).
+const flowCounts: Record<string, number> = { standard: 0, high: 0, extreme: 0 };
+for (const r of records) {
+  const fc = resolveFlowClass(flowOf(r));
+  if (fc) flowCounts[fc.key]++;
+}
+const hasFlow = Object.values(flowCounts).some((n) => n > 0);
+
 const noun = (n: number) => (n === 1 ? nounSingular : nounPlural);
 
 const siteBase = Astro.site
@@ -103,21 +111,38 @@ const itemListSchema = {
 
   <slot name="intro" />
 
-  <!-- VERDICT FILTER BAR -->
-  <div class="gf-bar">
+  <!-- FILTER BAR: verdict tabs + flow row, one sticky unit under the nav.
+       The sentinel sits just above it; the script watches it to set .stuck. -->
+  <div class="gf-sentinel" id="gf-sentinel" aria-hidden="true"></div>
+  <div class="gf-bar" id="gf-bar">
     <div class="gf-bar-inner">
       <div class="gf-cats" role="group" aria-label="Filter by verdict">
-        <button class="gf-tab is-active" data-verdict="all" data-slug="all" aria-pressed="true">
+        <button type="button" class="gf-tab is-active" data-verdict="all" aria-pressed="true">
           All
           <span class="gf-badge">{records.length}</span>
         </button>
         {verdictTabs.map((t) => (
-          <button class="gf-tab" data-verdict={t.key} data-slug={t.key} aria-pressed="false">
+          <button type="button" class="gf-tab" data-verdict={t.key} aria-pressed="false">
             {t.label}
             <span class="gf-badge">{t.count}</span>
           </button>
         ))}
       </div>
+      {hasFlow && (
+        <div class="gf-flow" role="group" aria-label="Filter by flow class">
+          <span class="gf-flow-lbl" aria-hidden="true">Flow</span>
+          <button type="button" class="gf-flow-btn is-active" data-flow="all" aria-pressed="true">
+            All
+            <span class="gf-flow-n">{records.length}</span>
+          </button>
+          {FLOW_CLASSES.map((f) => (
+            <button type="button" class="gf-flow-btn" data-flow={f.key} aria-pressed="false" disabled={flowCounts[f.key] === 0}>
+              {f.label}
+              <span class="gf-flow-n">{flowCounts[f.key]}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   </div>
 
@@ -136,7 +161,7 @@ const itemListSchema = {
             const imgSrc = imageOf(r);
             const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
             return (
-              <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''}>
+              <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''} data-flow={fc?.key ?? ''}>
                 <div class="card-img">
                   {/* Cover is the base layer: it shows while the image loads and if a hotlinked image fails. */}
                   <TypeCover eyebrow={categoryLabel} title={r['Name']} />
@@ -169,11 +194,152 @@ const itemListSchema = {
           No {nounPlural} listed yet — check back after the next Airtable sync.
         </p>
       )}
+      <div class="gf-nomatch" id="hw-nomatch" hidden>
+        <h2 class="gf-nomatch-title">Nothing matches both filters</h2>
+        <p>No {nounPlural} are in that combination.</p>
+        <button type="button" class="gf-clear" id="hw-clear">Clear filters</button>
+      </div>
     </div>
   </section>
 
   <Footer slot="footer" />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
+</Base>
+
+<script>
+  type State = { verdict: string; flow: string };
+  const state: State = { verdict: 'all', flow: 'all' };
+
+  const bar      = document.getElementById('gf-bar')!;
+  const sentinel = document.getElementById('gf-sentinel')!;
+  const region   = document.getElementById('hw-grid')?.parentElement ?? null; // count line + grid
+  const cards    = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
+  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
+  const flowBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-flow-btn'));
+  const countEl  = document.getElementById('hw-count');
+  const noMatch  = document.getElementById('hw-nomatch');
+  const total    = cards.length;
+  const nounS    = countEl?.dataset.nounSingular ?? 'item';
+  const nounP    = countEl?.dataset.nounPlural ?? 'items';
+
+  const matches = (c: HTMLElement, verdict: string, flow: string) =>
+    (verdict === 'all' || c.dataset.verdict === verdict) &&
+    (flow === 'all' || c.dataset.flow === flow);
+
+  // One layout step per filter change. A delayed hide (fade, then display:none)
+  // changes the page height twice, which is what made a stuck bar twitch.
+  function showCard(card: HTMLElement) {
+    if (!card.classList.contains('gf-hidden')) return;
+    card.classList.remove('gf-hidden');
+    card.style.opacity = '0';
+    void card.offsetHeight;
+    card.style.opacity = '1';
+  }
+  function hideCard(card: HTMLElement) {
+    card.classList.add('gf-hidden');
+  }
+
+  // State lives in ?verdict=&flow=. Old #verdict links still work on load.
+  let hashConsumed = false;
+  function readUrl() {
+    const q = new URLSearchParams(location.search);
+    const hash = location.hash.slice(1);
+    const v = q.get('verdict') ?? hash;
+    const f = q.get('flow');
+    if (v && tabs.some((t) => t.dataset.verdict === v)) {
+      state.verdict = v;
+      if (!q.has('verdict') && v === hash) hashConsumed = true;
+    }
+    if (f && flowBtns.some((b) => b.dataset.flow === f)) state.flow = f;
+  }
+  function writeUrl() {
+    const q = new URLSearchParams(location.search);
+    (Object.keys(state) as (keyof State)[]).forEach((k) =>
+      state[k] === 'all' ? q.delete(k) : q.set(k, state[k]));
+    const qs = q.toString();
+    history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + (hashConsumed ? '' : location.hash));
+  }
+
+  // Each button's count is what you'd see if you tapped it, given the other
+  // filter. Zero-match buttons are disabled unless they are the current one.
+  function syncButtons() {
+    tabs.forEach((t) => {
+      const on = t.dataset.verdict === state.verdict;
+      const n = cards.filter((c) => matches(c, t.dataset.verdict ?? 'all', state.flow)).length;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-pressed', String(on));
+      t.disabled = n === 0 && !on;
+      const badge = t.querySelector('.gf-badge');
+      if (badge) badge.textContent = String(n);
+    });
+    flowBtns.forEach((b) => {
+      const on = b.dataset.flow === state.flow;
+      const n = cards.filter((c) => matches(c, state.verdict, b.dataset.flow ?? 'all')).length;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', String(on));
+      b.disabled = n === 0 && !on;
+      const badge = b.querySelector('.gf-flow-n');
+      if (badge) badge.textContent = String(n);
+    });
+  }
+
+  function applyFilter(fromTap: boolean) {
+    // Anti-jitter: while the bar is stuck, bring the grid's top just under it
+    // before the card count changes, so the page never has to clamp scrollY
+    // mid-filter. Only moves up, and only if the grid top is above the bar.
+    if (fromTap && region && bar.classList.contains('stuck')) {
+      const barBottom = bar.getBoundingClientRect().bottom;
+      const regionTop = region.getBoundingClientRect().top;
+      if (regionTop < barBottom) {
+        window.scrollTo({ top: Math.round(scrollY + regionTop - barBottom + 4), behavior: 'instant' });
+      }
+    }
+    let visible = 0;
+    cards.forEach((c) => {
+      if (matches(c, state.verdict, state.flow)) { showCard(c); visible++; }
+      else hideCard(c);
+    });
+    if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${total === 1 ? nounS : nounP}`;
+    if (noMatch) noMatch.hidden = visible > 0 || total === 0;
+    syncButtons();
+    writeUrl();
+  }
+
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    state.verdict = t.dataset.verdict ?? 'all';
+    applyFilter(true);
+  }));
+  flowBtns.forEach((b) => b.addEventListener('click', () => {
+    state.flow = b.dataset.flow ?? 'all';
+    applyFilter(true);
+  }));
+  document.getElementById('hw-clear')?.addEventListener('click', () => {
+    state.verdict = 'all';
+    state.flow = 'all';
+    applyFilter(true);
+  });
+
+  // .stuck = the bar is pinned under the nav. IntersectionObserver on a 1px
+  // sentinel just above it, no scroll listener. The root margin is the compact
+  // nav height, so it is rebuilt when the nav breakpoints change.
+  let io: IntersectionObserver | undefined;
+  function watchStuck() {
+    io?.disconnect();
+    const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+    io = new IntersectionObserver(
+      ([e]) => bar.classList.toggle('stuck', !e.isIntersecting && e.boundingClientRect.top < navH),
+      { rootMargin: `-${navH}px 0px 0px 0px` },
+    );
+    io.observe(sentinel);
+  }
+  ['(max-width: 1023px)', '(max-width: 767px)'].forEach((q) =>
+    matchMedia(q).addEventListener('change', watchStuck));
+  watchStuck();
+
+  readUrl();
+  syncButtons();
+  if (state.verdict !== 'all' || state.flow !== 'all') applyFilter(false);
+</script>
 </Base>
 
 <script>
@@ -302,19 +468,79 @@ const itemListSchema = {
 /* card titles are <h2> for heading navigation — neutralise UA margins */
 .gf-card .card-title { margin-top: 0; }
 
-/* ── HARDWARE FILTER BAR — uses shared gf-* classes from guides pattern ── */
+/* ── HARDWARE FILTER BAR: verdict tabs + flow row as one sticky unit ──
+   .stuck swaps the background and adds a shadow. It must never touch height,
+   padding or font size: a bar that resizes while pinned moves the grid under
+   the finger. */
+html { overflow-anchor: none; }
+.gf-sentinel { height: 1px; margin-bottom: -1px; pointer-events: none; }
 .gf-bar {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
-  top: 56px;
+  top: calc(env(safe-area-inset-top, 0px) + var(--nav-h));
   z-index: 10;
+  transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.gf-bar.stuck {
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  backdrop-filter: saturate(160%) blur(18px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--black) 8%, transparent);
 }
 .gf-bar-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
 }
+.gf-tab:disabled, .gf-flow-btn:disabled { opacity: .4; cursor: default; }
+
+.gf-flow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.gf-flow::-webkit-scrollbar { display: none; }
+.gf-flow-lbl {
+  flex-shrink: 0;
+  margin-right: 4px;
+  font-family: var(--fm);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--g1);
+}
+.gf-flow-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px; /* hit target (Apple HIG) */
+  padding: 0 14px;
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--g1);
+  background: var(--surface);
+  border: 1px solid var(--border-s);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.gf-flow-n { font-family: var(--fm); font-size: 10px; font-weight: 500; color: var(--g1); }
+/* Pressed state is ink fill, not orange: orange stays on the verdict tab underline (Pointer Rule). */
+.gf-flow-btn[aria-pressed="true"] { background: var(--black); border-color: var(--black); color: var(--surface); }
+.gf-flow-btn[aria-pressed="true"] .gf-flow-n { color: var(--on-dark-soft); }
+@media (hover: hover) and (pointer: fine) {
+  .gf-flow-btn:not([aria-pressed="true"]):not(:disabled):hover { border-color: var(--black); color: var(--black); }
+}
+
 .gf-summary {
   font-family: var(--fm);
   font-size: 12px;
@@ -327,17 +553,32 @@ const itemListSchema = {
   transition: opacity 0.15s ease, border-color .15s, transform .15s, var(--press-release);
 }
 .gf-card.gf-hidden { display: none; }
+.gf-nomatch { padding: 40px 0; text-align: center; color: var(--g1); }
+.gf-nomatch[hidden] { display: none; }
+.gf-nomatch-title { font-family: var(--fd); font-size: 22px; font-weight: 800; color: var(--black); margin: 0 0 6px; }
+.gf-nomatch p { font-family: var(--fb); font-size: 15px; margin: 0 0 16px; }
+.gf-clear {
+  min-height: 44px; padding: 0 18px;
+  font-family: var(--fu); font-size: 13px; font-weight: 700;
+  color: var(--black); background: var(--surface);
+  border: 1px solid var(--border-s); border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+@media (hover: hover) and (pointer: fine) { .gf-clear:hover { border-color: var(--black); } }
 @media (max-width: 768px) {
   .hot-hero { padding: 36px 0 32px; }
   .hot-hero-inner { padding: 0 20px; }
   .hot-hero-title { font-size: 36px; }
   .gf-bar-inner { padding: 0 20px; }
+  /* Both rows scroll edge to edge instead of clipping at the page gutter. */
+  .gf-cats, .gf-flow { margin-inline: -20px; padding-inline: 20px; }
 }
 
 /* ── Reduced motion: global.css has no global reset, so this page honours the
    preference for its own filter motion (card fade + tab/badge transitions).
    hideCard's setTimeout fallback still flips display, so filtering stays correct ── */
 @media (prefers-reduced-motion: reduce) {
-  .gf-card { transition: none; }
+  .gf-card, .gf-bar, .gf-flow-btn { transition: none; }
 }
 </style>

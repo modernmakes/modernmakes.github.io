@@ -144,7 +144,12 @@
   /* Release half of the press system. Any component that writes its own
      `transition` appends this so the press scale springs back. */
   --press-release: scale 300ms var(--spring-snap);
+  /* Compact (scrolled) nav height. Sticky bars sit under it, and Nav.astro uses it
+     for .nav.scrolled .nav-bar, so the two can never drift apart. */
+  --nav-h: 56px;
 }
+@media (max-width: 1023px) { :root { --nav-h: 52px; } }
+@media (max-width: 767px)  { :root { --nav-h: 48px; } }
 @supports (transition-timing-function: linear(0, 1)) {
   :root {
     --spring-snap: linear(0, 0.0138, 0.0497, 0.1006, 0.161, 0.2268, 0.2947, 0.3624, 0.4281, 0.4907, 0.5494, 0.6037, 0.6534, 0.6985, 0.7391, 0.7753, 0.8074, 0.8358, 0.8606, 0.8822, 0.9009, 0.9171, 0.931, 0.9429, 0.953, 0.9615, 0.9687, 0.9747, 0.9798, 0.9839, 0.9874, 0.9902, 0.9925, 0.9944, 0.9959, 0.9971, 1);
@@ -249,7 +254,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 a:not([class]):active { opacity: .6; }
 :is(.btn-buy, .btn-printables, .lg-form-submit,
     .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card,
-    .gf-tab, .nav-search-btn, .nav-hamburger):active {
+    .gf-tab, .gf-flow-btn, .nav-search-btn, .nav-hamburger):active {
   /* !important: component `transition` shorthands load after this file and
      would otherwise stretch the press-down to their release timing. */
   transition-duration: var(--dur-press) !important;
@@ -259,7 +264,7 @@ a:not([class]):active { opacity: .6; }
 :is(.card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: var(--scale-press-card); }
 /* Light-plane cards only; dark cards keep their own border on press. */
 :is(.card, .product-card, .la-card, .tool-card):active { border-color: var(--border-s); }
-.gf-tab:active { scale: var(--scale-press-chip); }
+:is(.gf-tab, .gf-flow-btn):active { scale: var(--scale-press-chip); }
 :is(.nav-search-btn, .nav-hamburger):active { scale: var(--scale-press-icon); }
 /* Reduced motion: no scale, but the press still answers with a dim. */
 @media (prefers-reduced-motion: reduce) {
@@ -268,7 +273,7 @@ a:not([class]):active { opacity: .6; }
   /* Orange fills (and chips holding an orange badge) answer with a fill change
      instead: opacity would fade ink on orange below AA. */
   :is(.btn-buy, .lg-form-submit):active { scale: none; }
-  .gf-tab:active { scale: none; background: var(--bg); }
+  :is(.gf-tab, .gf-flow-btn):active { scale: none; background: var(--bg); }
 }
 
 /* ── TYPOGRAPHIC COVER ────────────────────────────────────────────────
