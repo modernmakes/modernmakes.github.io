@@ -159,7 +159,9 @@
 
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* Smooth only for in-page jumps (a clicked link has focus). Unconditional smooth made
+   Chrome animate its own scroll restoration on back/reload, and ignored reduced motion. */
+@media (prefers-reduced-motion: no-preference) { html:focus-within { scroll-behavior: smooth; } }
 body {
   font-family: var(--fu);
   background: var(--bg);
@@ -260,6 +262,20 @@ html.vt-arrived .nav { animation: none; }
   html:active-view-transition-type(back)::view-transition-old(root) { animation: var(--dur-page) var(--ease-move) both mm-back-out; }
   html:active-view-transition-type(back)::view-transition-new(root) { animation: var(--dur-page) var(--ease-move) both mm-back-in; }
 }
+/* Card → page zoom (type 'zoom', JS names one element per page `zoom`, never under
+   reduced motion). The image grows from the card into the detail hero; the rest of
+   the page just crossfades underneath. Curve and timings from the prototype. */
+@keyframes mm-fade-in  { from { opacity: 0; } }
+@keyframes mm-fade-out { to   { opacity: 0; } }
+::view-transition-group(zoom) { animation-duration: 440ms; animation-timing-function: cubic-bezier(0.2, 0.9, 0.24, 1); z-index: 2; overflow: clip; }
+::view-transition-image-pair(zoom) { overflow: clip; }
+::view-transition-old(zoom), ::view-transition-new(zoom) { width: 100%; height: auto; min-height: 100%; object-fit: cover; object-position: top center; }
+::view-transition-old(zoom) { animation: 220ms var(--ease-out) both mm-fade-out; }
+::view-transition-new(zoom) { animation: 300ms 60ms var(--ease-out) both mm-fade-in; }
+html:active-view-transition-type(back)::view-transition-old(zoom) { animation-duration: 260ms; animation-delay: 60ms; }
+html:active-view-transition-type(back)::view-transition-new(zoom) { animation-duration: 220ms; animation-delay: 0ms; }
+html:active-view-transition-type(zoom)::view-transition-old(root) { animation: var(--dur-page) var(--ease-out) both mm-fade-out; }
+html:active-view-transition-type(zoom)::view-transition-new(root) { animation: var(--dur-page) var(--ease-out) both mm-fade-in; }
 @media (prefers-reduced-motion: reduce) {
   /* No movement: the UA crossfade, capped at --dur-fast. */
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: var(--dur-fast); }

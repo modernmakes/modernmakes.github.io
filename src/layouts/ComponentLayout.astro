@@ -189,7 +189,7 @@ const breadcrumbSchema = {
   <!-- ── COMPONENT HERO ── -->
   <section class="comp-hero">
     <div class="comp-hero-inner">
-      <div class="comp-hero-media">
+      <div class="comp-hero-media" id="comp-hero">
         {heroImage
           ? <img src={heroImage} alt={title} width="800" height="600" loading="eager" fetchpriority="high" decoding="async" class="comp-hero-img" />
           : <div class="comp-hero-placeholder"><TypeCover eyebrow={category} title={title} /></div>
@@ -476,6 +476,8 @@ const breadcrumbSchema = {
 
   <Footer slot="footer" />
 
+  <!-- Hold first render until the hero exists, so the card→page zoom can name it in pagereveal. -->
+  <link rel="expect" href="#comp-hero" blocking="render" slot="head" />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(productSchema)}></script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
   <slot name="head" slot="head" />
