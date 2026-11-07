@@ -393,6 +393,14 @@ a:not([class]):active { opacity: .6; }
 .verdict-skip,
 .verdict-avoid { background: var(--verdict-skip-t); border: 1px solid var(--verdict-skip-border); color: var(--verdict-skip-ink); }
 .verdict-upd  { background: rgba(255,90,31,.12);  border: 1px solid rgba(255,90,31,.25);  color: var(--accent-ink); }
+/* Flow class chip (Standard / High / Extreme flow). Neutral on purpose: the verdict owns the colour. */
+.flow-chip {
+  display: inline-flex; align-items: center;
+  font-family: var(--fm); font-size: 10px; font-weight: 500; line-height: 1.4; white-space: nowrap;
+  padding: 2px 8px; border-radius: 3px;
+  border: 1px solid var(--border-s); color: var(--g1);
+}
+.flow-chip.on-dark { border-color: rgba(255,255,255,.2); color: var(--on-dark-soft); }
 /* Badge on a dark plane (hero bands): on-dark tones keep text >= 4.5:1. Add alongside .verdict-*. */
 .verdict-on-dark.verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--verdict-wh-on-dark); }
 .verdict-on-dark.verdict-rec  { background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); color: var(--verdict-be-on-dark); }

@@ -7,7 +7,7 @@ import TypeCover from './TypeCover.astro';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
-import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug } from '../lib/hardware';
+import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass } from '../lib/hardware';
 
 interface Props {
   records: any[];
@@ -27,6 +27,7 @@ interface Props {
   chips?: (r: any) => string[];        // spec chips per card
   excerptOf?: (r: any) => string;      // card excerpt
   imageOf?: (r: any) => string | null | undefined;  // card image URL source
+  flowOf?: (r: any) => unknown;        // max flow (mm³/s) source; default Hotends' column
 }
 
 const {
@@ -47,6 +48,7 @@ const {
   chips = () => [],
   excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
   imageOf = (r: any) => r['Image URL'] ?? r['Hero Image'] ?? null,
+  flowOf = (r: any) => r['Max Flow (mm³/s)'],
 } = Astro.props;
 
 // Verdict badges/tabs resolve through the shared taxonomy helper so every
@@ -130,6 +132,7 @@ const itemListSchema = {
           {records.map((r: any) => {
             const slug = toSlug(r['Name']);
             const v = resolveVerdict(r['Verdict']);
+            const fc = resolveFlowClass(flowOf(r));
             const imgSrc = imageOf(r);
             const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
             return (
@@ -154,6 +157,7 @@ const itemListSchema = {
                   <p class="card-excerpt">{excerptOf(r)}</p>
                   <div class="card-footer">
                     {v && <span class={`verdict ${v.cls}`}>{v.label}</span>}
+                    {fc && <span class="flow-chip">{fc.chipLabel}</span>}
                   </div>
                 </div>
               </a>

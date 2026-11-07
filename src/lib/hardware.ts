@@ -118,6 +118,29 @@ export const buildVerdictTabs = (records: any[]): (VerdictBucket & { count: numb
   return [...seen.values()].sort((a, b) => rank(a.key) - rank(b.key) || b.count - a.count);
 };
 
+// ── Hotend flow class (BRAND.md section 5) ───────────────────────────────────
+// Derived from listed max flow, never stored: Standard < 50, High 50-79,
+// Extreme >= 80 mm³/s. Missing / non-numeric / non-positive -> null, so no chip
+// and no filter bucket is ever invented for a record without the number.
+export interface FlowClass {
+  key: 'standard' | 'high' | 'extreme';
+  label: string;      // filter button text
+  chipLabel: string;  // badge text
+}
+
+export const FLOW_CLASSES: FlowClass[] = [
+  { key: 'standard', label: 'Standard', chipLabel: 'Standard flow' },
+  { key: 'high',     label: 'High',     chipLabel: 'High flow' },
+  { key: 'extreme',  label: 'Extreme',  chipLabel: 'Extreme flow' },
+];
+
+export const resolveFlowClass = (maxFlow: unknown): FlowClass | null => {
+  if (maxFlow === null || maxFlow === undefined || maxFlow === '') return null;
+  const n = typeof maxFlow === 'number' ? maxFlow : parseFloat(String(maxFlow));
+  if (!Number.isFinite(n) || n <= 0) return null;
+  return FLOW_CLASSES[n >= 80 ? 2 : n >= 50 ? 1 : 0];
+};
+
 // Known ecosystem links — shared by every category's sidebar chips.
 export const TOOLHEAD_HREFS: Record<string, string> = {
   Stealthburner: '/voron/toolheads/stealthburner',

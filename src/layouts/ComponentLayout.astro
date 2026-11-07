@@ -3,6 +3,7 @@ import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { resolveFlowClass } from '../lib/hardware';
 
 interface VendorLink {
   name: string;
@@ -122,6 +123,7 @@ const flowBenchmarks = [
   { label: 'Volcano',   value: 45 },
   { label: 'Ultra',     value: 70 },
 ];
+const flowClass = resolveFlowClass(maxFlow);
 const flowPct = maxFlow ? Math.min((maxFlow / FLOW_MAX) * 100, 100) : 0;
 // Anchor the readout so it never spills past either end of the track.
 const flowAnchor = flowPct >= 88 ? 'end' : flowPct <= 12 ? 'start' : 'mid';
@@ -213,6 +215,7 @@ const breadcrumbSchema = {
           <a href="#where-to-buy" class="comp-verdict-badge" style={`background:${vc.bg};color:${vc.text};border-color:${vc.border}`}>
             {verdictLabel}
           </a>
+          {flowClass && <span class="flow-chip on-dark">{flowClass.chipLabel}</span>}
           <span class="comp-verdict-text">{verdict}</span>
         </div>
         <div class="comp-key-stats">
