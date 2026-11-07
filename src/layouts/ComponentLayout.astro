@@ -189,7 +189,7 @@ const breadcrumbSchema = {
   <!-- ── COMPONENT HERO ── -->
   <section class="comp-hero">
     <div class="comp-hero-inner">
-      <div class="comp-hero-image">
+      <div class="comp-hero-media">
         {heroImage
           ? <img src={heroImage} alt={title} loading="eager" fetchpriority="high" class="comp-hero-img" />
           : <div class="comp-hero-placeholder"><TypeCover eyebrow={category} title={title} /></div>
@@ -493,12 +493,14 @@ const breadcrumbSchema = {
   margin: 0 auto;
   padding: 0 40px;
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 480px 1fr;
   gap: 52px;
   align-items: center;
 }
-.comp-hero-image {
-  background: #111;
+/* Image panel. --surface-media is sampled from the product WebPs, so the
+   contain-letterboxing disappears into it. Phase 2B's card zoom lands on this class. */
+.comp-hero-media {
+  background: var(--surface-media);
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4/3;
@@ -1192,11 +1194,15 @@ const breadcrumbSchema = {
   .comp-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
   .comp-sidebar-card { flex: 1 1 220px; }
 }
+@media (max-width: 767px) {
+  /* Full-bleed product image: square, edge to edge, directly under the 64px
+     mobile nav. Title, verdict and specs follow below at the page gutter. */
+  .comp-hero { padding: 64px 0 32px; }
+  .comp-hero-inner { grid-template-columns: 1fr; padding: 0; gap: 0; }
+  .comp-hero-media { border-radius: 0; aspect-ratio: 1 / 1; }
+  .comp-hero-info { padding: 24px 20px 0; }
+}
 @media (max-width: 768px) {
-  /* 64px mobile nav + 32px spacing */
-  .comp-hero { padding: 96px 0 32px; }
-  .comp-hero-inner { grid-template-columns: 1fr; padding: 0 20px; gap: 24px; }
-  .comp-hero-image { max-width: 320px; margin: 0 auto; }
   .comp-title { font-size: 28px; }
   .comp-body-inner { padding: 0 20px; }
   .comp-vendors-grid { grid-template-columns: 1fr 1fr; }
