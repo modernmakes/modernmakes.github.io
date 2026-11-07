@@ -62,3 +62,20 @@ LCP element, unchanged by this phase: `/` the typographic cover title, `/hardwar
 **Images.** Every `<img>` now has width/height or sits in a fixed or aspect-ratio box, with `decoding="async"`. Lazy everywhere except above the fold (nav logos, the first three index cards, the detail hero, the article hero when set). One `fetchpriority="high"` per page at most. Exceptions: the PA tuner's upload preview (size known only at runtime) and the ad slot card image (an aspect-ratio box, ads are off).
 
 **Accessibility (accesslint, serious and above).** `/hardware/hotends/`, `/hardware/extruders/`, `/hardware/hotends/rapido-2-plus-hf/` and `/news/bambu-lab-open-source-crisis/`: 0 on all four.
+
+## Phase 2B (7 Nov 2026)
+
+Speculation-rules prerender, cross-document view transitions (push/back, card→page zoom), the extrusion line, filter view transitions and the sliding tab underline. Same method (Lighthouse 12.6.1, mobile, simulated Slow 4G), but **median of 3 runs**, because single runs on this machine swing by up to 300 ms of TBT. Three builds were measured back to back in one session, each from a plain `git archive` copy under `scratch/`: the Phase 1 After commit (`1c9a7d5`), Phase 2A (`d89fde3`) and Phase 2B. The article row uses a 5-run rerun: its first 3-run pass had one 3.0 s LCP outlier on 2B, and all 5 reruns on both builds were 1.96 s (the Phase 1 build showed the same bimodal 3.2 s run).
+
+| Page | Perf 2A → 2B | LCP 2A → 2B | FCP 2A → 2B | CLS 2A → 2B | TBT: P1 After (table above) / P1 rebuilt today / 2A / 2B |
+| --- | --- | --- | --- | --- | --- |
+| `/` | 86 → 92 | 3.36 → 3.23 s | 1.59 → 1.59 s | 0.008 → 0.008 | 180 / 153 / 187 / 102 ms |
+| `/hardware/hotends/` | 98 → 98 | 2.12 → 2.11 s | 1.44 → 1.44 s | 0.001 → 0.001 | 95 / 69 / 75 / 70 ms |
+| `/hardware/hotends/rapido-2-plus-hf/` | 92 → 97 | 2.15 → 2.12 s | 1.59 → 1.58 s | 0.000 → 0.000 | 119 / 139 / 305 / 139 ms |
+| `/news/bambu-lab-open-source-crisis/` | 97 → 98 | 1.96 → 1.96 s | 1.44 → 1.44 s | 0.000 → 0.000 | 155 / 135 / 141 / 136 ms |
+
+**Gate.** LCP equal or faster and CLS unchanged on all four. Lighthouse accessibility unchanged (100, 100, 96, 100).
+
+**TBT versus Phase 1 After.** 2B is below the Phase 1 After figures on three pages and 20 ms above on the hotend detail (139 vs 119). The Phase 1 commit, rebuilt and measured today, also gives 139 ms there, so the gap is the machine, not the code; the higher TBT recorded for Phase 2A was the same session drift. Where the blocking time comes from (Lighthouse bootup-time and long-tasks, median run): `gtag.js` is about 200–240 ms of script and two 100–170 ms long tasks around 3.1 s, and the first document task (~200 ms, mostly style and layout) is the rest. Whether the gtag tasks land inside the TBT window is what swings single runs between ~70 and ~400 ms. Our own scripts are 5–15 ms of scripting per page; the 2B head script adds no measurable task. If TBT needs to come down, GA is the lever (delay `gtag.js` until after load or first interaction), not the motion code.
+
+**What 2B adds to every page.** One inline `<style>` (the `@view-transition` opt-in, kept inline because Chrome skipped most transitions when the opt-in arrived with the late stylesheet), the inline page-motion script (~5 KB unminified, comments included), and the speculation rules block.
