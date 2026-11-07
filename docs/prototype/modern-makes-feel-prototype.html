@@ -41,7 +41,7 @@
 }
 @media (min-width: 768px) { :root { --nav-h: 64px; } }
 
-html { scrollbar-gutter: stable; -webkit-text-size-adjust: 100%; }
+html { scrollbar-gutter: stable; -webkit-text-size-adjust: 100%; overflow-anchor: none; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--fu); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--dark); }
 ::selection { background: var(--accent-t); color: var(--ink); }
@@ -146,7 +146,9 @@ html.rm .press:active { transform: none; opacity: .72; }
 .hint-link { font: 500 12px var(--fm); color: #fff; background: rgba(255,90,31,.18); border: 1px solid rgba(255,90,31,.5); border-radius: 6px; padding: 2px 8px; margin: 0 2px; min-height: 28px; }
 @media (hover: hover) and (pointer: fine) { .hint-link:hover { background: rgba(255,90,31,.3); } }
 
-.tabs-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: relative; z-index: 2; }
+.tabs-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--nav-h)); z-index: 40; view-transition-name: filters; transition: background-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+.tabs-bar.stuck { background: rgba(255,255,255,.9); -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px); box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+::view-transition-group(filters) { animation-duration: var(--dur-fast); }
 .seg { position: relative; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
 .seg::-webkit-scrollbar { display: none; }
 .seg-btn { height: 48px; padding: 0 14px; display: inline-flex; align-items: center; gap: 8px; font: 700 12px var(--fu); letter-spacing: .08em; text-transform: uppercase; color: var(--g1); white-space: nowrap; }
@@ -162,7 +164,7 @@ html.rm .press:active { transform: none; opacity: .72; }
 .flow-btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
 .flow-btn[aria-pressed="true"] .n { color: rgba(255,255,255,.6); }
 .flow-btn:disabled { opacity: .4; cursor: default; }
-.rate-btn { display: none; margin-left: auto; min-height: 36px; padding: 0 4px 0 12px; display: inline-flex; align-items: center; gap: 6px; font: 600 13px var(--fu); color: var(--g1); white-space: nowrap; }
+.rate-btn { display: none; margin-left: auto; min-height: 36px; padding: 0 4px 0 12px; align-items: center; gap: 6px; font: 600 13px var(--fu); color: var(--g1); white-space: nowrap; }
 .rate-btn svg { width: 16px; height: 16px; }
 @media (min-width: 768px) { .rate-btn { display: inline-flex; } }
 @media (hover: hover) and (pointer: fine) { .rate-btn:hover { color: var(--ink); } }
@@ -1004,6 +1006,8 @@ function onScroll() {
     else if (dy > 0) { downRun += dy; upRun = 0; if (downRun > 24) revealed = false; }
     const wide = innerWidth >= 768;
     nav.classList.toggle('show-title', past && !(wide && revealed));
+    const bar = $('.tabs-bar');
+    if (bar) bar.classList.toggle('stuck', bar.getBoundingClientRect().top <= navBottom + 0.5 && scrollY > 0);
     const isDetail = state.route && state.route.type === 'detail';
     prog.classList.toggle('on', isDetail && scrollY > 8);
     if (isDetail) { const max = document.documentElement.scrollHeight - innerHeight; prog.style.setProperty('--read', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0); }
@@ -1016,6 +1020,11 @@ addEventListener('resize', () => { onScroll(); moveIndicator(); dismissTip(false
 function applyFilterNow(animate) {
   const cards = $$('.card');
   const shown = cards.filter(c => (state.filter === 'all' || c.dataset.verdict === state.filter) && (state.flow === 'all' || c.dataset.flow === state.flow));
+  const bar = $('.tabs-bar');
+  if (animate && bar && bar.classList.contains('stuck')) {
+    const top = Math.round($('.grid-wrap').getBoundingClientRect().top + scrollY - bar.getBoundingClientRect().bottom + 4);
+    if (top < scrollY) window.scrollTo({ top, behavior: 'instant' });
+  }
   const run = () => { cards.forEach(c => { c.hidden = !shown.includes(c); }); const cnt = $('#count'); if (cnt) cnt.textContent = `Showing ${shown.length} of ${DATA.length} hotends in this prototype (16 on the live site)`; $('#noMatch')?.classList.toggle('on', shown.length === 0); updateCounts(); };
   if (animate && supportsVT && !reduced()) {
     cards.forEach(c => { if (!c.hidden || shown.includes(c)) c.style.viewTransitionName = 'card-' + c.dataset.slug; });
