@@ -86,11 +86,22 @@
   },
   {
     "id": "recLIS9jXJQoER6No",
+    "Total Driver Slots": 8,
+    "Verdict": "Bleeding Edge",
+    "MCU": "STM32F407",
     "Slug": "mellow-fly-d8-board-high-expandability-klipper-canbus-rs232",
+    "Description": "Mellow FLY D8 is an 8-axis 3D printer mainboard built around an STM32F407 MCU, designed for Klipper. It connects to the host via Type-C USB and can act as a USB-to-CAN bridge for CAN tool boards, or talk to RS232 tool boards. A high-expandability board for large multi-motor builds.",
+    "Verdict Label": "Mellow's 8-axis Klipper board with CAN-bridge support — capable hardware, thinly documented.",
+    "Klipper Native": true,
+    "USB": true,
+    "Cons": "Thin documentation vs BTT boards\nNo verified price, dimensions or driver fitment\nSold without drivers",
+    "CAN Support": true,
     "Name": "Mellow FLY D8 Board (High-Expandability, Klipper Canbus RS232)",
     "Vendor 1 Name": "3D Mellow",
+    "Driver Count": 0,
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-d8-board-for-high-expandability-diy-3d-printer-accessories-klipper-canbus-rs232",
-    "Brand": "Mellow / Fly3D"
+    "Brand": "Mellow / Fly3D",
+    "Pros": "8 driver slots for large multi-motor builds\nActs as a USB-to-CAN bridge for CAN tool boards\nType-C USB host link\nKlipper native"
   },
   {
     "id": "recN1rHeCo40QtN2d",
@@ -114,11 +125,12 @@
     "CAN Support": true,
     "Driver - Extruder": "TMC2209",
     "Name": "BTT Octopus Pro v1.1",
-    "Vendor 1 Name": "BigTreeTech Store",
+    "Vendor 1 Name": "OneTwo3D",
     "Driver Count": 0,
-    "Vendor 1 URL": "https://bigtree-tech.com/products/bigtreetech-octopus-pro-v1-1",
+    "Vendor 1 URL": "https://www.onetwo3d.co.uk/product/bigtreetech-octopus-pro-controller-board/",
     "Brand": "BigTreeTech",
     "Voltage": "Both",
+    "Price (USD)": 68.24,
     "Pros": "8 driver slots\nPer-driver voltage selection (up to 60V via MOTOR_POWER jumper)\nTwo MCU variants (F446 budget, H723 performance)\nExtensive Voron community configs and documentation\nNative CAN bus\nKlipper native"
   },
   {
@@ -202,6 +214,7 @@
     "Driver - Extruder": "TMC2209",
     "Name": "BTT Octopus Pro v2",
     "Vendor 1 Name": "BigTreeTech Store",
+    "Driver Count": 0,
     "Vendor 1 URL": "https://bigtree-tech.com/products/bigtreetech-octopus-pro-v2",
     "Brand": "BigTreeTech",
     "Voltage": "24V",
@@ -294,12 +307,17 @@
   },
   {
     "id": "recnzKmHypFdLePCV",
+    "Verdict": "Bleeding Edge",
     "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2605/15/products/800-2.jpg",
     "Slug": "mellow-fly-c8-pro-v1-0-board-h618-mcu-550mhz-h723",
+    "Description": "Mellow FLY C8 Pro V1.0 is a mainboard built around an Allwinner H618 host processor and an STM32H723 MCU running at 550MHz, marketed for high-speed Voron, Trident, HevORT and VzBot builds.",
+    "Verdict Label": "Mellow's cheapest high-speed board — H618 host plus H723 MCU, but specs are unverified.",
+    "Cons": "MCU split unverified — product name mentions both H618 and H723\n3dmellow product page returns 404\nNo verified dimensions, drivers or voltage",
     "Name": "Mellow FLY C8 Pro V1.0 Board (H618 MCU 550Mhz H723)",
     "Vendor 1 Name": "3D Mellow",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-c8-pro-v10-board-h618-mcu-550mhz-h723-for-hi-speed-diy-3d-printer-accessories-",
     "Brand": "Mellow / Fly3D",
-    "Price (USD)": 21.9
+    "Price (USD)": 21.9,
+    "Pros": "Very low price ($21.90)\nH618 host processor plus 550MHz H723 MCU\nMarketed for Voron, HevORT and VzBot builds"
   }
 ]

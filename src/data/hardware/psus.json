@@ -28,11 +28,15 @@
     "Slug": "mean-well-lrs-600-24",
     "UL Certified": true,
     "Description": "For larger beds, enclosure/chamber heating, or higher total system draw where the 350W unit runs too close to its ceiling. A 350mm+ DC bed, an active chamber heater, or an AWD/toolchanger stepper count can pull the continuous load toward or past 350W; the LRS-600-24 restores headroom so the supply is not running near its limit. Same 24V rail and same Mean Well LRS reliability — just more margin.",
+    "Verdict Label": "The big LRS - 600W of enclosed 24V power for high-draw builds.",
     "Form Factor": "Enclosed",
+    "Cons": "No verified USD price or Digi-Key listing found - buy carefully\nFan-cooled, not fanless\nOverkill for most printers - the LRS-200-24 is the Voron BOM standard\nNo printer BOM ties this unit to a specific printer",
     "Name": "Mean Well LRS-600-24",
+    "Vendor 1 Name": "Unknown",
     "Output Voltage": "24V",
     "Brand": "Mean Well",
-    "Price (USD)": 75
+    "Price (USD)": 75,
+    "Pros": "600W rated output - the highest-wattage LRS in the table\nEnclosed metal case, UL 62368-1 approved\nBuilt-in fan with ON/OFF control - only runs when hot (on at 50C, off at 40C)\n24V/25A single output from the most common printer-PSU series"
   },
   {
     "id": "recDDnjlfzSMfXLTn",

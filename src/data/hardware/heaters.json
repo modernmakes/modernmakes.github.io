@@ -160,7 +160,6 @@
     "Price (USD)": 15,
     "Pros": "60W is the highest wattage in this comparison — fastest heat-up and highest sustained power at 24V\nOEM cartridge for the Rapido 2 BOM — matched impedance, no compatibility guesswork\n6×20mm standard form factor — broadly compatible beyond just Rapido\nReasonable price for an OEM-spec high-wattage cartridge",
     "Wattage (W)": 60,
-    "Max Temp (°C)": 450,
     "Description": "The Phaetus 60W cartridge is the OEM heater shipped with the Rapido 2 and is the highest-wattage cartridge in this reference. At 60W and 24V, it draws roughly 2.5A and can push the Rapido 2 to its maximum volumetric throughput. It fits any 6×20mm hotend block, making it a viable high-wattage upgrade for Dragon or V6-based setups as well.",
     "Voltage": "24V",
     "Compatible Hotends": [
@@ -245,6 +244,7 @@
       "Voron Trident",
       "VzBot"
     ],
+    "Vendor 1 Name": "AliExpress (various)",
     "Name": "Generic 24V 60W 6×20mm Heater Cartridge",
     "Slug": "generic-24v-60w-6-20mm-heater-cartridge",
     "Size": "6×20mm"
@@ -512,6 +512,7 @@
       "Voron 2.4",
       "Voron Trident"
     ],
+    "Vendor 1 Name": "AliExpress (various)",
     "Name": "Generic 24V 40W 6×20mm Heater Cartridge",
     "Slug": "generic-24v-40w-6-20mm-heater-cartridge",
     "Size": "6×20mm"
