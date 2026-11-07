@@ -74,6 +74,14 @@ for (const r of records) {
 }
 const hasFlow = Object.values(flowCounts).some((n) => n > 0);
 
+// Pre-paint filter: the inline script in the grid copies ?verdict=/?flow= onto
+// #hw-grid, and these rules hide non-matching cards before first paint.
+const q = (v: string) => v.replace(/["\\]/g, '\\$&');
+const prepaintCss = [
+  ...verdictTabs.map((t: any) => `#hw-grid[data-verdict="${q(t.key)}"] .gf-card:not([data-verdict="${q(t.key)}"])`),
+  ...FLOW_CLASSES.map((f) => `#hw-grid[data-flow="${f.key}"] .gf-card:not([data-flow="${f.key}"])`),
+].map((sel) => `${sel}{display:none}`).join('');
+
 const noun = (n: number) => (n === 1 ? nounSingular : nounPlural);
 
 const siteBase = Astro.site
@@ -153,7 +161,16 @@ const itemListSchema = {
         Showing {records.length} of {records.length} {noun(records.length)}
       </p>
       {records.length > 0 ? (
+        <style is:inline set:html={prepaintCss}></style>
         <div class="grid-3" id="hw-grid">
+          <script is:inline>
+            (function () {
+              var q = new URLSearchParams(location.search), g = document.getElementById('hw-grid');
+              var v = q.get('verdict') || location.hash.slice(1), f = q.get('flow');
+              if (v) g.dataset.verdict = v;
+              if (f) g.dataset.flow = f;
+            })();
+          </script>
           {records.map((r: any, i: number) => {
             const slug = toSlug(r['Name']);
             const v = resolveVerdict(r['Verdict']);
@@ -339,84 +356,9 @@ const itemListSchema = {
   readUrl();
   syncButtons();
   if (state.verdict !== 'all' || state.flow !== 'all') applyFilter(false);
-</script>
-</Base>
-
-<script>
-  let activeVerdict = 'all';
-
-  const allCards = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
-  const total    = allCards.length;
-  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
-  const countEl  = document.getElementById('hw-count');
-  const nounS    = countEl?.dataset.nounSingular ?? 'item';
-  const nounP    = countEl?.dataset.nounPlural ?? 'items';
-
-  function showCard(card: HTMLElement) {
-    if (!card.classList.contains('gf-hidden')) return;
-    card.classList.remove('gf-hidden');
-    card.style.opacity = '0';
-    void card.offsetHeight;
-    card.style.opacity = '1';
-  }
-
-  function hideCard(card: HTMLElement) {
-    if (card.classList.contains('gf-hidden')) return;
-    card.style.opacity = '0';
-    const done = () => card.classList.add('gf-hidden');
-    card.addEventListener('transitionend', done, { once: true });
-    setTimeout(done, 180);
-  }
-
-  function applyFilter() {
-    let visible = 0;
-    allCards.forEach((card) => {
-      const match = activeVerdict === 'all' || card.dataset.verdict === activeVerdict;
-      if (match) { showCard(card); visible++; }
-      else        { hideCard(card); }
-    });
-    if (countEl) {
-      countEl.textContent = `Showing ${visible} of ${total} ${total === 1 ? nounS : nounP}`;
-    }
-    pushHash();
-  }
-
-  function pushHash() {
-    if (activeVerdict === 'all') {
-      history.replaceState(null, '', location.pathname);
-    } else {
-      const tab = tabs.find((t) => t.dataset.verdict === activeVerdict);
-      const slug = tab?.dataset.slug ?? activeVerdict.replace(/\s+/g, '-');
-      history.replaceState(null, '', `#${slug}`);
-    }
-  }
-
-  function parseHash() {
-    const rawHash = location.hash.slice(1);
-    if (!rawHash) return;
-    const matched = tabs.find((t) => t.dataset.slug === rawHash);
-    if (matched) activeVerdict = matched.dataset.verdict ?? 'all';
-  }
-
-  function syncTabs() {
-    tabs.forEach((t) => {
-      const on = t.dataset.verdict === activeVerdict;
-      t.classList.toggle('is-active', on);
-      t.setAttribute('aria-pressed', String(on));
-    });
-  }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      activeVerdict = tab.dataset.verdict ?? 'all';
-      syncTabs();
-      applyFilter();
-    });
-  });
-
-  parseHash();
-  syncTabs();
-  if (activeVerdict !== 'all') applyFilter();
+  // The pre-paint attributes did their job; .gf-hidden takes over from here.
+  document.getElementById('hw-grid')?.removeAttribute('data-verdict');
+  document.getElementById('hw-grid')?.removeAttribute('data-flow');
 </script>
 
 <style is:global>

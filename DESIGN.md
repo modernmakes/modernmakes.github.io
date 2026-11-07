@@ -241,6 +241,12 @@ The component feel is **precise & confident**: flat surfaces, hairline borders, 
 - **Scroll behavior:** Solidifies to opaque `#1A1A1A` and shrinks 80px→56px at 80px scroll, restores below 60px (hysteresis kills flicker). On hero pages, starts fully transparent and transitions to glass after 50px.
 - **Mobile:** Collapses to a hamburger slide-down panel (staggered link entrance) below 1024px; wordmark swaps to lettermark below 768px. Search becomes a centered overlay dialog.
 
+### Sticky Filter Bar (second sanctioned glass surface)
+- **Where:** Hardware index pages (`gf-bar`: verdict tabs + flow row), pinned at `top: calc(env(safe-area-inset-top, 0px) + var(--nav-h))`.
+- **Glass:** Top-of-screen chrome only, like the nav. At rest it is flat surface; only while `.stuck` does it take the 94% surface glass (`color-mix` + blur) and a shadow, so the shadow reads as a reaction to floating, not a resting card shadow.
+- **Never changes size:** `.stuck` must not alter height, padding or font size; the bar is the same box stuck or not, which is what keeps taps from shifting the page.
+- **Not a licence:** Glass stays reserved for fixed/sticky chrome at the top of the screen. Cards, panels and in-flow surfaces still use none.
+
 ### Signature Component — Verdict Badge
 The verdict badge is the editorial spine of the hardware section. It encodes the publication's judgment (BUY / CONSIDER / SKIP / UPDATED, plus COMMUNITY) as a small semantic-colored pill, and it is the mechanism that lets Modern Makes have a strong opinion *without* ever calling itself a review. Filter tabs on index pages mirror these same values with count badges.
 
@@ -262,6 +268,6 @@ The verdict badge is the editorial spine of the hardware section. It encodes the
 - **Don't** use `border-left`/`border-right` greater than 1px as a colored accent stripe on cards, callouts, or list items. Use full hairline borders or background tints. (The legacy `lg-callout` 3px accent border is a known exception, not a pattern to copy.)
 - **Don't** lighten body text "for elegance" below Body Grey — it fails AA on the off-white bg.
 - **Don't** set prose in Barlow Condensed or data in Lora; don't use JetBrains Mono as decorative "tech costume" for non-data text.
-- **Don't** add ambient drop shadows to resting cards, or glassmorphism anywhere except the established nav glass.
+- **Don't** add ambient drop shadows to resting cards, or glassmorphism anywhere except the nav glass and the stuck filter bar.
 - **Don't** decorate dark bands with orange seams, radial glows, shine sweeps or blueprint drawings. Orange marks the one pointer on a screen (retired motif M8).
 - **Don't** fabricate audience metrics or hands-on test claims — "Audience metrics available on request," and verdicts synthesize community consensus.

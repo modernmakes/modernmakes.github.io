@@ -339,11 +339,13 @@ const breadcrumbItems = [
   const cmpBar         = document.querySelector<HTMLElement>('.cmp-bar');
   const sidebar        = document.querySelector<HTMLElement>('.art-sidebar');
 
+  /* Nav height comes from the --nav-h token (global.css), not a breakpoint table */
+  const navHeight = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+
   /* Position the comparison bar directly below the sticky article header */
   function stackCmpBar() {
     if (!stickyHeader || !cmpBar) return;
-    const navH = window.innerWidth < 768 ? 48 : window.innerWidth < 1024 ? 52 : 56;
-    cmpBar.style.top = (navH + stickyHeader.offsetHeight) + 'px';
+    cmpBar.style.top = (navHeight() + stickyHeader.offsetHeight) + 'px';
   }
 
   function updateSidebarTop(isSticky: boolean) {
@@ -364,7 +366,7 @@ const breadcrumbItems = [
   if (stickySentinel && stickyHeader) {
     new IntersectionObserver(
       ([e]) => onStickyChange(!e.isIntersecting),
-      { rootMargin: '-56px 0px 0px 0px', threshold: 0 }
+      { rootMargin: `-${navHeight()}px 0px 0px 0px`, threshold: 0 }
     ).observe(stickySentinel);
   }
 
