@@ -170,6 +170,8 @@ A restrained near-monochrome stage (warm off-white in light, near-black in dark)
 
 **Retired motif M8, the orange seam.** The gradient orange hairline on dark-band edges is gone (Nov 2026): orange is a pointer, not decoration, and Phase 2's extrusion line is the signature orange motion. Bands meet on the tonal plane change alone; the hero, breathing glow and card shine sweeps went with it.
 
+**The Extrusion Rule.** The extrusion line is the one orange motion on the site, and it replaces the seam as the signature. It is a 2px `--accent` line along the bottom of the nav that means "the next page is on its way": it appears only when a navigation is still waiting after 150ms (never on a prerendered, instant one), advances on `--dur-extrude` / `--ease-extrude` to 90%, and the arriving page completes it and fades it out. No glow, no dot, no gradient. Nothing else moves in orange: hovers, reveals and loaders use ink, tone or opacity. Reduced motion shows no line. (Code: `.nav-ext` in `global.css`, driven by `src/scripts/page-motion.js`.)
+
 **The Body-Grey Floor.** Body prose never goes lighter than Body Grey (`#5A5A5A`) on the off-white page. "Elegant light grey" is the single fastest way to fail AA contrast; if it's close, push toward Ink.
 
 ## 3. Typography

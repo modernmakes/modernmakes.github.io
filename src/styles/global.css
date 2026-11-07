@@ -131,8 +131,10 @@
   --dur-base:  220ms;    /* popovers, toasts, tab indicator */
   --dur-page:  280ms;    /* cross-page transitions */
   --dur-sheet: 450ms;    /* sheet open (prototype sign-off value) */
+  --dur-extrude: 1800ms; /* extrusion line advance (it never reaches the end on its own) */
   --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);   /* entering / responding */
   --ease-move: cubic-bezier(0.65, 0, 0.35, 1);   /* moving between two on-screen positions */
+  --ease-extrude: cubic-bezier(0.08, 0.7, 0.18, 1); /* extrusion line: fast start, long creep */
   --spring-snap:  var(--ease-out);   /* linear() springs below where supported */
   --spring-sheet: var(--ease-out);
   --scale-press-btn:  0.97;
@@ -262,6 +264,13 @@ html.vt-arrived .nav { animation: none; }
   html:active-view-transition-type(back)::view-transition-old(root) { animation: var(--dur-page) var(--ease-move) both mm-back-out; }
   html:active-view-transition-type(back)::view-transition-new(root) { animation: var(--dur-page) var(--ease-move) both mm-back-in; }
 }
+/* Extrusion line: the one orange motion (DESIGN.md). Under the nav, only on a navigation
+   still loading after 150ms; page-motion.js runs it, the next page completes and fades it. */
+.nav-ext { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; opacity: 0; pointer-events: none; z-index: 1; }
+.nav-ext.run { opacity: 1; transform: scaleX(.9); transition: transform var(--dur-extrude) var(--ease-extrude); }
+.nav-ext.done { opacity: 0; transform: scaleX(1); transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-base) var(--dur-fast) var(--ease-out); }
+@media (prefers-reduced-motion: reduce) { .nav-ext { display: none; } }
+
 /* Card → page zoom (type 'zoom', JS names one element per page `zoom`, never under
    reduced motion). The image grows from the card into the detail hero; the rest of
    the page just crossfades underneath. Curve and timings from the prototype. */

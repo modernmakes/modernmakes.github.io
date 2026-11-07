@@ -1,13 +1,60 @@
 // Cross-document page motion. Inlined in <head> by Base.astro as a classic script so the
 // pagereveal listener exists before the first render. Browsers without cross-document view
-// transitions skip all of it and navigate normally.
+// transitions skip the transition parts and navigate normally.
 (() => {
-  if (!('onpagereveal' in window)) return;
   const html = document.documentElement;
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasReveal = 'onpagereveal' in window;
+
+  // ── Extrusion line ── A 2px accent line under the nav, only when a navigation is still
+  // waiting after 150ms (so never on a prerendered, instant one). The outgoing page starts
+  // it; the incoming page completes and fades it. sessionStorage carries it across.
+  const EXT = 'mm-ext';
+  let extTimer = 0, extReset = 0;
+  const extEl = () => document.querySelector('.nav-ext');
+  const extStop = () => {
+    clearTimeout(extTimer); clearTimeout(extReset);
+    extEl()?.classList.remove('run', 'done');
+  };
+  addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || reduced()) return;
+    const a = e.target instanceof Element && e.target.closest('a[href]');
+    if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search)) return;
+    clearTimeout(extTimer);
+    extTimer = setTimeout(() => {
+      const el = extEl();
+      if (!el) return;
+      el.classList.add('run');
+      try { sessionStorage.setItem(EXT, '1'); } catch {}
+      // Download, 204 or a stopped load: don't leave it hanging.
+      extReset = setTimeout(() => { extStop(); try { sessionStorage.removeItem(EXT); } catch {} }, 10000);
+    }, 150);
+  });
+  addEventListener('pageswap', () => clearTimeout(extTimer)); // committed before 150ms: no line
+  addEventListener('pagehide', () => clearTimeout(extTimer));
+  const extFinish = () => {
+    let on = null;
+    try { on = sessionStorage.getItem(EXT); sessionStorage.removeItem(EXT); } catch {}
+    if (!on || reduced()) return;
+    const go = () => {
+      const el = extEl();
+      if (!el) return;
+      el.style.transition = 'none';
+      el.classList.add('run'); // jump to where the old page's line had got to
+      void el.offsetWidth;
+      el.style.transition = '';
+      el.classList.add('done');
+      setTimeout(() => el.classList.remove('run', 'done'), 500);
+    };
+    extEl() ? go() : addEventListener('DOMContentLoaded', go, { once: true });
+  };
+  addEventListener('pageshow', (e) => { if (e.persisted) extStop(); });
+  if (!hasReveal) { extFinish(); return; }
 
   // Back = a history traverse to an earlier entry. Everything else pushes forward.
   const isBack = (a) => !!a && a.navigationType === 'traverse' && !!a.from && !!a.entry && a.entry.index < a.from.index;
-  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ── Card → page zoom ── The tapped card's image and the detail hero share the name
   // `zoom`, one element per page at a time. sessionStorage remembers which index/item pair
@@ -56,6 +103,7 @@
 
   addEventListener('pagereveal', (e) => {
     name(null); // a bfcache-restored page still carries the name it set on the way out
+    extFinish();
     const vt = e.viewTransition;
     if (!vt) return;
     // The nav is a pinned shared element during the transition: don't replay its entrance.
