@@ -135,6 +135,7 @@ const itemListSchema = {
             <span class="gf-badge">{t.count}</span>
           </button>
         ))}
+        <span class="gf-tab-ind" aria-hidden="true"></span>
       </div>
       {hasFlow && (
         <div class="gf-flow" role="group" aria-label="Filter by flow class">
@@ -238,6 +239,9 @@ const itemListSchema = {
   const total    = cards.length;
   const nounS    = countEl?.dataset.nounSingular ?? 'item';
   const nounP    = countEl?.dataset.nounPlural ?? 'items';
+  const cats     = document.querySelector<HTMLElement>('.gf-cats');
+  const ind      = document.querySelector<HTMLElement>('.gf-tab-ind');
+  const reduced  = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const matches = (c: HTMLElement, verdict: string, flow: string) =>
     (verdict === 'all' || c.dataset.verdict === verdict) &&
@@ -245,9 +249,11 @@ const itemListSchema = {
 
   // One layout step per filter change. A delayed hide (fade, then display:none)
   // changes the page height twice, which is what made a stuck bar twitch.
-  function showCard(card: HTMLElement) {
+  // Inside a view transition the transition does the fade, so no opacity step.
+  function showCard(card: HTMLElement, fade = true) {
     if (!card.classList.contains('gf-hidden')) return;
     card.classList.remove('gf-hidden');
+    if (!fade) return;
     card.style.opacity = '0';
     void card.offsetHeight;
     card.style.opacity = '1';
@@ -298,6 +304,19 @@ const itemListSchema = {
       const badge = b.querySelector('.gf-flow-n');
       if (badge) badge.textContent = String(n);
     });
+    moveIndicator(true);
+  }
+
+  // Sliding underline under the active verdict tab: one element, transform only
+  // (translate to the tab, scaleX of a 1px line to its width). First placement and
+  // resizes jump; tab changes slide (--dur-base / --ease-move, none under reduced motion).
+  function moveIndicator(animate: boolean) {
+    const a = tabs.find((t) => t.classList.contains('is-active'));
+    if (!ind || !cats || !a) return;
+    if (!animate) ind.style.transition = 'none';
+    ind.style.transform = `translate(${a.offsetLeft}px, ${a.offsetTop + a.offsetHeight - 2}px) scaleX(${a.offsetWidth})`;
+    if (!animate) { void ind.offsetWidth; ind.style.transition = ''; }
+    cats.classList.add('has-ind');
   }
 
   function applyFilter(fromTap: boolean) {
@@ -311,15 +330,28 @@ const itemListSchema = {
         window.scrollTo({ top: Math.round(scrollY + regionTop - barBottom + 4), behavior: 'instant' });
       }
     }
-    let visible = 0;
-    cards.forEach((c) => {
-      if (matches(c, state.verdict, state.flow)) { showCard(c); visible++; }
-      else hideCard(c);
-    });
-    if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${total === 1 ? nounS : nounP}`;
-    if (noMatch) noMatch.hidden = visible > 0 || total === 0;
-    syncButtons();
+    const vt = fromTap && typeof document.startViewTransition === 'function' && !reduced();
+    const run = () => {
+      let visible = 0;
+      cards.forEach((c) => {
+        if (matches(c, state.verdict, state.flow)) { showCard(c, !vt); visible++; }
+        else hideCard(c);
+      });
+      if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${total === 1 ? nounS : nounP}`;
+      if (noMatch) noMatch.hidden = visible > 0 || total === 0;
+      syncButtons();
+    };
     writeUrl();
+    if (!vt) return run();
+    // Cards reflow inside a same-document view transition. The scroll step above has
+    // already happened, outside it. Names exist only for the transition.
+    const html = document.documentElement;
+    cards.forEach((c, i) => { c.style.viewTransitionName = `gf-card-${i}`; });
+    html.classList.add('vt-filter');
+    document.startViewTransition(run).finished.finally(() => {
+      cards.forEach((c) => { c.style.viewTransitionName = ''; });
+      html.classList.remove('vt-filter');
+    });
   }
 
   tabs.forEach((t) => t.addEventListener('click', () => {
@@ -355,6 +387,9 @@ const itemListSchema = {
 
   readUrl();
   syncButtons();
+  moveIndicator(false);
+  document.fonts?.ready.then(() => moveIndicator(false));
+  addEventListener('resize', () => moveIndicator(false), { passive: true });
   if (state.verdict !== 'all' || state.flow !== 'all') applyFilter(false);
   // The pre-paint attributes did their job; .gf-hidden takes over from here.
   document.getElementById('hw-grid')?.removeAttribute('data-verdict');
@@ -520,7 +555,21 @@ html { overflow-anchor: none; }
 /* ── Reduced motion: global.css has no global reset, so this page honours the
    preference for its own filter motion (card fade + tab/badge transitions).
    hideCard's setTimeout fallback still flips display, so filtering stays correct ── */
+/* Sliding verdict underline (JS places it; the static border stays as the no-JS fallback). */
+.gf-cats { position: relative; }
+.gf-tab-ind { position: absolute; left: 0; top: 0; width: 1px; height: 2px; background: var(--accent); transform-origin: 0 0; transform: scaleX(0); pointer-events: none; transition: transform var(--dur-base) var(--ease-move); }
+.gf-cats.has-ind .gf-tab.is-active { border-bottom-color: transparent; }
+
+/* Filter view transition: cards are class `card`; the bar and nav stay put above them,
+   and the bar is shown live so the underline slide is visible during it. */
+.gf-card { view-transition-class: card; }
+::view-transition-group(*.card) { animation-duration: var(--dur-page); animation-timing-function: var(--ease-move); }
+html.vt-filter .gf-bar { view-transition-name: gf-bar; }
+::view-transition-group(gf-bar) { animation: none; z-index: 5; }
+::view-transition-old(gf-bar) { display: none; }
+::view-transition-new(gf-bar) { animation: none; }
+
 @media (prefers-reduced-motion: reduce) {
-  .gf-card, .gf-bar, .gf-flow-btn { transition: none; }
+  .gf-card, .gf-bar, .gf-flow-btn, .gf-tab-ind { transition: none; }
 }
 </style>
