@@ -85,6 +85,9 @@ const partCounts: Record<string, { a: number; t: number }> = {
               id="printer-img-mobile"
               src="/media/ecosystems/voron/voron-2-4.webp"
               alt="Voron 2.4"
+              width="1024"
+              height="1024"
+              decoding="async"
               onerror="this.style.display='none'"
             />
             <p class="model-info-sizes" id="model-info-sizes">250mm · 300mm · 350mm</p>
@@ -117,6 +120,10 @@ const partCounts: Record<string, { a: number; t: number }> = {
               id="printer-img"
               src="/media/ecosystems/voron/voron-2-4.webp"
               alt="Voron 2.4"
+              width="1024"
+              height="1024"
+              fetchpriority="high"
+              decoding="async"
               class="model-img"
               onerror="this.style.display='none'"
             />

@@ -94,7 +94,7 @@ const currentPath = '/tools';
               <span style="font-size:10px;color:var(--g2)">PNG, JPG, WEBP · max 5MB</span>
             </div>
             <div id="uploadPreview" style="display:none">
-              <img id="previewImg" style="max-width:100%;border-radius:4px;max-height:180px;object-fit:contain" alt="Preview">
+              <img id="previewImg" decoding="async" style="max-width:100%;border-radius:4px;max-height:180px;object-fit:contain" alt="Preview">
               <button class="pt-btn-remove" id="removeImg">✕ Remove</button>
             </div>
           </div>

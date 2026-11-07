@@ -28,7 +28,7 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
 >
   {imageSrc ? (
     <div class="gc-media">
-      <img class="gc-media-img" src={imageSrc} alt={name} loading="lazy" decoding="async" />
+      <img class="gc-media-img" src={imageSrc} alt={name} width="800" height="600" loading="lazy" decoding="async" />
     </div>
   ) : (
     <div class="gc-band" aria-hidden="true"></div>

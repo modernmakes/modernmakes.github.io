@@ -79,7 +79,7 @@ const breadcrumbItems = [
   <!-- ── HERO ── -->
   <div class:list={['art-hero', { 'art-hero--band': !heroImage }]}>
     {heroImage
-      ? <img src={heroImage} alt="" class="art-hero-img" loading="lazy" aria-hidden="true" />
+      ? <img src={heroImage} alt="" class="art-hero-img" loading="eager" fetchpriority="high" decoding="async" aria-hidden="true" />
       : <TypeCover size="hero" eyebrow={category} title={title} date={date} />
     }
     {heroImage && (

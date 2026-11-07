@@ -154,7 +154,7 @@ const itemListSchema = {
       </p>
       {records.length > 0 ? (
         <div class="grid-3" id="hw-grid">
-          {records.map((r: any) => {
+          {records.map((r: any, i: number) => {
             const slug = toSlug(r['Name']);
             const v = resolveVerdict(r['Verdict']);
             const fc = resolveFlowClass(flowOf(r));
@@ -167,7 +167,7 @@ const itemListSchema = {
                   <TypeCover eyebrow={categoryLabel} title={r['Name']} />
                   {hasImg && (
                     <>
-                      <img src={imgSrc} alt={r['Name']} loading="lazy" decoding="async" onerror="this.parentElement.classList.add('card-img--failed')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                      <img src={imgSrc} alt={r['Name']} width="800" height="600" loading={i < 3 ? 'eager' : 'lazy'} decoding="async" onerror="this.parentElement.classList.add('card-img--failed')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
                       <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
                       <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-muted);padding:0 14px 10px">{categoryLabel}</span>
                     </>
