@@ -75,9 +75,24 @@ const siteURL = new URL('/', Astro.site).href;
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-CGR4N532H6');
+    // A speculation-rules prerender runs this page before anyone sees it.
+    // Hold the config (and its page_view) until the reader actually lands.
+    const startGa = () => { gtag('js', new Date()); gtag('config', 'G-CGR4N532H6'); };
+    if ((document as any).prerendering) document.addEventListener('prerenderingchange', startGa, { once: true });
+    else startGa();
   </script>
+  <!-- Prerender same-origin pages on hover/pointerdown (moderate). Unsupported browsers ignore it. -->
+  <script type="speculationrules" is:inline set:html={JSON.stringify({
+    prerender: [{
+      where: { and: [
+        { href_matches: '/*' },
+        { not: { href_matches: '/search*' } },
+        { not: { href_matches: '/*.*' } },
+        { not: { selector_matches: '[href^="#"], [target="_blank"], [rel~="external"], [download], [data-no-prerender]' } },
+      ] },
+      eagerness: 'moderate',
+    }],
+  })}></script>
 </head>
 <body data-hero={hasHero ? "true" : undefined}>
   <slot name="nav" />
