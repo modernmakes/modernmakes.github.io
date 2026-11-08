@@ -3,6 +3,7 @@
 //   h  hardware  { t title, b brand, c category, v verdict, vc badge class, f flow chip, p price, u url, k spec tokens }
 //   a  articles  { t title, c category, d date, u url }  (news, guides, comparisons, filament)
 //   t  tools     { t title, c category, k badge, u url }
+//   s  ISO time of the last Airtable sync (palette footer freshness label)
 import { getCollection } from 'astro:content';
 import { toSlug, resolveVerdict, resolveFlowClass } from './hardware';
 import tools from '../data/tools.json';
@@ -24,6 +25,7 @@ import gantrys from '../data/hardware/gantrys.json';
 import motionSystem from '../data/hardware/motion-system.json';
 import enclosures from '../data/hardware/enclosures.json';
 import printers from '../data/hardware/printers.json';
+import synced from '../data/hardware/_synced.json';
 
 // [records, route base, singular label] — routes match src/pages/hardware/* and /printers.
 const HARDWARE: [any[], string, string][] = [
@@ -91,5 +93,5 @@ export async function buildSearchIndex() {
 
   const t = tools.map((x) => ({ t: x.name, c: x.category, k: x.badge, u: x.href }));
 
-  return { h, a, t };
+  return { s: synced.synced, h, a, t };
 }

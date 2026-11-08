@@ -184,6 +184,7 @@
 </style>
 
 <script>
+  import { syncedLabel } from '../scripts/synced.js';
   type H = { t: string; b?: string; c: string; v?: string; vc?: string; f?: string; p?: number; u: string; k?: string };
   type A = { t: string; c: string; d?: string; u: string };
   type T = { t: string; c: string; k?: string; u: string };
@@ -253,6 +254,7 @@
   // ── Index ──
   let rows: Row[] = [];
   let byUrl = new Map<string, Row>();
+  let synced: string | null | undefined;
   let loading: Promise<void> | null = null;
 
   const row = (g: Group, u: string, t: string, sub: string, extra: string, hw?: H): Row => ({
@@ -268,6 +270,7 @@
       ...ACTIONS.map(([t, u, s]) => row('x', u, t, s, '')),
     ];
     byUrl = new Map(rows.map((r) => [r.u, r]));
+    synced = ix.s;
   }
 
   const load = () =>
@@ -340,6 +343,7 @@
       }
     }
     list.innerHTML = html;
+    (document.getElementById('cp-fresh') as HTMLElement).textContent = syncedLabel(synced) ?? '';
     list.scrollTop = 0;
     shown = [...list.querySelectorAll<HTMLAnchorElement>('.cp-row')];
     active = -1;

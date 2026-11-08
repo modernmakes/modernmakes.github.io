@@ -154,6 +154,12 @@ async function main() {
   console.log(`
 Export complete: ${exported}/${TABLES.length} hardware tables exported`);
 
+  // Freshness label (palette footer, hardware index headers): only when real data arrived.
+  if (exported > 0) {
+    await writeFile(join(OUT_DIR, '_synced.json'), JSON.stringify({ synced: new Date().toISOString() }, null, 2) + '
+', 'utf-8');
+  }
+
   // Newsletter archive (separate base: appjJWszZBOS13e0i)
   process.stdout.write('Fetching newsletter-archive... ');
   try {

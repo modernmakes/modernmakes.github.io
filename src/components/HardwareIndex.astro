@@ -7,6 +7,7 @@ import TypeCover from './TypeCover.astro';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import synced from '../data/hardware/_synced.json';
 import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES } from '../lib/hardware';
 
 interface Props {
@@ -114,6 +115,8 @@ const itemListSchema = {
       </nav>
       <h1 class="hot-hero-title" data-nav-title>{heading}</h1>
       <p class="hot-hero-sub">{sub}</p>
+      <!-- Relative time is computed in the browser (scripts/synced.js); hidden when missing or over 72 h old. -->
+      <p class="hot-hero-fresh" id="hot-hero-fresh" data-synced={synced.synced ?? ''} hidden></p>
     </div>
   </header>
 
@@ -225,6 +228,11 @@ const itemListSchema = {
 </Base>
 
 <script>
+  import { syncedLabel } from '../scripts/synced.js';
+  const freshEl = document.getElementById('hot-hero-fresh');
+  const freshText = freshEl && syncedLabel(freshEl.dataset.synced);
+  if (freshEl && freshText) { freshEl.textContent = freshText; freshEl.hidden = false; }
+
   type State = { verdict: string; flow: string };
   const state: State = { verdict: 'all', flow: 'all' };
 
@@ -440,6 +448,13 @@ const itemListSchema = {
   line-height: 1.7;
   max-width: 480px;
   margin: 0;
+}
+
+.hot-hero-fresh {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--on-dark-muted);
+  margin: 14px 0 0;
 }
 
 /* card titles are <h2> for heading navigation — neutralise UA margins */
