@@ -532,7 +532,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   }
 
   /* ─── READING PROGRESS ───
-     1px muted hairline along the bottom of the nav, filling as the article body
+     2px soft-white line (never orange: that is the extrusion line) along the bottom of the nav, filling as the article body
      ([data-progress]) is read: 0 when its top meets the nav, 1 when its end meets the
      bottom of the screen. Scroll-driven where supported, else a passive scroll fallback
      in the script below. Information, not decoration: kept under reduced motion. */
@@ -540,8 +540,8 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     display: none;
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: 1px;
-    background: var(--g2);
+    height: 2px;
+    background: var(--on-dark-soft);
     transform: scaleX(0);
     transform-origin: left;
     pointer-events: none;

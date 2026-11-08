@@ -21,6 +21,7 @@
       inputmode="search"
       enterkeyhint="go"
       autocomplete="off"
+      autocorrect="off"
       autocapitalize="off"
       spellcheck="false"
     />
@@ -45,6 +46,7 @@
     color: #fff;
     color-scheme: dark;
     overflow: hidden;
+    overscroll-behavior: none;
     max-width: none;
     max-height: none;
   }
@@ -86,6 +88,7 @@
     padding: 0 8px 0 16px;
     border-bottom: 1px solid var(--dark-border);
     flex: none;
+    touch-action: none; /* a drag here has nothing to scroll; never let it reach the page */
   }
   .cp-glass { color: var(--on-dark-muted); flex: none; }
   .cp-input {
@@ -167,6 +170,7 @@
     border-top: 1px solid var(--dark-border);
     font: 400 11px var(--fm);
     color: var(--on-dark-muted);
+    touch-action: none;
   }
   .cp-foot kbd {
     font: inherit;
@@ -319,6 +323,7 @@
     n = gi = 0;
     let html = '';
     let count = 0;
+    let suggest = false; // closest-name suggestions: shown, never highlighted
     if (!terms.length) {
       const rec = recents().map((u) => byUrl.get(u)).filter((r): r is Row => !!r);
       html = groupHtml('Recent', rec) + groupHtml('Actions', rows.filter((r) => r.g === 'x'));
@@ -339,6 +344,7 @@
           .sort((x, y) => x.d - y.d)
           .slice(0, 3)
           .map((x) => x.r);
+        suggest = true;
         html = `<p class="cp-empty">No matches for “${esc(raw)}”</p>` + groupHtml('Closest hardware', close);
       }
     }
@@ -347,7 +353,7 @@
     list.scrollTop = 0;
     shown = [...list.querySelectorAll<HTMLAnchorElement>('.cp-row')];
     active = -1;
-    if (shown.length) select(0, false, false);
+    if (shown.length && !suggest) select(0, false, false);
     else input.removeAttribute('aria-activedescendant');
     clearTimeout(statusT);
     statusT = window.setTimeout(() => {
@@ -373,6 +379,14 @@
     }, 100);
   };
 
+  // Scrolls only the results list. scrollIntoView would also scroll the page behind the sheet.
+  function reveal(el: HTMLElement) {
+    if (active === 0) { list.scrollTop = 0; return; } // first row: bring its group label into view too
+    const r = el.getBoundingClientRect(), l = list.getBoundingClientRect();
+    if (r.top < l.top) list.scrollTop += r.top - l.top - 8;
+    else if (r.bottom > l.bottom) list.scrollTop += r.bottom - l.bottom + 8;
+  }
+
   function select(i: number, scroll = true, user = true) {
     if (!shown.length) return;
     shown[active]?.setAttribute('aria-selected', 'false');
@@ -380,38 +394,70 @@
     const el = shown[active];
     el.setAttribute('aria-selected', 'true');
     input.setAttribute('aria-activedescendant', el.id);
-    if (scroll) el.scrollIntoView({ block: 'nearest' });
+    if (scroll) reveal(el);
     if (user) prerender(el.getAttribute('href')!);
   }
 
   // ── Open / close ──
+  // PHONE SHEET BEHAVIOUR. Keep all of this when the palette moves into the shared Sheet (Phase 4A).
+  // It copies iOS Settings / Spotlight search:
+  //  1. Starting a scroll on the results blurs the input on purpose, so the keyboard hides.
+  //  2. The sheet then grows to the full visual viewport. Its height follows visualViewport
+  //     through ONE rAF-batched write per frame, with no CSS transition on height: the keyboard
+  //     is already animating, and two animations on one box fight each other.
+  //  3. Only the results list scrolls. The page behind never moves: html is overflow:hidden
+  //     while open (CSS, :has(dialog[open])); a drag that starts outside the list, or on a list
+  //     with nothing to scroll, is swallowed; the list has overscroll-behavior: contain; and
+  //     any drift of window.scrollY (iOS scrolls the page on focus) is put straight back.
+  //  4. Closing leaves scrollY exactly where it was.
+  //  5. Tapping the input again raises the keyboard. The sheet shrinks to the space above it,
+  //     so the results stay visible.
   let opener: HTMLElement | null = null;
+  let lockY = 0;
+  let typed = false;
   const vv = window.visualViewport;
   const phone = matchMedia('(max-width: 767px)');
+
+  let fitRaf = 0, fitTop = '', fitH = '';
   function fit() {
-    if (!dlg.open || !vv || !phone.matches) { dlg.style.top = dlg.style.height = ''; return; }
-    dlg.style.top = `${vv.offsetTop}px`;
-    dlg.style.height = `${vv.height}px`;
+    fitRaf = 0;
+    const on = dlg.open && !!vv && phone.matches;
+    const top = on ? `${vv!.offsetTop}px` : '';
+    const h = on ? `${vv!.height}px` : '';
+    if (top !== fitTop) dlg.style.top = fitTop = top; // skip unchanged writes: each one is a relayout
+    if (h !== fitH) dlg.style.height = fitH = h;
   }
-  vv?.addEventListener('resize', fit);
-  vv?.addEventListener('scroll', fit);
+  const queueFit = () => { if (!fitRaf) fitRaf = requestAnimationFrame(fit); };
+  vv?.addEventListener('resize', queueFit);
+  vv?.addEventListener('scroll', queueFit);
+  phone.addEventListener('change', queueFit);
+
+  const holdScroll = () => { if (scrollY !== lockY) scrollTo({ top: lockY, behavior: 'instant' }); };
+  addEventListener('scroll', () => { if (dlg.open) holdScroll(); }, { passive: true });
 
   // from: the trigger that was tapped. WebKit doesn't focus links on tap, so activeElement would be <body>.
   function open(from?: HTMLElement) {
     if (dlg.open) return;
     opener = from ?? (document.activeElement as HTMLElement | null);
-    input.value = '';
+    lockY = scrollY;
+    typed = false;
+    input.value = ''; // always opens empty, showing recents
     const ready = rows.length > 0;
     if (ready) render(); // index cached: results are in the first frame
     else list.innerHTML = '<p class="cp-empty">Loading…</p>';
     dlg.showModal();
     fit();
-    input.focus(); // inside the gesture, so iOS raises the keyboard
+    input.focus({ preventScroll: true }); // inside the gesture, so iOS raises the keyboard
+    // bfcache, Safari form restore or AutoFill can put old text back after the clear above.
+    // Text that arrived with no input event is never the reader's: wipe it.
+    for (const ms of [0, 250]) setTimeout(() => { if (dlg.open && !typed && input.value) { input.value = ''; if (rows.length) render(); } }, ms);
     if (!ready) load().then(() => { if (dlg.open) render(); }, () => {});
   }
   const close = () => { if (dlg.open) dlg.close(); };
 
   dlg.addEventListener('close', () => {
+    input.value = '';
+    holdScroll();
     if (opener?.isConnected) opener.focus({ preventScroll: true });
     opener = null;
   });
@@ -422,17 +468,20 @@
     if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
   });
   document.getElementById('cp-cancel')!.addEventListener('click', close);
-  addEventListener('pagehide', close); // never come back from bfcache with it open
+  // Never come back from bfcache with it open, or with the old query in the box.
+  addEventListener('pagehide', () => { close(); input.value = ''; });
+  addEventListener('pageshow', () => { input.value = ''; });
 
-  input.addEventListener('input', () => { if (rows.length) render(); });
+  input.addEventListener('input', () => { typed = true; if (rows.length) render(); });
   input.addEventListener('keydown', (e) => {
     if (e.isComposing) return;
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
-      select(active + (e.key === 'ArrowDown' ? 1 : -1));
+      const dir = e.key === 'ArrowDown' ? 1 : -1;
+      select(active < 0 && dir < 0 ? shown.length - 1 : active + dir);
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      const el = shown[active];
+      const el = shown[active]; // only a highlighted row opens; with none, Enter does nothing
       if (!el) return;
       if (e.metaKey || e.ctrlKey) { remember(el.getAttribute('href')!); window.open(el.href, '_blank', 'noopener'); }
       else el.click(); // a real link click: normal navigation, page transition and extrusion line
@@ -450,8 +499,14 @@
     remember(el.getAttribute('href')!);
     if (!(e.metaKey || e.ctrlKey || e.shiftKey)) close();
   });
-  // Scrolling results on a phone drops the keyboard so more of them fit.
-  list.addEventListener('touchmove', () => { if (document.activeElement === input) input.blur(); }, { passive: true });
+  // Phone touch (see PHONE SHEET BEHAVIOUR). Non-passive so a drag that would only scroll the page can be cancelled.
+  let touchY0 = 0;
+  dlg.addEventListener('touchstart', (e) => { touchY0 = e.touches[0].clientY; }, { passive: true });
+  dlg.addEventListener('touchmove', (e) => {
+    const inList = list.contains(e.target as Node);
+    if (inList && document.activeElement === input && Math.abs(e.touches[0].clientY - touchY0) > 6) input.blur(); // hide the keyboard
+    if (!inList || list.scrollHeight <= list.clientHeight) e.preventDefault(); // nothing here to scroll: don't let it reach the page
+  }, { passive: false });
 
   // ── Triggers ──
   for (const el of document.querySelectorAll<HTMLElement>('[data-palette]')) {
