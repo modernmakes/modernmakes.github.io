@@ -47,8 +47,9 @@
     try { types = [...vt.types].join('+') || '-'; } catch {}
     const line = [n, e && 'persisted' in e && 'persisted=' + e.persisted, (sw || rv) && 'vt=' + (vt ? 'Y' : 'N'), vt && 'types=' + types,
       a && 'nav=' + a.navigationType, a && p(sw ? location.href : a.from && a.from.url) + '>' + p(sw ? a.entry && a.entry.url : location.href),
-      dd.pair && 'pair=' + dd.pair, dd.card && 'card=' + dd.card, 'y=' + Math.round(scrollY)].filter(Boolean).join(' ');
-    dd.pair = dd.card = undefined;
+      dd.pair && 'pair=' + dd.pair, dd.card && 'card=' + dd.card,
+      dd.y0 != null && 'y0=' + dd.y0, dd.sy != null && 'saved=' + dd.sy, dd.ay != null && 'applied=' + dd.ay, 'y=' + Math.round(scrollY)].filter(Boolean).join(' ');
+    dd.pair = dd.card = dd.y0 = dd.sy = dd.ay = undefined;
     try { sessionStorage.setItem(LOG, JSON.stringify([...lines(), line].slice(-12))); } catch {}
     show();
   };
@@ -113,7 +114,8 @@
   // zoomed so back can land on the same card.
   const KEY = 'mm-zoom';
   const path = (u) => new URL(u, location.href).pathname.replace(/\/$/, '') || '/';
-  const onScreen = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < innerHeight; };
+  // dy shifts the measurement to where the page will be once its saved scroll is applied.
+  const onScreen = (el, dy = 0) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.bottom + dy > 0 && r.top + dy < innerHeight; };
   const cardMedia = (item) => {
     for (const a of document.querySelectorAll('a.gf-card')) if (path(a.href) === item) return a.querySelector('.card-img');
     return null;
@@ -127,9 +129,9 @@
     if (el) el.style.viewTransitionName = 'zoom';
   };
   // Zoom only between the remembered pair, and only if this end is visible.
-  const zoomOn = (vt, el) => {
-    if (DBG) dd.card = !el ? 'none' : onScreen(el) ? 'on' : 'off';
-    if (!el || !onScreen(el)) return;
+  const zoomOn = (vt, el, dy = 0) => {
+    if (DBG) dd.card = !el ? 'none' : onScreen(el, dy) ? 'on' : 'off';
+    if (!el || !onScreen(el, dy)) return;
     name(el);
     vt.types.add('zoom');
   };
@@ -146,16 +148,23 @@
         const media = cardMedia(to);
         const keep = !!media && onScreen(media);
         try {
-          if (keep) sessionStorage.setItem(KEY, JSON.stringify({ index: here, item: to }));
+          if (keep) {
+            const r = media.getBoundingClientRect();
+            // y/top/h: Safari restores scroll after pagereveal, so back needs them (see pagereveal).
+            sessionStorage.setItem(KEY, JSON.stringify({ index: here, item: to, y: Math.round(scrollY), top: Math.round(r.top + scrollY), h: Math.round(r.height) }));
+          }
           else sessionStorage.removeItem(KEY);
         } catch {}
-        if (DBG) dd.pair = keep ? 'set' : 'cleared';
+        if (DBG) { dd.pair = keep ? 'set' : 'cleared'; dd.sy = Math.round(scrollY); }
         zoomOn(vt, media);
       } else {
         const z = read();
         const ok = !!z && z.item === here && z.index === to;
         if (DBG) dd.pair = ok ? 'match' : z ? 'mismatch' : 'none';
-        if (ok) zoomOn(vt, hero());
+        // The card was on screen at tap time; skip the hero if the saved geometry says it won't be.
+        const vis = !ok || typeof z.y !== 'number' || (z.top - z.y < innerHeight && z.top + z.h - z.y > 0);
+        if (DBG && ok) dd.sy = z.y;
+        if (ok && vis) zoomOn(vt, hero());
       }
     } finally { dbg('swap', e, vt); }
   });
@@ -174,9 +183,18 @@
       if (!reduced() && act && act.from) {
         const here = path(location.href), from = path(act.from.url), z = read();
         const ok = !!z && (back ? z.item === from && z.index === here : z.item === here && z.index === from);
-        if (DBG) dd.pair = ok ? 'match' : z ? 'mismatch' : 'none';
+        if (DBG) { dd.pair = ok ? 'match' : z ? 'mismatch' : 'none'; dd.y0 = Math.round(scrollY); }
+        // Safari (bfcache) restores scroll after pagereveal, so the card would measure off
+        // screen. Apply the saved scroll first; if it won't take, measure against it instead.
+        let dy = 0;
+        if (ok && back && typeof z.y === 'number') {
+          if (Math.abs(scrollY - z.y) > 1) scrollTo({ top: z.y, behavior: 'instant' });
+          dy = scrollY - z.y;
+          if (Math.abs(dy) <= 1) dy = 0;
+          if (DBG) { dd.sy = z.y; dd.ay = Math.round(scrollY); }
+        }
         // Card off screen (or gone): no zoom, the plain back transition runs.
-        if (ok) zoomOn(vt, back ? cardMedia(z.item) : hero());
+        if (ok) zoomOn(vt, back ? cardMedia(z.item) : hero(), dy);
       }
       vt.finished.finally(() => name(null));
     } finally { dbg('reveal', e, vt); }
