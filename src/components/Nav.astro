@@ -19,6 +19,8 @@ const hardwareActive  = currentPath.startsWith('/hardware');
         <img class="logo-lettermark" src="/images/lettermark.svg" alt="Modern Makes" width="500" height="500" decoding="async" />
       </a>
 
+      <!-- Links and the compact page title share one cell on desktop and swap in place. -->
+      <div class="nav-mid">
       <div class="nav-links">
 
         <!-- Printers dropdown -->
@@ -48,11 +50,13 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 
       </div>
 
-      <div class="nav-spacer" aria-hidden="true"></div>
-
-      <!-- Page title, shown under 1024px once the page's H1 scrolls under the nav.
-           The H1 stays the real heading; this is a visual echo, so hidden from AT. -->
+      <!-- Page title, shown once the page's H1 scrolls under the nav (centre under 1024px,
+           left of search on desktop). The H1 stays the real heading; this is a visual echo,
+           so hidden from AT. -->
       <div class="nav-title" aria-hidden="true"><span></span></div>
+      </div>
+
+      <div class="nav-spacer" aria-hidden="true"></div>
 
       <div class="nav-right">
         <!-- A plain link to /search without JS; CommandPalette turns [data-palette] into its trigger. -->
@@ -525,6 +529,37 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .nav-title { transform: none; transition: opacity var(--dur-fast) var(--ease-out); }
   }
 
+  /* ─── LARGE-TITLE HAND-OFF (1024px and up) ───
+     The links fade out and the page title fades in left of search. Scrolling up 56px
+     (.peek) brings the links back. Opacity only, so the nav never changes size; the
+     links stay focusable and reappear when focus enters them. */
+  .nav-mid { display: contents; }
+  @media (min-width: 1024px) {
+    .nav-mid { display: grid; flex: 1; min-width: 0; align-items: center; }
+    .nav-mid > * { grid-area: 1 / 1; }
+    .nav-links { transition: opacity var(--dur-base) var(--ease-out); }
+    .nav-title {
+      display: flex;
+      justify-content: flex-end;
+      min-width: 0;
+      font-family: var(--fd);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      color: #fff;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+      pointer-events: none;
+    }
+    .nav-title span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .nav.show-title:not(.peek) .nav-title { opacity: 1; transform: none; }
+    .nav.show-title:not(.peek) .nav-links { opacity: 0; pointer-events: none; }
+    .nav.show-title:not(.peek) .nav-links:focus-within { opacity: 1; pointer-events: auto; }
+    .nav.show-title:not(.peek):has(.nav-links:focus-within) .nav-title { opacity: 0; }
+  }
+
   /* ─── TABLET  768px–1023px ─── */
   @media (max-width: 1023px) {
     .nav-bar { height: 72px; }
@@ -583,6 +618,11 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     /* ── Throttled scroll → .scrolled with hysteresis (on:80 / off:60) ── */
     let rafPending = false;
     let isScrolled = false;
+    /* Desktop title hand-off: 56px of upward scroll brings the links back (.peek),
+       56px down hides them again. Mobile never peeks. */
+    const desk = matchMedia('(min-width: 1024px)');
+    const PEEK = 56;
+    let lastY = window.scrollY, upRun = 0, downRun = 0;
     const SCROLL_ON  = 80;
     const SCROLL_OFF = 60;
 
@@ -608,6 +648,16 @@ const hardwareActive  = currentPath.startsWith('/hardware');
           } else if (isScrolled && y < SCROLL_OFF) {
             isScrolled = false;
             nav.classList.remove('scrolled');
+          }
+
+          const dy = y - lastY;
+          lastY = y;
+          if (desk.matches && nav.classList.contains('show-title')) {
+            if (dy < 0) { upRun -= dy; downRun = 0; if (upRun >= PEEK) nav.classList.add('peek'); }
+            else if (dy > 0) { downRun += dy; upRun = 0; if (downRun >= PEEK) nav.classList.remove('peek'); }
+          } else {
+            upRun = downRun = 0;
+            nav.classList.remove('peek');
           }
           rafPending = false;
         });
