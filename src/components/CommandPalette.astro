@@ -1,0 +1,480 @@
+---
+// Command palette (System 2). Opened by ⌘K / Ctrl+K, "/" and any [data-palette] control
+// (the nav search icon, which is a plain /search link without JS). The index loads on
+// first open and is prefetched on hover / focus / touch of the control.
+---
+<dialog class="cp" id="cp" aria-label="Search Modern Makes">
+  <div class="cp-top">
+    <svg class="cp-glass" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input
+      id="cp-input"
+      class="cp-input"
+      type="text"
+      role="combobox"
+      aria-expanded="true"
+      aria-controls="cp-list"
+      aria-autocomplete="list"
+      aria-label="Search hardware, articles and tools"
+      placeholder="Search hardware, articles, tools"
+      inputmode="search"
+      enterkeyhint="go"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+    />
+    <button type="button" class="cp-cancel" id="cp-cancel">Cancel</button>
+  </div>
+  <div class="cp-list" id="cp-list" role="listbox" aria-label="Results"></div>
+  <div class="cp-foot">
+    <span class="cp-keys" aria-hidden="true"><kbd>↑</kbd><kbd>↓</kbd> move <kbd>↵</kbd> open <kbd>esc</kbd> close</span>
+    <span class="cp-fresh" id="cp-fresh"></span>
+  </div>
+  <div class="sr-only" id="cp-status" role="status" aria-live="polite"></div>
+</dialog>
+
+<style is:global>
+  /* Hallmark · component: command palette · genre: editorial · theme: DESIGN.md (Workshop Press, dark plane)
+   * states: default · hover · focus · active · loading · error · empty (no disabled/success: rows navigate)
+   * motion: none on desktop (keyboard, high frequency); mobile sheet rises once on --dur-base */
+  dialog.cp {
+    padding: 0;
+    border: 1px solid var(--dark-border);
+    background: var(--dark-surface);
+    color: #fff;
+    color-scheme: dark;
+    overflow: hidden;
+    max-width: none;
+    max-height: none;
+  }
+  dialog.cp[open] { display: flex; flex-direction: column; }
+  dialog.cp::backdrop { background: rgba(0, 0, 0, 0.5); }
+  html:has(dialog.cp[open]) { overflow: hidden; scrollbar-gutter: stable; }
+
+  /* Desktop / tablet: centred panel, fixed height so results never make it jump. */
+  @media (min-width: 768px) {
+    dialog.cp {
+      margin: 12vh auto auto;
+      width: min(640px, calc(100% - 32px));
+      height: min(64vh, 520px);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+  }
+  /* Phone: full-height sheet. JS sizes it to visualViewport so the keyboard never covers results. */
+  @media (max-width: 767px) {
+    dialog.cp {
+      position: fixed;
+      inset: 0 0 auto 0;
+      margin: 0;
+      width: 100vw; /* over the reserved scrollbar gutter too */
+      height: 100dvh;
+      border: 0;
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+  }
+  @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+    dialog.cp[open] { transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out); }
+    @starting-style { dialog.cp[open] { transform: translateY(16px); opacity: 0; } }
+  }
+
+  .cp-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px 0 16px;
+    border-bottom: 1px solid var(--dark-border);
+    flex: none;
+  }
+  .cp-glass { color: var(--on-dark-muted); flex: none; }
+  .cp-input {
+    flex: 1;
+    min-width: 0;
+    height: 56px;
+    background: transparent;
+    border: 0;
+    outline: none; /* the only control in the dialog; the caret is the focus mark */
+    color: #fff;
+    font: 500 17px var(--fu);
+    caret-color: var(--accent);
+  }
+  .cp-input::placeholder { color: var(--on-dark-muted); }
+  .cp-cancel {
+    flex: none;
+    min-height: 44px;
+    padding: 0 10px;
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    color: var(--accent);
+    font: 600 15px var(--fu);
+    cursor: pointer;
+  }
+  .cp-cancel:active { background: rgba(255, 255, 255, 0.06); }
+  @media (min-width: 768px) { .cp-cancel { display: none; } }
+
+  .cp-list {
+    flex: 1 1 auto;
+    min-height: 0; /* lets the list shrink inside the sheet instead of pushing past the keyboard */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 4px 8px 10px;
+  }
+  .cp-g {
+    font: 700 10px var(--fm);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+    padding: 14px 10px 6px;
+  }
+  .cp-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 4px;
+    min-height: 44px;
+    padding: 7px 10px;
+    border-radius: var(--radius-md);
+    color: #fff;
+    text-decoration: none;
+    scroll-margin: 8px 0;
+  }
+  .cp-row[aria-selected="true"] { background: rgba(255, 255, 255, 0.08); }
+  .cp-row:active { background: rgba(255, 255, 255, 0.12); }
+  .cp-main { flex: 1 1 14rem; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .cp-t, .cp-s { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cp-t { font: 600 15px/1.3 var(--fu); }
+  .cp-s { font: 400 11px/1.4 var(--fm); color: var(--on-dark-muted); }
+  .cp-meta { flex: none; display: flex; align-items: center; gap: 6px; }
+  .cp-p {
+    font: 500 13px var(--fm);
+    font-variant-numeric: tabular-nums;
+    color: var(--on-dark-soft);
+    min-width: 4.5ch;
+    text-align: right;
+  }
+  .cp-empty { padding: 20px 10px 6px; font: 400 15px/1.6 var(--fb); color: var(--on-dark-soft); }
+  .cp-empty a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+  .cp-foot {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--dark-border);
+    font: 400 11px var(--fm);
+    color: var(--on-dark-muted);
+  }
+  .cp-foot kbd {
+    font: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-sm);
+    padding: 0 5px;
+    margin-right: 2px;
+  }
+  .cp-fresh { margin-left: auto; }
+  @media (max-width: 767px) {
+    .cp-main { flex-basis: 100%; } /* verdict, flow and price always on their own line */
+    .cp-keys { display: none; }
+    .cp-foot:has(.cp-fresh:empty) { display: none; }
+  }
+</style>
+
+<script>
+  type H = { t: string; b?: string; c: string; v?: string; vc?: string; f?: string; p?: number; u: string; k?: string };
+  type A = { t: string; c: string; d?: string; u: string };
+  type T = { t: string; c: string; k?: string; u: string };
+  type Index = { s?: string | null; h: H[]; a: A[]; t: T[] };
+  type Group = 'h' | 'a' | 't' | 'x';
+  type Row = { g: Group; u: string; t: string; sub: string; hw?: H; title: string; tw: string[]; ws: string[]; hay: string };
+
+  const dlg = document.getElementById('cp') as HTMLDialogElement;
+  const input = document.getElementById('cp-input') as HTMLInputElement;
+  const list = document.getElementById('cp-list') as HTMLElement;
+  const status = document.getElementById('cp-status') as HTMLElement;
+
+  const RECENT = 'mm-cp-recent';
+  const ACTIONS: [string, string, string][] = [
+    ['Printers', '/printers', 'Every printer and self-build ecosystem'],
+    ['Hardware', '/hardware', 'All hardware categories'],
+    ['Tools', '/tools', 'Calculators and calibration'],
+    ['Newsletter', '/newsletter', 'Subscribe to Modern Makes'],
+  ];
+  const GROUP_LABEL: Record<Group, string> = { h: 'Hardware', a: 'Articles', t: 'Tools', x: 'Actions' };
+
+  // ── Text matching ──
+  const norm = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const words = (s: string) => norm(s).split(/[^a-z0-9.]+/).map((w) => w.replace(/^\.+|\.+$/g, '')).filter(Boolean);
+
+  // Optimal string alignment distance: Levenshtein plus adjacent swaps ("rapdio" → "rapido" is 1).
+  function osa(a: string, b: string): number {
+    const m = a.length, n = b.length;
+    let p2: number[] = [], p1 = Array.from({ length: n + 1 }, (_, j) => j);
+    for (let i = 1; i <= m; i++) {
+      const c = [i];
+      for (let j = 1; j <= n; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        let v = Math.min(p1[j] + 1, c[j - 1] + 1, p1[j - 1] + cost);
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, p2[j - 2] + 1);
+        c.push(v);
+      }
+      p2 = p1; p1 = c;
+    }
+    return p1[n];
+  }
+  // A typo'd term is near a word if it is within 1 edit (2 for 7+ letters) of the word or its same-length prefix.
+  const near = (w: string, x: string) => {
+    if (w.length < 4 || x.length < 3) return false;
+    const max = w.length >= 7 ? 2 : 1;
+    return osa(w, x) <= max || (x.length > w.length && osa(w, x.slice(0, w.length)) <= max);
+  };
+
+  function score(r: Row, q: string, terms: string[]): number {
+    let s = r.title === q ? 100 : r.title.startsWith(q) ? 50 : 0;
+    for (const w of terms) {
+      let best = 0;
+      for (const x of r.tw) best = Math.max(best, x === w ? 16 : x.startsWith(w) ? 12 : 0);
+      if (best < 12) {
+        if (r.title.includes(w)) best = Math.max(best, 8);
+        if (!best && r.ws.some((x) => x.startsWith(w))) best = 6;
+        if (!best && r.hay.includes(w)) best = 4;
+        if (!best && r.tw.some((x) => near(w, x))) best = 5;
+        if (!best && r.ws.some((x) => near(w, x))) best = 2;
+      }
+      if (!best) return 0; // every term has to land somewhere
+      s += best;
+    }
+    return s;
+  }
+
+  // ── Index ──
+  let rows: Row[] = [];
+  let byUrl = new Map<string, Row>();
+  let loading: Promise<void> | null = null;
+
+  const row = (g: Group, u: string, t: string, sub: string, extra: string, hw?: H): Row => ({
+    g, u, t, sub, hw, title: norm(t), tw: words(t), ws: words(`${t} ${sub} ${extra}`), hay: norm(`${t} ${sub} ${extra}`),
+  });
+  const dot = (...p: (string | undefined)[]) => p.filter(Boolean).join(' · ');
+
+  function prepare(ix: Index) {
+    rows = [
+      ...ix.h.map((x) => row('h', x.u, x.t, dot(x.b, x.c, x.k), dot(x.v, x.f), x)),
+      ...ix.a.map((x) => row('a', x.u, x.t, dot(x.c, x.d), '')),
+      ...ix.t.map((x) => row('t', x.u, x.t, dot(x.c, x.k), 'tool calculator')),
+      ...ACTIONS.map(([t, u, s]) => row('x', u, t, s, '')),
+    ];
+    byUrl = new Map(rows.map((r) => [r.u, r]));
+  }
+
+  const load = () =>
+    (loading ??= fetch('/search-index.json')
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .then(prepare)
+      .catch(() => {
+        loading = null; // let the next open retry
+        if (dlg.open) list.innerHTML = '<p class="cp-empty">Search didn’t load. <a href="/search">Open the search page</a> instead.</p>';
+        throw 0;
+      }));
+
+  // ── Recents (localStorage is optional: private mode or blocked storage just means no recents) ──
+  const recents = (): string[] => {
+    try { const v = JSON.parse(localStorage.getItem(RECENT) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; }
+  };
+  const remember = (u: string) => {
+    try { localStorage.setItem(RECENT, JSON.stringify([u, ...recents().filter((x) => x !== u)].slice(0, 8))); } catch {}
+  };
+
+  // ── Render ──
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
+  const price = (p: number) => (Number.isInteger(p) ? usd0 : usd2).format(p);
+  let shown: HTMLAnchorElement[] = [];
+  let active = -1;
+  let n = 0;
+
+  const rowHtml = (r: Row) => {
+    const h = r.hw;
+    const meta = h && (h.v || h.f || h.p)
+      ? `<span class="cp-meta">${h.v ? `<span class="verdict ${h.vc} verdict-on-dark">${esc(h.v)}</span>` : ''}${h.f ? `<span class="flow-chip on-dark">${esc(h.f)}</span>` : ''}${h.p ? `<span class="cp-p">${price(h.p)}</span>` : ''}</span>`
+      : '';
+    return `<a class="cp-row" role="option" id="cp-o${n++}" href="${esc(r.u)}" tabindex="-1" aria-selected="false"><span class="cp-main"><span class="cp-t">${esc(r.t)}</span><span class="cp-s">${esc(r.sub)}</span></span>${meta}</a>`;
+  };
+  let gi = 0;
+  const groupHtml = (label: string, rs: Row[]) =>
+    rs.length ? `<div role="group" aria-labelledby="cp-g${gi}"><div class="cp-g" id="cp-g${gi++}">${label}</div>${rs.map(rowHtml).join('')}</div>` : '';
+
+  let statusT = 0;
+  function render() {
+    const raw = input.value.trim();
+    const q = norm(raw);
+    const terms = words(raw);
+    n = gi = 0;
+    let html = '';
+    let count = 0;
+    if (!terms.length) {
+      const rec = recents().map((u) => byUrl.get(u)).filter((r): r is Row => !!r);
+      html = groupHtml('Recent', rec) + groupHtml('Actions', rows.filter((r) => r.g === 'x'));
+    } else {
+      const hits = rows
+        .map((r) => ({ r, s: score(r, q, terms) }))
+        .filter((x) => x.s > 0)
+        .sort((x, y) => y.s - x.s || x.r.t.length - y.r.t.length);
+      const take = (g: Group, max: number) => hits.filter((x) => x.r.g === g).slice(0, max).map((x) => x.r);
+      const groups: [Group, Row[]][] = [['h', take('h', 6)], ['a', take('a', 4)], ['t', take('t', 4)], ['x', take('x', 2)]];
+      count = groups.reduce((c, [, rs]) => c + rs.length, 0);
+      if (count) html = groups.map(([g, rs]) => groupHtml(GROUP_LABEL[g], rs)).join('');
+      else {
+        // Nothing matched: offer the three hardware names closest to what was typed.
+        const close = rows
+          .filter((r) => r.g === 'h')
+          .map((r) => ({ r, d: Math.min(osa(q, r.title), ...r.tw.map((w) => osa(q, w))) }))
+          .sort((x, y) => x.d - y.d)
+          .slice(0, 3)
+          .map((x) => x.r);
+        html = `<p class="cp-empty">No matches for “${esc(raw)}”</p>` + groupHtml('Closest hardware', close);
+      }
+    }
+    list.innerHTML = html;
+    list.scrollTop = 0;
+    shown = [...list.querySelectorAll<HTMLAnchorElement>('.cp-row')];
+    active = -1;
+    if (shown.length) select(0, false, false);
+    else input.removeAttribute('aria-activedescendant');
+    clearTimeout(statusT);
+    statusT = window.setTimeout(() => {
+      status.textContent = !terms.length ? '' : count ? `${count} result${count === 1 ? '' : 's'}` : 'No matches';
+    }, 300);
+  }
+
+  // ── Prerender the highlighted result (Chromium; a no-op elsewhere) ──
+  const canSpec = (HTMLScriptElement as any).supports?.('speculationrules');
+  let specEl: HTMLScriptElement | null = null;
+  let specT = 0;
+  const prerender = (u: string) => {
+    if (!canSpec) return;
+    clearTimeout(specT);
+    // Short dwell so arrowing through ten rows doesn't start ten prerenders.
+    specT = window.setTimeout(() => {
+      if (specEl?.textContent?.includes(`"${u}"`)) return;
+      specEl?.remove();
+      specEl = document.createElement('script');
+      specEl.type = 'speculationrules';
+      specEl.textContent = JSON.stringify({ prerender: [{ source: 'list', urls: [u] }] });
+      document.head.append(specEl);
+    }, 100);
+  };
+
+  function select(i: number, scroll = true, user = true) {
+    if (!shown.length) return;
+    shown[active]?.setAttribute('aria-selected', 'false');
+    active = (i + shown.length) % shown.length;
+    const el = shown[active];
+    el.setAttribute('aria-selected', 'true');
+    input.setAttribute('aria-activedescendant', el.id);
+    if (scroll) el.scrollIntoView({ block: 'nearest' });
+    if (user) prerender(el.getAttribute('href')!);
+  }
+
+  // ── Open / close ──
+  let opener: HTMLElement | null = null;
+  const vv = window.visualViewport;
+  const phone = matchMedia('(max-width: 767px)');
+  function fit() {
+    if (!dlg.open || !vv || !phone.matches) { dlg.style.top = dlg.style.height = ''; return; }
+    dlg.style.top = `${vv.offsetTop}px`;
+    dlg.style.height = `${vv.height}px`;
+  }
+  vv?.addEventListener('resize', fit);
+  vv?.addEventListener('scroll', fit);
+
+  function open() {
+    if (dlg.open) return;
+    opener = document.activeElement as HTMLElement | null;
+    input.value = '';
+    const ready = rows.length > 0;
+    if (ready) render(); // index cached: results are in the first frame
+    else list.innerHTML = '<p class="cp-empty">Loading…</p>';
+    dlg.showModal();
+    fit();
+    input.focus(); // inside the gesture, so iOS raises the keyboard
+    if (!ready) load().then(() => { if (dlg.open) render(); }, () => {});
+  }
+  const close = () => { if (dlg.open) dlg.close(); };
+
+  dlg.addEventListener('close', () => {
+    if (opener?.isConnected) opener.focus({ preventScroll: true });
+    opener = null;
+  });
+  // Click on the backdrop (the dialog box itself, outside its rect) closes.
+  dlg.addEventListener('click', (e) => {
+    if (e.target !== dlg) return;
+    const r = dlg.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
+  });
+  document.getElementById('cp-cancel')!.addEventListener('click', close);
+  addEventListener('pagehide', close); // never come back from bfcache with it open
+
+  input.addEventListener('input', () => { if (rows.length) render(); });
+  input.addEventListener('keydown', (e) => {
+    if (e.isComposing) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      select(active + (e.key === 'ArrowDown' ? 1 : -1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const el = shown[active];
+      if (!el) return;
+      if (e.metaKey || e.ctrlKey) { remember(el.getAttribute('href')!); window.open(el.href, '_blank', 'noopener'); }
+      else el.click(); // a real link click: normal navigation, page transition and extrusion line
+    }
+  });
+  list.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    const el = (e.target as Element).closest<HTMLAnchorElement>('.cp-row');
+    const i = el ? shown.indexOf(el) : -1;
+    if (i > -1 && i !== active) select(i, false);
+  });
+  list.addEventListener('click', (e) => {
+    const el = (e.target as Element).closest<HTMLAnchorElement>('.cp-row');
+    if (!el) return;
+    remember(el.getAttribute('href')!);
+    if (!(e.metaKey || e.ctrlKey || e.shiftKey)) close();
+  });
+  // Scrolling results on a phone drops the keyboard so more of them fit.
+  list.addEventListener('touchmove', () => { if (document.activeElement === input) input.blur(); }, { passive: true });
+
+  // ── Triggers ──
+  for (const el of document.querySelectorAll<HTMLElement>('[data-palette]')) {
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-haspopup', 'dialog');
+    el.setAttribute('aria-controls', 'cp');
+    const warm = () => { load().catch(() => {}); };
+    el.addEventListener('pointerenter', warm);
+    el.addEventListener('focus', warm);
+    el.addEventListener('touchstart', warm, { passive: true });
+    el.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let it open /search in a new tab
+      e.preventDefault();
+      open();
+    });
+    // role="button" promises Space as well as Enter.
+    el.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); open(); } });
+  }
+  const typing = (t: EventTarget | null) =>
+    t instanceof Element && !!t.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
+  addEventListener('keydown', (e) => {
+    if (e.isComposing) return;
+    if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      dlg.open ? close() : open();
+    } else if (e.key === '/' && !e.metaKey && !e.ctrlKey && !e.altKey && !dlg.open && !typing(e.target)) {
+      e.preventDefault();
+      open();
+    }
+  });
+</script>

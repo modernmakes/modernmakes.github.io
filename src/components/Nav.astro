@@ -1,4 +1,5 @@
 ---
+import CommandPalette from './CommandPalette.astro';
 interface Props {
   currentPath?: string;
 }
@@ -54,24 +55,13 @@ const hardwareActive  = currentPath.startsWith('/hardware');
       <div class="nav-title" aria-hidden="true"><span></span></div>
 
       <div class="nav-right">
-        <div class="nav-search-wrap" id="nav-search-wrap">
-          <div class="nav-search-field" id="nav-search-field">
-            <input
-              type="text"
-              id="nav-search-input"
-              class="nav-search-input"
-              placeholder="Search Modern Makes…"
-              autocomplete="off"
-              aria-label="Search"
-            />
-          </div>
-          <button class="nav-search-btn" id="nav-search-btn" aria-label="Search">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="M21 21l-4.35-4.35"/>
-            </svg>
-          </button>
-        </div>
+        <!-- A plain link to /search without JS; CommandPalette turns [data-palette] into its trigger. -->
+        <a href="/search" class="nav-search-btn" id="nav-search-btn" data-palette aria-label="Search" aria-keyshortcuts="Meta+K Control+K /">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </a>
         <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <line class="h-line h-top" x1="3" y1="5"  x2="17" y2="5"/>
@@ -107,22 +97,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   </div>
 </div>
 
-<!-- Mobile/tablet search overlay -->
-<div class="search-overlay" id="search-overlay" aria-hidden="true" role="dialog" aria-label="Search">
-  <div class="search-overlay-box" id="search-overlay-box">
-    <input
-      type="text"
-      id="search-overlay-input"
-      class="search-overlay-input"
-      placeholder="Search Modern Makes…"
-      autocomplete="off"
-      aria-label="Search"
-    />
-    <button class="search-overlay-submit" id="search-overlay-submit">
-      Search
-    </button>
-  </div>
-</div>
+<CommandPalette />
 
 <style is:global>
   /* ─── ENTRANCE ANIMATION ─── */
@@ -346,39 +321,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     flex-shrink: 0;
   }
 
-  /* ─── DESKTOP SEARCH ─── */
-  .nav-search-wrap {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .nav-search-field {
-    width: 0;
-    overflow: hidden;
-    transition: width 240ms cubic-bezier(0.4, 0, 0, 1);
-  }
-  .nav-search-wrap.open .nav-search-field { width: 220px; }
-
-  .nav-search-input {
-    width: 220px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
-    padding: 0 12px;
-    font-family: var(--fu, 'Barlow', sans-serif);
-    font-size: 13px;
-    color: #fff;
-    outline-color: transparent;
-    caret-color: var(--accent);
-  }
-  .nav-search-input::placeholder { color: var(--on-dark-muted); }
-  .nav-search-input:focus {
-    border-color: rgba(255, 90, 31, 0.5);
-    background: rgba(255, 255, 255, 0.1);
-  }
-
+  /* ─── SEARCH (opens the command palette) ─── */
   .nav-search-btn {
     display: flex;
     align-items: center;
@@ -400,11 +343,6 @@ const hardwareActive  = currentPath.startsWith('/hardware');
   /* Invisible 44 x 44 hit area (Apple HIG) without changing the visible size */
   .nav-search-btn::after,
   .nav-hamburger::after { content: ''; position: absolute; inset: -6px; }
-  .nav-search-wrap.open .nav-search-btn { color: var(--accent); }
-
-  @media (max-width: 1023px) {
-    .nav-search-field { display: none; }
-  }
 
   /* ─── HAMBURGER ─── */
   .nav-hamburger {
@@ -548,80 +486,6 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .panel-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
   }
   .panel-link.active { color: #fff; }
-
-  /* ─── MOBILE SEARCH OVERLAY ─── */
-  @keyframes overlay-enter {
-    from { opacity: 0; transform: translateY(-12px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .search-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0);
-    z-index: 1100;
-    align-items: center;
-    justify-content: center;
-    transition: background 200ms ease;
-  }
-  .search-overlay.open {
-    display: flex;
-    background: rgba(0, 0, 0, 0.75);
-  }
-
-  .search-overlay-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: calc(100% - 48px);
-    max-width: 400px;
-    background: var(--black);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    padding: 20px;
-    animation: overlay-enter 220ms cubic-bezier(0.4, 0, 0, 1) both;
-  }
-
-  .search-overlay-input {
-    width: 100%;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 6px;
-    padding: 0 14px;
-    font-family: var(--fu, 'Barlow', sans-serif);
-    font-size: 16px;
-    color: #fff;
-    outline-color: transparent;
-    caret-color: var(--accent);
-  }
-  .search-overlay-input::placeholder { color: var(--on-dark-muted); }
-  .search-overlay-input:focus {
-    border-color: rgba(255, 90, 31, 0.5);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .search-overlay-submit {
-    width: 100%;
-    height: 44px;
-    background: var(--accent);
-    color: var(--on-accent);
-    font-family: var(--fu, 'Barlow', sans-serif);
-    font-size: 14px;
-    font-weight: 700;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 150ms ease;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .search-overlay-submit:hover { background: var(--accent-mid); }
-  }
-
-  @media (min-width: 1024px) {
-    .search-overlay { display: none !important; }
-  }
 
   /* ─── PAGE TITLE IN NAV (under 1024px) ─── */
   .nav-title { display: none; }
@@ -815,79 +679,12 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closePanel()));
 
 
-    /* ── Desktop search ── */
-    const searchWrap  = document.getElementById('nav-search-wrap')  as HTMLElement;
-    const searchBtn   = document.getElementById('nav-search-btn')   as HTMLButtonElement;
-    const searchInput = document.getElementById('nav-search-input') as HTMLInputElement;
-
-    searchBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (window.innerWidth < 1024) {
-        openSearchOverlay();
-      } else {
-        const isOpen = searchWrap.classList.toggle('open');
-        if (isOpen) {
-          setTimeout(() => searchInput.focus(), 250);
-        } else {
-          searchInput.value = '';
-        }
-      }
-    });
-
-    searchInput.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        searchWrap.classList.remove('open');
-        searchInput.value = '';
-      }
-      if (e.key === 'Enter' && searchInput.value.trim()) {
-        window.location.href = '/search?q=' + encodeURIComponent(searchInput.value.trim());
-      }
-    });
-
-    document.addEventListener('click', e => {
-      if (!searchWrap.contains(e.target as Node)) {
-        searchWrap.classList.remove('open');
-        if (searchInput) searchInput.value = '';
-      }
-    });
-
-    /* ── Mobile search overlay ── */
-    const searchOverlay       = document.getElementById('search-overlay')        as HTMLElement;
-    const searchOverlayInput  = document.getElementById('search-overlay-input')  as HTMLInputElement;
-    const searchOverlaySubmit = document.getElementById('search-overlay-submit') as HTMLButtonElement;
-    const searchOverlayBox    = document.getElementById('search-overlay-box')    as HTMLElement;
-
-    function openSearchOverlay() {
-      searchOverlay.classList.add('open');
-      searchOverlay.setAttribute('aria-hidden', 'false');
-      setTimeout(() => searchOverlayInput.focus(), 100);
-    }
-    function closeSearchOverlay() {
-      searchOverlay.classList.remove('open');
-      searchOverlay.setAttribute('aria-hidden', 'true');
-      if (searchOverlayInput) searchOverlayInput.value = '';
-    }
-
-    searchOverlay.addEventListener('click', e => {
-      if (!searchOverlayBox.contains(e.target as Node)) closeSearchOverlay();
-    });
-
-    searchOverlayInput.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeSearchOverlay();
-      if (e.key === 'Enter' && searchOverlayInput.value.trim()) {
-        window.location.href = '/search?q=' + encodeURIComponent(searchOverlayInput.value.trim());
-      }
-    });
-
-    searchOverlaySubmit.addEventListener('click', () => {
-      if (searchOverlayInput.value.trim()) {
-        window.location.href = '/search?q=' + encodeURIComponent(searchOverlayInput.value.trim());
-      }
-    });
+    /* Search opens the palette (CommandPalette.astro); close the menu first so it isn't left open underneath. */
+    document.getElementById('nav-search-btn')?.addEventListener('click', () => closePanel());
 
     /* ── Escape closes everything ── */
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closePrinters(); closePanel(true); closeSearchOverlay(); }
+      if (e.key === 'Escape') { closePrinters(); closePanel(true); }
     });
 
     /* ── Auto-close on resize to desktop ── */
