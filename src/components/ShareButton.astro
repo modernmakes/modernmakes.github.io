@@ -10,7 +10,7 @@ interface Props {
 }
 const { title, tone = 'light' } = Astro.props;
 ---
-<button type="button" class:list={[tone === 'dark' ? 'comp-act' : 'share-btn']} data-share data-share-title={title}>
+<button type="button" class:list={[tone === 'dark' ? 'comp-act' : 'share-btn']} data-share data-haptic data-share-title={title}>
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
   <span>Share</span>
 </button>
@@ -46,6 +46,7 @@ const { title, tone = 'light' } = Astro.props;
 
 <script>
   import { openSheet } from '../scripts/sheet';
+  import { buzz } from '../scripts/haptics';
 
   const btn = document.querySelector<HTMLButtonElement>('[data-share]');
   const dlg = document.getElementById('share-sheet');
@@ -67,6 +68,7 @@ const { title, tone = 'light' } = Astro.props;
     }
 
     btn.addEventListener('click', async () => {
+      buzz(); // Android; on iPhone the label inside the button does the tap
       const url = link();
       if (native()) {
         try { await navigator.share({ title, url }); } catch { /* dismissed, or not allowed: nothing to do */ }

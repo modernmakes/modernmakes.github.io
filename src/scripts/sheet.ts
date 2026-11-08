@@ -16,6 +16,8 @@
 // (data-desktop="popover": non-modal, light dismiss, scales in from the trigger) or "plain" (the
 // palette: modal, no animation). Reduced motion removes the slide, spring and scale; dragging works.
 // Opening or closing never changes scrollY.
+// Triggers with data-haptic get a tap on iPhone (haptics.ts arms them) and a 10ms vibration on Android.
+import { armAll, buzz } from './haptics';
 
 type Mode = 'sheet' | 'modal' | 'popover' | 'plain';
 type Sample = { y: number; t: number };
@@ -311,6 +313,7 @@ document.addEventListener('click', (e) => {
   const t = e.target as Element;
   const trig = t.closest<HTMLElement>('[data-sheet]');
   if (trig) {
+    if (trig.hasAttribute('data-haptic')) buzz();
     if (cur?.dlg.id === trig.dataset.sheet) closeSheet();
     else openSheet(trig.dataset.sheet!, trig, (e as MouseEvent).detail === 0); // detail 0: opened from the keyboard
     return;
@@ -341,3 +344,5 @@ addEventListener('scroll', () => {
 }, { passive: true });
 phone.addEventListener('change', () => { if (cur) closeSheet(cur.dlg, true); });
 addEventListener('pagehide', () => { if (cur) closeSheet(cur.dlg, true); }); // never return from bfcache with one open
+
+armAll();
