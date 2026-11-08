@@ -10,6 +10,8 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 ---
 
 <nav class="nav" id="site-nav" aria-label="Primary navigation">
+  <!-- Reading progress (articles, guides, comparisons). Before .nav-ext so the extrusion line paints over it. -->
+  <div class="nav-prog" aria-hidden="true"></div>
   <div class="nav-ext" aria-hidden="true"></div>
   <div class="nav-bar">
     <div class="nav-inner">
@@ -529,6 +531,29 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .nav-title { transform: none; transition: opacity var(--dur-fast) var(--ease-out); }
   }
 
+  /* ─── READING PROGRESS ───
+     1px muted hairline along the bottom of the nav, filling as the article body
+     ([data-progress]) is read: 0 when its top meets the nav, 1 when its end meets the
+     bottom of the screen. Scroll-driven where supported, else a passive scroll fallback
+     in the script below. Information, not decoration: kept under reduced motion. */
+  .nav-prog {
+    display: none;
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--g2);
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
+  }
+  html:has([data-progress]) .nav-prog { display: block; }
+  @keyframes nav-prog { to { transform: scaleX(1); } }
+  @supports (animation-timeline: view()) {
+    html { timeline-scope: --read; }
+    [data-progress] { view-timeline: --read block; view-timeline-inset: var(--nav-h) 0px; }
+    .nav-prog { animation: nav-prog linear both; animation-timeline: --read; animation-range: contain 0% contain 100%; }
+  }
+
   /* ─── LARGE-TITLE HAND-OFF (1024px and up) ───
      The links fade out and the page title fades in left of search. Scrolling up 56px
      (.peek) brings the links back. Opacity only, so the nav never changes size; the
@@ -676,6 +701,25 @@ const hardwareActive  = currentPath.startsWith('/hardware');
         ([e]) => nav.classList.toggle('show-title', !e.isIntersecting && e.boundingClientRect.height > 0 && e.boundingClientRect.bottom <= navH),
         { rootMargin: `-${navH}px 0px 0px 0px` },
       ).observe(pageH1);
+    }
+
+    /* ── Reading progress fallback (no scroll-driven animations) ── */
+    const prog = nav.querySelector<HTMLElement>('.nav-prog');
+    const readBody = document.querySelector<HTMLElement>('[data-progress]');
+    if (prog && readBody && !CSS.supports('animation-timeline: view()')) {
+      const barNavH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+      let progPending = false;
+      const paint = () => {
+        progPending = false;
+        const r = readBody.getBoundingClientRect();
+        const span = r.height - (innerHeight - barNavH);
+        const p = span > 0 ? (barNavH - r.top) / span : r.bottom <= innerHeight ? 1 : 0;
+        prog.style.transform = `scaleX(${Math.min(1, Math.max(0, p))})`;
+      };
+      const queue = () => { if (!progPending) { progPending = true; requestAnimationFrame(paint); } };
+      addEventListener('scroll', queue, { passive: true });
+      addEventListener('resize', queue);
+      paint();
     }
 
     /* ── Printers dropdown ── */
