@@ -985,3 +985,39 @@ form[data-subscribe][hidden] { display: none; } /* the forms set display: flex *
   .sub-check path { animation: none; stroke-dashoffset: 0; }
 }
 [data-subscribe-msg]:focus { outline: none; } /* focused by script after success; not a control */
+
+/* ── SWITCH (native <input type="checkbox" switch role="switch">) ──
+ * Hallmark · component: switch · states: off · on · focus-visible · active
+ * Safari 17.4+ draws its own switch and plays the system haptic on a real tap: leave it native, only tint it.
+ * Every other browser gets this styled fallback. The label wraps text and input, so a tap anywhere toggles it.
+ * On is ink, not orange (the Pointer Rule). Reduced motion: the thumb jumps instead of sliding. */
+.mm-switch {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 44px;
+  font: 600 14px var(--fu); color: var(--black);
+  cursor: pointer;
+}
+.mm-switch input { flex: none; margin: 0; accent-color: var(--black); cursor: pointer; }
+@supports not selector(::thumb) {
+  .mm-switch input {
+    appearance: none; -webkit-appearance: none;
+    position: relative;
+    width: 44px; height: 26px;
+    border-radius: 13px;
+    background: var(--border-s);
+    box-shadow: inset 0 0 0 1px var(--g2);
+    transition: background-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .mm-switch input::before {
+    content: '';
+    position: absolute; top: 3px; left: 3px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: translate var(--dur-base) var(--spring-snap);
+  }
+  .mm-switch input:checked { background: var(--black); box-shadow: none; }
+  .mm-switch input:checked::before { translate: 18px 0; }
+  .mm-switch input:active::before { scale: 1.08 1; }
+  @media (prefers-reduced-motion: reduce) { .mm-switch input::before { transition: none; } }
+}

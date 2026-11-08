@@ -22,10 +22,12 @@ const currentPath = '/tools';
       <aside class="ms-sidebar">
 
         <div class="ms-section-label">Supply Voltage</div>
-        <div class="ms-volt-toggle">
-          <button type="button" class="ms-volt-btn active" id="btn24">24V</button>
-          <button type="button" class="ms-volt-btn" id="btn48">48V</button>
-        </div>
+        <!-- A real on/off setting, so a native switch: Safari draws and taps its own; others get .mm-switch. -->
+        <label class="mm-switch" for="volt48">
+          <span class="mm-switch-text">48V supply</span>
+          <input type="checkbox" switch role="switch" id="volt48" aria-describedby="volt48-hint">
+        </label>
+        <p class="ms-volt-hint" id="volt48-hint">Off runs every curve at 24V.</p>
 
         <div class="ms-divider"></div>
         <div class="ms-section-label">Drive Settings</div>
@@ -197,15 +199,7 @@ const currentPath = '/tools';
 }
 .ms-input:focus { outline: none; border-color: var(--accent); }
 
-.ms-volt-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 0; }
-.ms-volt-btn {
-  font-family: var(--fu); font-size: 14px; font-weight: 700; padding: 8px 0; flex: 1;
-  background: var(--bg); color: var(--g2); border: none; cursor: pointer; transition: all .12s;
-}
-.ms-volt-btn.active { background: var(--black); color: #fff; }
-@media (hover: hover) and (pointer: fine) {
-  .ms-volt-btn:not(.active):hover { background: var(--border); }
-}
+.ms-volt-hint { margin: 4px 0 0; font-family: var(--fu); font-size: 11px; color: var(--g2); }
 
 .ms-computed-box {
   background: rgba(255,90,31,.06); border: 1px solid rgba(255,90,31,.2);
@@ -454,7 +448,8 @@ function buildChartConfig(datasets: any[]) {
 
 // ── MAIN ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  let voltage     = 24;
+  const volt48    = document.getElementById('volt48') as HTMLInputElement;
+  let voltage     = volt48.checked ? 48 : 24; // the browser may restore the switch on back/forward
   const selected  = new Set<string>(['ldo-42sth48-2504ac', 'omc-17hs19-2004s1']);
   let chart: any  = null;
   let maxMsgTimer: ReturnType<typeof setTimeout> | null = null;
@@ -613,16 +608,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Wire inputs
-  document.getElementById('btn24')?.addEventListener('click', () => {
-    voltage = 24;
-    document.getElementById('btn24')?.classList.add('active');
-    document.getElementById('btn48')?.classList.remove('active');
-    renderAll();
-  });
-  document.getElementById('btn48')?.addEventListener('click', () => {
-    voltage = 48;
-    document.getElementById('btn48')?.classList.add('active');
-    document.getElementById('btn24')?.classList.remove('active');
+  volt48.addEventListener('change', () => {
+    voltage = volt48.checked ? 48 : 24;
     renderAll();
   });
   ['driveCurrent', 'pulleyTeeth', 'accelInput', 'massInput'].forEach(id => {
