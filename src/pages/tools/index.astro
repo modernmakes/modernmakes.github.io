@@ -3,85 +3,14 @@ import ToolHero from '../../components/ToolHero.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import toolsData from '../../data/tools.json';
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
 
-const tools = [
-  {
-    name: 'Pressure Advance Calibration',
-    description: 'Generate a PA/LA test pattern for Klipper, Marlin, or RepRapFirmware. Supports presets for Voron, Bambu, and Prusa.',
-    href: '/tools/pressure-advance',
-    badge: 'Klipper · Marlin · RRF',
-    category: 'Calibration',
-    icon: 'pa',
-  },
-  {
-    name: 'Retraction Calibration',
-    description: 'Generate a retraction distance test tower for direct drive or Bowden setups. Finds your optimal retraction in one print.',
-    href: '/tools/retraction-tuning',
-    badge: 'Direct Drive · Bowden',
-    category: 'Calibration',
-    icon: 'retract',
-  },
-  {
-    name: 'Flow Rate Calculator',
-    description: 'Calculate the volumetric flow rate your hotend must sustain. Shows which hotend tier your print settings require.',
-    href: '/tools/flowrate',
-    badge: 'mm³/s',
-    category: 'Calibration',
-    icon: 'flow',
-  },
-  {
-    name: 'Print Cost Estimator',
-    description: 'Calculate filament, electricity, and total cost per print job. Useful for quoting and material budgeting.',
-    href: '/tools/cost',
-    badge: '$/print',
-    category: 'Planning',
-    icon: 'cost',
-  },
-  {
-    name: 'Filament Converter',
-    description: 'Convert between filament weight and length for PLA, PETG, ABS, ASA, PA-CF, and TPU at 1.75mm or 2.85mm.',
-    href: '/tools/filament-converter',
-    badge: 'g ↔ m',
-    category: 'Utility',
-    icon: 'convert',
-  },
-  {
-    name: 'PA Calculator',
-    description: 'Map Pressure Advance values across a speed/acceleration grid. Import OrcaSlicer PA sweep results to auto-fill.',
-    href: '/tools/pa-calculator',
-    badge: 'PA grid',
-    category: 'Calibration',
-    icon: 'pa',
-  },
-  {
-    name: 'Pin Mapper',
-    description: 'Quick-reference Klipper pin lookup for BTT Octopus, Manta M8P, SKR 3, Fysetc Spider, and LDO Leviathan.',
-    href: '/tools/pin-mapper',
-    badge: 'Klipper pins',
-    category: 'Reference',
-    icon: 'pin',
-  },
-  {
-    name: 'Motor Simulator',
-    description: 'Compare common Voron stepper motors at 24V or 48V. Usable current, estimated torque, and recommended use cases.',
-    href: '/tools/motor-simulator',
-    badge: 'AWD · 48V',
-    category: 'Reference',
-    icon: 'motor',
-  },
-  {
-    name: 'PA Tuner',
-    description: 'AI-powered Pressure Advance analysis. Describe your setup, paste PA data or upload a test print photo for recommendations.',
-    href: '/tools/pa-tuner',
-    badge: 'AI · Vision',
-    category: 'Calibration',
-    icon: 'ai',
-  },
-];
+// Shared with the search index (src/lib/search-index.ts).
+const tools: { name: string; description: string; href: string; badge: string; category: string; icon: string; external?: boolean }[] = toolsData;
 
 const iconSvgs: Record<string, string> = {
   pa: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 4 4 4-6 4 10"/></svg>`,
