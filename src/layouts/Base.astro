@@ -102,11 +102,15 @@ const siteURL = new URL('/', Astro.site).href;
 </head>
 <body data-hero={hasHero ? "true" : undefined}>
   <slot name="nav" />
-  <main class={heroPage ? 'main-has-hero' : ''}>
-    {!hasPageH1 && <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>}
-    <slot />
-  </main>
-  <slot name="footer" />
+  <!-- Everything under the nav. A phone sheet scales and rounds this one element (the card-stack cue);
+       the nav, sheets and dialogs stay outside it so they never scale. -->
+  <div id="page">
+    <main class={heroPage ? 'main-has-hero' : ''}>
+      {!hasPageH1 && <h1 class="sr-only">Modern Makes — Editorial coverage of 3D printers, filament, mods, and builds that matter</h1>}
+      <slot />
+    </main>
+    <slot name="footer" />
+  </div>
   <script>
     // Shared scroll-reveal (M1) — one observer for every [data-reveal] on the page.
     // Adds .is-revealed, staggered by data-reveal-delay. Replaces the per-section
