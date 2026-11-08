@@ -42,7 +42,9 @@ const mainLinks = [
           <button
             class:list={['nav-dd-btn', { active: printersActive }]}
             id="printers-btn"
-            aria-haspopup="true"
+            type="button"
+            popovertarget="printers-panel"
+            aria-haspopup="menu"
             aria-expanded="false"
           >
             Printers
@@ -50,7 +52,7 @@ const mainLinks = [
               <path d="M6 9l6 6 6-6"/>
             </svg>
           </button>
-          <div class="nav-dd-panel" id="printers-panel" role="menu" aria-labelledby="printers-btn">
+          <div class="nav-dd-panel" id="printers-panel" popover role="menu" aria-labelledby="printers-btn">
             <a href="/printers" class="nav-dd-item" role="menuitem"><strong>All printers</strong></a>
             <a href="/voron" class="nav-dd-item" role="menuitem"><strong>Voron</strong><span class="sep"> · </span><span class="desc">2.4, Trident</span></a>
           </div>
@@ -293,19 +295,35 @@ const mainLinks = [
   .chevron { flex-shrink: 0; transition: transform 150ms ease; }
   .nav-dd.open .chevron { transform: rotate(180deg); }
 
+  /* The panel is a [popover]: top layer, light dismiss and Esc for free. JS places it under the trigger and
+     sets its transform-origin there, so it scales in from the button (0.96, 180ms); it leaves faster (150ms).
+     The UA hides it while closed; the exit runs because display/overlay transition discretely. */
   .nav-dd-panel {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
+    position: fixed;
+    inset: auto;
+    margin: 0;
     min-width: 200px;
     background: #222;
+    border: 0;
     border-radius: 8px;
     padding: 6px;
-    z-index: 1001;
+    color: #fff;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: scale(var(--scale-enter));
+    transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), display var(--dur-fast) allow-discrete, overlay var(--dur-fast) allow-discrete;
   }
-  .nav-dd.open .nav-dd-panel { display: block; }
+  .nav-dd-panel:popover-open { opacity: 1; transform: none; transition-duration: 180ms; }
+  @starting-style { .nav-dd-panel:popover-open { opacity: 0; transform: scale(var(--scale-enter)); } }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-dd-panel { transform: none; transition-duration: var(--dur-fast); }
+    @starting-style { .nav-dd-panel:popover-open { transform: none; } }
+  }
+  /* No Popover API: a plain absolutely-positioned panel toggled by a class (rare; desktop only). */
+  @supports not selector(:popover-open) {
+    .nav-dd-panel { display: none; position: absolute; top: calc(100% + 8px); left: 0; opacity: 1; transform: none; z-index: 1001; }
+    .nav-dd.open .nav-dd-panel { display: block; }
+  }
 
   .nav-dd-item {
     display: flex;
@@ -614,29 +632,60 @@ const mainLinks = [
       paint();
     }
 
-    /* ── Printers dropdown ── */
-    function closePrinters() {
-      printersDd.classList.remove('open');
-      printersBtn.setAttribute('aria-expanded', 'false');
+    /* ── Printers dropdown: the Popover API does light dismiss, Esc and focus return; this places it under the
+       trigger, closes it on scroll (the nav moves), and adds menu keys. ── */
+    const panel = document.getElementById('printers-panel') as HTMLElement;
+    const hasPopover = 'showPopover' in panel;
+    const items = () => [...panel.querySelectorAll<HTMLElement>('[role="menuitem"]')];
+    const placePrinters = () => {
+      const r = printersBtn.getBoundingClientRect();
+      panel.style.left = `${r.left}px`;
+      panel.style.top = `${r.bottom + 8}px`;
+      panel.style.transformOrigin = `${Math.round(r.width / 2)}px -8px`; // scale in from the trigger
+    };
+    const closeOnScroll = () => panel.hidePopover();
+    let viaKeyboard = false;
+
+    if (hasPopover) {
+      printersBtn.addEventListener('click', (e) => { viaKeyboard = e.detail === 0; placePrinters(); });
+      panel.addEventListener('toggle', (e) => {
+        const open = (e as ToggleEvent).newState === 'open';
+        printersDd.classList.toggle('open', open);
+        printersBtn.setAttribute('aria-expanded', String(open));
+        if (open) {
+          addEventListener('scroll', closeOnScroll, { passive: true });
+          if (viaKeyboard) items()[0]?.focus();
+        } else removeEventListener('scroll', closeOnScroll);
+      });
+      // Tabbing out of the open menu closes it.
+      panel.addEventListener('focusout', (e) => {
+        const to = (e as FocusEvent).relatedTarget;
+        if (to instanceof Node && !panel.contains(to) && to !== printersBtn) panel.hidePopover();
+      });
+      // Menu keys: arrows move between items, Home/End jump, ArrowDown/Up on the button opens it.
+      printersBtn.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+        e.preventDefault();
+        viaKeyboard = true;
+        placePrinters();
+        if (!panel.matches(':popover-open')) panel.showPopover();
+        const list = items();
+        (e.key === 'ArrowDown' ? list[0] : list[list.length - 1])?.focus();
+      });
+      panel.addEventListener('keydown', (e) => {
+        const list = items(), i = list.indexOf(document.activeElement as HTMLElement);
+        const to = e.key === 'ArrowDown' ? (i + 1) % list.length : e.key === 'ArrowUp' ? (i - 1 + list.length) % list.length : e.key === 'Home' ? 0 : e.key === 'End' ? list.length - 1 : -1;
+        if (to < 0) return;
+        e.preventDefault();
+        list[to].focus();
+      });
+    } else {
+      // Fallback for browsers without the Popover API: click toggles, outside click and Esc close.
+      const setOpen = (o: boolean) => { printersDd.classList.toggle('open', o); printersBtn.setAttribute('aria-expanded', String(o)); };
+      printersBtn.addEventListener('click', (e) => { e.stopPropagation(); setOpen(!printersDd.classList.contains('open')); });
+      document.addEventListener('click', (e) => { if (!printersDd.contains(e.target as Node)) setOpen(false); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
     }
-    function openPrinters() {
-      printersDd.classList.add('open');
-      printersBtn.setAttribute('aria-expanded', 'true');
-    }
-
-    printersBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      printersDd.classList.contains('open') ? closePrinters() : openPrinters();
-    });
-
-    document.addEventListener('click', e => {
-      if (!printersDd.contains(e.target as Node)) closePrinters();
-    });
-
-    /* ── Escape closes everything ── */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closePrinters(); // the menu and palette handle their own Esc (sheet.ts)
-    });
 
     /* ── The menu popover has no business open once the desktop links are showing ── */
     matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) closeSheet('menu-sheet', true); });
