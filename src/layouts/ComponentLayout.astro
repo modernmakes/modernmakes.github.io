@@ -341,7 +341,9 @@ const breadcrumbSchema = {
                     <tr class="comp-specs-row">
                       <td class="comp-specs-label">{s.label}</td>
                       <td class="comp-specs-val">
-                        {s.value}
+                        {s.label === 'Part Number'
+                          ? <span class="comp-pn"><span>{s.value}</span><button type="button" class="comp-copy" data-copy-text={s.value} data-haptic aria-label={`Copy part number ${s.value}`}><span data-copy-label>Copy</span></button></span>
+                          : s.value}
                         {s.note && <span class="comp-specs-note">{s.note}</span>}
                       </td>
                     </tr>
@@ -507,6 +509,7 @@ const breadcrumbSchema = {
   <!-- Hold first render until the hero exists, so the card→page zoom can name it in pagereveal. -->
   <link rel="expect" href="#comp-hero" blocking="render" slot="head" />
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(productSchema)}></script>
+  <script>import '../scripts/copy';</script>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
   <slot name="head" slot="head" />
 </Base>
@@ -1037,6 +1040,18 @@ const breadcrumbSchema = {
   color: var(--black);
   vertical-align: top;
 }
+/* Part number: the one spec people paste somewhere (a cart, a forum post), so it gets a copy control. */
+.comp-pn { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.comp-copy {
+  position: relative; min-height: 32px; padding: 0 12px;
+  font: 700 11px var(--fu); color: var(--black); background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.comp-copy:active { scale: var(--scale-press-btn); background: var(--bg); transition-duration: var(--dur-press); }
+.comp-copy.copied { border-color: var(--g2); }
+@media (hover: hover) and (pointer: fine) { .comp-copy:hover { background: var(--bg); border-color: var(--g2); } }
+@media (prefers-reduced-motion: reduce) { .comp-copy:active { scale: none; } }
 .comp-specs-note {
   display: block;
   font-size: 11px;

@@ -16,7 +16,7 @@ const { title, tone = 'light' } = Astro.props;
 </button>
 
 <Sheet id="share-sheet" title="Share" detent="medium" desktop="popover">
-  <button type="button" class="sheet-row" data-share-copy>
+  <button type="button" class="sheet-row" data-share-copy data-haptic>
     <span class="grow">Copy link</span>
   </button>
   <a class="sheet-row" data-share-reddit href="https://www.reddit.com/submit" target="_blank" rel="noopener noreferrer">
@@ -47,6 +47,7 @@ const { title, tone = 'light' } = Astro.props;
   import { openSheet } from '../scripts/sheet';
   import { buzz } from '../scripts/haptics';
   import { toast } from '../scripts/toast';
+  import { copyText } from '../scripts/copy';
 
   const btn = document.querySelector<HTMLButtonElement>('[data-share]');
   const dlg = document.getElementById('share-sheet');
@@ -81,14 +82,8 @@ const { title, tone = 'light' } = Astro.props;
 
     copy.addEventListener('click', async () => {
       const url = copy.dataset.url || link();
-      let ok = false;
-      try { await navigator.clipboard.writeText(url); ok = true; } catch {
-        const ta = document.createElement('textarea');
-        ta.value = url; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0;top:0';
-        document.body.append(ta); ta.select();
-        try { ok = document.execCommand('copy'); } catch {}
-        ta.remove();
-      }
+      buzz();
+      const ok = await copyText(url);
       toast(ok ? 'Link copied' : 'Couldn’t copy. Long-press to select instead.');
     });
   }

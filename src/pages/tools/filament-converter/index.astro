@@ -73,7 +73,7 @@ const currentPath = '/tools';
               <div class="fc-result-line" id="lenToWeight">= <strong>—</strong></div>
             </div>
           </div>
-          <div class="fc-formula-note" id="formulaNote">PLA · 1.75mm · ρ=1.24 g/cm³</div>
+          <div class="fc-formula-note"><span id="formulaNote">PLA · 1.75mm · ρ=1.24 g/cm³</span><button type="button" class="fc-copy-btn" id="copyBtn" data-haptic><span data-copy-label>Copy result</span></button></div>
         </div>
 
         <!-- Spool remaining -->
@@ -174,7 +174,17 @@ const currentPath = '/tools';
 .fc-big-input { font-size: 18px !important; padding: 12px 14px !important; font-weight: 600; }
 .fc-result-line { font-family: var(--fm); font-size: 13px; color: var(--g2); min-height: 20px; }
 .fc-result-line strong { color: var(--accent-dk); font-size: 15px; }
-.fc-formula-note { margin-top: 16px; font-family: var(--fu); font-size: 10px; color: var(--g2); padding-top: 12px; border-top: 1px solid var(--border); }
+.fc-formula-note { margin-top: 16px; font-family: var(--fu); font-size: 10px; color: var(--g2); padding-top: 12px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.fc-copy-btn {
+  position: relative; min-height: 36px; padding: 0 14px;
+  font: 700 12px var(--fu); color: var(--black); background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.fc-copy-btn:active { scale: var(--scale-press-btn); background: var(--bg); transition-duration: var(--dur-press); }
+.fc-copy-btn.copied { border-color: var(--g2); }
+@media (hover: hover) and (pointer: fine) { .fc-copy-btn:hover { background: var(--bg); border-color: var(--g2); } }
+@media (prefers-reduced-motion: reduce) { .fc-copy-btn:active { scale: none; } }
 
 .fc-spool-bar-wrap { display: flex; flex-direction: column; gap: 8px; }
 .fc-spool-bar-track { height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
@@ -188,6 +198,7 @@ const currentPath = '/tools';
 </style>
 
 <script>
+import { copy } from '../../../scripts/copy';
 let lastChanged: 'weight' | 'length' = 'weight';
 
 function getDensity(): number {
@@ -267,6 +278,12 @@ function updateAll() {
 document.querySelectorAll<HTMLInputElement>('input[name="dia"]').forEach(r => r.addEventListener('change', updateAll));
 (document.getElementById('remG') as HTMLInputElement)?.addEventListener('input', updateAll);
 (document.getElementById('fullG') as HTMLInputElement)?.addEventListener('input', updateAll);
+
+// The live direction's converted value, with its unit ("80.7 m" or "124.0 g").
+document.getElementById('copyBtn')?.addEventListener('click', (e) => {
+  const v = document.querySelector(lastChanged === 'weight' ? '#weightToLen strong' : '#lenToWeight strong')?.textContent ?? '';
+  if (v && v !== '—') copy(e.currentTarget as HTMLElement, v);
+});
 
 updateAll();
 </script>

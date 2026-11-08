@@ -306,7 +306,7 @@ M84</textarea>
 
         <!-- Action buttons -->
         <div class="pa-actions">
-          <button class="pa-btn-copy" id="copyBtn">Copy G-code</button>
+          <button type="button" class="pa-btn-copy" id="copyBtn" data-haptic><span data-copy-label>Copy G-code</span></button>
           <button class="pa-btn-download" id="downloadBtn">Download .gcode</button>
         </div>
 
@@ -382,6 +382,7 @@ M84</textarea>
 </style>
 
 <script>
+import { copy } from '../../scripts/copy';
 // ── PRESETS ──
 const PRESETS: Record<string, Record<string, string | number>> = {
   voron: { bedX:250, bedY:250, hotendTemp:240, bedTemp:110, acceleration:5000, travelSpeed:300, nozzleDia:0.4, firmware:'klipper' },
@@ -782,15 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Copy button
-  document.getElementById('copyBtn')?.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(currentGcode);
-      const btn = document.getElementById('copyBtn') as HTMLButtonElement;
-      btn.textContent = 'Copied ✓';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Copy G-code'; btn.classList.remove('copied'); }, 2000);
-    } catch { /* clipboard blocked */ }
-  });
+  document.getElementById('copyBtn')?.addEventListener('click', (e) => copy(e.currentTarget as HTMLElement, currentGcode));
 
   // Download button
   document.getElementById('downloadBtn')?.addEventListener('click', () => {

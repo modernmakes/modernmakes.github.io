@@ -75,7 +75,7 @@ const currentPath = '/tools';
             <div class="tc-result-num" id="totalResult">$1.43</div>
           </div>
           <div class="tc-formula" id="breakdownLine">Filament $1.25 + Electricity $0.18</div>
-          <button class="tc-copy-btn" id="copyBtn">Copy total</button>
+          <button type="button" class="tc-copy-btn" id="copyBtn" data-haptic><span data-copy-label>Copy total</span></button>
         </div>
 
         <!-- Per-100g reference -->
@@ -187,6 +187,7 @@ const currentPath = '/tools';
 </style>
 
 <script>
+import { copy } from '../../../scripts/copy';
 function v(id: string): number {
   return parseFloat((document.getElementById(id) as HTMLInputElement)?.value) || 0;
 }
@@ -225,15 +226,9 @@ document.querySelectorAll<HTMLInputElement>('.tc-input').forEach(el =>
   el.addEventListener('input', calc)
 );
 
-document.getElementById('copyBtn')?.addEventListener('click', async () => {
+document.getElementById('copyBtn')?.addEventListener('click', (e) => {
   const total = v('filamentG') / 1000 * v('costPerKg') + (v('printerW') / 1000) * v('printHours') * v('kwhRate');
-  try {
-    await navigator.clipboard.writeText(fmt(total));
-    const btn = document.getElementById('copyBtn') as HTMLButtonElement;
-    btn.textContent = 'Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy total'; btn.classList.remove('copied'); }, 2000);
-  } catch {}
+  copy(e.currentTarget as HTMLElement, fmt(total));
 });
 
 calc();

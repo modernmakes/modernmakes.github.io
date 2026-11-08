@@ -58,7 +58,7 @@ const currentPath = '/tools';
             <div class="tc-result-unit">mm³/s</div>
           </div>
           <div class="tc-formula" id="formulaLine">0.20 × 0.45 × 100 = 9.0 mm³/s</div>
-          <button class="tc-copy-btn" id="copyBtn">Copy result</button>
+          <button type="button" class="tc-copy-btn" id="copyBtn" data-haptic><span data-copy-label>Copy result</span></button>
         </div>
 
         <!-- Tier card -->
@@ -217,6 +217,7 @@ const currentPath = '/tools';
 </style>
 
 <script>
+import { copy } from '../../../scripts/copy';
 const TIERS = [
   { max: 15,   cls: 'ok',      label: 'Any standard hotend',       desc: 'Any hotend handles this comfortably. No upgrade needed.' },
   { max: 45,   cls: 'mid',     label: 'Standard high-flow hotend',  desc: 'A Dragon HF, Rapido 2 HF, or similar handles this. Standard E3D V6 may struggle at the upper end.' },
@@ -254,18 +255,12 @@ document.querySelectorAll<HTMLButtonElement>('.tc-preset-btn').forEach(btn => {
   });
 });
 
-document.getElementById('copyBtn')?.addEventListener('click', async () => {
+document.getElementById('copyBtn')?.addEventListener('click', (e) => {
   const lh  = (document.getElementById('layerH') as HTMLInputElement).value;
   const lw  = (document.getElementById('lineW')  as HTMLInputElement).value;
   const spd = (document.getElementById('speed')  as HTMLInputElement).value;
   const flow = (parseFloat(lh) * parseFloat(lw) * parseFloat(spd)).toFixed(1);
-  try {
-    await navigator.clipboard.writeText(`${flow} mm³/s`);
-    const btn = document.getElementById('copyBtn') as HTMLButtonElement;
-    btn.textContent = 'Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy result'; btn.classList.remove('copied'); }, 2000);
-  } catch {}
+  copy(e.currentTarget as HTMLElement, `${flow} mm³/s`);
 });
 
 calc();

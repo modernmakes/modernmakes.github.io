@@ -120,7 +120,7 @@ const currentPath = '/tools';
         <div class="pt-result-card" id="resultCard" style="display:none">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
             <div style="font-family:var(--fd);font-size:20px;font-weight:800;color:var(--black)">AI Recommendations</div>
-            <button class="pt-btn-copy-rec" id="copyRecBtn" style="display:none">Copy</button>
+            <button type="button" class="pt-btn-copy-rec" id="copyRecBtn" style="display:none" data-haptic><span data-copy-label>Copy</span></button>
           </div>
           <div class="pt-result-stream" id="streamOutput"></div>
           <div class="pt-loading" id="loadingIndicator" style="display:none">
@@ -262,6 +262,7 @@ const currentPath = '/tools';
 </style>
 
 <script>
+import { copy } from '../../../scripts/copy';
 const SYSTEM_PROMPT = `You are an expert 3D printer calibration assistant specializing in Pressure Advance tuning for Klipper. Analyze the provided PA data and printer setup. Give specific, actionable recommendations. Be concise and technical. Format your response with clear sections using bold headers. Keep your response under 800 tokens.`;
 
 let imageBase64: string | null = null;
@@ -482,15 +483,7 @@ Please analyze this and give me:
   }
 }
 
-document.getElementById('copyRecBtn')?.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(accumulatedText);
-    const btn = document.getElementById('copyRecBtn') as HTMLButtonElement;
-    btn.textContent = 'Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-  } catch {}
-});
+document.getElementById('copyRecBtn')?.addEventListener('click', (e) => copy(e.currentTarget as HTMLElement, accumulatedText));
 
 updateKeyUI();
 </script>

@@ -156,6 +156,8 @@ const currentPath = '/tools';
 </style>
 
 <script>
+import { copy } from '../../../scripts/copy';
+import { armAll } from '../../../scripts/haptics';
 interface PinRow {
   func: string;
   key: string;
@@ -441,7 +443,7 @@ function renderTable() {
       <td><div class="pm-key">${row.key}</div></td>
       <td><span class="pm-pin${isNegative ? ' pm-pin-neg' : ''}">${isNegative ? '!' : ''}${pinDisplay}</span></td>
       <td><div class="pm-note">${row.note}</div></td>
-      <td><button class="pm-copy-pin" data-pin="${row.key}: ${row.pin}">Copy</button></td>
+      <td><button type="button" class="pm-copy-pin" data-pin="${row.key}: ${row.pin}" data-haptic><span data-copy-label>Copy</span></button></td>
     </tr>`;
   }
 
@@ -452,16 +454,9 @@ function renderTable() {
   tbody.innerHTML = html;
 
   tbody.querySelectorAll<HTMLButtonElement>('.pm-copy-pin').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const pinVal = (btn.dataset.pin ?? '').split(':').pop()?.trim() ?? '';
-      try {
-        await navigator.clipboard.writeText(pinVal);
-        btn.textContent = 'Copied ✓';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
-      } catch {}
-    });
+    btn.addEventListener('click', () => copy(btn, (btn.dataset.pin ?? '').split(':').pop()?.trim() ?? ''));
   });
+  armAll(tbody);
 }
 
 document.getElementById('boardSel')?.addEventListener('change', renderTable);

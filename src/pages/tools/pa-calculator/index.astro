@@ -54,7 +54,7 @@ const currentPath = '/tools';
       <div class="pac-output-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
           <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:var(--black)">Output Strings</div>
-          <button class="pac-btn-copy-all" id="copyAllBtn">Copy all</button>
+          <button type="button" class="pac-btn-copy-all" id="copyAllBtn" data-haptic><span data-copy-label>Copy all</span></button>
         </div>
         <div id="outputLines" class="pac-output-lines">
           <div class="pac-output-empty">Fill in PA values above to generate output strings.</div>
@@ -198,6 +198,8 @@ const currentPath = '/tools';
 </style>
 
 <script>
+import { copy } from '../../../scripts/copy';
+import { armAll } from '../../../scripts/haptics';
 let gridData: Record<string, string> = {};
 
 function parseList(raw: string, max: number): number[] {
@@ -275,21 +277,14 @@ function renderOutput() {
   linesEl.innerHTML = rows.map((txt, i) =>
     `<div class="pac-output-row">
       <div class="pac-output-text">${txt}</div>
-      <button class="pac-copy-row-btn" data-idx="${i}">Copy</button>
+      <button type="button" class="pac-copy-row-btn" data-idx="${i}" data-haptic><span data-copy-label>Copy</span></button>
     </div>`
   ).join('');
 
   linesEl.querySelectorAll<HTMLButtonElement>('.pac-copy-row-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const idx = parseInt(btn.dataset.idx ?? '0');
-      try {
-        await navigator.clipboard.writeText(rows[idx]);
-        btn.textContent = 'Copied ✓';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
-      } catch {}
-    });
+    btn.addEventListener('click', () => copy(btn, rows[parseInt(btn.dataset.idx ?? '0')]));
   });
+  armAll(linesEl);
 }
 
 document.getElementById('clearGridBtn')?.addEventListener('click', () => {
@@ -297,7 +292,7 @@ document.getElementById('clearGridBtn')?.addEventListener('click', () => {
   renderGrid();
 });
 
-document.getElementById('copyAllBtn')?.addEventListener('click', async () => {
+document.getElementById('copyAllBtn')?.addEventListener('click', (e) => {
   const speeds = getSpeeds();
   const accels = getAccels();
   const lines: string[] = [];
@@ -310,13 +305,7 @@ document.getElementById('copyAllBtn')?.addEventListener('click', async () => {
     }
   }
   if (!lines.length) return;
-  try {
-    await navigator.clipboard.writeText(lines.join('\n'));
-    const btn = document.getElementById('copyAllBtn') as HTMLButtonElement;
-    btn.textContent = 'Copied ✓';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy all'; btn.classList.remove('copied'); }, 2000);
-  } catch {}
+  copy(e.currentTarget as HTMLElement, lines.join('\n'));
 });
 
 document.getElementById('importBtn')?.addEventListener('click', () => {
