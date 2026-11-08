@@ -3,6 +3,7 @@ import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ShareButton from '../components/ShareButton.astro';
 import NewsletterCapture from '../components/NewsletterCapture.astro';
 import '../styles/article.css';
 
@@ -89,6 +90,7 @@ const breadcrumbItems = [
         <time class="art-date">{date}</time>
         <span class="art-sep" aria-hidden="true">·</span>
         <span class="art-readtime">{readTime}</span>
+        <ShareButton title={title} />
       </div>
     </div>
   </div>

@@ -1,0 +1,100 @@
+---
+// Share button (System 4). Uses navigator.share where it exists, so iPhone gets its own share sheet
+// (we don't rebuild it). Otherwise it opens a Sheet (phones) / popover (desktop) with Copy link,
+// Reddit and X. One per page: the fallback sheet has a fixed id.
+import Sheet from './Sheet.astro';
+interface Props {
+  title: string;
+  /** dark: on the hardware hero (reuses .comp-act from ComponentLayout). light: in article headers. */
+  tone?: 'dark' | 'light';
+}
+const { title, tone = 'light' } = Astro.props;
+---
+<button type="button" class:list={[tone === 'dark' ? 'comp-act' : 'share-btn']} data-share data-share-title={title}>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+  <span>Share</span>
+</button>
+
+<Sheet id="share-sheet" title="Share" detent="medium" desktop="popover">
+  <button type="button" class="sheet-row" data-share-copy>
+    <span class="grow" data-share-copy-label>Copy link</span>
+  </button>
+  <a class="sheet-row" data-share-reddit href="https://www.reddit.com/submit" target="_blank" rel="noopener noreferrer">
+    <span class="grow">Reddit</span><span aria-hidden="true">↗</span><span class="sr-only">(opens in a new tab)</span>
+  </a>
+  <a class="sheet-row" data-share-x href="https://x.com/intent/post" target="_blank" rel="noopener noreferrer">
+    <span class="grow">X</span><span aria-hidden="true">↗</span><span class="sr-only">(opens in a new tab)</span>
+  </a>
+  <span class="sr-only" role="status" aria-live="polite" data-share-status></span>
+</Sheet>
+
+<style is:global>
+  .share-btn {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-left: auto;
+    min-height: 44px; padding: 0 14px;
+    background: transparent; color: var(--black);
+    border: 1px solid var(--border-s); border-radius: var(--radius-sm);
+    font: 700 13px var(--fu); cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), var(--press-release);
+  }
+  .share-btn:active { scale: var(--scale-press-btn); background: var(--bg); transition-duration: var(--dur-press); }
+  @media (hover: hover) and (pointer: fine) { .share-btn:hover { background: var(--bg); border-color: var(--g2); } }
+  @media (prefers-reduced-motion: reduce) { .share-btn:active { scale: none; } }
+</style>
+
+<script>
+  import { openSheet } from '../scripts/sheet';
+
+  const btn = document.querySelector<HTMLButtonElement>('[data-share]');
+  const dlg = document.getElementById('share-sheet');
+  if (btn && dlg) {
+    const copy = dlg.querySelector<HTMLButtonElement>('[data-share-copy]')!;
+    const label = dlg.querySelector<HTMLElement>('[data-share-copy-label]')!;
+    const status = dlg.querySelector<HTMLElement>('[data-share-status]')!;
+    const reddit = dlg.querySelector<HTMLAnchorElement>('[data-share-reddit]')!;
+    const x = dlg.querySelector<HTMLAnchorElement>('[data-share-x]')!;
+    const title = btn.dataset.shareTitle || document.title;
+    const link = () => document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href || location.href;
+    const native = () => !!navigator.share && (!navigator.canShare || navigator.canShare({ title, url: link() }));
+
+    // No native share: this button is a dialog trigger, so say so.
+    if (!native()) {
+      btn.setAttribute('aria-haspopup', 'dialog');
+      btn.setAttribute('aria-controls', 'share-sheet');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', async () => {
+      const url = link();
+      if (native()) {
+        try { await navigator.share({ title, url }); } catch { /* dismissed, or not allowed: nothing to do */ }
+        return;
+      }
+      const u = encodeURIComponent(url), t = encodeURIComponent(title);
+      reddit.href = `https://www.reddit.com/submit?url=${u}&title=${t}`;
+      x.href = `https://x.com/intent/post?url=${u}&text=${t}`;
+      copy.dataset.url = url;
+      openSheet(dlg as HTMLDialogElement, btn);
+    });
+
+    let timer = 0;
+    copy.addEventListener('click', async () => {
+      const url = copy.dataset.url || link();
+      let ok = false;
+      try { await navigator.clipboard.writeText(url); ok = true; } catch {
+        const ta = document.createElement('textarea');
+        ta.value = url; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0;top:0';
+        document.body.append(ta); ta.select();
+        try { ok = document.execCommand('copy'); } catch {}
+        ta.remove();
+      }
+      // Swap the label's text only, never the button's innerHTML.
+      label.textContent = ok ? 'Copied' : 'Couldn’t copy. Select the address bar instead.';
+      status.textContent = ok ? 'Link copied' : 'Copy failed';
+      clearTimeout(timer);
+      timer = window.setTimeout(() => { label.textContent = 'Copy link'; status.textContent = ''; }, 1800);
+    });
+  }
+</script>
