@@ -574,7 +574,14 @@ a:not([class]):active { opacity: .6; }
 .gf-cats {
   display: flex;
   gap: 2px;
+  /* Horizontal only: the tab's -1px margin used to hang 1px below this box and made the row
+     draggable vertically on iOS. The 1px padding/margin pair keeps it inside while the
+     active underline still covers the bar's bottom border. */
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  padding-bottom: 1px;
+  margin-bottom: -1px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
