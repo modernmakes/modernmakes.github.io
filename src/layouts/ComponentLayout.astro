@@ -254,7 +254,7 @@ const breadcrumbSchema = {
         )}
         <div class="comp-actions">
           {vendors.length > 0 && (
-            <button type="button" class="comp-act" data-sheet="buy-sheet" data-haptic aria-haspopup="dialog" aria-controls="buy-sheet" aria-expanded="false">
+            <button type="button" class="comp-act comp-act--buy" data-sheet="buy-sheet" data-haptic aria-haspopup="dialog" aria-controls="buy-sheet" aria-expanded="false">
               <span>Where to buy ({vendors.length})</span>
             </button>
           )}
@@ -650,7 +650,8 @@ const breadcrumbSchema = {
   padding: 2px 8px;
 }
 
-/* Hero actions: Where to buy (sheet / popover), Share. Ghost buttons on the dark hero: the one orange pointer stays the vendor card below. */
+/* Hero actions: Where to buy (sheet / popover) is the primary, an orange fill with ink text (Ink-on-Orange);
+   Share stays a ghost button. */
 .comp-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .comp-act {
   position: relative;
@@ -664,6 +665,9 @@ const breadcrumbSchema = {
 .comp-act:active { scale: var(--scale-press-btn); background: rgba(255,255,255,.08); transition-duration: var(--dur-press); }
 @media (hover: hover) and (pointer: fine) { .comp-act:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35); } }
 @media (prefers-reduced-motion: reduce) { .comp-act:active { scale: none; } }
+.comp-act--buy { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.comp-act--buy:active { background: var(--accent-mid); border-color: var(--accent-mid); }
+@media (hover: hover) and (pointer: fine) { .comp-act--buy:hover { background: var(--accent-mid); border-color: var(--accent-mid); } }
 .buy-ref { margin: 0 0 6px; font: 400 11px/1.5 var(--fm); color: var(--sh-muted); }
 
 /* ── BODY ── */
