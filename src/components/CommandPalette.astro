@@ -171,14 +171,8 @@
 </style>
 
 <script>
-  import { syncedLabel } from '../scripts/synced.js';
   import { openSheet, closeSheet } from '../scripts/sheet';
-  type H = { t: string; b?: string; c: string; v?: string; vc?: string; f?: string; p?: number; u: string; k?: string };
-  type A = { t: string; c: string; d?: string; u: string };
-  type T = { t: string; c: string; k?: string; u: string };
-  type Index = { s?: string | null; h: H[]; a: A[]; t: T[] };
-  type Group = 'h' | 'a' | 't' | 'x';
-  type Row = { g: Group; u: string; t: string; sub: string; hw?: H; title: string; tw: string[]; ws: string[]; hay: string };
+  import { rows, byUrl, loadIndex, search, rowHtml, esc, freshness, GROUP_LABEL, type Group, type Row } from '../scripts/search-core';
 
   const dlg = document.getElementById('cp') as HTMLDialogElement;
   const input = document.getElementById('cp-input') as HTMLInputElement;
@@ -186,90 +180,12 @@
   const status = document.getElementById('cp-status') as HTMLElement;
 
   const RECENT = 'mm-cp-recent';
-  const ACTIONS: [string, string, string][] = [
-    ['Printers', '/printers', 'Every printer and self-build ecosystem'],
-    ['Hardware', '/hardware', 'All hardware categories'],
-    ['Tools', '/tools', 'Calculators and calibration'],
-    ['Newsletter', '/newsletter', 'Subscribe to Modern Makes'],
-  ];
-  const GROUP_LABEL: Record<Group, string> = { h: 'Hardware', a: 'Articles', t: 'Tools', x: 'Actions' };
-
-  // ── Text matching ──
-  const norm = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const words = (s: string) => norm(s).split(/[^a-z0-9.]+/).map((w) => w.replace(/^\.+|\.+$/g, '')).filter(Boolean);
-
-  // Optimal string alignment distance: Levenshtein plus adjacent swaps ("rapdio" → "rapido" is 1).
-  function osa(a: string, b: string): number {
-    const m = a.length, n = b.length;
-    let p2: number[] = [], p1 = Array.from({ length: n + 1 }, (_, j) => j);
-    for (let i = 1; i <= m; i++) {
-      const c = [i];
-      for (let j = 1; j <= n; j++) {
-        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-        let v = Math.min(p1[j] + 1, c[j - 1] + 1, p1[j - 1] + cost);
-        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, p2[j - 2] + 1);
-        c.push(v);
-      }
-      p2 = p1; p1 = c;
-    }
-    return p1[n];
-  }
-  // A typo'd term is near a word if it is within 1 edit (2 for 7+ letters) of the word or its same-length prefix.
-  const near = (w: string, x: string) => {
-    if (w.length < 4 || x.length < 3) return false;
-    const max = w.length >= 7 ? 2 : 1;
-    return osa(w, x) <= max || (x.length > w.length && osa(w, x.slice(0, w.length)) <= max);
-  };
-
-  function score(r: Row, q: string, terms: string[]): number {
-    let s = r.title === q ? 100 : r.title.startsWith(q) ? 50 : 0;
-    for (const w of terms) {
-      let best = 0;
-      for (const x of r.tw) best = Math.max(best, x === w ? 16 : x.startsWith(w) ? 12 : 0);
-      if (best < 12) {
-        if (r.title.includes(w)) best = Math.max(best, 8);
-        if (!best && r.ws.some((x) => x.startsWith(w))) best = 6;
-        if (!best && r.hay.includes(w)) best = 4;
-        if (!best && r.tw.some((x) => near(w, x))) best = 5;
-        if (!best && r.ws.some((x) => near(w, x))) best = 2;
-      }
-      if (!best) return 0; // every term has to land somewhere
-      s += best;
-    }
-    return s;
-  }
-
-  // ── Index ──
-  let rows: Row[] = [];
-  let byUrl = new Map<string, Row>();
-  let synced: string | null | undefined;
-  let loading: Promise<void> | null = null;
-
-  const row = (g: Group, u: string, t: string, sub: string, extra: string, hw?: H): Row => ({
-    g, u, t, sub, hw, title: norm(t), tw: words(t), ws: words(`${t} ${sub} ${extra}`), hay: norm(`${t} ${sub} ${extra}`),
-  });
-  const dot = (...p: (string | undefined)[]) => p.filter(Boolean).join(' · ');
-
-  function prepare(ix: Index) {
-    rows = [
-      ...ix.h.map((x) => row('h', x.u, x.t, dot(x.b, x.c, x.k), dot(x.v, x.f), x)),
-      ...ix.a.map((x) => row('a', x.u, x.t, dot(x.c, x.d), '')),
-      ...ix.t.map((x) => row('t', x.u, x.t, dot(x.c, x.k), 'tool calculator')),
-      ...ACTIONS.map(([t, u, s]) => row('x', u, t, s, '')),
-    ];
-    byUrl = new Map(rows.map((r) => [r.u, r]));
-    synced = ix.s;
-  }
 
   const load = () =>
-    (loading ??= fetch('/search-index.json')
-      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
-      .then(prepare)
-      .catch(() => {
-        loading = null; // let the next open retry
-        if (dlg.open) list.innerHTML = '<p class="cp-empty">Search didn’t load. <a href="/search">Open the search page</a> instead.</p>';
-        throw 0;
-      }));
+    loadIndex().catch(() => {
+      if (dlg.open) list.innerHTML = '<p class="cp-empty">Search didn’t load. <a href="/search">Open the search page</a> instead.</p>';
+      throw 0;
+    });
 
   // ── Recents (localStorage is optional: private mode or blocked storage just means no recents) ──
   const recents = (): string[] => {
@@ -280,60 +196,38 @@
   };
 
   // ── Render ──
-  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
-  const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-  const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
-  const price = (p: number) => (Number.isInteger(p) ? usd0 : usd2).format(p);
   let shown: HTMLAnchorElement[] = [];
   let active = -1;
   let n = 0;
-
-  const rowHtml = (r: Row) => {
-    const h = r.hw;
-    const meta = h && (h.v || h.f || h.p)
-      ? `<span class="cp-meta">${h.v ? `<span class="verdict ${h.vc} verdict-on-dark">${esc(h.v)}</span>` : ''}${h.f ? `<span class="flow-chip on-dark">${esc(h.f)}</span>` : ''}${h.p ? `<span class="cp-p">${price(h.p)}</span>` : ''}</span>`
-      : '';
-    return `<a class="cp-row" role="option" id="cp-o${n++}" href="${esc(r.u)}" tabindex="-1" aria-selected="false"><span class="cp-main"><span class="cp-t">${esc(r.t)}</span><span class="cp-s">${esc(r.sub)}</span></span>${meta}</a>`;
-  };
   let gi = 0;
-  const groupHtml = (label: string, rs: Row[]) =>
-    rs.length ? `<div role="group" aria-labelledby="cp-g${gi}"><div class="cp-g" id="cp-g${gi++}">${label}</div>${rs.map(rowHtml).join('')}</div>` : '';
+  const opt = () => ` role="option" id="cp-o${n++}" tabindex="-1" aria-selected="false"`;
+  const groupHtml = (label: string, rs: Row[], terms: string[] = []) =>
+    rs.length ? `<div role="group" aria-labelledby="cp-g${gi}"><div class="cp-g" id="cp-g${gi++}">${label}</div>${rs.map((r) => rowHtml(r, terms, opt())).join('')}</div>` : '';
 
   let statusT = 0;
   function render() {
     const raw = input.value.trim();
-    const q = norm(raw);
-    const terms = words(raw);
     n = gi = 0;
     let html = '';
     let count = 0;
     let suggest = false; // closest-name suggestions: shown, never highlighted
-    if (!terms.length) {
+    let terms: string[] = [];
+    if (!raw) {
       const rec = recents().map((u) => byUrl.get(u)).filter((r): r is Row => !!r);
       html = groupHtml('Recent', rec) + groupHtml('Actions', rows.filter((r) => r.g === 'x'));
     } else {
-      const hits = rows
-        .map((r) => ({ r, s: score(r, q, terms) }))
-        .filter((x) => x.s > 0)
-        .sort((x, y) => y.s - x.s || x.r.t.length - y.r.t.length);
-      const take = (g: Group, max: number) => hits.filter((x) => x.r.g === g).slice(0, max).map((x) => x.r);
-      const groups: [Group, Row[]][] = [['h', take('h', 6)], ['a', take('a', 4)], ['t', take('t', 4)], ['x', take('x', 2)]];
-      count = groups.reduce((c, [, rs]) => c + rs.length, 0);
-      if (count) html = groups.map(([g, rs]) => groupHtml(GROUP_LABEL[g], rs)).join('');
+      const res = search(raw);
+      terms = res.terms;
+      count = res.count;
+      if (count) html = res.groups.map(([g, rs]) => groupHtml(GROUP_LABEL[g as Group], rs)).join('');
       else {
         // Nothing matched: offer the three hardware names closest to what was typed.
-        const close = rows
-          .filter((r) => r.g === 'h')
-          .map((r) => ({ r, d: Math.min(osa(q, r.title), ...r.tw.map((w) => osa(q, w))) }))
-          .sort((x, y) => x.d - y.d)
-          .slice(0, 3)
-          .map((x) => x.r);
         suggest = true;
-        html = `<p class="cp-empty">No matches for “${esc(raw)}”</p>` + groupHtml('Closest hardware', close);
+        html = `<p class="cp-empty">No matches for “${esc(raw)}”</p>` + groupHtml('Closest hardware', res.closest);
       }
     }
     list.innerHTML = html;
-    (document.getElementById('cp-fresh') as HTMLElement).textContent = syncedLabel(synced) ?? '';
+    (document.getElementById('cp-fresh') as HTMLElement).textContent = freshness();
     list.scrollTop = 0;
     shown = [...list.querySelectorAll<HTMLAnchorElement>('.cp-row')];
     active = -1;
@@ -401,10 +295,11 @@
   let typed = false;
 
   // from: the trigger that was tapped. WebKit doesn't focus links on tap, so activeElement would be <body>.
-  function open(from?: HTMLElement) {
+  // q: prefilled query (the 404 passes words from the broken URL); otherwise it opens empty.
+  function open(from?: HTMLElement, q = '') {
     if (dlg.open) return;
-    typed = false;
-    input.value = ''; // always opens empty, showing recents
+    typed = !!q; // a prefill is the reader's query: the restore-wipe below must leave it alone
+    input.value = q; // otherwise always opens empty, showing recents
     const ready = rows.length > 0;
     if (ready) render(); // index cached: results are in the first frame
     else list.innerHTML = '<p class="cp-empty">Loading…</p>';
@@ -468,10 +363,10 @@
     el.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let it open /search in a new tab
       e.preventDefault();
-      open(el);
+      open(el, el.dataset.paletteQ);
     });
     // role="button" promises Space as well as Enter.
-    el.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); open(el); } });
+    el.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); open(el, el.dataset.paletteQ); } });
   }
   const typing = (t: EventTarget | null) =>
     t instanceof Element && !!t.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
