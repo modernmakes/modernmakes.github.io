@@ -44,6 +44,10 @@ const velocity = (s: Sample[]) => {
   return b.t > a.t ? (b.y - a.y) / (b.t - a.t) : 0;
 };
 
+// At the medium detent the lower part of the panel is below the screen. Pad the scroll area by that much
+// so the last row can still be scrolled into view (the variable is read by .sheet-body's padding).
+const hide = (c: Cur) => c.panel.style.setProperty('--hide', `${Math.round(restY(c))}px`);
+
 function setY(c: Cur, y: number, animate: boolean) {
   c.y = y;
   const p = prog(c, y);
@@ -73,6 +77,7 @@ function fit() {
   c.yM = Math.max(0, c.H - 0.5 * vv.height);
   // Resting at a detent whose position moved with the viewport: follow it without animating.
   if (!c.dragging && !c.closing && c.y !== restY(c)) setY(c, restY(c), false);
+  hide(c);
 }
 const queueFit = () => { if (!fitRaf && cur?.mode === 'sheet') fitRaf = requestAnimationFrame(fit); };
 vv?.addEventListener('resize', queueFit);
@@ -99,7 +104,7 @@ function pageIn(c: Cur) {
 }
 
 // ── open ──
-export function openSheet(target: string | HTMLDialogElement, opener?: HTMLElement | null) {
+export function openSheet(target: string | HTMLDialogElement, opener?: HTMLElement | null, viaKeyboard = false) {
   const dlg = typeof target === 'string' ? (document.getElementById(target) as HTMLDialogElement | null) : target;
   if (!dlg || cur || dlg.open) return;
   const mode: Mode = phone.matches ? 'sheet' : ((dlg.dataset.desktop as Mode) || 'modal');
@@ -127,6 +132,7 @@ export function openSheet(target: string | HTMLDialogElement, opener?: HTMLEleme
     html.classList.add('sheet-open');
     if (mode === 'sheet') {
       fit();
+      hide(c);
       setY(c, c.H + 24, false); // start below the screen
       void c.panel.offsetHeight;
       dlg.classList.add('is-open');
@@ -137,8 +143,10 @@ export function openSheet(target: string | HTMLDialogElement, opener?: HTMLEleme
     }
   }
   if (!dlg.hasAttribute('data-sheet-nofocus')) {
-    // Focus the first thing in the body (or the close button); never scroll the page to it.
-    (dlg.querySelector<HTMLElement>('.sheet-body a[href], .sheet-body button, .sheet-body input') ?? dlg.querySelector<HTMLElement>('.sheet-x'))?.focus({ preventScroll: true });
+    // Keyboard open: straight to the first item. Pointer open: the panel itself, so no focus ring lands
+    // on a row nobody aimed at. Never scroll the page to it.
+    const first = dlg.querySelector<HTMLElement>('.sheet-body a[href], .sheet-body button, .sheet-body input') ?? dlg.querySelector<HTMLElement>('.sheet-x');
+    (viaKeyboard ? first : c.panel)?.focus({ preventScroll: true });
   }
 }
 
@@ -192,6 +200,7 @@ document.addEventListener('pointerdown', (e) => {
   if (!c || c.mode !== 'sheet' || e.button || !c.dlg.contains(t)) return;
   const h = t.closest('[data-sheet-drag]');
   if (!h || t.closest('button, a, input')) return;
+  if (e.pointerType === 'mouse') e.preventDefault(); // no text selection / native drag-and-drop under the pointer
   c.dragging = true;
   const y = currentY(c); // interrupts a spring mid-flight without a jump
   setY(c, y, false);
@@ -281,6 +290,7 @@ function release(c: Cur, v: number) {
     else if (c.detent === 'large' && c.y > c.yM / 2) to = c.yM; // far enough down from large: medium
     c.detent = to === 0 ? 'large' : 'medium';
   }
+  hide(c);
   setY(c, to, true);
 }
 
@@ -299,7 +309,7 @@ document.addEventListener('click', (e) => {
   const trig = t.closest<HTMLElement>('[data-sheet]');
   if (trig) {
     if (cur?.dlg.id === trig.dataset.sheet) closeSheet();
-    else openSheet(trig.dataset.sheet!, trig);
+    else openSheet(trig.dataset.sheet!, trig, (e as MouseEvent).detail === 0); // detail 0: opened from the keyboard
     return;
   }
   const c = cur;

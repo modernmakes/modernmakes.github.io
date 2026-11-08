@@ -1,5 +1,7 @@
 ---
 import CommandPalette from './CommandPalette.astro';
+import Sheet from './Sheet.astro';
+import home from '../data/homepage.json';
 interface Props {
   currentPath?: string;
 }
@@ -7,6 +9,16 @@ const { currentPath = '/' } = Astro.props;
 
 const printersActive  = currentPath.startsWith('/voron') || currentPath.startsWith('/printers');
 const hardwareActive  = currentPath.startsWith('/hardware');
+
+// Same ecosystem list as the footer: a live one is a link, the rest carry a "Soon" tag.
+const ecosystems = (home as any).ecosystems ?? [];
+const mainLinks = [
+  ['/hardware', 'Hardware', hardwareActive],
+  ['/filament', 'Filament', currentPath.startsWith('/filament')],
+  ['/guides', 'Guides', currentPath.startsWith('/guides')],
+  ['/tools', 'Tools', currentPath.startsWith('/tools')],
+  ['/news', 'News', currentPath.startsWith('/news')],
+] as const;
 ---
 
 <nav class="nav" id="site-nav" aria-label="Primary navigation">
@@ -68,7 +80,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
             <path d="M21 21l-4.35-4.35"/>
           </svg>
         </a>
-        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+        <button class="nav-hamburger" id="nav-hamburger" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-sheet" data-sheet="menu-sheet">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <line class="h-line h-top" x1="3" y1="5"  x2="17" y2="5"/>
             <line class="h-line h-mid" x1="3" y1="10" x2="17" y2="10"/>
@@ -82,26 +94,25 @@ const hardwareActive  = currentPath.startsWith('/hardware');
 </nav>
 
 <!-- Sibling of <nav> — participates in normal document flow to push content down -->
-<div class="nav-scrim" id="nav-scrim" aria-hidden="true"></div>
-<div class="nav-panel" id="nav-panel" inert>
-  <div class="panel-inner">
-
-    <div class="panel-eco-group">
-      <span class="panel-eco-label">Printers</span>
-      <a href="/printers" class:list={['panel-eco-link', { active: currentPath.startsWith('/printers') }]}>All printers</a>
-      <a href="/voron" class:list={['panel-eco-link', { active: currentPath.startsWith('/voron') }]}>Voron</a>
-    </div>
-
-    <div class="panel-divider"></div>
-
-    <a href="/hardware" class:list={['panel-link', { active: hardwareActive }]}>Hardware</a>
-    <a href="/filament" class:list={['panel-link', { active: currentPath.startsWith('/filament') }]}>Filament</a>
-    <a href="/guides"   class:list={['panel-link', { active: currentPath.startsWith('/guides') }]}>Guides</a>
-    <a href="/tools"    class:list={['panel-link', { active: currentPath.startsWith('/tools') }]}>Tools</a>
-    <a href="/news"     class:list={['panel-link', { active: currentPath.startsWith('/news') }]}>News</a>
-
-  </div>
-</div>
+<!-- The menu: a bottom sheet at the medium detent on phones (draggable to large), a popover under the
+     hamburger on tablets. Links close it instantly so the page transition sees a clean page. -->
+<Sheet id="menu-sheet" title="Menu" detent="medium" desktop="popover" dark>
+  <nav aria-label="Menu">
+    <span class="sheet-label">Printers</span>
+    <a href="/printers" class="sheet-row" aria-current={currentPath.startsWith('/printers') ? 'page' : undefined}>All printers</a>
+    {ecosystems.map((eco: any) => eco.status === 'live'
+      ? <a href={eco.href} class="sheet-row" aria-current={currentPath.startsWith(eco.href) ? 'page' : undefined}>{eco.name}</a>
+      : (
+        <span class="sheet-row">
+          <span class="grow">{eco.name}<span class="sr-only">, coming soon</span></span>
+          <span class="sheet-tag" aria-hidden="true">Soon</span>
+        </span>
+      )
+    )}
+    <span class="sheet-label">Browse</span>
+    {mainLinks.map(([href, label, on]) => <a href={href} class="sheet-row" aria-current={on ? 'page' : undefined}>{label}</a>)}
+  </nav>
+</Sheet>
 
 <CommandPalette />
 
@@ -375,123 +386,7 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     stroke: currentColor;
     stroke-width: 1.5;
     stroke-linecap: round;
-    transition: transform 220ms ease, opacity 150ms ease;
-    transform-origin: 10px 10px;
   }
-  /* Slide each outer bar onto the centre line (y=10), then rotate about the centre. */
-  .nav-hamburger.is-open .h-top { transform: rotate(45deg) translateY(5px); }
-  .nav-hamburger.is-open .h-mid { opacity: 0; }
-  .nav-hamburger.is-open .h-bot { transform: rotate(-45deg) translateY(-5px); }
-
-  /* ─── SLIDE-DOWN PANEL ─── */
-  @keyframes link-enter {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Overlay: fixed, so opening it never changes document layout (no scroll anchoring, no scrollY shift).
-     The nav bar (z 1000) stays above it; panel-inner padding-top clears the bar. */
-  .nav-panel {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 999;
-    max-height: 100vh;
-    max-height: 100dvh;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    background: var(--black);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      transform  var(--dur-sheet) var(--ease-out),
-      opacity    var(--dur-base)  var(--ease-out),
-      visibility 0s linear var(--dur-sheet);
-  }
-  .nav-panel.open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
-  }
-
-  .nav-scrim {
-    position: fixed;
-    inset: 0;
-    z-index: 998;
-    background: rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--dur-base) var(--ease-out);
-  }
-  .nav-scrim.open { opacity: 1; pointer-events: auto; }
-
-  /* Page scroll is locked while the menu is open. */
-  html.nav-open { overflow: hidden; scrollbar-gutter: stable; }
-
-  @media (min-width: 1024px) {
-    .nav-panel, .nav-scrim { display: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .nav-panel, .nav-scrim { transition: none; }
-    .nav-panel.open .panel-link { animation: none; }
-  }
-
-  .nav-panel.open .panel-link:nth-child(1) { animation: link-enter 200ms  40ms both; }
-  .nav-panel.open .panel-link:nth-child(2) { animation: link-enter 200ms  80ms both; }
-  .nav-panel.open .panel-link:nth-child(3) { animation: link-enter 200ms 120ms both; }
-  .nav-panel.open .panel-link:nth-child(4) { animation: link-enter 200ms 160ms both; }
-
-  .panel-inner {
-    padding: 8px 0 16px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .panel-eco-group { display: flex; flex-direction: column; }
-
-  .panel-eco-label {
-    font-family: var(--fu, 'Barlow', sans-serif);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--on-dark-muted);
-    padding: 12px 24px 4px;
-  }
-
-  .panel-eco-link {
-    font-family: var(--fu, 'Barlow', sans-serif);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--on-dark-muted);
-    padding: 10px 24px 10px 36px;
-    transition: color 150ms ease, background 150ms ease;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .panel-eco-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
-  }
-  .panel-eco-link.active { color: #fff; }
-
-  .panel-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.06);
-    margin: 8px 0;
-  }
-
-  .panel-link {
-    font-family: var(--fu, 'Barlow', sans-serif);
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    padding: 13px 24px;
-    transition: color 150ms ease, background 150ms ease;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .panel-link:hover  { color: #fff; background: rgba(255, 255, 255, 0.04); }
-  }
-  .panel-link.active { color: #fff; }
 
   /* ─── PAGE TITLE IN NAV (under 1024px) ─── */
   .nav-title { display: none; }
@@ -599,8 +494,6 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .nav-spacer { display: block; flex: 1; }
     .nav-hamburger { display: flex; }
 
-    /* Push panel content below the fixed nav bar so the first item isn't hidden */
-    .panel-inner { padding-top: 72px; }
   }
 
   /* ─── MOBILE  below 768px ─── */
@@ -614,17 +507,16 @@ const hardwareActive  = currentPath.startsWith('/hardware');
     .logo-lettermark { display: block; height: 36px; }
     .nav.scrolled .logo-lettermark { height: 30px; }
 
-    .panel-inner { padding-top: 64px; }
   }
 </style>
 
 <script>
+  import { closeSheet } from '../scripts/sheet';
+
   document.addEventListener('DOMContentLoaded', () => {
     const nav          = document.getElementById('site-nav')       as HTMLElement;
     const printersBtn  = document.getElementById('printers-btn')   as HTMLButtonElement;
     const printersDd   = document.getElementById('printers-dd')    as HTMLElement;
-    const hamburger    = document.getElementById('nav-hamburger')  as HTMLButtonElement;
-    const panel        = document.getElementById('nav-panel')      as HTMLElement;
 
     /* ── Hero-page transparent nav ── */
     /*
@@ -741,49 +633,12 @@ const hardwareActive  = currentPath.startsWith('/hardware');
       if (!printersDd.contains(e.target as Node)) closePrinters();
     });
 
-    /* ── Hamburger panel ── */
-    const scrim = document.getElementById('nav-scrim') as HTMLElement;
-    function closePanel(restoreFocus = false) {
-      const wasOpen = panel.classList.contains('open');
-      panel.classList.remove('open');
-      scrim.classList.remove('open');
-      document.documentElement.classList.remove('nav-open');
-      panel.inert = true; // inert: hidden from assistive tech and out of the tab order
-      hamburger.classList.remove('is-open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.setAttribute('aria-label', 'Open menu');
-      if (wasOpen && restoreFocus) hamburger.focus();
-    }
-    function openPanel() {
-      panel.classList.add('open');
-      scrim.classList.add('open');
-      document.documentElement.classList.add('nav-open');
-      panel.inert = false;
-      hamburger.classList.add('is-open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      hamburger.setAttribute('aria-label', 'Close menu');
-      (panel.querySelector('a') as HTMLElement | null)?.focus({ preventScroll: true });
-    }
-
-    hamburger.addEventListener('click', () => {
-      panel.classList.contains('open') ? closePanel(true) : openPanel();
-    });
-
-    scrim.addEventListener('click', () => closePanel(true));
-    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closePanel()));
-
-
-    /* Search opens the palette (CommandPalette.astro); close the menu first so it isn't left open underneath. */
-    document.getElementById('nav-search-btn')?.addEventListener('click', () => closePanel());
-
     /* ── Escape closes everything ── */
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closePrinters(); closePanel(true); }
+      if (e.key === 'Escape') closePrinters(); // the menu and palette handle their own Esc (sheet.ts)
     });
 
-    /* ── Auto-close on resize to desktop ── */
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024) closePanel();
-    });
+    /* ── The menu popover has no business open once the desktop links are showing ── */
+    matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) closeSheet('menu-sheet', true); });
   });
 </script>
