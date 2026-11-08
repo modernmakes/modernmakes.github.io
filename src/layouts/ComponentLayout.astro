@@ -572,9 +572,11 @@ const breadcrumbSchema = {
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--on-dark-muted); /* Where to buy is the hero's one orange element (Pointer Rule) */
   margin-bottom: 8px;
 }
+/* Same for the placeholder art's category label; the cards elsewhere keep theirs. */
+.comp-hero-placeholder .type-cover-eyebrow { color: var(--on-dark-muted); }
 .comp-title {
   font-family: var(--fd);
   font-size: 38px;
