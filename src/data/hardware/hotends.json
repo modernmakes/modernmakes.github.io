@@ -8,7 +8,7 @@
       "Universal"
     ],
     "Max Flow (mm³/s)": 62.51,
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Vendor 3 URL": "https://www.hotend.eu/p/phaetus-dragon-hotend-hf-oem-high-flow",
     "Description": "Compact all-metal hotend for stable, high-temperature 3D printing, rated to 500°C. The High Flow (HF) edition has a longer melt section for even faster extrusion while maintaining excellent print performance, in the same overall dimensions as the standard Dragon for zero-barrier interchangeability. Drop-in V6-compatible; includes a 0.4mm plated copper nozzle. Heater cartridge and thermistor not included.",
     "Verdict Label": "Phaetus's high-flow Dragon — 500°C, V6-compatible, heater sold separately",
@@ -50,7 +50,7 @@
     "Vendor 4 Name": "KB-3D",
     "Max Flow (mm³/s)": 36,
     "Related 2 Name": "Rapido 2 HF",
-    "Flow Class": "High Flow",
+    "Flow Class": "Standard Flow",
     "Vendor 2 Affiliate": true,
     "Related 1 Name": "Rapido 2 Plus UHF",
     "Vendor 3 URL": "https://www.filastruder.com/products/phaetus-rapido-2-plus-hotend",
@@ -92,7 +92,7 @@
     "Price (USD)": 99,
     "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
-    "Updated": "2026-11-06T09:49:07.000Z",
+    "Updated": "2026-11-05T08:24:30.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
@@ -107,7 +107,7 @@
     "Vendor 4 Name": "KB-3D",
     "Max Flow (mm³/s)": 75,
     "Related 2 Name": "Rapido 2 Plus HF",
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Vendor 2 Affiliate": true,
     "Related 1 Name": "Rapido 2 UHF",
     "Vendor 3 URL": "https://www.filastruder.com/products/phaetus-rapido-2-plus-hotend",
@@ -149,7 +149,7 @@
     "Price (USD)": 109.2,
     "Pros": "75 mm³/s — highest flow in the Rapido 2 family\n350°C ceiling for all exotic materials\nPT1000 for accurate high-temp readings\nFull toolhead ecosystem compatibility\nBest pick for speed-focused enclosed builds",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-11-06T09:49:09.000Z",
+    "Updated": "2026-11-05T08:24:32.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -164,7 +164,7 @@
     "Vendor 4 Name": "KB-3D",
     "Max Flow (mm³/s)": 36,
     "Related 2 Name": "Rapido 2 Plus HF",
-    "Flow Class": "High Flow",
+    "Flow Class": "Standard Flow",
     "Vendor 2 Affiliate": true,
     "Related 1 Name": "Rapido 2 HF",
     "Vendor 3 URL": "https://www.filastruder.com/products/phaetus-rapido-2f-hotend",
@@ -207,7 +207,7 @@
     "Price (USD)": 104.96,
     "Pros": "350°C ceiling with PT1000 for exotic materials\nMost compact form factor in the Rapido 2 family\nLightest weight — benefits high-acceleration toolheads\nLowest price in the lineup at $75\nGood fit for bowden or light-duty direct drive setups",
     "Related 1 URL": "/hardware/hotends/rapido-2-hf",
-    "Updated": "2026-11-06T09:49:11.000Z",
+    "Updated": "2026-11-05T08:24:34.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -222,7 +222,7 @@
     "Vendor 4 Name": "KB-3D",
     "Max Flow (mm³/s)": 45,
     "Related 2 Name": "Rapido 2 Plus HF",
-    "Flow Class": "High Flow",
+    "Flow Class": "Standard Flow",
     "Vendor 2 Affiliate": true,
     "Related 1 Name": "Rapido 2 UHF",
     "Vendor 3 URL": "https://www.filastruder.com/products/phaetus-rapido-2-hotend",
@@ -264,7 +264,7 @@
     "Price (USD)": 89,
     "Pros": "Excellent flow for standard filaments\nWell-documented community support\nCompatible with all major Voron toolheads\nAffordable entry into the Rapido 2 family\nPT100 upgrade available via Plus variant",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-11-06T09:49:14.000Z",
+    "Updated": "2026-11-05T08:24:35.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -307,7 +307,7 @@
       "Voron Trident"
     ],
     "Max Flow (mm³/s)": 14,
-    "Flow Class": "Standard",
+    "Flow Class": "Standard Flow",
     "Vendor 3 URL": "http://www.matterhackers.com/store/l/e3d-rapidchange-revo-voron-hotend-kit/sk/MCVP10CQ",
     "Description": "Smaller, lighter, and better than ever before, the Revo Voron HotEnd uses the smallest heatsink we've produced so far. Weighing in at only 25g, use Revo Voron to squeeze more speed performance from your motion system. Change nozzles at room temperature using just your fingers - no complex tools, no hot tightening. Revo Nozzles are a factory sealed nozzle and heatbreak in one, so they're easy to fit and can't leak material when in use. A Revo HeaterCore heats up in seconds, and its positive temperature coefficient means power reduces as it gets hotter, reducing hazards in a thermal runaway. Developed in collaboration with Team Voron; intended for use with the Voron StealthBurner, which includes an integrated cold side fan (no fan included with this kit).",
     "Verdict Label": "E3D's lightest Revo — 25g, cold nozzle changes, built for the StealthBurner",
@@ -349,7 +349,7 @@
     "Vendor 4 Name": "Printed Solid (CA)",
     "Max Flow (mm³/s)": 75,
     "Related 2 Name": "E3D Revo Voron",
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Vendor 2 Affiliate": true,
     "Related 1 Name": "Phaetus Dragon HF",
     "Vendor 3 URL": "https://www.fabreeko.com",
@@ -392,7 +392,7 @@
     "Price (USD)": 129.43,
     "Pros": "75 mm³/s max flow, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
     "Related 1 URL": "/hardware/hotends/phaetus-dragon-hf",
-    "Updated": "2026-11-06T09:49:15.000Z",
+    "Updated": "2026-11-05T08:24:45.000Z",
     "Vendor 5 Affiliate": true,
     "Related 2 URL": "/hardware/hotends/e3d-revo-voron"
   },
@@ -408,7 +408,7 @@
     "Vendor 4 Name": "3DO",
     "Max Flow (mm³/s)": 120,
     "Related 2 Name": "Chube Compact",
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "Extreme Flow",
     "Related 1 Name": "Chube Air",
     "Vendor 3 URL": "https://west3d.com/de-de/products/chube-hotend",
     "Description": "The Chube Conduction is the flagship of the Chube lineup, using thermal conduction through the mount structure to cool the hotend rather than a dedicated fan. This allows a longer 52mm meltzone and the highest flow rate in the family. It targets builders running enclosed, high-chamber-temp setups where fan-based cooling is a liability.",
@@ -442,7 +442,7 @@
     "Price (USD)": 320,
     "Pros": "Conduction cooling eliminates fan dependency\nHighest flow ceiling in the Chube lineup\n500°C max temp\nV6 nozzle compatibility\nM3 hardware throughout\n52mm meltzone — longest in the family\nUp to 47.5mm heater cartridge support for higher wattage",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-06T09:49:18.000Z",
+    "Updated": "2026-11-05T08:24:47.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -453,7 +453,7 @@
       "HevORT"
     ],
     "Max Flow (mm³/s)": 40,
-    "Flow Class": "High Flow",
+    "Flow Class": "Standard Flow",
     "Description": "Mellow HeatCore 4 UHF ALPS Hotend is a compact, high-performance, high flow, high-speed front-end solution for Voron series 3D printers. It supports stable extrusion at speeds exceeding 40mm ³/s and high-temperature printing at 400 ℃. We are equipped with a complete upgrade kit and replacement parts here, with multiple optional kits to meet your needs for complete machine upgrades, partial replacements, and daily maintenance and repair.",
     "Verdict Label": "Mellow's UHF kit with ALPS nozzle leveling — 400°C, 40 mm³/s",
     "Vendor 2 URL": "https://raven3dtech.com.au/product/heatcore-4-uhf-alps-hotend/",
@@ -506,7 +506,7 @@
     "Fan Size": "Not included",
     "Vendor 4 Name": "DHM-Online",
     "Max Flow (mm³/s)": 60,
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Related 1 Name": "Goliath Water",
     "Vendor 3 URL": "https://west3d.com/products/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled?country=US&currency=USD&variant=46506002743508",
     "Description": "The Goliath is a high-flow hotend designed by the VzBoT team and manufactured by Mellow. It features a 50mm meltzone, nickel-plated copper heat block with a 100W 24V nichrome wire heater, and a bi-material copper-zirconia heatbreak. Mounting pattern matches the Dragon hotend, giving it broad toolhead compatibility.",
@@ -543,7 +543,7 @@
     "Price (USD)": 129.99,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
     "Related 1 URL": "/hardware/hotends/goliath-water",
-    "Updated": "2026-11-06T09:49:20.000Z"
+    "Updated": "2026-11-05T08:24:53.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -556,7 +556,7 @@
     "Fan Size": "Water cooled",
     "Vendor 4 Name": "Alibaba (Mellow)",
     "Max Flow (mm³/s)": 100,
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "Extreme Flow",
     "Related 1 Name": "Goliath Air",
     "Vendor 3 URL": "https://west3d.com/de-de/products/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled",
     "Description": "The Goliath Water is the liquid-cooled variant of the VzBoT Goliath, replacing the air-cooled aluminum heatsink with a water-cooled block and included fittings. All other specs are identical to the Air variant. It enables sustained extreme flow rates that air cooling cannot support at prolonged high speeds.",
@@ -591,7 +591,7 @@
     "Price (USD)": 152.94,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
-    "Updated": "2026-11-06T09:49:22.000Z"
+    "Updated": "2026-11-05T08:24:58.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -604,7 +604,7 @@
     "Fan Size": "None (conduction cooled)",
     "Vendor 4 Name": "Fabreeko",
     "Max Flow (mm³/s)": 70,
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Related 1 Name": "Tricorn Air",
     "Vendor 3 URL": "https://lettucehead3d.com/product/tricorn-hotend-long-assembled-bn-thermal-paste/",
     "Description": "The Tricorn Conduction replaces the active heatsink fan with thermal conduction through the mounting structure, identical to the Chube Conduction approach. All other specs match the Tricorn Air — inverted heatbreak, 3x 40W 4mm cartridges, Dragon mount, M3/M4 hardware, 500°C ceiling. The long meltzone variant measures 53.5mm with nozzle.",
@@ -642,7 +642,7 @@
     "Price (USD)": 230,
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
-    "Updated": "2026-11-06T09:49:24.000Z"
+    "Updated": "2026-11-05T08:24:59.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -655,7 +655,7 @@
     "Fan Size": "Active (user-sourced)",
     "Vendor 4 Name": "Fabreeko",
     "Max Flow (mm³/s)": 70,
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Related 1 Name": "Tricorn Conduction",
     "Vendor 3 URL": "https://lettucehead3d.com/product/tricorn-hotend-long-assembled-bn-thermal-paste/",
     "Description": "The Tricorn is an open-source hotend designed around an inverted heatbreak geometry, three 40W 4mm heater cartridges, and Dragon-compatible mounting. It comes in air-cooled and conduction-cooled variants with long (53.5mm) and short (41mm) meltzone options. Hardware is M3/M4 throughout.",
@@ -691,7 +691,7 @@
     "Price (USD)": 230,
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
-    "Updated": "2026-11-06T09:49:26.000Z"
+    "Updated": "2026-11-05T08:25:01.000Z"
   },
   {
     "id": "receweeDHYJK3WSu6",
@@ -791,7 +791,7 @@
     "Fan Size": "Not included",
     "Max Flow (mm³/s)": 80,
     "Related 2 Name": "Chube Compact",
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "Extreme Flow",
     "Related 1 Name": "Chube Conduction",
     "Vendor 3 URL": "https://northprint3d.ca/product/chube-high-performance-hotend/",
     "Description": "The Chube Air is a high-flow, air-cooled hotend from Luke's Lab designed around V6 nozzle compatibility and all M3 hardware. With a 500°C max temp ceiling and a 42mm meltzone, it targets prosumer builders who want extreme temperature headroom without proprietary nozzle lock-in.",
@@ -836,7 +836,7 @@
     ],
     "Fan Size": "4010",
     "Max Flow (mm³/s)": 103,
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "Extreme Flow",
     "Vendor 3 URL": "https://www.onetwo3d.co.uk/product/rapido-x-hotend-with-liber-high-flow-module/",
     "Description": "Phaetus' next-generation high-flow hotend successor to the Rapido 2. Features an EndCoat titanium alloy heatbreak for reduced heat creep, copper alloy heating block for improved thermal mass, and an aluminum heatsink. Rated for over 100 mm³/s flow and up to 1300 mm/s print speeds per Phaetus claims. V6 nozzle compatible.",
     "Verdict Label": "Phaetus's highest-flow Rapido — 103 mm³/s with a 120W ceramic heater",
@@ -875,7 +875,7 @@
     "Vendor 4 Name": "DREMC",
     "Max Flow (mm³/s)": 50,
     "Related 2 Name": "Chube Conduction",
-    "Flow Class": "Ultra High Flow",
+    "Flow Class": "High Flow",
     "Related 1 Name": "Chube Air",
     "Vendor 3 URL": "https://3do.dk/en/complete-hotend/3666-chube-compact-hotend-pre-order.html",
     "Description": "The Chube Compact is the smallest member of the Chube family, with a 22.23mm OD and 48.5mm length. It uses a 6x16mm heater cartridge (upgradeable to 6x20mm) and a 33mm meltzone. Designed for toolhead designs where space and mass are a constraint but 500°C headroom is still desired.",
@@ -909,7 +909,7 @@
     "Price (USD)": 170,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-06T09:49:28.000Z",
+    "Updated": "2026-11-05T08:25:17.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]
