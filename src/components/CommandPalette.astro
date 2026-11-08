@@ -358,6 +358,12 @@
   }, { passive: true });
 
   // ── Triggers ──
+  // Shortcut hint in the nav control (CSS shows it only at 768px+ with a fine pointer).
+  const plat = (navigator as any).userAgentData?.platform || navigator.platform || '';
+  for (const k of document.querySelectorAll<HTMLElement>('[data-kbd]')) {
+    k.textContent = /mac/i.test(plat) ? '⌘K' : 'Ctrl K';
+    k.hidden = false;
+  }
   for (const el of document.querySelectorAll<HTMLElement>('[data-palette]')) {
     el.setAttribute('role', 'button');
     el.setAttribute('aria-haspopup', 'dialog');

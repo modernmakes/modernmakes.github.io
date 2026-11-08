@@ -81,6 +81,8 @@ const mainLinks = [
             <circle cx="11" cy="11" r="8"/>
             <path d="M21 21l-4.35-4.35"/>
           </svg>
+          <!-- Desktop shortcut hint. CommandPalette fills it (⌘K on Mac, Ctrl K elsewhere) and unhides it. -->
+          <kbd class="nav-kbd" data-kbd aria-hidden="true" hidden></kbd>
         </a>
         <button class="nav-hamburger" id="nav-hamburger" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-sheet" data-sheet="menu-sheet" data-haptic>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -374,6 +376,19 @@ const mainLinks = [
   }
   @media (hover: hover) and (pointer: fine) {
     .nav-search-btn:hover { color: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.06); }
+  }
+  /* ⌘K hint: only where a keyboard is likely (768px+ and a fine pointer). The control's name stays "Search". */
+  .nav-kbd { display: none; }
+  @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    .nav-search-btn:has(.nav-kbd:not([hidden])) { width: auto; gap: 8px; padding: 0 6px 0 8px; }
+    .nav-kbd:not([hidden]) {
+      display: inline-flex; align-items: center;
+      height: 20px; padding: 0 5px;
+      font: 500 11px/1 var(--fm);
+      color: var(--on-dark-muted);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-sm);
+    }
   }
   /* Invisible 44 x 44 hit area (Apple HIG) without changing the visible size */
   .nav-search-btn::after,
