@@ -396,9 +396,10 @@
   vv?.addEventListener('resize', fit);
   vv?.addEventListener('scroll', fit);
 
-  function open() {
+  // from: the trigger that was tapped. WebKit doesn't focus links on tap, so activeElement would be <body>.
+  function open(from?: HTMLElement) {
     if (dlg.open) return;
-    opener = document.activeElement as HTMLElement | null;
+    opener = from ?? (document.activeElement as HTMLElement | null);
     input.value = '';
     const ready = rows.length > 0;
     if (ready) render(); // index cached: results are in the first frame
@@ -464,10 +465,10 @@
     el.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let it open /search in a new tab
       e.preventDefault();
-      open();
+      open(el);
     });
     // role="button" promises Space as well as Enter.
-    el.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); open(); } });
+    el.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); open(el); } });
   }
   const typing = (t: EventTarget | null) =>
     t instanceof Element && !!t.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])');
