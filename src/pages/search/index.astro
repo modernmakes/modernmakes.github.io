@@ -1,131 +1,10 @@
 ---
+// /search: the full-page form of the command palette, and its no-JS fallback (the nav search icon is a
+// plain link here). Same index, ranking and rows as the palette (src/scripts/search-core.ts), so a query
+// gives the same results in the same order. Without JS it is a GET form plus browse links.
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
-import hotends   from '../../data/hardware/hotends.json';
-import extruders from '../../data/hardware/extruders.json';
-import probes    from '../../data/hardware/bed-probes.json';
-import printers  from '../../data/hardware/printers.json';
-
-/* ── build search index at build time ── */
-const toSlug = (name: string) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-
-interface SearchItem {
-  title:    string;
-  excerpt:  string;
-  url:      string;
-  type:     string;
-  category: string;
-}
-
-const items: SearchItem[] = [];
-
-/* news */
-const newsItems = await getCollection('news');
-for (const item of newsItems) {
-  items.push({
-    title:    item.data.title,
-    excerpt:  item.data.excerpt ?? '',
-    url:      `/news/${item.slug}`,
-    type:     'News',
-    category: (item.data.category as string | undefined) ?? 'News',
-  });
-}
-
-/* guides */
-const guideItems = await getCollection('guides');
-for (const item of guideItems) {
-  items.push({
-    title:    item.data.title,
-    excerpt:  item.data.excerpt ?? '',
-    url:      `/guides/${item.slug}`,
-    type:     'Guide',
-    category: (item.data.category as string | undefined) ?? 'Guide',
-  });
-}
-
-/* comparisons */
-const compItems = await getCollection('comparisons');
-for (const item of compItems) {
-  items.push({
-    title:    item.data.title,
-    excerpt:  item.data.excerpt ?? '',
-    url:      `/comparisons/${item.slug}`,
-    type:     'Comparison',
-    category: 'Comparison',
-  });
-}
-
-/* filament */
-const filItems = await getCollection('filament').catch(() => []);
-for (const item of filItems) {
-  items.push({
-    title:    item.data.title ?? String(item.slug).toUpperCase(),
-    excerpt:  item.data.description ?? '',
-    url:      `/filament/${item.slug}`,
-    type:     'Filament',
-    category: 'Filament',
-  });
-}
-
-/* hardware — hotends */
-for (const r of hotends as any[]) {
-  if (!r['Name']) continue;
-  items.push({
-    title:    r['Name'],
-    excerpt:  r['Verdict Label'] ?? r['Description'] ?? `${r['Brand'] ?? ''} hotend — ${r['Verdict'] ?? ''}`.trim(),
-    url:      `/hardware/hotends/${toSlug(r['Name'])}`,
-    type:     'Hardware',
-    category: 'Hotend',
-  });
-}
-
-/* hardware — extruders */
-for (const r of extruders as any[]) {
-  if (!r['Name']) continue;
-  items.push({
-    title:    r['Name'],
-    excerpt:  r['Verdict Label'] ?? r['Description'] ?? `${r['Brand'] ?? ''} extruder`.trim(),
-    url:      `/hardware/extruders/${toSlug(r['Name'])}`,
-    type:     'Hardware',
-    category: 'Extruder',
-  });
-}
-
-/* hardware — bed probes */
-for (const r of probes as any[]) {
-  if (!r['Name']) continue;
-  items.push({
-    title:    r['Name'],
-    excerpt:  r['Description'] ?? `${r['Name']} bed probe`,
-    url:      `/hardware/probes/${toSlug(r['Name'])}`,
-    type:     'Hardware',
-    category: 'Bed Probe',
-  });
-}
-
-/* printers (live at /printers, not /hardware) */
-items.push({
-  title:    'Printers',
-  excerpt:  'Self-build printer ecosystems and every printer model: build volume, frame, BOM cost, difficulty.',
-  url:      '/printers',
-  type:     'Hardware',
-  category: 'Printer',
-});
-for (const r of printers as any[]) {
-  if (!r['Name']) continue;
-  items.push({
-    title:    r['Name'],
-    excerpt:  r['Verdict Label'] ?? r['Description'] ?? `${r['Brand'] ?? ''} printer`.trim(),
-    url:      `/printers/${toSlug(r['Name'])}`,
-    type:     'Hardware',
-    category: 'Printer',
-  });
-}
-
-const indexJson = JSON.stringify(items);
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -137,56 +16,53 @@ const pageSchema = {
   name: 'Search — Modern Makes',
   url: `${siteBase}/search`,
 };
+
+const browse: [string, string][] = [
+  ['Hardware', '/hardware'],
+  ['Printers', '/printers'],
+  ['Guides', '/guides'],
+  ['News', '/news'],
+  ['Tools', '/tools'],
+];
 ---
 <Base
   title="Search"
-  description="Search Modern Makes — hardware specs, guides, news, comparisons, and filament profiles."
+  description="Search Modern Makes: hardware specs and verdicts, guides, news, comparisons and tools."
   hasPageH1={true}
 >
   <Nav slot="nav" currentPath="/search" />
 
   <div class="srch-wrap">
     <div class="srch-inner">
+      <h1 class="srch-h1">Search</h1>
 
-      <!-- header -->
-      <div class="srch-header">
-        <h1 class="srch-title">Search</h1>
-        <div class="srch-input-wrap">
-          <input
-            class="srch-input"
-            type="search"
-            id="srch-input"
-            placeholder="Hotends, guides, comparisons…"
-            autocomplete="off"
-            spellcheck="false"
-            aria-label="Search Modern Makes"
-          />
-          <span class="srch-icon" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-              <line x1="10" y1="10" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </span>
-        </div>
-      </div>
+      <form class="srch-form" id="srch-form" action="/search" method="get" role="search">
+        <label class="sr-only" for="srch-input">Search hardware, articles and tools</label>
+        <svg class="srch-glass" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input
+          class="srch-input"
+          id="srch-input"
+          name="q"
+          type="search"
+          placeholder="Hardware, articles, tools"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          enterkeyhint="search"
+        />
+        <button class="srch-go" type="submit">Search</button>
+      </form>
 
-      <!-- results count -->
-      <div class="srch-meta" id="srch-meta" aria-live="polite"></div>
-
-      <!-- results -->
+      <p class="srch-meta" id="srch-meta" role="status" aria-live="polite"></p>
       <div class="srch-results" id="srch-results"></div>
 
-      <!-- empty state -->
-      <div class="srch-empty" id="srch-empty" aria-hidden="true">
-        <p class="srch-empty-title">No results found.</p>
-        <p class="srch-empty-sub">Try a different term — hardware names, materials, or calibration topics work well.</p>
-      </div>
-
-      <!-- initial state -->
-      <div class="srch-prompt" id="srch-prompt">
-        <p>Start typing to search hardware specs, guides, news, and more.</p>
-      </div>
-
+      <nav class="srch-browse" id="srch-browse" aria-labelledby="srch-browse-h">
+        <h2 class="cp-g srch-gh" id="srch-browse-h">Browse</h2>
+        <ul>
+          {browse.map(([label, href]) => <li><a href={href}>{label}</a></li>)}
+        </ul>
+      </nav>
     </div>
   </div>
 
@@ -194,266 +70,138 @@ const pageSchema = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
 </Base>
 
-<script define:vars={{ indexJson }}>
-(function () {
-  const INDEX = JSON.parse(indexJson);
+<script>
+  import { loadIndex, search, rowHtml, esc, GROUP_LABEL, freshness } from '../../scripts/search-core';
 
-  const inputEl   = document.getElementById('srch-input');
-  const resultsEl = document.getElementById('srch-results');
-  const emptyEl   = document.getElementById('srch-empty');
-  const promptEl  = document.getElementById('srch-prompt');
-  const metaEl    = document.getElementById('srch-meta');
+  const form = document.getElementById('srch-form') as HTMLFormElement;
+  const input = document.getElementById('srch-input') as HTMLInputElement;
+  const results = document.getElementById('srch-results') as HTMLElement;
+  const meta = document.getElementById('srch-meta') as HTMLElement;
+  const browse = document.getElementById('srch-browse') as HTMLElement;
 
-  if (!inputEl || !resultsEl) return;
+  input.value = new URLSearchParams(location.search).get('q') ?? '';
+  let ready = false;
+  let statusT = 0;
 
-  /* ── check for ?q= param on load ── */
-  const params = new URLSearchParams(window.location.search);
-  const initialQ = params.get('q') ?? '';
-  if (initialQ) {
-    inputEl.value = initialQ;
-    runSearch(initialQ);
+  const section = (label: string, html: string) => `<section class="srch-g"><h2 class="cp-g srch-gh">${label}</h2>${html}</section>`;
+
+  function say(text: string) {
+    clearTimeout(statusT);
+    statusT = window.setTimeout(() => { meta.textContent = text; }, 300); // don't announce every keystroke
   }
 
-  inputEl.addEventListener('input', () => {
-    const q = inputEl.value.trim();
-    /* update URL param */
-    const url = new URL(window.location.href);
-    if (q) { url.searchParams.set('q', q); } else { url.searchParams.delete('q'); }
-    history.replaceState(null, '', url.toString());
-    runSearch(q);
+  function render() {
+    const raw = input.value.trim();
+    browse.hidden = !!raw;
+    if (!raw) { results.innerHTML = ''; say(''); return; }
+    if (!ready) { results.innerHTML = '<p class="srch-note">Loading…</p>'; return; }
+    const res = search(raw);
+    if (res.count) {
+      results.innerHTML = res.groups
+        .filter(([, rs]) => rs.length)
+        .map(([g, rs]) => section(GROUP_LABEL[g], rs.map((r) => rowHtml(r, res.terms)).join('')))
+        .join('');
+      say(`${res.count} result${res.count === 1 ? '' : 's'}${freshness() ? ` · ${freshness()}` : ''}`);
+    } else {
+      results.innerHTML = `<p class="srch-note">Nothing matched “${esc(raw)}”.</p>` +
+        (res.closest.length ? section('Closest hardware', res.closest.map((r) => rowHtml(r)).join('')) : '');
+      say('No matches');
+    }
+  }
+
+  // Linkable: the address bar always holds the current query.
+  function syncUrl() {
+    const url = new URL(location.href);
+    const q = input.value.trim();
+    if (q) url.searchParams.set('q', q); else url.searchParams.delete('q');
+    history.replaceState(history.state, '', url);
+  }
+
+  input.addEventListener('input', () => { syncUrl(); render(); });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // results are already live; Enter just hides the phone keyboard
+    syncUrl();
+    render();
+    if (matchMedia('(pointer: coarse)').matches) input.blur();
   });
 
-  function runSearch(q) {
-    if (!q) {
-      resultsEl.innerHTML = '';
-      emptyEl.setAttribute('aria-hidden', 'true');
-      promptEl.style.display = '';
-      metaEl.textContent = '';
-      return;
-    }
-
-    promptEl.style.display = 'none';
-    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-
-    const scored = INDEX
-      .map(item => {
-        const haystack = (item.title + ' ' + item.excerpt + ' ' + item.category).toLowerCase();
-        let score = 0;
-        for (const t of terms) {
-          if (item.title.toLowerCase().includes(t)) score += 3;
-          else if (haystack.includes(t)) score += 1;
-        }
-        return { item, score };
-      })
-      .filter(x => x.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 30)
-      .map(x => x.item);
-
-    if (scored.length === 0) {
-      resultsEl.innerHTML = '';
-      emptyEl.setAttribute('aria-hidden', 'false');
-      metaEl.textContent = '';
-      return;
-    }
-
-    emptyEl.setAttribute('aria-hidden', 'true');
-    metaEl.textContent = scored.length + ' result' + (scored.length === 1 ? '' : 's');
-
-    resultsEl.innerHTML = scored.map((item, i) =>
-      `<a class="srch-result" href="${item.url}" style="transition-delay:${i * 40}ms">
-        <div class="srch-result-meta">
-          <span class="srch-type">${escHtml(item.type)}</span>
-          <span class="srch-cat">${escHtml(item.category)}</span>
-        </div>
-        <div class="srch-result-title">${escHtml(item.title)}</div>
-        ${item.excerpt ? `<p class="srch-result-excerpt">${escHtml(item.excerpt)}</p>` : ''}
-      </a>`
-    ).join('');
-
-    /* stagger entrance */
-    requestAnimationFrame(() => {
-      resultsEl.querySelectorAll('.srch-result').forEach(el => {
-        el.classList.add('srch-result-visible');
-      });
-    });
-  }
-
-  function escHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-})();
+  render();
+  loadIndex().then(
+    () => { ready = true; render(); },
+    () => { results.innerHTML = '<p class="srch-note">Search didn’t load. Try again in a moment, or browse below.</p>'; browse.hidden = false; },
+  );
 </script>
 
 <style is:global>
-/* ── SEARCH PAGE ──────────────────────────── */
+/* Hallmark · redesign: /search · genre: editorial · theme: DESIGN.md (Workshop Press, dark plane)
+ * pre-emit critique: P4 H5 E4 S4 R5 V4
+ * The full-page form of the palette: the same dark plane and the same rows, so results look and rank the
+ * same in both. One column; the field is the only large element. No orange outside the focus ring and caret.
+ * states: field default · hover · focus-visible · filled; rows default · hover · focus-visible · active;
+ *         loading · error (index failed) · empty (no query: browse) · no hits (closest hardware). */
 .srch-wrap {
-  background: var(--bg);
+  background: var(--dark-bg);
+  color: #fff;
   min-height: calc(100vh - 80px);
-  padding: 40px 0 80px;
+  padding: 56px 24px 96px;
+  overflow-x: clip;
 }
-.srch-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
+.srch-inner { max-width: 720px; margin: 0 auto; }
+.srch-h1 { font: 800 clamp(40px, 6vw, 56px)/1 var(--fd); color: #fff; margin: 0 0 24px; }
 
-/* Header */
-.srch-header { margin-bottom: 28px; }
-.srch-title {
-  font-family: var(--fd);
-  font-size: 40px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1;
-  letter-spacing: -.5px;
-  margin-bottom: 20px;
-}
-.srch-input-wrap {
+.srch-form {
   position: relative;
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 6px 0 16px;
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-fast) var(--ease-out);
 }
-.srch-icon {
-  position: absolute;
-  left: 14px;
-  color: var(--g2);
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-}
+.srch-form:focus-within { border-color: rgba(255, 255, 255, 0.4); }
+@media (hover: hover) and (pointer: fine) { .srch-form:hover { border-color: rgba(255, 255, 255, 0.3); } }
+.srch-glass { flex: none; color: var(--on-dark-muted); }
 .srch-input {
-  width: 100%;
-  box-sizing: border-box;
-  font-family: var(--fu);
-  font-size: 16px;
-  color: var(--black);
-  background: var(--surface);
-  border: 2px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 16px 14px 42px;
-  outline-color: var(--accent);
-  transition: border-color .15s;
-  appearance: none;
+  flex: 1; min-width: 0; height: 56px;
+  background: transparent; border: 0; outline: none; /* the field's border is the focus mark */
+  color: #fff; caret-color: var(--accent);
+  font: 500 17px var(--fu);
+  appearance: none; -webkit-appearance: none;
 }
-.srch-input:focus { border-color: var(--accent); }
-.srch-input::placeholder { color: var(--g2); }
+.srch-input::placeholder { color: var(--on-dark-muted); }
 .srch-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.srch-go {
+  position: relative; flex: none;
+  min-height: 44px; padding: 0 14px;
+  background: transparent; color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-sm);
+  font: 700 14px var(--fu); cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.srch-go:active { scale: var(--scale-press-btn); background: rgba(255, 255, 255, 0.08); transition-duration: var(--dur-press); }
+@media (hover: hover) and (pointer: fine) { .srch-go:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.35); } }
+@media (prefers-reduced-motion: reduce) { .srch-go:active { scale: none; } }
 
-/* Meta */
-.srch-meta {
-  font-family: var(--fm);
-  font-size: 11px;
-  color: var(--g2);
-  margin-bottom: 14px;
-  min-height: 16px;
-}
+.srch-meta { min-height: 18px; margin: 12px 0 8px; font: 400 11px/1.6 var(--fm); color: var(--on-dark-muted); }
+.srch-note { margin: 16px 0 4px; font: 400 16px/1.6 var(--fb); color: var(--on-dark-soft); overflow-wrap: anywhere; }
 
-/* Results */
-.srch-results {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.srch-result {
-  display: block;
-  padding: 18px 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-decoration: none;
-  color: inherit;
-  /* entrance */
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity .25s ease, transform .25s ease, border-color .12s, box-shadow .12s;
-}
-.srch-result.srch-result-visible {
-  opacity: 1;
-  transform: none;
-}
-@media (hover: hover) and (pointer: fine) {
-  .srch-result:hover {
-    border-color: var(--accent);
-    box-shadow: 0 2px 12px rgba(255,90,31,.07);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .srch-result { transition: border-color .12s, box-shadow .12s !important; opacity: 1 !important; transform: none !important; }
-}
-.srch-result-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 5px;
-}
-.srch-type {
-  font-family: var(--fm);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.srch-cat {
-  font-family: var(--fu);
-  font-size: 9px;
-  color: var(--g2);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 1px 6px;
-}
-.srch-result-title {
-  font-family: var(--fd);
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1.1;
-  margin-bottom: 4px;
-}
-.srch-result-excerpt {
-  font-family: var(--fb);
-  font-size: 13px;
-  color: var(--g1);
-  line-height: 1.65;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
+.srch-g + .srch-g { margin-top: 8px; }
+.srch-gh { margin: 0; padding-left: 0; }
+.srch-results .cp-row { margin: 0 -10px; }
+.srch-results .cp-row:focus-visible { outline-offset: -2px; }
+@media (hover: hover) and (pointer: fine) { .srch-results .cp-row:hover { background: rgba(255, 255, 255, 0.08); } }
 
-/* Empty / prompt */
-.srch-empty, .srch-prompt {
-  padding: 48px 0;
-  text-align: center;
+.srch-browse { margin-top: 24px; }
+.srch-browse ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 28px; }
+.srch-browse a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font: 600 16px var(--fu); color: #fff; white-space: nowrap;
+  text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.3); text-underline-offset: 5px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
 }
-.srch-empty[aria-hidden="true"] { display: none; }
-.srch-empty-title {
-  font-family: var(--fd);
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--black);
-  margin-bottom: 8px;
-}
-.srch-empty-sub {
-  font-family: var(--fb);
-  font-size: 14px;
-  color: var(--g2);
-  line-height: 1.7;
-}
-.srch-prompt p {
-  font-family: var(--fb);
-  font-size: 15px;
-  color: var(--g2);
-}
+@media (hover: hover) and (pointer: fine) { .srch-browse a:hover { text-decoration-color: #fff; } }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .srch-inner { padding: 0 24px; }
-  .srch-title { font-size: 32px; }
-}
-@media (max-width: 480px) {
-  .srch-inner { padding: 0 20px; }
+@media (max-width: 600px) {
+  .srch-wrap { padding: 32px 16px 72px; }
 }
 </style>

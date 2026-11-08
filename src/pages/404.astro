@@ -41,7 +41,7 @@ import Footer from '../components/Footer.astro';
 </Base>
 
 <script>
-  import { loadIndex, guessHardware, rowHtml } from '../scripts/search-core';
+  import { loadIndex, guessHardware, rowHtml, words } from '../scripts/search-core';
 
   // "/hotends/rapido-hf-old.html" → "hotends rapido hf old": hyphens and slashes to spaces, file extensions
   // and plain numbers dropped.
@@ -65,7 +65,7 @@ import Footer from '../components/Footer.astro';
     loadIndex().then(() => {
       const hits = guessHardware(q);
       if (!hits.length) return;
-      document.getElementById('nf-rows')!.innerHTML = hits.map((r) => rowHtml(r)).join('');
+      document.getElementById('nf-rows')!.innerHTML = hits.map((r) => rowHtml(r, words(q))).join('');
       document.getElementById('nf-near')!.hidden = false;
     }, () => { /* no index: the search field and links still work */ });
   }

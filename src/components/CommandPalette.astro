@@ -141,6 +141,12 @@
     min-width: 4.5ch;
     text-align: right;
   }
+  /* Match highlighting (palette, /search, 404): heavier and full-contrast against the muted row text.
+     No fill, no orange. Barlow tops out at 600, so a matched title steps its other words down to 500. */
+  .cp-row mark { background: none; color: #fff; }
+  .cp-t:has(mark) { font-weight: 500; color: var(--on-dark-soft); }
+  .cp-t mark { font-weight: 600; }
+  .cp-s mark { font-weight: 500; }
   .cp-empty { padding: 20px 10px 6px; font: 400 15px/1.6 var(--fb); color: var(--on-dark-soft); }
   .cp-empty a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
@@ -219,7 +225,7 @@
       const res = search(raw);
       terms = res.terms;
       count = res.count;
-      if (count) html = res.groups.map(([g, rs]) => groupHtml(GROUP_LABEL[g as Group], rs)).join('');
+      if (count) html = res.groups.map(([g, rs]) => groupHtml(GROUP_LABEL[g as Group], rs, terms)).join('');
       else {
         // Nothing matched: offer the three hardware names closest to what was typed.
         suggest = true;

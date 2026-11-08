@@ -140,7 +140,9 @@ const price = (p: number) => (Number.isInteger(p) ? usd0 : usd2).format(p);
 export function mark(text: string, terms: string[]) {
   const ts = [...new Set(terms)].filter(Boolean).sort((a, b) => b.length - a.length);
   if (!ts.length) return esc(text);
-  const re = new RegExp(`(^|[^a-z0-9])(${ts.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi');
+  // A one-character term ("2") only marks a whole word, not the start of "2F" or "2026".
+  const alt = ts.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (t.length < 2 ? '(?![a-z0-9])' : '')).join('|');
+  const re = new RegExp(`(^|[^a-z0-9])(${alt})`, 'gi');
   let out = '', last = 0;
   for (const m of text.matchAll(re)) {
     const start = m.index! + m[1].length;
