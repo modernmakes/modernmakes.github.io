@@ -11,10 +11,12 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)');
 
 const live = document.createElement('div');
 live.className = 'sr-only';
+live.dataset.toast = '';
 live.setAttribute('role', 'status');
 live.setAttribute('aria-live', 'polite');
 const el = document.createElement('div');
 el.className = 'toast';
+el.dataset.toast = '';
 el.setAttribute('aria-hidden', 'true');
 document.body.append(live, el);
 

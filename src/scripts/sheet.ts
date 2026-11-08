@@ -326,14 +326,14 @@ document.addEventListener('click', (e) => {
   if (a && c.dlg.contains(a) && !a.target && !a.hasAttribute('download') && !(e as MouseEvent).metaKey && !(e as MouseEvent).ctrlKey && !(e as MouseEvent).shiftKey) closeSheet(c.dlg, true);
 });
 
-// Popover light dismiss: a press or focus anywhere outside it.
+// Popover light dismiss: a press or focus anywhere outside it (the toast and its live region don't count).
 document.addEventListener('pointerdown', (e) => {
   const c = cur, t = e.target as Node;
-  if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t)) closeSheet(c.dlg);
+  if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t) && !(t as Element).closest?.('[data-toast]')) closeSheet(c.dlg);
 }, true);
 document.addEventListener('focusin', (e) => {
   const c = cur, t = e.target as Node;
-  if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t)) closeSheet(c.dlg, true);
+  if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t) && !(t as Element).closest?.('[data-toast]')) closeSheet(c.dlg, true);
 });
 
 addEventListener('scroll', () => {
