@@ -2,8 +2,14 @@
 // Command palette (System 2). Opened by ⌘K / Ctrl+K, "/" and any [data-palette] control
 // (the nav search icon, which is a plain /search link without JS). The index loads on
 // first open and is prefetched on hover / focus / touch of the control.
+//
+// It is a Sheet (src/scripts/sheet.ts, styles in Sheet.astro, which Nav renders alongside it): a bottom
+// sheet at the large detent under 768px, and "plain" (the centred panel, no animation) from 768px up.
 ---
-<dialog class="cp" id="cp" aria-label="Search Modern Makes">
+<dialog class="sheet sheet--dark cp" id="cp" data-desktop="plain" data-detent="large" data-detents="large" data-sheet-nofocus aria-label="Search Modern Makes">
+  <div class="sheet-scrim" data-sheet-close></div>
+  <div class="sheet-panel cp-panel">
+  <div class="sheet-grab" data-sheet-drag aria-hidden="true"><span></span></div>
   <div class="cp-top">
     <svg class="cp-glass" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
@@ -25,61 +31,38 @@
       autocapitalize="off"
       spellcheck="false"
     />
-    <button type="button" class="cp-cancel" id="cp-cancel">Cancel</button>
+    <button type="button" class="cp-cancel" id="cp-cancel" data-sheet-close>Cancel</button>
   </div>
-  <div class="cp-list" id="cp-list" role="listbox" aria-label="Results"></div>
+  <div class="cp-list" id="cp-list" role="listbox" aria-label="Results" data-sheet-scroll></div>
   <div class="cp-foot">
     <span class="cp-keys" aria-hidden="true"><kbd>↑</kbd><kbd>↓</kbd> move <kbd>↵</kbd> open <kbd>esc</kbd> close</span>
     <span class="cp-fresh" id="cp-fresh"></span>
   </div>
   <div class="sr-only" id="cp-status" role="status" aria-live="polite"></div>
+  </div>
 </dialog>
 
 <style is:global>
   /* Hallmark · component: command palette · genre: editorial · theme: DESIGN.md (Workshop Press, dark plane)
    * states: default · hover · focus · active · loading · error · empty (no disabled/success: rows navigate)
-   * motion: none on desktop (keyboard, high frequency); mobile sheet rises once on --dur-base */
-  dialog.cp {
-    padding: 0;
-    border: 1px solid var(--dark-border);
-    background: var(--dark-surface);
-    color: #fff;
-    color-scheme: dark;
-    overflow: hidden;
-    overscroll-behavior: none;
-    max-width: none;
-    max-height: none;
-  }
-  dialog.cp[open] { display: flex; flex-direction: column; }
-  dialog.cp::backdrop { background: rgba(0, 0, 0, 0.5); }
-  html:has(dialog.cp[open]) { overflow: hidden; scrollbar-gutter: stable; }
+   * motion: none on desktop (keyboard, high frequency); the phone sheet uses the Sheet tokens */
+  dialog.cp { color-scheme: dark; }
 
-  /* Desktop / tablet: centred panel, fixed height so results never make it jump. */
-  @media (min-width: 768px) {
-    dialog.cp {
-      margin: 12vh auto auto;
-      width: min(640px, calc(100% - 32px));
-      height: min(64vh, 520px);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    }
+  /* Desktop / tablet ("plain"): the centred panel, fixed height so results never make it jump. */
+  [data-mode="plain"] .cp-panel {
+    position: relative;
+    display: flex; flex-direction: column;
+    width: min(640px, calc(100% - 32px));
+    height: min(64vh, 520px);
+    margin: 12vh auto 0;
+    background: var(--sh-bg);
+    border: 1px solid var(--sh-line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
-  /* Phone: full-height sheet. JS sizes it to visualViewport so the keyboard never covers results. */
-  @media (max-width: 767px) {
-    dialog.cp {
-      position: fixed;
-      inset: 0 0 auto 0;
-      margin: 0;
-      width: 100vw; /* over the reserved scrollbar gutter too */
-      height: 100dvh;
-      border: 0;
-      padding-top: env(safe-area-inset-top, 0px);
-    }
-  }
-  @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
-    dialog.cp[open] { transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out); }
-    @starting-style { dialog.cp[open] { transform: translateY(16px); opacity: 0; } }
-  }
+  /* Phone: the sheet's own panel (92% of the visual viewport); the footer carries the safe-area padding. */
+  [data-mode="sheet"] .cp-panel { padding-bottom: 0; }
+  [data-mode="sheet"] .cp-list { padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
 
   .cp-top {
     display: flex;
@@ -114,7 +97,7 @@
     font: 600 15px var(--fu);
     cursor: pointer;
   }
-  .cp-cancel:active { background: rgba(255, 255, 255, 0.06); }
+  .cp-cancel:active { background: var(--sh-wash); }
   @media (min-width: 768px) { .cp-cancel { display: none; } }
 
   .cp-list {
@@ -189,6 +172,7 @@
 
 <script>
   import { syncedLabel } from '../scripts/synced.js';
+  import { openSheet, closeSheet } from '../scripts/sheet';
   type H = { t: string; b?: string; c: string; v?: string; vc?: string; f?: string; p?: number; u: string; k?: string };
   type A = { t: string; c: string; d?: string; u: string };
   type T = { t: string; c: string; k?: string; u: string };
@@ -399,77 +383,44 @@
   }
 
   // ── Open / close ──
-  // PHONE SHEET BEHAVIOUR. Keep all of this when the palette moves into the shared Sheet (Phase 4A).
-  // It copies iOS Settings / Spotlight search:
-  //  1. Starting a scroll on the results blurs the input on purpose, so the keyboard hides.
-  //  2. The sheet then grows to the full visual viewport. Its height follows visualViewport
-  //     through ONE rAF-batched write per frame, with no CSS transition on height: the keyboard
-  //     is already animating, and two animations on one box fight each other.
-  //  3. Only the results list scrolls. The page behind never moves: html is overflow:hidden
-  //     while open (CSS, :has(dialog[open])); a drag that starts outside the list, or on a list
-  //     with nothing to scroll, is swallowed; the list has overscroll-behavior: contain; and
-  //     any drift of window.scrollY (iOS scrolls the page on focus) is put straight back.
-  //  4. Closing leaves scrollY exactly where it was.
-  //  5. Tapping the input again raises the keyboard. The sheet shrinks to the space above it,
-  //     so the results stay visible.
-  let opener: HTMLElement | null = null;
-  let lockY = 0;
+  // PHONE SHEET BEHAVIOUR. Keep all of this (Phase 3, tested on a real iPhone) while the palette lives in the
+  // shared Sheet. It copies iOS Settings / Spotlight search. Search-specific parts are here; the parts every
+  // sheet shares are in src/scripts/sheet.ts:
+  //  1. Starting a scroll on the results blurs the input on purpose, so the keyboard hides.   [touchmove below]
+  //  2. The sheet then grows to the large detent, 92% of the visual viewport. Its height follows
+  //     visualViewport through ONE rAF-batched write per frame, with no CSS transition on height: the
+  //     keyboard is already animating, and two animations on one box fight each other.        [sheet.ts fit()]
+  //  3. Only the results list scrolls. The page behind never moves: html is overflow:hidden while open; a drag
+  //     that starts outside the list, or on a list with nothing to scroll, is cancelled; the list has
+  //     overscroll-behavior: contain; any drift of window.scrollY (iOS scrolls the page on focus) is put
+  //     straight back.                                                                    [sheet.ts + .cp-list]
+  //  4. Closing leaves scrollY exactly where it was.                                        [sheet.ts finish()]
+  //  5. Tapping the input again raises the keyboard. The sheet shrinks to the space above it, so the
+  //     results stay visible.                                                                [sheet.ts fit()]
+  // The input is also always empty on open (below), and Enter only opens a highlighted row.
   let typed = false;
-  const vv = window.visualViewport;
-  const phone = matchMedia('(max-width: 767px)');
-
-  let fitRaf = 0, fitTop = '', fitH = '';
-  function fit() {
-    fitRaf = 0;
-    const on = dlg.open && !!vv && phone.matches;
-    const top = on ? `${vv!.offsetTop}px` : '';
-    const h = on ? `${vv!.height}px` : '';
-    if (top !== fitTop) dlg.style.top = fitTop = top; // skip unchanged writes: each one is a relayout
-    if (h !== fitH) dlg.style.height = fitH = h;
-  }
-  const queueFit = () => { if (!fitRaf) fitRaf = requestAnimationFrame(fit); };
-  vv?.addEventListener('resize', queueFit);
-  vv?.addEventListener('scroll', queueFit);
-  phone.addEventListener('change', queueFit);
-
-  const holdScroll = () => { if (scrollY !== lockY) scrollTo({ top: lockY, behavior: 'instant' }); };
-  addEventListener('scroll', () => { if (dlg.open) holdScroll(); }, { passive: true });
 
   // from: the trigger that was tapped. WebKit doesn't focus links on tap, so activeElement would be <body>.
   function open(from?: HTMLElement) {
     if (dlg.open) return;
-    opener = from ?? (document.activeElement as HTMLElement | null);
-    lockY = scrollY;
     typed = false;
     input.value = ''; // always opens empty, showing recents
     const ready = rows.length > 0;
     if (ready) render(); // index cached: results are in the first frame
     else list.innerHTML = '<p class="cp-empty">Loading…</p>';
-    dlg.showModal();
-    fit();
+    openSheet(dlg, from ?? (document.activeElement as HTMLElement | null));
+    if (!dlg.open) return; // another sheet is already open
     input.focus({ preventScroll: true }); // inside the gesture, so iOS raises the keyboard
     // bfcache, Safari form restore or AutoFill can put old text back after the clear above.
     // Text that arrived with no input event is never the reader's: wipe it.
     for (const ms of [0, 250]) setTimeout(() => { if (dlg.open && !typed && input.value) { input.value = ''; if (rows.length) render(); } }, ms);
     if (!ready) load().then(() => { if (dlg.open) render(); }, () => {});
   }
-  const close = () => { if (dlg.open) dlg.close(); };
+  const close = () => closeSheet(dlg);
 
-  dlg.addEventListener('close', () => {
-    input.value = '';
-    holdScroll();
-    if (opener?.isConnected) opener.focus({ preventScroll: true });
-    opener = null;
-  });
-  // Click on the backdrop (the dialog box itself, outside its rect) closes.
-  dlg.addEventListener('click', (e) => {
-    if (e.target !== dlg) return;
-    const r = dlg.getBoundingClientRect();
-    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close();
-  });
-  document.getElementById('cp-cancel')!.addEventListener('click', close);
-  // Never come back from bfcache with it open, or with the old query in the box.
-  addEventListener('pagehide', () => { close(); input.value = ''; });
+  dlg.addEventListener('close', () => { input.value = ''; });
+  // Never come back from bfcache with the old query in the box (sheet.ts closes it on pagehide).
+  addEventListener('pagehide', () => { input.value = ''; });
   addEventListener('pageshow', () => { input.value = ''; });
 
   input.addEventListener('input', () => { typed = true; if (rows.length) render(); });
@@ -496,17 +447,14 @@
   list.addEventListener('click', (e) => {
     const el = (e.target as Element).closest<HTMLAnchorElement>('.cp-row');
     if (!el) return;
-    remember(el.getAttribute('href')!);
-    if (!(e.metaKey || e.ctrlKey || e.shiftKey)) close();
+    remember(el.getAttribute('href')!); // sheet.ts closes the palette for a plain link click
   });
-  // Phone touch (see PHONE SHEET BEHAVIOUR). Non-passive so a drag that would only scroll the page can be cancelled.
+  // (1) above. The 6px threshold keeps a tap's jitter from hiding the keyboard.
   let touchY0 = 0;
-  dlg.addEventListener('touchstart', (e) => { touchY0 = e.touches[0].clientY; }, { passive: true });
-  dlg.addEventListener('touchmove', (e) => {
-    const inList = list.contains(e.target as Node);
-    if (inList && document.activeElement === input && Math.abs(e.touches[0].clientY - touchY0) > 6) input.blur(); // hide the keyboard
-    if (!inList || list.scrollHeight <= list.clientHeight) e.preventDefault(); // nothing here to scroll: don't let it reach the page
-  }, { passive: false });
+  list.addEventListener('touchstart', (e) => { touchY0 = e.touches[0].clientY; }, { passive: true });
+  list.addEventListener('touchmove', (e) => {
+    if (document.activeElement === input && Math.abs(e.touches[0].clientY - touchY0) > 6) input.blur();
+  }, { passive: true });
 
   // ── Triggers ──
   for (const el of document.querySelectorAll<HTMLElement>('[data-palette]')) {
