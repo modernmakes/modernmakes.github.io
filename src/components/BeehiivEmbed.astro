@@ -1,56 +1,12 @@
 ---
 ---
-<form class="beehiiv-fallback-form" id="newsletter-form">
-  <input type="email" name="email" id="newsletter-email" placeholder="Enter your email" aria-label="Email address" required />
-  <button type="submit" id="newsletter-btn">Subscribe →</button>
+<form class="beehiiv-fallback-form" id="newsletter-form" data-subscribe>
+  <input type="email" name="email" id="newsletter-email" placeholder="Enter your email" aria-label="Email address" aria-describedby="newsletter-msg" required />
+  <button type="submit" id="newsletter-btn" class="sub-btn"><span class="sub-label">Subscribe →</span><span class="sub-spin" aria-hidden="true"></span></button>
 </form>
-<p class="beehiiv-open-note" id="newsletter-msg" style="display:none;"></p>
+<p class="beehiiv-open-note" id="newsletter-msg" role="status" data-subscribe-msg></p>
 
-<script is:inline>
-(function() {
-  var form = document.getElementById('newsletter-form');
-  var btn = document.getElementById('newsletter-btn');
-  var msg = document.getElementById('newsletter-msg');
-  var email = document.getElementById('newsletter-email');
-
-  if (!form) return;
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    btn.textContent = 'Subscribing...';
-    btn.disabled = true;
-
-    var slug = window.location.pathname.replace(/\//g, '-').replace(/^-|-$/g, '') || 'unknown';
-    var pageType = window.location.pathname.includes('/guides/') ? 'guide_footer' : 'article_footer';
-
-    fetch('https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email.value,
-        utm_source: 'website',
-        utm_medium: 'subscribe_form',
-        utm_campaign: pageType + '__' + slug
-      })
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      form.style.display = 'none';
-      msg.textContent = "You're in. Welcome to The Modern Makes Brief.";
-      msg.style.display = 'block';
-      msg.style.color = '#fff';
-      msg.style.fontSize = '15px';
-    })
-    .catch(function() {
-      btn.textContent = 'Subscribe →';
-      btn.disabled = false;
-      msg.textContent = 'Something went wrong. Please try again.';
-      msg.style.display = 'block';
-      msg.style.color = 'rgba(255,255,255,0.5)';
-    });
-  });
-})();
-</script>
+<script>import '../scripts/subscribe';</script>
 
 <style>
   .beehiiv-fallback-form {
@@ -87,7 +43,10 @@
     letter-spacing: .05em;
     cursor: pointer;
     white-space: nowrap;
+    transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
   }
+  .beehiiv-fallback-form button:active { background: var(--accent-mid); }
+  .beehiiv-fallback-form input[type="email"][aria-invalid="true"] { border-color: var(--sub-error-on-dark); }
   @media (hover: hover) and (pointer: fine) {
     .beehiiv-fallback-form button:hover {
       background: var(--accent-mid);
@@ -97,6 +56,9 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
+  .beehiiv-open-note:empty { margin: 0; }
+  .beehiiv-open-note[data-state="error"] { color: var(--sub-error-on-dark); }
+  .beehiiv-open-note[data-state="success"] { color: #fff; font-size: 15px; justify-content: center; }
   .beehiiv-open-note {
     font-size: 13px;
     color: var(--on-dark-muted);

@@ -303,7 +303,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 /* Plain prose links have no component press state, so they dim instead of
    going silent now that the tap flash is off. */
 a:not([class]):active { opacity: .6; }
-:is(.btn-buy, .btn-printables, .lg-form-submit,
+:is(.btn-buy, .btn-printables, .lg-form-submit, .sub-btn,
     .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card,
     .gf-tab, .gf-flow-btn, .nav-search-btn, .nav-hamburger):active {
   /* !important: component `transition` shorthands load after this file and
@@ -311,7 +311,7 @@ a:not([class]):active { opacity: .6; }
   transition-duration: var(--dur-press) !important;
   transition-timing-function: var(--ease-out) !important;
 }
-:is(.btn-buy, .btn-printables, .lg-form-submit):active { scale: var(--scale-press-btn); }
+:is(.btn-buy, .btn-printables, .lg-form-submit, .sub-btn):active { scale: var(--scale-press-btn); }
 :is(.card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: var(--scale-press-card); }
 /* Light-plane cards only; dark cards keep their own border on press. */
 :is(.card, .product-card, .la-card, .tool-card):active { border-color: var(--border-s); }
@@ -323,7 +323,7 @@ a:not([class]):active { opacity: .6; }
       .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: none; opacity: .72; }
   /* Orange fills (and chips holding an orange badge) answer with a fill change
      instead: opacity would fade ink on orange below AA. */
-  :is(.btn-buy, .lg-form-submit):active { scale: none; }
+  :is(.btn-buy, .lg-form-submit, .sub-btn):active { scale: none; }
   :is(.gf-tab, .gf-flow-btn):active { scale: none; background: var(--bg); }
 }
 
@@ -950,3 +950,38 @@ main p a:not([class]) { text-decoration: underline; text-underline-offset: 2px; 
 @media (prefers-reduced-motion: reduce) {
   .toast, .toast[data-state] { transform: translate(-50%, 0); }
 }
+
+/* ── SUBSCRIBE STATES (src/scripts/subscribe.ts) ──
+ * Hallmark · component: newsletter form · states: idle · pressed (press system) · working · success · failure
+ * motion: label ↔ spinner crossfade on --dur-fast at a locked width; check draws in 300ms; failure is a
+ * 3-cycle 2px shake over 240ms. Reduced motion: no shake, no draw; the message and border change remain. */
+:root { --sub-error-on-dark: color-mix(in srgb, var(--danger) 40%, white); }
+.sub-btn { position: relative; }
+.sub-label { display: inline-block; transition: opacity var(--dur-fast) var(--ease-out); }
+.sub-spin {
+  position: absolute; inset: 0; margin: auto;
+  width: 14px; height: 14px; box-sizing: border-box;
+  border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+form[data-state="working"] .sub-btn { cursor: progress; }
+form[data-state="working"] .sub-label { opacity: 0; }
+form[data-state="working"] .sub-spin { opacity: 1; animation: sub-spin 700ms linear infinite; }
+@keyframes sub-spin { to { transform: rotate(360deg); } }
+.sub-shake { animation: sub-shake 240ms linear; }
+@keyframes sub-shake {
+  0%, 100% { translate: 0 0; }
+  8.33%, 41.67%, 75% { translate: -2px 0; }
+  25%, 58.33%, 91.67% { translate: 2px 0; }
+}
+form[data-subscribe][hidden] { display: none; } /* the forms set display: flex */
+[data-subscribe-msg][data-state="success"] { display: flex; align-items: center; gap: 8px; }
+.sub-check { flex: none; }
+.sub-check path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: sub-draw 300ms var(--ease-out) forwards; }
+@keyframes sub-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .sub-shake { animation: none; }
+  .sub-check path { animation: none; stroke-dashoffset: 0; }
+}
+[data-subscribe-msg]:focus { outline: none; } /* focused by script after success; not a control */
