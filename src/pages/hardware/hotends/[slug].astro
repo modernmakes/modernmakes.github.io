@@ -90,13 +90,13 @@ const specs = ([
 ] as ({ label: string; value: string } | null)[]).filter((s): s is { label: string; value: string } => s !== null);
 
 // Vendors — Vendor 1 through 5, skip empty
-type VendorEntry = { name: string; url: string; price: string; region: 'us'; primary: boolean };
+type VendorEntry = { name: string; url: string; price: string; region: 'us'; primary: boolean; affiliate: boolean };
 const vendors: VendorEntry[] = [];
 [1, 2, 3, 4, 5].forEach((n, idx) => {
   const name = record[`Vendor ${n} Name`] as string | undefined;
   const url  = record[`Vendor ${n} URL`]  as string | undefined;
   if (name?.trim()) {
-    vendors.push({ name: name.trim(), url: url ?? '#', price: '', region: 'us', primary: idx === 0 });
+    vendors.push({ name: name.trim(), url: url ?? '#', price: '', region: 'us', primary: idx === 0, affiliate: record[`Vendor ${n} Affiliate`] === true });
   }
 });
 

@@ -3,6 +3,8 @@ import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Sheet from '../components/Sheet.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import { resolveFlowClass } from '../lib/hardware';
 
 interface VendorLink {
@@ -11,6 +13,8 @@ interface VendorLink {
   price: string;
   region: 'us' | 'ca' | 'eu' | 'global';
   primary?: boolean;
+  /** Paid affiliate link: rel="sponsored" in the sheet; the others are plain rel="noopener". */
+  affiliate?: boolean;
 }
 interface SpecItem {
   label: string;
@@ -247,9 +251,31 @@ const breadcrumbSchema = {
             {tags.map(tag => <span class="comp-tag">{tag}</span>)}
           </div>
         )}
+        <div class="comp-actions">
+          {vendors.length > 0 && (
+            <button type="button" class="comp-act" data-sheet="buy-sheet" aria-haspopup="dialog" aria-controls="buy-sheet" aria-expanded="false">
+              <span>Where to buy ({vendors.length})</span>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   </section>
+
+  {vendors.length > 0 && (
+    <!-- A bottom sheet on phones, a popover under the button on desktop. Affiliate links are rel="sponsored". -->
+    <Sheet id="buy-sheet" title={`Where to buy (${vendors.length})`} detent="medium" desktop="popover">
+      {price.usd > 0 && <p class="buy-ref">Listed at ~${price.usd} USD. Vendors set their own prices.</p>}
+      {vendors.map(v => (
+        <a href={v.url} class="sheet-row" target="_blank" rel={v.affiliate ? 'sponsored noopener' : 'noopener'}>
+          <span class="grow">{v.name}{v.price && <span class="sub">{v.price}</span>}</span>
+          <span aria-hidden="true">↗</span>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      ))}
+      {vendors.some(v => v.affiliate) && <AffiliateDisclosure />}
+    </Sheet>
+  )}
 
   <!-- ── MAIN CONTENT ── -->
   <div class="comp-body">
@@ -618,6 +644,23 @@ const breadcrumbSchema = {
   border-radius: 3px;
   padding: 2px 8px;
 }
+
+/* Hero actions: Where to buy (sheet / popover), Share. Ghost buttons on the dark hero: the one orange pointer stays the vendor card below. */
+.comp-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.comp-actions:empty { display: none; }
+.comp-act {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 16px;
+  background: transparent; color: #fff;
+  border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius-sm);
+  font: 700 14px var(--fu); cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.comp-act:active { scale: var(--scale-press-btn); background: rgba(255,255,255,.08); transition-duration: var(--dur-press); }
+@media (hover: hover) and (pointer: fine) { .comp-act:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35); } }
+@media (prefers-reduced-motion: reduce) { .comp-act:active { scale: none; } }
+.buy-ref { margin: 0 0 6px; font: 400 11px/1.5 var(--fm); color: var(--sh-muted); }
 
 /* ── BODY ── */
 .comp-body {

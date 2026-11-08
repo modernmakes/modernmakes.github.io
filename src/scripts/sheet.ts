@@ -150,18 +150,21 @@ export function openSheet(target: string | HTMLDialogElement, opener?: HTMLEleme
   }
 }
 
-// Anchors a popover under (or over) its trigger and scales it in from there.
+// Anchors a popover under (or over) its trigger and scales it in from there. It takes the side with
+// more room and, if it still doesn't fit, shrinks (the body scrolls) instead of covering the trigger.
 function place(c: Cur) {
   const d = c.dlg, o = c.opener;
   const r = o ? o.getBoundingClientRect() : new DOMRect(innerWidth / 2, innerHeight / 3, 0, 0);
   const w = d.offsetWidth, h = d.offsetHeight, m = 12;
   let left = r.left + r.width / 2 < innerWidth / 2 ? r.left : r.right - w;
   left = Math.min(Math.max(m, left), innerWidth - w - m);
-  const fitsBelow = r.bottom + 8 + h <= innerHeight - m;
-  const top = fitsBelow ? r.bottom + 8 : Math.max(m, r.top - 8 - h);
+  const below = innerHeight - r.bottom - 8 - m, above = r.top - 8 - m;
+  const useBelow = h <= below || below >= above;
+  const ph = Math.min(h, Math.max(160, useBelow ? below : above));
+  if (ph < h) c.panel.style.maxHeight = `${ph}px`;
   d.style.left = `${left}px`;
-  d.style.top = `${top}px`;
-  c.panel.style.transformOrigin = `${Math.round(r.left + r.width / 2 - left)}px ${fitsBelow ? -8 : h + 8}px`;
+  d.style.top = `${useBelow ? r.bottom + 8 : r.top - 8 - ph}px`;
+  c.panel.style.transformOrigin = `${Math.round(r.left + r.width / 2 - left)}px ${useBelow ? -8 : ph + 8}px`;
 }
 
 // ── close ──
