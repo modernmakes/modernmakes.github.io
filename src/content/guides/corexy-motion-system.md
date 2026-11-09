@@ -7,6 +7,7 @@ excerpt: "A complete reference on CoreXY motion system geometry, belt routing, a
 difficulty: "Beginner"
 timeRequired: "10 minutes"
 guideCategory: "Hardware Setup"
+featured: true
 summary:
   - "CoreXY uses two fixed motors to drive a toolhead through crossed belts"
   - "Moving mass is minimal — only the toolhead travels, not the motors"

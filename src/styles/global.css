@@ -309,7 +309,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
    going silent now that the tap flash is off. */
 a:not([class]):active { opacity: .6; }
 :is(.btn-buy, .btn-printables, .lg-form-submit, .sub-btn,
-    .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card,
+    .card, .product-card, .la-card, .eco-card, .tool-card,
     .gf-tab, .gf-flow-btn, .nav-search-btn, .nav-hamburger, .menu-tile):active {
   /* !important: component `transition` shorthands load after this file and
      would otherwise stretch the press-down to their release timing. */
@@ -317,7 +317,7 @@ a:not([class]):active { opacity: .6; }
   transition-timing-function: var(--ease-out) !important;
 }
 :is(.btn-buy, .btn-printables, .lg-form-submit, .sub-btn):active { scale: var(--scale-press-btn); }
-:is(.card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: var(--scale-press-card); }
+:is(.card, .product-card, .la-card, .eco-card, .tool-card):active { scale: var(--scale-press-card); }
 /* Light-plane cards only; dark cards keep their own border on press. */
 :is(.card, .product-card, .la-card, .tool-card):active { border-color: var(--border-s); }
 :is(.gf-tab, .gf-flow-btn):active { scale: var(--scale-press-chip); }
@@ -326,7 +326,7 @@ a:not([class]):active { opacity: .6; }
 /* Reduced motion: no scale, but the press still answers with a dim. */
 @media (prefers-reduced-motion: reduce) {
   :is(.btn-printables, .nav-search-btn, .nav-hamburger,
-      .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card):active { scale: none; opacity: .72; }
+      .card, .product-card, .la-card, .eco-card, .tool-card):active { scale: none; opacity: .72; }
   /* Orange fills (and chips holding an orange badge) answer with a fill change
      instead: opacity would fade ink on orange below AA. */
   :is(.btn-buy, .lg-form-submit, .sub-btn):active { scale: none; }

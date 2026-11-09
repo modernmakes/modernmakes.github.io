@@ -14,7 +14,7 @@ summary:
   - "The 2.4 scales better to large format and has the deeper mod ecosystem"
   - "Both printers share the same toolhead, motion system, hotend, and electronics ecosystem"
   - "First-time Voron builders: start with the Trident"
-featured: false
+featured: true
 ---
 
 <p class="art-lead">The Voron 2.4 and Trident are the two flagship printers from the Voron Design community. They produce the same quality of prints. The differences are mechanical and procedural: how they move in Z, how complex they are to build, and how they scale to different sizes. This guide explains those differences clearly so you can pick the right one.</p>
