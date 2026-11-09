@@ -462,8 +462,9 @@ const mainLinks = [
   /* ─── READING PROGRESS ───
      2px soft-white line (never orange: that is the extrusion line) along the bottom of the nav, filling as the article body
      ([data-progress]) is read: 0 when its top meets the nav, 1 when its end meets the
-     bottom of the screen. Scroll-driven where supported, else a passive scroll fallback
-     in the script below. Information, not decoration: kept under reduced motion. */
+     bottom of the screen. Script-driven on every browser (below), with no transition: the
+     CSS scroll-driven version snapped back to 0 on iPhone when scrolling stopped.
+     Information, not decoration: kept under reduced motion. */
   .nav-prog {
     display: none;
     position: absolute;
@@ -475,12 +476,6 @@ const mainLinks = [
     pointer-events: none;
   }
   html:has([data-progress]) .nav-prog { display: block; }
-  @keyframes nav-prog { to { transform: scaleX(1); } }
-  @supports (animation-timeline: view()) {
-    html { timeline-scope: --read; }
-    [data-progress] { view-timeline: --read block; view-timeline-inset: var(--nav-h) 0px; }
-    .nav-prog { animation: nav-prog linear both; animation-timeline: --read; animation-range: contain 0% contain 100%; }
-  }
 
   /* ─── LARGE-TITLE HAND-OFF (1024px and up) ───
      The links fade out and the page title fades in left of search. Scrolling up 56px
@@ -628,12 +623,13 @@ const mainLinks = [
       ).observe(pageH1);
     }
 
-    /* ── Reading progress fallback (no scroll-driven animations) ── */
+    /* ── Reading progress: 0 when the body's top meets the compact nav, 1 when its end meets the
+       bottom of the screen. One rAF-throttled write per frame. ── */
     const prog = nav.querySelector<HTMLElement>('.nav-prog');
     const readBody = document.querySelector<HTMLElement>('[data-progress]');
-    if (prog && readBody && !CSS.supports('animation-timeline: view()')) {
-      const barNavH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
-      let progPending = false;
+    if (prog && readBody) {
+      const readNavH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
+      let barNavH = readNavH(), progPending = false;
       const paint = () => {
         progPending = false;
         const r = readBody.getBoundingClientRect();
@@ -643,7 +639,9 @@ const mainLinks = [
       };
       const queue = () => { if (!progPending) { progPending = true; requestAnimationFrame(paint); } };
       addEventListener('scroll', queue, { passive: true });
-      addEventListener('resize', queue);
+      addEventListener('scrollend', queue);
+      addEventListener('resize', () => { barNavH = readNavH(); queue(); }); // --nav-h changes per breakpoint
+      addEventListener('load', queue);
       paint();
     }
 
