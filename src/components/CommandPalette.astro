@@ -59,8 +59,9 @@
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   }
-  /* Phone: the full-screen view (Sheet.astro sizes the panel); the list carries the bottom safe area. */
-  [data-mode="full"] .cp-list { padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+  /* Phone: the full-screen view (Sheet.astro sizes the panel). The list's box never resizes: the keyboard
+     (--kb, set by sheet.ts) or the bottom safe area, whichever is taller, only pads its end. */
+  [data-mode="full"] .cp-list { padding-bottom: calc(10px + max(var(--kb, 0px), env(safe-area-inset-bottom, 0px))); }
 
   .cp-top {
     display: flex;
@@ -100,7 +101,7 @@
 
   .cp-list {
     flex: 1 1 auto;
-    min-height: 0; /* lets the list shrink above the keyboard instead of pushing past it; the only scroller */
+    min-height: 0; /* fills what the search field leaves; the only scroller */
     overflow-y: auto;
     overscroll-behavior: contain;
     padding: 4px 8px 10px;
@@ -175,7 +176,7 @@
 </style>
 
 <script>
-  import { openSheet, closeSheet, setSheetDbg } from '../scripts/sheet';
+  import { openSheet, closeSheet, setSheetDbg, forceKb } from '../scripts/sheet';
   import { rows, byUrl, loadIndex, search, rowHtml, esc, freshness, GROUP_LABEL, type Group, type Row } from '../scripts/search-core';
 
   const dlg = document.getElementById('cp') as HTMLDialogElement;
@@ -282,26 +283,26 @@
 
   // ── Open / close ──
   // PHONE BEHAVIOUR (under 768px): a full-screen search view, sheet.ts mode 'full' (data-phone="full"), like
-  // iOS Spotlight. It used to be a draggable bottom sheet; on a real iPhone the results froze behind the search
-  // field after the keyboard dropped, because the list sat in a transformed panel that was resized mid-scroll.
-  // So in this mode the panel never moves. Search-specific parts are here, the rest in src/scripts/sheet.ts:
-  //  1. The dialog fills the visual viewport (panel inset: 0, safe-area padding on top). No grab handle, no
-  //     drag-to-dismiss, no card-stack page, no transform or will-change on the panel. It fades in and out
-  //     (--dur-fast, --ease-out); reduced motion: instant.                               [Sheet.astro]
+  // iOS Spotlight. It used to be a draggable bottom sheet, then a view resized to the visual viewport; on a
+  // real iPhone both left the list stuck or jumping when the keyboard dropped mid-scroll. So in this mode
+  // nothing ever moves or resizes. Search-specific parts are here, the rest in src/scripts/sheet.ts:
+  //  1. The dialog is position: fixed, inset 0, height 100% of the layout viewport, which iOS doesn't shrink
+  //     for the keyboard. Its top and height are never written. No grab handle, no drag-to-dismiss, no
+  //     card-stack page, no transform or will-change on the panel. It fades in and out (--dur-fast,
+  //     --ease-out); reduced motion: instant. The ::backdrop is the panel's colour.     [Sheet.astro]
   //  2. Starting a scroll on the results blurs the input on purpose (6px threshold), so the keyboard hides.
   //                                                                                     [touchmove below]
-  //  3. The dialog follows visualViewport (top + height) through ONE rAF-batched write per frame, no CSS
-  //     transition. While a finger is on the list, or the list is still coasting (until scrollend, or 150ms
-  //     after its last scroll event), the write waits and lands once the list is idle. When the viewport
-  //     grows by more than 120px (keyboard closed) the list is re-armed once: overflow hidden for a
-  //     frame, scrollTop kept.                                                            [sheet.ts fit()]
+  //  3. The keyboard is handled inside the list: on visualViewport resize/scroll, ONE rAF-batched write sets
+  //     --kb = max(0, innerHeight - vv.height - vv.offsetTop) on the dialog, and .cp-list's bottom padding is
+  //     10px + max(--kb, safe area). Only that padding changes; the scroller's box never does. [sheet.ts fit()]
   //  4. Only the results list scrolls, and a touch that starts on it is never cancelled. The page behind
   //     never moves: html is overflow:hidden while open, a drag outside the list is cancelled, the list
   //     has overscroll-behavior: contain, and any drift of scrollY is put straight back.  [sheet.ts + .cp-list]
   //  5. Closing (Cancel, Esc, a result) leaves scrollY exactly where it was.             [sheet.ts finish()]
-  //  6. Tapping the input again raises the keyboard; the dialog shrinks to the space above it.
+  //  6. Tapping the input again raises the keyboard; --kb grows and the list's end clears it.
   // The input is also always empty on open (below), and Enter only opens a highlighted row.
-  // ?cpdebug (remembered for the session, ?cpdebug=off clears) draws a live readout over the palette.
+  // ?cpdebug (remembered for the session, ?cpdebug=off clears) draws a live readout over the palette and
+  // adds window.__cpKb(px): it forces --kb to simulate the keyboard; __cpKb(null) returns to live values.
   let typed = false;
 
   // from: the trigger that was tapped. WebKit doesn't focus links on tap, so activeElement would be <body>.
@@ -387,6 +388,7 @@
       else { last = ev; reps = 0; evs.push(line); if (evs.length > 10) evs.shift(); }
     };
     setSheetDbg(log);
+    (window as any).__cpKb = (px: number | null) => forceKb(px);
     for (const t of ['touchstart', 'touchmove', 'touchend', 'touchcancel']) list.addEventListener(t, () => log(`list ${t}`), { passive: true });
     list.addEventListener('scroll', () => log('list scroll'), { passive: true });
     list.addEventListener('scrollend', () => log('list scrollend'));
@@ -401,7 +403,7 @@
       const p = (dlg.querySelector('.cp-panel') as HTMLElement).getBoundingClientRect();
       box.textContent = [
         `cpdebug  vv h=${vv ? r(vv.height) : '-'} top=${vv ? r(vv.offsetTop) : '-'} scale=${vv ? vv.scale.toFixed(2) : '-'}`,
-        `dialog top=${dlg.style.top || '-'} h=${dlg.style.height || '-'} mode=${dlg.dataset.mode}`,
+        `dialog h=${getComputedStyle(dlg).height} innerH=${innerHeight} --kb=${dlg.style.getPropertyValue('--kb') || '-'} mode=${dlg.dataset.mode}`,
         `panel top=${r(p.top)} bottom=${r(p.bottom)} h=${r(p.height)}`,
         `list st=${r(list.scrollTop)} sh=${list.scrollHeight} ch=${list.clientHeight} oy=${getComputedStyle(list).overflowY}`,
         `active=${name(document.activeElement)} scrollY=${r(scrollY)}`,
