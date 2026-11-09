@@ -684,6 +684,35 @@ const mainLinks = [
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
     }
 
+    /* ── PROTOTYPE ?navzoom=lock: the nav keeps its normal on-screen size and stays pinned to the top
+       of what's visible while the page is pinch-zoomed. Remembered for the session; ?navzoom=off
+       clears it. Without the flag nothing below adds a listener. ── */
+    let zoomLock = false;
+    try {
+      const q = new URLSearchParams(location.search).get('navzoom');
+      if (q === 'off') sessionStorage.removeItem('mm-navzoom');
+      else if (q === 'lock') sessionStorage.setItem('mm-navzoom', 'lock');
+      zoomLock = sessionStorage.getItem('mm-navzoom') === 'lock';
+    } catch {}
+    const zvv = window.visualViewport;
+    if (zoomLock && zvv) {
+      let zRaf = 0;
+      const pin = () => {
+        zRaf = 0;
+        // = transform: translate(offsetLeft, offsetTop) scale(1/scale), written as the separate translate and
+        // scale properties because the nav's entrance animation fills `transform` and would override it.
+        if (zvv.scale > 1.01) {
+          nav.style.transformOrigin = '0 0';
+          nav.style.translate = `${zvv.offsetLeft}px ${zvv.offsetTop}px`;
+          nav.style.scale = String(1 / zvv.scale);
+        } else nav.style.translate = nav.style.scale = nav.style.transformOrigin = '';
+      };
+      const queuePin = () => { if (!zRaf) zRaf = requestAnimationFrame(pin); };
+      zvv.addEventListener('resize', queuePin);
+      zvv.addEventListener('scroll', queuePin);
+      pin();
+    }
+
     /* ── The menu popover has no business open once the desktop links are showing ── */
     matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) closeSheet('menu-sheet', true); });
   });
