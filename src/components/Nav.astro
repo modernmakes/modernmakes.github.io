@@ -598,13 +598,15 @@ const mainLinks = [
     const titleEl = nav.querySelector('.nav-title span');
     if (pageH1 && titleEl) {
       titleEl.textContent = pageH1.dataset.navTitle || (pageH1.textContent ?? '').replace(/\s+/g, ' ').trim();
+      // The accessible name must contain the visible text (WCAG 2.5.3).
+      titleEl.parentElement!.setAttribute('aria-label', `Back to top: ${titleEl.textContent}`);
       const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 56;
       new IntersectionObserver(
         ([e]) => nav.classList.toggle('show-title', !e.isIntersecting && e.boundingClientRect.height > 0 && e.boundingClientRect.bottom <= navH),
         { rootMargin: `-${navH}px 0px 0px 0px` },
       ).observe(pageH1);
     }
-    // Tap the title: back to the top. Focus stays where it is.
+    // Tap the title: back to the top. Focus stays where it is, except from the keyboard (below).
     const titleBtn = nav.querySelector<HTMLButtonElement>('.nav-title');
     const toTop = () => {
       buzz();
@@ -627,9 +629,14 @@ const mainLinks = [
       skipClickUntil = performance.now() + 400;
       toTop();
     }, { passive: true });
-    titleBtn?.addEventListener('click', () => {
+    titleBtn?.addEventListener('click', (e) => {
       if (performance.now() < skipClickUntil) return;
       toTop();
+      // From the keyboard (detail 0) the button is about to hide: put focus on the page's H1 instead.
+      if (e.detail === 0 && pageH1) {
+        pageH1.setAttribute('tabindex', '-1');
+        pageH1.focus({ preventScroll: true });
+      }
     });
 
     /* ── Reading progress: 0 when the body's top meets the compact nav, 1 when its end meets the
