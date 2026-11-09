@@ -119,7 +119,21 @@ const featuredImages = featuredHotends.map((rec: any) => {
   @media (max-width: 768px) {
     .fhw-container { padding: 0 20px; }
   }
-  @media (max-width: 560px) {
-    .fhw-grid { grid-template-columns: minmax(0, 1fr); }
+  /* Phones: a native swipe row. Cards are 82% wide so the next one peeks; the row bleeds to the
+     screen edges (negative margin = the gutter) and scrolls inside itself, never the page. */
+  @media (max-width: 767px) {
+    .fhw-grid {
+      display: flex;
+      gap: 12px;
+      margin-inline: -20px;
+      padding-inline: 20px;
+      scroll-padding-inline: 20px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .fhw-grid::-webkit-scrollbar { display: none; }
+    .fhw-grid > :global(*) { flex: 0 0 calc((100% + 40px) * 0.82); scroll-snap-align: start; } /* 82% of the screen */
   }
 </style>
