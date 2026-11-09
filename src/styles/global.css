@@ -1021,3 +1021,16 @@ form[data-subscribe][hidden] { display: none; } /* the forms set display: flex *
   .mm-switch input:active::before { scale: 1.08 1; }
   @media (prefers-reduced-motion: reduce) { .mm-switch input::before { transition: none; } }
 }
+
+/* ── TOUCH TEXT FIELDS ──
+ * iOS Safari zooms the page when a focused field is under 16px and stays zoomed, pushing the fixed nav's
+ * menu button off-screen. !important because component classes (.adv-input, .tc-input…) set their own sizes;
+ * a component that wants bigger (.fc-big-input, 18px) wins on specificity. Fine pointers are untouched. */
+@media (pointer: coarse) {
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"], [type="reset"], [type="file"], [type="color"], [type="hidden"], [type="image"]),
+  textarea,
+  select,
+  [contenteditable]:not([contenteditable="false"]) {
+    font-size: 16px !important;
+  }
+}
