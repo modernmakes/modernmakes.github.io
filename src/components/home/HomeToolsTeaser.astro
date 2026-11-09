@@ -1,5 +1,6 @@
 ---
 import data from '../../data/homepage.json';
+import SectionHead from './SectionHead.astro';
 const tools = (data as any).tools ?? [];
 
 // SVG icons keyed by icon field
@@ -14,13 +15,7 @@ const icons: Record<string, string> = {
 <section class="tools-section" aria-labelledby="tools-heading">
   <div class="tools-container">
 
-    <header class="tools-header">
-      <div class="tools-header-text">
-        <h2 id="tools-heading" class="tools-headline" data-reveal data-reveal-delay="80">Calculators built for serious printers</h2>
-        <p class="tools-sub" data-reveal data-reveal-delay="160">Free, no sign-up.</p>
-      </div>
-      <a href="/tools" class="tools-all-link" data-reveal data-reveal-delay="160">View all tools <span class="arrow">→</span></a>
-    </header>
+    <SectionHead id="tools-heading" title="Calculators built for serious printers" dek="Free, no sign-up." href="/tools" what="tools" />
 
     <div class="tools-grid">
       {tools.map((tool: any, i: number) => (
@@ -52,54 +47,12 @@ const icons: Record<string, string> = {
 <style is:global>
   .tools-section {
     background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 48px 0;
+    padding: var(--section-y) 0;
   }
   .tools-container {
-    max-width: 1200px;
+    max-width: var(--max-w);
     margin: 0 auto;
     padding: 0 40px;
-  }
-
-  /* Header */
-  .tools-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
-  .tools-header-text {}
-  .tools-headline {
-    font-family: var(--fd);
-    font-size: clamp(22px, 2vw + 10px, 32px);
-    font-weight: 800;
-    color: var(--black);
-    letter-spacing: -0.01em;
-    line-height: 1.05;
-    margin: 0 0 6px;
-  }
-  .tools-sub {
-    font-family: var(--fb);
-    font-size: 14px;
-    color: var(--grey-1);
-    margin: 0;
-  }
-  .tools-all-link {
-    font-family: var(--fu);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent-dk);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: color .15s;
-    padding-bottom: 2px;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .tools-all-link:hover { color: var(--accent-ink); }
   }
 
   /* Tool cards grid */
@@ -194,7 +147,7 @@ const icons: Record<string, string> = {
     font-size: 11px;
     font-weight: 500;
     color: var(--accent-ink);
-    background: rgba(255,90,31,.08);
+    background: var(--accent-t);
     padding: 3px 8px;
     border-radius: 3px;
   }
@@ -207,11 +160,8 @@ const icons: Record<string, string> = {
   /* Responsive */
   @media (max-width: 1024px) {
     .tools-grid { grid-template-columns: repeat(2, 1fr); }
-    .tools-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .tools-all-link { padding-bottom: 0; }
   }
   @media (max-width: 768px) {
-    .tools-section { padding: 40px 0; }
     .tools-container { padding: 0 20px; }
   }
   @media (max-width: 560px) {

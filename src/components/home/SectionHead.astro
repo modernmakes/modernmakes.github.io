@@ -1,0 +1,74 @@
+---
+// The one section head every homepage section uses: Headline-style h2, a one-line dek and a neutral
+// "See all →" link (right-aligned from 768px, under the dek on phones). The link is never orange:
+// each section's orange is its own primary action.
+interface Props {
+  /** id for the h2, so the section can use aria-labelledby */
+  id: string;
+  title: string;
+  dek?: string;
+  href?: string;
+  /** What "See all" lists, read to screen readers only ("See all articles"). */
+  what?: string;
+  tone?: 'light' | 'dark';
+}
+const { id, title, dek, href, what, tone = 'light' } = Astro.props;
+---
+<header class:list={['sh', `sh--${tone}`]}>
+  <div class="sh-text">
+    <h2 id={id} class="sh-title">{title}</h2>
+    {dek && <p class="sh-dek">{dek}</p>}
+  </div>
+  {href && <a href={href} class="sh-all">See all{what && <span class="sr-only"> {what}</span>}<span aria-hidden="true"> →</span></a>}
+</header>
+
+<style>
+  /* Hallmark · component: section head · genre: editorial · theme: DESIGN.md (Workshop Press)
+   * states: link default · hover (fine pointers) · focus-visible (global ring) · active
+   * contrast: ink / white on their planes; dek Body Grey on light, --on-dark-muted on dark */
+  .sh {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 32px;
+  }
+  .sh-text { min-width: 0; }
+  .sh-title {
+    margin: 0;
+    font: 800 22px/1.1 var(--fd);
+    letter-spacing: -0.2px;
+    text-wrap: balance;
+    color: var(--black);
+  }
+  .sh-dek {
+    margin: 6px 0 0;
+    max-width: 60ch;
+    font: 400 15px/1.6 var(--fb);
+    color: var(--g1);
+  }
+  .sh-all {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font: 600 13px/1.4 var(--fu);
+    color: var(--black);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+    transition: text-decoration-color var(--dur-fast) var(--ease-out);
+  }
+  .sh-all:active { text-decoration-thickness: 2px; }
+  @media (hover: hover) and (pointer: fine) {
+    .sh-all:hover { text-decoration-thickness: 2px; }
+  }
+  .sh--dark .sh-title, .sh--dark .sh-all { color: var(--on-dark); }
+  .sh--dark .sh-dek { color: var(--on-dark-muted); }
+
+  @media (max-width: 767px) {
+    .sh { flex-direction: column; align-items: flex-start; margin-bottom: 20px; }
+    .sh-all { min-height: 32px; }
+  }
+</style>

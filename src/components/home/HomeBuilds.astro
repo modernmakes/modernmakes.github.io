@@ -104,8 +104,8 @@ function formatCardDate(d: Date) {
 <style is:global>
 /* ── HomeBuilds ── */
 .builds {
-  background: #0a0a0a;
-  padding: 52px 0;
+  background: var(--dark-bg);
+  padding: var(--section-y) 0;
 }
 .builds-inner {
   max-width: 1200px;
@@ -155,7 +155,7 @@ function formatCardDate(d: Date) {
    opacity + filter carry the 600ms reveal. */
 .builds .build-feature {
   display: block;
-  background: #1c1c1c;
+  background: var(--dark-surface);
   border: 1px solid rgba(255,255,255,.07);
   border-radius: 10px;
   overflow: hidden;
@@ -234,7 +234,7 @@ function formatCardDate(d: Date) {
 }
 .builds .build-card {
   display: block;
-  background: #222;
+  background: var(--dark-surface);
   border: 1px solid rgba(255,255,255,.07);
   border-radius: 10px;
   overflow: hidden;

@@ -100,10 +100,9 @@ function bgStyle(eco: any) {
 </section>
 
 <style is:global>
-  /* Distinct background — slightly lighter than builds (#0f0f0f) */
   .eco-section {
-    background: #161616;
-    padding: 56px 0;
+    background: var(--dark-bg);
+    padding: var(--section-y) 0;
   }
   .eco-container {
     max-width: 1200px;
@@ -152,7 +151,7 @@ function bgStyle(eco: any) {
   .eco-section .eco-card {
     display: flex;
     flex-direction: column;
-    background: #1e1e1e;
+    background: var(--dark-surface);
     border: 1px solid rgba(255,90,31,.2);
     border-radius: 12px;
     overflow: hidden;
@@ -283,7 +282,7 @@ function bgStyle(eco: any) {
     font-weight: 700;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--on-dark-muted); /* AA on #161616 */
+    color: var(--on-dark-muted); /* AA on --dark-bg */
     margin: 0 0 7px;
     padding-bottom: 7px;
     /* Was a :first-of-type border-top on .eco-coming-item — moved here so the
@@ -310,13 +309,13 @@ function bgStyle(eco: any) {
     font-family: var(--fd);
     font-size: 14px;
     font-weight: 800;
-    color: var(--on-dark-soft); /* AA on #161616 */
+    color: var(--on-dark-soft); /* AA on --dark-bg */
     white-space: nowrap;
   }
   .eco-coming-desc {
     font-family: var(--fu);
     font-size: 10px;
-    color: var(--on-dark-muted); /* AA on #161616 */
+    color: var(--on-dark-muted); /* AA on --dark-bg */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -329,7 +328,7 @@ function bgStyle(eco: any) {
     .eco-card-img { height: 240px; }
   }
   @media (max-width: 768px) {
-    .eco-section { padding: 40px 0; }
+
     .eco-container { padding: 0 20px; }
     .eco-card-img { height: 180px; }
     .eco-card-body { padding: 16px 20px; }

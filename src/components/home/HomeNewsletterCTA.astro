@@ -24,7 +24,7 @@
 <style is:global>
   .nlcta-section {
     background: var(--bg);
-    padding: 24px 40px;
+    padding: var(--section-y) 40px;
   }
   .nlcta-container {
     max-width: 1200px;
@@ -129,12 +129,12 @@
   }
 
   @media (max-width: 900px) {
-    .nlcta-section { padding: 20px 24px; }
+    .nlcta-section { padding-inline: 24px; }
     .nlcta-inner { gap: 24px; }
     .nlcta-form-wrap { width: 280px; }
   }
   @media (max-width: 768px) {
-    .nlcta-section { padding: 20px; }
+    .nlcta-section { padding-inline: 20px; }
     .nlcta-inner {
       flex-direction: column;
       align-items: stretch;

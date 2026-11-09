@@ -44,6 +44,7 @@
   --code-ink:      #E8E8E4;   /* light text on dark code blocks */
   /* Secondary text on the dark planes. DESIGN.md: white at 50-85%, never
      pure white for body. Both clear 4.5:1 on --dark-bg and on #161616. */
+  --on-dark:       #FFFFFF;   /* headlines and primary text on the dark planes */
   --on-dark-soft:  rgba(255,255,255,.78);
   --on-dark-muted: rgba(255,255,255,.62);
 
@@ -150,6 +151,9 @@
   /* Compact (scrolled) nav height. Sticky bars sit under it, and Nav.astro uses it
      for .nav.scrolled .nav-bar, so the two can never drift apart. */
   --nav-h: 56px;
+  /* Homepage section rhythm: 56px of padding top and bottom under 768px, 88px from 1024px,
+     interpolated in between. Every homepage section below the hero uses it. */
+  --section-y: clamp(56px, 12.5vw - 40px, 88px);
 }
 @media (max-width: 1023px) { :root { --nav-h: 52px; } }
 @media (max-width: 767px)  { :root { --nav-h: 48px; } }
