@@ -19,7 +19,7 @@ const { id, title, dek, href, what, tone = 'light' } = Astro.props;
     <h2 id={id} class="sh-title">{title}</h2>
     {dek && <p class="sh-dek">{dek}</p>}
   </div>
-  {href && <a href={href} class="sh-all">See all{what && <span class="sr-only"> {what}</span>}<span aria-hidden="true"> →</span></a>}
+  {href && <a href={href} class="sh-all"><span>See all{what && <span class="sr-only"> {what}</span>}</span><span aria-hidden="true">→</span></a>}
 </header>
 
 <style>
@@ -51,6 +51,7 @@ const { id, title, dek, href, what, tone = 'light' } = Astro.props;
     flex: none;
     display: inline-flex;
     align-items: center;
+    gap: 4px;
     min-height: 44px;
     font: 600 13px/1.4 var(--fu);
     color: var(--black);

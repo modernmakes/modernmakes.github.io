@@ -1,5 +1,6 @@
 ---
 import TypeCover from '../TypeCover.astro';
+import SectionHead from './SectionHead.astro';
 import { getCollection } from 'astro:content';
 
 const [newsEntries, guideEntries, comparisonEntries] = await Promise.all([
@@ -53,12 +54,9 @@ function formatDate(date: Date) {
 }
 ---
 
-<section class="la-section" aria-label="Latest articles">
+<section class="la-section" aria-labelledby="la-heading">
   <div class="la-container">
-    <div class="la-head">
-      <span class="la-label" data-reveal>Latest</span>
-      <a href="/news" class="la-all-link" data-reveal data-reveal-delay="60">All articles <span class="arrow">→</span></a>
-    </div>
+    <SectionHead id="la-heading" title="Latest" dek="News, guides and comparisons, newest first." href="/news" what="articles" />
     <div class="la-grid">
       {latestArticles.map((article, i) => (
         <a href={article.href} class="la-card" data-reveal data-reveal-delay={i * 60} aria-label={article.title}>
@@ -76,7 +74,7 @@ function formatDate(date: Date) {
             <div class="la-card-cat">{article.category}</div>
             <div class="la-card-title">{article.title}</div>
             <div class="la-card-footer">
-              <span class="la-card-date">{formatDate(article.date)}</span>
+              <time class="la-card-date" datetime={article.date.toISOString().slice(0, 10)}>{formatDate(article.date)}</time>
             </div>
           </div>
         </a>
@@ -93,31 +91,6 @@ function formatDate(date: Date) {
   .la-container {
     max-width: 1200px;
     margin: 0 auto;
-  }
-  .la-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 24px;
-  }
-  .la-label {
-    font-family: var(--fd);
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    color: var(--accent-dk);
-  }
-  .la-all-link {
-    font-size: 12px;
-    color: var(--grey-1);
-    font-family: var(--fu);
-    transition: color 150ms;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .la-all-link:hover { color: var(--black); }
   }
 
   .la-grid {
@@ -186,6 +159,8 @@ function formatDate(date: Date) {
     padding: 0 12px 10px;
   }
 
+  .la-section .type-cover-eyebrow { color: var(--on-dark-muted); }
+
   .la-card-body {
     padding: 14px 16px 16px;
     display: flex;
@@ -197,7 +172,7 @@ function formatDate(date: Date) {
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
-    color: var(--accent-dk);
+    color: var(--g2);
     margin-bottom: 6px;
     font-family: var(--fu);
   }
@@ -230,11 +205,17 @@ function formatDate(date: Date) {
     .la-section { padding-inline: 24px; }
     .la-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   }
-  @media (max-width: 640px) {
+  /* Phones: one lead card, then three compact rows (category, title, date) on hairlines. */
+  @media (max-width: 767px) {
     .la-section { padding-inline: 20px; }
-    .la-grid { grid-template-columns: 1fr; gap: 10px; }
+    .la-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
     .la-card-img { aspect-ratio: 16/7; }
     .la-card-title { font-size: 17px; }
+    .la-card:first-child { margin-bottom: 12px; }
+    .la-section .la-card:not(:first-child) { background: none; border: 0; border-top: 1px solid var(--border); border-radius: 0; }
+    .la-card:not(:first-child) .la-card-img { display: none; }
+    .la-card:not(:first-child) .la-card-body { padding: 14px 0; }
+    .la-card:not(:first-child) .la-card-title { margin-bottom: 6px; }
   }
 
   /* Reveal + image zoom are motion — never move for reduce users. */
