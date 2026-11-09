@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import HomeHero from '../components/home/HomeHero.astro';
-import HomeTicker from '../components/home/HomeTicker.astro';
 import HomeNewsletterCTA from '../components/home/HomeNewsletterCTA.astro';
 import HomeLatestArticles from '../components/home/HomeLatestArticles.astro';
 import HomeEcosystemHubs from '../components/home/HomeEcosystemHubs.astro';
@@ -48,7 +47,6 @@ const featuredImages = featuredHotends.map((rec: any) => {
 <Base title="The 3D Printing Enthusiast's Publication" description="Modern Makes — editorial coverage of 3D printers, filament, mods, and the builds that matter." heroPage={true} hasHero={true}>
   <Nav slot="nav" currentPath={currentPath} />
   <HomeHero />
-  <HomeTicker />
   <HomeLatestArticles />
   <section class="fhw" aria-labelledby="fhw-heading">
     <div class="fhw-container">
