@@ -1,157 +1,105 @@
 ---
-// HomeNewsletterCTA — compact editorial callout strip between Latest and Ecosystems
+// HomeNewsletterCTA — the newsletter as its own full-width dark band: headline and one line, the form
+// beside them from 768px and stacked under them on phones. The form's markup is the subscribe.ts
+// contract (ids, data-subscribe, data-campaign, field names, the message element next to the form):
+// change the wrapper, never the form. Subscribe is the band's one orange element.
 ---
-<section class="nlcta-section" aria-label="Newsletter signup">
+<section class="nlcta-section" aria-labelledby="nlcta-heading">
   <div class="nlcta-container">
-    <div class="nlcta-inner">
-      <div class="nlcta-text" data-reveal>
-        <p class="nlcta-eyebrow">Free Newsletter</p>
-        <p class="nlcta-headline">The 3D printing briefing</p>
-        <p class="nlcta-sub">What's worth buying, building, and following.</p>
-      </div>
-      <div class="nlcta-form-wrap" data-reveal data-reveal-delay="100">
+    <div class="nlcta-text">
+      <h2 class="nlcta-headline" id="nlcta-heading">The 3D printing briefing</h2>
+      <p class="nlcta-sub">What's worth buying, building, and following.</p>
+    </div>
+    <div class="nlcta-form-wrap">
         <form class="beehiiv-fallback-form" id="nlcta-form" data-subscribe data-campaign="homepage_cta">
           <input type="email" name="email" id="nlcta-email"
             placeholder="your@email.com" aria-label="Email address" aria-describedby="nlcta-msg" required />
           <button type="submit" id="nlcta-btn" class="sub-btn"><span class="sub-label">Subscribe →</span><span class="sub-spin" aria-hidden="true"></span></button>
         </form>
         <p class="nlcta-note" id="nlcta-msg" role="status" data-subscribe-msg></p>
-      </div>
     </div>
   </div>
 </section>
 
 <style is:global>
+  /* Hallmark · component: newsletter band · genre: editorial · theme: DESIGN.md (dark plane)
+   * states: idle · hover (fine pointers) · focus-visible · active · working (spinner) · error · success
+   * (shared with BeehiivEmbed through subscribe.ts and global.css .sub-*). Ink on orange in every state.
+   * Every form rule is scoped to .nlcta-section: BeehiivEmbed uses the same form class. */
   .nlcta-section {
-    background: var(--bg);
+    background: var(--dark-bg);
     padding: var(--section-y) 40px;
   }
   .nlcta-container {
-    max-width: 1200px;
+    max-width: var(--max-w);
     margin: 0 auto;
-  }
-  .nlcta-inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
     align-items: center;
-    gap: 40px;
-    padding: 20px 28px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    box-sizing: border-box;
-    width: 100%;
+    gap: 24px 48px;
   }
-  .nlcta-text {
-    flex: 1;
-    min-width: 0;
-  }
-  .nlcta-eyebrow {
-    font-family: var(--fu);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--accent-dk);
-    margin: 0 0 4px;
-  }
+  .nlcta-text { min-width: 0; }
   .nlcta-headline {
-    font-family: var(--fd);
-    font-size: clamp(20px, 2vw + 10px, 28px);
-    font-weight: 800;
-    color: var(--black);
-    line-height: 1.05;
-    margin: 0 0 4px;
+    margin: 0;
+    font: 800 clamp(2rem, 5vw, 2.5rem)/1 var(--fd);
+    letter-spacing: -0.5px;
+    color: var(--on-dark);
+    text-wrap: balance;
   }
   .nlcta-sub {
-    font-family: var(--fb);
-    font-size: 13px;
-    color: var(--grey-1);
-    line-height: 1.5;
-    margin: 0;
+    margin: 10px 0 0;
+    font: 400 15px/1.6 var(--fb);
+    color: var(--on-dark-muted);
   }
-  .nlcta-form-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 320px;
-    flex-shrink: 0;
-  }
-  .beehiiv-fallback-form {
-    display: flex;
-    gap: 8px;
-    width: 100%;
-  }
-  .beehiiv-fallback-form input[type="email"] {
+  .nlcta-form-wrap { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .nlcta-section .beehiiv-fallback-form { display: flex; gap: 8px; width: 100%; }
+  .nlcta-section .beehiiv-fallback-form input[type="email"] {
     flex: 1;
-    height: 40px;
-    padding: 0 14px;
-    font-size: 13px;
-    font-family: var(--fu);
-    background: var(--surface);
-    color: var(--black);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    outline-color: transparent;
-    transition: border-color 150ms;
     min-width: 0;
+    height: 44px;
+    padding: 0 14px;
+    font: 400 15px var(--fu);
+    color: var(--on-dark);
+    background: color-mix(in srgb, var(--on-dark) 8%, transparent);
+    /* 40% white: the field's edge clears 3:1 against the band (WCAG 1.4.11). */
+    border: 1px solid color-mix(in srgb, var(--on-dark) 40%, transparent);
+    border-radius: var(--radius-sm);
     box-sizing: border-box;
+    transition: border-color var(--dur-fast) var(--ease-out);
   }
-  .beehiiv-fallback-form input[type="email"]::placeholder { color: var(--grey-2); }
-  .beehiiv-fallback-form input[type="email"]:focus { border-color: var(--accent); }
-  .beehiiv-fallback-form button[type="submit"] {
-    height: 40px;
-    padding: 0 18px;
+  .nlcta-section .beehiiv-fallback-form input[type="email"]::placeholder { color: var(--on-dark-muted); }
+  .nlcta-section .beehiiv-fallback-form input[type="email"]:focus { border-color: var(--accent); }
+  .nlcta-section .beehiiv-fallback-form input[type="email"][aria-invalid="true"],
+  .nlcta-section .beehiiv-fallback-form input[type="email"][aria-invalid="true"]:focus { border-color: var(--sub-error-on-dark); }
+  .nlcta-section .beehiiv-fallback-form button[type="submit"] {
+    flex: none;
+    height: 44px;
+    padding: 0 20px;
     background: var(--accent);
     color: var(--on-accent);
-    font-size: 13px;
-    font-weight: 700;
-    font-family: var(--fu);
-    border: none;
-    border-radius: 5px;
+    font: 700 14px var(--fu);
+    border: 0;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     white-space: nowrap;
     transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
-    flex-shrink: 0;
   }
-  .beehiiv-fallback-form button[type="submit"]:active { background: var(--accent-mid); }
-  .beehiiv-fallback-form input[type="email"][aria-invalid="true"],
-  .beehiiv-fallback-form input[type="email"][aria-invalid="true"]:focus { border-color: var(--danger); }
-  .nlcta-note[data-state="error"] { color: var(--danger); font-size: 12px; }
-  .nlcta-note[data-state="success"] { color: var(--black); font-size: 14px; }
+  .nlcta-section .beehiiv-fallback-form button[type="submit"]:active { background: var(--accent-mid); }
   @media (hover: hover) and (pointer: fine) {
-    .beehiiv-fallback-form button[type="submit"]:hover { background: var(--accent-mid); }
+    .nlcta-section .beehiiv-fallback-form button[type="submit"]:hover { background: var(--accent-mid); }
   }
-  .nlcta-note {
-    font-size: 11px;
-    color: var(--grey-2);
-    font-family: var(--fu);
-    margin: 0;
-  }
+  .nlcta-note { margin: 0; font: 400 13px/1.5 var(--fu); color: var(--on-dark-muted); }
+  .nlcta-note:empty { display: none; }
+  .nlcta-note[data-state="error"] { color: var(--sub-error-on-dark); }
+  .nlcta-note[data-state="success"] { color: var(--on-dark); font-size: 15px; }
 
-  @media (max-width: 900px) {
-    .nlcta-section { padding-inline: 24px; }
-    .nlcta-inner { gap: 24px; }
-    .nlcta-form-wrap { width: 280px; }
-  }
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .nlcta-section { padding-inline: 20px; }
-    .nlcta-inner {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 16px;
-      padding: 20px;
-    }
-    .nlcta-form-wrap { width: 100%; }
-    .beehiiv-fallback-form { flex-direction: column; }
-    .beehiiv-fallback-form input[type="email"],
-    .beehiiv-fallback-form button[type="submit"] {
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .beehiiv-fallback-form button[type="submit"] { height: 44px; }
+    .nlcta-container { grid-template-columns: minmax(0, 1fr); }
+    .nlcta-section .beehiiv-fallback-form { flex-direction: column; }
+    .nlcta-section .beehiiv-fallback-form input[type="email"] { flex: none; }
+    .nlcta-section .beehiiv-fallback-form button[type="submit"] { width: 100%; }
   }
 </style>
-
-<!-- Entrance is handled by the shared [data-reveal] observer in Base.astro (M1). -->
 
 <script>import '../../scripts/subscribe';</script>
