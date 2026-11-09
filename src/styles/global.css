@@ -37,6 +37,7 @@
   --dark-bg:       #1A1A1A;
   --dark-surface:  #222222;
   --dark-border:   rgba(255,255,255,0.08);
+  --dark-raised:   #2B2B2B;   /* one step lighter than --dark-surface: grouped cards and tiles on a dark sheet */
   --ink-deep:      #0A0A0A;   /* deepest black — media/image letterbox backgrounds */
   --surface-media: #101118;   /* product-shot backdrop — sampled from the hardware WebPs;
                                  image panels must use this so contain-letterboxing is seamless */
@@ -305,7 +306,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 a:not([class]):active { opacity: .6; }
 :is(.btn-buy, .btn-printables, .lg-form-submit, .sub-btn,
     .card, .product-card, .la-card, .eco-card, .build-card, .build-feature, .tool-card,
-    .gf-tab, .gf-flow-btn, .nav-search-btn, .nav-hamburger):active {
+    .gf-tab, .gf-flow-btn, .nav-search-btn, .nav-hamburger, .menu-tile):active {
   /* !important: component `transition` shorthands load after this file and
      would otherwise stretch the press-down to their release timing. */
   transition-duration: var(--dur-press) !important;
@@ -316,6 +317,7 @@ a:not([class]):active { opacity: .6; }
 /* Light-plane cards only; dark cards keep their own border on press. */
 :is(.card, .product-card, .la-card, .tool-card):active { border-color: var(--border-s); }
 :is(.gf-tab, .gf-flow-btn):active { scale: var(--scale-press-chip); }
+.menu-tile:active { scale: var(--scale-press-btn); }
 :is(.nav-search-btn, .nav-hamburger):active { scale: var(--scale-press-icon); }
 /* Reduced motion: no scale, but the press still answers with a dim. */
 @media (prefers-reduced-motion: reduce) {
@@ -325,6 +327,7 @@ a:not([class]):active { opacity: .6; }
      instead: opacity would fade ink on orange below AA. */
   :is(.btn-buy, .lg-form-submit, .sub-btn):active { scale: none; }
   :is(.gf-tab, .gf-flow-btn):active { scale: none; background: var(--bg); }
+  .menu-tile:active { scale: none; } /* its background wash still answers */
 }
 
 /* ── TYPOGRAPHIC COVER ────────────────────────────────────────────────
