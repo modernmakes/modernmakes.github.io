@@ -466,9 +466,10 @@ const mainLinks = [
   /* ─── READING PROGRESS ───
      2px soft-white line (never orange: that is the extrusion line) along the bottom of the nav, filling as the article body
      ([data-progress]) is read: 0 when its top meets the nav, 1 when its end meets the
-     bottom of the screen. Script-driven on every browser (below), with no transition: the
-     CSS scroll-driven version snapped back to 0 on iPhone when scrolling stopped.
-     Information, not decoration: kept under reduced motion. */
+     bottom of the screen. Script-driven on every browser (below): the CSS scroll-driven
+     version snapped back to 0 on iPhone when scrolling stopped. iOS delivers momentum scroll
+     updates in bursts, so a short linear transition glides between them instead of hopping.
+     Information, not decoration: kept under reduced motion, where it moves instantly. */
   .nav-prog {
     display: none;
     position: absolute;
@@ -478,7 +479,9 @@ const mainLinks = [
     transform: scaleX(0);
     transform-origin: left;
     pointer-events: none;
+    transition: transform 120ms linear;
   }
+  @media (prefers-reduced-motion: reduce) { .nav-prog { transition: none; } }
   html:has([data-progress]) .nav-prog { display: block; }
 
   /* ─── TABLET  768px–1023px ─── */
