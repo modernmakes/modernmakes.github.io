@@ -605,9 +605,31 @@ const mainLinks = [
       ).observe(pageH1);
     }
     // Tap the title: back to the top. Focus stays where it is.
-    nav.querySelector('.nav-title')?.addEventListener('click', () => {
+    const titleBtn = nav.querySelector<HTMLButtonElement>('.nav-title');
+    const toTop = () => {
       buzz();
       scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+    // While the page still coasts after a flick, iOS spends the first tap stopping the scroll and sends no
+    // click. So a touch that starts within 150ms of a scroll event is a "momentum tap": it acts on touchend
+    // (if the finger moved under 10px), and any click in the next 400ms is ignored so it can't fire twice.
+    // Never preventDefault here: the haptic label (haptics.ts) needs its native click.
+    let lastScroll = -1e9, tap: { x: number; y: number } | null = null, skipClickUntil = 0;
+    addEventListener('scroll', () => { lastScroll = performance.now(); }, { passive: true });
+    titleBtn?.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      tap = e.touches.length === 1 && performance.now() - lastScroll < 150 ? { x: t.clientX, y: t.clientY } : null;
+    }, { passive: true });
+    titleBtn?.addEventListener('touchend', (e) => {
+      const t = e.changedTouches[0], from = tap;
+      tap = null;
+      if (!from || !t || Math.hypot(t.clientX - from.x, t.clientY - from.y) >= 10) return;
+      skipClickUntil = performance.now() + 400;
+      toTop();
+    }, { passive: true });
+    titleBtn?.addEventListener('click', () => {
+      if (performance.now() < skipClickUntil) return;
+      toTop();
     });
 
     /* ── Reading progress: 0 when the body's top meets the compact nav, 1 when its end meets the
