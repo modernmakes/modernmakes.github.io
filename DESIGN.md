@@ -241,7 +241,7 @@ The component feel is **precise & confident**: flat surfaces, hairline borders, 
 - **Style:** Fixed top, dark glass at rest (`rgba(20,20,20,0.85)` + `blur(20px)`), Barlow 600 13px links at `--on-dark-muted` (62% white; 50% failed AA over the glass on light pages).
 - **States:** Hover → full white + faint white wash + 1px lift. Active → white with a 2px Electric Orange bottom border. Dropdown chevron rotates 180° on open.
 - **Scroll behavior:** Solidifies to opaque `#1A1A1A` and shrinks 80px→56px at 80px scroll, restores below 60px (hysteresis kills flicker). On hero pages, starts fully transparent and transitions to glass after 50px.
-- **Mobile:** Collapses to a hamburger slide-down panel (staggered link entrance) below 1024px; wordmark swaps to lettermark below 768px. Search opens the command palette: a centred panel from 768px, a full-height sheet below (Phase 3).
+- **Mobile:** Collapses to a hamburger slide-down panel (staggered link entrance) below 1024px; wordmark swaps to lettermark below 768px. Search opens the command palette: a centred panel from 768px, a full-screen search view below (no drag, it fades in and out).
 
 ### Sticky Filter Bar (second sanctioned glass surface)
 - **Where:** Hardware index pages (`gf-bar`: verdict tabs + flow row), pinned at `top: calc(env(safe-area-inset-top, 0px) + var(--nav-h))`.

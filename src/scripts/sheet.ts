@@ -2,7 +2,7 @@
 //
 // Under 768px a sheet is an iOS-style bottom sheet:
 //  - detents: medium (about 50% of the visual viewport) and large (92%); a sheet that lists only
-//    `large` in data-detents (the palette) has one;
+//    `large` in data-detents has one;
 //  - it follows the finger 1:1 (pointer events on the handle and header, touch events on the
 //    content), then on release dismisses on a flick (> 0.5 px/ms down) or past 40% of the visible
 //    height, and otherwise springs to the nearest detent (--spring-sheet);
@@ -12,6 +12,10 @@
 //    cancelled, any drift of scrollY is put straight back and closing restores it exactly;
 //  - the sheet is sized to window.visualViewport through one rAF-batched write, with no CSS
 //    transition on height, so an on-screen keyboard never covers it and never fights the animation.
+// A dialog with data-phone="full" (the palette) is instead a full-screen view under 768px ('full'):
+// the same page lock and visualViewport fit, but no drag, no handle, no card-stack and never a
+// transform on the panel; it fades in and out. Its fit() writes wait while a finger is on the
+// [data-sheet-scroll] list or the list is still coasting, so the scroller is never resized mid-scroll.
 // From 768px up a sheet is a centred modal (data-desktop="modal", the default), an anchored popover
 // (data-desktop="popover": non-modal, light dismiss, scales in from the trigger) or "plain" (the
 // palette: modal, no animation). Reduced motion removes the slide, spring and scale; dragging works.
@@ -19,7 +23,7 @@
 // Triggers with data-haptic get a tap on iPhone (haptics.ts arms them) and a 10ms vibration on Android.
 import { armAll, buzz } from './haptics';
 
-type Mode = 'sheet' | 'modal' | 'popover' | 'plain';
+type Mode = 'sheet' | 'full' | 'modal' | 'popover' | 'plain';
 type Sample = { y: number; t: number };
 interface Cur {
   dlg: HTMLDialogElement; mode: Mode; opener: HTMLElement | null;
@@ -66,24 +70,64 @@ function setY(c: Cur, y: number, animate: boolean) {
   }
 }
 
+// Debug hook (the palette's ?cpdebug sets it). Null otherwise, so every call is a no-op.
+export let sheetDbg: ((ev: string) => void) | null = null;
+export const setSheetDbg = (f: typeof sheetDbg) => { sheetDbg = f; };
+
 // ── visual viewport ──
 let fitRaf = 0, fitTop = '', fitH = '';
+// 'full' mode: a finger is on the list / the list is still scrolling / a fit() is waiting for both to end.
+let listTouch = false, listScrolling = false, fitWait = false, idleT = 0;
+const fits = (c: Cur | null) => c?.mode === 'sheet' || c?.mode === 'full';
 function fit() {
   fitRaf = 0;
   const c = cur;
-  if (!c || c.mode !== 'sheet' || !vv) return;
+  if (!c || !fits(c) || !vv) return;
+  if (c.mode === 'full' && (listTouch || listScrolling)) {
+    if (!fitWait) sheetDbg?.('fit deferred');
+    fitWait = true;
+    return;
+  }
   const top = `${vv.offsetTop}px`, h = `${vv.height}px`;
+  const grew = !!fitH && vv.height - parseFloat(fitH) > 120; // keyboard closed
   if (top !== fitTop) c.dlg.style.top = fitTop = top; // skip unchanged writes: each one is a relayout
-  if (h !== fitH) c.dlg.style.height = fitH = h;
+  if (h !== fitH) { c.dlg.style.height = fitH = h; sheetDbg?.(`fit applied h=${Math.round(vv.height)}`); }
+  if (c.mode === 'full') {
+    // WebKit can leave a scroller that was resized under it unscrollable: re-arm it once.
+    const sc = grew ? c.dlg.querySelector<HTMLElement>('[data-sheet-scroll]') : null;
+    if (sc) {
+      const st = sc.scrollTop;
+      sc.style.overflowY = 'hidden';
+      requestAnimationFrame(() => { sc.style.overflowY = ''; sc.scrollTop = st; sheetDbg?.('list re-armed'); });
+    }
+    return;
+  }
   c.H = c.panel.offsetHeight;
   c.yM = Math.max(0, c.H - 0.5 * vv.height);
   // Resting at a detent whose position moved with the viewport: follow it without animating.
   if (!c.dragging && !c.closing && c.y !== restY(c)) setY(c, restY(c), false);
   hide(c);
 }
-const queueFit = () => { if (!fitRaf && cur?.mode === 'sheet') fitRaf = requestAnimationFrame(fit); };
+const queueFit = () => { if (!fitRaf && fits(cur)) fitRaf = requestAnimationFrame(fit); };
+const flushFit = () => { if (fitWait && !listTouch && !listScrolling) { fitWait = false; queueFit(); } };
 vv?.addEventListener('resize', queueFit);
 vv?.addEventListener('scroll', queueFit);
+
+// 'full' mode: the list counts as scrolling until 'scrollend', or 150ms after its last scroll event.
+const hasScrollEnd = 'onscrollend' in window;
+const isList = (t: EventTarget | null) => t instanceof Element && t.matches('[data-sheet-scroll]');
+const onListScroll = (e: Event) => {
+  if (cur?.mode !== 'full' || !isList(e.target)) return;
+  listScrolling = true;
+  clearTimeout(idleT);
+  // With scrollend the timer is only a safety net, so a missed scrollend can't hold fit() forever.
+  idleT = window.setTimeout(onListIdle, hasScrollEnd ? 500 : 150);
+};
+const onListIdle = (e?: Event) => {
+  if (e && (cur?.mode !== 'full' || !isList(e.target))) return;
+  listScrolling = false;
+  flushFit();
+};
 
 // ── page behind (phone only) ──
 function pageIn(c: Cur) {
@@ -109,7 +153,7 @@ function pageIn(c: Cur) {
 export function openSheet(target: string | HTMLDialogElement, opener?: HTMLElement | null, viaKeyboard = false) {
   const dlg = typeof target === 'string' ? (document.getElementById(target) as HTMLDialogElement | null) : target;
   if (!dlg || cur || dlg.open) return;
-  const mode: Mode = phone.matches ? 'sheet' : ((dlg.dataset.desktop as Mode) || 'modal');
+  const mode: Mode = phone.matches ? (dlg.dataset.phone === 'full' ? 'full' : 'sheet') : ((dlg.dataset.desktop as Mode) || 'modal');
   const c: Cur = {
     dlg, mode, opener: opener ?? (document.activeElement as HTMLElement | null),
     panel: dlg.querySelector<HTMLElement>('.sheet-panel')!, scrim: dlg.querySelector<HTMLElement>('.sheet-scrim')!,
@@ -140,6 +184,7 @@ export function openSheet(target: string | HTMLDialogElement, opener?: HTMLEleme
       dlg.classList.add('is-open');
       setY(c, restY(c), true);
     } else {
+      if (mode === 'full') fit();
       void c.panel.offsetHeight;
       dlg.classList.add('is-open');
     }
@@ -175,11 +220,11 @@ export function closeSheet(target?: HTMLDialogElement | string, instant = false)
   if (!c || c.closing) return;
   if (target && (typeof target === 'string' ? c.dlg.id !== target : c.dlg !== target)) return;
   c.closing = true;
-  if (instant || c.mode === 'plain' || (c.mode === 'sheet' && reduceMq.matches)) return finish(c);
+  if (instant || c.mode === 'plain' || ((c.mode === 'sheet' || c.mode === 'full') && reduceMq.matches)) return finish(c);
   html.classList.add('sheet-closing'); // closing is faster than opening
   if (c.mode === 'sheet') setY(c, c.H + 24, true);
   else c.dlg.classList.remove('is-open');
-  c.timer = window.setTimeout(() => finish(c), c.mode === 'sheet' ? 240 : 170);
+  c.timer = window.setTimeout(() => finish(c), c.mode === 'sheet' ? 240 : c.mode === 'full' ? 160 : 170);
 }
 
 function finish(c: Cur) {
@@ -195,6 +240,7 @@ function finish(c: Cur) {
   if (c.opener?.hasAttribute('aria-expanded')) c.opener.setAttribute('aria-expanded', 'false');
   c.opener?.focus({ preventScroll: true }); // recorded explicitly: WebKit doesn't focus tapped links
   fitTop = fitH = '';
+  listTouch = listScrolling = fitWait = false;
   cur = null;
 }
 
@@ -236,6 +282,10 @@ let tc: { y0: number; last: number; base: number; mode: 0 | 1 | 2; sc: HTMLEleme
 const onTouchStart = (e: TouchEvent) => {
   const c = cur;
   tc = null;
+  if (c?.mode === 'full' && c.dlg.contains(e.target as Node)) {
+    listTouch = !!(e.target as Element).closest('[data-sheet-scroll]');
+    return;
+  }
   if (!c || c.mode !== 'sheet' || !c.dlg.contains(e.target as Node)) return;
   const sc = (e.target as Element).closest<HTMLElement>('[data-sheet-scroll]');
   const y = e.touches[0].clientY;
@@ -243,6 +293,11 @@ const onTouchStart = (e: TouchEvent) => {
 };
 const onTouchMove = (e: TouchEvent) => {
   const c = cur;
+  if (c?.mode === 'full') {
+    // The list scrolls natively, always. Anywhere else has nothing to scroll: keep the page still.
+    if (!listTouch && !(e.target as Element).closest('input, textarea')) e.preventDefault();
+    return;
+  }
   if (!c || c.mode !== 'sheet' || !c.dlg.contains(e.target as Node)) return;
   const y = e.touches[0].clientY, t = tc;
   if (!t) {
@@ -271,9 +326,13 @@ const onTouchMove = (e: TouchEvent) => {
   }
   t.last = y;
 };
-const onTouchEnd = () => {
+const onTouchEnd = (e: TouchEvent) => {
   const t = tc, c = cur;
   tc = null;
+  if (c?.mode === 'full') {
+    if (!e.touches.length) { listTouch = false; flushFit(); }
+    return;
+  }
   if (t?.mode === 1 && c) release(c, velocity(t.s));
 };
 // Bound to the dialogs, not the document: a non-passive touchmove listener on the document would slow
@@ -283,6 +342,9 @@ for (const d of document.querySelectorAll<HTMLDialogElement>('dialog.sheet')) {
   d.addEventListener('touchmove', onTouchMove, { passive: false });
   d.addEventListener('touchend', onTouchEnd, { passive: true });
   d.addEventListener('touchcancel', onTouchEnd, { passive: true });
+  // scroll / scrollend don't bubble: capture them from the list.
+  d.addEventListener('scroll', onListScroll, { capture: true, passive: true });
+  d.addEventListener('scrollend', onListIdle, { capture: true, passive: true });
 }
 
 function release(c: Cur, v: number) {

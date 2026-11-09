@@ -140,6 +140,25 @@ const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.
   span.sheet-row { cursor: default; color: var(--sh-muted); } /* a "coming soon" entry: text, not a link */
   .sheet-tag { font: 500 10px var(--fm); text-transform: uppercase; letter-spacing: 0.06em; color: var(--sh-muted); }
 
+  /* ── PHONE: full-screen view (data-phone="full", the palette) ──
+     Fitted to visualViewport by JS like a sheet, but the panel never moves: no transform, no
+     will-change, no handle. The whole dialog fades. While a fit() waits for the list to stop, the
+     backdrop fills any strip the dialog doesn't cover yet. */
+  dialog.sheet[data-mode="full"] {
+    position: fixed; inset: 0 0 auto 0; width: 100vw; height: 100dvh;
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+  dialog.sheet[data-mode="full"].is-open { opacity: 1; }
+  dialog.sheet[data-mode="full"]::backdrop { background: var(--dark-surface); }
+  [data-mode="full"] .sheet-scrim { display: none; }
+  [data-mode="full"] .sheet-panel {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    background: var(--sh-bg);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
   /* ── DESKTOP: centred modal and "plain" (the palette's own panel) ── */
   dialog.sheet[data-mode="modal"], dialog.sheet[data-mode="plain"] { position: fixed; inset: 0; width: 100%; height: 100%; }
   [data-mode="modal"] .sheet-scrim, [data-mode="plain"] .sheet-scrim { position: absolute; inset: 0; background: var(--scrim); opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
@@ -183,7 +202,7 @@ const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.
 
   /* Reduced motion: no slide, spring or scale. The sheet appears where it rests; popovers and modals fade. */
   @media (prefers-reduced-motion: reduce) {
-    [data-mode="sheet"] .sheet-panel, [data-mode="sheet"] .sheet-scrim { transition: none !important; }
+    [data-mode="sheet"] .sheet-panel, [data-mode="sheet"] .sheet-scrim, dialog.sheet[data-mode="full"] { transition: none !important; }
     [data-mode="modal"] .sheet-panel, [data-mode="popover"] .sheet-panel { transform: none; transition: opacity var(--dur-fast) var(--ease-out); }
     .sheet-x:active { scale: none; }
   }
