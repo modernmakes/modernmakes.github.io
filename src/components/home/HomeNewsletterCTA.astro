@@ -8,11 +8,11 @@
   <div class="nlcta-container">
     <div class="nlcta-text">
       <h2 class="nlcta-headline" id="nlcta-heading">The 3D printing briefing</h2>
-      <p class="nlcta-sub">What's worth buying, building, and following.</p>
+      <p class="nlcta-sub">What’s worth buying, building, and following.</p>
     </div>
     <div class="nlcta-form-wrap">
         <form class="beehiiv-fallback-form" id="nlcta-form" data-subscribe data-campaign="homepage_cta">
-          <input type="email" name="email" id="nlcta-email"
+          <input type="email" name="email" id="nlcta-email" autocomplete="email" spellcheck="false"
             placeholder="your@email.com" aria-label="Email address" aria-describedby="nlcta-msg" required />
           <button type="submit" id="nlcta-btn" class="sub-btn"><span class="sub-label">Subscribe →</span><span class="sub-spin" aria-hidden="true"></span></button>
         </form>
@@ -28,11 +28,12 @@
    * Every form rule is scoped to .nlcta-section: BeehiivEmbed uses the same form class. */
   .nlcta-section {
     background: var(--dark-bg);
-    padding: var(--section-y) 40px;
+    padding: var(--section-y) 0;
   }
   .nlcta-container {
     max-width: var(--max-w);
     margin: 0 auto;
+    padding: 0 40px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
     align-items: center;
@@ -94,8 +95,7 @@
   .nlcta-note[data-state="success"] { color: var(--on-dark); font-size: 15px; }
 
   @media (max-width: 767px) {
-    .nlcta-section { padding-inline: 20px; }
-    .nlcta-container { grid-template-columns: minmax(0, 1fr); }
+    .nlcta-container { padding: 0 20px; grid-template-columns: minmax(0, 1fr); }
     .nlcta-section .beehiiv-fallback-form { flex-direction: column; }
     .nlcta-section .beehiiv-fallback-form input[type="email"] { flex: none; }
     .nlcta-section .beehiiv-fallback-form button[type="submit"] { width: 100%; }

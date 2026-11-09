@@ -86,11 +86,12 @@ function formatDate(date: Date) {
 <style is:global>
   .la-section {
     background: var(--bg);
-    padding: var(--section-y) 40px;
+    padding: var(--section-y) 0;
   }
   .la-container {
-    max-width: 1200px;
+    max-width: var(--max-w);
     margin: 0 auto;
+    padding: 0 40px;
   }
 
   .la-grid {
@@ -202,12 +203,11 @@ function formatDate(date: Date) {
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .la-section { padding-inline: 24px; }
     .la-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   }
   /* Phones: one lead card, then three compact rows (category, title, date) on hairlines. */
   @media (max-width: 767px) {
-    .la-section { padding-inline: 20px; }
+    .la-container { padding: 0 20px; }
     .la-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
     .la-card-img { aspect-ratio: 16/7; }
     .la-card-title { font-size: 17px; }
