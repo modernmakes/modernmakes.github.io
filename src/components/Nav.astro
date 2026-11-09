@@ -33,6 +33,12 @@ const mainLinks = [
         <img class="logo-lettermark" src="/images/lettermark.svg" alt="Modern Makes" width="500" height="500" decoding="async" />
       </a>
 
+      <!-- Page title, shown once the page's H1 scrolls under the nav. It sits in the logo's grid
+           cell (and the links' on desktop) and swaps with them by opacity, so nothing shifts.
+           Tapping it goes back to the top. Hidden (and out of the tab order) while not shown.
+           The script only ever changes the inner span: haptics.ts adds a label to the button. -->
+      <button type="button" class="nav-title" aria-label="Back to top" data-haptic><span></span></button>
+
       <div class="nav-links">
 
         <!-- Printers dropdown -->
@@ -64,10 +70,6 @@ const mainLinks = [
 
       </div>
 
-      <!-- Page title, shown once the page's H1 scrolls under the nav. It sits in the logo's grid
-           cell (and the links' on desktop) and swaps with them by opacity, so nothing shifts.
-           The H1 stays the real heading; this is a visual echo, so hidden from AT. -->
-      <div class="nav-title" aria-hidden="true"><span></span></div>
 
       <div class="nav-right">
         <!-- A plain link to /search without JS; CommandPalette turns [data-palette] into its trigger. -->
@@ -433,8 +435,15 @@ const mainLinks = [
     grid-area: 1 / 1 / 2 / 3;
     margin-right: calc(12px - var(--nav-gap)); /* reach into the gap: 12px short of search */
     min-width: 0;
+    min-height: 44px;
     display: flex;
     align-items: center;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
     font-family: var(--fd);
     font-size: 17px;
     font-weight: 800;
@@ -443,7 +452,6 @@ const mainLinks = [
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
     transition: opacity var(--fade) var(--ease-out), visibility 0s linear var(--fade);
   }
   .nav-title span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -504,6 +512,7 @@ const mainLinks = [
 
 <script>
   import { closeSheet } from '../scripts/sheet';
+  import { buzz } from '../scripts/haptics';
 
   document.addEventListener('DOMContentLoaded', () => {
     const nav          = document.getElementById('site-nav')       as HTMLElement;
@@ -586,6 +595,11 @@ const mainLinks = [
         { rootMargin: `-${navH}px 0px 0px 0px` },
       ).observe(pageH1);
     }
+    // Tap the title: back to the top. Focus stays where it is.
+    nav.querySelector('.nav-title')?.addEventListener('click', () => {
+      buzz();
+      scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    });
 
     /* ── Reading progress: 0 when the body's top meets the compact nav, 1 when its end meets the
        bottom of the screen. One rAF-throttled write per frame. ── */
