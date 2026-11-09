@@ -503,10 +503,16 @@ const mainLinks = [
 
     .nav-inner { padding: 0 20px; --nav-gap: 12px; }
 
+    /* Full wordmark (140px wide at 28px tall) still clears search + menu at 360px. */
+    .logo-wordmark { height: 28px; }
+    .nav.scrolled .logo-wordmark { height: 24px; }
+
+  }
+  /* Narrower than that: the lettermark. */
+  @media (max-width: 359px) {
     .logo-wordmark   { display: none; }
     .logo-lettermark { display: block; height: 36px; }
     .nav.scrolled .logo-lettermark { height: 30px; }
-
   }
 </style>
 
