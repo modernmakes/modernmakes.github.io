@@ -100,7 +100,7 @@ const icons: Record<string, string> = {
   }
 
   .tool-card-icon {
-    color: var(--accent);
+    color: var(--black);
     display: flex;
     align-items: center;
     width: 22px;
@@ -146,10 +146,10 @@ const icons: Record<string, string> = {
     font-family: var(--fm);
     font-size: 11px;
     font-weight: 500;
-    color: var(--accent-ink);
-    background: var(--accent-t);
+    color: var(--g1);
+    background: var(--bg);
     padding: 3px 8px;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
   }
   .tool-card-arrow {
     font-size: 16px;
@@ -164,9 +164,15 @@ const icons: Record<string, string> = {
   @media (max-width: 768px) {
     .tools-container { padding: 0 20px; }
   }
-  @media (max-width: 560px) {
-    .tools-grid { grid-template-columns: 1fr; }
-    .tool-card { padding: 20px; }
+  /* Phones: a compact 2×2 of icon, name and one line (the tool's short unit label). The card's
+     aria-label still carries the full description. */
+  @media (max-width: 767px) {
+    .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .tools-section .tool-card { padding: 14px; gap: 10px; }
+    .tool-card-category, .tool-card-desc, .tool-card-arrow { display: none; }
+    .tool-card-name { font-size: 17px; }
+    .tool-card-footer { padding-top: 0; border-top: 0; }
+    .tool-card-unit { padding: 0; background: none; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   }
 </style>
 
