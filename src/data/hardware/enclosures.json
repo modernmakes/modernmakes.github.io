@@ -1,5 +1,13 @@
 [
   {
+    "id": "rec05EoefS1ezxgns",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/kit-fermeture-2-0-vcore-3-1",
+    "Price (USD)": 104.73,
+    "Slug": "enclosure-2-0-kit-for-v-core-3-1",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Enclosure 2.0 Kit for V-Core 3.1"
+  },
+  {
     "id": "rec0GWwzm8kn6Lqgv",
     "Verdict": "BUY",
     "Type": "Panel Vendor",
@@ -63,6 +71,23 @@
     "Name": "KB3D Voron Panel Cutting Service"
   },
   {
+    "id": "rec8R55GzomxHUDiZ",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/trident-inverted-electronics-acrylic-panel-by-loganfraser",
+    "Brand": "Fabreeko",
+    "Price (USD)": 26.99,
+    "Slug": "trident-inverted-electronics-acrylic-panel",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Trident Inverted Electronics Acrylic Panel"
+  },
+  {
+    "id": "recA7i2guBnc4GliS",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/box-turtle-enclosure-multi-color-printed-parts-by-mpp",
+    "Price (USD)": 79.99,
+    "Slug": "box-turtle-enclosure-printed-parts",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Box Turtle Enclosure Printed Parts"
+  },
+  {
     "id": "recBsZnE0uTjVCLi8",
     "Verdict": "BUY",
     "Type": "Enclosure Kit",
@@ -74,13 +99,13 @@
     "Description": "LDO’s Voron 2.4 panel kit is the most straightforward panel sourcing option for V2.4 builders who want verified panel dimensions and known vendor accountability. ACM panels are used for non-visibility positions, polycarbonate for the front door and top, and all panels are cut to the V2.4 spec. Available from KB3D and Fabreeko as part of V2.4 kit packages.",
     "Verdict Label": "Community-approved Voron 2.4 panel kit from LDO — ACM side panels with clear front/top, correct fit guaranteed",
     "Sizes Available": "300mm, 350mm",
-    "Slug": "ldo-voron-2-4-panels-kit-only-not-sold-separately",
+    "Slug": "voron-2-4-panels",
     "Cons": "More expensive than AliExpress panel alternatives\nACM side panels are opaque — front/top visibility requires the clear panels included in the kit\nDoesn’t include foam sealing by default — EVA foam door seal is a separate purchase",
     "Compatible Printers": [
       "Voron 2.4"
     ],
     "Vendor 1 Name": "KB3D",
-    "Name": "LDO Voron 2.4 Panels (kit-only, not sold separately)"
+    "Name": "Voron 2.4 Panels"
   },
   {
     "id": "recCT9ESuSvDfshQ5",
@@ -118,7 +143,7 @@
     "Description": "ACM (Aluminum Composite Material) consists of two thin aluminum faces bonded to a polyethylene core. For Voron enclosure panels, ACM is the standard recommendation for non-viewing panels (top, sides, back, bottom) because it handles chamber heat better than acrylic, is rigid, and provides an opaque professional finish. Front doors are usually clear acrylic or polycarbonate for print visibility. ACM is available from signage supply shops pre-cut or via panel vendors.",
     "Verdict Label": "The community’s preferred opaque panel material — aluminum face with polyethylene core, heat-resistant and rigid",
     "Sizes Available": "Standard sheets 1220x2440mm (4x8ft), cut to size",
-    "Slug": "3mm-acm-panels-aluminum-composite",
+    "Slug": "3mm-acm-panels",
     "Cons": "Opaque — no chamber visibility unless a window panel (acrylic or PC) is used on the front door\nCore material is polyethylene which softens above ~80°C continuous — adequate for typical chamber temps but not for extreme applications\nCutting ACM requires appropriate tooling — standard CNC routers or table saws work but blades must be suited for aluminum",
     "Compatible Printers": [
       "Voron 2.4",
@@ -126,7 +151,16 @@
       "VzBot"
     ],
     "Vendor 1 Name": "Fabreeko",
-    "Name": "3mm ACM Panels (Aluminum Composite)"
+    "Name": "3mm ACM Panels"
+  },
+  {
+    "id": "recHZcbkQ47nUhsOK",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/annex-k3-acrylic-back-panel-with-engraved-logo",
+    "Brand": "Fabreeko",
+    "Price (USD)": 29.99,
+    "Slug": "annex-k3-acrylic-back-panel",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Annex K3 Acrylic Back Panel"
   },
   {
     "id": "recI24lTsmkV4YHND",
@@ -139,7 +173,7 @@
     "Description": "SendCutSend is the primary custom panel cutting vendor for US-based Voron and self-build printer builders. DXF files for V2.4, Trident, and other printers are available in their respective GitHub repositories and upload directly to the SendCutSend ordering system. Material options include acrylic, polycarbonate, ACM, aluminum, and more. For builders who want precise fit with material choice freedom, this is the recommended route.",
     "Verdict Label": "Best custom panel vendor for US builders — upload DXF, choose material, receive precision-cut panels",
     "Sizes Available": "Custom cut; instant quote up to 30 x 44 in (762 x 1118 mm); custom quote up to 30 x 56 in",
-    "Slug": "sendcutsend-custom-panel-cutting",
+    "Slug": "panel-cutting-service",
     "Cons": "US-only service with limited international availability\nMinimum order requirements may make single-panel orders uneconomical\nShipping is reasonable but adds to cost vs. buying a pre-made kit",
     "Compatible Printers": [
       "Voron 2.4",
@@ -149,7 +183,25 @@
       "RatRig V-Core 4"
     ],
     "Vendor 1 Name": "SendCutSend",
-    "Name": "SendCutSend Custom Panel Cutting"
+    "Name": "Panel Cutting Service"
+  },
+  {
+    "id": "recJ2AIWCncVjKMrW",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/acrylic-pannel-for-clicky-clacky-door",
+    "Brand": "Fabreeko",
+    "Price (USD)": 23.99,
+    "Slug": "acrylic-panel-for-clicky-clack-door",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Acrylic Panel for Clicky-Clack Door"
+  },
+  {
+    "id": "recJQJ5y3uYUoQ8TM",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/k3-style-6mm-acrylic-door-for-voron-printers-by-gdsolar",
+    "Brand": "Fabreeko",
+    "Price (USD)": 49.99,
+    "Slug": "k3-style-6mm-acrylic-door-for-voron",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "K3 Style 6mm Acrylic Door for Voron"
   },
   {
     "id": "recKGb3GFMKsPWIeF",
@@ -171,6 +223,14 @@
     ],
     "Vendor 1 Name": "Local hardware/HVAC supply",
     "Name": "XPS Foam Insulation Panels"
+  },
+  {
+    "id": "recPmgxt7DHt7BeSe",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-v0-2-bottom-back-panel-set-by-honeybadger",
+    "Price (USD)": 15.99,
+    "Slug": "v0-2-bottom-back-panel-set",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "V0.2 Bottom & Back Panel Set"
   },
   {
     "id": "recVuqqmsaW2REPZm",
@@ -195,6 +255,14 @@
     "Name": "EVA Foam Door Seal"
   },
   {
+    "id": "recYFXV3qRmbdmWBs",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-v0-2-panel-set-by-honeybadger",
+    "Price (USD)": 32.99,
+    "Slug": "v0-2-clear-panel-set",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "V0.2 Clear Panel Set"
+  },
+  {
     "id": "recYR6T6bqEKVu5Qq",
     "Verdict": "BUY",
     "Type": "Panel Material",
@@ -217,6 +285,33 @@
     ],
     "Vendor 1 Name": "KB3D",
     "Name": "3mm Clear Polycarbonate Panels"
+  },
+  {
+    "id": "recbbGkHOK0oQHJzc",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/trident-clicky-clack-door-kit-by-ldo",
+    "Brand": "Fabreeko",
+    "Price (USD)": 44.99,
+    "Slug": "trident-clicky-clack-door-kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Trident Clicky-Clack Door Kit"
+  },
+  {
+    "id": "rechGwRE9rajDo45K",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-5mm-aluminum-structural-enclosure-panel",
+    "Brand": "Fabreeko",
+    "Price (USD)": 449.99,
+    "Slug": "5mm-aluminum-structural-enclosure-panel",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "5mm Aluminum Structural Enclosure Panel"
+  },
+  {
+    "id": "reciUWLAN49hG7Sdh",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-micron-160-180-colony-clacker-door-kit-1",
+    "Brand": "LDO",
+    "Price (USD)": 34.99,
+    "Slug": "micron-colony-clacker-door-kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Micron+ Colony Clacker Door Kit"
   },
   {
     "id": "recjvFwgSTsmYN40x",
@@ -254,12 +349,55 @@
     "Description": "Formbot includes acrylic enclosure panels in their Voron 2.4 kit. The panels are dimensionally correct for the Formbot frame, get the enclosure sealed on day one, and are functional for PLA and PETG printing. For builders targeting ABS and ASA at 60°C+ chamber temperatures, upgrading to polycarbonate panels is a common and documented next step. Price noted as $0 as these are kit-included.",
     "Verdict Label": "Included in the Formbot V2.4 kit — functional acrylic panels that get the enclosure built, but upgrading to PC is a common follow-on",
     "Sizes Available": "250mm, 300mm, 350mm",
-    "Slug": "formbot-voron-2-4-kit-panels",
+    "Slug": "voron-2-4-kit-panels",
     "Cons": "Acrylic panels with a 50°C chamber temperature limit — acceptable for PLA and PETG but limiting for ABS/ASA printing\nFormbot’s acrylic quality is functional but not premium — many kit builders upgrade to polycarbonate after the initial build\nDimensioned for the Formbot frame which has minor dimensional differences from true Voron CAD — may not be interchangeable with standard V2.4 panels",
     "Compatible Printers": [
       "Voron 2.4"
     ],
     "Vendor 1 Name": "Formbot (kit-included)",
-    "Name": "Formbot Voron 2.4 Kit Panels"
+    "Name": "Voron 2.4 Kit Panels"
+  },
+  {
+    "id": "rectanbTCVMLgC5o4",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/aluminium-handle-ergo",
+    "Price (USD)": 54.59,
+    "Slug": "handle-ergo",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Handle Ergo"
+  },
+  {
+    "id": "rectdJE1iRhBTWg3f",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/box-turtle-enclosure-kit-by-ldo",
+    "Brand": "LDO",
+    "Price (USD)": 214.99,
+    "Slug": "box-turtle-enclosure-kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Box Turtle Enclosure Kit"
+  },
+  {
+    "id": "recwDBIS6pnYQXvUl",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-micron-panel-kit",
+    "Brand": "Fabreeko",
+    "Price (USD)": 44.99,
+    "Slug": "micron-160-180-acrylic-panel-kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Micron 160 & 180 Acrylic Panel Kit"
+  },
+  {
+    "id": "recx7ywkZ3YNBE87i",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/clickyclackydoor-kit-by-ldo",
+    "Brand": "LDO",
+    "Price (USD)": 49.99,
+    "Slug": "v2-4-clicky-clack-door-kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "V2.4 Clicky-Clack Door Kit"
+  },
+  {
+    "id": "recxlFNDVY18XBTGd",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/vcore-3-1-enclosure-2-0-full-kit",
+    "Price (USD)": 299.69,
+    "Slug": "v-core-3-1-enclosure-2-0-full-kit",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "V-Core 3.1 + Enclosure 2.0 Full Kit"
   }
 ]

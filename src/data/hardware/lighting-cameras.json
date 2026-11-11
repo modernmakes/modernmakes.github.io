@@ -35,7 +35,7 @@
     "Description": "COB LED strips at 24V are the practical first choice for enclosure lighting on self-build printers. Running directly from the printer's main PSU, they need no separate power supply and connect with two wires to any spare output. COB technology produces even, diffused illumination — better for print monitoring than individual-dot strips. They're not addressable and can't integrate with Klipper LED macros, but for the purpose of seeing inside your printer clearly, nothing matches COB strips for simplicity and value.",
     "Verdict Label": "Simplest enclosure lighting upgrade — runs from the 24V printer PSU, even illumination, no controller needed",
     "Vendor 1 Name": "AliExpress (various)",
-    "Name": "COB LED Strip 24V White (Enclosure)",
+    "Name": "COB LED Strip 24V White",
     "Resolution": "N/A",
     "Type": "LED Strip",
     "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-24v-cob-led-strip-white.html",
@@ -45,7 +45,7 @@
     "Pros": "Runs directly from the printer's 24V PSU — no separate power supply, tap into existing wiring\nCOB (Chip on Board) technology produces uniform, diffused light with no hot spots — better for print monitoring photography than dot-matrix strips\nSimple two-wire installation — connect to a spare fan output for PWM dimming, or a MOSFET board\nHigh CRI (90+) options available at low cost — important for accurate color in print monitoring or video\nVery high lumen output per dollar compared to individual LED strips",
     "FOV": "N/A",
     "Klipper Compatible": true,
-    "Slug": "cob-led-strip-24v-white-enclosure",
+    "Slug": "cob-led-strip-24v-white",
     "Verdict": "BUY",
     "Voltage": "24V",
     "Cons": "Not addressable — cannot create lighting effects or integrate with Klipper LED status macros\nAlways-on unless wired to a PWM-capable output or relay — basic installations run at full brightness constantly\n24V COB variants are less common than 12V — verify voltage spec carefully before ordering from AliExpress listings\nHigh-density COB strips generate some heat — factor into enclosure thermal design for small chambers",
@@ -54,12 +54,20 @@
     ]
   },
   {
+    "id": "recOVPPJhKaSTYmp1",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "SK6812 RGBCW",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/sk6812-rgbcw",
+    "Price (USD)": 3.99,
+    "Slug": "sk6812-rgbcw"
+  },
+  {
     "id": "recTrqxYDxTvuSyJi",
     "Interface": "WiFi",
     "Description": "WLED running on an ESP32 (available pre-flashed from Athom) is the community's preferred approach for standalone addressable LED control on 3D printers. The Moonraker integration plugin allows Klipper to push print state changes directly to WLED, triggering effects on print start, heating, completion, and error without modifying Klipper macros. It supports virtually all common addressable strip types and can be controlled from any browser. The trade-off vs. direct Klipper [neopixel] is added network complexity, but the benefit is richer effects and independence from the Klipper restart cycle.",
     "Verdict Label": "Go-to standalone LED controller for Voron lighting — Moonraker plugin integrates WLED effects with Klipper print state",
     "Vendor 1 Name": "Athom",
-    "Name": "WLED Controller (ESP32-based)",
+    "Name": "WLED Controller",
     "Resolution": "N/A",
     "Type": "Controller",
     "Vendor 1 URL": "https://www.athom.tech/blank-1/wled-2812b-led-strip-controller",
@@ -70,9 +78,9 @@
     "Addressable": true,
     "FOV": "N/A",
     "Klipper Compatible": true,
-    "Slug": "wled-controller-esp32-based",
+    "Slug": "wled-controller",
     "Verdict": "BUY",
-    "Voltage": "5V",
+    "Voltage": "5-24V",
     "Cons": "Requires WiFi access inside the printer chassis — signal strength can be marginal inside fully metal enclosures\nMoonraker plugin requires manual installation and configuration — not zero-config\nAdds a network device to your setup — more complexity vs. direct Klipper GPIO neopixel control\nWLED configuration has a learning curve for users new to home automation-style tools",
     "Compatible Printers": [
       "Universal"
@@ -84,7 +92,7 @@
     "Description": "The Raspberry Pi Camera v3 Wide is the community's default recommendation for Klipper print monitoring. Its 12MP IMX708 sensor and 120° wide-angle optic cover the full build area of enclosed printers in a single frame, while the CSI interface integrates directly with Crowsnest without driver configuration. Phase-detection autofocus means you mount it once and forget the focus. The only hard constraint is Raspberry Pi host dependency — if your build runs a CB1 or other SBC, verify libcamera support before ordering.",
     "Verdict Label": "Community top pick for Klipper — CSI interface, 12MP, Crowsnest native, autofocus out of the box",
     "Vendor 1 Name": "Raspberry Pi / authorized resellers",
-    "Name": "Raspberry Pi Camera v3 Wide",
+    "Name": "Camera v3 Wide",
     "Resolution": "12MP",
     "Type": "Camera",
     "Vendor 1 URL": "https://www.raspberrypi.com/products/camera-module-3/",
@@ -94,9 +102,9 @@
     "Pros": "12MP IMX708 sensor — sharp, low-noise output for print monitoring and timelapse\n120° wide FOV covers the full build area of an enclosed printer without corner mounting\nCSI connection to the Pi host — no USB bandwidth competition with host controllers or Manta\nCrowsnest natively supports Pi Camera v3 — zero-config setup, no manual stream driver installation\nPhase-detection autofocus — adapts automatically to different camera positions without manual tuning\nBest image quality per dollar in the Klipper camera ecosystem",
     "FOV": "120°",
     "Klipper Compatible": true,
-    "Slug": "raspberry-pi-camera-v3-wide",
+    "Slug": "camera-v3-wide",
     "Verdict": "BUY",
-    "Voltage": "5V",
+    "Voltage": "3.3V",
     "Cons": "CSI ribbon cable is limited in length — typically 30cm stock, up to ~1m with quality flex cables before signal degradation; long runs inside enclosures require care\nRequires a Raspberry Pi host — does not work with Raspberry Pi alternatives (CB1, BTT Manta SBC mode) unless using libcamera-compatible OS\nCamera cable routing inside a hot enclosed printer can stress the ribbon connector",
     "Compatible Printers": [
       "Voron 2.4",
@@ -106,22 +114,30 @@
     ]
   },
   {
+    "id": "recVnyWO5HS3LW3gD",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Kirigami UFO",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/kirigami-ufo-by-livinhack",
+    "Price (USD)": 39.99,
+    "Slug": "kirigami-ufo"
+  },
+  {
     "id": "recXbUsFKYhIakMd1",
     "Interface": "PWM",
-    "Description": "Voron Daylight on a Stick is the community PCB designed to slot into Stealthburner and AfterBurner mounts and provide close-in, bright white illumination at the toolhead level. Running at 24V from the main PSU, it needs no separate power management. The PCB format keeps wiring clean and the LEDs position precisely where light is most useful — directly adjacent to the nozzle. Included in LDO and many other Voron kits by default. Not addressable, but that's by design — toolhead lighting is about illumination, not effects.",
+    "Description": "Voron Daylight on a Stick is a 24V LED bar by Bartlammers (Blamm) that mounts to 2020 extrusion to light the print chamber. It runs at 24V from the main PSU and needs no separate power management. The bar format spreads bright white light across the build area, making it easy to see prints in progress. Not addressable — chamber lighting is about illumination, not effects.",
     "Verdict Label": "Community-designed compact 24V toolhead LED PCB — the standard lighting solution for Stealthburner and AfterBurner",
     "Vendor 1 Name": "Fabreeko",
-    "Name": "Voron Daylight on a Stick PCB",
+    "Name": "Daylight on a Stick",
     "Resolution": "N/A",
     "Type": "LED Bar",
     "Vendor 1 URL": "https://www.fabreeko.com/products/daylight-disco-stick-rgb",
-    "Brand": "LDO / Voron Community",
+    "Brand": "Bartlammers",
     "Price (USD)": 24.99,
     "Color Temp (K)": "4000K",
     "Pros": "Community-designed PCB purpose-built for Voron toolhead mounting — dimensions match Stealthburner and AfterBurner mounts\nRuns at 24V from the printer PSU — no separate voltage regulation or power supply\nCompact stick-format PCB keeps the light source as close to the nozzle as possible without interfering with print cooling\nHigh CRI daylight-white LEDs — neutral, accurate illumination for toolhead-level print monitoring and photography\nLDO Voron kits include Daylight on a Stick by default — if you're buying a Voron kit, you likely already have these",
     "FOV": "N/A",
     "Klipper Compatible": true,
-    "Slug": "voron-daylight-on-a-stick-pcb",
+    "Slug": "daylight-on-a-stick",
     "Verdict": "BUY",
     "Voltage": "24V",
     "Cons": "Not addressable — on/off or PWM dimming only; no RGB effects or Klipper color macros\nVoron-specific dimensions — mounting on non-Voron toolheads requires community-adapted mount designs\nRequires PWM-capable output or manual wiring for dimming; basic installations run at constant brightness\nNot stocked at all vendors — availability tied to Voron kit restocks from LDO, Formbot, and similar",
@@ -136,7 +152,7 @@
     "Description": "The nozzle camera is a category of community mods rather than a specific product — builders mount inexpensive USB macro cameras at toolhead level to observe the nozzle and first layer in real time. When paired with Obico or a Klipper camera stream, this enables early failure detection and diagnostics that a standard overhead camera cannot provide. The limiting factor is standardization: mounting solutions, heat shielding, and camera selection are all builder-specific, and community consensus on a recommended solution hasn't solidified.",
     "Verdict Label": "Emerging community mod category — nozzle-level inspection adds real diagnostic value but no production-ready solution exists yet",
     "Vendor 1 Name": "AliExpress (various macro USB cameras)",
-    "Name": "Nozzle Camera (Generic Macro USB)",
+    "Name": "Nozzle Camera",
     "Resolution": "~2MP typical",
     "Type": "Camera",
     "Vendor 1 URL": "https://www.aliexpress.com/w/wholesale-usb-endoscope-camera-macro.html",
@@ -146,7 +162,7 @@
     "Pros": "Real-time nozzle-level inspection — enables early identification of first-layer adhesion issues, partial clogs, and stringing before they cause print failures\nLow component cost — generic USB macro cameras work for this purpose\nCompatible with Obico (formerly Spaghetti Detective) for AI-assisted failure detection\nCommunity-designed mounts exist for Stealthburner and similar toolheads",
     "FOV": "Macro / close-up",
     "Klipper Compatible": true,
-    "Slug": "nozzle-camera-generic-macro-usb",
+    "Slug": "nozzle-camera",
     "Verdict": "CONSIDER",
     "Compatible Toolheads": [
       "Stealthburner",
@@ -162,22 +178,30 @@
     ]
   },
   {
+    "id": "receKMXU12BccO1NU",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Disco Skirts",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/dr-daves-disco-skirts",
+    "Price (USD)": 26.99,
+    "Slug": "disco-skirts"
+  },
+  {
     "id": "recjpNqH5iN0dGZDO",
     "Interface": "USB",
     "Description": "The Logitech C920 is the default recommendation for Klipper users who aren't running a Raspberry Pi host, or who want USB simplicity over CSI performance. It's extensively documented in Crowsnest and works reliably across all SBC types. The trade-offs vs. Pi Camera v3 are real — 78° FOV, lower resolution, and a higher price — but for builds running anything other than an RPi, it's the straightforward choice.",
     "Verdict Label": "Reliable USB timelapse classic — works with any Klipper host but image quality and FOV lag behind Pi Camera v3",
-    "Vendor 1 Name": "Amazon / Best Buy / B&H",
-    "Name": "Logitech C920 HD Webcam",
+    "Vendor 1 Name": "Logitech",
+    "Name": "C920 HD Webcam",
     "Resolution": "1080p / 3MP",
     "Type": "Camera",
-    "Vendor 1 URL": "https://www.amazon.com/Logitech-C920x-Pro-HD-Webcam/dp/B085TFF7M1",
+    "Vendor 1 URL": "https://www.logitech.com/en-gb/shop/p/c920-pro-hd-webcam.960-001055",
     "Brand": "Logitech",
     "Price (USD)": 70,
     "Color Temp (K)": "N/A",
     "Pros": "USB plug-and-play — works with any Klipper host (Pi, CB1, BTT Manta SBC, BIGTREETECH Pi) regardless of SBC type\nExtensively documented in Crowsnest — widely deployed, dozens of working Klipper config examples\nH.264 hardware encoding onboard — lower CPU load on the host vs. MJPEG software encoding\nBroad retail availability — from electronics stores, not just 3D printing vendors",
     "FOV": "78°",
     "Klipper Compatible": true,
-    "Slug": "logitech-c920-hd-webcam",
+    "Slug": "c920-hd-webcam",
     "Verdict": "CONSIDER",
     "Voltage": "5V",
     "Cons": "78° FOV is noticeably narrower than the Pi Camera v3 Wide — may miss corners on larger enclosed builds without repositioning\nAutofocus less reliable for close-distance enclosure mounting — manual focus lock mod often recommended by the community\nUSB competes for bandwidth on the same host hub as the Klipper USB connection\nHigher price than Pi Camera v3 for lower resolution and narrower FOV in this context",
@@ -188,5 +212,53 @@
       "VzBot",
       "HevORT"
     ]
+  },
+  {
+    "id": "reckZZJaOZ7BbbcNy",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Carrot on a Stick & Carrot on a Twig",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/carrot-on-a-stick-carrot-on-a-twig-led-boards-for-ercf-v2-0",
+    "Price (USD)": 12.99,
+    "Slug": "carrot-on-a-stick-carrot-on-a-twig"
+  },
+  {
+    "id": "recnHuMHZXYIm0Wsk",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Kirigami LED and Breakout — V0.2",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/v0-2-kirigami-led-and-breakout-by-shammy",
+    "Price (USD)": 14.99,
+    "Slug": "kirigami-led-and-breakout-v0-2"
+  },
+  {
+    "id": "recnIzBuj8dhmqflk",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Nightlight on a Stick",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/nightlight-on-a-stick-by-blamm",
+    "Price (USD)": 24.99,
+    "Slug": "nightlight-on-a-stick"
+  },
+  {
+    "id": "recpRzBxX5msFn2ZA",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Sequins RGB WS2812 for Mini SB",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/sequins-rgb-ws2812-for-voron-mini-sb-extruder-by-fysetc",
+    "Price (USD)": 5.99,
+    "Slug": "sequins-rgb-ws2812-for-mini-sb"
+  },
+  {
+    "id": "recqG4bwidR4IjhMD",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "LED PCB and Cables for BoxTurtle",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/led-pcb-and-cables-for-boxturtle-by-ldo",
+    "Price (USD)": 19.99,
+    "Slug": "led-pcb-and-cables-for-boxturtle"
+  },
+  {
+    "id": "recti8Tgf0xfLUqm1",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Glow Stick",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/glow-stick-by-blamm",
+    "Price (USD)": 19.99,
+    "Slug": "glow-stick"
   }
 ]

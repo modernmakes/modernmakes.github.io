@@ -1,5 +1,13 @@
 [
   {
+    "id": "rec1au4XXS78j7kxJ",
+    "Name": "Toolhead v2",
+    "Price (USD)": 68.93,
+    "Vendor 1 Name": "https://northprint3d.ca/product/mathematicalpotato-toolhead-v2-for-annex-engineering-k3-hula-compatible/",
+    "Updated": "2026-11-11T10:43:02.000Z",
+    "Slug": "toolhead-v2"
+  },
+  {
     "id": "rec3aDajj9kXobN8u",
     "Image URL": "https://west3d.com/cdn/shop/files/jabberwocky-complete-toolhead-with-filament-cutter-and-extruder-for-3d-printers-and-multi-filament-setups-west3d-3d-printing-supplies-ldo-systems-850376.jpg",
     "Included Extruder": "Bondtech compound drive gear + dual LDO Orbiter gears, LDO NEMA14 8T 36mm motor",
@@ -120,6 +128,30 @@
     ]
   },
   {
+    "id": "recAAkFenv7iUefpd",
+    "Name": "Hypernova",
+    "Price (USD)": 150,
+    "Vendor 1 Name": "https://www.fabreeko.com/products/hypernova-print-head",
+    "Updated": "2026-11-11T10:42:59.000Z",
+    "Slug": "hypernova"
+  },
+  {
+    "id": "recAi7rrlLvN2yrRG",
+    "Name": "EVA 3.0",
+    "Price (USD)": 81.33,
+    "Vendor 1 Name": "https://store.brs-engineering.com/en/products/copie-de-eva-3-0-corexy-nuts",
+    "Updated": "2026-11-11T10:42:57.000Z",
+    "Slug": "eva-3-0"
+  },
+  {
+    "id": "recK6ZWMiLC8OU8go",
+    "Name": "Hula",
+    "Price (USD)": 47.83,
+    "Vendor 1 Name": "https://northprint3d.ca/product/hula-toolhead-kit-for-annex-engineering-k3/",
+    "Updated": "2026-11-11T10:43:00.000Z",
+    "Slug": "hula"
+  },
+  {
     "id": "recQU9XKnRz4FuA8p",
     "Included Extruder": "Sherpa Mini, Orbiter v2",
     "Pros": "Unibody design — rigid and easy to print with no supports needed\n2510 fan positioned higher for better heatsink cooling\nAngled 4010 fans improve airflow to nozzle\nStays within V0.2 MiniSB footprint\nCompatible with Dragon Burner extras and Alternative Voron Mounts",
@@ -149,10 +181,18 @@
     ]
   },
   {
+    "id": "recSaCUFcl60uaDVo",
+    "Name": "K3 Metal Toolhead",
+    "Price (USD)": 31.65,
+    "Vendor 1 Name": "https://northprint3d.ca/product/k3-metal-toolhead-kit/",
+    "Updated": "2026-11-11T10:43:01.000Z",
+    "Slug": "k3-metal-toolhead"
+  },
+  {
     "id": "recUfYIqUPASq5GwH",
     "Included Extruder": "Sherpa Mini, Orbiter v2, G2SA, LGX Lite, Wristwatch BMG/G2, Papilio Lite, and others",
     "Pros": "CFD-optimized dual 4010 ducts — significant part cooling improvement over v7\nWidest hotend and extruder compatibility of any V0 toolhead\nOnline configurator generates custom STL zip\nNeopixel logo and nozzle LED support\nMounts for all Voron printers plus Tap and Boop",
-    "Name": "Dragon Burner (V0.2 / Printers for Ants)",
+    "Name": "Dragon Burner V0.2",
     "Included Hotend": "Most standard hotends (Dragon, Rapido HF, Revo Voron, V6, Volcano, and more — not UHF)",
     "Brand / Designer": "chirpy2605",
     "Compatible Motion Systems": [
@@ -172,8 +212,8 @@
     "Vendor 1 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
     "Cons": "V0.2 X-carriage only — V0.1 users must use Dragon Burner v4\nDoes not support UHF hotends (use Rapid Burner instead)",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:16.000Z",
-    "Slug": "dragon-burner-v0-2-printers-for-ants",
+    "Updated": "2026-11-11T10:36:47.000Z",
+    "Slug": "dragon-burner-v0-2",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
       "2x 4010"
@@ -214,7 +254,7 @@
     "id": "recXpl4tQWokUatTX",
     "Included Extruder": "Sherpa Mini, Orbiter v2, G2SA, Wristwatch BMG/G2, and others",
     "Pros": "Only toolhead in chirpy2605’s lineup supporting Rapido UHF, Dragon UHF, Goliath Air, and Goliath Water\nCFD-tuned v8 ducts\nNo X, Y, or Z travel loss\nNeopixel LED support",
-    "Name": "Rapid Burner (chirpy2605, UHF)",
+    "Name": "Rapid Burner UHF",
     "Included Hotend": "Rapido UHF, Dragon UHF, Goliath Air, Goliath Water",
     "Brand / Designer": "chirpy2605",
     "Compatible Motion Systems": [
@@ -234,8 +274,8 @@
     "Vendor 1 Name": "https://www.etsy.com/listing/1503463243/rapid-burner-latest-version-3d-printed",
     "Cons": "UHF and Goliath hotends only — not for standard or HF hotends\nV0.2 X-carriage only (V0.1 use Rapid Burner v4)\nGoliath nichrome wires require specific routing to avoid stress damage",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:17.000Z",
-    "Slug": "rapid-burner-chirpy2605-uhf",
+    "Updated": "2026-11-11T10:36:48.000Z",
+    "Slug": "rapid-burner-uhf",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
       "2x 4010"
@@ -297,6 +337,14 @@
     ]
   },
   {
+    "id": "reccq81JQligTQhuv",
+    "Name": "Burgo",
+    "Price (USD)": 87.22,
+    "Vendor 1 Name": "https://northprint3d.ca/product/burgo-voron-toolhead/",
+    "Updated": "2026-11-11T10:43:00.000Z",
+    "Slug": "burgo"
+  },
+  {
     "id": "recdL04Yb38BoVmDH",
     "Image URL": "https://raw.githubusercontent.com/VoronDesign/Voron-Stealthburner/main/Images/stealthburner_front.png",
     "Included Extruder": "Clockwork 2 (CW2)",
@@ -329,7 +377,7 @@
     "id": "recdL3lEf5BGf066O",
     "Included Extruder": "Orbiter 2.0, LGX Lite, Sherpa Mini (via adapters)",
     "Pros": "Enormous hotend compatibility library; large community; well-documented; V0 variant available; Voron V0 Nozzle Cam mod support",
-    "Name": "Dragon Burner (2.4 / Trident / V0)",
+    "Name": "Dragon Burner 2.4 / Trident / V0",
     "Included Hotend": "Dragon HF/UHF, Rapido HF/UHF, NF-Crazy, Revo Voron, CHC Pro, Bambu X1C hotend, DropEffect XG (and many others)",
     "Brand / Designer": "chirpy2605",
     "Vendor 2 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
@@ -347,7 +395,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Dragon_Burner",
     "Cons": "GitHub repo appears archived/deleted as of mid-2026 — verify current source; 4010 fans may underperform 5015 on demanding overhangs",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:20.000Z",
+    "Updated": "2026-11-11T10:36:49.000Z",
     "Slug": "dragon-burner-2-4-trident-v0",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -359,7 +407,7 @@
     "Image URL": "https://raw.githubusercontent.com/Armchair-Heavy-Industries/Xol-Toolhead/main/docs/assets/images/Xol-Toolhead.both.png",
     "Included Extruder": "Sherpa Mini, G2SA, LGX Lite, Orbiter 2.0, DFA (via adapters)",
     "Pros": "Lower mass than StealthBurner — better for high-accel/IS tuning; modular hotend mounts support wide hotend range; active development; good community documentation",
-    "Name": "Xol Toolhead",
+    "Name": "Xol",
     "Included Hotend": "Rapido HF/UHF, Dragon HF/UHF, DropEffect XG, NF-Crazy, Revo Voron, Chube Compact",
     "Brand / Designer": "Armchair Heavy Industries (DW-Tas)",
     "Vendor 2 Name": "https://www.fabreeko.com/collections/vendors/products/xol-2-toolhead-by-armchair-engineering",
@@ -376,12 +424,20 @@
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/Xol-Toolhead",
     "Cons": "Dual 4010 fans provide less static pressure than 5015 blowers — may underperform on dense overhangs; less plug-and-play than CW2-based designs; no filament cutter native",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:20.000Z",
-    "Slug": "xol-toolhead",
+    "Updated": "2026-11-11T10:36:49.000Z",
+    "Slug": "xol",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
       "Dual 4010 axial"
     ]
+  },
+  {
+    "id": "recgBkoMdf7U9RERZ",
+    "Name": "VC4 CNC Toolhead",
+    "Price (USD)": 399.96,
+    "Vendor 1 Name": "https://store.brs-engineering.com/en/products/vc4-cnc-toolhhead",
+    "Updated": "2026-11-11T10:42:58.000Z",
+    "Slug": "vc4-cnc-toolhead"
   },
   {
     "id": "rechooEtkm4CXaX3T",
@@ -467,7 +523,7 @@
     "id": "reczHwSWHcrIZKowp",
     "Included Extruder": "Integrated extruder — Orbiter 2 gear set (or Bondtech / REDGA gear set); NEMA 14, 10-tooth stepper gear",
     "Pros": "Specifically designed for Monolith gantry — fills a gap not covered by standard toolheads\nCommunity-developed for advanced builders",
-    "Name": "Angry Tool Head",
+    "Name": "Angry",
     "Included Hotend": "Hotend-agnostic",
     "Brand / Designer": "Shamoon78",
     "Compatible Motion Systems": [
@@ -483,8 +539,8 @@
     "Vendor 1 Name": "https://github.com/Shamoon78/Angry_Tool_Head/",
     "Cons": "Monolith gantry required — not for standard CoreXY setups\nLimited documentation and community testing data compared to established toolheads\nActive development — design may change",
     "Verdict": "Consider",
-    "Updated": "2026-11-06T11:05:23.000Z",
-    "Slug": "angry-tool-head",
+    "Updated": "2026-11-11T10:36:50.000Z",
+    "Slug": "angry",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
       "2x 4010"

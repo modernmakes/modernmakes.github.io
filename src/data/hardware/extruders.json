@@ -265,6 +265,15 @@
     "Mount": "VzBot Custom"
   },
   {
+    "id": "rec9sgqUwQt6KsklL",
+    "Slug": "hemera",
+    "Vendor 1 Name": "DigitMakers",
+    "Name": "Hemera",
+    "Vendor 1 URL": "https://www.digitmakers.ca/products/e3d-hemera-direct-universal-kit-1-75mm-12v-24v",
+    "Brand": "E3D",
+    "Price (USD)": 123.79
+  },
+  {
     "id": "recABo5M0h9psLxBz",
     "Cons": "Large form factor not suited to compact toolheads; $187 is steep when LGX Lite PRO exists for $149; limited community adoption vs Lite platform",
     "Vendor 4 Name": "Slice Engineering",
@@ -453,6 +462,15 @@
     "Mount": "Custom"
   },
   {
+    "id": "recDTViTJsYmfox8w",
+    "Slug": "qr-m",
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "QR-M",
+    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/qrm-extruder",
+    "Brand": "Bondtech",
+    "Price (USD)": 155
+  },
+  {
     "id": "recGLCZyZl3wJDPpi",
     "Cons": "Effect of the oblique/twirling teeth still needs further testing per the designer; twisting force on filament under higher back pressure may cause issues with flexibles or at high flow; needs a donor HGX 2.0 gear kit plus a NEMA14 36 mm pancake motor — neither is included in any kit price",
     "Compatible Printers": [
@@ -479,6 +497,15 @@
     "Drive Type": "Dual",
     "Pros": "39.5 g in the designer's own weight comparison (vs 46.4 g v1, 51.0 g HGX 2.0); large 18 mm extrusion gears for a big filament contact area; high reduction ratios (44:10, 37:17); printed parts take about an hour",
     "Mount": "Sherpa Mini"
+  },
+  {
+    "id": "recGjUGVmrvP6ypO6",
+    "Slug": "roto",
+    "Vendor 1 Name": "E3D Online",
+    "Name": "Roto",
+    "Vendor 1 URL": "https://e3d-online.com/products/roto-extruder",
+    "Brand": "E3D",
+    "Price (USD)": 207
   },
   {
     "id": "recH3VO0VklTut3wn",
@@ -864,6 +891,15 @@
     "Mount": "Custom"
   },
   {
+    "id": "recVmE0Lo2D5Zlypo",
+    "Slug": "bmg-x2-m",
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "BMG-X2-M",
+    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/bmg-x2-m-extruder-for-mosquito",
+    "Brand": "Bondtech",
+    "Price (USD)": 135
+  },
+  {
     "id": "recZFXMlrzNUmW4kQ",
     "Cons": "Still PUBLIC BETA per the JaredC01/Galileo2 README, pending design finalization and testing; kit excludes printed parts; assembled weight unpublished (the 25 g figure from Matrix3D is the printed-parts kit only)",
     "Vendor 4 Name": "KB-3D",
@@ -930,6 +966,14 @@
     "Vendor 4 URL": "https://store.dremc.com.au/products/bondtech-oem-ridga-v2?pr_prod_strat=jac&pr_rec_id=e0fc64b92&pr_rec_pid=7759692333225&pr_ref_pid=7750435373225&pr_seq=uniform",
     "Updated": "2026-11-04",
     "Mount": "Universal"
+  },
+  {
+    "id": "recbnQe5mXJLf5mSY",
+    "Slug": "orbiter-3-0",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Orbiter 3.0",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/orbiter-3-0-extruder-with-integrated-electronics-1-75mm-by-ldo",
+    "Price (USD)": 99.99
   },
   {
     "id": "recbwhTIDgqVhejO9",
@@ -1016,9 +1060,18 @@
     "Mount": "Orbiter"
   },
   {
+    "id": "recnweQ3ba26koXZq",
+    "Slug": "titan-aero",
+    "Vendor 1 Name": "DigitMakers",
+    "Name": "Titan Aero",
+    "Vendor 1 URL": "https://www.digitmakers.ca/products/e3d-titan-extruder-1-75mm-full-assembly-with-bracket-and-motor",
+    "Brand": "E3D",
+    "Price (USD)": 111.81
+  },
+  {
     "id": "recpyMFZ0Du4Czl6a",
     "Cons": "Older design than Orbiter V3.5 - noisier fan, no RGB sensor board\nSensor adds wiring and Klipper/Marlin configuration\n135g plus sensor weight - heavier than the lightest modern extruders",
-    "Slug": "ldo-orbiter-v2-5-smart-filament-sensor",
+    "Slug": "orbiter-v2-5-smart-filament-sensor",
     "Description": "The Orbiter Extruder V2.5 features a robust injection-molded outer shell, enhancing durability. It utilizes an LDO high-temperature motor for strong torque output and improved performance. The high-quality, RNC nano-coated gears (HRC60+) incorporate an innovative flat-bottom design, maintaining consistent extrusion rates regardless of filament position.",
     "Verdict Label": "The classic LDO Orbiter V2.5 plus a smart filament sensor - proven dual-drive extrusion with runout detection.",
     "Ecosystem": [
@@ -1028,7 +1081,7 @@
     "Verdict": "Workhorse",
     "Weight (g)": 135,
     "Vendor 1 Name": "3D Mellow",
-    "Name": "LDO Orbiter V2.5 + Smart Filament Sensor",
+    "Name": "Orbiter V2.5 + Smart Filament Sensor",
     "Vendor 2 URL": "https://www.filastruder.com/collections/jubilee/products/ldo-orbiter-v2-v2-5-standard-mirrored-copy",
     "Gear Ratio": "7.5:1",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-ldo-orbiter-extruder-v25-smart-filament-sensor-–-diy-3d-printer-upgrade-automatic-filament-runout-detection",
@@ -1068,6 +1121,15 @@
     "Mount": "Custom"
   },
   {
+    "id": "recqRF8rbEIqnz0do",
+    "Slug": "hemera-xs",
+    "Vendor 1 Name": "E3D Online",
+    "Name": "Hemera XS",
+    "Vendor 1 URL": "https://e3d-online.com/products/revo-hemera-xs-coldside-kits",
+    "Brand": "E3D",
+    "Price (USD)": 130.88
+  },
+  {
     "id": "rectO0o6ndqe359Lw",
     "Cons": "Requires HGX-Lite gear kit — additional cost on top of printed parts\nSmaller community install base vs Sherpa Mini or Orbiter\nPrinted plastic body — less rigid than CNC alternatives\nFewer pre-built toolhead integrations than LGX Lite or Sherpa",
     "Slug": "hummingbird",
@@ -1091,6 +1153,15 @@
     "Pros": "LGX Lite mounting footprint — wide toolhead compatibility\nHGX-Lite gears provide strong dual-drive grip at high ratio\nThickened idler arm prevents flex under sustained load\nPrint-it-yourself — zero cost beyond HGX-Lite gear kit\nBy nhchiu — active Voron community contributor (ProtoXtruder designer)",
     "Updated": "2026-11-04",
     "Mount": "LGX Lite"
+  },
+  {
+    "id": "recxB1AdW28YNPoFW",
+    "Slug": "apus-2",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Apus 2",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/apus-2-compact-extruder-by-phaetus",
+    "Brand": "Phaetus",
+    "Price (USD)": 49.99
   },
   {
     "id": "recz1G5OzR9hhHnmH",

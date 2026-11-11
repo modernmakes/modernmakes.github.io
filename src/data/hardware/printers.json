@@ -1,7 +1,15 @@
 [
   {
+    "id": "rec34cHfsZVpqcnVc",
+    "Slug": "delta-flyer",
+    "Price (USD)": 389.99,
+    "Name": "Delta Flyer",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/delta-flyer-kit-by-ldo"
+  },
+  {
     "id": "rec4b2C9v0qV0786D",
-    "Slug": "diy-vzbot-awd-330-vz330-3d-printer-kit-for-usa",
+    "Slug": "vzbot-awd-330-kit",
     "Difficulty": "Advanced",
     "Price (USD)": 1360,
     "Build Volume": "330×330×330mm",
@@ -10,7 +18,7 @@
     "Available Sizes": "330mm",
     "Frame": "2020",
     "Tool Configuration": "Single",
-    "Name": "DIY VzBoT AWD 330 VZ330 3D Printer Kit For USA",
+    "Name": "VzBoT AWD 330 Kit",
     "Vendor 1 Name": "3D Mellow",
     "Assembly": "Kit",
     "Klipper Native": true,
@@ -49,7 +57,7 @@
   },
   {
     "id": "rec9of9SAAVos4UZl",
-    "Slug": "ratrig-v-minion",
+    "Slug": "v-minion",
     "Verdict": "SKIP",
     "Difficulty": "Intermediate",
     "Price (USD)": 700,
@@ -68,7 +76,7 @@
     "Frame": "2020",
     "Cons": "No longer supported by RatRig — no active kit, no documentation updates, no official community support\nChoose Voron 0.2 instead: larger community, active development, LDO kit available\nSourcing parts requires finding discontinued components; not recommended for a new build",
     "Tool Configuration": "Single",
-    "Name": "RatRig V-Minion",
+    "Name": "V-Minion",
     "Vendor 1 Name": "RatRig",
     "Assembly": "Kit",
     "Klipper Native": true,
@@ -78,7 +86,7 @@
   },
   {
     "id": "recAWaST6qF4kiaJ6",
-    "Slug": "ratrig-v-core-4",
+    "Slug": "v-core-4",
     "Verdict": "BUY",
     "Difficulty": "Advanced",
     "Price (USD)": 1400,
@@ -98,13 +106,21 @@
     "Frame": "3030",
     "Cons": "AWD requires 4 stepper drivers for XY — mainboard or toolboard planning is more complex than standard 2-motor CoreXY\nKit cost is higher than self-sourcing equivalent Voron parts\nEVA 3 toolhead has less community modding depth than Stealthburner\n3030 extrusion costs more and weighs more than 2020 — shipping weight and parts cost increase with build size",
     "Tool Configuration": "Single",
-    "Name": "RatRig V-Core 4",
+    "Name": "V-Core 4",
     "Vendor 1 Name": "RatRig",
     "Assembly": "Self-build",
     "Klipper Native": true,
     "Type": "CoreXY",
     "Vendor 1 URL": "https://ratrig.com/rat-rig-v-core-4.html",
     "Brand": "RatRig"
+  },
+  {
+    "id": "recEvKD4bgXfoigpZ",
+    "Slug": "micron",
+    "Price (USD)": 819.99,
+    "Name": "Micron+",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-micron-3d-printer-kit-180mm-3d-printer-kit-with-honeybadger-upgrades"
   },
   {
     "id": "recGhwLzdGrAg8o95",
@@ -193,6 +209,30 @@
     "Brand": "Voron Design"
   },
   {
+    "id": "recfiADI50XRoZi2Q",
+    "Slug": "positron-v3-2",
+    "Price (USD)": 649.99,
+    "Name": "Positron V3.2",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/positron-v3-2-3d-printer-kit-by-ldo"
+  },
+  {
+    "id": "recgJ5HhlAt6V56zx",
+    "Slug": "venture-xl",
+    "Price (USD)": 2199.99,
+    "Name": "Venture XL",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/fysetc-venture-xl-600x600-large-format-3d-printer-kit"
+  },
+  {
+    "id": "recjXyqCjcDvAepj2",
+    "Slug": "lh-stinger",
+    "Price (USD)": 749.99,
+    "Name": "LH Stinger",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/lh-stinger-3d-printer-kit-by-fysetc"
+  },
+  {
     "id": "reclpXm2VsRYiIQfZ",
     "Slug": "vzbot",
     "Verdict": "BUY",
@@ -249,5 +289,13 @@
     "Type": "CoreXY",
     "Vendor 1 URL": "https://hevort.com",
     "Brand": "HevORT"
+  },
+  {
+    "id": "rectPU0OPQLRcP6F3",
+    "Slug": "rook-mk1",
+    "Price (USD)": 174.99,
+    "Name": "Rook MK1",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/rook-mk1-by-rolohaun-3d"
   }
 ]

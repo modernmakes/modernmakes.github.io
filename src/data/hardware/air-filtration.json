@@ -1,19 +1,27 @@
 [
   {
+    "id": "recBfevcxmLT5PEou",
+    "Name": "HEPA H14/13 Filter",
+    "Vendor 1 Name": "BRS Engineering",
+    "Slug": "hepa-h14-13-filter",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/hepa-filter",
+    "Price (USD)": 44.56
+  },
+  {
     "id": "recJgeynEAxaFHhPs",
     "Compatible Printers": [
       "Voron 2.4"
     ],
     "Printed Parts Required": true,
     "Filter Media": "HEPA",
-    "Name": "Voron Exhaust Filter (Stock BOM)",
+    "Name": "Exhaust Filter",
     "Vendor 1 Name": "GitHub (VoronDesign)",
     "Description": "The Voron Exhaust Filter is the official BOM air filtration design for the V2.4, mounting at the rear exhaust panel and routing through a large activated carbon bed before venting externally. It's a sound design and ships with large carbon capacity, but community consensus has largely moved toward the Nevermore Micro for new builds: recirculating air through carbon inside the chamber eliminates VOCs more completely than venting filtered air out of the room. Most build guides now recommend printing the Nevermore alongside or instead of the stock exhaust filter.",
     "Verdict Label": "Stock BOM starting point — functional, but most builds upgrade to Nevermore for recirculation",
     "Verdict": "CONSIDER",
     "Open Source": true,
     "Replacement Filter Available": true,
-    "Slug": "voron-exhaust-filter-stock-bom",
+    "Slug": "exhaust-filter",
     "Cons": "Exhaust-only design — vents filtered air outside the enclosure rather than recirculating it\nRequires external exhaust routing (hose/duct to window or outside) for meaningful effectiveness\nDoes not keep VOCs inside the enclosure for elimination — if you vent inside the room, the carbon helps but imperfectly\nSuperseded by the Nevermore Micro for most builds — recirculation is a fundamentally better approach for enclosed printing\nOnly designed for Voron 2.4 exhaust panel geometry",
     "Vendor 1 URL": "https://github.com/VoronDesign/Voron-2/tree/Voron2.4/STLs/Exhaust_Filter",
     "Type": "Exhaust",
@@ -21,6 +29,46 @@
     "Price (USD)": 8,
     "Pros": "Official Voron Design exhaust filter — part of the base V2.4 BOM\nLarge carbon volume (~50-80g) for substantial media capacity\nSimple design — mounts directly to the V2.4 rear exhaust panel cutout\nUses the existing 60mm exhaust fan already on the V2.4 BOM — no additional hardware required\nHigh community familiarity — documented extensively in the V2.4 build guides",
     "Fan Size": "60x60x20 axial"
+  },
+  {
+    "id": "recLHehwlcWslH6kB",
+    "Name": "CF80 Filtration",
+    "Vendor 1 Name": "BRS Engineering",
+    "Slug": "cf80-filtration",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-cf80-filtration",
+    "Price (USD)": 411.1
+  },
+  {
+    "id": "recSRdQ4wehxFeTU0",
+    "Name": "RatPack HEPA Filter Module",
+    "Vendor 1 Name": "Fabreeko",
+    "Slug": "ratpack-hepa-filter-module",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/rat-rig-rat-pack-hepa-grade-filter-module",
+    "Price (USD)": 64.99
+  },
+  {
+    "id": "recShZoscl4Vq6tpe",
+    "Name": "Nevermore MAX Printed Parts",
+    "Vendor 1 Name": "Fabreeko",
+    "Slug": "nevermore-max-printed-parts",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/nevermore-max-printed-parts-by-mpp",
+    "Price (USD)": 159.99
+  },
+  {
+    "id": "recUbnmAiKnKHctV6",
+    "Name": "Nevermore Mini / StealthMax HEPA Filter",
+    "Vendor 1 Name": "Fabreeko",
+    "Slug": "nevermore-mini-stealthmax-hepa-filter",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/nevermore-mini-stealthmax-s-v1-hepa-filter",
+    "Price (USD)": 4.49
+  },
+  {
+    "id": "recXZ0RyA752FKyYD",
+    "Name": "Activated Carbon Pellets",
+    "Vendor 1 Name": "NorthPrint3D",
+    "Slug": "activated-carbon-pellets",
+    "Vendor 1 URL": "https://northprint3d.ca/product/activated-carbon-pellets/",
+    "Price (USD)": 22.51
   },
   {
     "id": "reci5HQvSIVQvRmLA",
@@ -33,6 +81,7 @@
     "Name": "Nevermore StealthMax",
     "Vendor 1 Name": "GitHub (Nevermore3D)",
     "Description": "The Nevermore StealthMax is the high-capacity evolution of the Micro, designed for 300-350mm builds where the Micro's small carbon bed saturates too quickly. With 40-60g of carbon vs the Micro's ~10g, refill intervals are proportionally longer. The low-profile housing mounts in the same under-bed location without protruding visibly. Clear upgrade path recommendation: 250mm builds use the Micro; 300mm and larger should default to the StealthMax.",
+    "Fan Included": true,
     "Verdict Label": "The step-up for 300mm+ builds — larger carbon bed, longer service life between refills",
     "Verdict": "BUY",
     "Open Source": true,
@@ -57,14 +106,14 @@
     ],
     "Printed Parts Required": true,
     "Filter Media": "HEPA",
-    "Name": "HEPA Exhaust Mod (Generic)",
+    "Name": "HEPA Exhaust Mod",
     "Vendor 1 Name": "Printables / GitHub (various)",
     "Description": "HEPA exhaust mods are a general community pattern rather than a single product — multiple designers have published STLs that adapt standard 40mm or 80mm HEPA filter elements to printer exhaust ports. The approach captures ultrafine particles at the point of exhaust but does not recirculate or capture VOCs. Best for builders who can't exhaust outdoors and need some particulate reduction; for serious VOC reduction, pair with a Nevermore inside the enclosure.",
     "Verdict Label": "Documented community pattern for HEPA exhaust — implementation varies by printer model",
     "Verdict": "CONSIDER",
     "Open Source": true,
     "Replacement Filter Available": true,
-    "Slug": "hepa-exhaust-mod-generic",
+    "Slug": "hepa-exhaust-mod",
     "Cons": "Exhaust-only filtration — air exits the printer rather than being recirculated and cleaned in-chamber\nHEPA captures particles but does not address VOC/chemical fumes — no carbon stage\nMultiple non-standard implementations exist; build quality varies significantly by remixer\nLess effective than Nevermore+BentoBox combination for enclosed ABS printing",
     "Vendor 1 URL": "https://www.printables.com/search/models?q=HEPA+exhaust+filter+3d+printer",
     "Type": "Exhaust",
@@ -83,6 +132,7 @@
     "Name": "BentoBox",
     "Vendor 1 Name": "Printables (thrutheframe)",
     "Description": "The BentoBox is a two-stage air filtration unit designed by Rolohaun that mounts on the Voron gantry crossbar. It combines an activated carbon layer for VOC capture with a HEPA filter for ultrafine particle removal — the stage that Nevermore's carbon-only design doesn't address. Community framing is consistent: BentoBox and Nevermore Micro are complementary installs, not alternatives. The Nevermore handles continuous chamber VOC recirculation; the BentoBox adds the particulate filtration layer above it.",
+    "Fan Included": true,
     "Verdict Label": "Best paired with Nevermore — adds HEPA stage the carbon-only designs lack",
     "Verdict": "BUY",
     "Open Source": true,
@@ -108,6 +158,7 @@
     "Name": "Nevermore Micro v6",
     "Vendor 1 Name": "GitHub (Nevermore3D)",
     "Description": "The Nevermore Micro is the default air filtration recommendation for any Voron build. Rather than venting VOCs outside like the stock exhaust filter, it recirculates chamber air through an activated carbon bed — eliminating the need for outdoor exhaust routing entirely. The v6 design is the current standard, fits under the bed on both V2.4 and Trident without taking up enclosure panel real estate, and prints in a single session. Community consensus is clear: print this before you print anything else in ABS.",
+    "Fan Included": true,
     "Verdict Label": "Community consensus for Voron — the first mod everyone prints",
     "Verdict": "BUY",
     "Open Source": true,
@@ -123,6 +174,14 @@
     "Fan Size": "5015"
   },
   {
+    "id": "recxcBT0cpu2gIFNr",
+    "Name": "Potassium Permanganate Impregnated Activated Alumina",
+    "Vendor 1 Name": "NorthPrint3D",
+    "Slug": "potassium-permanganate-impregnated-activated-alumina",
+    "Vendor 1 URL": "https://northprint3d.ca/product/potassium-permanganate-impregnated-activated-alumina/",
+    "Price (USD)": 22.51
+  },
+  {
     "id": "recyr4i0mTiPtmsbk",
     "Compatible Printers": [
       "Voron 2.4",
@@ -133,6 +192,7 @@
     "Name": "Nevermore Duo",
     "Vendor 1 Name": "GitHub (Nevermore3D)",
     "Description": "The Nevermore Duo is the dual-fan variant of the Micro, delivering roughly twice the recirculation airflow. It targets builders running high-VOC schedules — continuous ABS or ASA printing where the Micro's single-fan airflow starts to fall short. For typical mixed-material Voron use, the Micro handles the job; the Duo is the answer when you're specifically saturating the Micro's capacity.",
+    "Fan Included": true,
     "Verdict Label": "Dual-fan variant for higher airflow — niche upgrade over the Micro for heavy ABS/ASA printers",
     "Verdict": "CONSIDER",
     "Open Source": true,

@@ -2,7 +2,6 @@
   {
     "id": "rec0tIX7L0c3HQDN5",
     "Diameter (mm)": 18,
-    "Brand Tier": "OEM",
     "Description": "Gates 2GT toothed idlers are used at the inner XY belt path reversal points in Voron CoreXY builds where the belt wraps with the tooth side inward. Outer belt reversals use smooth F695 bearings instead. Mismatching toothed and smooth idler positions causes belt noise and eventual skipping.",
     "Verdict Label": "OEM toothed idler — used where belt reversal requires tooth engagement",
     "Tooth Profile": "2GT",
@@ -14,20 +13,19 @@
       "VzBot"
     ],
     "Vendor 1 Name": "Fabreeko",
-    "Name": "Gates 2GT Toothed Idler",
+    "Name": "2GT Toothed Idler",
     "Type": "Idler",
     "Vendor 1 URL": "https://fabreeko.com",
     "Brand": "Gates",
     "Price (USD)": 8,
     "Pros": "OEM tooth profile matched to Gates belt — zero pitch mismatch at tooth reversal points\nUsed at belt path reversal points where a smooth idler would cause belt tooth rotation and skip\nPre-assembled with integrated bearing",
-    "Slug": "gates-2gt-toothed-idler",
+    "Slug": "2gt-toothed-idler",
     "Rail Profile": "N/A",
     "Material": "Aluminum"
   },
   {
     "id": "rec1AOqhI51ryna3W",
     "Diameter (mm)": 5,
-    "Brand Tier": "Quality Clone",
     "Description": "Trianglelab’s 2GT 20T drive pulley is a reliable quality clone for most builds. At normal and moderate acceleration, it performs indistinguishably from Gates. For a performance build chasing every marginal improvement, Gates is still correct.",
     "Verdict Label": "Reliable quality clone pulley — works well in practice, sold by trusted ecosystem vendors",
     "Tooth Profile": "2GT",
@@ -51,9 +49,25 @@
     "Material": "Aluminum"
   },
   {
+    "id": "rec1PuzJzEbCh8pbT",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "CNC All Wheel Drive Kit for Voron V2.4 and Trident",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-cnc-all-wheel-drive-kit-for-voron-v2-4-and-trident",
+    "Brand": "LDO",
+    "Price (USD)": 109.99,
+    "Slug": "cnc-all-wheel-drive-kit-for-voron-v2-4-and-trident"
+  },
+  {
+    "id": "rec1SEQGwAbUSG5xU",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Rock-em Sock-em Z Joints",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/rock-em-sock-em-z-joints-by-whoppingpochard",
+    "Price (USD)": 8.99,
+    "Slug": "rock-em-sock-em-z-joints"
+  },
+  {
     "id": "rec21GNGnStXFEZYE",
     "Diameter (mm)": 5,
-    "Brand Tier": "OEM",
     "Description": "The Gates 2GT 20T drive pulley is the XY motor pulley specified in Voron BOM and used in all prosumer CoreXY builds. OEM match for Gates LL-2GT belt. Bore is typically 5mm for standard NEMA17 motor shafts.",
     "Verdict Label": "OEM pulley for all Voron and CoreXY XY motor drives — machined to 2GT spec",
     "Tooth Profile": "2GT",
@@ -78,10 +92,42 @@
     "Material": "Aluminum"
   },
   {
+    "id": "rec41UNemUiAKZ0BB",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Trident 9MM Conversion CNC Parts",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/trident-9mm-conversion-cnc-parts-by-double-t-honeybadger",
+    "Price (USD)": 149.99,
+    "Slug": "trident-9mm-conversion-cnc-parts"
+  },
+  {
+    "id": "rec5N1hSmfmwbZLoq",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "GATES 2GT Closed Loop Belts",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/gates-2gt-close-loop-belts-6mm-9mm-and-10mm-epdm",
+    "Brand": "Gates",
+    "Price (USD)": 22.99,
+    "Slug": "gates-2gt-closed-loop-belts"
+  },
+  {
+    "id": "rec5b4EhAU2aXzVpa",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Hybrid Ceramic Bearing Kit for Voron",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-hybrid-bearing-kit-for-voron",
+    "Price (USD)": 69.99,
+    "Slug": "hybrid-ceramic-bearing-kit-for-voron"
+  },
+  {
+    "id": "rec5iVxNskj5uPrCC",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Beefy Z Idlers (BZI) for Voron",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/beefy-z-idlers-bzi-for-voron-by-clee",
+    "Price (USD)": 8.99,
+    "Slug": "beefy-z-idlers-bzi-for-voron"
+  },
+  {
     "id": "rec6a0V3IkgRRwbxY",
     "Diameter (mm)": 8,
     "Length (mm)": 300,
-    "Brand Tier": "Budget Clone",
     "Description": "T8x8 300mm lead screws serve 250mm Voron 2.4 builds and all Voron Trident Z axes. Trident uses 3 lead screws for independent Z leveling (Quad Gantry Leveling equivalent). All other characteristics are the same as the 400mm variant.",
     "Verdict Label": "Z lead screw for 250mm Voron V2.4 and Voron Trident",
     "Tooth Profile": "N/A",
@@ -102,9 +148,42 @@
     "Material": "Stainless"
   },
   {
+    "id": "rec9FiUxlVACqnDqV",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "PEEK Leadscrew Nuts",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/peek-nuts-by-ldo",
+    "Brand": "LDO",
+    "Price (USD)": 9.99,
+    "Slug": "peek-leadscrew-nuts"
+  },
+  {
+    "id": "recASONPKLptcc0O0",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "MICRONPlus Motion Kit",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/micronplus-motion-kit",
+    "Brand": "LDO",
+    "Price (USD)": 89.99,
+    "Slug": "micronplus-motion-kit"
+  },
+  {
+    "id": "recB5MeKAfSrjNKS4",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "V0.2 Ultimate Motion Kit",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-v0-1-motion-kit-with-gates-belts",
+    "Price (USD)": 82.99,
+    "Slug": "v0-2-ultimate-motion-kit"
+  },
+  {
+    "id": "recCew4Y9d3pwcGQ4",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Positron Black Steel Pre-Modified Rails",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/positron-rails-by-honeybadger",
+    "Price (USD)": 49.99,
+    "Slug": "positron-black-steel-pre-modified-rails"
+  },
+  {
     "id": "recCqJ7iQO6TjMpKb",
     "Belt Width (mm)": 6,
-    "Brand Tier": "OEM",
     "Description": "Gates LL-2GT 6mm belt is the specified XY drive belt for Voron Design printers and is the de facto standard for all prosumer CoreXY self-builds. The 6mm width fits standard V2.4, Trident, 0.2, VzBot, and HevORT drive configurations. Gates is the OEM; all clone belts are measured against its dimensional accuracy and elasticity.",
     "Verdict Label": "The standard XY drive belt for all Voron and most prosumer CoreXY builds",
     "Tooth Profile": "2GT",
@@ -129,9 +208,34 @@
     "Material": "N/A"
   },
   {
+    "id": "recDGv2ewG8qvNEiy",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "MGN12C Linear Rail",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/linear-rails-by-ultimate-linear-systems-uls-mgn12c",
+    "Price (USD)": 139.99,
+    "Slug": "mgn12c-linear-rail"
+  },
+  {
+    "id": "recE7iDWol2A5CRfc",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "AWD Drive 1.35a",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-awd-drive-v21",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 166,
+    "Slug": "awd-drive-1-35a"
+  },
+  {
+    "id": "recEvoDcqbLUrQK3C",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Z Oldham Decoupler",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/decoupleur-oldham",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 65.73,
+    "Slug": "z-oldham-decoupler"
+  },
+  {
     "id": "recGSOC4JJfpUYQTj",
     "Belt Width (mm)": 6,
-    "Brand Tier": "Budget Clone",
     "Description": "Generic 2GT 6mm belts from unknown manufacturers have no guaranteed tooth profile accuracy. Even minor pitch variation produces resonance artifacts that Input Shaper cannot correct. eSUN is only marginally more expensive and is a substantial quality improvement.",
     "Verdict Label": "Unknown manufacturer belt — tooth profile accuracy is untested and resonance behavior is unpredictable",
     "Tooth Profile": "2GT",
@@ -152,8 +256,23 @@
     "Material": "N/A"
   },
   {
+    "id": "recGkCuUK75s14L2n",
+    "Vendor 1 Name": "NorthPrint3D",
+    "Name": "XY Joint and Tensioner Kit for K3",
+    "Vendor 1 URL": "https://northprint3d.ca/product/slm-xy-joint-and-tensioner-kit-for-annex-engineering-k3/",
+    "Price (USD)": 126.61,
+    "Slug": "xy-joint-and-tensioner-kit-for-k3"
+  },
+  {
+    "id": "recHEVzY4qNhgeJpG",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "MGN15 Steel Linear Rails",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-mgn15h-stainless-steel-rails",
+    "Price (USD)": 44.99,
+    "Slug": "mgn15-steel-linear-rails"
+  },
+  {
     "id": "recHdOq8p9C9jDpuE",
-    "Brand Tier": "OEM",
     "Description": "LDO is a Taiwanese linear motion manufacturer that produces MGN-profile rails to a quality level equivalent to Hiwin, and is sold by Voron-community-approved vendors as the expected alternative. For Voron builds, LDO rails are interchangeable with Hiwin and are the default recommendation when Hiwin is out of stock or unavailable.",
     "Verdict Label": "Licensed OEM supplier — consistently recommended alongside Hiwin by Voron-affiliated vendors",
     "Tooth Profile": "N/A",
@@ -165,11 +284,11 @@
       "Voron Trident",
       "VzBot"
     ],
-    "Vendor 1 Name": "KB3D",
+    "Vendor 1 Name": "West3D",
     "Name": "LDO MGN9H Linear Rail",
     "Carriage Type": "MGN9H",
     "Type": "Linear Rail",
-    "Vendor 1 URL": "https://kb-3d.com",
+    "Vendor 1 URL": "https://west3d.com/products/ldo-motors-mgn9h-1r-300-350-4000-linear-rails-with-carriages",
     "Brand": "LDO",
     "Pros": "LDO is a licensed manufacturer — not a quality clone, but a separate first-tier supplier approved by the Voron community\nSold by KB3D, Fabreeko, and Voron-official kit vendors as the expected rail choice\nConsistently smooth with correct preload — community comparison builds show it matches Hiwin results",
     "Slug": "ldo-mgn9h-linear-rail",
@@ -178,7 +297,6 @@
   },
   {
     "id": "recIW1sIZdZ0rJBXz",
-    "Brand Tier": "Quality Clone",
     "Description": "Mellow is a Chinese linear motion manufacturer with an above-average reputation in the Voron and CoreXY community for quality clone rails. MGN9H from Mellow has a reasonable community track record, but buyers should budget time to clean and re-lube on arrival, and should expect to inspect and potentially reject an individual rail.",
     "Verdict Label": "Upper-tier quality clone — generally smooth, but you’re buying a quality distribution, not a guaranteed unit",
     "Tooth Profile": "N/A",
@@ -190,15 +308,32 @@
       "Voron Trident",
       "VzBot"
     ],
-    "Vendor 1 Name": "Mellow (AliExpress)",
+    "Vendor 1 Name": "3D Mellow",
     "Name": "Mellow MGN9H Linear Rail",
     "Carriage Type": "MGN9H",
     "Type": "Linear Rail",
-    "Vendor 1 URL": "https://www.aliexpress.com/store/1047297",
+    "Vendor 1 URL": "https://3dmellow.com",
     "Brand": "Mellow",
     "Pros": "Mellow has a positive reputation in the AliExpress ecosystem — fewer dead-on-arrival reports than generic alternatives\nMore affordable than Hiwin or LDO — meaningful cost savings on a 5-rail V2.4 build\nCommunity has documented satisfactory results with Mellow rails on Voron builds\nSold pre-cleaned and lightly lubricated in most listings",
     "Slug": "mellow-mgn9h-linear-rail",
     "Rail Profile": "MGN9"
+  },
+  {
+    "id": "recKlwJ3pQlBktBSY",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Wobble X",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/wobble-x-ws8-by-mellow",
+    "Brand": "Mellow",
+    "Price (USD)": 19.99,
+    "Slug": "wobble-x"
+  },
+  {
+    "id": "recLMZheX3c9RGnw6",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "MGN7H Stainless Steel Rails",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-mgn7h-stainless-steel-rails",
+    "Price (USD)": 18.5,
+    "Slug": "mgn7h-stainless-steel-rails"
   },
   {
     "id": "recLZiqD6BaXbOV38",
@@ -216,19 +351,18 @@
       "Voron Trident"
     ],
     "Vendor 1 Name": "BRS Engineering",
-    "Name": "BRS GT1.5 Anti-VFA Belt Conversion Kit",
+    "Name": "GT1.5 Anti-VFA Belt Conversion Kit",
     "Type": "Belt Kit",
-    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/belts",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/v-core-anti-vfa-kit-gt1-5-gates-powergrip%C2%AE-belt-conversion",
     "Brand": "BRS Engineering",
-    "Price (USD)": 69,
+    "Price (USD)": 122,
     "Pros": "GT1.5 pitch (1.5mm) vs standard GT2 (2mm) — half the resonance frequency interval\nDirectly reduces variable frequency artifacts (VFA/salmon skin) in prints\nAvailable in EPDM (standard, from €69) and Powergrip rubber (premium, €139)\nOpen-source printed pulleys and idlers available from BRS GitHub\nOfficial RatRig compatibility, community-proven on Voron builds",
-    "Slug": "brs-gt1-5-anti-vfa-belt-conversion-kit",
+    "Slug": "gt1-5-anti-vfa-belt-conversion-kit",
     "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
     "id": "recRq9fXrD8W3mKYk",
-    "Brand Tier": "Budget Clone",
     "Description": "Generic MGN9H rails from unspecified AliExpress sellers are a quality gamble. The lower price is offset by inconsistent preload, possible binding, and no path for returns on defective units. For a build where linear rail quality directly determines print quality, the savings do not justify the risk when Mellow (CONSIDER) and LDO/Hiwin (BUY) are available.",
     "Verdict Label": "Quality lottery — unknown manufacturer sourcing means no consistency guarantee",
     "Tooth Profile": "N/A",
@@ -250,7 +384,6 @@
   },
   {
     "id": "recS1mILSZiWJcp2a",
-    "Brand Tier": "OEM",
     "Description": "Hiwin MGN12H is used on the Voron 2.4 and Trident gantry Y rails and Z axes where span length and lateral load require the wider 12mm profile. The V2.4 uses MGN12H on both Y gantry rails and all four Z rails. Combined with titanium backers, MGN12H provides a rigid, repeatable foundation for the gantry.",
     "Verdict Label": "OEM 12mm rail — standard for V2.4 and Trident gantry and Z axis",
     "Tooth Profile": "N/A",
@@ -273,10 +406,50 @@
     "Material": "Stainless"
   },
   {
+    "id": "recT4WCpLAYDzJtvd",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "BFI - Beefy Front Idlers for Voron",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/beefy-front-idlers-bfi-for-voron-by-clee",
+    "Price (USD)": 8.99,
+    "Slug": "bfi-beefy-front-idlers-for-voron"
+  },
+  {
+    "id": "recUrOWE79u8JVpzO",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "RatRig Pillow Blocks",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ratrig-pillow-blocks-machined",
+    "Price (USD)": 35,
+    "Slug": "ratrig-pillow-blocks"
+  },
+  {
+    "id": "recVPrPFnDgzZKiDS",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Bearings for Annex K3",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-chrome-steel-bearings-for-annex-k3",
+    "Price (USD)": 69.99,
+    "Slug": "bearings-for-annex-k3"
+  },
+  {
+    "id": "recWohP8lYXtvOybl",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "V2.4 Ultimate Motion Kit with Gates Belts",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-2-4-motion-kit-by-fystec-with-gates-belts",
+    "Price (USD)": 144.99,
+    "Slug": "v2-4-ultimate-motion-kit-with-gates-belts"
+  },
+  {
+    "id": "recXKITpNdmIGOLq7",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Micron 160/180 Stainless Steel Rail Kit",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-micron-160-180-rail-kit",
+    "Brand": "LDO",
+    "Price (USD)": 149.99,
+    "Slug": "micron-160-180-stainless-steel-rail-kit"
+  },
+  {
     "id": "recZ2ipWXMxpDjmLS",
     "Diameter (mm)": 8,
     "Length (mm)": 400,
-    "Brand Tier": "Budget Clone",
     "Description": "T8x8 400mm lead screws are used in the stock Voron 2.4 Z axis for 300mm and 350mm builds (4 screws). They work but are the most common first upgrade target. Belted Z is the official Voron Design upgrade path.",
     "Verdict Label": "Stock Z lead screw for 300mm and 350mm Voron V2.4 builds — functional but belted Z is the community upgrade",
     "Tooth Profile": "N/A",
@@ -294,10 +467,36 @@
     "Material": "Stainless"
   },
   {
+    "id": "recZ9C7X5rtS8ded0",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "V0/0.1 Linear Rails Kit (5 pieces)",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-v0-0-1-linear-rails-kit-5-pieces-440c-stainless",
+    "Brand": "LDO",
+    "Price (USD)": 104.99,
+    "Slug": "v0-0-1-linear-rails-kit-5-pieces"
+  },
+  {
+    "id": "recaQjYYia8YyQHq9",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "L3VER M2 Block with Tensioners Module",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/precision-motor-block-1-0",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 221.71,
+    "Slug": "l3ver-m2-block-with-tensioners-module"
+  },
+  {
+    "id": "recbbAasNZBWVj3EA",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "AWD Drive 1.3",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-awd-drive-1-1-hardware-kit-only",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 88.01,
+    "Slug": "awd-drive-1-3"
+  },
+  {
     "id": "recbloEvRGfjGshpW",
     "Belt Width (mm)": 6,
-    "Brand Tier": "OEM",
-    "Description": "The Voron 2.4 Belted Z is an official Voron Design upgrade replacing stock lead screws with belt-driven Z. Each corner Z motor drives a belt loop, eliminating lead screws entirely. Result is faster Z travel, elimination of screw-induced ringing, and lower maintenance. Considered effectively mandatory for any performance-focused V2.4 build.",
+    "Description": "The Voron 2.4 uses a belt-driven Z system as stock — each of the four corner Z motors drives a belt loop, and the printer has no lead screws. The result is fast Z travel, no screw-induced ringing, and low maintenance. This is the standard V2.4 Z setup, not an add-on upgrade.",
     "Verdict Label": "Official V2.4 Z upgrade — eliminates lead screw ringing and dramatically improves Z speed",
     "Tooth Profile": "GT2",
     "Verdict": "BUY",
@@ -319,7 +518,6 @@
   {
     "id": "recdHqyyaCvZcIafe",
     "Belt Width (mm)": 9,
-    "Brand Tier": "OEM",
     "Description": "Gates LL-2GT 9mm belt is used in AWD CoreXY builds (RatRig V-Core 4, some VzBot configurations) where the wider belt handles the aggregate tension from 4 independent motor drives. The 9mm width is required when using 9mm pulleys and idlers; it is not a drop-in substitute for 6mm hardware.",
     "Verdict Label": "9mm Gates belt for AWD builds — wider belt handles the higher forces of 4-motor drive",
     "Tooth Profile": "2GT",
@@ -330,20 +528,45 @@
       "VzBot"
     ],
     "Vendor 1 Name": "Fabreeko",
-    "Name": "Gates 2GT Belt 9mm",
+    "Name": "2GT Belt 9mm",
     "Type": "Belt",
     "Vendor 1 URL": "https://fabreeko.com",
     "Brand": "Gates",
     "Price (USD)": 20,
     "Pros": "Higher belt tension capacity than 6mm — appropriate for AWD drives where all 4 motor torques route through the belt simultaneously\nSame Gates quality as 6mm — OEM specification, consistent stretch\nRequired for RatRig V-Core 4 AWD configuration — 6mm belt is undersized for 4-motor AWD tension",
-    "Slug": "gates-2gt-belt-9mm",
+    "Slug": "2gt-belt-9mm",
     "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
+    "id": "recdiszKP1HhlyGcu",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "GT1.5 26T Pulley (9mm Belt)",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/gt1-5-26t-pulley-9mm-belt",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 10.03,
+    "Slug": "gt1-5-26t-pulley-9mm-belt"
+  },
+  {
+    "id": "recfZiMFqDhBr9SiQ",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "GT2 80T Pulley",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/gt2-80t-pulley",
+    "Price (USD)": 7.99,
+    "Slug": "gt2-80t-pulley"
+  },
+  {
+    "id": "recgHTfEG9k5x47dc",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Disc Coupler",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/disc-coupler",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 19.83,
+    "Slug": "disc-coupler"
+  },
+  {
     "id": "recgIp3I5xu8RRTOU",
     "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2606/16/products/800-3-132831e919.jpg",
-    "Brand Tier": "Quality Clone",
     "Description": "Genuine GATES LL-1.5GT timing belt and pulley kit with CNC-machined aluminium drive and idler pulleys (27T/21T, 5mm bore) for 6/9/10/12mm belts; 1.5mm tooth pitch gives higher positioning precision and lower backlash than GT2.",
     "Verdict Label": "Genuine Gates GT1.5 belt and pulley kit — the best-verified value in the table",
     "Tooth Profile": "GT1.5",
@@ -353,20 +576,37 @@
       "Universal"
     ],
     "Vendor 1 Name": "3D Mellow",
-    "Name": "Mellow 3D Printer Part GATES-LL-1.5GT Gear Synchronous Belt Timing Pulley Idler Pulley Kit (6/9/10/12mm)",
+    "Name": "GATES-LL-1.5GT Belt Kit (6/9/10/12mm)",
     "Type": "Belt Kit",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-3d-printer-part-gates-ll-15gt-gear-synchronous-belt-timing-pulley-idler-pulley-gt15-for-6mm-9mm-10mm-12mm-timing-be",
     "Brand": "Mellow 3D",
     "Price (USD)": 12.5,
     "Pros": "Genuine GATES LL-1.5GT belts, not clones\nCNC-machined aluminium drive and idler pulleys (27T/21T, 5mm bore)\n1.5mm tooth pitch gives higher positioning precision and lower backlash than GT2\nOne kit covers 6/9/10/12mm belts\n2.50 in stock at 3D Mellow",
-    "Slug": "mellow-3d-printer-part-gates-ll-1-5gt-gear-synchronous-belt-timing-pulley-idler-pulley-kit-6-9-10-12mm",
+    "Slug": "gates-ll-1-5gt-belt-kit-6-9-10-12mm",
     "Rail Profile": "N/A",
     "Material": "Aluminum"
   },
   {
+    "id": "rechLmQMWPrrfLYh8",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "V-Core 3/4 Z1 Preloaded Rails Kit",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/vcore-3-4-z1-preloaded-rails-kit",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 215.02,
+    "Slug": "v-core-3-4-z1-preloaded-rails-kit"
+  },
+  {
+    "id": "rechesLVGH9NkDtGH",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "L3VER M1 REFRESH V1.5",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/tensionner-l3ver-m1-refresh-v1-1-printed-parts-only-with-inserts-cad",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 72.42,
+    "Slug": "l3ver-m1-refresh-v1-5"
+  },
+  {
     "id": "recipb38sZofw7p65",
     "Diameter (mm)": 13,
-    "Brand Tier": "Budget Clone",
     "Description": "F695 2RS flanged bearings are used at all smooth idler positions in Voron CoreXY belt paths — outer reversals where the belt’s flat back contacts the bearing. 5mm bore fits the M5 idler post and the flange retains belt laterally. Voron BOM specifies F695 2RS; note that quality varies significantly by source.",
     "Verdict Label": "Standard smooth idler for all Voron CoreXY belt path outer reversals",
     "Tooth Profile": "N/A",
@@ -381,12 +621,82 @@
     "Vendor 1 Name": "Fabreeko",
     "Name": "F695 2RS Smooth Idler Bearing",
     "Type": "Bearing",
-    "Vendor 1 URL": "https://fabreeko.com",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-bearings-for-voron?variant=42421520531711",
     "Brand": "Generic",
-    "Price (USD)": 2.87,
+    "Price (USD)": 1.39,
     "Pros": "F695 2RS is the correct bearing spec — 5mm bore, 13mm OD, flanged\nFlange retains the belt’s lateral position without a separate washer\nStandard industrial bearing spec — available from reputable vendors at low cost",
     "Slug": "f695-2rs-smooth-idler-bearing",
     "Rail Profile": "N/A"
+  },
+  {
+    "id": "recj4Gu8w5SnArEzQ",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "GATES 1.5GT 9mm RF Belt",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/gates-1-5gt-9mm-rf-belt",
+    "Brand": "Gates",
+    "Price (USD)": 7.99,
+    "Slug": "gates-1-5gt-9mm-rf-belt"
+  },
+  {
+    "id": "recjlM4LxuClCNLJL",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Z-Upgrade 2.8 Definitive Edition",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/z-upgrade-2-0-vcore-3-x",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 512.49,
+    "Slug": "z-upgrade-2-8-definitive-edition"
+  },
+  {
+    "id": "recjvFvmTZIPzzPTN",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "V-Core 3/4 Z0 Preloaded HIWIN Rails Kit",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/vcore-3-4-z0-preloaded-hiwin-rails-kit",
+    "Brand": "Hiwin",
+    "Price (USD)": 555.94,
+    "Slug": "v-core-3-4-z0-preloaded-hiwin-rails-kit"
+  },
+  {
+    "id": "recktzFCy1EMXWBqO",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Tr8 8mm Anti-Backlash POM Nut",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/tr8-8mm-anti-backlash-pom-nut",
+    "Price (USD)": 4.99,
+    "Slug": "tr8-8mm-anti-backlash-pom-nut"
+  },
+  {
+    "id": "recnCcwlpdU7dXn0g",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "MGN9C Stainless Steel Rails",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-mgn9c-stainless-steel-rails",
+    "Price (USD)": 29.99,
+    "Slug": "mgn9c-stainless-steel-rails"
+  },
+  {
+    "id": "recoMdzwQesSIApQc",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "GATES GT3 Open Belt",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/gates-gt3-open-belt-ll-gt3-6-9-reinforced",
+    "Brand": "Gates",
+    "Price (USD)": 7.99,
+    "Slug": "gates-gt3-open-belt"
+  },
+  {
+    "id": "recopg5KxkOD1OYxY",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "V-Core 3/4 Z1 Preloaded HIWIN Rails Kit",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/vcore-4-0-z1-preloaded-hiwin-rails-kit",
+    "Brand": "Hiwin",
+    "Price (USD)": 555.94,
+    "Slug": "v-core-3-4-z1-preloaded-hiwin-rails-kit"
+  },
+  {
+    "id": "rectstWXLqPazaytA",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Precision Motor Block",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/precision-motor-block",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 150.4,
+    "Slug": "precision-motor-block"
   },
   {
     "id": "recu6UTO7pho4oYkF",
@@ -403,19 +713,18 @@
     ],
     "Open Source": true,
     "Vendor 1 Name": "BRS Engineering",
-    "Name": "BRS Z-Upgrade 4.0b Ballscrew System",
+    "Name": "Z-Upgrade 4.0b Ballscrew System",
     "Type": "Z Upgrade Kit",
-    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/z-upgrade",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/z-upgrade-4-0-for-vcore-4-0-4-1",
     "Brand": "BRS Engineering",
-    "Price (USD)": 149,
+    "Price (USD)": 536,
     "Pros": "Ballscrew Z axis — eliminates leadscrew backlash and wobble artifacts\nSignificant improvement in Z-axis positional accuracy and repeatability\nAvailable hardware-only (€149) or full kit with PA12-CF printed parts (€262)\nOfficial RatRig partnership — confirmed V-Core 4 compatibility\nOpen-source printed parts on BRS GitHub",
-    "Slug": "brs-z-upgrade-4-0b-ballscrew-system",
+    "Slug": "z-upgrade-4-0b-ballscrew-system",
     "Rail Profile": "N/A",
     "Material": "N/A"
   },
   {
     "id": "recvIILzOefQWCXc1",
-    "Brand Tier": "OEM",
     "Description": "LDO MGN12H is the Voron-community-approved 12mm rail for V2.4 and Trident gantry and Z axes. It performs identically to Hiwin MGN12H at the same price point and is sold by the same Voron-affiliated vendors. Either LDO or Hiwin is the correct answer for a V2.4 MGN12H spec.",
     "Verdict Label": "Licensed OEM-quality 12mm rail — recommended for V2.4/Trident gantry and Z axis",
     "Tooth Profile": "N/A",
@@ -425,11 +734,11 @@
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Vendor 1 Name": "KB3D",
+    "Vendor 1 Name": "West3D",
     "Name": "LDO MGN12H Linear Rail",
     "Carriage Type": "MGN12H ",
     "Type": "Linear Rail",
-    "Vendor 1 URL": "https://kb-3d.com",
+    "Vendor 1 URL": "https://west3d.com/products/ldo-motors-mgn12h-1r-300-350-400-linear-rails-with-carriages",
     "Brand": "LDO",
     "Pros": "Same quality tier as Hiwin MGN12H from a licensed manufacturer — correct preload, consistent motion\nApproved by Voron community vendor network — KB3D and Fabreeko ship LDO MGN12H in kit builds\nDirect substitute for Hiwin MGN12H in all V2.4 and Trident configurations",
     "Slug": "ldo-mgn12h-linear-rail",
@@ -437,8 +746,25 @@
     "Material": "Stainless"
   },
   {
+    "id": "recwyCyOZSVU9zxjb",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "V-Core 3/4 Z0 Preloaded Rails Kit",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/vcore-3-4-z0-preloaded-rails-kit",
+    "Brand": "BRS Engineering",
+    "Price (USD)": 215.02,
+    "Slug": "v-core-3-4-z0-preloaded-rails-kit"
+  },
+  {
+    "id": "recxGVtROCcWIokXL",
+    "Vendor 1 Name": "E3D Online",
+    "Name": "GT2 Pulley 16 Tooth",
+    "Vendor 1 URL": "https://e3d-online.com/products/gt2-pulley-16-tooth",
+    "Brand": "E3D",
+    "Price (USD)": 5.81,
+    "Slug": "gt2-pulley-16-tooth"
+  },
+  {
     "id": "recxcw6tBNLrFJRaf",
-    "Brand Tier": "Budget Clone",
     "Description": "Oldham couplers are required at the motor-to-lead-screw junction on all Voron lead screw Z axes. They allow lateral float to accommodate shaft misalignment while transmitting rotation. Rigid shaft couplers are not a substitute — they will bind and cause Z banding.",
     "Verdict Label": "Essential companion to lead screw Z — eliminates Z binding from shaft misalignment",
     "Tooth Profile": "N/A",
@@ -447,16 +773,15 @@
     "Vendor 1 Name": "Fabreeko",
     "Name": "Oldham Coupler",
     "Type": "Coupler",
-    "Vendor 1 URL": "https://fabreeko.com",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/mini-oldham-leadscrew-wobblers-by-mandalarose",
     "Brand": "Generic",
-    "Price (USD)": 5,
+    "Price (USD)": 58.99,
     "Pros": "Allows lateral float between motor shaft and lead screw — corrects for inevitable misalignment in assembled frames\nWithout Oldham couplers, misalignment binds Z and causes Z banding artifacts\nCheap, reliable, and non-negotiable on lead screw Z builds",
     "Slug": "oldham-coupler",
     "Rail Profile": "N/A"
   },
   {
     "id": "recyStrlO1KwMrFuQ",
-    "Brand Tier": "OEM",
     "Description": "Hiwin MGN9H is the reference standard for linear motion in prosumer CoreXY printers. The 9mm profile is used on XY axes where low mass matters (Voron 0.2 on all axes, V2.4 and Trident on the X carriage). H carriages have factory-set preload that is consistent and reliable. All clone rail quality is benchmarked against Hiwin performance.",
     "Verdict Label": "The OEM reference standard — tight tolerances, consistent preload, zero quality lottery",
     "Tooth Profile": "N/A",
@@ -468,15 +793,31 @@
       "Voron Trident",
       "VzBot"
     ],
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "OneTwo3D",
     "Name": "Hiwin MGN9H Linear Rail",
     "Carriage Type": "MGN9H",
     "Type": "Linear Rail",
-    "Vendor 1 URL": "https://fabreeko.com",
+    "Vendor 1 URL": "https://www.onetwo3d.co.uk/product/hiwin-mg-series-miniature-linear-rails/",
     "Brand": "Hiwin",
     "Pros": "Factory-set preload is consistent across the carriage — no binding at any point on the rail\nH carriage (high preload) provides rigidity without being over-constrained\nTight machining tolerances — Hiwin is the benchmark all clone rails are measured against\nSatisfied community documentation goes back years — well-understood failure modes",
     "Slug": "hiwin-mgn9h-linear-rail",
     "Rail Profile": "MGN9",
     "Material": "Stainless"
+  },
+  {
+    "id": "reczRjI1aGzWHjvt1",
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "V-Core 3 Ballscrews Kit SFU1204",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/kit-vcore3-vis-a-bille-sfu1204",
+    "Price (USD)": 233.96,
+    "Slug": "v-core-3-ballscrews-kit-sfu1204"
+  },
+  {
+    "id": "reczz0LMM6udnullb",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "GTC-19X26 High Vibration Damping Rubber Coupling",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/gtc-19x26-high-vibration-damping-rubber-coupling",
+    "Price (USD)": 28.99,
+    "Slug": "gtc-19x26-high-vibration-damping-rubber-coupling"
   }
 ]

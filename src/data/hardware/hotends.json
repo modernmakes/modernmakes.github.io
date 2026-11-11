@@ -268,6 +268,34 @@
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
+    "id": "recEKccmC5iKMTO4D",
+    "Vendor 1 Name": "DigitMakers",
+    "Name": "Chimera",
+    "Slug": "chimera",
+    "Vendor 1 URL": "https://www.digitmakers.ca/collections/mechanical-3d-printing-canada-components-3d-printer-filaments-ca/products/e3d-chimera-2-in-2-out-extrusion",
+    "Brand": "E3D",
+    "Price (USD)": 126.6,
+    "Updated": "2026-11-11T10:43:00.000Z"
+  },
+  {
+    "id": "recGr8JtqZl2cA7CE",
+    "Vendor 1 Name": "NorthPrint3D",
+    "Name": "Takoto",
+    "Slug": "takoto",
+    "Vendor 1 URL": "https://northprint3d.ca/product/takoto-hotend/",
+    "Price (USD)": 105.51,
+    "Updated": "2026-11-11T10:43:06.000Z"
+  },
+  {
+    "id": "recHlqoAW1fzMXiU1",
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "Omni 500",
+    "Slug": "omni-500",
+    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/omni-500-hotend",
+    "Price (USD)": 439.98,
+    "Updated": "2026-11-11T10:43:09.000Z"
+  },
+  {
     "id": "recII7ukzgt2G3hsF",
     "Cons": "Requires water cooling — significant setup complexity vs air-cooled hotends\nCurrently SOLD OUT ($220 USD)\nExtremely small production runs (21 units in last batch)\nSolo operator — support and supply are unpredictable\nThermal conductivity ~50 W/mK (steel) — requires MPC control for best results\nLimit heater to 80W during initial heat-up to prevent discoloration\nNo published max flow data",
     "Compatible Printers": [
@@ -286,10 +314,14 @@
     "Heater Type": "Ø6x cartridge (20–35mm)",
     "Heat Block": "Steel, water-cooled block with barb fittings (3mm / 1/8\" tubing)",
     "Image URL": "/media/hardware/hotends/v9.webp",
+    "Compatible Toolheads": [
+      "Dragon Burner",
+      "Stealthburner (Dragon printhead)"
+    ],
     "Thermistor": "Custom Ø3x15mm cartridge",
     "Vendor 1 Name": "V9 Hotend (direct, via email)",
-    "Name": "V9 Hotend v9.2",
-    "Slug": "v9-hotend-v9-2",
+    "Name": "V9.2",
+    "Slug": "v9-2",
     "Type": "Liquid Cooled",
     "Vendor 1 URL": "https://www.v9hotend.com/",
     "Brand": "V9 Hotend",
@@ -297,7 +329,7 @@
     "Heat Break": "Steel, Ø2.00mm bore, proprietary hardened surface",
     "Price (USD)": 220,
     "Pros": "All-steel construction with proprietary hardened surface — harder than abrasive filament fiber, never wears\nMeltzone dimensions remain constant after 1000kg of filled filament\n550°C max temp — highest of any currently available hotend\n39.5mm meltzone length enables extremely high flow rates\nSpring rate >1500N/mm — exceptionally stiff, eliminates flex artifacts\nStandard M6x1 nozzle thread, 4x M3 Ø16mm mounting (Voron standard)\nFree integration STEP/STL files on website",
-    "Updated": "2026-11-05T08:24:40.000Z"
+    "Updated": "2026-11-11T10:58:46.000Z"
   },
   {
     "id": "recMt0kXFBBWHxwRQ",
@@ -335,6 +367,23 @@
     "Price (USD)": 79.99,
     "Pros": "25g — E3D's lightest hotend\nRapidChange nozzles changed cold by hand, no tools, no leaks\nHeaterCore heats in seconds, PTC safety (power drops as it gets hotter)\nDeveloped with Team Voron for the StealthBurner",
     "Updated": "2026-11-06T09:49:34.000Z"
+  },
+  {
+    "id": "recMxi02KiBC6XTwA",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "DigitMakers",
+    "Name": "Lite6",
+    "Slug": "lite6",
+    "Vendor 1 URL": "https://www.digitmakers.ca/products/genuine-e3d-lite6-direct-hotend-kit-1-75mm-universal",
+    "Brand": "E3D",
+    "Price (USD)": 37.98,
+    "Updated": "2026-11-11T10:58:25.000Z"
   },
   {
     "id": "recPc9uC0INefKqim",
@@ -446,6 +495,22 @@
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
+    "id": "recQz6z6nAL2MCtlS",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "Copperhead",
+    "Slug": "copperhead",
+    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/copperhead-hotends",
+    "Price (USD)": 124.99,
+    "Updated": "2026-11-11T10:58:24.000Z"
+  },
+  {
     "id": "recRTlhOsk8R0530r",
     "Cons": "Sold as a multi-variant kit page — full-kit price not clearly listed\nNo verified full hotend weight published\nConstruction type not confirmed as all-metal by any source",
     "Compatible Printers": [
@@ -474,6 +539,47 @@
     "Updated": "2026-11-06T09:49:34.000Z"
   },
   {
+    "id": "recRbTxxDtpmhcwlH",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL"
+    ],
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "Mosquito Conduct",
+    "Slug": "mosquito-conduct",
+    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/mosquito-conduct",
+    "Price (USD)": 199.99,
+    "Updated": "2026-11-11T10:58:42.000Z"
+  },
+  {
+    "id": "recS6EG4Te665LCNB",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner"
+    ],
+    "Vendor 1 Name": "BRS Engineering",
+    "Name": "Dragon Ultra CF",
+    "Slug": "dragon-ultra-cf",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-edition-dragon-ultra-cf",
+    "Price (USD)": 239.53,
+    "Updated": "2026-11-11T10:58:29.000Z"
+  },
+  {
+    "id": "recU3eoBgpOl4hKoL",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Mosquito",
+    "Slug": "mosquito",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/copy-of-slice-engineering-50w-heater-cartridge-24v",
+    "Price (USD)": 149.99,
+    "Updated": "2026-11-11T10:58:35.000Z"
+  },
+  {
     "id": "recVpyq77QoLXjXZL",
     "Cons": "Not released yet — Q3/Q4 2026, currently in beta\nPCB rated to only 80°C; load cell to 150°C (enclosure/thermal considerations)\nInitial toolhead support limited to Stealthburner; A4T/Archetype are community efforts\nMax-flow and PA calibration features are 'coming soon,' not shipping\nSource files not fully published until out of beta",
     "Compatible Printers": [
@@ -487,13 +593,13 @@
       "Stealthburner"
     ],
     "Vendor 1 Name": "Not yet available (beta)",
-    "Name": "Amplify Hotend",
-    "Slug": "amplify-hotend",
+    "Name": "Amplify",
+    "Slug": "amplify",
     "Type": "All-metal",
     "Brand": "Amplify",
     "Heat Break": "E3D Revo (native); V6/Volcano via Hemera heat break",
     "Pros": "Integrated load cell enables probing, clog detection, and force-based PA/max-flow calibration\nNative Kalico integration, no plugins\nClaimed probe accuracy 0.8–4 microns; works on any bed surface\nNo Z-offset calibration or temperature drift in enclosed printers\nE3D Revo compatible; 320Hz sampling; standalone USB (STM32); fully open source",
-    "Updated": "2026-11-05T08:24:51.000Z"
+    "Updated": "2026-11-11T10:36:47.000Z"
   },
   {
     "id": "recWyx2Kh3TM6cYgE",
@@ -592,6 +698,20 @@
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
     "Updated": "2026-11-05T08:24:58.000Z"
+  },
+  {
+    "id": "recZfHibPiZ5iC7fs",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Mosquito Magnum+",
+    "Slug": "mosquito-magnum",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/slice-engineering-the-mosquito-magnum-®-hot-end",
+    "Price (USD)": 249.99,
+    "Updated": "2026-11-11T10:58:39.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -694,6 +814,23 @@
     "Updated": "2026-11-05T08:25:01.000Z"
   },
   {
+    "id": "receUb8AHcB88xaQB",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "E3D Online",
+    "Name": "V6",
+    "Slug": "v6",
+    "Vendor 1 URL": "https://e3d-online.com/products/v6-all-metal-hotend",
+    "Brand": "E3D",
+    "Price (USD)": 89.21,
+    "Updated": "2026-11-11T10:58:19.000Z"
+  },
+  {
     "id": "receweeDHYJK3WSu6",
     "Cons": "Community reports of heat creep and poor PLA performance vs the genuine Mosquito\nMarketed at Ender/CR-10/Prusa upgrades, not hobbyist builds (needs community mounts)\nNo published max flow, weight, or thermistor spec\nHeater/thermistor inclusion unstated at $26",
     "Compatible Printers": [
@@ -722,6 +859,20 @@
     "Updated": "2026-11-06T09:49:35.000Z"
   },
   {
+    "id": "recf0c4BD2oyc5jZQ",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Mosquito Magnum",
+    "Slug": "mosquito-magnum",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/slice-engineering-the-mosquito-magnum-®-hotend",
+    "Price (USD)": 174.99,
+    "Updated": "2026-11-11T10:58:37.000Z"
+  },
+  {
     "id": "rech7SSLjkyKP1SzQ",
     "Cons": "Limited community build data vs Goliath line, price and detailed specs not available from product page (JS-rendered), niche product for large-format builds",
     "Compatible Printers": [
@@ -745,6 +896,20 @@
     "Updated": "2026-11-06T09:49:35.000Z"
   },
   {
+    "id": "reciRNDlTl1q8PEPR",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Dragon UHF",
+    "Slug": "dragon-uhf",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/phaetus-dragon-uhf",
+    "Brand": "Phaetus",
+    "Price (USD)": 74.99,
+    "Updated": "2026-11-11T10:58:27.000Z"
+  },
+  {
     "id": "recs3UEj9CCrYKDsT",
     "Cons": "Longer heat block can cause stringing with slow retraction, requires Volcano nozzles (larger selection than V6 but still limited), community price page returned 404 — price needs verification",
     "Compatible Printers": [
@@ -765,6 +930,13 @@
     "Heater Type": "MCH Ceramic",
     "Heat Block": "CHC WR (Wear Resistant)",
     "Image URL": "/media/hardware/hotends/chc-xl.webp",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
     "Vendor 2 Name": "Geekbuying",
     "Vendor 3 Name": "Trianglelab",
     "Thermistor": "PT1000",
@@ -778,7 +950,64 @@
     "Heat Break": "Patented multiple thermal break design; monolithic construction",
     "Price (USD)": 83.99,
     "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
-    "Updated": "2026-11-06T09:49:36.000Z"
+    "Updated": "2026-11-11T10:58:44.000Z"
+  },
+  {
+    "id": "rectR1zHFE0rg1EkP",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "90 Degree Hotend",
+    "Slug": "90-degree-hotend",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/positron-v3-2-ldo-kit-90-degree-hot-end-kit",
+    "Price (USD)": 74.99,
+    "Updated": "2026-11-11T10:43:07.000Z"
+  },
+  {
+    "id": "recvWDTnHlysl79Tc",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "NexG",
+    "Slug": "nexg",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/phaetus-nexg-hotend",
+    "Brand": "Phaetus",
+    "Price (USD)": 99.99,
+    "Updated": "2026-11-11T10:58:31.000Z"
+  },
+  {
+    "id": "recwDsERGqQwL5Egq",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL"
+    ],
+    "Vendor 1 Name": "Slice Engineering",
+    "Name": "Mosquito Liquid",
+    "Slug": "mosquito-liquid",
+    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/mosquito-liquid",
+    "Price (USD)": 189.99,
+    "Updated": "2026-11-11T10:58:41.000Z"
+  },
+  {
+    "id": "recxad9vquG9vyyHz",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "neXt G Fiber",
+    "Slug": "next-g-fiber",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/dropeffect-next-g-fiber-extreme-gradient-hotend-by-phaetus",
+    "Brand": "Phaetus",
+    "Price (USD)": 99.99,
+    "Updated": "2026-11-11T10:58:33.000Z"
   },
   {
     "id": "recy7WC7NNzNHzUqW",
@@ -849,6 +1078,11 @@
     "Heater Type": "60W Ceramic",
     "Heat Block": "Copper Alloy",
     "Image URL": "/media/hardware/hotends/rapido-x.webp",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "XOL",
+      "Dragon Burner"
+    ],
     "Vendor 2 Name": "ANTINSKY",
     "Vendor 3 Name": "OneTwo3D",
     "Thermistor": "PT1000",
@@ -862,7 +1096,7 @@
     "Heat Break": "Stainless Steel + Endcoat Coating",
     "Price (USD)": 93.45,
     "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation",
-    "Updated": "2026-11-06T09:49:36.000Z"
+    "Updated": "2026-11-11T10:58:21.000Z"
   },
   {
     "id": "reczz9oIVsXB06Bg1",

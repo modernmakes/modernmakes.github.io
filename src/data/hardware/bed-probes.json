@@ -2,11 +2,13 @@
   {
     "id": "rec2v7ZQqsoluFtSt",
     "Verdict": "Bleeding Edge",
+    "Accuracy (mm)": "Unknown",
     "Price (USD)": 28.99,
     "Pros": "Automatic PA calibration with no test print, using a direct force measurement\nDoubles as a high-precision nozzle-contact probe (drop-in Z- endstop)\nOpen source (MIT), roughly $30, and stocked by community vendors\nMounting footprint compatible with E3D and Voron toolhead ecosystems\nUSB or I2C; works with Klipper and RepRapFirmware (community plugin)",
     "Slug": "bd-pressure",
     "Description": "An open-source (MIT) strain-gauge sensor from Mark Niu / PandaPi3D that measures extruder pressure directly to derive the optimal Pressure Advance value without printing a calibration pattern. The same hardware works as a switch-type nozzle-contact probe on the Z- endstop pin, and connects to Klipper over USB or I2C. Uses a BF350 350Ω strain gauge mounted zero-distance to its PCB for EMI immunity.",
     "Verdict Label": "A ~$30 strain-gauge module that auto-calibrates Pressure Advance without a test print and doubles as a nozzle probe.",
+    "Klipper Native": true,
     "Cons": "Requires wiring and Klipper module setup — not plug-and-play\nCalibration algorithm is still experimental and evolving\nOften sold out at Western vendors\nNo published accuracy spec for the PA result",
     "Open Source": true,
     "Installation Complexity": "Medium",
@@ -44,22 +46,40 @@
   },
   {
     "id": "rec70MV90NtUlGmq3",
+    "Accuracy (mm)": "Unknown",
     "Price (USD)": 13.75,
-    "Slug": "mellow-alps-pressure-sensor-module-for-goliath-hotend-auto-z-homing-mesh-bed-leveling",
+    "Slug": "alps-pressure-sensor-module",
     "Description": "ALPS pressure module for Goliath hotends that enables automatic Z-axis homing and mesh bed leveling through real-time pressure sensing. Based on the high-sensitivity ADS131M02 sensor, it detects nozzle-to-bed contact with high precision, mounts directly on top of the heatsink in CNC aluminum, and needs no Z-offset recalibration after a nozzle change.",
     "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2604/30/products/76bd6e8490.jpg",
+    "Klipper Native": true,
     "Vendor 1 Name": "3D Mellow",
-    "Name": "Mellow ALPS Pressure Sensor Module for Goliath Hotend (Auto Z Homing Mesh Bed Leveling)",
+    "Name": "ALPS Pressure Sensor Module",
     "Type": "Nozzle Contact",
     "Vendor 1 URL": "https://3dmellow.com/products/goliath-alps-module-pressure-sensor",
     "Brand": "Mellow 3D"
+  },
+  {
+    "id": "rec9Q3K0ocZ2e6B5Z",
+    "Price (USD)": 28.99,
+    "Slug": "bd-sensor-m",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "BD Sensor M",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/bd-sensor-m-realtime-eddy-current-sensor"
+  },
+  {
+    "id": "recDF8v2ZZr5Qygzd",
+    "Price (USD)": 14.99,
+    "Slug": "super-pinda",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "Super Pinda",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/super-pinda-by-fysetc"
   },
   {
     "id": "recFWD12nFASMSZuG",
     "Verdict": "Bleeding Edge",
     "Accuracy (mm)": "Accuracy not published; ADXL345-based; probe specs unconfirmed",
     "Pros": "Integrates ADXL345 accelerometer with eddy current probe functionality; BTT-ecosystem-adjacent with Fly3D CAN toolhead boards; Klipper native; compact form factor suited to Fly SHT and SB2040-series toolhead boards",
-    "Slug": "mellow-fly-adxl",
+    "Slug": "fly-adxl",
     "Updated": "2026-06-27",
     "Description": "ADXL345-based probe module from Mellow (Fly3D), a Chinese Klipper hardware manufacturer. Mellow produces CAN toolhead boards (Fly-SHT36, Fly-SB2040) that include integrated ADXL345 sensors. The Fly-ADXL product combines accelerometer (for input shaping) with probe functionality for bed meshing. Details on standalone probe performance are sparse in Western community sources. Requires verification against current Mellow product lineup before recommending — Mellow's product naming evolves rapidly.",
     "Verdict Label": "Niche Klipper ecosystem option; limited English documentation — needs verification",
@@ -72,7 +92,7 @@
     ],
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "Mellow / Fly3D",
-    "Name": "Mellow Fly ADXL",
+    "Name": "Fly ADXL",
     "Type": "Eddy Current",
     "Vendor 1 URL": "https://www.aliexpress.com/store/1069528",
     "Brand": "Mellow / Fly3D"
@@ -83,7 +103,7 @@
     "Accuracy (mm)": "Eddy current displacement; accuracy not independently published by BTT",
     "Price (USD)": 26.99,
     "Pros": "Budget-friendly eddy current in the BTT ecosystem; USB and CAN bus versions available; integrates with BTT toolhead boards; Klipper support via BTT's open source firmware; competitive price vs Cartographer",
-    "Slug": "btt-eddy",
+    "Slug": "eddy",
     "Updated": "2026-06-27",
     "Description": "BTT's eddy current displacement sensor for bed meshing and homing. Part of BigTreeTech's ecosystem of Klipper hardware. Available in USB and CAN variants. Targets the same use case as Beacon and Cartographer at a budget price point. BTT maintains open source firmware. Community adoption is growing but lags significantly behind Beacon RevH and Cartographer V3/V4 in documented installations and community guides. Requires conductive bed surface.",
     "Verdict Label": "Budget eddy current option; Cartographer is better established at similar price",
@@ -97,7 +117,7 @@
     ],
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "BIQU / BigTreeTech",
-    "Name": "BTT Eddy",
+    "Name": "Eddy",
     "Type": "Eddy Current",
     "Vendor 1 URL": "https://biqu.equipment/products/btt-eddy-series",
     "Brand": "BigTreeTech"
@@ -207,11 +227,13 @@
   },
   {
     "id": "reck63GTJQyOFScKh",
+    "Accuracy (mm)": "Unknown",
     "Price (USD)": 62.4,
-    "Slug": "mellow-high-flow-fluxheat-v6-alps-hotend-smart-leveling-nozzle-probe-replace-3d-touch",
+    "Slug": "fluxheat-v6-alps-nozzle-probe",
     "Description": "Compact high-performance V6 hotend with a 96W ceramic heater (up to 350 C with PT1000 sensor, over 40 mm3/s flow) that integrates Mellow's ALPS pressure-based bed leveling module, which detects nozzle-to-bed contact via the ADS131M02 sensor for auto Z homing and mesh leveling. V6 nozzle compatible; works with Klipper, Marlin and RRF; sold as a BLTouch/3D Touch replacement for Voron, BLV, VzBot and HevORT DIY printers.",
+    "Klipper Native": true,
     "Vendor 1 Name": "3D Mellow",
-    "Name": "Mellow High Flow FluxHeat V6 ALPS Hotend Smart Leveling Nozzle Probe (Replace 3D Touch)",
+    "Name": "FluxHeat V6 ALPS Nozzle Probe",
     "Type": "Nozzle Contact",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-high-flow-fluxheat-v6-alps-hotend-smart-leveling-nozzle-probe-for-voron-blv-vzbot-hevort-diy-3d-printer-replace-3d-touch",
     "Brand": "Mellow 3D"
@@ -239,6 +261,15 @@
     "Type": "Optical",
     "Vendor 1 URL": "https://www.creality.com/products/cr-touch-auto-leveling-kit",
     "Brand": "Creality"
+  },
+  {
+    "id": "recq2HYJwSv3QxCGF",
+    "Price (USD)": 46.74,
+    "Slug": "pz-probe",
+    "Vendor 1 Name": "E3D Online",
+    "Name": "PZ Probe",
+    "Vendor 1 URL": "https://e3d-online.com/products/pz-probe",
+    "Brand": "E3D"
   },
   {
     "id": "reczSuDbczbQtYGD0",

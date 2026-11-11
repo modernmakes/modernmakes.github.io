@@ -1,8 +1,24 @@
 [
   {
+    "id": "recBgEGMwtd5dAvHp",
+    "Slug": "ultra-light-x-beam-backers",
+    "Price (USD)": 10.99,
+    "Name": "Ultra Light X Beam Backers",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ultra-light-x-beam-backers"
+  },
+  {
+    "id": "recCSn2AeuBowZ59j",
+    "Slug": "cnc-xy-joint-lwe-kit",
+    "Price (USD)": 99,
+    "Name": "CNC XY Joint LWE Kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-cnc-xy-joint-lwe-kit-by-chatoiclab"
+  },
+  {
     "id": "recDvOnRiej9rHz2R",
     "Verdict": "BUY",
-    "Slug": "brs-x-gantry-cf-tube-v-core-4",
+    "Slug": "x-gantry-cf-tube-v-core-4",
     "Price (USD)": 67.4,
     "Pros": "Dramatically reduced X-axis moving mass vs aluminum extrusion\nHollow CF tube provides excellent vibration damping\nOpen-source printed end brackets (PA12-CF available from BRS)\nOfficial RatRig partnership — confirmed compatibility\nSignificant resonance improvement for high-speed printing",
     "Printed Parts Required": true,
@@ -16,15 +32,31 @@
     "Compatible Printers": [
       "RatRig V-Core 4"
     ],
-    "Name": "BRS X-Gantry CF Tube — V-Core 4",
+    "Name": "X-Gantry CF Tube — V-Core 4",
     "Vendor 1 Name": "BRS Engineering",
     "Material": "Carbon Fiber",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/x-gantry-tube",
     "Brand": "BRS Engineering"
   },
   {
+    "id": "recSPPa2jsGlxEhkm",
+    "Slug": "carbonara-cf-tube",
+    "Price (USD)": 59.99,
+    "Name": "Carbonara CF Tube",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/carbonara-cf-tube-for-voron-printers"
+  },
+  {
+    "id": "recUx6BafS24MU0Mj",
+    "Slug": "x-gantry-v-core-3-1-wide-boy",
+    "Price (USD)": 138.15,
+    "Name": "X-Gantry — V-Core 3.1 Wide Boy",
+    "Vendor 1 Name": "BRS Engineering",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-vcore-3-0-3-1-wide-boy"
+  },
+  {
     "id": "recVL62LG5BMckD5e",
-    "Slug": "mellow-custom-vzbot-x-gantry-rail-square-tube-lightweight-high-flatness-vzbot-235-330",
+    "Slug": "x-gantry-square-tube-vzbot-235-330",
     "Price (USD)": 31,
     "Drop-in Replacement": true,
     "Description": "Mellow's redesigned X-axis aluminum square tube for the VzBoT 235/330, machined from 23mm stock down to 21mm at the ends and 20mm in the middle for flatness within +/-0.1mm. The revised design avoids thread damage from the guide rail screws and provides better fastening force; it is stress tested and authorized by the VzBoT team.",
@@ -33,16 +65,23 @@
     "Compatible Printers": [
       "VzBot"
     ],
-    "Name": "Mellow Custom VZBOT X-Gantry Rail Square Tube Lightweight High Flatness (VzBoT 235/330)",
+    "Name": "X-Gantry Square Tube (VzBoT 235/330)",
     "Vendor 1 Name": "3D Mellow",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-custom-vzbot-x-gantry-rail-square-tube-lightweight-high-flatness-suitable-for-vzbot-235-330-3d-printer",
     "Brand": "Mellow 3D"
   },
   {
+    "id": "recY8iQZfRsH5phzq",
+    "Slug": "carbon-gantry-bar-v2-4",
+    "Price (USD)": 38.99,
+    "Name": "Carbon Gantry Bar — V2.4",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-v2-4-carbon-gantry-bar-for-350mm-by-fysetc"
+  },
+  {
     "id": "recceKxa8EdT0RbDB",
     "Verdict": "BUY",
     "Slug": "titanium-backers",
-    "Price (USD)": 40,
     "Pros": "Eliminates gantry bow caused by differential thermal expansion between aluminum extrusion and steel linear rails — a real and measurable print quality issue at chamber temp\nTitanium’s coefficient of thermal expansion closely matches the linear rail steel — this is why titanium specifically, not aluminum\nSold pre-cut by Fabreeko, KB3D, and others — hardware-only installation, no printing required\nWidely considered mandatory by experienced V2.4 builders running enclosed hot chambers",
     "Weight (g)": 203.3,
     "Drop-in Replacement": true,
@@ -67,8 +106,7 @@
   {
     "id": "recd0P7ci7ZQ72sYb",
     "Verdict": "BUY",
-    "Slug": "spannsysteme-x-gantry-v-core-3",
-    "Price (USD)": 40,
+    "Slug": "x-gantry-v-core-3",
     "Pros": "Precision EN AW-7075 extrusion replacement\nSignificant weight reduction vs stock 2020 extrusion (68–119g depending on size)\nDrop-in fit, no additional hardware needed\n±0.01mm machining tolerances\nMade in Austria, QA-certified",
     "Weight (g)": 86,
     "Updated": "2026-06-29",
@@ -81,7 +119,7 @@
     "Compatible Printers": [
       "RatRig V-Core 3"
     ],
-    "Name": "Spannsysteme X-Gantry — V-Core 3",
+    "Name": "X-Gantry — V-Core 3",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Material": "Aluminum 7075",
     "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
@@ -90,7 +128,7 @@
   {
     "id": "recfk8NiHZrS0djeH",
     "Verdict": "BUY",
-    "Slug": "spannsysteme-x-gantry-voron-2-4-r2-trident",
+    "Slug": "x-gantry-voron-2-4-r2-trident",
     "Price (USD)": 73,
     "Pros": "Precision EN AW-7075 X-beam replacement\nDrop-in installation, no printed parts needed\nAvailable for all Voron 2.4 build sizes (330/380/430mm)\nMade in Austria",
     "Updated": "2026-06-29",
@@ -104,7 +142,7 @@
       "Voron 2.4 R2",
       "Voron Trident"
     ],
-    "Name": "Spannsysteme X-Gantry — Voron 2.4 R2/Trident",
+    "Name": "X-Gantry — Voron 2.4 R2/Trident",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Material": "Aluminum 7075",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-voron-2-4-r2-trident",
@@ -113,8 +151,7 @@
   {
     "id": "recftNkczLVdpTr0Q",
     "Verdict": "CONSIDER",
-    "Slug": "brs-x-gantry-cf-tube-v-core-3-wide-boy-oss",
-    "Price (USD)": 0,
+    "Slug": "x-gantry-cf-tube-v-core-3-wide-boy",
     "Pros": "Fully open source — download and print for free\nCF tube can be self-sourced for lower cost\nCommunity-proven Wide Boy design",
     "Printed Parts Required": true,
     "Updated": "2026-06-29",
@@ -128,17 +165,57 @@
     "Compatible Printers": [
       "RatRig V-Core 3"
     ],
-    "Name": "BRS X-Gantry CF Tube — V-Core 3 Wide Boy (OSS)",
+    "Name": "X-Gantry CF Tube — V-Core 3 Wide Boy",
     "Vendor 1 Name": "BRS Engineering (open source)",
     "Material": "Carbon Fiber",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/x-gantry-tube",
     "Brand": "BRS Engineering"
   },
   {
+    "id": "recgltV1eGzODuOWb",
+    "Slug": "hula-halo",
+    "Price (USD)": 830.01,
+    "Name": "Hula Halo",
+    "Vendor 1 Name": "NorthPrint3D",
+    "Vendor 1 URL": "https://northprint3d.ca/product/hula-halo-for-annex-engineering-k3/"
+  },
+  {
+    "id": "recjJ2YdElI9enFxs",
+    "Slug": "lightweight-gantry-v-core-3-1",
+    "Price (USD)": 94.99,
+    "Name": "Lightweight Gantry — V-Core 3.1",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ratrig-v-core-3-1-light-weight-gantry-by-spanner-systeme",
+    "Brand": "Spannsysteme"
+  },
+  {
+    "id": "recrjLYBuF9wx6DwZ",
+    "Slug": "ultra-light-x-beam-with-aluminum-xy-joints",
+    "Price (USD)": 139.99,
+    "Name": "Ultra Light X Beam with Aluminum XY Joints",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ultra-light-x-beam-with-aluminum-xy-joints-by-common-anomaly"
+  },
+  {
+    "id": "rectBR0he7l4w31Z1",
+    "Slug": "carbonara-cf-tube-hardware-kit",
+    "Price (USD)": 49.99,
+    "Name": "Carbonara CF Tube Hardware Kit",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-hardware-kit-for-carbonara-cf-tubes-voron"
+  },
+  {
+    "id": "recw590GAH6urWqlT",
+    "Slug": "reinforced-gantry-mounts",
+    "Price (USD)": 16.99,
+    "Name": "Reinforced Gantry Mounts",
+    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/reinforced-gantry-mounts-for-v2-4-redoubt-by-annex-engineering"
+  },
+  {
     "id": "recx26cUqRaONqo2c",
     "Verdict": "BUY",
-    "Slug": "spannsysteme-x-gantry-v-core-4",
-    "Price (USD)": 40,
+    "Slug": "x-gantry-v-core-4",
     "Pros": "Precision EN AW-7075 machined X-beam replacement\nLighter than stock V-Core 4 X-axis extrusion\nDrop-in replacement, no additional hardware needed\nMade in Austria, QA-certified",
     "Updated": "2026-06-29",
     "Drop-in Replacement": true,
@@ -150,7 +227,7 @@
     "Compatible Printers": [
       "RatRig V-Core 4"
     ],
-    "Name": "Spannsysteme X-Gantry — V-Core 4",
+    "Name": "X-Gantry — V-Core 4",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Material": "Aluminum 7075",
     "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
