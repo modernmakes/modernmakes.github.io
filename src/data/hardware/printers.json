@@ -209,6 +209,37 @@
     "Brand": "Voron Design"
   },
   {
+    "id": "recXyr3sSzgHFKPGq",
+    "Slug": "tiny-m",
+    "Build Volume": "150×150×150mm",
+    "Description": "A compact open-source printer based on the Voron V0, scaled up to 2020 aluminium extrusions and NEMA 17 motors, with a 150mm³ build volume. It is a self-sourced design with no commercial kit and no detailed build manual (builders follow the Voron V0 manual). The project halted in August 2023 and the repository is archived.",
+    "Name": "Tiny-M",
+    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Type": "CoreXY",
+    "Vendor 1 URL": "https://github.com/gsl12/Tiny-M"
+  },
+  {
+    "id": "recabPUOXnyn6gzOy",
+    "Slug": "salad-fork",
+    "Build Volume": "120 / 160 / 180mm X/Y; 150mm Z on the 180mm size (SimplyPrint); Z unpublished for 120/160mm",
+    "Description": "The Salad Fork is a from-scratch, open-source printer from PrintersForAnts that scales the Voron Trident down to a 1515-extrusion frame, using a triple-leadscrew bed mount that enables automatic bed leveling with Klicky. It supports 120mm, 160mm or 180mm build sizes, with Klicky probing by default and the mini-StealthBurner as the default toolhead.",
+    "Name": "Salad Fork",
+    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Type": "CoreXY",
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/Salad_Fork"
+  },
+  {
+    "id": "recbkLxVSVEGxLNYN",
+    "Slug": "tiny-t",
+    "Build Volume": "150×150×150mm",
+    "Enclosure": true,
+    "Description": "A Voron Trident scaled down to a 150mm³ build volume, built on 2020 extrusions with a triple-leadscrew Z bed (3x V0.1 Z steppers with 150mm leadscrews). A self-sourced, open-source PrintersForAnts design with no commercial kit.",
+    "Name": "Tiny-T",
+    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Type": "CoreXY",
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/TinyT"
+  },
+  {
     "id": "recfiADI50XRoZi2Q",
     "Slug": "positron-v3-2",
     "Price (USD)": 649.99,
@@ -297,5 +328,16 @@
     "Name": "Rook MK1",
     "Vendor 1 Name": "Fabreeko",
     "Vendor 1 URL": "https://www.fabreeko.com/products/rook-mk1-by-rolohaun-3d"
+  },
+  {
+    "id": "recx2CIwN2JVC0XKd",
+    "Slug": "micron-120",
+    "Build Volume": "120×120×115mm",
+    "Description": "A from-scratch Printers for Ants community build that scales the Voron 2.4 design down onto 1515 extrusion, with a flying gantry and quad-gantry leveling. The original 120x120mm size is the smaller sibling of the later 180mm Micron+; it is a self-sourced open design with no LDO full kit, built from the official BOM.",
+    "Available Sizes": "120×120mm; 180×180mm (Micron+)",
+    "Name": "Micron 120",
+    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Type": "CoreXY",
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/Micron"
   }
 ]

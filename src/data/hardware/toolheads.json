@@ -1,11 +1,20 @@
 [
   {
     "id": "rec1au4XXS78j7kxJ",
+    "Included Extruder": "None (not included — Sherpa Mini/Micro, LGX Lite/Lite Pro via new K3rabiner; DFA supported)",
+    "Pros": "Nearly full-metal construction with generatively designed SLM bracing for stiffness; optional inverted Y-rail so one spacer set fits any rail thickness; new K3rabiner mount widens extruder compatibility (incl. DFA); fits super-wide rail backers",
     "Name": "Toolhead v2",
-    "Price (USD)": 68.93,
+    "Included Hotend": "None (not included — Chube Conduction or Chube Air only)",
+    "Price (USD)": 77.74,
+    "Hotend Mount Style": "Custom",
+    "Source URL": "https://github.com/MathematicalPotato/MP_DooKi3_Toolhead_V2",
+    "Description": "Updated version of MathematicalPotato's DooKi3 metal toolhead for the Annex Engineering K3: nearly full-metal construction with SLM generative bracing, optional inverted Y-rail configuration and a new K3rabiner PCB mount. Hula-compatible; Chube Air/Conduction only. Price: $77.74 (NorthPrint3D kit, 110.74 CAD).",
     "Vendor 1 Name": "https://northprint3d.ca/product/mathematicalpotato-toolhead-v2-for-annex-engineering-k3-hula-compatible/",
-    "Updated": "2026-11-11T10:43:02.000Z",
-    "Slug": "toolhead-v2"
+    "Cons": "Preorder only (ends 15 Nov 2026, ~60-day wait); Chube-only; extruder, hotend, fans, toolboard and printed parts all extra; SLM version costs more than the cheaper fan-plate version",
+    "Verdict": "Consider",
+    "Updated": "2026-11-12T10:56:10.000Z",
+    "Slug": "toolhead-v2",
+    "Type": "Toolhead Kit"
   },
   {
     "id": "rec3aDajj9kXobN8u",
@@ -106,13 +115,14 @@
     "Name": "Archetype",
     "Included Hotend": "Multiple via modular mount system",
     "Brand / Designer": "Armchair Heavy Industries",
+    "Price (USD)": 26.55,
     "Vendor 2 Name": "https://jb3d.uk/product/archetype-printed-parts-kit-abs-and-pccf/",
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Archetype modular system",
     "Source URL": "https://github.com/Armchair-Heavy-Industries/Archetype",
-    "Description": "Modular community toolhead system for Voron 2.4 and Trident. Designed with a modular architecture allowing hotend, extruder, and fan-duct modules to be swapped independently. Print-it-yourself.",
+    "Description": "Modular community toolhead system for Voron 2.4 and Trident. Designed with a modular architecture allowing hotend, extruder, and fan-duct modules to be swapped independently. Print-it-yourself. Price: $26.55 (JB3D printed-parts kit, cheapest ABS config £20).",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
@@ -120,7 +130,7 @@
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/Archetype",
     "Cons": "Community mod — verify current development status; source URL needs confirmation",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:14.000Z",
+    "Updated": "2026-11-12T10:56:17.000Z",
     "Slug": "archetype",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -129,27 +139,62 @@
   },
   {
     "id": "recAAkFenv7iUefpd",
+    "Included Extruder": "None (not included — Sherpa Mini, Sherpa Micro, Orbiter 2.0/2.5, G2SA; also LGX Lite/Pro, WWBMG per HyperDrive)",
+    "Pros": "CNC-machined aluminium plates clamp the rail block on 3 sides for rigidity and heat dissipation; wide hotend/extruder support; 6 mm and 9 mm belts; Beacon/Cartographer probe support; full CAD + build manual published",
     "Name": "Hypernova",
+    "Included Hotend": "None (not included — Chube Air, Rapido HF/UHF, TZV6 W/MZE, Dragon Ace; also Red Lizard K1 HF/UHF per HyperDrive)",
     "Price (USD)": 150,
+    "Vendor 2 Name": "https://beavertonmilestonehobby.com/products/hypernova",
+    "Hotend Mount Style": "Modular — per-hotend adapter plates",
+    "Source URL": "https://hyperdrivedesign.com/products/Hypernova/hypernova/",
+    "Description": "Next-generation CNC-aluminium print head from HyperDrive Design, inspired by the Xol toolhead. Top and bottom plates clamp the rail block on three sides; supports Chube Air, Rapido HF/UHF, TZV6 and Dragon Ace hotends with Sherpa/Orbiter/G2SA/LGX extruders. Sold as a hardware kit (plates, fans, hardware); printed parts are supplied as STLs or in PPS-CF10.",
     "Vendor 1 Name": "https://www.fabreeko.com/products/hypernova-print-head",
-    "Updated": "2026-11-11T10:42:59.000Z",
-    "Slug": "hypernova"
+    "Cons": "Printed parts not in the box (ABS STLs via Discord, or PPS-CF10 from vendor); Complete Printhead variant sold out at Fabreeko; new/unproven design; Xol-inspired, not a clean-sheet proven platform",
+    "Verdict": "Consider",
+    "Updated": "2026-11-12T10:56:40.000Z",
+    "Slug": "hypernova",
+    "Type": "Toolhead Kit",
+    "Part Cooling Fans": [
+      "Dual 4010"
+    ]
   },
   {
     "id": "recAi7rrlLvN2yrRG",
+    "Included Extruder": "None (not included — user-supplied; compatible with BMG, LGX, LGX Lite, Orbiter 1.5/2.0, Sherpa Mini)",
+    "Pros": "Enormous extruder/hotend/probe compatibility; all probe supports included; PA12-CF printed kit; a price for all variants; long-proven RatRig platform",
     "Name": "EVA 3.0",
+    "Included Hotend": "None (not included — user-supplied; mounts for Rapido, Mosquito/Magnum, Dragon, Revo Voron, BMO, Nova)",
     "Price (USD)": 81.33,
+    "Vendor 2 Name": "https://www.etsy.com/listing/1302913703/rat-rig-v-core-31-eva-302-abs-printed",
+    "Hotend Mount Style": "Modular — per-hotend adapter plates",
+    "Source URL": "https://main.eva-3d.page/",
+    "Description": "EVA 3.0 is Paweł Kucmus's modular CoreXY carriage platform: a printed toolhead system that accepts a wide range of extruders, hotends and cooling setups. BRS sells it as a PA12-CF15 printed-parts kit for VMinion (CoreXY, hex-nut version); extruder, hotend and hardware are user-supplied.",
     "Vendor 1 Name": "https://store.brs-engineering.com/en/products/copie-de-eva-3-0-corexy-nuts",
-    "Updated": "2026-11-11T10:42:57.000Z",
-    "Slug": "eva-3-0"
+    "Cons": "Printed kit only — extruder, hotend and fasteners (M3 nuts not provided) are extra; sold out at BRS at time of check; configuration complexity (many variants)",
+    "Verdict": "Buy",
+    "Updated": "2026-11-12T10:56:39.000Z",
+    "Slug": "eva-3-0",
+    "Type": "Toolhead Kit",
+    "Part Cooling Fans": [
+      "Configurable"
+    ]
   },
   {
     "id": "recK6ZWMiLC8OU8go",
+    "Included Extruder": "None (not included — Sherpa Micro only)",
+    "Pros": "Full-metal toolhead for the K3's wide Hula rail backers; much stiffer than stock with better heat dissipation; purpose-built for high-speed/high-acceleration K3 use",
     "Name": "Hula",
-    "Price (USD)": 47.83,
+    "Included Hotend": "None (not included — Chube Air or Chube Conduction only)",
+    "Price (USD)": 53.94,
+    "Hotend Mount Style": "Custom",
+    "Source URL": "https://northprint3d.ca/product/hula-halo-for-annex-engineering-k3-complete-set/",
+    "Description": "Full new metal toolhead for the Annex Engineering K3, designed by Tiger3DPrinting and Glizzynator to fit the wider Hula steel rail backers. Kit of aluminium plates, SLM parts and hardware; extruder mount, duct and cable mount must be printed. Chube Air/Conduction only, Sherpa Micro only. Price: $53.94 (NorthPrint3D kit, 76.84 CAD).",
     "Vendor 1 Name": "https://northprint3d.ca/product/hula-toolhead-kit-for-annex-engineering-k3/",
-    "Updated": "2026-11-11T10:43:00.000Z",
-    "Slug": "hula"
+    "Cons": "Preorder only (ends 15 Nov 2026, ~60-day wait); Chube-only and Sherpa Micro-only; not recommended for PLA/PETG (no heatsink fan); extruder, hotend, fans and printed parts all extra; dedicated toolboard only planned, timeline uncertain",
+    "Verdict": "Consider",
+    "Updated": "2026-11-12T10:56:05.000Z",
+    "Slug": "hula",
+    "Type": "Toolhead Kit"
   },
   {
     "id": "recQU9XKnRz4FuA8p",
@@ -182,11 +227,23 @@
   },
   {
     "id": "recSaCUFcl60uaDVo",
+    "Included Extruder": "None (not included — with K3rabiner: Sherpa Mini std/mirrored, Sherpa Micro mirrored, LGX Lite Pro; without: DFA and DFA-pattern extruders)",
+    "Pros": "Replaces the K3's printed party plate with rigid 3–3.2 mm aluminium; broad extruder support via K3rabiner/DFA plates; compatible with all K3 hotend and cooling configs; DXFs included to cut your own",
     "Name": "K3 Metal Toolhead",
+    "Included Hotend": "None (not included — Chube Air/Conduction, Slice Mosquito, Dragon)",
     "Price (USD)": 31.65,
+    "Hotend Mount Style": "Custom",
+    "Source URL": "https://github.com/MathematicalPotato/MP_DooKi3_Toolhead_V1/blob/HEAD/README.md",
+    "Description": "Metal toolhead plates for the Annex Engineering K3 (original idea by Cbon, current iteration by MathematicalPotato): three aluminium plates and four spacers replacing the printed party plate. Compatible with Sherpa Mini/Micro, LGX Lite Pro and DFA extruders and with Chube, Mosquito and Dragon hotends.",
     "Vendor 1 Name": "https://northprint3d.ca/product/k3-metal-toolhead-kit/",
-    "Updated": "2026-11-11T10:43:01.000Z",
-    "Slug": "k3-metal-toolhead"
+    "Cons": "Plates + spacers only — everything else (extruder, hotend, fans, printed parts, toolboard) extra; DFA plate needs countersinking for standard Sherpa Micro (not recommended config); NorthPrint3D page currently bot-blocked so live price/stock unverifiable",
+    "Verdict": "Buy",
+    "Updated": "2026-11-12T10:56:42.000Z",
+    "Slug": "k3-metal-toolhead",
+    "Type": "Toolhead Kit",
+    "Part Cooling Fans": [
+      "Configurable"
+    ]
   },
   {
     "id": "recUfYIqUPASq5GwH",
@@ -195,12 +252,14 @@
     "Name": "Dragon Burner V0.2",
     "Included Hotend": "Most standard hotends (Dragon, Rapido HF, Revo Voron, V6, Volcano, and more — not UHF)",
     "Brand / Designer": "chirpy2605",
+    "Price (USD)": 14.99,
+    "Vendor 2 Name": "https://pjotr3dshop.com/products/dragon-burner-toolhead-printed-parts-kit-abs-two-colours",
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Dragon Mount",
     "Source URL": "https://github.com/chirpy2605/voron/tree/main/V0/Dragon_Burner",
-    "Description": "The Dragon Burner v8 is the community-standard lightweight toolhead for Voron V0.2 and Printers for Ants. CFD-tuned dual 4010 blower ducts, hotend cooling via a 3010 fan, and support for an enormous range of hotends and extruders. Mountable to all Voron printers via the Alternative Voron Mounts system.",
+    "Description": "The Dragon Burner v8 is the community-standard lightweight toolhead for Voron V0.2 and Printers for Ants. CFD-tuned dual 4010 blower ducts, hotend cooling via a 3010 fan, and support for an enormous range of hotends and extruders. Mountable to all Voron printers via the Alternative Voron Mounts system. Price: $14.99 (Etsy 3DLabsPrinting printed-parts kit, regular price; no hardware included).",
     "Compatible Printers": [
       "Voron V0.2",
       "Voron Trident",
@@ -212,7 +271,7 @@
     "Vendor 1 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
     "Cons": "V0.2 X-carriage only — V0.1 users must use Dragon Burner v4\nDoes not support UHF hotends (use Rapid Burner instead)",
     "Verdict": "Buy",
-    "Updated": "2026-11-11T10:36:47.000Z",
+    "Updated": "2026-11-12T10:56:21.000Z",
     "Slug": "dragon-burner-v0-2",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -226,13 +285,15 @@
     "Name": "AntHead",
     "Included Hotend": "Dragon-compatible hotend, Revo Voron, Rapido, TZV6 with or without V6 nozzle",
     "Brand / Designer": "PrintersForAnts",
+    "Price (USD)": 18.5,
+    "Vendor 2 Name": "https://west3d.com/products/ant-head-fastener-kit-bdf",
     "Compatible Motion Systems": [
       "CoreXY (micro-format)"
     ],
     "Hotend Mount Style": "V0-format compact mounts",
     "Filament Cutter": true,
     "Source URL": "https://github.com/PrintersForAnts/AntHead",
-    "Description": "Ultra-compact toolhead designed for the Voron V0 ecosystem and other micro-format CoreXY printers. Optimized for the tight constraints of V0 build volumes. Print-it-yourself design, maintained by the PrintersForAnts community mod collective.",
+    "Description": "Ultra-compact toolhead designed for the Voron V0 ecosystem and other micro-format CoreXY printers. Optimized for the tight constraints of V0 build volumes. Print-it-yourself design, maintained by the PrintersForAnts community mod collective. Price: $18.50 (Etsy printed-parts kit, regular price; no hardware included).",
     "Compatible Printers": [
       "Voron V0.1",
       "Voron V0.2",
@@ -242,7 +303,7 @@
     "Vendor 1 Name": "https://github.com/PrintersForAnts/AntHead",
     "Cons": "Limited to micro-format printers; specific source URL needs verification; limited hotend options vs larger toolheads",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:16.000Z",
+    "Updated": "2026-11-12T10:56:15.000Z",
     "Slug": "anthead",
     "Type": "Print-it-yourself",
     "Multi-Material Ready": true,
@@ -257,12 +318,13 @@
     "Name": "Rapid Burner UHF",
     "Included Hotend": "Rapido UHF, Dragon UHF, Goliath Air, Goliath Water",
     "Brand / Designer": "chirpy2605",
+    "Price (USD)": 16.99,
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Dragon Mount",
     "Source URL": "https://github.com/chirpy2605/voron/tree/main/V0/Rapid_Burner",
-    "Description": "The Rapid Burner v8 is the UHF-specific variant of the Dragon Burner for Voron V0.2 and Printers for Ants. Designed exclusively for Rapido UHF, Dragon UHF, Goliath Air, and Goliath Water hotends. Shares the same CFD-tuned v8 duct design as the Dragon Burner.",
+    "Description": "The Rapid Burner v8 is the UHF-specific variant of the Dragon Burner for Voron V0.2 and Printers for Ants. Designed exclusively for Rapido UHF, Dragon UHF, Goliath Air, and Goliath Water hotends. Shares the same CFD-tuned v8 duct design as the Dragon Burner. Price: $16.99 (Etsy 3DLabsPrinting printed-parts kit, regular price; no hardware included).",
     "Compatible Printers": [
       "Voron V0.2",
       "Voron Trident",
@@ -274,7 +336,7 @@
     "Vendor 1 Name": "https://www.etsy.com/listing/1503463243/rapid-burner-latest-version-3d-printed",
     "Cons": "UHF and Goliath hotends only — not for standard or HF hotends\nV0.2 X-carriage only (V0.1 use Rapid Burner v4)\nGoliath nichrome wires require specific routing to avoid stress damage",
     "Verdict": "Buy",
-    "Updated": "2026-11-11T10:36:48.000Z",
+    "Updated": "2026-11-12T10:56:22.000Z",
     "Slug": "rapid-burner-uhf",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -288,13 +350,14 @@
     "Name": "A4T",
     "Included Hotend": "Dragon HF recommended (Triangle Lab ZS-MZE-HF); alternatives Chube Compact, Dragon UHF/UHF-Mini, Dragon Ace, Rapido HF/UHF, NF-Crazy Volcano, Revo-Voron, Bambulab, TZ-V6-2.0",
     "Brand / Designer": "Armchair Heavy Industries (DW-Tas)",
+    "Price (USD)": 11.2,
     "Vendor 2 Name": "https://www.onetwo3d.co.uk/product/a4t-fastener-kit/",
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Custom",
     "Source URL": "https://github.com/Armchair-Heavy-Industries/A4T",
-    "Description": "[A]nother [4]010 [T]oolhead: a single-filament toolhead for Voron front-rail printers built around dual 4010 blower fans, efficient ducts and easy assembly. Multi-material only via optional external Crossbow Filament Cutter and EMU MMU accessories.",
+    "Description": "[A]nother [4]010 [T]oolhead: a single-filament toolhead for Voron front-rail printers built around dual 4010 blower fans, efficient ducts and easy assembly. Multi-material only via optional external Crossbow Filament Cutter and EMU MMU accessories. Price: $11.20 (OneTwo3D A4T fastener/hardware kit; printed parts, fans, hotend and extruder not included).",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
@@ -302,7 +365,7 @@
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/A4T",
     "Cons": "Complex setup requiring MMU system; more bulk than single-material heads; less community support than Jabberwocky; source URL needs verification",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:17.000Z",
+    "Updated": "2026-11-12T10:56:13.000Z",
     "Slug": "a4t",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -338,11 +401,21 @@
   },
   {
     "id": "reccq81JQligTQhuv",
+    "Included Extruder": "None (not included — mounts for LGX Lite Pro, Vz-Hextrudort, Sherpa Mini/Micro, Orbiter 2, Peopoly Lancer, DFA, FXD)",
+    "Pros": "Fully open-source SLM metal toolhead; no X travel loss; Chube-optimised; wide extruder compatibility; sold by multiple vendors",
     "Name": "Burgo",
-    "Price (USD)": 87.22,
+    "Included Hotend": "None (not included — designed for Chube Air and Chube Conduction only)",
+    "Price (USD)": 74.57,
+    "Vendor 2 Name": "https://www.lukeslabonline.com/collections/voron/products/takeoff-toolhead",
+    "Hotend Mount Style": "Custom",
+    "Source URL": "https://github.com/Kizime123/Takeoff-Toolhead",
+    "Description": "SLM-printed metal toolhead for Voron printers designed by Burgo, built around dual 3628 part-cooling fans and the Chube Air/Conduction hotend, with no X travel loss. Sold as a plates-and-hardware kit; extruder, hotend and fans are user-supplied. Price: $74.57 (NorthPrint3D kit, 106.22 CAD).",
     "Vendor 1 Name": "https://northprint3d.ca/product/burgo-voron-toolhead/",
-    "Updated": "2026-11-11T10:43:00.000Z",
-    "Slug": "burgo"
+    "Cons": "Trident builds need front-left/rear leadscrew cut (or printed spacers); belt-clamp mount needs a pretension tool at high belt tension; Chube hotends only; ~17 mm Y loss on some frames",
+    "Verdict": "Buy",
+    "Updated": "2026-11-12T10:56:01.000Z",
+    "Slug": "burgo",
+    "Type": "Toolhead Kit"
   },
   {
     "id": "recdL04Yb38BoVmDH",
@@ -380,13 +453,14 @@
     "Name": "Dragon Burner 2.4 / Trident / V0",
     "Included Hotend": "Dragon HF/UHF, Rapido HF/UHF, NF-Crazy, Revo Voron, CHC Pro, Bambu X1C hotend, DropEffect XG (and many others)",
     "Brand / Designer": "chirpy2605",
+    "Price (USD)": 14.99,
     "Vendor 2 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Dragon Burner native mount system (many adapters)",
     "Source URL": "https://github.com/chirpy2605/voron/tree/main/V0/Dragon_Burner",
-    "Description": "Highly popular community toolhead for Voron 2.4, Trident, and V0. Known for supporting a very wide range of hotends including Dragon, Rapido, NF-Crazy, Revo, CHC Pro, Bambu X1C hotend, DropEffect, and more via the DB hotend mount system. Multiple versions (v6–v8). Dual 4010 fans on main version; separate V0 variant for compact printers.",
+    "Description": "Highly popular community toolhead for Voron 2.4, Trident, and V0. Known for supporting a very wide range of hotends including Dragon, Rapido, NF-Crazy, Revo, CHC Pro, Bambu X1C hotend, DropEffect, and more via the DB hotend mount system. Multiple versions (v6–v8). Dual 4010 fans on main version; separate V0 variant for compact printers. Price: $14.99 (Etsy 3DLabsPrinting printed-parts kit, regular price; no hardware included).",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -395,7 +469,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Dragon_Burner",
     "Cons": "GitHub repo appears archived/deleted as of mid-2026 — verify current source; 4010 fans may underperform 5015 on demanding overhangs",
     "Verdict": "Buy",
-    "Updated": "2026-11-11T10:36:49.000Z",
+    "Updated": "2026-11-12T10:56:18.000Z",
     "Slug": "dragon-burner-2-4-trident-v0",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -410,13 +484,14 @@
     "Name": "Xol",
     "Included Hotend": "Rapido HF/UHF, Dragon HF/UHF, DropEffect XG, NF-Crazy, Revo Voron, Chube Compact",
     "Brand / Designer": "Armchair Heavy Industries (DW-Tas)",
+    "Price (USD)": 36.99,
     "Vendor 2 Name": "https://www.fabreeko.com/collections/vendors/products/xol-2-toolhead-by-armchair-engineering",
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Modular — per-hotend adapter plates",
     "Source URL": "https://github.com/Armchair-Heavy-Industries/Xol-Toolhead",
-    "Description": "Lightweight, compact print-it-yourself toolhead for Voron 2.4 and Trident. Designed to reduce inertia vs StealthBurner for high-acceleration printing. Supports a broad range of hotends and extruders via a modular hotend-mount system. Uses dual 4010 axial fans for part cooling. Compatible with Xol Carriage or stock Voron MGN12 carriage with adapter.",
+    "Description": "Lightweight, compact print-it-yourself toolhead for Voron 2.4 and Trident. Designed to reduce inertia vs StealthBurner for high-acceleration printing. Supports a broad range of hotends and extruders via a modular hotend-mount system. Uses dual 4010 axial fans for part cooling. Compatible with Xol Carriage or stock Voron MGN12 carriage with adapter. Price: $36.99 (Fabreeko HoneyBadger hardware kit, regular price; no printed parts, hotend, or extruder).",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
@@ -424,7 +499,7 @@
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/Xol-Toolhead",
     "Cons": "Dual 4010 fans provide less static pressure than 5015 blowers — may underperform on dense overhangs; less plug-and-play than CW2-based designs; no filament cutter native",
     "Verdict": "Buy",
-    "Updated": "2026-11-11T10:36:49.000Z",
+    "Updated": "2026-11-12T10:56:25.000Z",
     "Slug": "xol",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -433,11 +508,23 @@
   },
   {
     "id": "recgBkoMdf7U9RERZ",
+    "Included Extruder": "None (not included — Orbiter, Hextrudort Low/Low Plus (+ water-cooled), LGX Lite/Pro, Sherpa Mini via adapter plates)",
+    "Pros": "Full-metal CNC toolhead — lighter, stiffer and more durable than stock VC4; huge extruder/hotend range; Single and IDEX layouts; EBB42/Orbitool O2S toolboard mounts; sold by 4 vendors; actively updated (Aug 2026)",
     "Name": "VC4 CNC Toolhead",
-    "Price (USD)": 399.96,
+    "Included Hotend": "None (not included — Rapido 1/2/Ace UHF, Dragon Ace, Goliath Air/WC, Triangle Labs CHC XL, Chube Air/Conduction, Mosquito Magnum+)",
+    "Price (USD)": 185,
+    "Hotend Mount Style": "Custom",
+    "Source URL": "https://www.printables.com/model/1384111-cnc-milled-toolhead-for-the-ratrig-vcore-441",
+    "Description": "CNC-milled metal toolhead for the RatRig V-Core 4/4.1 by Cristian I, evolving the VzBot CNC toolhead chassis. Replaces the stock printed toolhead with machined carriages for lower weight, higher rigidity and broad extruder/hotend compatibility in Single and IDEX layouts. Price: $180.93 (BRS kit, €163, Single, raw silver, PA12CF printed parts — smallest/lowest-end complete kit).",
     "Vendor 1 Name": "https://store.brs-engineering.com/en/products/vc4-cnc-toolhhead",
-    "Updated": "2026-11-11T10:42:58.000Z",
-    "Slug": "vc4-cnc-toolhead"
+    "Cons": "Switching requires belts cut shorter (can't go back without new longer belts); printed parts still needed (or bought separately); Chube hotends need a Beacon Y-offset fix in printer.cfg; top-end IDEX + PPS-CF config is very expensive",
+    "Verdict": "Consider",
+    "Updated": "2026-11-12T10:56:44.000Z",
+    "Slug": "vc4-cnc-toolhead",
+    "Type": "Toolhead Kit",
+    "Part Cooling Fans": [
+      "CPAP"
+    ]
   },
   {
     "id": "rechooEtkm4CXaX3T",
@@ -476,6 +563,7 @@
     "Compatible Motion Systems": [
       "CoreXY"
     ],
+    "Hotend Mount Style": "Custom",
     "Source URL": "https://github.com/Suzu0071/A5T",
     "Description": "Single A4T-derived toolhead using 5015 part-cooling fan(s) instead of the A4T's dual 4010 blowers. Currently in testing.",
     "Compatible Printers": [
@@ -485,7 +573,7 @@
     "Vendor 1 Name": "https://github.com/Suzu0071/A5T",
     "Cons": "Complex multi-material setup; primarily tuned for VzBot; source URL needs verification; limited community outside VzBot ecosystem",
     "Verdict": "Consider",
-    "Updated": "2026-11-06T11:05:22.000Z",
+    "Updated": "2026-11-12T10:56:27.000Z",
     "Slug": "a5t",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [

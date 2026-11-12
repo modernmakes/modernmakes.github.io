@@ -61,19 +61,59 @@
   },
   {
     "id": "recHoiLkmvx6xmXE4",
+    "Description": "Fire Thorn flex plate with Mandala Rose Works' ThornGrip cold-plate surface, cut from premium 0.65mm 1075 spring steel. Designed to print at low bed temperatures — PLA at 35C, PETG 50-60C (release agent recommended), ABS/ASA 50-80C, nylon 70C, PC up to 100-110C. Stock sizes run from Voron 0 up to RatRig 500, with custom sizes available direct from Mandala Rose Works. A specialty plate for low-temperature printing rather than a general-purpose PEI surface. Price: $22.00 (smallest in-stock variant, Voron 0 130x130; Voron 250 is $53; RatRig 500 oversize $199.)",
+    "Verdict Label": "Specialist cold plate for low-temp filaments — wide size range, premium price",
     "Vendor 1 Name": "Fabreeko",
     "Name": "Fire Thorn Flexplate",
     "Vendor 1 URL": "https://www.fabreeko.com/products/fire-thorn-flexplates-with-thorngrip-surface",
-    "Price (USD)": 199,
-    "Slug": "fire-thorn-flexplate"
+    "Brand": "Mandala Rose Works",
+    "Price (USD)": 22,
+    "Thickness (mm)": 0.65,
+    "Pros": "Cold-plate printing: PLA at just 35C bed temp\n0.65mm 1075 spring steel — thicker and stiffer than standard 0.5mm plates\nCovers nearly every printer: Bambu, Voron, RatRig, Prusa, Qidi, Creality and more\nCustom sizes available direct from Mandala Rose Works (DXF/SVG or dimensions)\nPer-filament bed-temp guide published on the page, plus independent willitstick.fyi testing link",
+    "Slug": "fire-thorn-flexplate",
+    "Spring Steel Included": true,
+    "Best For": [
+      "Bambu",
+      "RatRig",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Verdict": "Niche Pick",
+    "Sizes Available": [
+      "250",
+      "300",
+      "235"
+    ],
+    "Cons": "Proprietary ThornGrip surface — not PEI, so no smooth/textured PEI option on this plate\nNo maximum bed temperature published; the guide only goes up to PC at 100-110C\nPETG needs a release agent on this surface\nMade-to-order lead time of 1-2 weeks if a size is out of stock"
   },
   {
     "id": "recK3SzkaN1wb0idz",
+    "Description": "Honeybadger P-Series Gen 2 smooth black PEI flex plate, made from perfectly flat Japan-made smooth PEI on a 0.5mm spring steel base (0.4mm on Bambu OEM spec). Gen 2 is about 3x as thick as the original at ~0.7mm total, and is rated to 120C for excellent adhesion on all commonly used filaments. Sizing guidance is printed on the page: 5mm over build size for Voron 2.4/Trident (250=255, 300=305, 350=355), 20mm over for RatRig, and 235mm for Ender 3/5/S1/Pro. Not recommended for use with Voron TAP, and PETG needs a release agent on smooth PEI. Price: $24.99 (smallest in-stock size, 160mm; 125mm at $19.99 is out of stock.)",
+    "Verdict Label": "Perfectly flat smooth black PEI — great first layers, with TAP and PETG caveats",
     "Vendor 1 Name": "Fabreeko",
     "Name": "P-Series Smooth Black PEI Flex Plate Gen 2",
+    "Surface Type": "Smooth PEI",
     "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-p-series-smooth-black-pei-beds",
-    "Price (USD)": 89.99,
-    "Slug": "p-series-smooth-black-pei-flex-plate-gen-2"
+    "Brand": "Fabreeko",
+    "Price (USD)": 24.99,
+    "Thickness (mm)": 0.7,
+    "Pros": "Japan-made smooth black PEI, perfectly flat, for excellent adhesion and a clean bottom finish\nGen 2 is about 3x as thick as the original (~0.7mm total) for better durability\nRated to 120C — higher than the other Honeybadger PEI plates\nWide size range including Bambu OEM-spec 0.4mm steel variants\nWell rated at 4.52/5 (23 ratings)",
+    "Slug": "p-series-smooth-black-pei-flex-plate-gen-2",
+    "Spring Steel Included": true,
+    "Best For": [
+      "Bambu",
+      "RatRig",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Max Temp (°C)": 120,
+    "Verdict": "Solid Choice",
+    "Sizes Available": [
+      "235",
+      "250",
+      "300"
+    ],
+    "Cons": "Not recommended with Voron TAP — the nozzle force indents the PEI\nPETG bonds too strongly to smooth PEI; a release agent (glue etc.) is required\nSmall deformation can occur over time when removing prints (heat cycles help it recover)\nMagnet not included — you must source one if your printer has none"
   },
   {
     "id": "recMEptiGa010bIZe",
@@ -191,11 +231,31 @@
   },
   {
     "id": "recXXaRPN00orLVSP",
+    "Description": "Honeybadger GoldGrip dual-sided PEI flex plate: a 0.5mm genuine spring steel base with 0.25mm Sabic Ultem 1000 smooth PEI on one side (twice the industry-standard thickness) and fine-textured PEI on the other, so you can flip between a flawless matte finish and high-adhesion texture without swapping plates. Rated to 110C bed temperature and compatible with virtually every FDM filament. Sizes from 125mm up to 377mm, including Voron 250/300/350 and Bambu H2D/H2S fitments. Price: $27.99 (smallest in-stock size, 250mm; 125/160mm at $22.99 are out of stock.)",
+    "Verdict Label": "Dual-sided smooth + textured PEI with a thick 0.25mm Ultem smooth side — great value",
     "Vendor 1 Name": "Fabreeko",
     "Name": "GoldGrip Double Sided PEI Flex Plate",
+    "Surface Type": "Dual-Sided",
     "Vendor 1 URL": "https://www.fabreeko.com/products/fabreeko-v2-4-trident-dual-sided-pei",
-    "Price (USD)": 59.99,
-    "Slug": "goldgrip-double-sided-pei-flex-plate"
+    "Brand": "Fabreeko",
+    "Price (USD)": 27.99,
+    "Thickness (mm)": 0.5,
+    "Pros": "Two surfaces in one plate — flip between smooth and textured without swapping plates\nSmooth side is 0.25mm Sabic Ultem 1000 PEI, twice the thickness of industry standard sheets\nFine-textured side gives strong adhesion and a premium textured bottom finish\nWide size range including Voron 250/300/350 and Bambu H2D/H2S\nVery affordable for a dual-sided plate (250mm $27.99)",
+    "Slug": "goldgrip-double-sided-pei-flex-plate",
+    "Spring Steel Included": true,
+    "Best For": [
+      "Bambu",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Max Temp (°C)": 110,
+    "Verdict": "Top Pick",
+    "Sizes Available": [
+      "235",
+      "250",
+      "300"
+    ],
+    "Cons": "110C max bed temp rules out the highest-temp engineering filaments\nTextured-both-sides variant costs the same but loses the smooth side\nNo magnetic base included — magnetic sheets are sold separately"
   },
   {
     "id": "recdcP11q23iVMqxd",
@@ -248,18 +308,59 @@
   },
   {
     "id": "recgrIl9ST1vxnJ5J",
+    "Description": "Honeybadger SatinGrip dual-sided PEI flex plate: a 0.5mm genuine spring steel base coated both sides in a special PC-blend PEI that delivers a near-satin matte finish with the adhesion and longevity of a textured surface. The PC-blend formula pushes high-temp capability up to 220C, making it one of the few flex plates truly suitable for engineering-grade polymers alongside everyday PLA, PETG and TPU. Same finish on both sides — flip and get the same results every time. Sizes from 125mm up to 510mm. Price: $19.99 (smallest in-stock size, 185mm; 125mm at $18.99 is out of stock.)",
+    "Verdict Label": "Dual-sided semi-satin PC-blend PEI rated to 220C — the high-temp bargain",
     "Vendor 1 Name": "Fabreeko",
     "Name": "SatinGrip Dual Sided PEI Flex Plate",
+    "Surface Type": "Satin",
     "Vendor 1 URL": "https://www.fabreeko.com/products/open-beta-semi-satin-thin-dual-sided-textured-beds-by-honeybadger",
-    "Price (USD)": 114.99,
-    "Slug": "satingrip-dual-sided-pei-flex-plate"
+    "Brand": "Fabreeko",
+    "Price (USD)": 19.99,
+    "Thickness (mm)": 0.5,
+    "Pros": "Rated to 220C — one of the few flex plates truly suitable for engineering-grade polymers\nDual-sided with the same semi-satin finish on both sides; flip and keep printing\nNear-satin matte finish on parts — textured-level adhesion with a smooth, refined look\nWorks with virtually every FDM filament, PLA through nylon\nWell rated at 4.65/5 (26 ratings) and very affordable (255mm $29.99)",
+    "Slug": "satingrip-dual-sided-pei-flex-plate",
+    "Spring Steel Included": true,
+    "Best For": [
+      "Bambu",
+      "RatRig",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Max Temp (°C)": 220,
+    "Verdict": "Top Pick",
+    "Sizes Available": [
+      "235",
+      "250",
+      "300"
+    ],
+    "Cons": "Semi-satin finish is a compromise — neither a true smooth mirror nor a heavy texture\nPC-blend coating is a proprietary formulation, so long-term durability vs standard PEI is less established\nNo magnetic base included — magnetic sheets are sold separately"
   },
   {
     "id": "reci3fyfmf3OvXuVB",
+    "Description": "Honeybadger NightGrip single-sided textured PEI flex plate: a 0.5mm genuine spring steel base with a powder-coated, fine-textured sticky black PEI surface built for tenacious first-layer adhesion on virtually every FDM filament, releasing cleanly when the print is done. Single-sided to maximize magnetic contact between plate and bed; dual-textured versions are available for twice the surface life. Rated to 110C, in sizes from 125mm up to 520mm. Price: $21.99 (smallest size, 125x125 v0.2 fitment.)",
+    "Verdict Label": "Strong-adhesion black textured PEI — single-sided for maximum magnetic hold",
     "Vendor 1 Name": "Fabreeko",
     "Name": "NightGrip Textured PEI Flex Plate",
+    "Surface Type": "Textured PEI",
     "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-v2-4-single-sided-black-pei-textured",
-    "Price (USD)": 129.99,
-    "Slug": "nightgrip-textured-pei-flex-plate"
+    "Brand": "Fabreeko",
+    "Price (USD)": 21.99,
+    "Thickness (mm)": 0.5,
+    "Pros": "Tenacious adhesion from the fine-textured sticky black PEI — no glue sticks or hairspray needed\nSingle-sided design maximizes magnetic contact for the strongest possible hold\nDual-sided option doubles surface life if you want it\nHuge size range, 125mm up to 520mm\nWell rated at 4.71/5 (21 ratings)",
+    "Slug": "nightgrip-textured-pei-flex-plate",
+    "Spring Steel Included": true,
+    "Best For": [
+      "Bambu",
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Max Temp (°C)": 110,
+    "Verdict": "Solid Choice",
+    "Sizes Available": [
+      "235",
+      "250",
+      "300"
+    ],
+    "Cons": "Single-sided version has only one usable surface\n110C max bed temp rules out the highest-temp engineering filaments\nNo magnetic base included — magnetic sheets are sold separately"
   }
 ]

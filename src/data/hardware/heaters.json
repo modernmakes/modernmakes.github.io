@@ -176,36 +176,6 @@
     "Size": "6×20mm"
   },
   {
-    "id": "recTAVYv8mLjkQpop",
-    "Verdict Label": "Quality clone 50W cartridge from Mellow — competitive with Slice Engineering at a lower price, but with less community track record",
-    "Verdict": "CONSIDER",
-    "Type": "Heater Cartridge",
-    "Vendor 1 URL": "https://3dmellow.com/products/mellow-3d-printer-parts-heating-tube-12v-24v-50w-high-temperature-618-22mm-cartridge-heater-for-nf-crazy-hotend-mosmax-v6",
-    "Brand": "Mellow",
-    "Price (USD)": 4,
-    "Pros": "50W wattage matches Slice Engineering’s recommended spec at a lower price point\nMellow is a recognized brand in the Voron/AliExpress ecosystem — better accountability than generic sellers\nStandard 6×20mm format — fits any compatible hotend",
-    "Wattage (W)": 50,
-    "Max Temp (°C)": 550,
-    "Description": "Mellow’s NF-Crazy 50W heater cartridge is the included cartridge in their NF-Crazy hotend and is also available separately. At 50W and 24V in a standard 6×20mm format, it is a reasonable alternative to Slice Engineering’s cartridge at a lower price. For builders who prioritize cost or are already using Mellow hardware, it is a defensible choice.",
-    "Voltage": "24V",
-    "Compatible Hotends": [
-      "Mellow NF-Crazy",
-      "Mosquito",
-      "E3D V6",
-      "Mosmax"
-    ],
-    "Cons": "Less community testing data than Slice Engineering — fewer long-term build reports at high wattage\nMellow QC is generally good but not at the level of a dedicated component manufacturer like Slice\nFor the small price premium over Slice Engineering, Slice is the cleaner choice",
-    "Compatible Printers": [
-      "Voron 2.4",
-      "Voron Trident",
-      "VzBot"
-    ],
-    "Vendor 1 Name": "Mellow (AliExpress)",
-    "Name": "NF-Crazy 50W 24V Heater Cartridge",
-    "Slug": "nf-crazy-50w-24v-heater-cartridge",
-    "Size": "6x18mm / 6x22mm"
-  },
-  {
     "id": "recUSi38wRhPhmzvw",
     "Verdict Label": "High-wattage clone — fast heat-up but verify resistance before use; batch quality is variable",
     "Verdict": "BUDGET",
