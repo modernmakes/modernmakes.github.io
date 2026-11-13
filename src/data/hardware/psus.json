@@ -1,12 +1,22 @@
 [
   {
     "id": "rec0O5hRmmlDbsceT",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 350.4,
     "Slug": "uhp-350-48",
+    "UL Certified": true,
+    "Description": "Mean Well's 350W slim-line 48V supply (350.4W rated, 7.3A) in a 220 × 62 × 31 mm fanless metal case with 94% efficiency and active PFC. It cools silently by convection with no fan, but must be mounted to an aluminium plate or cabinet base to meet its derating curve. A silent 350W option for 48V printer builds only — it cannot power a standard 24V board.",
+    "Verdict Label": "Silent 350W supply for 48V builds — zero fan noise, but 48V boards only",
+    "Form Factor": "Enclosed",
+    "Cons": "48V output — only for 48V-capable boards, not a drop-in for 24V printers\nMust be mounted to an aluminium plate to meet its derating curve\nDerates above ~45°C at 230VAC input\nNo DC OK signal or redundant function on the standard type",
+    "Fanless": true,
     "Name": "UHP-350-48",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "48V",
     "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-uhp-350-48-power-supply",
     "Brand": "Mean Well",
-    "Price (USD)": 79.99
+    "Price (USD)": 79.99,
+    "Pros": "Silent fanless convection cooling, zero fan noise\n350.4W / 7.3A at 48V\nSlim 31mm profile — 220 × 62 × 31 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
   },
   {
     "id": "rec1Y6gXzRRY5cFbk",
@@ -21,7 +31,6 @@
     "Compatible Printers": [
       "Universal"
     ],
-    "Fanless": true,
     "Name": "LRS-100-24",
     "Vendor 1 Name": "Mouser",
     "Output Voltage": "24V",
@@ -32,21 +41,39 @@
   },
   {
     "id": "recAkyhLfANqhRRCc",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 201.6,
     "Slug": "uhp-200-24",
+    "UL Certified": true,
+    "Description": "Mean Well's 200W slim-line 24V supply (201.6W rated, 8.4A) in a 194 × 55 × 26 mm fanless metal case with 94% efficiency and active PFC. It cools silently by convection with no fan, but must be mounted to an aluminium plate or cabinet base to meet its derating curve. Suited to small printers and accessory loads rather than as a primary supply for a heated-bed build.",
+    "Verdict Label": "Silent 200W supply for small builds and accessory loads — too small as a primary for heated-bed printers",
+    "Form Factor": "Enclosed",
+    "Cons": "Only 201.6W — too small as a primary for heated-bed builds\nMust be mounted to an aluminium plate to meet its derating curve\nNo DC OK signal or redundant function on the standard type",
+    "Fanless": true,
     "Name": "UHP-200-24",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "24V",
     "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-uhp-200-24",
     "Brand": "Mean Well",
-    "Price (USD)": 47.99
+    "Price (USD)": 47.99,
+    "Pros": "Silent fanless convection cooling, zero fan noise\nSlim 26mm profile — 194 × 55 × 26 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
   },
   {
     "id": "recAnu5cG8yxbNfMI",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 348,
     "Slug": "nes-350-12",
+    "UL Certified": true,
+    "Description": "The Mean Well NES-350-12 is a 348W enclosed single-output supply delivering 12V at up to 29A, with a built-in temperature-controlled fan and UL60950-1 approval. It suits 12V accessories, LED loads and other 12V equipment, but it cannot serve as the main supply for a standard 24V printer. Input voltage is selectable 115/230V by switch, so the switch must be set correctly before use.",
+    "Verdict Label": "A proven 12V accessory supply, not a main PSU for a 24V printer.",
+    "Form Factor": "Enclosed",
+    "Cons": "12V only — cannot power a standard 24V printer mainboard, heaters or motors\nFan-cooled, so not silent and the fan is a wear item\n115/230V input selector switch must be set correctly before use\nOlder economy design at ~83% efficiency, below modern LRS/UHP units",
     "Name": "NES-350-12",
     "Vendor 1 Name": "DigitMakers",
     "Vendor 1 URL": "https://www.digitmakers.ca/products/mean-well-nes-350-12v-power-supply",
     "Brand": "Mean Well",
-    "Price (USD)": 35.16
+    "Price (USD)": 35.16,
+    "Pros": "348W / 29A at 12V, plenty for 12V accessories and LED loads\nUL60950-1 approved, with overload, over-voltage and over-temperature protection\nBuilt-in fan with temperature-controlled on/off, output adjustable 10–13.5V"
   },
   {
     "id": "recBkLUEY4sIPiMII",
@@ -59,7 +86,7 @@
     "Form Factor": "Enclosed",
     "Cons": "No verified USD price or Digi-Key listing found - buy carefully\nFan-cooled, not fanless\nOverkill for most printers - the LRS-200-24 is the Voron BOM standard\nNo printer BOM ties this unit to a specific printer",
     "Name": "LRS-600-24",
-    "Vendor 1 Name": "Unknown",
+    "Vendor 1 Name": "RS",
     "Output Voltage": "24V",
     "Brand": "Mean Well",
     "Price (USD)": 75,
@@ -79,7 +106,6 @@
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Fanless": true,
     "Name": "LRS-200-24",
     "Vendor 1 Name": "Digi-Key",
     "Output Voltage": "24V",
@@ -111,12 +137,21 @@
   },
   {
     "id": "recFREz7ez12FfnuQ",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 350.4,
     "Slug": "lrs-350-48",
+    "UL Certified": true,
+    "Description": "The LRS-350-48 is Mean Well's enclosed 350.4W single-output supply, delivering 48V at up to 7.3A from a low-profile 215×115×30mm case for builders running 48V stepper setups. It carries UL 62368-1 certification and uses a temperature-controlled built-in fan that only switches on above 50°C.",
+    "Verdict Label": "A proven 48V workhorse for 48V motor builds, but the wrong voltage for a standard 24V printer.",
+    "Form Factor": "Enclosed",
+    "Cons": "48V is non-standard for most hobbyist printers — needs a 48V-capable board and drivers\nRequires manual 115/230V input voltage selection by switch\nFan adds noise and a wear item under sustained load",
     "Name": "LRS-350-48",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "48V",
     "Vendor 1 URL": "https://www.fabreeko.com/products/well-lrs-350-48-power-supply",
     "Brand": "Mean Well",
-    "Price (USD)": 38.99
+    "Price (USD)": 38.99,
+    "Pros": "48V at 7.3A for high-voltage stepper setups\nUL 62368-1 certified\nTemperature-controlled fan only runs when hot\nLow-profile 30mm enclosed case, up to 89% efficient"
   },
   {
     "id": "recG5emjKryrM5NjZ",
@@ -169,10 +204,10 @@
     "Wattage (W)": 504,
     "Slug": "rsp-500-24",
     "UL Certified": true,
-    "Description": "The RSP-500-24 is the choice for 350mm Voron 2.4 builds or any build running a heated chamber alongside a large heated bed. At 500W / 20.8A, it delivers full rated output without derating under sustained multi-load conditions. Unlike the LRS series' temperature-controlled fan, the RSP uses forced-air cooling (always-on fan) — consistently at full power, but audible. PFC is included, making it cleaner on noisy or international mains supply.",
+    "Description": "The RSP-500-24 is the choice for 350mm Voron 2.4 builds or any build running a heated chamber alongside a large heated bed. At 500W / 20.8A, it delivers full rated output without derating under sustained multi-load conditions. Like the LRS series, the RSP uses a temperature-controlled fan (ON/OFF controlled, off below ~40°C) — consistently at full power, but audible under sustained load. PFC is included, making it cleaner on noisy or international mains supply.",
     "Verdict Label": "350mm+ and heated chambers — full headroom, no derating",
     "Form Factor": "Enclosed",
-    "Cons": "Always-on fan is audible at all times — not quiet-build friendly\nLarger physical footprint than LRS series — requires more enclosure space\nOverkill for 250mm or 300mm builds without chamber heating",
+    "Cons": "Fan is audible under sustained load — not quiet-build friendly\nLarger physical footprint than LRS series — requires more enclosure space\nOverkill for 250mm or 300mm builds without chamber heating",
     "Compatible Printers": [
       "Voron 2.4",
       "RatRig",
@@ -188,38 +223,76 @@
   },
   {
     "id": "recXuKyuFqY2shf1j",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 50,
     "Slug": "rs-50-5",
+    "UL Certified": true,
+    "Description": "The Mean Well RS-50-5 is an enclosed 50W supply delivering 5V at up to 10A, cooled silently by free air convection with no fan. It is UL62368-1 approved and gives a Raspberry Pi or other 5V setup twice the current headroom of the 25W RS-25-5, but it is an accessory supply only — it cannot power a printer's 24V system.",
+    "Verdict Label": "A silent 50W 5V supply with real headroom for a Pi plus 5V accessories.",
+    "Form Factor": "Enclosed",
+    "Cons": "5V only, useless as a printer main PSU\nStill only 50W — not a substitute for a 24V main supply\nMains-voltage screw terminals need a proper enclosure and careful wiring",
+    "Fanless": true,
     "Name": "RS-50-5",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "5V",
     "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-rs-50-5-switching-power-supply",
     "Brand": "Mean Well",
-    "Price (USD)": 14.99
+    "Price (USD)": 14.99,
+    "Pros": "Fanless, silent free-air convection cooling\nUL62368-1 approved, with short-circuit / overload / over-voltage protection\n50W / 10A — double the RS-25-5, enough for a Pi plus 5V fans, LEDs or logic\nCompact 99×97×36 mm, −25 to +70°C working range, under 0.5W no-load consumption"
   },
   {
     "id": "recgxpEzyvJU5RiBC",
+    "Verdict": "BUY",
+    "Wattage (W)": 350.4,
     "Slug": "uhp-350-24",
+    "UL Certified": true,
+    "Description": "Mean Well's 350W slim-line 24V supply (350.4W rated, 14.6A) in a 220 × 62 × 31 mm fanless metal case with 94% efficiency and active PFC. It cools silently by convection with no fan, but must be mounted to an aluminium plate or cabinet base to meet its derating curve. A direct silent replacement for a 350W LRS in a 300mm build.",
+    "Verdict Label": "Silent 350W primary for 300mm builds with zero fan noise",
+    "Form Factor": "Enclosed",
+    "Cons": "Must be mounted to an aluminium plate to meet its derating curve\nDerates above ~45°C at 230VAC input\nNo DC OK signal or redundant function on the standard type",
+    "Fanless": true,
     "Name": "UHP-350-24",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "24V",
     "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-uhp-350-24-power-supply",
     "Brand": "Mean Well",
-    "Price (USD)": 79.99
+    "Price (USD)": 79.99,
+    "Pros": "Silent fanless convection cooling, zero fan noise\n350.4W / 14.6A at 24V — enough for a 300mm build\nSlim 31mm profile — 220 × 62 × 31 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
   },
   {
     "id": "recloPvccLX43gdAG",
+    "Verdict": "BUY",
+    "Wattage (W)": 300,
     "Slug": "lcp300-24d5",
+    "Description": "The LCP300-24D5 is LDO's compact, fully enclosed 300W dual-output power supply designed for 3D printing, delivering 24V across three terminals plus a 5V output from a single 120×95×35mm unit. Its GaN design with power factor correction runs at up to 91% efficiency, and dual AC input terminals let additional AC loads daisy-chain through the supply.",
+    "Verdict Label": "A compact dual-output 24V+5V supply purpose-built for 3D printers, with no separate 5V supply needed.",
+    "Form Factor": "Enclosed",
+    "Cons": "No UL certification — EN IEC 62368-1 LVD compliance only\n5V rail is a buck converter off the 24V rail, max 25W\nGets hot at full 300W and needs external airflow\nNarrow operating temperature range, -20 to 40°C",
     "Name": "LCP300-24D5",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "Dual",
     "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-lcp300-24d5-compact-power-supply-24v-and-5v-300w",
-    "Price (USD)": 69.99
+    "Price (USD)": 69.99,
+    "Pros": "Dual 24V (x3) + 5V outputs from one compact enclosed unit\nGaN design with PFC, up to 91% efficient\nDaisy-chainable dual AC input terminals simplify wiring\nOverload, overvoltage and temperature protection built in"
   },
   {
     "id": "recogmbh29WT8N2c8",
+    "Verdict": "CONSIDER",
+    "Wattage (W)": 25,
     "Slug": "rs-25-5",
+    "UL Certified": true,
+    "Description": "The Mean Well RS-25-5 is a compact enclosed 25W supply delivering 5V at up to 5A, cooled silently by free air convection with no fan. It is UL62368-1 approved and well suited to powering a Raspberry Pi, Klipper host or other small 5V logic loads, but it has no role as a printer main supply.",
+    "Verdict Label": "A compact silent 5V supply for a Raspberry Pi or other small 5V loads.",
+    "Form Factor": "Enclosed",
+    "Cons": "Only 25W / 5A — one small 5V load, no headroom for more\n5V only, useless as a printer main PSU\nMains-voltage screw terminals need a proper enclosure and careful wiring",
+    "Fanless": true,
     "Name": "RS-25-5",
     "Vendor 1 Name": "Fabreeko",
+    "Output Voltage": "5V",
     "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-rs-25-5",
     "Brand": "Mean Well",
-    "Price (USD)": 9.99
+    "Price (USD)": 9.99,
+    "Pros": "Fanless, silent free-air convection cooling\nUL62368-1 approved, with short-circuit / overload / over-voltage protection\nCompact 78×51×28 mm, wide −20 to +70°C working range, under 0.5W no-load consumption\n3-year warranty"
   },
   {
     "id": "recrxTHwgMqPs4s2w",

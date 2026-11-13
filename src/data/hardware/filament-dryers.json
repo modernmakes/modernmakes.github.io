@@ -1,6 +1,7 @@
 [
   {
     "id": "rec1oXx6f3zNhfIK3",
+    "Temperature Display": true,
     "Pros": "Polymaker brand credibility — designed by the company that makes the filament, built to their drying specs\nClean, well-constructed design vs. budget alternatives\nFeed port, humidity indicator, temperature display\n70°C max — matches the Sunlu S2 at the top of this performance tier\nGood integration with Polymaker’s published filament drying guidelines",
     "Humidity Display": true,
     "Slug": "polydryer-box",
@@ -11,6 +12,7 @@
     "Spool Capacity": 1,
     "Vendor 1 Name": "Polymaker",
     "Name": "PolyDryer Box",
+    "Timer": true,
     "Type": "Passive",
     "Vendor 1 URL": "https://shop.polymaker.com/products/filament-dryer?variant=43078550323257",
     "Brand": "Polymaker",
@@ -47,12 +49,24 @@
   },
   {
     "id": "rec6XQirYgEvhqEqG",
+    "Temperature Display": true,
+    "Pros": "360° rotating heating keeps temperature difference between spools to just 1°C\n80°C max temperature covers PA, PC and other high-temp filaments\n9 built-in material presets plus 3 customizable slots (M1, M2, M3)\nAutomatic humidity-control mode holds a set RH when not heating\nV0 fireproof shell and self-regulating PTC heating element\n8 filament outlet holes for print-while-drying in any direction\nPower-loss memory and 2 desiccant compartments",
+    "Humidity Display": true,
     "Slug": "polyphemus-filament-dryer",
+    "Cons": "Rotating motor is a wear item rated at 1500h lifespan (replaceable)\nHolds only two 1 kg spools; a 3 kg spool needs the expansion parts\nCurrently out of stock at Fabreeko\n130W and 2.2 kg — heavier and hungrier than the smaller Cyclopes",
+    "Spool Capacity": 2,
     "Vendor 1 Name": "Fabreeko",
     "Name": "Polyphemus Filament Dryer",
+    "Timer": true,
+    "Type": "Active with Feed Port",
     "Vendor 1 URL": "https://www.fabreeko.com/products/eibos-3d-filament-dryer-polyphemus",
     "Brand": "EIBOS",
-    "Price (USD)": 129.99
+    "Price (USD)": 129.99,
+    "Feed Port": true,
+    "Max Temp (°C)": 80,
+    "Description": "The Polyphemus is EIBOS's large-format dryer, holding two 1 kg spools (or one 3 kg spool with expansion parts) and drying to 80°C with a 360° rotating heating head that keeps the temperature difference across the chamber to just 1°C. Nine material presets plus three custom slots, automatic humidity hold, and a V0 fireproof shell round out a dryer built for even, hands-off drying of high-temperature filaments.",
+    "Verdict Label": "Rotating 360° heating dries two spools evenly to 80°C — the even-heating pick for high-temp filaments.",
+    "Verdict": "Solid Choice"
   },
   {
     "id": "recEEf2Cw108PkCup",
@@ -102,12 +116,23 @@
   },
   {
     "id": "recMo2qtegpClCsSs",
+    "Temperature Display": true,
+    "Pros": "85°C ceiling with six presets (35–85°C) — hot enough for nylon, PC and PVA where 70°C dryers fall short\nDries two 1 kg spools at once and feeds both directly to printers while drying\nClosed-loop temperature control with a 48-hour timer and auto shut-off\nExpandable to four spools or a single 5 kg spool with add-on kits",
     "Slug": "filament-dryer-pro3",
+    "Cons": "No humidity readout — the display shows temperature and timer only, so chamber RH stays invisible\nOnly two spools in the base unit; four-spool capacity costs extra for the Additional Chamber Kit\nManufacturer warns temperature is not uniform inside — around 70°C under the lid at an 85°C setpoint\n$172 for a two-spool dryer is steep next to four-spool 70°C boxes",
+    "Spool Capacity": 2,
     "Vendor 1 Name": "DigitMakers",
     "Name": "Filament Dryer PRO3",
+    "Timer": true,
+    "Type": "Active with Feed Port",
     "Vendor 1 URL": "https://www.digitmakers.ca/products/printdry-filament-dryer-pro3",
     "Brand": "PrintDry",
-    "Price (USD)": 172.33
+    "Price (USD)": 172.33,
+    "Feed Port": true,
+    "Max Temp (°C)": 85,
+    "Description": "The PrintDry PRO3 is an actively heated, closed-loop filament dryer that holds two standard 1 kg spools (up to 200 mm diameter) and dries at up to 85°C across six presets, with feed-through ports so both spools can print directly from the chamber. A 48-hour timer with auto shut-off and a double-wall insulated chamber round out a unit aimed squarely at hygroscopic engineering filaments like nylon, PC and PVA, with optional kits expanding it to four spools or a single 5 kg spool.",
+    "Verdict Label": "85°C dual-spool drying with print-while-drying feed ports — the right pick for nylon and PC builders who don't need a humidity readout.",
+    "Verdict": "Solid Choice"
   },
   {
     "id": "recMq9crW4KWGhdjS",

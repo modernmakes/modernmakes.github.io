@@ -21,17 +21,18 @@
   {
     "id": "rec5cTZ31Yj0ll2gd",
     "Vendor 1 URL": "https://www.fabreeko.com/products/dropeffect-phaetus-xg-hotend-nozzles",
+    "Material": "Hardened Steel",
     "Brand": "Phaetus",
     "Style": "Standard",
     "Price (USD)": 12.99,
     "Diameter (mm)": "0.2 / 0.4 / 0.6 / 0.8",
-    "Pros": "One-handed nozzle changes via the XG's three-point mounting — no tools, no hot-tightening routine\nHardened steel variant is abrasive-safe and costs only $12.99\nCheap spares: brass from $5.99\nFits the XG's Creality and E3D V6 style groove mounts via the hotend itself",
+    "Pros": "One-handed nozzle changes via the XG's three-point mounting — no tools, no hot-tightening routine\nHardened steel is abrasive-safe and costs only $12.99\nFits the XG's Creality and E3D V6 style groove mounts via the hotend itself",
     "Verdict": "Niche Pick",
-    "Slug": "dropeffect-xg",
-    "Cons": "XG hotend only — this nozzle fits nothing else\nAlmost no published specifications (Fabreeko: 'More info coming soon'; no max-temp or thread figure anywhere)\nUser report: could not push filament much faster than ~15 mm³/s — not really an upgrade over stock\nRecord is ambiguous: one listing covers Brass, Hardened Steel and Copper at different prices (see held list)",
+    "Slug": "dropeffect-xg-hardened-steel",
+    "Cons": "XG hotend only — this nozzle fits nothing else\nAlmost no published specifications (Fabreeko: 'More info coming soon'; no max-temp or thread figure anywhere)\nUser report: could not push filament much faster than ~15 mm³/s — not really an upgrade over stock",
     "Vendor 1 Name": "Fabreeko",
-    "Name": "DropEffect XG",
-    "Description": "DropEffect (Phaetus) replacement nozzle for the XG hotend, Phaetus's sub-brand hotend with an extreme temperature gradient and one-handed nozzle changes via three-point mounting between the ring heater block and the frame. The XG heats to 300°C. Fabreeko sells the nozzle in Brass ($5.99), Hardened Steel ($12.99) and Copper ($12.99), all in 0.2, 0.4, 0.6 and 0.8mm; the XG ships with a hardened steel and a brass 0.4mm nozzle. Documentation is thin — Fabreeko lists 'More info coming soon' and no thread or max-temp figure is published — and one user reports a ~15 mm³/s flow ceiling, so treat this as a spare for XG owners rather than an upgrade. NOTE: this single record spans three materials at two prices; it likely needs splitting into three records or a decision that it represents the hardened steel variant.",
+    "Name": "DropEffect XG Hardened Steel",
+    "Description": "DropEffect (Phaetus) replacement nozzle for the XG hotend, Phaetus's sub-brand hotend with an extreme temperature gradient and one-handed nozzle changes via three-point mounting between the ring heater block and the frame. The XG heats to 300°C. Hardened steel variant, $12.99, in 0.2, 0.4, 0.6 and 0.8mm; the XG ships with a hardened steel and a brass 0.4mm nozzle. Documentation is thin — Fabreeko lists 'More info coming soon' and no thread or max-temp figure is published — and one user reports a ~15 mm³/s flow ceiling, so treat this as a spare for XG owners rather than an upgrade.",
     "Verdict Label": "Spare nozzle for the DropEffect XG — XG owners only"
   },
   {
@@ -343,6 +344,23 @@
     "Max Temp (°C)": 550
   },
   {
+    "id": "recL30CHt3r1QBQaY",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/dropeffect-phaetus-xg-hotend-nozzles",
+    "Material": "Brass",
+    "Brand": "Phaetus",
+    "Style": "Standard",
+    "Price (USD)": 5.99,
+    "Diameter (mm)": "0.2 / 0.4 / 0.6 / 0.8",
+    "Pros": "One-handed nozzle changes via the XG's three-point mounting — no tools, no hot-tightening routine\nCheapest XG spare at $5.99\nFits the XG's Creality and E3D V6 style groove mounts via the hotend itself",
+    "Verdict": "Niche Pick",
+    "Slug": "dropeffect-xg-brass",
+    "Cons": "XG hotend only — this nozzle fits nothing else\nAlmost no published specifications (Fabreeko: 'More info coming soon'; no max-temp or thread figure anywhere)\nBrass is not abrasive-safe — for abrasive filaments use the hardened steel variant\nUser report: could not push filament much faster than ~15 mm³/s — not really an upgrade over stock",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "DropEffect XG Brass",
+    "Description": "DropEffect (Phaetus) replacement nozzle for the XG hotend, Phaetus's sub-brand hotend with an extreme temperature gradient and one-handed nozzle changes via three-point mounting between the ring heater block and the frame. The XG heats to 300°C. Brass variant, $5.99, in 0.2, 0.4, 0.6 and 0.8mm; the XG ships with a brass and a hardened steel 0.4mm nozzle. Documentation is thin — Fabreeko lists 'More info coming soon' and no thread or max-temp figure is published — and one user reports a ~15 mm³/s flow ceiling, so treat this as a spare for XG owners rather than an upgrade.",
+    "Verdict Label": "Cheapest spare nozzle for the DropEffect XG — XG owners only"
+  },
+  {
     "id": "recM9UiSzGdb6oxxG",
     "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/microswiss-cm2-nozzle",
     "Material": "Hardened Steel",
@@ -628,6 +646,22 @@
     "Thread": "Revo",
     "Verdict Label": "The easiest nozzle upgrade: hot-swap in seconds, no tools",
     "Max Temp (°C)": 300
+  },
+  {
+    "id": "recoZcxj9r7h7azcF",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/dropeffect-phaetus-xg-hotend-nozzles",
+    "Brand": "Phaetus",
+    "Style": "Standard",
+    "Price (USD)": 12.99,
+    "Diameter (mm)": "0.2 / 0.4 / 0.6 / 0.8",
+    "Pros": "One-handed nozzle changes via the XG's three-point mounting — no tools, no hot-tightening routine\nFits the XG's Creality and E3D V6 style groove mounts via the hotend itself",
+    "Verdict": "Niche Pick",
+    "Slug": "dropeffect-xg-copper",
+    "Cons": "XG hotend only — this nozzle fits nothing else\nAlmost no published specifications (Fabreeko: 'More info coming soon'; no max-temp or thread figure anywhere)\nSame $12.99 price as the hardened steel variant, with no published advantage over it\nUser report: could not push filament much faster than ~15 mm³/s — not really an upgrade over stock",
+    "Vendor 1 Name": "Fabreeko",
+    "Name": "DropEffect XG Copper",
+    "Description": "DropEffect (Phaetus) replacement nozzle for the XG hotend, Phaetus's sub-brand hotend with an extreme temperature gradient and one-handed nozzle changes via three-point mounting between the ring heater block and the frame. The XG heats to 300°C. Copper variant, $12.99, in 0.2, 0.4, 0.6 and 0.8mm. Documentation is thin — Fabreeko lists 'More info coming soon' and no thread or max-temp figure is published — and one user reports a ~15 mm³/s flow ceiling, so treat this as a spare for XG owners rather than an upgrade. No published specs distinguish the copper variant from the other materials.",
+    "Verdict Label": "Copper spare nozzle for the DropEffect XG — XG owners only"
   },
   {
     "id": "recrjDsA8dpAk3d5Y",

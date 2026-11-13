@@ -1,11 +1,19 @@
 [
   {
     "id": "recBfevcxmLT5PEou",
+    "Filter Media": "HEPA",
     "Name": "HEPA H14/13 Filter",
     "Vendor 1 Name": "BRS Engineering",
+    "Description": "The BRS HEPA H14/13 Filter is a replacement HEPA filter element from Alveo3D, made to fit the RatPack filter module. It is available in two sizes: Small (124x124x44mm, H13, 99.95% at MPPS 0.3µm, ~600h lifespan) and Large (150x150x50mm external, 160x160x50mm frame, H14, 99.995% at MPPS 0.3µm, ~900h lifespan). The honeycomb element uses cotton, PP and PET media with a PU foam joint seal, rated to 55 m3/h max airflow, 120 Pa max air resistance, and 0-60 °C working temperature. It captures ultrafine particles only — there is no carbon stage, so it does not address VOCs on its own and is best paired with a carbon filter such as the Nevermore or the CF80 cartridge. It was sold out on the BRS store at time of check.",
+    "Verdict Label": "The correct H13/H14 replacement element for the RatPack — high efficiency, long service life",
+    "Verdict": "BUY",
+    "Replacement Filter Available": true,
     "Slug": "hepa-h14-13-filter",
+    "Cons": "HEPA only — captures particles, not VOCs; no carbon stage, so pair with carbon filtration for fumes\nSold out on the live BRS store at time of check (2026-11-13)\nTwo sizes/classes (Small H13 vs Large H14) — must order the size matching your RatPack housing\nHour-rated consumable (~600-900h) — needs periodic replacement\nWorking temperature limited to 0-60 °C",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/hepa-filter",
-    "Price (USD)": 44.56
+    "Type": "HEPA",
+    "Price (USD)": 44.56,
+    "Pros": "True HEPA H14 (99.995%) / H13 (99.95%) at MPPS 0.3µm — very high particulate efficiency\nDrop-in replacement element for the RatPack filter module\nLong service life: ~600h (Small/H13) / ~900h (Large/H14)\nPU foam joint seal and honeycomb construction; rated to 55 m3/h max airflow, 120 Pa max resistance\nTwo sizes cover RatPack small and large housings"
   },
   {
     "id": "recJgeynEAxaFHhPs",
@@ -13,7 +21,7 @@
       "Voron 2.4"
     ],
     "Printed Parts Required": true,
-    "Filter Media": "HEPA",
+    "Filter Media": "Activated Carbon",
     "Name": "Exhaust Filter",
     "Vendor 1 Name": "GitHub (VoronDesign)",
     "Description": "The Voron Exhaust Filter is the official BOM air filtration design for the V2.4, mounting at the rear exhaust panel and routing through a large activated carbon bed before venting externally. It's a sound design and ships with large carbon capacity, but community consensus has largely moved toward the Nevermore Micro for new builds: recirculating air through carbon inside the chamber eliminates VOCs more completely than venting filtered air out of the room. Most build guides now recommend printing the Nevermore alongside or instead of the stock exhaust filter.",
@@ -27,48 +35,98 @@
     "Type": "Exhaust",
     "Brand": "Voron Design",
     "Price (USD)": 8,
-    "Pros": "Official Voron Design exhaust filter — part of the base V2.4 BOM\nLarge carbon volume (~50-80g) for substantial media capacity\nSimple design — mounts directly to the V2.4 rear exhaust panel cutout\nUses the existing 60mm exhaust fan already on the V2.4 BOM — no additional hardware required\nHigh community familiarity — documented extensively in the V2.4 build guides",
+    "Pros": "Official Voron Design exhaust filter — part of the base V2.4 BOM\nLarge carbon bed for substantial media capacity\nSimple design — mounts directly to the V2.4 rear exhaust panel cutout\nUses the existing 60mm exhaust fan already on the V2.4 BOM — no additional hardware required\nHigh community familiarity — documented extensively in the V2.4 build guides",
     "Fan Size": "60x60x20 axial"
   },
   {
     "id": "recLHehwlcWslH6kB",
+    "Filter Media": "Both",
     "Name": "CF80 Filtration",
     "Vendor 1 Name": "BRS Engineering",
+    "Description": "The BRS CF80 is a heavy-duty, plug-and-play air filtration unit for the RatRig V-Core 3.1, combining a HEPA filter with a refillable 250g activated carbon cartridge (V2.5) in a single housing. Two 80x38mm Sunon PWM fans drive chamber air through the carbon bed and HEPA stage, with input and output flows oriented to the upper chamber to avoid turbulence over the print area. BRS publishes measured closed-chamber data after 2h of ABS printing: VOC 0-1 on a 0-10 scale (vs 6-7 without the filter), formaldehyde under 0.0001 mg/m3, and PM2.5 under 1 µg/m3. An optional beta servo flap automates open-loop exhaust (PLA/PETG) versus closed-loop recirculation (ABS/ASA/PA/PC) via Klipper. The cartridge lasts 12-24 months depending on usage and refills for under 20 EUR; the design files (STEP + STL) are published free on Printables. It is a premium-priced complete system, not a DIY print project, and it was sold out on the BRS store at time of check.",
+    "Verdict Label": "Premium plug-and-play HEPA + carbon system for V-Core 3.1 — superb measured filtration, at a premium price",
+    "Verdict": "CONSIDER",
+    "Open Source": true,
+    "Replacement Filter Available": true,
+    "Carbon Capacity (g)": 250,
     "Slug": "cf80-filtration",
+    "Cons": "Premium price (on file $411.10; live store lists EUR 319-369) — far above DIY Nevermore/BentoBox builds\nSold out on the live BRS store at time of check (2026-11-13)\nDesigned around the V-Core 3.1 — fitment on other enclosed printers is not documented\nServo flap is a beta module that may need fine-tuning (per BRS)\n250g carbon bed is still a consumable — cartridge needs refilling every 12-24 months",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-cf80-filtration",
-    "Price (USD)": 411.1
+    "Type": "Combined",
+    "Price (USD)": 411.1,
+    "Pros": "Combined HEPA + 250g activated carbon cartridge in one unit — captures fine particles and VOCs together\nMeasured closed-chamber results after 2h ABS printing: VOC 0-1 (vs 6-7 without), CH2O under 0.0001 mg/m3, PM2.5 under 1 µg/m3\nRefillable V2.5 cartridge with 12-24 month lifespan; refills under 20 EUR\nDual 80x38mm Sunon PWM fans supplied, wiring and DC jack installed — sold as a complete unit\nOptional servo flap switches between recirculating closed loop (ABS/ASA/PA/PC) and exhaust open loop (PLA/PETG)\nDesign files (STEP + STL) published free on Printables; V-Core 3.1 compatible",
+    "Fan Size": "8038 x2 (Sunon PWM)"
   },
   {
     "id": "recSRdQ4wehxFeTU0",
+    "Printed Parts Required": true,
+    "Filter Media": "Both",
     "Name": "RatPack HEPA Filter Module",
     "Vendor 1 Name": "Fabreeko",
+    "Description": "The RatPack is RatRig's in-chamber air filter module for V-Core printers, combining a HEPA H13/H14 pleated filter from Alveo 3D with coconut activated carbon granules to capture both ultrafine particles and VOCs. A 120x32 24V blower recirculates chamber air through the filter, with native RatOS and Klipper integration for automated fan control before, during and after prints. It comes in Small (124x124x44mm filter, 600-hour service life) and Large (160x160x53mm, H14, 900-hour service life) versions; printed enclosure and mount parts are required but not included. Price basis: $48.99 (Small variant, smallest size; Large is $64.99).",
+    "Verdict Label": "RatRig's integrated in-chamber HEPA+carbon filter — polished and plug-and-play for V-Core builds, at a premium over DIY options",
+    "Verdict": "CONSIDER",
+    "Open Source": true,
+    "Replacement Filter Available": true,
     "Slug": "ratpack-hepa-filter-module",
+    "Cons": "Printed parts required but not included — enclosure and mounts must be printed first\nPremium price vs DIY options: $64.99 (Large) / $48.99 (Small) before printed parts, vs ~$8-15 BOM for Nevermore Micro / BentoBox\nCarbon is impregnated in the HEPA filter, not a refillable loose bed — the whole filter element is replaced when exhausted\nDesigned for RatRig V-Core — other printers depend on the flexible mounts fitting their enclosure",
     "Vendor 1 URL": "https://www.fabreeko.com/products/rat-rig-rat-pack-hepa-grade-filter-module",
-    "Price (USD)": 64.99
+    "Type": "Recirculating",
+    "Price (USD)": 48.99,
+    "Pros": "Two-stage filtration in one unit: HEPA H13 (Small) / H14 (Large) pleated filter plus coconut activated carbon granules for VOCs and odours\nIn-chamber recirculation — scrubs chamber air during the print and for 300 seconds after, so fumes are cleared before the printer is opened\nNative RatOS and Klipper integration — fan triggers and automations configurable in firmware\nTwo sizes: Small fits V-Core 3 and 300mm V-Core 4, Large suits 400-500mm V-Core 4; flexible mounts adapt it to other printers\nLong filter service life: 600 hours (Small) / 900 hours (Large)\nOpen source — STLs and CAD under CC BY-NC-SA 4.0",
+    "Fan Size": "120x32 blower, 24V"
   },
   {
     "id": "recShZoscl4Vq6tpe",
+    "Filter Media": "Both",
     "Name": "Nevermore MAX Printed Parts",
     "Vendor 1 Name": "Fabreeko",
+    "Description": "The Nevermore MAX Printed Parts kit is MPP's printed-parts set for the Nevermore MAX, the large external recirculating filter for 300mm+ builds — the biggest unit in the Nevermore family. Parts are printed in LDO ABS (1,133g of filament, about 56 hours of print time) in black with an accent colour of your choice. The completed unit holds roughly a kilo of activated carbon plus four HEPA filters, driven by a 70mm blower, for far longer service intervals than a Micro. Fans, carbon, HEPA filters, hardware and panels are sourced separately per the BOM, and note the design itself is archived — the StealthMax is its successor and the current recommendation.",
+    "Verdict Label": "Archived MAX design, superseded by StealthMax — kit saves 56 hours of printing, but fans, carbon and HEPA are extra",
+    "Verdict": "CONSIDER",
+    "Open Source": true,
+    "Replacement Filter Available": true,
+    "Carbon Capacity (g)": 1000,
     "Slug": "nevermore-max-printed-parts",
+    "Cons": "Printed parts only — fan, ~1kg carbon, 4 HEPA filters, hardware and panels are all sourced separately, so the true build cost is well above $159.99\nArchived work-in-progress design superseded by the StealthMax — the StealthMax is the current recommendation for 300mm+ builds\nRequires a 300x300mm bed minimum and an external mounting location — much larger footprint than under-bed filters\nPrinted on demand — up to 5 days to ship (typically 2-3 days)",
     "Vendor 1 URL": "https://www.fabreeko.com/products/nevermore-max-printed-parts-by-mpp",
-    "Price (USD)": 159.99
+    "Type": "Recirculating",
+    "Brand": "Nevermore",
+    "Price (USD)": 159.99,
+    "Pros": "Saves ~56 hours of printing and 1,133g of filament — the MAX frame is notoriously warp-prone in ABS\nParts printed in LDO ABS to proper specs (0.2mm layers, 4 wall loops, 40% adaptive cubic infill)\nHighest-capacity Nevermore — ~1kg of carbon plus built-in HEPA, far longer service intervals than a Micro\nAccent colour of your choice included; ASA-CF option available\nOpen-source GPLv3 design with a full BOM on GitHub",
+    "Fan Size": "70mm blower (Delta BFB0712HF or Sanyo 9TD12P6G001)"
   },
   {
     "id": "recUbnmAiKnKHctV6",
+    "Filter Media": "HEPA",
     "Name": "Nevermore Mini / StealthMax HEPA Filter",
     "Vendor 1 Name": "Fabreeko",
+    "Description": "A replacement HEPA filter element (190mm x 45mm) for the Nevermore Mini and StealthMax S. It adds the particulate-capture stage the carbon-only Mini lacks, catching ultrafine particles down to 2.5µm and below, and drops into the HEPA cartridge variants of the Mini and the StealthMax S. At $4.49 it is a cheap consumable — replace it when you change the carbon.",
+    "Verdict Label": "Cheap consumable — the correct HEPA element for the Mini / StealthMax S",
+    "Verdict": "BUY",
+    "Replacement Filter Available": true,
     "Slug": "nevermore-mini-stealthmax-hepa-filter",
+    "Cons": "HEPA only — captures particles but does nothing for VOCs on its own; it complements the carbon bed, it does not replace it\nElement only — needs the HEPA cartridge variant of the Mini / StealthMax S housing to mount in\nNo filtration grade published (no H13/H14 rating stated) — efficiency class unverified",
     "Vendor 1 URL": "https://www.fabreeko.com/products/nevermore-mini-stealthmax-s-v1-hepa-filter",
-    "Price (USD)": 4.49
+    "Type": "HEPA",
+    "Brand": "Nevermore",
+    "Price (USD)": 4.49,
+    "Pros": "Correct-fit HEPA element (190 x 45mm) for the Nevermore Mini / StealthMax S\nAdds the particulate-filtration stage the carbon-only Mini lacks — captures ultrafine particles\nVery cheap at $4.49 — negligible running cost\nIn stock at Fabreeko"
   },
   {
     "id": "recXZ0RyA752FKyYD",
+    "Filter Media": "Activated Carbon",
     "Name": "Activated Carbon Pellets",
     "Vendor 1 Name": "NorthPrint3D",
+    "Description": "Bulk activated carbon pellets sold by NorthPrint3D as refill media for 3D-printer air filters — the carbon bed for Nevermore and Rebreather designs on Voron and Annex printers, and the BentoBox for Bambu Lab printers. Steam-activated anthracite carbon, 4mm diameter pellets, 1250–1300 m²/g surface area, CTC efficiency 80 minimum, acid-free with no sucrose-based binders. Sold as a 400g bag (~850mL volume) — enough to refill a Nevermore Micro (~10g) many times over. Made in the USA, packaged in Canada; also available in bulk on request. Price basis: 36.16 CAD at NorthPrint3D (~$25.38 USD at ~0.7018, Nov 13 2026).",
+    "Verdict Label": "The standard refill carbon for Nevermore and BentoBox builds — buy a bag and stop paying per-filter prices",
+    "Verdict": "BUY",
+    "Replacement Filter Available": true,
     "Slug": "activated-carbon-pellets",
+    "Cons": "Bulk consumable only — needs a filter unit (Nevermore, BentoBox, etc.) to be useful; not a filter on its own\nNo fan, housing, or printed parts included — just the media\nCarbon saturates and must be replaced every few months with heavy use\n400g bag is far more than a single small filter needs — overkill if you only own one Nevermore Micro",
     "Vendor 1 URL": "https://northprint3d.ca/product/activated-carbon-pellets/",
-    "Price (USD)": 22.51
+    "Price (USD)": 25.38,
+    "Pros": "High-porosity steam-activated anthracite carbon (1250–1300 m²/g surface area, CTC efficiency 80 minimum)\nThe standard refill carbon for Nevermore, Rebreather, and BentoBox filter designs\n400g bag (~850mL) refills a Nevermore Micro (~10g) dozens of times — very low cost per refill\nAcid-free, no sucrose-based binders; 4mm pellets for consistent bed packing\nIn stock at a Canadian vendor (NorthPrint3D), with bulk pricing available on request"
   },
   {
     "id": "reci5HQvSIVQvRmLA",
@@ -174,9 +232,15 @@
     "id": "recxcBT0cpu2gIFNr",
     "Name": "Potassium Permanganate Impregnated Activated Alumina",
     "Vendor 1 Name": "NorthPrint3D",
+    "Description": "Potassium permanganate impregnated activated alumina — a chemical absorbent (chemisorbent) media for capturing VOCs, nitrogen dioxide, and some sulfur-containing compounds, similar to the community 'Nevermore Scorch' media. 3mm pellets, minimum 8% potassium permanganate content, 250 m²/g surface area. Sold as an 800g package (~850mL). Permanently absorbs VOCs; replace when the purple color degrades to gray or brown. NorthPrint3D recommends mixing with activated carbon for best results, noting carbon is less performant above 50°C. Handle with gloves and eyewear — it stains skin, clothes, and surfaces; hydrogen peroxide deactivates it. Price basis: 36.16 CAD at NorthPrint3D (~$25.38 USD at ~0.7018, Nov 13 2026).",
+    "Verdict Label": "Niche chemical absorbent for VOCs carbon misses — worth it for heavy ABS/ASA printers, overkill for most builds",
+    "Verdict": "CONSIDER",
+    "Replacement Filter Available": true,
     "Slug": "potassium-permanganate-impregnated-activated-alumina",
+    "Cons": "Stains skin, clothes, and surfaces — gloves and eyewear required when handling\nNot a standalone filter — must be loaded into a filter unit (e.g. Nevermore) and works best mixed with activated carbon\nNo published MSDS yet (listed as 'coming soon')\nNiche media — most builders' VOC needs are met by plain activated carbon alone\nNot carbon — do not confuse with activated carbon pellets; different media, different handling",
     "Vendor 1 URL": "https://northprint3d.ca/product/potassium-permanganate-impregnated-activated-alumina/",
-    "Price (USD)": 22.51
+    "Price (USD)": 25.38,
+    "Pros": "Chemisorbent media that permanently absorbs VOCs, nitrogen dioxide, and some sulfur-containing compounds carbon alone misses\nSimilar to the community 'Nevermore Scorch' media — a known upgrade path for Nevermore builds\n800g package (~850mL) is a large quantity for the price\nColor-change indicator — replace when purple degrades to gray or brown, no guessing\n3mm pellets for low pressure drop across the filter bed"
   },
   {
     "id": "recyr4i0mTiPtmsbk",

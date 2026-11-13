@@ -1,5 +1,15 @@
 [
   {
+    "id": "rec2i8mOrNn0wx7ZM",
+    "Slug": "stealthfork",
+    "Build Volume": "160×160×160mm",
+    "Description": "Experimental beta printer blending the Micron+ R1's aesthetics and compact form factor with the Salad Fork's fixed gantry; STLs are published for 160mm and 180mm builds, with some parts borrowed from the Micron R1 repo. Beta status: STLs are complete and two showcase builds exist, but there is no full BOM or assembly guide yet — the README notes a full assembly is still pending.",
+    "Name": "StealthFork",
+    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Type": "CoreXY",
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/StealthFork"
+  },
+  {
     "id": "rec34cHfsZVpqcnVc",
     "Slug": "delta-flyer",
     "Price (USD)": 389.99,
