@@ -155,6 +155,31 @@
     "Mount": "Custom"
   },
   {
+    "id": "rec76eoGQDUjxSzr7",
+    "Cons": "Superseded by the Apus 2, which costs less ($53.89) and adds a filament break sensor and 70 N+ pushing force\nOwn mounting pattern — needs a printed adapter for most toolheads\nRelatively small user base vs Bondtech/E3D rivals",
+    "Slug": "apus",
+    "Description": "Compact lightweight all-metal dual-drive extruder from Phaetus, 155 g with a NEMA 14 motor and 6.3:1 gearing. RNC hardened steel dual drive gears grip industrial and composite filaments, and the universal hotend mount swaps hotends with two screws. Price $71.32 direct from Phaetus (blue and black, same price).",
+    "Verdict Label": "Lightweight dual-drive extruder, superseded by the cheaper, stronger Apus 2",
+    "Vendor 3 Name": "Anodas",
+    "Ecosystem": [
+      "Voron"
+    ],
+    "Verdict": "Niche Pick",
+    "Weight (g)": 155,
+    "Vendor 1 Name": "Phaetus",
+    "Name": "Apus",
+    "Vendor 2 URL": "https://galaxus.ch/en/s1/product/phaetus-apus-extruder-3d-printer-accessories-24691933",
+    "Gear Ratio": "6.3:1",
+    "Vendor 1 URL": "https://www.phaetus.com/collections/extruder/products/apus-extruder%C2%AE",
+    "Brand": "Phaetus",
+    "Drive Type": "Dual",
+    "Vendor 2 Name": "Galaxus",
+    "Price (USD)": 71.32,
+    "Pros": "155 g lightweight all-metal design with NEMA 14 motor\nRNC hardened steel dual drive gears, 6.3:1 co-prime ratio\nUniversal hotend mounting with quick-swap three-screw system\nManual filament wheel for easy load/unload\nBuilt for industrial and composite filaments",
+    "Vendor 3 URL": "https://www.anodas.lt/en/phaetus-apus-extruder",
+    "Mount": "Custom"
+  },
+  {
     "id": "rec78PjIZFUJd0scI",
     "Cons": "Work in progress per the README ('things will likely change'); no commercial kit — print it yourself and sacrifice a BMG kit plus a pancake motor; assembled weight unpublished",
     "Vendor 4 Name": "MatterHackers",
