@@ -70,6 +70,7 @@
     "Cons": "12V only — cannot power a standard 24V printer mainboard, heaters or motors\nFan-cooled, so not silent and the fan is a wear item\n115/230V input selector switch must be set correctly before use\nOlder economy design at ~83% efficiency, below modern LRS/UHP units",
     "Name": "NES-350-12",
     "Vendor 1 Name": "DigitMakers",
+    "Output Voltage": "12V",
     "Vendor 1 URL": "https://www.digitmakers.ca/products/mean-well-nes-350-12v-power-supply",
     "Brand": "Mean Well",
     "Price (USD)": 35.16,
@@ -274,6 +275,7 @@
     "Vendor 1 Name": "Fabreeko",
     "Output Voltage": "Dual",
     "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-lcp300-24d5-compact-power-supply-24v-and-5v-300w",
+    "Brand": "LDO",
     "Price (USD)": 69.99,
     "Pros": "Dual 24V (x3) + 5V outputs from one compact enclosed unit\nGaN design with PFC, up to 91% efficient\nDaisy-chainable dual AC input terminals simplify wiring\nOverload, overvoltage and temperature protection built in"
   },

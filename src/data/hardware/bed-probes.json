@@ -94,7 +94,8 @@
     "Vendor 1 Name": "Fabreeko",
     "Name": "Super Pinda",
     "Type": "Inductive",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/super-pinda-by-fysetc"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/super-pinda-by-fysetc",
+    "Brand": "FYSETC"
   },
   {
     "id": "recFWD12nFASMSZuG",
@@ -191,7 +192,7 @@
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "GitHub (Community Build / DIY)",
     "Name": "Klicky PCB",
-    "Type": "Hall Effect",
+    "Type": "Microswitch",
     "Vendor 1 URL": "https://github.com/jlas1/Klicky-Probe",
     "Brand": "Open Source / Community"
   },
@@ -243,7 +244,7 @@
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "Euclid Probe",
     "Name": "Euclid Probe",
-    "Type": "Hall Effect",
+    "Type": "Microswitch",
     "Vendor 1 URL": "https://euclidprobe.github.io/00-getting.html",
     "Brand": "Euclid Probe"
   },

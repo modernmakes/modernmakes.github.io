@@ -5,6 +5,7 @@
     "Pros": "Nearly full-metal construction with generatively designed SLM bracing for stiffness; optional inverted Y-rail so one spacer set fits any rail thickness; new K3rabiner mount widens extruder compatibility (incl. DFA); fits super-wide rail backers",
     "Name": "Toolhead v2",
     "Included Hotend": "None (not included — Chube Conduction or Chube Air only)",
+    "Brand / Designer": "MathematicalPotato",
     "Price (USD)": 77.74,
     "Hotend Mount Style": "Custom",
     "Source URL": "https://github.com/MathematicalPotato/MP_DooKi3_Toolhead_V2",
@@ -12,7 +13,7 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/mathematicalpotato-toolhead-v2-for-annex-engineering-k3-hula-compatible/",
     "Cons": "Preorder only (ends 15 Nov 2026, ~60-day wait); Chube-only; extruder, hotend, fans, toolboard and printed parts all extra; SLM version costs more than the cheaper fan-plate version",
     "Verdict": "Consider",
-    "Updated": "2026-11-12T10:56:10.000Z",
+    "Updated": "2026-11-15T10:31:39.000Z",
     "Slug": "toolhead-v2",
     "Type": "Toolhead Kit"
   },
@@ -143,6 +144,7 @@
     "Pros": "CNC-machined aluminium plates clamp the rail block on 3 sides for rigidity and heat dissipation; wide hotend/extruder support; 6 mm and 9 mm belts; Beacon/Cartographer probe support; full CAD + build manual published",
     "Name": "Hypernova",
     "Included Hotend": "None (not included — Chube Air, Rapido HF/UHF, TZV6 W/MZE, Dragon Ace; also Red Lizard K1 HF/UHF per HyperDrive)",
+    "Brand / Designer": "HyperDrive Design",
     "Price (USD)": 150,
     "Vendor 2 Name": "https://beavertonmilestonehobby.com/products/hypernova",
     "Hotend Mount Style": "Modular — per-hotend adapter plates",
@@ -151,7 +153,7 @@
     "Vendor 1 Name": "https://www.fabreeko.com/products/hypernova-print-head",
     "Cons": "Printed parts not in the box (ABS STLs via Discord, or PPS-CF10 from vendor); Complete Printhead variant sold out at Fabreeko; new/unproven design; Xol-inspired, not a clean-sheet proven platform",
     "Verdict": "Consider",
-    "Updated": "2026-11-12T10:56:40.000Z",
+    "Updated": "2026-11-15T10:31:36.000Z",
     "Slug": "hypernova",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -164,6 +166,7 @@
     "Pros": "Enormous extruder/hotend/probe compatibility; all probe supports included; PA12-CF printed kit; a price for all variants; long-proven RatRig platform",
     "Name": "EVA 3.0",
     "Included Hotend": "None (not included — user-supplied; mounts for Rapido, Mosquito/Magnum, Dragon, Revo Voron, BMO, Nova)",
+    "Brand / Designer": "Pawel Kucmus",
     "Price (USD)": 81.33,
     "Vendor 2 Name": "https://www.etsy.com/listing/1302913703/rat-rig-v-core-31-eva-302-abs-printed",
     "Hotend Mount Style": "Modular — per-hotend adapter plates",
@@ -172,7 +175,7 @@
     "Vendor 1 Name": "https://store.brs-engineering.com/en/products/copie-de-eva-3-0-corexy-nuts",
     "Cons": "Printed kit only — extruder, hotend and fasteners (M3 nuts not provided) are extra; sold out at BRS at time of check; configuration complexity (many variants)",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:39.000Z",
+    "Updated": "2026-11-15T10:31:31.000Z",
     "Slug": "eva-3-0",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -185,6 +188,7 @@
     "Pros": "Full-metal toolhead for the K3's wide Hula rail backers; much stiffer than stock with better heat dissipation; purpose-built for high-speed/high-acceleration K3 use",
     "Name": "Hula",
     "Included Hotend": "None (not included — Chube Air or Chube Conduction only)",
+    "Brand / Designer": "Tiger3DPrinting",
     "Price (USD)": 53.94,
     "Hotend Mount Style": "Custom",
     "Source URL": "https://northprint3d.ca/product/hula-halo-for-annex-engineering-k3-complete-set/",
@@ -192,7 +196,7 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/hula-toolhead-kit-for-annex-engineering-k3/",
     "Cons": "Preorder only (ends 15 Nov 2026, ~60-day wait); Chube-only and Sherpa Micro-only; not recommended for PLA/PETG (no heatsink fan); extruder, hotend, fans and printed parts all extra; dedicated toolboard only planned, timeline uncertain",
     "Verdict": "Consider",
-    "Updated": "2026-11-12T10:56:05.000Z",
+    "Updated": "2026-11-15T10:31:33.000Z",
     "Slug": "hula",
     "Type": "Toolhead Kit"
   },
@@ -231,6 +235,7 @@
     "Pros": "Replaces the K3's printed party plate with rigid 3–3.2 mm aluminium; broad extruder support via K3rabiner/DFA plates; compatible with all K3 hotend and cooling configs; DXFs included to cut your own",
     "Name": "K3 Metal Toolhead",
     "Included Hotend": "None (not included — Chube Air/Conduction, Slice Mosquito, Dragon)",
+    "Brand / Designer": "Luke's Labratory",
     "Price (USD)": 31.65,
     "Hotend Mount Style": "Custom",
     "Source URL": "https://github.com/MathematicalPotato/MP_DooKi3_Toolhead_V1/blob/HEAD/README.md",
@@ -238,7 +243,7 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/k3-metal-toolhead-kit/",
     "Cons": "Plates + spacers only — everything else (extruder, hotend, fans, printed parts, toolboard) extra; DFA plate needs countersinking for standard Sherpa Micro (not recommended config); NorthPrint3D page currently bot-blocked so live price/stock unverifiable",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:42.000Z",
+    "Updated": "2026-11-15T10:31:37.000Z",
     "Slug": "k3-metal-toolhead",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -405,6 +410,7 @@
     "Pros": "Fully open-source SLM metal toolhead; no X travel loss; Chube-optimised; wide extruder compatibility; sold by multiple vendors",
     "Name": "Burgo",
     "Included Hotend": "None (not included — designed for Chube Air and Chube Conduction only)",
+    "Brand / Designer": "Burgo",
     "Price (USD)": 74.57,
     "Vendor 2 Name": "https://www.lukeslabonline.com/collections/voron/products/takeoff-toolhead",
     "Hotend Mount Style": "Custom",
@@ -413,9 +419,12 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/burgo-voron-toolhead/",
     "Cons": "Trident builds need front-left/rear leadscrew cut (or printed spacers); belt-clamp mount needs a pretension tool at high belt tension; Chube hotends only; ~17 mm Y loss on some frames",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:01.000Z",
+    "Updated": "2026-11-15T10:31:30.000Z",
     "Slug": "burgo",
-    "Type": "Toolhead Kit"
+    "Type": "Toolhead Kit",
+    "Part Cooling Fans": [
+      "Dual 3628"
+    ]
   },
   {
     "id": "recdL04Yb38BoVmDH",
@@ -513,6 +522,7 @@
     "Pros": "Full-metal CNC toolhead — lighter, stiffer and more durable than stock VC4; huge extruder/hotend range; Single and IDEX layouts; EBB42/Orbitool O2S toolboard mounts; sold by 4 vendors; actively updated (Aug 2026)",
     "Name": "VC4 CNC Toolhead",
     "Included Hotend": "None (not included — Rapido 1/2/Ace UHF, Dragon Ace, Goliath Air/WC, Triangle Labs CHC XL, Chube Air/Conduction, Mosquito Magnum+)",
+    "Brand / Designer": "Cristian I",
     "Price (USD)": 185,
     "Hotend Mount Style": "Custom",
     "Source URL": "https://www.printables.com/model/1384111-cnc-milled-toolhead-for-the-ratrig-vcore-441",
@@ -520,11 +530,11 @@
     "Vendor 1 Name": "https://store.brs-engineering.com/en/products/vc4-cnc-toolhhead",
     "Cons": "Switching requires belts cut shorter (can't go back without new longer belts); printed parts still needed (or bought separately); Chube hotends need a Beacon Y-offset fix in printer.cfg; top-end IDEX + PPS-CF config is very expensive",
     "Verdict": "Consider",
-    "Updated": "2026-11-12T10:56:44.000Z",
+    "Updated": "2026-11-15T10:31:41.000Z",
     "Slug": "vc4-cnc-toolhead",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
-      "CPAP"
+      "4028"
     ]
   },
   {
