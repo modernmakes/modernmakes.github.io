@@ -5,6 +5,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -128,25 +129,25 @@ const breadcrumbSchema = {
             <h2>Get in Touch</h2>
             <p>Tell us what you're looking for. We respond within 2 business days.</p>
 
-            <form class="lg-form" id="adv-form">
+            <form class="lg-form" id="adv-form" data-contact data-type="advertise" data-page="advertise" data-success="Inquiry sent. We’ll follow up within a few business days.">
               <div class="lg-form-row">
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="adv-name">Name</label>
-                  <input class="lg-form-input" type="text" id="adv-name" placeholder="Your name" required />
+                  <input class="lg-form-input" type="text" id="adv-name" name="name" placeholder="Your name" required />
                 </div>
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="adv-company">Company</label>
-                  <input class="lg-form-input" type="text" id="adv-company" placeholder="Company or brand" required />
+                  <input class="lg-form-input" type="text" id="adv-company" name="company" placeholder="Company or brand" required />
                 </div>
               </div>
               <div class="lg-form-row">
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="adv-email">Email</label>
-                  <input class="lg-form-input" type="email" id="adv-email" placeholder="you@company.com" required />
+                  <input class="lg-form-input" type="email" id="adv-email" name="email" placeholder="you@company.com" required />
                 </div>
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="adv-ptype">Partnership type</label>
-                  <select class="lg-form-input" id="adv-ptype">
+                  <select class="lg-form-input" id="adv-ptype" name="partnershipType">
                     <option value="">Select...</option>
                     <option value="Sponsored Content">Sponsored Content</option>
                     <option value="Newsletter Sponsorship">Newsletter Sponsorship</option>
@@ -157,8 +158,9 @@ const breadcrumbSchema = {
               </div>
               <div class="lg-form-group">
                 <label class="lg-form-label" for="adv-msg">Message</label>
-                <textarea class="lg-form-input lg-form-textarea" id="adv-msg" placeholder="What are you looking for? Budget, timeline, product details…" rows="5" required></textarea>
+                <textarea class="lg-form-input lg-form-textarea" id="adv-msg" name="message" placeholder="What are you looking for? Budget, timeline, product details…" rows="5" required></textarea>
               </div>
+              <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" name="website" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" /></div>
               <button class="lg-form-submit" type="submit" id="adv-btn">Send Inquiry</button>
               <p class="lg-form-msg" id="adv-msg-out" style="display:none"></p>
             </form>
@@ -171,8 +173,8 @@ const breadcrumbSchema = {
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(breadcrumbSchema)}></script>
 </Base>
 
 <script>
@@ -193,45 +195,7 @@ const breadcrumbSchema = {
 })();
 </script>
 
-<script is:inline>
-(function () {
-  var form = document.getElementById('adv-form');
-  var btn  = document.getElementById('adv-btn');
-  var out  = document.getElementById('adv-msg-out');
-  if (!form) return;
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name    = document.getElementById('adv-name').value;
-    var company = document.getElementById('adv-company').value;
-    var email   = document.getElementById('adv-email').value;
-    var ptype   = document.getElementById('adv-ptype').value;
-    var message = document.getElementById('adv-msg').value;
-
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    fetch('https://hook.us1.make.com/xxkrs4kgfwvgp0d83ve2oylwy6pntes2', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'advertise', name: name, company: company, email: email, partnershipType: ptype, message: message, page: 'advertise' })
-    })
-    .then(function () {
-      form.style.display = 'none';
-      out.textContent = 'Inquiry sent. We'll follow up within a few business days.';
-      out.style.color = 'var(--g1)';
-      out.style.display = 'block';
-    })
-    .catch(function () {
-      btn.textContent = 'Send Inquiry';
-      btn.disabled = false;
-      out.textContent = 'Something went wrong. Email modernmakesco@gmail.com directly.';
-      out.style.color = 'var(--accent)';
-      out.style.display = 'block';
-    });
-  });
-})();
-</script>
+<script>import '../../scripts/contact';</script>
 
 <style>
 .adv-track-list { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }

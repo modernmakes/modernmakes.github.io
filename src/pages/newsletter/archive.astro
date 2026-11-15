@@ -8,6 +8,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import BeehiivEmbed from '../../components/BeehiivEmbed.astro';
 import issuesRaw from '../../data/newsletter-archive.json';
+import { jsonLd } from '../../lib/jsonld';
 
 interface Issue {
   issueNumber: number;
@@ -147,8 +148,8 @@ const breadcrumbSchema = {
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(breadcrumbSchema)}></script>
 </Base>
 
 <script>

@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const title   = "How HevORT Was Built: One Engineer's Answer to Mechanical Precision";
 const excerpt = "MirageC decided that firmware compensation for mechanical problems was the wrong approach. What he built instead starts with the mechanics being correct.";
@@ -12,7 +13,7 @@ const excerpt = "MirageC decided that firmware compensation for mechanical probl
   readTime="6 min read"
   currentPath="/hevort"
 >
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": title,

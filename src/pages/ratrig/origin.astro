@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const title   = "How RatRig Got Here: From Extrusion Supplier to CoreXY Benchmark";
 const excerpt = "RatRig started selling aluminum rails to people who built things. The logical next step was designing the machine those rails belonged in.";
@@ -12,7 +13,7 @@ const excerpt = "RatRig started selling aluminum rails to people who built thing
   readTime="6 min read"
   currentPath="/ratrig"
 >
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": title,

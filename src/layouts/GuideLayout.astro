@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import ShareButton from '../components/ShareButton.astro';
 import NewsletterCapture from '../components/NewsletterCapture.astro';
 import '../styles/article.css';
+import { jsonLd } from '../lib/jsonld';
 
 interface Props {
   title: string;
@@ -243,7 +244,7 @@ const breadcrumbItems = [
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": title,
@@ -257,7 +258,7 @@ const breadcrumbItems = [
     },
     "isPartOf": { "@type": "WebSite", "url": siteBase }
   })}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": breadcrumbItems,

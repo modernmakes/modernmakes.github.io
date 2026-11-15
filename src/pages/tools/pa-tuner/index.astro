@@ -3,6 +3,7 @@ import ToolHero from '../../../components/ToolHero.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import { jsonLd } from '../../../lib/jsonld';
 const currentPath = '/tools';
 ---
 <Base hasPageH1={true}
@@ -23,7 +24,7 @@ const currentPath = '/tools';
         <!-- API Key Setup -->
         <div class="pt-api-section" id="apiSection">
           <div class="pt-section-head">API Key</div>
-          <p class="pt-section-note">Your Anthropic API key is stored locally in your browser and never sent to our servers. <a href="https://console.anthropic.com" target="_blank" rel="noopener">Get a key ↗</a></p>
+          <p class="pt-section-note">Your Anthropic API key is kept in this tab only (cleared when you close it) and never sent to our servers. <a href="https://console.anthropic.com" target="_blank" rel="noopener">Get a key ↗</a></p>
           <div class="pt-field">
             <label class="pt-label" for="apiKeyIn">Anthropic API Key</label>
             <input class="pt-input" type="password" id="apiKeyIn" placeholder="sk-ant-…">
@@ -107,7 +108,7 @@ const currentPath = '/tools';
       </aside>
 
       <!-- RIGHT: OUTPUT -->
-      <main class="pt-output">
+      <section class="pt-output">
 
         <!-- Idle state -->
         <div class="pt-idle-card" id="idleCard">
@@ -128,13 +129,13 @@ const currentPath = '/tools';
           </div>
         </div>
 
-      </main>
+      </section>
     </div>
   </div>
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -270,7 +271,7 @@ let imageMediaType: string | null = null;
 let accumulatedText = '';
 
 function getApiKey(): string {
-  return localStorage.getItem('mm_anthropic_key') ?? '';
+  return sessionStorage.getItem('mm_anthropic_key') ?? '';
 }
 
 function updateKeyUI() {
@@ -304,12 +305,12 @@ document.getElementById('saveKeyBtn')?.addEventListener('click', () => {
     s.className = 'pt-key-status error';
     return;
   }
-  localStorage.setItem('mm_anthropic_key', val);
+  sessionStorage.setItem('mm_anthropic_key', val);
   updateKeyUI();
 });
 
 document.getElementById('clearKeyBtn')?.addEventListener('click', () => {
-  localStorage.removeItem('mm_anthropic_key');
+  sessionStorage.removeItem('mm_anthropic_key');
   updateKeyUI();
   const apiSection = document.getElementById('apiSection') as HTMLElement;
   apiSection.classList.remove('hidden');
@@ -429,6 +430,7 @@ Please analyze this and give me:
       headers: {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
         'content-type': 'application/json',
       },
       body: JSON.stringify({

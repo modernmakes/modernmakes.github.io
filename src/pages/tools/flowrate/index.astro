@@ -3,6 +3,7 @@ import ToolHero from '../../../components/ToolHero.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
+import { jsonLd } from '../../../lib/jsonld';
 const currentPath = '/tools';
 ---
 <Base hasPageH1={true}
@@ -112,7 +113,7 @@ const currentPath = '/tools';
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {

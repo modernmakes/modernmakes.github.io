@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import TypeCover from '../../components/TypeCover.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const currentPath = '/news';
 const siteBase = Astro.site
@@ -99,7 +100,7 @@ const counts = { all: sorted.length };
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {

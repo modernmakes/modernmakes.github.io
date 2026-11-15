@@ -7,6 +7,7 @@ import Sheet from '../components/Sheet.astro';
 import ShareButton from '../components/ShareButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import { resolveFlowClass } from '../lib/hardware';
+import { jsonLd } from '../lib/jsonld';
 
 interface VendorLink {
   name: string;
@@ -508,9 +509,9 @@ const breadcrumbSchema = {
 
   <!-- Hold first render until the hero exists, so the card→page zoom can name it in pagereveal. -->
   <link rel="expect" href="#comp-hero" blocking="render" slot="head" />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(productSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(productSchema)}></script>
   <script>import '../scripts/copy';</script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(breadcrumbSchema)}></script>
   <slot name="head" slot="head" />
 </Base>
 

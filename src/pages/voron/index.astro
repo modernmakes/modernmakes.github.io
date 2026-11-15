@@ -5,6 +5,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import { handBadge, type RecordRef } from '../../lib/hardware';
 import voronData from '../../data/products/voron-variants.json';
+import { jsonLd } from '../../lib/jsonld';
 const currentPath = '/voron';
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -424,7 +425,7 @@ const partCounts: Record<string, { a: number; t: number }> = {
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {

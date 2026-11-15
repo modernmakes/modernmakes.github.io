@@ -3,6 +3,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -103,8 +104,8 @@ const sections = [
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(breadcrumbSchema)}></script>
 </Base>
 
 <script>

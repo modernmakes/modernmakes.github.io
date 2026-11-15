@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import toolsData from '../../data/tools.json';
+import { jsonLd } from '../../lib/jsonld';
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -63,7 +64,7 @@ const iconSvgs: Record<string, string> = {
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {

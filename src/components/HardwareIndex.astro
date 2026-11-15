@@ -9,6 +9,7 @@ import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
 import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES } from '../lib/hardware';
+import { jsonLd } from '../lib/jsonld';
 
 interface Props {
   records: any[];
@@ -224,7 +225,7 @@ const itemListSchema = {
   </section>
 
   <Footer slot="footer" />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(itemListSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(itemListSchema)}></script>
 </Base>
 
 <script>

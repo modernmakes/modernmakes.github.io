@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { jsonLd } from '../../lib/jsonld';
 const label = 'newsletter'.charAt(0).toUpperCase() + 'newsletter'.slice(1);
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -17,7 +18,7 @@ const siteBase = Astro.site
     <p style="margin-top:24px"><a href="/newsletter/archive" style="font-family:'Barlow',sans-serif;font-size:13px;color:var(--g1)">Browse past issues →</a></p>
   </section>
   <Footer slot="footer" />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {

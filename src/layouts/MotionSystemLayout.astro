@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { jsonLd } from '../lib/jsonld';
 
 interface PrinterEntry     { name: string; notes?: string; }
 interface ToolheadEntry    { name: string; notes?: string; }
@@ -399,7 +400,7 @@ const breadcrumbItems = [
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     "name": title,
@@ -410,7 +411,7 @@ const breadcrumbItems = [
     "programmingLanguage": "Hardware mod",
     "publisher": { "@type": "Organization", "name": "Modern Makes", "url": siteBase }
   })}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": breadcrumbItems,

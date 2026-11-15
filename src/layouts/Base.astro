@@ -2,6 +2,7 @@
 // Base layout — wraps every page on the site
 import '../styles/global.css';
 import pageMotion from '../scripts/page-motion.js?raw';
+import { jsonLd } from '../lib/jsonld';
 interface Props {
   title: string;
   description?: string;
@@ -52,7 +53,7 @@ const siteURL = new URL('/', Astro.site).href;
   <meta property="og:image" content={ogImageURL} />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script type="application/ld+json" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Modern Makes",

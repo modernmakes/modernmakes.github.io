@@ -3,6 +3,7 @@ import VoronSubsystemLayout from '../../layouts/VoronSubsystemLayout.astro';
 import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
 import TypeCover from '../../components/TypeCover.astro';
 import { handBadge } from '../../lib/hardware';
+import { jsonLd } from '../../lib/jsonld';
 
 const products = [
   {
@@ -196,7 +197,7 @@ const products = [
     </div>
   </section>
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [{
       "@type": "ItemList",

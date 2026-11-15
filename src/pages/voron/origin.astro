@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const title   = "How Voron Started: A Garage Project That Became a Movement";
 const excerpt = "In 2015, Maksim Zolin wanted a better printer. What he built instead was a design philosophy — and a community of 15,000 builders that changed what DIY 3D printing could be.";
@@ -12,7 +13,7 @@ const excerpt = "In 2015, Maksim Zolin wanted a better printer. What he built in
   readTime="6 min read"
   currentPath="/voron"
 >
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": title,

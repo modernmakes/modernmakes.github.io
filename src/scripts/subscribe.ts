@@ -9,6 +9,8 @@ import { buzz } from './haptics';
 
 const HOOK = 'https://hook.us1.make.com/rb9wcdyixxygfhoihhr0mnjpm1k61hu4';
 const TIMEOUT = 10_000;
+const MIN_MS = 3000; // a human takes longer than this to fill the form
+const loadedAt = performance.now();
 const MSG = {
   invalid: 'That address doesn’t look right.',
   failed: 'That didn’t go through. Try again in a moment.',
@@ -54,6 +56,8 @@ for (const form of document.querySelectorAll<HTMLFormElement>('form[data-subscri
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (form.dataset.state === 'working') return;
+    // Bot signals (filled honeypot, or submitted under 3 s after load): drop silently, no request, no error UI.
+    if (form.querySelector<HTMLInputElement>('input[data-hp]')?.value || performance.now() - loadedAt < MIN_MS) return;
     if (!looksValid(input)) { fail(MSG.invalid); input.focus(); return; }
 
     btn.style.width = `${btn.getBoundingClientRect().width}px`; // the spinner never changes the button's size

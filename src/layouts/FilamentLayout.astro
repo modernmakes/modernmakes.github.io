@@ -3,6 +3,7 @@ import TypeCover from '../components/TypeCover.astro';
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { jsonLd } from '../lib/jsonld';
 
 interface Brand {
   name: string;
@@ -393,7 +394,7 @@ const breadcrumbItems = [
   </section>
 
   <Footer slot="footer" />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": `${title} — Filament Guide`,
@@ -407,7 +408,7 @@ const breadcrumbItems = [
     },
     "isPartOf": { "@type": "WebSite", "url": siteBase }
   })}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": breadcrumbItems,

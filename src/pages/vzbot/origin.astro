@@ -1,5 +1,6 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const title   = "How VzBoT Happened: A TronXY Frame and a Demand for Speed";
 const excerpt = "Simon Vez started with a donor frame and a question: how fast can this actually go? The answer became one of the most technically distinctive printers in the open-source ecosystem.";
@@ -12,7 +13,7 @@ const excerpt = "Simon Vez started with a donor frame and a question: how fast c
   readTime="6 min read"
   currentPath="/vzbot"
 >
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": title,

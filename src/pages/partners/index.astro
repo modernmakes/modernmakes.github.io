@@ -5,6 +5,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import { jsonLd } from '../../lib/jsonld';
 
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
@@ -117,15 +118,15 @@ const breadcrumbSchema = {
             <h2>Apply</h2>
             <p>Tell us about your product and affiliate program. We review applications within 5 business days.</p>
 
-            <form class="lg-form" id="prt-form">
+            <form class="lg-form" id="prt-form" data-contact data-type="partner" data-page="partners" data-success="Application sent. We’ll review it within 5 business days.">
               <div class="lg-form-row">
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="prt-company">Company / Brand</label>
-                  <input class="lg-form-input" type="text" id="prt-company" placeholder="Your company name" required />
+                  <input class="lg-form-input" type="text" id="prt-company" name="company" placeholder="Your company name" required />
                 </div>
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="prt-category">Product category</label>
-                  <select class="lg-form-input" id="prt-category">
+                  <select class="lg-form-input" id="prt-category" name="category">
                     <option value="">Select...</option>
                     <option value="hotends">Hotends</option>
                     <option value="extruders">Extruders</option>
@@ -140,21 +141,22 @@ const breadcrumbSchema = {
               <div class="lg-form-row">
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="prt-website">Website</label>
-                  <input class="lg-form-input" type="url" id="prt-website" placeholder="https://yoursite.com" />
+                  <input class="lg-form-input" type="url" id="prt-website" name="website" placeholder="https://yoursite.com" />
                 </div>
                 <div class="lg-form-group">
                   <label class="lg-form-label" for="prt-affiliate-url">Affiliate program URL</label>
-                  <input class="lg-form-input" type="url" id="prt-affiliate-url" placeholder="https://affiliate-platform.com/..." />
+                  <input class="lg-form-input" type="url" id="prt-affiliate-url" name="affiliateUrl" placeholder="https://affiliate-platform.com/..." />
                 </div>
               </div>
               <div class="lg-form-group">
                 <label class="lg-form-label" for="prt-contact-email">Contact email</label>
-                <input class="lg-form-input" type="email" id="prt-contact-email" placeholder="you@company.com" required />
+                <input class="lg-form-input" type="email" id="prt-contact-email" name="email" placeholder="you@company.com" required />
               </div>
               <div class="lg-form-group">
                 <label class="lg-form-label" for="prt-msg">Message</label>
-                <textarea class="lg-form-input lg-form-textarea" id="prt-msg" placeholder="What products are you hoping to get exposure for? Commission structure? Anything else we should know?" rows="4"></textarea>
+                <textarea class="lg-form-input lg-form-textarea" id="prt-msg" name="message" placeholder="What products are you hoping to get exposure for? Commission structure? Anything else we should know?" rows="4"></textarea>
               </div>
+              <div style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" name="fax" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" /></div>
               <button class="lg-form-submit" type="submit" id="prt-btn">Send Application</button>
               <p class="lg-form-msg" id="prt-msg-out" style="display:none"></p>
             </form>
@@ -167,8 +169,8 @@ const breadcrumbSchema = {
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(pageSchema)}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(pageSchema)}></script>
+  <script type="application/ld+json" slot="head" set:html={jsonLd(breadcrumbSchema)}></script>
 </Base>
 
 <script>
@@ -189,46 +191,7 @@ const breadcrumbSchema = {
 })();
 </script>
 
-<script is:inline>
-(function () {
-  var form = document.getElementById('prt-form');
-  var btn  = document.getElementById('prt-btn');
-  var out  = document.getElementById('prt-msg-out');
-  if (!form) return;
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var company      = document.getElementById('prt-company').value;
-    var category     = document.getElementById('prt-category').value;
-    var website      = document.getElementById('prt-website').value;
-    var affiliateUrl = document.getElementById('prt-affiliate-url').value;
-    var email        = document.getElementById('prt-contact-email').value;
-    var message      = document.getElementById('prt-msg').value;
-
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    fetch('https://hook.us1.make.com/xxkrs4kgfwvgp0d83ve2oylwy6pntes2', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'partner', company: company, category: category, website: website, affiliateUrl: affiliateUrl, email: email, message: message, page: 'partners' })
-    })
-    .then(function () {
-      form.style.display = 'none';
-      out.textContent = 'Application sent. We'll review it within 5 business days.';
-      out.style.color = 'var(--g1)';
-      out.style.display = 'block';
-    })
-    .catch(function () {
-      btn.textContent = 'Send Application';
-      btn.disabled = false;
-      out.textContent = 'Something went wrong. Email modernmakesco@gmail.com directly.';
-      out.style.color = 'var(--accent)';
-      out.style.display = 'block';
-    });
-  });
-})();
-</script>
+<script>import '../../scripts/contact';</script>
 
 <style>
 .prt-offer-list { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }

@@ -18,6 +18,7 @@ import toolboards from '../../data/hardware/toolboards.json';
 import bedProbes from '../../data/hardware/bed-probes.json';
 import psus from '../../data/hardware/psus.json';
 import partCooling from '../../data/hardware/part-cooling.json';
+import { jsonLd } from '../../lib/jsonld';
 
 const currentPath = '/voron/configurator';
 const siteBase = Astro.site
@@ -106,7 +107,7 @@ const subsystems = [
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Voron Configurator — Modern Makes',

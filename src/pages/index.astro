@@ -14,6 +14,7 @@ import { resolveVerdict } from '../lib/hardware';
 import hotends from '../data/hardware/hotends.json';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { jsonLd } from '../lib/jsonld';
 const currentPath = '/';
 
 // Slug + first-sentence helpers (defined inline per project convention)
@@ -75,7 +76,7 @@ const featuredImages = featuredHotends.map((rec: any) => {
   <HomeToolsTeaser />
   <AdSlot slotName="home-above-footer" />
   <Footer slot="footer" />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Modern Makes — The 3D Printing Enthusiast's Publication",

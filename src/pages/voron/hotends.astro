@@ -4,6 +4,7 @@ import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
 import TypeCover from '../../components/TypeCover.astro';
 import { resolveVerdict, toSlug } from '../../lib/hardware';
 import hotends from '../../data/hardware/hotends.json';
+import { jsonLd } from '../../lib/jsonld';
 const siteBase = Astro.site
   ? new URL(Astro.site).href.replace(/\/$/, '')
   : 'https://modernmakes.github.io';
@@ -202,7 +203,7 @@ const fmtPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2))
     </div>
   </section>
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {

@@ -7,6 +7,7 @@ import ShareButton from '../components/ShareButton.astro';
 import NewsletterCapture from '../components/NewsletterCapture.astro';
 import { getRelatedContent, type RelatedCollection } from '../lib/related-content';
 import '../styles/article.css';
+import { jsonLd } from '../lib/jsonld';
 
 interface Props {
   title: string;
@@ -161,7 +162,7 @@ const breadcrumbItems = [
   <Footer slot="footer" />
 
   <slot name="head" slot="head" />
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "NewsArticle",
     "headline": title,
@@ -177,7 +178,7 @@ const breadcrumbItems = [
     },
     "isPartOf": { "@type": "WebSite", "url": siteBase }
   })}></script>
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": breadcrumbItems,

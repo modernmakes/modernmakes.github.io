@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ratrigData from '../../data/ratrigData.json';
+import { jsonLd } from '../../lib/jsonld';
 
 const currentPath = '/ratrig';
 const siteBase = Astro.site
@@ -172,7 +173,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
 
   <Footer slot="footer" />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+  <script type="application/ld+json" slot="head" set:html={jsonLd({
     "@context": "https://schema.org",
     "@graph": [
       {
