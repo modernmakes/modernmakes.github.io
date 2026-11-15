@@ -425,13 +425,14 @@
     "Name": "StealthBurner",
     "Included Hotend": "Dragon HF, Dragon UHF, Revo Voron, Rapido HF, NF-Crazy (via adapters)",
     "Brand / Designer": "Voron Design",
+    "Price (USD)": 34,
     "Vendor 2 Name": "https://www.fabreeko.com/collections/voron/products/stealthburner-kit-for-voron-by-fystec",
     "Compatible Motion Systems": [
       "CoreXY"
     ],
     "Hotend Mount Style": "Dragon/V6 (native); Rapido, Revo via adapters",
     "Source URL": "https://vorondesign.com/voron_stealthburner",
-    "Description": "Official Voron Design toolhead for Voron 2.4 and Trident. Successor to AfterBurner. Ships with Clockwork 2 (CW2) direct-drive extruder. Supports a wide range of hotends via official and community adapters. Two 5015 blower fans provide strong part cooling. Print-it-yourself design — no PCB required for basic wiring.",
+    "Description": "Official Voron Design toolhead for Voron 2.4 and Trident. Successor to AfterBurner. Ships with Clockwork 2 (CW2) direct-drive extruder. Supports a wide range of hotends via official and community adapters. Two 5015 blower fans provide strong part cooling. Print-it-yourself design — no PCB required for basic wiring. Price is the FYSETC direct kit price ($34).",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
@@ -439,7 +440,7 @@
     "Vendor 1 Name": "https://github.com/VoronDesign/Voron-Stealthburner",
     "Cons": "Bulkier than newer community designs; no filament cutter by default; not multi-material ready without mods; CW2 has more parts than some alternatives",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:19.000Z",
+    "Updated": "2026-11-14T22:28:57.000Z",
     "Slug": "stealthburner",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [

@@ -238,9 +238,9 @@
       "RatRig V-Core"
     ],
     "ADXL345 Onboard": true,
-    "Name": "SHT36 v2",
+    "Name": "SHT36 v2 (072)",
     "Vendor 1 Name": "Mellow (AliExpress)",
-    "Description": "Mellow's toolboard answer to the BTT EBB36, using the same STM32G0B1CBT6 chip with FDCAN bus support. Hardware specs are essentially equivalent: TMC2209, ADXL345, Neopixel, USB-C fallback. The SHT36 v2 integrates well with the broader Mellow/Fly ecosystem (Fly-Super8, FLY-Gemini, etc.). A solid option if you're already using Mellow mainboards and want a consistent vendor stack, or if EBB36 stock is constrained.",
+    "Description": "Mellow's toolboard answer to the BTT EBB36. The SHT36 v2 (072) is the later-shipment variant, using the APM32F072 MCU (STM32F072-compatible) with FDCAN bus support. Hardware specs: TMC2209, ADXL345, Neopixel, USB-C fallback. The SHT36 v2 integrates well with the broader Mellow/Fly ecosystem (Fly-Super8, FLY-Gemini, etc.). A solid option if you're already using Mellow mainboards and want a consistent vendor stack, or if EBB36 stock is constrained. Note: units shipped before 2022-10-18 use the GD32F103 chip instead — see the separate SHT36 v2 (103) record.",
     "Verdict Label": "Solid EBB36 alternative from Mellow",
     "Verdict": "CONSIDER",
     "Fan Outputs": 2,
@@ -256,9 +256,10 @@
     "Brand": "Mellow",
     "Neopixel Support": true,
     "Price (USD)": 18,
-    "Pros": "- Same STM32G0B1CBT6 MCU as EBB36 v1.2 — identical CAN and Klipper support\n- USB-C fallback for flashing\n- ADXL345 and Neopixel onboard\n- Active Mellow ecosystem and Fly-OS integration",
+    "Pros": "- APM32F072 MCU (STM32F072-compatible) with FDCAN bus — Klipper CAN support\n- USB-C fallback for flashing\n- ADXL345 and Neopixel onboard\n- Active Mellow ecosystem and Fly-OS integration",
     "USB Fallback": true,
-    "Slug": "sht36-v2"
+    "Slug": "sht36-v2-072",
+    "MCU": "APM32F072"
   },
   {
     "id": "recdjR4FWpAi2acOO",
@@ -320,6 +321,38 @@
     "USB Fallback": true,
     "Slug": "sb2040-v3-pro",
     "MCU": "RP2040 133MHz dual-core"
+  },
+  {
+    "id": "reciz6xylY8YXj8Sa",
+    "Hotend Connector": "JST-PH 2.0 4-pin",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "RatRig V-Core"
+    ],
+    "ADXL345 Onboard": true,
+    "Name": "SHT36 v2 (103)",
+    "Vendor 1 Name": "Mellow (AliExpress)",
+    "Description": "Mellow's toolboard answer to the BTT EBB36. The SHT36 v2 (103) is the first-batch variant, using the GD32F103 MCU (STM32F103-compatible) with FDCAN bus support. Hardware specs: TMC2209, ADXL345, Neopixel, USB-C fallback. The SHT36 v2 integrates well with the broader Mellow/Fly ecosystem (Fly-Super8, FLY-Gemini, etc.). A solid option if you're already using Mellow mainboards and want a consistent vendor stack, or if EBB36 stock is constrained. Note: units shipped after 2022-10-18 use the APM32F072 chip instead — see the separate SHT36 v2 (072) record.",
+    "Verdict Label": "Solid EBB36 alternative from Mellow",
+    "Verdict": "CONSIDER",
+    "Fan Outputs": 2,
+    "Stepper Driver": "TMC2209",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Clockwork 2",
+      "Sherpa Mini"
+    ],
+    "Cons": "- Fewer Voron-specific guides than EBB36\n- Mellow documentation is primarily in Chinese — English translations available but sometimes lag\n- Community config files less widely shared than BTT equivalents",
+    "Connection": "CAN + USB",
+    "Vendor 1 URL": "https://www.aliexpress.com/store/1103443/search?SearchText=SHT36",
+    "Brand": "Mellow",
+    "Neopixel Support": true,
+    "Price (USD)": 18,
+    "Pros": "- GD32F103 MCU (STM32F103-compatible) with FDCAN bus — Klipper CAN support\n- USB-C fallback for flashing\n- ADXL345 and Neopixel onboard\n- Active Mellow ecosystem and Fly-OS integration",
+    "USB Fallback": true,
+    "Slug": "sht36-v2-103",
+    "MCU": "GD32F103"
   },
   {
     "id": "recncup8iN3VhYBuT",

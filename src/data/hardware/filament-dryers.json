@@ -29,7 +29,7 @@
     "Pros": "Built-in filament weight scale — tracks remaining spool weight without opening the box\nFeed port for print-while-dry\nHumidity sensor and temperature display\nReliable eSUN brand — established in the filament community",
     "Humidity Display": true,
     "Slug": "ebox-pro",
-    "Cons": "55°C max temp — noticeably lower than S2 (70°C) and EIBOS (75°C)\nIneffective for PA/nylon, PC, or other engineering filaments at this temperature\nMore expensive than Sunlu S2 for less drying performance\nOlder product design — community has moved toward S2/EIBOS at same price tier",
+    "Cons": "55°C max temp — noticeably lower than S2 (70°C) and EIBOS (70°C)\nIneffective for PA/nylon, PC, or other engineering filaments at this temperature\nMore expensive than Sunlu S2 for less drying performance\nOlder product design — community has moved toward S2/EIBOS at same price tier",
     "Compatible Printers": [
       "Universal"
     ],
@@ -42,7 +42,7 @@
     "Brand": "eSUN",
     "Price (USD)": 46.57,
     "Feed Port": true,
-    "Max Temp (°C)": 70,
+    "Max Temp (°C)": 55,
     "Description": "The eSUN eBOX Pro is distinguished by its built-in filament weight scale, letting you track remaining spool weight without pulling it out mid-print. Feed port, humidity sensor, and temp display are all present. The critical limitation is the 55°C ceiling — well below what PA/nylon (75–80°C) and PC (80°C+) require. Community consensus: the scale is genuinely useful, but the temp ceiling makes this a PLA/PETG-only dryer. If you don’t regularly need the scale, the Sunlu S2 outperforms it for less money.",
     "Verdict Label": "Built-in filament scale is genuinely useful — but the 55°C ceiling limits what it can dry",
     "Verdict": "Solid Choice"
@@ -71,7 +71,7 @@
   {
     "id": "recEEf2Cw108PkCup",
     "Temperature Display": true,
-    "Pros": "Best active circulation design in this comparison — convection heating produces measurably more even temperature distribution\n75°C max — reaches optimal PA/nylon drying range where S2 falls short\nHumidity sensor with display — know when drying is complete\nFeed port for print-while-dry\nNoticeably better build quality vs. budget options — lid seal, material consistency\nTimer function",
+    "Pros": "Best active circulation design in this comparison — convection heating produces measurably more even temperature distribution\n70°C max — reaches optimal PA/nylon drying range where S2 falls short\nHumidity sensor with display — know when drying is complete\nFeed port for print-while-dry\nNoticeably better build quality vs. budget options — lid seal, material consistency\nTimer function",
     "Humidity Display": true,
     "Slug": "eibos-cyclopes",
     "Cons": "Approximately 2× the price of Sunlu S2\nSingle spool only — no multi-spool option\nPremium hard to justify for casual PLA/PETG drying\nAliExpress pricing is best but adds lead time vs. Amazon S2",
@@ -88,7 +88,7 @@
     "Price (USD)": 89.99,
     "Feed Port": true,
     "Max Temp (°C)": 70,
-    "Description": "The EIBOS Cyclopes is the performance pick in this category. Its convection heating design produces more even temperature distribution than the budget alternatives, and the 75°C ceiling enters the effective drying range for PA/nylon where the S2 falls short. Community verdict is clear: Sunlu S2 for value-conscious builders who primarily dry PLA and PETG; EIBOS for anyone printing hygroscopic engineering filaments regularly and wanting confidence in the result. At roughly 2× the S2 price, the upgrade justifies itself once PA, moisture-sensitive TPU, or ASA that’s been sitting open are part of your regular rotation.",
+    "Description": "The EIBOS Cyclopes is the performance pick in this category. Its convection heating design produces more even temperature distribution than the budget alternatives, and the 70°C ceiling enters the effective drying range for PA/nylon where the S2 falls short. Community verdict is clear: Sunlu S2 for value-conscious builders who primarily dry PLA and PETG; EIBOS for anyone printing hygroscopic engineering filaments regularly and wanting confidence in the result. At roughly 2× the S2 price, the upgrade justifies itself once PA, moisture-sensitive TPU, or ASA that’s been sitting open are part of your regular rotation.",
     "Verdict Label": "Performance benchmark — the upgrade from S2 when drying quality matters",
     "Verdict": "Top Pick"
   },
@@ -139,7 +139,7 @@
     "Temperature Display": true,
     "Pros": "Cheapest active entry point on the list\nFeed port for print-while-dry\nCompact and lightweight\nFine for PLA maintenance drying and dry storage between uses",
     "Slug": "ebox-lite",
-    "Cons": "45°C max temp — barely above ambient for any serious moisture removal\nNo humidity sensor — no moisture level feedback\nNo timer\nNot effective for PETG, PA, or any engineering filament with significant moisture exposure\nMore ‘heated storage’ than ‘active drying’",
+    "Cons": "55°C max temp (inside) — barely above ambient for any serious moisture removal\nNo humidity sensor — no moisture level feedback\nNo timer\nNot effective for PETG, PA, or any engineering filament with significant moisture exposure\nMore ‘heated storage’ than ‘active drying’",
     "Compatible Printers": [
       "Universal"
     ],
@@ -153,7 +153,7 @@
     "Price (USD)": 52.99,
     "Feed Port": true,
     "Max Temp (°C)": 55,
-    "Description": "The eSUN eBOX Lite is the budget floor — functional for keeping recently-opened PLA and PETG from absorbing ambient moisture, but with a 45°C ceiling it cannot rescue filament that has already absorbed significant moisture. Think of it as a heated dry box rather than a dryer. Community context: adequate for maintaining filament condition between print sessions; not the right tool if you’re starting with wet filament or printing hygroscopic engineering materials.",
+    "Description": "The eSUN eBOX Lite is the budget floor — functional for keeping recently-opened PLA and PETG from absorbing ambient moisture, but with a 55°C ceiling (inside temp; hot plate reaches 118°C) it cannot rescue filament that has already absorbed significant moisture. Think of it as a heated dry box rather than a dryer. Community context: adequate for maintaining filament condition between print sessions; not the right tool if you’re starting with wet filament or printing hygroscopic engineering materials.",
     "Verdict Label": "Budget dry-storage box with slight warmth — maintenance drying only",
     "Verdict": "Solid Choice"
   },
@@ -177,18 +177,9 @@
     "Price (USD)": 116.99,
     "Feed Port": true,
     "Max Temp (°C)": 70,
-    "Description": "The Sunlu S4 scales the S2’s proven active drying system to four simultaneous spools. Aimed at multi-material builders running an AMS, toolchanger, or high-volume print farms — the four independent feed ports let you print from any slot while the others dry. At $75 the per-spool cost is roughly equivalent to four individual S2 units, but the integrated form factor and single power connection is meaningfully cleaner. Same 70°C ceiling as the S2 applies throughout.",
+    "Description": "The Sunlu S4 scales the S2’s proven active drying system to four simultaneous spools. Aimed at multi-material builders running an AMS, toolchanger, or high-volume print farms — the four independent feed ports let you print from any slot while the others dry. At $116.99 the per-spool cost is roughly equivalent to four individual S2 units, but the integrated form factor and single power connection is meaningfully cleaner. Same 70°C ceiling as the S2 applies throughout.",
     "Verdict Label": "Four-spool simultaneous drying — right pick for multi-material and high-volume builders",
     "Verdict": "Solid Choice"
-  },
-  {
-    "id": "reckFfHXb5tMBFmaD",
-    "Slug": "tetras-filament-dryer-series-x",
-    "Vendor 1 Name": "Fabreeko",
-    "Name": "TETRAS Filament Dryer Series X",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/tetras-filament-dryer-series-x-by-eibos",
-    "Brand": "EIBOS",
-    "Price (USD)": 209.99
   },
   {
     "id": "recuM7XeVzCgeN6j7",

@@ -88,6 +88,7 @@
     "Name": "LRS-600-24",
     "Vendor 1 Name": "RS",
     "Output Voltage": "24V",
+    "Vendor 1 URL": "https://us.rs-online.com/product/mean-well/lrs-600-24/73281070/",
     "Brand": "Mean Well",
     "Price (USD)": 75,
     "Pros": "600W rated output - the highest-wattage LRS in the table\nEnclosed metal case, UL 62368-1 approved\nBuilt-in fan with ON/OFF control - only runs when hot (on at 50C, off at 40C)\n24V/25A single output from the most common printer-PSU series"
@@ -268,6 +269,7 @@
     "Verdict Label": "A compact dual-output 24V+5V supply purpose-built for 3D printers, with no separate 5V supply needed.",
     "Form Factor": "Enclosed",
     "Cons": "No UL certification — EN IEC 62368-1 LVD compliance only\n5V rail is a buck converter off the 24V rail, max 25W\nGets hot at full 300W and needs external airflow\nNarrow operating temperature range, -20 to 40°C",
+    "Fanless": true,
     "Name": "LCP300-24D5",
     "Vendor 1 Name": "Fabreeko",
     "Output Voltage": "Dual",

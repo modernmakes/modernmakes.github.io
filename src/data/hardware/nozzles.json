@@ -419,23 +419,6 @@
     "Max Temp (°C)": 285
   },
   {
-    "id": "recViqTVOc8trPZwJ",
-    "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/bridgemaster-nozzle-xl",
-    "Material": "Hardened Steel",
-    "Brand": "Slice Engineering",
-    "Style": "Standard",
-    "Price (USD)": 19.99,
-    "Pros": "Same copper-alloy-core thermal performance as the standard BridgeMaster — holds temperature under heavy part cooling\nCarbide-based coating for abrasive-filament wear resistance\nCheaper than the standard BridgeMaster at $19.99",
-    "Verdict": "Solid Choice",
-    "Slug": "bridgemaster-xl",
-    "Cons": "Almost no published information: Slice lists 2 unlabeled variants and no diameters, thread or specs\nUnclear what 'XL' denotes vs the standard BridgeMaster (diameter range? geometry?) — confirm before recommending\nNo published max-temp rating",
-    "Vendor 1 Name": "Slice Engineering",
-    "Name": "BridgeMaster XL",
-    "Description": "Slice Engineering's BridgeMaster XL is a variant of the BridgeMaster bridging nozzle, sold direct by Slice at $19.99. It shares the BridgeMaster line's hardened copper alloy core and carbide-based coating, built to hold filament temperature to the tip under strong part cooling for bridging and overhangs. Note: Slice publishes almost no detail on the XL — its page lists two unlabeled variants with no diameters, thread or spec sheet, and no other retailer documents it — so the diameter range and exact geometry are unverified.",
-    "Thread": "M6",
-    "Verdict Label": "BridgeMaster bridging performance, supersized"
-  },
-  {
     "id": "recW2e2UJuV5yTlKW",
     "Vendor 1 URL": "https://e3d-online.com/products/revo-belt-nozzles",
     "Material": "Brass",
