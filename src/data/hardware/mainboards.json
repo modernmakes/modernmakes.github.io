@@ -102,6 +102,7 @@
     "Vendor 1 Name": "Fabreeko",
     "Driver Count": 6,
     "Vendor 1 URL": "https://www.fabreeko.com/products/recore-a7-by-iagent",
+    "Brand": "iAgent",
     "Voltage": "24V",
     "Price (USD)": 75,
     "Pros": "All-in-one: Linux host + 6x TMC2209 on one board — no separate Pi needed\nShips with Debian, Klipper and OctoPrint/Mainsail preinstalled\nGigabit Ethernet, 4x USB, flexible temperature inputs (thermistor/thermocouple/PT100/PT1000)\nOpen-schematic design"
@@ -373,6 +374,7 @@
     "Vendor 1 Name": "Fabreeko",
     "Driver Count": 4,
     "Vendor 1 URL": "https://www.fabreeko.com/products/positron-main-board-ldo-kit",
+    "Brand": "LDO",
     "Voltage": "24V",
     "Price (USD)": 49.99,
     "Pros": "Purpose-designed for the Positron V3.2 — wiring is nearly plug-and-play\n4x onboard TMC2209 drivers\nOnboard USB hub with Ethernet + USB-A\nRP2040 with native Klipper USB connection"

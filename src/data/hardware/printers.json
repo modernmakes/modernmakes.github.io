@@ -18,7 +18,8 @@
     "Vendor 1 Name": "PrintersForAnts (GitHub)",
     "Assembly": "Self-sourced",
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/StealthFork"
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/StealthFork",
+    "Brand": "PrintersForAnts"
   },
   {
     "id": "rec34cHfsZVpqcnVc",
@@ -72,13 +73,13 @@
     "Slug": "voron-0-2",
     "Verdict": "BUY",
     "Difficulty": "Intermediate",
-    "Price (USD)": 480,
+    "Price (USD)": 699.99,
     "Pros": "Lowest BOM cost of any Voron printer — compact size means less extrusion, smaller bed, fewer parts\nFully enclosed — prints ABS and ASA reliably in a desktop-friendly package\nFaster to build than V2.4 or Trident — lower part count, less cable management\nSame Klipper ecosystem as full-size Vorons — config structure and community resources overlap\nLDO V0.2 kit is one of the best-value Voron kits available",
     "Build Volume": "120×120×120mm",
     "Max Temp - Hotend (°C)": 300,
     "Community Size": "Large",
     "Enclosure": true,
-    "Description": "The Voron 0.2 is the compact fully-enclosed CoreXY in the Voron family — a 120mm build volume printer using 1515 extrusion, built for small functional parts in ABS and ASA where an enclosed chamber matters. It’s the fastest Voron to build and the lowest BOM cost, making it a strong secondary printer or a first Voron for builders who don’t need large volume. The 0.2 revision addressed the front idler issues that plagued the 0.1.",
+    "Description": "The Voron 0.2 is the compact fully-enclosed CoreXY in the Voron family — a 120mm build volume printer using 1515 extrusion, built for small functional parts in ABS and ASA where an enclosed chamber matters. It’s the fastest Voron to build and the lowest BOM cost, making it a strong secondary printer or a first Voron for builders who don’t need large volume. The 0.2 revision addressed the front idler issues that plagued the 0.1. Price is the LDO V0.2-S1 kit at Fabreeko ($699.99 regular; $639.99 sale, currently out of stock).",
     "Verdict Label": "Best compact enclosed self-build — ABS-capable in a small footprint, lowest Voron BOM cost",
     "Max Temp — Bed (°C)": 110,
     "Compatible Toolheads": [
@@ -176,7 +177,8 @@
     "Assembly": "Kit",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-micron-3d-printer-kit-180mm-3d-printer-kit-with-honeybadger-upgrades"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-micron-3d-printer-kit-180mm-3d-printer-kit-with-honeybadger-upgrades",
+    "Brand": "PrintersForAnts"
   },
   {
     "id": "recGhwLzdGrAg8o95",
@@ -212,13 +214,13 @@
     "Slug": "voron-trident",
     "Verdict": "BUY",
     "Difficulty": "Advanced",
-    "Price (USD)": 900,
+    "Price (USD)": 1250,
     "Pros": "300mm Z volume matches X and Y — the Trident 300 is more cubic than the V2.4 300 (which loses Z to gantry clearance)\n3-point lead screw Z is faster to commission and easier to diagnose than QGL\nSame Stealthburner, Tap, and Klipper ecosystem as all Voron printers\nFull Voron community behind it",
     "Build Volume": "250x250x250, 300x300x250, 350x350x250 mm",
     "Max Temp - Hotend (°C)": 300,
     "Community Size": "Large",
     "Enclosure": true,
-    "Description": "The Voron Trident uses a moving-bed Z mechanism — 3 independent lead screws under the bed tram the surface via 3-point auto-leveling, while the gantry is fixed in Z. Available in 250mm, 300mm, and 350mm; the 300mm variant is the most common choice and delivers a fully cubic build volume. XY motion, Stealthburner toolhead, and Klipper ecosystem are identical to the V2.4.",
+    "Description": "The Voron Trident uses a moving-bed Z mechanism — 3 independent lead screws under the bed tram the surface via 3-point auto-leveling, while the gantry is fixed in Z. Available in 250mm, 300mm, and 350mm; the 300mm variant is the most common choice and delivers a fully cubic build volume. XY motion, Stealthburner toolhead, and Klipper ecosystem are identical to the V2.4. Price is the LDO Trident Rev D kit at Fabreeko ($1,250.00 regular for the 250mm, no printed parts; $1,199.99 sale, currently out of stock).",
     "Verdict Label": "Simpler Z than the V2.4, same Voron toolchain — the better first Voron for builders who don’t need flying-gantry complexity",
     "Max Temp — Bed (°C)": 110,
     "Compatible Toolheads": [
@@ -283,7 +285,8 @@
     "Assembly": "Self-sourced",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/gsl12/Tiny-M"
+    "Vendor 1 URL": "https://github.com/gsl12/Tiny-M",
+    "Brand": "PrintersForAnts"
   },
   {
     "id": "recabPUOXnyn6gzOy",
@@ -305,7 +308,8 @@
     "Assembly": "Self-sourced",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/Salad_Fork"
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/Salad_Fork",
+    "Brand": "PrintersForAnts"
   },
   {
     "id": "recbkLxVSVEGxLNYN",
@@ -326,7 +330,8 @@
     "Vendor 1 Name": "PrintersForAnts (GitHub)",
     "Assembly": "Self-sourced",
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/TinyT"
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/TinyT",
+    "Brand": "PrintersForAnts"
   },
   {
     "id": "recfiADI50XRoZi2Q",
@@ -494,6 +499,7 @@
     "Assembly": "Self-sourced",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/Micron"
+    "Vendor 1 URL": "https://github.com/PrintersForAnts/Micron",
+    "Brand": "PrintersForAnts"
   }
 ]

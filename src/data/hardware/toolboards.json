@@ -8,6 +8,7 @@
     "Verdict": "CONSIDER",
     "Cons": "Preorder only, with roughly a 60-day lead after the preorder period closes (Nov 15)\nPassive breakout only - no MCU, stepper driver or CAN/USB, so all control still runs back to the mainboard\nOnly fits the MathematicalPotato Toolhead v2 on an Annex K3, not a general-purpose toolboard",
     "Vendor 1 URL": "https://northprint3d.ca/product/mathematicalpotato-k3rabiner-toolboard-v2-for-annex-engineering-k3-hula-compatible/",
+    "Brand": "MathematicalPotato",
     "Price (USD)": 29.54,
     "Pros": "2 oz copper PCB with genuine Molex/JST connectors, assembled in Canada\nPurpose-built for the MathematicalPotato (DooKi3) Toolhead v2 and the Hula gantry, with a revised outline and connector placement\nThermistor port offered as JST-XH or Microfit 3.0 to suit the builder's harness",
     "Slug": "k3rabiner-toolboard-v2"
@@ -195,6 +196,7 @@
     "Cons": "12-32 V input and a 5 A heater output cap it at 120 W at 24 V - modest next to newer TMC2240 boards\nNeeds a Duet 3 mainboard or Tool Distribution Board for CAN-FD - not a standalone Klipper USB board\nMounting pattern is Hemera/Hemera XS, so other extruders need a bracket",
     "Connection": "CAN",
     "Vendor 1 URL": "https://www.digitmakers.ca/collections/all/products/duet-3-tool-board-1lc",
+    "Brand": "Duet3D",
     "Price (USD)": 52.75,
     "Pros": "The original Duet CAN-FD toolboard - mature, open-hardware, and backed by full Duet documentation\nOnboard LIS3DH accelerometer (v1.1+) for RRF input shaping\nTwo thermistor/PT1000 inputs plus filament monitor and Z-probe connectors cover a full direct-drive tool\nAlso runs Klipper (sample config in the Klipper repo)",
     "Slug": "tool-board-1lc",
@@ -274,6 +276,7 @@
     "Cons": "No hotend heater or fan outputs — gantry motors only, not a toolhead board\nDIY heritage: work-in-progress repo; self-build needs JLCPCB assembly plus hand-soldered parts and a thermal pad to the extrusion\nMust remove the 120R CAN termination resistor to run an umbilical to a CAN toolhead\nNiche fit: designed for 15mm extrusions / PrintersForAnts Micron builds",
     "Connection": "CAN + USB",
     "Vendor 1 URL": "https://www.fabreeko.com/products/gbb15-canbus-stepper-board",
+    "Brand": "skuep",
     "Price (USD)": 39.99,
     "Pros": "Two TMC2209 drivers on the gantry cut umbilical wiring to just CAN + power\nDoubles as a USB-to-CAN bridge for Voron 0 / Trident\nOpen-source design with full KiCad, BOM and Klipper config on GitHub\nSold assembled by Fabreeko and West3D at $39.99 — no JLCPCB order needed",
     "Slug": "gbb15"
@@ -289,6 +292,7 @@
     "Fan Outputs": 3,
     "Cons": "Passive breakout only - no MCU, driver or CAN/USB, so all wiring still runs back to the mainboard\nFits the Armchair Engineering Xol toolhead only\nFan and heater connections are JST-XH/Micro-Fit, so the harness needs the right crimps",
     "Vendor 1 URL": "https://www.fabreeko.com/products/xol-toolhead-board-by-ruiqimao",
+    "Brand": "ruiqimao",
     "Price (USD)": 29.99,
     "Pros": "Covers every Xol connection - heater, thermistor, extruder motor, 3 fans, Neopixel and 2 aux - on one tidy PCB\nSelectable fan voltage (5V, Alt, 24V) suits different fan builds\nIn stock at Fabreeko with a 5.0/5 rating, and a share of sales goes to the designer",
     "Slug": "xol-toolhead-board"
@@ -369,7 +373,7 @@
     "Cons": "RepRapFirmware only in practice - no Klipper sample config exists for it (E3D makes a separate Klipper Roto board)\nRoto motor must stay under 600 mA, so the driver's extra current is mostly unused\nSold out at E3D at time of check, though Filastruder had it in stock",
     "Connection": "CAN",
     "Vendor 1 URL": "https://e3d-online.com/products/duet-3-toolboard-roto",
-    "Brand": "E3D",
+    "Brand": "Duet3D",
     "Price (USD)": 92.15,
     "Pros": "Purpose-built for the Revo Roto, with the Duet scanning Z probe coil built in (Filastruder includes 2 coils)\nTMC2240 driver and 120 MHz SAME51 give it headroom over the Klipper Roto board\nTakes the Roto's E3D connectors plug-and-play, plus 4 IO ports and a Neopixel header\nIntegrated LIS2DW accelerometer and LDC1612 inductive sensor for scanning Z probe",
     "Slug": "toolboard-for-roto-extruder",
