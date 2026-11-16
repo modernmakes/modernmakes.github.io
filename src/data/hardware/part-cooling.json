@@ -63,6 +63,7 @@
   },
   {
     "id": "recLnjRLug3vRQ7J6",
+    "Brand": "HoneyBadger",
     "Price (USD)": 8.99,
     "Pros": "- Dual ball bearing on both variants — better lifespan than sleeve-bearing 4010 blowers\n- 9.5K variant gives ~3 CFM / 160 Pa in a compact 4010 blower footprint\n- 1-year guarantee on all HoneyBadger fans\n- 24V native — drops into Voron fan ports without conversion",
     "Cons": "- No published noise figure\n- 12K variant runs at the limit of what this motor size can handle — Fabreeko warns prolonged high-temperature use shortens its life\n- 12K variant currently out of stock at Fabreeko (checked 2026-11-13); in-stock 9.5K variant is $8.99, not the on-file $9.99\n- Lower airflow than any 5015 blower — only for toolheads that call for a 4010",
@@ -81,6 +82,7 @@
   },
   {
     "id": "recS1MuycjDcuxLCy",
+    "Brand": "HoneyBadger",
     "Price (USD)": 7.99,
     "Noise (dBA)": "31.2 dBA",
     "Pros": "- Very quiet at 31.2 dBA\n- Dual ball bearing for long life\n- 16.53 CFM at 4,800 RPM\n- Wide operating voltage (12–26.5 VDC)",
@@ -193,6 +195,7 @@
   },
   {
     "id": "recU5VP1SfsTNxiVm",
+    "Brand": "Slice Engineering",
     "Price (USD)": 8.99,
     "Pros": "- Designed to mount directly to Mosquito, Mosquito Magnum and Copperhead with included hardware\n- Dual Japanese bearings and genuine Molex Micro-Fit 3.0 connector\n- 1 m extension cable and M2.5 mounting screws included",
     "Cons": "- No published static pressure or noise figure\n- 25mm size is Mosquito-specific — not a general-purpose part-cooling fan\n- 12V and 24V variants are separate SKUs — order the right voltage",
@@ -211,6 +214,7 @@
   },
   {
     "id": "recVhpXKYx0c4YYWD",
+    "Brand": "HoneyBadger",
     "Price (USD)": 7.99,
     "Noise (dBA)": "32.7 dBA",
     "Pros": "- Good static pressure for a 3010 — 107 Pa\n- Dual ball bearing, 13,800 RPM\n- 3-wire output with optional tach; JST XH 2.54 2-pin and 3-pin connectors included\n- 24V native, quiet at 32.7 dBA",
@@ -230,6 +234,7 @@
   },
   {
     "id": "recWaJQxAZvh9KX9g",
+    "Brand": "HoneyBadger",
     "Price (USD)": 8.99,
     "Noise (dBA)": "39.2 dBA",
     "Pros": "- Very high airflow for an 80mm fan — 60 CFM at 4,600 RPM\n- Dual ball bearing\n- 24V native\n- Sold individually",
@@ -291,6 +296,7 @@
     "Type": "Axial",
     "Vendor 1 URL": "https://www.fabreeko.com/products/gds-time-5015-axial-cooling-fan",
     "Slug": "5015-axial-cooling-fan",
+    "Bearing Type": "Hydraulic Bearing",
     "Description": "The GDStime 5015 axial is a 24V electronics-cooling fan in a 50x50x15mm frame, spinning at 5000 RPM to move 12.5 CFM at just 31.2 dBA, on a hydraulic bearing rated for 40,000 hours. That airflow-to-noise ratio is good, but static pressure is only 0.16 inH2O (~40 Pa), so it suits open electronics-bay cooling rather than ducted part cooling. At $9.99 it is a cheap, quiet spare — just don't expect it to replace a 5015 blower.",
     "Verdict Label": "Cheap quiet 24V axial for electronics cooling — high airflow, low static pressure",
     "Size (mm)": "5015",
@@ -299,6 +305,7 @@
   },
   {
     "id": "reccKUIowqyAjc7ta",
+    "Brand": "HoneyBadger",
     "Price (USD)": 9.99,
     "Noise (dBA)": "33.5 dBA",
     "Pros": "- Quiet at 33.5 dBA for a 24V axial\n- High airflow for its size — 17.9 CFM at 5,000 RPM\n- Ball bearing, rated -10C to 70C operating temperature\n- 24V native, 0.07A draw",
@@ -396,6 +403,7 @@
   },
   {
     "id": "reclSXQgirSdaByxJ",
+    "Brand": "HoneyBadger",
     "Price (USD)": 14.99,
     "Noise (dBA)": "51.5 dBA",
     "Pros": "- 31.54 CFM and 339 Pa static pressure — far beyond any toolhead blower\n- Dual ball bearing, 0.6A 24V motor\n- PWM capable via 2 wires\n- Built for auxiliary cooling and chamber heaters",
@@ -499,6 +507,7 @@
   },
   {
     "id": "reczQNKNvGQesX00a",
+    "Brand": "HoneyBadger",
     "Price (USD)": 8.49,
     "Noise (dBA)": "30.7 dBA",
     "Pros": "- Very high static pressure for a 25mm fan — 183 Pa\n- Dual ball bearing, 20,000 RPM\n- Quiet for its speed at 30.7 dBA\n- 3-wire output with optional tach; JST XH 2.54 2-pin and 3-pin connectors included",

@@ -94,19 +94,20 @@
     "Vendor 1 Name": "Fabreeko",
     "Name": "Super Pinda",
     "Type": "Inductive",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/super-pinda-by-fysetc"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/super-pinda-by-fysetc",
+    "Brand": "FYSETC"
   },
   {
     "id": "recFWD12nFASMSZuG",
     "Verdict": "Bleeding Edge",
-    "Accuracy (mm)": "Accuracy not published; ADXL345-based; probe specs unconfirmed",
-    "Pros": "Integrates ADXL345 accelerometer with eddy current probe functionality; BTT-ecosystem-adjacent with Fly3D CAN toolhead boards; Klipper native; compact form factor suited to Fly SHT and SB2040-series toolhead boards",
+    "Accuracy (mm)": "N/A",
+    "Pros": "Standalone USB ADXL345 accelerometer for Klipper input shaping; BTT-ecosystem-adjacent with Fly3D CAN toolhead boards; Klipper native; compact form factor suited to Fly SHT and SB2040-series toolhead boards",
     "Slug": "fly-adxl",
     "Updated": "2026-06-27",
-    "Description": "ADXL345-based probe module from Mellow (Fly3D), a Chinese Klipper hardware manufacturer. Mellow produces CAN toolhead boards (Fly-SHT36, Fly-SB2040) that include integrated ADXL345 sensors. The Fly-ADXL product combines accelerometer (for input shaping) with probe functionality for bed meshing. Details on standalone probe performance are sparse in Western community sources. Requires verification against current Mellow product lineup before recommending — Mellow's product naming evolves rapidly.",
+    "Description": "USB ADXL345 accelerometer board from Mellow (Fly3D), a Chinese Klipper hardware manufacturer, for Klipper input shaping. This is an accelerometer, not a bed probe — it measures toolhead vibration so Klipper can compensate for resonance; it does not sense the bed or do bed meshing. Mellow produces CAN toolhead boards (Fly-SHT36, Fly-SB2040) that include integrated ADXL345 sensors; the Fly-ADXL is the standalone USB version. Requires verification against current Mellow product lineup before recommending — Mellow's product naming evolves rapidly.",
     "Verdict Label": "Niche Klipper ecosystem option; limited English documentation — needs verification",
     "Klipper Native": true,
-    "Cons": "Limited English-language documentation; smaller install base than Beacon, Cartographer, or BTT Eddy; product specifications not independently verified; Mellow Fly ecosystem is less common in Western Voron community; record needs spec verification",
+    "Cons": "Limited English-language documentation; smaller install base than dedicated input-shaping boards; product specifications not independently verified; Mellow Fly ecosystem is less common in Western Voron community; record needs spec verification",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -115,7 +116,7 @@
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "Mellow / Fly3D",
     "Name": "Fly ADXL",
-    "Type": "Eddy Current",
+    "Type": "Accelerometer",
     "Vendor 1 URL": "https://www.aliexpress.com/store/1069528",
     "Brand": "Mellow / Fly3D"
   },
@@ -191,7 +192,7 @@
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "GitHub (Community Build / DIY)",
     "Name": "Klicky PCB",
-    "Type": "Hall Effect",
+    "Type": "Microswitch",
     "Vendor 1 URL": "https://github.com/jlas1/Klicky-Probe",
     "Brand": "Open Source / Community"
   },
@@ -243,7 +244,7 @@
     "Installation Complexity": "Medium",
     "Vendor 1 Name": "Euclid Probe",
     "Name": "Euclid Probe",
-    "Type": "Hall Effect",
+    "Type": "Microswitch",
     "Vendor 1 URL": "https://euclidprobe.github.io/00-getting.html",
     "Brand": "Euclid Probe"
   },
