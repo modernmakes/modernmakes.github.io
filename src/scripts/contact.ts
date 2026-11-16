@@ -21,8 +21,12 @@ for (const form of document.querySelectorAll<HTMLFormElement>('form[data-contact
     msg.style.display = 'block';
   };
   const done = () => {
+    form.after(msg);
     form.style.display = 'none';
+    msg.setAttribute('role', 'status');
+    msg.setAttribute('tabindex', '-1');
     show((form.dataset.success || 'Sent.').replace('{email}', () => email.value), 'var(--g1)');
+    msg.focus();
   };
 
   email.addEventListener('input', () => email.removeAttribute('aria-invalid'));
