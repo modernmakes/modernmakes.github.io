@@ -133,8 +133,7 @@ export const guessHardware = (text: string, n = 3) => {
 // ── Row markup (styles: .cp-* in CommandPalette.astro, global) ──
 export const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const usd0 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-const usd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
-const price = (p: number) => (Number.isInteger(p) ? usd0 : usd2).format(p);
+const price = (p: number) => '~' + usd0.format(Math.round(p));
 
 // Wraps each search term where it starts a word in <mark>. Works on the raw text, escapes the rest.
 export function mark(text: string, terms: string[]) {

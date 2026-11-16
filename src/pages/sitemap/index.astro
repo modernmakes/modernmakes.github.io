@@ -8,9 +8,7 @@ import extruders from '../../data/hardware/extruders.json';
 import probes    from '../../data/hardware/bed-probes.json';
 import printers  from '../../data/hardware/printers.json';
 import { jsonLd } from '../../lib/jsonld';
-
-const toSlug = (name: string) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+import { toSlug } from '../../lib/hardware';
 
 /* content collections */
 const newsItems   = await getCollection('news');

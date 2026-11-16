@@ -59,7 +59,7 @@ function formatDate(date: Date) {
     <SectionHead id="la-heading" title="Latest" dek="News, guides and comparisons, newest first." href="/news" what="articles" />
     <div class="la-grid">
       {latestArticles.map((article, i) => (
-        <a href={article.href} class="la-card" data-reveal data-reveal-delay={i * 60} aria-label={article.title}>
+        <a href={article.href} class:list={['la-card', { 'la-card--cover': !article.heroImage }]} data-reveal data-reveal-delay={i * 60} aria-label={article.title}>
           <div class="la-card-img" style={bgStyle(article.heroImage)}>
             {article.heroImage ? (
               <>
@@ -143,6 +143,9 @@ function formatDate(date: Date) {
     /* Signature editorial hover — slow image zoom (F7). Card clips it. */
     transition: transform 500ms var(--stagger-ease);
   }
+  /* Image-less: the cover carries category, title and date, so the body is dropped. */
+  .la-section .la-card--cover .la-card-img { aspect-ratio: 4/3; }
+  .la-card--cover .la-card-body { display: none; }
   .la-card-img-overlay {
     position: absolute;
     inset: 0;
@@ -214,6 +217,7 @@ function formatDate(date: Date) {
     .la-card:first-child { margin-bottom: 12px; }
     .la-section .la-card:not(:first-child) { background: none; border: 0; border-top: 1px solid var(--border); border-radius: 0; }
     .la-card:not(:first-child) .la-card-img { display: none; }
+    .la-card--cover:not(:first-child) .la-card-body { display: flex; }
     .la-card:not(:first-child) .la-card-body { padding: 14px 0; }
     .la-card:not(:first-child) .la-card-title { margin-bottom: 6px; }
   }

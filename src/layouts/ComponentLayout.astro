@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Sheet from '../components/Sheet.astro';
 import ShareButton from '../components/ShareButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
-import { resolveFlowClass } from '../lib/hardware';
+import { resolveFlowClass, FLOW_CLASSES } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
 
 interface VendorLink {
@@ -123,12 +123,10 @@ const regionLabels: Record<string, string> = {
 // (water-cooled blocks reach ~100 mm³/s) so a 75 and a 100 don't pin to the
 // same spot — the marker position stays honest across the whole range.
 const FLOW_MAX = 100;
-const flowBenchmarks = [
-  { label: 'Standard',  value: 15 },
-  { label: 'High-Flow', value: 30 },
-  { label: 'Volcano',   value: 45 },
-  { label: 'Ultra',     value: 70 },
-];
+const flowClassText = FLOW_CLASSES.map((c, i) => {
+  const next = FLOW_CLASSES[i + 1];
+  return `${c.label} ${!next ? `${c.min}+` : c.min === 0 ? `under ${next.min}` : `${c.min}–${next.min - 1}`}`;
+}).join(', ');
 const flowClass = resolveFlowClass(maxFlow);
 const flowPct = maxFlow ? Math.min((maxFlow / FLOW_MAX) * 100, 100) : 0;
 // Anchor the readout so it never spills past either end of the track.
@@ -268,7 +266,7 @@ const breadcrumbSchema = {
   {vendors.length > 0 && (
     <!-- A bottom sheet on phones, a popover under the button on desktop. Affiliate links are rel="sponsored". -->
     <Sheet id="buy-sheet" title={`Where to buy (${vendors.length})`} detent="medium" desktop="popover">
-      {price.usd > 0 && <p class="buy-ref">Listed at ~${price.usd} USD. Vendors set their own prices.</p>}
+      {price.usd > 0 && <p class="buy-ref">Listed at ~${Math.round(price.usd)} USD. Vendors set their own prices.</p>}
       {vendors.map(v => (
         <a href={v.url} class="sheet-row" target="_blank" rel={v.affiliate ? 'sponsored noopener' : 'noopener'}>
           <span class="grow">{v.name}{v.price && <span class="sub">{v.price}</span>}</span>
@@ -293,21 +291,21 @@ const breadcrumbSchema = {
             <div class="comp-flow-box">
               <p class="sr-only">
                 Rated max flow {maxFlow} mm³/s on a 0 to {FLOW_MAX} mm³/s scale.
-                Reference tiers: {flowBenchmarks.map(b => `${b.label} ${b.value}`).join(', ')} mm³/s.
+                Flow classes: {flowClassText} mm³/s.
               </p>
               <div class="comp-flow-graph" aria-hidden="true">
                 <!-- reference tiers sit ABOVE the track so the fill never hides them -->
                 <div class="comp-flow-marks">
-                  {flowBenchmarks.map(b => (
-                    <div class="comp-flow-mark" style={`left:${(b.value / FLOW_MAX) * 100}%`}>
-                      <span class="comp-flow-mark-name">{b.label}</span>
-                      <span class="comp-flow-mark-num">{b.value}</span>
+                  {FLOW_CLASSES.map(c => (
+                    <div class:list={['comp-flow-mark', { 'comp-flow-mark-first': c.min === 0 }]} style={`left:${(c.min / FLOW_MAX) * 100}%`}>
+                      <span class="comp-flow-mark-name">{c.label}</span>
+                      <span class="comp-flow-mark-num">{c.min}</span>
                     </div>
                   ))}
                 </div>
                 <div class="comp-flow-track">
-                  {flowBenchmarks.map(b => (
-                    <span class="comp-flow-gridline" style={`left:${(b.value / FLOW_MAX) * 100}%`}></span>
+                  {FLOW_CLASSES.filter(c => c.min > 0).map(c => (
+                    <span class="comp-flow-gridline" style={`left:${(c.min / FLOW_MAX) * 100}%`}></span>
                   ))}
                   <div class="comp-flow-fill" style={`transform:scaleX(${flowPct / 100})`}></div>
                   <div class="comp-flow-dot" style={`left:${flowPct}%`}></div>
@@ -909,6 +907,7 @@ const breadcrumbSchema = {
   text-align: center;
   white-space: nowrap;
 }
+.comp-flow-mark-first { transform: none; text-align: left; }
 .comp-flow-mark-name {
   display: block;
   font-family: var(--fu);
@@ -989,7 +988,7 @@ const breadcrumbSchema = {
   font-family: var(--fd);
   font-size: 17px;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--accent-ink);
   line-height: 1;
 }
 .comp-flow-readout-unit {

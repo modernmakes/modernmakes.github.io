@@ -7,7 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const toSlug = (name: string): string =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  name.toLowerCase().replace(/\+/g, '-plus').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
 // ── Verdict taxonomy ─────────────────────────────────────────────────────────
 // Four verdicts, source of truth BRAND.md section 5:
@@ -16,7 +16,8 @@ export const toSlug = (name: string): string =>
 //   Bleeding Edge — newest or most experimental; buy it if you'll tune it
 //   Skip          — don't
 // A record's stored "Verdict" may use these, the prior Buy / Consider / Skip
-// values, or legacy Top Pick / Solid Choice / Niche Pick labels, in any casing;
+// values, or legacy Top Pick / Solid Choice / Niche Pick labels (Top Pick and Solid Choice
+// alias to Workhorse, Niche Pick to Bleeding Edge), in any casing;
 // only Hotends has been migrated in Airtable so far. resolveVerdict maps any
 // of these (case-insensitive) onto a display bucket; any other non-empty token
 // passes through as its own neutral badge/tab so categories with their own
@@ -42,7 +43,7 @@ const VERDICT_ALIAS: Record<string, string> = {
   'top pick': 'workhorse',
   'bleeding edge': 'bleeding-edge',
   consider: 'bleeding-edge',
-  'solid choice': 'bleeding-edge',
+  'solid choice': 'workhorse',
   'niche pick': 'bleeding-edge',
   skip: 'skip',
 };
@@ -126,19 +127,20 @@ export interface FlowClass {
   key: 'standard' | 'high' | 'extreme';
   label: string;      // filter button text
   chipLabel: string;  // badge text
+  min: number;        // lower bound (mm³/s), inclusive
 }
 
 export const FLOW_CLASSES: FlowClass[] = [
-  { key: 'standard', label: 'Standard', chipLabel: 'Standard flow' },
-  { key: 'high',     label: 'High',     chipLabel: 'High flow' },
-  { key: 'extreme',  label: 'Extreme',  chipLabel: 'Extreme flow' },
+  { key: 'standard', label: 'Standard', chipLabel: 'Standard flow', min: 0 },
+  { key: 'high',     label: 'High',     chipLabel: 'High flow', min: 50 },
+  { key: 'extreme',  label: 'Extreme',  chipLabel: 'Extreme flow', min: 80 },
 ];
 
 export const resolveFlowClass = (maxFlow: unknown): FlowClass | null => {
   if (maxFlow === null || maxFlow === undefined || maxFlow === '') return null;
   const n = typeof maxFlow === 'number' ? maxFlow : parseFloat(String(maxFlow));
   if (!Number.isFinite(n) || n <= 0) return null;
-  return FLOW_CLASSES[n >= 80 ? 2 : n >= 50 ? 1 : 0];
+  return [...FLOW_CLASSES].reverse().find((c) => n >= c.min) ?? FLOW_CLASSES[0];
 };
 
 // Known ecosystem links — shared by every category's sidebar chips.
@@ -242,7 +244,7 @@ export function buildDetailProps(record: any, config: DetailConfig) {
   // Always end the sidebar quick specs with price when present.
   const quickSpecs = resolveSpecs(record, config.quickSpecs);
   if (priceRaw != null) {
-    quickSpecs.push({ label: 'Price', value: `~$${priceRaw} USD` });
+    quickSpecs.push({ label: 'Price', value: `~$${Math.round(priceUsd)} USD` });
   }
   const specs = resolveSpecs(record, config.specs);
 

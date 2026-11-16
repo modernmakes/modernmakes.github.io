@@ -197,7 +197,7 @@ const itemListSchema = {
                 </div>
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
-                  <h2 class="card-title">{r['Name']}</h2>
+                  <h2 class:list={['card-title', { 'sr-only': !hasImg }]}>{r['Name']}</h2>
                   <div class="product-card-specs" style="margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap">
                     {chips(r).map((c) => <span class="spec-chip">{c}</span>)}
                   </div>

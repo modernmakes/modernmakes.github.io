@@ -1,10 +1,7 @@
 ---
 import ComponentLayout from '../../../layouts/ComponentLayout.astro';
 import hotends from '../../../data/hardware/hotends.json';
-import { resolveVerdict } from '../../../lib/hardware';
-
-const toSlug = (name: string) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+import { resolveVerdict, toSlug } from '../../../lib/hardware';
 
 const TOOLHEAD_HREFS: Record<string, string> = {
   'Stealthburner': '/voron/toolheads/stealthburner',
@@ -24,8 +21,6 @@ const PRINTER_HREFS: Record<string, string> = {
 };
 
 export function getStaticPaths() {
-  const toSlug = (name: string) =>
-    name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   return (hotends as any[])
     .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
     .map((r: any) => ({
@@ -71,7 +66,7 @@ const quickSpecs = ([
   record['Heat Block']               ? { label: 'Heat Block', value: record['Heat Block'] }                  : null,
   record['Thermistor']               ? { label: 'Thermistor', value: record['Thermistor'] }                  : null,
   record['Heater Type']              ? { label: 'Heater',     value: record['Heater Type'] }                 : null,
-  record['Price (USD)']      != null ? { label: 'Price',      value: `~$${record['Price (USD)']} USD` }      : null,
+  record['Price (USD)']      != null ? { label: 'Price',      value: `~$${Math.round(Number(record['Price (USD)']))} USD` }      : null,
 ] as ({ label: string; value: string } | null)[]).filter((s): s is { label: string; value: string } => s !== null);
 
 // Full specs table
