@@ -38,6 +38,7 @@
   {
     "id": "rec5qsdlz7L8eiwyL",
     "Vendor 1 URL": "https://e3d-online.com/products/revo-high-temperature-nozzle",
+    "Material": "Copper",
     "Brand": "E3D",
     "Style": "Standard",
     "Price (USD)": 52.75,
@@ -56,6 +57,7 @@
   {
     "id": "rec6iwPb4sMOW8TdJ",
     "Vendor 1 URL": "https://www.fabreeko.com/products/bondtech-coated-copper-cht-nozzle-fin-for-slice-engineering-mako",
+    "Material": "Copper",
     "Brand": "Bondtech",
     "Style": "CHT",
     "Price (USD)": 24.99,
@@ -67,12 +69,14 @@
     "Vendor 1 Name": "Fabreeko",
     "Name": "CHT Mako",
     "Description": "Bondtech's coated-copper CHT nozzle in the FIN (Free and open-source Insulated Nozzle) standard, made for the Slice Engineering Mako hotend on Bambu Lab X1/X1C/X1E/P1P/P1S printers. The FIN geometry interlocks with the silicone boot to fully insulate the hotend, and the CHT inlet pattern splits filament into three strands for market-leading volumetric flow with rigid non-abrasive materials. Nickel-coated copper gives superior heat conduction; working temperature up to 450°C per Bondtech's datasheet (the Mako hotend and Bambu firmware cap it lower in practice). 6mm hex, M5x0.8 FIN thread — not M6, so it fits the Mako only. Available in 0.2, 0.4, 0.6 and 0.8mm.",
+    "Thread": "FIN",
     "Verdict Label": "High-flow CHT nozzle for the Slice Mako (FIN)",
     "Max Temp (°C)": 450
   },
   {
     "id": "rec70xiTAb7B3WxGJ",
     "Vendor 1 URL": "https://e3d-online.com/products/revo-obxidian-500-nozzles",
+    "Material": "Copper",
     "Brand": "E3D",
     "Style": "Obxidian",
     "Price (USD)": 73.45,
@@ -223,6 +227,7 @@
     "Vendor 1 Name": "Slice Engineering",
     "Name": "DiamondBack FIN",
     "Description": "DiamondBack's FIN nozzle for the Slice Engineering Mako hotend, from US Synthetic Corporation — over 40 years in industrial diamond products. It uses a solid polycrystalline diamond (PCD) tip, not a coating, giving extreme hardness, wear resistance and thermal conductivity, so a single nozzle prints any filament from PLA and ABS to abrasive carbon fibers with no nozzle changes. Rated to 300°C maximum operating temperature; Slice notes it generally runs at lower temperatures than other nozzles and recommends recalibrating Z-offset after installation. FIN geometry with 6mm hex, torqued to 1.5 Nm on the Mako. Made in the USA with a 30-Day Performance Promise. Available in 0.4, 0.6 and 0.8mm.",
+    "Thread": "FIN",
     "Verdict Label": "One nozzle for every filament: solid diamond tip for the Mako",
     "Max Temp (°C)": 300
   },
@@ -230,7 +235,7 @@
     "id": "recEYJQpVPOXdXwMq",
     "Vendor 1 URL": "https://www.fabreeko.com/products/alpha-tungsten-carbide-wc-high-temperature-nozzle",
     "Material": "Tungsten",
-    "Brand": "Fabreeko",
+    "Brand": "Alpha",
     "Style": "Standard",
     "Price (USD)": 44.99,
     "Diameter (mm)": "0.4 / 0.6",
@@ -287,7 +292,7 @@
     "id": "recIuh4nCTyhohO9Q",
     "Vendor 1 URL": "https://www.fabreeko.com/products/alpha-polycrystalline-diamond-pcd-nozzle",
     "Material": "PCD",
-    "Brand": "Fabreeko",
+    "Brand": "Alpha",
     "Style": "Standard",
     "Price (USD)": 74.99,
     "Diameter (mm)": "0.4 / 0.5 / 0.6 / 0.8",
@@ -364,6 +369,7 @@
     "id": "recM9UiSzGdb6oxxG",
     "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/microswiss-cm2-nozzle",
     "Material": "Hardened Steel",
+    "Brand": "Micro-Swiss",
     "Style": "Standard",
     "Price (USD)": 23.75,
     "Diameter (mm)": "0.4 / 0.6 / 0.8",
@@ -518,6 +524,7 @@
   {
     "id": "recdIKJ4ScHkGYDR6",
     "Vendor 1 URL": "https://www.fabreeko.com/products/copy-of-phaetus-brass-nozzle-v6-nozzles",
+    "Material": "Copper",
     "Brand": "Phaetus",
     "Style": "Standard",
     "Price (USD)": 9.99,
@@ -596,6 +603,7 @@
     "id": "recnudWQxSG4ONYzX",
     "Vendor 1 URL": "https://www.sliceengineering.com/en-ca/products/dianoz-pro-nozzle",
     "Material": "PCD",
+    "Brand": "Dianoz",
     "Style": "Standard",
     "Price (USD)": 214.99,
     "Diameter (mm)": "0.4 / 0.6 / 0.8",
@@ -633,6 +641,7 @@
   {
     "id": "recoZcxj9r7h7azcF",
     "Vendor 1 URL": "https://www.fabreeko.com/products/dropeffect-phaetus-xg-hotend-nozzles",
+    "Material": "Copper",
     "Brand": "Phaetus",
     "Style": "Standard",
     "Price (USD)": 12.99,

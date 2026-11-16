@@ -14,7 +14,8 @@
     "Name": "Ultra Light X Beam Backers",
     "Vendor 1 Name": "Fabreeko",
     "Material": "Titanium",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/ultra-light-x-beam-backers"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ultra-light-x-beam-backers",
+    "Brand": "Common Anomaly"
   },
   {
     "id": "recCSn2AeuBowZ59j",
@@ -31,7 +32,8 @@
     "Cons": "$99 for the XY joints alone — the X beam, drives and idlers are separate\nCurrently out of stock at Fabreeko\nMetal joints add weight vs printed joints, trading mass for rigidity",
     "Name": "CNC XY Joint LWE Kit",
     "Vendor 1 Name": "Fabreeko",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-cnc-xy-joint-lwe-kit-by-chatoiclab"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-cnc-xy-joint-lwe-kit-by-chatoiclab",
+    "Brand": "ChaoticLab"
   },
   {
     "id": "recDvOnRiej9rHz2R",
@@ -74,7 +76,8 @@
     "Name": "Carbonara CF Tube",
     "Vendor 1 Name": "Fabreeko",
     "Material": "Carbon Fiber",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/carbonara-cf-tube-for-voron-printers"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/carbonara-cf-tube-for-voron-printers",
+    "Brand": "Brazuka"
   },
   {
     "id": "recUx6BafS24MU0Mj",
@@ -128,7 +131,8 @@
     "Name": "Carbon Gantry Bar — V2.4",
     "Vendor 1 Name": "Fabreeko",
     "Material": "Carbon Fiber",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-v2-4-carbon-gantry-bar-for-350mm-by-fysetc"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/voron-v2-4-carbon-gantry-bar-for-350mm-by-fysetc",
+    "Brand": "FYSETC"
   },
   {
     "id": "recceKxa8EdT0RbDB",
@@ -173,7 +177,7 @@
     ],
     "Name": "X-Gantry — V-Core 3",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
-    "Material": "Aluminum 7075",
+    "Material": "EN AW 6060 T66",
     "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
     "Brand": "Spannsysteme"
   },
@@ -196,7 +200,7 @@
     ],
     "Name": "X-Gantry — Voron 2.4 R2/Trident",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
-    "Material": "Aluminum 7075",
+    "Material": "EN AW 6060 T66",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-voron-2-4-r2-trident",
     "Brand": "Spannsysteme"
   },
@@ -236,7 +240,8 @@
     "Name": "Hula Halo",
     "Vendor 1 Name": "NorthPrint3D",
     "Material": "Steel",
-    "Vendor 1 URL": "https://northprint3d.ca/product/hula-halo-for-annex-engineering-k3/"
+    "Vendor 1 URL": "https://northprint3d.ca/product/hula-halo-for-annex-engineering-k3/",
+    "Brand": "Hula"
   },
   {
     "id": "recjJ2YdElI9enFxs",
@@ -272,7 +277,8 @@
     "Name": "Ultra Light X Beam with Aluminum XY Joints",
     "Vendor 1 Name": "Fabreeko",
     "Material": "Aluminum Billet",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/ultra-light-x-beam-with-aluminum-xy-joints-by-common-anomaly"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ultra-light-x-beam-with-aluminum-xy-joints-by-common-anomaly",
+    "Brand": "Common Anomaly"
   },
   {
     "id": "rectBR0he7l4w31Z1",
@@ -290,7 +296,8 @@
     "Name": "Carbonara CF Tube Hardware Kit",
     "Vendor 1 Name": "Fabreeko",
     "Material": "Steel",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-hardware-kit-for-carbonara-cf-tubes-voron"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-hardware-kit-for-carbonara-cf-tubes-voron",
+    "Brand": "HoneyBadger"
   },
   {
     "id": "recw590GAH6urWqlT",
@@ -308,7 +315,8 @@
     "Name": "Reinforced Gantry Mounts",
     "Vendor 1 Name": "Fabreeko",
     "Material": "Steel",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/reinforced-gantry-mounts-for-v2-4-redoubt-by-annex-engineering"
+    "Vendor 1 URL": "https://www.fabreeko.com/products/reinforced-gantry-mounts-for-v2-4-redoubt-by-annex-engineering",
+    "Brand": "Annex Engineering"
   },
   {
     "id": "recx26cUqRaONqo2c",
@@ -327,7 +335,7 @@
     ],
     "Name": "X-Gantry — V-Core 4",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
-    "Material": "Aluminum 7075",
+    "Material": "EN AW 6060 T66",
     "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
     "Brand": "Spannsysteme"
   }

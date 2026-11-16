@@ -1534,7 +1534,7 @@
     "Max Temp (°C)": 360,
     "Body": "Liber™ heats and melts filament faster and more thoroughly, providing a consistent material supply for high-speed, high-flow extrusion.",
     "Nozzle Thread": "V6",
-    "Heater Type": "60W Ceramic",
+    "Heater Type": "120W Ceramic",
     "Heat Block": "Copper Alloy",
     "Image URL": "/media/hardware/hotends/rapido-x.webp",
     "Compatible Toolheads": [
@@ -1556,7 +1556,7 @@
     "Heat Break": "Stainless Steel + Endcoat Coating",
     "Price (USD)": 93.45,
     "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation",
-    "Updated": "2026-11-12T03:52:30.000Z"
+    "Updated": "2026-11-15T21:08:41.000Z"
   },
   {
     "id": "reczz9oIVsXB06Bg1",
