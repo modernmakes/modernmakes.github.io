@@ -369,12 +369,20 @@ field (see Known Patterns & Gotchas below).
 
 ```js
 export const toSlug = (name) =>
-  name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  name.toLowerCase().replace(/\+/g, '-plus').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 ```
 
-"Rapido 2 UHF" → `rapido-2-uhf`, "Chube Air" → `chube-air`, "Voron 0.2" → `voron-02`
-(punctuation is stripped, not converted to a dash — this is where a hand-rolled or
-misremembered version of this function tends to drift).
+"Rapido 2 UHF" → `rapido-2-uhf`, "Chube Air" → `chube-air`, "Voron 0.2" → `voron-02`,
+"Mosquito Magnum+" → `mosquito-magnum-plus` (`+` becomes `-plus`; other punctuation is
+stripped, not converted to a dash — this is where a hand-rolled or misremembered version of
+this function tends to drift).
+
+**Import only.** Every route/page imports `toSlug` from `src/lib/hardware.ts`; no page may
+define a local copy. Local copies in `hotends/[slug].astro`, `sitemap/index.astro` and
+`pages/index.astro` made "Mosquito Magnum+" silently overwrite "Mosquito Magnum" (both built to
+`/hardware/hotends/mosquito-magnum`). An imported `toSlug` is visible inside `getStaticPaths`,
+so no inline copy is needed there. The one allowed mirror is `printerSlug()` in
+`astro.config.mjs` (config can't import TS); it must stay identical to `toSlug`.
 
 ---
 
@@ -458,7 +466,7 @@ Applies whenever `/seo audit`, `/seo schema`, `/seo geo`, `/seo technical`, `/se
 ## Known Patterns & Gotchas
 
 - **`<style is:global>`** required for any styles that interact with JS-toggled classes — Astro's default scoping hashes class names at build time
-- **`toSlug`** must be defined inside `getStaticPaths` AND again in the frontmatter render section separately — it is not accessible across both due to Astro hoisting
+- **`toSlug`** is import-only from `src/lib/hardware.ts` — never define a local copy in a page (see Slug generation)
 - **Case-sensitive file paths** on Linux/GitHub Pages — Windows dev doesn't catch mismatches; 404s on existing images almost always trace to case mismatch. All media lives under lowercase, hyphenated paths: `public/media/ecosystems/voron/`, `public/media/articles/`, `public/media/hardware/[category]/`
 - **Media path rule** — All paths under `public/media/` are lowercase, hyphenated, no spaces — GitHub Pages is case-sensitive (Linux). This applies to folder names, filenames, and every reference to them in code or content.
 - **`typecast: true`** required on all Airtable write operations (update_records, create_records) — without it, singleSelect fields with new values fail silently
@@ -508,7 +516,7 @@ Frontmatter schemas in `src/content/config.ts`. Dynamic routes in `src/pages/new
 ## Hardware Section
 
 - **Hardware index** (`/hardware`) — category grid, dynamic counts from JSON `.length`. No Motion Mods card — lives at `/voron/mods`
-- **Verdict values:** `Benchmark`, `Workhorse`, `Bleeding Edge`, `Skip` — four verdicts, source of truth BRAND.md §5 (Benchmark = the one pick per class; hotend classes by max flow: Standard <50, High 50–79, Extreme 80+ mm³/s). Benchmark is only ever set deliberately in Airtable — no legacy label aliases to it, and no record holds it yet. Legacy `Buy`/`Top Pick` alias to Workhorse; `Consider`/`Solid Choice`/`Niche Pick` alias to Bleeding Edge — resolved case-insensitively by `resolveVerdict()` in `src/lib/hardware.ts`. Any other non-empty token passes through as its own neutral (blue) badge/tab, so category-specific values (e.g. Part Cooling TOP/MID) still render and filter. Only Hotends is fully migrated in Airtable; other categories may still store legacy values.
+- **Verdict values:** `Benchmark`, `Workhorse`, `Bleeding Edge`, `Skip` — four verdicts, source of truth BRAND.md §5 (Benchmark = the one pick per class; hotend classes by max flow: Standard <50, High 50–79, Extreme 80+ mm³/s). Benchmark is only ever set deliberately in Airtable — no legacy label aliases to it, and no record holds it yet. Legacy `Buy`/`Top Pick`/`Solid Choice` alias to Workhorse; `Consider`/`Niche Pick` alias to Bleeding Edge — resolved case-insensitively by `resolveVerdict()` in `src/lib/hardware.ts`. Any other non-empty token passes through as its own neutral (blue) badge/tab, so category-specific values (e.g. Part Cooling TOP/MID) still render and filter. Only Hotends is fully migrated in Airtable; other categories may still store legacy values.
 - **Verdict badge colors:** Benchmark = ink (`.verdict-benchmark`, `--black` bg, white text), Workhorse = green (`.verdict-best`), Bleeding Edge = blue (`.verdict-rec`), Skip = burnt orange per DESIGN.md (`.verdict-skip`, `--verdict-skip*` tokens; text uses the darker `--verdict-skip-ink` for AA) — defined in `global.css`, mirrored in `ComponentLayout.astro`'s detail badge map and `GlassCard.astro`. Passthrough/unknown tokens render as a neutral grey chip (`.verdict-neutral`, plus a grey fallback in `ComponentLayout.astro`), never the Bleeding Edge blue.
 - **Hotend detail** (`/hardware/hotends/[slug]`) — redirect from old `/hardware/hotends/rapido-2` → `/hardware/hotends/rapido-2-uhf`
 

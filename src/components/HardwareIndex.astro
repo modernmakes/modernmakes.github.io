@@ -199,7 +199,8 @@ const itemListSchema = {
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
                   <h2 class:list={['card-title', { 'sr-only': !hasImg }]}>{r['Name']}</h2>
                   <div class="product-card-specs" style="margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap">
-                    {chips(r).map((c) => <span class="spec-chip">{c}</span>)}
+                    {/* pages pass raw prices; round to whole dollars to match the detail page */}
+                    {chips(r).map((c) => <span class="spec-chip">{c.replace(/^~\$(\d+(?:\.\d+)?)/, (_, n) => `~$${Math.round(Number(n))}`)}</span>)}
                   </div>
                   <p class="card-excerpt">{excerptOf(r)}</p>
                   <div class="card-footer">
