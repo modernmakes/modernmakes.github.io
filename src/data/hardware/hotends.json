@@ -1063,7 +1063,7 @@
     "Related 1 Name": "Tricorn Air",
     "Description": "The Tricorn Conduction replaces the active heatsink fan with thermal conduction through the mounting structure, identical to the Chube Conduction approach. All other specs match the Tricorn Air — inverted heatbreak, 3x 40W 4mm cartridges, Dragon mount, M3/M4 hardware, 500°C ceiling. The long meltzone variant measures 53.5mm with nozzle. Open-source project: https://github.com/tricornhotend/tricornhotend.com — currently not available.",
     "Verdict Label": "Same Tricorn hardware, fan dependency removed — best for high-temperature enclosed builds.",
-    "Vendor 2 URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
+    "Vendor 2 URL": "https://excit3d.shop/shop/tricorn-hotend",
     "Weight (g)": 65,
     "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
@@ -1078,14 +1078,14 @@
       "XOL",
       "A4T"
     ],
-    "Vendor 2 Name": "Fabreeko",
+    "Vendor 2 Name": "Excit3D",
     "Part Number": "TRICORN-COND",
     "Thermistor": "PT1000",
-    "Vendor 1 Name": "Excit3D",
+    "Vendor 1 Name": "GitHub (tricornhotend)",
     "Name": "Tricorn Conduction",
     "Slug": "tricorn-conduction",
     "Type": "All-Metal",
-    "Vendor 1 URL": "https://excit3d.shop/shop/tricorn-hotend",
+    "Vendor 1 URL": "https://github.com/tricornhotend/tricornhotend.com",
     "Brand": "Tricorn",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Inverted (Titanium Ti-6Al-4v)",
@@ -1093,7 +1093,7 @@
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-17T22:31:47.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -1110,7 +1110,7 @@
     "Related 1 Name": "Tricorn Conduction",
     "Description": "The Tricorn is an open-source hotend designed around an inverted heatbreak geometry, three 40W 4mm heater cartridges, and Dragon-compatible mounting. It comes in air-cooled and conduction-cooled variants with long (53.5mm) and short (41mm) meltzone options. Hardware is M3/M4 throughout. Open-source project: https://github.com/tricornhotend/tricornhotend.com — currently not available.",
     "Verdict Label": "An open-source hotend that re-thinks the heat block from first principles — and mostly gets it right.",
-    "Vendor 2 URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
+    "Vendor 2 URL": "https://excit3d.shop/shop/tricorn-hotend",
     "Weight (g)": 65,
     "Verdict": "Workhorse",
     "Max Temp (°C)": 500,
@@ -1125,14 +1125,14 @@
       "XOL",
       "A4T"
     ],
-    "Vendor 2 Name": "Fabreeko",
+    "Vendor 2 Name": "Excit3D",
     "Part Number": "TRICORN-AIR",
     "Thermistor": "PT1000",
-    "Vendor 1 Name": "Excit3D",
+    "Vendor 1 Name": "GitHub (tricornhotend)",
     "Name": "Tricorn Air",
     "Slug": "tricorn-air",
     "Type": "All-Metal",
-    "Vendor 1 URL": "https://excit3d.shop/shop/tricorn-hotend",
+    "Vendor 1 URL": "https://github.com/tricornhotend/tricornhotend.com",
     "Brand": "Tricorn",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Inverted",
@@ -1140,7 +1140,7 @@
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-17T22:31:46.000Z"
   },
   {
     "id": "receUb8AHcB88xaQB",
