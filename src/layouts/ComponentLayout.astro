@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Sheet from '../components/Sheet.astro';
 import ShareButton from '../components/ShareButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
-import { resolveFlowClass, FLOW_CLASSES } from '../lib/hardware';
+import { resolveFlowClass, FLOW_CLASSES, hardwareNavTitle } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
 
 interface VendorLink {
@@ -139,6 +139,7 @@ const canonicalUrl = siteBase + Astro.url.pathname;
 const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 // Printers live at /printers/<slug>, outside /hardware, so they get their own breadcrumb trail and nav highlight.
 const isPrinter = pathSegments[0] === 'printers';
+const navTitle = hardwareNavTitle(brand, title, isPrinter ? 'printers' : pathSegments[1]);
 const segLabels: Record<string, string> = {
   hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',
   nozzles: 'Nozzles', mainboards: 'Mainboards', toolboards: 'Toolboards', 'part-cooling': 'Part Cooling',
@@ -164,8 +165,9 @@ const productSchema = {
   brand: { '@type': 'Brand', name: brand },
   description: excerpt || verdict,
   url: canonicalUrl,
+  // On-site paths get the site origin; external Airtable URLs are already absolute.
   image: heroImageUrl
-    ? `${siteBase}${heroImageUrl}`
+    ? (heroImageUrl.startsWith('/') ? `${siteBase}${heroImageUrl}` : heroImageUrl)
     : `${siteBase}/images/og-default.jpg`,
   offers: {
     '@type': 'Offer',
@@ -214,7 +216,7 @@ const breadcrumbSchema = {
           <span>{title}</span>
         </nav>
         <div class="comp-brand">{brand}</div>
-        <h1 class="comp-title" data-nav-title>{title}</h1>
+        <h1 class="comp-title" data-nav-title={navTitle}>{title}</h1>
         <div class="comp-verdict-row">
           <a href="#where-to-buy" class="comp-verdict-badge" style={`background:${vc.bg};color:${vc.text};border-color:${vc.border}`}>
             {verdictLabel}

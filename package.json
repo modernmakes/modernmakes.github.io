@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "fetch-data": "node scripts/fetch-airtable.mjs",
     "tells": "node scripts/content-tells.mjs",
-    "tells:strict": "node scripts/content-tells.mjs --strict"
+    "tells:strict": "node scripts/content-tells.mjs --strict",
+    "audit:images": "node scripts/audit-hardware-images.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.2.1",

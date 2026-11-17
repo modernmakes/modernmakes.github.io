@@ -1,7 +1,7 @@
 ---
 import ComponentLayout from '../../../layouts/ComponentLayout.astro';
 import hotends from '../../../data/hardware/hotends.json';
-import { resolveVerdict, toSlug } from '../../../lib/hardware';
+import { resolveVerdict, toSlug, imageOf } from '../../../lib/hardware';
 
 const TOOLHEAD_HREFS: Record<string, string> = {
   'Stealthburner': '/voron/toolheads/stealthburner',
@@ -99,7 +99,7 @@ const pageTitle = `${record['Name']} Hotend — Specs, Verdict & Where to Buy`;
 const primaryVendorUrl = vendors[0]?.url ?? '';
 // On-site path like "/media/hardware/hotends/rapido-2-hf.webp" — drives both the
 // visible hero <img> (heroImage) and the Product schema image (heroImageUrl).
-const heroImage = (record['Image URL'] as string | undefined) ?? '';
+const heroImage = imageOf(record);
 
 // Related components — Related 1 through 3, skip empty
 type RelatedEntry = { title: string; category: string; href: string };

@@ -33,7 +33,8 @@ const p = buildDetailProps(record, config);
   relatedComponents={p.relatedComponents}
   pageTitle={p.pageTitle}
   primaryVendorUrl={p.primaryVendorUrl}
-  heroImageUrl={p.heroImageUrl}
+  heroImage={p.heroImage}
+  heroImageUrl={p.heroImage}
 >
   {p.bodyParagraphs.map((para: string) => <p>{para}</p>)}
 </ComponentLayout>

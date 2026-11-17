@@ -8,7 +8,7 @@ import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
-import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES } from '../lib/hardware';
+import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
 
 interface Props {
@@ -28,7 +28,6 @@ interface Props {
   schemaName: string;     // ItemList schema name
   chips?: (r: any) => string[];        // spec chips per card
   excerptOf?: (r: any) => string;      // card excerpt
-  imageOf?: (r: any) => string | null | undefined;  // card image URL source
   flowOf?: (r: any) => unknown;        // max flow (mm³/s) source; default Hotends' column
 }
 
@@ -49,7 +48,6 @@ const {
   schemaName,
   chips = () => [],
   excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
-  imageOf = (r: any) => r['Image URL'] ?? r['Hero Image'] ?? null,
   flowOf = (r: any) => r['Max Flow (mm³/s)'],
 } = Astro.props;
 
@@ -181,7 +179,7 @@ const itemListSchema = {
             const v = resolveVerdict(r['Verdict']);
             const fc = resolveFlowClass(flowOf(r));
             const imgSrc = imageOf(r);
-            const hasImg = typeof imgSrc === 'string' && imgSrc.trim() !== '';
+            const hasImg = imgSrc !== '';
             return (
               <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''} data-flow={fc?.key ?? ''}>
                 <div class="card-img">

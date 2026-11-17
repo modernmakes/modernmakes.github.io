@@ -10,7 +10,7 @@ import HomeToolsTeaser from '../components/home/HomeToolsTeaser.astro';
 import AdSlot from '../components/AdSlot.astro';
 import GlassCard from '../components/GlassCard.astro';
 import SectionHead from '../components/home/SectionHead.astro';
-import { resolveVerdict, toSlug } from '../lib/hardware';
+import { resolveVerdict, toSlug, imageOf } from '../lib/hardware';
 import hotends from '../data/hardware/hotends.json';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -36,7 +36,7 @@ const featuredHotends = (hotends as any[]).slice(0, 3);
 // lowercase today, and `npm run fetch-data` writes them from Airtable.
 const publicDir = join(process.cwd(), 'public');
 const featuredImages = featuredHotends.map((rec: any) => {
-  const url = typeof rec['Image URL'] === 'string' ? rec['Image URL'].trim() : '';
+  const url = imageOf(rec);
   if (!url.startsWith('/')) return null;
   return existsSync(join(publicDir, url)) ? url : null;
 });

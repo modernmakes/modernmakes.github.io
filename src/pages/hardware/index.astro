@@ -3,7 +3,7 @@ import TypeCover from '../../components/TypeCover.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import { toSlug } from '../../lib/hardware';
+import { toSlug, imageOf } from '../../lib/hardware';
 import hotendsData        from '../../data/hardware/hotends.json';
 import extrudersData      from '../../data/hardware/extruders.json';
 import bedProbesData      from '../../data/hardware/bed-probes.json';
@@ -53,7 +53,7 @@ const hotendImage = (slug: string): string | null => {
   const rec = (hotendsData as any[]).find(
     (r) => typeof r['Name'] === 'string' && toSlug(r['Name']) === slug,
   );
-  return (rec?.['Image URL'] as string | undefined) ?? null;
+  return rec ? imageOf(rec) || null : null;
 };
 
 const featured = [

@@ -9,6 +9,40 @@
 export const toSlug = (name: string): string =>
   name.toLowerCase().replace(/\+/g, '-plus').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
+import { imageOf } from './hardware-image';
+export { imageOf };
+
+// Reader-facing singular per detail-route folder (/hardware/<folder>/, /printers/).
+// Hand-picked, never a trailing-s strip: some categories have no plain singular.
+export const CATEGORY_SINGULAR: Record<string, string> = {
+  'hotends': 'Hotend',
+  'extruders': 'Extruder',
+  'nozzles': 'Nozzle',
+  'probes': 'Probe',
+  'build-plates': 'Build Plate',
+  'mainboards': 'Mainboard',
+  'toolboards': 'Toolboard',
+  'part-cooling': 'Part Cooling',
+  'air-filtration': 'Air Filter',
+  'enclosures': 'Enclosure',
+  'filament-dryers': 'Filament Dryer',
+  'heaters': 'Heater',
+  'psus': 'PSU',
+  'gantrys': 'Gantry',
+  'motion-system': 'Motion Component',
+  'lighting-cameras': 'Lighting & Camera',
+  'motors': 'Motor',
+  'printers': 'Printer',
+};
+
+/** Compact nav title on hardware detail pages: "{Brand} {Name} - {Category}". Skips the brand when the name already starts with it. */
+export const hardwareNavTitle = (brand: string, name: string, folder: string): string => {
+  const b = (brand ?? '').trim();
+  const full = b && !name.toLowerCase().startsWith(b.toLowerCase()) ? `${b} ${name}` : name;
+  const cat = CATEGORY_SINGULAR[folder];
+  return cat ? `${full} - ${cat}` : full;
+};
+
 // ── Verdict taxonomy ─────────────────────────────────────────────────────────
 // Four verdicts, source of truth BRAND.md section 5:
 //   Benchmark     — the one we'd point a friend to in its class (one per class)
@@ -286,10 +320,8 @@ export function buildDetailProps(record: any, config: DetailConfig) {
   const m = rawDesc.match(/^[^.!?]+[.!?]/);
   const excerpt = m ? m[0] : rawDesc;
 
-  // Only feed schema an on-site image path; external Airtable image URLs would
-  // break ComponentLayout's `${siteBase}${heroImageUrl}` concatenation.
-  const rawImg = (record['Hero Image'] as string | undefined) ?? '';
-  const heroImageUrl = rawImg.startsWith('/') ? rawImg : '';
+  // Same resolver as the index cards, so card and detail hero always agree.
+  const heroImage = imageOf(record);
 
   return {
     title: record['Name'],
@@ -310,7 +342,7 @@ export function buildDetailProps(record: any, config: DetailConfig) {
     relatedComponents,
     pageTitle: `${record['Name']} ${config.titleNoun} — Specs, Verdict & Where to Buy`,
     primaryVendorUrl: vendors[0]?.url ?? '',
-    heroImageUrl,
+    heroImage,
     bodyParagraphs,
   };
 }
