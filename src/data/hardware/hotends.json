@@ -331,6 +331,8 @@
   {
     "id": "recFJcb0HcaAbQd6r",
     "Cons": "Standard flow only — no published max flow figure\nThe HF/UHF exist for high-flow builds",
+    "Max Flow (mm³/s)": 46.08,
+    "Flow Class": "Standard Flow",
     "Description": "The Dragon ST is the standard-flow base model of Phaetus's Dragon family — an all-metal kit rated to 500°C with a 0.1 mm thin-walled heat break and a rigid torsion-resistant structure for one-handed nozzle changes. V6-nozzle compatible with the same mounts as the Dragon HF and UHF. Price $56.23 direct from Phaetus (black in stock, blue sold out).",
     "Verdict Label": "The standard-flow Dragon — 500°C all-metal, V6-compatible",
     "Verdict": "Workhorse",
@@ -347,7 +349,7 @@
     "Heat Break": "0.1 mm thin-walled heat break",
     "Price (USD)": 56.23,
     "Pros": "500°C all-metal kit\n0.1 mm thin-walled heat break for fast heat-up and clean retractions\nRigid torsion-resistant structure for one-handed nozzle changes\nV6-nozzle compatible, same mounts as the Dragon HF/UHF",
-    "Updated": "2026-11-16T10:40:27.000Z"
+    "Updated": "2026-11-17T04:19:01.000Z"
   },
   {
     "id": "recGr8JtqZl2cA7CE",
@@ -1224,8 +1226,8 @@
     "id": "reciRNDlTl1q8PEPR",
     "Cons": "Heater cartridge and thermistor NOT included — bought separately\n500°C needs PT1000/thermocouple-class sensing and suitable firmware, not the stock NTC setup\nLonger than a standard Dragon — check toolhead clearance",
     "Vendor 4 Name": "West3D",
-    "Max Flow (mm³/s)": 70.5,
-    "Flow Class": "High Flow",
+    "Max Flow (mm³/s)": 45,
+    "Flow Class": "Standard Flow",
     "Vendor 3 URL": "https://www.digmach.com/products/phaetus-dragon-uhf-hotend",
     "Description": "Phaetus's ultra-high-flow Dragon. A lengthened plated-copper heat block plus an extended nut stretch the melt zone for up to 70.5 mm³/s, while a 0.25mm-wall titanium heat break keeps heat where it belongs. All-metal, 500°C-capable, V6-nozzle compatible and a drop-in for V6/Dragon mounts. Heater cartridge and thermistor are not included.",
     "Vendor 4 URL": "https://west3d.com/en-au/products/phaetus-dragon-uhf-hot-end",
@@ -1258,7 +1260,7 @@
     "Heat Break": "Titanium alloy, 0.25mm wall",
     "Price (USD)": 74.99,
     "Pros": "70.5 mm³/s — the highest-flow Dragon\n500°C all-metal design for PEEK/PEI and other engineering filaments\nThin-wall (0.25mm) titanium heat break for excellent thermal isolation\nV6 nozzle ecosystem and one-handed nozzle changes\nLight at 61.2g",
-    "Updated": "2026-11-16T10:40:31.000Z"
+    "Updated": "2026-11-17T04:17:29.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",

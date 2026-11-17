@@ -293,6 +293,7 @@
   },
   {
     "id": "recV9SzVuTrwSw9I3",
+    "Image URL": "/media/hardware/toolheads/anthead-toolhead.webp",
     "Included Extruder": "BMG extruder kit or G2 extruder kit; WWG2 dual-sensor variant is the default in CAD; main housing supports Sherpa and Orbiter 2 bolt patterns",
     "Pros": "Extremely compact; designed specifically for V0 constraints; active community from PrintersForAnts",
     "Name": "AntHead",
@@ -316,7 +317,7 @@
     "Vendor 1 Name": "https://github.com/PrintersForAnts/AntHead",
     "Cons": "Limited to micro-format printers; specific source URL needs verification; limited hotend options vs larger toolheads",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:15.000Z",
+    "Updated": "2026-11-17T04:16:53.000Z",
     "Slug": "anthead",
     "Type": "Print-it-yourself",
     "Multi-Material Ready": true,
@@ -326,6 +327,7 @@
   },
   {
     "id": "recXpl4tQWokUatTX",
+    "Image URL": "/media/hardware/toolheads/rapid-burner-uhf-toolhead.webp",
     "Included Extruder": "Sherpa Mini, Orbiter v2, G2SA, Wristwatch BMG/G2, and others",
     "Pros": "Only toolhead in chirpy2605’s lineup supporting Rapido UHF, Dragon UHF, Goliath Air, and Goliath Water\nCFD-tuned v8 ducts\nNo X, Y, or Z travel loss\nNeopixel LED support",
     "Name": "Rapid Burner UHF",
@@ -349,7 +351,7 @@
     "Vendor 1 Name": "https://www.etsy.com/listing/1503463243/rapid-burner-latest-version-3d-printed",
     "Cons": "UHF and Goliath hotends only — not for standard or HF hotends\nV0.2 X-carriage only (V0.1 use Rapid Burner v4)\nGoliath nichrome wires require specific routing to avoid stress damage",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:22.000Z",
+    "Updated": "2026-11-17T04:16:56.000Z",
     "Slug": "rapid-burner-uhf",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -358,6 +360,7 @@
   },
   {
     "id": "recZ6Pc10cC4RE4iO",
+    "Image URL": "/media/hardware/toolheads/a4t-toolhead.webp",
     "Included Extruder": "Modified WW-BMG with Bondtech RIDGA v2 (Sherpa-Mini spacing); alternatives Sherpa-Mini, VZ-Hextrudort-Low, LGX-Lite, E3D Roto Vitamins, Wrist-Watch G2, Orbiter 2.0",
     "Pros": "4-material capability without tool changer; compatible with Xol ecosystem; print-it-yourself cost; filament cutter included",
     "Name": "A4T",
@@ -378,7 +381,7 @@
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/A4T",
     "Cons": "Complex setup requiring MMU system; more bulk than single-material heads; less community support than Jabberwocky; source URL needs verification",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:13.000Z",
+    "Updated": "2026-11-17T04:16:58.000Z",
     "Slug": "a4t",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -387,6 +390,7 @@
   },
   {
     "id": "recZYFEanROBUxIRA",
+    "Image URL": "/media/hardware/toolheads/mini-aftersherpa-toolhead.webp",
     "Included Extruder": "Any Sherpa Mini mount-compatible extruder",
     "Pros": "Enables standalone extruder support on V0.1 printers that otherwise require integrated extruder toolheads\nSherpa Mini mounting pattern — broad extruder compatibility\nCreated by PrintersForAnts community",
     "Name": "Mini-AfterSherpa",
@@ -405,7 +409,7 @@
     "Vendor 1 Name": "https://github.com/PrintersForAnts/Mini-AfterSherpa",
     "Cons": "Older V0.1-focused design — V0.2 users should consider Dragon Burner\nLimited part cooling compared to newer dual-fan designs",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:18.000Z",
+    "Updated": "2026-11-17T04:17:00.000Z",
     "Slug": "mini-aftersherpa",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -414,6 +418,7 @@
   },
   {
     "id": "reccq81JQligTQhuv",
+    "Image URL": "/media/hardware/toolheads/burgo-toolhead.webp",
     "Included Extruder": "None (not included — mounts for LGX Lite Pro, Vz-Hextrudort, Sherpa Mini/Micro, Orbiter 2, Peopoly Lancer, DFA, FXD)",
     "Pros": "Fully open-source SLM metal toolhead; no X travel loss; Chube-optimised; wide extruder compatibility; sold by multiple vendors",
     "Name": "Burgo",
@@ -427,7 +432,7 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/burgo-voron-toolhead/",
     "Cons": "Trident builds need front-left/rear leadscrew cut (or printed spacers); belt-clamp mount needs a pretension tool at high belt tension; Chube hotends only; ~17 mm Y loss on some frames",
     "Verdict": "Buy",
-    "Updated": "2026-11-15T10:31:30.000Z",
+    "Updated": "2026-11-17T04:17:02.000Z",
     "Slug": "burgo",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -466,6 +471,7 @@
   },
   {
     "id": "recdL3lEf5BGf066O",
+    "Image URL": "/media/hardware/toolheads/dragon-burner-2-4-trident-v0-toolhead.webp",
     "Included Extruder": "Orbiter 2.0, LGX Lite, Sherpa Mini (via adapters)",
     "Pros": "Enormous hotend compatibility library; large community; well-documented; V0 variant available; Voron V0 Nozzle Cam mod support",
     "Name": "Dragon Burner 2.4 / Trident / V0",
@@ -487,7 +493,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Dragon_Burner",
     "Cons": "GitHub repo appears archived/deleted as of mid-2026 — verify current source; 4010 fans may underperform 5015 on demanding overhangs",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:18.000Z",
+    "Updated": "2026-11-17T04:17:04.000Z",
     "Slug": "dragon-burner-2-4-trident-v0",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -526,6 +532,7 @@
   },
   {
     "id": "recgBkoMdf7U9RERZ",
+    "Image URL": "/media/hardware/toolheads/vc4-cnc-toolhead.webp",
     "Included Extruder": "None (not included — Orbiter, Hextrudort Low/Low Plus (+ water-cooled), LGX Lite/Pro, Sherpa Mini via adapter plates)",
     "Pros": "Full-metal CNC toolhead — lighter, stiffer and more durable than stock VC4; huge extruder/hotend range; Single and IDEX layouts; EBB42/Orbitool O2S toolboard mounts; sold by 4 vendors; actively updated (Aug 2026)",
     "Name": "VC4 CNC Toolhead",
@@ -538,7 +545,7 @@
     "Vendor 1 Name": "https://store.brs-engineering.com/en/products/vc4-cnc-toolhhead",
     "Cons": "Switching requires belts cut shorter (can't go back without new longer belts); printed parts still needed (or bought separately); Chube hotends need a Beacon Y-offset fix in printer.cfg; top-end IDEX + PPS-CF config is very expensive",
     "Verdict": "Consider",
-    "Updated": "2026-11-15T10:31:41.000Z",
+    "Updated": "2026-11-17T04:17:05.000Z",
     "Slug": "vc4-cnc-toolhead",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -547,6 +554,7 @@
   },
   {
     "id": "rechooEtkm4CXaX3T",
+    "Image URL": "/media/hardware/toolheads/breakneck-toolhead.webp",
     "Included Extruder": "Hextrudort, Micro Sherpa",
     "Pros": "CPAP cooling provides more airflow than typical 5015 or 4010 fan setups\nExperimental post-extruder filament path bend provides bowden-like buffering effect\nPredecessor project to the more ambitious ARMPITHEIGHT ecosystem",
     "Name": "BreakNeck",
@@ -565,7 +573,7 @@
     "Vendor 1 Name": "https://github.com/leddhedd/BreakNeck",
     "Cons": "Superseded by ARMPITHEIGHT — active development has moved on\nCPAP hose routing adds complexity\nExperimental filament path not proven in production use",
     "Verdict": "Consider",
-    "Updated": "2026-11-06T11:05:21.000Z",
+    "Updated": "2026-11-17T04:17:08.000Z",
     "Slug": "breakneck",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -574,6 +582,7 @@
   },
   {
     "id": "recjPYM7BYKwW6oSz",
+    "Image URL": "/media/hardware/toolheads/a5t-toolhead.webp",
     "Included Extruder": "None included — user-supplied; A4T-compatible (WW-BMG recommended, Sherpa Mini, VZ-Hextrudort-Low, LGX-Lite, Orbiter 2.0, WWG2)",
     "Pros": "5-material capability; VzBot ecosystem integration; print-it-yourself",
     "Name": "A5T",
@@ -592,7 +601,7 @@
     "Vendor 1 Name": "https://github.com/Suzu0071/A5T",
     "Cons": "Complex multi-material setup; primarily tuned for VzBot; source URL needs verification; limited community outside VzBot ecosystem",
     "Verdict": "Consider",
-    "Updated": "2026-11-12T10:56:27.000Z",
+    "Updated": "2026-11-17T04:17:10.000Z",
     "Slug": "a5t",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
