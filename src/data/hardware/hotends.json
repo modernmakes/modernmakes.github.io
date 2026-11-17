@@ -1,6 +1,7 @@
 [
   {
     "id": "rec2sH6A2uozbMkSO",
+    "Max Flow Source URL": "https://www.3djake.com/phaetus/dragon-high-flow-hotend",
     "Cons": "Heater cartridge and thermistor NOT included — bought separately\nNo Phaetus product page or manufacturer list price — reseller prices vary ($44.44–$54.37)\nManufacturer flow figure (62.51 mm³/s) is a lab test — realistic flow ~20–30 mm³/s",
     "Compatible Printers": [
       "Voron 2.4",
@@ -38,10 +39,12 @@
     "Heat Break": "Copper alloy & hardened steel bi-metal heat break, 0.1mm ultra-thin wall, with ceramic insulation below the heat break (HF) for a longer melt zone",
     "Price (USD)": 54.37,
     "Pros": "500°C max temp\nV6-compatible drop-in, same dimensions as the standard Dragon\nLonger melt section for higher flow\n0.4mm plated copper nozzle included\n53g lightweight",
-    "Updated": "2026-11-16T10:40:25.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z"
   },
   {
     "id": "rec7Nntel8WpI6ldz",
+    "Max Flow Source URL": "https://west3d.com/en-de/products/rapido-hot-end-high-flow-tl-phaetus",
     "Cons": "45 mm³/s limits throughput vs UHF variants\nPT1000 requires firmware configuration adjustment\nPriced identically to the UHF — harder to justify unless flow is not the bottleneck",
     "Compatible Printers": [
       "Voron 2.4",
@@ -94,11 +97,13 @@
     "Price (USD)": 99,
     "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
-    "Updated": "2026-11-17T04:14:10.000Z",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
     "id": "rec7nAlY5yM2ZzAFb",
+    "Max Flow Source URL": "https://west3d.com/en-de/products/rapido-hot-end-high-flow-tl-phaetus",
     "Cons": "Premium price at $109\nPT1000 requires firmware configuration\nOverkill for builders who don't push high-temp exotic materials at speed",
     "Compatible Printers": [
       "Voron 2.4",
@@ -151,11 +156,13 @@
     "Price (USD)": 109.2,
     "Pros": "75 mm³/s — highest flow in the Rapido 2 family\n350°C ceiling for all exotic materials\nPT1000 for accurate high-temp readings\nFull toolhead ecosystem compatibility\nBest pick for speed-focused enclosed builds",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-11-12T03:52:53.000Z",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
     "id": "rec90hq2iEo7kyf89",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-prime",
     "Cons": "Needs a full liquid-cooling loop (pump, radiator, fittings) — not a standalone part; industrial pricing (~$1,500+ as a kit); heavy, at the top of Prime's published 103–140 g mass range; custom mount required, not a drop-in.",
     "Fan Size": "N/A — water cooled",
     "Max Flow (mm³/s)": 116,
@@ -180,10 +187,12 @@
     "Heat Break": "Bimetallic Heat Break™ optimized for liquid cooling (copper alloy & strain-hardened steel)",
     "Price (USD)": 1571.99,
     "Pros": "Same 116 mm³/s / 500°C Prime performance as the Air version; liquid cooling eliminates heat creep in heated chambers above 80°C; no heatsink fan to fail; dual 100 W heaters and dual sensor support for redundancy.",
-    "Updated": "2026-11-16T10:40:01.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recAsuEJU5161ysSg",
+    "Max Flow Source URL": "https://www.3djake.com/phaetus/rapido-hotend-2f",
     "Cons": "36 mm³/s is the lowest flow in the family — noticeably limiting at high speeds\nNot well-suited for large-volume production printing\nPT1000 config required\nFlow ceiling becomes the bottleneck before other system limits",
     "Compatible Printers": [
       "Voron 2.4",
@@ -237,11 +246,13 @@
     "Price (USD)": 104.96,
     "Pros": "350°C ceiling with PT1000 for exotic materials\nMost compact form factor in the Rapido 2 family\nLightest weight — benefits high-acceleration toolheads\nLowest price in the lineup at $75\nGood fit for bowden or light-duty direct drive setups",
     "Related 1 URL": "/hardware/hotends/rapido-2-hf",
-    "Updated": "2026-11-12T03:52:54.000Z",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
     "id": "recD1Lly97QafZlXQ",
+    "Max Flow Source URL": "https://west3d.com/en-de/products/rapido-hot-end-high-flow-tl-phaetus",
     "Cons": "290°C ceiling rules out PA, PC without the Plus\nNTC100K thermistor less accurate at high temps\nNot ideal if you regularly print exotic materials",
     "Compatible Printers": [
       "Voron 2.4",
@@ -294,7 +305,8 @@
     "Price (USD)": 89,
     "Pros": "Excellent flow for standard filaments\nWell-documented community support\nCompatible with all major Voron toolheads\nAffordable entry into the Rapido 2 family\nPT100 upgrade available via Plus variant",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-11-12T03:52:49.000Z",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -429,6 +441,7 @@
   },
   {
     "id": "recKeZAqcTlVH5hl1",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-prime",
     "Cons": "Relies on the mount structure as a heatsink — needs a metal mount with real thermal mass; industrial pricing (~$1,500+ as a kit); no published standalone weight; custom integration, not a drop-in.",
     "Fan Size": "None (conduction cooled)",
     "Max Flow (mm³/s)": 116,
@@ -453,7 +466,8 @@
     "Heat Break": "Conduction Bimetallic Heat Break™ (no cooling fins — conduction only)",
     "Price (USD)": 1571.99,
     "Pros": "Same 116 mm³/s / 500°C Prime performance with zero fan dependency; no heatsink fan to fail, vibrate, or suck in chamber heat; suited to hot enclosed chambers; dual 100 W heaters and dual sensor support.",
-    "Updated": "2026-11-16T10:40:04.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recMpNWcctaKbgxdu",
@@ -566,6 +580,7 @@
   },
   {
     "id": "recPDhTG5pXQqyLkp",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-prime",
     "Cons": "Standalone Prime ACE sold by Slice with heaters and sensors included; needs a Bondtech LGX extruder; industrial Prime pricing on top of the LGX.",
     "Fan Size": "4010",
     "Max Flow (mm³/s)": 116,
@@ -590,10 +605,12 @@
     "Heat Break": "Bimetallic Heat Break™ (copper alloy & strain-hardened steel)",
     "Price (USD)": 1571.99,
     "Pros": "Prime's 116 mm³/s / 500°C melt zone with the shortest possible filament path — Slice's own recommendation for maximum flow with soft filaments; LGX interface-plug mount, no separate mount to design; a 4010 fan is enough for the monolithic cold block; one-handed nozzle changes.",
-    "Updated": "2026-11-16T10:40:06.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recPc9uC0INefKqim",
+    "Max Flow Source URL": "https://www.3djake.com/phaetus/rapido-hotend-2-uhf",
     "Cons": "290°C limit rules out high-temp engineering filaments, NTC100K not ideal for high-temp use, UHF nozzle ecosystem less universal than V6, Heater wattage inconsistently reported",
     "Compatible Printers": [
       "Voron 2.4",
@@ -648,7 +665,8 @@
     "Price (USD)": 129.43,
     "Pros": "75 mm³/s max flow, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
     "Related 1 URL": "/hardware/hotends/dragon-hf",
-    "Updated": "2026-11-17T09:25:02.000Z",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z",
     "Vendor 5 Affiliate": true,
     "Related 2 URL": "/hardware/hotends/revo-voron"
   },
@@ -705,6 +723,7 @@
   },
   {
     "id": "recQz6z6nAL2MCtlS",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/copperhead-hotends",
     "Cons": "33 mm³/s is the lowest flow in the Slice line\nHeater, thermistor, nozzle and fan all sold separately\nConfigurable variants make buying the right parts confusing",
     "Fan Size": "Not included",
     "Max Flow (mm³/s)": 33,
@@ -738,7 +757,8 @@
     "Heat Break": "Bimetallic (copper alloy + steel, thicker wall)",
     "Price (USD)": 69.99,
     "Pros": "Open-source (CC-BY-SA) modular design — swap heat sinks and heat breaks per printer\nBimetallic Heat Break, 60% better heat-creep reduction than monolithic designs\n450°C covers nearly every filament\nCheapest hotend in the Slice line",
-    "Updated": "2026-11-16T10:40:20.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recRTlhOsk8R0530r",
@@ -773,6 +793,7 @@
   },
   {
     "id": "recRbTxxDtpmhcwlH",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-conduct",
     "Cons": "Requires a metal machine structure and professional installation\nNo published mass; heater and sensor sold separately\nVery few hobbyist toolheads support conduction mounting",
     "Fan Size": "None (conduction cooled)",
     "Vendor 4 Name": "Ultimate 3D Printing Store",
@@ -808,7 +829,8 @@
     "Heat Break": "Bimetallic, conduction-optimized (copper alloy + hardened steel)",
     "Price (USD)": 199.99,
     "Pros": "No fan to fail inside a hot chamber\nConduction cooling dumps heat straight into the machine structure\nSame 500°C melt zone as the standard Mosquito",
-    "Updated": "2026-11-16T10:40:11.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recS6EG4Te665LCNB",
@@ -840,6 +862,7 @@
   },
   {
     "id": "recU3eoBgpOl4hKoL",
+    "Max Flow Source URL": "https://www.sliceengineering.com/blogs/news/understanding-hotend-flow-rate",
     "Cons": "35 mm³/s flow is modest by 2026 standards\nHeater cartridge, thermistor and fan sold separately\nKit with nozzle, boot and paste costs more than the hotend alone",
     "Fan Size": "Not included",
     "Vendor 4 Name": "DigitMakers",
@@ -878,7 +901,8 @@
     "Heat Break": "Bimetallic (copper alloy + hardened steel)",
     "Price (USD)": 104.99,
     "Pros": "Featherweight 37g — fastest accelerations in its class\n500°C rating covers every printable filament\nBimetallic Heat Break virtually eliminates heat creep and jamming\nOne-handed nozzle changes via rigid roll-cage frame\nDeep adapter ecosystem (Stealthburner, Dragon Burner, XOL and more)",
-    "Updated": "2026-11-16T10:40:15.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recWyx2Kh3TM6cYgE",
@@ -982,6 +1006,7 @@
   },
   {
     "id": "recZfHibPiZ5iC7fs",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-magnum-hotend",
     "Cons": "100W dual-heater config is professional-install only (fire/burn warnings apply)\nHeaters and sensors sold separately — bundles run $300+\n73g and 60mm tall — heavier and taller than the Mosquito/Magnum",
     "Fan Size": "Not included",
     "Vendor 4 Name": "MatterHackers",
@@ -1020,10 +1045,12 @@
     "Heat Break": "Bimetallic (copper alloy + hardened steel)",
     "Price (USD)": 249.99,
     "Pros": "90 mm³/s flow — 2.5x the standard Mosquito\nDual 50W heater sockets for up to 100W\n500°C rating, 1.75 and 2.85mm filament\nSame Bimetallic Heat Break and roll-cage one-handed nozzle change",
-    "Updated": "2026-11-16T10:40:18.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
+    "Max Flow Source URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
     "Cons": "Requires mount/toolhead designed to conduct heat away efficiently\nSmaller compatible toolhead set than air variant\nFewer community examples of completed conduction builds\nSourcing 4mm heater cartridges requires planning",
     "Compatible Printers": [
       "Voron 2.4",
@@ -1065,10 +1092,12 @@
     "Price (USD)": 230,
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
-    "Updated": "2026-11-17T08:38:10.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
+    "Max Flow Source URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
     "Cons": "Newer brand with smaller install base than Phaetus\nFewer documented Klipper configs in the wild\n4mm heater cartridges are less commonly stocked than 6mm\nOpen-source license is CC BY-NC — commercial use requires a separate license",
     "Compatible Printers": [
       "Voron 2.4",
@@ -1110,10 +1139,12 @@
     "Price (USD)": 230,
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
-    "Updated": "2026-11-17T08:38:09.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "receUb8AHcB88xaQB",
+    "Max Flow Source URL": "https://cnckitchen.com/blog/flow-rate-benchmarking-of-a-hotend",
     "Cons": "Modest ~15 mm³/s flow — outclassed for speed by modern high-flow hotends\nKit requires assembly (pre-assembled costs more)\nSupplied thermistor caps at 300°C; higher temps need PT100/PT1000 + copper block",
     "Fan Size": "3010",
     "Vendor 4 Name": "DigitMakers",
@@ -1153,10 +1184,12 @@
     "Heat Break": "All-metal stainless steel heat break",
     "Price (USD)": 89.21,
     "Pros": "300°C all-metal design\nM6 nozzle ecosystem — the de-facto standard\nGroove mount fits nearly every toolhead\nProven, reliable, huge community support",
-    "Updated": "2026-11-16T10:40:22.000Z"
+    "Max Flow Source": "Independent test",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recf0c4BD2oyc5jZQ",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-magnum-hotend",
     "Cons": "Single 50W heater ceiling — no dual-heater option\nHeater, thermistor and fan sold separately\nModest flow gain over the standard Mosquito for the price",
     "Fan Size": "Not included",
     "Vendor 4 Name": "MatterHackers",
@@ -1195,7 +1228,8 @@
     "Heat Break": "Bimetallic (copper alloy + hardened steel)",
     "Price (USD)": 129.99,
     "Pros": "Extended melt zone pushes flow to 40 mm³/s\nSame 41g mass and 500°C rating as the original Mosquito\nThermal insulator protects the melt zone from cooling losses\nDrop-in for Mosquito mounts and adapters",
-    "Updated": "2026-11-16T10:40:17.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "rech7SSLjkyKP1SzQ",
@@ -1315,6 +1349,7 @@
   },
   {
     "id": "recvWDTnHlysl79Tc",
+    "Max Flow Source URL": "https://www.3djake.com/dropeffect/nextg-hotend",
     "Cons": "104NT thermistor caps this version at 280°C — the Fiber PT1000 version is the high-temp pick\nCeramic plate heater is a newer design with less long-term history than cartridges\nOften sold out at major retailers",
     "Max Flow (mm³/s)": 45,
     "Flow Class": "Standard Flow",
@@ -1349,10 +1384,12 @@
     "Heat Break": "All-metal",
     "Price (USD)": 99.99,
     "Pros": "45 mm³/s with the UHF groove adapter\nKinematic coupling — rigid block, minimal heat transfer to the heatsink\nSame footprint as the Dragon, so it drops into Dragon toolheads\nV6 nozzle ecosystem; Rapido 2 parts for maintenance",
-    "Updated": "2026-11-16T10:40:34.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z"
   },
   {
     "id": "recwDsERGqQwL5Egq",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-liquid",
     "Cons": "Needs an external liquid loop plus Eisele G1/8 fittings\n35 mm³/s — no flow gain over the air-cooled Mosquito\nNarrow use case — overkill outside heated chambers",
     "Fan Size": "N/A — liquid cooled",
     "Vendor 4 Name": "DHM-Online",
@@ -1390,10 +1427,12 @@
     "Heat Break": "Bimetallic, conduction-optimized (copper alloy + hardened steel)",
     "Price (USD)": 189.99,
     "Pros": "Liquid cooling works in 80°C+ chambers where fans fail\nCorrosion-resistant bronze base suits most coolants\nSame 500°C Bimetallic Heat Break technology as the air-cooled Mosquito\nShips with GammaMaster nozzle and boron nitride paste",
-    "Updated": "2026-11-16T10:40:13.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recwnSZP2iQPs8Odz",
+    "Max Flow Source URL": "https://www.sliceengineering.com/products/mosquito-prime",
     "Cons": "Extremely expensive (~$1,570+ as a kit); overkill for any hobbyist build — aimed at industrial users; large and heavy (103 g, 88 mm tall); needs a 24 V system and a custom mount; heatsink fan not included.",
     "Fan Size": "2510",
     "Max Flow (mm³/s)": 116,
@@ -1418,7 +1457,8 @@
     "Heat Break": "Bimetallic Heat Break™ (copper alloy & strain-hardened steel)",
     "Price (USD)": 1571.99,
     "Pros": "Highest rated volumetric flow of any production hotend (116 mm³/s PLA); 500°C nickel-plated copper-alloy hot block; 61 mm melt zone gives a consistent melt at extreme flow; dual heaters and dual sensors (up to 200 W); one-handed nozzle changes; made in the USA with strong support.",
-    "Updated": "2026-11-16T10:40:09.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:37.000Z"
   },
   {
     "id": "recxIKSAlFeKPnIwj",
@@ -1452,6 +1492,7 @@
   },
   {
     "id": "recxad9vquG9vyyHz",
+    "Max Flow Source URL": "https://west3d.com/en-de/products/phaetus-nextg-fiber-extreme-gradient-drop-effect-hotend-next-g-nexg",
     "Cons": "Priced well above the standard neXt G for what is mostly a sensor/nozzle upgrade\nCeramic plate heater is still a newer design\nOften out of stock at major retailers",
     "Vendor 4 Name": "DigitMakers",
     "Max Flow (mm³/s)": 45,
@@ -1490,7 +1531,8 @@
     "Heat Break": "All-metal, RCC coated",
     "Price (USD)": 99.99,
     "Pros": "Built for fiber-filled filaments — hardened steel nozzles included (0.4 + 0.5mm)\nPT1000 thermistor for 320°C+ printing\n45 mm³/s with the UHF adapter; RCC-coated all-metal heat break\nSame Dragon footprint and V6 nozzle compatibility as the standard neXt G",
-    "Updated": "2026-11-16T10:40:41.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z"
   },
   {
     "id": "recy7WC7NNzNHzUqW",
@@ -1545,6 +1587,7 @@
   },
   {
     "id": "recyv2pbsnYW5hoNl",
+    "Max Flow Source URL": "https://west3d.com/en-de/products/phaetus-rapido-x-high-flow-hotend-with-liber-technology",
     "Cons": "Preorder / limited initial availability, performance data still emerging from community, premium price vs Rapido 2 line",
     "Compatible Printers": [
       "Voron 2.4",
@@ -1586,7 +1629,8 @@
     "Heat Break": "Stainless Steel + Endcoat Coating",
     "Price (USD)": 93.45,
     "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation",
-    "Updated": "2026-11-15T21:08:41.000Z"
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-17T10:26:54.000Z"
   },
   {
     "id": "reczz9oIVsXB06Bg1",
