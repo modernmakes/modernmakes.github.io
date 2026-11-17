@@ -431,7 +431,7 @@ a:not([class]):active { opacity: .6; }
 }
 .card-title {
   font-family: var(--fd); font-size: 17px; font-weight: 800;
-  line-height: 1.1; color: var(--black); flex: 1; margin-bottom: 6px;
+  line-height: 1.1; color: var(--black); flex: none; margin-bottom: 6px;
 }
 .card-excerpt {
   font-family: var(--fb); font-size: 13px; color: var(--g1);
