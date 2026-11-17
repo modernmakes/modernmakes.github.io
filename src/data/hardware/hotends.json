@@ -374,6 +374,7 @@
     "Nozzle Thread": "Volcano (E3D Volcano nozzle)",
     "Heater Type": "Ø6x cartridge (20–35mm)",
     "Heat Block": "Copper melt-zone block with dual clamped Ø6x20mm heater cartridges",
+    "Image URL": "/media/hardware/hotends/he20.webp",
     "Vendor 2 Name": "HartSmart Products",
     "Vendor 3 Name": "MatterHackers",
     "Part Number": "HE20",
@@ -388,7 +389,7 @@
     "Heat Break": "Titanium feed tube; 3 titanium hollow pillar mounts (no threaded heat break)",
     "Price (USD)": 160,
     "Pros": "All-metal, tested past 320°C\nDual Ø6x20mm heater cartridges clamped for excellent thermal transfer\nIndependently proven >30 mm³/s flow\n3 titanium pillar mounts — extremely rigid, survives crashes that would bend a threaded heat break\nStandard Volcano nozzles, widely available\nBMG-M / LGX mounting",
-    "Updated": "2026-11-12T01:11:40.000Z"
+    "Updated": "2026-11-17T08:45:25.000Z"
   },
   {
     "id": "recII7ukzgt2G3hsF",
