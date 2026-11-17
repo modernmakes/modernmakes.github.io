@@ -62,6 +62,26 @@ const COMMON_NAMES = new Set([
   'activated carbon pellets',
 ]);
 
+// Extra link texts for a record, keyed "<route folder>/<record Name>". The E3D Roto is
+// sold as the "Revo Roto", so the full phrase links instead of the bare second word.
+const ALIASES: Record<string, string[]> = {
+  'extruders/Roto': ['Revo Roto'],
+};
+
+// A mention stays plain when the word right after it (one space or a hyphen, then an optional "(", any case)
+// says the copy means a standard, family or ecosystem rather than the product page.
+// Keyed by record Name, so aliases and "Brand Name" forms share the list; "*" applies to every name.
+export const CONTEXT_EXCLUSIONS: Record<string, string[]> = {
+  // "V6 nozzles", "V6 thread", "V6-style": the E3D V6 nozzle/mount standard, not the V6 hotend.
+  V6: ['style', 'nozzle', 'nozzles', 'thread', 'threads', 'compatible', 'pattern', 'standard', 'mount', 'ecosystem', 'family', 'type',
+    'block', 'blocks', 'm6'], // added after the first report: "V6 block", "V6 (M6) threading"
+  // "Octopus ecosystem/options": BTT's board family, not the original Octopus board.
+  Octopus: ['ecosystem', 'family', 'options', 'line', 'range', 'series'],
+  '*': ['ecosystem', 'family', 'series', 'line', 'range', 'lineup'],
+};
+const excludedAfter = (name: string, next: string | undefined) =>
+  !!next && [...(CONTEXT_EXCLUSIONS[name] ?? []), ...CONTEXT_EXCLUSIONS['*']].includes(next.toLowerCase());
+
 export interface LinkTarget { name: string; href: string; folder: string }
 
 const index = new Map<string, LinkTarget>();
@@ -77,6 +97,7 @@ export const AMBIGUOUS: { text: string; hrefs: string[] }[] = [];
       const brand = typeof r.Brand === 'string' ? r.Brand.trim() : '';
       const texts = [name];
       if (brand && !name.toLowerCase().startsWith(brand.toLowerCase())) texts.push(`${brand} ${name}`);
+      texts.push(...(ALIASES[`${target.folder}/${name}`] ?? []));
       for (const text of texts) {
         if (text.length < 4 && !/\d/.test(text)) { SKIPPED.push({ text, href: target.href, reason: 'under 4 chars, no digit' }); continue; }
         if (COMMON_NAMES.has(text.toLowerCase())) { SKIPPED.push({ text, href: target.href, reason: 'common word' }); continue; }
@@ -113,13 +134,15 @@ const pattern = new RegExp(
   'g',
 );
 
-/** HTML-escapes `text`, then links the first mention per page of each other hardware record. */
+/** HTML-escapes `text`, then links the first mention of each other hardware record not already in `alreadyLinked` (one Set per page section). */
 export function linkHardwareMentions(text: string, opts: { selfHref: string; alreadyLinked: Set<string> }): string {
   const self = opts.selfHref.replace(/\/$/, '');
   return escapeHtml(text ?? '').replace(pattern, (m, at: number, all: string) => {
     const t = byEscaped.get(m);
-    const next = /^ ([^\s,;:()]+)/.exec(all.slice(at + m.length))?.[1];
-    if (!t || t.href === self || opts.alreadyLinked.has(t.href) || (next && prefixes.has(`${m} ${next}`))) return m;
+    const after = all.slice(at + m.length);
+    const next = /^ ([^\s,;:()]+)/.exec(after)?.[1];
+    const nextWord = /^[ -]\(?([A-Za-z0-9]+)/.exec(after)?.[1]; // \"V6 (M6)\" reads past the paren
+    if (!t || t.href === self || opts.alreadyLinked.has(t.href) || (next && prefixes.has(`${m} ${next}`)) || excludedAfter(t.name, nextWord)) return m;
     opts.alreadyLinked.add(t.href);
     return `<a href="${t.href}" class="hw-mention">${m}</a>`;
   });

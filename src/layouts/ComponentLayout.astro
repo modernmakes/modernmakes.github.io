@@ -146,14 +146,16 @@ const canonicalUrl = siteBase + Astro.url.pathname;
 const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 // Printers live at /printers/<slug>, outside /hardware, so they get their own breadcrumb trail and nav highlight.
 const isPrinter = pathSegments[0] === 'printers';
-// Hardware mentions in visible copy link to their detail pages: first mention per target,
-// shared across fields in render order. Schema, title and meta keep the plain strings.
-const linkedHrefs = new Set<string>();
-const link = (t: string) => linkHardwareMentions(t, { selfHref: '/' + pathSegments.join('/'), alreadyLinked: linkedHrefs });
-const verdictHtml = link(verdict);
-const prosHtml = pros.map(link);
-const consHtml = cons.map(link);
-const bodyHtml = body.map(link);
+// Hardware mentions in visible copy link to their detail pages: first mention per target
+// within each section (verdict, pros, cons, body). Schema, title and meta keep the plain strings.
+const sectionLinker = () => {
+  const alreadyLinked = new Set<string>();
+  return (t: string) => linkHardwareMentions(t, { selfHref: '/' + pathSegments.join('/'), alreadyLinked });
+};
+const verdictHtml = sectionLinker()(verdict);
+const prosHtml = pros.map(sectionLinker());
+const consHtml = cons.map(sectionLinker());
+const bodyHtml = body.map(sectionLinker());
 const navTitle = hardwareNavTitle(brand, title, isPrinter ? 'printers' : pathSegments[1]);
 const segLabels: Record<string, string> = {
   hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',

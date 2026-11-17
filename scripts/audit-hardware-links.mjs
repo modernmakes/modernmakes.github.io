@@ -1,6 +1,6 @@
 // Report every auto-link linkHardwareMentions() (src/lib/hardware-links.ts) creates on
 // hardware detail pages, so wrong matches can be spotted by eye.
-// Fields and order mirror ComponentLayout: verdict label, pros, cons, body paragraphs.
+// Fields mirror ComponentLayout: verdict label, pros, cons, body; first mention per target per section.
 // Usage: npm run audit:links   (run after npm run build to check hrefs against dist/)
 import { existsSync } from 'node:fs';
 import { ROUTE_TABLES, SKIPPED, AMBIGUOUS, LINK_INDEX, linkHardwareMentions } from '../src/lib/hardware-links.ts';
@@ -24,12 +24,20 @@ for (const { file, base, records } of ROUTE_TABLES) {
   for (const r of records) {
     if (typeof r?.Name !== 'string' || !r.Name.trim()) continue;
     const page = `${base}/${toSlug(r.Name)}`;
-    const opts = { selfHref: page, alreadyLinked: new Set() };
-    const fields = [['verdict', r['Verdict Label'] ?? ''], ...lines(r.Pros).map((t) => ['pro', t]), ...lines(r.Cons).map((t) => ['con', t]), ...paras(r.Body).map((t) => ['body', t])];
-    for (const [field, text] of fields) {
-      for (const [, href, txt] of linkHardwareMentions(text, opts).matchAll(anchor)) {
-        all.push({ page, field, txt, href });
-        perCat[file]++;
+    const sections = [['verdict', [r['Verdict Label'] ?? '']], ['pro', lines(r.Pros)], ['con', lines(r.Cons)], ['body', paras(r.Body)]];
+    for (const [field, texts] of sections) {
+      const opts = { selfHref: page, alreadyLinked: new Set() };
+      for (const text of texts) {
+        const html = linkHardwareMentions(text, opts);
+        for (const mm of html.matchAll(anchor)) {
+          const [whole, href, txt] = mm;
+          // 8 words of surrounding plain text around this anchor, for eyeballing context
+          const plain = (s) => s.replace(/<a [^>]*>(.*?)<\/a>/g, '$1').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+          const words = (s) => plain(s).split(/\s+/).filter(Boolean);
+          const ctx = [...words(html.slice(0, mm.index)).slice(-4), `[${txt}]`, ...words(html.slice(mm.index + whole.length)).slice(0, 4)].join(' ');
+          all.push({ page, field, txt, href, ctx });
+          perCat[file]++;
+        }
       }
     }
   }
@@ -42,6 +50,10 @@ console.log(`HARDWARE MENTION LINKS: ${all.length} total`);
 for (const [cat, n] of Object.entries(perCat)) console.log(`  ${cat.padEnd(18)} ${n}`);
 console.log('\nLINKS (source page [field] -> linked text -> target)');
 for (const l of all) console.log(`  ${l.page} [${l.field}] -> "${l.txt}" -> ${l.href}`);
+const WATCH = /^(?:.* )?(V6|Octopus|Roto)$/;
+const watched = all.filter((l) => WATCH.test(l.txt));
+console.log(`\nV6 / OCTOPUS / ROTO LINKS, with context (${watched.length})`);
+for (const l of watched) console.log(`  ${l.page} [${l.field}] ${l.ctx}`);
 console.log(`\nSKIPPED NAMES (${SKIPPED.length})`);
 for (const s of SKIPPED) console.log(`  "${s.text}" (${s.reason}) ${s.href}`);
 console.log(`\nAMBIGUOUS NAMES, not linked (${AMBIGUOUS.length})`);
