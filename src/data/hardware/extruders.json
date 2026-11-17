@@ -1290,7 +1290,7 @@
   {
     "id": "recpyMFZ0Du4Czl6a",
     "Cons": "Older design than Orbiter V3.5 - noisier fan, no RGB sensor board\nSensor adds wiring and Klipper/Marlin configuration\n135g plus sensor weight - heavier than the lightest modern extruders",
-    "Slug": "orbiter-v2-5-smart-filament-sensor",
+    "Slug": "orbiter-v2-5-plus-smart-filament-sensor",
     "Description": "The Orbiter Extruder V2.5 features a robust injection-molded outer shell, enhancing durability. It utilizes an LDO high-temperature motor for strong torque output and improved performance. The high-quality, RNC nano-coated gears (HRC60+) incorporate an innovative flat-bottom design, maintaining consistent extrusion rates regardless of filament position.",
     "Verdict Label": "The classic LDO Orbiter V2.5 plus a smart filament sensor - proven dual-drive extrusion with runout detection.",
     "Ecosystem": [

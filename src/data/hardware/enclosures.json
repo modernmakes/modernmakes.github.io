@@ -412,7 +412,7 @@
     "Description": "LDO Colony Clacker door hardware kit for Micron+ 160/180 and other 1515-based Printers for Ants printers, inspired by tanaes' Clicky-Clack fridge door mod. It was remodelled from scratch for the small Micron frame, with improved tolerances and STLs tuned for standard Voron print settings. The kit supplies the door hardware only — the buyer prints the parts and sources a 3mm acrylic or polycarbonate door panel (330mm x 290mm).",
     "Verdict Label": "Purpose-built clacker door hardware for Micron 160/180 — panel and printed parts not included",
     "Sizes Available": "160mm, 180mm",
-    "Slug": "micron-colony-clacker-door-kit",
+    "Slug": "micron-plus-colony-clacker-door-kit",
     "Cons": "Door panel not included in the base kit — buyer sources a 3mm acrylic or polycarbonate panel\nPrinted parts not included\nHardware list is long (M3 screws/nuts, dowel pins, magnets, foam tape) — a fiddly small-printer build",
     "Vendor 1 Name": "Fabreeko",
     "Name": "Micron+ Colony Clacker Door Kit"
@@ -542,7 +542,7 @@
     "Material": "ABS",
     "Description": "Printed-parts kit for a V-Core 3.1 with Enclosure 2.0 and EVA 3.x, from BRS Engineering. Despite the 'Full Kit' name, this is printed parts only — no panels, extrusions or hardware. Offered in PA12-CF15 (nylon 12 + carbon fiber, 150–175°C heat resistance) or WORK (ABS-derived, ~110°C), printed to ±0.07 mm. BRS recommends SpannSysteme machined aluminum tubing with it.",
     "Verdict Label": "Printed-parts set for V-Core 3.1 + enclosure + EVA",
-    "Slug": "v-core-3-1-enclosure-2-0-full-kit",
+    "Slug": "v-core-3-1-plus-enclosure-2-0-full-kit",
     "Cons": "Printed parts only despite the 'Full Kit' name — no panels, extrusions or hardware\nExpensive for a printed-parts set\nSold out at time of check (page badge; JSON-LD says InStock — contradictory)",
     "Vendor 1 Name": "BRS Engineering",
     "Name": "V-Core 3.1 + Enclosure 2.0 Full Kit"
