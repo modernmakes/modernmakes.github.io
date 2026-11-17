@@ -9,7 +9,8 @@
     "fetch-data": "node scripts/fetch-airtable.mjs",
     "tells": "node scripts/content-tells.mjs",
     "tells:strict": "node scripts/content-tells.mjs --strict",
-    "audit:images": "node scripts/audit-hardware-images.mjs"
+    "audit:images": "node scripts/audit-hardware-images.mjs",
+    "audit:links": "node scripts/audit-hardware-links.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.2.1",

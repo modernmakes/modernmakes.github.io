@@ -8,6 +8,7 @@ import ShareButton from '../components/ShareButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import { resolveFlowClass, FLOW_CLASSES, hardwareNavTitle } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
+import { linkHardwareMentions } from '../lib/hardware-links';
 
 interface VendorLink {
   name: string;
@@ -66,6 +67,8 @@ interface Props {
   pageTitle?: string;
   primaryVendorUrl?: string;
   heroImageUrl?: string;
+  /** Editorial body paragraphs (plain text); auto-linked like verdict, pros and cons. */
+  body?: string[];
 }
 
 const {
@@ -91,6 +94,7 @@ const {
   pageTitle,
   primaryVendorUrl = '',
   heroImageUrl = '',
+  body = [],
 } = Astro.props;
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
@@ -139,6 +143,14 @@ const canonicalUrl = siteBase + Astro.url.pathname;
 const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 // Printers live at /printers/<slug>, outside /hardware, so they get their own breadcrumb trail and nav highlight.
 const isPrinter = pathSegments[0] === 'printers';
+// Hardware mentions in visible copy link to their detail pages: first mention per target,
+// shared across fields in render order. Schema, title and meta keep the plain strings.
+const linkedHrefs = new Set<string>();
+const link = (t: string) => linkHardwareMentions(t, { selfHref: '/' + pathSegments.join('/'), alreadyLinked: linkedHrefs });
+const verdictHtml = link(verdict);
+const prosHtml = pros.map(link);
+const consHtml = cons.map(link);
+const bodyHtml = body.map(link);
 const navTitle = hardwareNavTitle(brand, title, isPrinter ? 'printers' : pathSegments[1]);
 const segLabels: Record<string, string> = {
   hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',
@@ -222,7 +234,7 @@ const breadcrumbSchema = {
             {verdictLabel}
           </a>
           {flowClass && <span class="flow-chip on-dark">{flowClass.chipLabel}</span>}
-          <span class="comp-verdict-text">{verdict}</span>
+          <span class="comp-verdict-text" set:html={verdictHtml} />
         </div>
         <div class="comp-key-stats">
           <div class="comp-stat">
@@ -384,7 +396,7 @@ const breadcrumbSchema = {
                 <div class="comp-pros">
                   <div class="comp-pros-head">Pros</div>
                   <ul class="comp-pros-list">
-                    {pros.map(p => <li><span class="comp-pros-icon" aria-hidden="true">✓</span>{p}</li>)}
+                    {prosHtml.map(p => <li><span class="comp-pros-icon" aria-hidden="true">✓</span><span set:html={p} /></li>)}
                   </ul>
                 </div>
               )}
@@ -392,7 +404,7 @@ const breadcrumbSchema = {
                 <div class="comp-cons">
                   <div class="comp-cons-head">Cons</div>
                   <ul class="comp-cons-list">
-                    {cons.map(c => <li><span class="comp-cons-icon" aria-hidden="true">✗</span>{c}</li>)}
+                    {consHtml.map(c => <li><span class="comp-cons-icon" aria-hidden="true">✗</span><span set:html={c} /></li>)}
                   </ul>
                 </div>
               )}
@@ -402,6 +414,7 @@ const breadcrumbSchema = {
 
         <!-- PROSE CONTENT (editorial notes) -->
         <div class="comp-prose art-content">
+          {bodyHtml.map(h => <p set:html={h} />)}
           <slot />
         </div>
 

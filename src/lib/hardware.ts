@@ -6,8 +6,8 @@
 // and spec mapping here means every category behaves exactly like /hardware/hotends.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const toSlug = (name: string): string =>
-  name.toLowerCase().replace(/\+/g, '-plus').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+import { toSlug } from './slug';
+export { toSlug };
 
 import { imageOf } from './hardware-image';
 export { imageOf };

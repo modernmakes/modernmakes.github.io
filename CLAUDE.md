@@ -363,7 +363,7 @@ git commit -m "data: [description]"
 
 ### Slug generation
 
-Single source of truth: `toSlug()` in `src/lib/hardware.ts`. Every hardware href is built by
+Single source of truth: `toSlug()` in `src/lib/hardware.ts` (defined in the import-free `src/lib/slug.ts` and re-exported, so Node scripts can load it). Every hardware href is built by
 calling it at build time — never hand-typed, never read from Airtable's own `Slug` formula
 field (see Known Patterns & Gotchas below).
 
