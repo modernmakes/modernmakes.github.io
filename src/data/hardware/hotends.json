@@ -1434,6 +1434,7 @@
     "Nozzle Thread": "Supervolcano (E3D Supervolcano nozzle)",
     "Heater Type": "Ø6x cartridge (20–35mm)",
     "Heat Block": "Copper melt-zone block, 3x the HE20 melt zone, with dual clamped Ø6x20mm heater cartridges",
+    "Image URL": "/media/hardware/hotends/he50.webp",
     "Vendor 2 Name": "HartSmart Products",
     "Part Number": "HE50",
     "Thermistor": "Custom Ø3x15mm cartridge",
@@ -1447,7 +1448,7 @@
     "Heat Break": "Titanium feed tube; 3 titanium hollow pillar mounts (no threaded heat break)",
     "Price (USD)": 210,
     "Pros": "All-metal, tested past 320°C\nDual Ø6x20mm heater cartridges clamped for excellent thermal transfer\nIndependently proven >50 mm³/s flow (HartSmart: >55)\n3x melt zone of the HE20\nSupervolcano nozzles, widely available\nBMG-M / LGX mounting (Multi-Mount option)",
-    "Updated": "2026-11-12T01:11:36.000Z"
+    "Updated": "2026-11-17T08:46:30.000Z"
   },
   {
     "id": "recxad9vquG9vyyHz",
