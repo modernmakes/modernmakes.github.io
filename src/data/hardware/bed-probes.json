@@ -267,6 +267,31 @@
     "Brand": "Mellow 3D"
   },
   {
+    "id": "reckZG6zrWukY6Clo",
+    "Verdict": "Bleeding Edge",
+    "Pros": "Uses the hotend itself as the probe — no separate probe hardware\nBOM is just 2 grub screws + wire\nSets Z offset and builds a bed mesh like FlexTap\nWorks with Dragon ST/HF, Rapido HF, Revo Voron, and Dragon Ace",
+    "Slug": "dragon-burner-peck",
+    "Description": "Experimental flexure probe for the Dragon Burner toolhead — the centre of the hotend mount is suspended by flexures so the hotend itself acts as the Z probe (FlexTap-style), setting Z offset and building a bed mesh. A normally-closed switch is formed by 2x M3x3mm grub screws and wires. Available for Dragon ST/HF, Rapido HF, Revo Voron, and Dragon Ace hotends, in Sherpa Mini and Orbiter v2 mount patterns. EXPERIMENTAL — not even in beta yet, and it may never be released depending on test results.",
+    "Verdict Label": "Experimental flexure probe for the Dragon Burner — the hotend itself is the Z probe. Not yet in beta; may never be released.",
+    "Compatible Toolheads": [
+      "Dragon Burner "
+    ],
+    "Klipper Native": true,
+    "Cons": "EXPERIMENTAL — not in beta, may never be released\nRequires cutting thin walls and calibrating grub screws with a multimeter\nProbe properties change with chamber temperature — probe cold or fully heat-soaked\nCan damage flex plates during testing; frequent toolhead rebuilds likely\nInaccurate bed mesh on v0 (cantilever bed + trigger force)",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "Voron V0"
+    ],
+    "Open Source": true,
+    "Installation Complexity": "Hard",
+    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Name": "Dragon Burner Peck",
+    "Type": "Nozzle Contact",
+    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/Experimental/Peck",
+    "Brand": "Open Source / Community"
+  },
+  {
     "id": "reclm5cB7iOXVlMql",
     "Verdict": "Skip",
     "Accuracy (mm)": "Optical switch-based; accuracy not independently published; similar to BLTouch in practice",

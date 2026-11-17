@@ -598,6 +598,7 @@
     "Pros": "Phaetus's proprietary EndCoat™ DLC-inspired surface coating provides anti-adhesive properties\nLowest price entry into coated abrasive nozzles at ~$9\nAvailable for multiple printer platforms",
     "Verdict": "Niche Pick",
     "Abrasive Filament": true,
+    "Image URL": "/media/hardware/nozzles/endcoat-nozzle.webp",
     "Slug": "endcoat",
     "Cons": "EndCoat™ coating longevity under sustained abrasive use is less proven than uncoated HS or SiC\nLimited community testing data vs. more established options\nCoating may degrade with very aggressive filaments (high SiC or metal-fill)",
     "Vendor 1 Name": "Phaetus",

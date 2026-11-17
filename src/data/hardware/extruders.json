@@ -99,6 +99,31 @@
     "Mount": "Sherpa Mini"
   },
   {
+    "id": "rec1S3F0FC6ibslD7",
+    "Cons": "Work in progress — CAD not yet published, design may change\nRequires BMG extruder kit + NEMA14 pancake motor (sourced separately)\nSmaller community install base vs Sherpa Mini or Orbiter",
+    "Compatible Printers": [
+      "Voron 0"
+    ],
+    "Slug": "minimouse",
+    "Description": "Direct-drive extruder designed for the Voron v0.1, built on a BMG extruder gear kit with a NEMA14 36mm pancake motor (10T gear). Uses Mini-AfterSherpa mounts and works with chirpy2605's Dragon Burner and Mailbox (5015) toolheads. Work in progress — CAD not yet published.",
+    "Verdict Label": "BMG-based direct-drive extruder for the Voron v0.1 — work in progress, CAD not yet published.",
+    "Ecosystem": [
+      "Voron"
+    ],
+    "Verdict": "Bleeding Edge",
+    "Compatible Toolheads": [
+      "Dragon Burner",
+      "Mailbox"
+    ],
+    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Name": "MiniMouse",
+    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/MiniMouse",
+    "Brand": "chirpy2605",
+    "Drive Type": "Dual",
+    "Pros": "BMG gears provide strong dual-drive grip\nDirect drive for the Voron v0.1\nWorks with Dragon Burner and Mailbox toolheads\nPrint-it-yourself — zero cost beyond BMG kit + motor",
+    "Mount": "Custom"
+  },
+  {
     "id": "rec2QjYTkDkDzBB7Q",
     "Cons": "Bowden only — not suitable for direct drive toolheads; introduces filament lag compared to direct drive; larger and heavier than DD extruders; less common in modern Voron builds",
     "Slug": "m4",

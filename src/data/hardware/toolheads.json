@@ -188,6 +188,31 @@
     ]
   },
   {
+    "id": "recBQgfT20jZ5NhGD",
+    "Pros": "CPAP blower delivers high CFM and very high static pressure — stronger part cooling than blower fans\nShutter switches between internal (closed-loop, ABS) and external (PLA/PETG) air intake\nBackup 5015 Mailbox duct swaps in without dismantling the toolhead\nNo loss in X or Z travel, at most 3mm in Y\nWide extruder and hotend support",
+    "Name": "StovePipe",
+    "Brand / Designer": "chirpy2605",
+    "Compatible Motion Systems": [
+      "CoreXY"
+    ],
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/V0/StovePipe",
+    "Description": "CPAP-fan toolhead for the Voron v0.1 (also Printers for Ants) built around the Wonsmart WS7040-24-V200 CPAP blower with its driver board and a 15mm ID CPAP hose. Uses the standard Voron X carriage with no loss in X or Z and at most 3mm in Y. Includes a shutter to switch the air intake between internal (closed-loop, for ABS) and external (for PLA/PETG), and a backup Mailbox-style 5015 fan duct that swaps in without dismantling the toolhead. Supported extruders: RoundAbout, RoundHouse, LGX Lite, Orbiter v1.5, Sherpa Mini, Sailfin. Supported hotends: Revo Voron, Dragon SF/HF, DragonFly, Rapido HF, Rapido UHF, Dragon UHF, Mellow NF Crazy. Released v1 Dec 2022.",
+    "Compatible Printers": [
+      "Voron V0.1",
+      "Printers for Ants"
+    ],
+    "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/StovePipe",
+    "Cons": "Requires Wonsmart WS7040 fan + driver board + Klipper Expander (or logic-level control) — extra cost and wiring\nFan can pull 2.8A at full load — needs a suitable MOSFET, not a standard MCU fan header\nCPAP hose routing is tight on the v0.1\nHotend can struggle to hold temp at high fan output — may need PID tuning or a stronger heater",
+    "Verdict": "Buy",
+    "Updated": "2026-11-17T22:30:33.000Z",
+    "Slug": "stovepipe",
+    "Type": "Print-it-yourself",
+    "Part Cooling Fans": [
+      "CPAP (7040)",
+      "5015"
+    ]
+  },
+  {
     "id": "recK6ZWMiLC8OU8go",
     "Included Extruder": "None (not included — Sherpa Micro only)",
     "Pros": "Full-metal toolhead for the K3's wide Hula rail backers; much stiffer than stock with better heat dissipation; purpose-built for high-speed/high-acceleration K3 use",
@@ -578,6 +603,23 @@
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
       "CPAP (7040)"
+    ]
+  },
+  {
+    "id": "rechrepTqBBUoPbD7",
+    "Pros": "2x 4010 part cooling + 3010 hotend fan + 2x Neopixels\nWide hotend support including Dragon, Rapido, Revo Voron, and Bambu X1C\nDesigned for the Doron Velta delta printer",
+    "Name": "CraneFly",
+    "Brand / Designer": "chirpy2605",
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/CraneFly",
+    "Description": "Effector (toolhead) for the Doron Velta delta 3D printer, using 2x 4010 blower fans for part cooling, a 3010 axial fan for the hotend, and 2x Neopixels. Supports Dragon SF/HF, Dragon ACE, Rapido v1/v2, Dragon Volcano/UHF, Revo Voron, and Bambu X1C (and clone) hotends. Currently in BETA2. Peck flexure-mount support is ALPHA and untested on this printer.",
+    "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/general/CraneFly",
+    "Cons": "BETA2 — still in development, CAD will change\nFor a delta printer (Doron Velta), not a Voron\nPeck flexure-mount support is ALPHA and untested\nSmaller community install base vs Voron toolheads",
+    "Verdict": "Consider",
+    "Updated": "2026-11-17T22:30:35.000Z",
+    "Slug": "cranefly",
+    "Type": "Print-it-yourself",
+    "Part Cooling Fans": [
+      "2x 4010"
     ]
   },
   {
