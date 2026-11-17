@@ -520,7 +520,7 @@
     ],
     "Verdict": "Workhorse",
     "Weight (g)": 18,
-    "Image URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder/raw/main/Images/sherpa_micro_pr.jpg",
+    "Image URL": "/media/hardware/extruders/sherpa-micro-extruder.webp",
     "Compatible Toolheads": [
       "AntHead",
       "Mini-AfterSherpa"
