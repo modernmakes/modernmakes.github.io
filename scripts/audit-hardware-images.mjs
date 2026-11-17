@@ -5,9 +5,9 @@
 //        npm run audit:images -- --strict exit 1 if any CASE/NAME MISMATCH exists
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { imageOf } from '../src/lib/hardware-image.ts';
+import { toSlug } from '../src/lib/slug.ts';
 
 const DATA = 'src/data/hardware';
-const toSlug = (s = '') => String(s).toLowerCase().replace(/\+/g, '-plus').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 const norm = (f) => f.toLowerCase().replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
 const stripPrefix = (s, p) => (p && s.startsWith(p + '-') ? s.slice(p.length + 1) : s);
 const kind = (p) => (!p ? 'empty' : p.startsWith('/') ? 'local' : 'external');

@@ -1,7 +1,8 @@
 ---
 import ComponentLayout from '../../../layouts/ComponentLayout.astro';
 import hotends from '../../../data/hardware/hotends.json';
-import { resolveVerdict, toSlug, imageOf } from '../../../lib/hardware';
+import { resolveVerdict, toSlug, imageOf, flowSourceCaption } from '../../../lib/hardware';
+import { relatedHref } from '../../../lib/hardware-links';
 
 const TOOLHEAD_HREFS: Record<string, string> = {
   'Stealthburner': '/voron/toolheads/stealthburner',
@@ -108,7 +109,7 @@ const relatedComponents: RelatedEntry[] = [];
   const name = record[`Related ${n} Name`] as string | undefined;
   const href = record[`Related ${n} URL`]  as string | undefined;
   if (name?.trim()) {
-    relatedComponents.push({ title: name.trim(), category: 'Hardware', href: href ?? '/hardware' });
+    relatedComponents.push({ title: name.trim(), category: 'Hardware', href: relatedHref(name, href) });
   }
 });
 
@@ -146,4 +147,5 @@ const excerpt = rawDesc.match(/^[^.!?]+[.!?]/) ? rawDesc.match(/^[^.!?]+[.!?]/)!
   heroImage={heroImage}
   heroImageUrl={heroImage}
   body={bodyParagraphs}
+  flowCaption={flowSourceCaption(record)}
 />

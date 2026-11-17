@@ -1045,11 +1045,13 @@ form[data-subscribe][hidden] { display: none; } /* the forms set display: flex *
   }
 }
 
-/* ── HARDWARE MENTIONS ──
-   Auto-linked record names in hardware detail copy (src/lib/hardware-links.ts).
+/* ── HARDWARE MENTIONS + FLOW SOURCE LINKS ──
+   Auto-linked record names in hardware detail copy (src/lib/hardware-links.ts) and the
+   flow-caption source link (flowSourceCaption in src/lib/hardware.ts).
    Same treatment as .art-content a (article.css); on the dark .comp-hero the
    verdict label uses --accent, hover --accent-mid. Focus ring: global :focus-visible. */
-.hw-mention {
+.hw-mention,
+.flow-source-link {
   color: var(--accent-dk);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -1057,6 +1059,7 @@ form[data-subscribe][hidden] { display: none; } /* the forms set display: flex *
 }
 .comp-hero .hw-mention { color: var(--accent); }
 @media (hover: hover) and (pointer: fine) {
-  .hw-mention:hover { color: var(--accent-ink); }
+  .hw-mention:hover,
+  .flow-source-link:hover { color: var(--accent-ink); }
   .comp-hero .hw-mention:hover { color: var(--accent-mid); }
 }

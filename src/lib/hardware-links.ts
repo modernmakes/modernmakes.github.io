@@ -124,3 +124,17 @@ export function linkHardwareMentions(text: string, opts: { selfHref: string; alr
     return `<a href="${t.href}" class="hw-mention">${m}</a>`;
   });
 }
+
+// Every live detail-page path, for resolving stored "Related N URL" values.
+export const LIVE_PATHS: ReadonlySet<string> = new Set(
+  ROUTE_TABLES.flatMap(({ base, records }) =>
+    records.filter((r) => typeof r?.Name === 'string' && r.Name.trim()).map((r) => `${base}/${toSlug(r.Name)}`)),
+);
+
+/** Href for a "Related N" entry: a stored /hardware or /printers URL only when it is a live page, else the record named, else the fallback. */
+export const relatedHref = (name: string, storedUrl: string | undefined, fallback = '/hardware'): string => {
+  const url = (storedUrl ?? '').trim().replace(/(.)\/$/, '$1');
+  const isRecordPath = /^\/(hardware|printers)\/./.test(url);
+  if (url && (!isRecordPath || LIVE_PATHS.has(url))) return url;
+  return LINK_INDEX.get(name.trim())?.href ?? fallback;
+};

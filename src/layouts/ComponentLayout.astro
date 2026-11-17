@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Sheet from '../components/Sheet.astro';
 import ShareButton from '../components/ShareButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
-import { resolveFlowClass, FLOW_CLASSES, hardwareNavTitle } from '../lib/hardware';
+import { resolveFlowClass, FLOW_CLASSES, hardwareNavTitle, FLOW_CAPTION_TAIL } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
 import { linkHardwareMentions } from '../lib/hardware-links';
 
@@ -69,6 +69,8 @@ interface Props {
   heroImageUrl?: string;
   /** Editorial body paragraphs (plain text); auto-linked like verdict, pros and cons. */
   body?: string[];
+  /** Flow diagram caption HTML from flowSourceCaption(); hotend pages pass it with maxFlow. */
+  flowCaption?: string;
 }
 
 const {
@@ -95,6 +97,7 @@ const {
   primaryVendorUrl = '',
   heroImageUrl = '',
   body = [],
+  flowCaption = `Rated maximum flow. ${FLOW_CAPTION_TAIL}`,
 } = Astro.props;
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
@@ -336,9 +339,7 @@ const breadcrumbSchema = {
                   <span>{FLOW_MAX} mm³/s</span>
                 </div>
               </div>
-              <p class="comp-flow-note">
-                Max flow at 250°C, from published test data, with standard PLA/PETG. Actual performance varies by filament, nozzle diameter, and temperature.
-              </p>
+              <p class="comp-flow-note" set:html={flowCaption} />
             </div>
           </section>
         )}

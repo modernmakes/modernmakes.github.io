@@ -10,6 +10,7 @@ import { toSlug } from './slug';
 export { toSlug };
 
 import { imageOf } from './hardware-image';
+import { relatedHref } from './hardware-links';
 export { imageOf };
 
 // Reader-facing singular per detail-route folder (/hardware/<folder>/, /printers/).
@@ -177,6 +178,39 @@ export const resolveFlowClass = (maxFlow: unknown): FlowClass | null => {
   return [...FLOW_CLASSES].reverse().find((c) => n >= c.min) ?? FLOW_CLASSES[0];
 };
 
+// ── Flow diagram caption (hotend pages) ─────────────────────────────────────
+// Attribution comes from Airtable "Max Flow Source" (Manufacturer / Independent test /
+// Community estimate) + "Max Flow Source URL". Third-party sources need a URL; without one
+// the caption claims nothing beyond "Rated maximum flow." Returns escaped HTML.
+const escHtml = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+const httpUrl = (v: unknown): URL | null => {
+  try {
+    const u = new URL(String(v ?? '').trim());
+    return u.protocol === 'https:' || u.protocol === 'http:' ? u : null;
+  } catch { return null; }
+};
+const extLink = (u: URL, text: string) =>
+  `<a href="${escHtml(u.href)}" class="flow-source-link" target="_blank" rel="noopener">${escHtml(text)}<span class="sr-only"> (opens in new tab)</span></a>`;
+export const FLOW_CAPTION_TAIL = 'Real-world flow varies with filament, nozzle and temperature.';
+
+export const flowSourceCaption = (record: any): string => {
+  const source = String(record?.['Max Flow Source'] ?? '').trim().toLowerCase();
+  const url = httpUrl(record?.['Max Flow Source URL']);
+  const brand = String(record?.['Brand'] ?? '').trim();
+  const host = url?.hostname.replace(/^www\./, '') ?? '';
+  let lead = 'Rated maximum flow.';
+  if (source === 'manufacturer' && brand) {
+    const text = `${brand}'s published rating`;
+    lead = `${url ? extLink(url, text) : escHtml(text)}.`;
+  } else if (source === 'independent test' && url) {
+    lead = `Independently tested — ${extLink(url, host)}.`;
+  } else if (source === 'community estimate' && url) {
+    lead = `Community estimate — ${extLink(url, host)}.`;
+  }
+  return `${lead} ${FLOW_CAPTION_TAIL}`;
+};
+
 // Known ecosystem links — shared by every category's sidebar chips.
 export const TOOLHEAD_HREFS: Record<string, string> = {
   Stealthburner: '/voron/toolheads/stealthburner',
@@ -305,7 +339,7 @@ export function buildDetailProps(record: any, config: DetailConfig) {
     const name = record[`Related ${n} Name`] as string | undefined;
     const href = record[`Related ${n} URL`] as string | undefined;
     if (name?.trim()) {
-      relatedComponents.push({ title: name.trim(), category: 'Hardware', href: href ?? '/hardware' });
+      relatedComponents.push({ title: name.trim(), category: 'Hardware', href: relatedHref(name, href) });
     }
   });
 
