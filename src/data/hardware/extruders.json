@@ -83,6 +83,7 @@
     ],
     "Verdict": "Workhorse",
     "Weight (g)": 45,
+    "Image URL": "/media/hardware/extruders/annex-engineering-cnc-sherpa-mini-v3-extruder.webp",
     "Vendor 1 Name": "NorthPrint3D",
     "Name": "CNC Sherpa Mini v3",
     "Vendor 2 URL": "https://www.fysetc.com/en-de/products/cnc-all-metal-sherpa-v3-extruder-light-weight-kit-36-moons",
@@ -166,6 +167,7 @@
     ],
     "Verdict": "Niche Pick",
     "Weight (g)": 155,
+    "Image URL": "/media/hardware/extruders/phaetus-apus-extruder.webp",
     "Vendor 1 Name": "Phaetus",
     "Name": "Apus",
     "Vendor 2 URL": "https://galaxus.ch/en/s1/product/phaetus-apus-extruder-3d-printer-accessories-24691933",
@@ -196,6 +198,7 @@
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
+    "Image URL": "/media/hardware/extruders/chirpy2605-roundhouse-extruder.webp",
     "Compatible Toolheads": [
       "Mini-AfterSherpa",
       "Mailbox"
@@ -262,6 +265,7 @@
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
+    "Image URL": "/media/hardware/extruders/chirpy2605-rainbow-dragon-extruder.webp",
     "Compatible Toolheads": [
       "Dragon Burner"
     ],
@@ -294,6 +298,7 @@
     ],
     "Verdict": "Bleeding Edge",
     "Weight (g)": 51,
+    "Image URL": "/media/hardware/extruders/mellow-vz-hextrudort-low-plus-extruder.webp",
     "Vendor 1 Name": "3D Mellow",
     "Name": "Vz-Hextrudort-Low Plus",
     "Vendor 2 URL": "https://eastsupplier.com/en-jp/products/mellow-60t-12mm-gear-all-metal-cnc-vz-hextrudort-low-wc-plus-extruder-for-vzbot-330-vz235-hevort-voron-3d-printer",
@@ -324,6 +329,7 @@
     ],
     "Verdict": "Workhorse",
     "Weight (g)": 388,
+    "Image URL": "/media/hardware/extruders/e3d-hemera-extruder.webp",
     "Vendor 1 Name": "DigitMakers",
     "Name": "Hemera",
     "Vendor 2 URL": "https://www.matterhackers.com/store/l/e3d-hemera-dual-drive-extruder-and-hotend/sk/MNTJGY13",
@@ -386,6 +392,7 @@
     ],
     "Verdict": "Workhorse",
     "Weight (g)": 75,
+    "Image URL": "/media/hardware/extruders/bondtech-bmg-extruder.webp",
     "Vendor 1 Name": "Bondtech",
     "Name": "BMG",
     "Vendor 2 URL": "https://www.matterhackers.com/store/l/bondtech-bmg-extruder/sk/M88WAUL2",
