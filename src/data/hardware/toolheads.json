@@ -1,6 +1,7 @@
 [
   {
     "id": "rec1au4XXS78j7kxJ",
+    "Image URL": "/media/hardware/toolheads/toolhead-v2.webp",
     "Included Extruder": "None (not included — Sherpa Mini/Micro, LGX Lite/Lite Pro via new K3rabiner; DFA supported)",
     "Pros": "Nearly full-metal construction with generatively designed SLM bracing for stiffness; optional inverted Y-rail so one spacer set fits any rail thickness; new K3rabiner mount widens extruder compatibility (incl. DFA); fits super-wide rail backers",
     "Name": "Toolhead v2",
@@ -13,7 +14,7 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/mathematicalpotato-toolhead-v2-for-annex-engineering-k3-hula-compatible/",
     "Cons": "Preorder only (ends 15 Nov 2026, ~60-day wait); Chube-only; extruder, hotend, fans, toolboard and printed parts all extra; SLM version costs more than the cheaper fan-plate version",
     "Verdict": "Consider",
-    "Updated": "2026-11-15T10:31:39.000Z",
+    "Updated": "2026-11-17T04:16:37.000Z",
     "Slug": "toolhead-v2",
     "Type": "Toolhead Kit"
   },
@@ -51,6 +52,7 @@
   },
   {
     "id": "rec5b14AMHOazH8nv",
+    "Image URL": "/media/hardware/toolheads/mailbox-toolhead.webp",
     "Included Extruder": "LGX Lite, Orbiter v1.5, Voron PocketWatch 2, RoundHouse, RoundAbout, RoundTrip",
     "Pros": "Unique 5015 fan gutted for high-volume part cooling\nNeopixel RGBW LED integration\nNo X or Z travel loss on V0.2\nWorks with Mini-AfterSherpa extruder mounting pattern\nMounts available for Trident, V2.4, Switchwire, and Legacy",
     "Name": "Mailbox",
@@ -72,7 +74,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Mailbox",
     "Cons": "5015 fan modification requires careful disassembly\nMay tap door/tophat on V0.1\nLess cooling symmetry than dual 4010 designs",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:13.000Z",
+    "Updated": "2026-11-17T04:16:39.000Z",
     "Slug": "mailbox",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -111,6 +113,7 @@
   },
   {
     "id": "rec9XnEX8ZTYNV5nY",
+    "Image URL": "/media/hardware/toolheads/archetype-toolhead.webp",
     "Included Extruder": "Multiple via modular mount system",
     "Pros": "True modular design — swap components without reprinting the whole head; flexible fan duct configurations",
     "Name": "Archetype",
@@ -131,7 +134,7 @@
     "Vendor 1 Name": "https://github.com/Armchair-Heavy-Industries/Archetype",
     "Cons": "Community mod — verify current development status; source URL needs confirmation",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:17.000Z",
+    "Updated": "2026-11-17T04:16:41.000Z",
     "Slug": "archetype",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -140,6 +143,7 @@
   },
   {
     "id": "recAAkFenv7iUefpd",
+    "Image URL": "/media/hardware/toolheads/hypernova-toolhead.webp",
     "Included Extruder": "None (not included — Sherpa Mini, Sherpa Micro, Orbiter 2.0/2.5, G2SA; also LGX Lite/Pro, WWBMG per HyperDrive)",
     "Pros": "CNC-machined aluminium plates clamp the rail block on 3 sides for rigidity and heat dissipation; wide hotend/extruder support; 6 mm and 9 mm belts; Beacon/Cartographer probe support; full CAD + build manual published",
     "Name": "Hypernova",
@@ -153,7 +157,7 @@
     "Vendor 1 Name": "https://www.fabreeko.com/products/hypernova-print-head",
     "Cons": "Printed parts not in the box (ABS STLs via Discord, or PPS-CF10 from vendor); Complete Printhead variant sold out at Fabreeko; new/unproven design; Xol-inspired, not a clean-sheet proven platform",
     "Verdict": "Consider",
-    "Updated": "2026-11-15T10:31:36.000Z",
+    "Updated": "2026-11-17T04:16:42.000Z",
     "Slug": "hypernova",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -162,6 +166,7 @@
   },
   {
     "id": "recAi7rrlLvN2yrRG",
+    "Image URL": "/media/hardware/toolheads/eva-3-0-toolhead.webp",
     "Included Extruder": "None (not included — user-supplied; compatible with BMG, LGX, LGX Lite, Orbiter 1.5/2.0, Sherpa Mini)",
     "Pros": "Enormous extruder/hotend/probe compatibility; all probe supports included; PA12-CF printed kit; a price for all variants; long-proven RatRig platform",
     "Name": "EVA 3.0",
@@ -175,7 +180,7 @@
     "Vendor 1 Name": "https://store.brs-engineering.com/en/products/copie-de-eva-3-0-corexy-nuts",
     "Cons": "Printed kit only — extruder, hotend and fasteners (M3 nuts not provided) are extra; sold out at BRS at time of check; configuration complexity (many variants)",
     "Verdict": "Buy",
-    "Updated": "2026-11-15T10:31:31.000Z",
+    "Updated": "2026-11-17T04:16:44.000Z",
     "Slug": "eva-3-0",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -202,6 +207,7 @@
   },
   {
     "id": "recQU9XKnRz4FuA8p",
+    "Image URL": "/media/hardware/toolheads/yavoth-toolhead.webp",
     "Included Extruder": "Sherpa Mini, Orbiter v2",
     "Pros": "Unibody design — rigid and easy to print with no supports needed\n2510 fan positioned higher for better heatsink cooling\nAngled 4010 fans improve airflow to nozzle\nStays within V0.2 MiniSB footprint\nCompatible with Dragon Burner extras and Alternative Voron Mounts",
     "Name": "Yavoth",
@@ -222,7 +228,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/Yavoth",
     "Cons": "UHF variants lose 8.5mm Z height\nNo probe mounts integrated (use carriage-mounted probes)\nMay tap front door on some V0.2 installations",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:15.000Z",
+    "Updated": "2026-11-17T04:16:46.000Z",
     "Slug": "yavoth",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -231,6 +237,7 @@
   },
   {
     "id": "recSaCUFcl60uaDVo",
+    "Image URL": "/media/hardware/toolheads/k3-metal-toolhead.webp",
     "Included Extruder": "None (not included — with K3rabiner: Sherpa Mini std/mirrored, Sherpa Micro mirrored, LGX Lite Pro; without: DFA and DFA-pattern extruders)",
     "Pros": "Replaces the K3's printed party plate with rigid 3–3.2 mm aluminium; broad extruder support via K3rabiner/DFA plates; compatible with all K3 hotend and cooling configs; DXFs included to cut your own",
     "Name": "K3 Metal Toolhead",
@@ -243,7 +250,7 @@
     "Vendor 1 Name": "https://northprint3d.ca/product/k3-metal-toolhead-kit/",
     "Cons": "Plates + spacers only — everything else (extruder, hotend, fans, printed parts, toolboard) extra; DFA plate needs countersinking for standard Sherpa Micro (not recommended config); NorthPrint3D page currently bot-blocked so live price/stock unverifiable",
     "Verdict": "Buy",
-    "Updated": "2026-11-15T10:31:37.000Z",
+    "Updated": "2026-11-17T04:16:48.000Z",
     "Slug": "k3-metal-toolhead",
     "Type": "Toolhead Kit",
     "Part Cooling Fans": [
@@ -252,6 +259,7 @@
   },
   {
     "id": "recUfYIqUPASq5GwH",
+    "Image URL": "/media/hardware/toolheads/dragon-burner-v0-2-toolhead.webp",
     "Included Extruder": "Sherpa Mini, Orbiter v2, G2SA, LGX Lite, Wristwatch BMG/G2, Papilio Lite, and others",
     "Pros": "CFD-optimized dual 4010 ducts — significant part cooling improvement over v7\nWidest hotend and extruder compatibility of any V0 toolhead\nOnline configurator generates custom STL zip\nNeopixel logo and nozzle LED support\nMounts for all Voron printers plus Tap and Boop",
     "Name": "Dragon Burner V0.2",
@@ -276,7 +284,7 @@
     "Vendor 1 Name": "https://www.etsy.com/listing/1502885485/dragon-burner-latest-version-3d-printed",
     "Cons": "V0.2 X-carriage only — V0.1 users must use Dragon Burner v4\nDoes not support UHF hotends (use Rapid Burner instead)",
     "Verdict": "Buy",
-    "Updated": "2026-11-12T10:56:21.000Z",
+    "Updated": "2026-11-17T04:16:51.000Z",
     "Slug": "dragon-burner-v0-2",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [

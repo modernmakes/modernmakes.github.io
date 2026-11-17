@@ -50,7 +50,7 @@
     ],
     "Fan Size": "3010",
     "Vendor 4 Name": "West3D",
-    "Max Flow (mm³/s)": 36,
+    "Max Flow (mm³/s)": 45,
     "Related 2 Name": "Rapido 2 HF",
     "Flow Class": "Standard Flow",
     "Vendor 2 Affiliate": true,
@@ -94,7 +94,7 @@
     "Price (USD)": 99,
     "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
-    "Updated": "2026-11-12T03:52:50.000Z",
+    "Updated": "2026-11-17T04:14:10.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
