@@ -33,6 +33,7 @@ const excerptOf = (r: any) =>
   schemaName="Self-Build CoreXY 3D Printers"
   chips={chips}
   excerptOf={excerptOf}
+  priceOf={(r: any) => r['Price (USD)'] ?? r['BOM Cost']}
 >
   <Fragment slot="intro">
     <section class="section" aria-labelledby="eco-heading">

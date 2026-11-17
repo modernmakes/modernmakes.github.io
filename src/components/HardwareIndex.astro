@@ -10,6 +10,7 @@ import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
 import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
+import { DEFAULT_SORT, SORTS, chooseBands, inBand, num, sortItems, type ViewItem } from '../scripts/hardware-view';
 
 interface Props {
   records: any[];
@@ -29,6 +30,7 @@ interface Props {
   chips?: (r: any) => string[];        // spec chips per card
   excerptOf?: (r: any) => string;      // card excerpt
   flowOf?: (r: any) => unknown;        // max flow (mm³/s) source; default Hotends' column
+  priceOf?: (r: any) => unknown;       // price (USD) source for sorting and price bands
 }
 
 const {
@@ -49,6 +51,7 @@ const {
   chips = () => [],
   excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
   flowOf = (r: any) => r['Max Flow (mm³/s)'],
+  priceOf = (r: any) => r['Price (USD)'],
 } = Astro.props;
 
 // Verdict badges/tabs resolve through the shared taxonomy helper so every
@@ -73,6 +76,30 @@ for (const r of records) {
   if (fc) flowCounts[fc.key]++;
 }
 const hasFlow = Object.values(flowCounts).some((n) => n > 0);
+
+// Sort/filter data (src/scripts/hardware-view.ts). Every card carries what the page needs as data
+// attributes, so the script never reads card text: name, brand slug, price, flow, Recommended rank,
+// price band, and its position under each sort (data-o-<sort>), which the pre-paint script uses.
+type Item = ViewItem & { r: any; band: string; o: Record<string, number> };
+const items: Item[] = records.map((r: any, i: number) => ({
+  r,
+  name: String(r['Name']).trim(),
+  brand: toSlug(String(r['Brand'] ?? '').trim()),
+  price: num(priceOf(r)),
+  flow: num(flowOf(r)),
+  rank: i,
+  verdict: resolveVerdict(r['Verdict'])?.key ?? '',
+  flowClass: resolveFlowClass(flowOf(r))?.key ?? '',
+  band: '',
+  o: {},
+}));
+const sorts = SORTS.filter((s) => !s.when || s.when(items));
+for (const s of sorts) {
+  if (s.key !== DEFAULT_SORT) sortItems(items, s.key).forEach((it, pos) => { it.o[s.key] = pos; });
+}
+const bands = chooseBands(items.flatMap((it) => (it.price === null ? [] : [it.price])));
+for (const it of items) it.band = bands.find((b) => inBand(it.price, b)) ?? '';
+const orderAttrs = (it: Item) => Object.fromEntries(Object.entries(it.o).map(([k, v]) => [`data-o-${k}`, v]));
 
 // Pre-paint filter: the inline script in the grid copies ?verdict=/?flow= onto
 // #hw-grid, and these rules hide non-matching cards before first paint.
@@ -174,14 +201,17 @@ const itemListSchema = {
               if (f) g.dataset.flow = f;
             })();
           </script>
-          {records.map((r: any, i: number) => {
+          {items.map((it, i: number) => {
+            const r = it.r;
             const slug = toSlug(r['Name']);
             const v = resolveVerdict(r['Verdict']);
             const fc = resolveFlowClass(flowOf(r));
             const imgSrc = imageOf(r);
             const hasImg = imgSrc !== '';
             return (
-              <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={v?.key ?? ''} data-flow={fc?.key ?? ''}>
+              <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={it.verdict} data-flow={it.flowClass}
+                 data-name={it.name} data-brand={it.brand} data-price={it.price ?? ''} data-flow-n={it.flow ?? ''}
+                 data-rank={it.rank} data-band={it.band} {...orderAttrs(it)}>
                 <div class="card-img">
                   {/* Cover is the base layer: it shows while the image loads and if a hotlinked image fails. */}
                   <TypeCover eyebrow={categoryLabel} title={r['Name']} />
