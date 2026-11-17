@@ -218,37 +218,6 @@
     "Mount": "Custom"
   },
   {
-    "id": "rec82A3dwioyD0B5p",
-    "Cons": "Ecosystem-specific — designed for VzBot/HevORT custom mounts\nSingle-drive twirl gear — less filament grip than dual BMG-style\nLimited toolhead support outside VzBot ecosystem\nFewer guides and less documentation than Voron-standard extruders",
-    "Vendor 4 Name": "DHM-Online",
-    "Slug": "vz-hextrudort",
-    "Community Rating": 4,
-    "Description": "CNC-machined 6061 aluminum extruder originally designed by MirageC as the HextrudORT, adapted for VzBot by the VzBoT3D community. Uses a single-drive twirl gear: 60T main gear with 8T pinion (7.5:1) or 10T pinion (6:1). Available in Standard, PLUS (larger 60T gear), and Low/WC (low center of gravity) variants. Commercial versions manufactured by Mellow3D and distributed through West3D and Fabreeko. Drive type: Single. Mount: VzBot custom — not Voron-standard. Ecosystem: VzBot 330, VZ235, HevORT.",
-    "Verdict Label": "The definitive VzBot/HevORT extruder — excellent CNC quality, but ecosystem-locked.",
-    "Vendor 3 Name": "Print3DShop",
-    "Ecosystem": [
-      "VzBot",
-      "HevORT"
-    ],
-    "Verdict": "Bleeding Edge",
-    "Weight (g)": 40,
-    "Image URL": "/media/hardware/extruders/vz-hextrudort-extruder.webp",
-    "Vendor 1 Name": "West3D (Mellow CNC)",
-    "Name": "Vz-HextrudORT",
-    "Vendor 2 URL": "https://www.fabreeko.com/products/mellow-60t-12mm-gear-all-metal-cnc-vz-hextrudort-low-plus-extruder-for-vzbot-330-vz235-hevort-voron-3d-printer",
-    "Gear Ratio": "7.5:1 (8T) / 6:1 (10T)",
-    "Vendor 1 URL": "https://west3d.com/products/vz-hextrudort-cnc-lightweight-extruder-by-vzbot-mellow",
-    "Brand": "Mellow3D",
-    "Drive Type": "Single",
-    "Vendor 2 Name": "Fabreeko",
-    "Price (USD)": 69.99,
-    "Pros": "CNC 6061 aluminum body — extremely rigid and light\nLow center of gravity variant improves dynamic print quality\nOpen-source with active VzBoT community iteration\nMultiple variants (Standard, PLUS, Low/WC) for different build requirements\nMellow3D commercial version available through major US/EU resellers",
-    "Vendor 3 URL": "https://print3dshop.org/products/mellow-cnc-all-metal-vz-hextrudort-low-wc-extruder-one-shaft-twirl-gear-for-vzbot-330-vz235-hevort-3d-printer",
-    "Vendor 4 URL": "https://www.dhm-online.com/en/vz-extruder/12851-vz-extruder-without-motor-extruder-for-vzbot.html",
-    "Updated": "2026-11-04",
-    "Mount": "VzBot Custom"
-  },
-  {
     "id": "rec9moeBFPMexbYUD",
     "Cons": "WIP/BETA per the README and 'not a plug and play solution'; CAD to be released only when it leaves beta; needs 2x NEMA14 motors, 2x BMG gear sets and a spare stepper driver slot / 5-stepper MCU; assembled weight unpublished; gear ratio is disputed (see held)",
     "Vendor 4 Name": "MatterHackers",
@@ -568,6 +537,28 @@
     "Mount": "Custom"
   },
   {
+    "id": "recEwLQxA6iaxSgDw",
+    "Cons": "Requires HGX Lite 2.0 gear kit — additional cost on top of printed parts\nNOT a direct upgrade from Hummingbird v1 — little BOM reuse\nVery new design (Aug 2026) — minimal community testing\nPrinted plastic body — less rigid than CNC alternatives",
+    "Slug": "hummingbird-2-0",
+    "Description": "Print-it-yourself compact direct drive extruder by nhchiu (also the designer of ProtoXtruder). Hummingbird 2.0 uses the large extrusion gears of the HGX Lite 2.0 extruder for high gear ratios and good filament grip. Same form factor and mounting pattern as the Bondtech LGX Lite. NOT a direct upgrade from the original Hummingbird — little BOM reuse. Uses NEMA14 36mm pancake motor with 10T gear. Klipper rotation_distance 53.494165, gear_ratio 44:10, 37:17. Available on Printables and GitHub (nhchiu/VoronMods). Drive type: Dual (HGX Lite 2.0 gears). Ecosystem: Voron / CoreXY.",
+    "Verdict Label": "Free-to-print LGX Lite-footprint extruder using HGX Lite 2.0 gears — strong dual-drive grip, zero cost beyond the gear kit.",
+    "Ecosystem": [
+      "Voron"
+    ],
+    "Verdict": "Bleeding Edge",
+    "Image URL": "/media/hardware/extruders/hummingbird-2-0-extruder.webp",
+    "Vendor 1 Name": "Printables (nhchiu)",
+    "Name": "Hummingbird 2.0",
+    "Vendor 2 URL": "https://github.com/nhchiu/VoronMods/tree/main/Extruders/Hummingbird_2.0",
+    "Gear Ratio": "44:10, 37:17",
+    "Vendor 1 URL": "https://www.printables.com/model/1814487-hummingbird-extruder-20",
+    "Brand": "nhchiu",
+    "Drive Type": "Dual",
+    "Vendor 2 Name": "GitHub (nhchiu)",
+    "Pros": "LGX Lite mounting footprint — wide toolhead compatibility\nHGX Lite 2.0 gears provide strong dual-drive grip at high ratio\nPrint-it-yourself — zero cost beyond HGX Lite 2.0 gear kit\nBy nhchiu — active Voron community contributor (ProtoXtruder designer)\nSame gear ratio and rotation distance as ProtoXtruder 2.0 (53.494165)",
+    "Mount": "LGX Lite"
+  },
+  {
     "id": "recGLCZyZl3wJDPpi",
     "Cons": "Effect of the oblique/twirling teeth still needs further testing per the designer; twisting force on filament under higher back pressure may cause issues with flexibles or at high flow; needs a donor HGX 2.0 gear kit plus a NEMA14 36 mm pancake motor — neither is included in any kit price",
     "Compatible Printers": [
@@ -762,48 +753,6 @@
     "Pros": "CNC 6061 aluminum body - extremely rigid and light\nLarger 60T 12mm gears improve flexible-filament (TPU) control\nWater-cooling cools hotend and motor together\nChoice of 8T or 10T Moons/LDO motors",
     "Vendor 3 URL": "https://raven3dtech.com.au/product/mellow-60t-12mm-gear-all-metal-cnc-vz-hextrudort-low-wc-plus-extruder-for-vzbot-330-vz235-hevort-voron-3d-printer/",
     "Mount": "VzBot Custom"
-  },
-  {
-    "id": "recKZWr538a7kJVVy",
-    "Cons": "PEEK gears are harder to source as replacements than POM\nMore expensive than printed Sherpa alternatives\n10T version requires rotation distance recalibration vs 8T",
-    "Vendor 4 Name": "Fabreeko",
-    "Compatible Printers": [
-      "Voron 2.4",
-      "Voron Trident",
-      "RatRig V-Core 3"
-    ],
-    "Slug": "sherpa-v3",
-    "Community Rating": 5,
-    "Description": "The Fysetc Sherpa V3 is the third-generation CNC version of the Sherpa Mini extruder. The key upgrade over V2 is the replacement of POM gears with PEEK (30% glass fiber) gears and PEEK motor inserts, specifically solving the heat creep and TPU clogging issue that affected earlier all-metal Sherpa builds. CNC aviation aluminum body, Moons 36 motor, nano-coated steel drive gears.",
-    "Verdict Label": "The most refined CNC Sherpa available — PEEK gears and inserts solve the TPU heat creep problem.",
-    "Vendor 3 Name": "NorthPrint3D",
-    "Ecosystem": [
-      "Voron",
-      "Universal"
-    ],
-    "Verdict": "Workhorse",
-    "Weight (g)": 18,
-    "Image URL": "https://www.fysetc.com/cdn/shop/files/1_32e2d749-5ef6-4212-87a2-9aa26e256378.jpg?v=1744440462",
-    "Compatible Toolheads": [
-      "Stealthburner",
-      "XOL",
-      "Dragon Burner",
-      "A4T"
-    ],
-    "Vendor 1 Name": "Fysetc",
-    "Name": "Sherpa V3",
-    "Vendor 2 URL": "https://www.onbuy.com/ie/p/cnc-all-metal-sherpa-v3-extruder-high-temperature-resistance-light-weight-kit-with-36moons-motor-for-voron-cr-10-b~p219543015/",
-    "Gear Ratio": "50:10 (10T) or 50:8 (8T)",
-    "Vendor 1 URL": "https://www.fysetc.com/products/fysetc-sherpa-extruder",
-    "Brand": "Fysetc",
-    "Drive Type": "Dual",
-    "Vendor 2 Name": "OnBuy",
-    "Price (USD)": 70,
-    "Pros": "PEEK (30% GF) gears replace POM — dramatically better thermal isolation from motor\nPEEK inserts added to further block motor heat transfer\nCNC aviation aluminum body — lightweight and stiff\nNano-coated mold steel drive gears — durable and precise\nMoons 36 pancake motor included\nSupports both 8T and 10T configurations\nDirect and Bowden compatible",
-    "Vendor 3 URL": "https://northprint3d.ca/product/annex-engineering-cnc-sherpa-mini-v3-by-fysetc/",
-    "Vendor 4 URL": "https://www.fabreeko.com/products/sherpa-mini-extruder-cnc-version-by-fysetc",
-    "Updated": "2026-11-04",
-    "Mount": "Sherpa Mini"
   },
   {
     "id": "recLJc8JvO6nIn13E",
@@ -1373,33 +1322,6 @@
     "Vendor 3 URL": "https://3dprintingcanada.com/products/e3d-hemera-xs-direct-coldside-24v",
     "Vendor 4 URL": "https://www.123-3d.ie/E3D-Hemera-XS-Direct-Coldside-24V-HEMERA-XS-175-COLD-D-24V-i11236-t165181.html",
     "Mount": "Custom"
-  },
-  {
-    "id": "rectO0o6ndqe359Lw",
-    "Cons": "Requires HGX-Lite gear kit — additional cost on top of printed parts\nSmaller community install base vs Sherpa Mini or Orbiter\nPrinted plastic body — less rigid than CNC alternatives\nFewer pre-built toolhead integrations than LGX Lite or Sherpa",
-    "Slug": "hummingbird",
-    "Community Rating": 4,
-    "Description": "Print-it-yourself compact direct drive extruder by nhchiu (also the designer of ProtoXtruder). Uses HGX-Lite large drive gears (44:10, 37:17 ratio) in a compact body with the same mounting footprint as the Bondtech LGX Lite. Features a thickened idler arm vs original design to prevent flex under load. Supports 3 types of 4mm OD PTFE tube retainers. Available on Printables and GitHub (nhchiu/VoronMods). Drive type: Dual (HGX-Lite gears). Ecosystem: Voron / CoreXY.",
-    "Verdict Label": "Free-to-print LGX Lite-footprint extruder using HGX-Lite gears — strong dual-drive grip, zero cost beyond the gear kit.",
-    "Vendor 3 Name": "WoodArtSupply",
-    "Ecosystem": [
-      "Voron"
-    ],
-    "Verdict": "Bleeding Edge",
-    "Weight (g)": 25,
-    "Image URL": "/media/hardware/extruders/hummingbird-extruder.webp",
-    "Vendor 1 Name": "Printables (nhchiu)",
-    "Name": "Hummingbird",
-    "Vendor 2 URL": "https://kingroon.com/en-mexican/products/hgx-lite-extruder-dual-gear-extruder-hard-steel-reduction-gear-high-speed-motor-3d-printer-parts-for-cr10-cr-10s-ender3-v2-voron",
-    "Gear Ratio": "44:10, 37:17",
-    "Vendor 1 URL": "https://www.printables.com/model/367706-hummingbird-extruder",
-    "Brand": "nhchiu",
-    "Drive Type": "Dual",
-    "Vendor 2 Name": "Kingroon",
-    "Pros": "LGX Lite mounting footprint — wide toolhead compatibility\nHGX-Lite gears provide strong dual-drive grip at high ratio\nThickened idler arm prevents flex under sustained load\nPrint-it-yourself — zero cost beyond HGX-Lite gear kit\nBy nhchiu — active Voron community contributor (ProtoXtruder designer)",
-    "Vendor 3 URL": "https://woodartsupply.com/products/hocenway-upgraded-super-light-large-gear-hgx-lite-extruder-hardened-steel-reduction-gear-compatible-with-voron-ender-5-series-ender-3-v2-pro-cr10-cr10s-and-other-diy-3d-printer",
-    "Updated": "2026-11-04",
-    "Mount": "LGX Lite"
   },
   {
     "id": "recxB1AdW28YNPoFW",
