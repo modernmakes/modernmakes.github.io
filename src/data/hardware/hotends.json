@@ -299,9 +299,12 @@
   },
   {
     "id": "recEKccmC5iKMTO4D",
+    "Max Flow Source URL": "https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html",
     "Cons": "Dual extrusion is niche now — IDEX and toolchangers have largely replaced it\nBowden only; needs two extruders, two heater outputs and two sensor inputs\nNo manufacturer flow figure; each side performs like a V6\nWater-cooled variant needs a separate cooling loop",
     "Fan Size": "3010",
     "Vendor 4 Name": "Filastruder",
+    "Max Flow (mm³/s)": 11,
+    "Flow Class": "Standard Flow",
     "Vendor 3 URL": "https://top3dshop.com/product/e3d-chimera-hotend",
     "Description": "E3D's two-in, two-out dual-extrusion hotend — essentially two V6 hot sides sharing one heatsink. Each nozzle is individually temperature-controlled, so it can print two colours or two different materials (e.g. PLA with PVA support) in one print. Air-cooled as standard, with a water-cooled variant for heated chambers.",
     "Vendor 4 URL": "https://www.filastruder.com/collections/e3d-hotends/products/chimera-cyclops",
@@ -326,12 +329,14 @@
     "Heat Break": "All-metal stainless steel (2x Kraken heat breaks)",
     "Price (USD)": 126.6,
     "Pros": "Two independently temperature-controlled nozzles — print two materials at once\nDual-colour or soluble-support (PVA) printing\nShares the whole V6 ecosystem: blocks, sensors, cartridges, nozzles\nCompact 30×28mm footprint; air- or water-cooled variants",
-    "Updated": "2026-11-16T10:40:37.000Z"
+    "Max Flow Source": "Community estimate",
+    "Updated": "2026-11-17T08:09:41.000Z"
   },
   {
     "id": "recFJcb0HcaAbQd6r",
+    "Max Flow Source URL": "https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html",
     "Cons": "Standard flow only — no published max flow figure\nThe HF/UHF exist for high-flow builds",
-    "Max Flow (mm³/s)": 46.08,
+    "Max Flow (mm³/s)": 15,
     "Flow Class": "Standard Flow",
     "Description": "The Dragon ST is the standard-flow base model of Phaetus's Dragon family — an all-metal kit rated to 500°C with a 0.1 mm thin-walled heat break and a rigid torsion-resistant structure for one-handed nozzle changes. V6-nozzle compatible with the same mounts as the Dragon HF and UHF. Price $56.23 direct from Phaetus (black in stock, blue sold out).",
     "Verdict Label": "The standard-flow Dragon — 500°C all-metal, V6-compatible",
@@ -349,7 +354,8 @@
     "Heat Break": "0.1 mm thin-walled heat break",
     "Price (USD)": 56.23,
     "Pros": "500°C all-metal kit\n0.1 mm thin-walled heat break for fast heat-up and clean retractions\nRigid torsion-resistant structure for one-handed nozzle changes\nV6-nozzle compatible, same mounts as the Dragon HF/UHF",
-    "Updated": "2026-11-17T04:19:01.000Z"
+    "Max Flow Source": "Community estimate",
+    "Updated": "2026-11-17T08:09:41.000Z"
   },
   {
     "id": "recGr8JtqZl2cA7CE",
@@ -517,9 +523,12 @@
   },
   {
     "id": "recMxi02KiBC6XTwA",
+    "Max Flow Source URL": "https://ellis3dp.com/Print-Tuning-Guide/articles/determining_max_volumetric_flow_rate.html",
     "Cons": "240°C ceiling — no nylon, PC or other high-temp materials\nShorter melt zone means more modest print speeds than the V6\nPTFE liner degrades if pushed past its limit",
     "Fan Size": "3010",
     "Vendor 4 Name": "Spool3D",
+    "Max Flow (mm³/s)": 11,
+    "Flow Class": "Standard Flow",
     "Vendor 3 URL": "https://aus3d.com.au/products/e3d-lite6-hotend",
     "Description": "E3D's entry-level hotend — 'V6's little brother'. A mostly-metal design with a one-piece stainless heatbreak/heatsink lined with PTFE, using the same V6 nozzles, heater block and groove mount. Aimed at PLA and ABS on a budget, with a 240°C temperature limit from the PTFE liner.",
     "Vendor 4 URL": "https://spool3d.ca/e3d-lite6-full-hotend-kit-1-75mm-universal/",
@@ -527,7 +536,6 @@
     "Vendor 2 URL": "https://www.filastruder.com/collections/e3d-hotends/products/lite6",
     "Verdict": "Workhorse",
     "Max Temp (°C)": 240,
-    "Vendor 5 URL": "https://www.printedsolid.com/products/lite6",
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
     "Heat Block": "Aluminium",
@@ -541,7 +549,6 @@
     ],
     "Vendor 2 Name": "Filastruder",
     "Vendor 3 Name": "Aus3D",
-    "Vendor 5 Name": "PrintedSolid",
     "Thermistor": "NTC100K",
     "Vendor 1 Name": "DigitMakers",
     "Name": "Lite6",
@@ -553,7 +560,8 @@
     "Heat Break": "One-piece stainless steel heatbreak/heatsink, PTFE-lined",
     "Price (USD)": 37.98,
     "Pros": "Lowest-cost genuine E3D hotend\nSame V6 nozzles, heater block and groove mount as the V6\nStainless one-piece heatbreak/heatsink is nearly indestructible\nPTFE liner is cheap and easy to replace if overheated",
-    "Updated": "2026-11-16T10:40:24.000Z"
+    "Max Flow Source": "Community estimate",
+    "Updated": "2026-11-17T08:19:08.000Z"
   },
   {
     "id": "recPDhTG5pXQqyLkp",

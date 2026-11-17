@@ -139,27 +139,6 @@
     "Verdict Label": "European quality ruby"
   },
   {
-    "id": "rec9V4X6HK4MS2Vie",
-    "Vendor 1 URL": "https://www.aliexpress.com/store/1048651",
-    "Material": "Brass",
-    "Brand": "Mellow3D",
-    "Style": "CHT",
-    "Price (USD)": 4.99,
-    "Diameter (mm)": "0.4 / 0.6 / 0.8 / 1.0",
-    "Pros": "25–35% flow rate improvement over standard brass at 0.6mm+ (CNCKitchen validated)\n~$5 vs $25 for original Bondtech CHT\nStandard M6 thread — fits any V6-compatible block",
-    "Verdict": "Solid Choice",
-    "Image URL": "/media/hardware/nozzles/cht-brass.webp",
-    "Slug": "cht-brass",
-    "Cons": "Not abrasive-safe (brass wears quickly with CF/GF)\nQuality varies by vendor batch\nClone status — no official documentation",
-    "Vendor 1 Name": "Mellow3D (AliExpress)",
-    "Name": "CHT Brass",
-    "Updated": "2026-06-27",
-    "Description": "Third-party implementation of Bondtech's CHT (Core Heating Technology) design, sold under brands like Mellow3D and Trianglelab on AliExpress. The CHT design splits filament into 3 strands through multiple bores to dramatically increase surface contact with the heater block walls. CNCKitchen testing consistently shows 25–35% higher volumetric flow compared to standard brass at 0.6mm and above. The M6 clones are effectively identical to the original Bondtech CHT at a fraction of the price and are the default nozzle recommendation for Voron builders wanting more speed without switching to hardened steel.",
-    "Thread": "M6",
-    "Verdict Label": "Best bang-for-buck high-flow upgrade",
-    "Max Temp (°C)": 285
-  },
-  {
     "id": "recAscDKBnEoTkKfv",
     "Vendor 1 URL": "https://e3d-online.com/products/revo-high-flow-nozzles",
     "Material": "Brass",
