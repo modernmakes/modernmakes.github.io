@@ -154,14 +154,14 @@ const itemListSchema = {
   <div class="gf-bar" id="gf-bar">
     <div class="gf-bar-inner">
       <div class="gf-cats" role="group" aria-label="Filter by verdict">
-        <button type="button" class="gf-tab is-active" data-verdict="all" aria-pressed="true">
+        <button type="button" class="gf-tab is-active" data-f="verdict" data-v="" aria-pressed="true">
           All
-          <span class="gf-badge">{records.length}</span>
+          <span class="gf-badge" data-n>{records.length}</span>
         </button>
         {verdictTabs.map((t) => (
-          <button type="button" class="gf-tab" data-verdict={t.key} aria-pressed="false">
+          <button type="button" class="gf-tab" data-f="verdict" data-v={t.key} data-label={t.label} aria-pressed="false">
             {t.label}
-            <span class="gf-badge">{t.count}</span>
+            <span class="gf-badge" data-n>{t.count}</span>
           </button>
         ))}
         <span class="gf-tab-ind" aria-hidden="true"></span>
@@ -169,14 +169,14 @@ const itemListSchema = {
       {hasFlow && (
         <div class="gf-flow" role="group" aria-label="Filter by flow class">
           <span class="gf-flow-lbl" aria-hidden="true">Flow</span>
-          <button type="button" class="gf-flow-btn is-active" data-flow="all" aria-pressed="true">
+          <button type="button" class="gf-flow-btn is-active" data-f="flow" data-v="" aria-pressed="true">
             All
-            <span class="gf-flow-n">{records.length}</span>
+            <span class="gf-flow-n" data-n>{records.length}</span>
           </button>
           {FLOW_CLASSES.map((f) => (
-            <button type="button" class="gf-flow-btn" data-flow={f.key} aria-pressed="false" disabled={flowCounts[f.key] === 0}>
+            <button type="button" class="gf-flow-btn" data-f="flow" data-v={f.key} data-label={f.chipLabel} aria-pressed="false" disabled={flowCounts[f.key] === 0}>
               {f.label}
-              <span class="gf-flow-n">{flowCounts[f.key]}</span>
+              <span class="gf-flow-n" data-n>{flowCounts[f.key]}</span>
             </button>
           ))}
         </div>
@@ -226,13 +226,20 @@ const itemListSchema = {
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
                   <h2 class:list={['card-title', { 'sr-only': !hasImg }]}>{r['Name']}</h2>
-                  {/* no empty row: its margins would make the title→excerpt gap uneven across the grid */}
-                  {chips(r).length > 0 && (
-                    <div class="product-card-specs" style="margin:0 0 8px;display:flex;gap:6px;flex-wrap:wrap">
-                      {/* pages pass raw prices; round to whole dollars to match the detail page */}
-                      {chips(r).map((c) => <span class="spec-chip">{c.replace(/^~\$(\d+(?:\.\d+)?)/, (_, n) => `~$${Math.round(Number(n))}`)}</span>)}
-                    </div>
-                  )}
+                  {/* no empty row: its margins would make the title→excerpt gap uneven across the grid.
+                      An unlisted price (missing or $0) drops the page's "~$" chip and carries a
+                      "No listed price" chip that only shows under a price sort (gf-np-row: the row
+                      exists only for that chip, so it hides with it). */}
+                  {(() => {
+                    const cc = chips(r).filter((c) => it.price !== null || !/^~\$/.test(c));
+                    return (cc.length > 0 || it.price === null) && (
+                      <div class:list={['product-card-specs', { 'gf-np-row': cc.length === 0 }]} style="margin:0 0 8px;display:flex;gap:6px;flex-wrap:wrap">
+                        {/* pages pass raw prices; round to whole dollars to match the detail page */}
+                        {cc.map((c) => <span class="spec-chip">{c.replace(/^~\$(\d+(?:\.\d+)?)/, (_, n) => `~$${Math.round(Number(n))}`)}</span>)}
+                        {it.price === null && <span class="spec-chip gf-noprice">No listed price</span>}
+                      </div>
+                    );
+                  })()}
                   <p class="card-excerpt">{excerptOf(r)}</p>
                   <div class="card-footer">
                     {v && <span class={`verdict ${v.cls}`}>{v.label}</span>}
@@ -262,31 +269,51 @@ const itemListSchema = {
 
 <script>
   import { syncedLabel } from '../scripts/synced.js';
+  import { DEFAULT_SORT, FILTERS, SORTS, matchesAll, sortItems, type FilterState, type ViewItem } from '../scripts/hardware-view';
   const freshEl = document.getElementById('hot-hero-fresh');
   const freshText = freshEl && syncedLabel(freshEl.dataset.synced);
   if (freshEl && freshText) { freshEl.textContent = freshText; freshEl.hidden = false; }
 
-  type State = { verdict: string; flow: string };
-  const state: State = { verdict: 'all', flow: 'all' };
+  // ── State: one sort and the registry's filters (an empty list = no filter) ──
+  type Card = ViewItem & { el: HTMLElement; o: Record<string, number> };
+  const state = { sort: DEFAULT_SORT, f: Object.fromEntries(FILTERS.map((f) => [f.key, [] as string[]])) as FilterState };
+  const FILTER = Object.fromEntries(FILTERS.map((f) => [f.key, f]));
 
   const bar      = document.getElementById('gf-bar')!;
   const sentinel = document.getElementById('gf-sentinel')!;
-  const region   = document.getElementById('hw-grid')?.parentElement ?? null; // count line + grid
-  const cards    = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'));
-  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
-  const flowBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-flow-btn'));
+  const grid     = document.getElementById('hw-grid');
+  const region   = grid?.parentElement ?? null; // count line + grid
   const countEl  = document.getElementById('hw-count');
   const noMatch  = document.getElementById('hw-nomatch');
-  const total    = cards.length;
   const nounS    = countEl?.dataset.nounSingular ?? 'item';
   const nounP    = countEl?.dataset.nounPlural ?? 'items';
   const cats     = document.querySelector<HTMLElement>('.gf-cats');
   const ind      = document.querySelector<HTMLElement>('.gf-tab-ind');
+  const tabs     = Array.from(document.querySelectorAll<HTMLButtonElement>('.gf-tab'));
   const reduced  = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const noun     = (n: number) => (n === 1 ? nounS : nounP);
 
-  const matches = (c: HTMLElement, verdict: string, flow: string) =>
-    (verdict === 'all' || c.dataset.verdict === verdict) &&
-    (flow === 'all' || c.dataset.flow === flow);
+  // Cards in Recommended order, described entirely by their build-time data attributes.
+  const numAttr = (v?: string) => (v ? Number(v) : null);
+  const cards: Card[] = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'), (el) => {
+    const d = el.dataset, o: Record<string, number> = {};
+    for (const s of SORTS) { const a = el.getAttribute(`data-o-${s.key}`); if (a !== null) o[s.key] = +a; }
+    return { el, o, name: d.name ?? '', brand: d.brand ?? '', price: numAttr(d.price), flow: numAttr(d.flowN), rank: +(d.rank ?? 0), verdict: d.verdict ?? '', flowClass: d.flow ?? '' };
+  }).sort((a, b) => a.rank - b.rank);
+  const total = cards.length;
+
+  // Every option control (verdict tab, flow button, sort radio, filter chip) is [data-f][data-v];
+  // data-v="" is a filter's "All". Its count, if any, is the [data-n] inside it.
+  const ctrls = Array.from(document.querySelectorAll<HTMLElement>('[data-f][data-v]'));
+  const sortOk = (k: string) => k === DEFAULT_SORT || (SORTS.some((s) => s.key === k) && cards.some((c) => k in c.o));
+  const valueOk = (k: string, v: string) => ctrls.some((c) => c.dataset.f === k && c.dataset.v === v);
+
+  // Stable order for the current sort: the build's ranks when it wrote them, the comparator otherwise.
+  const ordered = (): Card[] => {
+    const k = state.sort;
+    if (k === DEFAULT_SORT) return cards;
+    return cards.every((c) => k in c.o) ? cards.slice().sort((a, b) => a.o[k] - b.o[k]) : sortItems(cards, k);
+  };
 
   // One layout step per filter change. A delayed hide (fade, then display:none)
   // changes the page height twice, which is what made a stuck bar twitch.
@@ -299,52 +326,53 @@ const itemListSchema = {
     void card.offsetHeight;
     card.style.opacity = '1';
   }
-  function hideCard(card: HTMLElement) {
-    card.classList.add('gf-hidden');
-  }
+  const hideCard = (card: HTMLElement) => card.classList.add('gf-hidden');
 
-  // State lives in ?verdict=&flow=. Old #verdict links still work on load.
+  // ── URL ── ?verdict=&flow=&sort= (old #verdict links still work on load). Invalid values are ignored.
   let hashConsumed = false;
   function readUrl() {
     const q = new URLSearchParams(location.search);
     const hash = location.hash.slice(1);
-    const v = q.get('verdict') ?? hash;
-    const f = q.get('flow');
-    if (v && tabs.some((t) => t.dataset.verdict === v)) {
-      state.verdict = v;
-      if (!q.has('verdict') && v === hash) hashConsumed = true;
+    for (const f of FILTERS) {
+      let raw = q.get(f.key);
+      if (f.key === 'verdict' && raw === null && hash) raw = hash;
+      if (!raw) continue;
+      let vals = [...new Set(raw.split(','))].filter((v) => v && valueOk(f.key, v));
+      if (!f.multi) vals = vals.slice(0, 1);
+      state.f[f.key] = vals;
+      if (f.key === 'verdict' && vals.length && !q.has('verdict')) hashConsumed = true;
     }
-    if (f && flowBtns.some((b) => b.dataset.flow === f)) state.flow = f;
+    const s = q.get('sort');
+    if (s && sortOk(s)) state.sort = s;
   }
   function writeUrl() {
     const q = new URLSearchParams(location.search);
-    (Object.keys(state) as (keyof State)[]).forEach((k) =>
-      state[k] === 'all' ? q.delete(k) : q.set(k, state[k]));
+    for (const k of ['verdict', 'flow']) state.f[k].length ? q.set(k, state.f[k].join(',')) : q.delete(k);
     const qs = q.toString();
     history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + (hashConsumed ? '' : location.hash));
   }
 
-  // Each button's count is what you'd see if you tapped it, given the other
-  // filter. Zero-match buttons are disabled unless they are the current one.
-  function syncButtons() {
-    tabs.forEach((t) => {
-      const on = t.dataset.verdict === state.verdict;
-      const n = cards.filter((c) => matches(c, t.dataset.verdict ?? 'all', state.flow)).length;
-      t.classList.toggle('is-active', on);
-      t.setAttribute('aria-pressed', String(on));
-      t.disabled = n === 0 && !on;
-      const badge = t.querySelector('.gf-badge');
+  // Each option's count is what you'd see if you picked it, given the other filters.
+  // Zero-match options are disabled unless they are the current one.
+  function setOn(el: HTMLElement, on: boolean) {
+    if (el instanceof HTMLInputElement) { el.checked = on; return; }
+    el.classList.toggle('is-active', on);
+    el.setAttribute('aria-pressed', String(on));
+  }
+  function syncControls() {
+    for (const el of ctrls) {
+      const k = el.dataset.f!, v = el.dataset.v!;
+      if (k === 'sort') { setOn(el, state.sort === v); continue; }
+      const f = FILTER[k];
+      if (!f) continue;
+      const cur = state.f[k];
+      const on = v === '' ? cur.length === 0 : cur.includes(v);
+      const n = cards.filter((c) => matchesAll(c, state.f, k) && (v === '' || f.test(c, [v]))).length;
+      setOn(el, on);
+      (el as HTMLButtonElement | HTMLInputElement).disabled = n === 0 && !on;
+      const badge = el.querySelector('[data-n]') ?? el.parentElement?.querySelector('[data-n]');
       if (badge) badge.textContent = String(n);
-    });
-    flowBtns.forEach((b) => {
-      const on = b.dataset.flow === state.flow;
-      const n = cards.filter((c) => matches(c, state.verdict, b.dataset.flow ?? 'all')).length;
-      b.classList.toggle('is-active', on);
-      b.setAttribute('aria-pressed', String(on));
-      b.disabled = n === 0 && !on;
-      const badge = b.querySelector('.gf-flow-n');
-      if (badge) badge.textContent = String(n);
-    });
+    }
     moveIndicator(true);
   }
 
@@ -360,7 +388,25 @@ const itemListSchema = {
     cats.classList.add('has-ind');
   }
 
-  function applyFilter(fromTap: boolean) {
+  // Filter, order, count. `fade`: shown cards fade in (not inside a view transition).
+  function render(fade: boolean) {
+    let visible = 0;
+    for (const c of cards) {
+      if (matchesAll(c, state.f)) { showCard(c.el, fade); visible++; }
+      else hideCard(c.el);
+    }
+    if (grid) {
+      const order = ordered();
+      const now = grid.querySelectorAll(':scope > .gf-card');
+      if (order.some((c, i) => now[i] !== c.el)) grid.append(...order.map((c) => c.el));
+      if (state.sort === DEFAULT_SORT) delete grid.dataset.sort; else grid.dataset.sort = state.sort;
+    }
+    if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${noun(total)}`;
+    if (noMatch) noMatch.hidden = visible > 0 || total === 0;
+    syncControls();
+  }
+
+  function apply(fromTap: boolean) {
     // Anti-jitter: while the bar is stuck, bring the grid's top just under it
     // before the card count changes, so the page never has to clamp scrollY
     // mid-filter. Only moves up, and only if the grid top is above the bar.
@@ -372,41 +418,32 @@ const itemListSchema = {
       }
     }
     const vt = fromTap && typeof document.startViewTransition === 'function' && !reduced();
-    const run = () => {
-      let visible = 0;
-      cards.forEach((c) => {
-        if (matches(c, state.verdict, state.flow)) { showCard(c, !vt); visible++; }
-        else hideCard(c);
-      });
-      if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${total === 1 ? nounS : nounP}`;
-      if (noMatch) noMatch.hidden = visible > 0 || total === 0;
-      syncButtons();
-    };
     writeUrl();
-    if (!vt) return run();
-    // Cards reflow inside a same-document view transition. The scroll step above has
+    if (!vt) return render(true);
+    // Cards filter and move inside a same-document view transition. The scroll step above has
     // already happened, outside it. Names exist only for the transition.
     const html = document.documentElement;
-    cards.forEach((c, i) => { c.style.viewTransitionName = `gf-card-${i}`; });
+    cards.forEach((c, i) => { c.el.style.viewTransitionName = `gf-card-${i}`; });
     html.classList.add('vt-filter');
-    document.startViewTransition(run).finished.finally(() => {
-      cards.forEach((c) => { c.style.viewTransitionName = ''; });
+    document.startViewTransition(() => render(false)).finished.finally(() => {
+      cards.forEach((c) => { c.el.style.viewTransitionName = ''; });
       html.classList.remove('vt-filter');
     });
   }
 
-  tabs.forEach((t) => t.addEventListener('click', () => {
-    state.verdict = t.dataset.verdict ?? 'all';
-    applyFilter(true);
-  }));
-  flowBtns.forEach((b) => b.addEventListener('click', () => {
-    state.flow = b.dataset.flow ?? 'all';
-    applyFilter(true);
-  }));
+  // Bar buttons (verdict tabs, flow): one value at a time, "" = All.
+  for (const el of ctrls) {
+    if (!(el instanceof HTMLButtonElement)) continue;
+    el.addEventListener('click', () => {
+      const k = el.dataset.f!, v = el.dataset.v!;
+      state.f[k] = v ? [v] : [];
+      apply(true);
+    });
+  }
   document.getElementById('hw-clear')?.addEventListener('click', () => {
-    state.verdict = 'all';
-    state.flow = 'all';
-    applyFilter(true);
+    for (const f of FILTERS) state.f[f.key] = [];
+    state.sort = DEFAULT_SORT;
+    apply(true);
   });
 
   // .stuck = the bar is pinned under the nav. IntersectionObserver on a 1px
@@ -427,14 +464,12 @@ const itemListSchema = {
   watchStuck();
 
   readUrl();
-  syncButtons();
+  render(false);
   moveIndicator(false);
   document.fonts?.ready.then(() => moveIndicator(false));
   addEventListener('resize', () => moveIndicator(false), { passive: true });
-  if (state.verdict !== 'all' || state.flow !== 'all') applyFilter(false);
   // The pre-paint attributes did their job; .gf-hidden takes over from here.
-  document.getElementById('hw-grid')?.removeAttribute('data-verdict');
-  document.getElementById('hw-grid')?.removeAttribute('data-flow');
+  if (grid) { delete grid.dataset.verdict; delete grid.dataset.flow; }
 </script>
 
 <style is:global>
@@ -581,6 +616,12 @@ html { overflow-anchor: none; }
   transition: opacity 0.15s ease, border-color .15s, transform .15s, var(--press-release);
 }
 .gf-card.gf-hidden { display: none; }
+/* "No listed price" shows only under a price sort (#hw-grid[data-sort], set by the page script and
+   by the pre-paint script). The row's inline display:flex needs the !important to stay hidden. */
+.gf-noprice { display: none; }
+#hw-grid[data-sort^="price"] .gf-noprice { display: inline; }
+.gf-np-row { display: none !important; }
+#hw-grid[data-sort^="price"] .gf-np-row { display: flex !important; }
 .gf-nomatch { padding: 40px 0; text-align: center; color: var(--g1); }
 .gf-nomatch[hidden] { display: none; }
 .gf-nomatch-title { font-family: var(--fd); font-size: 22px; font-weight: 800; color: var(--black); margin: 0 0 6px; }
