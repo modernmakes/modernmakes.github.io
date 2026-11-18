@@ -528,6 +528,11 @@ const tiles = [
     transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
   }
   .menu-ico { flex: none; color: var(--sh-muted); }
+  /* Short phones (iPhone SE, 360×640): the medium detent is half the screen, so the tiles go compact,
+     icon beside the label, and all six sit above it without scrolling. */
+  @media (max-width: 767px) and (max-height: 700px) {
+    .menu-tile { flex-direction: row; align-items: center; justify-content: flex-start; gap: 10px; min-height: 52px; padding: 0 14px; }
+  }
   .menu-tile[aria-current="page"] .menu-ico { color: var(--accent); }
   /* Pressed and hovered rows/tiles lay the sheet's wash over their own tone. */
   .menu-tile:active, .menu-card .sheet-row:active { background-image: linear-gradient(var(--sh-wash), var(--sh-wash)); }
