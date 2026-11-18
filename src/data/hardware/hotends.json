@@ -318,7 +318,7 @@
     "Max Flow (mm³/s)": 11,
     "Flow Class": "Standard Flow",
     "Vendor 3 URL": "https://top3dshop.com/product/e3d-chimera-hotend",
-    "Description": "E3D's two-in, two-out dual-extrusion hotend — essentially two V6 hot sides sharing one heatsink. Each nozzle is individually temperature-controlled, so it can print two colours or two different materials (e.g. PLA with PVA support) in one print. Air-cooled as standard, with a water-cooled variant for heated chambers.",
+    "Description": "E3D's two-in, two-out dual-extrusion hotend — essentially two V6 hot sides sharing one heatsink. Each nozzle is individually temperature-controlled, so it can print two colours or two different materials (e.g. PLA with PVA support) in one print. Air-cooled as standard, with a water-cooled variant for heated chambers.\n\nFlow note: no max-flow figure has been published for this hotend — the 11 mm³/s on file is unverified (a V6-based inference, not a published Chimera figure; E3D never published one).",
     "Vendor 4 URL": "https://www.filastruder.com/collections/e3d-hotends/products/chimera-cyclops",
     "Verdict Label": "True dual extrusion — two nozzles, two temperatures, one compact 30×28mm footprint",
     "Vendor 2 URL": "https://e3d-online.com/products/chimera",
@@ -342,7 +342,7 @@
     "Price (USD)": 126.6,
     "Pros": "Two independently temperature-controlled nozzles — print two materials at once\nDual-colour or soluble-support (PVA) printing\nShares the whole V6 ecosystem: blocks, sensors, cartridges, nozzles\nCompact 30×28mm footprint; air- or water-cooled variants",
     "Max Flow Source": "Community estimate",
-    "Updated": "2026-11-17T08:09:41.000Z"
+    "Updated": "2026-11-17T23:24:36.000Z"
   },
   {
     "id": "recFJcb0HcaAbQd6r",
@@ -473,7 +473,7 @@
     "id": "recMpNWcctaKbgxdu",
     "Cons": "Max flow unpublished\nM4 nozzle thread — limited nozzle choice vs V6\n300°C stock ceiling, thermocouple upgrade needed for 500°C\nSuperseded by the neXt G successor",
     "Fan Size": "2510",
-    "Description": "The XG is DropEffect's extreme-gradient hotend and the predecessor of the neXt G — a 40 g all-metal design with a ceramic ring heater, titanium heat break, and kinematic coupling for one-handed nozzle changes. Voron-style mount out of the box (Creality mount is an add-on). Rated 300°C stock, 500°C with a thermocouple upgrade. Price $82.95 direct from Phaetus.",
+    "Description": "The XG is DropEffect's extreme-gradient hotend and the predecessor of the neXt G — a 40 g all-metal design with a ceramic ring heater, titanium heat break, and kinematic coupling for one-handed nozzle changes. Voron-style mount out of the box (Creality mount is an add-on). Rated 300°C stock, 500°C with a thermocouple upgrade. Price $82.95 direct from Phaetus.\n\nFlow note: no max-flow figure has been published for this hotend, so this field is left blank. (Do not borrow the neXt G's 45 mm³/s — that is a different hotend.)",
     "Verdict Label": "40 g extreme-gradient hotend with one-handed nozzle changes",
     "Weight (g)": 40,
     "Verdict": "Bleeding Edge",
@@ -490,7 +490,7 @@
     "Heat Break": "Titanium",
     "Price (USD)": 82.95,
     "Pros": "40 g — extremely light\nCeramic ring heater, 280°C in under 1 minute\nKinematic coupling for one-handed nozzle changes\nVoron-style mount out of the box\n500°C capable with thermocouple upgrade",
-    "Updated": "2026-11-16T10:40:29.000Z"
+    "Updated": "2026-11-17T23:24:15.000Z"
   },
   {
     "id": "recMt0kXFBBWHxwRQ",
@@ -545,7 +545,7 @@
     "Max Flow (mm³/s)": 11,
     "Flow Class": "Standard Flow",
     "Vendor 3 URL": "https://aus3d.com.au/products/e3d-lite6-hotend",
-    "Description": "E3D's entry-level hotend — 'V6's little brother'. A mostly-metal design with a one-piece stainless heatbreak/heatsink lined with PTFE, using the same V6 nozzles, heater block and groove mount. Aimed at PLA and ABS on a budget, with a 240°C temperature limit from the PTFE liner.",
+    "Description": "E3D's entry-level hotend — 'V6's little brother'. A mostly-metal design with a one-piece stainless heatbreak/heatsink lined with PTFE, using the same V6 nozzles, heater block and groove mount. Aimed at PLA and ABS on a budget, with a 240°C temperature limit from the PTFE liner.\n\nFlow note: no max-flow figure has been published for this hotend — the 11 mm³/s on file is unverified (a V6-based inference, not a published Lite6 figure).",
     "Vendor 4 URL": "https://spool3d.ca/e3d-lite6-full-hotend-kit-1-75mm-universal/",
     "Verdict Label": "E3D's budget entry hotend — V6-compatible, PTFE-lined, capped at 240°C",
     "Vendor 2 URL": "https://www.filastruder.com/collections/e3d-hotends/products/lite6",
@@ -576,7 +576,7 @@
     "Price (USD)": 37.98,
     "Pros": "Lowest-cost genuine E3D hotend\nSame V6 nozzles, heater block and groove mount as the V6\nStainless one-piece heatbreak/heatsink is nearly indestructible\nPTFE liner is cheap and easy to replace if overheated",
     "Max Flow Source": "Community estimate",
-    "Updated": "2026-11-17T08:19:08.000Z"
+    "Updated": "2026-11-17T23:24:38.000Z"
   },
   {
     "id": "recPDhTG5pXQqyLkp",
@@ -685,7 +685,7 @@
     "Flow Class": "Extreme Flow",
     "Related 1 Name": "Chube Air",
     "Vendor 3 URL": "https://west3d.com/de-de/products/chube-hotend",
-    "Description": "The Chube Conduction is the flagship of the Chube lineup, using thermal conduction through the mount structure to cool the hotend rather than a dedicated fan. This allows a longer 52mm meltzone and the highest flow rate in the family. It targets builders running enclosed, high-chamber-temp setups where fan-based cooling is a liability.",
+    "Description": "The Chube Conduction is the flagship of the Chube lineup, using thermal conduction through the mount structure to cool the hotend rather than a dedicated fan. This allows a longer 52mm meltzone and the highest flow rate in the family. It targets builders running enclosed, high-chamber-temp setups where fan-based cooling is a liability.\n\nFlow note: Luke's Lab publishes no max-flow figure for this hotend — the 120 mm³/s on file is unverified. Independent reporting puts it nearer 80.",
     "Vendor 4 URL": "https://3do.dk/en/complete-hotend/2522-chube-conduction.html",
     "Verdict Label": "The highest-flow Chube variant — conduction cooling removes the fan bottleneck entirely.",
     "Vendor 2 URL": "https://hartsmartproducts.com/collections/all/products/chube-conduction",
@@ -718,7 +718,7 @@
     "Price (USD)": 320,
     "Pros": "Conduction cooling eliminates fan dependency\nHighest flow ceiling in the Chube lineup\n500°C max temp\nV6 nozzle compatibility\nM3 hardware throughout\n52mm meltzone — longest in the family\nUp to 47.5mm heater cartridge support for higher wattage",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-12T03:52:45.000Z",
+    "Updated": "2026-11-17T23:24:02.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -800,7 +800,7 @@
     "Max Flow (mm³/s)": 35,
     "Flow Class": "Standard Flow",
     "Vendor 3 URL": "https://www.dhm-online.com/en/mosquito/12791-mosquito-conduct-slice-engineering.html",
-    "Description": "The Mosquito Conduct replaces the finned heat sink with a conduction-cooled block that bolts metal-to-metal to the printer's structure, removing the fan entirely for hot-chamber industrial printing. Same 500°C Bimetallic Heat Break and melt zone as the air-cooled Mosquito. Professional installation only. Price basis: Slice Kit $199.99 (single variant). Weight: 41 g (Slice product page, Technical Specifications table).",
+    "Description": "The Mosquito Conduct replaces the finned heat sink with a conduction-cooled block that bolts metal-to-metal to the printer's structure, removing the fan entirely for hot-chamber industrial printing. Same 500°C Bimetallic Heat Break and melt zone as the air-cooled Mosquito. Professional installation only. Price basis: Slice Kit $199.99 (single variant). Weight: 41 g (Slice product page, Technical Specifications table).\n\nFlow note: Slice publishes no max-flow figure for this Conduct variant — the 35 mm³/s on file is unverified. (The Magnum+ Conduct is rated 90.)",
     "Vendor 4 URL": "https://ultimate3dprintingstore.com/products/slice-engineering-mosquito-conduct-hotend",
     "Verdict Label": "Fan-free Mosquito for enclosed industrial printers — conduction cooling, 500°C",
     "Vendor 2 URL": "https://top3dshop.com/product/slice-engineering-mosquito-conduct-hotend",
@@ -830,13 +830,13 @@
     "Price (USD)": 199.99,
     "Pros": "No fan to fail inside a hot chamber\nConduction cooling dumps heat straight into the machine structure\nSame 500°C melt zone as the standard Mosquito",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-17T23:24:01.000Z"
   },
   {
     "id": "recS6EG4Te665LCNB",
     "Cons": "No published max temp, flow rate or weight\nSmall-batch BRS product, currently sold out\n€215 ($239.53) is steep; heater config varies (70W cartridge or flat ceramic)",
     "Fan Size": "Not included",
-    "Description": "BRS Engineering's Dragon Ultra CF is a Dragon-structure hotend rebuilt for carbon-fiber filaments: a custom composite ceramic heat break with ceramic ring insulation, a Volcano-style copper-plated or aluminum block, and a 70W cartridge heater with PT1000 sensor, assembled and torqued by BRS. An M6 extender lets it run V6 nozzles, and a tungsten carbide nozzle is optional. Price basis: BRS list €215 (converted, $239.53); the lowest BRS variant is €108 but its configuration is unlabeled.",
+    "Description": "BRS Engineering's Dragon Ultra CF is a Dragon-structure hotend rebuilt for carbon-fiber filaments: a custom composite ceramic heat break with ceramic ring insulation, a Volcano-style copper-plated or aluminum block, and a 70W cartridge heater with PT1000 sensor, assembled and torqued by BRS. An M6 extender lets it run V6 nozzles, and a tungsten carbide nozzle is optional. Price basis: BRS list €215 (converted, $239.53); the lowest BRS variant is €108 but its configuration is unlabeled.\n\nFlow note: no max-flow figure has been published for this hotend, so this field is left blank.",
     "Verdict Label": "BRS's carbon-fiber-proof Dragon — ceramic composite heat break, PT1000, built for PA-CF",
     "Verdict": "Bleeding Edge",
     "Nozzle Thread": "M6 Volcano (V6 via included M6 extender)",
@@ -858,7 +858,7 @@
     "Heat Break": "Composite ceramic heat break, ceramic ring insulation",
     "Price (USD)": 239.53,
     "Pros": "Custom composite ceramic heat break tested 100kg+ PA12-CF15 over 12 months without failure\nVolcano block with optional fully-machined tungsten carbide nozzle\nPT1000 sensor; Dragon-pattern mount fits standard toolheads",
-    "Updated": "2026-11-16T10:40:35.000Z"
+    "Updated": "2026-11-17T23:24:16.000Z"
   },
   {
     "id": "recU3eoBgpOl4hKoL",
@@ -918,7 +918,7 @@
     "Flow Class": "High Flow",
     "Related 1 Name": "Goliath Water",
     "Vendor 3 URL": "https://west3d.com/products/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled?country=US&currency=USD&variant=46506002743508",
-    "Description": "The Goliath is a high-flow hotend designed by the VzBoT team and manufactured by Mellow. It features a 50mm meltzone, nickel-plated copper heat block with a 100W 24V nichrome wire heater, and a bi-material copper-zirconia heatbreak. Mounting pattern matches the Dragon hotend, giving it broad toolhead compatibility.",
+    "Description": "The Goliath is a high-flow hotend designed by the VzBoT team and manufactured by Mellow. It features a 50mm meltzone, nickel-plated copper heat block with a 100W 24V nichrome wire heater, and a bi-material copper-zirconia heatbreak. Mounting pattern matches the Dragon hotend, giving it broad toolhead compatibility.\n\nFlow note: no max-flow figure found for the original Goliath V2 — the 60 mm³/s on file is unverified.",
     "Vendor 4 URL": "https://www.dhm-online.com/en/vz-hotend/12854-goliath-air-hotend-hotend-for-air-cooled-vzbot.html",
     "Verdict Label": "A VzBoT-designed extreme-flow hotend — unmatched meltzone at this price, but not a beginner install.",
     "Vendor 2 URL": "https://northprint3d.ca/product/vzbot-mellow-goliath-lsd-hotend/",
@@ -952,7 +952,7 @@
     "Price (USD)": 129.99,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
     "Related 1 URL": "/hardware/hotends/goliath-water",
-    "Updated": "2026-11-05T08:24:53.000Z"
+    "Updated": "2026-11-17T23:24:08.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -968,7 +968,7 @@
     "Flow Class": "Extreme Flow",
     "Related 1 Name": "Goliath Air",
     "Vendor 3 URL": "https://west3d.com/de-de/products/goliath-hot-end-by-mellow-and-vzbot-air-or-water-cooled",
-    "Description": "The Goliath Water is the liquid-cooled variant of the VzBoT Goliath, replacing the air-cooled aluminum heatsink with a water-cooled block and included fittings. All other specs are identical to the Air variant. It enables sustained extreme flow rates that air cooling cannot support at prolonged high speeds.",
+    "Description": "The Goliath Water is the liquid-cooled variant of the VzBoT Goliath, replacing the air-cooled aluminum heatsink with a water-cooled block and included fittings. All other specs are identical to the Air variant. It enables sustained extreme flow rates that air cooling cannot support at prolonged high speeds.\n\nFlow note: no max-flow figure found for the original Goliath V2 — the 100 mm³/s on file is unverified, and the Air/Water split is not confirmed.",
     "Vendor 4 URL": "https://www.alibaba.com/suppliersubdomainalibabacom/product-detail/Mellow-All-Metal-Goliath-Water-V2_1601190536981.html",
     "Verdict Label": "The water-cooled Goliath unlocks the full meltzone potential — for builds already running liquid cooling.",
     "Vendor 2 URL": "https://northprint3d.ca/product/vzbot-mellow-goliath-lsd-hotend/",
@@ -1002,7 +1002,7 @@
     "Price (USD)": 152.94,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
-    "Updated": "2026-11-12T03:52:47.000Z"
+    "Updated": "2026-11-17T23:24:10.000Z"
   },
   {
     "id": "recZfHibPiZ5iC7fs",
@@ -1061,9 +1061,9 @@
     "Max Flow (mm³/s)": 70,
     "Flow Class": "High Flow",
     "Related 1 Name": "Tricorn Air",
-    "Description": "The Tricorn Conduction replaces the active heatsink fan with thermal conduction through the mounting structure, identical to the Chube Conduction approach. All other specs match the Tricorn Air — inverted heatbreak, 3x 40W 4mm cartridges, Dragon mount, M3/M4 hardware, 500°C ceiling. The long meltzone variant measures 53.5mm with nozzle. Open-source project: https://github.com/tricornhotend/tricornhotend.com — currently not available.",
+    "Description": "The Tricorn Conduction replaces the active heatsink fan with thermal conduction through the mounting structure, identical to the Chube Conduction approach. All other specs match the Tricorn Air — inverted heatbreak, 3x 40W 4mm cartridges, Dragon mount, M3/M4 hardware, 500°C ceiling. The long meltzone variant measures 53.5mm with nozzle. Open-source project: https://github.com/tricornhotend/tricornhotend.com — currently not available.\n\nFlow note: no max-flow figure is published anywhere for this hotend — the 70 mm³/s on file is unverified. The creator's own test reached 108 mm³/s (0.5 mm tungsten carbide nozzle), but that was a test setting, not a rating.",
     "Verdict Label": "Same Tricorn hardware, fan dependency removed — best for high-temperature enclosed builds.",
-    "Vendor 2 URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
+    "Vendor 2 URL": "https://excit3d.shop/shop/tricorn-hotend",
     "Weight (g)": 65,
     "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
@@ -1078,14 +1078,14 @@
       "XOL",
       "A4T"
     ],
-    "Vendor 2 Name": "Fabreeko",
+    "Vendor 2 Name": "Excit3D",
     "Part Number": "TRICORN-COND",
     "Thermistor": "PT1000",
-    "Vendor 1 Name": "Excit3D",
+    "Vendor 1 Name": "GitHub (tricornhotend)",
     "Name": "Tricorn Conduction",
     "Slug": "tricorn-conduction",
     "Type": "All-Metal",
-    "Vendor 1 URL": "https://excit3d.shop/shop/tricorn-hotend",
+    "Vendor 1 URL": "https://github.com/tricornhotend/tricornhotend.com",
     "Brand": "Tricorn",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Inverted (Titanium Ti-6Al-4v)",
@@ -1093,7 +1093,7 @@
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-17T23:24:07.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -1108,9 +1108,9 @@
     "Max Flow (mm³/s)": 70,
     "Flow Class": "High Flow",
     "Related 1 Name": "Tricorn Conduction",
-    "Description": "The Tricorn is an open-source hotend designed around an inverted heatbreak geometry, three 40W 4mm heater cartridges, and Dragon-compatible mounting. It comes in air-cooled and conduction-cooled variants with long (53.5mm) and short (41mm) meltzone options. Hardware is M3/M4 throughout. Open-source project: https://github.com/tricornhotend/tricornhotend.com — currently not available.",
+    "Description": "The Tricorn is an open-source hotend designed around an inverted heatbreak geometry, three 40W 4mm heater cartridges, and Dragon-compatible mounting. It comes in air-cooled and conduction-cooled variants with long (53.5mm) and short (41mm) meltzone options. Hardware is M3/M4 throughout. Open-source project: https://github.com/tricornhotend/tricornhotend.com — currently not available.\n\nFlow note: no max-flow figure is published anywhere for this hotend — the 70 mm³/s on file is unverified. The creator's own test reached 108 mm³/s (0.5 mm tungsten carbide nozzle), but that was a test setting, not a rating.",
     "Verdict Label": "An open-source hotend that re-thinks the heat block from first principles — and mostly gets it right.",
-    "Vendor 2 URL": "https://www.fabreeko.com/products/tricorn-high-flow-open-source-hotend",
+    "Vendor 2 URL": "https://excit3d.shop/shop/tricorn-hotend",
     "Weight (g)": 65,
     "Verdict": "Workhorse",
     "Max Temp (°C)": 500,
@@ -1125,14 +1125,14 @@
       "XOL",
       "A4T"
     ],
-    "Vendor 2 Name": "Fabreeko",
+    "Vendor 2 Name": "Excit3D",
     "Part Number": "TRICORN-AIR",
     "Thermistor": "PT1000",
-    "Vendor 1 Name": "Excit3D",
+    "Vendor 1 Name": "GitHub (tricornhotend)",
     "Name": "Tricorn Air",
     "Slug": "tricorn-air",
     "Type": "All-Metal",
-    "Vendor 1 URL": "https://excit3d.shop/shop/tricorn-hotend",
+    "Vendor 1 URL": "https://github.com/tricornhotend/tricornhotend.com",
     "Brand": "Tricorn",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Inverted",
@@ -1140,7 +1140,7 @@
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-17T23:24:05.000Z"
   },
   {
     "id": "receUb8AHcB88xaQB",
@@ -1242,7 +1242,7 @@
     "Fan Size": "None - no fan included (>=40 mm recommended)",
     "Max Flow (mm³/s)": 100,
     "Flow Class": "Extreme Flow",
-    "Description": "Mellow3D all-metal integrated hotend designed for large-format and high-speed 3D printers. The 'Air' designation indicates air-cooled heatsink (vs water-cooled). 'Lite' indicates a reduced-weight variant. Part of the DualVelo product family. All-metal construction with no PTFE in the melt zone. Dual-feed, single-nozzle design for multi-colour/material blending; the kit includes the extruder (36 mm motor, NF hardened-steel gears), 2× 24 V 60 W heaters, a PT1000 sensor, and 0.4 + 0.6 mm brass nozzles; no fan included. Price basis: regular kit price $276 (flash sale $143.52 at time of check, temporary).",
+    "Description": "Mellow3D all-metal integrated hotend designed for large-format and high-speed 3D printers. The 'Air' designation indicates air-cooled heatsink (vs water-cooled). 'Lite' indicates a reduced-weight variant. Part of the DualVelo product family. All-metal construction with no PTFE in the melt zone. Dual-feed, single-nozzle design for multi-colour/material blending; the kit includes the extruder (36 mm motor, NF hardened-steel gears), 2× 24 V 60 W heaters, a PT1000 sensor, and 0.4 + 0.6 mm brass nozzles; no fan included. Price basis: regular kit price $276 (flash sale $143.52 at time of check, temporary).\n\nFlow note: Mellow publishes only 'flow tested up to ≥400 g/h' (a mass flow, not mm³/s) — the 100 mm³/s on file is unverified and is not a published figure.",
     "Verdict Label": "Mellow's large-format hotend-and-extruder unit — $129, specs thin on the ground",
     "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 400,
@@ -1259,7 +1259,7 @@
     "Heat Break": "Aerospace-grade low-friction wear tube core; titanium alloy reinforcement screws",
     "Price (USD)": 276,
     "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation",
-    "Updated": "2026-11-12T01:06:48.000Z"
+    "Updated": "2026-11-17T23:24:11.000Z"
   },
   {
     "id": "reciRNDlTl1q8PEPR",
@@ -1314,7 +1314,7 @@
     "Max Flow (mm³/s)": 100,
     "Flow Class": "Extreme Flow",
     "Vendor 3 URL": "https://trianglelab.net/products/chc%C2%AE-xl-hotend?VariantsId=12020",
-    "Description": "Triangle Lab's Compact High Conduction XL — a Volcano-format all-metal hotend. Extends the CHC Pro design with a longer heat block for higher flow using large-format or Volcano nozzles. All-metal construction with no PTFE in the melt zone. Compatible with standard V6 heaters and cartridges. Popular in the VzBot community for high-temp, high-flow printing.",
+    "Description": "Triangle Lab's Compact High Conduction XL — a Volcano-format all-metal hotend. Extends the CHC Pro design with a longer heat block for higher flow using large-format or Volcano nozzles. All-metal construction with no PTFE in the melt zone. Compatible with standard V6 heaters and cartridges. Popular in the VzBot community for high-temp, high-flow printing.\n\nFlow note: no numeric max-flow figure on the retailer or manufacturer pages — the 100 mm³/s on file is unverified. Secondary sources say 50–100 / 'over 100'.",
     "Verdict Label": "Trianglelab's ceramic high-flow hotend — air or water cooled, 48g",
     "Vendor 2 URL": "https://www.geekbuying.com/item/Trianglelab-CHC-XL-Wear-resistant-Air-Hotend-for-FDM-3D-Printer-528243.html",
     "Weight (g)": 48,
@@ -1345,7 +1345,7 @@
     "Heat Break": "Patented multiple thermal break design; monolithic construction",
     "Price (USD)": 83.99,
     "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
-    "Updated": "2026-11-12T00:28:19.000Z"
+    "Updated": "2026-11-17T23:24:12.000Z"
   },
   {
     "id": "recvWDTnHlysl79Tc",
@@ -1549,7 +1549,7 @@
     "Flow Class": "Extreme Flow",
     "Related 1 Name": "Chube Conduction",
     "Vendor 3 URL": "https://northprint3d.ca/product/chube-high-performance-hotend/",
-    "Description": "The Chube Air is a high-flow, air-cooled hotend from Luke's Lab designed around V6 nozzle compatibility and all M3 hardware. With a 500°C max temp ceiling and a 42mm meltzone, it targets prosumer builders who want extreme temperature headroom without proprietary nozzle lock-in.",
+    "Description": "The Chube Air is a high-flow, air-cooled hotend from Luke's Lab designed around V6 nozzle compatibility and all M3 hardware. With a 500°C max temp ceiling and a 42mm meltzone, it targets prosumer builders who want extreme temperature headroom without proprietary nozzle lock-in.\n\nFlow note: Luke's Lab publishes no max-flow figure — the 80 mm³/s on file is unverified.",
     "Vendor 4 URL": "https://3do.dk/en/complete-hotend/2521-chube-air.html",
     "Verdict Label": "A genuinely original high-flow design — impressive specs, but ecosystem support is still maturing.",
     "Vendor 2 URL": "https://kb-3d.com/store/extruders-hotends/6557-9400-lukes-lab-chube-hot-end-1759669688348.html",
@@ -1582,7 +1582,7 @@
     "Price (USD)": 260,
     "Pros": "500°C max temp — highest ceiling in its class\nV6 nozzle compatibility — use your existing stock\nM3 hardware throughout — no tiny screws to strip\nStandard 3x15mm thermistor cartridge\n6x20–22mm heater cartridge compatibility\n42mm meltzone length",
     "Related 1 URL": "/hardware/hotends/chube-conduction",
-    "Updated": "2026-11-12T03:52:43.000Z",
+    "Updated": "2026-11-17T23:24:03.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -1646,7 +1646,7 @@
     "Flow Class": "High Flow",
     "Related 1 Name": "Chube Air",
     "Vendor 3 URL": "https://3do.dk/en/complete-hotend/3666-chube-compact-hotend-pre-order.html",
-    "Description": "The Chube Compact is the smallest member of the Chube family, with a 22.23mm OD and 48.5mm length. It uses a 6x16mm heater cartridge (upgradeable to 6x20mm) and a 33mm meltzone. Designed for toolhead designs where space and mass are a constraint but 500°C headroom is still desired.",
+    "Description": "The Chube Compact is the smallest member of the Chube family, with a 22.23mm OD and 48.5mm length. It uses a 6x16mm heater cartridge (upgradeable to 6x20mm) and a 33mm meltzone. Designed for toolhead designs where space and mass are a constraint but 500°C headroom is still desired.\n\nFlow note: no published max-flow figure — the 50 mm³/s on file is unverified. A Luke's Lab demo showed ABS printing at 50, but that was a demonstrated print, not a rated maximum.",
     "Vendor 4 URL": "https://store.dremc.com.au/products/chube-compact-lukes-laboratory",
     "Verdict Label": "A compact V6-compatible hotend with 500°C headroom — best for weight-sensitive toolheads.",
     "Vendor 2 URL": "https://www.fabreeko.com/products/chube-compact-high-performance-hotend-for-3d-printers",
@@ -1677,7 +1677,7 @@
     "Price (USD)": 170,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-05T08:25:17.000Z",
+    "Updated": "2026-11-17T23:24:04.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]

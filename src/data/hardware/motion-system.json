@@ -198,7 +198,6 @@
     "Compatible Printers": [
       "Voron Trident"
     ],
-    "Vendor 1 Name": "Unknown",
     "Name": "T8 Lead Screw 8mm Lead 300mm",
     "Type": "Lead Screw",
     "Brand": "Generic",
@@ -365,7 +364,6 @@
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Vendor 1 Name": "Unknown",
     "Name": "Generic 2GT Belt 6mm",
     "Type": "Belt",
     "Brand": "Generic",
@@ -526,7 +524,6 @@
       "Voron 2.4",
       "Voron Trident"
     ],
-    "Vendor 1 Name": "Unknown",
     "Name": "Generic MGN9H Linear Rail",
     "Carriage Type": "MGN9H",
     "Type": "Linear Rail",
@@ -655,7 +652,6 @@
     "Verdict": "CONSIDER",
     "Lead (mm)": 8,
     "Cons": "Slower Z than belted Z — meaningful impact on multi-material and probing workflows\nRing resonance from lead screw whip is a documented problem at higher Z travel speeds\nRequires Oldham couplers and periodic lubrication\nBelted Z is the community-preferred upgrade",
-    "Vendor 1 Name": "Unknown",
     "Name": "T8 Lead Screw 8mm Lead 400mm",
     "Type": "Lead Screw",
     "Brand": "Generic",
