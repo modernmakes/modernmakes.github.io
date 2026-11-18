@@ -12,7 +12,7 @@ import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
 import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
-import { DEFAULT_SORT, SORTS, bandLabel, chooseBands, inBand, num, sortItems, type ViewItem } from '../scripts/hardware-view';
+import { DEFAULT_SORT, SORTS, SORT_TEXT, bandLabel, chooseBands, inBand, num, sortItems, type ViewItem } from '../scripts/hardware-view';
 
 interface Props {
   records: any[];
@@ -95,7 +95,8 @@ const items: Item[] = records.map((r: any, i: number) => ({
   band: '',
   o: {},
 }));
-const sorts = SORTS.filter((s) => !s.when || s.when(items));
+const sorts = SORTS.filter((s) => !s.when || s.when(items))
+  .map((s) => ({ ...s, label: SORT_TEXT[s.key]?.[0] ?? s.key, short: SORT_TEXT[s.key]?.[1] ?? s.key }));
 for (const s of sorts) {
   if (s.key !== DEFAULT_SORT) sortItems(items, s.key).forEach((it, pos) => { it.o[s.key] = pos; });
 }
@@ -251,6 +252,7 @@ const itemListSchema = {
         <div class="gf-active" id="hw-active" hidden>
           <ul class="gf-active-list" id="hw-active-list" aria-label="Active sort and filters"></ul>
           <button type="button" class="gf-clear-all" id="hw-clear-all">Clear all</button>
+          <template id="hw-chip-x"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></template>
         </div>
       </div>
       {records.length > 0 ? (
@@ -388,7 +390,7 @@ const itemListSchema = {
   const cards: Card[] = Array.from(document.querySelectorAll<HTMLElement>('.gf-card'), (el) => {
     const d = el.dataset, o: Record<string, number> = {};
     for (const s of SORTS) { const a = el.getAttribute(`data-o-${s.key}`); if (a !== null) o[s.key] = +a; }
-    return { el, o, name: d.name ?? '', brand: d.brand ?? '', price: numAttr(d.price), flow: numAttr(d.flowN), rank: +(d.rank ?? 0), verdict: d.verdict ?? '', flowClass: d.flow ?? '' };
+    return { el, o, name: d.name ?? '', brand: d.brand ?? '', price: numAttr(d.price), flow: numAttr(d.flowN), rank: +(d.rank ?? 0), verdict: d.verdict ?? '', flowClass: d.flow ?? '', band: d.band ?? '' };
   }).sort((a, b) => a.rank - b.rank);
   const total = cards.length;
 
@@ -489,7 +491,7 @@ const itemListSchema = {
   const sheetKeys = [...new Set(ctrls.filter((c) => c instanceof HTMLInputElement && c.dataset.f !== 'sort').map((c) => c.dataset.f!))];
 
   // Active non-default choices as removable chips, then the trigger badges and labels.
-  const X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  const X = document.getElementById('hw-chip-x') as HTMLTemplateElement | null; // the chip's × icon
   function renderChrome(visible: number) {
     const active: [string, string, string][] = [];
     if (state.sort !== DEFAULT_SORT) active.push(['sort', state.sort, `Sort: ${labelOf('sort', state.sort)}`]);
@@ -504,7 +506,7 @@ const itemListSchema = {
         b.dataset.rv = v;
         b.setAttribute('aria-label', `Remove ${label}`);
         b.textContent = label;
-        b.insertAdjacentHTML('beforeend', X);
+        if (X) b.append(X.content.cloneNode(true));
         li.append(b);
         return li;
       }));

@@ -17,12 +17,11 @@ export interface ViewItem {
   rank: number;           // position in the Recommended (verdict) order
   verdict: string;        // verdict key, '' when none
   flowClass: string;      // flow class key, '' when none
+  band: string;           // price band key from the build, '' when unpriced or outside every band
 }
 
 export interface SortDef {
   key: string;
-  label: string;          // option text
-  short: string;          // trigger and chip text ("Sort: <short>")
   cmp: (a: ViewItem, b: ViewItem) => number; // ties fall back to Recommended order
   /** Offered only when this returns true for the category's items. */
   when?: (items: ViewItem[]) => boolean;
@@ -30,7 +29,6 @@ export interface SortDef {
 
 export interface FilterDef {
   key: string;            // URL param and data-f value
-  label: string;          // group label
   multi: boolean;         // several values at once (OR within the filter)
   test: (item: ViewItem, values: string[]) => boolean; // values is never empty here
 }
@@ -43,20 +41,31 @@ const nullsLast = (a: number | null, b: number | null, dir: 1 | -1) =>
 export const DEFAULT_SORT = 'recommended';
 
 export const SORTS: SortDef[] = [
-  { key: 'recommended', label: 'Recommended', short: 'Recommended', cmp: () => 0 },
-  { key: 'price-asc', label: 'Price: low to high', short: 'Lowest price', cmp: (a, b) => nullsLast(a.price, b.price, 1) },
-  { key: 'price-desc', label: 'Price: high to low', short: 'Highest price', cmp: (a, b) => nullsLast(a.price, b.price, -1) },
-  { key: 'name', label: 'Name A–Z', short: 'Name A–Z', cmp: (a, b) => coll.compare(a.name, b.name) },
+  { key: 'recommended', cmp: () => 0 },
+  { key: 'price-asc', cmp: (a, b) => nullsLast(a.price, b.price, 1) },
+  { key: 'price-desc', cmp: (a, b) => nullsLast(a.price, b.price, -1) },
+  { key: 'name', cmp: (a, b) => coll.compare(a.name, b.name) },
   {
-    key: 'brand', label: 'Brand A–Z', short: 'Brand A–Z',
+    key: 'brand',
     cmp: (a, b) => (a.brand ? (b.brand ? coll.compare(a.brand, b.brand) : -1) : b.brand ? 1 : 0) || coll.compare(a.name, b.name),
   },
   {
-    key: 'flow-desc', label: 'Flow: highest first', short: 'Highest flow',
+    key: 'flow-desc',
     cmp: (a, b) => nullsLast(a.flow, b.flow, -1),
     when: (items) => items.some((i) => i.flow !== null),
   },
 ];
+
+// Option text and the short form used on the trigger and chip ("Sort: Lowest price"). Build only:
+// the page reads both back from the rendered controls, so they never ship in the script.
+export const SORT_TEXT: Record<string, [label: string, short: string]> = {
+  recommended: ['Recommended', 'Recommended'],
+  'price-asc': ['Price: low to high', 'Lowest price'],
+  'price-desc': ['Price: high to low', 'Highest price'],
+  name: ['Name A–Z', 'Name A–Z'],
+  brand: ['Brand A–Z', 'Brand A–Z'],
+  'flow-desc': ['Flow: highest first', 'Highest flow'],
+};
 
 /** Stable: equal items keep their Recommended order. */
 export const sortItems = <T extends ViewItem>(items: T[], key: string): T[] => {
@@ -122,10 +131,11 @@ export function chooseBands(prices: number[]): string[] {
 
 // ── Filters ──────────────────────────────────────────────────────────────────
 export const FILTERS: FilterDef[] = [
-  { key: 'verdict', label: 'Verdict', multi: false, test: (i, v) => i.verdict === v[0] },
-  { key: 'flow', label: 'Flow', multi: false, test: (i, v) => i.flowClass === v[0] },
-  { key: 'brand', label: 'Brand', multi: true, test: (i, v) => v.includes(i.brand) },
-  { key: 'price', label: 'Price', multi: true, test: (i, v) => v.some((b) => inBand(i.price, b)) },
+  { key: 'verdict', multi: false, test: (i, v) => i.verdict === v[0] },
+  { key: 'flow', multi: false, test: (i, v) => i.flowClass === v[0] },
+  { key: 'brand', multi: true, test: (i, v) => v.includes(i.brand) },
+  // The build files each priced card under one band (data-band), so the page never parses band keys.
+  { key: 'price', multi: true, test: (i, v) => v.includes(i.band) },
 ];
 
 export type FilterState = Record<string, string[]>;

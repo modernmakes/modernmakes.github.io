@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { chooseBands, inBand, parseBand, bandLabel, sortItems, matchesAll, num, type ViewItem } from '../src/scripts/hardware-view.ts';
 
 const it = (name: string, price: number | null, rank: number, brand = '', flow: number | null = null): ViewItem =>
-  ({ name, brand, price, flow, rank, verdict: '', flowClass: '' });
+  ({ name, brand, price, flow, rank, verdict: '', flowClass: '', band: '' });
 const names = (xs: ViewItem[]) => xs.map((x) => x.name).join('');
 
 // Bands: lower bound inclusive, upper exclusive; bad keys rejected.
@@ -25,11 +25,11 @@ assert.equal(names(sortItems([it('a', 1, 0, '', null), it('b', 1, 1, '', 80), it
 assert.equal(names(sortItems(sample(), 'nonsense')), 'bacd'); // unknown key = Recommended
 
 // Filters stack; an empty value list means "no filter".
-const x = { ...it('x', 60, 0, 'e3d'), verdict: 'workhorse' };
+const x = { ...it('x', 60, 0, 'e3d'), verdict: 'workhorse', band: '50-100' };
 assert.ok(matchesAll(x, { brand: ['e3d', 'phaetus'], price: ['50-100'], verdict: ['workhorse'], flow: [] }));
 assert.ok(!matchesAll(x, { brand: ['phaetus'] }));
 assert.ok(matchesAll(x, { brand: ['phaetus'] }, 'brand')); // a group's own counts skip itself
-assert.ok(!matchesAll({ ...x, price: null }, { price: ['50-100'] }));
+assert.ok(!matchesAll({ ...x, price: null, band: '' }, { price: ['50-100'] }));
 assert.ok(matchesAll(x, { price: ['under-50', '50-100'] }) && !matchesAll(x, { price: ['under-50', '100-plus'] })); // bands OR together
 
 assert.equal(num('0'), null);
