@@ -654,10 +654,13 @@ const tiles = [
       }
     }, { passive: true });
 
-    /* ── Page title in nav: IntersectionObserver on the opted-in H1 (no scroll
-       listener). The H1 counts as "under the nav" once it is fully above the
-       compact nav height; CSS swaps it with the logo (and the links on desktop). ── */
-    const pageH1  = document.querySelector<HTMLElement>('h1[data-nav-title]');
+    /* ── Page title in nav: the page's first visible H1 inside <main> (never Base's sr-only
+       fallback), unless it says data-nav-title="off"; data-nav-title="<text>" overrides the text.
+       IntersectionObserver, no scroll listener: the H1 counts as "under the nav" once it is fully
+       above the compact nav height; CSS swaps it with the logo (and the links on desktop). ── */
+    const firstH1 = Array.from(document.querySelectorAll<HTMLElement>('main h1'))
+      .find((h) => !h.classList.contains('sr-only') && h.getClientRects().length > 0);
+    const pageH1  = firstH1?.dataset.navTitle === 'off' ? undefined : firstH1;
     const titleEl = nav.querySelector('.nav-title span');
     if (pageH1 && titleEl) {
       titleEl.textContent = pageH1.dataset.navTitle || (pageH1.textContent ?? '').replace(/\s+/g, ' ').trim();
