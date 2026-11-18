@@ -25,6 +25,7 @@ const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.
       </button>
     </div>
     <div class="sheet-body" data-sheet-scroll><slot /></div>
+    {Astro.slots.has('footer') && <div class="sheet-foot"><slot name="footer" /></div>}
   </div>
 </dialog>
 
@@ -121,6 +122,12 @@ const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Optional footer (the "footer" slot): always on screen. At the medium detent the bottom of the
+     panel is below the screen, so the footer rides up by that much (--hide) on the sheet's own
+     spring. Panel and footer move by opposite amounts between detents, so it holds still. */
+  .sheet-foot { position: relative; z-index: 1; flex: none; padding: 12px 20px; background: var(--sh-bg); border-top: 1px solid var(--sh-line); }
+  [data-mode="sheet"] .sheet-foot { transform: translateY(calc(-1 * var(--hide, 0px))); transition: transform var(--dur-sheet) var(--spring-sheet); }
+
   /* Rows shared by every sheet's content. */
   .sheet-label { display: block; font: 700 10px var(--fm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sh-muted); padding: 14px 4px 4px; }
   .sheet-row {
@@ -203,7 +210,7 @@ const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.
 
   /* Reduced motion: no slide, spring or scale. The sheet appears where it rests; popovers and modals fade. */
   @media (prefers-reduced-motion: reduce) {
-    [data-mode="sheet"] .sheet-panel, [data-mode="sheet"] .sheet-scrim, dialog.sheet[data-mode="full"] { transition: none !important; }
+    [data-mode="sheet"] .sheet-panel, [data-mode="sheet"] .sheet-scrim, [data-mode="sheet"] .sheet-foot, dialog.sheet[data-mode="full"] { transition: none !important; }
     [data-mode="modal"] .sheet-panel, [data-mode="popover"] .sheet-panel { transform: none; transition: opacity var(--dur-fast) var(--ease-out); }
     .sheet-x:active { scale: none; }
   }

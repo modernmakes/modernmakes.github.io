@@ -1,0 +1,42 @@
+---
+// Sort and filter options for the hardware indexes, rendered into each sheet that shows them:
+// the phone "Sort & filter" sheet (both parts) and the desktop Sort and Filters popovers (one part
+// each). Every option is [data-f][data-v]; HardwareIndex's script keeps all copies in step, counts
+// them and applies them. Native radios and checkboxes give the keyboard path for free.
+interface Opt { value: string; label: string; count: number }
+interface Group { key: string; label: string; options: Opt[] }
+interface Props {
+  ns: string;                                    // keeps each copy's radio group separate
+  parts: ('sort' | 'filters')[];
+  sorts: { key: string; label: string; short: string }[];
+  groups: Group[];
+  defaultSort: string;
+}
+const { ns, parts, sorts, groups, defaultSort } = Astro.props;
+---
+{parts.includes('sort') && (
+  <fieldset class="hv-group">
+    <legend class="sheet-label">Sort by</legend>
+    {sorts.map((s) => (
+      <label class="sheet-row hv-opt">
+        <input type="radio" class="hv-input" name={`hv-sort-${ns}`} data-f="sort" data-v={s.key} data-label={s.short} checked={s.key === defaultSort} />
+        <span class="grow">{s.label}</span>
+        <svg class="hv-tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </label>
+    ))}
+  </fieldset>
+)}
+{parts.includes('filters') && groups.map((g) => (
+  <fieldset class="hv-group">
+    <legend class="sheet-label">{g.label}</legend>
+    <div class="hv-chips">
+      {g.options.map((o) => (
+        <label class="hv-chip">
+          <input type="checkbox" class="hv-input" name={`hv-${g.key}-${ns}`} data-f={g.key} data-v={o.value} data-label={o.label} />
+          <span>{o.label}</span>
+          <span class="hv-n" data-n>{o.count}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+))}

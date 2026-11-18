@@ -1,5 +1,7 @@
 ---
 import TypeCover from './TypeCover.astro';
+import Sheet from './Sheet.astro';
+import HardwareViewControls from './HardwareViewControls.astro';
 // Reusable hardware category index — the exact /hardware/hotends grid pattern
 // (dark hero, sticky verdict filter, count summary, card grid, ItemList schema,
 // fade-filter script). Every hardware category renders through this so the UI
@@ -121,6 +123,7 @@ const filterGroups = [
   ...(brandOpts.length ? [{ key: 'brand', label: 'Brand', multi: true, options: brandOpts }] : []),
   ...(priceOpts.length >= 2 ? [{ key: 'price', label: 'Price', multi: true, options: priceOpts }] : []),
 ];
+const hasControls = records.length > 1 && (sorts.length > 1 || filterGroups.length > 0);
 // What the URL may hold for each filter and sort; the page script and the pre-paint script both check it.
 const viewCfg = {
   sort: sorts.map((s) => s.key),
@@ -177,8 +180,9 @@ const itemListSchema = {
   <!-- FILTER BAR: verdict tabs + flow row, one sticky unit under the nav.
        The sentinel sits just above it; the script watches it to set .stuck. -->
   <div class="gf-sentinel" id="gf-sentinel" aria-hidden="true"></div>
-  <div class="gf-bar" id="gf-bar">
+  <div class="gf-bar" id="gf-bar" data-route={route}>
     <div class="gf-bar-inner">
+      <div class="gf-row">
       <div class="gf-cats" role="group" aria-label="Filter by verdict">
         <button type="button" class="gf-tab is-active" data-f="verdict" data-v="" aria-pressed="true">
           All
@@ -191,6 +195,32 @@ const itemListSchema = {
           </button>
         ))}
         <span class="gf-tab-ind" aria-hidden="true"></span>
+      </div>
+      {hasControls && (
+        <div class="gf-ctl">
+          {/* Phone: one button opens the Sort & filter sheet. The badge counts non-default choices in it. */}
+          <button type="button" class="gf-ctl-btn gf-ctl-phone" data-sheet="hw-view" data-haptic
+                  aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-view">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" /><circle cx="16" cy="7" r="2" /><circle cx="8" cy="17" r="2" /></svg>
+            <span>Sort &amp; filter</span>
+            <span class="gf-ctl-n" data-ctl-n="all" aria-hidden="true" hidden></span><span class="sr-only" data-ctl-sr="all"></span>
+          </button>
+          {/* Desktop: Sort and Filters menus, anchored popovers. */}
+          <button type="button" class="gf-ctl-btn gf-ctl-desk" data-sheet="hw-sort"
+                  aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-sort">
+            <span class="gf-ctl-k">Sort:</span> <span data-sort-label>{sorts[0].short}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+          </button>
+          {filterGroups.length > 0 && (
+            <button type="button" class="gf-ctl-btn gf-ctl-desk" data-sheet="hw-filters"
+                    aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-filters">
+              <span>Filters</span>
+              <span class="gf-ctl-n" data-ctl-n="filters" aria-hidden="true" hidden></span><span class="sr-only" data-ctl-sr="filters"></span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+            </button>
+          )}
+        </div>
+      )}
       </div>
       {hasFlow && (
         <div class="gf-flow" role="group" aria-label="Filter by flow class">
@@ -212,10 +242,17 @@ const itemListSchema = {
 
   <section class="section">
     <div class="container">
-      <p class="gf-summary" id="hw-count" aria-live="polite" aria-atomic="true"
-         data-noun-singular={nounSingular} data-noun-plural={nounPlural}>
-        Showing {records.length} of {records.length} {noun(records.length)}
-      </p>
+      {/* Live count, then the active non-default choices as removable chips (built by the script). */}
+      <div class="gf-status">
+        <p class="gf-summary" id="hw-count" aria-live="polite" aria-atomic="true"
+           data-noun-singular={nounSingular} data-noun-plural={nounPlural}>
+          Showing {records.length} of {records.length} {noun(records.length)}
+        </p>
+        <div class="gf-active" id="hw-active" hidden>
+          <ul class="gf-active-list" id="hw-active-list" aria-label="Active sort and filters"></ul>
+          <button type="button" class="gf-clear-all" id="hw-clear-all">Clear all</button>
+        </div>
+      </div>
       {records.length > 0 ? (
         <style is:inline set:html={prepaintCss}></style>
         <div class="grid-3" id="hw-grid">
@@ -290,6 +327,25 @@ const itemListSchema = {
     </div>
   </section>
 
+  {hasControls && (
+    <>
+      {/* Phone (under 768px): everything in one sheet; changes apply live underneath, "Show N" closes it. */}
+      <Sheet id="hw-view" title="Sort & filter" detent="medium">
+        <HardwareViewControls ns="m" parts={['sort', 'filters']} sorts={sorts} groups={filterGroups} defaultSort={DEFAULT_SORT} />
+        <button slot="footer" type="button" class="hv-show" data-sheet-close data-show-n>Show {records.length} {noun(records.length)}</button>
+      </Sheet>
+      {/* Desktop: two anchored menus. */}
+      <Sheet id="hw-sort" title="Sort" desktop="popover">
+        <HardwareViewControls ns="s" parts={['sort']} sorts={sorts} groups={filterGroups} defaultSort={DEFAULT_SORT} />
+      </Sheet>
+      {filterGroups.length > 0 && (
+        <Sheet id="hw-filters" title="Filters" desktop="popover">
+          <HardwareViewControls ns="f" parts={['filters']} sorts={sorts} groups={filterGroups} defaultSort={DEFAULT_SORT} />
+        </Sheet>
+      )}
+    </>
+  )}
+
   <Footer slot="footer" />
   <script type="application/ld+json" slot="head" set:html={jsonLd(itemListSchema)}></script>
 </Base>
@@ -297,6 +353,7 @@ const itemListSchema = {
 <script>
   import { syncedLabel } from '../scripts/synced.js';
   import { DEFAULT_SORT, FILTERS, SORTS, matchesAll, sortItems, type FilterState, type ViewItem } from '../scripts/hardware-view';
+  import { closeSheet, holdScroll } from '../scripts/sheet';
   const freshEl = document.getElementById('hot-hero-fresh');
   const freshText = freshEl && syncedLabel(freshEl.dataset.synced);
   if (freshEl && freshText) { freshEl.textContent = freshText; freshEl.hidden = false; }
@@ -312,6 +369,12 @@ const itemListSchema = {
   const region   = grid?.parentElement ?? null; // count line + grid
   const countEl  = document.getElementById('hw-count');
   const noMatch  = document.getElementById('hw-nomatch');
+  const activeWrap = document.getElementById('hw-active');
+  const activeList = document.getElementById('hw-active-list');
+  const viewSheet  = document.getElementById('hw-view') as HTMLDialogElement | null;
+  const showNs     = Array.from(document.querySelectorAll<HTMLElement>('[data-show-n]'));
+  const sortLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-sort-label]'));
+  const ctlNs      = Array.from(document.querySelectorAll<HTMLElement>('[data-ctl-n]'));
   const nounS    = countEl?.dataset.nounSingular ?? 'item';
   const nounP    = countEl?.dataset.nounPlural ?? 'items';
   const cats     = document.querySelector<HTMLElement>('.gf-cats');
@@ -420,6 +483,45 @@ const itemListSchema = {
     cats.classList.add('has-ind');
   }
 
+  // Label for a value: the control's data-label (sort short name, brand, band, verdict, flow class).
+  const labelOf = (k: string, v: string) => ctrls.find((c) => c.dataset.f === k && c.dataset.v === v)?.dataset.label ?? v;
+  // Choices that live in the sheet / Filters menu (not in the bar): brand, price, and anything added later.
+  const sheetKeys = [...new Set(ctrls.filter((c) => c instanceof HTMLInputElement && c.dataset.f !== 'sort').map((c) => c.dataset.f!))];
+
+  // Active non-default choices as removable chips, then the trigger badges and labels.
+  const X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  function renderChrome(visible: number) {
+    const active: [string, string, string][] = [];
+    if (state.sort !== DEFAULT_SORT) active.push(['sort', state.sort, `Sort: ${labelOf('sort', state.sort)}`]);
+    for (const f of FILTERS) for (const v of state.f[f.key]) active.push([f.key, v, labelOf(f.key, v)]);
+    if (activeList && activeWrap) {
+      activeList.replaceChildren(...active.map(([k, v, label]) => {
+        const li = document.createElement('li');
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'gf-chip';
+        b.dataset.rf = k;
+        b.dataset.rv = v;
+        b.setAttribute('aria-label', `Remove ${label}`);
+        b.textContent = label;
+        b.insertAdjacentHTML('beforeend', X);
+        li.append(b);
+        return li;
+      }));
+      activeWrap.hidden = active.length === 0;
+    }
+    const nFilters = sheetKeys.reduce((n, k) => n + state.f[k].length, 0);
+    for (const el of ctlNs) {
+      const n = el.dataset.ctlN === 'all' ? nFilters + (state.sort !== DEFAULT_SORT ? 1 : 0) : nFilters;
+      el.textContent = String(n);
+      el.hidden = n === 0;
+      const sr = el.parentElement?.querySelector<HTMLElement>(`[data-ctl-sr="${el.dataset.ctlN}"]`);
+      if (sr) sr.textContent = n ? `, ${n} active` : '';
+    }
+    for (const el of sortLabels) el.textContent = labelOf('sort', state.sort);
+    for (const el of showNs) el.textContent = `Show ${visible} ${noun(visible)}`;
+  }
+
   // Filter, order, count. `fade`: shown cards fade in (not inside a view transition).
   function render(fade: boolean) {
     let visible = 0;
@@ -435,29 +537,43 @@ const itemListSchema = {
     }
     if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${noun(total)}`;
     if (noMatch) noMatch.hidden = visible > 0 || total === 0;
+    renderChrome(visible);
     syncControls();
   }
 
-  function apply(fromTap: boolean) {
-    // Anti-jitter: while the bar is stuck, bring the grid's top just under it
-    // before the card count changes, so the page never has to clamp scrollY
-    // mid-filter. Only moves up, and only if the grid top is above the bar.
-    if (fromTap && region && bar.classList.contains('stuck')) {
-      const barBottom = bar.getBoundingClientRect().bottom;
-      const regionTop = region.getBoundingClientRect().top;
-      if (regionTop < barBottom) {
-        window.scrollTo({ top: Math.round(scrollY + regionTop - barBottom + 4), behavior: 'instant' });
-      }
-    }
-    const vt = fromTap && typeof document.startViewTransition === 'function' && !reduced();
+  // Brings the results' top just under a stuck bar (never down, never when it is already below it).
+  function alignResults() {
+    if (!region || !bar.classList.contains('stuck')) return;
+    const barBottom = bar.getBoundingClientRect().bottom;
+    const regionTop = region.getBoundingClientRect().top;
+    if (regionTop < barBottom) window.scrollTo({ top: Math.round(scrollY + regionTop - barBottom + 4), behavior: 'instant' });
+  }
+
+  // Changes made inside the phone sheet are aligned when it closes (the page is locked while open).
+  let alignOnClose = false;
+  viewSheet?.addEventListener('close', () => { if (alignOnClose) { alignOnClose = false; alignResults(); } });
+
+  function apply(fromTap: boolean, after?: () => void) {
+    // With a sheet or menu open, cards change in place, without the view transition: it would draw
+    // the moving cards over the open panel and hold input for its duration. A keyboard change in a
+    // menu doesn't animate either (it only happens with the menu open).
+    const open = document.querySelector<HTMLDialogElement>('dialog.sheet[open]');
+    // Anti-jitter: while the bar is stuck, bring the grid's top just under it before the card count
+    // changes, so the page never has to clamp scrollY mid-filter. A popover stays open through it;
+    // a modal sheet locks the page, so that alignment waits for it to close.
+    if (fromTap && open && open.dataset.mode !== 'popover') alignOnClose = true;
+    else if (fromTap) { if (open) holdScroll(); alignResults(); }
+    const vt = fromTap && !open && typeof document.startViewTransition === 'function' && !reduced();
     writeUrl();
-    if (!vt) return render(true);
+    if (!vt) { render(true); after?.(); return; }
     // Cards filter and move inside a same-document view transition. The scroll step above has
     // already happened, outside it. Names exist only for the transition.
     const html = document.documentElement;
     cards.forEach((c, i) => { c.el.style.viewTransitionName = `gf-card-${i}`; });
     html.classList.add('vt-filter');
-    document.startViewTransition(() => render(false)).finished.finally(() => {
+    const t = document.startViewTransition(() => render(false));
+    t.updateCallbackDone.then(() => after?.(), () => after?.());
+    t.finished.finally(() => {
       cards.forEach((c) => { c.el.style.viewTransitionName = ''; });
       html.classList.remove('vt-filter');
     });
@@ -472,10 +588,55 @@ const itemListSchema = {
       apply(true);
     });
   }
-  document.getElementById('hw-clear')?.addEventListener('click', () => {
+
+  // Sheet and menu options (radios and checkboxes). Every copy is kept in step by syncControls.
+  let pointerAt = -1e9;
+  addEventListener('pointerdown', (e) => { pointerAt = e.timeStamp; }, true);
+  for (const el of ctrls) {
+    if (!(el instanceof HTMLInputElement)) continue;
+    el.addEventListener('change', (e) => {
+      const k = el.dataset.f!, v = el.dataset.v!;
+      if (k === 'sort') {
+        if (!el.checked) return;
+        state.sort = v;
+        // The desktop Sort menu works like a menu: a click picks and closes it (at once, so the
+        // cards can animate). Arrow keys move through the options with it open; Enter closes it.
+        const menu = el.closest<HTMLDialogElement>('dialog');
+        if (menu?.dataset.mode === 'popover' && e.timeStamp - pointerAt < 1000) closeSheet(menu, true);
+      } else {
+        const rest = state.f[k].filter((x) => x !== v);
+        state.f[k] = el.checked ? (FILTER[k]?.multi ? [...rest, v] : [v]) : rest;
+      }
+      apply(true);
+    });
+    if (el.dataset.f === 'sort') el.addEventListener('keydown', (e) => {
+      const menu = el.closest<HTMLDialogElement>('dialog');
+      if (e.key === 'Enter' && menu?.dataset.mode === 'popover') { e.preventDefault(); closeSheet(menu); }
+    });
+  }
+
+  // The visible sort & filter trigger (phone or desktop), for focus after everything is cleared.
+  const trigger = () => Array.from(document.querySelectorAll<HTMLElement>('.gf-ctl-btn')).find((b) => b.offsetParent !== null);
+  function clearAll() {
     for (const f of FILTERS) state.f[f.key] = [];
     state.sort = DEFAULT_SORT;
-    apply(true);
+    apply(true, () => trigger()?.focus({ preventScroll: true }));
+  }
+  document.getElementById('hw-clear')?.addEventListener('click', clearAll);
+  document.getElementById('hw-clear-all')?.addEventListener('click', clearAll);
+
+  // Removing one chip: focus moves to the chip that takes its place, else Clear all's target.
+  activeList?.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest<HTMLButtonElement>('.gf-chip');
+    if (!b) return;
+    const k = b.dataset.rf!, v = b.dataset.rv!;
+    const i = Array.from(activeList.querySelectorAll('.gf-chip')).indexOf(b);
+    if (k === 'sort') state.sort = DEFAULT_SORT;
+    else state.f[k] = state.f[k].filter((x) => x !== v);
+    apply(true, () => {
+      const left = activeList.querySelectorAll<HTMLElement>('.gf-chip');
+      (left[Math.min(i, left.length - 1)] ?? trigger())?.focus({ preventScroll: true });
+    });
   });
 
   // .stuck = the bar is pinned under the nav. IntersectionObserver on a 1px
@@ -672,8 +833,10 @@ html { overflow-anchor: none; }
   .hot-hero-inner { padding: 0 20px; }
   .hot-hero-title { font-size: 36px; }
   .gf-bar-inner { padding: 0 20px; }
-  /* Both rows scroll edge to edge instead of clipping at the page gutter. */
+  /* Both rows scroll edge to edge instead of clipping at the page gutter. The tab row stops at
+     the sort & filter control instead, which keeps the gutter on the right. */
   .gf-cats, .gf-flow { margin-inline: -20px; padding-inline: 20px; }
+  .gf-row > .gf-cats { margin-right: 0; padding-right: 0; }
 }
 
 /* ── Reduced motion: global.css has no global reset, so this page honours the
@@ -683,6 +846,122 @@ html { overflow-anchor: none; }
 .gf-cats { position: relative; }
 .gf-tab-ind { position: absolute; left: 0; top: 0; width: 1px; height: 2px; background: var(--accent); transform-origin: 0 0; transform: scaleX(0); pointer-events: none; transition: transform var(--dur-base) var(--ease-move); }
 .gf-cats.has-ind .gf-tab.is-active { border-bottom-color: transparent; }
+
+
+/* ── SORT & FILTER CONTROLS (Phase 4D) ──
+   Hallmark · component: hardware sort & filter controls · genre: editorial · theme: DESIGN.md (Workshop Press)
+   states: default · hover (fine pointer only) · focus-visible · active (press) · disabled · selected.
+   No loading / error / success states: every change is local and instant.
+   motion: press scale (PRESS SYSTEM), colour on --dur-fast / --ease-out; the popovers and sheet are
+   the Sheet engine's; cards move in the vt-filter transition. Chips and badges change instantly:
+   they update on every tap, so animating them would only slow the read.
+   The bar keeps one height: the controls sit inside the tab row (36px boxes in a 46px row) and
+   the active choices live in the status row below the bar, never in it. */
+.gf-row { display: flex; align-items: center; }
+.gf-row > .gf-cats { flex: 1 1 auto; min-width: 0; align-self: stretch; }
+.gf-ctl { flex: none; display: flex; align-items: center; gap: 8px; padding-left: 12px; }
+.gf-ctl-btn {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 36px; padding: 0 12px;
+  font-family: var(--fu); font-size: 13px; font-weight: 600; color: var(--black); white-space: nowrap;
+  background: var(--surface); border: 1px solid var(--border-s); border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.gf-ctl-btn::before { content: ""; position: absolute; inset: -4px 0; } /* 44px hit area */
+.gf-ctl-btn svg { flex: none; color: var(--g1); }
+.gf-ctl-btn[aria-expanded="true"] { border-color: var(--black); }
+.gf-ctl-k { color: var(--g1); font-weight: 500; }
+.gf-ctl-n {
+  min-width: 18px; height: 18px; padding: 0 5px; border-radius: 10px;
+  font-family: var(--fm); font-size: 10px; font-weight: 700; line-height: 18px; text-align: center;
+  color: var(--surface); background: var(--black);
+}
+.gf-ctl-n[hidden] { display: none; }
+.gf-ctl-phone { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .gf-ctl-btn:hover { border-color: var(--black); }
+}
+@media (max-width: 767px) {
+  .gf-ctl-desk { display: none; }
+  .gf-ctl-phone { display: inline-flex; }
+  .gf-ctl { padding-left: 8px; }
+}
+
+/* Status row: live count, then the active choices as removable chips, then Clear all. */
+.gf-status { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 16px 0 12px; }
+.gf-status .gf-summary { padding: 0; }
+.gf-active { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 8px; }
+.gf-active[hidden] { display: none; }
+.gf-active-list { display: flex; flex-wrap: wrap; gap: 12px 8px; list-style: none; margin: 0; padding: 0; }
+.gf-chip {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 8px 0 12px;
+  font-family: var(--fu); font-size: 12px; font-weight: 600; color: var(--black); white-space: nowrap;
+  background: var(--surface); border: 1px solid var(--border-s); border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.gf-chip::before { content: ""; position: absolute; inset: -6px 0; } /* 44px hit area */
+.gf-chip svg { flex: none; color: var(--g1); transition: color var(--dur-fast) var(--ease-out); }
+.gf-clear-all {
+  position: relative;
+  height: 32px; padding: 0 4px;
+  font-family: var(--fu); font-size: 12px; font-weight: 700; color: var(--black);
+  background: none; border: 0; cursor: pointer;
+  text-decoration: underline; text-decoration-color: var(--border-s); text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+.gf-clear-all::before { content: ""; position: absolute; inset: -6px -4px; }
+@media (hover: hover) and (pointer: fine) {
+  .gf-chip:hover { border-color: var(--black); }
+  .gf-chip:hover svg { color: var(--black); }
+  .gf-clear-all:hover { text-decoration-color: var(--black); }
+}
+
+/* Sheet and popover contents (HardwareViewControls.astro). */
+.hv-group { min-width: 0; margin: 0; padding: 0 0 8px; border: 0; }
+.hv-group + .hv-group { margin-top: 4px; border-top: 1px solid var(--sh-line); }
+.hv-input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.hv-opt { position: relative; }
+.hv-opt .hv-tick { flex: none; color: var(--sh-fg); opacity: 0; }
+.hv-opt:has(.hv-input:checked) { font-weight: 700; }
+.hv-opt:has(.hv-input:checked) .hv-tick { opacity: 1; }
+.hv-opt:has(.hv-input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+.hv-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 6px 0 4px; }
+.hv-chip {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 14px;
+  font-family: var(--fu); font-size: 13px; font-weight: 600; color: var(--g1);
+  background: var(--surface); border: 1px solid var(--border-s); border-radius: var(--radius-sm);
+  cursor: pointer; -webkit-user-select: none; user-select: none;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.hv-n { font-family: var(--fm); font-size: 10px; font-weight: 500; color: var(--g1); }
+/* Selected = ink fill, as the flow buttons: orange stays the sheet's one pointer (Show N). */
+.hv-chip:has(.hv-input:checked) { color: var(--surface); background: var(--black); border-color: var(--black); }
+.hv-chip:has(.hv-input:checked) .hv-n { color: var(--on-dark-soft); }
+.hv-chip:has(.hv-input:disabled) { opacity: .4; cursor: default; }
+.hv-chip:has(.hv-input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .hv-chip:not(:has(.hv-input:checked)):not(:has(.hv-input:disabled)):hover { color: var(--black); border-color: var(--black); }
+}
+.hv-show {
+  display: block; width: 100%; min-height: 48px; padding: 0 16px;
+  font-family: var(--fu); font-size: 15px; font-weight: 700; color: var(--on-accent);
+  background: var(--accent); border: 0; border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.hv-show:active { background: var(--accent-mid); }
+@media (hover: hover) and (pointer: fine) { .hv-show:hover { background: var(--accent-mid); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .gf-ctl-btn, .gf-chip, .gf-chip svg, .gf-clear-all, .hv-chip, .hv-show { transition: none; }
+}
 
 /* Filter view transition: cards are class `card`; the bar and nav stay put above them,
    and the bar is shown live so the underline slide is visible during it. */

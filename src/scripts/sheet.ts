@@ -353,10 +353,19 @@ document.addEventListener('click', (e) => {
 });
 
 // Popover light dismiss: a press or focus anywhere outside it (the toast and its live region don't count).
+// A press on another sheet's trigger closes this one at once, so that click can open the next.
 document.addEventListener('pointerdown', (e) => {
   const c = cur, t = e.target as Node;
-  if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t) && !(t as Element).closest?.('[data-toast]')) closeSheet(c.dlg);
+  if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t) && !(t as Element).closest?.('[data-toast]')) closeSheet(c.dlg, !!(t as Element).closest?.('[data-sheet]'));
 }, true);
+
+// A page that moves the scroll position itself while a popover is open (the hardware filters
+// bringing results up under the sticky bar) calls this first, so that scroll isn't a light dismiss.
+let scrollHold = 0;
+export const holdScroll = () => {
+  const n = ++scrollHold;
+  requestAnimationFrame(() => requestAnimationFrame(() => { if (scrollHold === n) scrollHold = 0; }));
+};
 document.addEventListener('focusin', (e) => {
   const c = cur, t = e.target as Node;
   if (c?.mode === 'popover' && !c.dlg.contains(t) && !c.opener?.contains(t) && !(t as Element).closest?.('[data-toast]')) closeSheet(c.dlg, true);
@@ -365,7 +374,7 @@ document.addEventListener('focusin', (e) => {
 addEventListener('scroll', () => {
   const c = cur;
   if (!c) return;
-  if (c.mode === 'popover') closeSheet(c.dlg, true);
+  if (c.mode === 'popover') { if (!scrollHold) closeSheet(c.dlg, true); }
   else if (scrollY !== c.lockY) scrollTo({ top: c.lockY, behavior: 'instant' }); // iOS scrolls the page on focus
 }, { passive: true });
 phone.addEventListener('change', () => { if (cur) closeSheet(cur.dlg, true); });
