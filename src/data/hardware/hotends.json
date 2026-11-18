@@ -946,13 +946,13 @@
     "Slug": "goliath-air",
     "Type": "All-Metal",
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005005298362710.html",
-    "Brand": "Mellow3D",
+    "Brand": "Mellow 3D",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Copper-Zirconia Bi-Material",
     "Price (USD)": 129.99,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
     "Related 1 URL": "/hardware/hotends/goliath-water",
-    "Updated": "2026-11-17T23:24:08.000Z"
+    "Updated": "2026-11-18T03:28:39.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -996,13 +996,13 @@
     "Slug": "goliath-water",
     "Type": "Liquid Cooled",
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005005298362710.html",
-    "Brand": "Mellow3D",
+    "Brand": "Mellow 3D",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Copper-Zirconia Bi-Material",
     "Price (USD)": 152.94,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
-    "Updated": "2026-11-17T23:24:10.000Z"
+    "Updated": "2026-11-18T03:28:39.000Z"
   },
   {
     "id": "recZfHibPiZ5iC7fs",
@@ -1634,7 +1634,7 @@
   },
   {
     "id": "reczz9oIVsXB06Bg1",
-    "Cons": "45 mm³/s is the lowest flow in the Chube family\n33mm meltzone is shorter than Air and Conduction\nSmaller community and fewer validated configs\nNot ideal for high-speed production printing",
+    "Cons": "50 mm³/s is the lowest flow in the Chube family\n33mm meltzone is shorter than Air and Conduction\nSmaller community and fewer validated configs\nNot ideal for high-speed production printing",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
@@ -1653,7 +1653,7 @@
     "Weight (g)": 50,
     "Verdict": "Bleeding Edge",
     "Max Temp (°C)": 500,
-    "Body": "The Chube Compact occupies the same niche as the Rapido 2F — small, light, still capable of high temperatures — but with V6 nozzle compatibility as the differentiator. At 22.23mm OD it fits toolhead designs that the larger Air and Conduction variants can't.\n\nThe 33mm meltzone and 45 mm³/s ceiling are real limitations. This isn't a high-throughput hotend. But if your use case is a compact toolhead on a Voron running standard materials at moderate speed with occasional high-temp filament (PA, PC), the 500°C ceiling gives you that headroom without needing a larger body.\n\nAt $65 it's the entry point into the Chube family and the easiest to justify as a trial. If Chube's V6-native approach appeals to you, the Compact is the lowest-risk way to evaluate it before committing to the Air or Conduction variants.",
+    "Body": "The Chube Compact is the smallest member of the Chube family — 22.23mm OD and 48.5mm long — built for toolhead designs where space and mass are the constraint. It keeps the family's V6 nozzle compatibility and 500°C ceiling, with a 6x16mm heater cartridge (upgradeable to 6x20mm) and a 33mm meltzone, and it fits toolheads the larger Air and Conduction variants can't.\n\nThe 33mm meltzone and modest flow ceiling are real limitations. This isn't a high-throughput hotend. But if your use case is a compact toolhead on a Voron running standard materials at moderate speed with occasional high-temp filament (PA, PC), the 500°C ceiling gives you that headroom without needing a larger body.\n\nAt $170 it's the entry point into the Chube family and the easiest to justify as a trial. If Chube's V6-native approach appeals to you, the Compact is the lowest-risk way to evaluate it before committing to the Air or Conduction variants.",
     "Nozzle Thread": "V6 (M6)",
     "Heater Type": "Cartridge",
     "Heat Block": "Copper Alloy",
@@ -1677,7 +1677,7 @@
     "Price (USD)": 170,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-17T23:24:04.000Z",
+    "Updated": "2026-11-18T01:05:40.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]

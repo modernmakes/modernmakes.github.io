@@ -150,7 +150,7 @@
     "Vendor 1 Name": "Mellow 3D Official Store",
     "Driver Count": 0,
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005007765975184.html",
-    "Brand": "Mellow / Fly3D",
+    "Brand": "Mellow 3D",
     "Voltage": "24V",
     "Price (USD)": 34.41,
     "Pros": "8 driver slots for large multi-motor builds\nActs as a USB-to-CAN bridge for CAN tool boards\nType-C USB host link\nKlipper native"
@@ -323,7 +323,7 @@
     "Vendor 1 Name": "Mellow 3D Official Store",
     "Driver Count": 0,
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005004431621335.html",
-    "Brand": "Mellow / Fly3D",
+    "Brand": "Mellow 3D",
     "Voltage": "24V",
     "Price (USD)": 60.53,
     "Pros": "8 driver slots\nCAN bus support\nKlipper native\nTMC5160 capable\nMellow has credibility from popular toolhead boards (Fly SHT, Gemini)"
@@ -398,7 +398,7 @@
     "Vendor 1 Name": "Mellow 3D Official Store",
     "Driver Count": 0,
     "Vendor 1 URL": "https://www.aliexpress.com/item/1005009808722768.html",
-    "Brand": "Mellow / Fly3D",
+    "Brand": "Mellow 3D",
     "Voltage": "24V",
     "Price (USD)": 112,
     "Pros": "Very low price ($21.90)\nH618 host processor plus 550MHz H723 MCU\nMarketed for Voron, HevORT and VzBot builds"
