@@ -1,5 +1,6 @@
 ---
 import TypeCover from '../../components/TypeCover.astro';
+import Icon, { type IconName } from '../../components/icons/Icon.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -28,24 +29,24 @@ const len = (d: unknown) => (Array.isArray(d) ? d.length : 0);
 // dynamic from each JSON file's length — a category with no records yet still
 // links through to its (empty-state) index.
 const categories = [
-  { name: 'Hotends',            description: 'High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.', href: '/hardware/hotends',          count: len(hotendsData),        icon: '🔥' },
-  { name: 'Extruders',          description: 'Direct-drive and Bowden extruders — gear ratios, weight, and toolhead fit.',         href: '/hardware/extruders',        count: len(extrudersData),      icon: '⚙️' },
-  { name: 'Bed Probes',         description: 'Inductive, nozzle-contact, and eddy-current probes — repeatability and Klipper fit.', href: '/hardware/probes',           count: len(bedProbesData),      icon: '🎯' },
-  { name: 'Nozzles',            description: 'Hardened steel, brass, ruby, and specialty nozzles for every filament type.',         href: '/hardware/nozzles',          count: len(nozzlesData),        icon: '💧' },
-  { name: 'Mainboards',         description: 'Controller boards for Klipper and RRF — MCU, driver slots, CAN, and voltage.',        href: '/hardware/mainboards',       count: len(mainboardsData),     icon: '🧠' },
-  { name: 'Toolboards',         description: 'CAN-bus toolhead boards — MCU, onboard driver, accelerometer, and Neopixel.',         href: '/hardware/toolboards',       count: len(toolboardsData),     icon: '🔧' },
-  { name: 'Part Cooling',       description: 'Blowers and fans for part cooling — airflow, static pressure, and toolhead fit.',     href: '/hardware/part-cooling',     count: len(partCoolingData),    icon: '🌀' },
-  { name: 'Build Plates',       description: 'PEI, textured, and smooth build surfaces — adhesion, release, and longevity.',        href: '/hardware/build-plates',     count: len(buildPlatesData),    icon: '🧲' },
-  { name: 'Power Supplies',     description: 'PSUs for prosumer builds — wattage, voltage, certification, and cooling.',            href: '/hardware/psus',             count: len(psusData),           icon: '⚡' },
-  { name: 'Stepper Motors',     description: 'Motion and extrusion steppers — torque, current, frame size, and use case.',          href: '/hardware/motors',           count: len(motorsData),         icon: '🔄' },
-  { name: 'Heaters',            description: 'Cartridge heaters, bed heaters, and silicone pads — wattage, voltage, and control.',  href: '/hardware/heaters',          count: len(heatersData),        icon: '🌡️' },
-  { name: 'Filament Dryers',    description: 'Active and passive dryers — capacity, temperature, and print-while-dry support.',     href: '/hardware/filament-dryers',  count: len(filamentDryersData), icon: '♨️' },
-  { name: 'Air Filtration',     description: 'VOC and particulate filtration — media type, fan size, and printer fit.',            href: '/hardware/air-filtration',   count: len(airFiltrationData),  icon: '🌬️' },
-  { name: 'Lighting & Cameras', description: 'Chamber lighting and monitoring cameras — interface, resolution, and Klipper fit.',  href: '/hardware/lighting-cameras', count: len(lightingCamerasData),icon: '💡' },
-  { name: 'Gantrys',            description: 'Gantry kits and conversions — kinematics, extrusion size, and motor count.',         href: '/hardware/gantrys',          count: len(gantrysData),        icon: '🏗️' },
-  { name: 'Motion System',      description: 'Linear rails, belts, pulleys, and lead screws — type, spec, and brand tier.',         href: '/hardware/motion-system',    count: len(motionSystemData),   icon: '🛤️' },
-  { name: 'Enclosures',         description: 'Kit and DIY enclosures — material, thickness, and chamber temperature.',            href: '/hardware/enclosures',       count: len(enclosuresData),     icon: '📦' },
-].map((c) => ({ ...c, live: true }));
+  { name: 'Hotends',            description: 'High-flow, standard, and specialty hotends. Specs, compatibility, and where to buy.', href: '/hardware/hotends',          count: len(hotendsData),        icon: 'hotend' },
+  { name: 'Extruders',          description: 'Direct-drive and Bowden extruders — gear ratios, weight, and toolhead fit.',         href: '/hardware/extruders',        count: len(extrudersData),      icon: 'extruder' },
+  { name: 'Bed Probes',         description: 'Inductive, nozzle-contact, and eddy-current probes — repeatability and Klipper fit.', href: '/hardware/probes',           count: len(bedProbesData),      icon: 'probe' },
+  { name: 'Nozzles',            description: 'Hardened steel, brass, ruby, and specialty nozzles for every filament type.',         href: '/hardware/nozzles',          count: len(nozzlesData),        icon: 'nozzle' },
+  { name: 'Mainboards',         description: 'Controller boards for Klipper and RRF — MCU, driver slots, CAN, and voltage.',        href: '/hardware/mainboards',       count: len(mainboardsData),     icon: 'mainboard' },
+  { name: 'Toolboards',         description: 'CAN-bus toolhead boards — MCU, onboard driver, accelerometer, and Neopixel.',         href: '/hardware/toolboards',       count: len(toolboardsData),     icon: 'toolboard' },
+  { name: 'Part Cooling',       description: 'Blowers and fans for part cooling — airflow, static pressure, and toolhead fit.',     href: '/hardware/part-cooling',     count: len(partCoolingData),    icon: 'part-cooling' },
+  { name: 'Build Plates',       description: 'PEI, textured, and smooth build surfaces — adhesion, release, and longevity.',        href: '/hardware/build-plates',     count: len(buildPlatesData),    icon: 'build-plate' },
+  { name: 'Power Supplies',     description: 'PSUs for prosumer builds — wattage, voltage, certification, and cooling.',            href: '/hardware/psus',             count: len(psusData),           icon: 'psu' },
+  { name: 'Stepper Motors',     description: 'Motion and extrusion steppers — torque, current, frame size, and use case.',          href: '/hardware/motors',           count: len(motorsData),         icon: 'motor' },
+  { name: 'Heaters',            description: 'Cartridge heaters, bed heaters, and silicone pads — wattage, voltage, and control.',  href: '/hardware/heaters',          count: len(heatersData),        icon: 'heater' },
+  { name: 'Filament Dryers',    description: 'Active and passive dryers — capacity, temperature, and print-while-dry support.',     href: '/hardware/filament-dryers',  count: len(filamentDryersData), icon: 'filament-dryer' },
+  { name: 'Air Filtration',     description: 'VOC and particulate filtration — media type, fan size, and printer fit.',            href: '/hardware/air-filtration',   count: len(airFiltrationData),  icon: 'air-filtration' },
+  { name: 'Lighting & Cameras', description: 'Chamber lighting and monitoring cameras — interface, resolution, and Klipper fit.',  href: '/hardware/lighting-cameras', count: len(lightingCamerasData),icon: 'lighting-camera' },
+  { name: 'Gantrys',            description: 'Gantry kits and conversions — kinematics, extrusion size, and motor count.',         href: '/hardware/gantrys',          count: len(gantrysData),        icon: 'gantry' },
+  { name: 'Motion System',      description: 'Linear rails, belts, pulleys, and lead screws — type, spec, and brand tier.',         href: '/hardware/motion-system',    count: len(motionSystemData),   icon: 'motion-system' },
+  { name: 'Enclosures',         description: 'Kit and DIY enclosures — material, thickness, and chamber temperature.',            href: '/hardware/enclosures',       count: len(enclosuresData),     icon: 'enclosure' },
+].map((c) => ({ ...c, icon: c.icon as IconName, live: true }));
 
 // Pull the featured hotend's product image straight from its record so the
 // card matches the hotends index/detail (same "Image URL" field).
@@ -118,7 +119,7 @@ const featured = [
           cat.live
             ? (
               <a href={cat.href} class="hw-cat-card hw-cat-live">
-                <div class="hw-cat-icon">{cat.icon}</div>
+                <Icon name={cat.icon} class="hw-cat-icon" />
                 <div class="hw-cat-body">
                   <div class="hw-cat-name">{cat.name}</div>
                   <div class="hw-cat-desc">{cat.description}</div>
@@ -131,7 +132,7 @@ const featured = [
             )
             : (
               <div class="hw-cat-card hw-cat-soon" aria-label={`${cat.name} — coming soon`}>
-                <div class="hw-cat-icon hw-cat-icon-dim">{cat.icon}</div>
+                <Icon name={cat.icon} class="hw-cat-icon" />
                 <div class="hw-cat-body">
                   <div class="hw-cat-name hw-cat-name-dim">{cat.name}</div>
                   <div class="hw-cat-desc hw-cat-desc-dim">{cat.description}</div>
@@ -330,8 +331,9 @@ const featured = [
   .hw-cat-live:hover { border-color: var(--accent); transform: translateY(-1px); }
 }
 .hw-cat-soon { opacity: .6; cursor: default; }
-.hw-cat-icon { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
-.hw-cat-icon-dim { filter: grayscale(1); }
+/* Line icon from the shared set, in the card's secondary text colour (not orange: the Pointer Rule).
+   Top-aligned with the 17px name. */
+.hw-cat-icon { flex-shrink: 0; color: var(--g2); margin-top: -1px; }
 .hw-cat-body { flex: 1; min-width: 0; }
 .hw-cat-name { font-family: var(--fd); font-size: 17px; font-weight: 800; color: var(--black); margin-bottom: 4px; }
 .hw-cat-name-dim { color: var(--g1); }
