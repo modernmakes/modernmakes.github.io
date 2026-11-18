@@ -82,7 +82,7 @@ const breadcrumbItems = [
   <div class:list={['art-hero', { 'art-hero--band': !heroImage }]}>
     {heroImage
       ? <img src={heroImage} alt="" class="art-hero-img" loading="eager" fetchpriority="high" decoding="async" aria-hidden="true" />
-      : <TypeCover size="hero" eyebrow={category} title={title} date={date} />
+      : <TypeCover size="hero" eyebrow={category} date={date} />
     }
     {heroImage && (
       <>
@@ -289,7 +289,7 @@ const breadcrumbItems = [
         {relatedArticles.map(card => (
           <a href={card.href} class="art-related-card">
             <div class="art-related-card-img">
-              <TypeCover eyebrow={card.category} title={card.title} date={card.date} />
+              <TypeCover eyebrow={card.category} />
             </div>
             <div class="art-related-card-body">
               <div class="art-related-card-cat">{card.category}</div>

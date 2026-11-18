@@ -1,18 +1,15 @@
 ---
-// Designed stand-in for a missing image: category eyebrow, headline set large,
-// optional mono date. Decorative (the card or page already carries the text),
-// so it is hidden from assistive tech. Styles: .type-cover in global.css.
-// size="hero" drops the headline: the page H1 sits directly below it.
+// Designed stand-in for a missing image: the category eyebrow on a neutral dot pattern, plus the
+// mono date on article heroes. Never the title: every card and page shows its own title right
+// beside it. Decorative, so it is hidden from assistive tech. Styles: .type-cover in global.css.
 interface Props {
-  title: string;
   eyebrow?: string;
   date?: string;
   size?: 'card' | 'hero';
 }
-const { title, eyebrow, date, size = 'card' } = Astro.props;
+const { eyebrow, date, size = 'card' } = Astro.props;
 ---
 <div class:list={['type-cover', { 'type-cover--hero': size === 'hero' }]} aria-hidden="true">
   {eyebrow && <span class="type-cover-eyebrow">{eyebrow}</span>}
-  {size !== 'hero' && <span class="type-cover-title">{title}</span>}
   {date && <span class="type-cover-date">{date}</span>}
 </div>

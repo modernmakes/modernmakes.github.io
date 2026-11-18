@@ -215,7 +215,7 @@ const breadcrumbSchema = {
       <div class="comp-hero-media" id="comp-hero">
         {heroImage
           ? <img src={heroImage} alt={title} width="800" height="600" loading="eager" fetchpriority="high" decoding="async" class="comp-hero-img" />
-          : <div class="comp-hero-placeholder"><TypeCover eyebrow={category} title={title} /></div>
+          : <div class="comp-hero-placeholder"><TypeCover eyebrow={category} /></div>
         }
       </div>
       <div class="comp-hero-info">
@@ -508,7 +508,7 @@ const breadcrumbSchema = {
           {relatedComponents.map(r => (
             <a href={r.href} class="comp-related-card">
               <div class="comp-related-card-img">
-                <TypeCover eyebrow={r.category} title={r.title} />
+                <TypeCover eyebrow={r.category} />
               </div>
               <div class="comp-related-card-body">
                 <div class="comp-related-card-title">{r.title}</div>

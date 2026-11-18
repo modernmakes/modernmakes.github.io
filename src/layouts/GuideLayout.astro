@@ -226,7 +226,7 @@ const breadcrumbItems = [
         {relatedArticles.map(card => (
           <a href={card.href} class="art-related-card">
             <div class="art-related-card-img">
-              <TypeCover eyebrow={card.category} title={card.title} date={card.date} />
+              <TypeCover eyebrow={card.category} />
             </div>
             <div class="art-related-card-body">
               <div class="art-related-card-cat">{card.category}</div>

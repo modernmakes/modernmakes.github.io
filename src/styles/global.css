@@ -344,22 +344,16 @@ a:not([class]):active { opacity: .6; }
   position: absolute; inset: 0;
   display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
   padding: 14px 16px;
-  background: var(--dark-bg);
+  /* Neutral dot grid (a perforated plate), hairline-dark so it never competes with the eyebrow. */
+  background: radial-gradient(circle, var(--dark-border) 1.2px, transparent 1.6px) 0 0 / 14px 14px, var(--dark-bg);
   color: #fff;
   overflow: hidden;
-  container-type: inline-size; /* title size follows the card, not the viewport */
 }
 .type-cover-eyebrow {
   flex-shrink: 0;
   font-family: var(--fu); font-size: 10px; font-weight: 500;
   letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent);
-}
-.type-cover-title {
-  font-family: var(--fd); font-weight: 800;
-  font-size: clamp(18px, 8cqi, 30px); min-height: 0; line-height: .98; letter-spacing: -.01em;
-  text-wrap: balance;
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
 .type-cover-date {
   flex-shrink: 0;

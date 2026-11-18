@@ -76,7 +76,7 @@ const comingSoon = [
         {live.map(mod => (
           <a href={mod.href} class="mm-card" aria-label={mod.title}>
             <div class="mm-card-img">
-              <TypeCover eyebrow={mod.motionType} title={mod.title} />
+              <TypeCover eyebrow={mod.motionType} />
             </div>
             <div class="mm-card-body">
               <div class="mm-card-title">{mod.title}</div>
@@ -115,7 +115,7 @@ const comingSoon = [
         {comingSoon.map(mod => (
           <div class="mm-card mm-card-soon" aria-label={`${mod.title} — coming soon`}>
             <div class="mm-card-img mm-card-img-dim">
-              <TypeCover eyebrow={mod.motionType} title={mod.title} />
+              <TypeCover eyebrow={mod.motionType} />
             </div>
             <div class="mm-card-body">
               <div class="mm-card-title mm-title-dim">{mod.title}</div>

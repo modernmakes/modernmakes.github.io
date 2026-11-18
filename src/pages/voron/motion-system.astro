@@ -88,7 +88,7 @@ const products = [
       <div class="grid-3">
         {products.map(product => (
           <div class="product-card" data-compatible={product.compatible}>
-            <div class="product-card-img" style="height:140px"><TypeCover eyebrow={product.brand} title={product.name} /></div>
+            <div class="product-card-img" style="height:140px"><TypeCover eyebrow={product.brand} /></div>
             <div class="product-card-body">
               {(v => v && <span class={`verdict-badge ${v.cls}`}>{v.label}</span>)(handBadge(product.badge.label, product.record))}
               <div class="product-card-brand">{product.brand}</div>

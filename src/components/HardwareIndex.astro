@@ -322,7 +322,7 @@ const itemListSchema = {
                  data-rank={it.rank} data-band={it.band} {...orderAttrs(it)}>
                 <div class="card-img">
                   {/* Cover is the base layer: it shows while the image loads and if a hotlinked image fails. */}
-                  <TypeCover eyebrow={categoryLabel} title={r['Name']} />
+                  <TypeCover eyebrow={categoryLabel} />
                   {hasImg && (
                     <>
                       <img src={imgSrc} alt={r['Name']} width="800" height="600" loading={i < 3 ? 'eager' : 'lazy'} decoding="async" onerror="this.parentElement.classList.add('card-img--failed')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
@@ -333,7 +333,7 @@ const itemListSchema = {
                 </div>
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
-                  <h2 class:list={['card-title', { 'sr-only': !hasImg }]}>{r['Name']}</h2>
+                  <h2 class="card-title">{r['Name']}</h2>
                   {/* no empty row: its margins would make the title→excerpt gap uneven across the grid */}
                   {chips(r).length > 0 && (
                     <div class="product-card-specs" style="margin:0 0 8px;display:flex;gap:6px;flex-wrap:wrap">
