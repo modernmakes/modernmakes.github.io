@@ -23,6 +23,7 @@
     "Sizes Available": [
       "250"
     ],
+    "Image URL": "/media/hardware/build-plates/pei-spring-steel.webp",
     "Cons": "Magnetic base not included\nEdge flatness varies by batch\nPEI coating wears faster than premium options after heavy use\nNot a meaningful upgrade over Energetic at similar price",
     "Compatible Printers": [
       "Voron 2.4 ",
@@ -85,6 +86,7 @@
       "300",
       "235"
     ],
+    "Image URL": "/media/hardware/build-plates/fire-thorn-flexplate.webp",
     "Cons": "Proprietary ThornGrip surface — not PEI, so no smooth/textured PEI option on this plate\nNo maximum bed temperature published; the guide only goes up to PC at 100-110C\nPETG needs a release agent on this surface\nMade-to-order lead time of 1-2 weeks if a size is out of stock"
   },
   {
