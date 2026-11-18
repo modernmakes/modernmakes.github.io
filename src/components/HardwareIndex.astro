@@ -12,6 +12,8 @@ import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
 import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
+import { transformSync } from 'esbuild';
+const minify = (js: string) => transformSync(js, { minify: true, target: 'es2020' }).code;
 import { DEFAULT_SORT, SORTS, SORT_TEXT, bandLabel, chooseBands, inBand, num, sortItems, type ViewItem } from '../scripts/hardware-view';
 
 interface Props {
@@ -151,6 +153,33 @@ const prepaintCss = [
   // WebKit can paint between the end of the grid and the inline reorder after it.
   + '#hw-grid[data-sort]:not([data-ordered]){visibility:hidden}';
 
+// The two inline pre-paint scripts (top of the grid, right after it). They run on every load of
+// every index, so they ship minified.
+const prepaintStartJs = minify(`
+(function () {
+  var q = new URLSearchParams(location.search), g = document.getElementById('hw-grid'), c = {};
+  try { c = JSON.parse(document.getElementById('hw-view-cfg').textContent); } catch (e) {}
+  var v = q.get('verdict') || location.hash.slice(1), f = q.get('flow'), s = q.get('sort');
+  if (v) g.dataset.verdict = v;
+  if (f) g.dataset.flow = f;
+  if (s && s !== 'recommended' && (c.sort || []).indexOf(s) > -1) g.dataset.sort = s;
+  ['brand', 'price'].forEach(function (k) {
+    var x = (q.get(k) || '').split(',').filter(function (y) { return (c[k] || []).indexOf(y) > -1; });
+    if (x.length) g.dataset[k] = x.join(' ');
+  });
+})();
+`);
+const prepaintSortJs = minify(`
+(function () {
+  var g = document.getElementById('hw-grid'), s = g.dataset.sort;
+  if (!s) return;
+  var a = 'data-o-' + s, c = [].filter.call(g.children, function (e) { return e.hasAttribute(a); });
+  c.sort(function (x, y) { return x.getAttribute(a) - y.getAttribute(a); });
+  c.forEach(function (e) { g.appendChild(e); });
+  g.dataset.ordered = '';
+})();
+`);
+
 const noun = (n: number) => (n === 1 ? nounSingular : nounPlural);
 
 const siteBase = Astro.site
@@ -271,20 +300,7 @@ const itemListSchema = {
       {records.length > 0 ? (<>
         <style is:inline set:html={prepaintCss}></style>
         <div class="grid-3" id="hw-grid">
-          <script is:inline>
-            (function () {
-              var q = new URLSearchParams(location.search), g = document.getElementById('hw-grid'), c = {};
-              try { c = JSON.parse(document.getElementById('hw-view-cfg').textContent); } catch (e) {}
-              var v = q.get('verdict') || location.hash.slice(1), f = q.get('flow'), s = q.get('sort');
-              if (v) g.dataset.verdict = v;
-              if (f) g.dataset.flow = f;
-              if (s && s !== 'recommended' && (c.sort || []).indexOf(s) > -1) g.dataset.sort = s;
-              ['brand', 'price'].forEach(function (k) {
-                var x = (q.get(k) || '').split(',').filter(function (y) { return (c[k] || []).indexOf(y) > -1; });
-                if (x.length) g.dataset[k] = x.join(' ');
-              });
-            })();
-          </script>
+          <script is:inline set:html={prepaintStartJs}></script>
           {items.map((it, i: number) => {
             const r = it.r;
             const slug = toSlug(r['Name']);
@@ -336,16 +352,7 @@ const itemListSchema = {
         </div>
         {/* A sorted URL paints sorted: put the cards in that sort's build-time order now, before the
             first frame (the page script would otherwise do it after load). */}
-        <script is:inline>
-          (function () {
-            var g = document.getElementById('hw-grid'), s = g.dataset.sort;
-            if (!s) return;
-            var a = 'data-o-' + s, c = [].filter.call(g.children, function (e) { return e.hasAttribute(a); });
-            c.sort(function (x, y) { return x.getAttribute(a) - y.getAttribute(a); });
-            c.forEach(function (e) { g.appendChild(e); });
-            g.dataset.ordered = '';
-          })();
-        </script>
+        <script is:inline set:html={prepaintSortJs}></script>
       </>) : (
         <p style="font-family:var(--fb);font-size:15px;color:var(--g2);padding:40px 0">
           No {nounPlural} listed yet — check back after the next Airtable sync.
