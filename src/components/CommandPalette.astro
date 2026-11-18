@@ -176,8 +176,13 @@
 </style>
 
 <script>
-  import { openSheet, closeSheet, setSheetDbg, forceKb } from '../scripts/sheet';
-  import { rows, byUrl, loadIndex, search, rowHtml, esc, freshness, GROUP_LABEL, type Group, type Row } from '../scripts/search-core';
+  import { openSheet, closeSheet } from '../scripts/sheet';
+  import type { Group, Row } from '../scripts/search-core';
+
+  // The ranker and index loader (~2 KB gzipped) come in on first intent (hover, focus, touch, open), not with the page.
+  type Core = typeof import('../scripts/search-core');
+  let core: Core | null = null;
+  const rows = (): Row[] => core?.rows ?? [];
 
   const dlg = document.getElementById('cp') as HTMLDialogElement;
   const input = document.getElementById('cp-input') as HTMLInputElement;
@@ -187,7 +192,7 @@
   const RECENT = 'mm-cp-recent';
 
   const load = () =>
-    loadIndex().catch(() => {
+    import('../scripts/search-core').then((c) => (core = c).loadIndex()).catch(() => {
       if (dlg.open) list.innerHTML = '<p class="cp-empty">Search didn’t load. <a href="/search">Open the search page</a> instead.</p>';
       throw 0;
     });
@@ -207,7 +212,7 @@
   let gi = 0;
   const opt = () => ` role="option" id="cp-o${n++}" tabindex="-1" aria-selected="false"`;
   const groupHtml = (label: string, rs: Row[], terms: string[] = []) =>
-    rs.length ? `<div role="group" aria-labelledby="cp-g${gi}"><div class="cp-g" id="cp-g${gi++}">${label}</div>${rs.map((r) => rowHtml(r, terms, opt())).join('')}</div>` : '';
+    rs.length ? `<div role="group" aria-labelledby="cp-g${gi}"><div class="cp-g" id="cp-g${gi++}">${label}</div>${rs.map((r) => core!.rowHtml(r, terms, opt())).join('')}</div>` : '';
 
   let statusT = 0;
   function render() {
@@ -218,21 +223,21 @@
     let suggest = false; // closest-name suggestions: shown, never highlighted
     let terms: string[] = [];
     if (!raw) {
-      const rec = recents().map((u) => byUrl.get(u)).filter((r): r is Row => !!r);
-      html = groupHtml('Recent', rec) + groupHtml('Actions', rows.filter((r) => r.g === 'x'));
+      const rec = recents().map((u) => core!.byUrl.get(u)).filter((r): r is Row => !!r);
+      html = groupHtml('Recent', rec) + groupHtml('Actions', rows().filter((r) => r.g === 'x'));
     } else {
-      const res = search(raw);
+      const res = core!.search(raw);
       terms = res.terms;
       count = res.count;
-      if (count) html = res.groups.map(([g, rs]) => groupHtml(GROUP_LABEL[g as Group], rs, terms)).join('');
+      if (count) html = res.groups.map(([g, rs]) => groupHtml(core!.GROUP_LABEL[g as Group], rs, terms)).join('');
       else {
         // Nothing matched: offer the three hardware names closest to what was typed.
         suggest = true;
-        html = `<p class="cp-empty">No matches for “${esc(raw)}”</p>` + groupHtml('Closest hardware', res.closest);
+        html = `<p class="cp-empty">No matches for “${core!.esc(raw)}”</p>` + groupHtml('Closest hardware', res.closest);
       }
     }
     list.innerHTML = html;
-    (document.getElementById('cp-fresh') as HTMLElement).textContent = freshness();
+    (document.getElementById('cp-fresh') as HTMLElement).textContent = core!.freshness();
     list.scrollTop = 0;
     shown = [...list.querySelectorAll<HTMLAnchorElement>('.cp-row')];
     active = -1;
@@ -311,7 +316,7 @@
     if (dlg.open) return;
     typed = !!q; // a prefill is the reader's query: the restore-wipe below must leave it alone
     input.value = q; // otherwise always opens empty, showing recents
-    const ready = rows.length > 0;
+    const ready = rows().length > 0;
     if (ready) render(); // index cached: results are in the first frame
     else list.innerHTML = '<p class="cp-empty">Loading…</p>';
     openSheet(dlg, from ?? (document.activeElement as HTMLElement | null));
@@ -320,7 +325,7 @@
     input.focus({ preventScroll: true }); // inside the gesture, so iOS raises the keyboard
     // bfcache, Safari form restore or AutoFill can put old text back after the clear above.
     // Text that arrived with no input event is never the reader's: wipe it.
-    for (const ms of [0, 250]) setTimeout(() => { if (dlg.open && !typed && input.value) { input.value = ''; if (rows.length) render(); } }, ms);
+    for (const ms of [0, 250]) setTimeout(() => { if (dlg.open && !typed && input.value) { input.value = ''; if (rows().length) render(); } }, ms);
     if (!ready) load().then(() => { if (dlg.open) render(); }, () => {});
   }
   const close = () => closeSheet(dlg);
@@ -330,7 +335,7 @@
   addEventListener('pagehide', () => { input.value = ''; });
   addEventListener('pageshow', () => { input.value = ''; });
 
-  input.addEventListener('input', () => { typed = true; if (rows.length) render(); });
+  input.addEventListener('input', () => { typed = true; if (rows().length) render(); });
   input.addEventListener('keydown', (e) => {
     if (e.isComposing) return;
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -372,48 +377,7 @@
     else if (q !== null) sessionStorage.setItem('mm-cpdebug', '1');
     CPDBG = sessionStorage.getItem('mm-cpdebug') === '1';
   } catch {}
-  if (CPDBG) {
-    const vv = window.visualViewport;
-    const box = document.createElement('pre');
-    box.id = 'cp-debug';
-    box.setAttribute('aria-hidden', 'true');
-    box.style.cssText = 'position:absolute;left:0;right:0;bottom:0;z-index:2;margin:0;padding:6px 8px;max-height:45%;overflow:hidden;pointer-events:none;font:9px/1.35 ui-monospace,monospace;white-space:pre-wrap;word-break:break-all;background:rgba(0,0,0,.85);color:rgb(170,255,170)';
-    dlg.append(box);
-    const t0 = performance.now(), evs: string[] = [];
-    let last = '', reps = 0;
-    // Repeats of one event collapse into a count, so a scroll doesn't push everything else out.
-    const log = (ev: string) => {
-      const line = `${Math.round(performance.now() - t0)} ${ev}`;
-      if (ev === last) evs[evs.length - 1] = `${line} x${++reps + 1}`;
-      else { last = ev; reps = 0; evs.push(line); if (evs.length > 10) evs.shift(); }
-    };
-    setSheetDbg(log);
-    (window as any).__cpKb = (px: number | null) => forceKb(px);
-    for (const t of ['touchstart', 'touchmove', 'touchend', 'touchcancel']) list.addEventListener(t, () => log(`list ${t}`), { passive: true });
-    list.addEventListener('scroll', () => log('list scroll'), { passive: true });
-    list.addEventListener('scrollend', () => log('list scrollend'));
-    vv?.addEventListener('resize', () => log('vv resize'));
-    vv?.addEventListener('scroll', () => log('vv scroll'));
-    input.addEventListener('focus', () => log('input focus'));
-    input.addEventListener('blur', () => log('input blur'));
-    const r = Math.round;
-    const name = (e: Element | null) => !e ? '-' : e.tagName.toLowerCase() + (e.id ? `#${e.id}` : '') + (e.classList.length ? `.${[...e.classList].join('.')}` : '');
-    const draw = () => {
-      if (!dlg.open) return;
-      const p = (dlg.querySelector('.cp-panel') as HTMLElement).getBoundingClientRect();
-      box.textContent = [
-        `cpdebug  vv h=${vv ? r(vv.height) : '-'} top=${vv ? r(vv.offsetTop) : '-'} scale=${vv ? vv.scale.toFixed(2) : '-'}`,
-        `dialog h=${getComputedStyle(dlg).height} innerH=${innerHeight} --kb=${dlg.style.getPropertyValue('--kb') || '-'} mode=${dlg.dataset.mode}`,
-        `panel top=${r(p.top)} bottom=${r(p.bottom)} h=${r(p.height)}`,
-        `list st=${r(list.scrollTop)} sh=${list.scrollHeight} ch=${list.clientHeight} oy=${getComputedStyle(list).overflowY}`,
-        `active=${name(document.activeElement)} scrollY=${r(scrollY)}`,
-        `html=${document.documentElement.className || '-'}`,
-        ...evs,
-      ].join('\n');
-      requestAnimationFrame(draw);
-    };
-    dbgOpen = () => { log('open'); requestAnimationFrame(draw); };
-  }
+  if (CPDBG) import('../scripts/cp-debug').then((m) => { dbgOpen = m.initCpDebug(dlg, list, input); });
 
   // ── Triggers ──
   // Shortcut hint in the nav control (CSS shows it only at 768px+ with a fine pointer).
