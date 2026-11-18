@@ -1,4 +1,5 @@
 ---
+import TypeCover from './TypeCover.astro';
 // GlassCard — reusable frosted backdrop-filter feature card.
 // The whole card is a link; hover lift is CSS-only and reduced-motion safe.
 // Needs a dark backdrop behind it for backdrop-filter to have anything to blur.
@@ -13,7 +14,7 @@ interface Props {
   price: number;
   href: string;
   /** Product-shot URL. Callers pass this only once they've confirmed the file exists,
-   *  so an absent/missing image falls back to the solid band rather than a broken img. */
+   *  so an absent/missing image falls back to the placeholder cover rather than a broken img. */
   imageSrc?: string | null;
   /** When set, the card joins the shared scroll-reveal with this stagger delay (ms) */
   revealDelay?: number;
@@ -31,7 +32,7 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
       <img class="gc-media-img" src={imageSrc} alt={name} width="800" height="600" loading="lazy" decoding="async" />
     </div>
   ) : (
-    <div class="gc-band" aria-hidden="true"></div>
+    <div class="gc-media gc-media--cover"><TypeCover eyebrow={category} /></div>
   )}
   <div class="gc-body">
     <p class="gc-category">{category}</p>
@@ -76,15 +77,8 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
     outline-offset: 3px;
   }
 
-  .gc-band {
-    height: 120px;
-    background: var(--dark-surface);
-    border-top-left-radius: var(--radius-2xl);
-    border-top-right-radius: var(--radius-2xl);
-  }
-
-  /* Product-shot panel. Same 120px height as .gc-band so swapping between the
-     two never shifts the card's layout. The panel background is the colour the
+  /* Product-shot panel. Same 120px height with or without a shot, so swapping
+     never shifts the card's layout. The panel background is the colour the
      product WebPs are shot on, so `contain` letterboxing reads as one surface
      rather than an image sitting on a mismatched field. Hairline rule separates
      the panel from the glass body — no overlay, the shot carries itself. */
@@ -96,6 +90,8 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
     border-top-left-radius: var(--radius-2xl);
     border-top-right-radius: var(--radius-2xl);
   }
+  /* No product shot: the placeholder cover (category + pattern) fills the same 120px panel. */
+  .gc-media--cover { position: relative; overflow: hidden; padding: 0; }
   .gc-media-img {
     display: block;
     width: 100%;
