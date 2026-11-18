@@ -10,7 +10,7 @@ import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
 import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
-import { DEFAULT_SORT, SORTS, chooseBands, inBand, num, sortItems, type ViewItem } from '../scripts/hardware-view';
+import { DEFAULT_SORT, SORTS, bandLabel, chooseBands, inBand, num, sortItems, type ViewItem } from '../scripts/hardware-view';
 
 interface Props {
   records: any[];
@@ -100,6 +100,32 @@ for (const s of sorts) {
 const bands = chooseBands(items.flatMap((it) => (it.price === null ? [] : [it.price])));
 for (const it of items) it.band = bands.find((b) => inBand(it.price, b)) ?? '';
 const orderAttrs = (it: Item) => Object.fromEntries(Object.entries(it.o).map(([k, v]) => [`data-o-${k}`, v]));
+
+// Filter options. Brand needs at least two brands; price needs at least two non-empty bands.
+// Cards with no brand are never a brand option (they show while no brand is picked).
+const coll = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+const brandMap = new Map<string, { label: string; count: number }>();
+for (const it of items) {
+  if (!it.brand) continue;
+  const b = brandMap.get(it.brand);
+  if (b) b.count++;
+  else brandMap.set(it.brand, { label: String(it.r['Brand']).trim(), count: 1 });
+}
+const brandOpts = brandMap.size >= 2
+  ? [...brandMap].map(([value, b]) => ({ value, ...b })).sort((a, b) => coll.compare(a.label, b.label))
+  : [];
+const priceOpts = bands
+  .map((b) => ({ value: b, label: bandLabel(b), count: items.filter((it) => it.band === b).length }))
+  .filter((o) => o.count > 0);
+const filterGroups = [
+  ...(brandOpts.length ? [{ key: 'brand', label: 'Brand', multi: true, options: brandOpts }] : []),
+  ...(priceOpts.length >= 2 ? [{ key: 'price', label: 'Price', multi: true, options: priceOpts }] : []),
+];
+// What the URL may hold for each filter and sort; the page script and the pre-paint script both check it.
+const viewCfg = {
+  sort: sorts.map((s) => s.key),
+  ...Object.fromEntries(filterGroups.map((g) => [g.key, g.options.map((o) => o.value)])),
+};
 
 // Pre-paint filter: the inline script in the grid copies ?verdict=/?flow= onto
 // #hw-grid, and these rules hide non-matching cards before first paint.
@@ -256,10 +282,11 @@ const itemListSchema = {
         </p>
       )}
       <div class="gf-nomatch" id="hw-nomatch" hidden>
-        <h2 class="gf-nomatch-title">Nothing matches both filters</h2>
+        <h2 class="gf-nomatch-title">Nothing matches these filters</h2>
         <p>No {nounPlural} are in that combination.</p>
-        <button type="button" class="gf-clear" id="hw-clear">Clear filters</button>
+        <button type="button" class="gf-clear" id="hw-clear">Clear all</button>
       </div>
+      <script type="application/json" id="hw-view-cfg" set:html={JSON.stringify(viewCfg)}></script>
     </div>
   </section>
 
@@ -305,8 +332,11 @@ const itemListSchema = {
   // Every option control (verdict tab, flow button, sort radio, filter chip) is [data-f][data-v];
   // data-v="" is a filter's "All". Its count, if any, is the [data-n] inside it.
   const ctrls = Array.from(document.querySelectorAll<HTMLElement>('[data-f][data-v]'));
-  const sortOk = (k: string) => k === DEFAULT_SORT || (SORTS.some((s) => s.key === k) && cards.some((c) => k in c.o));
-  const valueOk = (k: string, v: string) => ctrls.some((c) => c.dataset.f === k && c.dataset.v === v);
+  // The values this category offers, from the build (sorts it shows, brand slugs, price bands).
+  let cfg: Record<string, string[]> = {};
+  try { cfg = JSON.parse(document.getElementById('hw-view-cfg')?.textContent || '{}'); } catch {}
+  const sortOk = (k: string) => k === DEFAULT_SORT || !!cfg.sort?.includes(k);
+  const valueOk = (k: string, v: string) => !!cfg[k]?.includes(v) || ctrls.some((c) => c.dataset.f === k && c.dataset.v === v);
 
   // Stable order for the current sort: the build's ranks when it wrote them, the comparator otherwise.
   const ordered = (): Card[] => {
@@ -328,7 +358,8 @@ const itemListSchema = {
   }
   const hideCard = (card: HTMLElement) => card.classList.add('gf-hidden');
 
-  // ── URL ── ?verdict=&flow=&sort= (old #verdict links still work on load). Invalid values are ignored.
+  // ── URL ── ?verdict=&flow=&sort=&brand=a,b&price= (old #verdict links still work on load).
+  // Invalid values are ignored.
   let hashConsumed = false;
   function readUrl() {
     const q = new URLSearchParams(location.search);
@@ -347,8 +378,9 @@ const itemListSchema = {
   }
   function writeUrl() {
     const q = new URLSearchParams(location.search);
-    for (const k of ['verdict', 'flow']) state.f[k].length ? q.set(k, state.f[k].join(',')) : q.delete(k);
-    const qs = q.toString();
+    for (const k of ['verdict', 'flow', 'brand', 'price']) state.f[k].length ? q.set(k, state.f[k].join(',')) : q.delete(k);
+    state.sort === DEFAULT_SORT ? q.delete('sort') : q.set('sort', state.sort);
+    const qs = q.toString().replace(/%2C/gi, ','); // brand=a,b reads better than a%2Cb
     history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + (hashConsumed ? '' : location.hash));
   }
 

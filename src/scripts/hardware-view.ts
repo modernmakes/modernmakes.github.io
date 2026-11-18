@@ -125,7 +125,7 @@ export const FILTERS: FilterDef[] = [
   { key: 'verdict', label: 'Verdict', multi: false, test: (i, v) => i.verdict === v[0] },
   { key: 'flow', label: 'Flow', multi: false, test: (i, v) => i.flowClass === v[0] },
   { key: 'brand', label: 'Brand', multi: true, test: (i, v) => v.includes(i.brand) },
-  { key: 'price', label: 'Price', multi: false, test: (i, v) => inBand(i.price, v[0]) },
+  { key: 'price', label: 'Price', multi: true, test: (i, v) => v.some((b) => inBand(i.price, b)) },
 ];
 
 export type FilterState = Record<string, string[]>;

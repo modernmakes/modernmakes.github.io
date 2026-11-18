@@ -30,6 +30,7 @@ assert.ok(matchesAll(x, { brand: ['e3d', 'phaetus'], price: ['50-100'], verdict:
 assert.ok(!matchesAll(x, { brand: ['phaetus'] }));
 assert.ok(matchesAll(x, { brand: ['phaetus'] }, 'brand')); // a group's own counts skip itself
 assert.ok(!matchesAll({ ...x, price: null }, { price: ['50-100'] }));
+assert.ok(matchesAll(x, { price: ['under-50', '50-100'] }) && !matchesAll(x, { price: ['under-50', '100-plus'] })); // bands OR together
 
 assert.equal(num('0'), null);
 assert.equal(num('12.5'), 12.5);
