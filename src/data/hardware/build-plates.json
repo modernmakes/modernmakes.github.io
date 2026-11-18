@@ -23,6 +23,7 @@
     "Sizes Available": [
       "250"
     ],
+    "Image URL": "/media/hardware/build-plates/pei-spring-steel.webp",
     "Cons": "Magnetic base not included\nEdge flatness varies by batch\nPEI coating wears faster than premium options after heavy use\nNot a meaningful upgrade over Energetic at similar price",
     "Compatible Printers": [
       "Voron 2.4 ",
@@ -85,6 +86,7 @@
       "300",
       "235"
     ],
+    "Image URL": "/media/hardware/build-plates/fire-thorn-flexplate.webp",
     "Cons": "Proprietary ThornGrip surface — not PEI, so no smooth/textured PEI option on this plate\nNo maximum bed temperature published; the guide only goes up to PC at 100-110C\nPETG needs a release agent on this surface\nMade-to-order lead time of 1-2 weeks if a size is out of stock"
   },
   {
@@ -114,6 +116,7 @@
       "250",
       "300"
     ],
+    "Image URL": "/media/hardware/build-plates/p-series-smooth-black-pei-flex-plate-gen-2.webp",
     "Cons": "Not recommended with Voron TAP — the nozzle force indents the PEI\nPETG bonds too strongly to smooth PEI; a release agent (glue etc.) is required\nSmall deformation can occur over time when removing prints (heat cycles help it recover)\nMagnet not included — you must source one if your printer has none"
   },
   {
@@ -139,6 +142,7 @@
       "250",
       "300"
     ],
+    "Image URL": "/media/hardware/build-plates/pei-spring-steel-sheet-dual-sided.webp",
     "Cons": "Edge curl common — may need mesh bed leveling compensation\nPEI coating lifespan shorter than premium options\nMagnetic base not included\nBatch quality varies — some sheets arrive warped",
     "Compatible Printers": [
       "Voron 2.4 ",
@@ -167,6 +171,7 @@
     "Sizes Available": [
       "250"
     ],
+    "Image URL": "/media/hardware/build-plates/pex-system-250mm.webp",
     "Cons": "Lower max temp than PEI (110°C sustained) — marginal for high-temp ABS/ASA printing\nMore expensive than budget PEI options\nPEX surface texture is unique — some users prefer more aggressive PEI grip",
     "Compatible Printers": [
       "Voron 2.4 "
@@ -194,6 +199,7 @@
     "Sizes Available": [
       "250"
     ],
+    "Image URL": "/media/hardware/build-plates/magnetic-build-system-250mm.webp",
     "Cons": "Premium price vs. Chinese alternatives\nMagnetic base requires separate purchase if not in kit\n250mm format only covers 250x250 build area",
     "Compatible Printers": [
       "Voron 2.4 ",
@@ -223,6 +229,7 @@
     "Sizes Available": [
       "300"
     ],
+    "Image URL": "/media/hardware/build-plates/magnetic-build-system-300mm.webp",
     "Cons": "Higher price point at 300mm\nShipping weight increases build cost\nMagnetic base adds to total system price",
     "Compatible Printers": [
       "Voron 2.4 ",
@@ -279,6 +286,7 @@
     "Sizes Available": [
       "250"
     ],
+    "Image URL": "/media/hardware/build-plates/satin-sheet-250mm.webp",
     "Cons": "100°C sustained max temp — not suitable for high-temp ABS/ASA enclosure printing\nProietary Prusa magnet spacing — requires adapter or DIY magnetic base for Voron/RatRig\nPremium price for what's effectively a mid-tier surface on self-build printers\nMoistly designed for MK4/XL — size adaptation needed"
   },
   {
@@ -337,6 +345,7 @@
       "250",
       "300"
     ],
+    "Image URL": "/media/hardware/build-plates/satingrip-dual-sided-pei-flex-plate.webp",
     "Cons": "Semi-satin finish is a compromise — neither a true smooth mirror nor a heavy texture\nPC-blend coating is a proprietary formulation, so long-term durability vs standard PEI is less established\nNo magnetic base included — magnetic sheets are sold separately"
   },
   {
@@ -365,6 +374,7 @@
       "250",
       "300"
     ],
+    "Image URL": "/media/hardware/build-plates/nightgrip-textured-pei-flex-plate.webp",
     "Cons": "Single-sided version has only one usable surface\n110C max bed temp rules out the highest-temp engineering filaments\nNo magnetic base included — magnetic sheets are sold separately"
   }
 ]

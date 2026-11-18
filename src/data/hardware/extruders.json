@@ -42,7 +42,6 @@
     "Community Rating": 3,
     "Vendor 5 Name": "Galaxus",
     "Description": "Thermal-hardened variant of the LGX Pro Metal, designed for heated chamber 3D printers. The key differentiator from the standard LGX Pro Metal 1.75 is the High Temperature Nema17 30mm HT pancake motor that maintains reliable performance at elevated ambient temperatures. Aluminum housing throughout (vs PA12 GF polymer on LGX PRO). Full hardened steel drive train. Same $312.38 price as the standard Pro Metal. Luke's Lab specifically recommends this extruder paired with the Chube conduction hotend for heated chamber builds. Not needed for standard enclosed printers. Gear Ratio: 6.84:1 is the overall reduction from Bondtech's published gearing 44:14, 37:17 (the previous 3:1 was only the first stage, per a MatterHackers article).",
-    "Verdict Label": "Bleeding Edge",
     "Vendor 3 Name": "Anodas",
     "Ecosystem": [
       "Universal"
@@ -345,7 +344,6 @@
     "Community Rating": 3,
     "Vendor 5 Name": "Filament2Print",
     "Description": "Industrial-targeted evolution of the base LGX. Upgrades the motor from 25mm to a stronger 30mm Nema17 pancake and includes the full hardened steel drive train stock (no separate purchase needed). PA12 GF glass-filled polymer housing provides higher thermal resistance than standard LGX. A free aluminum interface plug accommodates longer hotends. Tagged by Bondtech as industrial/PROduction-grade. Sits between the base LGX ($123) and Pro Metal ($312) in price and specification. Gear Ratio: 6.84:1 is the overall reduction from Bondtech's published gearing 44:14, 37:17 (the previous 3:1 was only the first stage, per a MatterHackers article).",
-    "Verdict Label": "Workhorse",
     "Vendor 3 Name": "Filastruder",
     "Ecosystem": [
       "Universal"
@@ -981,7 +979,6 @@
     "Community Rating": 4,
     "Vendor 5 Name": "Filament2Print",
     "Description": "The original Bondtech LGX (Large Gears eXtruder), introduced 2021 as Gen3 dual-drive platform. Uses physically larger drive gears than BMG for improved filament grip. Comes with a custom Nema17 25mm pancake motor and supports both bowden and direct drive. Steel Drive Train is a $43.63 optional upgrade (pre-installed on LGX Lite V2 and LGX PRO). Extensive upgrade kit ecosystem covers most popular printers. At $123.75 it's the entry point to the full-size LGX platform. Gear Ratio: 6.84:1 is the overall reduction from Bondtech's published gearing 44:14, 37:17 (the previous 3:1 was only the first stage, per a MatterHackers article).",
-    "Verdict Label": "Workhorse",
     "Vendor 3 Name": "HartSmart Products",
     "Ecosystem": [
       "Universal"
