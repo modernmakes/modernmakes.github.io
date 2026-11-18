@@ -95,6 +95,7 @@
     "Stepper Driver": "TMC2240",
     "Vendor 4 URL": "https://west3d.com/products/btt-ebb-sb2240-can-bus-pcb-for-stealthburner",
     "Vendor 2 Name": "BIQU Equipment",
+    "Image URL": "/media/hardware/toolboards/ebb-sb2240.webp",
     "Vendor 2 URL": "https://biqu.equipment/products/bigtreetech-ebb-sb2209-can-v1-0",
     "Cons": "Costs more than the SB2209 sibling for the same board, but the premium varies widely by retailer (about 30% more at Kamami, only ~$4 more at BIQU); USB-C is mainly for flashing, not a substitute for CAN in normal use; TMC2240's SPI mode needs a different Klipper config than the SB2209's UART mode",
     "Vendor 3 Name": "Kamami",
@@ -119,6 +120,7 @@
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
     "Vendor 2 Name": "Filastruder",
+    "Image URL": "/media/hardware/toolboards/klipper-toolboard-for-roto-extruder.webp",
     "Vendor 2 URL": "https://www.filastruder.com/products/klipper-toolboard-for-roto-extruder",
     "Cons": "USB-only - no CAN option, so it needs a USB run back to the host\nSold out at E3D at time of check, though Filastruder had it in stock\nDoes not include the Roto extruder itself",
     "Connection": "USB",
@@ -148,6 +150,7 @@
     "Fan Outputs": 0,
     "Vendor 4 URL": "https://biqu.equipment/products/bigtreetech-ebb36-42-can-bus-u2c-v2-1-klipper-board",
     "Vendor 2 Name": "Fabreeko",
+    "Image URL": "/media/hardware/toolboards/u2c-v2-1.webp",
     "Compatible Toolheads": [
       "N/A — bridge device, not a toolboard"
     ],
@@ -195,6 +198,7 @@
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
     "Vendor 2 Name": "Filastruder",
+    "Image URL": "/media/hardware/toolboards/tool-board-1lc.webp",
     "Vendor 2 URL": "https://www.filastruder.com/products/duet3toolboard1lc",
     "Cons": "12-32 V input and a 5 A heater output cap it at 120 W at 24 V - modest next to newer TMC2240 boards\nNeeds a Duet 3 mainboard or Tool Distribution Board for CAN-FD - not a standalone Klipper USB board\nMounting pattern is Hemera/Hemera XS, so other extruders need a bracket",
     "Connection": "CAN",
@@ -220,6 +224,7 @@
     "Stepper Driver": "TMC2240",
     "Vendor 4 URL": "https://www.onetwo3d.co.uk/product/ldo-orbitool-o2s/",
     "Vendor 2 Name": "Fabreeko",
+    "Image URL": "/media/hardware/toolboards/orbitool-o2s.webp",
     "Vendor 2 URL": "https://www.fabreeko.com/products/orbiter-2-and-smart-orbiter-3-orbitool-board-kit",
     "Cons": "Orbiter-only — not a general-purpose toolboard\nUSB-only, no CAN option\nList price ($91.80) is steep; the $50.49 street price is a flash sale\nHotend connector type is undocumented",
     "Vendor 3 Name": "Filastruder",
@@ -250,6 +255,7 @@
     "Verdict": "CONSIDER",
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
+    "Image URL": "/media/hardware/toolboards/sht36-v2-072.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "Clockwork 2",
@@ -275,6 +281,7 @@
     "Verdict": "CONSIDER",
     "Stepper Driver": "TMC2209",
     "Vendor 2 Name": "West3D",
+    "Image URL": "/media/hardware/toolboards/gbb15.webp",
     "Vendor 2 URL": "https://west3d.com/products/gbb15-can-bus-stepper-board-for-1515-extrusions",
     "Cons": "No hotend heater or fan outputs — gantry motors only, not a toolhead board\nDIY heritage: work-in-progress repo; self-build needs JLCPCB assembly plus hand-soldered parts and a thermal pad to the extrusion\nMust remove the 120R CAN termination resistor to run an umbilical to a CAN toolhead\nNiche fit: designed for 15mm extrusions / PrintersForAnts Micron builds",
     "Connection": "CAN + USB",
@@ -293,6 +300,7 @@
     "Verdict Label": "Tidy Xol-only wiring breakout",
     "Verdict": "CONSIDER",
     "Fan Outputs": 3,
+    "Image URL": "/media/hardware/toolboards/xol-toolhead-board.webp",
     "Cons": "Passive breakout only - no MCU, driver or CAN/USB, so all wiring still runs back to the mainboard\nFits the Armchair Engineering Xol toolhead only\nFan and heater connections are JST-XH/Micro-Fit, so the harness needs the right crimps",
     "Vendor 1 URL": "https://www.fabreeko.com/products/xol-toolhead-board-by-ruiqimao",
     "Brand": "ruiqimao",
@@ -315,6 +323,7 @@
     "Verdict": "CONSIDER",
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2240",
+    "Image URL": "/media/hardware/toolboards/sb2040-v3-pro.webp",
     "Compatible Toolheads": [
       "Stealthburner"
     ],
@@ -345,6 +354,7 @@
     "Verdict": "CONSIDER",
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
+    "Image URL": "/media/hardware/toolboards/sht36-v2-103.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "Clockwork 2",
@@ -372,6 +382,7 @@
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2240",
     "Vendor 2 Name": "Filastruder",
+    "Image URL": "/media/hardware/toolboards/toolboard-for-roto-extruder.webp",
     "Vendor 2 URL": "https://www.filastruder.com/products/duet-3-roto-toolboard",
     "Cons": "RepRapFirmware only in practice - no Klipper sample config exists for it (E3D makes a separate Klipper Roto board)\nRoto motor must stay under 600 mA, so the driver's extra current is mostly unused\nSold out at E3D at time of check, though Filastruder had it in stock",
     "Connection": "CAN",
@@ -401,6 +412,7 @@
     "Stepper Driver": "TMC2209",
     "Vendor 4 URL": "https://www.onetwo3d.co.uk/product/ldo-nitehawk-sb-usb-toolhead-board/",
     "Vendor 2 Name": "West3D",
+    "Image URL": "/media/hardware/toolboards/nitehawk-sb-v2.webp",
     "Compatible Toolheads": [
       "Stealthburner"
     ],
@@ -428,6 +440,7 @@
     "Fan Outputs": 4,
     "Stepper Driver": "TMC2209",
     "Vendor 2 Name": "FYSETC",
+    "Image URL": "/media/hardware/toolboards/h36-combo-v1-3.webp",
     "Vendor 2 URL": "https://www.fysetc.com/products/h36-v1-3",
     "Cons": "125C operation is CAN-only; the USB hub chip is not 125C rated\nV1.2/V1.3 silkscreen errors on the XT30 connector and HE0 markings (documented; bottom silkscreen is correct)\nPricier than EBB36/SHT36 for the same basic job\nFYSETC docs mix V1/V2 variants, so check you are on the V1.3 page",
     "Connection": "CAN + USB",
@@ -455,6 +468,7 @@
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
     "Vendor 2 Name": "Kamami",
+    "Image URL": "/media/hardware/toolboards/ebb36-can-v1-2.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "Clockwork 2"
@@ -485,6 +499,7 @@
     "Verdict": "SKIP",
     "Fan Outputs": 1,
     "Stepper Driver": "TMC2209",
+    "Image URL": "/media/hardware/toolboards/huvud.webp",
     "Compatible Toolheads": [
       "Various toolheads"
     ],
@@ -513,6 +528,7 @@
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
     "Vendor 2 Name": "Kamami",
+    "Image URL": "/media/hardware/toolboards/ebb42-can-v1-1.webp",
     "Compatible Toolheads": [
       "42mm toolhead mounts",
       "Custom toolheads"

@@ -5,6 +5,7 @@
     "Price (USD)": 18.26,
     "Noise (dBA)": "45.0 dBA",
     "Pros": "- Highest static pressure and CFM among conventional 5015 blowers\n- Industrial-grade ball bearing — rated 50,000+ hours MTTF\n- Consistent specs — Delta is a major OEM supplier to server and telecom industry\n- Significantly better overhang performance vs GDStime at aggressive print speeds\n- Available through Digi-Key and Mouser — not dependent on AliExpress supply chain",
+    "Image URL": "/media/hardware/part-cooling/bfb0524hh-5015.webp",
     "Compatible Toolheads": [
       "Stealthburner",
       "XOL",
