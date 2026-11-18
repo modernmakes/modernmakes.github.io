@@ -3,8 +3,9 @@
 // the phone "Sort & filter" sheet (both parts) and the desktop Sort and Filters popovers (one part
 // each). Every option is [data-f][data-v]; HardwareIndex's script keeps all copies in step, counts
 // them and applies them. Native radios and checkboxes give the keyboard path for free.
-interface Opt { value: string; label: string; count: number }
-interface Group { key: string; label: string; options: Opt[] }
+interface Opt { value: string; label: string; count: number; chip?: string }
+// single: one value at a time (radios, "" = All), as the flow buttons in the desktop bar.
+interface Group { key: string; label: string; options: Opt[]; single?: boolean }
 interface Props {
   ns: string;                                    // keeps each copy's radio group separate
   parts: ('sort' | 'filters')[];
@@ -32,7 +33,7 @@ const { ns, parts, sorts, groups, defaultSort } = Astro.props;
     <div class="hv-chips">
       {g.options.map((o) => (
         <label class="hv-chip">
-          <input type="checkbox" class="hv-input" name={`hv-${g.key}-${ns}`} data-f={g.key} data-v={o.value} data-label={o.label} />
+          <input type={g.single ? 'radio' : 'checkbox'} class="hv-input" name={`hv-${g.key}-${ns}`} data-f={g.key} data-v={o.value} data-label={o.chip ?? o.label} checked={g.single && o.value === ''} disabled={o.count === 0} />
           <span>{o.label}</span>
           <span class="hv-n" data-n>{o.count}</span>
         </label>

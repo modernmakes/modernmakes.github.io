@@ -126,6 +126,12 @@ const filterGroups = [
   ...(brandOpts.length ? [{ key: 'brand', label: 'Brand', multi: true, options: brandOpts }] : []),
   ...(priceOpts.length >= 2 ? [{ key: 'price', label: 'Price', multi: true, options: priceOpts }] : []),
 ];
+// Phones: the flow filter moves from the bar into the Sort & filter sheet, as its first group.
+const flowGroup = hasFlow ? [{
+  key: 'flow', label: 'Flow', single: true,
+  options: [{ value: '', label: 'All', count: records.length },
+    ...FLOW_CLASSES.map((f) => ({ value: f.key, label: f.label, chip: f.chipLabel, count: flowCounts[f.key] }))],
+}] : [];
 const hasControls = records.length > 1 && (sorts.length > 1 || filterGroups.length > 0);
 // What the URL may hold for each filter and sort; the page script and the pre-paint script both check it.
 const viewCfg = {
@@ -247,6 +253,8 @@ const itemListSchema = {
             <span>Sort &amp; filter</span>
             <span class="gf-ctl-n" data-ctl-n="all" aria-hidden="true" hidden></span><span class="sr-only" data-ctl-sr="all"></span>
           </button>
+          {/* Phone row 2: the live result count beside the button (#hw-count announces it). */}
+          <span class="gf-ctl-count" data-bar-count aria-hidden="true">{records.length} {noun(records.length)}</span>
           {/* Desktop: Sort and Filters menus, anchored popovers. */}
           <button type="button" class="gf-ctl-btn gf-ctl-desk" data-sheet="hw-sort"
                   aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-sort">
@@ -366,7 +374,7 @@ const itemListSchema = {
     <>
       {/* Phone (under 768px): everything in one sheet; changes apply live underneath, "Show N" closes it. */}
       <Sheet id="hw-view" title="Sort & filter" detent="medium">
-        <HardwareViewControls ns="m" parts={['sort', 'filters']} sorts={sorts} groups={filterGroups} defaultSort={DEFAULT_SORT} />
+        <HardwareViewControls ns="m" parts={['sort', 'filters']} sorts={sorts} groups={[...flowGroup, ...filterGroups]} defaultSort={DEFAULT_SORT} />
         <button slot="footer" type="button" class="hv-show" data-sheet-close data-show-n>Show {records.length} {noun(records.length)}</button>
       </Sheet>
       {/* Desktop: two anchored menus. */}
@@ -410,6 +418,7 @@ const itemListSchema = {
   const showNs     = Array.from(document.querySelectorAll<HTMLElement>('[data-show-n]'));
   const sortLabels = Array.from(document.querySelectorAll<HTMLElement>('[data-sort-label]'));
   const ctlNs      = Array.from(document.querySelectorAll<HTMLElement>('[data-ctl-n]'));
+  const barCounts  = Array.from(document.querySelectorAll<HTMLElement>('[data-bar-count]'));
   const nounS    = countEl?.dataset.nounSingular ?? 'item';
   const nounP    = countEl?.dataset.nounPlural ?? 'items';
   const cats     = document.querySelector<HTMLElement>('.gf-cats');
@@ -520,8 +529,10 @@ const itemListSchema = {
 
   // Label for a value: the control's data-label (sort short name, brand, band, verdict, flow class).
   const labelOf = (k: string, v: string) => ctrls.find((c) => c.dataset.f === k && c.dataset.v === v)?.dataset.label ?? v;
-  // Choices that live in the sheet / Filters menu (not in the bar): brand, price, and anything added later.
-  const sheetKeys = [...new Set(ctrls.filter((c) => c instanceof HTMLInputElement && c.dataset.f !== 'sort').map((c) => c.dataset.f!))];
+  // Filters each trigger's panel holds (its badge counts them): the phone sheet has flow too, the
+  // desktop Filters menu only brand, price and anything added later.
+  const keysIn = (id: string) => [...new Set(ctrls.filter((c) => c instanceof HTMLInputElement && c.dataset.f !== 'sort' && c.closest(`#${id}`)).map((c) => c.dataset.f!))];
+  const sheetKeys: Record<string, string[]> = { all: keysIn('hw-view'), filters: keysIn('hw-filters') };
 
   // Active non-default choices as removable chips, then the trigger badges and labels.
   const X = document.getElementById('hw-chip-x') as HTMLTemplateElement | null; // the chip's × icon
@@ -545,9 +556,9 @@ const itemListSchema = {
       }));
       activeWrap.hidden = active.length === 0;
     }
-    const nFilters = sheetKeys.reduce((n, k) => n + state.f[k].length, 0);
-    for (const el of ctlNs) {
-      const n = el.dataset.ctlN === 'all' ? nFilters + (state.sort !== DEFAULT_SORT ? 1 : 0) : nFilters;
+      for (const el of ctlNs) {
+      const which = el.dataset.ctlN === 'all' ? 'all' : 'filters';
+      const n = (sheetKeys[which] ?? []).reduce((m, k) => m + state.f[k].length, 0) + (which === 'all' && state.sort !== DEFAULT_SORT ? 1 : 0);
       el.textContent = String(n);
       el.hidden = n === 0;
       const sr = el.parentElement?.querySelector<HTMLElement>(`[data-ctl-sr="${el.dataset.ctlN}"]`);
@@ -555,6 +566,7 @@ const itemListSchema = {
     }
     for (const el of sortLabels) el.textContent = labelOf('sort', state.sort);
     for (const el of showNs) el.textContent = `Show ${visible} ${noun(visible)}`;
+    for (const el of barCounts) el.textContent = visible === total ? `${total} ${noun(total)}` : `${visible} of ${total} ${noun(total)}`;
   }
 
   // Filter, order, count. `fade`: shown cards fade in (not inside a view transition).
@@ -663,7 +675,7 @@ const itemListSchema = {
         if (menu?.dataset.mode === 'popover' && e.timeStamp - pointerAt < 1000) closeSheet(menu, true);
       } else {
         const rest = state.f[k].filter((x) => x !== v);
-        state.f[k] = el.checked ? (FILTER[k]?.multi ? [...rest, v] : [v]) : rest;
+        state.f[k] = !el.checked ? rest : !v ? [] : FILTER[k]?.multi ? [...rest, v] : [v]; // v "" = All (radio groups)
       }
       apply(true);
     });
@@ -892,10 +904,31 @@ html { overflow-anchor: none; }
   .hot-hero-inner { padding: 0 20px; }
   .hot-hero-title { font-size: 36px; }
   .gf-bar-inner { padding: 0 20px; }
-  /* Both rows scroll edge to edge instead of clipping at the page gutter. The tab row stops at
-     the sort & filter control instead, which keeps the gutter on the right. */
+  /* Tablet: both rows scroll edge to edge instead of clipping at the page gutter. The tab row stops
+     at the sort & filter controls instead, which keeps the gutter on the right. */
   .gf-cats, .gf-flow { margin-inline: -20px; padding-inline: 20px; }
   .gf-row > .gf-cats { margin-right: 0; padding-right: 0; }
+}
+
+/* ── PHONE BAR (under 768px): two rows, never a sideways scroll ──
+   Row 1: every verdict tab, wrapping onto a second line if they don't fit (5 tabs at 360px do).
+   Row 2: Sort & filter, and the live count opposite. Flow lives in the sheet here.
+   One height per page whatever is selected: a tab's width never depends on state (the active tab
+   only changes colour; badges hold two digits' width), so the wrap never changes. */
+.gf-ctl-count { display: none; }
+@media (max-width: 767px) {
+  .gf-row { flex-wrap: wrap; }
+  .gf-row > .gf-cats { flex: 1 1 100%; flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
+  /* Sized so three tabs (All / Workhorse / Bleeding Edge) share one row at 360px. */
+  .gf-cats .gf-tab { flex: 1 1 auto; justify-content: center; gap: 4px; padding: 0 6px; letter-spacing: .02em; }
+  .gf-cats .gf-badge { box-sizing: border-box; min-width: calc(2ch + 12px); padding: 1px 5px; text-align: center; font-variant-numeric: tabular-nums; }
+  .gf-row > .gf-ctl { flex: 1 1 100%; justify-content: space-between; padding: 4px 0; border-top: 1px solid var(--border); }
+  .gf-ctl-count { display: inline; font-family: var(--fm); font-size: 12px; color: var(--g1); white-space: nowrap; }
+  .gf-flow { display: none; }
+  /* The bar shows the count; the status row's copy stays for screen readers (it is the live region). */
+  .gf-status .gf-summary { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .gf-status { padding: 12px 0 4px; }
+  .gf-status:has(.gf-active[hidden]) { padding: 8px 0 0; }
 }
 
 /* ── Reduced motion: global.css has no global reset, so this page honours the
