@@ -1,11 +1,26 @@
 ---
 import HardwareIndex from '../../../components/HardwareIndex.astro';
+import Sheet from '../../../components/Sheet.astro';
 import records from '../../../data/hardware/hotends.json';
+import { VERDICT_BUCKETS, FLOW_CLASSES } from '../../../lib/hardware';
 
 const chips = (r: any) => [
   r['Max Temp (°C)'] != null ? `${r['Max Temp (°C)']}°C` : null,
   r['Max Flow (mm³/s)'] != null ? `${r['Max Flow (mm³/s)']} mm³/s` : null,
 ].filter(Boolean) as string[];
+
+// "How we rate": the four verdicts (BRAND.md section 5) and the flow classes they are judged within.
+const verdictCopy: Record<string, string> = {
+  benchmark: 'The best in its flow class, the one every other hotend in that class gets compared to. One per class at most.',
+  'value-pick': 'Not the best, but the best bang for buck: most of what the Benchmark gives for meaningfully less money. Free print-it-yourself designs often land here.',
+  contender: 'Solid and worth considering, neither the best nor the cheapest.',
+  skip: 'Superseded, poor value, or not worth buying.',
+};
+const flowCopy: Record<string, string> = {
+  standard: 'Under 50 mm³/s',
+  high: '50 to 79 mm³/s',
+  extreme: '80 mm³/s and up',
+};
 ---
 <HardwareIndex
   records={records}
@@ -20,4 +35,54 @@ const chips = (r: any) => [
   description="Hotend reviews, specs, and where to buy — high-flow, standard, and specialty hotends for CoreXY and other 3D printer builds."
   schemaName="Best FDM Hotends for Voron & Prosumer Printers"
   chips={chips}
-/>
+>
+  <Fragment slot="intro">
+    <div class="container rate-line">
+      <p>Verdicts are judged against other hotends in the same flow class.</p>
+      <button type="button" class="rate-open" data-sheet="hw-rate" aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-rate">How we rate</button>
+    </div>
+    <Sheet id="hw-rate" title="How we rate" detent="fit">
+      <p class="rate-lead">A verdict is our call on whether a hotend is worth buying, judged against the others in its flow class. Verdicts are our own judgement, based on community support and feedback.</p>
+      <h3 class="rate-h">Verdicts</h3>
+      <dl class="rate-list">
+        {VERDICT_BUCKETS.map((b) => (
+          <div class="rate-row">
+            <dt><span class={`verdict ${b.cls}`}>{b.label}</span></dt>
+            <dd>{verdictCopy[b.key]}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="rate-note">The four are options, not slots to fill: a class can have no Benchmark or no Value Pick. The line under each verdict carries the nuance.</p>
+      <h3 class="rate-h">Flow class</h3>
+      <dl class="rate-list">
+        {FLOW_CLASSES.map((f) => (
+          <div class="rate-row">
+            <dt><span class="flow-chip">{f.chipLabel}</span></dt>
+            <dd>{flowCopy[f.key]}, from the hotend's listed max flow.</dd>
+          </div>
+        ))}
+      </dl>
+    </Sheet>
+  </Fragment>
+</HardwareIndex>
+
+<style>
+  /* Legend line between the hero and the filter bar; the button opens the "How we rate" sheet. */
+  .rate-line { display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px; padding-top: 12px; }
+  .rate-line p { margin: 0; font: 400 13px/1.5 var(--fu); color: var(--g1); }
+  .rate-open {
+    min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+    font: 600 13px var(--fu); color: var(--black);
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--border-s);
+    transition: text-decoration-color var(--dur-fast) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) { .rate-open:hover { text-decoration-color: currentColor; } }
+
+  .rate-lead, .rate-note { margin: 0 0 12px; font: 400 14px/1.6 var(--fb); color: var(--sh-fg); }
+  .rate-note { margin: 12px 0 0; color: var(--sh-muted); font-size: 13px; }
+  .rate-h { margin: 16px 0 8px; font: 700 10px var(--fm); letter-spacing: 0.12em; text-transform: uppercase; color: var(--sh-muted); }
+  .rate-list { margin: 0; }
+  .rate-row { display: grid; grid-template-columns: 112px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--sh-line); }
+  .rate-row dt { margin: 0; }
+  .rate-row dd { margin: 0; font: 400 13px/1.5 var(--fu); color: var(--sh-fg); }
+</style>

@@ -5,6 +5,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import ratrigData from '../../data/ratrigData.json';
 import { jsonLd } from '../../lib/jsonld';
+import { resolveVerdict } from '../../lib/hardware';
 
 const currentPath = '/ratrig';
 const siteBase = Astro.site
@@ -131,7 +132,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
                 <div class="product-card-name">{p.name}</div>
                 <div style="font-family:'Lora',serif;font-size:12px;color:var(--g1);line-height:1.6;margin:6px 0 10px">{p.desc}</div>
                 <div class="product-card-footer">
-                  <span class={`verdict ${p.verdictClass}`}>{p.verdictLabel}</span>
+                  {(v => v && <span class={`verdict ${v.cls}`}>{v.label}</span>)(resolveVerdict(p.verdictLabel))}
                   <span class="btn-printables">View at vendor →</span>
                 </div>
               </div>
@@ -161,7 +162,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
                 </div>
                 <div class="product-card-footer">
                   <span class="product-card-price">{p.price}</span>
-                  <span class={`verdict ${p.verdictClass}`}>{p.verdictLabel}</span>
+                  {(v => v && <span class={`verdict ${v.cls}`}>{v.label}</span>)(resolveVerdict(p.verdictLabel))}
                 </div>
               </div>
             </div>
@@ -250,7 +251,7 @@ const { flagship, discontinued, subsystems, framePrecisionParts, topPicks } = ra
   line-height: 1;
   margin: 0;
 }
-.flagship-name-col .verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--verdict-wh-on-dark); }
+.flagship-name-col .verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--green-on-dark); }
 .mspec-item { display: flex; flex-direction: column; gap: 4px; }
 .mspec-label { font-family: var(--fu); font-size: 10px; font-weight: 600; color: var(--on-dark-muted); text-transform: uppercase; letter-spacing: .1em; }
 .mspec-val { font-family: var(--fd); font-size: 20px; font-weight: 700; color: rgba(255,255,255,.9); }

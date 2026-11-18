@@ -7,9 +7,9 @@ interface Props {
   category: string;
   name: string;
   description: string;
-  /** Display label from the verdict taxonomy, e.g. "Workhorse" */
+  /** Display label from the verdict taxonomy, e.g. "Value Pick" */
   verdict: string;
-  /** Stable taxonomy key (benchmark | workhorse | bleeding-edge | skip) — drives the badge colour */
+  /** Stable taxonomy key (benchmark | value-pick | contender | skip) — drives the badge colour */
   verdictKey: string;
   price: number;
   href: string;
@@ -146,28 +146,28 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
     border-radius: var(--radius-badge);
     white-space: nowrap;
   }
-  /* Verdict taxonomy: Benchmark (ink, inverted to white on glass), Workhorse
-     (green), Bleeding Edge (blue), Skip (burnt orange). Tuned for the dark
-     glass backdrop — brighter fills than the light-mode index badges, same hues. */
+  /* Verdict taxonomy (BRAND.md section 5) on the dark glass: Benchmark inverts to white, Value Pick green,
+     Contender neutral, Skip a muted outline. Same tokens as .verdict-on-dark in global.css, slightly
+     stronger washes for the glass backdrop. */
   .gc-verdict--benchmark {
     background: var(--surface);
     border: 1px solid var(--surface);
-    color: var(--black);
+    color: var(--verdict-benchmark);
   }
-  .gc-verdict--workhorse {
+  .gc-verdict--value-pick {
     background: rgba(34, 197, 94, 0.15);
     border: 1px solid rgba(34, 197, 94, 0.4);
-    color: var(--verdict-wh-on-dark);
+    color: var(--green-on-dark);
   }
-  .gc-verdict--bleeding-edge {
-    background: rgba(59, 130, 246, 0.15);
-    border: 1px solid rgba(59, 130, 246, 0.4);
-    color: var(--verdict-be-on-dark);
+  .gc-verdict--contender {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--on-dark-soft);
   }
   .gc-verdict--skip {
-    background: color-mix(in srgb, var(--verdict-skip) 15%, transparent);
-    border: 1px solid color-mix(in srgb, var(--verdict-skip) 40%, transparent);
-    color: var(--verdict-skip-on-dark);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--on-dark-muted);
   }
   .gc-price {
     font-family: var(--fd);

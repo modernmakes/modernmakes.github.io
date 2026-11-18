@@ -22,9 +22,9 @@ const COMMIT   = process.argv.includes('--commit');
 // the table (record recrxTHwgMqPs4s2w: Price $59.99, Verdict "BUY", full write-up),
 // so per the decision it is left untouched rather than duplicated or overwritten.
 //
-// Verdict is "BUY", not "Workhorse": the PSUs table still uses the legacy taxonomy
-// (BUY/CONSIDER) and the site's resolveVerdict() renders BUY as a green Workhorse
-// badge, so this stays consistent with the other 8 rows and avoids taxonomy drift.
+// Verdict is "BUY": the PSUs table still uses the legacy values (BUY/CONSIDER), which the
+// site's resolveVerdict() shows as Contender until that table's verdict pass, so this
+// stays consistent with the other 8 rows and avoids taxonomy drift.
 const RECORDS = [
   {
     name: 'Mean Well LRS-600-24',
@@ -152,11 +152,11 @@ async function main() {
   const verdictField = mapping.verdict;
   if (verdictField && verdictField.type === 'singleSelect') {
     const choices = (verdictField.options?.choices || []).map((c) => c.name);
-    if (!choices.includes('Workhorse')) {
+    if (!choices.includes('BUY')) {
       flags.push(
         `Verdict field "${verdictField.name}" is a single-select whose choices are ` +
-        `[${choices.join(', ')}] — "Workhorse" is NOT among them. With typecast:true the ` +
-        `insert will CREATE the "Workhorse" choice. Remove it from the records or pre-add ` +
+        `[${choices.join(', ')}] — "BUY" is NOT among them. With typecast:true the ` +
+        `insert will CREATE the "BUY" choice. Remove it from the records or pre-add ` +
         `the choice if that is not what you want.`
       );
     }

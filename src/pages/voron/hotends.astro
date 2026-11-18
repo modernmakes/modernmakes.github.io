@@ -161,7 +161,7 @@ const fmtPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2))
                 <th scope="row" style="text-align:left;padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border);white-space:nowrap">{p.name}</th>
                 {toolheadCols.map(th => {
                   const yes = p.toolheads.includes(th);
-                  return <td style={`text-align:center;padding:10px 12px;color:${yes ? 'var(--verdict-wh-ink)' : 'var(--g2)'};font-weight:${yes ? '600' : '400'}`}><span aria-hidden="true">{yes ? '✓' : '—'}</span><span class="sr-only">{yes ? 'Compatible' : 'Not listed'}</span></td>;
+                  return <td style={`text-align:center;padding:10px 12px;color:${yes ? 'var(--green-ink)' : 'var(--g2)'};font-weight:${yes ? '600' : '400'}`}><span aria-hidden="true">{yes ? '✓' : '—'}</span><span class="sr-only">{yes ? 'Compatible' : 'Not listed'}</span></td>;
                 })}
               </tr>
             ))}
@@ -177,7 +177,7 @@ const fmtPrice = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2))
     <div class="container">
       <div class="section-head">
         <h2 class="section-head-label">Community mods</h2>
-        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:var(--verdict-wh-ink);border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:var(--green-ink);border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Printables</span>
       </div>
       <div class="grid-3">
         {[

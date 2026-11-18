@@ -58,9 +58,8 @@ const {
   priceOf = (r: any) => r['Price (USD)'],
 } = Astro.props;
 
-// Verdict badges/tabs resolve through the shared taxonomy helper so every
-// category renders Workhorse / Bleeding Edge / Skip consistently, while any
-// other stored token (legacy or category-specific) still passes through.
+// Verdict badges/tabs resolve through the shared taxonomy helper, so every category renders
+// Benchmark / Value Pick / Contender / Skip in that order (legacy stored values map in hardware.ts).
 const verdictRank = (rawV: any) => {
   const t = resolveVerdict(rawV);
   const i = t ? VERDICT_BUCKETS.findIndex((b) => b.key === t.key) : -1;
@@ -919,7 +918,7 @@ html { overflow-anchor: none; }
 @media (max-width: 767px) {
   .gf-row { flex-wrap: wrap; }
   .gf-row > .gf-cats { flex: 1 1 100%; flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
-  /* Sized so three tabs (All / Workhorse / Bleeding Edge) share one row at 360px. */
+  /* Sized so three tabs (e.g. All / Value Pick / Contender) share one row at 360px. */
   .gf-cats .gf-tab { flex: 1 1 auto; justify-content: center; gap: 4px; padding: 0 6px; letter-spacing: .02em; }
   .gf-cats .gf-badge { box-sizing: border-box; min-width: calc(2ch + 12px); padding: 1px 5px; text-align: center; font-variant-numeric: tabular-nums; }
   .gf-row > .gf-ctl { flex: 1 1 100%; justify-content: space-between; padding: 4px 0; border-top: 1px solid var(--border); }

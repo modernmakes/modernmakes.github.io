@@ -4,7 +4,7 @@ import Icon, { type IconName } from '../../components/icons/Icon.astro';
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import { toSlug, imageOf } from '../../lib/hardware';
+import { toSlug, imageOf, resolveVerdict } from '../../lib/hardware';
 import hotendsData        from '../../data/hardware/hotends.json';
 import extrudersData      from '../../data/hardware/extruders.json';
 import bedProbesData      from '../../data/hardware/bed-probes.json';
@@ -57,16 +57,21 @@ const hotendImage = (slug: string): string | null => {
   return rec ? imageOf(rec) || null : null;
 };
 
-const featured = [
+const verdictOf = (slug: string) => {
+  const rec = (hotendsData as any[]).find((r) => typeof r['Name'] === 'string' && toSlug(r['Name']) === slug);
+  const v = resolveVerdict(rec?.Verdict);
+  return { verdict: v?.label ?? '', verdictCls: v?.cls ?? '' };
+};
+
+const featured: { title: string; category: string; verdict: string; verdictCls?: string; verdictColor?: string; verdictBg?: string; href: string; image: string | null; description: string }[] = [
   {
     title: 'Phaetus Rapido 2 UHF',
     category: 'Hotend',
-    verdict: 'WORKHORSE',
-    verdictColor: '#2E7D32',
-    verdictBg: '#E8F5E9',
+    // A hardware verdict comes from the record, never typed here.
+    ...verdictOf('rapido-2-uhf'),
     href: '/hardware/hotends/rapido-2-uhf',
     image: hotendImage('rapido-2-uhf'),
-    description: '60 mm³/s max flow. The benchmark high-flow hotend for CoreXY builds in 2026.',
+    description: '60 mm³/s max flow. A high-flow hotend for CoreXY builds.',
   },
   {
     title: 'Mammoth3D',
@@ -172,8 +177,8 @@ const featured = [
               <div class="hw-feat-top">
                 <span class="hw-feat-title">{f.title}</span>
                 <span
-                  class="hw-feat-verdict"
-                  style={`background:${f.verdictBg};color:${f.verdictColor}`}
+                  class:list={['hw-feat-verdict', f.verdictCls]}
+                  style={f.verdictBg && `background:${f.verdictBg};color:${f.verdictColor}`}
                 >
                   {f.verdict}
                 </span>

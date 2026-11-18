@@ -40,7 +40,7 @@ function tierStyle(tier: string): string {
 
 // Map compatibility rating to colour
 function ratingStyle(rating: string): string {
-  if (rating === 'EXCELLENT') return 'color:var(--verdict-wh-ink-dk)';
+  if (rating === 'EXCELLENT') return 'color:var(--green-ink-dk)';
   if (rating === 'GOOD')      return 'color:#2563eb';
   if (rating === 'LIMITED')   return 'color:var(--caution-ink)';
   return 'color:var(--danger)';
@@ -314,9 +314,9 @@ const difficultyColor: Record<string, string> = {
   margin-bottom: 20px;
 }
 /* Badge sits on the dark hero: use the on-dark verdict tones */
-.fil-verdict-row .verdict-rec { background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); color: var(--verdict-be-on-dark); }
-.fil-verdict-row .verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--verdict-wh-on-dark); }
-.fil-verdict-row .verdict-avoid { color: var(--verdict-skip-on-dark); }
+.fil-verdict-row .verdict-rec { background: rgba(96,165,250,.14); border-color: rgba(96,165,250,.35); color: var(--blue-on-dark); }
+.fil-verdict-row .verdict-best { background: rgba(74,222,128,.14); border-color: rgba(74,222,128,.35); color: var(--green-on-dark); }
+.fil-verdict-row .verdict-avoid { color: var(--amber-on-dark); }
 .fil-verdict-label {
   font-family: var(--fu);
   font-size: 13px;

@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Sheet from '../components/Sheet.astro';
 import ShareButton from '../components/ShareButton.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
-import { resolveFlowClass, FLOW_CLASSES, hardwareNavTitle, FLOW_CAPTION_TAIL } from '../lib/hardware';
+import { resolveVerdict, resolveFlowClass, FLOW_CLASSES, hardwareNavTitle, FLOW_CAPTION_TAIL } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
 import { linkHardwareMentions } from '../lib/hardware-links';
 
@@ -102,22 +102,8 @@ const {
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
 
-// Keyed by display label (current taxonomy) with the prior tokens kept for
-// back-compat. Lookup is case-insensitive so "WORKHORSE"/"Workhorse" both hit.
-// The badge sits on the dark .comp-hero, so text uses the on-dark verdict tokens.
-const verdictColors: Record<string, { bg: string; text: string; border: string }> = {
-  benchmark:       { bg: 'var(--surface)', text: 'var(--black)', border: 'var(--surface)' },
-  workhorse:       { bg: 'rgba(34,197,94,.12)',  text: 'var(--verdict-wh-on-dark)', border: 'rgba(34,197,94,.3)' },
-  'bleeding edge': { bg: 'rgba(59,130,246,.12)', text: 'var(--verdict-be-on-dark)', border: 'rgba(59,130,246,.3)' },
-  skip:            { bg: 'color-mix(in srgb, var(--verdict-skip) 15%, transparent)', text: 'var(--verdict-skip-on-dark)', border: 'color-mix(in srgb, var(--verdict-skip) 40%, transparent)' },
-  // Back-compat with the prior verdict tokens.
-  buy:      { bg: 'rgba(34,197,94,.12)',  text: 'var(--verdict-wh-on-dark)', border: 'rgba(34,197,94,.3)' },
-  consider: { bg: 'rgba(59,130,246,.12)', text: 'var(--verdict-be-on-dark)', border: 'rgba(59,130,246,.3)' },
-  updated:  { bg: 'rgba(255,90,31,.12)',  text: 'var(--accent-mid)', border: 'rgba(255,90,31,.3)' },
-};
-// Any other token is a passthrough: neutral grey, never the Bleeding Edge blue.
-const neutralVc = { bg: 'rgba(255,255,255,.08)', text: 'rgba(255,255,255,.75)', border: 'rgba(255,255,255,.2)' };
-const vc = verdictColors[String(verdictLabel).toLowerCase()] ?? neutralVc;
+// The badge sits on the dark .comp-hero: the shared verdict classes with their on-dark tones (global.css).
+const verdictCls = resolveVerdict(verdictLabel)?.cls ?? 'verdict-contender';
 
 const regionLabels: Record<string, string> = {
   us: 'US',
@@ -235,7 +221,7 @@ const breadcrumbSchema = {
         <div class="comp-brand">{brand}</div>
         <h1 class="comp-title" data-nav-title={navTitle}>{title}</h1>
         <div class="comp-verdict-row">
-          <a href="#where-to-buy" class="comp-verdict-badge" style={`background:${vc.bg};color:${vc.text};border-color:${vc.border}`}>
+          <a href="#where-to-buy" class={`comp-verdict-badge verdict-on-dark ${verdictCls}`}>
             {verdictLabel}
           </a>
           {flowClass && <span class="flow-chip on-dark">{flowClass.chipLabel}</span>}
@@ -616,7 +602,8 @@ const breadcrumbSchema = {
   font-weight: 800;
   letter-spacing: .1em;
   text-transform: uppercase;
-  border: 1.5px solid;
+  border-width: 1.5px; /* colours come from .verdict-on-dark.verdict-* */
+  border-style: solid;
   border-radius: 4px;
   padding: 4px 12px;
   flex-shrink: 0;

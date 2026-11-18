@@ -80,25 +80,26 @@ It is not a tutorial channel, not a personal maker journal, and not a broad DIY 
 
 ## 5. Verdict Taxonomy
 
-**Four verdicts: Benchmark / Workhorse / Bleeding Edge / Skip.** Updated 2026-11-04 (replaces the three-verdict set).
+**Four verdicts: Benchmark / Value Pick / Contender / Skip.** Updated 2026-11-18 (replaces Benchmark / Workhorse / Bleeding Edge / Skip). Display order everywhere (tabs, sorts, legends) is the order of the table below.
 
-A verdict is our call on whether to buy, judged against other hardware **in the same class** (for hotends, the flow class below). Verdicts synthesise community consensus (Reddit, Discord, YouTube, CNC Kitchen data); they never imply hands-on testing.
+A verdict is our call on whether to buy, judged against other hardware **in the same class** (for hotends, the flow class below). Verdicts are our own judgement based on community support and feedback. No "we tested" claims and no cited third-party research on the site.
 
 | Verdict | Meaning | The test it must pass |
 |---|---|---|
-| **Benchmark** | The one we'd point a friend to in its class | Community default for the class, mounts on the major toolheads, no unresolved widespread failures. **One per class.** |
-| **Workhorse** | Proven and safe, just not the pick | Shipping 12+ months with a broad base of documented builds and no failure pattern. Loses to the Benchmark on price, performance or support. |
-| **Bleeding Edge** | Newest or most experimental; buy it if you'll tune it | Shipping under 12 months, or too few documented builds to call it proven yet. Hardware graduates once the community catches up (the Goliath is the reference case). |
-| **Skip** | Don't | Something in the same class does the job better for similar money, or there's a recurring failure pattern. |
+| **Benchmark** | The best in its class, the one everything else gets compared to | Best overall balance in the class. **One per class at most.** |
+| **Value Pick** | Not the best, but the best bang for buck | Trade-off test: delivers most of what the Benchmark gives for meaningfully less money (about 25% less as a guide, not a rule). Free print-it-yourself designs often land here. A category may have none. |
+| **Contender** | Solid and worth considering | Worth considering, but neither the best nor the cheapest. |
+| **Skip** | Not worth buying | Superseded, poor value, or not worth buying. |
 
 **Rules:**
+- The four are options, not slots to fill: a class can have no Benchmark and no Value Pick.
+- Newness or niche-ness doesn't decide the verdict. The Verdict Label line carries the nuance.
 - Setup needs (water cooling, PT1000 firmware changes, custom mounts) are listed on the part, never folded into the verdict.
-- Every verdict cites the consensus sources behind it, in the record's Verdict Label/notes.
 - A class is re-checked whenever new hardware enters it; only one Benchmark may hold a class at a time.
 
-**Hotend flow class** (from listed max flow): **Standard** under 50 mm³/s · **High** 50–79 mm³/s · **Extreme** 80 mm³/s and up. Other hardware categories need their own class axis defined here before they adopt the four verdicts; until then they keep their current verdicts.
+**Hotend flow class** (from listed max flow): **Standard** under 50 mm³/s · **High** 50–79 mm³/s · **Extreme** 80 mm³/s and up. Other hardware categories need their own class axis defined here before they get a Benchmark or Value Pick.
 
-All verdict logic routes through `resolveVerdict()` in `src/lib/hardware.ts`; the Benchmark bucket is added there in the site-code phase. Never invent verdict labels beyond these four. Never use the word "review" in titles, labels, or badges for hardware pages — use "specs," "verdict," "where to buy" instead.
+All verdict logic routes through `resolveVerdict()` in `src/lib/hardware.ts`. Until each category's verdict pass, any legacy value still stored in Airtable (Workhorse, Bleeding Edge, Buy, Consider, Top Pick, Solid Choice, Niche Pick, Top, Mid, Budget, anything else) shows as Contender, from one temporary table there; the build logs any value that table doesn't list. Never invent verdict labels beyond these four. Never use the word "review" in titles, labels, or badges for hardware pages — use "specs," "verdict," "where to buy" instead.
 
 ---
 
@@ -180,3 +181,4 @@ Footer tagline rotates from a fixed pool every 4 hours (same tagline shown site-
 |---|---|
 | 2026-07-14 | Consolidated brand-guide_1.md, brand-guidelines.html voice/color/type sections, and footer tagline decision into this single canonical file |
 | 2026-11-04 | Verdicts expanded to Benchmark / Workhorse / Bleeding Edge / Skip with pass/fail tests, judged within class; hotend flow classes added (Standard / High / Extreme) |
+| 2026-11-18 | Verdicts replaced by Benchmark / Value Pick / Contender / Skip; legacy values show as Contender until each category's verdict pass; verdicts are our own judgement, no "we tested" claims or cited third-party research |

@@ -18,10 +18,12 @@ colors:
   on-accent: "#1A1A1A"
   on-dark-soft: "rgba(255,255,255,0.78)"
   on-dark-muted: "rgba(255,255,255,0.62)"
-  verdict-buy: "#16A34A"
-  verdict-workhorse-ink: "#117D39"
-  verdict-skip: "#E65100"
-  verdict-skip-ink: "#B23C00"
+  verdict-benchmark: "#1A1A1A"
+  verdict-value: "#117D39"
+  verdict-contender: "#5A5A5A"
+  verdict-skip: "#6F6F6F"
+  amber: "#E65100"
+  amber-ink: "#B23C00"
   caution-ink: "#AA5D05"
   verdict-updated: "#3B82F6"
   verdict-community: "#7C3AED"
@@ -99,9 +101,9 @@ components:
     rounded: "{rounded.xs}"
     padding: "2px 7px"
     typography: "{typography.label}"
-  verdict-buy:
+  verdict-value:
     backgroundColor: "#E8F8EE"
-    textColor: "{colors.verdict-buy}"
+    textColor: "{colors.verdict-value}"
     rounded: "{rounded.xs}"
     padding: "2px 8px"
 ---
@@ -130,7 +132,7 @@ What it explicitly rejects: the **affiliate review-farm** (star ratings, listicl
 A restrained near-monochrome stage (warm off-white in light, near-black in dark) with one decisive orange and a small set of semantic verdict colors that appear only on badges.
 
 ### Primary
-- **Electric Orange** (`#FF5A1F`): The single brand voice. CTAs (`btn-buy`), active nav underlines, eyebrows, links on hover, the "BUY/BEST" verdict, focus rings, the orange-tinted hover glow. It points the reader at the next action or the key fact.
+- **Electric Orange** (`#FF5A1F`): The single brand voice. CTAs (`btn-buy`), active nav underlines, eyebrows, links on hover, focus rings, the orange-tinted hover glow. It points the reader at the next action or the key fact.
 - **Orange Deep** (`#C93B08`, `--accent-dk`): Small orange *text* on light surfaces (eyebrows, card categories, inline links), and the hover/pressed step for orange text. 5.1:1 on white, 4.7:1 on the page.
 - **Orange Mid** (`#FF7A45`, `--accent-mid`): Hover/pressed fill for orange buttons with ink labels, and small orange text on dark orange tints.
 - **Orange Ink** (`#7A2E0A`, `--accent-ink`): Orange text on orange tints (pills, callouts), where Orange Deep is under 4.5:1.
@@ -150,10 +152,12 @@ A restrained near-monochrome stage (warm off-white in light, near-black in dark)
 - **Dark Border** (`rgba(255,255,255,0.08)`): Hairline separators on dark.
 
 ### Tertiary — Verdict Semantics (badges only)
-- **Verdict Benchmark** (Ink background, white text): the one pick per class (BRAND.md §5).
-- **Verdict Workhorse** (text `#117D39` `--verdict-wh-ink` on `rgba(34,197,94,.12)`): green. The tint hue stays `#16A34A`; the text is darkened to 4.7:1 on the tint.
-- **Verdict Skip** (`#E65100` hue on `#FFF3E0`): burnt orange-amber. Fill and border use `#E65100`; the text uses `#B23C00` (`--verdict-skip-ink`, 5.4:1) because `#E65100` on `#FFF3E0` is only 3.5:1.
-- **On the dark planes** (detail hero, glass cards) verdict text uses `--verdict-wh-on-dark` `#4ADE80`, `--verdict-be-on-dark` `#60A5FA`, `--verdict-skip-on-dark`; Benchmark inverts to white with ink text.
+Four verdicts (BRAND.md §5), strongest to weakest, one token each in `global.css` (`--verdict-benchmark`, `--verdict-value`, `--verdict-contender`, `--verdict-skip`):
+- **Benchmark** (`.verdict-benchmark`, ink `#1A1A1A` fill, white text): the only filled verdict, so it reads strongest. Never the accent: an index can show one Benchmark per class, and orange stays a single pointer (The Pointer Rule). On the dark planes it inverts to white with ink text.
+- **Value Pick** (`.verdict-value`, text `#117D39` on `rgba(34,197,94,.12)`): the one positive hue. Text is 4.7:1 on the tint; `#4ADE80` (`--green-on-dark`) on the dark planes.
+- **Contender** (`.verdict-contender`, Body Grey `#5A5A5A` on a 10% grey tint): neutral. `--on-dark-soft` on the dark planes.
+- **Skip** (`.verdict-skip`, Muted Grey `#6F6F6F` text, no fill, `--border-s` outline): muted, quieter than Contender. `--on-dark-muted` on the dark planes.
+- **Amber** (`--amber`, `--amber-ink` `#B23C00` on `--amber-t` `#FFF3E0`) is a warning tone, not a verdict: compatibility caveats and the filament "avoid" rating.
 - **Verdict Updated** (`#3B82F6` on `rgba(59,130,246,.12)`): blue.
 - **Verdict Community** (`#7C3AED` on `rgba(139,92,246,.12)`): violet, for community-mod content.
 
@@ -223,7 +227,7 @@ The component feel is **precise & confident**: flat surfaces, hairline borders, 
 
 ### Chips
 - **Spec Chip** (`spec-chip`): JetBrains Mono 10px on page-bg fill, 1px border, 3px radius, `2px 7px`. Tabular spec tokens on product cards.
-- **Verdict Badge** (`verdict`): Pill, 10px 700, semantic color-on-tint (see Colors). Carries the BUY/CONSIDER/SKIP/UPDATED judgment. The word "review" never appears.
+- **Verdict Badge** (`verdict`): Pill, 10px 700, semantic color-on-tint (see Colors). Carries the Benchmark / Value Pick / Contender / Skip judgment (plus UPDATED, COMMUNITY). The word "review" never appears.
 
 ### Cards / Containers
 - **Corner Style:** 10px radius (`--radius-lg`).
@@ -250,7 +254,7 @@ The component feel is **precise & confident**: flat surfaces, hairline borders, 
 - **Not a licence:** Glass stays reserved for fixed/sticky chrome at the top of the screen. Cards, panels and in-flow surfaces still use none.
 
 ### Signature Component — Verdict Badge
-The verdict badge is the editorial spine of the hardware section. It encodes the publication's judgment (BUY / CONSIDER / SKIP / UPDATED, plus COMMUNITY) as a small semantic-colored pill, and it is the mechanism that lets Modern Makes have a strong opinion *without* ever calling itself a review. Filter tabs on index pages mirror these same values with count badges.
+The verdict badge is the editorial spine of the hardware section. It encodes the publication's judgment (Benchmark / Value Pick / Contender / Skip, plus UPDATED and COMMUNITY) as a small semantic-colored pill, and it is the mechanism that lets Modern Makes have a strong opinion *without* ever calling itself a review. Filter tabs on index pages mirror these same values with count badges.
 
 ## 6. Do's and Don'ts
 
@@ -260,7 +264,7 @@ The verdict badge is the editorial spine of the hardware section. It encodes the
 - **Do** assign type by job: Barlow Condensed announces, Lora narrates, JetBrains Mono labels data. The Three-Voice Rule.
 - **Do** keep surfaces flat at rest; let shadows be a reaction to hover/float/focus only.
 - **Do** use 1px hairline borders that deepen or turn accent on hover — never thicken into a stripe.
-- **Do** label hardware judgments with verdict badges ("BUY", "SKIP") and the words "specs / verdict / where to buy".
+- **Do** label hardware judgments with verdict badges ("Value Pick", "Skip") and the words "specs / verdict / where to buy".
 - **Do** honor `prefers-reduced-motion` on every hover lift, nav transition, and staggered reveal (crossfade or instant fallback).
 
 ### Don't:

@@ -32,7 +32,7 @@ export function getStaticPaths() {
 
 const { record } = Astro.props as { record: any };
 
-const verdictLabel = resolveVerdict(record['Verdict'])?.label ?? 'Bleeding Edge';
+const verdictLabel = resolveVerdict(record['Verdict'])?.label ?? 'Contender';
 
 const pros: string[] = (record['Pros'] ?? '')
   .split(/\r?\n/).map((s: string) => s.trim()).filter(Boolean);

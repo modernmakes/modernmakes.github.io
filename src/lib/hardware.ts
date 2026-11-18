@@ -45,62 +45,66 @@ export const hardwareNavTitle = (brand: string, name: string, folder: string): s
 };
 
 // ── Verdict taxonomy ─────────────────────────────────────────────────────────
-// Four verdicts, source of truth BRAND.md section 5:
-//   Benchmark     — the one we'd point a friend to in its class (one per class)
-//   Workhorse     — proven and safe, just not the pick
-//   Bleeding Edge — newest or most experimental; buy it if you'll tune it
-//   Skip          — don't
-// A record's stored "Verdict" may use these, the prior Buy / Consider / Skip
-// values, or legacy Top Pick / Solid Choice / Niche Pick labels (Top Pick and Solid Choice
-// alias to Workhorse, Niche Pick to Bleeding Edge), in any casing;
-// only Hotends has been migrated in Airtable so far. resolveVerdict maps any
-// of these (case-insensitive) onto a display bucket; any other non-empty token
-// passes through as its own neutral badge/tab so categories with their own
-// values (e.g. Budget / Mid / Top) still render and filter. Benchmark is only
-// ever set deliberately in Airtable: no legacy label aliases to it.
+// Four verdicts, judged within class; source of truth BRAND.md section 5:
+//   Benchmark  — the best in its class, the one everything else is compared to (one per class at most)
+//   Value Pick — most of what the Benchmark gives for meaningfully less money
+//   Contender  — solid and worth considering, neither the best nor the cheapest
+//   Skip       — superseded, poor value, or not worth buying
+// Display order everywhere (tabs, Recommended sort, legends) is the order below.
 export interface VerdictBucket {
-  key: string;   // stable, lowercase, hyphenated — used for filter matching
+  key: string;   // stable, lowercase, hyphenated — used for filter matching and GA4
   label: string; // display text
   cls: string;   // badge css class (defined in global.css)
 }
 
 export const VERDICT_BUCKETS: VerdictBucket[] = [
-  { key: 'benchmark',     label: 'Benchmark',     cls: 'verdict-benchmark' },
-  { key: 'workhorse',     label: 'Workhorse',     cls: 'verdict-best' },
-  { key: 'bleeding-edge', label: 'Bleeding Edge', cls: 'verdict-rec' },
-  { key: 'skip',          label: 'Skip',          cls: 'verdict-skip' },
+  { key: 'benchmark',  label: 'Benchmark',  cls: 'verdict-benchmark' },
+  { key: 'value-pick', label: 'Value Pick', cls: 'verdict-value' },
+  { key: 'contender',  label: 'Contender',  cls: 'verdict-contender' },
+  { key: 'skip',       label: 'Skip',       cls: 'verdict-skip' },
 ];
 
+// Stored Verdict value (any casing) -> bucket key. The canonical four map to themselves.
+// shortcut: the legacy rows are temporary until each category's verdict pass in Airtable;
+// delete them once no table stores a legacy value (the build warns for anything unmapped).
 const VERDICT_ALIAS: Record<string, string> = {
   benchmark: 'benchmark',
-  workhorse: 'workhorse',
-  buy: 'workhorse',
-  'top pick': 'workhorse',
-  'bleeding edge': 'bleeding-edge',
-  consider: 'bleeding-edge',
-  'solid choice': 'workhorse',
-  'niche pick': 'bleeding-edge',
+  'value pick': 'value-pick',
+  contender: 'contender',
   skip: 'skip',
+  // Legacy values, all Contender until re-rated:
+  workhorse: 'contender',
+  'bleeding edge': 'contender',
+  buy: 'contender',
+  consider: 'contender',
+  'solid choice': 'contender',
+  mid: 'contender',
+  'niche pick': 'contender',
+  'top pick': 'contender',
+  top: 'contender',
+  budget: 'contender',
 };
 
-const titleCase = (s: string) => s.trim().replace(/\b\w/g, (c) => c.toUpperCase());
-
+const warned = new Set<string>();
 export const resolveVerdict = (raw: unknown): VerdictBucket | null => {
   if (typeof raw !== 'string' || !raw.trim()) return null;
-  const known = VERDICT_ALIAS[raw.trim().toLowerCase()];
-  if (known) return VERDICT_BUCKETS.find((b) => b.key === known) ?? null;
-  // Unknown but present — keep it visible rather than dropping the record.
-  return { key: raw.trim().toLowerCase().replace(/\s+/g, '-'), label: titleCase(raw), cls: 'verdict-neutral' };
+  const t = raw.trim().toLowerCase();
+  let key = VERDICT_ALIAS[t];
+  if (!key) {
+    // Any other value is legacy too: Contender, and say so in the build log.
+    if (!warned.has(t)) { warned.add(t); console.warn(`[verdict] unmapped value "${raw.trim()}" shown as Contender: add it to VERDICT_ALIAS in src/lib/hardware.ts`); }
+    key = 'contender';
+  }
+  return VERDICT_BUCKETS.find((b) => b.key === key)!;
 };
 
 // ── Hand-written badges on the Voron pages ──────────────────────────────────
 // Product lists on /voron/* carry hand-written labels (RECOMMENDED, TOP PICK ...).
 // They route through resolveVerdict so the badge is always one of the shared
 // classes. A product that has a hardware record with a verdict shows that
-// verdict. Otherwise: RECOMMENDED / TOP PICK / COMMUNITY STANDARD -> Workhorse,
-// ENTHUSIAST -> Bleeding Edge, SITUATIONAL / BUDGET (PICK) / POPULAR / COMMUNITY FAV
-// / BAMBU ONLY -> no badge. Nothing
-// maps to Benchmark: that is only ever set deliberately in Airtable.
+// verdict. Otherwise: RECOMMENDED / TOP PICK / COMMUNITY STANDARD / ENTHUSIAST -> Contender,
+// SITUATIONAL / BUDGET (PICK) / POPULAR / COMMUNITY FAV / BAMBU ONLY -> no badge. Nothing
+// maps to Benchmark or Value Pick: those are only ever set deliberately in Airtable.
 import bedProbes from '../data/hardware/bed-probes.json';
 import extruders from '../data/hardware/extruders.json';
 import mainboards from '../data/hardware/mainboards.json';
@@ -114,10 +118,10 @@ const RECORD_TABLES: Record<string, any[]> = { bedProbes, extruders, mainboards,
 export type RecordRef = [keyof typeof RECORD_TABLES, string];
 
 const HAND_LABEL: Record<string, string | null> = {
-  RECOMMENDED: 'Workhorse',
-  'TOP PICK': 'Workhorse',
-  'COMMUNITY STANDARD': 'Workhorse',
-  ENTHUSIAST: 'Bleeding Edge',
+  RECOMMENDED: 'Contender',
+  'TOP PICK': 'Contender',
+  'COMMUNITY STANDARD': 'Contender',
+  ENTHUSIAST: 'Contender',
   SITUATIONAL: null,
   'BUDGET PICK': null,
   BUDGET: null,
@@ -136,8 +140,7 @@ export const handBadge = (label: string, ref?: RecordRef): VerdictBucket | null 
   return resolveVerdict(key in HAND_LABEL ? HAND_LABEL[key] : label);
 };
 
-// Ordered, counted verdict tabs present in a record set: canonical buckets
-// first (in defined order), then any passthrough tokens by frequency.
+// Ordered, counted verdict tabs present in a record set, in VERDICT_BUCKETS order.
 export const buildVerdictTabs = (records: any[]): (VerdictBucket & { count: number })[] => {
   const seen = new Map<string, VerdictBucket & { count: number }>();
   for (const r of records) {
@@ -281,7 +284,7 @@ const splitLines = (raw: unknown): string[] =>
  * mirroring the proven /hardware/hotends/[slug] mapping exactly.
  */
 export function buildDetailProps(record: any, config: DetailConfig) {
-  const verdictLabel = resolveVerdict(record['Verdict'])?.label ?? 'Bleeding Edge';
+  const verdictLabel = resolveVerdict(record['Verdict'])?.label ?? 'Contender';
 
   const pros = splitLines(record['Pros']);
   const cons = splitLines(record['Cons']);

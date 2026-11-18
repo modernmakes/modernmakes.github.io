@@ -150,7 +150,7 @@ const products = [
               <tr style={`border-bottom:1px solid var(--border);background:${i%2===0 ? '#fff' : 'var(--bg)'}`}>
                 <td style="padding:10px 16px;font-weight:600;color:var(--black);border-right:1px solid var(--border)">{row.name}</td>
                 {[row.s250, row.s300, row.s350, row.tex, row.smo].map(val => (
-                  <td style={`text-align:center;padding:10px 12px;color:${val==='✓' ? 'var(--verdict-wh-ink)' : 'var(--accent-dk)'};font-weight:${val==='✓' ? '600' : '400'}`}>{val}</td>
+                  <td style={`text-align:center;padding:10px 12px;color:${val==='✓' ? 'var(--green-ink)' : 'var(--accent-dk)'};font-weight:${val==='✓' ? '600' : '400'}`}>{val}</td>
                 ))}
               </tr>
             ))}
@@ -166,7 +166,7 @@ const products = [
     <div class="container">
       <div class="section-head">
         <h2 class="section-head-label">Community resources</h2>
-        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:var(--verdict-wh-ink);border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Guides</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#E8F5E9;color:var(--green-ink);border:1px solid #A5D6A7;padding:2px 8px;border-radius:3px">Free / Guides</span>
       </div>
       <div class="grid-3">
         {[
