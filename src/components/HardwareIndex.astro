@@ -586,7 +586,29 @@ const itemListSchema = {
   let alignOnClose = false;
   viewSheet?.addEventListener('close', () => { if (alignOnClose) { alignOnClose = false; alignResults(); } });
 
+  // ── GA4 ── One hardware_view_change per settled change of each control, sent 800ms after the
+  // last change (or when the page is left), so running through options in the sheet sends one
+  // event per control instead of one per step. A change undone before it settles sends nothing.
+  const gaKeys = ['sort', ...FILTERS.map((f) => f.key)];
+  const gaValue = (k: string) => (k === 'sort' ? state.sort : state.f[k].join(',') || 'all');
+  const gaSent: Record<string, string> = {};
+  let gaTimer = 0;
+  function gaFlush() {
+    clearTimeout(gaTimer);
+    gaTimer = 0;
+    const gtag = (window as any).gtag;
+    for (const k of gaKeys) {
+      const v = gaValue(k);
+      if (v === gaSent[k]) continue;
+      gaSent[k] = v;
+      if (typeof gtag === 'function') gtag('event', 'hardware_view_change', { category: bar.dataset.route ?? '', control: k, value: v });
+    }
+  }
+  addEventListener('pagehide', () => { if (gaTimer) gaFlush(); });
+
   function apply(fromTap: boolean, after?: () => void) {
+    clearTimeout(gaTimer);
+    gaTimer = window.setTimeout(gaFlush, 800);
     // With a sheet or menu open, cards change in place, without the view transition: it would draw
     // the moving cards over the open panel and hold input for its duration. A keyboard change in a
     // menu doesn't animate either (it only happens with the menu open).
@@ -690,6 +712,7 @@ const itemListSchema = {
   watchStuck();
 
   readUrl();
+  for (const k of gaKeys) gaSent[k] = gaValue(k); // what the URL opened with is not a change
   render(false);
   moveIndicator(false);
   document.fonts?.ready.then(() => moveIndicator(false));
