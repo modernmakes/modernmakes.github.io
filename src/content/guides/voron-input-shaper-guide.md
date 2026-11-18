@@ -19,7 +19,7 @@ summary:
   - "Run SHAPER_CALIBRATE from the Klipper console"
   - "Results show recommended shaper type and frequency per axis"
   - "Reduces ringing artifacts at accelerations above 3000mm/s²"
-featured: false
+featured: true
 ---
 
 <p class="art-lead">Ringing — the wavy artifact that shadows every sharp edge at high print speeds — is a mechanical resonance problem, not a slicer setting. Input shaper is Klipper's compensation algorithm for it. Done correctly, it lets you push acceleration well past what was previously usable while keeping walls sharp. Done sloppily, it barely helps. This guide does it correctly.</p>
