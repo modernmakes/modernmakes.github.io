@@ -55,7 +55,7 @@
     "Slug": "alps-pressure-sensor-module",
     "Description": "ALPS pressure module for Goliath hotends that enables automatic Z-axis homing and mesh bed leveling through real-time pressure sensing. Based on the high-sensitivity ADS131M02 sensor, it detects nozzle-to-bed contact with high precision, mounts directly on top of the heatsink in CNC aluminum, and needs no Z-offset recalibration after a nozzle change.",
     "Verdict Label": "Cheap nozzle-touch leveling add-on, but Goliath hotends only and thinly field-proven.",
-    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2604/30/products/76bd6e8490.jpg",
+    "Image URL": "/media/hardware/bed-probes/alps-pressure-sensor-module.webp",
     "Klipper Native": true,
     "Cons": "Goliath hotends only — useless without a Goliath heatsink, so applicability is narrow\nNo published accuracy or repeatability spec (Accuracy field is 'Unknown')\nRequires nozzle wiping for accuracy and secure mounting to avoid vibration issues; multiple leveling tests needed at first setup\nMust be wired to the mainboard/toolboard — Type-C alone will not run it, so wiring and Klipper config are required\nSmall community footprint vs Klicky, Voron Tap and Beacon; thinly field-proven",
     "Installation Complexity": "Medium",
