@@ -418,9 +418,15 @@
   // ── Triggers ──
   // Shortcut hint in the nav control (CSS shows it only at 768px+ with a fine pointer).
   const plat = (navigator as any).userAgentData?.platform || navigator.platform || '';
+  // The accessible name must contain the visible hint (WCAG 2.5.3), so it tracks the same media query as the CSS.
+  const hintMq = matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)');
   for (const k of document.querySelectorAll<HTMLElement>('[data-kbd]')) {
     k.textContent = /mac/i.test(plat) ? '⌘K' : 'Ctrl K';
     k.hidden = false;
+    const btn = k.closest<HTMLElement>('[data-palette]');
+    const name = () => btn?.setAttribute('aria-label', hintMq.matches ? `Search (${k.textContent})` : 'Search');
+    name();
+    hintMq.addEventListener('change', name);
   }
   for (const el of document.querySelectorAll<HTMLElement>('[data-palette]')) {
     el.setAttribute('role', 'button');
