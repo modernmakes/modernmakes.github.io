@@ -4,7 +4,6 @@ import records from '../../../data/hardware/extruders.json';
 
 const chips = (r: any) => [
   r['Gear Ratio'] ? String(r['Gear Ratio']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

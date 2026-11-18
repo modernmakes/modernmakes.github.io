@@ -5,7 +5,6 @@ import records from '../../../data/hardware/toolboards.json';
 const chips = (r: any) => [
   r['MCU'] ? String(r['MCU']) : null,
   r['Driver'] ? String(r['Driver']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

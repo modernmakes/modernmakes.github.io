@@ -5,7 +5,6 @@ import records from '../../../data/hardware/hotends.json';
 const chips = (r: any) => [
   r['Max Temp (°C)'] != null ? `${r['Max Temp (°C)']}°C` : null,
   r['Max Flow (mm³/s)'] != null ? `${r['Max Flow (mm³/s)']} mm³/s` : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']} USD` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

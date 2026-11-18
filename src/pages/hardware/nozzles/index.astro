@@ -5,7 +5,6 @@ import records from '../../../data/hardware/nozzles.json';
 const chips = (r: any) => [
   r['Material'] ? String(r['Material']) : null,
   (r['Diameter'] ?? r['Diameter (mm)']) != null ? String(r['Diameter'] ?? r['Diameter (mm)']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

@@ -5,7 +5,6 @@ import records from '../../../data/hardware/motors.json';
 const chips = (r: any) => [
   (r['Size'] ?? r['Frame Size']) ? String(r['Size'] ?? r['Frame Size']) : null,
   (r['Holding Torque'] ?? r['Holding Torque (Ncm)']) ? String(r['Holding Torque'] ?? r['Holding Torque (Ncm)']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

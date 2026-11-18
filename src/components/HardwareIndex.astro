@@ -326,24 +326,20 @@ const itemListSchema = {
                 <div class="card-body">
                   <div class="card-cat">{r['Brand'] ?? ''}</div>
                   <h2 class:list={['card-title', { 'sr-only': !hasImg }]}>{r['Name']}</h2>
-                  {/* no empty row: its margins would make the title→excerpt gap uneven across the grid.
-                      An unlisted price (missing or $0) drops the page's "~$" chip and carries a
-                      "No listed price" chip that only shows under a price sort (gf-np-row: the row
-                      exists only for that chip, so it hides with it). */}
-                  {(() => {
-                    const cc = chips(r).filter((c) => it.price !== null || !/^~\$/.test(c));
-                    return (cc.length > 0 || it.price === null) && (
-                      <div class:list={['product-card-specs', { 'gf-np-row': cc.length === 0 }]} style="margin:0 0 8px;display:flex;gap:6px;flex-wrap:wrap">
-                        {/* pages pass raw prices; round to whole dollars to match the detail page */}
-                        {cc.map((c) => <span class="spec-chip">{c.replace(/^~\$(\d+(?:\.\d+)?)/, (_, n) => `~$${Math.round(Number(n))}`)}</span>)}
-                        {it.price === null && <span class="spec-chip gf-noprice">No listed price</span>}
-                      </div>
-                    );
-                  })()}
+                  {/* no empty row: its margins would make the title→excerpt gap uneven across the grid */}
+                  {chips(r).length > 0 && (
+                    <div class="product-card-specs" style="margin:0 0 8px;display:flex;gap:6px;flex-wrap:wrap">
+                      {chips(r).map((c) => <span class="spec-chip">{c}</span>)}
+                    </div>
+                  )}
                   <p class="card-excerpt">{excerptOf(r)}</p>
                   <div class="card-footer">
                     {v && <span class={`verdict ${v.cls}`}>{v.label}</span>}
                     {fc && <span class="flow-chip">{fc.chipLabel}</span>}
+                    {/* whole dollars, as on the detail page; unpriced = missing, zero or not a number */}
+                    {it.price === null
+                      ? <span class="gf-price gf-price--none">No listed price</span>
+                      : <span class="gf-price">~${Math.round(it.price)}</span>}
                   </div>
                 </div>
               </a>
@@ -872,12 +868,12 @@ html { overflow-anchor: none; }
   transition: opacity 0.15s ease, border-color .15s, transform .15s, var(--press-release);
 }
 .gf-card.gf-hidden { display: none; }
-/* "No listed price" shows only under a price sort (#hw-grid[data-sort], set by the page script and
-   by the pre-paint script). The row's inline display:flex needs the !important to stay hidden. */
-.gf-noprice { display: none; }
-#hw-grid[data-sort^="price"] .gf-noprice { display: inline; }
-.gf-np-row { display: none !important; }
-#hw-grid[data-sort^="price"] .gf-np-row { display: flex !important; }
+/* Card bottom row: verdict (and flow) on the left, the price opposite. Price is data (Mono-Is-Data),
+   ink not orange (Pointer Rule). Cards in a row share a height and the row sits at margin-top:auto,
+   so these line up across the row. */
+.gf-card .card-footer { justify-content: flex-start; flex-wrap: wrap; gap: 6px 8px; }
+.gf-price { margin-left: auto; font-family: var(--fm); font-size: 18px; font-weight: 700; line-height: 1; color: var(--black); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.gf-price--none { font-family: var(--fu); font-size: 12px; font-weight: 500; line-height: 18px; color: var(--g2); }
 .gf-nomatch { padding: 40px 0; text-align: center; color: var(--g1); }
 .gf-nomatch[hidden] { display: none; }
 .gf-nomatch-title { font-family: var(--fd); font-size: 22px; font-weight: 800; color: var(--black); margin: 0 0 6px; }

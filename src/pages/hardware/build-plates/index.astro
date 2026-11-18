@@ -5,7 +5,6 @@ import records from '../../../data/hardware/build-plates.json';
 const chips = (r: any) => [
   r['Surface'] ? String(r['Surface']) : null,
   (r['Size'] ?? r['Size (mm)']) ? String(r['Size'] ?? r['Size (mm)']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

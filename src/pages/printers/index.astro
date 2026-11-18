@@ -9,7 +9,6 @@ const ecosystems = (homepage as any).ecosystems ?? [];
 const chips = (r: any) => [
   r['Build Volume'] ? String(r['Build Volume']) : null,
   r['Motion System'] ? String(r['Motion System']) : null,
-  (r['Price (USD)'] ?? r['BOM Cost']) != null ? `~$${r['Price (USD)'] ?? r['BOM Cost']}` : null,
 ].filter(Boolean) as string[];
 
 // Printers are hero content — lead each card with build volume + motion system.

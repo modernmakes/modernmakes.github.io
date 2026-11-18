@@ -5,7 +5,6 @@ import records from '../../../data/hardware/psus.json';
 const chips = (r: any) => [
   (r['Wattage'] ?? r['Wattage (W)']) != null ? `${r['Wattage'] ?? r['Wattage (W)']}W` : null,
   r['Voltage'] ? String(r['Voltage']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

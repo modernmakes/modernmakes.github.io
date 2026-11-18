@@ -5,7 +5,6 @@ import records from '../../../data/hardware/part-cooling.json';
 const chips = (r: any) => [
   r['Type'] ? String(r['Type']) : null,
   (r['Size'] ?? r['Size (mm)']) ? String(r['Size'] ?? r['Size (mm)']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

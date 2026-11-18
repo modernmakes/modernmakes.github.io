@@ -5,7 +5,6 @@ import records from '../../../data/hardware/gantrys.json';
 const chips = (r: any) => [
   (r['Kinematic'] ?? r['Kinematics']) ? String(r['Kinematic'] ?? r['Kinematics']) : null,
   r['Extrusion Size'] ? String(r['Extrusion Size']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

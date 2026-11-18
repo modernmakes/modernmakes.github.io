@@ -5,7 +5,6 @@ import records from '../../../data/hardware/filament-dryers.json';
 const chips = (r: any) => [
   r['Capacity'] ? String(r['Capacity']) : null,
   (r['Max Temp'] ?? r['Max Temp (°C)']) != null ? `${r['Max Temp'] ?? r['Max Temp (°C)']}°C` : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

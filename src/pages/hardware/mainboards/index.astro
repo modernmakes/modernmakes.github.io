@@ -5,7 +5,6 @@ import records from '../../../data/hardware/mainboards.json';
 const chips = (r: any) => [
   (r['Driver Slots'] ?? r['Driver Count']) != null ? `${r['Driver Slots'] ?? r['Driver Count']} drivers` : null,
   r['Voltage'] ? String(r['Voltage']) : null,
-  r['Price (USD)'] != null ? `~$${r['Price (USD)']}` : null,
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex
