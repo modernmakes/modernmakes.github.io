@@ -4,7 +4,7 @@
 //  - detents: medium (about 50% of the visual viewport) and large (92%); a sheet that lists only
 //    `large` in data-detents has one;
 //  - it follows the finger 1:1 (pointer events on the handle and header, touch events on the
-//    content), then on release dismisses on a flick (> 0.5 px/ms down) or past 40% of the visible
+//    content), then on release dismisses on a flick (> 0.5 px/ms down over the last 100ms) or past 40% of the visible
 //    height, and otherwise springs to the nearest detent (--spring-sheet);
 //  - the content only hands a downward drag to the sheet once it is scrolled to the top;
 //  - the page behind dims (scrim), scales to 0.96 and rounds its top corners (the card-stack cue);
@@ -45,8 +45,13 @@ const pivot = (c: Cur) => (c.two ? c.yM : 0);
 // 1 at every detent, falling to 0 as the sheet is pulled down to nothing.
 const prog = (c: Cur, y: number) => (y <= pivot(c) ? 1 : Math.max(0, 1 - (y - pivot(c)) / Math.max(1, c.H - pivot(c))));
 const currentY = (c: Cur) => new DOMMatrix(getComputedStyle(c.panel).transform).m42;
-const velocity = (s: Sample[]) => {
-  const a = s[Math.max(0, s.length - 4)], b = s[s.length - 1];
+// Release velocity from the last 100ms of movement only: a finger that stopped before lifting has
+// no recent samples, so it reads as ~0 (springs to a detent) instead of the old fast drag's flick.
+const VEL_WINDOW = 100;
+const velocity = (s: Sample[], now: number) => {
+  const r = s.filter((x) => now - x.t <= VEL_WINDOW);
+  if (r.length < 2) return 0;
+  const a = r[0], b = r[r.length - 1];
   return b.t > a.t ? (b.y - a.y) / (b.t - a.t) : 0;
 };
 
@@ -239,12 +244,12 @@ document.addEventListener('pointermove', (e) => {
   if (y < 0) y = -Math.pow(-y, 0.65); // friction past the top, not a wall
   setY(c, y, false);
   drag.s.push({ y: e.clientY, t: e.timeStamp });
-  if (drag.s.length > 6) drag.s.shift();
+  if (drag.s.length > 16) drag.s.shift(); // enough for 100ms at 120Hz
 });
 const dragEnd = (e: PointerEvent) => {
   const c = cur;
   if (!drag || !c || e.pointerId !== drag.id) return;
-  const v = velocity(drag.s);
+  const v = velocity(drag.s, e.timeStamp);
   drag = null;
   release(c, v);
 };
@@ -291,7 +296,7 @@ const onTouchMove = (e: TouchEvent) => {
     if (ny < 0) ny = -Math.pow(-ny, 0.65);
     setY(c, ny, false);
     t.s.push({ y, t: e.timeStamp });
-    if (t.s.length > 6) t.s.shift();
+    if (t.s.length > 16) t.s.shift();
   } else if (t.sc.scrollHeight <= t.sc.clientHeight) {
     e.preventDefault(); // nothing to scroll here: keep the page still
   }
@@ -300,7 +305,7 @@ const onTouchMove = (e: TouchEvent) => {
 const onTouchEnd = (e: TouchEvent) => {
   const t = tc, c = cur;
   tc = null;
-  if (t?.mode === 1 && c) release(c, velocity(t.s));
+  if (t?.mode === 1 && c) release(c, velocity(t.s, e.timeStamp));
 };
 // Bound to the dialogs, not the document: a non-passive touchmove listener on the document would slow
 // touch scrolling on every page, open sheet or not.
