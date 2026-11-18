@@ -5,16 +5,19 @@
 interface Props {
   id: string;
   title: string;
-  /** Detent a phone sheet opens at. It can always be dragged to the other one. */
-  detent?: 'medium' | 'large';
+  /** Detent a phone sheet opens at. It can be dragged to the other one, except 'fit': a single detent
+   *  at the content's height, capped at 92% of the visual viewport (the body scrolls past that). */
+  detent?: 'medium' | 'large' | 'fit';
+  /** 'fit' only: how many tightening steps the sheet's own CSS defines for [data-fit~="N"] (sheet.ts tighten()). */
+  fitSteps?: number;
   /** What it becomes from 768px up. */
   desktop?: 'modal' | 'popover';
   /** Dark plane (menu); light surface otherwise. */
   dark?: boolean;
 }
-const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.props;
+const { id, title, detent = 'medium', desktop = 'modal', dark = false, fitSteps } = Astro.props;
 ---
-<dialog class:list={['sheet', { 'sheet--dark': dark }]} id={id} data-detent={detent} data-desktop={desktop} aria-labelledby={`${id}-title`}>
+<dialog class:list={['sheet', { 'sheet--dark': dark }]} id={id} data-detent={detent} data-fit-steps={fitSteps} data-desktop={desktop} aria-labelledby={`${id}-title`}>
   <div class="sheet-scrim" data-sheet-close></div>
   <div class="sheet-panel" tabindex="-1">
     <div class="sheet-grab" data-sheet-drag aria-hidden="true"><span></span></div>
@@ -88,6 +91,8 @@ const { id, title, detent = 'medium', desktop = 'modal', dark = false } = Astro.
     transition: transform var(--dur-sheet) var(--spring-sheet);
     will-change: transform;
   }
+  /* Fit detent: as tall as its content, never past the large detent. */
+  dialog.sheet[data-detent="fit"][data-mode="sheet"] .sheet-panel { height: auto; max-height: 92%; }
   /* The spring overshoots a little past its rest position: keep the panel's colour under it. */
   [data-mode="sheet"] .sheet-panel::after { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 48px; background: var(--sh-bg); }
   html.sheet-closing .sheet-panel { transition-duration: var(--dur-base); transition-timing-function: var(--ease-out); }

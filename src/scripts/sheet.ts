@@ -2,7 +2,9 @@
 //
 // Under 768px a sheet is an iOS-style bottom sheet:
 //  - detents: medium (about 50% of the visual viewport) and large (92%); a sheet that lists only
-//    `large` in data-detents has one;
+//    `large` in data-detents has one; data-detent="fit" has one detent at the height of its content,
+//    capped at 92% (past that its body scrolls). data-fit-steps="n" lets fit() take steps 1..n, one at a
+//    time, until the content fits (data-fit="… N"; the sheet's own CSS tightens per step);
 //  - it follows the finger 1:1 (pointer events on the handle and header, touch events on the
 //    content), then on release dismisses on a flick (> 0.5 px/ms down over the last 100ms) or past 40% of the visible
 //    height, and otherwise springs to the nearest detent (--spring-sheet);
@@ -98,12 +100,19 @@ function fit() {
   if (!vv) return;
   const top = `${vv.offsetTop}px`, h = `${vv.height}px`;
   if (top !== fitTop) c.dlg.style.top = fitTop = top; // skip unchanged writes: each one is a relayout
-  if (h !== fitH) c.dlg.style.height = fitH = h;
+  if (h !== fitH) { c.dlg.style.height = fitH = h; tighten(c); }
   c.H = c.panel.offsetHeight;
   c.yM = Math.max(0, c.H - 0.5 * vv.height);
   // Resting at a detent whose position moved with the viewport: follow it without animating.
   if (!c.dragging && !c.closing && c.y !== restY(c)) setY(c, restY(c), false);
   hide(c);
+}
+// Fit detent: step up from none while the body still has to scroll. data-fit lists the steps taken
+// ("", " 1", " 1 2" …) so the sheet's CSS can match each one with [data-fit~="N"].
+function tighten(c: Cur) {
+  const d = c.dlg.dataset, b = c.panel.querySelector<HTMLElement>('.sheet-body')!;
+  let s = '';
+  for (let i = 1; (d.fit = s), i <= +d.fitSteps! && b.scrollHeight > b.clientHeight + 1; i++) s += ' ' + i;
 }
 const queueFit = () => { if (!fitRaf && fits(cur)) fitRaf = requestAnimationFrame(fit); };
 vv?.addEventListener('resize', queueFit);
@@ -138,8 +147,8 @@ export function openSheet(target: string | HTMLDialogElement, opener?: HTMLEleme
     dlg, mode, opener: opener ?? (document.activeElement as HTMLElement | null),
     panel: dlg.querySelector<HTMLElement>('.sheet-panel')!, scrim: dlg.querySelector<HTMLElement>('.sheet-scrim')!,
     lockY: scrollY, H: 0, yM: 0, y: 0,
-    detent: dlg.dataset.detent === 'large' ? 'large' : 'medium',
-    two: (dlg.dataset.detents ?? 'medium large').includes('medium'),
+    detent: dlg.dataset.detent === 'medium' ? 'medium' : 'large',
+    two: dlg.dataset.detent !== 'fit' && (dlg.dataset.detents ?? 'medium large').includes('medium'),
     fx: false, closing: false, dragging: false,
   };
   cur = c;
