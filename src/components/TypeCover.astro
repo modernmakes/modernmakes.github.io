@@ -1,7 +1,7 @@
 ---
-// Designed stand-in for a missing image: the category eyebrow on a neutral dot pattern, plus the
-// mono date on article heroes. Never the title: every card and page shows its own title right
-// beside it. Decorative, so it is hidden from assistive tech. Styles: .type-cover in global.css.
+// Designed stand-in for a missing image: a neutral dot pattern. Cards (size="card") are pattern-only,
+// since every card body already shows its category below. Heroes (size="hero") add the category
+// eyebrow and the mono date. Never the title: every card and page shows its own title right beside it. Decorative, so it is hidden from assistive tech. Styles: .type-cover in global.css.
 interface Props {
   eyebrow?: string;
   date?: string;
@@ -10,6 +10,6 @@ interface Props {
 const { eyebrow, date, size = 'card' } = Astro.props;
 ---
 <div class:list={['type-cover', { 'type-cover--hero': size === 'hero' }]} aria-hidden="true">
-  {eyebrow && <span class="type-cover-eyebrow">{eyebrow}</span>}
-  {date && <span class="type-cover-date">{date}</span>}
+  {size === 'hero' && eyebrow && <span class="type-cover-eyebrow">{eyebrow}</span>}
+  {size === 'hero' && date && <span class="type-cover-date">{date}</span>}
 </div>
