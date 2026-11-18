@@ -6,6 +6,7 @@
     "Description": "The K3rabiner Toolboard v2 is a passive wiring breakout PCB designed by MathematicalPotato for the DooKi3 Toolhead v2 on the Annex Engineering K3, and it is also Hula-gantry compatible. It is a 2 oz copper, lead-free PCB, fully assembled with genuine Molex and JST connectors in Canada, with a choice of JST-XH or Microfit 3.0 thermistor port. It carries no MCU, stepper driver or communications bus of its own - it tidies the toolhead wiring back to the mainboard. It is sold as a preorder with about a 60-day lead time.",
     "Verdict Label": "K3-only passive breakout; preorder with a long lead time",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/toolboards/k3rabiner-toolboard-v2.webp",
     "Cons": "Preorder only, with roughly a 60-day lead after the preorder period closes (Nov 15)\nPassive breakout only - no MCU, stepper driver or CAN/USB, so all control still runs back to the mainboard\nOnly fits the MathematicalPotato Toolhead v2 on an Annex K3, not a general-purpose toolboard",
     "Vendor 1 URL": "https://northprint3d.ca/product/mathematicalpotato-k3rabiner-toolboard-v2-for-annex-engineering-k3-hula-compatible/",
     "Brand": "MathematicalPotato",
@@ -27,6 +28,7 @@
     "Stepper Driver": "TMC2209",
     "Vendor 4 URL": "https://west3d.com/products/btt-ebb-sb2209-can-bus-pcb-for-stealthburner-w-harness-and-connectors-complete",
     "Vendor 2 Name": "BIQU Equipment",
+    "Image URL": "/media/hardware/toolboards/ebb-sb2209.webp",
     "Vendor 2 URL": "https://biqu.equipment/products/bigtreetech-ebb-sb2209-can-v1-0",
     "Cons": "The TMC2240 sibling (SB2240) costs more for the same board, but the premium varies widely by retailer (about 30% more at Kamami, only ~$4 more at BIQU); USB-C is mainly for flashing, not a substitute for CAN in normal use; An RP2040 variant of the SB2209 CAN is now sold alongside the STM32 version, so listings need care; TMC2209 has less diagnostic headroom than the TMC2240",
     "Vendor 3 Name": "Kamami",
@@ -59,6 +61,7 @@
     "Stepper Driver": "TMC2209",
     "Vendor 4 URL": "https://www.onetwo3d.co.uk/product/ldo-nitehawk-36-usb-toolboard/",
     "Vendor 2 Name": "West3D",
+    "Image URL": "/media/hardware/toolboards/nitehawk-36.webp",
     "Compatible Toolheads": [
       "36mm toolhead mounts",
       "Custom toolheads"
