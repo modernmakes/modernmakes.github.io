@@ -40,7 +40,9 @@ const { category, name, description, verdict, verdictKey, price, href, imageSrc,
     <p class="gc-desc">{description}</p>
     <div class="gc-foot">
       <span class:list={['gc-verdict', `gc-verdict--${verdictKey}`]}>{verdict}</span>
-      <span class="gc-price">${price}</span>
+      {price > 0
+        ? <span class="gc-price">~${Math.round(price)}</span>
+        : <span class="gc-price">No listed price</span>}
     </div>
   </div>
 </a>
