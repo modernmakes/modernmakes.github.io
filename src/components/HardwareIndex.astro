@@ -131,13 +131,25 @@ const viewCfg = {
   ...Object.fromEntries(filterGroups.map((g) => [g.key, g.options.map((o) => o.value)])),
 };
 
-// Pre-paint filter: the inline script in the grid copies ?verdict=/?flow= onto
-// #hw-grid, and these rules hide non-matching cards before first paint.
+// Pre-paint filter: the inline script at the top of the grid copies the URL's verdict, flow, sort,
+// brand and price (checked against #hw-view-cfg) onto #hw-grid, and these rules hide non-matching
+// cards as they stream in, before first paint. Brand and price hold space-separated lists, so a
+// card hides when its value is not in the list (and cards with no value hide once one is picked).
 const q = (v: string) => v.replace(/["\\]/g, '\\$&');
 const prepaintCss = [
   ...verdictTabs.map((t: any) => `#hw-grid[data-verdict="${q(t.key)}"] .gf-card:not([data-verdict="${q(t.key)}"])`),
   ...FLOW_CLASSES.map((f) => `#hw-grid[data-flow="${f.key}"] .gf-card:not([data-flow="${f.key}"])`),
-].map((sel) => `${sel}{display:none}`).join('');
+  ...filterGroups.flatMap((g) => {
+    const attr = g.key === 'price' ? 'band' : g.key;
+    return [
+      ...g.options.map((o) => `#hw-grid[data-${g.key}]:not([data-${g.key}~="${q(o.value)}"]) .gf-card[data-${attr}="${q(o.value)}"]`),
+      `#hw-grid[data-${g.key}] .gf-card[data-${attr}=""]`,
+    ];
+  }),
+].map((sel) => `${sel}{display:none}`).join('')
+  // A sorted grid stays invisible (still laid out, so nothing shifts) until the cards are in order:
+  // WebKit can paint between the end of the grid and the inline reorder after it.
+  + '#hw-grid[data-sort]:not([data-ordered]){visibility:hidden}';
 
 const noun = (n: number) => (n === 1 ? nounSingular : nounPlural);
 
@@ -255,15 +267,22 @@ const itemListSchema = {
           <template id="hw-chip-x"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></template>
         </div>
       </div>
-      {records.length > 0 ? (
+      <script type="application/json" id="hw-view-cfg" set:html={JSON.stringify(viewCfg)}></script>
+      {records.length > 0 ? (<>
         <style is:inline set:html={prepaintCss}></style>
         <div class="grid-3" id="hw-grid">
           <script is:inline>
             (function () {
-              var q = new URLSearchParams(location.search), g = document.getElementById('hw-grid');
-              var v = q.get('verdict') || location.hash.slice(1), f = q.get('flow');
+              var q = new URLSearchParams(location.search), g = document.getElementById('hw-grid'), c = {};
+              try { c = JSON.parse(document.getElementById('hw-view-cfg').textContent); } catch (e) {}
+              var v = q.get('verdict') || location.hash.slice(1), f = q.get('flow'), s = q.get('sort');
               if (v) g.dataset.verdict = v;
               if (f) g.dataset.flow = f;
+              if (s && s !== 'recommended' && (c.sort || []).indexOf(s) > -1) g.dataset.sort = s;
+              ['brand', 'price'].forEach(function (k) {
+                var x = (q.get(k) || '').split(',').filter(function (y) { return (c[k] || []).indexOf(y) > -1; });
+                if (x.length) g.dataset[k] = x.join(' ');
+              });
             })();
           </script>
           {items.map((it, i: number) => {
@@ -315,7 +334,19 @@ const itemListSchema = {
             );
           })}
         </div>
-      ) : (
+        {/* A sorted URL paints sorted: put the cards in that sort's build-time order now, before the
+            first frame (the page script would otherwise do it after load). */}
+        <script is:inline>
+          (function () {
+            var g = document.getElementById('hw-grid'), s = g.dataset.sort;
+            if (!s) return;
+            var a = 'data-o-' + s, c = [].filter.call(g.children, function (e) { return e.hasAttribute(a); });
+            c.sort(function (x, y) { return x.getAttribute(a) - y.getAttribute(a); });
+            c.forEach(function (e) { g.appendChild(e); });
+            g.dataset.ordered = '';
+          })();
+        </script>
+      </>) : (
         <p style="font-family:var(--fb);font-size:15px;color:var(--g2);padding:40px 0">
           No {nounPlural} listed yet — check back after the next Airtable sync.
         </p>
@@ -325,7 +356,6 @@ const itemListSchema = {
         <p>No {nounPlural} are in that combination.</p>
         <button type="button" class="gf-clear" id="hw-clear">Clear all</button>
       </div>
-      <script type="application/json" id="hw-view-cfg" set:html={JSON.stringify(viewCfg)}></script>
     </div>
   </section>
 
@@ -536,6 +566,7 @@ const itemListSchema = {
       const now = grid.querySelectorAll(':scope > .gf-card');
       if (order.some((c, i) => now[i] !== c.el)) grid.append(...order.map((c) => c.el));
       if (state.sort === DEFAULT_SORT) delete grid.dataset.sort; else grid.dataset.sort = state.sort;
+      grid.dataset.ordered = ''; // releases the pre-paint guard even if the inline reorder never ran
     }
     if (countEl) countEl.textContent = `Showing ${visible} of ${total} ${noun(total)}`;
     if (noMatch) noMatch.hidden = visible > 0 || total === 0;
@@ -664,7 +695,7 @@ const itemListSchema = {
   document.fonts?.ready.then(() => moveIndicator(false));
   addEventListener('resize', () => moveIndicator(false), { passive: true });
   // The pre-paint attributes did their job; .gf-hidden takes over from here.
-  if (grid) { delete grid.dataset.verdict; delete grid.dataset.flow; }
+  if (grid) { delete grid.dataset.verdict; delete grid.dataset.flow; delete grid.dataset.brand; delete grid.dataset.price; }
 </script>
 
 <style is:global>
