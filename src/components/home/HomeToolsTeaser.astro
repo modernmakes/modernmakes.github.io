@@ -58,7 +58,7 @@ const icons: Record<string, string> = {
   /* Tool cards grid */
   .tools-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* all four calculators in one row on desktop */
     gap: 16px;
   }
 
