@@ -1,7 +1,10 @@
 ---
 // Base layout — wraps every page on the site
 import '../styles/global.css';
-import pageMotion from '../scripts/page-motion.js?raw';
+import pageMotionSrc from '../scripts/page-motion.js?raw';
+import { transformSync } from 'esbuild';
+// Inlined into every page's <head>, so it ships minified (the source keeps its comments).
+const pageMotion = transformSync(pageMotionSrc, { minify: true, target: 'es2020' }).code;
 import { jsonLd } from '../lib/jsonld';
 interface Props {
   title: string;

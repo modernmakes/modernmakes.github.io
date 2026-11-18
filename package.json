@@ -18,5 +18,8 @@
   "dependencies": {
     "@astrojs/sitemap": "3.2.1",
     "astro": "^4.15.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.21.5"
   }
 }
