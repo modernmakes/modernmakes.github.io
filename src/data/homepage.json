@@ -33,13 +33,6 @@
       "image": null
     }
   ],
-  "ticker": [
-    { "text": "Bambu Lab's open source crisis, explained", "category": "News", "href": "/news/bambu-lab-open-source-crisis" },
-    { "text": "Voron Phoenix: the 600mm IDEX Voron, previewed (not released yet)", "category": "Preview", "href": "/news/voron-phoenix-idex-preview" },
-    { "text": "A full Klipper conversion for the Bambu P1, documented step by step", "category": "Mod", "href": "/news/bambu-p1-klipper-conversion" },
-    { "text": "Bondtech INDX 8-nozzle toolchanger now orderable", "category": "Launch", "href": "/news/bondtech-indx-tool-changer-released" },
-    { "text": "OrcaSlicer 2.3.2 patches a 3MF path-traversal flaw", "category": "Update", "href": "/news/orcslicer-v2-3-2-rc2-released" }
-  ],
   "tools": [
   {
     "name": "Pressure Advance Calibration",
