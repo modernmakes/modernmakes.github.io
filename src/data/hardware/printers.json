@@ -33,6 +33,7 @@
     "Community Size": "Niche",
     "Description": "A compact delta printer kit from Rolohaun and Kanrog, made by LDO. A fun, affordable way into delta printing, with Klipper built in — but the build volume is tiny and delta calibration takes patience. Price is the LDO kit from Fabreeko.",
     "Verdict Label": "Fun little delta — a second printer, not a first",
+    "Image URL": "/media/hardware/printers/delta-flyer.webp",
     "Max Temp — Bed (°C)": 105,
     "Available Sizes": "Ø115mm",
     "Cons": "Small Ø115×110mm build volume; manual levelling; delta calibration takes patience; currently out of stock at Fabreeko.",
@@ -110,6 +111,7 @@
     "Enclosure": true,
     "Description": "The RatRig V-Minion has been discontinued and is no longer supported by RatRig. No active kit is available and official documentation is no longer maintained. Builders looking for a compact enclosed CoreXY with kit support should look at the Voron 0.2 instead — larger community, active LDO kit, and ongoing development.",
     "Verdict Label": "Discontinued — RatRig no longer supports the V-Minion; no active kit, no official documentation updates",
+    "Image URL": "/media/hardware/printers/v-minion.webp",
     "Max Temp — Bed (°C)": 110,
     "Compatible Toolheads": [
       "RatRig EVA Mini"
@@ -140,6 +142,7 @@
     "Multi-Material": true,
     "Description": "The RatRig V-Core 4 is the premier commercially-kitted self-build CoreXY, distinguished by its All-Wheel-Drive (AWD) 4-motor XY motion and 3030 aluminum extrusion frame. Available in 300mm, 400mm, and 500mm build volumes; price scales with size. AWD eliminates conventional belt tension asymmetry and the 3030 frame is meaningfully stiffer than Voron’s 2020 baseline. Official RatRig documentation and community support is the key differentiator from pure-community Voron builds.",
     "Verdict Label": "Best-supported self-build kit — AWD CoreXY, 3030 frame rigidity, official documentation and RatRig community backing",
+    "Image URL": "/media/hardware/printers/v-core-4.webp",
     "Max Temp — Bed (°C)": 120,
     "Compatible Toolheads": [
       "RatRig EVA 3"
@@ -168,6 +171,7 @@
     "Enclosure": true,
     "Description": "The PrintersForAnts Micron+ (R1) as a complete LDO kit: a 180mm Voron 2.4-style printer with a flying gantry, enclosed in panels, running Klipper. Price is the Fabreeko LDO kit with Honeybadger upgrades — printed parts and a hotend are still needed.",
     "Verdict Label": "The definitive tiny Voron-style build",
+    "Image URL": "/media/hardware/printers/micron-plus.webp",
     "Available Sizes": "180×180mm",
     "Frame": "1515",
     "Cons": "Needs printed parts and a hotend on top of the kit price; currently out of stock at Fabreeko.",
@@ -193,6 +197,7 @@
     "Enclosure": true,
     "Description": "The Voron 2.4 is the benchmark CoreXY self-build — a fully enclosed flying-gantry printer where 4 independent Z motors tram the gantry (not the bed) via Quad Gantry Level. Available in 250mm, 300mm, and 350mm build volumes; the 300mm is the community sweet spot. Klipper is the sole supported firmware; the official config and documentation on vorondesign.com are the most comprehensive in any self-build community. Price is the LDO Rev D+ kit at Fabreeko, 300mm (smallest size currently listed; 250mm not offered in Rev D+).",
     "Verdict Label": "Best-documented self-build in existence — deepest community, config library, and mod ecosystem of any open-source printer",
+    "Image URL": "/media/hardware/printers/voron-2-4.webp",
     "Max Temp — Bed (°C)": 110,
     "Compatible Toolheads": [
       "Stealthburner"
@@ -222,6 +227,7 @@
     "Enclosure": true,
     "Description": "The Voron Trident uses a moving-bed Z mechanism — 3 independent lead screws under the bed tram the surface via 3-point auto-leveling, while the gantry is fixed in Z. Available in 250mm, 300mm, and 350mm; the 300mm variant is the most common choice and delivers a fully cubic build volume. XY motion, Stealthburner toolhead, and Klipper ecosystem are identical to the V2.4. Price is the LDO Trident Rev D kit at Fabreeko ($1,250.00 regular for the 250mm, no printed parts; $1,199.99 sale, currently out of stock).",
     "Verdict Label": "Simpler Z than the V2.4, same Voron toolchain — the better first Voron for builders who don’t need flying-gantry complexity",
+    "Image URL": "/media/hardware/printers/voron-trident.webp",
     "Max Temp — Bed (°C)": 110,
     "Compatible Toolheads": [
       "Stealthburner"
@@ -345,6 +351,7 @@
     "Community Size": "Small",
     "Description": "A folding CoreXY printer from LDO that packs into a standard filament box and sets up in about a minute. Built for travel, not for big or hot prints — PLA and PETG only. Price is the Fabreeko base kit without printed parts ($569.99); the bundle with printed parts is $649.99.",
     "Verdict Label": "The printer that folds into a filament box",
+    "Image URL": "/media/hardware/printers/positron-v3-2.webp",
     "Max Temp — Bed (°C)": 80,
     "Available Sizes": "180×180mm",
     "Cons": "PLA/PETG only (260°C hotend, 80°C bed); manual levelling; currently out of stock at Fabreeko.",
@@ -369,6 +376,7 @@
     "Enclosure": true,
     "Description": "FYSETC's 600mm Voron 2.4-inspired kit: a fully enclosed CoreXY machine with CNC parts, a four-zone heated bed and Klipper, with the toolhead and control box pre-assembled. Price is the Fabreeko kit; skirts and cosmetic printed parts still need printing.",
     "Verdict Label": "A 600mm monster for patient builders",
+    "Image URL": "/media/hardware/printers/venture-xl.webp",
     "Available Sizes": "600×600mm",
     "Cons": "Expensive and enormous (910×910×940mm); needs printed skirts to finish; IDEX/AWD upgrades not available yet; currently out of stock / preorder.",
     "Tool Configuration": "Single",
@@ -391,6 +399,7 @@
     "Community Size": "Small",
     "Description": "A no-compromise CoreXZ bed-slinger from lhndo, sold as a FYSETC Rev2 kit: carbon-fibre bed, Dragon UHF hotend, 48V AWD Y-axis and Klipper, built for 400–600mm/s printing. Price is the Fabreeko kit — printed parts and a Raspberry Pi are still needed. An LHS Pico MMU multi-material add-on exists, but the stock printer is single-toolhead.",
     "Verdict Label": "The fastest bed-slinger you can build",
+    "Image URL": "/media/hardware/printers/lh-stinger.webp",
     "Available Sizes": "235×235mm",
     "Cons": "Open frame — no enclosure in the kit; needs printed parts and a Pi; Y-motor sync is fiddly; currently out of stock at Fabreeko.",
     "Tool Configuration": "Single",
@@ -414,6 +423,7 @@
     "Enclosure": true,
     "Description": "The VzBot is an open-source CoreXY designed from the ground up for high-acceleration Klipper printing. Available in 235mm and 330mm build volumes; the 235mm is the more common starting point. Every gantry geometry decision — reduced moving mass, stiffened XY motion, toolhead weight minimization — exists to push Input Shaper resonance peaks higher. Expert-only territory: rewards builders who already know Klipper inside out.",
     "Verdict Label": "Highest acceleration potential of any printer in this guide — speed-optimized design from the ground up, expert-only build territory",
+    "Image URL": "/media/hardware/printers/vzbot.webp",
     "Max Temp — Bed (°C)": 120,
     "Compatible Toolheads": [
       "VzBot Toolhead"
@@ -469,6 +479,7 @@
     "Community Size": "Small",
     "Description": "Rolohaun's tiny DIY CoreXY starter kit: a 105mm printer with a printed frame, MGN9 rails and a Sherpa Mini extruder, sold by Fabreeko with a full build guide and Klipper config. Price is the starter kit only — a hotend, 120mm bed and heater, PSU and fans still need sourcing.",
     "Verdict Label": "The cheapest way into DIY CoreXY",
+    "Image URL": "/media/hardware/printers/rook-mk1.webp",
     "Available Sizes": "105×105mm",
     "Cons": "Starter kit only — hotend, bed, heater, PSU and fans must be sourced; tiny 105mm build area; currently out of stock at Fabreeko.",
     "Tool Configuration": "Single",

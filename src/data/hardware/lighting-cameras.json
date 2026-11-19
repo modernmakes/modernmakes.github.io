@@ -170,6 +170,7 @@
     "Klipper Compatible": true,
     "Slug": "daylight-on-a-stick",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/daylight-on-a-stick.webp",
     "Voltage": "24V",
     "Cons": "Not addressable — on/off or PWM dimming only; no RGB effects or Klipper color macros\nVoron-specific dimensions — mounting on non-Voron toolheads requires community-adapted mount designs\nRequires PWM-capable output or manual wiring for dimming; basic installations run at constant brightness\nNot stocked at all vendors — availability tied to Voron kit restocks from LDO, Formbot, and similar",
     "Compatible Printers": [
@@ -227,6 +228,7 @@
     "Klipper Compatible": true,
     "Slug": "disco-skirts",
     "Verdict": "Niche Pick",
+    "Image URL": "/media/hardware/lighting-cameras/disco-skirts.webp",
     "Voltage": "5V",
     "Cons": "Purely cosmetic — adds no print illumination or monitoring value\nPrinted parts required from GitHub, not included in the $26.99 set\nMinimal documentation — the author calls it \"a silly board\" and notes he spent no time documenting it; Blamm's Disco on a Stick docs are the reference\nNeeds a spare 5V neopixel output and data line — 5V, not the printer's 24V rail"
   },
@@ -248,6 +250,7 @@
     "Klipper Compatible": true,
     "Slug": "c920-hd-webcam",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/lighting-cameras/c920-hd-webcam.webp",
     "Voltage": "5V",
     "Cons": "78° FOV is noticeably narrower than the Pi Camera v3 Wide — may miss corners on larger enclosed builds without repositioning\nAutofocus less reliable for close-distance enclosure mounting — manual focus lock mod often recommended by the community\nUSB competes for bandwidth on the same host hub as the Klipper USB connection\nHigher price than Pi Camera v3 for lower resolution and narrower FOV in this context",
     "Compatible Printers": [
@@ -277,6 +280,7 @@
     "Klipper Compatible": true,
     "Slug": "carrot-on-a-stick-carrot-on-a-twig",
     "Verdict": "Niche Pick",
+    "Image URL": "/media/hardware/lighting-cameras/carrot-on-a-stick-carrot-on-a-twig.webp",
     "Voltage": "5V",
     "Cons": "ERCF v2 only — useless without the Enraged Rabbit feeder\nFabreeko's own page carries almost no documentation (\"more info to be released soon\")\nOptional bling — the ERCF works fine without it\nTwo variants share one listing, so the price depends on which board you pick"
   },
@@ -299,6 +303,7 @@
     "Klipper Compatible": true,
     "Slug": "kirigami-led-and-breakout-v0-2",
     "Verdict": "Niche Pick",
+    "Image URL": "/media/hardware/lighting-cameras/kirigami-led-and-breakout-v0-2.webp",
     "Voltage": "5V",
     "Cons": "V0.2 Kirigami bed only — no use on any other printer\nWire not included, despite the breakout needing it\nSingle LED only — a status indicator, not enclosure lighting\nThin documentation — Fabreeko lists the remix with no wiring diagram"
   },
@@ -320,6 +325,7 @@
     "Klipper Compatible": true,
     "Slug": "nightlight-on-a-stick",
     "Verdict": "Niche Pick",
+    "Image URL": "/media/hardware/lighting-cameras/nightlight-on-a-stick.webp",
     "Voltage": "24V",
     "Cons": "UV only — useless as general print lighting and distorts print colours\nNot addressable — no RGB effects or Klipper colour macros\nUV wavelength is not published, so the exact fluorescence response is unverified\nSingle-purpose effect bar at the same price as the white Daylight bar"
   },
@@ -342,6 +348,7 @@
     "Klipper Compatible": true,
     "Slug": "sequins-rgb-ws2812-for-mini-sb",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/sequins-rgb-ws2812-for-mini-sb.webp",
     "Voltage": "5V",
     "Cons": "RGB only — cannot produce neutral white light for print illumination\nTiny 11 × 5 mm boards need soldering and careful wire routing inside the toolhead\n5V WS2812 ICs are heat-sensitive — keep away from the hotend/heater block"
   },
@@ -364,6 +371,7 @@
     "Klipper Compatible": true,
     "Slug": "led-pcb-and-cables-for-boxturtle",
     "Verdict": "Solid Choice",
+    "Image URL": "/media/hardware/lighting-cameras/led-pcb-and-cables-for-boxturtle.webp",
     "Voltage": "5V",
     "Cons": "BoxTurtle-only — useless without an Armored Turtle AFC build\nCurrently out of stock at Fabreeko (as of 2026-11-15) — check before ordering\nOnly 4 LEDs — lane indicators, not enclosure illumination\nNeeds the LED Effects / Happy Hare neopixel config to do more than static colours"
   },
@@ -385,6 +393,7 @@
     "Klipper Compatible": true,
     "Slug": "glow-stick",
     "Verdict": "Niche Pick",
+    "Image URL": "/media/hardware/lighting-cameras/glow-stick.webp",
     "Voltage": "24V",
     "Cons": "UV only — useless as general chamber illumination; you still need a white light for print monitoring\nNot addressable — on/off or PWM dimming only, no effects or Klipper colour macros\nV0 short length — too short for 2.4/Trident chambers (the Nightlight on a Stick is the full-size UV equivalent)\nUV wavelength is unpublished — no nm figure on the Fabreeko page or in the repo"
   }
