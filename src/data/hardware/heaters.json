@@ -9,6 +9,7 @@
     "Pros": "Widely available — stocked by most 3D printing BOM vendors and AliExpress\nFotek's genuine SSR-40DA is a legitimate industrial relay when sourced from verified channels\nCompatible with Klipper's standard SSR configuration — DC 3-32V control, AC load",
     "Wattage (W)": 9600,
     "Description": "The Fotek SSR-40DA is the most common solid-state relay in 3D printer BOMs, but it carries a well-documented safety risk: counterfeit units are prevalent across AliExpress and have appeared even through Amazon and mainstream channels. Counterfeit Foteks have failed under normal bed heater loads, causing printer fires. If you use a Fotek SSR, purchase exclusively from Fotek's authorized industrial distributors. The safer community recommendation is the Omron G3NB-210B sourced from Digi-Key or Mouser, where industrial-grade components are reliably authenticated.",
+    "Image URL": "/media/hardware/heaters/fotek-ssr-40da.webp",
     "Voltage": "AC",
     "Cons": "⚠️ KNOWN COMMUNITY SAFETY ISSUE: The Fotek SSR-40DA is one of the most-counterfeited components in 3D printing BOMs. Counterfeit units have failed catastrophically at loads well below the 40A rating, causing fires in the 3D printing community.\nCounterfeit Foteks are indistinguishable by appearance — the internal components are substandard and may fail under sustained bed heating loads\nPurchasing from Fotek's authorized distributors reduces but does not eliminate counterfeit risk due to supply chain contamination\nOmron G3NB-210B is the community-recommended alternative — buy from Digi-Key or Mouser where counterfeits are not prevalent",
     "Compatible Printers": [
@@ -59,6 +60,7 @@
     "Pros": "500W at AC line voltage reaches 110°C reliably in an enclosed printer — thermal headroom for ABS, ASA, PA\nOEM-grade silicone construction — even heat distribution across the full 250mm bed surface\nBuilt-in overheat thermal fuse — independent safety redundancy beyond the SSR and Klipper\nKeenovo is the reference supplier for Voron project heaters — extensive community build logs\nAvailable in both 110V and 220V variants — order the correct voltage for your mains supply",
     "Wattage (W)": 450,
     "Description": "The Keenovo 500W 250×250mm silicone bed heater is the Voron Trident 250mm BOM reference. At AC mains voltage it reaches and holds 110°C reliably without the thermal limitations of a 24V DC bed heater. The factory-installed overheat thermal fuse adds an independent safety layer beyond Klipper's thermal runaway protection. Available in 110V and 220V variants — specify at order time. Requires SSR switching controlled by Klipper.",
+    "Image URL": "/media/hardware/heaters/silicone-bed-heater-250x250mm-450w.webp",
     "Voltage": "AC",
     "Cons": "Requires SSR (solid state relay) for switching — AC mains wiring is not optional\nInstallation requires basic electrical safety knowledge — AC at mains voltage inside the printer\nMains voltage heaters require a safety ground connection to the printer frame\nLead time from Keenovo can be 2-4 weeks — not available for same-day sourcing",
     "Compatible Printers": [
@@ -82,6 +84,7 @@
     "Pros": "Designed for longevity at elevated temperatures with faster heat-up\nFor PEEK/PEI and other high-temp thermoplastics\nFits Revo HT, V6 and Volcano blocks",
     "Max Temp (°C)": 450,
     "Description": "E3D's high-temperature 24V heater cartridge for the Revo HT block, also fitting V6 and Volcano blocks, rated to 450 °C and built for long service life at elevated temperatures with faster heat-up for materials such as PEEK and PEI. It must only be used with a copper block, ideally with Revo HT-Abrasive nozzles, and no temperature sensor is included.",
+    "Image URL": "/media/hardware/heaters/revo-high-temperature-heater-cartridge.webp",
     "Voltage": "24V",
     "Cons": "No thermistor included — separate PT100/PT1000 sensor required\nCopper block only, will melt standard aluminium blocks\nE3D recommends Revo HT-Abrasive nozzles only\nExpensive for a cartridge",
     "Vendor 1 Name": "E3D Online",
@@ -101,6 +104,7 @@
     "Pros": "750W at AC line voltage has substantial headroom — reaches 110°C fast and recovers quickly from bed opening\nOEM Keenovo quality — even silicone heating element, consistent watt density across the pad\nBuilt-in overheat thermal fuse as standard — same safety spec as the 250mm variant\nThe V2.4 BOM reference heater — community build guides, PID values, and wiring diagrams are written around this unit\nAvailable in 110V and 220V",
     "Wattage (W)": 750,
     "Description": "The Keenovo 750W 300×300mm bed heater is the Voron 2.4 300mm BOM reference and the most-documented silicone bed heater in the self-build ecosystem. At 750W it drives the aluminum bed to 110°C comfortably and recovers quickly from the thermal penalty of opening the door mid-print. The thermal fuse, even watt density, and Keenovo's consistent quality make it the default recommendation for any V2.4 300mm build.",
+    "Image URL": "/media/hardware/heaters/silicone-bed-heater-300x300mm-750w.webp",
     "Voltage": "AC",
     "Cons": "750W requires an SSR rated for the load — verify SSR current spec (40A SSR has substantial headroom at typical mains amperage)\nAC mains wiring required inside the printer — ground the frame, protect conductors from pinch points\nLead time from Keenovo AliExpress store can extend 2-4 weeks\n300×300mm pad size is specific to V2.4 300 — not a stock size for RatRig or VzBot without customization",
     "Compatible Printers": [
@@ -123,6 +127,7 @@
     "Pros": "60W is the highest wattage available in a standard 6×20mm cartridge — maximum thermal recovery capacity for aggressive printing\nPhaetus produces heater cartridges designed for their own hotend lineup — quality control is better than generic alternatives\nFits any hotend accepting a standard 6mm bore cartridge",
     "Wattage (W)": 60,
     "Description": "The Trianglelab 60W 24V heater cartridge provides maximum wattage in a standard 6x20mm form factor, making it the choice for builders who are running very high print speeds or printing at elevated temperatures where thermal recovery is a bottleneck. It fits any compatible hotend but requires careful PID tuning in Klipper to prevent overshoot. Note: this is a generic Trianglelab cartridge, not a Phaetus part — the true Rapido v1 OEM heater is a 115W cylindrical ceramic unit, not a 6x20mm cartridge.",
+    "Image URL": "/media/hardware/heaters/60w-24v-heater-cartridge.webp",
     "Voltage": "24V",
     "Compatible Hotends": [
       "Phaetus Rapido",
@@ -152,6 +157,7 @@
     "Pros": "True edge-to-edge heating element and covering\nAnnex-specific fit, designed with the Annex team\nIntegrated 150 °C safety thermostat, CE-certified\nNo RTV needed — high-temp Lohmann glue",
     "Wattage (W)": 300,
     "Description": "Fabreeko's edge-to-edge bed heater sized for the Annex K3, with the heating element and covering running to the edge of the build plate for even heating. It is CE-certified with an integrated 150 °C thermostat for thermal-runaway protection and uses high-temperature Lohmann glue, so no RTV is needed. It runs on universal 110/220 V mains power at 300 W.",
+    "Image URL": "/media/hardware/heaters/edge-to-edge-bed-heater-for-annex.webp",
     "Voltage": "AC",
     "Cons": "Only the K3 size is available (K1/K2 \"will be added later\")\nMains-voltage heater needs an SSR\nNo rated max temperature published",
     "SSR Required": true,
@@ -171,6 +177,7 @@
     "Pros": "Genuine LDO S1 part — edge-to-edge polyimide heating on a Mic 6 bed\nScrew-in 104-GT2 thermistor included for accurate bed temperatures\nThermal fuse included for safety",
     "Wattage (W)": 100,
     "Description": "LDO's bed heater as fitted to the S1 model of the Voron V0.1/V0.2: a 100 W polyimide heater on a 120×120 mm Mic 6 bed, giving edge-to-edge heating. It includes a screw-in 104-GT2 thermistor for accurate temperature readings and a thermal fuse for safety. No PSU is included — a 200 W 24 V PSU is recommended.",
+    "Image URL": "/media/hardware/heaters/v0-2-0-1-s1-polyimide-heater.webp",
     "Voltage": "24V",
     "Cons": "No PSU included — a 200 W 24 V PSU is required/recommended\nHeater wires are short, meant for Wagos or PCB unions\nNo rated max temperature published",
     "Vendor 1 Name": "Fabreeko",
@@ -190,6 +197,7 @@
     "Wattage (W)": 40,
     "Max Temp (°C)": 300,
     "Description": "Generic 24V 40W cartridges are the BOM fallback for self-build printers on a budget. They work and are acceptable as temporary or backup heaters, but the actual wattage and resistance should be verified with a multimeter before installation — labeled specs are unreliable. The community standard recommendation is to measure resistance (40W at 24V = 14.4Ω), accept units within ±10%, and always buy a pack of several so you have verified spares on hand.",
+    "Image URL": "/media/hardware/heaters/40w-24v-heater-cartridge-6x20mm.webp",
     "Voltage": "24V",
     "Compatible Hotends": [
       "E3D V6-compatible",

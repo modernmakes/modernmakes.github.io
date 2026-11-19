@@ -124,6 +124,7 @@
     "Temperature Display": true,
     "Pros": "85°C ceiling with six presets (35–85°C) — hot enough for nylon, PC and PVA where 70°C dryers fall short\nDries two 1 kg spools at once and feeds both directly to printers while drying\nClosed-loop temperature control with a 48-hour timer and auto shut-off\nExpandable to four spools or a single 5 kg spool with add-on kits",
     "Slug": "filament-dryer-pro3",
+    "Image URL": "/media/hardware/filament-dryers/filament-dryer-pro3.webp",
     "Cons": "No humidity readout — the display shows temperature and timer only, so chamber RH stays invisible\nOnly two spools in the base unit; four-spool capacity costs extra for the Additional Chamber Kit\nManufacturer warns temperature is not uniform inside — around 70°C under the lid at an 85°C setpoint\n$172 for a two-spool dryer is steep next to four-spool 70°C boxes",
     "Spool Capacity": 2,
     "Vendor 1 Name": "DigitMakers",
@@ -144,6 +145,7 @@
     "Temperature Display": true,
     "Pros": "Cheapest active entry point on the list\nFeed port for print-while-dry\nCompact and lightweight\nFine for PLA maintenance drying and dry storage between uses",
     "Slug": "ebox-lite",
+    "Image URL": "/media/hardware/filament-dryers/ebox-lite.webp",
     "Cons": "55°C max temp (inside) — barely above ambient for any serious moisture removal\nNo humidity sensor — no moisture level feedback\nNo timer\nNot effective for PETG, PA, or any engineering filament with significant moisture exposure\nMore ‘heated storage’ than ‘active drying’",
     "Compatible Printers": [
       "Universal"
@@ -168,6 +170,7 @@
     "Pros": "Dries up to 4 spools simultaneously — significant time savings for multi-material builds\nFour independent PTFE feed ports — can feed AMS, toolchanger, or four printers at once\nSame proven S2 heating and fan system, scaled up\nHumidity sensor and temperature display\nSingle power brick — cleaner than running four S2 units",
     "Humidity Display": true,
     "Slug": "filadryer-s4",
+    "Image URL": "/media/hardware/filament-dryers/filadryer-s4.webp",
     "Cons": "Same 70°C ceiling as S2 — PA/PC builders still thermally limited\nBulky footprint — needs dedicated shelf space\nRoughly same cost as buying four S2 units — not substantially cheaper per spool\nFan noise compounds at full 4-spool capacity",
     "Compatible Printers": [
       "Universal"
@@ -192,6 +195,7 @@
     "Pros": "Sub-$30 price point — most accessible dryer on the market\nFeed port allows printing directly from the dryer without opening\nHumidity sensor + temperature display — know when drying is complete\nActive fan ensures even heat distribution across the spool\nAmazon Prime availability — no lead time",
     "Humidity Display": true,
     "Slug": "filadryer-s2",
+    "Image URL": "/media/hardware/filament-dryers/filadryer-s2.webp",
     "Cons": "Single spool only\n70°C ceiling insufficient for optimal PA/nylon or PC drying (ideal is 80°C+)\nBudget-tier build quality — lid seal degrades with repeated use\nNo filament weight sensor",
     "Compatible Printers": [
       "Universal"
