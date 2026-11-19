@@ -2,6 +2,7 @@
   {
     "id": "rec0tIX7L0c3HQDN5",
     "Diameter (mm)": 18,
+    "Image URL": "/media/hardware/motion-systems/2gt-toothed-idler.webp",
     "Description": "Gates 2GT toothed idlers are used at the inner XY belt path reversal points in Voron CoreXY builds where the belt wraps with the tooth side inward. Outer belt reversals use smooth F695 bearings instead. Mismatching toothed and smooth idler positions causes belt noise and eventual skipping.",
     "Verdict Label": "OEM toothed idler — used where belt reversal requires tooth engagement",
     "Tooth Profile": "2GT",
@@ -50,6 +51,7 @@
   },
   {
     "id": "rec1PuzJzEbCh8pbT",
+    "Image URL": "/media/hardware/motion-systems/cnc-all-wheel-drive-kit-for-voron-v2-4-and-trident.webp",
     "Description": "LDO CNC all-wheel-drive kit for the Voron V2.4 and Trident: all hardware needed to convert to a 4-motor CoreXY motion system. Requires 4 stepper motors with a 35mm shaft (recommended LDO-42STH48-2504AH S35, not included). Price basis: V2.4 variant $104.99 (out of stock), Trident variant $109.99 (in stock).",
     "Verdict Label": "CNC all-wheel-drive conversion for V2.4/Trident — needs 4 S35-shaft motors",
     "Tooth Profile": "N/A",
@@ -170,6 +172,7 @@
   },
   {
     "id": "rec5iVxNskj5uPrCC",
+    "Image URL": "/media/hardware/motion-systems/beefy-z-idlers-bzi-for-voron.webp",
     "Description": "Printed Z idler set for Voron 2.4, Micron and Doomcube, designed by clee. One $8.99 kit makes 4 Z idlers and includes spares. Same design principle as the Beefy Front Idlers: belt tension compresses the printed layers instead of splitting them. Kit includes the printed parts plus stainless hardware; the stock 20T toothed idlers and frame mounting hardware are reused. Design is open source (GPL-3.0).",
     "Verdict Label": "$8.99 USD via Fabreeko | 4-idler kit for Voron 2.4 / Micron / Doomcube",
     "Tooth Profile": "2GT",
@@ -325,6 +328,7 @@
   },
   {
     "id": "recE7iDWol2A5CRfc",
+    "Image URL": "/media/hardware/motion-systems/awd-drive-1-35a.webp",
     "Description": "Full AWD (4-motor XY) kit for any RatRig V-Core 3.0/3.1. Damper-mounted drives for lower noise, ABEC-5/7 bearings, and genuine Gates GT2 16T pulleys. Full kit includes printed parts with inserts and embedded bearings, 8x F695 and 4x 695ZZ bearings, 2x 5x65mm shafts, 2x disc couplers, screws and shoulder bolts. Needs a mirrored rear block and 30-60mm more belt length; use the AWD layout if running an L3VER M2. STL files on Printables and manual/BOM on GitHub.",
     "Verdict Label": "Full AWD kit for any V-Core — printed parts, bearings, GT2 pulleys included",
     "Tooth Profile": "N/A",
@@ -565,6 +569,7 @@
   },
   {
     "id": "recT4WCpLAYDzJtvd",
+    "Image URL": "/media/hardware/motion-systems/bfi-beefy-front-idlers-for-voron.webp",
     "Description": "Printed front idler set for Voron Trident, Voron 2.4, Salad Fork and Micron, designed by clee. One $8.99 kit makes 2 idlers and includes spares. The design loads printed layers in compression under belt tension instead of pulling them apart, fixing the cracked stock idlers. Kit includes the printed parts plus stainless hardware (M3/M5 screws, nuts, pins, heat inserts); the stock idler bearing and shim stack is reused. Design is open source (GPL-3.0).",
     "Verdict Label": "$8.99 USD via Fabreeko | 2-idler kit, universal for Trident / 2.4 / Salad Fork / Micron",
     "Tooth Profile": "2GT",
@@ -602,6 +607,7 @@
   },
   {
     "id": "recVPrPFnDgzZKiDS",
+    "Image URL": "/media/hardware/motion-systems/bearings-for-annex-k3.webp",
     "Description": "HoneyBadger precision micro bearing kit for the Annex K3: 4x F695-2RS, 17x 625-2RS and 6x 623-2RS. ABEC 3 certified chrome steel or ABEC 7 hybrid ceramic, polished races, high-temp rating. Price basis: chrome steel $29.99 (out of stock) / hybrid ceramic $69.99 (available).",
     "Verdict Label": "Full bearing set for the Annex K3 — F695, 625 and 623",
     "Tooth Profile": "N/A",
@@ -707,6 +713,7 @@
   },
   {
     "id": "recbbAasNZBWVj3EA",
+    "Image URL": "/media/hardware/motion-systems/awd-drive-1-3.webp",
     "Description": "Hardware-only kit adding all-wheel drive (4-motor XY) to any RatRig V-Core version. Drives mount on a damper system to reduce noise, with genuine Gates (or Kis3D) pulleys on ABEC-5/7 bearings for long life. No frame or enclosure modifications needed; requires 30-60mm more belt length. Hardware kit only — no printed parts. Compatible with V-Core 3.0/3.1 (200-500mm+), stock leadscrew Z and BRS ballscrew Z-upgrades, and L3VER M1/M2.",
     "Verdict Label": "Hardware-only AWD kit for any V-Core — damper-mounted, ABEC bearings",
     "Tooth Profile": "N/A",
@@ -745,6 +752,7 @@
   },
   {
     "id": "recdHqyyaCvZcIafe",
+    "Image URL": "/media/hardware/motion-systems/2gt-belt-9mm.webp",
     "Belt Width (mm)": 9,
     "Description": "Gates LL-2GT 9mm belt is used in AWD CoreXY builds (RatRig V-Core 4, some VzBot configurations) where the wider belt handles the aggregate tension from 4 independent motor drives. The 9mm width is required when using 9mm pulleys and idlers; it is not a drop-in substitute for 6mm hardware.",
     "Verdict Label": "9mm Gates belt for AWD builds — wider belt handles the higher forces of 4-motor drive",
@@ -805,6 +813,7 @@
   },
   {
     "id": "recgHTfEG9k5x47dc",
+    "Image URL": "/media/hardware/motion-systems/disc-coupler.webp",
     "Description": "Dual-disc shaft coupler: two aluminum hubs joined by one or two thin stainless steel discs. The thin metal disc flexes to absorb angular, parallel and axial misalignment while transmitting torque with zero backlash and high concentricity. BRS sells it for printer use because it behaves better than low-cost spider (jaw) couplers. Sold in several bore/size variants from EUR 13.90 (lowest variant).",
     "Verdict Label": "Dual-disc zero-backlash coupler — beats spider couplers on concentricity",
     "Tooth Profile": "N/A",
@@ -881,6 +890,7 @@
   {
     "id": "recipb38sZofw7p65",
     "Diameter (mm)": 13,
+    "Image URL": "/media/hardware/motion-systems/f695-2rs-smooth-idler-bearing.webp",
     "Description": "F695 2RS flanged bearings are used at all smooth idler positions in Voron CoreXY belt paths — outer reversals where the belt’s flat back contacts the bearing. 5mm bore fits the M5 idler post and the flange retains belt laterally. Voron BOM specifies F695 2RS; note that quality varies significantly by source.",
     "Verdict Label": "Standard smooth idler for all Voron CoreXY belt path outer reversals",
     "Tooth Profile": "N/A",
