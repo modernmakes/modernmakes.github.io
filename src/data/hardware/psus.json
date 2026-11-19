@@ -21,6 +21,7 @@
   {
     "id": "rec1Y6gXzRRY5cFbk",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/lrs-100-24.webp",
     "Wattage (W)": 108,
     "Slug": "lrs-100-24",
     "UL Certified": true,
@@ -97,6 +98,7 @@
   {
     "id": "recDDnjlfzSMfXLTn",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/lrs-200-24.webp",
     "Wattage (W)": 211.2,
     "Slug": "lrs-200-24",
     "UL Certified": true,
@@ -264,6 +266,7 @@
   {
     "id": "recloPvccLX43gdAG",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/lcp300-24d5.webp",
     "Wattage (W)": 300,
     "Slug": "lcp300-24d5",
     "Description": "The LCP300-24D5 is LDO's compact, fully enclosed 300W dual-output power supply designed for 3D printing, delivering 24V across three terminals plus a 5V output from a single 120×95×35mm unit. Its GaN design with power factor correction runs at up to 91% efficiency, and dual AC input terminals let additional AC loads daisy-chain through the supply.",
