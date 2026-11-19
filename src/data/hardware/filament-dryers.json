@@ -5,6 +5,7 @@
     "Pros": "Polymaker brand credibility — designed by the company that makes the filament, built to their drying specs\nClean, well-constructed design vs. budget alternatives\nFeed port, humidity indicator, temperature display\n70°C max — matches the Sunlu S2 at the top of this performance tier\nGood integration with Polymaker’s published filament drying guidelines",
     "Humidity Display": true,
     "Slug": "polydryer-box",
+    "Image URL": "/media/hardware/filament-dryers/polydryer-box.webp",
     "Cons": "More expensive than Sunlu S2 for equivalent drying performance\nSingle spool only\n70°C ceiling still limits PA/PC optimal drying\nLimited retail distribution — Polymaker store or Amazon only",
     "Compatible Printers": [
       "Universal"
@@ -29,6 +30,7 @@
     "Pros": "Built-in filament weight scale — tracks remaining spool weight without opening the box\nFeed port for print-while-dry\nHumidity sensor and temperature display\nReliable eSUN brand — established in the filament community",
     "Humidity Display": true,
     "Slug": "ebox-pro",
+    "Image URL": "/media/hardware/filament-dryers/ebox-pro.webp",
     "Cons": "55°C max temp — noticeably lower than S2 (70°C) and EIBOS (70°C)\nIneffective for PA/nylon, PC, or other engineering filaments at this temperature\nMore expensive than Sunlu S2 for less drying performance\nOlder product design — community has moved toward S2/EIBOS at same price tier",
     "Compatible Printers": [
       "Universal"
@@ -53,6 +55,7 @@
     "Pros": "360° rotating heating keeps temperature difference between spools to just 1°C\n80°C max temperature covers PA, PC and other high-temp filaments\n9 built-in material presets plus 3 customizable slots (M1, M2, M3)\nAutomatic humidity-control mode holds a set RH when not heating\nV0 fireproof shell and self-regulating PTC heating element\n8 filament outlet holes for print-while-drying in any direction\nPower-loss memory and 2 desiccant compartments",
     "Humidity Display": true,
     "Slug": "polyphemus-filament-dryer",
+    "Image URL": "/media/hardware/filament-dryers/polyphemus-filament-dryer.webp",
     "Cons": "Rotating motor is a wear item rated at 1500h lifespan (replaceable)\nHolds only two 1 kg spools; a 3 kg spool needs the expansion parts\nCurrently out of stock at Fabreeko\n130W and 2.2 kg — heavier and hungrier than the smaller Cyclopes",
     "Spool Capacity": 2,
     "Vendor 1 Name": "Fabreeko",
@@ -74,6 +77,7 @@
     "Pros": "Best active circulation design in this comparison — convection heating produces measurably more even temperature distribution\n70°C max — reaches optimal PA/nylon drying range where S2 falls short\nHumidity sensor with display — know when drying is complete\nFeed port for print-while-dry\nNoticeably better build quality vs. budget options — lid seal, material consistency\nTimer function",
     "Humidity Display": true,
     "Slug": "eibos-cyclopes",
+    "Image URL": "/media/hardware/filament-dryers/eibos-cyclopes.webp",
     "Cons": "Approximately 2× the price of Sunlu S2\nSingle spool only — no multi-spool option\nPremium hard to justify for casual PLA/PETG drying\nAliExpress pricing is best but adds lead time vs. Amazon S2",
     "Compatible Printers": [
       "Universal"
@@ -97,6 +101,7 @@
     "Temperature Display": true,
     "Pros": "Higher max temp than most dedicated dryers — Cosori ~72°C, Excalibur ~74°C+\nOften cheaper than purpose-built dryers for equivalent or greater capacity\nRound dehydrators (Cosori) fit 1–2 standard 1kg spools; Excalibur holds 2–4\nWidely available — Amazon, local kitchen stores, Costco\nDecades of community documentation — well-understood method with no surprises\nExcalibur has exceptionally even airflow — better temperature uniformity than most dedicated dryers",
     "Slug": "cosori-pioneer-cfd-n051-w",
+    "Image URL": "/media/hardware/filament-dryers/cosori-pioneer-cfd-n051-w.webp",
     "Cons": "No PTFE feed port by default — requires drilling + bowden fitting modification\nNo humidity sensor — no moisture feedback during drying cycle\nSpools may not sit flat depending on tray geometry and spool diameter — test before relying on it\nLess ergonomic than purpose-built dryers\nCosori 70–72°C ceiling is real — verify your specific unit before committing to PA drying",
     "Compatible Printers": [
       "Universal"
