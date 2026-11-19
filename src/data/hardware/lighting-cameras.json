@@ -18,6 +18,7 @@
     "Klipper Compatible": true,
     "Slug": "ws2812b-neopixel-led-strip",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/ws2812b-neopixel-led-strip.webp",
     "Compatible Toolheads": [
       "Stealthburner"
     ],
@@ -47,6 +48,7 @@
     "Klipper Compatible": true,
     "Slug": "cob-led-strip-24v-white",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/cob-led-strip-24v-white.webp",
     "Voltage": "24V",
     "Cons": "Not addressable — cannot create lighting effects or integrate with Klipper LED status macros\nAlways-on unless wired to a PWM-capable output or relay — basic installations run at full brightness constantly\n24V COB variants are less common than 12V — verify voltage spec carefully before ordering from AliExpress listings\nHigh-density COB strips generate some heat — factor into enclosure thermal design for small chambers",
     "Compatible Printers": [
@@ -72,6 +74,7 @@
     "Klipper Compatible": true,
     "Slug": "sk6812-rgbcw",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/sk6812-rgbcw.webp",
     "Voltage": "5V",
     "Cons": "5V over long runs causes voltage drop — power injection needed for longer strips\nSK6812 ICs degrade above ~60°C — keep out of the hottest chamber spots\nOnly 10 LEDs in this Fabreeko strip — enough for a logo or toolhead accent, not full enclosure lighting\nData signal degrades over long cable runs — series resistor on the data line is community-standard practice"
   },
@@ -94,6 +97,7 @@
     "Klipper Compatible": true,
     "Slug": "wled-controller",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/wled-controller.webp",
     "Voltage": "5-24V",
     "Cons": "Requires WiFi access inside the printer chassis — signal strength can be marginal inside fully metal enclosures\nMoonraker plugin requires manual installation and configuration — not zero-config\nAdds a network device to your setup — more complexity vs. direct Klipper GPIO neopixel control\nWLED configuration has a learning curve for users new to home automation-style tools",
     "Compatible Printers": [
@@ -118,6 +122,7 @@
     "Klipper Compatible": true,
     "Slug": "camera-v3-wide",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/lighting-cameras/camera-v3-wide.webp",
     "Voltage": "3.3V",
     "Cons": "CSI ribbon cable is limited in length — typically 30cm stock, up to ~1m with quality flex cables before signal degradation; long runs inside enclosures require care\nRequires a Raspberry Pi host — does not work with Raspberry Pi alternatives (CB1, BTT Manta SBC mode) unless using libcamera-compatible OS\nCamera cable routing inside a hot enclosed printer can stress the ribbon connector",
     "Compatible Printers": [
@@ -144,6 +149,7 @@
     "Klipper Compatible": true,
     "Slug": "kirigami-ufo",
     "Verdict": "Niche Pick",
+    "Image URL": "/media/hardware/lighting-cameras/kirigami-ufo.webp",
     "Cons": "Voron V0.1/V0.2 Kirigami bed only — useless on any other printer\nNo LEDs included — the lighting is only a pass-through; the front neopixel is a separate part\nRequires Molex/XH crimping and the rest of the BOM from GitHub — not a plug-and-play kit\n$39.99 buys two bare PCBs plus pins; printed parts and all other components are sourced separately"
   },
   {
