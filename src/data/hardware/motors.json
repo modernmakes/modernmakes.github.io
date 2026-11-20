@@ -7,6 +7,7 @@
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 61,
+    "Image URL": "/media/hardware/motors/42sth60-2004b-en1000.webp",
     "Frame Size": "NEMA17",
     "Body": "Aluminium end caps / steel housing",
     "Vendor 1 Name": "Fabreeko",
@@ -36,6 +37,7 @@
     "Rated Current (A)": 1.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 52,
+    "Image URL": "/media/hardware/motors/35sth52-1504ah.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -63,6 +65,7 @@
     "Rated Current (A)": 2.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2504ah-s45r.webp",
     "Use Case": [
       "XY"
     ],
@@ -127,6 +130,7 @@
     "Rated Current (A)": 1,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 36,
+    "Image URL": "/media/hardware/motors/cse14ra1l410a-01.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -158,6 +162,7 @@
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/17hm19-2004s1.webp",
     "Use Case": [
       "XY"
     ],
@@ -187,6 +192,7 @@
     "Verdict Label": "Budget AliExpress clone — verify specs with multimeter before installing; quality inconsistent",
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/nema17-48mm-stepper.webp",
     "Use Case": [
       "XY"
     ],
@@ -209,6 +215,7 @@
     "Verdict": "Workhorse",
     "Motor Length (mm)": 26,
     "Lead Screw Lead (mm)": 8,
+    "Image URL": "/media/hardware/motors/42sth25-1004cl200e-vrn.webp",
     "Use Case": [
       "Z"
     ],
@@ -236,6 +243,7 @@
     "Rated Current (A)": 0.35,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 17.5,
+    "Image URL": "/media/hardware/motors/36sth17-0354ahg.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -261,6 +269,7 @@
     "Rated Current (A)": 1.68,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 40,
+    "Image URL": "/media/hardware/motors/42sth40-1684ac-vrn.webp",
     "Use Case": [
       "Z"
     ],
@@ -288,6 +297,7 @@
     "Rated Current (A)": 1,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 20,
+    "Image URL": "/media/hardware/motors/42sth20-1004ashig-7t.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -317,6 +327,7 @@
     "Verdict": "Workhorse",
     "Motor Length (mm)": 40,
     "Lead Screw Lead (mm)": 8,
+    "Image URL": "/media/hardware/motors/42sth40-1684l300e.webp",
     "Use Case": [
       "Z"
     ],
@@ -345,6 +356,7 @@
     "Rated Current (A)": 1,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 20,
+    "Image URL": "/media/hardware/motors/36sth20-1004ahg-xh.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -374,6 +386,7 @@
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 40,
+    "Image URL": "/media/hardware/motors/42sth40-2004mah.webp",
     "Use Case": [
       "XY"
     ],
@@ -424,6 +437,7 @@
     "Rated Current (A)": 2.8,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2804ahs80.webp",
     "Use Case": [
       "XY"
     ],
@@ -452,6 +466,7 @@
     "Rated Current (A)": 2.8,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2804ah.webp",
     "Use Case": [
       "XY"
     ],
@@ -480,6 +495,7 @@
     "Rated Current (A)": 0.8,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 20,
+    "Image URL": "/media/hardware/motors/36sth20-0804ah.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -505,6 +521,7 @@
     "Rated Current (A)": 2.5,
     "Verdict": "Niche Pick",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2504b-en1000.webp",
     "Frame Size": "NEMA17",
     "Body": "Aluminium end caps / steel housing",
     "Vendor 1 Name": "Fabreeko",
@@ -529,6 +546,7 @@
     "Vendor 2 URL": "https://www.pololu.com/product/2268",
     "Verdict": "Workhorse",
     "Lead Screw Lead (mm)": 8,
+    "Image URL": "/media/hardware/motors/t8-integrated-lead-screw-nema17.webp",
     "Use Case": [
       "Z"
     ],
@@ -553,6 +571,7 @@
     "Rated Current (A)": 2.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2504ah-s80.webp",
     "Use Case": [
       "XY"
     ],
@@ -580,6 +599,7 @@
     "Rated Current (A)": 1,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 25,
+    "Image URL": "/media/hardware/motors/lgx-pancake-25mm.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -605,6 +625,7 @@
     "Rated Current (A)": 2.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 47,
+    "Image URL": "/media/hardware/motors/42cm06.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -638,6 +659,7 @@
     "Verdict": "Workhorse",
     "Weight (g)": 350,
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2504ac.webp",
     "Use Case": [
       "XY"
     ],
@@ -666,6 +688,7 @@
     "Rated Current (A)": 2.8,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2804ac.webp",
     "Use Case": [
       "XY"
     ],
@@ -696,6 +719,7 @@
     "Description": "The SLM NEMA17 Water Cooler is a specialty stepper with an integrated water cooling block, designed for extreme-performance CoreXY builds. Liquid cooling removes motor heat that would otherwise force current rollback, allowing sustained operation at higher currents than air-cooled equivalents. Most commonly found in HevORT and high-current VzBot builds where the entire motion system is engineered for high performance. Not a meaningful upgrade for standard Voron builds — the thermal ceiling on an LDO at Voron's recommended currents is not the limiting factor at typical print speeds. Makes sense only if you're already building around a full water cooling loop for the motion system.",
     "Verdict Label": "Specialty water-cooled NEMA17 — high sustained current capability; requires water cooling loop",
     "Verdict": "Bleeding Edge",
+    "Image URL": "/media/hardware/motors/nema17-water-cooler.webp",
     "Use Case": [
       "XY"
     ],
@@ -716,6 +740,7 @@
     "Verdict Label": "NEMA14 motor for the E3D Revo Roto | on-file price is a GBP→USD conversion",
     "Rated Current (A)": 0.6,
     "Verdict": "Workhorse",
+    "Image URL": "/media/hardware/motors/roto-motor.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -738,7 +763,7 @@
     "Rated Current (A)": 2.8,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
-    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2606/02/products/800-1-1649517599.jpg",
+    "Image URL": "/media/hardware/motors/42sth48-2804ah-s55.webp",
     "Use Case": [
       "XY"
     ],
@@ -767,6 +792,7 @@
     "Rated Current (A)": 2.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2504ah-s55.webp",
     "Use Case": [
       "XY"
     ],
@@ -794,6 +820,7 @@
     "Rated Current (A)": 2.8,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48ac-r.webp",
     "Use Case": [
       "XY"
     ],
@@ -821,6 +848,7 @@
     "Rated Current (A)": 2.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/42sth48-2504ah-s35r.webp",
     "Use Case": [
       "XY"
     ],
@@ -848,6 +876,7 @@
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 52,
+    "Image URL": "/media/hardware/motors/35sth52-2004-s35.webp",
     "Frame Size": "NEMA14",
     "Body": "Aluminium end caps / steel housing",
     "Vendor 1 Name": "Fabreeko",
@@ -868,6 +897,7 @@
     "Verdict Label": "Custom motor for the E3D Revo Hemera XS | on-file price is a GBP→USD conversion",
     "Rated Current (A)": 1.4,
     "Verdict": "Workhorse",
+    "Image URL": "/media/hardware/motors/hemera-xs-motor.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -891,6 +921,7 @@
     "Verdict": "Workhorse",
     "Motor Length (mm)": 40,
     "Lead Screw Lead (mm)": 8,
+    "Image URL": "/media/hardware/motors/42sth40-1684cl350et.webp",
     "Use Case": [
       "Z"
     ],

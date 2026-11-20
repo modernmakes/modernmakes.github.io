@@ -2,6 +2,7 @@
   {
     "id": "rec0O5hRmmlDbsceT",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/uhp-350-48.webp",
     "Wattage (W)": 350.4,
     "Slug": "uhp-350-48",
     "UL Certified": true,
@@ -21,6 +22,7 @@
   {
     "id": "rec1Y6gXzRRY5cFbk",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/lrs-100-24.webp",
     "Wattage (W)": 108,
     "Slug": "lrs-100-24",
     "UL Certified": true,
@@ -42,6 +44,7 @@
   {
     "id": "recAkyhLfANqhRRCc",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/uhp-200-24.webp",
     "Wattage (W)": 201.6,
     "Slug": "uhp-200-24",
     "UL Certified": true,
@@ -61,6 +64,7 @@
   {
     "id": "recAnu5cG8yxbNfMI",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/nes-350-12.webp",
     "Wattage (W)": 348,
     "Slug": "nes-350-12",
     "UL Certified": true,
@@ -79,6 +83,7 @@
   {
     "id": "recBkLUEY4sIPiMII",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/lrs-600-24.webp",
     "Wattage (W)": 600,
     "Slug": "lrs-600-24",
     "UL Certified": true,
@@ -97,6 +102,7 @@
   {
     "id": "recDDnjlfzSMfXLTn",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/lrs-200-24.webp",
     "Wattage (W)": 211.2,
     "Slug": "lrs-200-24",
     "UL Certified": true,
@@ -119,6 +125,7 @@
   {
     "id": "recENtT8s3hz1tdY7",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/sst-st30sf.webp",
     "Wattage (W)": 300,
     "Slug": "sst-st30sf",
     "UL Certified": true,
@@ -140,6 +147,7 @@
   {
     "id": "recFREz7ez12FfnuQ",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/lrs-350-48.webp",
     "Wattage (W)": 350.4,
     "Slug": "lrs-350-48",
     "UL Certified": true,
@@ -158,6 +166,7 @@
   {
     "id": "recG5emjKryrM5NjZ",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/supernova-650-gm.webp",
     "Wattage (W)": 650,
     "Slug": "supernova-650-gm",
     "Description": "The EVGA SuperNOVA 650 GM is the mid-range SFX-L pick for VzBot builds — 80+ Gold efficiency, fully modular cables, and 650W headroom at a price above the budget ST30SF. SFX-L form factor is longer than SFX spec (100mm vs 63.5mm depth), so verify chassis clearance before ordering. Community considers the 650 GM a cleaner choice than the ST30SF due to modular cabling, making it easier to route only what you need in a compact electronics bay. Same 12V rail caveats apply — dedicated 24V supply still recommended for the heated bed. Scope: auxiliary ATX PSU for secondary 12V use, not a primary printer PSU.",
@@ -178,6 +187,7 @@
   {
     "id": "recIWYmQd7ElRI1Qi",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/uhp-500-24.webp",
     "Wattage (W)": 501.6,
     "Slug": "uhp-500-24",
     "UL Certified": true,
@@ -203,6 +213,7 @@
   {
     "id": "recPnPtYjsIIUbMJ8",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/rsp-500-24.webp",
     "Wattage (W)": 504,
     "Slug": "rsp-500-24",
     "UL Certified": true,
@@ -226,6 +237,7 @@
   {
     "id": "recXuKyuFqY2shf1j",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/rs-50-5.webp",
     "Wattage (W)": 50,
     "Slug": "rs-50-5",
     "UL Certified": true,
@@ -245,6 +257,7 @@
   {
     "id": "recgxpEzyvJU5RiBC",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/uhp-350-24.webp",
     "Wattage (W)": 350.4,
     "Slug": "uhp-350-24",
     "UL Certified": true,
@@ -264,6 +277,7 @@
   {
     "id": "recloPvccLX43gdAG",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/lcp300-24d5.webp",
     "Wattage (W)": 300,
     "Slug": "lcp300-24d5",
     "Description": "The LCP300-24D5 is LDO's compact, fully enclosed 300W dual-output power supply designed for 3D printing, delivering 24V across three terminals plus a 5V output from a single 120×95×35mm unit. Its GaN design with power factor correction runs at up to 91% efficiency, and dual AC input terminals let additional AC loads daisy-chain through the supply.",
@@ -282,6 +296,7 @@
   {
     "id": "recogmbh29WT8N2c8",
     "Verdict": "CONSIDER",
+    "Image URL": "/media/hardware/psus/rs-25-5.webp",
     "Wattage (W)": 25,
     "Slug": "rs-25-5",
     "UL Certified": true,
@@ -301,6 +316,7 @@
   {
     "id": "recrxTHwgMqPs4s2w",
     "Verdict": "BUY",
+    "Image URL": "/media/hardware/psus/lrs-350-24.webp",
     "Wattage (W)": 350.4,
     "Slug": "lrs-350-24",
     "UL Certified": true,

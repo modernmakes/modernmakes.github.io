@@ -189,6 +189,7 @@
   },
   {
     "id": "recBQgfT20jZ5NhGD",
+    "Image URL": "/media/hardware/toolheads/stovepipe.webp",
     "Pros": "CPAP blower delivers high CFM and very high static pressure — stronger part cooling than blower fans\nShutter switches between internal (closed-loop, ABS) and external (PLA/PETG) air intake\nBackup 5015 Mailbox duct swaps in without dismantling the toolhead\nNo loss in X or Z travel, at most 3mm in Y\nWide extruder and hotend support",
     "Name": "StovePipe",
     "Brand / Designer": "chirpy2605",
@@ -204,7 +205,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/V0/StovePipe",
     "Cons": "Requires Wonsmart WS7040 fan + driver board + Klipper Expander (or logic-level control) — extra cost and wiring\nFan can pull 2.8A at full load — needs a suitable MOSFET, not a standard MCU fan header\nCPAP hose routing is tight on the v0.1\nHotend can struggle to hold temp at high fan output — may need PID tuning or a stronger heater",
     "Verdict": "Buy",
-    "Updated": "2026-11-17T22:30:33.000Z",
+    "Updated": "2026-11-20T00:42:27.000Z",
     "Slug": "stovepipe",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -607,6 +608,7 @@
   },
   {
     "id": "rechrepTqBBUoPbD7",
+    "Image URL": "/media/hardware/toolheads/cranefly.webp",
     "Pros": "2x 4010 part cooling + 3010 hotend fan + 2x Neopixels\nWide hotend support including Dragon, Rapido, Revo Voron, and Bambu X1C\nDesigned for the Doron Velta delta printer",
     "Name": "CraneFly",
     "Brand / Designer": "chirpy2605",
@@ -615,7 +617,7 @@
     "Vendor 1 Name": "https://github.com/chirpy2605/voron/tree/main/general/CraneFly",
     "Cons": "BETA2 — still in development, CAD will change\nFor a delta printer (Doron Velta), not a Voron\nPeck flexure-mount support is ALPHA and untested\nSmaller community install base vs Voron toolheads",
     "Verdict": "Consider",
-    "Updated": "2026-11-17T22:30:35.000Z",
+    "Updated": "2026-11-20T00:42:29.000Z",
     "Slug": "cranefly",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [

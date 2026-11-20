@@ -40,7 +40,7 @@
     "Price (USD)": 54.37,
     "Pros": "500°C max temp\nV6-compatible drop-in, same dimensions as the standard Dragon\nLonger melt section for higher flow\n0.4mm plated copper nozzle included\n53g lightweight",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "rec7Nntel8WpI6ldz",
@@ -98,7 +98,7 @@
     "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z",
+    "Updated": "2026-11-19T01:35:01.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
@@ -157,7 +157,7 @@
     "Pros": "75 mm³/s — highest flow in the Rapido 2 family\n350°C ceiling for all exotic materials\nPT1000 for accurate high-temp readings\nFull toolhead ecosystem compatibility\nBest pick for speed-focused enclosed builds",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z",
+    "Updated": "2026-11-19T01:35:01.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -188,7 +188,7 @@
     "Price (USD)": 1571.99,
     "Pros": "Same 116 mm³/s / 500°C Prime performance as the Air version; liquid cooling eliminates heat creep in heated chambers above 80°C; no heatsink fan to fail; dual 100 W heaters and dual sensor support for redundancy.",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recAsuEJU5161ysSg",
@@ -247,7 +247,7 @@
     "Pros": "350°C ceiling with PT1000 for exotic materials\nMost compact form factor in the Rapido 2 family\nLightest weight — benefits high-acceleration toolheads\nLowest price in the lineup at $75\nGood fit for bowden or light-duty direct drive setups",
     "Related 1 URL": "/hardware/hotends/rapido-2-hf",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z",
+    "Updated": "2026-11-19T01:35:01.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -306,7 +306,7 @@
     "Pros": "Excellent flow for standard filaments\nWell-documented community support\nCompatible with all major Voron toolheads\nAffordable entry into the Rapido 2 family\nPT100 upgrade available via Plus variant",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z",
+    "Updated": "2026-11-19T01:35:01.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -340,7 +340,7 @@
     "Price (USD)": 126.6,
     "Pros": "Two independently temperature-controlled nozzles — print two materials at once\nDual-colour or soluble-support (PVA) printing\nShares the whole V6 ecosystem: blocks, sensors, cartridges, nozzles\nCompact 30×28mm footprint; air- or water-cooled variants",
     "Max Flow Source": "Community estimate",
-    "Updated": "2026-11-18T07:16:23.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recFJcb0HcaAbQd6r",
@@ -365,7 +365,7 @@
     "Price (USD)": 56.23,
     "Pros": "500°C all-metal kit\n0.1 mm thin-walled heat break for fast heat-up and clean retractions\nRigid torsion-resistant structure for one-handed nozzle changes\nV6-nozzle compatible, same mounts as the Dragon HF/UHF",
     "Max Flow Source": "Community estimate",
-    "Updated": "2026-11-17T08:09:41.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recGr8JtqZl2cA7CE",
@@ -399,7 +399,7 @@
     "Heat Break": "Titanium feed tube; 3 titanium hollow pillar mounts (no threaded heat break)",
     "Price (USD)": 160,
     "Pros": "All-metal, tested past 320°C\nDual Ø6x20mm heater cartridges clamped for excellent thermal transfer\nIndependently proven >30 mm³/s flow\n3 titanium pillar mounts — extremely rigid, survives crashes that would bend a threaded heat break\nStandard Volcano nozzles, widely available\nBMG-M / LGX mounting",
-    "Updated": "2026-11-17T08:45:25.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recII7ukzgt2G3hsF",
@@ -435,7 +435,7 @@
     "Heat Break": "Steel, Ø2.00mm bore, proprietary hardened surface",
     "Price (USD)": 220,
     "Pros": "All-steel construction with proprietary hardened surface — harder than abrasive filament fiber, never wears\nMeltzone dimensions remain constant after 1000kg of filled filament\n550°C max temp — highest of any currently available hotend\n39.5mm meltzone length enables extremely high flow rates\nSpring rate >1500N/mm — exceptionally stiff, eliminates flex artifacts\nStandard M6x1 nozzle thread, 4x M3 Ø16mm mounting (Voron standard)\nFree integration STEP/STL files on website",
-    "Updated": "2026-11-11T10:58:46.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recKeZAqcTlVH5hl1",
@@ -465,7 +465,7 @@
     "Price (USD)": 1571.99,
     "Pros": "Same 116 mm³/s / 500°C Prime performance with zero fan dependency; no heatsink fan to fail, vibrate, or suck in chamber heat; suited to hot enclosed chambers; dual 100 W heaters and dual sensor support.",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recMpNWcctaKbgxdu",
@@ -488,7 +488,7 @@
     "Heat Break": "Titanium",
     "Price (USD)": 82.95,
     "Pros": "40 g — extremely light\nCeramic ring heater, 280°C in under 1 minute\nKinematic coupling for one-handed nozzle changes\nVoron-style mount out of the box\n500°C capable with thermocouple upgrade",
-    "Updated": "2026-11-17T23:24:15.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recMt0kXFBBWHxwRQ",
@@ -532,7 +532,7 @@
     "Heat Break": "Integrated into Revo nozzle - factory-sealed nozzle + heatbreak in one unit, no separate heat break",
     "Price (USD)": 79.99,
     "Pros": "25g — E3D's lightest hotend\nRapidChange nozzles changed cold by hand, no tools, no leaks\nHeaterCore heats in seconds, PTC safety (power drops as it gets hotter)\nDeveloped with Team Voron for the StealthBurner",
-    "Updated": "2026-11-16T10:40:39.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recMxi02KiBC6XTwA",
@@ -574,7 +574,7 @@
     "Price (USD)": 37.98,
     "Pros": "Lowest-cost genuine E3D hotend\nSame V6 nozzles, heater block and groove mount as the V6\nStainless one-piece heatbreak/heatsink is nearly indestructible\nPTFE liner is cheap and easy to replace if overheated",
     "Max Flow Source": "Community estimate",
-    "Updated": "2026-11-17T23:24:38.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recPDhTG5pXQqyLkp",
@@ -604,7 +604,7 @@
     "Price (USD)": 1571.99,
     "Pros": "Prime's 116 mm³/s / 500°C melt zone with the shortest possible filament path — Slice's own recommendation for maximum flow with soft filaments; LGX interface-plug mount, no separate mount to design; a 4010 fan is enough for the monolithic cold block; one-handed nozzle changes.",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recPc9uC0INefKqim",
@@ -664,7 +664,7 @@
     "Pros": "75 mm³/s max flow, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
     "Related 1 URL": "/hardware/hotends/dragon-hf",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z",
+    "Updated": "2026-11-19T01:35:01.000Z",
     "Vendor 5 Affiliate": true,
     "Related 2 URL": "/hardware/hotends/revo-voron"
   },
@@ -713,10 +713,10 @@
     "Brand": "Luke's Lab",
     "Mount Style": "6x18mm bolt circle, M3 tapped",
     "Heat Break": "Bi-Metal",
-    "Price (USD)": 320,
+    "Price (USD)": 325.05,
     "Pros": "Conduction cooling eliminates fan dependency\nHighest flow ceiling in the Chube lineup\n500°C max temp\nV6 nozzle compatibility\nM3 hardware throughout\n52mm meltzone — longest in the family\nUp to 47.5mm heater cartridge support for higher wattage",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-17T23:24:02.000Z",
+    "Updated": "2026-11-19T01:37:35.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -756,7 +756,7 @@
     "Price (USD)": 69.99,
     "Pros": "Open-source (CC-BY-SA) modular design — swap heat sinks and heat breaks per printer\nBimetallic Heat Break, 60% better heat-creep reduction than monolithic designs\n450°C covers nearly every filament\nCheapest hotend in the Slice line",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recRTlhOsk8R0530r",
@@ -788,7 +788,7 @@
     "Heat Break": "TC4 titanium heatbreak",
     "Price (USD)": 60.82,
     "Pros": "ALPS smart leveling (nozzle-based probe) built in\n400°C max temp\n40+ mm³/s flow\nPT1000 sensor\nComplete kit with replacement parts available (Sets 1–8)",
-    "Updated": "2026-11-18T07:18:53.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recRbTxxDtpmhcwlH",
@@ -829,7 +829,7 @@
     "Price (USD)": 199.99,
     "Pros": "No fan to fail inside a hot chamber\nConduction cooling dumps heat straight into the machine structure\nSame 500°C melt zone as the standard Mosquito",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T23:24:01.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recS6EG4Te665LCNB",
@@ -857,7 +857,7 @@
     "Heat Break": "Composite ceramic heat break, ceramic ring insulation",
     "Price (USD)": 239.53,
     "Pros": "Custom composite ceramic heat break tested 100kg+ PA12-CF15 over 12 months without failure\nVolcano block with optional fully-machined tungsten carbide nozzle\nPT1000 sensor; Dragon-pattern mount fits standard toolheads",
-    "Updated": "2026-11-17T23:24:16.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recU3eoBgpOl4hKoL",
@@ -901,7 +901,7 @@
     "Price (USD)": 104.99,
     "Pros": "Featherweight 37g — fastest accelerations in its class\n500°C rating covers every printable filament\nBimetallic Heat Break virtually eliminates heat creep and jamming\nOne-handed nozzle changes via rigid roll-cage frame\nDeep adapter ecosystem (Stealthburner, Dragon Burner, XOL and more)",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recWyx2Kh3TM6cYgE",
@@ -951,7 +951,7 @@
     "Price (USD)": 129.99,
     "Pros": "50mm meltzone — longest in any air-cooled prosumer hotend\n550°C maximum temp ceiling\n100W 24V nichrome heater for fast ramp times\nDragon-compatible mounting pattern — broad toolhead support\nV6 nozzle thread\nBi-material copper-zirconia heatbreak\nOpen-source design by VzBoT team",
     "Related 1 URL": "/hardware/hotends/goliath-water",
-    "Updated": "2026-11-18T03:28:39.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recZZrTGnFhtNcmej",
@@ -1001,7 +1001,7 @@
     "Price (USD)": 152.94,
     "Pros": "Water cooling removes the thermal limit of air-cooled heatsink\nHighest sustained flow ceiling of any listed hotend\n550°C max temp\n100W 24V nichrome heater\nWater fittings included\nDragon-compatible mount\nOpen-source design",
     "Related 1 URL": "/hardware/hotends/goliath-air",
-    "Updated": "2026-11-18T03:28:39.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recZfHibPiZ5iC7fs",
@@ -1045,7 +1045,30 @@
     "Price (USD)": 249.99,
     "Pros": "90 mm³/s flow — 2.5x the standard Mosquito\nDual 50W heater sockets for up to 100W\n500°C rating, 1.75 and 2.85mm filament\nSame Bimetallic Heat Break and roll-cage one-handed nozzle change",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
+  },
+  {
+    "id": "recbCozhanAErEaeA",
+    "Max Flow Source URL": "https://3dmellow.com/products/mellow-upgraded-goliath-lite-air-water-cooled-hotend-tc4-titanium-350%C2%B0c-110w-high-flow?VariantsId=12946",
+    "Max Flow (mm³/s)": 50,
+    "Flow Class": "High Flow",
+    "Related 1 Name": "Goliath Lite Water",
+    "Description": "Lite version of the Mellow/VzBoT Goliath, designed by Mellow in collaboration with the VzBot team. Max temperature 350 C (vs 450 C on the original Goliath). TC4 titanium heatbreak and titanium fixing screws, 110W 24V ceramic heater plates, PT1000 temperature sensor, hardened steel V6 nozzle (carbon-fibre capable). Flow rated 50+ mm3/s by Mellow. Air-cooled variant. Price basis: Mellow store regular $131.00 (on sale $68.12 at time of adding, Nov 2026).",
+    "Max Temp (°C)": 350,
+    "Nozzle Thread": "V6 (M6)",
+    "Image URL": "/media/hardware/hotends/goliath-lite-air.webp",
+    "Thermistor": "PT1000",
+    "Vendor 1 Name": "3D Mellow",
+    "Name": "Goliath Lite Air",
+    "Slug": "goliath-lite-air",
+    "Type": "All-Metal",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-upgraded-goliath-lite-air-water-cooled-hotend-tc4-titanium-350%C2%B0c-110w-high-flow?VariantsId=12946",
+    "Brand": "Mellow 3D",
+    "Heat Break": "TC4 Titanium",
+    "Price (USD)": 131,
+    "Related 1 URL": "/hardware/hotends/goliath-lite-water",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-20T00:42:34.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -1092,7 +1115,7 @@
     "Pros": "Eliminates heatsink fan dependency\nIdeal for 60–70°C enclosed chambers\n500°C component temp ceiling\nInverted heatbreak geometry\n3x 40W 4mm heater cartridges\nM3/M4 hardware only\nDragon-compatible mount\nHighest flow ceiling in the Tricorn lineup",
     "Related 1 URL": "/hardware/hotends/tricorn-air",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T23:24:07.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "receIRf4FXjLg0O9w",
@@ -1139,7 +1162,7 @@
     "Pros": "500°C component temp ceiling\nInverted heatbreak keeps threads out of melt zone\n3x 40W 4mm heater cartridges — higher combined surface area than a single 6mm\nM3/M4 hardware only — no tiny screws\nDragon-compatible mount\nAir or conduction cooled variants\nOpen-source design (CC BY-NC 4.0)\nPassive heatsink holds 118°C with block at 260°C uncooled",
     "Related 1 URL": "/hardware/hotends/tricorn-conduction",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T23:24:05.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "receUb8AHcB88xaQB",
@@ -1184,7 +1207,7 @@
     "Price (USD)": 89.21,
     "Pros": "300°C all-metal design\nM6 nozzle ecosystem — the de-facto standard\nGroove mount fits nearly every toolhead\nProven, reliable, huge community support",
     "Max Flow Source": "Independent test",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recf0c4BD2oyc5jZQ",
@@ -1228,7 +1251,7 @@
     "Price (USD)": 129.99,
     "Pros": "Extended melt zone pushes flow to 40 mm³/s\nSame 41g mass and 500°C rating as the original Mosquito\nThermal insulator protects the melt zone from cooling losses\nDrop-in for Mosquito mounts and adapters",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "rech7SSLjkyKP1SzQ",
@@ -1253,12 +1276,12 @@
     "Name": "DualVelo Air Lite",
     "Slug": "dualvelo-air-lite",
     "Type": "All-metal",
-    "Vendor 1 URL": "https://3dmellow.com/products/mellow-dualvelo-air-lite-all-metal-hotend-extruder-for-large-format-3d-printers-%E2%80%94-high-speed-diy-3d-printing",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005010209713210.html?pdp_npi=4%40dis%21CAD%21C%24+18.09%21C%24+1.91%21%21%2112.36%211.31%21%40210327ef17950520134587449e0cb7%2112000051535139972%21sh%21CA%213958672741%21X&spm=a2g0o.store_pc_allItems_or_groupList.new_all_items_2007473650367.1005010209713210",
     "Brand": "Mellow 3D",
     "Heat Break": "Aerospace-grade low-friction wear tube core; titanium alloy reinforcement screws",
-    "Price (USD)": 276,
+    "Price (USD)": 120.74,
     "Pros": "All-metal construction, air-cooled (no liquid cooling required), Mellow3D quality manufacturing, designed for high-speed operation",
-    "Updated": "2026-11-17T23:24:11.000Z"
+    "Updated": "2026-11-19T01:35:50.000Z"
   },
   {
     "id": "reciRNDlTl1q8PEPR",
@@ -1298,7 +1321,30 @@
     "Heat Break": "Titanium alloy, 0.25mm wall",
     "Price (USD)": 74.99,
     "Pros": "70.5 mm³/s — the highest-flow Dragon\n500°C all-metal design for PEEK/PEI and other engineering filaments\nThin-wall (0.25mm) titanium heat break for excellent thermal isolation\nV6 nozzle ecosystem and one-handed nozzle changes\nLight at 61.2g",
-    "Updated": "2026-11-17T04:17:29.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
+  },
+  {
+    "id": "recjReUTDhEESivnz",
+    "Max Flow Source URL": "https://3dmellow.com/products/mellow-upgraded-goliath-lite-air-water-cooled-hotend-tc4-titanium-350%C2%B0c-110w-high-flow?VariantsId=12947",
+    "Max Flow (mm³/s)": 50,
+    "Flow Class": "High Flow",
+    "Related 1 Name": "Goliath Lite Air",
+    "Description": "Lite version of the Mellow/VzBoT Goliath, designed by Mellow in collaboration with the VzBot team. Max temperature 350 C (vs 450 C on the original Goliath). TC4 titanium heatbreak and titanium fixing screws, 110W 24V ceramic heater plates, PT1000 temperature sensor, hardened steel V6 nozzle (carbon-fibre capable). Flow rated 50+ mm3/s by Mellow. Water-cooled variant. Price basis: Mellow store regular $169.90 (on sale $88.35 at time of adding, Nov 2026).",
+    "Max Temp (°C)": 350,
+    "Nozzle Thread": "V6 (M6)",
+    "Image URL": "/media/hardware/hotends/goliath-lite-water.webp",
+    "Thermistor": "PT1000",
+    "Vendor 1 Name": "3D Mellow",
+    "Name": "Goliath Lite Water",
+    "Slug": "goliath-lite-water",
+    "Type": "Liquid Cooled",
+    "Vendor 1 URL": "https://3dmellow.com/products/mellow-upgraded-goliath-lite-air-water-cooled-hotend-tc4-titanium-350%C2%B0c-110w-high-flow?VariantsId=12947",
+    "Brand": "Mellow 3D",
+    "Heat Break": "TC4 Titanium",
+    "Price (USD)": 169.9,
+    "Related 1 URL": "/hardware/hotends/goliath-lite-air",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-20T00:42:36.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",
@@ -1344,7 +1390,7 @@
     "Heat Break": "Patented multiple thermal break design; monolithic construction",
     "Price (USD)": 83.99,
     "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
-    "Updated": "2026-11-17T23:24:12.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recvWDTnHlysl79Tc",
@@ -1384,7 +1430,7 @@
     "Price (USD)": 99.99,
     "Pros": "45 mm³/s with the UHF groove adapter\nKinematic coupling — rigid block, minimal heat transfer to the heatsink\nSame footprint as the Dragon, so it drops into Dragon toolheads\nV6 nozzle ecosystem; Rapido 2 parts for maintenance",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recwDsERGqQwL5Egq",
@@ -1427,7 +1473,7 @@
     "Price (USD)": 189.99,
     "Pros": "Liquid cooling works in 80°C+ chambers where fans fail\nCorrosion-resistant bronze base suits most coolants\nSame 500°C Bimetallic Heat Break technology as the air-cooled Mosquito\nShips with GammaMaster nozzle and boron nitride paste",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recwnSZP2iQPs8Odz",
@@ -1457,7 +1503,7 @@
     "Price (USD)": 1571.99,
     "Pros": "Highest rated volumetric flow of any production hotend (116 mm³/s PLA); 500°C nickel-plated copper-alloy hot block; 61 mm melt zone gives a consistent melt at extreme flow; dual heaters and dual sensors (up to 200 W); one-handed nozzle changes; made in the USA with strong support.",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:37.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recxIKSAlFeKPnIwj",
@@ -1487,7 +1533,7 @@
     "Heat Break": "Titanium feed tube; 3 titanium hollow pillar mounts (no threaded heat break)",
     "Price (USD)": 210,
     "Pros": "All-metal, tested past 320°C\nDual Ø6x20mm heater cartridges clamped for excellent thermal transfer\nIndependently proven >50 mm³/s flow (HartSmart: >55)\n3x melt zone of the HE20\nSupervolcano nozzles, widely available\nBMG-M / LGX mounting (Multi-Mount option)",
-    "Updated": "2026-11-17T08:46:30.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recxad9vquG9vyyHz",
@@ -1531,7 +1577,7 @@
     "Price (USD)": 99.99,
     "Pros": "Built for fiber-filled filaments — hardened steel nozzles included (0.4 + 0.5mm)\nPT1000 thermistor for 320°C+ printing\n45 mm³/s with the UHF adapter; RCC-coated all-metal heat break\nSame Dragon footprint and V6 nozzle compatibility as the standard neXt G",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "recy7WC7NNzNHzUqW",
@@ -1578,10 +1624,10 @@
     "Brand": "Luke's Lab",
     "Mount Style": "Chube 6x18mm bolt circle, M3",
     "Heat Break": "Chalice (unibody)",
-    "Price (USD)": 260,
+    "Price (USD)": 264,
     "Pros": "500°C max temp — highest ceiling in its class\nV6 nozzle compatibility — use your existing stock\nM3 hardware throughout — no tiny screws to strip\nStandard 3x15mm thermistor cartridge\n6x20–22mm heater cartridge compatibility\n42mm meltzone length",
     "Related 1 URL": "/hardware/hotends/chube-conduction",
-    "Updated": "2026-11-17T23:24:03.000Z",
+    "Updated": "2026-11-19T01:36:49.000Z",
     "Related 2 URL": "/hardware/hotends/chube-compact"
   },
   {
@@ -1629,7 +1675,7 @@
     "Price (USD)": 93.45,
     "Pros": "Highest-flow Phaetus offering, EndCoat heatbreak reduces jamming, V6 nozzle ecosystem, strong community anticipation",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-17T10:26:54.000Z"
+    "Updated": "2026-11-19T01:35:01.000Z"
   },
   {
     "id": "reczz9oIVsXB06Bg1",
@@ -1673,10 +1719,10 @@
     "Brand": "Luke's Lab",
     "Mount Style": "Dragon Mount",
     "Heat Break": "Chalice Titanium",
-    "Price (USD)": 170,
+    "Price (USD)": 172,
     "Pros": "Smallest form factor in the Chube lineup\n500°C max temp ceiling\nV6 nozzle compatibility\nM3 hardware throughout\nLowest price in the Chube family\n22.23mm OD — drops into tight toolhead spaces",
     "Related 1 URL": "/hardware/hotends/chube-air",
-    "Updated": "2026-11-18T01:05:40.000Z",
+    "Updated": "2026-11-19T01:38:02.000Z",
     "Related 2 URL": "/hardware/hotends/chube-conduction"
   }
 ]

@@ -2,6 +2,7 @@
   {
     "id": "rec0tIX7L0c3HQDN5",
     "Diameter (mm)": 18,
+    "Image URL": "/media/hardware/motion-systems/2gt-toothed-idler.webp",
     "Description": "Gates 2GT toothed idlers are used at the inner XY belt path reversal points in Voron CoreXY builds where the belt wraps with the tooth side inward. Outer belt reversals use smooth F695 bearings instead. Mismatching toothed and smooth idler positions causes belt noise and eventual skipping.",
     "Verdict Label": "OEM toothed idler — used where belt reversal requires tooth engagement",
     "Tooth Profile": "2GT",
@@ -26,6 +27,7 @@
   {
     "id": "rec1AOqhI51ryna3W",
     "Diameter (mm)": 5,
+    "Image URL": "/media/hardware/motion-systems/trianglelab-2gt-20t-drive-pulley.webp",
     "Description": "Trianglelab’s 2GT 20T drive pulley is a reliable quality clone for most builds. At normal and moderate acceleration, it performs indistinguishably from Gates. For a performance build chasing every marginal improvement, Gates is still correct.",
     "Verdict Label": "Reliable quality clone pulley — works well in practice, sold by trusted ecosystem vendors",
     "Tooth Profile": "2GT",
@@ -50,6 +52,7 @@
   },
   {
     "id": "rec1PuzJzEbCh8pbT",
+    "Image URL": "/media/hardware/motion-systems/cnc-all-wheel-drive-kit-for-voron-v2-4-and-trident.webp",
     "Description": "LDO CNC all-wheel-drive kit for the Voron V2.4 and Trident: all hardware needed to convert to a 4-motor CoreXY motion system. Requires 4 stepper motors with a 35mm shaft (recommended LDO-42STH48-2504AH S35, not included). Price basis: V2.4 variant $104.99 (out of stock), Trident variant $109.99 (in stock).",
     "Verdict Label": "CNC all-wheel-drive conversion for V2.4/Trident — needs 4 S35-shaft motors",
     "Tooth Profile": "N/A",
@@ -68,6 +71,7 @@
   {
     "id": "rec1SEQGwAbUSG5xU",
     "Diameter (mm)": 9,
+    "Image URL": "/media/hardware/motion-systems/rock-em-sock-em-z-joints.webp",
     "Description": "Set of 4 printed ball-joint Z joints for Voron 2.4 by whoppingpochard. Replaces the stock Z belt clamps and mounts with a ball-and-socket joint that constrains the gantry rigidly in XY while allowing rotational movement, and shortens the distance in Z from carriage to gantry. The joint can be popped apart with the included printed lever without removing the belt clamps. Sold as a set of 4; print with the standard Voron parts profile and add 9mm sphere nuts and hardware per the designer BOM. Design is shared open source on GitHub.",
     "Verdict Label": "$8.99 USD via Fabreeko | Set of 4 ball-joint Z joints - beta design",
     "Tooth Profile": "N/A",
@@ -87,6 +91,7 @@
   {
     "id": "rec21GNGnStXFEZYE",
     "Diameter (mm)": 5,
+    "Image URL": "/media/hardware/motion-systems/gates-2gt-20t-drive-pulley.webp",
     "Description": "The Gates 2GT 20T drive pulley is the XY motor pulley specified in Voron BOM and used in all prosumer CoreXY builds. OEM match for Gates LL-2GT belt. Bore is typically 5mm for standard NEMA17 motor shafts.",
     "Verdict Label": "OEM pulley for all Voron and CoreXY XY motor drives — machined to 2GT spec",
     "Tooth Profile": "2GT",
@@ -112,6 +117,7 @@
   },
   {
     "id": "rec41UNemUiAKZ0BB",
+    "Image URL": "/media/hardware/motion-systems/trident-9mm-conversion-cnc-parts.webp",
     "Belt Width (mm)": 9,
     "Description": "HoneyBadger / Double T CNC conversion kit taking the Voron Trident gantry to 9mm belts: black-anodized metal motor mounts, XY joints and tensioners (2 upper + 2 lower each), 16 aluminium threaded pins and 20 aluminium washers. Belts, 20T 9mm motor pulleys, bearings and fasteners are sourced separately. Price basis: $149.99 all colours (a 'No M3 washers' variant is $139.99); all variants out of stock.",
     "Verdict Label": "CNC 9mm belt conversion for Trident — stiffer gantry, needs belts and bearings sourced separately",
@@ -132,6 +138,7 @@
   },
   {
     "id": "rec5N1hSmfmwbZLoq",
+    "Image URL": "/media/hardware/motion-systems/gates-2gt-closed-loop-belts.webp",
     "Length (mm)": 2400,
     "Belt Width (mm)": 6,
     "Description": "Genuine Gates PowerGrip 2GT closed-loop timing belts in high-temperature EPDM. Straight-cut loops (not spiral cut) with no glued or welded seam, fiberglass-reinforced cord, nylon-faced teeth, operating temperature -45°C to +135°C. Widths 6/9/10mm, all 2.4M long. Price basis: 6mm 2.4M variant, $15.99 (smallest size).",
@@ -152,6 +159,7 @@
   },
   {
     "id": "rec5b4EhAU2aXzVpa",
+    "Image URL": "/media/hardware/motion-systems/hybrid-ceramic-bearing-kit-for-voron.webp",
     "Description": "HoneyBadger hybrid ceramic bearing kit for Voron: Si3N4 ceramic bearings with stainless steel bands and polished retainers, factory lubed, rated to 10,000 RPM with 4+ year life expectancy and +180C temperature rating. Price basis: F623-2RS set of 24 for V0.1/V0.2 $69.99 (in stock); F695-2RS set of 20 for V2.4/Trident/Zero G $64.99 (out of stock); 625-2RS set of 12 for V2.4 Z motors $29.99 (out of stock).",
     "Verdict Label": "Hybrid ceramic Voron bearing kit — Si3N4 balls, stainless bands, 10,000 RPM rated",
     "Tooth Profile": "N/A",
@@ -170,6 +178,7 @@
   },
   {
     "id": "rec5iVxNskj5uPrCC",
+    "Image URL": "/media/hardware/motion-systems/beefy-z-idlers-bzi-for-voron.webp",
     "Description": "Printed Z idler set for Voron 2.4, Micron and Doomcube, designed by clee. One $8.99 kit makes 4 Z idlers and includes spares. Same design principle as the Beefy Front Idlers: belt tension compresses the printed layers instead of splitting them. Kit includes the printed parts plus stainless hardware; the stock 20T toothed idlers and frame mounting hardware are reused. Design is open source (GPL-3.0).",
     "Verdict Label": "$8.99 USD via Fabreeko | 4-idler kit for Voron 2.4 / Micron / Doomcube",
     "Tooth Profile": "2GT",
@@ -211,6 +220,7 @@
   },
   {
     "id": "rec9FiUxlVACqnDqV",
+    "Image URL": "/media/hardware/motion-systems/peek-leadscrew-nuts.webp",
     "Description": "LDO latest-generation PEEK lead screw nuts for the Voron Trident and V0, designed for enhanced durability and long-term performance. They address the early wear issues commonly seen with POM nuts, especially when paired with PTFE-coated lead screws. Sold individually. Price basis: $9.99 each, both Trident and V0 variants in stock.",
     "Verdict Label": "LDO PEEK lead screw nuts — fixes POM wear, for Trident and V0",
     "Tooth Profile": "N/A",
@@ -228,6 +238,7 @@
   },
   {
     "id": "recASONPKLptcc0O0",
+    "Image URL": "/media/hardware/motion-systems/micronplus-motion-kit.webp",
     "Belt Width (mm)": 6,
     "Description": "LDO Micron+ motion kit: F623-2RS bearings (32), 625-2RS bearings (8), 5x50mm shafts with ground flat (4), Igus KGLM-03 bearings (4), 2GT 16T 5mm-bore pulleys (14), 6mm x 188mm belt loops (4) and 5m of 2GT 6mm open belt. Price basis: $89.99, single variant, in stock.",
     "Verdict Label": "Complete LDO motion kit for Micron+ — bearings, pulleys and 2GT belts",
@@ -264,6 +275,7 @@
   },
   {
     "id": "recCew4Y9d3pwcGQ4",
+    "Image URL": "/media/hardware/motion-systems/positron-black-steel-pre-modified-rails.webp",
     "Description": "HoneyBadger black steel rail set, pre-modified for the Positron 3D printer: MGN12C, MGW9H and MGN9C rails with heavier preload. Made from bearing steel with a black rust-prevention coating, shipped dry and clean (Rev 2 rails come with EP2 grease). One-year no-questions-asked warranty. Single variant at $49.99, in stock at Fabreeko — matches the price on file.",
     "Verdict Label": "Niche Pick — the pre-modified black-steel rail set made for the Positron printer",
     "Tooth Profile": "N/A",
@@ -280,6 +292,7 @@
   },
   {
     "id": "recCqJ7iQO6TjMpKb",
+    "Image URL": "/media/hardware/motion-systems/gates-2gt-belt-6mm.webp",
     "Belt Width (mm)": 6,
     "Description": "Gates LL-2GT 6mm belt is the specified XY drive belt for Voron Design printers and is the de facto standard for all prosumer CoreXY self-builds. The 6mm width fits standard V2.4, Trident, 0.2, VzBot, and HevORT drive configurations. Gates is the OEM; all clone belts are measured against its dimensional accuracy and elasticity.",
     "Verdict Label": "The standard XY drive belt for all Voron and most prosumer CoreXY builds",
@@ -306,6 +319,7 @@
   },
   {
     "id": "recDGv2ewG8qvNEiy",
+    "Image URL": "/media/hardware/motion-systems/mgn12c-linear-rail.webp",
     "Description": "ULS (Xinxin) MGN12C linear guide rails sold by Fabreeko, in 313–675mm lengths with single or dual carriages. SUS440 martensitic stainless steel (HRC 58–62), ±1µm/1000mm accuracy, 1.5-year warranty. Price on file ($139.99) is the dual-carriage 675mm variant, out of stock at check; the smallest single-carriage 313mm variant lists at $62.99 (sale-labelled, regular price unverified — see held).",
     "Verdict Label": "High-end Taiwanese rail — ±1µm/1000mm accuracy, but premium-priced and less proven in Voron builds",
     "Tooth Profile": "N/A",
@@ -325,6 +339,7 @@
   },
   {
     "id": "recE7iDWol2A5CRfc",
+    "Image URL": "/media/hardware/motion-systems/awd-drive-1-35a.webp",
     "Description": "Full AWD (4-motor XY) kit for any RatRig V-Core 3.0/3.1. Damper-mounted drives for lower noise, ABEC-5/7 bearings, and genuine Gates GT2 16T pulleys. Full kit includes printed parts with inserts and embedded bearings, 8x F695 and 4x 695ZZ bearings, 2x 5x65mm shafts, 2x disc couplers, screws and shoulder bolts. Needs a mirrored rear block and 30-60mm more belt length; use the AWD layout if running an L3VER M2. STL files on Printables and manual/BOM on GitHub.",
     "Verdict Label": "Full AWD kit for any V-Core — printed parts, bearings, GT2 pulleys included",
     "Tooth Profile": "N/A",
@@ -341,6 +356,7 @@
   },
   {
     "id": "recEvoDcqbLUrQK3C",
+    "Image URL": "/media/hardware/motion-systems/z-oldham-decoupler.webp",
     "Description": "BRS Engineering Z Oldham decoupler — an evolution of the HevORT Wings system that compensates XY offset and removes Z wobble artefacts, with no backlash and no play. Maximum XY total deviation 2.4mm. Sold pre-assembled as a kit of 3, with inserts, magnets and 4mm steel beads (without screws); PA12-CF15 throughout, one-piece v2.3 central ring. 25kg+ support capacity before bending/fatigue. Reworked from an EvoMotor iteration (2021) under CC-BY-SA. Price on file ($65.73) is a EUR conversion — the store lists €59, EUR only, so the price is held unverified.",
     "Verdict Label": "BRS Oldham decoupler — kills Z wobble with no backlash, rated for 25kg+ beds",
     "Tooth Profile": "N/A",
@@ -379,6 +395,7 @@
   },
   {
     "id": "recGkCuUK75s14L2n",
+    "Image URL": "/media/hardware/motion-systems/xy-joint-and-tensioner-kit-for-k3.webp",
     "Belt Width (mm)": 12,
     "Description": "SLM aluminum XY joint and tensioner kit for the Annex Engineering K3, sold by NorthPrint3D. Upgrades the K3 from its stock 9mm belts to 12mm belts. Includes XY rail brackets/tensioners and rail holders, all tapped and ready to install. Based on Mathematical Potato's open design. Preorder item - estimated delivery about 60 days after the preorder period ends.",
     "Verdict Label": "$126.61 USD via NorthPrint3D | SLM aluminum 12mm-belt upgrade for Annex K3 - preorder",
@@ -397,6 +414,7 @@
   },
   {
     "id": "recHEVzY4qNhgeJpG",
+    "Image URL": "/media/hardware/motion-systems/mgn15-steel-linear-rails.webp",
     "Description": "HoneyBadger MGN15 linear rails sold by Fabreeko in two materials: 440C stainless steel (Class H, high precision) and 52100 high-carbon bearing steel with black oxide coating (Class C, higher load ratings), with single or dual carriage blocks, in 250–500mm lengths. Heavy preload requires a break-in. Price on file ($44.99) is the 440C stainless 500mm single-carriage variant, out of stock at check; smallest variant is the Black Steel 250mm dual-carriage at $22.99 — price basis held pending a decision (see held).",
     "Verdict Label": "Wide 15mm rail in two materials — stainless Class H or black bearing steel Class C",
     "Tooth Profile": "N/A",
@@ -414,6 +432,7 @@
   },
   {
     "id": "recHdOq8p9C9jDpuE",
+    "Image URL": "/media/hardware/motion-systems/ldo-mgn9h-linear-rail.webp",
     "Description": "LDO is a Taiwanese linear motion manufacturer that produces MGN-profile rails to a quality level equivalent to Hiwin, and is sold by Voron-community-approved vendors as the expected alternative. For Voron builds, LDO rails are interchangeable with Hiwin and are the default recommendation when Hiwin is out of stock or unavailable.",
     "Verdict Label": "Licensed OEM supplier — consistently recommended alongside Hiwin by Voron-affiliated vendors",
     "Tooth Profile": "N/A",
@@ -439,6 +458,7 @@
   },
   {
     "id": "recIW1sIZdZ0rJBXz",
+    "Image URL": "/media/hardware/motion-systems/mellow-mgn9h-linear-rail.webp",
     "Description": "Mellow is a Chinese linear motion manufacturer with an above-average reputation in the Voron and CoreXY community for quality clone rails. MGN9H from Mellow has a reasonable community track record, but buyers should budget time to clean and re-lube on arrival, and should expect to inspect and potentially reject an individual rail.",
     "Verdict Label": "Upper-tier quality clone — generally smooth, but you’re buying a quality distribution, not a guaranteed unit",
     "Tooth Profile": "N/A",
@@ -463,6 +483,7 @@
   {
     "id": "recKlwJ3pQlBktBSY",
     "Diameter (mm)": 8,
+    "Image URL": "/media/hardware/motion-systems/wobble-x.webp",
     "Description": "Mellow Wobble X decoupler for T8 lead screws: allows natural motion of the lead screw and prevents Z wobble on prints. Available in WS8, WS12 and WS16 sizes. Price on file ($19.99) is the WS12/WS16 price; the smallest WS8 lists at $17.99 — but all sizes were out of stock at Fabreeko at check, so the price is held (see held).",
     "Verdict Label": "Mellow Z-wobble decoupler for T8 lead screws — lets the screw float instead of bending the gantry",
     "Tooth Profile": "N/A",
@@ -479,6 +500,7 @@
   },
   {
     "id": "recLMZheX3c9RGnw6",
+    "Image URL": "/media/hardware/motion-systems/mgn7h-stainless-steel-rails.webp",
     "Description": "HoneyBadger MGN7H stainless steel linear rails with heavy preload, sold by Fabreeko in 34mm (CNC Tap), 150mm and 220mm (Micron+) lengths. 440C stainless steel, shipped dry and clean — add EP2 grease after break-in. One-year no-questions-asked warranty. Price on file ($18.50) is the 220mm Micron+ variant; the smallest 34mm variant lists at $9.99 (sale-labelled, regular price unverified — see held).",
     "Verdict Label": "Heavy-preload 7mm rail — needs a break-in, best for V0/Micron and Tap",
     "Tooth Profile": "N/A",
@@ -496,6 +518,7 @@
   },
   {
     "id": "recLZiqD6BaXbOV38",
+    "Image URL": "/media/hardware/motion-systems/gt1-5-anti-vfa-belt-conversion-kit.webp",
     "Belt Width (mm)": 6,
     "Updated": "2026-06-29",
     "Description": "Anti-VFA belt conversion kit for CoreXY printers using GT1.5 (1.5mm pitch) belts instead of the standard GT2 (2mm pitch). The finer pitch halves the frequency interval between belt resonance harmonics, directly attacking variable frequency artifacts in print surface quality. Available in EPDM rubber (standard, from €69) and Powergrip rubber (premium, €139). Requires GT1.5-compatible pulleys and idlers — BRS sells matching printed PA12-CF hardware or you can use open-source files from their GitHub. BRS Engineering has official RatRig partnership. Price basis: V-Core 3.x, 300mm, Powergrip (smallest size, standard belt).",
@@ -522,6 +545,7 @@
   },
   {
     "id": "recRq9fXrD8W3mKYk",
+    "Image URL": "/media/hardware/motion-systems/generic-mgn9h-linear-rail.webp",
     "Description": "Generic MGN9H rails from unspecified AliExpress sellers are a quality gamble. The lower price is offset by inconsistent preload, possible binding, and no path for returns on defective units. For a build where linear rail quality directly determines print quality, the savings do not justify the risk when Mellow (CONSIDER) and LDO/Hiwin (BUY) are available.",
     "Verdict Label": "Quality lottery — unknown manufacturer sourcing means no consistency guarantee",
     "Tooth Profile": "N/A",
@@ -542,6 +566,7 @@
   },
   {
     "id": "recS1mILSZiWJcp2a",
+    "Image URL": "/media/hardware/motion-systems/hiwin-mgn12h-linear-rail.webp",
     "Description": "Hiwin MGN12H is used on the Voron 2.4 and Trident gantry Y rails and Z axes where span length and lateral load require the wider 12mm profile. The V2.4 uses MGN12H on both Y gantry rails and all four Z rails. Combined with titanium backers, MGN12H provides a rigid, repeatable foundation for the gantry.",
     "Verdict Label": "OEM 12mm rail — standard for V2.4 and Trident gantry and Z axis",
     "Tooth Profile": "N/A",
@@ -565,6 +590,7 @@
   },
   {
     "id": "recT4WCpLAYDzJtvd",
+    "Image URL": "/media/hardware/motion-systems/bfi-beefy-front-idlers-for-voron.webp",
     "Description": "Printed front idler set for Voron Trident, Voron 2.4, Salad Fork and Micron, designed by clee. One $8.99 kit makes 2 idlers and includes spares. The design loads printed layers in compression under belt tension instead of pulling them apart, fixing the cracked stock idlers. Kit includes the printed parts plus stainless hardware (M3/M5 screws, nuts, pins, heat inserts); the stock idler bearing and shim stack is reused. Design is open source (GPL-3.0).",
     "Verdict Label": "$8.99 USD via Fabreeko | 2-idler kit, universal for Trident / 2.4 / Salad Fork / Micron",
     "Tooth Profile": "2GT",
@@ -584,6 +610,7 @@
   },
   {
     "id": "recUrOWE79u8JVpzO",
+    "Image URL": "/media/hardware/motion-systems/ratrig-pillow-blocks.webp",
     "Description": "Set of 3 machined 6061 aluminum pillow blocks for RatRig V-Core 3.1 and 4.0, matching the printed blocks and sized as a snug fit for the RatRig thrust bearings. $35.00 per set of 3; a single block for VMinion is available as a $13.00 variant. V-Core 4.0 requires 12 M3x14 bolts (not included).",
     "Verdict Label": "$35.00 USD via Fabreeko | Set of 3 machined 6061 pillow blocks",
     "Tooth Profile": "N/A",
@@ -602,6 +629,7 @@
   },
   {
     "id": "recVPrPFnDgzZKiDS",
+    "Image URL": "/media/hardware/motion-systems/bearings-for-annex-k3.webp",
     "Description": "HoneyBadger precision micro bearing kit for the Annex K3: 4x F695-2RS, 17x 625-2RS and 6x 623-2RS. ABEC 3 certified chrome steel or ABEC 7 hybrid ceramic, polished races, high-temp rating. Price basis: chrome steel $29.99 (out of stock) / hybrid ceramic $69.99 (available).",
     "Verdict Label": "Full bearing set for the Annex K3 — F695, 625 and 623",
     "Tooth Profile": "N/A",
@@ -619,6 +647,7 @@
   },
   {
     "id": "recWohP8lYXtvOybl",
+    "Image URL": "/media/hardware/motion-systems/v2-4-ultimate-motion-kit-with-gates-belts.webp",
     "Belt Width (mm)": 9,
     "Description": "HoneyBadger ultimate motion kit for the Voron 2.4 with genuine Gates GT2 belts: 9mm XY belts, 6mm Z belt loops, Powage 80T pulleys, HoneyBadger toothed idlers and pulleys, ABEC 3 F695 and 625 bearings, and idler shafts. Price basis: $169.99 regular ($144.99 sale) for the single kit variant.",
     "Verdict Label": "Complete Gates-belt motion kit for V2.4 — currently out of stock",
@@ -637,6 +666,7 @@
   },
   {
     "id": "recXKITpNdmIGOLq7",
+    "Image URL": "/media/hardware/motion-systems/micron-160-180-stainless-steel-rail-kit.webp",
     "Description": "LDO stainless steel rail kit for the Micron 160/180, sold by Fabreeko as a set of 5 rails. $149.99, in stock, matching the price on file. The Fabreeko page states no rail profile, carriage type or lengths, so those fields are held.",
     "Verdict Label": "LDO stainless rail kit for the Micron 160/180 — the correct rails for the build",
     "Tooth Profile": "N/A",
@@ -673,6 +703,7 @@
   },
   {
     "id": "recZ9C7X5rtS8ded0",
+    "Image URL": "/media/hardware/motion-systems/v0-0-1-linear-rails-kit-5-pieces.webp",
     "Length (mm)": 150,
     "Description": "LDO linear rails kit for the Voron V0/V0.1: five 150mm MGN7H rails with carriages in 440C stainless steel — a complete rail set for one build. $104.99 at Fabreeko, matching the price on file, but out of stock at check (see held).",
     "Verdict Label": "Complete LDO rail set for a V0/V0.1 — five 150mm 440C stainless MGN7H rails",
@@ -691,6 +722,7 @@
   },
   {
     "id": "recaQjYYia8YyQHq9",
+    "Image URL": "/media/hardware/motion-systems/l3ver-m2-block-with-tensioners-module.webp",
     "Description": "Pair of XY motor blocks with an integrated belt-tension mechanism for the RatRig V-Core 3.0/3.1 — a replacement for the stock blocks that opens up tensioner-less printheads (e.g. VzBot). Based on the Precision Motor Block: full shouldered-screw conversion for better precision, longer bearing life and less vibration, with a damper-ready base (N17 damper not supplied) and the NEMA mated via disc coupler and extended shaft on two bearings for coaxial movement. ABEC-7 bearings; kits delivered in pairs (left/right), pre-assembled. Classic (open/Enclosure 1.0) and Enclosed (V-Core 3.1 + Enclosure 2.0) versions; an AWD layout exists for AWD drives.",
     "Verdict Label": "Motor blocks with integrated tensioners — shouldered screws, ABEC-7 bearings",
     "Tooth Profile": "N/A",
@@ -707,6 +739,7 @@
   },
   {
     "id": "recbbAasNZBWVj3EA",
+    "Image URL": "/media/hardware/motion-systems/awd-drive-1-3.webp",
     "Description": "Hardware-only kit adding all-wheel drive (4-motor XY) to any RatRig V-Core version. Drives mount on a damper system to reduce noise, with genuine Gates (or Kis3D) pulleys on ABEC-5/7 bearings for long life. No frame or enclosure modifications needed; requires 30-60mm more belt length. Hardware kit only — no printed parts. Compatible with V-Core 3.0/3.1 (200-500mm+), stock leadscrew Z and BRS ballscrew Z-upgrades, and L3VER M1/M2.",
     "Verdict Label": "Hardware-only AWD kit for any V-Core — damper-mounted, ABEC bearings",
     "Tooth Profile": "N/A",
@@ -745,6 +778,7 @@
   },
   {
     "id": "recdHqyyaCvZcIafe",
+    "Image URL": "/media/hardware/motion-systems/2gt-belt-9mm.webp",
     "Belt Width (mm)": 9,
     "Description": "Gates LL-2GT 9mm belt is used in AWD CoreXY builds (RatRig V-Core 4, some VzBot configurations) where the wider belt handles the aggregate tension from 4 independent motor drives. The 9mm width is required when using 9mm pulleys and idlers; it is not a drop-in substitute for 6mm hardware.",
     "Verdict Label": "9mm Gates belt for AWD builds — wider belt handles the higher forces of 4-motor drive",
@@ -769,6 +803,7 @@
   {
     "id": "recdiszKP1HhlyGcu",
     "Diameter (mm)": 5,
+    "Image URL": "/media/hardware/motion-systems/gt1-5-26t-pulley-9mm-belt.webp",
     "Description": "BRS GT1.5 26T pulley for 9mm belts, aluminium alloy, 5mm bore. Diameter matches a GT2 20T pulley, so it swaps easily from a GT2 setup with the correct belt type; GT1.5 pitch reduces VFA. Price basis: BRS lists €9.00 EUR; the on-file $10.03 is a currency conversion, not a verified USD price. Sold out at BRS at time of check.",
     "Verdict Label": "BRS GT1.5 26T pulley for 9mm belts — same pitch diameter as a GT2 20T",
     "Tooth Profile": "GT1.5",
@@ -788,6 +823,7 @@
   {
     "id": "recfZiMFqDhBr9SiQ",
     "Diameter (mm)": 5,
+    "Image URL": "/media/hardware/motion-systems/gt2-80t-pulley.webp",
     "Description": "GT2 80T pulley, 6mm wide, 5mm bore, sold singly by Fabreeko for use in M4, V2.4 and other motion systems. Price basis: single pulley, $7.99 (verified on Fabreeko page).",
     "Verdict Label": "80T GT2 pulley — 5mm bore for 6mm belts, used in M4/V2.4 motion systems",
     "Tooth Profile": "GT2",
@@ -805,6 +841,7 @@
   },
   {
     "id": "recgHTfEG9k5x47dc",
+    "Image URL": "/media/hardware/motion-systems/disc-coupler.webp",
     "Description": "Dual-disc shaft coupler: two aluminum hubs joined by one or two thin stainless steel discs. The thin metal disc flexes to absorb angular, parallel and axial misalignment while transmitting torque with zero backlash and high concentricity. BRS sells it for printer use because it behaves better than low-cost spider (jaw) couplers. Sold in several bore/size variants from EUR 13.90 (lowest variant).",
     "Verdict Label": "Dual-disc zero-backlash coupler — beats spider couplers on concentricity",
     "Tooth Profile": "N/A",
@@ -823,7 +860,7 @@
   {
     "id": "recgIp3I5xu8RRTOU",
     "Diameter (mm)": 5,
-    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2606/16/products/800-3-132831e919.jpg",
+    "Image URL": "/media/hardware/motion-systems/gates-ll-1-5gt-belt-kit-6-9-10-12mm.webp",
     "Description": "Genuine GATES LL-1.5GT timing belt and pulley kit with CNC-machined aluminium drive and idler pulleys (27T/21T, 5mm bore) for 6/9/10/12mm belts; 1.5mm tooth pitch gives higher positioning precision and lower backlash than GT2.",
     "Verdict Label": "Genuine Gates GT1.5 belt and pulley kit — the best-verified value in the table",
     "Tooth Profile": "GT1.5",
@@ -845,6 +882,7 @@
   },
   {
     "id": "rechLmQMWPrrfLYh8",
+    "Image URL": "/media/hardware/motion-systems/v-core-3-4-z1-preloaded-rails-kit.webp",
     "Description": "BRS Engineering preloaded rail kit for the RatRig V-Core 3/4: replaces the stock Chinese XY rails with quality black Z1 preloaded rails (default set 2x MGN12C Y + 1x MGN12C X; lighter MGN9H X set available with minor part modifications). Z1 is a light preload — most commonly used rail preload class. Ships direct from the supplier in 10–15 days, cut to the correct length; custom sizes on request. Price on file ($215.02) is a EUR conversion — the store lists €125 for the smallest variant, EUR only, so the price is held unverified.",
     "Verdict Label": "Black Z1 preloaded rails for the V-Core XY — light preload, budget alternative to Hiwin",
     "Tooth Profile": "N/A",
@@ -863,6 +901,7 @@
   },
   {
     "id": "rechesLVGH9NkDtGH",
+    "Image URL": "/media/hardware/motion-systems/l3ver-m1-refresh-v1-5.webp",
     "Description": "Quick-install rear belt tensioner module for the RatRig V-Core 3.0/3.1. Moves belt tensioning to the rear of the machine, freeing the print head for tensioner-less designs (VzBot, Flathead 3.0 and other head mods). Does not use the motors as tension elements, which improves XY motor-block reliability and allows very precise tension (+/-0.05mm). Installs in about 30 minutes with limited dismantling; locks with two shoulder screws and allows 16mm of adjustment travel. Printed parts only, with inserts; CAD STEP included. Under CC-BY-NC-ND 4.0. Compatible with any V-Core 3.0/3.1 (200-500mm) and BRS AWD Drive.",
     "Verdict Label": "Rear belt tensioner — precise tension without using the motors",
     "Tooth Profile": "N/A",
@@ -881,6 +920,7 @@
   {
     "id": "recipb38sZofw7p65",
     "Diameter (mm)": 13,
+    "Image URL": "/media/hardware/motion-systems/f695-2rs-smooth-idler-bearing.webp",
     "Description": "F695 2RS flanged bearings are used at all smooth idler positions in Voron CoreXY belt paths — outer reversals where the belt’s flat back contacts the bearing. 5mm bore fits the M5 idler post and the flange retains belt laterally. Voron BOM specifies F695 2RS; note that quality varies significantly by source.",
     "Verdict Label": "Standard smooth idler for all Voron CoreXY belt path outer reversals",
     "Tooth Profile": "N/A",
@@ -904,6 +944,7 @@
   },
   {
     "id": "recj4Gu8w5SnArEzQ",
+    "Image URL": "/media/hardware/motion-systems/gates-1-5gt-9mm-rf-belt.webp",
     "Belt Width (mm)": 9,
     "Description": "Gates 1.5GT 9mm RF (reinforced fiberglass) open belt, sold by the metre. Fiberglass-reinforced rubber with a nylon fabric layer on the tooth-facing side. GT1.5 as used in Qidi printers and some Bambu machines. Price basis: $7.99 per metre. Note: out of stock at Fabreeko at time of check (2026-11-16).",
     "Verdict Label": "Gates 1.5GT 9mm reinforced open belt — fiberglass cord, nylon tooth facing",
@@ -924,6 +965,7 @@
   {
     "id": "recjlM4LxuClCNLJL",
     "Diameter (mm)": 12,
+    "Image URL": "/media/hardware/motion-systems/z-upgrade-2-8-definitive-edition.webp",
     "Length (mm)": 450,
     "Description": "Definitive-edition ballscrew Z upgrade for RatRig V-Core 3.0/3.1. Replaces the stock trapezoidal Z with C7 SFU1204 ballscrews for higher precision, repeatability and reliability, with no Z wobble and minimal maintenance. Proven design since 2021 with 350+ users. Natively compatible with RatRig bottom plates (1204 version) and NEMA 17/23 motors. Kit includes printed parts, SFU1204/1605 C7 screws with BF+BK supports and a complete Oldham V2.5; motors, couplers and general screws not included. Smallest size is the VC 300 with 450mm screws.",
     "Verdict Label": "Proven ballscrew Z for V-Core 3.0/3.1 — 350+ users since 2021",
@@ -943,6 +985,7 @@
   },
   {
     "id": "recjvFvmTZIPzzPTN",
+    "Image URL": "/media/hardware/motion-systems/v-core-3-4-z0-preloaded-hiwin-rails-kit.webp",
     "Description": "BRS Engineering Hiwin preloaded rail kit for the RatRig V-Core 3/4: replaces the stock Chinese XY rails with genuine Hiwin Z0 preloaded rails (default set 2x MGN12C Y + 1x MGN12C X; lighter MGN9H X set available with minor part modifications). Ships direct from the supplier in 10–15 days, cut to the correct length; custom sizes on request. Price on file ($555.94) is a EUR conversion — the store lists €269 for the smallest variant, EUR only, so the price is held unverified.",
     "Verdict Label": "Genuine Hiwin Z0 rails for the V-Core XY — the no-compromise rail upgrade",
     "Tooth Profile": "N/A",
@@ -963,6 +1006,7 @@
   {
     "id": "recktzFCy1EMXWBqO",
     "Diameter (mm)": 8,
+    "Image URL": "/media/hardware/motion-systems/tr8-8mm-anti-backlash-pom-nut.webp",
     "Description": "Anti-backlash POM nut for Tr8 lead screws, used in V0.1 and Trident builds. Price basis: $4.99, single variant, in stock.",
     "Verdict Label": "Anti-backlash POM nut for Tr8 lead screws — V0.1 and Trident",
     "Tooth Profile": "N/A",
@@ -979,6 +1023,7 @@
   },
   {
     "id": "recnCcwlpdU7dXn0g",
+    "Image URL": "/media/hardware/motion-systems/mgn9c-stainless-steel-rails.webp",
     "Description": "HoneyBadger MGN9C stainless steel linear rails with medium-high custom preload, sold by Fabreeko in 100–300mm lengths. Rails are 440C hardened stainless steel with thicker 6.5mm guides, pre-lubed with EP2 grease, and covered by a one-year no-questions-asked warranty. Price on file ($29.99) is the 300mm variant; the smallest 100mm variant lists at $14.99 (sale-labelled, regular price unverified — see held).",
     "Verdict Label": "Community-favourite clone rail — pre-lubed, medium-high preload, 1-year warranty",
     "Tooth Profile": "N/A",
@@ -998,6 +1043,7 @@
   },
   {
     "id": "recoMdzwQesSIApQc",
+    "Image URL": "/media/hardware/motion-systems/gates-gt3-open-belt.webp",
     "Belt Width (mm)": 9,
     "Description": "Genuine reinforced Gates GT3 open belt, sold by the metre in 6mm and 9mm widths. ~20% stiffer and stretches less than 2GT while staying backwards compatible with the 2GT tooth profile. Price basis: 9mm variant, $7.99 per metre (6mm is $6.99, sale-labelled).",
     "Verdict Label": "Genuine reinforced Gates GT3 open belt — ~20% stiffer than 2GT, backwards compatible",
@@ -1016,6 +1062,7 @@
   },
   {
     "id": "recopg5KxkOD1OYxY",
+    "Image URL": "/media/hardware/motion-systems/v-core-3-4-z1-preloaded-hiwin-rails-kit.webp",
     "Description": "BRS Engineering Hiwin preloaded rail kit for the RatRig V-Core 3/4: replaces the stock Chinese XY rails with genuine Hiwin Z1 preloaded rails (default set 2x MGN12C Y + 1x MGN12C X; lighter MGN9H X set available with minor part modifications). Z1 is a light preload. Ships direct from the supplier in 10–15 days, cut to the correct length; custom sizes on request. Price on file ($555.94) is a EUR conversion — the store lists €269 for the smallest variant, EUR only, so the price is held unverified.",
     "Verdict Label": "Genuine Hiwin Z1 rails for the V-Core XY — light preload, the no-compromise rail upgrade",
     "Tooth Profile": "N/A",
@@ -1035,6 +1082,7 @@
   },
   {
     "id": "rectstWXLqPazaytA",
+    "Image URL": "/media/hardware/motion-systems/precision-motor-block.webp",
     "Description": "Replacement XY motor block for the RatRig V-Core 3 that swaps the standard M5 bolts for shoulder bolts for more precise motion, with a printed part and disc coupler that damp vibration and noise; a NEMA damper can be added. Removes stress from the NEMA shaft for longer life. Needs 4x 625ZZ bearings, 2x 55x5mm shafts and a 5x5 disc coupler (up to 30mm diameter). Sold as printed composite (PA12-CF) parts.",
     "Verdict Label": "Shoulder-bolt XY motor block — quieter, more precise V-Core 3 motion",
     "Tooth Profile": "N/A",
@@ -1052,6 +1100,7 @@
   {
     "id": "recu6UTO7pho4oYkF",
     "Diameter (mm)": 12,
+    "Image URL": "/media/hardware/motion-systems/z-upgrade-4-0b-ballscrew-system.webp",
     "Updated": "2026-06-29",
     "Description": "Ballscrew-based Z axis upgrade for RatRig V-Core 4.0 (version 4.0b). Replaces the stock leadscrew Z system with precision ballscrews — eliminating leadscrew wobble artifacts in the Z direction and improving positional repeatability. Available as hardware-only kit (€149, for builders with a printer) or full kit with PA12-CF printed parts (€262). Open-source printed part files on BRS GitHub. BRS Engineering has official RatRig partnership agreement. Price basis: 300mm, PA12-CF (smallest size, lowest-end material).",
     "Verdict Label": "from €149 | significant improvement, non-trivial install",
@@ -1076,6 +1125,7 @@
   },
   {
     "id": "recvIILzOefQWCXc1",
+    "Image URL": "/media/hardware/motion-systems/ldo-mgn12h-linear-rail.webp",
     "Description": "LDO MGN12H is the Voron-community-approved 12mm rail for V2.4 and Trident gantry and Z axes. It performs identically to Hiwin MGN12H at the same price point and is sold by the same Voron-affiliated vendors. Either LDO or Hiwin is the correct answer for a V2.4 MGN12H spec.",
     "Verdict Label": "Licensed OEM-quality 12mm rail — recommended for V2.4/Trident gantry and Z axis",
     "Tooth Profile": "N/A",
@@ -1099,6 +1149,7 @@
   },
   {
     "id": "recwyCyOZSVU9zxjb",
+    "Image URL": "/media/hardware/motion-systems/v-core-3-4-z0-preloaded-rails-kit.webp",
     "Description": "BRS Engineering preloaded rail kit for the RatRig V-Core 3/4: replaces the stock Chinese XY rails with quality black Z0 preloaded rails (default set 2x MGN12C Y + 1x MGN12C X; lighter MGN9H X set available with minor part modifications). Preload removes carriage clearance for better rigidity and input shaper performance. Ships direct from the supplier in 10–15 days, cut to the correct length; custom sizes on request. Price on file ($215.02) is a EUR conversion — the store lists €125 for the smallest variant, EUR only, so the price is held unverified.",
     "Verdict Label": "Black Z0 preloaded rails for the V-Core XY — the budget alternative to the Hiwin kit",
     "Tooth Profile": "N/A",
@@ -1118,6 +1169,7 @@
   {
     "id": "recxGVtROCcWIokXL",
     "Diameter (mm)": 5,
+    "Image URL": "/media/hardware/motion-systems/gt2-pulley-16-tooth.webp",
     "Description": "E3D GT2 pulley with 16 teeth, giving motors more force into the belt than 20T pulleys. Gear width 7.5mm, max belt width 7mm, 5mm bore, flanges on both edges. Price basis: E3D lists £4.35 GBP; the on-file $5.81 is a currency conversion, not a verified USD price. Sold out at E3D at time of check.",
     "Verdict Label": "16T GT2 drive pulley — more torque than 20T, lower top speed",
     "Tooth Profile": "GT2",
@@ -1136,6 +1188,7 @@
   },
   {
     "id": "recxcw6tBNLrFJRaf",
+    "Image URL": "/media/hardware/motion-systems/oldham-coupler.webp",
     "Description": "Oldham couplers are required at the motor-to-lead-screw junction on all Voron lead screw Z axes. They allow lateral float to accommodate shaft misalignment while transmitting rotation. Rigid shaft couplers are not a substitute — they will bind and cause Z banding.",
     "Verdict Label": "Essential companion to lead screw Z — eliminates Z binding from shaft misalignment",
     "Tooth Profile": "N/A",
@@ -1153,6 +1206,7 @@
   },
   {
     "id": "recyStrlO1KwMrFuQ",
+    "Image URL": "/media/hardware/motion-systems/hiwin-mgn9h-linear-rail.webp",
     "Description": "Hiwin MGN9H is the reference standard for linear motion in prosumer CoreXY printers. The 9mm profile is used on XY axes where low mass matters (Voron 0.2 on all axes, V2.4 and Trident on the X carriage). H carriages have factory-set preload that is consistent and reliable. All clone rail quality is benchmarked against Hiwin performance.",
     "Verdict Label": "The OEM reference standard — tight tolerances, consistent preload, zero quality lottery",
     "Tooth Profile": "N/A",
@@ -1178,6 +1232,7 @@
   {
     "id": "reczRjI1aGzWHjvt1",
     "Diameter (mm)": 12,
+    "Image URL": "/media/hardware/motion-systems/v-core-3-ballscrews-kit-sfu1204.webp",
     "Length (mm)": 450,
     "Description": "BRS ballscrew kit for the RatRig V-Core 3: 3x C7 rolled SFU1204 ballscrews with BK10/BF10 supports and nuts (SFU1605 with BK12/BF12 also listed as an option). Genuine RATTM Motors screws, tolerances checked by BRS before shipping. Smallest variant is the 450mm screw set for the VC 300; 550mm (VC 400) and 650mm (VC 500) sets are also sold.",
     "Verdict Label": "C7 ballscrew kit for V-Core 3 — BRS tolerance-checked, 450mm smallest",
@@ -1198,6 +1253,7 @@
   {
     "id": "reczz0LMM6udnullb",
     "Diameter (mm)": 19,
+    "Image URL": "/media/hardware/motion-systems/gtc-19x26-high-vibration-damping-rubber-coupling.webp",
     "Length (mm)": 26,
     "Description": "GTC-19X26 high shock-absorption coupler: imported composite rubber damping element with H7 tolerance holes and 12.9 grade bolts, for absorbing vibration forces while maintaining responsiveness. Specs: 5mm inner diameter, 19mm outer diameter, 26mm length. Price basis: $28.99, single variant, in stock.",
     "Verdict Label": "High-damping rubber shaft coupler — 19mm OD x 26mm, 5mm bore",
