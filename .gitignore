@@ -33,3 +33,6 @@ scratch/
 
 .impeccable/critique/
 .hallmark/log.json
+
+# Internal PRDs, audits, research and prototypes: local only, backed up in the vault
+docs/

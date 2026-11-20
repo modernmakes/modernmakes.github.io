@@ -480,6 +480,7 @@ Applies whenever `/seo audit`, `/seo schema`, `/seo geo`, `/seo technical`, `/se
 
 ## Known Patterns & Gotchas
 
+- **Internal research, verdict notes, PRDs and audits never get committed.** `docs/` is gitignored; durable copies go to the vault (`wiki\modern-makes\site-docs\` in the vault).
 - **`<style is:global>`** required for any styles that interact with JS-toggled classes — Astro's default scoping hashes class names at build time
 - **`toSlug`** — one shared function, imported everywhere (pages, `getStaticPaths`, config, scripts); never a local copy (see Slug generation)
 - **Case-sensitive file paths** on Linux/GitHub Pages — Windows dev doesn't catch mismatches; 404s on existing images almost always trace to case mismatch. All media lives under lowercase, hyphenated paths: `public/media/ecosystems/voron/`, `public/media/articles/`, `public/media/hardware/[category]/`
