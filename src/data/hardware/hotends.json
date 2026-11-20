@@ -1332,6 +1332,7 @@
     "Description": "Lite version of the Mellow/VzBoT Goliath, designed by Mellow in collaboration with the VzBot team. Max temperature 350 C (vs 450 C on the original Goliath). TC4 titanium heatbreak and titanium fixing screws, 110W 24V ceramic heater plates, PT1000 temperature sensor, hardened steel V6 nozzle (carbon-fibre capable). Flow rated 50+ mm3/s by Mellow. Water-cooled variant. Price basis: Mellow store regular $169.90 (on sale $88.35 at time of adding, Nov 2026).",
     "Max Temp (°C)": 350,
     "Nozzle Thread": "V6 (M6)",
+    "Image URL": "/media/hardware/hotends/goliath-lite-water.webp",
     "Thermistor": "PT1000",
     "Vendor 1 Name": "3D Mellow",
     "Name": "Goliath Lite Water",
@@ -1343,7 +1344,7 @@
     "Price (USD)": 169.9,
     "Related 1 URL": "/hardware/hotends/goliath-lite-air",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-19T08:28:07.000Z"
+    "Updated": "2026-11-20T00:42:36.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",
