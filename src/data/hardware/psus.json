@@ -177,9 +177,9 @@
       "VzBot"
     ],
     "Name": "SuperNOVA 650 GM",
-    "Vendor 1 Name": "Amazon",
+    "Vendor 1 Name": "Scan",
     "Output Voltage": "12V (single-rail)",
-    "Vendor 1 URL": "https://www.amazon.com/dp/B07JG5M5TW",
+    "Vendor 1 URL": "https://www.scan.co.uk/products/650w-evga-supernova-650gm-fully-modular-80-plus-gold-single-rail-541a-92mm-fan-sfx-psu",
     "Brand": "EVGA",
     "Price (USD)": 99.99,
     "Pros": "Fully modular — clean cable routing in compact enclosures, only run what you need\n80+ Gold efficiency — good balance of heat and cost\n650W / 54A on 12V rail — sufficient headroom for most VzBot configurations\nLower price than Corsair SF750 at comparable quality tier\nUL certified"
@@ -247,9 +247,9 @@
     "Cons": "5V only, useless as a printer main PSU\nStill only 50W — not a substitute for a 24V main supply\nMains-voltage screw terminals need a proper enclosure and careful wiring",
     "Fanless": true,
     "Name": "RS-50-5",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Kamami",
     "Output Voltage": "5V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-rs-50-5-switching-power-supply",
+    "Vendor 1 URL": "https://kamami.pl/en/built-in-power-supplies/584929-rs-50-5-mean-well-50w-5v-10a-switching-mode-power-supply-5902186328297.html",
     "Brand": "Mean Well",
     "Price (USD)": 14.99,
     "Pros": "Fanless, silent free-air convection cooling\nUL62368-1 approved, with short-circuit / overload / over-voltage protection\n50W / 10A — double the RS-25-5, enough for a Pi plus 5V fans, LEDs or logic\nCompact 99×97×36 mm, −25 to +70°C working range, under 0.5W no-load consumption"
@@ -267,9 +267,9 @@
     "Cons": "Must be mounted to an aluminium plate to meet its derating curve\nDerates above ~45°C at 230VAC input\nNo DC OK signal or redundant function on the standard type",
     "Fanless": true,
     "Name": "UHP-350-24",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "OpenELAB",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-uhp-350-24-power-supply",
+    "Vendor 1 URL": "https://openelab.io/a/s/products/meanwell-uhp350-24-power-supply",
     "Brand": "Mean Well",
     "Price (USD)": 79.99,
     "Pros": "Silent fanless convection cooling, zero fan noise\n350.4W / 14.6A at 24V — enough for a 300mm build\nSlim 31mm profile — 220 × 62 × 31 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
@@ -306,9 +306,9 @@
     "Cons": "Only 25W / 5A — one small 5V load, no headroom for more\n5V only, useless as a printer main PSU\nMains-voltage screw terminals need a proper enclosure and careful wiring",
     "Fanless": true,
     "Name": "RS-25-5",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Kamami",
     "Output Voltage": "5V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-rs-25-5",
+    "Vendor 1 URL": "https://kamami.pl/en/built-in-power-supplies/584928-rs-25-5-mean-well-25w-5v-5a-switching-mode-power-supply-5902186328280.html",
     "Brand": "Mean Well",
     "Price (USD)": 9.99,
     "Pros": "Fanless, silent free-air convection cooling\nUL62368-1 approved, with short-circuit / overload / over-voltage protection\nCompact 78×51×28 mm, wide −20 to +70°C working range, under 0.5W no-load consumption\n3-year warranty"

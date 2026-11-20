@@ -92,10 +92,9 @@
     "Thickness (mm)": 8,
     "Available Sizes": "300mm build: 329×329×8mm\n400mm build: 429×429×10mm (manufacture stopped)\n500mm build: 529×529×10mm (manufacture stopped)",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
-    "Price (USD)": 244,
+    "Price (USD)": 410.38,
     "Cons": "400mm and 500mm build variants discontinued (manufacture stopped)\nAll sizes currently sold out via BRS Engineering\nHigh price point at €355\nEU purchasing only via BRS Engineering",
     "Brand": "Spannsysteme",
-    "Price (EUR)": 355,
     "Compatible Printers": [
       "RatRig V-Core 3",
       "RatRig V-Core 4"
@@ -132,10 +131,9 @@
     "Thickness (mm)": 8,
     "Available Sizes": "250×250×8mm\n300×300×8mm\n350×350×8mm",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
-    "Price (USD)": 225,
+    "Price (USD)": 230.04,
     "Cons": "All variants currently sold out at BRS Engineering\nEU purchasing only via BRS Engineering\n€199 is on the higher end for a bare bed plate",
     "Brand": "Spannsysteme",
-    "Price (EUR)": 199,
     "Compatible Printers": [
       "Voron 2.4 R2",
       "Voron Trident"
