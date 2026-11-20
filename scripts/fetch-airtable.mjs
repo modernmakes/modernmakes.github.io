@@ -27,6 +27,8 @@ const TABLES = [
   { name: 'motors',           id: 'tblRXZNO0ITQeNg9q' },
   // Filament (tblCD21uNiq1db1HC) is empty and unused; re-add here if it is ever populated.
   { name: 'printers',         id: 'tblboLo18BZ2k0E9n' },
+  { name: 'beds',             id: 'tblHqkdz9jpvpTjmG' },
+  { name: 'frame-components', id: 'tblPs8q3jUVVlvQJ6' },
 ];
 
 function httpError(res, body) {

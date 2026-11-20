@@ -253,6 +253,8 @@ src/
       lighting-cameras.json
       motors.json
       printers.json
+      beds.json
+      frame-components.json
   styles/
     global.css              — entire design system
   components/
