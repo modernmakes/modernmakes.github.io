@@ -33,7 +33,9 @@ interface Props {
   schemaName: string;     // ItemList schema name
   chips?: (r: any) => string[];        // spec chips per card
   excerptOf?: (r: any) => string;      // card excerpt
-  flowOf?: (r: any) => unknown;        // max flow (mm³/s) source; default Hotends' column
+  flowOf?: (r: any) => unknown;        // max flow (mm³/s) source (sorting); default Hotends' column
+  flowClassOf?: (r: any) => unknown;   // editorial flow class source; default Hotends' column
+  showVerdict?: boolean;               // false hides verdict badges and tabs (no verdict pass yet)
   priceOf?: (r: any) => unknown;       // price (USD) source for sorting and price bands
 }
 
@@ -55,6 +57,8 @@ const {
   chips = () => [],
   excerptOf = (r: any) => r['Verdict Label'] ?? r['Description'] ?? '',
   flowOf = (r: any) => r['Max Flow (mm³/s)'],
+  flowClassOf = (r: any) => r['Editorial Flow Class'],
+  showVerdict = true,
   priceOf = (r: any) => r['Price (USD)'],
 } = Astro.props;
 
@@ -68,14 +72,14 @@ const verdictRank = (rawV: any) => {
 
 const records = (raw as any[])
   .filter((r: any) => typeof r['Name'] === 'string' && r['Name'].trim())
-  .sort((a: any, b: any) => verdictRank(a['Verdict']) - verdictRank(b['Verdict']));
+  .sort((a: any, b: any) => (showVerdict ? verdictRank(a['Verdict']) - verdictRank(b['Verdict']) : 0));
 
-const verdictTabs = buildVerdictTabs(records);
+const verdictTabs = showVerdict ? buildVerdictTabs(records) : [];
 
 // Flow row only exists when the category has flow data (today: Hotends).
 const flowCounts: Record<string, number> = { standard: 0, high: 0, extreme: 0 };
 for (const r of records) {
-  const fc = resolveFlowClass(flowOf(r));
+  const fc = resolveFlowClass(flowClassOf(r));
   if (fc) flowCounts[fc.key]++;
 }
 const hasFlow = Object.values(flowCounts).some((n) => n > 0);
@@ -91,8 +95,8 @@ const items: Item[] = records.map((r: any, i: number) => ({
   price: num(priceOf(r)),
   flow: num(flowOf(r)),
   rank: i,
-  verdict: resolveVerdict(r['Verdict'])?.key ?? '',
-  flowClass: resolveFlowClass(flowOf(r))?.key ?? '',
+  verdict: showVerdict ? (resolveVerdict(r['Verdict'])?.key ?? '') : '',
+  flowClass: resolveFlowClass(flowClassOf(r))?.key ?? '',
   band: '',
   o: {},
 }));
@@ -230,7 +234,7 @@ const itemListSchema = {
   <div class="gf-bar" id="gf-bar" data-route={route}>
     <div class="gf-bar-inner">
       <div class="gf-row">
-      <div class="gf-cats" role="group" aria-label="Filter by verdict">
+      {showVerdict && <div class="gf-cats" role="group" aria-label="Filter by verdict">
         <button type="button" class="gf-tab is-active" data-f="verdict" data-v="" aria-pressed="true">
           All
           <span class="gf-badge" data-n>{records.length}</span>
@@ -242,7 +246,7 @@ const itemListSchema = {
           </button>
         ))}
         <span class="gf-tab-ind" aria-hidden="true"></span>
-      </div>
+      </div>}
       {hasControls && (
         <div class="gf-ctl">
           {/* Phone: one button opens the Sort & filter sheet. The badge counts non-default choices in it. */}
@@ -311,8 +315,8 @@ const itemListSchema = {
           {items.map((it, i: number) => {
             const r = it.r;
             const slug = toSlug(r['Name']);
-            const v = resolveVerdict(r['Verdict']);
-            const fc = resolveFlowClass(flowOf(r));
+            const v = showVerdict ? resolveVerdict(r['Verdict']) : null;
+            const fc = resolveFlowClass(flowClassOf(r));
             const imgSrc = imageOf(r);
             const hasImg = imgSrc !== '';
             return (

@@ -62,7 +62,7 @@ const compatibleToolheads = [...toolheadLinks, ...printerLinks];
 // Quick specs sidebar — key stats at a glance
 const quickSpecs = ([
   record['Max Temp (°C)']    != null ? { label: 'Max Temp',   value: `${record['Max Temp (°C)']}°C` }       : null,
-  record['Max Flow (mm³/s)'] != null ? { label: 'Max Flow',   value: `${record['Max Flow (mm³/s)']} mm³/s` } : null,
+  record['Max Flow (mm³/s)'] != null ? { label: 'Max Flow (claimed)', value: `${record['Max Flow (mm³/s)']} mm³/s` } : null,
   record['Heat Break']               ? { label: 'Heat Break', value: record['Heat Break'] }                  : null,
   record['Heat Block']               ? { label: 'Heat Block', value: record['Heat Block'] }                  : null,
   record['Thermistor']               ? { label: 'Thermistor', value: record['Thermistor'] }                  : null,
@@ -73,7 +73,7 @@ const quickSpecs = ([
 // Full specs table
 const specs = ([
   record['Max Temp (°C)']    != null ? { label: 'Max Temperature', value: `${record['Max Temp (°C)']}°C` }          : null,
-  record['Max Flow (mm³/s)'] != null ? { label: 'Max Flow',        value: `${record['Max Flow (mm³/s)']} mm³/s` }   : null,
+  record['Max Flow (mm³/s)'] != null ? { label: 'Max Flow (claimed)', value: `${record['Max Flow (mm³/s)']} mm³/s` }   : null,
   record['Heat Break']               ? { label: 'Heat Break',      value: record['Heat Break'] }                     : null,
   record['Heat Block']               ? { label: 'Heat Block',      value: record['Heat Block'] }                     : null,
   record['Nozzle Thread']            ? { label: 'Nozzle Thread',   value: record['Nozzle Thread'] }                  : null,
@@ -148,4 +148,13 @@ const excerpt = rawDesc.match(/^[^.!?]+[.!?]/) ? rawDesc.match(/^[^.!?]+[.!?]/)!
   heroImageUrl={heroImage}
   body={bodyParagraphs}
   flowCaption={flowSourceCaption(record)}
+  flowClassName={record['Editorial Flow Class'] ?? ''}
+  tested={record['Tested Flow (mm³/s)'] != null ? {
+    flow: Number(record['Tested Flow (mm³/s)']),
+    nozzle: record['Tested Nozzle (mm)'] != null ? Number(record['Tested Nozzle (mm)']) : undefined,
+    material: record['Tested Material'],
+    temp: record['Tested Temp (°C)'] != null ? Number(record['Tested Temp (°C)']) : undefined,
+    by: record['Tested By'],
+    url: record['Tested Source URL'],
+  } : undefined}
 />

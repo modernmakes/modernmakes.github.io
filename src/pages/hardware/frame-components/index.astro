@@ -1,0 +1,25 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/frame-components.json';
+
+const chips = (r: any) => [
+  r['Type'] ? String(r['Type']) : null,
+  r['Material'] ? String(r['Material']) : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="frame-components"
+  categoryLabel="FRAME COMPONENT"
+  crumb="Frame Components"
+  heading="Frame Components"
+  sub="Frame kits, corner plates, braces, and structural upgrades. Type, material, and extrusion fit."
+  nounSingular="component"
+  nounPlural="components"
+  title="Frame Components for Voron & Prosumer Printers"
+  description="Frame kits and precision-machined frame upgrades: type, material, extrusion size, and where to buy."
+  schemaName="Frame Components for Voron & Prosumer Printers"
+  chips={chips}
+  excerptOf={(r) => r['Description'] ?? ''}
+  showVerdict={false}
+/>

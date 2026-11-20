@@ -26,6 +26,8 @@ export const CATEGORY_SINGULAR: Record<string, string> = {
   'part-cooling': 'Part Cooling',
   'air-filtration': 'Air Filter',
   'enclosures': 'Enclosure',
+  'beds': 'Bed',
+  'frame-components': 'Frame Component',
   'filament-dryers': 'Filament Dryer',
   'heaters': 'Heater',
   'psus': 'PSU',
@@ -158,14 +160,13 @@ export const buildVerdictTabs = (records: any[]): (VerdictBucket & { count: numb
 };
 
 // ── Hotend flow class (BRAND.md section 5) ───────────────────────────────────
-// Derived from listed max flow, never stored: Standard < 50, High 50-79,
-// Extreme >= 80 mm³/s. Missing / non-numeric / non-positive -> null, so no chip
-// and no filter bucket is ever invented for a record without the number.
+// Read from Airtable "Editorial Flow Class" (Standard / High / Extreme). Empty -> null, so no chip
+// and no class tab is ever invented. `min` only positions the tier marks on the detail flow diagram.
 export interface FlowClass {
   key: 'standard' | 'high' | 'extreme';
   label: string;      // filter button text
   chipLabel: string;  // badge text
-  min: number;        // lower bound (mm³/s), inclusive
+  min: number;        // diagram tier mark (mm³/s)
 }
 
 export const FLOW_CLASSES: FlowClass[] = [
@@ -174,11 +175,9 @@ export const FLOW_CLASSES: FlowClass[] = [
   { key: 'extreme',  label: 'Extreme',  chipLabel: 'Extreme flow', min: 80 },
 ];
 
-export const resolveFlowClass = (maxFlow: unknown): FlowClass | null => {
-  if (maxFlow === null || maxFlow === undefined || maxFlow === '') return null;
-  const n = typeof maxFlow === 'number' ? maxFlow : parseFloat(String(maxFlow));
-  if (!Number.isFinite(n) || n <= 0) return null;
-  return [...FLOW_CLASSES].reverse().find((c) => n >= c.min) ?? FLOW_CLASSES[0];
+export const resolveFlowClass = (editorialClass: unknown): FlowClass | null => {
+  const t = String(editorialClass ?? '').trim().toLowerCase();
+  return FLOW_CLASSES.find((c) => c.key === t) ?? null;
 };
 
 // ── Flow diagram caption (hotend pages) ─────────────────────────────────────
@@ -253,6 +252,7 @@ export interface DetailConfig {
   quickSpecs: SpecDef[];   // sidebar quick specs
   specs: SpecDef[];        // full specifications table
   tags?: SpecDef[];        // hero chips (e.g. printers: build volume, difficulty)
+  showVerdict?: boolean;   // false: no badge, and the title drops "Verdict" (no verdict pass yet)
   priceFields?: string[];  // price source columns; defaults to ['Price (USD)']
 }
 
@@ -377,7 +377,7 @@ export function buildDetailProps(record: any, config: DetailConfig) {
     specs,
     vendors,
     relatedComponents,
-    pageTitle: `${record['Name']} ${config.titleNoun} — Specs, Verdict & Where to Buy`,
+    pageTitle: `${record['Name']} ${config.titleNoun} — Specs, ${config.showVerdict === false ? '' : 'Verdict & '}Where to Buy`,
     primaryVendorUrl: vendors[0]?.url ?? '',
     heroImage,
     bodyParagraphs,

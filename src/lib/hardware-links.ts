@@ -17,6 +17,8 @@ import motionSystem from '../data/hardware/motion-system.json' with { type: 'jso
 import motors from '../data/hardware/motors.json' with { type: 'json' };
 import nozzles from '../data/hardware/nozzles.json' with { type: 'json' };
 import partCooling from '../data/hardware/part-cooling.json' with { type: 'json' };
+import beds from '../data/hardware/beds.json' with { type: 'json' };
+import frameComponents from '../data/hardware/frame-components.json' with { type: 'json' };
 import printers from '../data/hardware/printers.json' with { type: 'json' };
 import psus from '../data/hardware/psus.json' with { type: 'json' };
 import toolboards from '../data/hardware/toolboards.json' with { type: 'json' };
@@ -27,10 +29,12 @@ import toolboards from '../data/hardware/toolboards.json' with { type: 'json' };
 export const ROUTE_TABLES: { file: string; base: string; records: any[] }[] = [
   { file: 'air-filtration', base: '/hardware/air-filtration', records: airFiltration },
   { file: 'bed-probes', base: '/hardware/probes', records: bedProbes },
+  { file: 'beds', base: '/hardware/beds', records: beds },
   { file: 'build-plates', base: '/hardware/build-plates', records: buildPlates },
   { file: 'enclosures', base: '/hardware/enclosures', records: enclosures },
   { file: 'extruders', base: '/hardware/extruders', records: extruders },
   { file: 'filament-dryers', base: '/hardware/filament-dryers', records: filamentDryers },
+  { file: 'frame-components', base: '/hardware/frame-components', records: frameComponents },
   { file: 'gantrys', base: '/hardware/gantrys', records: gantrys },
   { file: 'heaters', base: '/hardware/heaters', records: heaters },
   { file: 'hotends', base: '/hardware/hotends', records: hotends },

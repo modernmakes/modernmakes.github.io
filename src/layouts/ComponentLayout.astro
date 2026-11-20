@@ -71,6 +71,12 @@ interface Props {
   body?: string[];
   /** Flow diagram caption HTML from flowSourceCaption(); hotend pages pass it with maxFlow. */
   flowCaption?: string;
+  /** Airtable "Editorial Flow Class" (Standard / High / Extreme); empty = no chip. */
+  flowClassName?: string;
+  /** false hides the verdict badge (categories that have not had a verdict pass). */
+  showVerdict?: boolean;
+  /** Independent measurement credited on hotend pages; shown beside the claimed figure. */
+  tested?: { flow: number; nozzle?: number; material?: string; temp?: number; by?: string; url?: string };
 }
 
 const {
@@ -98,6 +104,9 @@ const {
   heroImageUrl = '',
   body = [],
   flowCaption = `Rated maximum flow. ${FLOW_CAPTION_TAIL}`,
+  flowClassName = '',
+  showVerdict = true,
+  tested,
 } = Astro.props;
 
 const hasSidebar = quickSpecs.length > 0 || compatibleToolheads.length > 0;
@@ -120,7 +129,11 @@ const flowClassText = FLOW_CLASSES.map((c, i) => {
   const next = FLOW_CLASSES[i + 1];
   return `${c.label} ${!next ? `${c.min}+` : c.min === 0 ? `under ${next.min}` : `${c.min}–${next.min - 1}`}`;
 }).join(', ');
-const flowClass = resolveFlowClass(maxFlow);
+const flowClass = resolveFlowClass(flowClassName);
+const testedDetail = tested
+  ? [tested.nozzle ? `${tested.nozzle} mm` : '', tested.material ?? '', tested.temp ? `${tested.temp} °C` : ''].filter(Boolean).join(', ')
+  : '';
+const testedHref = (() => { try { const u = new URL(tested?.url ?? ''); return /^https?:$/.test(u.protocol) ? u.href : ''; } catch { return ''; } })();
 const flowPct = maxFlow ? Math.min((maxFlow / FLOW_MAX) * 100, 100) : 0;
 // Anchor the readout so it never spills past either end of the track.
 const flowAnchor = flowPct >= 88 ? 'end' : flowPct <= 12 ? 'start' : 'mid';
@@ -146,7 +159,7 @@ const navTitle = hardwareNavTitle(brand, title, isPrinter ? 'printers' : pathSeg
 const segLabels: Record<string, string> = {
   hardware: 'Hardware', hotends: 'Hotends', extruders: 'Extruders', probes: 'Bed Probes', motion: 'Motion Mods',
   nozzles: 'Nozzles', mainboards: 'Mainboards', toolboards: 'Toolboards', 'part-cooling': 'Part Cooling',
-  'build-plates': 'Build Plates', psus: 'Power Supplies', motors: 'Stepper Motors', heaters: 'Heaters',
+  'build-plates': 'Build Plates', beds: 'Beds', 'frame-components': 'Frame Components', psus: 'Power Supplies', motors: 'Stepper Motors', heaters: 'Heaters',
   'filament-dryers': 'Filament Dryers', 'air-filtration': 'Air Filtration', 'lighting-cameras': 'Lighting & Cameras',
   gantrys: 'Gantrys', 'motion-system': 'Motion System', enclosures: 'Enclosures', printers: 'Printers',
 };
@@ -221,9 +234,11 @@ const breadcrumbSchema = {
         <div class="comp-brand">{brand}</div>
         <h1 class="comp-title" data-nav-title={navTitle}>{title}</h1>
         <div class="comp-verdict-row">
-          <a href="#where-to-buy" class={`comp-verdict-badge verdict-on-dark ${verdictCls}`}>
-            {verdictLabel}
-          </a>
+          {showVerdict && (
+            <a href="#where-to-buy" class={`comp-verdict-badge verdict-on-dark ${verdictCls}`}>
+              {verdictLabel}
+            </a>
+          )}
           {flowClass && <span class="flow-chip on-dark">{flowClass.chipLabel}</span>}
           <span class="comp-verdict-text" set:html={verdictHtml} />
         </div>
@@ -246,7 +261,7 @@ const breadcrumbSchema = {
           )}
           {maxFlow && (
             <div class="comp-stat">
-              <span class="comp-stat-label">Max Flow</span>
+              <span class="comp-stat-label">Max Flow (claimed)</span>
               <span class="comp-stat-val">{maxFlow} mm³/s</span>
             </div>
           )}
@@ -295,7 +310,7 @@ const breadcrumbSchema = {
             <h2 class="comp-section-title" id="flow-heading">Flow Rate Reference</h2>
             <div class="comp-flow-box">
               <p class="sr-only">
-                Rated max flow {maxFlow} mm³/s on a 0 to {FLOW_MAX} mm³/s scale.
+                Claimed max flow {maxFlow} mm³/s on a 0 to {FLOW_MAX} mm³/s scale.
                 Flow classes: {flowClassText} mm³/s.
               </p>
               <div class="comp-flow-graph" aria-hidden="true">
@@ -328,6 +343,11 @@ const breadcrumbSchema = {
                 </div>
               </div>
               <p class="comp-flow-note" set:html={flowCaption} />
+              {tested && (
+                <p class="comp-flow-note comp-flow-tested">
+                  Tested: {tested.flow} mm³/s{testedDetail && ` (${testedDetail})`}{tested.by && <>, {testedHref ? <a href={testedHref} class="flow-source-link" target="_blank" rel="noopener">{tested.by}<span class="sr-only"> (opens in new tab)</span></a> : tested.by}</>}
+                </p>
+              )}
             </div>
           </section>
         )}

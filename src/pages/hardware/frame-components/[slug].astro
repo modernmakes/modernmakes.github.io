@@ -1,0 +1,31 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import records from '../../../data/hardware/frame-components.json';
+import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+
+const config: DetailConfig = {
+  categoryLabel: 'FRAME COMPONENT',
+  componentType: 'Frame Component',
+  titleNoun: 'Frame Component',
+  showVerdict: false,
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Material', fields: ['Material'] },
+    { label: 'Extrusion', fields: ['Compatible Extrusion'] },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Material', fields: ['Material'] },
+    { label: 'Compatible Extrusion', fields: ['Compatible Extrusion'] },
+    { label: 'Dimensions', fields: ['Dimensions'] },
+    { label: 'Open Source', fields: ['Open Source'], fmt: (v) => (v === true ? 'Yes' : String(v)) },
+  ],
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(records as any[]);
+}
+
+const { record } = Astro.props as { record: any };
+---
+<HardwareDetail record={record} config={config} />

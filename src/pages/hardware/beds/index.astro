@@ -1,0 +1,25 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/beds.json';
+
+const chips = (r: any) => [
+  r['Material'] ? String(r['Material']) : null,
+  r['Thickness (mm)'] != null ? `${r['Thickness (mm)']} mm` : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={records}
+  route="beds"
+  categoryLabel="BED"
+  crumb="Beds"
+  heading="Beds"
+  sub="Precision aftermarket print beds. Material, thickness, flatness, and printer fit."
+  nounSingular="bed"
+  nounPlural="beds"
+  title="Precision Print Beds for Voron & Prosumer Printers"
+  description="Aftermarket print beds: cast and machined aluminum, thickness, flatness tolerance, sizes, and where to buy."
+  schemaName="Precision Print Beds for Voron & Prosumer Printers"
+  chips={chips}
+  excerptOf={(r) => r['Description'] ?? ''}
+  showVerdict={false}
+/>

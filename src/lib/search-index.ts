@@ -24,6 +24,8 @@ import lightingCameras from '../data/hardware/lighting-cameras.json';
 import gantrys from '../data/hardware/gantrys.json';
 import motionSystem from '../data/hardware/motion-system.json';
 import enclosures from '../data/hardware/enclosures.json';
+import beds from '../data/hardware/beds.json';
+import frameComponents from '../data/hardware/frame-components.json';
 import printers from '../data/hardware/printers.json';
 import synced from '../data/hardware/_synced.json';
 
@@ -46,9 +48,13 @@ const HARDWARE: [any[], string, string][] = [
   [gantrys, '/hardware/gantrys', 'Gantry'],
   [motionSystem, '/hardware/motion-system', 'Motion system'],
   [enclosures, '/hardware/enclosures', 'Enclosure'],
+  [beds, '/hardware/beds', 'Bed'],
+  [frameComponents, '/hardware/frame-components', 'Frame component'],
   [printers, '/printers', 'Printer'],
 ];
 
+// No verdict pass yet: no badge in search.
+const NO_VERDICT = new Set(['/hardware/beds', '/hardware/frame-components']);
 const str = (v: unknown) => (v === undefined || v === null ? '' : String(v).trim());
 const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
@@ -58,7 +64,7 @@ export async function buildSearchIndex() {
     records
       .filter((r) => typeof r.Name === 'string' && r.Name.trim())
       .map((r) => {
-        const v = resolveVerdict(r.Verdict);
+        const v = NO_VERDICT.has(base) ? null : resolveVerdict(r.Verdict);
         const flow = str(r['Max Flow (mm³/s)']);
         // Thread fields carry notes ('M6 (E3D V6 standard); 0.4mm…'): keep the thread itself.
         const thread = str(r['Nozzle Thread'] ?? r.Thread).split(/[(;,]/)[0].trim();
@@ -70,7 +76,7 @@ export async function buildSearchIndex() {
           c: label,
           v: v?.label,
           vc: v?.cls,
-          f: resolveFlowClass(r['Max Flow (mm³/s)'])?.chipLabel,
+          f: resolveFlowClass(r['Editorial Flow Class'])?.chipLabel,
           p: Number.isFinite(price) && price > 0 ? price : undefined,
           u: `${base}/${toSlug(r.Name)}`,
           k: k || undefined,
