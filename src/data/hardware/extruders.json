@@ -108,6 +108,7 @@
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
+    "Image URL": "/media/hardware/extruders/minimouse.webp",
     "Compatible Toolheads": [
       "Dragon Burner",
       "Mailbox"
