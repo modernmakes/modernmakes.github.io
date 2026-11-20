@@ -308,25 +308,30 @@ currentPath         — pass ecosystem path for correct nav highlight (e.g. '/vo
 
 | Table | ID | Status |
 |---|---|---|
-| Hotends | tblWYO1fRFXcY6fXF | 16 records — still stores the previous taxonomy's values; shown as Contender until its verdict pass (no Benchmark or Value Pick assigned yet) |
-| Extruders | tblTWR36Uq0RM4TB2 | 30 records |
-| Bed Probes | tblbKbuuUQhCSX38C | 9 records |
-| Nozzles | tblGOrDOH1cBBjgUv | 20 records |
-| Build Plates | tblmKDQDt0wHypEjx | 12 records |
-| Mainboards | tbl7zcODDUtBp63PX | 10 records |
-| Toolboards | tblPaWOgRQDq6TrwH | 8 records |
-| Part Cooling | tblCzOd1Crf4K9ZkO | 11 records |
-| Air Filtration | tblPecAiQBq1Wbuy6 | 8 records |
-| Enclosure | tbldFKTCpesINRv3n | 16 records |
+| Hotends | tblWYO1fRFXcY6fXF | 42 records — still stores the previous taxonomy's values; shown as Contender until its verdict pass (no Benchmark or Value Pick assigned yet) |
+| Extruders | tblTWR36Uq0RM4TB2 | 45 records |
+| Toolhead | tblfmSZtQvt4XQetS | 26 records |
+| Bed Probes | tblbKbuuUQhCSX38C | 16 records |
+| Nozzles | tblGOrDOH1cBBjgUv | 37 records |
+| Build Plates | tblmKDQDt0wHypEjx | 13 records |
+| Mainboards | tbl7zcODDUtBp63PX | 15 records |
+| Toolboards | tblPaWOgRQDq6TrwH | 20 records |
+| Part Cooling | tblCzOd1Crf4K9ZkO | 22 records |
+| Air Filtration | tblPecAiQBq1Wbuy6 | 13 records |
+| Enclosure | tbldFKTCpesINRv3n | 28 records |
 | Filament Dryers | tblAFI1uYCz9ovbJI | 9 records |
-| Heaters | tbleG8nGHrCiVWPRP | 25 records |
-| PSUs | tbl8vxrHDWKksQs1e | 8 records |
-| Gantrys | tblbofl1tnNRRHdaH | 7 records |
-| Motion System | tbl2CQ6TAnkwprQkX | 23 records |
-| Lighting & Cameras | tbljCecwZZPXMsSoI | 8 records |
+| Heaters | tbleG8nGHrCiVWPRP | 23 records |
+| PSUs | tbl8vxrHDWKksQs1e | 16 records |
+| Gantrys | tblbofl1tnNRRHdaH | 17 records |
+| Motion System | tbl2CQ6TAnkwprQkX | 62 records |
+| Lighting & Cameras | tbljCecwZZPXMsSoI | 16 records |
 | Filament | tblCD21uNiq1db1HC | empty |
-| Printers | tblboLo18BZ2k0E9n | 8 records |
-| Motors | tblRXZNO0ITQeNg9q | 12 records |
+| Printers | tblboLo18BZ2k0E9n | 20 records |
+| Motors | tblRXZNO0ITQeNg9q | 34 records |
+| Bed | tblHqkdz9jpvpTjmG | 9 records |
+| Frame Components | tblPs8q3jUVVlvQJ6 | 24 records |
+
+Counts as of 2026-11-19. Check Airtable for current numbers.
 
 ### Editorial DB Tables
 
