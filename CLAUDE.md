@@ -259,7 +259,7 @@ src/
     Nav.astro, Footer.astro, AdSlot.astro, BeehiivEmbed.astro, [homepage section components]
 ```
 
-Record counts: see the Hardware DB table above.
+Record counts: see the Hardware DB table below.
 
 ---
 
