@@ -234,29 +234,32 @@ src/
     homepage.json           — drives every homepage section
     ads.json                — ad slot config
     hardware/               — JSON files fetched from Airtable
-      hotends.json          — 16 records
-      extruders.json        — 30 records
-      bed-probes.json       — 9 records
-      nozzles.json          — 20 records
-      build-plates.json     — 12 records
-      mainboards.json       — 10 records
-      toolboards.json       — 8 records
-      part-cooling.json     — 11 records
-      air-filtration.json   — 8 records
-      enclosures.json       — 16 records
-      filament-dryers.json  — 9 records
-      heaters.json          — 25 records
-      psus.json             — 8 records
-      gantrys.json          — 7 records
-      motion-system.json    — 23 records
-      lighting-cameras.json — 8 records
-      motors.json           — 12 records
-      printers.json         — 8 records
+      hotends.json
+      extruders.json
+      toolheads.json
+      bed-probes.json
+      nozzles.json
+      build-plates.json
+      mainboards.json
+      toolboards.json
+      part-cooling.json
+      air-filtration.json
+      enclosures.json
+      filament-dryers.json
+      heaters.json
+      psus.json
+      gantrys.json
+      motion-system.json
+      lighting-cameras.json
+      motors.json
+      printers.json
   styles/
     global.css              — entire design system
   components/
     Nav.astro, Footer.astro, AdSlot.astro, BeehiivEmbed.astro, [homepage section components]
 ```
+
+Record counts: see the Hardware DB table above.
 
 ---
 
