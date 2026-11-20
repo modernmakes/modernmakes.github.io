@@ -36,6 +36,7 @@
     "Rated Current (A)": 1.5,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 52,
+    "Image URL": "/media/hardware/motors/35sth52-1504ah.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -158,6 +159,7 @@
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 48,
+    "Image URL": "/media/hardware/motors/17hm19-2004s1.webp",
     "Use Case": [
       "XY"
     ],
@@ -236,6 +238,7 @@
     "Rated Current (A)": 0.35,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 17.5,
+    "Image URL": "/media/hardware/motors/36sth17-0354ahg.webp",
     "Use Case": [
       "Extruder"
     ],
@@ -848,6 +851,7 @@
     "Rated Current (A)": 2,
     "Verdict": "Workhorse",
     "Motor Length (mm)": 52,
+    "Image URL": "/media/hardware/motors/35sth52-2004-s35.webp",
     "Frame Size": "NEMA14",
     "Body": "Aluminium end caps / steel housing",
     "Vendor 1 Name": "Fabreeko",
