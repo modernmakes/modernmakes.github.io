@@ -37,29 +37,6 @@
     "Brand": "ChaoticLab"
   },
   {
-    "id": "recDvOnRiej9rHz2R",
-    "Verdict": "BUY",
-    "Slug": "x-gantry-cf-tube-v-core-4",
-    "Price (USD)": 67.4,
-    "Pros": "Dramatically reduced X-axis moving mass vs aluminum extrusion\nHollow CF tube provides excellent vibration damping\nOpen-source printed end brackets (PA12-CF available from BRS)\nOfficial RatRig partnership — confirmed compatibility\nSignificant resonance improvement for high-speed printing",
-    "Printed Parts Required": true,
-    "Updated": "2026-06-29",
-    "GitHub / Source URL": "https://github.com/Florent-BRS",
-    "Description": "Carbon fiber tube X-gantry beam for RatRig V-Core 4.0/4.1. Replaces stock X-axis extrusion with a hollow CF tube — dramatically lower moving mass and better resonance damping vs aluminum. Printed PA12-CF end brackets required (open-source files on GitHub; printed parts sold by BRS). BRS Engineering has an official RatRig partnership agreement. Tube from €60.",
-    "Verdict Label": "from €60 EUR",
-    "Extrusion Size": "2020",
-    "Kinematic": "CoreXY",
-    "Cons": "Requires printed end brackets (not a true bolt-on swap)\nEU-based — lead times due to one-man manufacturing operation\nCF tube must be purchased (self-sourcing possible but sizing critical)",
-    "Compatible Printers": [
-      "RatRig V-Core 4"
-    ],
-    "Name": "X-Gantry CF Tube — V-Core 4",
-    "Vendor 1 Name": "BRS Engineering",
-    "Material": "Carbon Fiber",
-    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/x-gantry-tube",
-    "Brand": "BRS Engineering"
-  },
-  {
     "id": "recSPPa2jsGlxEhkm",
     "Verdict": "BUY",
     "Slug": "carbonara-cf-tube",
@@ -79,26 +56,6 @@
     "Material": "Carbon Fiber",
     "Vendor 1 URL": "https://www.fabreeko.com/products/carbonara-cf-tube-for-voron-printers",
     "Brand": "Brazuka"
-  },
-  {
-    "id": "recUx6BafS24MU0Mj",
-    "Verdict": "BUY",
-    "Slug": "x-gantry-v-core-3-1-wide-boy",
-    "Price (USD)": 80.21,
-    "Pros": "Precision EN AW 6060 T66 extrusion replacement, ±0.01 mm length tolerance\nRoughly half the weight of stock 2020 extrusion (109 g vs 259 g, Wide Boy beam)\nDrop-in fit using existing hardware\nMade in Austria",
-    "Weight (g)": 109,
-    "Drop-in Replacement": true,
-    "Description": "Precision-milled EN AW 6060 T66 aluminum X-axis gantry extrusion replacement for RatRig V-Core 3.0/3.1 Wide Boy. Roughly half the weight of the stock 2020 profile — 109 g vs 259 g for the Wide Boy beam. Drop-in bolt-on replacement using existing hardware; linear rail mounts with 6x M3x8mm screws (not included). CNC-machined in Austria by Spannsysteme, sold via BRS Engineering. Smallest size (200 mm, raw aluminum) from €72.",
-    "Verdict Label": "from €72 EUR (200mm, raw aluminum)",
-    "Extrusion Size": "2020",
-    "Image URL": "/media/hardware/gantrys/x-gantry-v-core-3-1-wide-boy.webp",
-    "Kinematic": "CoreXY",
-    "Cons": "EU purchasing via BRS Engineering; prices in EUR only\nSize-specific SKU — must order correct build size\nCurrently sold out on BRS",
-    "Name": "X-Gantry — V-Core 3.1 Wide Boy",
-    "Vendor 1 Name": "BRS Engineering",
-    "Material": "Aluminum Extrusion",
-    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-vcore-3-0-3-1-wide-boy",
-    "Brand": "Spannsysteme"
   },
   {
     "id": "recVL62LG5BMckD5e",
@@ -165,29 +122,6 @@
     "Brand": "Community"
   },
   {
-    "id": "recd0P7ci7ZQ72sYb",
-    "Verdict": "BUY",
-    "Slug": "x-gantry-v-core-3",
-    "Pros": "Precision EN AW-7075 extrusion replacement\nSignificant weight reduction vs stock 2020 extrusion (68–119g depending on size)\nDrop-in fit, no additional hardware needed\n±0.01mm machining tolerances\nMade in Austria, QA-certified",
-    "Weight (g)": 86,
-    "Updated": "2026-06-29",
-    "Drop-in Replacement": true,
-    "Description": "Precision-milled EN AW 6060 T66 aluminum X-axis gantry extrusion replacement for RatRig V-Core 3 (200/300/400/500mm builds). Roughly half the weight of the stock 2020 aluminum profile — 68g for 200mm build up to 119g for 500mm. Drop-in bolt-on replacement using existing hardware. CNC-machined in Austria by Spannsysteme. Order through BRS Engineering, now the exclusive EU reseller for all Spannsysteme products.",
-    "Verdict Label": "from €40 EUR (size-dependent)",
-    "Extrusion Size": "2020",
-    "Image URL": "/media/hardware/gantrys/x-gantry-v-core-3.webp",
-    "Kinematic": "CoreXY",
-    "Cons": "EU purchasing only (via BRS Engineering, exclusive EU reseller)\nSize-specific SKU — must order correct build size\nAvailability subject to batch production lead times",
-    "Compatible Printers": [
-      "RatRig V-Core 3"
-    ],
-    "Name": "X-Gantry — V-Core 3",
-    "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
-    "Material": "EN AW 6060 T66",
-    "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
-    "Brand": "Spannsysteme"
-  },
-  {
     "id": "recfk8NiHZrS0djeH",
     "Verdict": "BUY",
     "Slug": "x-gantry-voron-2-4-r2-trident",
@@ -210,29 +144,6 @@
     "Material": "EN AW 6060 T66",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/x-gantry-for-voron-2-4-r2-trident",
     "Brand": "Spannsysteme"
-  },
-  {
-    "id": "recftNkczLVdpTr0Q",
-    "Verdict": "CONSIDER",
-    "Slug": "x-gantry-cf-tube-v-core-3-wide-boy",
-    "Pros": "Fully open source — download and print for free\nCF tube can be self-sourced for lower cost\nCommunity-proven Wide Boy design",
-    "Printed Parts Required": true,
-    "Updated": "2026-06-29",
-    "GitHub / Source URL": "https://github.com/Florent-BRS",
-    "Description": "Fully open-source CF tube X-gantry design for RatRig V-Core 3 (Wide Boy variant). Design files freely available via BRS Engineering GitHub. Users source their own CF tube and self-print all end brackets. Zero purchase required from BRS — complete DIY option. Part of BRS Engineering's open-source 3D printer mod ecosystem.",
-    "Verdict Label": "OSS — hardware self-sourced",
-    "Extrusion Size": "2020",
-    "Open Source": true,
-    "Kinematic": "CoreXY",
-    "Cons": "Full DIY — requires sourcing CF tube and printing all brackets\nLess turnkey than retail BRS kits for VC4/Voron\nLess active community vs VC4 variant",
-    "Compatible Printers": [
-      "RatRig V-Core 3"
-    ],
-    "Name": "X-Gantry CF Tube — V-Core 3 Wide Boy",
-    "Vendor 1 Name": "BRS Engineering (open source)",
-    "Material": "Carbon Fiber",
-    "Vendor 1 URL": "https://store.brs-engineering.com/en/collections/x-gantry-tube",
-    "Brand": "BRS Engineering"
   },
   {
     "id": "recgltV1eGzODuOWb",
@@ -333,10 +244,11 @@
     "id": "recx26cUqRaONqo2c",
     "Verdict": "BUY",
     "Slug": "x-gantry-v-core-4",
+    "Price (USD)": 59.99,
     "Pros": "Precision EN AW-7075 machined X-beam replacement\nLighter than stock V-Core 4 X-axis extrusion\nDrop-in replacement, no additional hardware needed\nMade in Austria, QA-certified",
     "Updated": "2026-06-29",
     "Drop-in Replacement": true,
-    "Description": "Precision-milled EN AW 6060 T66 aluminum X-axis gantry replacement for RatRig V-Core 4.0/4.1 (525/625/725mm builds). Drop-in replacement for stock V-Core 4 X-rail extrusion. CNC-machined in Austria by Spannsysteme. Now sold exclusively via BRS Engineering in EU.",
+    "Description": "Precision-milled EN AW 6060 T66 aluminum X-axis gantry replacement for RatRig V-Core 4.0/4.1 (525/625/725mm builds). Drop-in replacement for stock V-Core 4 X-rail extrusion. CNC-machined in Austria by Spannsysteme. Now sold exclusively via BRS Engineering in EU. Price basis: Raw Aluminum, 300mm Vcore 4 (525mm) size.",
     "Verdict Label": "from €40 EUR (size-dependent)",
     "Extrusion Size": "2020",
     "Image URL": "/media/hardware/gantrys/x-gantry-v-core-4.webp",
@@ -346,9 +258,9 @@
       "RatRig V-Core 4"
     ],
     "Name": "X-Gantry — V-Core 4",
-    "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
+    "Vendor 1 Name": "Fabreeko",
     "Material": "EN AW 6060 T66",
-    "Vendor 1 URL": "https://spannsysteme.shop/produktkategorie/x-gantry/",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/ratrig-v-core-4-light-weight-gantry-by-spannsysteme",
     "Brand": "Spannsysteme"
   }
 ]
