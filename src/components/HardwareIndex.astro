@@ -841,7 +841,11 @@ const itemListSchema = {
   font-size: 11px;
   color: var(--on-dark-muted);
   margin: 14px 0 0;
+  line-height: 1.4;
+  min-height: 1.4em;
 }
+/* The label is filled in by the browser; its line is reserved so filling it never pushes the page down. */
+.hot-hero-fresh[hidden] { display: block; visibility: hidden; }
 
 
 /* ── HARDWARE FILTER BAR: verdict tabs + flow row as one sticky unit ──
@@ -1030,7 +1034,7 @@ html { overflow-anchor: none; }
   .gf-row > .gf-cats { flex: 1 1 100%; flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
   /* Sized so three tabs (e.g. All / Value Pick / Contender) share one row at 360px. */
   .gf-cats .gf-tab { flex: 1 1 auto; justify-content: center; gap: 4px; padding: 0 6px; letter-spacing: .02em; }
-  .gf-cats .gf-badge { box-sizing: border-box; min-width: calc(2ch + 12px); padding: 1px 5px; text-align: center; font-variant-numeric: tabular-nums; }
+  .gf-cats .gf-badge { box-sizing: border-box; min-width: calc(3ch + 12px); padding: 1px 5px; }
   .gf-row > .gf-ctl { flex: 1 1 100%; justify-content: space-between; padding: 4px 0; border-top: 1px solid var(--border); }
   .gf-ctl-count { display: inline; font-family: var(--fm); font-size: 12px; color: var(--g1); white-space: nowrap; }
   .gf-flow { display: none; }

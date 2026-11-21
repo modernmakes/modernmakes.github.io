@@ -637,6 +637,8 @@ a:not([class]):active { opacity: .6; }
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 1px 7px;
+  /* Room for three digits: a count changing while filtering or syncing never resizes its tab. */
+  box-sizing: border-box; min-width: calc(3ch + 16px); text-align: center; font-variant-numeric: tabular-nums;
   transition: background .15s, color .15s, border-color .15s;
 }
 .gf-tab.is-active .gf-badge {
