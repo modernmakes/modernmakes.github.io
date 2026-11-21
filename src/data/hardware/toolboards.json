@@ -493,7 +493,6 @@
       "Custom builds"
     ],
     "Name": "Huvud",
-    "Vendor 1 Name": "GitHub (open source)",
     "Description": "The original community-designed CAN toolboard, created by Pontus Borg (bananas-blender) and a key reason CAN toolboards became mainstream in the Voron community. Runs on the STM32F103C8T6 — the same 'blue pill' chip used in early reprap boards. CAN-only with no USB fallback, and lacks an onboard ADXL345. Both are significant omissions by current standards. Still operational and supported by Klipper, but the EBB36 v1.2 and Nitehawk boards have made it obsolete for new builds. If you have one running, keep it — don't spec it for new builds.",
     "Verdict Label": "Superseded — skip for new builds",
     "Verdict": "SKIP",
@@ -504,8 +503,8 @@
       "Various toolheads"
     ],
     "Cons": "- No ADXL345 onboard — resonance tuning requires external probe or skipping\n- CAN only: no USB fallback makes initial flashing and debugging significantly harder\n- STM32F103C8T6 is older and slower (72MHz) with limited flash\n- Community has moved on: EBB36 and Nitehawk offer more features at similar or lower cost\n- Design is effectively frozen — no active development",
+    "Source URL": "https://github.com/bananas-blender/HUVUD",
     "Connection": "CAN",
-    "Vendor 1 URL": "https://github.com/bananas-blender/HUVUD",
     "Brand": "Community (Bananas-blender)",
     "Pros": "- Pioneered the CAN toolboard concept for prosumer FDM — historically significant\n- Open source design: PCB files, BOM, and documentation on GitHub\n- Compact form factor\n- Proven CAN bus reliability in early Voron community builds",
     "Slug": "huvud",

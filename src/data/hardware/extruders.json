@@ -113,12 +113,11 @@
       "Dragon Burner",
       "Mailbox"
     ],
-    "Vendor 1 Name": "GitHub (chirpy2605)",
     "Name": "MiniMouse",
-    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/MiniMouse",
     "Brand": "chirpy2605",
     "Drive Type": "Dual",
     "Pros": "BMG gears provide strong dual-drive grip\nDirect drive for the Voron v0.1\nWorks with Dragon Burner and Mailbox toolheads\nPrint-it-yourself — zero cost beyond BMG kit + motor",
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/MiniMouse",
     "Mount": "Custom"
   },
   {
@@ -133,16 +132,15 @@
     ],
     "Verdict": "Workhorse",
     "Image URL": "/media/hardware/extruders/voron-m4-extruder.webp",
-    "Vendor 1 Name": "GitHub (VoronDesign)",
+    "Vendor 1 Name": "Etsy - Yacime3D (printed parts only)",
     "Name": "M4",
-    "Vendor 2 URL": "https://www.etsy.com/listing/1104621446/voron-mobius-voron-m4-extruder-abs",
     "Gear Ratio": "4:1",
-    "Vendor 1 URL": "https://github.com/VoronDesign/Mobius-Extruder",
+    "Vendor 1 URL": "https://www.etsy.com/listing/1104621446/voron-mobius-voron-m4-extruder-abs",
     "Brand": "VoronDesign",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "Etsy - Yacime3D (printed parts only)",
     "Pros": "Official VoronDesign extruder; purpose-built for remote/Bowden drive; strong grip for long filament paths; free/OSS; well-documented; standard for MMU/multi-material Voron configurations",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/VoronDesign/Mobius-Extruder",
     "Mount": "Universal"
   },
   {
@@ -207,16 +205,15 @@
   {
     "id": "rec78PjIZFUJd0scI",
     "Cons": "Work in progress per the README ('things will likely change'); no commercial kit — print it yourself and sacrifice a BMG kit plus a pancake motor; assembled weight unpublished",
-    "Vendor 4 Name": "MatterHackers",
+    "Vendor 4 Name": "Filastruder",
     "Compatible Printers": [
       "Voron 0",
       "Printers for Ants"
     ],
     "Slug": "roundhouse",
-    "Vendor 5 Name": "Filastruder",
     "Description": "A direct drive extruder designed for the Voron V0.1, built using BMG extruder kit guts and a NEMA14 36mm pancake motor. Uses the Mini-AfterSherpa mounting pattern and was designed to complement the 5015 Toolhead.",
     "Verdict Label": "BMG-guts direct-drive extruder for the Voron V0.1 — still a work in progress",
-    "Vendor 3 Name": "Ultimate 3D Printing Store",
+    "Vendor 3 Name": "MatterHackers",
     "Ecosystem": [
       "Voron"
     ],
@@ -226,33 +223,32 @@
       "Mini-AfterSherpa",
       "Mailbox"
     ],
-    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Vendor 1 Name": "KB-3D",
     "Name": "RoundHouse",
-    "Vendor 2 URL": "https://kb-3d.com/store/bmg/280-bondtech-bmg-extruder-7350011410309.html",
+    "Vendor 2 URL": "https://ultimate3dprintingstore.com/collections/3d-printer-parts/products/bondtech-bmg-extruder-1-75mm",
     "Gear Ratio": "50:17",
-    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundHouse",
+    "Vendor 1 URL": "https://kb-3d.com/store/bmg/280-bondtech-bmg-extruder-7350011410309.html",
     "Brand": "chirpy2605",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "KB-3D",
-    "Vendor 5 URL": "https://www.filastruder.com/collections/bondtech/products/bondtech-bmg-extruder",
+    "Vendor 2 Name": "Ultimate 3D Printing Store",
     "Pros": "Reuses the proven Bondtech BMG gear set; Mini-AfterSherpa mount, designed to complement the 5015 toolhead; direct drive for the V0.1",
-    "Vendor 3 URL": "https://ultimate3dprintingstore.com/collections/3d-printer-parts/products/bondtech-bmg-extruder-1-75mm",
-    "Vendor 4 URL": "https://www.matterhackers.com/store/l/bondtech-bmg-extruder/sk/M88WAUL2",
+    "Vendor 3 URL": "https://www.matterhackers.com/store/l/bondtech-bmg-extruder/sk/M88WAUL2",
+    "Vendor 4 URL": "https://www.filastruder.com/collections/bondtech/products/bondtech-bmg-extruder",
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundHouse",
     "Mount": "Custom"
   },
   {
     "id": "rec9moeBFPMexbYUD",
     "Cons": "WIP/BETA per the README and 'not a plug and play solution'; CAD to be released only when it leaves beta; needs 2x NEMA14 motors, 2x BMG gear sets and a spare stepper driver slot / 5-stepper MCU; assembled weight unpublished; gear ratio is disputed (see held)",
-    "Vendor 4 Name": "MatterHackers",
+    "Vendor 4 Name": "Filastruder",
     "Compatible Printers": [
       "Voron 0",
       "Printers for Ants"
     ],
     "Slug": "rainbow-dragon",
-    "Vendor 5 Name": "Filastruder",
     "Description": "A Voron and Printers for Ants extruder specifically designed for the Phaetus TaiChi dual filament hotend. Enables dual-filament printing on V0-class and Printers for Ants machines.",
     "Verdict Label": "Dual-filament BMG extruder for the Phaetus TaiChi hotend — beta, not plug-and-play",
-    "Vendor 3 Name": "KB-3D",
+    "Vendor 3 Name": "MatterHackers",
     "Ecosystem": [
       "Voron"
     ],
@@ -261,18 +257,18 @@
     "Compatible Toolheads": [
       "Dragon Burner"
     ],
-    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Vendor 1 Name": "West3D",
     "Name": "Rainbow Dragon",
-    "Vendor 2 URL": "https://west3d.com/products/phaetus-taichi-hot-end",
+    "Vendor 2 URL": "https://kb-3d.com/store/bmg/280-bondtech-bmg-extruder-7350011410309.html",
     "Gear Ratio": "50:17",
-    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/V0/Rainbow_Dragon",
+    "Vendor 1 URL": "https://west3d.com/products/phaetus-taichi-hot-end",
     "Brand": "chirpy2605",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "West3D",
-    "Vendor 5 URL": "https://www.filastruder.com/collections/bondtech/products/bondtech-bmg-extruder",
+    "Vendor 2 Name": "KB-3D",
     "Pros": "Dual-filament extrusion with 2x BMG gear sets for the Phaetus TaiChi dual-filament hotend; built for Dragon Burner v7+ toolheads on Voron V0.2 / Printers for Ants",
-    "Vendor 3 URL": "https://kb-3d.com/store/bmg/280-bondtech-bmg-extruder-7350011410309.html",
-    "Vendor 4 URL": "https://www.matterhackers.com/store/l/bondtech-bmg-extruder/sk/M88WAUL2",
+    "Vendor 3 URL": "https://www.matterhackers.com/store/l/bondtech-bmg-extruder/sk/M88WAUL2",
+    "Vendor 4 URL": "https://www.filastruder.com/collections/bondtech/products/bondtech-bmg-extruder",
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/V0/Rainbow_Dragon",
     "Mount": "Custom"
   },
   {
@@ -444,7 +440,7 @@
   {
     "id": "recDEgvnXLs00ob4D",
     "Cons": "Requires specific pinion stepper motor, plastic body less rigid than CNC alternatives, older design showing age vs newer competitors",
-    "Vendor 4 Name": "DFH",
+    "Vendor 4 Name": "FYSETC",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -455,10 +451,9 @@
     ],
     "Slug": "sherpa-mini",
     "Community Rating": 5,
-    "Vendor 5 Name": "FYSETC",
     "Description": "Dual-geared hobbed filament extruder designed by Anlin / Annex Engineering. Gear-driven design for high torque with near-silent operation. Release 2 adds Bondtech RIDGA v2 compatibility and a stronger idler arm. Requires a pinion-equipped pancake stepper (Nema 14). Print-it-yourself open-source design with commercial gear kits available.",
     "Verdict Label": "The print-it-yourself lightweight dual-drive standard — massive toolhead support, near-silent operation, and free to build.",
-    "Vendor 3 Name": "Filastruder",
+    "Vendor 3 Name": "DFH",
     "Ecosystem": [
       "Voron",
       "Annex Engineering",
@@ -476,20 +471,20 @@
       "Mailbox",
       "and most community toolheads"
     ],
-    "Vendor 1 Name": "Annex Engineering (GitHub)",
+    "Vendor 1 Name": "TriangleLab",
     "Name": "Sherpa Mini",
-    "Vendor 2 URL": "https://trianglelab.net/products/sherpa-mini-extruder?VariantsId=10515",
+    "Vendor 2 URL": "https://www.filastruder.com/collections/vendors/products/ldo-sherpa-mini-extruder",
     "Gear Ratio": "50:17",
-    "Vendor 1 URL": "https://github.com/Annex-Engineering/Sherpa_Mini-Extruder",
+    "Vendor 1 URL": "https://trianglelab.net/products/sherpa-mini-extruder?VariantsId=10515",
     "Brand": "Annex Engineering",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "TriangleLab",
+    "Vendor 2 Name": "Filastruder",
     "Price (USD)": 95,
-    "Vendor 5 URL": "https://www.fysetc.com/products/cnc-all-metal-sherpa-mini-extruder-temperature-resistance-light-weight",
     "Pros": "Extremely light (~25g without motor), massive toolhead ecosystem support, near-silent operation, print-it-yourself with accessible gear kits",
-    "Vendor 3 URL": "https://www.filastruder.com/collections/vendors/products/ldo-sherpa-mini-extruder",
-    "Vendor 4 URL": "https://dfh.fm/products/fysetc-machined-mini-sherpa-extruder",
+    "Vendor 3 URL": "https://dfh.fm/products/fysetc-machined-mini-sherpa-extruder",
+    "Vendor 4 URL": "https://www.fysetc.com/products/cnc-all-metal-sherpa-mini-extruder-temperature-resistance-light-weight",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/Annex-Engineering/Sherpa_Mini-Extruder",
     "Mount": "Sherpa Mini"
   },
   {
@@ -516,17 +511,16 @@
       "AntHead",
       "Mini-AfterSherpa"
     ],
-    "Vendor 1 Name": "Annex Engineering",
+    "Vendor 1 Name": "Fabreeko",
     "Name": "Sherpa Micro",
-    "Vendor 2 URL": "https://www.fabreeko.com/products/mellow-sherpa-micro-extruder-all-metal-cnc-with-8t-10t-ldo-moons-motor-for-voron-2-4-ender3-blv-3d-printer-parts",
     "Gear Ratio": "50:17",
-    "Vendor 1 URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder",
+    "Vendor 1 URL": "https://www.fabreeko.com/products/mellow-sherpa-micro-extruder-all-metal-cnc-with-8t-10t-ldo-moons-motor-for-voron-2-4-ender3-blv-3d-printer-parts",
     "Brand": "Annex Engineering",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "Fabreeko",
     "Price (USD)": 64.99,
     "Pros": "Only 18g; dual-drive 50:17 gearing; near-silent; proven Annex design widely used on Voron V0 and small toolheads; Bondtech RIDGA v2 support in Release 2; Mellow CNC version available ready-made",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/Annex-Engineering/Sherpa_Micro-Extruder",
     "Mount": "Custom"
   },
   {
@@ -569,15 +563,12 @@
     ],
     "Verdict": "Bleeding Edge",
     "Image URL": "/media/hardware/extruders/hummingbird-2-0-extruder.webp",
-    "Vendor 1 Name": "Printables (nhchiu)",
     "Name": "Hummingbird 2.0",
-    "Vendor 2 URL": "https://github.com/nhchiu/VoronMods/tree/main/Extruders/Hummingbird_2.0",
     "Gear Ratio": "44:10, 37:17",
-    "Vendor 1 URL": "https://www.printables.com/model/1814487-hummingbird-extruder-20",
     "Brand": "nhchiu",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "GitHub (nhchiu)",
     "Pros": "LGX Lite mounting footprint — wide toolhead compatibility\nHGX Lite 2.0 gears provide strong dual-drive grip at high ratio\nPrint-it-yourself — zero cost beyond HGX Lite 2.0 gear kit\nBy nhchiu — active Voron community contributor (ProtoXtruder designer)\nSame gear ratio and rotation distance as ProtoXtruder 2.0 (53.494165)",
+    "Source URL": "https://github.com/nhchiu/VoronMods/tree/main/Extruders/Hummingbird_2.0",
     "Mount": "LGX Lite"
   },
   {
@@ -599,13 +590,12 @@
     "Verdict": "Bleeding Edge",
     "Weight (g)": 39.5,
     "Image URL": "/media/hardware/extruders/protoxtruder-2-0-extruder.webp",
-    "Vendor 1 Name": "nhchiu",
     "Name": "ProtoXtruder 2.0",
     "Gear Ratio": "44:10, 37:17",
-    "Vendor 1 URL": "https://www.printables.com/model/822947-protoxtruder-20",
     "Brand": "ProtoTypist",
     "Drive Type": "Dual",
     "Pros": "39.5 g in the designer's own weight comparison (vs 46.4 g v1, 51.0 g HGX 2.0); large 18 mm extrusion gears for a big filament contact area; high reduction ratios (44:10, 37:17); printed parts take about an hour",
+    "Source URL": "https://www.printables.com/model/822947-protoxtruder-20",
     "Mount": "Sherpa Mini"
   },
   {
@@ -642,7 +632,6 @@
   {
     "id": "recH3VO0VklTut3wn",
     "Cons": "No complete kit: printed parts plus the LDO G2E donor kit; assembled weight unpublished; a community design, not a Voron-team release",
-    "Vendor 4 Name": "West3D (donor G2E kit)",
     "Compatible Printers": [
       "Voron 0",
       "Mini printers",
@@ -652,7 +641,7 @@
     "Community Rating": 4,
     "Description": "Compact variant of the Galileo 2 gearbox redesigned for small-format printers and V0-scale toolheads. Maintains the 9:1 planetary gear ratio in a significantly smaller footprint. Community name 'WristWatch' refers to its compact round profile. Print-it-yourself open-source design.",
     "Verdict Label": "Galileo 2 guts in a standalone Orbiter-mount extruder",
-    "Vendor 3 Name": "KB-3D (donor G2E kit)",
+    "Vendor 3 Name": "West3D (donor G2E kit)",
     "Ecosystem": [
       "Voron"
     ],
@@ -662,18 +651,18 @@
       "AntHead",
       "Mini-AfterSherpa"
     ],
-    "Vendor 1 Name": "GitHub (tetsu97)",
+    "Vendor 1 Name": "Etsy - 3DLabsPrinting (printed parts only)",
     "Name": "G2 WristWatch",
-    "Vendor 2 URL": "https://www.etsy.com/listing/1687330977/wristwatch-g2-extruder-printed-parts-for",
+    "Vendor 2 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
     "Gear Ratio": "9:1",
-    "Vendor 1 URL": "https://github.com/tetsu97/WristWatch-G2-Extruder",
+    "Vendor 1 URL": "https://www.etsy.com/listing/1687330977/wristwatch-g2-extruder-printed-parts-for",
     "Brand": "JaredC01",
     "Drive Type": "Planetary",
-    "Vendor 2 Name": "Etsy - 3DLabsPrinting (printed parts only)",
+    "Vendor 2 Name": "KB-3D (donor G2E kit)",
     "Pros": "9:1 planetary gearbox with large 16mm drive gear and idler bearing; Orbiter 2 mounting pattern fits XOL, A4T and other popular toolheads; only 3 printed parts (main body, rear plate, tension arm)",
-    "Vendor 3 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
-    "Vendor 4 URL": "https://west3d.com/products/galileo-2-kit-by-jaredc01-ldo-motors-g2e-and-g2z-extruder-and-z-drive-kits",
+    "Vendor 3 URL": "https://west3d.com/products/galileo-2-kit-by-jaredc01-ldo-motors-g2e-and-g2z-extruder-and-z-drive-kits",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/tetsu97/WristWatch-G2-Extruder",
     "Mount": "Galileo 2"
   },
   {
@@ -687,7 +676,6 @@
     "Community Rating": 4,
     "Description": "WristWatch G2 variant specifically adapted for the AntHead toolhead. Uses the same 9:1 G2 planetary gearbox in the WristWatch compact format, mounted to the AntHead body. Open-source, print-it-yourself.",
     "Verdict Label": "WristWatch G2 on the AntHead toolhead for Micron / Printers for Ants",
-    "Vendor 3 Name": "West3D (donor G2E kit)",
     "Ecosystem": [
       "Voron"
     ],
@@ -696,17 +684,17 @@
     "Compatible Toolheads": [
       "AntHead"
     ],
-    "Vendor 1 Name": "GitHub (PrintersForAnts)",
+    "Vendor 1 Name": "KB-3D (donor G2E kit)",
     "Name": "G2 WW AntHead",
-    "Vendor 2 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
+    "Vendor 2 URL": "https://west3d.com/products/galileo-2-kit-by-jaredc01-ldo-motors-g2e-and-g2z-extruder-and-z-drive-kits",
     "Gear Ratio": "9:1",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/AntHead",
+    "Vendor 1 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
     "Brand": "JaredC01",
     "Drive Type": "Planetary",
-    "Vendor 2 Name": "KB-3D (donor G2E kit)",
+    "Vendor 2 Name": "West3D (donor G2E kit)",
     "Pros": "Galileo 2 planetary 9:1 gearbox with large 16mm drive gear; Orbiter 2 mounting pattern; AntHead is the go-to lightweight toolhead for Printers for Ants",
-    "Vendor 3 URL": "https://west3d.com/products/galileo-2-kit-by-jaredc01-ldo-motors-g2e-and-g2z-extruder-and-z-drive-kits",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/PrintersForAnts/AntHead",
     "Mount": "Galileo 2"
   },
   {
@@ -845,7 +833,7 @@
   {
     "id": "recOWIqrARnM2b0CR",
     "Cons": "No commercial kit and no single gear ratio — it depends on which donor gears are fitted; assembled weight unpublished; no dedicated RoundTrip README was found, only mentions in the Dragon/Rapid Burner READMEs",
-    "Vendor 4 Name": "West3D",
+    "Vendor 4 Name": "MandalaRoseWorks",
     "Compatible Printers": [
       "Voron 0",
       "Voron Trident",
@@ -854,28 +842,27 @@
     ],
     "Slug": "roundtrip",
     "Community Rating": 3,
-    "Vendor 5 Name": "MandalaRoseWorks",
     "Description": "An open-air printed extruder body series from chirpy2605 that reuses gear sets from other extruders. Four variants: LGX Lite, Trianglelab TBG, Orbiter v1.5, and Orbiter v2.0. The open design makes gear mesh inspection and backlash adjustment straightforward. All variants are free/OSS on GitHub.",
     "Verdict Label": "Donor-gear extruder for the Voron V0 — bring your own LGX Lite, Orbiter or TBG Lite gears",
-    "Vendor 3 Name": "Slice Engineering",
+    "Vendor 3 Name": "West3D",
     "Ecosystem": [
       "Voron",
       "Universal"
     ],
     "Verdict": "Bleeding Edge",
     "Image URL": "/media/hardware/extruders/chirpy2605-roundtrip-extruder.webp",
-    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Vendor 1 Name": "MatterHackers",
     "Name": "RoundTrip",
-    "Vendor 2 URL": "https://www.matterhackers.com/store/l/bondtech-lgx-lite-extruder-no-motor/sk/MUFWD66C?aff=7610",
-    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundTrip",
+    "Vendor 2 URL": "https://www.sliceengineering.com/collections/extruders/products/bondtech-lgx-lite",
+    "Vendor 1 URL": "https://www.matterhackers.com/store/l/bondtech-lgx-lite-extruder-no-motor/sk/MUFWD66C?aff=7610",
     "Brand": "chirpy2605",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "MatterHackers",
-    "Vendor 5 URL": "https://mandalaroseworks.com/products/ldo-orbiter-v2-0-direct-drive-extruder",
+    "Vendor 2 Name": "Slice Engineering",
     "Pros": "Reuses gears from extruders builders may already own (LGX Lite, TBG Lite, Orbiter v1.5/v2); custom mount for Dragon/Rapid Burner toolheads",
-    "Vendor 3 URL": "https://www.sliceengineering.com/collections/extruders/products/bondtech-lgx-lite",
-    "Vendor 4 URL": "https://west3d.com/en-de/products/tgb-lite-extruder-by-tl",
+    "Vendor 3 URL": "https://west3d.com/en-de/products/tgb-lite-extruder-by-tl",
+    "Vendor 4 URL": "https://mandalaroseworks.com/products/ldo-orbiter-v2-0-direct-drive-extruder",
     "Updated": "2026-06-27",
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundTrip",
     "Mount": "Custom"
   },
   {
@@ -890,23 +877,22 @@
     "Community Rating": 2,
     "Description": "Open-source print-it-yourself extruder from Printables designed for prosumer CoreXY builds. Uses standard Bondtech-style dual gears. Intended as a more accessible alternative to commercial extruders with a focus on simple assembly and widely available hardware.",
     "Verdict Label": "Lightweight Sherpa-Mini extruder built on HGX Lite gears",
-    "Vendor 3 Name": "WoodArtSupply",
     "Ecosystem": [
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
     "Weight (g)": 46.4,
     "Image URL": "/media/hardware/extruders/protoxtruder-extruder.webp",
-    "Vendor 1 Name": "nhchiu",
+    "Vendor 1 Name": "Kingroon",
     "Name": "ProtoXtruder v1",
-    "Vendor 2 URL": "https://kingroon.com/en-mexican/products/hgx-lite-extruder-dual-gear-extruder-hard-steel-reduction-gear-high-speed-motor-3d-printer-parts-for-cr10-cr-10s-ender3-v2-voron",
+    "Vendor 2 URL": "https://woodartsupply.com/products/hocenway-upgraded-super-light-large-gear-hgx-lite-extruder-hardened-steel-reduction-gear-compatible-with-voron-ender-5-series-ender-3-v2-pro-cr10-cr10s-and-other-diy-3d-printer",
     "Gear Ratio": "44:10, 37:17",
-    "Vendor 1 URL": "https://www.printables.com/model/436425-protoxtruder",
+    "Vendor 1 URL": "https://kingroon.com/en-mexican/products/hgx-lite-extruder-dual-gear-extruder-hard-steel-reduction-gear-high-speed-motor-3d-printer-parts-for-cr10-cr-10s-ender3-v2-voron",
     "Brand": "ProtoTypist",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "Kingroon",
+    "Vendor 2 Name": "WoodArtSupply",
     "Pros": "46.4 g in the designer's weight comparison; large HGX Lite extrusion gears; Sherpa Mini mounting pattern; simple BOM (gear kit, bearings, shafts, NEMA14 motor)",
-    "Vendor 3 URL": "https://woodartsupply.com/products/hocenway-upgraded-super-light-large-gear-hgx-lite-extruder-hardened-steel-reduction-gear-compatible-with-voron-ender-5-series-ender-3-v2-pro-cr10-cr10s-and-other-diy-3d-printer",
+    "Source URL": "https://www.printables.com/model/436425-protoxtruder",
     "Mount": "Sherpa Mini"
   },
   {
@@ -1033,7 +1019,7 @@
   {
     "id": "recZFXMlrzNUmW4kQ",
     "Cons": "Still PUBLIC BETA per the JaredC01/Galileo2 README, pending design finalization and testing; kit excludes printed parts; assembled weight unpublished (the 25 g figure from Matrix3D is the printed-parts kit only)",
-    "Vendor 4 Name": "KB-3D",
+    "Vendor 4 Name": "OneTwo3D",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -1042,29 +1028,28 @@
     ],
     "Slug": "galileo-2-standalone",
     "Community Rating": 5,
-    "Vendor 5 Name": "OneTwo3D",
     "Description": "Galileo 2 extruder configured as a pure standalone unit — uses the same G2 gearbox (9:1, 9T sun/3 planets) but mounts independently without requiring a specific toolhead carriage integration. Shares BOM and printed parts with the G2E kit. Klipper config identical to G2E. Open-sourced by JaredC01.",
     "Verdict Label": "Galileo 2 as an Orbiter / Sherpa Mini drop-in — still in public beta",
-    "Vendor 3 Name": "Fabreeko",
+    "Vendor 3 Name": "KB-3D",
     "Ecosystem": [
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
     "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
-    "Vendor 1 Name": "JaredC01",
+    "Vendor 1 Name": "Filastruder",
     "Name": "Galileo 2 Standalone",
-    "Vendor 2 URL": "https://www.filastruder.com/collections/ldo/products/ldo-galileo-v2-kit",
+    "Vendor 2 URL": "https://www.fabreeko.com/collections/extruder/products/galileo-2-kits-by-ldo-g2e-g2z",
     "Gear Ratio": "9:1",
-    "Vendor 1 URL": "https://github.com/JaredC01/G2",
+    "Vendor 1 URL": "https://www.filastruder.com/collections/ldo/products/ldo-galileo-v2-kit",
     "Brand": "JaredC01",
     "Drive Type": "Planetary",
-    "Vendor 2 Name": "Filastruder",
+    "Vendor 2 Name": "Fabreeko",
     "Price (USD)": 49.99,
-    "Vendor 5 URL": "https://www.onetwo3d.co.uk/product/ldo-galileo-2-extruder-kit/",
     "Pros": "Same G2E kit parts and motor as the G2E, just different printed parts; drop-in replacement for Orbiter 2.0 or Sherpa Mini; described by Fabreeko as lightweight, comparable to the Orbiter 2.0",
-    "Vendor 3 URL": "https://www.fabreeko.com/collections/extruder/products/galileo-2-kits-by-ldo-g2e-g2z",
-    "Vendor 4 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
+    "Vendor 3 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
+    "Vendor 4 URL": "https://www.onetwo3d.co.uk/product/ldo-galileo-2-extruder-kit/",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/JaredC01/G2",
     "Mount": "Galileo 2"
   },
   {
@@ -1196,31 +1181,30 @@
   {
     "id": "recfdgGAB8rGmmOqF",
     "Cons": "No complete kit: printed parts plus the LDO G2E donor kit; assembled weight unpublished",
-    "Vendor 4 Name": "West3D",
+    "Vendor 4 Name": "Fabreeko",
     "Slug": "wristwatch-g2",
     "Community Rating": 4,
-    "Vendor 5 Name": "Fabreeko",
     "Description": "Combines the proven 9:1 planetary gearing from the Galileo 2 with the Orbiter 2 mounting footprint. Designed by @bythorsthunder, repository maintained by tetsu97. A bridge between two popular extruder families — useful when your toolhead has an Orbiter mount but you want planetary reduction.",
     "Verdict Label": "Galileo 2 guts in a standalone Orbiter-mount extruder",
-    "Vendor 3 Name": "KB-3D",
+    "Vendor 3 Name": "West3D",
     "Ecosystem": [
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
     "Image URL": "/media/hardware/extruders/wristwatch-g2-extruder.webp",
-    "Vendor 1 Name": "GitHub (tetsu97)",
+    "Vendor 1 Name": "Etsy - 3DLabsPrinting (printed parts only)",
     "Name": "WristWatch G2",
-    "Vendor 2 URL": "https://www.etsy.com/listing/1687330977/wristwatch-g2-extruder-printed-parts-for",
+    "Vendor 2 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
     "Gear Ratio": "9:1",
-    "Vendor 1 URL": "https://github.com/tetsu97/WristWatch-G2-Extruder",
+    "Vendor 1 URL": "https://www.etsy.com/listing/1687330977/wristwatch-g2-extruder-printed-parts-for",
     "Brand": "bythorsthunder",
     "Drive Type": "Planetary",
-    "Vendor 2 Name": "Etsy - 3DLabsPrinting (printed parts only)",
-    "Vendor 5 URL": "https://www.fabreeko.com/collections/extruder/products/galileo-2-kits-by-ldo-g2e-g2z",
+    "Vendor 2 Name": "KB-3D",
     "Pros": "9:1 planetary gearbox with large 16mm drive gear; Orbiter 2 mounting pattern fits XOL, A4T and other toolheads; only 3 printed parts",
-    "Vendor 3 URL": "https://kb-3d.com/store/voron/989-ldo-motors-galileo-2-extruder-g2e-for-voron-1694715593330.html",
-    "Vendor 4 URL": "https://west3d.com/products/galileo-2-kit-by-jaredc01-ldo-motors-g2e-and-g2z-extruder-and-z-drive-kits",
+    "Vendor 3 URL": "https://west3d.com/products/galileo-2-kit-by-jaredc01-ldo-motors-g2e-and-g2z-extruder-and-z-drive-kits",
+    "Vendor 4 URL": "https://www.fabreeko.com/collections/extruder/products/galileo-2-kits-by-ldo-g2e-g2z",
     "Updated": "2026-11-04",
+    "Source URL": "https://github.com/tetsu97/WristWatch-G2-Extruder",
     "Mount": "Orbiter"
   },
   {
@@ -1280,7 +1264,6 @@
   {
     "id": "recqNkKevhU76vdkL",
     "Cons": "Work in progress per the README and CAD was not yet published; no commercial kit; no verified current seller of a complete Orbiter v2.0 donor kit (West3D delisted it); assembled weight unpublished",
-    "Vendor 4 Name": "Peedee3D",
     "Compatible Printers": [
       "Voron 0",
       "Printers for Ants"
@@ -1288,7 +1271,7 @@
     "Slug": "roundabout",
     "Description": "A direct drive extruder for the Voron V0.1 that uses the guts of an Orbiter v2.0. Shares the Mini-AfterSherpa mounting pattern with the RoundHouse and was designed to complement the 5015 Toolhead.",
     "Verdict Label": "Orbiter-v2.0-guts direct-drive extruder for the Voron V0.1 — still a work in progress",
-    "Vendor 3 Name": "Tiny Machines 3D",
+    "Vendor 3 Name": "Peedee3D",
     "Ecosystem": [
       "Voron"
     ],
@@ -1298,17 +1281,17 @@
       "Mini-AfterSherpa",
       "Mailbox"
     ],
-    "Vendor 1 Name": "GitHub (chirpy2605)",
+    "Vendor 1 Name": "MandalaRoseWorks",
     "Name": "RoundAbout",
-    "Vendor 2 URL": "https://mandalaroseworks.com/products/ldo-orbiter-v2-0-direct-drive-extruder",
+    "Vendor 2 URL": "https://www.tinymachines3d.com/products/orbiter-v2-0-direct-drive-extruder-upgrade",
     "Gear Ratio": "7.5:1",
-    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundAbout",
+    "Vendor 1 URL": "https://mandalaroseworks.com/products/ldo-orbiter-v2-0-direct-drive-extruder",
     "Brand": "chirpy2605",
     "Drive Type": "Dual",
-    "Vendor 2 Name": "MandalaRoseWorks",
+    "Vendor 2 Name": "Tiny Machines 3D",
     "Pros": "Reuses the Orbiter v2.0 gear set (7.5:1); Mini-AfterSherpa mount, designed to complement the 5015 toolhead; direct drive for the V0.1",
-    "Vendor 3 URL": "https://www.tinymachines3d.com/products/orbiter-v2-0-direct-drive-extruder-upgrade",
-    "Vendor 4 URL": "https://peedee3d.com/products/ldo-orbiter-v2-0-extruder",
+    "Vendor 3 URL": "https://peedee3d.com/products/ldo-orbiter-v2-0-extruder",
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundAbout",
     "Mount": "Custom"
   },
   {

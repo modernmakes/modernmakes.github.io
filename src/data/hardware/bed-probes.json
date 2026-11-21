@@ -197,11 +197,10 @@
       "RatRig VCore 3"
     ],
     "Open Source": true,
+    "Source URL": "https://github.com/jlas1/Klicky-Probe",
     "Installation Complexity": "Medium",
-    "Vendor 1 Name": "GitHub (Community Build / DIY)",
     "Name": "Klicky PCB",
     "Type": "Microswitch",
-    "Vendor 1 URL": "https://github.com/jlas1/Klicky-Probe",
     "Brand": "Open Source / Community"
   },
   {
@@ -296,11 +295,10 @@
       "Voron V0"
     ],
     "Open Source": true,
+    "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/Experimental/Peck",
     "Installation Complexity": "Hard",
-    "Vendor 1 Name": "GitHub (chirpy2605)",
     "Name": "Dragon Burner Peck",
     "Type": "Nozzle Contact",
-    "Vendor 1 URL": "https://github.com/chirpy2605/voron/tree/main/general/Experimental/Peck",
     "Brand": "Open Source / Community"
   },
   {

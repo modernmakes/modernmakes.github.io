@@ -126,7 +126,7 @@
     "id": "recGK2Fxdia9mkPso",
     "Type": "Idler Spacer",
     "Verdict": "BUY",
-    "Verdict Label": "€3 EUR per piece",
+    "Verdict Label": "About $3.50 per piece",
     "Compatible Printers": [
       "RatRig V-Core 3",
       "RatRig V-Core 4",
@@ -137,12 +137,11 @@
     "Compatible Extrusion": "2020 and 3030",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Brand": "Spannsysteme",
-    "Price (EUR)": 3,
     "Dimensions": "13.96mm long, 9.95/7.80mm OD, 5.10mm ID",
-    "Vendor 1 URL": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/aluminium-spacer-14mm-idler-stack",
     "Updated": "2026-06-29",
-    "Price (USD)": 5.49,
-    "Description": "Precision EN AW-6060 aluminum idler spacer (Distanzbolzen) — 14mm. Drop-in replacement for printed or stock idler spacers on the XY axis idler stack. Machined to tighter tolerances than printed alternatives, reducing belt path slop and potential VFA. CNC-machined in Austria by Spannsysteme, sold in EU via BRS Engineering.",
+    "Price (USD)": 6,
+    "Description": "Precision EN AW-6060 aluminum idler spacer (Distanzbolzen) — 14mm. Drop-in replacement for printed or stock idler spacers on the XY axis idler stack. Machined to tighter tolerances than printed alternatives, reducing belt path slop and potential VFA. CNC-machined in Austria by Spannsysteme, sold in EU via BRS Engineering.\n\nPrice basis: Aluminium Spacer 14mm (Idler Stack) at BRS Engineering (US store), regular price.",
     "Material": "EN AW-6060 Aluminum"
   },
   {
@@ -208,7 +207,7 @@
     "id": "recOJEOtLPERETwbW",
     "Type": "Joining Plate",
     "Verdict": "BUY",
-    "Verdict Label": "€25-31 EUR",
+    "Verdict Label": "About $29–36",
     "Compatible Printers": [
       "RatRig V-Core 3",
       "RatRig V-Core 4"
@@ -217,19 +216,18 @@
     "Compatible Extrusion": "3030",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Brand": "Spannsysteme",
-    "Price (EUR)": 25,
     "Dimensions": "118×118×19mm",
-    "Vendor 1 URL": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/aluminium-3030-joining-plate-bottom",
     "Updated": "2026-06-29",
-    "Price (USD)": 44.99,
-    "Description": "Precision EN AW-7075 aluminum corner joining plate for 3030-profile printers (RatRig V-Core 3 and V-Core 4). Replaces or supplements stock printed/plastic corner connections for improved frame rigidity. 118×118×19mm, CNC-machined in Austria by Spannsysteme. Sold in EU via BRS Engineering (exclusive Spannsysteme reseller).",
+    "Price (USD)": 68,
+    "Description": "Precision EN AW-7075 aluminum corner joining plate for 3030-profile printers (RatRig V-Core 3 and V-Core 4). Replaces or supplements stock printed/plastic corner connections for improved frame rigidity. 118×118×19mm, CNC-machined in Austria by Spannsysteme. Sold in EU via BRS Engineering (exclusive Spannsysteme reseller).\n\nPrice basis: Aluminium 3030 Joining Plate Bottom, Silver raw, at BRS Engineering (US store), regular price.",
     "Material": "EN AW-7075 Aluminum"
   },
   {
     "id": "recUlgGchagHGmFeV",
     "Type": "Diagonal Brace",
     "Verdict": "BUY",
-    "Verdict Label": "€19-25 EUR",
+    "Verdict Label": "About $22–29",
     "Compatible Printers": [
       "RatRig V-Core 3",
       "RatRig V-Core 4",
@@ -241,19 +239,18 @@
     "Compatible Extrusion": "2020 and 3030",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Brand": "Spannsysteme",
-    "Price (EUR)": 19,
     "Dimensions": "195×30×19mm",
-    "Vendor 1 URL": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/aluminium-2020-3030-diagonal-support",
     "Updated": "2026-06-29",
-    "Price (USD)": 29.99,
-    "Description": "Precision EN AW-7075 aluminum diagonal frame brace for 3030-profile printers. 195×30×19mm. Triangulates corner connections to reduce racking and frame flex — directly reduces ringing artifacts at higher print speeds. Fits all printers using 3030 extrusion profile. CNC-machined in Austria, sold in EU via BRS Engineering.",
+    "Price (USD)": 60,
+    "Description": "Precision EN AW-7075 aluminum diagonal frame brace for 3030-profile printers. 195×30×19mm. Triangulates corner connections to reduce racking and frame flex — directly reduces ringing artifacts at higher print speeds. Fits all printers using 3030 extrusion profile. CNC-machined in Austria, sold in EU via BRS Engineering.\n\nPrice basis: Aluminium 2020/3030 Diagonal Support, Silver Raw, at BRS Engineering (US store), regular price.",
     "Material": "EN AW-7075 Aluminum"
   },
   {
     "id": "recdPBJZgpa95Cxix",
     "Type": "Handle",
     "Verdict": "CONSIDER",
-    "Verdict Label": "€25-31 EUR",
+    "Verdict Label": "About $29–36",
     "Compatible Printers": [
       "RatRig V-Core 3",
       "RatRig V-Core 4",
@@ -264,12 +261,11 @@
     "Compatible Extrusion": "2020 and 3030",
     "Vendor 1 Name": "BRS Engineering (Spannsysteme EU reseller)",
     "Brand": "Spannsysteme",
-    "Price (EUR)": 25,
     "Dimensions": "192×50×18mm, 176mm hole distance",
-    "Vendor 1 URL": "https://spannsysteme.shop/kategorie/3d-drucker-upgrades/",
+    "Vendor 1 URL": "https://store.brs-engineering.com/en/products/aluminium-handle-ergo",
     "Updated": "2026-06-29",
-    "Price (USD)": 44.99,
-    "Description": "Ergonomic CNC-machined EN AW-7075 aluminum frame handle. 192×50×18mm. Mounts to 2020 or 3030 extrusion profiles. More rigid and durable than printed plastic handles — won't flex or creep under repeated load. Functional quality-of-life upgrade for enclosed printers moved frequently. CNC-machined in Austria, sold in EU via BRS Engineering.",
+    "Price (USD)": 68,
+    "Description": "Ergonomic CNC-machined EN AW-7075 aluminum frame handle. 192×50×18mm. Mounts to 2020 or 3030 extrusion profiles. More rigid and durable than printed plastic handles — won't flex or creep under repeated load. Functional quality-of-life upgrade for enclosed printers moved frequently. CNC-machined in Austria, sold in EU via BRS Engineering.\n\nPrice basis: Aluminium Handle Ergo, Silver raw, at BRS Engineering (US store), regular price.",
     "Material": "EN AW-7075 Aluminum"
   },
   {

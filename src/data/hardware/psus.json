@@ -12,11 +12,11 @@
     "Cons": "48V output — only for 48V-capable boards, not a drop-in for 24V printers\nMust be mounted to an aluminium plate to meet its derating curve\nDerates above ~45°C at 230VAC input\nNo DC OK signal or redundant function on the standard type",
     "Fanless": true,
     "Name": "UHP-350-48",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Mouser",
     "Output Voltage": "48V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-uhp-350-48-power-supply",
+    "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/UHP-350-48",
     "Brand": "Mean Well",
-    "Price (USD)": 79.99,
+    "Price (USD)": 68.8,
     "Pros": "Silent fanless convection cooling, zero fan noise\n350.4W / 7.3A at 48V\nSlim 31mm profile — 220 × 62 × 31 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
   },
   {
@@ -96,7 +96,7 @@
     "Output Voltage": "24V",
     "Vendor 1 URL": "https://us.rs-online.com/product/mean-well/lrs-600-24/73281070/",
     "Brand": "Mean Well",
-    "Price (USD)": 75,
+    "Price (USD)": 81.85,
     "Pros": "600W rated output - the highest-wattage LRS in the table\nEnclosed metal case, UL 62368-1 approved\nBuilt-in fan with ON/OFF control - only runs when hot (on at 50C, off at 40C)\n24V/25A single output from the most common printer-PSU series"
   },
   {
@@ -117,9 +117,9 @@
     "Name": "LRS-200-24",
     "Vendor 1 Name": "Digi-Key",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/LRS-200-24/7705022",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/LRS-200-24/7705026",
     "Brand": "Mean Well",
-    "Price (USD)": 39.99,
+    "Price (USD)": 24.5,
     "Pros": "Voron Design BOM-specified for all 250mm builds\nUL 62368-1 and CE certified — industrial-grade reliability\nTemperature-controlled fan quiet at typical print loads\nWide input range (90–264 VAC) — works worldwide\nThousands of successful Voron builds documented on this exact unit"
   },
   {
@@ -127,7 +127,7 @@
     "Verdict": "CONSIDER",
     "Image URL": "/media/hardware/psus/sst-st30sf.webp",
     "Wattage (W)": 300,
-    "Slug": "sst-st30sf",
+    "Slug": "sst-st30sf-v2",
     "UL Certified": true,
     "Description": "The Silverstone SST-ST30SF is an SFX-format 300W ATX PSU used in some VzBot builds where compact form factor is the priority. ATX PSUs output 12V as the primary rail (plus 5V and 3.3V auxiliaries), so most VzBot builds using this unit pair it with a dedicated 24V Mean Well for heated bed and main stepper power, using the ST30SF for the SBC, electronics, and low-voltage accessories. Non-modular cable routing requires care in the compact VzBot bay. Budget-tier SFX option. Scope: auxiliary ATX PSU for secondary 12V use, not a primary printer PSU.",
     "Verdict Label": "Budget SFX pick for VzBot — fits the compact bay, tradeoffs to know",
@@ -136,12 +136,12 @@
     "Compatible Printers": [
       "VzBot"
     ],
-    "Name": "SST-ST30SF",
-    "Vendor 1 Name": "Silverstone",
+    "Name": "SST-ST30SF V2",
+    "Vendor 1 Name": "Newegg",
     "Output Voltage": "12V (single-rail)",
-    "Vendor 1 URL": "https://www.silverstonetek.com/en/product/power-supplies/sfx-sfx-l/ST30SF/",
+    "Vendor 1 URL": "https://www.newegg.com/silverstone-sfx-series-300-w-80-plus-bronze-certified-power-supply-sst-st30sf-v2/p/N82E16817256175",
     "Brand": "Silverstone",
-    "Price (USD)": 64.99,
+    "Price (USD)": 85.49,
     "Pros": "SFX form factor fits VzBot electronics bay without modification\n300W sufficient for VzBot SBC + electronics (separate 24V PSU handles heated bed)\n80+ Bronze certified\nUL certified — safe for enclosed printer use\nLess expensive than SF750 or EVGA 650 GM"
   },
   {
@@ -156,33 +156,12 @@
     "Form Factor": "Enclosed",
     "Cons": "48V is non-standard for most hobbyist printers — needs a 48V-capable board and drivers\nRequires manual 115/230V input voltage selection by switch\nFan adds noise and a wear item under sustained load",
     "Name": "LRS-350-48",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Mouser",
     "Output Voltage": "48V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/well-lrs-350-48-power-supply",
+    "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/LRS-350-48",
     "Brand": "Mean Well",
-    "Price (USD)": 38.99,
+    "Price (USD)": 32.5,
     "Pros": "48V at 7.3A for high-voltage stepper setups\nUL 62368-1 certified\nTemperature-controlled fan only runs when hot\nLow-profile 30mm enclosed case, up to 89% efficient"
-  },
-  {
-    "id": "recG5emjKryrM5NjZ",
-    "Verdict": "CONSIDER",
-    "Image URL": "/media/hardware/psus/supernova-650-gm.webp",
-    "Wattage (W)": 650,
-    "Slug": "supernova-650-gm",
-    "Description": "The EVGA SuperNOVA 650 GM is the mid-range SFX-L pick for VzBot builds — 80+ Gold efficiency, fully modular cables, and 650W headroom at a price above the budget ST30SF. SFX-L form factor is longer than SFX spec (100mm vs 63.5mm depth), so verify chassis clearance before ordering. Community considers the 650 GM a cleaner choice than the ST30SF due to modular cabling, making it easier to route only what you need in a compact electronics bay. Same 12V rail caveats apply — dedicated 24V supply still recommended for the heated bed. Scope: auxiliary ATX PSU for secondary 12V use, not a primary printer PSU.",
-    "Verdict Label": "Modular SFX-L for VzBot — good value between ST30SF and SF750",
-    "Form Factor": "SFX",
-    "Cons": "SFX-L form factor is longer than SFX (100mm deep vs 63.5mm) — confirm chassis fit before ordering\n12V primary rail — same 24V adaptation requirement as other ATX units\nEVGA exited the GPU market — long-term warranty support may be slower to navigate\nNot widely stocked vs. Corsair — harder to find locally",
-    "Compatible Printers": [
-      "VzBot"
-    ],
-    "Name": "SuperNOVA 650 GM",
-    "Vendor 1 Name": "Amazon",
-    "Output Voltage": "12V (single-rail)",
-    "Vendor 1 URL": "https://www.amazon.com/dp/B07JG5M5TW",
-    "Brand": "EVGA",
-    "Price (USD)": 99.99,
-    "Pros": "Fully modular — clean cable routing in compact enclosures, only run what you need\n80+ Gold efficiency — good balance of heat and cost\n650W / 54A on 12V rail — sufficient headroom for most VzBot configurations\nLower price than Corsair SF750 at comparable quality tier\nUL certified"
   },
   {
     "id": "recIWYmQd7ElRI1Qi",
@@ -203,11 +182,11 @@
     ],
     "Fanless": true,
     "Name": "UHP-500-24",
-    "Vendor 1 Name": "Digi-Key",
+    "Vendor 1 Name": "Mouser",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/UHP-500-24/9405499",
+    "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/UHP-500-24",
     "Brand": "Mean Well",
-    "Price (USD)": 109.99,
+    "Price (USD)": 94.2,
     "Pros": "Completely silent — no fan, no noise under any load\n500W / 20.8A — adequate for 350mm builds and heated chambers\nSlim 40mm profile fits compact electronics bays cleanly\nUL 62368-1 and CE certified\nHeat conducts to chassis — PSU enclosure acts as heatsink"
   },
   {
@@ -229,9 +208,9 @@
     "Name": "RSP-500-24",
     "Vendor 1 Name": "Digi-Key",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/RSP-500-24/2268234",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/RSP-500-24/7706339",
     "Brand": "Mean Well",
-    "Price (USD)": 97.5,
+    "Price (USD)": 94.6,
     "Pros": "500W / 20.8A — handles 350mm bed, chamber heater, and 5 steppers simultaneously\nUL 62368-1 and CE certified\nForced-air cooling maintains full rated output at ambient temps\nActive PFC — cleaner operation on noisy or international mains"
   },
   {
@@ -247,9 +226,9 @@
     "Cons": "5V only, useless as a printer main PSU\nStill only 50W — not a substitute for a 24V main supply\nMains-voltage screw terminals need a proper enclosure and careful wiring",
     "Fanless": true,
     "Name": "RS-50-5",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Kamami",
     "Output Voltage": "5V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-rs-50-5-switching-power-supply",
+    "Vendor 1 URL": "https://kamami.pl/en/built-in-power-supplies/584929-rs-50-5-mean-well-50w-5v-10a-switching-mode-power-supply-5902186328297.html",
     "Brand": "Mean Well",
     "Price (USD)": 14.99,
     "Pros": "Fanless, silent free-air convection cooling\nUL62368-1 approved, with short-circuit / overload / over-voltage protection\n50W / 10A — double the RS-25-5, enough for a Pi plus 5V fans, LEDs or logic\nCompact 99×97×36 mm, −25 to +70°C working range, under 0.5W no-load consumption"
@@ -267,9 +246,9 @@
     "Cons": "Must be mounted to an aluminium plate to meet its derating curve\nDerates above ~45°C at 230VAC input\nNo DC OK signal or redundant function on the standard type",
     "Fanless": true,
     "Name": "UHP-350-24",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "OpenELAB",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-uhp-350-24-power-supply",
+    "Vendor 1 URL": "https://openelab.io/a/s/products/meanwell-uhp350-24-power-supply",
     "Brand": "Mean Well",
     "Price (USD)": 79.99,
     "Pros": "Silent fanless convection cooling, zero fan noise\n350.4W / 14.6A at 24V — enough for a 300mm build\nSlim 31mm profile — 220 × 62 × 31 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
@@ -286,9 +265,9 @@
     "Cons": "No UL certification — EN IEC 62368-1 LVD compliance only\n5V rail is a buck converter off the 24V rail, max 25W\nGets hot at full 300W and needs external airflow\nNarrow operating temperature range, -20 to 40°C",
     "Fanless": true,
     "Name": "LCP300-24D5",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "KB-3D",
     "Output Voltage": "Dual",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-lcp300-24d5-compact-power-supply-24v-and-5v-300w",
+    "Vendor 1 URL": "https://kb-3d.com/store/power-supplies-converters/6570-ldo-motors-compact-dual-voltage-power-supply-lcp300-24d5-6975415155222.html",
     "Brand": "LDO",
     "Price (USD)": 69.99,
     "Pros": "Dual 24V (x3) + 5V outputs from one compact enclosed unit\nGaN design with PFC, up to 91% efficient\nDaisy-chainable dual AC input terminals simplify wiring\nOverload, overvoltage and temperature protection built in"
@@ -306,9 +285,9 @@
     "Cons": "Only 25W / 5A — one small 5V load, no headroom for more\n5V only, useless as a printer main PSU\nMains-voltage screw terminals need a proper enclosure and careful wiring",
     "Fanless": true,
     "Name": "RS-25-5",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "Kamami",
     "Output Voltage": "5V",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/mean-well-rs-25-5",
+    "Vendor 1 URL": "https://kamami.pl/en/built-in-power-supplies/584928-rs-25-5-mean-well-25w-5v-5a-switching-mode-power-supply-5902186328280.html",
     "Brand": "Mean Well",
     "Price (USD)": 9.99,
     "Pros": "Fanless, silent free-air convection cooling\nUL62368-1 approved, with short-circuit / overload / over-voltage protection\nCompact 78×51×28 mm, wide −20 to +70°C working range, under 0.5W no-load consumption\n3-year warranty"
@@ -331,11 +310,11 @@
       "HevORT"
     ],
     "Name": "LRS-350-24",
-    "Vendor 1 Name": "Digi-Key",
+    "Vendor 1 Name": "Mouser",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.digikey.com/product-detail/en/mean-well-usa-inc/LRS-350-24/1866-3346-ND/7705034",
+    "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/LRS-350-24",
     "Brand": "Mean Well",
-    "Price (USD)": 59.99,
+    "Price (USD)": 31.4,
     "Pros": "Headroom for 300mm bed, chamber heater, and stepper load simultaneously\nSame mounting footprint as LRS-200-24 — drop-in upgrade\nUL 62368-1 and CE certified\nTemperature-controlled fan stays quiet at moderate loads\nCommunity-recommended upgrade path for 250mm builds adding a chamber heater"
   }
 ]
