@@ -44,18 +44,18 @@ const subsystems = [
   { id: 'part-cooling', label: 'Part Cooling', stepNumber: '12', records: partCooling, routeBase: '/hardware/part-cooling', crossLink: null },
 ];
 ---
-<Base hasPageH1={true} heroPage={true} title="Voron Configurator — Build Your Parts List" description="Pick your Voron model and toolhead, then build a compatible parts list across hotends, extruders, motion system, electronics, and more.">
+<Base hasPageH1={true} title="Voron Configurator — Build Your Parts List" description="Pick your Voron model and toolhead, then build a compatible parts list across hotends, extruders, motion system, electronics, and more.">
   <Nav slot="nav" currentPath={currentPath} />
 
-  <div style="background:var(--black);padding:56px 0 32px;border-bottom:3px solid var(--accent)">
+  <div class="cfg-hero" style="background:var(--black);border-bottom:3px solid var(--accent)">
     <div style="max-width:1200px;margin:0 auto;padding:0 40px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+      <nav class="breadcrumb" aria-label="Breadcrumb" style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
         <a href="/" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Home</a>
         <span style="color:var(--on-dark-muted)">/</span>
         <a href="/voron" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Voron</a>
         <span style="color:var(--on-dark-muted)">/</span>
-        <span style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Configurator</span>
-      </div>
+        <span aria-current="page" style="font-size:12px;color:var(--on-dark-muted);font-family:var(--fu)">Configurator</span>
+      </nav>
       <div class="eyebrow" style="margin-bottom:10px;color:var(--accent)">Voron · Build Planner</div>
       <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.5px;margin-bottom:12px">Configurator</h1>
       <p style="font-family:'Lora',serif;font-size:15px;color:var(--on-dark-muted);line-height:1.7;max-width:560px">Pick your model and toolhead first — they filter every part list below to what actually fits. Everything here is session-only; nothing is saved.</p>
@@ -106,6 +106,12 @@ const subsystems = [
   </section>
 
   <Footer slot="footer" />
+
+  <style is:global>
+    /* Same top padding as .hot-hero so the breadcrumb sits the same distance below the nav as /hardware/hotends */
+    .cfg-hero { padding: 48px 0 32px; }
+    @media (max-width: 768px) { .cfg-hero { padding-top: 36px; } }
+  </style>
 
   <script type="application/ld+json" slot="head" set:html={jsonLd({
     '@context': 'https://schema.org',
