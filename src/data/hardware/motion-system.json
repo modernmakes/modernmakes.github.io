@@ -35,6 +35,7 @@
     "Open Source": true,
     "Vendor 1 Name": "Fabreeko",
     "Name": "CNC All Wheel Drive Kit for Voron V2.4 and Trident",
+    "Type": "Motion Kit",
     "Vendor 1 URL": "https://www.fabreeko.com/products/ldo-cnc-all-wheel-drive-kit-for-voron-v2-4-and-trident",
     "Brand": "LDO",
     "Price (USD)": 109.99,
@@ -54,6 +55,7 @@
     "Open Source": true,
     "Vendor 1 Name": "Fabreeko",
     "Name": "Rock-em Sock-em Z Joints",
+    "Type": "Z Joint",
     "Vendor 1 URL": "https://www.fabreeko.com/products/rock-em-sock-em-z-joints-by-whoppingpochard",
     "Brand": "Independent",
     "Price (USD)": 8.99,
@@ -186,7 +188,8 @@
     "Price (USD)": 9.99,
     "Pros": "PEEK construction addresses the early wear seen with POM nuts, especially on PTFE-coated lead screws\nLatest-generation LDO design for enhanced durability and long-term performance\n$9.99 each, in stock for both Trident and V0 variants",
     "Slug": "peek-leadscrew-nuts",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "PEEK"
   },
   {
     "id": "recASONPKLptcc0O0",
@@ -240,7 +243,8 @@
     "Brand": "HoneyBadger",
     "Price (USD)": 49.99,
     "Pros": "Pre-modified to fit the Positron 3D printer — no cutting or adapting needed\nHoneyBadger heavier preload, same quality and feel as the stainless series, at a lower price\nSpare carriages and balls available; one-year no-questions-asked warranty",
-    "Slug": "positron-black-steel-pre-modified-rails"
+    "Slug": "positron-black-steel-pre-modified-rails",
+    "Material": "Steel"
   },
   {
     "id": "recCqJ7iQO6TjMpKb",
@@ -299,6 +303,7 @@
     "Cons": "Needs a mirrored rear block (or AWD-layout L3VER M2)\nNeeds 30-60mm longer belts\nHeadline price is a sale price (EUR 149 vs EUR 160 regular) — confirm current pricing",
     "Vendor 1 Name": "BRS Engineering",
     "Name": "AWD Drive 2.1",
+    "Type": "Drive Kit",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-awd-drive-v21",
     "Brand": "BRS Engineering",
     "Price (USD)": 180,
@@ -322,7 +327,8 @@
     "Brand": "BRS Engineering",
     "Price (USD)": 67,
     "Pros": "Compensates XY offset and removes Z wobble artefacts with no backlash and no play\nSold pre-assembled as a kit of 3, with inserts, magnets and 4mm steel beads\n25kg+ support capacity before bending/fatigue (tested over 12 months) — handles heavy beds like Mandala Rose York or Spannsysteme 10/12mm\nPA12-CF15 throughout; central ring updated to a one-piece v2.3 design",
-    "Slug": "z-oldham-decoupler"
+    "Slug": "z-oldham-decoupler",
+    "Material": "PA12-CF15"
   },
   {
     "id": "recGkCuUK75s14L2n",
@@ -335,6 +341,7 @@
     "Open Source": true,
     "Vendor 1 Name": "NorthPrint3D",
     "Name": "XY Joint and Tensioner Kit for K3",
+    "Type": "XY Joint Kit",
     "Vendor 1 URL": "https://northprint3d.ca/product/slm-xy-joint-and-tensioner-kit-for-annex-engineering-k3/",
     "Brand": "SLM",
     "Price (USD)": 142.38,
@@ -415,12 +422,14 @@
     "Cons": "Heavier than normal preload — rail may not feel completely smooth until the break-in process is done\nNarrow 7mm profile is only for small printers (V0, Micron, Tap); not a gantry rail\nStill a clone rail, not Hiwin/LDO",
     "Vendor 1 Name": "Fabreeko",
     "Name": "MGN7H Stainless Steel Rails",
+    "Carriage Type": "MGN7H",
     "Type": "Linear Rail",
     "Vendor 1 URL": "https://www.fabreeko.com/products/honeybadger-mgn7h-stainless-steel-rails",
     "Brand": "HoneyBadger",
     "Price (USD)": 9.99,
     "Pros": "440C stainless steel with heavy preload for improved performance and durability\nShips dry and clean — add EP2 grease and go, no IPA soak needed\nOne-year no-questions-asked warranty from HoneyBadger\n5.0/5.0 rating on Fabreeko\n34mm variant made for ChaoticLab CNC Tap and FYSETC Carbon Tap",
     "Slug": "mgn7h-stainless-steel-rails",
+    "Rail Profile": "MGN7",
     "Material": "Stainless"
   },
   {
@@ -552,7 +561,8 @@
     "Price (USD)": 69.99,
     "Pros": "Complete K3 set in one kit: 4x F695-2RS, 17x 625-2RS, 6x 623-2RS\nABEC 3 chrome steel or ABEC 7 hybrid ceramic options; polished races, high-temp rated",
     "Slug": "bearings-for-annex-k3",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Chrome Steel"
   },
   {
     "id": "recWohP8lYXtvOybl",
@@ -602,12 +612,14 @@
     "Cons": "Out of stock at Fabreeko at check — per the vendor rule, Fabreeko should be switched out if it stays out of stock\nOnly fits V0/V0.1; 150mm MGN7H rails are useless elsewhere",
     "Vendor 1 Name": "West3D",
     "Name": "V0/0.1 Linear Rails Kit (5 pieces)",
+    "Carriage Type": "MGN7H",
     "Type": "Linear Rail",
     "Vendor 1 URL": "https://west3d.com/products/mgn7h-1r-150-linear-rails-with-carriages",
     "Brand": "LDO",
     "Price (USD)": 104.99,
     "Pros": "Complete set — 5 rails covers a whole V0/V0.1 build, no sourcing five separate rails\nLDO quality with 440C stainless steel for longevity\nSingle $104.99 price for the full set",
     "Slug": "v0-0-1-linear-rails-kit-5-pieces",
+    "Rail Profile": "MGN7",
     "Material": "Stainless"
   },
   {
@@ -620,6 +632,7 @@
     "Cons": "N17 damper not supplied\nNeeds the AWD layout if used with a BRS AWD Drive\nPremium price over stock blocks; printed parts, not metal",
     "Vendor 1 Name": "BRS Engineering",
     "Name": "L3VER M2 Block with Tensioners Module",
+    "Type": "Motor Block",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/precision-motor-block-1-0",
     "Brand": "BRS Engineering",
     "Price (USD)": 174,
@@ -637,6 +650,7 @@
     "Cons": "Hardware only — printed parts not included\nNeeds 30-60mm longer belts\nNeeds mirrored rear blocks (or AWD-layout L3VER M2)\nStore page says the manual is 'incoming soon'",
     "Vendor 1 Name": "BRS Engineering",
     "Name": "AWD Drive 1.35a",
+    "Type": "Drive Kit",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/brs-awd-drive-1-1-hardware-kit-only",
     "Brand": "BRS Engineering",
     "Price (USD)": 89,
@@ -765,7 +779,8 @@
     "Price (USD)": 141,
     "Pros": "Swaps the stock RatRig Chinese XY rails for quality preloaded black rails\nZ1 light preload removes carriage play while keeping motion smooth\nTested by BRS for years; cheaper than the Hiwin version of the same kit\nCovers 2x Y rails + X rail; custom sizes available on request",
     "Slug": "v-core-3-4-z1-preloaded-rails-kit",
-    "Rail Profile": "MGN12"
+    "Rail Profile": "MGN12",
+    "Material": "Steel"
   },
   {
     "id": "rechesLVGH9NkDtGH",
@@ -778,6 +793,7 @@
     "Open Source": true,
     "Vendor 1 Name": "BRS Engineering",
     "Name": "L3VER M1 REFRESH V1.5",
+    "Type": "Tensioner",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/tensionner-l3ver-m1-refresh-v1-1-printed-parts-only-with-inserts-cad",
     "Brand": "BRS Engineering",
     "Price (USD)": 100,
@@ -808,7 +824,8 @@
     "Price (USD)": 1.39,
     "Pros": "F695 2RS is the correct bearing spec — 5mm bore, 13mm OD, flanged\nFlange retains the belt’s lateral position without a separate washer\nStandard industrial bearing spec — available from reputable vendors at low cost",
     "Slug": "f695-2rs-smooth-idler-bearing",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Chrome Steel"
   },
   {
     "id": "reciz6rInwaLuWqrU",
@@ -864,7 +881,8 @@
     "Price (USD)": 381,
     "Pros": "Ballscrew Z — eliminates leadscrew wobble and backlash\nProven since 2021, 350+ users\nNatively compatible with RatRig bottom plates, no new cuts needed (1204 version)\nWorks with NEMA 17 or NEMA 23 motors\nReinforced front blocks, denser integration",
     "Slug": "z-upgrade-2-8-definitive-edition",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Steel"
   },
   {
     "id": "recjvFvmTZIPzzPTN",
@@ -902,7 +920,8 @@
     "Price (USD)": 4.99,
     "Pros": "Anti-backlash design takes up lead-screw play for cleaner Z\nCheap at $4.99 and in stock; used in V0.1 and Trident builds",
     "Slug": "tr8-8mm-anti-backlash-pom-nut",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "POM"
   },
   {
     "id": "recnCcwlpdU7dXn0g",
@@ -930,6 +949,7 @@
     "Belt Width (mm)": 9,
     "Description": "Genuine reinforced Gates GT3 open belt, sold by the metre in 6mm and 9mm widths. ~20% stiffer and stretches less than 2GT while staying backwards compatible with the 2GT tooth profile. Price basis: 9mm variant, $7.99 per metre (6mm is $6.99, sale-labelled).",
     "Verdict Label": "Genuine reinforced Gates GT3 open belt — ~20% stiffer than 2GT, backwards compatible",
+    "Tooth Profile": "GT3",
     "Verdict": "BUY",
     "Cons": "Tooth Profile GT3 has no matching choice in the Motion System table yet\n9mm variant costs more per metre than 6mm; the 6mm price is sale-labelled with no regular price shown",
     "Vendor 1 Name": "Fabreeko",
@@ -973,12 +993,14 @@
     "Cons": "Printed part, not metal\nNeeds bearings, shafts and a disc coupler alongside it\nStore page lists no description or full kit contents — verify what the EUR 109 / EUR 135 variants include before ordering",
     "Vendor 1 Name": "BRS Engineering",
     "Name": "Precision Motor Block",
+    "Type": "Motor Block",
     "Vendor 1 URL": "https://store.brs-engineering.com/en/products/precision-motor-block",
     "Brand": "BRS Engineering",
     "Price (USD)": 123,
     "Pros": "Shoulder bolts replace standard M5 bolts — more precise motion\nPrinted part + coupler damp vibration and noise\nNEMA damper can be added\nTakes stress off the NEMA shaft — longer motor life",
     "Slug": "precision-motor-block",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "PA12-CF"
   },
   {
     "id": "recu6UTO7pho4oYkF",
@@ -1047,7 +1069,8 @@
     "Price (USD)": 141,
     "Pros": "Swaps the stock RatRig Chinese XY rails for quality preloaded black rails\nPreload removes carriage play, improving rigidity and input shaper results\nTested by BRS for years; cheaper than the Hiwin version of the same kit\nCovers 2x Y rails + X rail; custom sizes available on request",
     "Slug": "v-core-3-4-z0-preloaded-rails-kit",
-    "Rail Profile": "MGN12"
+    "Rail Profile": "MGN12",
+    "Material": "Steel"
   },
   {
     "id": "recxGVtROCcWIokXL",
@@ -1131,7 +1154,8 @@
     "Price (USD)": 223,
     "Pros": "C7 rolled ballscrews with BK10/BF10 end supports and nuts included\nGenuine RATTM Motors screws\nBRS checks tolerances before shipping\nSFU1605 heavy-duty option available for larger builds",
     "Slug": "v-core-3-ballscrews-kit-sfu1204",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Steel"
   },
   {
     "id": "reczz0LMM6udnullb",
@@ -1150,6 +1174,7 @@
     "Price (USD)": 28.99,
     "Pros": "Second-generation high-damping imported composite rubber absorbs vibration while staying responsive\nH7 tolerance holes for exact fitment; 12.9 grade bolts",
     "Slug": "gtc-19x26-high-vibration-damping-rubber-coupling",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Rubber"
   }
 ]
