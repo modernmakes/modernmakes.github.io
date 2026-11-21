@@ -296,7 +296,7 @@
   {
     "id": "recE7iDWol2A5CRfc",
     "Image URL": "/media/hardware/motion-systems/awd-drive-1-35a.webp",
-    "Description": "Full AWD (4-motor XY) kit for any RatRig V-Core 3.0/3.1. Damper-mounted drives for lower noise, ABEC-5/7 bearings, and genuine Gates GT2 16T pulleys. Full kit includes printed parts with inserts and embedded bearings, 8x F695 and 4x 695ZZ bearings, 2x 5x65mm shafts, 2x disc couplers, screws and shoulder bolts. Needs a mirrored rear block and 30-60mm more belt length; use the AWD layout if running an L3VER M2. STL files on Printables and manual/BOM on GitHub.\n\nPrice basis: BRS-AWD Drive V2.1 at BRS Engineering (US store), regular price.",
+    "Description": "Full AWD (4-motor XY) kit for any RatRig V-Core 3.0/3.1. Damper-mounted drives for lower noise, ABEC-5/7 bearings, and genuine Gates GT2 16T pulleys. Full kit includes printed parts with inserts and embedded bearings, 8x F695 and 4x 695ZZ bearings, 2x 5x65mm shafts, 2x disc couplers, screws and shoulder bolts. Needs a mirrored rear block and 30-60mm more belt length; use the AWD layout if running an L3VER M2. STL files on Printables and manual/BOM on GitHub.\n\nPrice basis: BRS-AWD Drive V2.1 at BRS Engineering (US store), regular price.\n\nPrinted parts with metal hardware.",
     "Verdict Label": "Full AWD kit for any V-Core — printed parts, bearings, GT2 pulleys included",
     "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
@@ -309,7 +309,8 @@
     "Price (USD)": 180,
     "Pros": "Full kit — printed parts, bearings, shafts, disc couplers and GT2 pulleys included\nDamper-mounted drives — quieter than stock\nGenuine Gates GT2 16T pulleys on ABEC-5/7 bearings\nFits any V-Core 3.0/3.1 size, open or enclosed, stock or ballscrew Z",
     "Slug": "awd-drive-2-1",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Mixed"
   },
   {
     "id": "recEvoDcqbLUrQK3C",
@@ -353,7 +354,7 @@
   {
     "id": "recHEVzY4qNhgeJpG",
     "Image URL": "/media/hardware/motion-systems/mgn15-steel-linear-rails.webp",
-    "Description": "HoneyBadger MGN15 linear rails sold by Fabreeko in two materials: 440C stainless steel (Class H, high precision) and 52100 high-carbon bearing steel with black oxide coating (Class C, higher load ratings), with single or dual carriage blocks, in 250–500mm lengths. Heavy preload requires a break-in. Price on file ($44.99) is the 440C stainless 500mm single-carriage variant, out of stock at check; smallest variant is the Black Steel 250mm dual-carriage at $22.99 — price basis held pending a decision (see held).\n\nPrice basis: 440C Stainless 450mm (smallest in-stock size) at Fabreeko.",
+    "Description": "HoneyBadger MGN15 linear rails sold by Fabreeko in two materials: 440C stainless steel (Class H, high precision) and 52100 high-carbon bearing steel with black oxide coating (Class C, higher load ratings), with single or dual carriage blocks, in 250–500mm lengths. Heavy preload requires a break-in. Price on file ($44.99) is the 440C stainless 500mm single-carriage variant, out of stock at check; smallest variant is the Black Steel 250mm dual-carriage at $22.99 — price basis held pending a decision (see held).\n\nPrice basis: 440C Stainless 450mm (smallest in-stock size) at Fabreeko.\n\nSold with C or H carriages, in 52100 bearing steel (black oxide) or 440C stainless steel.",
     "Verdict Label": "Wide 15mm rail in two materials — stainless Class H or black bearing steel Class C",
     "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
@@ -625,7 +626,7 @@
   {
     "id": "recaQjYYia8YyQHq9",
     "Image URL": "/media/hardware/motion-systems/l3ver-m2-block-with-tensioners-module.webp",
-    "Description": "Pair of XY motor blocks with an integrated belt-tension mechanism for the RatRig V-Core 3.0/3.1 — a replacement for the stock blocks that opens up tensioner-less printheads (e.g. VzBot). Based on the Precision Motor Block: full shouldered-screw conversion for better precision, longer bearing life and less vibration, with a damper-ready base (N17 damper not supplied) and the NEMA mated via disc coupler and extended shaft on two bearings for coaxial movement. ABEC-7 bearings; kits delivered in pairs (left/right), pre-assembled. Classic (open/Enclosure 1.0) and Enclosed (V-Core 3.1 + Enclosure 2.0) versions; an AWD layout exists for AWD drives.\n\nPrice basis: CLASSIC M2 / Damperless / ASA Black at BRS Engineering (US store), regular price.",
+    "Description": "Pair of XY motor blocks with an integrated belt-tension mechanism for the RatRig V-Core 3.0/3.1 — a replacement for the stock blocks that opens up tensioner-less printheads (e.g. VzBot). Based on the Precision Motor Block: full shouldered-screw conversion for better precision, longer bearing life and less vibration, with a damper-ready base (N17 damper not supplied) and the NEMA mated via disc coupler and extended shaft on two bearings for coaxial movement. ABEC-7 bearings; kits delivered in pairs (left/right), pre-assembled. Classic (open/Enclosure 1.0) and Enclosed (V-Core 3.1 + Enclosure 2.0) versions; an AWD layout exists for AWD drives.\n\nPrice basis: CLASSIC M2 / Damperless / ASA Black at BRS Engineering (US store), regular price.\n\nAvailable in ASA or PA12-CF15.",
     "Verdict Label": "Motor blocks with integrated tensioners — shouldered screws, ABEC-7 bearings",
     "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
@@ -643,7 +644,7 @@
   {
     "id": "recbbAasNZBWVj3EA",
     "Image URL": "/media/hardware/motion-systems/awd-drive-1-3.webp",
-    "Description": "Hardware-only kit adding all-wheel drive (4-motor XY) to any RatRig V-Core version. Drives mount on a damper system to reduce noise, with genuine Gates (or Kis3D) pulleys on ABEC-5/7 bearings for long life. No frame or enclosure modifications needed; requires 30-60mm more belt length. Hardware kit only — no printed parts. Compatible with V-Core 3.0/3.1 (200-500mm+), stock leadscrew Z and BRS ballscrew Z-upgrades, and L3VER M1/M2.\n\nPrice basis: BRS-AWD Drive 1.35a hardware kit only at BRS Engineering (US store).",
+    "Description": "Hardware-only kit adding all-wheel drive (4-motor XY) to any RatRig V-Core version. Drives mount on a damper system to reduce noise, with genuine Gates (or Kis3D) pulleys on ABEC-5/7 bearings for long life. No frame or enclosure modifications needed; requires 30-60mm more belt length. Hardware kit only — no printed parts. Compatible with V-Core 3.0/3.1 (200-500mm+), stock leadscrew Z and BRS ballscrew Z-upgrades, and L3VER M1/M2.\n\nPrice basis: BRS-AWD Drive 1.35a hardware kit only at BRS Engineering (US store).\n\nPrinted parts with metal hardware.",
     "Verdict Label": "Hardware-only AWD kit for any V-Core — damper-mounted, ABEC bearings",
     "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
@@ -656,7 +657,8 @@
     "Price (USD)": 89,
     "Pros": "Adds AWD to any V-Core with no frame or enclosure mods\nDamper-mounted drives — quieter operation\nGenuine Gates pulleys, ABEC-5/7 bearings, high-quality disc couplers\nWorks with stock Z, BRS ballscrew Z and L3VER M1/M2",
     "Slug": "awd-drive-1-35a",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Mixed"
   },
   {
     "id": "recdHqyyaCvZcIafe",
@@ -724,7 +726,7 @@
   {
     "id": "recgHTfEG9k5x47dc",
     "Image URL": "/media/hardware/motion-systems/disc-coupler.webp",
-    "Description": "Dual-disc shaft coupler: two aluminum hubs joined by one or two thin stainless steel discs. The thin metal disc flexes to absorb angular, parallel and axial misalignment while transmitting torque with zero backlash and high concentricity. BRS sells it for printer use because it behaves better than low-cost spider (jaw) couplers. Sold in several bore/size variants from EUR 13.90 (lowest variant).\n\nPrice basis: 5x5 at BRS Engineering (US store).",
+    "Description": "Dual-disc shaft coupler: two aluminum hubs joined by one or two thin stainless steel discs. The thin metal disc flexes to absorb angular, parallel and axial misalignment while transmitting torque with zero backlash and high concentricity. BRS sells it for printer use because it behaves better than low-cost spider (jaw) couplers. Sold in several bore/size variants from EUR 13.90 (lowest variant).\n\nPrice basis: 5x5 at BRS Engineering (US store).\n\nAluminium hubs with stainless steel discs.",
     "Verdict Label": "Dual-disc zero-backlash coupler — beats spider couplers on concentricity",
     "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",
@@ -737,7 +739,8 @@
     "Price (USD)": 16,
     "Pros": "Zero-backlash design with true limited end float\nAbsorbs angular, parallel and axial misalignment\nHigh concentricity and perfect torque transmission\nBetter suited to NEMA and servo actuators than spider couplers\nHigh speed rating and long service life",
     "Slug": "disc-coupler",
-    "Rail Profile": "N/A"
+    "Rail Profile": "N/A",
+    "Material": "Mixed"
   },
   {
     "id": "recgIp3I5xu8RRTOU",
@@ -785,7 +788,7 @@
   {
     "id": "rechesLVGH9NkDtGH",
     "Image URL": "/media/hardware/motion-systems/l3ver-m1-refresh-v1-5.webp",
-    "Description": "Quick-install rear belt tensioner module for the RatRig V-Core 3.0/3.1. Moves belt tensioning to the rear of the machine, freeing the print head for tensioner-less designs (VzBot, Flathead 3.0 and other head mods). Does not use the motors as tension elements, which improves XY motor-block reliability and allows very precise tension (+/-0.05mm). Installs in about 30 minutes with limited dismantling; locks with two shoulder screws and allows 16mm of adjustment travel. Printed parts only, with inserts; CAD STEP included. Under CC-BY-NC-ND 4.0. Compatible with any V-Core 3.0/3.1 (200-500mm) and BRS AWD Drive.\n\nPrice basis: ASA Black / RR2023 at BRS Engineering (US store), regular price.",
+    "Description": "Quick-install rear belt tensioner module for the RatRig V-Core 3.0/3.1. Moves belt tensioning to the rear of the machine, freeing the print head for tensioner-less designs (VzBot, Flathead 3.0 and other head mods). Does not use the motors as tension elements, which improves XY motor-block reliability and allows very precise tension (+/-0.05mm). Installs in about 30 minutes with limited dismantling; locks with two shoulder screws and allows 16mm of adjustment travel. Printed parts only, with inserts; CAD STEP included. Under CC-BY-NC-ND 4.0. Compatible with any V-Core 3.0/3.1 (200-500mm) and BRS AWD Drive.\n\nPrice basis: ASA Black / RR2023 at BRS Engineering (US store), regular price.\n\nAvailable in ASA or PA12-CF15.",
     "Verdict Label": "Rear belt tensioner — precise tension without using the motors",
     "Tooth Profile": "N/A",
     "Verdict": "CONSIDER",

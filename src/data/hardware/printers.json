@@ -399,6 +399,7 @@
     "Cons": "Open frame — no enclosure in the kit; needs printed parts and a Pi; Y-motor sync is fiddly.",
     "Tool Configuration": "Single",
     "Name": "LH Stinger",
+    "Source URL": "https://github.com/lhndo/LH-Stinger",
     "Vendor 1 Name": "FYSETC",
     "Assembly": "Kit",
     "Klipper Native": true,
