@@ -222,7 +222,7 @@
     "Verdict": "CONSIDER",
     "Fan Outputs": 2,
     "Stepper Driver": "TMC2209",
-    "Image URL": "https://ueeshop.ly200-cdn.com/u_file/UPBE/UPBE311/2604/30/products/e6636bbec2.jpg",
+    "Image URL": "/media/hardware/toolboards/sht36-v3.webp",
     "Cons": "Many variants (V3 / Plus / Eddy / Max) — easy to buy the wrong one\nBoard-only price varies by variant and is hard to pin down\nRS232 mode needs a separate UTOR adapter\nMellow documentation is primarily in Chinese",
     "Connection": "CAN + RS232",
     "Vendor 1 URL": "https://3dmellow.com/products/mellow-fly-sht36-v3-klipper-compatible-3d-printer-klipper-rrf-canbus-rs232-board-max-plus-ldc1612-eddy-for-nema14-17-motor",

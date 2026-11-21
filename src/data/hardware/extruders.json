@@ -620,7 +620,7 @@
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
-    "Image URL": "https://github.com/JaredC01/Galileo2/raw/main/images/g2extruder.png",
+    "Image URL": "/media/hardware/extruders/g2-ww-anthead.webp",
     "Compatible Toolheads": [
       "AntHead"
     ],
@@ -677,7 +677,7 @@
       "HevORT"
     ],
     "Verdict": "Bleeding Edge",
-    "Image URL": "https://ae01.alicdn.com/kf/S079994f7be2a4d299778bf155f6f0919s.jpg",
+    "Image URL": "/media/hardware/extruders/vz-hextrudort-low.webp",
     "Vendor 1 Name": "3D Mellow",
     "Name": "Vz-Hextrudort-Low",
     "Vendor 2 URL": "https://print3dshop.org/products/mellow-cnc-all-metal-vz-hextrudort-low-wc-extruder-one-shaft-twirl-gear-for-vzbot-330-vz235-hevort-3d-printer",
@@ -958,7 +958,7 @@
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
-    "Image URL": "https://www.3dlabtech.ca/wp-content/uploads/2021/10/LDO-Galileo-2-Extruder-e1704850852804.jpg",
+    "Image URL": "/media/hardware/extruders/galileo-2-standalone.webp",
     "Vendor 1 Name": "Filastruder",
     "Name": "Galileo 2 Standalone",
     "Vendor 2 URL": "https://www.fabreeko.com/collections/extruder/products/galileo-2-kits-by-ldo-g2e-g2z",
@@ -1040,7 +1040,7 @@
       "Voron"
     ],
     "Verdict": "Bleeding Edge",
-    "Image URL": "https://advanced3dprinting.com/cdn/shop/files/fxd1.1.jpg",
+    "Image URL": "/media/hardware/extruders/fxd-v1-1.webp",
     "Vendor 1 Name": "A3DP",
     "Name": "FXD v1.1",
     "Vendor 2 URL": "https://www.fabreeko.com/collections/extruder/products/fxd-fixed-gear-extruder",

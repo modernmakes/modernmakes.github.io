@@ -20,7 +20,7 @@
   },
   {
     "id": "rec3aDajj9kXobN8u",
-    "Image URL": "https://west3d.com/cdn/shop/files/jabberwocky-complete-toolhead-with-filament-cutter-and-extruder-for-3d-printers-and-multi-filament-setups-west3d-3d-printing-supplies-ldo-systems-850376.jpg",
+    "Image URL": "/media/hardware/toolheads/jabberwocky.webp",
     "Included Extruder": "Bondtech compound drive gear + dual LDO Orbiter gears, LDO NEMA14 8T 36mm motor",
     "Pros": "Built-in filament cutter; dual filament sensors; NitéHawk 36 CAN toolboard included; LEDs (nozzle + status); multi-material ready out of box; strong community support",
     "Name": "Jabberwocky",
@@ -42,7 +42,7 @@
     "Vendor 1 Name": "https://west3d.com/products/jabberwocky-complete-toolhead-with-filament-cutter-and-extruder-for-3d-printers-and-multi-filament-setups",
     "Cons": "Higher cost than DIY options; Conch hotend limits future hotend swaps; NEMA14 motor may require retuning",
     "Verdict": "Buy",
-    "Updated": "2026-11-06T11:05:13.000Z",
+    "Updated": "2026-11-21T07:54:27.000Z",
     "Slug": "jabberwocky",
     "Type": "Commercial Kit",
     "Multi-Material Ready": true,
@@ -82,7 +82,7 @@
   },
   {
     "id": "rec9TVxjk049XGYvN",
-    "Image URL": "https://excit3d.shop/uploads/1778518705382-62828.png",
+    "Image URL": "/media/hardware/toolheads/peregrine.webp",
     "Included Extruder": "None (not included — compatible with Sherpa Mini)",
     "Pros": "Commercial quality; reduced mass for high-acceleration printing; active vendor support from Excit3D",
     "Name": "Peregrine",
@@ -103,7 +103,7 @@
     "Vendor 1 Name": "https://excit3d.shop",
     "Cons": "Price and availability depend on Excit3D stock; smaller community than Voron Design toolheads; specs need verification from vendor page (JS-rendered, not fetchable)",
     "Verdict": "Consider",
-    "Updated": "2026-11-06T11:05:14.000Z",
+    "Updated": "2026-11-21T07:54:27.000Z",
     "Slug": "peregrine",
     "Type": "Commercial",
     "Part Cooling Fans": [
@@ -475,7 +475,6 @@
   },
   {
     "id": "recdL04Yb38BoVmDH",
-    "Image URL": "https://raw.githubusercontent.com/VoronDesign/Voron-Stealthburner/main/Images/stealthburner_front.png",
     "Included Extruder": "Clockwork 2 (CW2)",
     "Pros": "Official Voron toolhead — largest community support and mod ecosystem; strong part cooling; CW2 extruder is well-proven; many hotend adapters available",
     "Name": "StealthBurner",
@@ -495,7 +494,7 @@
     "Vendor 1 Name": "https://www.fabreeko.com/collections/voron/products/stealthburner-kit-for-voron-by-fystec",
     "Cons": "Bulkier than newer community designs; no filament cutter by default; not multi-material ready without mods; CW2 has more parts than some alternatives",
     "Verdict": "Buy",
-    "Updated": "2026-11-20T22:22:01.000Z",
+    "Updated": "2026-11-21T07:54:27.000Z",
     "Slug": "stealthburner",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
@@ -534,7 +533,7 @@
   },
   {
     "id": "recfGAzC4DZ4y5vHF",
-    "Image URL": "https://raw.githubusercontent.com/Armchair-Heavy-Industries/Xol-Toolhead/main/docs/assets/images/Xol-Toolhead.both.png",
+    "Image URL": "/media/hardware/toolheads/xol.webp",
     "Included Extruder": "Sherpa Mini, G2SA, LGX Lite, Orbiter 2.0, DFA (via adapters)",
     "Pros": "Lower mass than StealthBurner — better for high-accel/IS tuning; modular hotend mounts support wide hotend range; active development; good community documentation",
     "Name": "Xol",
@@ -554,7 +553,7 @@
     "Vendor 1 Name": "https://www.fabreeko.com/collections/vendors/products/xol-2-toolhead-by-armchair-engineering",
     "Cons": "Dual 4010 fans provide less static pressure than 5015 blowers — may underperform on dense overhangs; less plug-and-play than CW2-based designs; no filament cutter native",
     "Verdict": "Buy",
-    "Updated": "2026-11-20T22:22:01.000Z",
+    "Updated": "2026-11-21T07:54:27.000Z",
     "Slug": "xol",
     "Type": "Print-it-yourself",
     "Part Cooling Fans": [
