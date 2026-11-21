@@ -883,7 +883,10 @@ html { overflow-anchor: none; }
 @media (min-width: 900px) {
   .gf-list { --row-thumb: 112px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-.gf-card { display: grid; grid-template-columns: var(--row-thumb) minmax(0, 1fr); }
+@media (min-width: 1280px) {
+  .gf-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.gf-card { display: grid; grid-template-columns: var(--row-thumb) minmax(0, 1fr); min-height: var(--row-thumb); }
 .gf-card .card-img {
   width: var(--row-thumb); height: var(--row-thumb); aspect-ratio: auto;
   background: var(--surface-media);
@@ -897,7 +900,7 @@ html { overflow-anchor: none; }
   margin: 0; font-family: var(--fm); font-size: 10px; font-weight: 500; letter-spacing: .04em;
   color: var(--g1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.gf-card h2.card-title { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gf-card h2.card-title { margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; }
 .gf-card .card-footer {
   margin: 4px 0 0; padding: 0; border-top: 0;
   justify-content: flex-start; flex-wrap: nowrap; gap: 6px; min-width: 0;
