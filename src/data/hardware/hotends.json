@@ -39,8 +39,74 @@
     "Updated": "2026-11-20T09:37:11.000Z"
   },
   {
+    "id": "rec3MjEKFmCLRAqu0",
+    "Cons": "Sold bare — heater and thermistor not included\nStandard flow only; HF version is a separate listing",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig"
+    ],
+    "Max Flow (mm³/s)": 46.08,
+    "Flow Class": "Standard Flow",
+    "Description": "Trianglelab's Dragon Hotend V2.0, the standard-flow version of the Dragon (jointly developed with Phaetus). A drop-in replacement for the E3D V6 with a plated copper block, rigid monolithic construction, and one-hand nozzle changes. Sold bare (heatsink, heat break, block, nozzle, V6 adapter) — heater and thermistor are not included. Manufacturer flow test: 46.08 mm³/s (PLA @ 215°C); the HF version tested 62.51 mm³/s.",
+    "Verdict Label": "Trianglelab's standard-flow Dragon — the original V6 drop-in",
+    "Verdict": "Workhorse",
+    "Max Temp (°C)": 450,
+    "Nozzle Thread": "V6",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "Trianglelab",
+    "Name": "Dragon V2.0",
+    "Slug": "dragon-v2-0",
+    "Type": "All-metal",
+    "Vendor 1 URL": "https://www.trianglelab.net/products/dragon-hotend?VariantsId=11396",
+    "Brand": "Triangle Lab",
+    "Price (USD)": 63.68,
+    "Pros": "Rigid monolithic design — collisions won't break the heat break\nOne-hand nozzle changes\nV6 drop-in with included adapter",
+    "Max Flow Source": "Manufacturer",
+    "Updated": "2026-11-21T00:49:06.000Z"
+  },
+  {
+    "id": "rec5B4uqdiNItmvRG",
+    "Cons": "Volcano nozzles only\nNo manufacturer flow figure published",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig"
+    ],
+    "Description": "Trianglelab's T-Volcano Dragon in high-flow form: the Dragon hotend design stretched to a Volcano-length melt zone for higher flow. Ships as a complete kit — pre-installed hotend, plated copper heater block and 0.4mm nozzle, silicone sock, 24V 50W heater cartridge, and 104GT-2 thermistor. A standard-flow (SF) version is sold on the same page. Price is the regular price; Trianglelab was running it at $67.20 on flash sale at last check.",
+    "Verdict Label": "Dragon hotend with a Volcano-length melt zone — complete kit with heater and thermistor",
+    "Verdict": "Contender",
+    "Nozzle Thread": "Volcano",
+    "Heater Type": "Cartridge",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Thermistor": "NTC100K",
+    "Vendor 1 Name": "Trianglelab",
+    "Name": "T-Volcano Dragon HF",
+    "Slug": "t-volcano-dragon-hf",
+    "Type": "All-metal",
+    "Vendor 1 URL": "https://www.trianglelab.net/products/t-volcano-dragon-hotend-high-flow?VariantsId=10286",
+    "Brand": "Triangle Lab",
+    "Price (USD)": 89.6,
+    "Pros": "Complete kit — heater, thermistor, nozzle, and sock included\nVolcano-length melt zone for high flow\nPlated copper block and nozzle",
+    "Updated": "2026-11-21T00:49:45.000Z"
+  },
+  {
     "id": "rec7Nntel8WpI6ldz",
-    "Cons": "Lower flow than the UHF variants\nPT1000 requires firmware configuration adjustment\nPriced identically to the UHF — harder to justify unless flow is not the bottleneck",
+    "Cons": "Lower flow than the UHF variants\nPT1000 requires firmware configuration adjustment\nOnly $5 less than the Plus UHF — harder to justify unless flow is not the bottleneck",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -88,14 +154,45 @@
     "Mount Style": "UHF Mount",
     "Heat Break": "Titanium",
     "Price (USD)": 99,
-    "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nOnly $10 more than the HF\nIdeal for enclosed builds running high-temp materials",
+    "Pros": "350°C ceiling opens PA-CF, PC, PEI\nPT1000 thermistor is more accurate above 280°C\nSame toolhead compatibility as standard Rapido 2\nAbout $6 more than the standard HF at Phaetus\nIdeal for enclosed builds running high-temp materials",
     "Related 1 URL": "/hardware/hotends/rapido-2-plus-uhf",
-    "Updated": "2026-11-20T09:37:11.000Z",
+    "Updated": "2026-11-21T01:00:15.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-hf"
   },
   {
+    "id": "rec7c9kWLhw2JisPF",
+    "Cons": "Needs a liquid cooling loop\nOut of stock at Trianglelab at last check\nVoron 2.4 fitment needs an angled install",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig"
+    ],
+    "Description": "The liquid-cooled Dragon: a water-circulation heatsink keeps the cold end at room temperature for heated-chamber printing, in an all-metal kit rated to 500°C. Standard-flow and high-flow versions share the same dimensions for zero-barrier interchangeability. Ships pre-assembled with groove-mount adapter, nickel-plated copper 0.4 nozzle, and 2m of silicone tube. Price is the standard-flow set. Note: Trianglelab's page showed out of stock at last check, and Voron 2.4 installs need the hotend angled to clear the enclosure.",
+    "Verdict Label": "Liquid-cooled Dragon — water-circulation heatsink, 500°C rated",
+    "Verdict": "Contender",
+    "Max Temp (°C)": 500,
+    "Nozzle Thread": "V6",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 1 Name": "Trianglelab",
+    "Name": "Dragon LC",
+    "Slug": "dragon-lc",
+    "Type": "Liquid Cooled",
+    "Vendor 1 URL": "https://www.trianglelab.net/products/dragon-lc-hotend?VariantsId=10070",
+    "Brand": "Triangle Lab",
+    "Price (USD)": 62.62,
+    "Pros": "Cold end stays at room temperature in heated chambers\n500°C all-metal construction\nStandard and high-flow versions are dimensionally interchangeable",
+    "Updated": "2026-11-21T00:49:06.000Z"
+  },
+  {
     "id": "rec7nAlY5yM2ZzAFb",
-    "Cons": "Premium price at $109\nPT1000 requires firmware configuration\nOverkill for builders who don't push high-temp exotic materials at speed",
+    "Cons": "Top of the Rapido 2 price range at $104\nPT1000 requires firmware configuration\nOverkill for builders who don't push high-temp exotic materials at speed",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident",
@@ -118,7 +215,7 @@
     "Max Temp (°C)": 350,
     "Related 3 Name": "Rapido 2F",
     "Vendor 4 Affiliate": true,
-    "Body": "The Rapido 2 Plus UHF is the flagship of the lineup — the only Rapido 2 variant that combines UHF flow with a 350°C ceiling and PT1000 thermistor. For most builders, it's more hotend than they need. For the right build, it's exactly right.\n\nWho needs it: builders running PA-CF and PC at speed in an enclosed, chambered machine. With UHF flow and 350°C available, it covers the material and throughput needs of nearly any prosumer build.\n\nThe $109 price is the highest in the lineup but reasonable given what's on offer. The main consideration is whether you'll actually use the 350°C ceiling — if your material stack tops out at ABS or ASA, the standard UHF at $99 is a better value. But if your build is spec'd around performance materials from the start, the Plus UHF is the correct answer.",
+    "Body": "The Rapido 2 Plus UHF is the flagship of the lineup — the only Rapido 2 variant that combines UHF flow with a 350°C ceiling and PT1000 thermistor. For most builders, it's more hotend than they need. For the right build, it's exactly right.\n\nWho needs it: builders running PA-CF and PC at speed in an enclosed, chambered machine. With UHF flow and 350°C available, it covers the material and throughput needs of nearly any prosumer build.\n\nAt $104 from Phaetus it costs the same as the standard UHF, so price isn't the deciding factor. The question is whether you'll use the 350°C ceiling: if your material stack tops out at ABS or ASA, the standard UHF's NTC100K setup is simpler to configure. If your build is spec'd around performance materials from the start, the Plus UHF is the correct answer.",
     "Vendor 5 URL": "https://www.matterhackers.com/store/l/phaetus-rapido-plus-2-hotend/sk/MDQWNHLS",
     "Nozzle Thread": "M6",
     "Heater Type": "Cartridge",
@@ -142,11 +239,30 @@
     "Brand": "Phaetus",
     "Mount Style": "UHF Mount",
     "Heat Break": "Titanium",
-    "Price (USD)": 109.2,
+    "Price (USD)": 104,
     "Pros": "UHF melt zone — the highest-flow tier of the Rapido 2 family\n350°C ceiling for all exotic materials\nPT1000 for accurate high-temp readings\nFull toolhead ecosystem compatibility\nBest pick for speed-focused enclosed builds",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-11-20T09:37:11.000Z",
+    "Updated": "2026-11-21T01:00:15.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
+  },
+  {
+    "id": "rec8DyqSwiNgjOsEO",
+    "Cons": "Revo nozzle ecosystem pricing\nModest flow vs high-flow hotends",
+    "Description": "E3D's RapidChange Revo Micro: a roughly 30g hotend with tool-free nozzle swaps. The DB already carries the Revo Voron; the Micro is the smaller sibling. Price is the 24V version (12V out of stock at BIQU).",
+    "Verdict Label": "E3D RapidChange Revo Micro — ~30g with tool-free nozzle swaps",
+    "Weight (g)": 30,
+    "Verdict": "Workhorse",
+    "Heater Type": "Revo HeaterCore",
+    "Thermistor": "NTC100K",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "Revo Micro",
+    "Slug": "revo-micro",
+    "Type": "All-metal",
+    "Vendor 1 URL": "https://biqu.equipment/products/rapidchange-revo-hotened-for-bowden-and",
+    "Brand": "E3D",
+    "Price (USD)": 189.85,
+    "Pros": "Tool-free nozzle changes\nVery light at ~30g",
+    "Updated": "2026-11-21T00:28:07.000Z"
   },
   {
     "id": "rec90hq2iEo7kyf89",
@@ -290,10 +406,10 @@
     "Brand": "Phaetus",
     "Mount Style": "UHF Mount",
     "Heat Break": "Titanium",
-    "Price (USD)": 89,
+    "Price (USD)": 93.45,
     "Pros": "Excellent flow for standard filaments\nWell-documented community support\nCompatible with all major Voron toolheads\nAffordable entry into the Rapido 2 family\nPT100 upgrade available via Plus variant",
     "Related 1 URL": "/hardware/hotends/rapido-2-uhf",
-    "Updated": "2026-11-20T09:37:11.000Z",
+    "Updated": "2026-11-21T01:00:15.000Z",
     "Related 2 URL": "/hardware/hotends/rapido-2-plus-hf"
   },
   {
@@ -636,10 +752,10 @@
     "Brand": "Phaetus",
     "Mount Style": "Groove mount",
     "Heat Break": "Titanium",
-    "Price (USD)": 129.43,
+    "Price (USD)": 103.95,
     "Pros": "Volcano-style extended melt zone, Detachable thermistor, Titanium heat break, Plated copper heat block, Includes V6 and Volcano nozzles, Wide toolhead compatibility",
     "Related 1 URL": "/hardware/hotends/dragon-hf",
-    "Updated": "2026-11-20T09:37:11.000Z",
+    "Updated": "2026-11-21T01:00:15.000Z",
     "Vendor 5 Affiliate": true,
     "Related 2 URL": "/hardware/hotends/revo-voron"
   },
@@ -930,6 +1046,44 @@
     "Updated": "2026-11-20T22:15:05.000Z"
   },
   {
+    "id": "recYxHQLPViMdKL6o",
+    "Tested Nozzle (mm)": 1.2,
+    "Cons": "Longer heating section can misalign fan ducts and probes\nMax flow figure needs the optional MZE extender and a 1.2mm nozzle",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot",
+      "RatRig"
+    ],
+    "Max Flow (mm³/s)": 74,
+    "Flow Class": "High Flow",
+    "Description": "Trianglelab's next-generation Dragon: the original Dragon's HF heat-break design paired with a Volcano-style heater block, a titanium-alloy heat break for abrasion resistance, and ceramic heating pads instead of a cartridge. With the optional MZE melt-zone extender the melt section reaches 40mm and manufacturer-tested flow hits 74 mm³/s (PETG, 1.2mm nozzle). Fits toolheads designed for V6 or Dragon/Dragon UHF; V6 nozzles with 7.5mm thread. Note the heating section is 8.5mm longer than the original Dragon, which can shift part-cooling and probe alignment.",
+    "Verdict Label": "Next-gen Dragon with HF heat break, Volcano block, and ceramic pad heaters",
+    "Verdict": "Contender",
+    "Nozzle Thread": "V6",
+    "Heater Type": "MCH Ceramic",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Tested Flow (mm³/s)": 74,
+    "Tested By": "Trianglelab",
+    "Vendor 1 Name": "Trianglelab",
+    "Name": "Dragon Ace",
+    "Slug": "dragon-ace",
+    "Type": "All-metal",
+    "Vendor 1 URL": "https://www.trianglelab.net/products/dragon-ace%E2%84%A2-hotend?VariantsId=11348",
+    "Brand": "Triangle Lab",
+    "Price (USD)": 61.62,
+    "Pros": "Up to 74 mm³/s with the MZE extender (manufacturer test)\nCeramic pad heaters — faster heat-up, easy to replace\nTitanium heat break resists abrasive filaments\n10g lighter than the original Dragon despite the longer block",
+    "Max Flow Source": "Manufacturer",
+    "Tested Material": "PETG",
+    "Updated": "2026-11-21T00:49:06.000Z"
+  },
+  {
     "id": "recZZrTGnFhtNcmej",
     "Cons": "Requires a full water cooling loop — significant added complexity and cost\nNichrome wire routing still requires care\nSilicone sock only rated to 300°C\nM3 thermistor thread strips easily\nNot practical for most standard Voron builds without significant modification",
     "Compatible Printers": [
@@ -1033,6 +1187,7 @@
     "Verdict": "Contender",
     "Max Temp (°C)": 350,
     "Nozzle Thread": "V6 (M6)",
+    "Heater Type": "110W Ceramic",
     "Image URL": "/media/hardware/hotends/goliath-lite-air.webp",
     "Thermistor": "PT1000",
     "Vendor 1 Name": "3D Mellow",
@@ -1045,7 +1200,7 @@
     "Price (USD)": 131,
     "Related 1 URL": "/hardware/hotends/goliath-lite-water",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-20T07:25:45.000Z"
+    "Updated": "2026-11-21T00:59:37.000Z"
   },
   {
     "id": "recbvY6iGD5CDE6fA",
@@ -1237,6 +1392,44 @@
     "Updated": "2026-11-20T09:15:04.000Z"
   },
   {
+    "id": "rech3HBRLl9dh3fR9",
+    "Cons": "Needs a liquid cooling loop (pump, radiator, tubing)\nLonger heat block can cause stringing with slow retraction",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "VzBot",
+      "RatRig",
+      "large-format CoreXY"
+    ],
+    "Description": "The liquid-cooled version of Triangle Lab's Compact High Conduction XL, designed for high-speed FDM printing in heated chambers — liquid cooling keeps it working properly with chamber temperatures up to 120°C. Patented multiple thermal-break design keeps the cold end cooler, reducing heat creep; monolithic construction protects the thin-walled throat from nozzle changes and collisions. Embedded temperature sensor, MCH ceramic heating element, V6-style nozzle compatibility with an optional melt-zone extender for even more flow. Price is the standard Set A (non-wear-resistant) complete hotend; the wear-resistant coated Set B is $98.90 regular. An air-cooled version is listed separately as CHC XL Air.\n\nFlow note: Triangle Lab shows its flow test results only as images with no stated figure, so we don't list one yet.",
+    "Verdict Label": "Trianglelab's ceramic high-flow hotend — liquid-cooled for heated chambers",
+    "Vendor 2 URL": "https://west3d.com/products/chc-xl-extreme-high-flow-hot-end-wear-resistant-air-or-water-cooled",
+    "Verdict": "Contender",
+    "Max Temp (°C)": 300,
+    "Nozzle Thread": "V6",
+    "Heater Type": "MCH Ceramic",
+    "Heat Block": "CHC WR (Wear Resistant)",
+    "Compatible Toolheads": [
+      "Stealthburner",
+      "Dragon Burner",
+      "XOL",
+      "Mini Stealthburner",
+      "Archetype"
+    ],
+    "Vendor 2 Name": "West3D",
+    "Thermistor": "PT1000",
+    "Vendor 1 Name": "Trianglelab",
+    "Name": "CHC XL Liquid",
+    "Slug": "chc-xl-liquid",
+    "Type": "Liquid Cooled",
+    "Vendor 1 URL": "https://trianglelab.net/products/chc%C2%AE-xl-hotend-liquid-cooling?VariantsId=12028",
+    "Brand": "Triangle Lab",
+    "Mount Style": "Dragon (screw mount)",
+    "Heat Break": "Patented multiple thermal break design; monolithic construction",
+    "Price (USD)": 90.9,
+    "Pros": "Liquid cooling keeps the cold end stable in chambers up to 120°C\nMultiple thermal-break design reduces heat creep\nMonolithic construction — no fragile thin-walled throat\nEasy heater/sensor replacement",
+    "Updated": "2026-11-21T00:50:20.000Z"
+  },
+  {
     "id": "rech7SSLjkyKP1SzQ",
     "Cons": "No heatsink fan included (Mellow recommends a fan ≥40 mm); no published weight, dimensions, or nozzle thread; limited community build data vs Goliath line; niche dual-feed product for large-format builds",
     "Compatible Printers": [
@@ -1313,6 +1506,7 @@
     "Verdict": "Contender",
     "Max Temp (°C)": 350,
     "Nozzle Thread": "V6 (M6)",
+    "Heater Type": "110W Ceramic",
     "Image URL": "/media/hardware/hotends/goliath-lite-water.webp",
     "Thermistor": "PT1000",
     "Vendor 1 Name": "3D Mellow",
@@ -1325,11 +1519,11 @@
     "Price (USD)": 169.9,
     "Related 1 URL": "/hardware/hotends/goliath-lite-air",
     "Max Flow Source": "Manufacturer",
-    "Updated": "2026-11-20T07:25:45.000Z"
+    "Updated": "2026-11-21T00:59:37.000Z"
   },
   {
     "id": "recs3UEj9CCrYKDsT",
-    "Cons": "Longer heat block can cause stringing with slow retraction, requires Volcano nozzles (larger selection than V6 but still limited), community price page returned 404 — price needs verification",
+    "Cons": "Longer heat block can cause stringing with slow retraction, requires Volcano nozzles (larger selection than V6 but still limited)",
     "Compatible Printers": [
       "Voron 2.4",
       "VzBot",
@@ -1337,10 +1531,10 @@
       "large-format CoreXY"
     ],
     "Fan Size": "4010",
-    "Vendor 3 URL": "https://trianglelab.net/products/chc%C2%AE-xl-hotend?VariantsId=12020",
-    "Description": "Triangle Lab's Compact High Conduction XL — a Volcano-format all-metal hotend. Extends the CHC Pro design with a longer heat block for higher flow using large-format or Volcano nozzles. All-metal construction with no PTFE in the melt zone. Compatible with standard V6 heaters and cartridges. Popular in the VzBot community for high-temp, high-flow printing.\n\nFlow note: Triangle Lab shows its flow test results only as images with no stated figure, so we don't list one yet.",
-    "Verdict Label": "Trianglelab's ceramic high-flow hotend — air or water cooled, 48g",
-    "Vendor 2 URL": "https://www.geekbuying.com/item/Trianglelab-CHC-XL-Wear-resistant-Air-Hotend-for-FDM-3D-Printer-528243.html",
+    "Vendor 3 URL": "https://www.geekbuying.com/item/Trianglelab-CHC-XL-Wear-resistant-Air-Hotend-for-FDM-3D-Printer-528243.html",
+    "Description": "Triangle Lab's Compact High Conduction XL, air-cooled version — a Volcano-format all-metal hotend. Extends the CHC Pro design with a longer heat block for higher flow using large-format or Volcano nozzles. All-metal construction with no PTFE in the melt zone. Compatible with standard V6 heaters and cartridges. Popular in the VzBot community for high-temp, high-flow printing. A liquid-cooled version is listed separately as CHC XL Liquid.\n\nFlow note: Triangle Lab shows its flow test results only as images with no stated figure, so we don't list one yet.",
+    "Verdict Label": "Trianglelab's ceramic high-flow hotend — air-cooled, 48g",
+    "Vendor 2 URL": "https://west3d.com/products/chc-xl-extreme-high-flow-hot-end-wear-resistant-air-or-water-cooled",
     "Weight (g)": 48,
     "Verdict": "Contender",
     "Max Temp (°C)": 300,
@@ -1356,20 +1550,20 @@
       "Mini Stealthburner",
       "Archetype"
     ],
-    "Vendor 2 Name": "Geekbuying",
-    "Vendor 3 Name": "Trianglelab",
+    "Vendor 2 Name": "West3D",
+    "Vendor 3 Name": "Geekbuying",
     "Thermistor": "PT1000",
-    "Vendor 1 Name": "West3D",
-    "Name": "CHC XL",
-    "Slug": "chc-xl",
+    "Vendor 1 Name": "Trianglelab",
+    "Name": "CHC XL Air",
+    "Slug": "chc-xl-air",
     "Type": "All-metal",
-    "Vendor 1 URL": "https://west3d.com/products/chc-xl-extreme-high-flow-hot-end-wear-resistant-air-or-water-cooled",
+    "Vendor 1 URL": "https://trianglelab.net/products/chc%C2%AE-xl-hotend?VariantsId=12020",
     "Brand": "Triangle Lab",
     "Mount Style": "Dragon (screw mount)",
     "Heat Break": "Patented multiple thermal break design; monolithic construction",
-    "Price (USD)": 83.99,
+    "Price (USD)": 83.9,
     "Pros": "All-metal melt zone, Volcano nozzle compatibility for very high flow, well-priced for performance, proven Triangle Lab manufacturing",
-    "Updated": "2026-11-20T09:37:11.000Z"
+    "Updated": "2026-11-21T00:50:20.000Z"
   },
   {
     "id": "recvWDTnHlysl79Tc",

@@ -144,6 +144,22 @@
     "Verdict": "Solid Choice"
   },
   {
+    "id": "recU5NerfrgbI6CAN",
+    "Pros": "Dries while printing\nMulti-color feeding and drying in one unit",
+    "Slug": "vivid",
+    "Cons": "Expensive\nComplex system vs a plain dryer",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "ViViD",
+    "Type": "Active with Feed Port",
+    "Vendor 1 URL": "https://biqu.equipment/products/biqu-vivid",
+    "Brand": "BIQU",
+    "Price (USD)": 399,
+    "Feed Port": true,
+    "Description": "A Klipper multi-color filament feeder with an integrated active dryer: 4 colors (expandable), RFID spool tracking, and print-while-drying. A feeder+dryer combo listed here as the closest table fit. Brand choice for BIQU doesn't exist in this table yet.",
+    "Verdict Label": "Klipper multi-color feeder with integrated active dryer",
+    "Verdict": "Niche Pick"
+  },
+  {
     "id": "recbTjrGDKhZn0EOJ",
     "Temperature Display": true,
     "Pros": "Dries up to 4 spools simultaneously — significant time savings for multi-material builds\nFour independent PTFE feed ports — can feed AMS, toolchanger, or four printers at once\nSame proven S2 heating and fan system, scaled up\nHumidity sensor and temperature display\nSingle power brick — cleaner than running four S2 units",

@@ -280,6 +280,21 @@
     ]
   },
   {
+    "id": "recU6H3s8jKIWVL0L",
+    "Pros": "Only 13g\nEnables clean filament cuts for multi-material setups",
+    "Name": "Magneto Cutter",
+    "Brand / Designer": "BIQU",
+    "Price (USD)": 26.99,
+    "Filament Cutter": true,
+    "Description": "A 13g CNC AL6061 magnetic filament cutter for VzBot toolheads (open-source design by Trevor Reintjes). A toolhead accessory rather than a full toolhead.",
+    "Vendor 1 Name": "https://biqu.equipment/products/bigtreetech-magneto-cutter-auto-loading-magnetic-filament-cutter-for-vzbot-3d-printer-toolhead-high-precision-upgrade-accessories",
+    "Cons": "Accessory only — needs a compatible VzBot toolhead\nDesigner choice doesn't exist in this table yet",
+    "Verdict": "Consider",
+    "Updated": "2026-11-21T00:59:40.000Z",
+    "Slug": "magneto-cutter",
+    "Type": "Commercial"
+  },
+  {
     "id": "recUfYIqUPASq5GwH",
     "Image URL": "/media/hardware/toolheads/dragon-burner-v0-2-toolhead.webp",
     "Included Extruder": "Sherpa Mini, Orbiter v2, G2SA, LGX Lite, Wristwatch BMG/G2, Papilio Lite, and others",
@@ -664,6 +679,20 @@
     "Part Cooling Fans": [
       "2x 4010"
     ]
+  },
+  {
+    "id": "recyiKGoavUHORfL9",
+    "Pros": "Swap toolheads without rewiring\nCAN version adds accelerometer + thermocouple amp",
+    "Name": "Hermit Crab V2.0",
+    "Brand / Designer": "BIQU",
+    "Price (USD)": 132.09,
+    "Description": "A quick-change tool plate set (3 tool plates + fixed plate) for swapping toolheads without rewiring. The CAN version ($164.89) adds a LIS2DW accelerometer and MAX31865. Price basis: Standard version.",
+    "Vendor 1 Name": "https://biqu.equipment/products/biqu-hermit-crab-v2-0-quick-change-extruder-hotend-tool-for-3d-printing",
+    "Cons": "Adds mass and stack height to the toolhead\nBrand/designer choice for BIQU doesn't exist in this table yet",
+    "Verdict": "Consider",
+    "Updated": "2026-11-21T00:59:40.000Z",
+    "Slug": "hermit-crab-v2-0",
+    "Type": "Commercial"
   },
   {
     "id": "reczHwSWHcrIZKowp",

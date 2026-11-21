@@ -110,6 +110,21 @@
     "Vendor 5 Name": "DigMach"
   },
   {
+    "id": "rec8SZkkOsj2oQdlG",
+    "Name": "EBB42 Gen2 V1.0",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Description": "The new-generation EBB42 CAN toolhead board, successor to the EBB42 CAN v1.1 already in the DB.",
+    "Verdict Label": "New-generation 42mm CAN toolhead board",
+    "Verdict": "CONSIDER",
+    "Cons": "CAN setup complexity vs USB boards",
+    "Connection": "CAN",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-ebb36-42-can-bus-u2c-v2-1-klipper-board",
+    "Brand": "BTT",
+    "Price (USD)": 48.99,
+    "Pros": "Current-generation CAN toolboard\n42mm format matches NEMA17 toolhead mounts",
+    "Slug": "ebb42-gen2-v1-0"
+  },
+  {
     "id": "recBpjlpgN9UXE9ah",
     "Hotend Connector": "Molex Micro-Fit 3.0 2-pin",
     "Name": "Klipper ToolBoard for Roto Extruder",
@@ -130,6 +145,36 @@
     "Pros": "Mounts directly to the Roto with automotive-grade USB to the Pi - no CAN adapter needed\nOnboard LIS2DW12 accelerometer for Klipper input shaping\nAccepts both NTC and PT1000 sensors, so standard and high-temperature Revo HeaterCores both work\nFused USB adaptor board protects the Pi's USB port",
     "Slug": "klipper-toolboard-for-roto-extruder",
     "MCU": "STM32F042 48MHz"
+  },
+  {
+    "id": "recCqbXK8lEMvf3m4",
+    "Name": "EBB36 Gen2 V1.0",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Description": "The new-generation EBB36 CAN toolhead board, successor to the EBB36 CAN v1.2 already in the DB.",
+    "Verdict Label": "New-generation 36mm CAN toolhead board",
+    "Verdict": "CONSIDER",
+    "Cons": "CAN setup complexity vs USB boards",
+    "Connection": "CAN",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-ebb36-42-can-bus-u2c-v2-1-klipper-board",
+    "Brand": "BTT",
+    "Price (USD)": 48.99,
+    "Pros": "Current-generation CAN toolboard\n36mm format fits compact toolheads",
+    "Slug": "ebb36-gen2-v1-0"
+  },
+  {
+    "id": "recCtkX2YMSORafGv",
+    "Name": "CEB V1.0",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Description": "A CANbus expansion hub for running multiple toolhead boards from one CAN bus — the U2C-style bridge role, listed here following the U2C precedent.",
+    "Verdict Label": "CANbus expansion hub for multiple toolhead boards",
+    "Verdict": "CONSIDER",
+    "Cons": "Hub only — still needs toolboards and CAN setup",
+    "Connection": "CAN",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-ceb",
+    "Brand": "BTT",
+    "Price (USD)": 15.99,
+    "Pros": "Cheap way to add CAN toolboards",
+    "Slug": "ceb-v1-0"
   },
   {
     "id": "recExh4qF7BdZyXP0",

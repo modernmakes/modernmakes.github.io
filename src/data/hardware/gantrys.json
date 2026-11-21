@@ -37,6 +37,36 @@
     "Brand": "ChaoticLab"
   },
   {
+    "id": "recGgp3pAOQAv7E3c",
+    "Verdict": "CONSIDER",
+    "Slug": "carbon-fiber-y-gantry-kit",
+    "Price (USD)": 154.99,
+    "Pros": "Full CF Y-gantry conversion in one kit",
+    "Description": "ChaoticLab's 3-tube carbon-fiber Y-gantry kit for Voron 2.4 R1/R2. Price basis: 300mm full kit (350mm $159.99). Full kit out of stock at BIQU; the tube-only 300mm kit ($74.99) was in stock.",
+    "Verdict Label": "3-tube CF Y-gantry for Voron 2.4 R1/R2",
+    "Cons": "Full kit out of stock at BIQU at last check",
+    "Name": "Carbon Fiber Y-Gantry Kit",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Material": "Carbon Fiber",
+    "Vendor 1 URL": "https://biqu.equipment/products/carbon-fiber-y-gantry-kit",
+    "Brand": "ChaoticLab"
+  },
+  {
+    "id": "recIPLdeOzVvOhnPZ",
+    "Verdict": "CONSIDER",
+    "Slug": "carbon-fiber-tube-x-axis",
+    "Price (USD)": 31.68,
+    "Pros": "Lighter X gantry than aluminum extrusion\nCheap entry to a CF gantry",
+    "Description": "ChaoticLab's carbon-fiber X-gantry tube kit for the Voron 2.4 — distinct from the FYSETC Carbon Gantry Bar and Brazuka Carbonara. Price basis: 300mm (350mm $32.00).",
+    "Verdict Label": "ChaoticLab CF X-gantry tube kit for Voron 2.4",
+    "Cons": "Tube only — mounts and hardware are separate",
+    "Name": "Carbon Fiber Tube X-Axis",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Material": "Carbon Fiber",
+    "Vendor 1 URL": "https://biqu.equipment/products/carbon-fiber-tube-parts-for-voron-2-4",
+    "Brand": "ChaoticLab"
+  },
+  {
     "id": "recSPPa2jsGlxEhkm",
     "Verdict": "BUY",
     "Slug": "carbonara-cf-tube",
@@ -262,5 +292,20 @@
     "Material": "EN AW 6060 T66",
     "Vendor 1 URL": "https://www.fabreeko.com/products/ratrig-v-core-4-light-weight-gantry-by-spannsysteme",
     "Brand": "Spannsysteme"
+  },
+  {
+    "id": "recykDMo8PpSOMBX5",
+    "Verdict": "CONSIDER",
+    "Slug": "voron-2-4-cnc-parts-kit-v2-0",
+    "Price (USD)": 459,
+    "Pros": "Replaces printed motion parts with machined aluminum throughout",
+    "Description": "ChaoticLab's full CNC aluminum parts set for the Voron 2.4: AB drive, Z drive, Z joints, XY joints, and tensioners. Price basis: without Tap ($499 with Tap Red). All CNC variants out of stock at BIQU at last check.",
+    "Verdict Label": "Full CNC aluminum parts set for Voron 2.4 (AB/Z drives, joints, tensioners)",
+    "Cons": "Out of stock at BIQU at last check\nPremium price vs printed parts",
+    "Name": "Voron 2.4 CNC Parts Kit V2.0",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Material": "Aluminum Billet",
+    "Vendor 1 URL": "https://biqu.equipment/products/voron-2-4-cnc-parts-kit-v2-0-diy-kits-8-kits-electronics-cable-fastener-heated-bed-motion-panels-frame-cnc",
+    "Brand": "ChaoticLab"
   }
 ]

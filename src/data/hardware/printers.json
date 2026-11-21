@@ -140,7 +140,7 @@
     "Multi-Material": true,
     "Description": "The RatRig V-Core 4.1 is the premier commercially-kitted self-build CoreXY, distinguished by its All-Wheel-Drive (AWD) 4-motor XY motion and 3030 aluminum extrusion frame. The 4.1 revision adds a steel X-axis gantry (eliminating bi-metal thermal distortion), an all-new full-metal toolhead with Orbitool O2S toolboard, improved part cooling, and RatOS 2.1. Available in 300mm, 400mm, and 500mm build volumes; price scales with size. AWD eliminates conventional belt tension asymmetry and the 3030 frame is meaningfully stiffer than Voron's 2020 baseline. Official RatRig documentation and community support is the key differentiator from pure-community Voron builds.\n\nPrice basis: 300mm Standard Kit (machine + electronics) at RatRig's US store, regular price (Machine $1,086.41 + Electronics $726.14).",
     "Verdict Label": "Best-supported self-build kit — AWD CoreXY, 3030 frame rigidity, official documentation and RatRig community backing",
-    "Image URL": "/media/hardware/printers/v-core-4.webp",
+    "Image URL": "/media/hardware/printers/v-core-4-1.webp",
     "Max Temp — Bed (°C)": 120,
     "Compatible Toolheads": [
       "RatRig EVA 3"
