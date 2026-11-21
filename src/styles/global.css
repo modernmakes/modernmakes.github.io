@@ -316,7 +316,7 @@ a, button, summary, [role="button"] { touch-action: manipulation; }
 a:not([class]):active { opacity: .6; }
 :is(.btn-buy, .btn-printables, .lg-form-submit, .sub-btn,
     .card, .product-card, .la-card, .eco-card, .tool-card,
-    .gf-tab, .gf-flow-btn, .gf-ctl-btn, .gf-chip, .hv-chip, .hv-show,
+    .gf-tab, .gf-flow-btn, .gf-ctl-btn, .gf-view-btn, .gf-chip, .hv-chip, .hv-show,
     .nav-search-btn, .nav-hamburger, .menu-tile):active {
   /* !important: component `transition` shorthands load after this file and
      would otherwise stretch the press-down to their release timing. */
@@ -327,7 +327,7 @@ a:not([class]):active { opacity: .6; }
 :is(.card, .product-card, .la-card, .eco-card, .tool-card):active { scale: var(--scale-press-card); }
 /* Light-plane cards only; dark cards keep their own border on press. */
 :is(.card, .product-card, .la-card, .tool-card):active { border-color: var(--border-s); }
-:is(.gf-tab, .gf-flow-btn, .gf-chip, .hv-chip):active { scale: var(--scale-press-chip); }
+:is(.gf-tab, .gf-flow-btn, .gf-view-btn, .gf-chip, .hv-chip):active { scale: var(--scale-press-chip); }
 .menu-tile:active { scale: var(--scale-press-btn); }
 :is(.nav-search-btn, .nav-hamburger):active { scale: var(--scale-press-icon); }
 /* Reduced motion: no scale, but the press still answers with a dim. */
@@ -337,7 +337,7 @@ a:not([class]):active { opacity: .6; }
   /* Orange fills (and chips holding an orange badge) answer with a fill change
      instead: opacity would fade ink on orange below AA. */
   :is(.btn-buy, .lg-form-submit, .sub-btn, .hv-show):active { scale: none; }
-  :is(.gf-tab, .gf-flow-btn, .gf-ctl-btn, .gf-chip):active { scale: none; background: var(--bg); }
+  :is(.gf-tab, .gf-flow-btn, .gf-ctl-btn, .gf-view-btn, .gf-chip):active { scale: none; background: var(--bg); }
   .hv-chip:active { scale: none; border-color: var(--black); }
   .menu-tile:active { scale: none; } /* its background wash still answers */
 }
