@@ -494,6 +494,7 @@ Applies whenever `/seo audit`, `/seo schema`, `/seo geo`, `/seo technical`, `/se
 - **CSS nav hysteresis** — nav snaps solid at 80px scroll down, unsnaps at 60px scroll up — eliminates flicker at threshold
 - **`Astro.site`** — set in `astro.config.mjs`. Use for absolute URLs in schema: `new URL(Astro.site).href.replace(/\/$/, '')`
 - **`fetch-data` script** — `scripts/fetch-airtable.mjs` requires `AIRTABLE_TOKEN` env var. Run from VS Code terminal where token is set. GitHub Actions also runs nightly
+- **Airtable sync:** run `npm run fetch-data` before verifying or pushing data-dependent changes. The token is in a local `.env` that Claude must never open, print, echo or copy; never run commands that output environment variables.
 - **The sync fails loudly.** `fetch-airtable.mjs` finishes the run, lists every table that failed with its HTTP status, and exits 1; failed tables never overwrite their JSON (a 0-record result over a non-empty file counts as a failure). A red **Fetch Airtable Data** run means check the `AIRTABLE_TOKEN` secret first (401/403 = missing, expired or no access). It used to exit 0 on errors and silently stopped updating from 2026-06-30.
 - **AdSlot component** — `<AdSlot slotName="slot-name" />` renders nothing when `"active": false` in `ads.json`
 - **Newsletter forms** — subscribe through `BeehiivEmbed.astro`. The old `form[data-nl]` handler in Base.astro was removed (native-feel Phase 1) because it showed "Subscribed ✓" without sending anything

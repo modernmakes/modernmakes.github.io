@@ -2,8 +2,11 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
+// Local runs: load a gitignored .env. CI has none and uses its secret.
+try { process.loadEnvFile('.env'); } catch {}
+
 const BASE_ID = 'appt6uoXxkQJEe3Rp';
-const TOKEN   = process.env.AIRTABLE_TOKEN;
+const TOKEN  = process.env.AIRTABLE_TOKEN;
 const OUT_DIR = 'src/data/hardware';
 
 const TABLES = [
