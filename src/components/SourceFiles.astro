@@ -1,0 +1,99 @@
+---
+// Community / open-source project link, shared by every detail page.
+//   mode="button"  hero action (secondary; `primary` when there is no Where to buy)
+//   mode="section" the card under Where to Buy
+//   mode="side"    sidebar entry under the vendor quick-list
+import Icon from './icons/Icon.astro';
+import { sourceLabel } from '../lib/hardware';
+
+interface Props {
+  url: string;
+  mode: 'button' | 'section' | 'side';
+  primary?: boolean;
+  /** Heading class so the section matches its page (comp-section-title, th-h2). */
+  headingClass?: string;
+}
+const { url, mode, primary = false, headingClass = 'comp-section-title' } = Astro.props;
+
+const { host, path } = sourceLabel(url);
+const segs = Astro.url.pathname.split('/').filter(Boolean);
+const category = segs.length >= 3 ? segs[segs.length - 2] : segs[0] ?? '';
+const slug = segs[segs.length - 1] ?? '';
+const track = { 'data-source-click': '', 'data-category': category, 'data-slug': slug, 'data-host': host };
+---
+{mode === 'button' && (
+  <a href={url} class:list={['src-act', { 'src-act--primary': primary }]} target="_blank" rel="noopener" data-haptic {...track}>
+    <Icon name="source" size={18} />
+    <span>Source files ↗</span>
+    <span class="sr-only">(opens in a new tab)</span>
+  </a>
+)}
+
+{mode === 'section' && (
+  <section class="comp-section src-section" id="source-files" aria-labelledby="source-heading" style="margin-top:48px">
+    <h2 class={headingClass} id="source-heading">Source files</h2>
+    <a href={url} class="src-card" target="_blank" rel="noopener" {...track}>
+      <span class="src-card-icon"><Icon name="source" size={22} /></span>
+      <span class="src-card-text">
+        <span class="src-card-host">{host}</span>
+        {path && <span class="src-card-path">{path}</span>}
+        <span class="src-card-note">Community project: BOM, print files and build docs.</span>
+      </span>
+      <span class="src-card-arrow" aria-hidden="true">↗</span>
+      <span class="sr-only">(opens in a new tab)</span>
+    </a>
+  </section>
+)}
+
+{mode === 'side' && (
+  <div class="comp-sidebar-card">
+    <div class="comp-sidebar-title">Source files</div>
+    <a href={url} class="comp-vendor-quick" target="_blank" rel="noopener" {...track}>
+      <span class="comp-vendor-quick-name">{host}</span>
+      <span class="comp-vendor-quick-arrow" aria-hidden="true">↗</span>
+      <span class="sr-only">(opens in a new tab)</span>
+    </a>
+  </div>
+)}
+
+<script>
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest<HTMLElement>('[data-source-click]');
+    const gtag = (window as any).gtag;
+    if (a && typeof gtag === 'function') gtag('event', 'source_click', { category: a.dataset.category, slug: a.dataset.slug, host: a.dataset.host });
+  });
+</script>
+
+<style is:global>
+.src-act {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 16px;
+  background: transparent; color: #fff;
+  border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius-sm);
+  font: 700 14px var(--fu); text-decoration: none; cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.src-act:active { scale: var(--scale-press-btn); background: rgba(255,255,255,.08); transition-duration: var(--dur-press); }
+@media (hover: hover) and (pointer: fine) { .src-act:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35); } }
+.src-act--primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.src-act--primary:active { background: var(--accent-mid); border-color: var(--accent-mid); }
+@media (hover: hover) and (pointer: fine) { .src-act--primary:hover { background: var(--accent-mid); border-color: var(--accent-mid); } }
+@media (prefers-reduced-motion: reduce) { .src-act:active { scale: none; } }
+
+.src-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-lg);
+  padding: 16px 18px; text-decoration: none;
+  transition: border-color var(--dur-fast) var(--ease-out), var(--press-release);
+}
+.src-card:active { scale: var(--scale-press-btn); transition-duration: var(--dur-press); }
+@media (hover: hover) and (pointer: fine) { .src-card:hover { border-color: var(--border-s); } }
+@media (prefers-reduced-motion: reduce) { .src-card:active { scale: none; } }
+.src-card-icon { color: var(--g1); flex-shrink: 0; display: flex; }
+.src-card-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.src-card-host { font: 800 15px var(--fd); color: var(--black); }
+.src-card-path { font: 700 13px var(--fm); color: var(--g1); overflow-wrap: anywhere; }
+.src-card-note { font: 400 13px/1.5 var(--fu); color: var(--g1); }
+.src-card-arrow { font-size: 14px; color: var(--g2); flex-shrink: 0; }
+</style>

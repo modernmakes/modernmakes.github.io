@@ -324,16 +324,7 @@ export function buildDetailProps(record: any, config: DetailConfig) {
     ? resolveSpecs(record, config.tags).map((s) => s.value)
     : [];
 
-  // Vendors — Vendor 1 through 5, skip empty.
-  type VendorEntry = { name: string; url: string; price: string; region: 'us'; primary: boolean; affiliate: boolean };
-  const vendors: VendorEntry[] = [];
-  [1, 2, 3, 4, 5].forEach((n, idx) => {
-    const name = record[`Vendor ${n} Name`] as string | undefined;
-    const url = record[`Vendor ${n} URL`] as string | undefined;
-    if (name?.trim()) {
-      vendors.push({ name: name.trim(), url: url ?? '#', price: '', region: 'us', primary: idx === 0, affiliate: record[`Vendor ${n} Affiliate`] === true });
-    }
-  });
+  const { vendors, sourceUrl } = buildVendors(record);
 
   // Related components — Related 1 through 3, skip empty.
   type RelatedEntry = { title: string; category: string; href: string };
@@ -379,9 +370,63 @@ export function buildDetailProps(record: any, config: DetailConfig) {
     relatedComponents,
     pageTitle: `${record['Name']} ${config.titleNoun} — Specs, ${config.showVerdict === false ? '' : 'Verdict & '}Where to Buy`,
     primaryVendorUrl: vendors[0]?.url ?? '',
+    sourceUrl,
     heroImage,
     bodyParagraphs,
   };
+}
+
+/** Community project link: "Source URL" (gantrys use "GitHub / Source URL"). */
+export const getSourceUrl = (record: any): string =>
+  (record?.['Source URL'] ?? record?.['GitHub / Source URL'] ?? '').toString().trim();
+
+const hostOf = (url: string) => { try { return new URL(url).hostname.replace(/^www\./, '').toLowerCase(); } catch { return ''; } };
+
+// Repo / model-page hosts are source files, never shops.
+const SOURCE_HOSTS = ['github.com', 'gitlab.com', 'codeberg.org', 'printables.com', 'thingiverse.com', 'vorondesign.com', 'docs.vzbot.org', 'onshape.com'];
+export const isSourceHost = (url: string) => {
+  const h = hostOf(url);
+  return SOURCE_HOSTS.some((s) => h === s || h.endsWith('.' + s));
+};
+
+const titleCase = (s: string) => s.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()).trim();
+
+/** Display label for a source link: { host: 'GitHub', path: 'VoronDesign/Mobius-Extruder' }. */
+export function sourceLabel(url: string): { host: string; path: string } {
+  const h = hostOf(url);
+  let segs: string[] = [];
+  try { segs = new URL(url).pathname.split('/').filter(Boolean); } catch { /* keep empty */ }
+  const names: Record<string, string> = { 'github.com': 'GitHub', 'gitlab.com': 'GitLab', 'codeberg.org': 'Codeberg', 'printables.com': 'Printables', 'thingiverse.com': 'Thingiverse', 'vorondesign.com': 'Voron Design', 'docs.vzbot.org': 'VzBoT docs', 'onshape.com': 'Onshape' };
+  const key = Object.keys(names).find((k) => h === k || h.endsWith('.' + k));
+  const host = key ? names[key] : h;
+  let path = segs.join('/');
+  if (key === 'github.com' || key === 'gitlab.com' || key === 'codeberg.org') path = segs.slice(0, 2).join('/');
+  else if (key === 'printables.com') {
+    const i = segs.indexOf('model');
+    path = titleCase((segs[i + 1] ?? '').replace(/^\d+-?/, '')); // /model/123-mobius-extruder
+  } else if (key === 'thingiverse.com') path = titleCase((segs[segs.length - 1] ?? '').replace(/^thing:\d+/, ''));
+  else if (key === 'vorondesign.com' || key === 'docs.vzbot.org') path = segs.join('/');
+  return { host, path };
+}
+
+type VendorEntry = { name: string; url: string; price: string; region: 'us'; primary: boolean; affiliate: boolean };
+
+/** Vendor 1 through 5, minus repo/model links, which belong under Source files. */
+export function buildVendors(record: any): { vendors: VendorEntry[]; sourceUrl: string } {
+  const all: Omit<VendorEntry, 'primary'>[] = [];
+  [1, 2, 3, 4, 5].forEach((n) => {
+    let name = (record[`Vendor ${n} Name`] as string | undefined)?.trim();
+    let url = record[`Vendor ${n} URL`] as string | undefined;
+    // Toolhead rows sometimes hold the URL in the Name cell; recover the shop name from its host.
+    if (name && !url && /^https?:\/\//.test(name)) {
+      url = name;
+      name = titleCase(hostOf(name).split('.')[0]);
+    }
+    if (name) all.push({ name, url: url ?? '#', price: '', region: 'us', affiliate: record[`Vendor ${n} Affiliate`] === true });
+  });
+  const dropped = all.filter((v) => isSourceHost(v.url));
+  const vendors = all.filter((v) => !isSourceHost(v.url)).map((v, i) => ({ ...v, primary: i === 0 }));
+  return { vendors, sourceUrl: getSourceUrl(record) || dropped[0]?.url || '' };
 }
 
 /** getStaticPaths helper shared by every detail route. */
