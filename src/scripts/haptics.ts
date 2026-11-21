@@ -30,8 +30,20 @@ export function arm(el: HTMLElement) {
   sw.addEventListener('click', (e) => e.stopPropagation());
   sw.addEventListener('change', (e) => e.stopPropagation());
   label.append(sw);
+  // A label inside a link takes the click for itself (interactive content wins over the link's own
+  // activation), so the link would never follow. Re-click the link once the switch has toggled.
+  // This is not a preventDefault: the label's click still toggles the switch.
+  if (el instanceof HTMLAnchorElement) label.addEventListener('click', (e) => { e.stopPropagation(); setTimeout(() => el.click(), 0); });
   if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
   el.append(label);
 }
 
 export const armAll = (root: ParentNode = document) => root.querySelectorAll<HTMLElement>('[data-haptic]').forEach(arm);
+
+// Android: one delegated listener buzzes for every [data-haptic] press. data-haptic="manual" marks
+// controls that call buzz() themselves. No buzz without a live user activation (a scripted click).
+document.addEventListener('click', (e) => {
+  if (isIOS || navigator.userActivation?.isActive === false) return;
+  const el = (e.target as Element).closest?.('[data-haptic]');
+  if (el && el.getAttribute('data-haptic') !== 'manual') buzz();
+});

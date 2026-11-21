@@ -44,7 +44,7 @@ const tiles = [
            cell (and the links' on desktop) and swaps with them by opacity, so nothing shifts.
            Tapping it goes back to the top. Hidden (and out of the tab order) while not shown.
            The script only ever changes the inner span: haptics.ts adds a label to the button. -->
-      <button type="button" class="nav-title" aria-label="Back to top" data-haptic><span></span></button>
+      <button type="button" class="nav-title" aria-label="Back to top" data-haptic="manual"><span></span></button>
 
       <div class="nav-links">
 
@@ -64,8 +64,8 @@ const tiles = [
             </svg>
           </button>
           <div class="nav-dd-panel" id="printers-panel" popover role="menu" aria-labelledby="printers-btn">
-            <a href="/printers" class="nav-dd-item" role="menuitem"><strong>All printers</strong></a>
-            <a href="/voron" class="nav-dd-item" role="menuitem"><strong>Voron</strong><span class="sep"> · </span><span class="desc">2.4, Trident</span></a>
+            <a href="/printers" class="nav-dd-item" role="menuitem" data-haptic><strong>All printers</strong></a>
+            <a href="/voron" class="nav-dd-item" role="menuitem" data-haptic><strong>Voron</strong><span class="sep"> · </span><span class="desc">2.4, Trident</span></a>
           </div>
         </div>
 
@@ -88,7 +88,7 @@ const tiles = [
           <!-- Desktop shortcut hint. CommandPalette fills it (⌘K on Mac, Ctrl K elsewhere) and unhides it. -->
           <kbd class="nav-kbd" data-kbd aria-hidden="true" hidden></kbd>
         </a>
-        <button class="nav-hamburger" id="nav-hamburger" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-sheet" data-sheet="menu-sheet" data-haptic>
+        <button class="nav-hamburger" id="nav-hamburger" type="button" aria-label="Open menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-sheet" data-sheet="menu-sheet" data-haptic="manual">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <line class="h-line h-top" x1="3" y1="5"  x2="17" y2="5"/>
             <line class="h-line h-mid" x1="3" y1="10" x2="17" y2="10"/>
@@ -110,7 +110,7 @@ const tiles = [
   <nav class="menu" aria-label="Menu">
     <ul class="menu-tiles" role="list">
       {tiles.map(([href, label, on, icon]) => (
-        <li><a href={href} class="menu-tile" aria-current={on ? 'page' : undefined}>
+        <li><a href={href} class="menu-tile" data-haptic aria-current={on ? 'page' : undefined}>
           <Icon name={icon} class="menu-ico" />
           <span>{label}</span>
         </a></li>
@@ -121,7 +121,7 @@ const tiles = [
       <ul class="menu-card menu-eco" role="list" aria-labelledby="menu-eco-label">
         {ecosystems.map((eco: any) => <li>{eco.status === 'live'
           ? (
-            <a href={eco.href} class="sheet-row" aria-current={currentPath.startsWith(eco.href) ? 'page' : undefined}>
+            <a href={eco.href} class="sheet-row" data-haptic aria-current={currentPath.startsWith(eco.href) ? 'page' : undefined}>
               <span class="grow">{eco.name}{eco.models && <>{" "}<span class="sub">{eco.models}</span></>}</span>
             </a>
           ) : (
@@ -133,8 +133,8 @@ const tiles = [
       </ul>
     </div>
     <ul class="menu-card" role="list">
-      <li><a href="/newsletter" class="sheet-row" aria-current={currentPath.startsWith('/newsletter') ? 'page' : undefined}>Newsletter</a></li>
-      <li><a href="/about" class="sheet-row" aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>About</a></li>
+      <li><a href="/newsletter" class="sheet-row" data-haptic aria-current={currentPath.startsWith('/newsletter') ? 'page' : undefined}>Newsletter</a></li>
+      <li><a href="/about" class="sheet-row" data-haptic aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>About</a></li>
     </ul>
   </nav>
 </Sheet>

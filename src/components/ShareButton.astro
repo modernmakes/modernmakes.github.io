@@ -10,13 +10,13 @@ interface Props {
 }
 const { title, tone = 'light' } = Astro.props;
 ---
-<button type="button" class:list={[tone === 'dark' ? 'comp-act' : 'share-btn']} data-share data-haptic data-share-title={title}>
+<button type="button" class:list={[tone === 'dark' ? 'comp-act' : 'share-btn']} data-share data-haptic="manual" data-share-title={title}>
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
   <span>Share</span>
 </button>
 
 <Sheet id="share-sheet" title="Share" detent="medium" desktop="popover">
-  <button type="button" class="sheet-row" data-share-copy data-haptic>
+  <button type="button" class="sheet-row" data-share-copy data-haptic="manual">
     <span class="grow">Copy link</span>
   </button>
   <a class="sheet-row" data-share-reddit href="https://www.reddit.com/submit" target="_blank" rel="noopener noreferrer">

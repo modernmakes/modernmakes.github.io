@@ -55,7 +55,7 @@ const currentPath = '/tools';
       <div class="pac-output-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
           <div style="font-family:var(--fd);font-size:18px;font-weight:800;color:var(--black)">Output Strings</div>
-          <button type="button" class="pac-btn-copy-all" id="copyAllBtn" data-haptic><span data-copy-label>Copy all</span></button>
+          <button type="button" class="pac-btn-copy-all" id="copyAllBtn" data-haptic="manual"><span data-copy-label>Copy all</span></button>
         </div>
         <div id="outputLines" class="pac-output-lines">
           <div class="pac-output-empty">Fill in PA values above to generate output strings.</div>
@@ -278,7 +278,7 @@ function renderOutput() {
   linesEl.innerHTML = rows.map((txt, i) =>
     `<div class="pac-output-row">
       <div class="pac-output-text">${txt}</div>
-      <button type="button" class="pac-copy-row-btn" data-idx="${i}" data-haptic><span data-copy-label>Copy</span></button>
+      <button type="button" class="pac-copy-row-btn" data-idx="${i}" data-haptic="manual"><span data-copy-label>Copy</span></button>
     </div>`
   ).join('');
 

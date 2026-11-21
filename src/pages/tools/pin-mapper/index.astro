@@ -444,7 +444,7 @@ function renderTable() {
       <td><div class="pm-key">${row.key}</div></td>
       <td><span class="pm-pin${isNegative ? ' pm-pin-neg' : ''}">${isNegative ? '!' : ''}${pinDisplay}</span></td>
       <td><div class="pm-note">${row.note}</div></td>
-      <td><button type="button" class="pm-copy-pin" data-pin="${row.key}: ${row.pin}" data-haptic><span data-copy-label>Copy</span></button></td>
+      <td><button type="button" class="pm-copy-pin" data-pin="${row.key}: ${row.pin}" data-haptic="manual"><span data-copy-label>Copy</span></button></td>
     </tr>`;
   }
 

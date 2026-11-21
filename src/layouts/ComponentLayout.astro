@@ -277,7 +277,7 @@ const breadcrumbSchema = {
         )}
         <div class="comp-actions">
           {vendors.length > 0 && (
-            <button type="button" class="comp-act comp-act--buy" data-sheet="buy-sheet" data-haptic aria-haspopup="dialog" aria-controls="buy-sheet" aria-expanded="false">
+            <button type="button" class="comp-act comp-act--buy" data-sheet="buy-sheet" data-haptic="manual" aria-haspopup="dialog" aria-controls="buy-sheet" aria-expanded="false">
               <span>Where to buy ({vendors.length})</span>
             </button>
           )}
@@ -369,7 +369,7 @@ const breadcrumbSchema = {
                       <td class="comp-specs-label">{s.label}</td>
                       <td class="comp-specs-val">
                         {s.label === 'Part Number'
-                          ? <span class="comp-pn"><span>{s.value}</span><button type="button" class="comp-copy" data-copy-text={s.value} data-haptic aria-label={`Copy part number ${s.value}`}><span data-copy-label>Copy</span></button></span>
+                          ? <span class="comp-pn"><span>{s.value}</span><button type="button" class="comp-copy" data-copy-text={s.value} data-haptic="manual" aria-label={`Copy part number ${s.value}`}><span data-copy-label>Copy</span></button></span>
                           : s.value}
                         {s.note && <span class="comp-specs-note">{s.note}</span>}
                       </td>
