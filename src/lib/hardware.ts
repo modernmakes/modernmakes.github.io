@@ -7,9 +7,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { toSlug } from './slug';
-export { toSlug };
+export { toSlug, withBrand };
 
-import { imageOf } from './hardware-image';
+import { imageOf, withBrand } from './hardware-image';
 import { relatedHref } from './hardware-links';
 export { imageOf };
 
@@ -215,11 +215,11 @@ export const flowSourceCaption = (record: any): string => {
 
 // Known ecosystem links — shared by every category's sidebar chips.
 export const TOOLHEAD_HREFS: Record<string, string> = {
-  Stealthburner: '/voron/toolheads/stealthburner',
-  StealthBurner: '/voron/toolheads/stealthburner',
-  XOL: '/voron/toolheads/xol',
-  'Dragon Burner': '/voron/toolheads/dragon-burner',
-  Archetype: '/voron/toolheads/archetype',
+  Stealthburner: '/hardware/toolheads/stealthburner',
+  StealthBurner: '/hardware/toolheads/stealthburner',
+  XOL: '/hardware/toolheads/xol',
+  'Dragon Burner': '/hardware/toolheads/dragon-burner-2-4-trident-v0',
+  Archetype: '/hardware/toolheads/archetype',
 };
 
 export const PRINTER_HREFS: Record<string, string> = {
@@ -355,7 +355,7 @@ export function buildDetailProps(record: any, config: DetailConfig) {
     title: record['Name'],
     category: config.categoryLabel,
     componentType: config.componentType,
-    brand: record['Brand'] ?? '',
+    brand: record['Brand'] ?? record['Brand / Designer'] ?? '',
     price: { usd: priceUsd },
     verdict: record['Verdict Label'] ?? '',
     verdictLabel,

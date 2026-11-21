@@ -1,0 +1,27 @@
+---
+import HardwareIndex from '../../../components/HardwareIndex.astro';
+import records from '../../../data/hardware/toolheads.json';
+import { withBrand } from '../../../lib/hardware';
+
+const chips = (r: any) => [
+  r['Type'] ? String(r['Type']) : null,
+  r['Multi-Material Ready'] ? 'Multi-material' : null,
+  r['Filament Cutter'] ? 'Filament cutter' : null,
+].filter(Boolean) as string[];
+---
+<HardwareIndex
+  records={withBrand(records as any[])}
+  route="toolheads"
+  categoryLabel="TOOLHEAD"
+  crumb="Toolheads"
+  heading="Toolheads"
+  sub="Complete toolhead assemblies. Included hotend and extruder, mount style, cooling, and printer fit."
+  nounSingular="toolhead"
+  nounPlural="toolheads"
+  title="Toolheads for Voron & Prosumer Printers"
+  description="Toolhead specs and compatibility: included hotend and extruder, mount style, part cooling, printer fit, and where to buy."
+  schemaName="Toolheads for Voron & Prosumer Printers"
+  chips={chips}
+  excerptOf={(r) => r['Description'] ?? ''}
+  showVerdict={false}
+/>

@@ -3,7 +3,7 @@
 // picker. Compatibility is computed by the caller (server-side on first
 // render, client-side on re-selection) via src/lib/configurator-engine.ts —
 // this component only renders whatever compat state it's handed.
-import { resolveVerdict, toSlug } from '../../lib/hardware';
+import { resolveVerdict, toSlug, imageOf } from '../../lib/hardware';
 
 interface Props {
   record: Record<string, any>;
@@ -12,6 +12,8 @@ interface Props {
   routeBase?: string | null;
   reasons?: string[];
   matchTag?: string | null;
+  /** Show the record's "Image URL" above the name (toolhead step). */
+  showImage?: boolean;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   routeBase = null,
   reasons = [],
   matchTag = null,
+  showImage = false,
 } = Astro.props as Props;
 
 const name: string = record['Name'] ?? 'Unnamed part';
@@ -29,6 +32,7 @@ const priceRaw = record['Price (USD)'];
 const priceDisplay = typeof priceRaw === 'number' && priceRaw > 0 ? `~$${priceRaw} USD` : 'Free / DIY';
 const href = routeBase ? `${routeBase}/${toSlug(name)}` : null;
 const incompatible = reasons.length > 0;
+const image = showImage ? imageOf(record) : '';
 
 // Trimmed field set the client-side engine re-evaluates on every selection
 // change — kept to exactly what src/lib/configurator-engine.ts reads.
@@ -67,6 +71,7 @@ const vendors = [1, 2, 3, 4, 5]
   data-subsystem-label={subsystemLabel}
   data-part={JSON.stringify(enginePayload)}
 >
+  {image && <img class="cfg-card-img" src={image} alt="" width="400" height="300" loading="lazy" decoding="async" />}
   <div class="cfg-card-top">
     {href ? (
       <a href={href} class="cfg-card-name">{name}</a>
@@ -118,6 +123,7 @@ const vendors = [1, 2, 3, 4, 5]
     border-color: var(--accent);
     box-shadow: 0 0 0 1px var(--accent);
   }
+  .cfg-card-img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--surface-media); border-radius: var(--radius-sm); }
   .cfg-card-top {
     display: flex;
     align-items: flex-start;

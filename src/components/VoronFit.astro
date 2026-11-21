@@ -1,0 +1,80 @@
+---
+// Voron-only guide content for a toolhead's hardware page: overview, printed parts,
+// required hardware and hotend/extruder fit tables. Source: src/data/toolheads.json.
+interface Props { t: any }
+const { t } = Astro.props;
+const pill = (ok: boolean | null) => (ok === true ? 'is-ok' : ok === false ? 'is-no' : 'is-limited');
+const tables = [
+  { heading: 'Hotend fit', cols: ['Hotend', 'Max Temp', 'Flow'], rows: t.hotends.map((r: any) => ({ ...r, cells: [r.temp, r.flow] })) },
+  { heading: 'Extruder fit', cols: ['Extruder', 'Gear Ratio', 'Weight'], rows: t.extruders.map((r: any) => ({ ...r, cells: [r.ratio, r.weight] })) },
+];
+---
+<section class="vf" id="voron-fit" aria-labelledby="vf-h">
+  <h2 class="comp-section-title" id="vf-h">Voron fit</h2>
+
+  {t.callout && (
+    <div class="callout callout-orange vf-callout">
+      <strong>{t.callout.title}</strong>
+      {t.callout.body}
+    </div>
+  )}
+
+  {t.overview.map((p: string) => <p class="vf-prose">{p}</p>)}
+
+  <h3 class="vf-h3">Printed parts</h3>
+  <ul class="vf-list">
+    {t.parts.map((part: string) => <li class="vf-li"><span class="vf-mark vf-mark--part" aria-hidden="true">▸</span>{part}</li>)}
+  </ul>
+
+  <h3 class="vf-h3">Required hardware</h3>
+  <ul class="vf-list">
+    {t.hardware.map((hw: string) => <li class="vf-li"><span class="vf-mark" aria-hidden="true">·</span>{hw}</li>)}
+  </ul>
+
+  {tables.map((tb) => (
+    <>
+      <h3 class="vf-h3">{tb.heading}</h3>
+      <div class="vf-table-wrap">
+        <table class="vf-table">
+          <thead>
+            <tr>{[...tb.cols, 'Status'].map((c, i) => <th class={i === 0 ? 'vf-first' : ''}>{c}</th>)}</tr>
+          </thead>
+          <tbody>
+            {tb.rows.map((row: any) => (
+              <tr>
+                <td class="vf-name">{row.name}</td>
+                {row.cells.map((c: string) => <td class="vf-mono">{c}</td>)}
+                <td><span class={`vf-pill ${pill(row.ok)}`}>{row.status}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+</section>
+
+<style>
+  .vf { margin-top: 48px; }
+  .vf-callout { margin: 0 0 20px; }
+  .vf-prose { font-family: var(--fb); font-size: 16px; line-height: 1.8; color: var(--g1); margin: 0 0 16px; }
+  .vf-h3 { font-family: var(--fd); font-size: 18px; font-weight: 800; color: var(--black); margin: 28px 0 12px; }
+  .vf-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .vf-li { font-family: var(--fu); font-size: 14px; color: var(--g1); display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+  .vf-mark { color: var(--g2); flex-shrink: 0; }
+  .vf-mark--part { color: var(--accent-dk); }
+  .vf-table-wrap { background: var(--surface); border-radius: var(--radius-lg); overflow-x: auto; border: 1px solid var(--border); }
+  .vf-table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: var(--fu); }
+  .vf-table thead tr { background: var(--black); }
+  .vf-table th { text-align: center; padding: 10px 12px; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-muted); }
+  .vf-table th.vf-first { text-align: left; padding: 10px 16px; }
+  .vf-table tbody tr { border-bottom: 1px solid var(--border); }
+  .vf-table tbody tr:nth-child(even) { background: var(--bg); }
+  .vf-table td { text-align: center; padding: 10px 12px; }
+  .vf-table td.vf-name { text-align: left; padding: 10px 16px; font-weight: 600; color: var(--black); }
+  .vf-mono { color: var(--g1); font-family: var(--fm); font-size: 12px; }
+  .vf-pill { font-size: 10px; font-weight: 700; font-family: var(--fm); padding: 2px 8px; border-radius: var(--radius-badge); }
+  .vf-pill.is-ok { background: rgba(46,125,50,.1); color: var(--green-ink-dk); }
+  .vf-pill.is-no { background: var(--danger-t); color: var(--danger); }
+  .vf-pill.is-limited { background: var(--amber-t); color: var(--amber-ink); }
+</style>

@@ -7,6 +7,7 @@ import hotends   from '../../data/hardware/hotends.json';
 import extruders from '../../data/hardware/extruders.json';
 import probes    from '../../data/hardware/bed-probes.json';
 import printers  from '../../data/hardware/printers.json';
+import toolheads from '../../data/hardware/toolheads.json';
 import beds      from '../../data/hardware/beds.json';
 import frameComponents from '../../data/hardware/frame-components.json';
 import { jsonLd } from '../../lib/jsonld';
@@ -85,6 +86,10 @@ const breadcrumbSchema = {
             {(probes as any[]).filter(r => r['Name']).map((r: any) => (
               <li class="sm-indent"><a href={`/hardware/probes/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
             ))}
+            <li class="sm-sub-head"><a href="/hardware/toolheads">Toolheads</a></li>
+            {(toolheads as any[]).filter(r => r['Name']).map((r: any) => (
+              <li class="sm-indent"><a href={`/hardware/toolheads/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
+            ))}
             <li class="sm-sub-head"><a href="/hardware/beds">Beds</a></li>
             {(beds as any[]).filter(r => r['Name']).map((r: any) => (
               <li class="sm-indent"><a href={`/hardware/beds/${toSlug(r['Name'])}`}>{r['Name']}</a></li>
@@ -114,11 +119,6 @@ const breadcrumbSchema = {
             <li><a href="/voron">Voron</a></li>
             <li class="sm-indent"><a href="/voron/origin">Voron Origin</a></li>
             <li class="sm-indent"><a href="/voron/mods">Voron Mods</a></li>
-            <li class="sm-indent"><a href="/voron/toolheads/stealthburner">Stealthburner</a></li>
-            <li class="sm-indent"><a href="/voron/toolheads/xol">XOL Toolhead</a></li>
-            <li class="sm-indent"><a href="/voron/toolheads/dragon-burner">Dragon Burner</a></li>
-            <li class="sm-indent"><a href="/voron/toolheads/mini-stealthburner">Mini Stealthburner</a></li>
-            <li class="sm-indent"><a href="/voron/toolheads/archetype">Archetype</a></li>
             <li><a href="/ratrig">RatRig</a></li>
             <li class="sm-indent"><a href="/ratrig/origin">RatRig Origin</a></li>
             <li><a href="/vzbot">VzBot</a></li>

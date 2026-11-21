@@ -1,8 +1,7 @@
 ---
 // Toolhead is its own step right after machine selection, since it gates
-// every other subsystem's Compatible Toolheads filter. Toolheads have no
-// detail route on the site yet (no src/pages/hardware/toolheads/[slug]),
-// so cards never link internally — routeBase is intentionally omitted.
+// every other subsystem's Compatible Toolheads filter. Cards show the record's
+// image and link to /hardware/toolheads/[slug].
 import PartCard from './PartCard.astro';
 import { evaluateCompatibility, machineCheck, type Machine, type PartRecord } from '../../lib/configurator-engine';
 
@@ -28,7 +27,8 @@ const incompatibleMap = new Map(incompatible.map((i) => [i.record, i.reasons]));
         record={record}
         subsystemId="toolhead"
         subsystemLabel="Toolhead"
-        routeBase={null}
+        routeBase="/hardware/toolheads"
+        showImage={true}
         reasons={incompatibleMap.get(record) ?? []}
       />
     ))}

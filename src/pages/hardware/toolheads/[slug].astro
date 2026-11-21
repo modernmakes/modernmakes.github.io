@@ -1,0 +1,52 @@
+---
+import HardwareDetail from '../../../components/HardwareDetail.astro';
+import VoronFit from '../../../components/VoronFit.astro';
+import records from '../../../data/hardware/toolheads.json';
+import voronToolheads from '../../../data/toolheads.json';
+import { staticPathsFor, withBrand, type DetailConfig } from '../../../lib/hardware';
+
+const joinList = (v: any) => (Array.isArray(v) ? v.join(', ') : String(v));
+const yes = () => 'Yes';
+
+const config: DetailConfig = {
+  categoryLabel: 'TOOLHEAD',
+  componentType: 'Toolhead',
+  titleNoun: 'Toolhead',
+  showVerdict: false,
+  quickSpecs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Hotend', fields: ['Included Hotend'] },
+    { label: 'Extruder', fields: ['Included Extruder'] },
+    { label: 'Cooling', fields: ['Part Cooling Fans'], fmt: joinList },
+  ],
+  specs: [
+    { label: 'Type', fields: ['Type'] },
+    { label: 'Included Hotend', fields: ['Included Hotend'] },
+    { label: 'Included Extruder', fields: ['Included Extruder'] },
+    { label: 'Hotend Mount Style', fields: ['Hotend Mount Style'] },
+    { label: 'Part Cooling Fans', fields: ['Part Cooling Fans'], fmt: joinList },
+    { label: 'Filament Cutter', fields: ['Filament Cutter'], fmt: yes },
+    { label: 'Multi-Material Ready', fields: ['Multi-Material Ready'], fmt: yes },
+    { label: 'Compatible Printers', fields: ['Compatible Printers'], fmt: joinList },
+  ],
+};
+
+// The five hand-written Voron toolhead guides, keyed by this record's slug.
+const VORON_GUIDE: Record<string, string> = {
+  stealthburner: 'stealthburner',
+  xol: 'xol',
+  'dragon-burner-2-4-trident-v0': 'dragon-burner',
+  archetype: 'archetype',
+};
+
+export function getStaticPaths() {
+  return staticPathsFor(withBrand(records as any[]));
+}
+
+const { slug } = Astro.params;
+const { record } = Astro.props as { record: any };
+const guide = (voronToolheads as Record<string, any>)[VORON_GUIDE[slug as string] ?? ''];
+---
+<HardwareDetail record={record} config={config}>
+  {guide && <VoronFit t={guide} />}
+</HardwareDetail>

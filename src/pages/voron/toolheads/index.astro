@@ -3,10 +3,11 @@ import TypeCover from '../../../components/TypeCover.astro';
 import Base from '../../../layouts/Base.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
-import { handBadge } from '../../../lib/hardware';
+import { handBadge, imageOf, toSlug } from '../../../lib/hardware';
+import hwToolheads from '../../../data/hardware/toolheads.json';
 const currentPath = '/voron/toolheads';
 
-const toolheads = [
+const toolheadList = [
   {
     name: 'Stealthburner',
     tags: 'official',
@@ -78,6 +79,14 @@ const toolheads = [
     githubUrl: 'https://github.com/Armchair-Engineering/Archetype',
   },
 ];
+
+// Card image and detail link come from the matching Airtable row (same slug rule as the hardware pages).
+const hwSlugs: Record<string, string> = { 'Xol Toolhead': 'xol', 'Dragon Burner': 'dragon-burner-2-4-trident-v0', 'Mini-Stealthburner': '' };
+const toolheads = toolheadList.map((th) => {
+  const key = th.name in hwSlugs ? hwSlugs[th.name] : toSlug(th.name);
+  const rec = key ? (hwToolheads as any[]).find((r) => { const s = toSlug(r.Name ?? ''); return s === key || s.startsWith(`${key}-`); }) : undefined;
+  return { ...th, image: rec ? imageOf(rec) : '', href: rec ? `/hardware/toolheads/${toSlug(rec.Name)}` : '/hardware/toolheads' };
+});
 ---
 <Base hasPageH1={true} title="Voron Toolheads — Stealthburner, Xol, Dragon Burner & More" description="The community-validated toolhead options for Voron 2.4 and Trident. Stealthburner, Xol, Dragon Burner, and Archetype — with full compatibility tables, printed parts lists, and build guides.">
   <Nav slot="nav" currentPath={currentPath} />
@@ -104,6 +113,7 @@ const toolheads = [
         <span class="model-context-label">Showing parts for:</span>
         <span id="active-model-label" class="model-context-value">Voron 2.4</span>
         <a href="/voron" class="model-context-switch">Switch model →</a>
+        <a href="/hardware/toolheads" class="model-context-switch">Show all toolheads →</a>
       </div>
     </div>
   </div>
@@ -130,7 +140,9 @@ const toolheads = [
         {toolheads.map(th => (
           <div class="product-card" data-compatible={th.compatible} data-tags={th.tags}>
             <div class="product-card-img" style="height:120px">
-              <TypeCover eyebrow="Toolhead" />
+              {th.image
+                ? <img src={th.image} alt={th.name} width="800" height="600" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;background:var(--surface-media)" />
+                : <TypeCover eyebrow="Toolhead" />}
             </div>
             <div class="product-card-body">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
@@ -150,7 +162,7 @@ const toolheads = [
                 </div>
               </div>
               <div class="product-card-footer" style="margin-top:auto">
-                <a href={th.href} style="font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;color:var(--accent-dk)">View toolhead →</a>
+                <a href={th.href} style="font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;color:var(--accent-dk)">{th.href === '/hardware/toolheads' ? 'Browse toolheads →' : 'View toolhead →'}</a>
                 <a href={th.githubUrl} target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--g2)">GitHub ↗</a>
               </div>
             </div>

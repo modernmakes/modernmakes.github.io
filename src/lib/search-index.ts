@@ -5,7 +5,7 @@
 //   t  tools     { t title, c category, k badge, u url }
 //   s  ISO time of the last Airtable sync (palette footer freshness label)
 import { getCollection } from 'astro:content';
-import { toSlug, resolveVerdict, resolveFlowClass } from './hardware';
+import { toSlug, resolveVerdict, resolveFlowClass, withBrand } from './hardware';
 import tools from '../data/tools.json';
 import hotends from '../data/hardware/hotends.json';
 import extruders from '../data/hardware/extruders.json';
@@ -27,6 +27,7 @@ import enclosures from '../data/hardware/enclosures.json';
 import beds from '../data/hardware/beds.json';
 import frameComponents from '../data/hardware/frame-components.json';
 import printers from '../data/hardware/printers.json';
+import toolheads from '../data/hardware/toolheads.json';
 import synced from '../data/hardware/_synced.json';
 
 // [records, route base, singular label] — routes match src/pages/hardware/* and /printers.
@@ -37,6 +38,7 @@ const HARDWARE: [any[], string, string][] = [
   [nozzles, '/hardware/nozzles', 'Nozzle'],
   [mainboards, '/hardware/mainboards', 'Mainboard'],
   [toolboards, '/hardware/toolboards', 'Toolboard'],
+  [withBrand(toolheads as any[]), '/hardware/toolheads', 'Toolhead'],
   [partCooling, '/hardware/part-cooling', 'Part cooling'],
   [buildPlates, '/hardware/build-plates', 'Build plate'],
   [psus, '/hardware/psus', 'Power supply'],
@@ -54,7 +56,7 @@ const HARDWARE: [any[], string, string][] = [
 ];
 
 // No verdict pass yet: no badge in search.
-const NO_VERDICT = new Set(['/hardware/beds', '/hardware/frame-components']);
+const NO_VERDICT = new Set(['/hardware/beds', '/hardware/frame-components', '/hardware/toolheads']);
 const str = (v: unknown) => (v === undefined || v === null ? '' : String(v).trim());
 const fmtDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 

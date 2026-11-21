@@ -22,10 +22,11 @@ import frameComponents from '../data/hardware/frame-components.json' with { type
 import printers from '../data/hardware/printers.json' with { type: 'json' };
 import psus from '../data/hardware/psus.json' with { type: 'json' };
 import toolboards from '../data/hardware/toolboards.json' with { type: 'json' };
+import toolheads from '../data/hardware/toolheads.json' with { type: 'json' };
+import { withBrand } from './hardware-image';
 
 // Data file -> detail route base, read off the [slug].astro routes. Every one builds
 // its slug with toSlug(Name) over records with a non-empty Name.
-// toolheads.json has no detail route (the Voron toolhead pages read src/data/toolheads.json), so it is not indexed.
 export const ROUTE_TABLES: { file: string; base: string; records: any[] }[] = [
   { file: 'air-filtration', base: '/hardware/air-filtration', records: airFiltration },
   { file: 'bed-probes', base: '/hardware/probes', records: bedProbes },
@@ -47,11 +48,14 @@ export const ROUTE_TABLES: { file: string; base: string; records: any[] }[] = [
   { file: 'printers', base: '/printers', records: printers },
   { file: 'psus', base: '/hardware/psus', records: psus },
   { file: 'toolboards', base: '/hardware/toolboards', records: toolboards },
+  { file: 'toolheads', base: '/hardware/toolheads', records: withBrand(toolheads as any[]) },
 ];
 
 // Names that read as ordinary words or generic parts in copy; never auto-linked.
 // Lowercase; compared against the whole name/alias.
 const COMMON_NAMES = new Set([
+  // toolheads named like ordinary words
+  'angry', 'mailbox', 'hula', 'burgo', 'peregrine', 'hypernova', 'stovepipe', 'jabberwocky', 'breakneck', 'cranefly', 'fiberstream', 'yavoth', 'toolhead v2',
   'm4',               // extruder, but also the metric screw size
   'volcano',          // nozzle, but also the heater-block format
   'eddy',             // BTT probe, but also an SHT36 variant and "eddy current"; "BigTreeTech Eddy" still links

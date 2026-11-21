@@ -38,4 +38,6 @@ const p = buildDetailProps(record, config);
   heroImage={p.heroImage}
   heroImageUrl={p.heroImage}
   body={p.bodyParagraphs}
-/>
+>
+  <slot />
+</ComponentLayout>
