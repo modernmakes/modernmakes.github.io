@@ -16,7 +16,7 @@
     "Output Voltage": "48V",
     "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/UHP-350-48",
     "Brand": "Mean Well",
-    "Price (USD)": 79.99,
+    "Price (USD)": 68.8,
     "Pros": "Silent fanless convection cooling, zero fan noise\n350.4W / 7.3A at 48V\nSlim 31mm profile — 220 × 62 × 31 mm\n94% efficient with built-in active PFC\nUL 62368-1 certified"
   },
   {
@@ -96,7 +96,7 @@
     "Output Voltage": "24V",
     "Vendor 1 URL": "https://us.rs-online.com/product/mean-well/lrs-600-24/73281070/",
     "Brand": "Mean Well",
-    "Price (USD)": 75,
+    "Price (USD)": 81.85,
     "Pros": "600W rated output - the highest-wattage LRS in the table\nEnclosed metal case, UL 62368-1 approved\nBuilt-in fan with ON/OFF control - only runs when hot (on at 50C, off at 40C)\n24V/25A single output from the most common printer-PSU series"
   },
   {
@@ -119,7 +119,7 @@
     "Output Voltage": "24V",
     "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/LRS-200-24/7705026",
     "Brand": "Mean Well",
-    "Price (USD)": 39.99,
+    "Price (USD)": 24.5,
     "Pros": "Voron Design BOM-specified for all 250mm builds\nUL 62368-1 and CE certified — industrial-grade reliability\nTemperature-controlled fan quiet at typical print loads\nWide input range (90–264 VAC) — works worldwide\nThousands of successful Voron builds documented on this exact unit"
   },
   {
@@ -127,7 +127,7 @@
     "Verdict": "CONSIDER",
     "Image URL": "/media/hardware/psus/sst-st30sf.webp",
     "Wattage (W)": 300,
-    "Slug": "sst-st30sf",
+    "Slug": "sst-st30sf-v2",
     "UL Certified": true,
     "Description": "The Silverstone SST-ST30SF is an SFX-format 300W ATX PSU used in some VzBot builds where compact form factor is the priority. ATX PSUs output 12V as the primary rail (plus 5V and 3.3V auxiliaries), so most VzBot builds using this unit pair it with a dedicated 24V Mean Well for heated bed and main stepper power, using the ST30SF for the SBC, electronics, and low-voltage accessories. Non-modular cable routing requires care in the compact VzBot bay. Budget-tier SFX option. Scope: auxiliary ATX PSU for secondary 12V use, not a primary printer PSU.",
     "Verdict Label": "Budget SFX pick for VzBot — fits the compact bay, tradeoffs to know",
@@ -136,12 +136,12 @@
     "Compatible Printers": [
       "VzBot"
     ],
-    "Name": "SST-ST30SF",
-    "Vendor 1 Name": "Silverstone",
+    "Name": "SST-ST30SF V2",
+    "Vendor 1 Name": "Newegg",
     "Output Voltage": "12V (single-rail)",
-    "Vendor 1 URL": "https://www.silverstonetek.com/en/product/power-supplies/sfx-sfx-l/ST30SF/",
+    "Vendor 1 URL": "https://www.newegg.com/silverstone-sfx-series-300-w-80-plus-bronze-certified-power-supply-sst-st30sf-v2/p/N82E16817256175",
     "Brand": "Silverstone",
-    "Price (USD)": 64.99,
+    "Price (USD)": 85.49,
     "Pros": "SFX form factor fits VzBot electronics bay without modification\n300W sufficient for VzBot SBC + electronics (separate 24V PSU handles heated bed)\n80+ Bronze certified\nUL certified — safe for enclosed printer use\nLess expensive than SF750 or EVGA 650 GM"
   },
   {
@@ -160,29 +160,8 @@
     "Output Voltage": "48V",
     "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/LRS-350-48",
     "Brand": "Mean Well",
-    "Price (USD)": 38.99,
+    "Price (USD)": 32.5,
     "Pros": "48V at 7.3A for high-voltage stepper setups\nUL 62368-1 certified\nTemperature-controlled fan only runs when hot\nLow-profile 30mm enclosed case, up to 89% efficient"
-  },
-  {
-    "id": "recG5emjKryrM5NjZ",
-    "Verdict": "CONSIDER",
-    "Image URL": "/media/hardware/psus/supernova-650-gm.webp",
-    "Wattage (W)": 650,
-    "Slug": "supernova-650-gm",
-    "Description": "The EVGA SuperNOVA 650 GM is the mid-range SFX-L pick for VzBot builds — 80+ Gold efficiency, fully modular cables, and 650W headroom at a price above the budget ST30SF. SFX-L form factor is longer than SFX spec (100mm vs 63.5mm depth), so verify chassis clearance before ordering. Community considers the 650 GM a cleaner choice than the ST30SF due to modular cabling, making it easier to route only what you need in a compact electronics bay. Same 12V rail caveats apply — dedicated 24V supply still recommended for the heated bed. Scope: auxiliary ATX PSU for secondary 12V use, not a primary printer PSU.",
-    "Verdict Label": "Modular SFX-L for VzBot — good value between ST30SF and SF750",
-    "Form Factor": "SFX",
-    "Cons": "SFX-L form factor is longer than SFX (100mm deep vs 63.5mm) — confirm chassis fit before ordering\n12V primary rail — same 24V adaptation requirement as other ATX units\nEVGA exited the GPU market — long-term warranty support may be slower to navigate\nNot widely stocked vs. Corsair — harder to find locally",
-    "Compatible Printers": [
-      "VzBot"
-    ],
-    "Name": "SuperNOVA 650 GM",
-    "Vendor 1 Name": "Scan",
-    "Output Voltage": "12V (single-rail)",
-    "Vendor 1 URL": "https://www.scan.co.uk/products/650w-evga-supernova-650gm-fully-modular-80-plus-gold-single-rail-541a-92mm-fan-sfx-psu",
-    "Brand": "EVGA",
-    "Price (USD)": 99.99,
-    "Pros": "Fully modular — clean cable routing in compact enclosures, only run what you need\n80+ Gold efficiency — good balance of heat and cost\n650W / 54A on 12V rail — sufficient headroom for most VzBot configurations\nLower price than Corsair SF750 at comparable quality tier\nUL certified"
   },
   {
     "id": "recIWYmQd7ElRI1Qi",
@@ -207,7 +186,7 @@
     "Output Voltage": "24V",
     "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/UHP-500-24",
     "Brand": "Mean Well",
-    "Price (USD)": 109.99,
+    "Price (USD)": 94.2,
     "Pros": "Completely silent — no fan, no noise under any load\n500W / 20.8A — adequate for 350mm builds and heated chambers\nSlim 40mm profile fits compact electronics bays cleanly\nUL 62368-1 and CE certified\nHeat conducts to chassis — PSU enclosure acts as heatsink"
   },
   {
@@ -231,7 +210,7 @@
     "Output Voltage": "24V",
     "Vendor 1 URL": "https://www.digikey.com/en/products/detail/mean-well-usa-inc/RSP-500-24/7706339",
     "Brand": "Mean Well",
-    "Price (USD)": 97.5,
+    "Price (USD)": 94.6,
     "Pros": "500W / 20.8A — handles 350mm bed, chamber heater, and 5 steppers simultaneously\nUL 62368-1 and CE certified\nForced-air cooling maintains full rated output at ambient temps\nActive PFC — cleaner operation on noisy or international mains"
   },
   {
@@ -331,11 +310,11 @@
       "HevORT"
     ],
     "Name": "LRS-350-24",
-    "Vendor 1 Name": "Digi-Key",
+    "Vendor 1 Name": "Mouser",
     "Output Voltage": "24V",
-    "Vendor 1 URL": "https://www.digikey.com/product-detail/en/mean-well-usa-inc/LRS-350-24/1866-3346-ND/7705034",
+    "Vendor 1 URL": "https://www.mouser.com/en/ProductDetail/MEAN-WELL/LRS-350-24",
     "Brand": "Mean Well",
-    "Price (USD)": 59.99,
+    "Price (USD)": 31.4,
     "Pros": "Headroom for 300mm bed, chamber heater, and stepper load simultaneously\nSame mounting footprint as LRS-200-24 — drop-in upgrade\nUL 62368-1 and CE certified\nTemperature-controlled fan stays quiet at moderate loads\nCommunity-recommended upgrade path for 250mm builds adding a chamber heater"
   }
 ]

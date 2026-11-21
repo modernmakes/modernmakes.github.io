@@ -16,10 +16,9 @@
     "Cons": "Beta — no full BOM or assembly guide yet; some parts must be pulled from the Micron R1 repo; tiny community.",
     "Tool Configuration": "Single",
     "Name": "StealthFork",
-    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Source URL": "https://github.com/PrintersForAnts/StealthFork",
     "Assembly": "Self-sourced",
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/StealthFork",
     "Brand": "PrintersForAnts"
   },
   {
@@ -92,11 +91,10 @@
     "Cons": "120×120×120mm build volume — limiting as a primary printer; excellent as a secondary or specialty machine\n1515 extrusion requires different hardware than 2020 builds — sourcing is more specialized\nManual bed leveling — no auto-leveling routine; tramming requires attention at build time\nSome V0.2 front idler geometry is known to require careful assembly for good belt tension",
     "Tool Configuration": "Single",
     "Name": "Voron 0.2",
-    "Vendor 1 Name": "Voron Design",
+    "Source URL": "https://vorondesign.com/voron0.2",
     "Assembly": "Self-build",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://vorondesign.com/voron0.2",
     "Brand": "Voron Design"
   },
   {
@@ -104,7 +102,6 @@
     "Slug": "v-minion",
     "Verdict": "SKIP",
     "Difficulty": "Intermediate",
-    "Price (USD)": 700,
     "Pros": "Compact enclosed CoreXY design from RatRig — the concept was sound\nEVA Mini toolhead and Klipper-native config were part of the broader RatRig ecosystem",
     "Build Volume": "180×180×180mm",
     "Max Temp - Hotend (°C)": 300,
@@ -208,11 +205,10 @@
     "Cons": "4 Z motors and QGL still requires careful commissioning — same complexity as 250mm and 350mm\nSlightly heavier and more expensive than 250mm; still less capable than 350mm if volume is the priority\nNot a short build — same time investment as all V2.4 variants",
     "Tool Configuration": "Single",
     "Name": "Voron 2.4",
-    "Vendor 1 Name": "Voron Design",
+    "Source URL": "https://vorondesign.com/voron2.4",
     "Assembly": "Self-build",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://vorondesign.com/voron2.4",
     "Brand": "Voron Design"
   },
   {
@@ -238,11 +234,10 @@
     "Cons": "Moving bed in Z can affect print stability on extremely tall parts\nSlightly less active mod development than V2.4 in some edge areas\nSame build complexity and time commitment as V2.4 in XY",
     "Tool Configuration": "Single",
     "Name": "Voron Trident",
-    "Vendor 1 Name": "Voron Design",
+    "Source URL": "https://vorondesign.com/voron_trident",
     "Assembly": "Self-build",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://vorondesign.com/voron_trident",
     "Brand": "Voron Design"
   },
   {
@@ -266,11 +261,10 @@
     "Cons": "CoreXZ motion means the toolhead moves in both X and Z — heavier toolhead mass limits speed more than CoreXY\nSingle size only (250x210mm) — no larger build volume option\nSmallest community of the current Voron models",
     "Tool Configuration": "Single",
     "Name": "Voron Switchwire",
-    "Vendor 1 Name": "Voron Design",
+    "Source URL": "https://vorondesign.com/voron_switchwire",
     "Assembly": "Self-build",
     "Klipper Native": true,
     "Type": "CoreXZ",
-    "Vendor 1 URL": "https://vorondesign.com/voron_switchwire",
     "Brand": "Voron Design"
   },
   {
@@ -289,11 +283,10 @@
     "Cons": "Project halted August 2023 and repo archived; no detailed build manual (builders follow the V0 manual); BOM is a draft.",
     "Tool Configuration": "Single",
     "Name": "Tiny-M",
-    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Source URL": "https://github.com/gsl12/Tiny-M",
     "Assembly": "Self-sourced",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/gsl12/Tiny-M",
     "Brand": "PrintersForAnts"
   },
   {
@@ -313,11 +306,10 @@
     "Cons": "Self-sourced only — no kit; EU 1515 profiles with a wide channel don't fit, so extrusion sourcing needs care.",
     "Tool Configuration": "Single",
     "Name": "Salad Fork",
-    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Source URL": "https://github.com/PrintersForAnts/Salad_Fork",
     "Assembly": "Self-sourced",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/Salad_Fork",
     "Brand": "PrintersForAnts"
   },
   {
@@ -337,10 +329,9 @@
     "Cons": "No assembly manual in the repo — just a parts list; self-sourced only.",
     "Tool Configuration": "Single",
     "Name": "Tiny-T",
-    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Source URL": "https://github.com/PrintersForAnts/TinyT",
     "Assembly": "Self-sourced",
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/TinyT",
     "Brand": "PrintersForAnts"
   },
   {
@@ -372,7 +363,7 @@
     "Slug": "venture-xl",
     "Verdict": "Niche Pick",
     "Difficulty": "Expert",
-    "Price (USD)": 2199.99,
+    "Price (USD)": 2599,
     "Pros": "Huge 600mm³ enclosed volume; CNC-machined parts; four-zone bed; pre-assembled toolhead and control box; Klipper with 7-inch touchscreen.",
     "Build Volume": "600×600×600mm",
     "Max Temp - Hotend (°C)": 500,
@@ -382,21 +373,21 @@
     "Verdict Label": "A 600mm monster for patient builders",
     "Image URL": "/media/hardware/printers/venture-xl.webp",
     "Available Sizes": "600×600mm",
-    "Cons": "Expensive and enormous (910×910×940mm); needs printed skirts to finish; IDEX/AWD upgrades not available yet; currently out of stock / preorder.",
+    "Cons": "Expensive and enormous (910×910×940mm); needs printed skirts to finish; IDEX/AWD upgrades not available yet.",
     "Tool Configuration": "Single",
     "Name": "Venture XL",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "FYSETC",
     "Assembly": "Kit",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/fysetc-venture-xl-600x600-large-format-3d-printer-kit"
+    "Vendor 1 URL": "https://www.fysetc.com/products/venture-xl"
   },
   {
     "id": "recjXyqCjcDvAepj2",
     "Slug": "lh-stinger",
     "Verdict": "Solid Choice",
     "Difficulty": "Advanced",
-    "Price (USD)": 749.99,
+    "Price (USD)": 749,
     "Pros": "600mm/s claimed with AWD Y at 48V; carbon-fibre bed and carriage; Dragon UHF hotend; full Klipper config and active Discord.",
     "Build Volume": "235×235×200mm",
     "Max Temp - Hotend (°C)": 500,
@@ -405,21 +396,20 @@
     "Verdict Label": "The fastest bed-slinger you can build",
     "Image URL": "/media/hardware/printers/lh-stinger.webp",
     "Available Sizes": "235×235mm",
-    "Cons": "Open frame — no enclosure in the kit; needs printed parts and a Pi; Y-motor sync is fiddly; currently out of stock at Fabreeko.",
+    "Cons": "Open frame — no enclosure in the kit; needs printed parts and a Pi; Y-motor sync is fiddly.",
     "Tool Configuration": "Single",
     "Name": "LH Stinger",
-    "Vendor 1 Name": "Fabreeko",
+    "Vendor 1 Name": "FYSETC",
     "Assembly": "Kit",
     "Klipper Native": true,
     "Type": "CoreXZ",
-    "Vendor 1 URL": "https://www.fabreeko.com/products/lh-stinger-3d-printer-kit-by-fysetc"
+    "Vendor 1 URL": "https://www.fysetc.com/products/lh-stinger-3d-printer-kit"
   },
   {
     "id": "reclpXm2VsRYiIQfZ",
     "Slug": "vzbot",
     "Verdict": "BUY",
     "Difficulty": "Expert",
-    "Price (USD)": 1500,
     "Pros": "Speed-optimized from the ground up — gantry geometry and moving mass decisions are engineered for high-acceleration Klipper printing, not retrofitted\nGoliath hotend integrates natively with the VzBot toolhead — high-flow performance in the same package\nKlipper Input Shaper documentation and resonance tuning resources are deeply embedded in the VzBot community\nOpen source — all design files on GitHub\nActive Discord community of expert-level contributors",
     "Build Volume": "330x330mm XY (Vz330, Z not stated in project docs) / 235x235x200-225mm (Vz235)",
     "Max Temp - Hotend (°C)": 300,
@@ -437,11 +427,10 @@
     "Cons": "Not beginner territory — assumes Klipper fluency, Input Shaper experience, and mechanical debugging comfort\nSmaller community than Voron — fewer mods, fewer people to debug with when something goes wrong\nSourcing some VzBot-specific parts requires more research than Voron’s well-established vendor network\nNot enclosed by default — ABS printing requires an enclosure add-on\nHigh complexity overhead: if you’re not running high-speed printing, the build doesn’t justify itself",
     "Tool Configuration": "Single",
     "Name": "VzBot",
-    "Vendor 1 Name": "VzBot",
+    "Source URL": "https://docs.vzbot.org",
     "Assembly": "Self-build",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://docs.vzbot.org",
     "Brand": "VzBot"
   },
   {
@@ -449,7 +438,6 @@
     "Slug": "hevort-hre",
     "Verdict": "CONSIDER",
     "Difficulty": "Expert",
-    "Price (USD)": 2000,
     "Pros": "Parallel Z lifting mechanism with high-quality lead screws delivers exceptional Z repeatability — dimensional accuracy is the design goal\nKinematic bed mounts (standard in most HevORT builds) minimize first-layer variance over time\nFully enclosed — chamber temperature stability supported by default design\nKlipper native; community configs exist on GitHub\nOpen source — all design files accessible for builders who want to customize extensively",
     "Build Volume": "315x315x340mm or 415x415x440mm (configurable, X=Y 1:1)",
     "Max Temp - Hotend (°C)": 300,
@@ -511,11 +499,10 @@
     "Cons": "Self-sourced only — no full LDO kit for the 120; small build volume; ABS parts and tuning needed.",
     "Tool Configuration": "Single",
     "Name": "Micron 120",
-    "Vendor 1 Name": "PrintersForAnts (GitHub)",
+    "Source URL": "https://github.com/PrintersForAnts/Micron",
     "Assembly": "Self-sourced",
     "Klipper Native": true,
     "Type": "CoreXY",
-    "Vendor 1 URL": "https://github.com/PrintersForAnts/Micron",
     "Brand": "PrintersForAnts"
   }
 ]

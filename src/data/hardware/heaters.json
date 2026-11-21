@@ -265,17 +265,19 @@
     "Verdict Label": "Community's preferred SSR — authentic Omron from Digi-Key or Mouser eliminates counterfeit risk",
     "Verdict": "TOP",
     "Type": "SSR",
+    "Vendor 1 URL": "https://www.digikey.com/en/products/detail/omron-automation-and-safety/G3NA-210B-UTU-DC5-24/634443",
     "Brand": "Omron",
-    "Price (USD)": 22,
+    "Price (USD)": 40.93,
     "Pros": "Omron's industrial manufacturing quality is consistent — genuine units perform to rated spec\nDistributed through Digi-Key and Mouser — both have rigorous supply chain controls that make counterfeit Omrons rare vs. AliExpress Foteks\n10A rating is more than adequate for Voron bed heaters (500W at 120V = ~4.2A; 750W at 240V = ~3.1A)\nThe explicit community safety recommendation — widely cited in Voron documentation and Discord as the alternative to Fotek",
     "Wattage (W)": 2400,
-    "Description": "The Omron G3NB-210B is the Voron community's documented replacement recommendation for the Fotek SSR-40DA. Sourced from Digi-Key or Mouser, genuine Omrons are not subject to the counterfeit risk that plagues the Fotek supply chain. At 10A, it handles standard Voron bed heater loads comfortably (a 750W heater at 240V draws approximately 3.1A). The premium over a Fotek is meaningful insurance for a component that sits between mains voltage and your printer — buy it from a verified distributor and don't look for a cheaper option.",
+    "Description": "The Omron G3NB-210B is the Voron community's documented replacement recommendation for the Fotek SSR-40DA. Sourced from Digi-Key or Mouser, genuine Omrons are not subject to the counterfeit risk that plagues the Fotek supply chain. At 10A, it handles standard Voron bed heater loads comfortably (a 750W heater at 240V draws approximately 3.1A). The premium over a Fotek is meaningful insurance for a component that sits between mains voltage and your printer — buy it from a verified distributor and don't look for a cheaper option.\n\nPrice basis: DigiKey lists the G3NA-210B, the equivalent Omron solid-state relay in the same class (the G3NB itself is only stocked out of stock at Fabreeko).",
     "Image URL": "/media/hardware/heaters/omron-g3nb-210b.webp",
     "Voltage": "AC",
     "Cons": "Higher price than the Fotek SSR — premium for authentic industrial sourcing\n10A rated (not 40A like the Fotek) — adequate for standard 250/300mm beds but verify your heater's actual draw before installation\nBulkier than some panel-mount alternatives — requires appropriate DIN rail or chassis mounting",
     "Compatible Printers": [
       "Universal (AC bed/chamber heaters)"
     ],
+    "Vendor 1 Name": "DigiKey",
     "Name": "Omron G3NB-210B",
     "Slug": "omron-g3nb-210b",
     "Size": "Standard DIN/panel mount"
@@ -540,7 +542,7 @@
       "E3D Revo CR",
       "Revo Hemera"
     ],
-    "Cons": "Proprietary to Revo ecosystem — does not fit any non-Revo hotend\nExpensive replacement part — if the core fails out of warranty, it’s a significant cost vs. a standard 6×20mm cartridge at $5\nRevo nozzles are more expensive than standard nozzles — the ecosystem lock extends to consumables\n40W wattage — not the highest-wattage option for aggressive printing",
+    "Cons": "Proprietary to Revo ecosystem — does not fit any non-Revo hotend\nExpensive replacement part — if the core fails out of warranty, it’s a significant cost vs. a standard 6×20mm cartridge at $5\nRevo nozzles are more expensive than standard nozzles — the ecosystem lock extends to consumables\n60W wattage — not the highest-wattage option for aggressive printing",
     "Compatible Printers": [
       "Voron 2.4",
       "Voron Trident"
