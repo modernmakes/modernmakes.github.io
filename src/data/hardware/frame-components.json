@@ -103,6 +103,20 @@
     "Material": "Aluminum"
   },
   {
+    "id": "rec6243Ls6MJ2eCgA",
+    "Type": "Frame Kit",
+    "Verdict": "CONSIDER",
+    "Name": "SimpleCore Redux Frame Kit",
+    "Compatible Extrusion": "2020",
+    "Slug": "simplecore-redux-frame-kit",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Brand": "Funssor",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005010337317033.html",
+    "Price (USD)": 116.35,
+    "Description": "Cut Misumi HFSB5-2020 extrusions, black anodized, for the SimpleCore Redux frame. Price: C$166.22 regular converted at ×0.70.",
+    "Material": "Aluminum"
+  },
+  {
     "id": "rec7VLEKma95zhp0V",
     "Type": "Backers",
     "Verdict": "CONSIDER",

@@ -108,6 +108,19 @@
     "Brand": "Mellow 3D"
   },
   {
+    "id": "recVSk9u27ZV8zFLg",
+    "Verdict": "CONSIDER",
+    "Slug": "jubilee-x-crossbar",
+    "Price (USD)": 72.07,
+    "Description": "Machined MIC6 aluminum X-axis crossbar for the Jubilee tool-changer motion system. Price: C$102.95 regular converted at ×0.70.",
+    "Kinematic": "CoreXY",
+    "Name": "Jubilee X Crossbar",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Material": "Aluminum Billet",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005012437797441.html",
+    "Brand": "Funssor"
+  },
+  {
     "id": "recY8iQZfRsH5phzq",
     "Verdict": "CONSIDER",
     "Slug": "carbon-gantry-bar-v2-4",

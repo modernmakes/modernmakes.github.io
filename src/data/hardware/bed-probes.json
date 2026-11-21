@@ -1,5 +1,22 @@
 [
   {
+    "id": "rec2L3dbkNTVp6aZj",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 51.82,
+    "Slug": "virtu-e3-idm-scanner",
+    "Description": "USB/CAN IDM eddy-current scanner PCB kit made for the VIRTU E3 printer and its V-ION fan duct; the listing also lists Voron, VzBot, RatRig, and Annex as applicable. Board + sensor included. Price: C$74.03 regular converted at ×0.70.",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "VzBot",
+      "RatRig"
+    ],
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "VIRTU E3 IDM Scanner",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005013110408828.html",
+    "Brand": "Funssor"
+  },
+  {
     "id": "rec2v7ZQqsoluFtSt",
     "Verdict": "Bleeding Edge",
     "Accuracy (mm)": "Unknown",
@@ -82,6 +99,19 @@
     "Brand": "BigTreeTech"
   },
   {
+    "id": "rec8kubdmQOG8D2IN",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 34.27,
+    "Slug": "eddy-tool-setter",
+    "Description": "Eddy-current tool setter module for toolchanger XY offset calibration with high repeat positioning (Klipper). Not a bed probe — it calibrates tool offsets on toolchanger printers. Board + coil/sensor module included. Price: C$48.96 regular converted at ×0.70.",
+    "Klipper Native": true,
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Eddy Tool Setter",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005013606377281.html",
+    "Brand": "Funssor"
+  },
+  {
     "id": "rec9Q3K0ocZ2e6B5Z",
     "Verdict": "Bleeding Edge",
     "Accuracy (mm)": "±0.005mm repeatability (contact/collision-sensing mode; per project README)",
@@ -140,6 +170,23 @@
     "Type": "Accelerometer",
     "Vendor 1 URL": "https://www.aliexpress.com/store/1069528",
     "Brand": "Mellow 3D"
+  },
+  {
+    "id": "recJMhy3HZxWzU84J",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 52.43,
+    "Slug": "idm-scanner-v3",
+    "Description": "Klipper-only eddy-current bed scanner (IDM V3), available in USB or CAN bus versions for DIY Voron and VzBot printers. Board + sensor coil in housing included. Price: C$74.90 regular converted at ×0.70.",
+    "Klipper Native": true,
+    "Compatible Printers": [
+      "Voron 2.4",
+      "VzBot"
+    ],
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "IDM Scanner V3",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005006168869710.html",
+    "Brand": "Funssor"
   },
   {
     "id": "recLNDyq5Hus6bJjl",
@@ -265,6 +312,19 @@
     "Type": "Contact",
     "Vendor 1 URL": "https://biqu.equipment/products/microprobe-v1-0-for-b1-printers-h2-extruders-ender-3",
     "Brand": "BigTreeTech"
+  },
+  {
+    "id": "recaEeaVw9s5599HR",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 28.44,
+    "Slug": "simple-eddy-probe",
+    "Description": "Eddy-current bed scanning probe with I2C interface (needs a free I2C port); Klipper has built-in support. Supports Tap and auto Z-offset; base frequency 5500 kHz, >400 kHz over 3mm. Board 45×23mm, coil PCB 11×22mm, 4P connector. Sensor board + coil PCB included; the USB version is a separate listing. Price: C$40.63 regular converted at ×0.70.",
+    "Klipper Native": true,
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Simple Eddy Probe",
+    "Type": "Eddy Current",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005013572587888.html",
+    "Brand": "Funssor"
   },
   {
     "id": "recc4dCzEyOtKLTWE",

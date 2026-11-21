@@ -21,6 +21,19 @@
     "Flatness Tolerance": "≤0.1mm"
   },
   {
+    "id": "rec3nBBdGmFaYPits",
+    "Description": "Ultra-flat aluminum alloy bed plate with silicone heater pad for the SimpleCore Redux. Flatness 0.1mm, max ~105°C. Heater options: 110V 500W, 220V 500W, or 24V 280W. Price: C$43.95 regular converted at ×0.70.",
+    "Name": "SimpleCore Redux Heated Bed",
+    "Material": "CNC Aluminum",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005010398429634.html",
+    "Slug": "simplecore-redux-heated-bed",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Price (USD)": 30.77,
+    "Brand": "Funssor",
+    "Flatness Tolerance": "0.1mm"
+  },
+  {
     "id": "rec5le8FMlMQLRfDH",
     "Description": "Precision cast aluminum bed for the Annex Engineering K3, made by HoneyBadger. Machined in-house from USA-sourced aluminum, 9.5 mm thick, 180×180 mm with round corners, pre-drilled and tapped M5 thermal fuse holder. Flat within .015'' (±.005'' thickness tolerance, 25 RMS surface finish or better). Price $39.99 is for the single 180×180 mm Alca 5 variant.",
     "Name": "Cast Aluminum Bed — Annex K3",

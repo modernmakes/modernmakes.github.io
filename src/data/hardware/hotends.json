@@ -1699,6 +1699,19 @@
     "Updated": "2026-11-20T09:15:04.000Z"
   },
   {
+    "id": "recxUeRoKw4gEL1dv",
+    "Description": "E3D SuperVolcano-style high-flow hotend kit (clone): 0.4mm nozzle and Volcano heater block, sold as nozzle-only, block-only, or full-kit variants. Price is for the base variant. Price: C$15.04 regular converted at ×0.70.",
+    "Verdict": "Contender",
+    "Nozzle Thread": "Volcano",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Super Volcano",
+    "Slug": "super-volcano",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005010617733737.html",
+    "Brand": "Funssor",
+    "Price (USD)": 10.53,
+    "Updated": "2026-11-21T10:51:30.000Z"
+  },
+  {
     "id": "recxad9vquG9vyyHz",
     "Cons": "Priced well above the standard neXt G for what is mostly a sensor/nozzle upgrade\nCeramic plate heater is still a newer design\nOften out of stock at major retailers",
     "Vendor 4 Name": "DigitMakers",

@@ -92,6 +92,19 @@
     "Material": "Aluminum"
   },
   {
+    "id": "rec3dtYPBa51K3Ur2",
+    "Description": "CNC-machined aluminum upper and lower AB drive / motor mount plates (pinned, black) for the Micron R1. Price: C$70.85 regular converted at ×0.70.",
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Micron R1 AB Drive Plates",
+    "Type": "Drive Kit",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005013398434896.html",
+    "Brand": "Funssor",
+    "Price (USD)": 49.6,
+    "Slug": "micron-r1-ab-drive-plates",
+    "Material": "Aluminum"
+  },
+  {
     "id": "rec41UNemUiAKZ0BB",
     "Image URL": "/media/hardware/motion-systems/trident-9mm-conversion-cnc-parts.webp",
     "Belt Width (mm)": 9,
@@ -703,6 +716,22 @@
     "Slug": "gt1-5-26t-pulley-9mm-belt",
     "Rail Profile": "N/A",
     "Material": "Aluminum"
+  },
+  {
+    "id": "recfQGwdsjFDFUMVs",
+    "Description": "Hartk Sexbolt Z endstop mod kit for Voron 2.4 and Trident: endstop PCB plus hardware (bolt and fittings). Price: C$20.98 regular converted at ×0.70.",
+    "Verdict": "CONSIDER",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Sexbolt Z Endstop Kit",
+    "Type": "Z Joint",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005003383523297.html",
+    "Brand": "Funssor",
+    "Price (USD)": 14.69,
+    "Slug": "sexbolt-z-endstop-kit"
   },
   {
     "id": "recfZiMFqDhBr9SiQ",

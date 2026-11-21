@@ -1,5 +1,16 @@
 [
   {
+    "id": "rec07ucwqX8108YR1",
+    "Slug": "pellet-extruder-v5",
+    "Description": "Screw-type pellet extruder full kit for printing directly from plastic pellets (PLA/PETG/ABS): barrel, hopper, motor, 24V 40W heater, 24V fan, water-cool nozzle assembly with 1.0mm nozzle. Stepper ≤1.3A. Price: C$271.84 regular converted at ×0.70.",
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Pellet Extruder V5",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005009549880923.html",
+    "Brand": "Funssor",
+    "Price (USD)": 190.29
+  },
+  {
     "id": "rec08iNZwKasrStBB",
     "Cons": "Very small — gear ratio means higher rotation distance config needed\nMore expensive than printed Sherpa Micro alternatives\nLimited reseller availability\nNot ideal for high-torque abrasive filament applications",
     "Compatible Printers": [
@@ -255,6 +266,17 @@
     "Vendor 4 URL": "https://www.filastruder.com/collections/bondtech/products/bondtech-bmg-extruder",
     "Source URL": "https://github.com/chirpy2605/voron/tree/main/general/RoundHouse",
     "Mount": "Custom"
+  },
+  {
+    "id": "rec7hqtCYDojQ98zK",
+    "Slug": "universal-pellet-extruder",
+    "Description": "Smaller screw-type pellet extruder for printing from plastic pellets: 0.8mm nozzle, 260°C max. A cheaper, more compact alternative to the V5 pellet extruder. Price: C$151.11 regular converted at ×0.70.",
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Universal Pellet Extruder",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005006780771816.html",
+    "Brand": "Funssor",
+    "Price (USD)": 105.78
   },
   {
     "id": "rec9moeBFPMexbYUD",
@@ -940,6 +962,17 @@
     "Pros": "Extruder and hotend in one compact unit\n7:1 dual-gear drive with strong grip\n195g complete"
   },
   {
+    "id": "recYvPrNzvSoDvA2T",
+    "Slug": "ceramic-syringe-pump",
+    "Description": "Feed side for ceramic clay/paste printing: 500CC syringe barrel with a NEMA17 leadscrew plunger pump and 8mm tube. Price is for the barrel variant; full kits with the pump are also sold. Pairs with a heated clay print head (sold separately). Price: C$29.75 regular converted at ×0.70.",
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Ceramic Syringe Pump",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005006273536284.html",
+    "Brand": "Funssor",
+    "Price (USD)": 20.83
+  },
+  {
     "id": "recZFXMlrzNUmW4kQ",
     "Cons": "Still PUBLIC BETA per the JaredC01/Galileo2 README, pending design finalization and testing; kit excludes printed parts; assembled weight unpublished (the 25 g figure from Matrix3D is the printed-parts kit only)",
     "Vendor 4 Name": "OneTwo3D",
@@ -1021,6 +1054,17 @@
     "Vendor 4 URL": "https://store.dremc.com.au/products/bondtech-oem-ridga-v2?pr_prod_strat=jac&pr_rec_id=e0fc64b92&pr_rec_pid=7759692333225&pr_ref_pid=7750435373225&pr_seq=uniform",
     "Updated": "2026-11-04",
     "Mount": "Universal"
+  },
+  {
+    "id": "recbT6F9DTBTorUBU",
+    "Slug": "ceramic-clay-extruder",
+    "Description": "Heated print head for ceramic clay/paste printing: extruder body with motor, 12/24V 50W heater, thermistor, and 2mm nozzle. Pairs with a syringe pump (sold separately) that feeds the paste. Price: C$49.19 regular converted at ×0.70.",
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Ceramic Clay Extruder",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005009182100803.html",
+    "Brand": "Funssor",
+    "Price (USD)": 34.43
   },
   {
     "id": "recbwhTIDgqVhejO9",

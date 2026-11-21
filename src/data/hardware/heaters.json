@@ -370,6 +370,23 @@
     "Size": "180×180mm"
   },
   {
+    "id": "reciVVnkc4AZoup1e",
+    "Verdict": "CONSIDER",
+    "Type": "Bed",
+    "Vendor 1 URL": "https://www.aliexpress.com/item/1005009338250801.html",
+    "Brand": "Funssor",
+    "Price (USD)": 25.38,
+    "Wattage (W)": 300,
+    "Description": "160×160mm silicone heater pad kit (300W, 120V or 220V) for the RatRig V-Minion and V-Chonk. Price: C$36.25 regular converted at ×0.70.",
+    "Compatible Printers": [
+      "RatRig"
+    ],
+    "Vendor 1 Name": "Funssor (AliExpress)",
+    "Name": "Silicone Heater 160×160 — V-Minion/V-Chonk",
+    "Slug": "silicone-heater-160-160-v-minion-v-chonk",
+    "Size": "160x160mm"
+  },
+  {
     "id": "recpNdyhQY4vuv546",
     "Verdict Label": "The Voron community’s high-wattage standard — 50W ensures fast heat-up and thermal recovery at aggressive print speeds",
     "Verdict": "BUY",

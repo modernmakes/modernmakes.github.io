@@ -211,6 +211,21 @@
     ]
   },
   {
+    "id": "recIKwnRCOZt5K8ho",
+    "Name": "V-Core 4.1 Toolhead Kit",
+    "Brand / Designer": "Funssor",
+    "Price (USD)": 24.32,
+    "Description": "CNC-machined aluminum toolhead parts (black) for the RatRig V-Core 4.1 in IDEX/Hybrid configuration; nylon-part and metal-part variants are sold. Vendor: Funssor (AliExpress). Price: C$34.74 regular converted at ×0.70.",
+    "Compatible Printers": [
+      "RatRig"
+    ],
+    "Vendor 1 Name": "https://www.aliexpress.com/item/1005011905991365.html",
+    "Verdict": "Consider",
+    "Updated": "2026-11-21T10:51:29.000Z",
+    "Slug": "v-core-4-1-toolhead-kit",
+    "Type": "Toolhead Kit"
+  },
+  {
     "id": "recK6ZWMiLC8OU8go",
     "Included Extruder": "None (not included — Sherpa Micro only)",
     "Pros": "Full-metal toolhead for the K3's wide Hula rail backers; much stiffer than stock with better heat dissipation; purpose-built for high-speed/high-acceleration K3 use",
