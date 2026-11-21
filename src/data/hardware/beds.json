@@ -1,5 +1,26 @@
 [
   {
+    "id": "rec3n9jE9WWYCmDiN",
+    "Description": "CNC-machined high-density graphite build plate. Graphite's low thermal expansion keeps the bed flatter at temperature than aluminum, and its high thermal conductivity reduces the resistance between the silicone heater and the steel sheet for faster, more stable heating. Flatness is manually inspected before dispatch. For the VzBot 330. 6 countersink mounting holes and 4 threaded M3 holes for thermal fuses. Weight: 1.45kg. Ordering: N2O Factory doesn't sell these through a checkout listing — you contact/email them through their site to order one.",
+    "Name": "Graphite Bed — VzBot 330",
+    "Material": "High-Density Graphite",
+    "Verdict Label": "Order by email",
+    "Pros": "High-density graphite — very low thermal expansion, so the bed warps far less when heated\nHigh thermal conductivity — faster, more even heat-up than aluminum\nPrecision CNC-machined with chamfered edges\nFlatness inspected to ≤0.1mm before dispatch",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://n2ofactory.com/products/graphite-build-plate-for-voron-v0-1-0-2-%E5%89%AF%E6%9C%AC",
+    "Slug": "graphite-bed-vzbot-330",
+    "Thickness (mm)": 8,
+    "Available Sizes": "VzBot 330 size ×8mm",
+    "Vendor 1 Name": "N2O Factory",
+    "Price (USD)": 250,
+    "Cons": "Premium price vs cast aluminum plates\nOrder by email/contact only — no direct checkout\nMagnetic sheet and silicone heater are applied by you (not included)",
+    "Brand": "N2O Factory",
+    "Compatible Printers": [
+      "VzBot 330"
+    ],
+    "Flatness Tolerance": "≤0.1mm"
+  },
+  {
     "id": "rec5le8FMlMQLRfDH",
     "Description": "Precision cast aluminum bed for the Annex Engineering K3, made by HoneyBadger. Machined in-house from USA-sourced aluminum, 9.5 mm thick, 180×180 mm with round corners, pre-drilled and tapped M5 thermal fuse holder. Flat within .015'' (±.005'' thickness tolerance, 25 RMS surface finish or better). Price $39.99 is for the single 180×180 mm Alca 5 variant.",
     "Name": "Cast Aluminum Bed — Annex K3",
@@ -90,6 +111,24 @@
     "Flatness Tolerance": "Flat within 0.015 in (0.38 mm); ±0.005 in thickness tolerance"
   },
   {
+    "id": "recPYZ9qSTrwUHa2e",
+    "Description": "CNC-machined high-density graphite build plate. Graphite's low thermal expansion keeps the bed flatter at temperature than aluminum, and its high thermal conductivity reduces the resistance between the silicone heater and the steel sheet for faster, more stable heating. Flatness is manually inspected before dispatch. For the VzBot 235. 4 countersink mounting holes and 4 threaded M3 holes for thermal fuses. Weight: 1kg. Ordering: N2O Factory doesn't sell these through a checkout listing — you contact/email them through their site to order one.",
+    "Name": "Graphite Bed — VzBot 235",
+    "Material": "High-Density Graphite",
+    "Verdict Label": "Order by email",
+    "Pros": "High-density graphite — very low thermal expansion, so the bed warps far less when heated\nHigh thermal conductivity — faster, more even heat-up than aluminum\nPrecision CNC-machined with chamfered edges\nFlatness inspected to ≤0.1mm before dispatch",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://n2ofactory.com/products/graphite-build-plate-for-vzbot-235",
+    "Slug": "graphite-bed-vzbot-235",
+    "Thickness (mm)": 8,
+    "Available Sizes": "VzBot 235 size ×8mm",
+    "Vendor 1 Name": "N2O Factory",
+    "Price (USD)": 200,
+    "Cons": "Premium price vs cast aluminum plates\nOrder by email/contact only — no direct checkout\nMagnetic sheet and silicone heater are applied by you (not included)",
+    "Brand": "N2O Factory",
+    "Flatness Tolerance": "≤0.1mm"
+  },
+  {
     "id": "recVhks6os9Xee7E7",
     "Description": "Precision cast aluminum bed plate for RatRig V-Core 3.0/3.1 and V-Core 4.0. EN AW-5083 cast tooling plate — an inherently stable, low-stress aluminum alloy used for precision reference surfaces. 10mm thick vs 6mm OEM, adding thermal mass and reducing warp risk. QA-certified by Mitutoyo CRYSTA-Apex V CMM. Available with or without embedded HT magnets for removable print surface mounting. Design based on Mandala Rose Works pattern. Currently sold via BRS Engineering (exclusive EU reseller for Spannsysteme). 400mm and 500mm variants have been discontinued; only 300mm build size remains active.",
     "Name": "Cast Tooling Plate — V-Core 3/4",
@@ -114,6 +153,24 @@
     "Flatness Tolerance": "±0.05mm total length (Mitutoyo CRYSTA-Apex V CMM certified); no flatness figure published"
   },
   {
+    "id": "recXr67YXUNVoain4",
+    "Description": "CNC-machined high-density graphite build plate. Graphite's low thermal expansion keeps the bed flatter at temperature than aluminum, and its high thermal conductivity reduces the resistance between the silicone heater and the steel sheet for faster, more stable heating. Flatness is manually inspected before dispatch. For the Voron V0.1/0.2. 3 counterbore mounting holes and 2 threaded M3 holes for thermal fuses. Weight: 186g. Ordering: N2O Factory doesn't sell these through a checkout listing — you contact/email them through their site to order one.",
+    "Name": "Graphite Bed — Voron V0.1/0.2",
+    "Material": "High-Density Graphite",
+    "Verdict Label": "Order by email",
+    "Pros": "High-density graphite — very low thermal expansion, so the bed warps far less when heated\nHigh thermal conductivity — faster, more even heat-up than aluminum\nPrecision CNC-machined with chamfered edges\nFlatness inspected to ≤0.1mm before dispatch",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://n2ofactory.com/products/graphite-build-plate-for-voron-v0-1-0-2-%E5%89%AF%E6%9C%AC-1",
+    "Slug": "graphite-bed-voron-v0-1-0-2",
+    "Thickness (mm)": 8,
+    "Available Sizes": "Voron V0.1/0.2 size ×8mm",
+    "Vendor 1 Name": "N2O Factory",
+    "Price (USD)": 130,
+    "Cons": "Premium price vs cast aluminum plates\nOrder by email/contact only — no direct checkout\nMagnetic sheet and silicone heater are applied by you (not included)",
+    "Brand": "N2O Factory",
+    "Flatness Tolerance": "≤0.1mm"
+  },
+  {
     "id": "recZ9gRNrJ7M9BRlo",
     "Description": "HoneyBadger ATP5 cast aluminum bed plate for Voron V2.4/Trident, designed by Whoppingpochard. 9.525 mm (3/8″) thick cast plate in 250/300/350 mm sizes (actual plate 255/305/355 mm), with threaded holes in the back for flex-plate stops and easy print-surface attachment/removal. Made in the USA from US-grade ATP5 cast aluminum. Heater and thermal fuse sold separately. Price $99.99 regular (250 mm; sale $74.99); 300 mm $99.99 sale, 350 mm $129.99 sale.",
     "Name": "ATP5 Cast Aluminum Plate — Voron",
@@ -131,6 +188,67 @@
     "Price (USD)": 99.99,
     "Cons": "All three sizes currently out of stock at Fabreeko; bed heater and thermal fuse must be sourced separately (\"Bed heater… Thermal Fuse — 120-130c rated is recomended\"); 350 mm size costs $129.99 (sale)",
     "Brand": "HoneyBadger"
+  },
+  {
+    "id": "recgd7yDUlr9witR6",
+    "Description": "CNC-machined high-density graphite build plate. Graphite's low thermal expansion keeps the bed flatter at temperature than aluminum, and its high thermal conductivity reduces the resistance between the silicone heater and the steel sheet for faster, more stable heating. Flatness is manually inspected before dispatch. For RatRig V-Core 4.0 in 300/400/500 sizes, with 3 countersink mounting holes and 8 threaded accessory points. Weights: 2kg (300), 3.4kg (400), 5.2kg (500). Price is for the 300 size. Ordering: N2O Factory doesn't sell these through a checkout listing — you contact/email them through their site to order one.",
+    "Name": "Graphite Bed — V-Core 4.0",
+    "Material": "High-Density Graphite",
+    "Verdict Label": "Order by email",
+    "Pros": "High-density graphite — very low thermal expansion, so the bed warps far less when heated\nHigh thermal conductivity — faster, more even heat-up than aluminum\nPrecision CNC-machined with chamfered edges\nFlatness inspected to ≤0.1mm before dispatch",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://n2ofactory.com/products/for-ratrig-v-core-4-0-300",
+    "Slug": "graphite-bed-v-core-4-0",
+    "Thickness (mm)": 10,
+    "Available Sizes": "329×329×10mm (300)\n429×429×10mm (400)\n529×529×10mm (500)",
+    "Vendor 1 Name": "N2O Factory",
+    "Price (USD)": 320,
+    "Cons": "Premium price vs cast aluminum plates\nOrder by email/contact only — no direct checkout\nMagnetic sheet and silicone heater are applied by you (not included)",
+    "Brand": "N2O Factory",
+    "Compatible Printers": [
+      "RatRig V-Core 4"
+    ],
+    "Flatness Tolerance": "≤0.1mm (500 size: <0.2mm)"
+  },
+  {
+    "id": "recsafBBFJeWX444O",
+    "Description": "CNC-machined high-density graphite build plate. Graphite's low thermal expansion keeps the bed flatter at temperature than aluminum, and its high thermal conductivity reduces the resistance between the silicone heater and the steel sheet for faster, more stable heating. Flatness is manually inspected before dispatch. For the Micron+ 180 (also fits Voron V0.1/0.2 mounting). 4 counterbore mounting holes and 3 threaded M3 holes. Weight: 186g. Ordering: N2O Factory doesn't sell these through a checkout listing — you contact/email them through their site to order one.",
+    "Name": "Graphite Bed — Micron+ 180",
+    "Material": "High-Density Graphite",
+    "Verdict Label": "Order by email",
+    "Pros": "High-density graphite — very low thermal expansion, so the bed warps far less when heated\nHigh thermal conductivity — faster, more even heat-up than aluminum\nPrecision CNC-machined with chamfered edges\nFlatness inspected to ≤0.1mm before dispatch",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://n2ofactory.com/products/micron-180",
+    "Slug": "graphite-bed-micron-plus-180",
+    "Thickness (mm)": 8,
+    "Available Sizes": "186×193×8mm",
+    "Vendor 1 Name": "N2O Factory",
+    "Price (USD)": 180,
+    "Cons": "Premium price vs cast aluminum plates\nOrder by email/contact only — no direct checkout\nMagnetic sheet and silicone heater are applied by you (not included)",
+    "Brand": "N2O Factory",
+    "Flatness Tolerance": "≤0.1mm"
+  },
+  {
+    "id": "rectjUJu5DxFuZlSX",
+    "Description": "CNC-machined high-density graphite build plate. Graphite's low thermal expansion keeps the bed flatter at temperature than aluminum, and its high thermal conductivity reduces the resistance between the silicone heater and the steel sheet for faster, more stable heating. Flatness is manually inspected before dispatch. For Voron 2.4 and Trident in 250/300/350 sizes. 7 counterbore mounting holes, 2 threaded M3 holes for thermal fuses, kinematic-mount compatible, and compatible with inductive probes, Klicky, Tap, and Beacon. Weights: 870g (250), 1.23kg (300), 1.67kg (350). Price is for the 250 size. Ordering: N2O Factory doesn't sell these through a checkout listing — you contact/email them through their site to order one.",
+    "Name": "Graphite Bed — Voron 2.4/Trident",
+    "Material": "High-Density Graphite",
+    "Verdict Label": "Order by email",
+    "Pros": "High-density graphite — very low thermal expansion, so the bed warps far less when heated\nHigh thermal conductivity — faster, more even heat-up than aluminum\nPrecision CNC-machined with chamfered edges\nFlatness inspected to ≤0.1mm before dispatch",
+    "Verdict": "CONSIDER",
+    "Vendor 1 URL": "https://n2ofactory.com/products/graphite-build-plate-for-voron-v2-4",
+    "Slug": "graphite-bed-voron-2-4-trident",
+    "Thickness (mm)": 8,
+    "Available Sizes": "250×250×8mm\n300×300×8mm\n350×350×8mm",
+    "Vendor 1 Name": "N2O Factory",
+    "Price (USD)": 220,
+    "Cons": "Premium price vs cast aluminum plates\nOrder by email/contact only — no direct checkout\nMagnetic sheet and silicone heater are applied by you (not included)",
+    "Brand": "N2O Factory",
+    "Compatible Printers": [
+      "Voron 2.4 R2",
+      "Voron Trident"
+    ],
+    "Flatness Tolerance": "≤0.1mm"
   },
   {
     "id": "recx7WoL3AIAVoClK",
