@@ -245,7 +245,9 @@ const itemListSchema = {
         </button>
         {verdictTabs.map((t) => (
           <button type="button" class="gf-tab" data-f="verdict" data-v={t.key} data-label={t.label} aria-pressed="false">
-            {t.label}
+            {t.label.includes(' ')
+              ? <><span class="gf-tab-long">{t.label}</span><span class="gf-tab-short" aria-hidden="true">{t.label.split(' ')[0]}</span></>
+              : t.label}
             <span class="gf-badge" data-n>{t.count}</span>
           </button>
         ))}
@@ -254,7 +256,7 @@ const itemListSchema = {
       {hasControls && (
         <div class="gf-ctl">
           {/* Phone: one button opens the Sort & filter sheet. The badge counts non-default choices in it. */}
-          <button type="button" class="gf-ctl-btn gf-ctl-phone" data-sheet="hw-view" data-haptic
+          <button type="button" class="gf-ctl-btn gf-ctl-phone" data-sheet="hw-view" data-haptic="manual"
                   aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-view">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" /><circle cx="16" cy="7" r="2" /><circle cx="8" cy="17" r="2" /></svg>
             <span>Sort &amp; filter</span>
@@ -276,7 +278,7 @@ const itemListSchema = {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
             </button>
           )}
-          {/* List / grid: one preference for every hardware index (localStorage mm-hw-view, ?view=). */}
+          {/* List / grid: one preference for every hardware index (localStorage mm-hw-view, ?view=). In the bar from 768px; on phones the same control sits at the top of the Sort & filter sheet. */}
           <div class="gf-view" role="radiogroup" aria-label="Layout">
             <button type="button" class="gf-view-btn is-active" role="radio" aria-checked="true" aria-label="List view" data-view="list"><Icon name="list" size={18} /></button>
             <button type="button" class="gf-view-btn" role="radio" aria-checked="false" aria-label="Grid view" data-view="grid" tabindex="-1"><Icon name="grid" size={18} /></button>
@@ -384,6 +386,10 @@ const itemListSchema = {
     <>
       {/* Phone (under 768px): everything in one sheet; changes apply live underneath, "Show N" closes it. */}
       <Sheet id="hw-view" title="Sort & filter" detent="medium">
+        <div class="gf-view gf-view--sheet" role="radiogroup" aria-label="Layout">
+          <button type="button" class="gf-view-btn is-active" role="radio" aria-checked="true" aria-label="List view" data-view="list"><Icon name="list" size={18} /></button>
+          <button type="button" class="gf-view-btn" role="radio" aria-checked="false" aria-label="Grid view" data-view="grid" tabindex="-1"><Icon name="grid" size={18} /></button>
+        </div>
         <HardwareViewControls ns="m" parts={['sort', 'filters']} sorts={sorts} groups={[...flowGroup, ...filterGroups]} defaultSort={DEFAULT_SORT} />
         <button slot="footer" type="button" class="hv-show" data-sheet-close data-show-n>Show {records.length} {noun(records.length)}</button>
       </Sheet>
@@ -530,6 +536,14 @@ const itemListSchema = {
   // Sliding underline under the active verdict tab: one element, transform only
   // (translate to the tab, scaleX of a 1px line to its width). First placement and
   // resizes jump; tab changes slide (--dur-base / --ease-move, none under reduced motion).
+  // Phones: the tab row is one line and scrolls when it must. Edge fade while more is hidden to the right.
+  function tabsOverflow() {
+    if (!cats) return;
+    const over = cats.scrollWidth > cats.clientWidth + 1;
+    cats.classList.toggle('is-scroll', over);
+    cats.classList.toggle('is-end', !over || cats.scrollLeft + cats.clientWidth >= cats.scrollWidth - 1);
+  }
+  cats?.addEventListener('scroll', tabsOverflow, { passive: true });
   function moveIndicator(animate: boolean) {
     const a = tabs.find((t) => t.classList.contains('is-active'));
     if (!ind || !cats || !a) return;
@@ -689,14 +703,15 @@ const itemListSchema = {
     const gtag = (window as any).gtag;
     if (typeof gtag === 'function') gtag('event', 'hardware_view_mode', { category: bar.dataset.route ?? '', view: v });
   }
-  viewBtns.forEach((b, i) => {
+  viewBtns.forEach((b) => {
     b.addEventListener('click', () => setView(b.dataset.view!));
     // Radiogroup keys: arrows move and select, as native radios do.
     b.addEventListener('keydown', (e) => {
       const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
       if (!d) return;
       e.preventDefault();
-      const n = viewBtns[(i + d + viewBtns.length) % viewBtns.length];
+      const pair = Array.from(b.parentElement!.querySelectorAll<HTMLButtonElement>('.gf-view-btn'));
+      const n = pair[(pair.indexOf(b) + d + pair.length) % pair.length];
       setView(n.dataset.view!);
       n.focus();
     });
@@ -783,9 +798,15 @@ const itemListSchema = {
   syncView();
   for (const k of gaKeys) gaSent[k] = gaValue(k); // what the URL opened with is not a change
   render(false);
-  moveIndicator(false);
-  document.fonts?.ready.then(() => moveIndicator(false));
-  addEventListener('resize', () => moveIndicator(false), { passive: true });
+  const settleTabs = () => {
+    moveIndicator(false); tabsOverflow();
+    const a = tabs.find((t) => t.classList.contains('is-active'));
+    if (cats && a && cats.scrollWidth > cats.clientWidth) cats.scrollLeft = Math.max(0, a.offsetLeft - 20);
+    tabsOverflow();
+  };
+  settleTabs();
+  document.fonts?.ready.then(settleTabs);
+  addEventListener('resize', () => { moveIndicator(false); tabsOverflow(); }, { passive: true });
   // The pre-paint attributes did their job; .gf-hidden takes over from here.
   if (grid) { delete grid.dataset.verdict; delete grid.dataset.flow; delete grid.dataset.brand; delete grid.dataset.price; }
 </script>
@@ -1028,13 +1049,18 @@ html { overflow-anchor: none; }
    Row 2: Sort & filter, and the live count opposite. Flow lives in the sheet here.
    One height per page whatever is selected: a tab's width never depends on state (the active tab
    only changes colour; badges hold two digits' width), so the wrap never changes. */
+/* Edge fade while the tab row has more to scroll to. */
+.gf-cats.is-scroll { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+.gf-cats.is-scroll.is-end { -webkit-mask-image: none; mask-image: none; }
 .gf-ctl-count { display: none; }
 @media (max-width: 767px) {
   .gf-row { flex-wrap: wrap; }
-  .gf-row > .gf-cats { flex: 1 1 100%; flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
-  /* Sized so three tabs (e.g. All / Value Pick / Contender) share one row at 360px. */
-  .gf-cats .gf-tab { flex: 1 1 auto; justify-content: center; gap: 4px; padding: 0 6px; letter-spacing: .02em; }
-  .gf-cats .gf-badge { box-sizing: border-box; min-width: calc(3ch + 12px); padding: 1px 5px; }
+  /* One line, never wrapped: tabs share the row when they fit and the row scrolls sideways when not
+     (edge fade while there is more; the active tab is scrolled into view on load). */
+  .gf-row > .gf-cats { flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; margin-inline: 0; padding-inline: 0; }
+  .gf-cats .gf-tab { flex: 1 0 auto; justify-content: center; gap: 4px; padding: 0 5px; letter-spacing: .02em; }
+  .gf-cats .gf-badge { font-size: 9px; min-width: calc(3ch + 8px); padding: 1px 3px; }
+  .gf-view:not(.gf-view--sheet) { display: none; }
   .gf-row > .gf-ctl { flex: 1 1 100%; justify-content: space-between; padding: 4px 0; border-top: 1px solid var(--border); }
   .gf-ctl-count { display: inline; font-family: var(--fm); font-size: 12px; color: var(--g1); white-space: nowrap; }
   .gf-flow { display: none; }
@@ -1085,6 +1111,17 @@ html { overflow-anchor: none; }
 }
 .gf-ctl-n[hidden] { display: none; }
 .gf-ctl-phone { display: none; }
+/* Verdict tab "Value Pick" reads "Value" under 420px; the full name stays in the accessible name. */
+.gf-tab-short { display: none; }
+@media (max-width: 419px) {
+  .gf-tab-long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .gf-tab-short { display: inline; }
+}
+/* The sheet's copy: phones only, full width above the sort options. */
+.gf-view--sheet { display: flex; margin: 0 0 8px; }
+.gf-view--sheet .gf-view-btn { flex: 1; width: auto; height: 44px; }
+.gf-view--sheet .gf-view-btn::before { inset: 0; }
+@media (min-width: 768px) { .gf-view--sheet { display: none; } }
 /* List / grid segmented control: the active segment takes the verdict tab's treatment (ink + orange underline). */
 .gf-view { flex: none; display: inline-flex; background: var(--surface); border: 1px solid var(--border-s); border-radius: var(--radius-sm); }
 .gf-view-btn {
@@ -1104,7 +1141,7 @@ html { overflow-anchor: none; }
   .gf-ctl-phone { display: inline-flex; }
   .gf-ctl { padding-left: 8px; }
   /* Row 2 keeps one height: button, count (shrinks, ellipsis), toggle. */
-  .gf-ctl-count { flex: 1 1 0; min-width: 0; padding-inline: 12px; overflow: hidden; text-overflow: ellipsis; }
+  .gf-ctl-count { flex: 1 1 0; min-width: 0; padding-inline: 12px; overflow: hidden; text-overflow: ellipsis; text-align: right; }
 }
 
 /* Status row: live count, then the active choices as removable chips, then Clear all. */
