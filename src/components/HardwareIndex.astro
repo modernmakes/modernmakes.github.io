@@ -259,7 +259,7 @@ const itemListSchema = {
           <button type="button" class="gf-ctl-btn gf-ctl-phone" data-sheet="hw-view" data-haptic="manual"
                   aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-view">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" /><circle cx="16" cy="7" r="2" /><circle cx="8" cy="17" r="2" /></svg>
-            <span>Sort &amp; filter</span>
+            <span class="gf-ctl-long">Sort &amp; filter</span><span class="gf-ctl-short" aria-hidden="true">Filter</span>
             <span class="gf-ctl-n" data-ctl-n="all" aria-hidden="true" hidden></span><span class="sr-only" data-ctl-sr="all"></span>
           </button>
           {/* Phone row 2: the live result count beside the button (#hw-count announces it). */}
@@ -278,7 +278,7 @@ const itemListSchema = {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
             </button>
           )}
-          {/* List / grid: one preference for every hardware index (localStorage mm-hw-view, ?view=). In the bar from 768px; on phones the same control sits at the top of the Sort & filter sheet. */}
+          {/* List / grid: one preference for every hardware index (localStorage mm-hw-view, ?view=). In the bar at every width, beside the Sort & filter button on phones. */}
           <div class="gf-view" role="radiogroup" aria-label="Layout">
             <button type="button" class="gf-view-btn is-active" role="radio" aria-checked="true" aria-label="List view" data-view="list"><Icon name="list" size={18} /></button>
             <button type="button" class="gf-view-btn" role="radio" aria-checked="false" aria-label="Grid view" data-view="grid" tabindex="-1"><Icon name="grid" size={18} /></button>
@@ -386,10 +386,6 @@ const itemListSchema = {
     <>
       {/* Phone (under 768px): everything in one sheet; changes apply live underneath, "Show N" closes it. */}
       <Sheet id="hw-view" title="Sort & filter" detent="medium">
-        <div class="gf-view gf-view--sheet" role="radiogroup" aria-label="Layout">
-          <button type="button" class="gf-view-btn is-active" role="radio" aria-checked="true" aria-label="List view" data-view="list"><Icon name="list" size={18} /></button>
-          <button type="button" class="gf-view-btn" role="radio" aria-checked="false" aria-label="Grid view" data-view="grid" tabindex="-1"><Icon name="grid" size={18} /></button>
-        </div>
         <HardwareViewControls ns="m" parts={['sort', 'filters']} sorts={sorts} groups={[...flowGroup, ...filterGroups]} defaultSort={DEFAULT_SORT} />
         <button slot="footer" type="button" class="hv-show" data-sheet-close data-show-n>Show {records.length} {noun(records.length)}</button>
       </Sheet>
@@ -1070,7 +1066,6 @@ html { overflow-anchor: none; }
   .gf-cats .gf-tab { flex: 1 0 auto; justify-content: center; gap: 4px; padding: 0 5px; letter-spacing: .02em; }
   .gf-cats .gf-badge { font-size: 9px; min-width: calc(3ch + 8px); padding: 1px 3px; }
   @media (max-width: 479px) { .gf-cats .gf-badge { display: none; } } /* counts stay in each tab's aria-label */
-  .gf-view:not(.gf-view--sheet) { display: none; }
   .gf-row > .gf-ctl { flex: 1 1 100%; justify-content: space-between; padding: 4px 0; border-top: 1px solid var(--border); }
   .gf-ctl-count { display: inline; font-family: var(--fm); font-size: 12px; color: var(--g1); white-space: nowrap; }
   .gf-flow { display: none; }
@@ -1123,15 +1118,13 @@ html { overflow-anchor: none; }
 .gf-ctl-phone { display: none; }
 /* Verdict tab "Value Pick" reads "Value" under 420px; the full name stays in the accessible name. */
 .gf-tab-short { display: none; }
+.gf-ctl-short { display: none; }
 @media (max-width: 419px) {
   .gf-tab-long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .gf-tab-short { display: inline; }
+  .gf-ctl-long { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .gf-ctl-short { display: inline; }
 }
-/* The sheet's copy: phones only, full width above the sort options. */
-.gf-view--sheet { display: flex; margin: 0 0 8px; }
-.gf-view--sheet .gf-view-btn { flex: 1; width: auto; height: 44px; }
-.gf-view--sheet .gf-view-btn::before { inset: 0; }
-@media (min-width: 768px) { .gf-view--sheet { display: none; } }
 /* List / grid segmented control: the active segment takes the verdict tab's treatment (ink + orange underline). */
 .gf-view { flex: none; display: inline-flex; background: var(--surface); border: 1px solid var(--border-s); border-radius: var(--radius-sm); }
 .gf-view-btn {
