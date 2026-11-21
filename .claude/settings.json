@@ -1,6 +1,6 @@
 {
   "permissions": {
-    "deny": ["Read(./.env)", "Read(./.env.*)", "Edit(./.env)", "Write(./.env)"]
+    "deny": ["Read(./.env)", "Read(./.env.*)", "Edit(./.env)", "Edit(./.env.*)"]
   },
   "enabledPlugins": {
     "claude-seo@agricidaniel-claude-seo": true
