@@ -6,10 +6,21 @@ interface Props {
   eyebrow?: string;
   date?: string;
   size?: 'card' | 'hero';
+  /** List-row thumb: a two-letter monogram of `label` (the brand, else the name) on --surface-media. No title. */
+  compact?: boolean;
+  label?: string;
 }
-const { eyebrow, date, size = 'card' } = Astro.props;
+const { eyebrow, date, size = 'card', compact = false, label = '' } = Astro.props;
+
+// "Bondtech" -> BO, "Rat Rig" -> RR, "E3D" -> E3.
+const words = label.trim().split(/[\s\-_/]+/).filter(Boolean);
+const monogram = (words.length > 1 ? words[0][0] + words[1][0] : (words[0] ?? '').slice(0, 2)).toUpperCase();
 ---
+{compact ? (
+  <div class="type-cover type-cover--compact" aria-hidden="true">{monogram && <span class="type-cover-mono">{monogram}</span>}</div>
+) : (
 <div class:list={['type-cover', { 'type-cover--hero': size === 'hero' }]} aria-hidden="true">
   {size === 'hero' && eyebrow && <span class="type-cover-eyebrow">{eyebrow}</span>}
   {size === 'hero' && date && <span class="type-cover-date">{date}</span>}
 </div>
+)}

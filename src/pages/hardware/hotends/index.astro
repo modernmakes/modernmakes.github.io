@@ -68,10 +68,10 @@ const flowCopy: Record<string, string> = {
 
 <style>
   /* Strip under the filter bar (outside the sticky element); the button opens the "How we rate" sheet. */
-  .rate-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; column-gap: 8px; padding-block: 6px; min-height: 44px; text-align: left; }
-  .rate-line p { margin: 0; font: 400 13px/1.5 var(--fu); color: var(--g1); }
+  .rate-line { display: flex; flex-wrap: nowrap; align-items: center; justify-content: flex-start; column-gap: 8px; padding-block: 6px; min-height: 44px; text-align: left; }
+  .rate-line p { flex: 0 1 auto; min-width: 0; margin: 0; font: 400 13px/1.5 var(--fu); color: var(--g1); }
   .rate-open {
-    min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+    flex: none; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
     font: 600 13px var(--fu); color: var(--black);
     text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--border-s);
     transition: text-decoration-color var(--dur-fast) var(--ease-out);

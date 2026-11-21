@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import synced from '../data/hardware/_synced.json';
-import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf } from '../lib/hardware';
+import { resolveVerdict, buildVerdictTabs, VERDICT_BUCKETS, toSlug, resolveFlowClass, FLOW_CLASSES, imageOf, getSourceUrl } from '../lib/hardware';
 import { jsonLd } from '../lib/jsonld';
 import { transformSync } from 'esbuild';
 const minify = (js: string) => transformSync(js, { minify: true, target: 'es2020' }).code;
@@ -296,7 +296,7 @@ const itemListSchema = {
   {/* Outside the sticky bar, so it scrolls away with the page. */}
   <slot name="afterFilters" />
 
-  <section class="section">
+  <section class="section gf-list-section">
     <div class="container">
       {/* Live count, then the active non-default choices as removable chips (built by the script). */}
       <div class="gf-status">
@@ -313,7 +313,7 @@ const itemListSchema = {
       <script type="application/json" id="hw-view-cfg" set:html={JSON.stringify(viewCfg)}></script>
       {records.length > 0 ? (<>
         <style is:inline set:html={prepaintCss}></style>
-        <div class="grid-3" id="hw-grid">
+        <div class="gf-list" id="hw-grid">
           <script is:inline set:html={prepaintStartJs}></script>
           {items.map((it, i: number) => {
             const r = it.r;
@@ -322,38 +322,28 @@ const itemListSchema = {
             const fc = resolveFlowClass(flowClassOf(r));
             const imgSrc = imageOf(r);
             const hasImg = imgSrc !== '';
+            const brand = String(r['Brand'] ?? '').trim();
             return (
               <a href={`${basePath}/${slug}`} class="card gf-card" data-verdict={it.verdict} data-flow={it.flowClass}
                  data-name={it.name} data-brand={it.brand} data-price={it.price ?? ''} data-flow-n={it.flow ?? ''}
                  data-rank={it.rank} data-band={it.band} {...orderAttrs(it)}>
                 <div class="card-img">
-                  {/* Cover is the base layer: it shows while the image loads and if a hotlinked image fails. */}
-                  <TypeCover eyebrow={categoryLabel} />
+                  {/* The monogram is the base layer: it shows while the image loads and if a hotlinked image fails. */}
+                  <TypeCover compact label={brand || it.name} />
                   {hasImg && (
-                    <>
-                      <img src={imgSrc} alt={r['Name']} width="800" height="600" loading={i < 3 ? 'eager' : 'lazy'} decoding="async" onerror="this.parentElement.classList.add('card-img--failed')" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-                      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%)"></div>
-                      <span style="position:relative;z-index:1;font-family:var(--fu);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-muted);padding:0 14px 10px">{categoryLabel}</span>
-                    </>
+                    <img src={imgSrc} alt="" width="112" height="112" loading={i < 4 ? 'eager' : 'lazy'} decoding="async" onerror="this.parentElement.classList.add('card-img--failed')" />
                   )}
                 </div>
                 <div class="card-body">
-                  <div class="card-cat">{r['Brand'] ?? ''}</div>
+                  <div class="card-cat">{brand}</div>
                   <h2 class="card-title">{r['Name']}</h2>
-                  {/* no empty row: its margins would make the title→excerpt gap uneven across the grid */}
-                  {chips(r).length > 0 && (
-                    <div class="product-card-specs" style="margin:0 0 8px;display:flex;gap:6px;flex-wrap:wrap">
-                      {chips(r).map((c) => <span class="spec-chip">{c}</span>)}
-                    </div>
-                  )}
-                  <p class="card-excerpt">{excerptOf(r)}</p>
                   <div class="card-footer">
                     {v && <span class={`verdict ${v.cls}`}>{v.label}</span>}
-                    {fc && <span class="flow-chip">{fc.chipLabel}</span>}
-                    {/* whole dollars, as on the detail page; unpriced = missing, zero or not a number */}
-                    {it.price === null
-                      ? <span class="gf-price gf-price--none">No listed price</span>
-                      : <span class="gf-price">~${Math.round(it.price)}</span>}
+                    {fc && <span class="flow-chip">{fc.label}<span class="gf-flow-sfx"> flow</span></span>}
+                    {/* whole dollars, as on the detail page; no price: a community project (it has a source link) or simply unlisted */}
+                    {it.price !== null
+                      ? <span class="gf-price">~${Math.round(it.price)}</span>
+                      : <span class="gf-price gf-price--none">{getSourceUrl(r) ? 'Community project' : 'No listed price'}</span>}
                   </div>
                 </div>
               </a>
@@ -795,9 +785,6 @@ const itemListSchema = {
   margin: 14px 0 0;
 }
 
-/* card titles are <h2> for heading navigation — neutralise UA margins */
-/* 12px below the title whether or not the spec-chip row follows (the row has no top margin) */
-.gf-card h2.card-title { margin: 0 0 12px; }
 
 /* ── HARDWARE FILTER BAR: verdict tabs + flow row as one sticky unit ──
    .stuck swaps the background and adds a shadow. It must never touch height,
@@ -886,12 +873,44 @@ html { overflow-anchor: none; }
   transition: opacity 0.15s ease, border-color .15s, transform .15s, var(--press-release);
 }
 .gf-card.gf-hidden { display: none; }
-/* Card bottom row: verdict (and flow) on the left, the price opposite. Price is data (Mono-Is-Data),
-   ink not orange (Pointer Rule). Cards in a row share a height and the row sits at margin-top:auto,
-   so these line up across the row. */
-.gf-card .card-footer { justify-content: flex-start; flex-wrap: wrap; gap: 6px 8px; }
-.gf-price { margin-left: auto; font-family: var(--fm); font-size: 18px; font-weight: 700; line-height: 1; color: var(--black); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.gf-price--none { font-family: var(--fu); font-size: 12px; font-weight: 500; line-height: 18px; color: var(--g2); }
+/* ── LIST ROWS (every width) ──
+   One column up to 899px with a 96px square thumb, two columns of rows from 900px with 112px.
+   A row is thumb | body: brand (mono), name on one line, then verdict badge, flow chip and price,
+   the price pushed right. Titles stay <h2> for heading navigation. Price is data (Mono-Is-Data),
+   ink not orange (Pointer Rule). The filter script only reads data attributes, so none of this
+   is known to it; .gf-hidden and the pre-paint rules hide whole rows. */
+.gf-list { --row-thumb: 96px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+@media (min-width: 900px) {
+  .gf-list { --row-thumb: 112px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.gf-card { display: grid; grid-template-columns: var(--row-thumb) minmax(0, 1fr); }
+.gf-card .card-img {
+  width: var(--row-thumb); height: var(--row-thumb); aspect-ratio: auto;
+  background: var(--surface-media);
+}
+.gf-card .card-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; background: var(--surface-media);
+}
+.gf-card .card-body { padding: 10px 12px; min-width: 0; justify-content: center; gap: 3px; }
+.gf-card .card-cat {
+  margin: 0; font-family: var(--fm); font-size: 10px; font-weight: 500; letter-spacing: .04em;
+  color: var(--g1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.gf-card h2.card-title { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gf-card .card-footer {
+  margin: 4px 0 0; padding: 0; border-top: 0;
+  justify-content: flex-start; flex-wrap: nowrap; gap: 6px; min-width: 0;
+}
+.gf-card .card-footer > .verdict, .gf-card .card-footer > .flow-chip { flex: none; padding-inline: 6px; }
+.gf-price { margin-left: auto; font-family: var(--fm); font-size: 14px; font-weight: 700; line-height: 18px; color: var(--black); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.gf-price--none { font-family: var(--fu); font-size: 11px; font-weight: 500; color: var(--g2); }
+/* Phones: the flow chip drops the word "flow" visually (kept for screen readers) so the row never overflows at 360px. */
+.gf-flow-sfx { white-space: pre; }
+@media (max-width: 479px) {
+  .gf-flow-sfx { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@media (max-width: 767px) { .gf-list-section { padding-top: 8px; } }
 .gf-nomatch { padding: 40px 0; text-align: center; color: var(--g1); }
 .gf-nomatch[hidden] { display: none; }
 .gf-nomatch-title { font-family: var(--fd); font-size: 22px; font-weight: 800; color: var(--black); margin: 0 0 6px; }

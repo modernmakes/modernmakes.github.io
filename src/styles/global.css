@@ -366,6 +366,9 @@ a:not([class]):active { opacity: .6; }
   font-family: var(--fm); font-size: 10px;
   color: var(--on-dark-muted);
 }
+/* Compact (list-row thumb): a two-letter brand monogram on the product-shot backdrop, centred. */
+.type-cover--compact { align-items: center; justify-content: center; padding: 0; background: var(--surface-media); }
+.type-cover-mono { font-family: var(--fd); font-size: 28px; font-weight: 800; letter-spacing: .02em; color: var(--on-dark-muted); }
 /* A hotlinked image failed to load: hide it and its overlays, leave the cover. */
 .card-img--failed > :not(.type-cover) { display: none; }
 /* Full-width article hero: aligns with the 1200px content column. */
