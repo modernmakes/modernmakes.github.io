@@ -1047,7 +1047,7 @@
       "XY",
       "Z"
     ],
-    "Frame Size": "NEMA 23",
+    "Frame Size": "NEMA23",
     "Vendor 1 Name": "StepperOnline",
     "Name": "23HS22-2804S",
     "Step Angle": "1.8°",
