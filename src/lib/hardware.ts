@@ -242,7 +242,7 @@ export const PRINTER_HREFS: Record<string, string> = {
 export interface SpecDef {
   label: string;
   fields: string[];
-  fmt?: (value: any) => string;
+  fmt?: (value: any, record: any) => string;
 }
 
 export interface DetailConfig {
@@ -269,7 +269,7 @@ const resolveSpecs = (record: any, defs: SpecDef[]): { label: string; value: str
     .map((d) => {
       const v = firstPresent(record, d.fields);
       if (v === undefined) return null;
-      return { label: d.label, value: d.fmt ? d.fmt(v) : String(v) };
+      return { label: d.label, value: d.fmt ? d.fmt(v, record) : String(v) };
     })
     .filter((s): s is { label: string; value: string } => s !== null);
 
@@ -435,3 +435,17 @@ export function staticPathsFor(records: any[]) {
     .filter((r) => typeof r['Name'] === 'string' && r['Name'].trim())
     .map((r) => ({ params: { slug: toSlug(r['Name']) }, props: { record: r } }));
 }
+
+// Extruder weight with its "Weight Basis" ("295 g incl. motor", "75 g, no motor", "175 g complete (incl. hotend)").
+// No basis: the number alone. Weights on different bases are not comparable, so nothing sorts by it.
+const WEIGHT_BASIS: Record<string, string> = {
+  'with motor': ' incl. motor',
+  'without motor': ', no motor',
+  'complete unit (incl. hotend)': ' complete (incl. hotend)',
+};
+export const formatWeight = (record: any): string | null => {
+  const w = record?.['Weight (g)'];
+  if (w == null || w === '') return null;
+  const b = String(record['Weight Basis'] ?? '').trim();
+  return `${w} g${b ? (WEIGHT_BASIS[b.toLowerCase()] ?? `, ${b.toLowerCase()}`) : ''}`;
+};

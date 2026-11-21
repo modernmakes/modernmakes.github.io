@@ -1,9 +1,11 @@
 ---
 import HardwareIndex from '../../../components/HardwareIndex.astro';
 import records from '../../../data/hardware/extruders.json';
+import { formatWeight } from '../../../lib/hardware';
 
 const chips = (r: any) => [
   r['Gear Ratio'] ? String(r['Gear Ratio']) : null,
+  formatWeight(r),
 ].filter(Boolean) as string[];
 ---
 <HardwareIndex

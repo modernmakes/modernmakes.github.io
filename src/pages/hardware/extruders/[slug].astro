@@ -1,7 +1,7 @@
 ---
 import HardwareDetail from '../../../components/HardwareDetail.astro';
 import records from '../../../data/hardware/extruders.json';
-import { staticPathsFor, type DetailConfig } from '../../../lib/hardware';
+import { staticPathsFor, formatWeight, type DetailConfig } from '../../../lib/hardware';
 
 const joinList = (v: any) => (Array.isArray(v) ? v.join(', ') : String(v));
 
@@ -11,13 +11,13 @@ const config: DetailConfig = {
   titleNoun: 'Extruder',
   quickSpecs: [
     { label: 'Gear Ratio', fields: ['Gear Ratio'] },
-    { label: 'Weight', fields: ['Weight (g)'], fmt: (v) => `${v}g` },
+    { label: 'Weight', fields: ['Weight (g)'], fmt: (v, r) => formatWeight(r) ?? `${v} g` },
     { label: 'Mount', fields: ['Mount', 'Mount Style'] },
     { label: 'Ecosystem', fields: ['Ecosystem'], fmt: joinList },
   ],
   specs: [
     { label: 'Gear Ratio', fields: ['Gear Ratio'] },
-    { label: 'Weight', fields: ['Weight (g)'], fmt: (v) => `${v}g` },
+    { label: 'Weight', fields: ['Weight (g)'], fmt: (v, r) => formatWeight(r) ?? `${v} g` },
     { label: 'Mount', fields: ['Mount', 'Mount Style'] },
     { label: 'Drive Type', fields: ['Drive Type', 'Drive'] },
     { label: 'Ecosystem', fields: ['Ecosystem'], fmt: joinList },
