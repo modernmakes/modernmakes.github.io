@@ -293,6 +293,9 @@ const itemListSchema = {
     </div>
   </div>
 
+  {/* Outside the sticky bar, so it scrolls away with the page. */}
+  <slot name="afterFilters" />
+
   <section class="section">
     <div class="container">
       {/* Live count, then the active non-default choices as removable chips (built by the script). */}

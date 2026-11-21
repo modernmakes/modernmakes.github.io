@@ -36,11 +36,11 @@ const flowCopy: Record<string, string> = {
   schemaName="Best FDM Hotends for Voron & Prosumer Printers"
   chips={chips}
 >
+  <div slot="afterFilters" class="container rate-line">
+    <p>Verdicts are judged against other hotends in the same flow class.</p>
+    <button type="button" class="rate-open" data-sheet="hw-rate" aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-rate">How we rate</button>
+  </div>
   <Fragment slot="intro">
-    <div class="container rate-line">
-      <p>Verdicts are judged against other hotends in the same flow class.</p>
-      <button type="button" class="rate-open" data-sheet="hw-rate" aria-haspopup="dialog" aria-expanded="false" aria-controls="hw-rate">How we rate</button>
-    </div>
     <Sheet id="hw-rate" title="How we rate" detent="fit">
       <p class="rate-lead">A verdict is our call on whether a hotend is worth buying, judged against the others in its flow class. Verdicts are our own judgement, based on community support and feedback.</p>
       <h3 class="rate-h">Verdicts</h3>
@@ -58,7 +58,7 @@ const flowCopy: Record<string, string> = {
         {FLOW_CLASSES.map((f) => (
           <div class="rate-row">
             <dt><span class="flow-chip">{f.chipLabel}</span></dt>
-            <dd>{flowCopy[f.key]}, from the hotend's listed max flow.</dd>
+            <dd>{flowCopy[f.key]}, our editorial class, set from the maker's published figure or a credited independent test; where neither exists it's our call, and the hotend's page says so.</dd>
           </div>
         ))}
       </dl>
@@ -67,8 +67,8 @@ const flowCopy: Record<string, string> = {
 </HardwareIndex>
 
 <style>
-  /* Legend line between the hero and the filter bar; the button opens the "How we rate" sheet. */
-  .rate-line { display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px; padding-top: 12px; }
+  /* Strip under the filter bar (outside the sticky element); the button opens the "How we rate" sheet. */
+  .rate-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; column-gap: 8px; padding-block: 6px; min-height: 44px; text-align: left; }
   .rate-line p { margin: 0; font: 400 13px/1.5 var(--fu); color: var(--g1); }
   .rate-open {
     min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
