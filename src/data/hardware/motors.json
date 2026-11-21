@@ -24,6 +24,37 @@
     "Part Number": "LDO-42STH60-2004B-EN1000"
   },
   {
+    "id": "rec2Fz7rMZ0rcULjJ",
+    "Cons": "Modest torque — sized for V0-class machines only",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "The 0.5A, 42mm NEMA 14 specified for Voron V0 A/B and Z axes. Low current keeps the little drivers on V0 boards happy.",
+    "Verdict Label": "The standard Voron V0 A/B/Z motor — 42mm, 0.5A",
+    "Rated Current (A)": 0.5,
+    "Verdict": "Workhorse",
+    "Weight (g)": 200,
+    "Motor Length (mm)": 42,
+    "Use Case": [
+      "XY",
+      "Z"
+    ],
+    "Frame Size": "NEMA14",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "14HS17-0504S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-14-bipolar-1-8deg-23ncm-32-6oz-in-0-5a-7-5v-35x35x42mm-4-wires-14hs17-0504s",
+    "Brand": "OMC",
+    "Price (USD)": 10.44,
+    "Voltage Rating": "24V",
+    "Pros": "The specified V0 axis motor\nLow 0.5A draw suits small integrated drivers",
+    "Holding Torque (N·cm)": 23,
+    "Slug": "14hs17-0504s",
+    "Phase Voltage": "7.5V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "14HS17-0504S"
+  },
+  {
     "id": "rec2M6oRlue8JIecI",
     "Cons": "Not the Stealthburner CW2 motor — check toolhead compatibility before ordering (CW2 needs Moons CSE14)\n1.8° step angle = 200 steps/rev vs Moons CSE14's 400 (0.9°) — minor difference in practice with microstepping",
     "Compatible Printers": [
@@ -119,6 +150,99 @@
     "Part Number": "MS17HA6P4200"
   },
   {
+    "id": "rec4bm5vywgI0i6TW",
+    "Cons": "Lower torque and top speed than 1.8° equivalents\nNeeds doubled steps/mm in firmware",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "A 0.9° (400-step) NEMA 17. The finer step angle is popular on Voron 2.4 and RatRig XY axes to reduce VFA and banding compared with standard 1.8° motors.",
+    "Verdict Label": "0.9° NEMA 17 for finer native resolution on quality-focused CoreXY builds",
+    "Rated Current (A)": 0.9,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 280,
+    "Motor Length (mm)": 40,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HM15-0904S",
+    "Step Angle": "0.9°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-bipolar-0-9deg-36ncm-51oz-in-0-9a-5-4v-42x42x40mm-4-wires-17hm15-0904s",
+    "Brand": "OMC",
+    "Price (USD)": 10.78,
+    "Voltage Rating": "24V",
+    "Pros": "0.9° steps — finer native resolution, less VFA\nSame footprint as standard 40mm motors",
+    "Holding Torque (N·cm)": 36,
+    "Slug": "17hm15-0904s",
+    "Phase Voltage": "4.8V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HM15-0904S"
+  },
+  {
+    "id": "rec73C2jly7zXOr1Q",
+    "Cons": "Needs a closed-loop driver\nTorque is modest for its 60mm length",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A mid-size closed-loop NEMA 17 (42 N·cm, 1000PPR encoder) for axes that want encoder feedback without the largest frame.",
+    "Verdict Label": "Mid-size closed-loop NEMA 17 with encoder",
+    "Rated Current (A)": 1.5,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 400,
+    "Motor Length (mm)": 60,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS15-1504D-E1K",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-closed-loop-stepper-motor-42ncm-59-48oz-in-with-encoder-1000ppr-4000cpr-17hs15-1504d-e1k",
+    "Brand": "OMC",
+    "Price (USD)": 17.75,
+    "Voltage Rating": "24V",
+    "Pros": "Encoder feedback in a mid-size package",
+    "Holding Torque (N·cm)": 42,
+    "Slug": "17hs15-1504d-e1k",
+    "Phase Voltage": "2.5V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS15-1504D-E1K"
+  },
+  {
+    "id": "rec7ZqgAbZNfsgm1F",
+    "Cons": "Motor only — driver separate\n80mm body, 500g",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Description": "The high-torque P-series closed-loop motor: 72 N·cm with a 1000PPR encoder, motor only. For heavy gantries that want premium closed-loop drive.",
+    "Verdict Label": "P-series high-torque closed-loop NEMA 17 (motor only)",
+    "Rated Current (A)": 2,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 500,
+    "Motor Length (mm)": 80,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17E1K-07",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/p-series-nema-17-closed-loop-stepper-motor-72ncm-101-98oz-in-with-encoder-1000ppr-4000cpr-17e1k-07",
+    "Brand": "OMC",
+    "Price (USD)": 33.43,
+    "Voltage Rating": "24V",
+    "Pros": "High torque with encoder feedback\nPremium P-series build",
+    "Holding Torque (N·cm)": 72,
+    "Slug": "17e1k-07",
+    "Phase Voltage": "3.5V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17E1K-07"
+  },
+  {
     "id": "rec89qEa5tKckEj6j",
     "Cons": "Stealthburner CW2 specific — not a drop-in for Orbiter v2, Sherpa Mini, or LGX Lite (those use 52mm NEMA14)\n0.9° requires verifying rotation_distance matches community CW2 config baseline\nLimited availability outside Voron ecosystem vendors",
     "Compatible Printers": [
@@ -205,6 +329,153 @@
     "Pros": "Lowest cost entry point for A/B motors ($8–12)\nMany units perform adequately in standard print-speed builds\nWidely available through AliExpress storefronts",
     "Slug": "nema17-48mm-stepper",
     "Shaft Diameter (mm)": 5
+  },
+  {
+    "id": "recAipgYL6Rs6kS5j",
+    "Cons": "40mm body is long for a pancake-style extruder motor",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "BIGTREETECH's 40mm NEMA17 extruder motor (1.8°, 1.0A, ≥450 mN·m holding torque), sold for H2-series extruders. Brand choice for BTT doesn't exist in this table yet.",
+    "Verdict Label": "BTT 40mm NEMA17 extruder motor, 1.0A",
+    "Rated Current (A)": 1,
+    "Verdict": "CONSIDER",
+    "Motor Length (mm)": 40,
+    "Use Case": [
+      "Extruder"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "42 Stepper Motor 40mm",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://biqu.equipment/products/bigtreetech-btt-42-stepper-motor-40mm-3d-printer-parts-motor-for-extruder-3d-printer-vs-b1-h2-v2-0",
+    "Brand": "BigTreeTech",
+    "Price (USD)": 22.5,
+    "Voltage Rating": "24V",
+    "Pros": "Purpose-sold extruder motor for H2 extruders",
+    "Holding Torque (N·cm)": 45,
+    "Slug": "42-stepper-motor-40mm",
+    "Shaft Diameter (mm)": 5
+  },
+  {
+    "id": "recBd0MfJLfElAqDn",
+    "Cons": "Premium price vs standard LDO motors\n3A draw needs drivers and cooling to match\nPulleys not included",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Description": "The Kraken V2 is a high-torque LDO 42STH60-3004AH-R(37) NEMA 17 (60mm body, 3.0A, 8.0 kg/cm holding torque) specified by Omranello of D3vil Design and sold by 3D Mellow. It adds an internal ATC Semitec 104GT-2 thermistor for motor temperature monitoring, with a 1m combined motor/thermistor cable terminated in a 4-pin JST-XH. The round 37mm shaft suits high-torque A/B axes on Voron and VzBot builds; pulleys are not included.",
+    "Verdict Label": "High-torque 3A NEMA 17 with built-in motor thermistor — D3vil Design Kraken V2",
+    "Rated Current (A)": 3,
+    "Verdict": "CONSIDER",
+    "Motor Length (mm)": 60,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "3D Mellow",
+    "Name": "42STH60-3004AH(R37)",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.3dmellow.com/products/kraken-high-torque-nema-17-stepper-motor-v2-d3vil-design-104gt-2-for-k1-k1c-k1-max,-voron-vzbot-3d-printersround-shaft?VariantsId=10663",
+    "Brand": "LDO",
+    "Price (USD)": 110,
+    "Voltage Rating": "24V",
+    "Pros": "3.0A winding and 78 N·cm holding torque — well above standard 48mm motors\nBuilt-in 104GT-2 thermistor for motor temperature monitoring\nRound shaft for high-torque, frequent-direction-change axes",
+    "Holding Torque (N·cm)": 78,
+    "Slug": "42sth60-3004ah-r37",
+    "Phase Voltage": "Unknown",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "LDO-42STH60-3004AH-R(37)"
+  },
+  {
+    "id": "recCQzhoXKHjgNqtU",
+    "Cons": "Needs a closed-loop driver (not a standard TMC2209 setup)\n68mm body is long for a 48mm-class motor",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "A closed-loop NEMA 17 with a 1000PPR (4000CPR) encoder. Closed-loop drive eliminates lost steps and runs cooler than open-loop at the same torque, at the cost of a longer body and a closed-loop driver.",
+    "Verdict Label": "Closed-loop NEMA 17 with 1000PPR encoder — 48mm-class torque with position feedback",
+    "Rated Current (A)": 2,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 430,
+    "Motor Length (mm)": 68,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS19-2004D-E1K",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-closed-loop-stepper-motor-52ncm-73-64oz-in-with-encoder-1000ppr-4000cpr-17hs19-2004d-e1k",
+    "Brand": "OMC",
+    "Price (USD)": 18.75,
+    "Voltage Rating": "24V",
+    "Pros": "Encoder feedback — no lost steps\nRuns cooler than open-loop equivalents",
+    "Holding Torque (N·cm)": 52,
+    "Slug": "17hs19-2004d-e1k",
+    "Phase Voltage": "2.2V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS19-2004D-E1K"
+  },
+  {
+    "id": "recE0IlTRQxfiJQGv",
+    "Cons": "Premium price vs the 1.8° versions\nNeeds doubled steps/mm in firmware",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "LDO's 0.9° (400 steps/rev) 48mm NEMA17 at 2.5A — the high-resolution counterpart to the 1.8° 2504AC/AH motors already in the DB, for XY axes where finer steps reduce VFA.",
+    "Verdict Label": "LDO 0.9° 48mm motor — the high-resolution version of the 2504",
+    "Rated Current (A)": 2.5,
+    "Verdict": "CONSIDER",
+    "Motor Length (mm)": 48,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "42STH48-2504MAC(F)",
+    "Step Angle": "0.9°",
+    "Vendor 1 URL": "https://biqu.equipment/products/ldo-42sth48-2504macf-reva-motor-driver",
+    "Brand": "LDO",
+    "Price (USD)": 48.32,
+    "Voltage Rating": "24V",
+    "Pros": "0.9° steps for finer native resolution\nLDO consistency",
+    "Slug": "42sth48-2504mac-f",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "LDO-42STH48-2504MAC(F) RevA"
+  },
+  {
+    "id": "recEFIXc6iBmkd7Qk",
+    "Cons": "High phase resistance/inductance — poor high-speed torque\nNiche: most builds are better served by a 2A motor run at lower current",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A 0.4A, 34mm NEMA 17 for light Z axes and small printers where a standard 2A motor is more than the axis needs and driver current is limited.",
+    "Verdict Label": "Low-current 34mm NEMA 17 for light axes where 2A is overkill",
+    "Rated Current (A)": 0.4,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 230,
+    "Motor Length (mm)": 34,
+    "Use Case": [
+      "Z"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS13-0404S1",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-bipolar-1-8deg-26ncm-36-8oz-in-0-4a-12v-42x42x34mm-4-wires-17hs13-0404s1",
+    "Brand": "OMC",
+    "Price (USD)": 8.48,
+    "Voltage Rating": "24V",
+    "Pros": "Runs cool at low current\nCompact 34mm body",
+    "Holding Torque (N·cm)": 26,
+    "Slug": "17hs13-0404s1",
+    "Phase Voltage": "12V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS13-0404S1"
   },
   {
     "id": "recEmjeKzioY00Ex3",
@@ -349,6 +620,97 @@
     "Part Number": "LDO-42STH40-1684L300E"
   },
   {
+    "id": "recJegAPmxxp5ir7s",
+    "Cons": "Motor only — closed-loop driver sold separately\nPricier than the standard closed-loop line",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "StepperOnline's P-series closed-loop motor with 1000PPR encoder, sold motor-only (driver separate). The P series is their higher-grade closed-loop line.",
+    "Verdict Label": "P-series closed-loop NEMA 17 (motor only) — StepperOnline's premium encoder line",
+    "Rated Current (A)": 2,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 360,
+    "Motor Length (mm)": 68,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17E1K-05",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/p-series-nema-17-closed-loop-stepper-motor-48ncm-67-99oz-in-with-encoder-1000ppr-4000cpr-17e1k-05",
+    "Brand": "OMC",
+    "Price (USD)": 31.36,
+    "Voltage Rating": "24V",
+    "Pros": "Premium P-series build\nEncoder feedback",
+    "Holding Torque (N·cm)": 48,
+    "Slug": "17e1k-05",
+    "Phase Voltage": "2.7V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17E1K-05"
+  },
+  {
+    "id": "recKNOdz4YGIKEMFm",
+    "Cons": "Still only 16 N·cm — geared extruders only",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "The Class H 180°C version of the pancake extruder motor. On enclosed Vorons the extruder sits in the chamber, so the high-temp rating matters more here than on frame-mounted motors.",
+    "Verdict Label": "High-temp pancake extruder motor for enclosed, heated-chamber builds",
+    "Rated Current (A)": 1,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 150,
+    "Motor Length (mm)": 21.5,
+    "Use Case": [
+      "Extruder"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS08-1004S-H",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-high-temp-stepper-motor-16ncm-22-7oz-in-extruder-motor-insulation-class-h-180c-17hs08-1004s-h",
+    "Brand": "OMC",
+    "Price (USD)": 10.72,
+    "Voltage Rating": "24V",
+    "Pros": "Pancake extruder motor rated for hot chambers\nOnly slightly heavier than the standard version",
+    "Holding Torque (N·cm)": 16,
+    "Slug": "17hs08-1004s-h",
+    "Phase Voltage": "3.7V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS08-1004S-H"
+  },
+  {
+    "id": "recKPuOO84pQwk7s4",
+    "Cons": "Backlash inherent to planetary gears\nHeavier than a pancake + printed gearbox",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A 48mm NEMA 17 with an integrated 5.18:1 planetary gearbox — the gearmotor format used by Sherpa-style extruders and compact geared drives. Total length is motor plus 27.3mm gearbox.",
+    "Verdict Label": "5.18:1 planetary gearmotor — the Sherpa-style extruder gearmotor format",
+    "Rated Current (A)": 1.68,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 520,
+    "Motor Length (mm)": 48,
+    "Use Case": [
+      "Extruder"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS19-1684S-PG5",
+    "Step Angle": "0.35° (geared)",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-stepper-motor-bipolar-l-48mm-w-gear-ratio-5-1-planetary-gearbox-17hs19-1684s-pg5",
+    "Brand": "OMC",
+    "Price (USD)": 28.86,
+    "Voltage Rating": "24V",
+    "Pros": "Integrated 5:1 planetary — extruder-ready reduction\nCompact for a gearmotor",
+    "Holding Torque (N·cm)": 52,
+    "Slug": "17hs19-1684s-pg5",
+    "Phase Voltage": "3.0V",
+    "Shaft Diameter (mm)": 8,
+    "Part Number": "17HS19-1684S-PG5"
+  },
+  {
     "id": "recL2MZffZ9rANFEf",
     "Cons": "Price is $18.99 regular; the $16.14 on file is the sale price\n10-tooth variant was out of stock at Fabreeko\nNo shaft diameter published, so only the gear options are checkable",
     "Description": "NEMA 14 extruder motor, 20mm body, with an integrated drive gear (6, 8 or 10 tooth) and XH connector. Rated 1.0A with 100 mNm holding torque. Price $18.99 regular ($16.14 sale) at Fabreeko.",
@@ -374,6 +736,67 @@
     "Slug": "36sth20-1004ahg-xh",
     "Phase Voltage": "2.1V",
     "Part Number": "LDO-36STH20-1004AHG(XH)"
+  },
+  {
+    "id": "recLqlyX2Z7EOYG7Q",
+    "Cons": "16 N·cm is only enough through a geared extruder, not direct drive",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "StepperOnline markets the 17HS08-1004S explicitly as an extruder motor and bundles it in Voron 2.4/Afterburner kits. It fits geared extruders (Clockwork, Sherpa-style) that need a 20mm pancake NEMA 17.",
+    "Verdict Label": "The classic pancake extruder motor — 20mm NEMA 17 for geared extruders",
+    "Rated Current (A)": 1,
+    "Verdict": "Workhorse",
+    "Weight (g)": 140,
+    "Motor Length (mm)": 21.5,
+    "Use Case": [
+      "Extruder"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS08-1004S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-bipolar-1-8deg-16ncm-22-6oz-in-1a-3-7v-42x42x20mm-4-wires-17hs08-1004s",
+    "Brand": "OMC",
+    "Price (USD)": 7.99,
+    "Voltage Rating": "24V",
+    "Pros": "Purpose-sold as an extruder motor\nVery light at 140g — keeps toolhead mass down",
+    "Holding Torque (N·cm)": 16,
+    "Slug": "17hs08-1004s",
+    "Phase Voltage": "3.7V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS08-1004S"
+  },
+  {
+    "id": "recMGX4h7ehsYTwTn",
+    "Cons": "Costs roughly double the standard motor\nNo US warehouse stock — ships from China/DE",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "The high-temperature version of StepperOnline's 60mm NEMA 17, with Class H 180°C insulation for motors that live inside an actively heated chamber, where standard Class B motors derate.",
+    "Verdict Label": "High-temp (Class H 180°C) 60mm NEMA 17 for motors inside a heated chamber",
+    "Rated Current (A)": 2.1,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 500,
+    "Motor Length (mm)": 60,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS24-2104S-H",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-high-temp-stepper-motor-65ncm-92oz-in-insulation-class-h-180c-17hs24-2104s-h",
+    "Brand": "OMC",
+    "Price (USD)": 18.38,
+    "Voltage Rating": "24V",
+    "Pros": "Rated for 180°C insulation class — survives heated chambers\nStrongest high-temp NEMA 17 in the line",
+    "Holding Torque (N·cm)": 65,
+    "Slug": "17hs24-2104s-h",
+    "Phase Voltage": "3.4V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS24-2104S-H"
   },
   {
     "id": "recMuJxUwk76AsDgK",
@@ -405,6 +828,68 @@
     "Phase Voltage": "2.1V",
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-42STH40-2004MAH"
+  },
+  {
+    "id": "recPIJ5oIjU9C05Du",
+    "Cons": "Backlash inherent to planetary gears\nNo US warehouse stock — ships from China/DE",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A 48mm NEMA 17 with an integrated 19.203:1 planetary gearbox (52 N·cm motor torque before the gearbox, 3 Nm max permissible output). Suits Z lifts and slow, high-force axes. Total length is motor plus 35mm gearbox.",
+    "Verdict Label": "19:1 planetary gearmotor — high reduction for Z lifts and heavy slow axes",
+    "Rated Current (A)": 1.68,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 560,
+    "Motor Length (mm)": 48,
+    "Use Case": [
+      "Z"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS19-1684S-PG19",
+    "Step Angle": "0.094° (geared)",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-stepper-motor-bipolar-l-48mm-w-gear-ratio-19-1-planetary-gearbox-17hs19-1684s-pg19",
+    "Brand": "OMC",
+    "Price (USD)": 28.86,
+    "Voltage Rating": "24V",
+    "Pros": "Integrated planetary gearbox — huge output torque\nFine output resolution from the reduction",
+    "Holding Torque (N·cm)": 52,
+    "Slug": "17hs19-1684s-pg19",
+    "Phase Voltage": "3.0V",
+    "Shaft Diameter (mm)": 8,
+    "Part Number": "17HS19-1684S-PG19"
+  },
+  {
+    "id": "recPr3JxBiyduLhfJ",
+    "Cons": "Costs roughly double the standard motor\nNo US warehouse stock — ships from China/DE",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "The Class H 180°C version of the standard 48mm Voron motor, for XY/Z motors mounted inside a heated chamber.",
+    "Verdict Label": "High-temp (Class H 180°C) version of the standard Voron 48mm motor",
+    "Rated Current (A)": 2,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 350,
+    "Motor Length (mm)": 48,
+    "Use Case": [
+      "XY",
+      "Z"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS19-2004S1-H",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-high-temp-stepper-motor-59ncm-84oz-in-insulation-class-h-180c-17hs19-2004s1-h",
+    "Brand": "OMC",
+    "Price (USD)": 16.27,
+    "Voltage Rating": "24V",
+    "Pros": "Same specs as the standard 48mm motor, rated for hot chambers\nDrop-in replacement on Voron builds",
+    "Holding Torque (N·cm)": 59,
+    "Slug": "17hs19-2004s1-h",
+    "Phase Voltage": "3.0V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS19-2004S1-H"
   },
   {
     "id": "recQDUdx2y3WI1VWk",
@@ -514,6 +999,70 @@
     "Part Number": "LDO-36STH20-0804AH"
   },
   {
+    "id": "recXCMCqztQVUI9yl",
+    "Cons": "Needs a closed-loop driver",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "The magnetic-encoder version of the 48mm-class closed-loop motor. The magnetic encoder keeps the body to 51.5mm where the optical version needs 68mm, with slightly higher torque.",
+    "Verdict Label": "Closed-loop NEMA 17 with magnetic encoder — shorter than the optical version",
+    "Rated Current (A)": 2,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 400,
+    "Motor Length (mm)": 51.5,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS19-2004-ME1K",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-closed-loop-stepper-motor-56ncm-79-3oz-in-with-magnetic-encoder-1000ppr-4000cpr-17hs19-2004-me1k",
+    "Brand": "OMC",
+    "Price (USD)": 18.75,
+    "Voltage Rating": "24V",
+    "Pros": "Shorter than the optical-encoder equivalent\nMagnetic encoder tolerates dust and vibration",
+    "Holding Torque (N·cm)": 56,
+    "Slug": "17hs19-2004-me1k",
+    "Phase Voltage": "2.8V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS19-2004-ME1K"
+  },
+  {
+    "id": "recXd1Uqefx7zw7qo",
+    "Cons": "700g and a 57mm frame — needs mounts designed for NEMA 23\n2.8A needs a driver that can deliver it",
+    "Compatible Printers": [
+      "HevORT",
+      "RatRig V-Core 4",
+      "Universal"
+    ],
+    "Description": "A 56mm NEMA 23 for large-format hobbyist builds (HevORT, big RatRig/V-Core, belted-Z conversions) that need more torque than a NEMA 17 can give. Note: StepperOnline's page title and spec table disagree slightly on torque (1.2/1.26 vs 1.24 Nm); the spec-table figure is used here.",
+    "Verdict Label": "Standard NEMA 23 for large-format builds that outgrow NEMA 17",
+    "Rated Current (A)": 2.8,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 700,
+    "Motor Length (mm)": 56,
+    "Use Case": [
+      "XY",
+      "Z"
+    ],
+    "Frame Size": "NEMA23",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "23HS22-2804S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-23-bipolar-1-8deg-1-26nm-178-4oz-in-2-8a-2-5v-57x57x56mm-4-wires-23hs22-2804s",
+    "Brand": "OMC",
+    "Price (USD)": 13.37,
+    "Voltage Rating": "24V",
+    "Pros": "Roughly double the torque of a strong NEMA 17\nCheap for a NEMA 23",
+    "Holding Torque (N·cm)": 124,
+    "Slug": "23hs22-2804s",
+    "Phase Voltage": "2.6V",
+    "Shaft Diameter (mm)": 6.35,
+    "Part Number": "23HS22-2804S"
+  },
+  {
     "id": "recZbFRGJa1MXF9HH",
     "Cons": "Needs an encoder-capable controller (e.g. Duet) — useless on a plain step/dir driver\nEncoder housing adds ~20mm to the rear — check clearance behind the motor\nNo live Fabreeko product page found for the 48mm version, so the $44.99 price is unverified\nCosts nearly double the plain 2504AH",
     "Description": "The LDO-42STH48-2504B-EN1000 is a closed-loop version of the 2.5A 2504 stepper, with a 1000-line encoder on the rear shaft for position feedback. EN1000 = 1000-line encoder. The 48mm body carries an encoder housing at the rear (about 20mm on the 60mm sibling). It needs a controller with an encoder input (e.g. Duet 3). Price $44.99 on file at Fabreeko — no live Fabreeko product page was found for the 48mm version, so the price is unverified.",
@@ -562,6 +1111,67 @@
     "Pros": "Lowest cost Z motor option ($12–18 including lead screw)\nAdequate for low-speed Z use or budget-first machines\nReadily available in required lengths from AliExpress",
     "Slug": "t8-integrated-lead-screw-nema17",
     "Integrated Lead Screw": true
+  },
+  {
+    "id": "recaKPCMSwrJSEZMS",
+    "Cons": "41.5mm long — much longer than the 20mm open-loop pancake\nNeeds a closed-loop driver",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A closed-loop version of the pancake motor with a 1000PPR encoder — for geared extruders where a skipped step ruins the print and feedback is worth the extra length.",
+    "Verdict Label": "Closed-loop pancake motor for extruders that must never skip",
+    "Rated Current (A)": 1,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 206,
+    "Motor Length (mm)": 41.5,
+    "Use Case": [
+      "Extruder"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS08-1004D-E1K",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-closed-loop-stepper-motor-14ncm-19-83oz-in-with-encoder-1000ppr-4000cpr-17hs08-1004d-e1k",
+    "Brand": "OMC",
+    "Price (USD)": 16.05,
+    "Voltage Rating": "24V",
+    "Pros": "Encoder feedback on an extruder-sized motor\nStill light at 206g",
+    "Holding Torque (N·cm)": 14,
+    "Slug": "17hs08-1004d-e1k",
+    "Phase Voltage": "3.7V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS08-1004D-E1K"
+  },
+  {
+    "id": "reccNU9uo5qwfKLEt",
+    "Cons": "Quality consistency lower than LDO — occasional unit-to-unit variance reported\nNot on the primary Voron BOM",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident"
+    ],
+    "Description": "The OMC/StepperOnline 17HS19-2004S1 is the standard 48mm 2A NEMA 17 used for Voron 2.4 and Trident XY and Z axes. StepperOnline sells it in Voron 2.4/Afterburner motor kits, and it is the default budget pick for CoreXY builds that don't need LDO's consistency premium.",
+    "Verdict Label": "The classic budget Voron XY motor — 48mm, 2A, 59 N·cm",
+    "Rated Current (A)": 2,
+    "Verdict": "Workhorse",
+    "Weight (g)": 390,
+    "Motor Length (mm)": 48,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS19-2004S1",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-bipolar-59ncm-84oz-in-2a-42x48mm-4-wires-w-1m-cable-connector-17hs19-2004s1",
+    "Brand": "OMC",
+    "Price (USD)": 9.62,
+    "Voltage Rating": "24V",
+    "Pros": "Very low price for a full-size 48mm 2A motor\nThe default Voron XY/Z motor in budget builds — widely documented\n1m cable with connector included",
+    "Holding Torque (N·cm)": 59,
+    "Slug": "17hs19-2004s1",
+    "Phase Voltage": "3.2V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS19-2004S1"
   },
   {
     "id": "receoIFquOMhXyIBA",
@@ -645,6 +1255,20 @@
     "Part Number": "42CM06"
   },
   {
+    "id": "rechkrb1OmEe3hBOV",
+    "Cons": "Bundle — individual motors may be cheaper to source separately",
+    "Description": "LDO's 7-motor set for the Voron 2.4: 4× 42STH48-2004AC(VRN) for Z, 2× 42STH40-2004MAH(VRN) for XY, and 1× 36STH20-1004AHG(VRN) for the extruder. A bundle — most of these motors are already in the DB individually.",
+    "Verdict Label": "LDO 7-motor set for Voron 2.4 (4× Z, 2× XY, 1× extruder)",
+    "Verdict": "CONSIDER",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "Voron 2.4 Motor Kit",
+    "Vendor 1 URL": "https://biqu.equipment/products/ldo-voron-v2-4-motor-kits-revc-1-8-nema17-stepper-motor-180-c-ldo-42sth48-2004ac-for-voron-v1-2-3d-printer-accessories",
+    "Brand": "LDO",
+    "Price (USD)": 169,
+    "Pros": "Every Voron 2.4 motor in one box\nMatched LDO set",
+    "Slug": "voron-2-4-motor-kit"
+  },
+  {
     "id": "reclSVvefxWhqk5VT",
     "Cons": "Price premium over generic alternatives (~$20–25 vs $8–12)\nRequires 2 units per A/B drive axis pair",
     "Compatible Printers": [
@@ -678,6 +1302,36 @@
     "Phase Voltage": "3.0V",
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-42STH48-2504AC"
+  },
+  {
+    "id": "recmKBiF5htnUO6Td",
+    "Cons": "52mm body is long for a NEMA 14 — check clearance on compact builds",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "The long-body 52mm NEMA 14 used in Voron V0.1 kits for the Z axis (and A/B on some builds). The strongest NEMA 14 in StepperOnline's line.",
+    "Verdict Label": "Long-body NEMA 14 — the Voron V0.1 Z motor",
+    "Rated Current (A)": 1.5,
+    "Verdict": "Workhorse",
+    "Weight (g)": 350,
+    "Motor Length (mm)": 52,
+    "Use Case": [
+      "Z"
+    ],
+    "Frame Size": "NEMA14",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "14HS20-1504S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-14-bipolar-1-8deg-40ncm-56-7oz-in-1-5a-4-2v-35x35x52mm-4-wires-14hs20-1504s",
+    "Brand": "OMC",
+    "Price (USD)": 14.47,
+    "Voltage Rating": "24V",
+    "Pros": "Strongest NEMA 14 available — the V0.1 Z standard\nWell documented in V0 builds",
+    "Holding Torque (N·cm)": 40,
+    "Slug": "14hs20-1504s",
+    "Phase Voltage": "4.2V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "14HS20-1504S"
   },
   {
     "id": "recmND191eF1Q68Cf",
@@ -783,6 +1437,101 @@
     "Phase Voltage": "1.4V",
     "Shaft Diameter (mm)": 5,
     "Part Number": "LDO-42STH48-2804AH(S55)"
+  },
+  {
+    "id": "recnHXXlhBNUR00si",
+    "Cons": "Less torque than the 48mm motor — not for heavy gantries",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A 40mm-body 2A NEMA 17 for smaller CoreXY builds (Micron, Salad Fork class) and anywhere a lighter, shorter motor than the standard 48mm fits better.",
+    "Verdict Label": "40mm 2A NEMA 17 — the lighter alternative for smaller CoreXY builds",
+    "Rated Current (A)": 2,
+    "Verdict": "Workhorse",
+    "Weight (g)": 310,
+    "Motor Length (mm)": 40,
+    "Use Case": [
+      "XY",
+      "Z"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS16-2004S1",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-bipolar-45ncm-64oz-in-2a-42x42x40mm-4-wires-w-1m-cable-connector-17hs16-2004s1",
+    "Brand": "OMC",
+    "Price (USD)": 9.13,
+    "Voltage Rating": "24V",
+    "Pros": "Full 2A winding in a 40mm body\nLighter than the 48mm standard",
+    "Holding Torque (N·cm)": 45,
+    "Slug": "17hs16-2004s1",
+    "Phase Voltage": "2.6V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS16-2004S1"
+  },
+  {
+    "id": "recodHqBm1zdukHXU",
+    "Cons": "80mm body and 556g — the biggest NEMA 17 here\nNeeds a closed-loop driver",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Description": "The high-torque closed-loop NEMA 17: 80 N·cm with a 1000PPR encoder, for heavy gantries where lost steps are not acceptable.",
+    "Verdict Label": "The strongest closed-loop NEMA 17 — 80 N·cm with encoder feedback",
+    "Rated Current (A)": 2,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 556,
+    "Motor Length (mm)": 80,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS24-2004D-E1K",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-closed-loop-stepper-motor-80ncm-113-29oz-in-with-encoder-1000ppr-4000cpr-17hs24-2004d-e1k",
+    "Brand": "OMC",
+    "Price (USD)": 20.03,
+    "Voltage Rating": "24V",
+    "Pros": "Highest torque closed-loop option\nEncoder feedback for demanding axes",
+    "Holding Torque (N·cm)": 80,
+    "Slug": "17hs24-2004d-e1k",
+    "Phase Voltage": "2.6V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS24-2004D-E1K"
+  },
+  {
+    "id": "recohJqvXHJtA6WUc",
+    "Cons": "60mm body needs clearance the 48mm motor doesn't\nHigher inductance than shorter motors — torque falls off sooner at very high RPM",
+    "Compatible Printers": [
+      "Voron 2.4",
+      "Voron Trident",
+      "VzBot"
+    ],
+    "Description": "The 60mm-body 17HS24-2104S is StepperOnline's strongest standard NEMA 17, for heavy CoreXY gantries (Voron 2.4 AWD, VzBot) where the standard 48mm motor runs out of torque at speed.",
+    "Verdict Label": "Long-body 60mm NEMA 17 for heavy gantries that out-torque the 48mm motor",
+    "Rated Current (A)": 2.1,
+    "Verdict": "Workhorse",
+    "Weight (g)": 500,
+    "Motor Length (mm)": 60,
+    "Use Case": [
+      "XY"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS24-2104S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-bipolar-1-8deg-65ncm-92oz-in-2-1a-3-36v-42x42x60mm-4-wires-17hs24-2104s",
+    "Brand": "OMC",
+    "Price (USD)": 13.24,
+    "Voltage Rating": "24V",
+    "Pros": "Highest holding torque in the standard NEMA 17 line\nSuits AWD and high-speed builds with heavy toolheads",
+    "Holding Torque (N·cm)": 76,
+    "Slug": "17hs24-2104s",
+    "Phase Voltage": "3.4V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS24-2104S"
   },
   {
     "id": "recqzY6Q9fhwQJXGH",
@@ -913,6 +1662,68 @@
     "Phase Voltage": "3.22V"
   },
   {
+    "id": "recviKrGV0SAcA8Rc",
+    "Cons": "Long, heavy motor — NEMA 23 mounts required\nWeight not published by the manufacturer",
+    "Compatible Printers": [
+      "HevORT",
+      "RatRig V-Core 4",
+      "Universal"
+    ],
+    "Description": "The long-body 76mm NEMA 23, rated 2.00 Nm in the spec table (page title says 1.9 Nm). For the largest hobbyist gantries and Z lifts. StepperOnline doesn't publish a weight for this one.",
+    "Verdict Label": "Long-body 2 Nm NEMA 23 for the largest hobbyist gantries and Z lifts",
+    "Rated Current (A)": 2.8,
+    "Verdict": "CONSIDER",
+    "Motor Length (mm)": 76.5,
+    "Use Case": [
+      "Z"
+    ],
+    "Frame Size": "NEMA 23",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "23HS30-2804S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-23-bipolar-1-8deg-1-9nm-269oz-in-2-8a-3-2v-57x57x76mm-4-wires-23hs30-2804s",
+    "Brand": "OMC",
+    "Price (USD)": 18.26,
+    "Voltage Rating": "24V",
+    "Pros": "Highest torque in the line — 2 Nm\nSuits big Z lifts and heavy gantries",
+    "Holding Torque (N·cm)": 200,
+    "Slug": "23hs30-2804s",
+    "Phase Voltage": "3.3V",
+    "Shaft Diameter (mm)": 6.35,
+    "Part Number": "23HS30-2804S"
+  },
+  {
+    "id": "recw3qYjaxJrEqdpq",
+    "Cons": "Least torque of the NEMA 14s\nNo US warehouse stock — ships from China/DE",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "A shorter 34mm NEMA 14 for compact small-printer axes where the standard 42mm V0 motor doesn't fit.",
+    "Verdict Label": "Compact 34mm NEMA 14 for tight small-printer axes",
+    "Rated Current (A)": 0.8,
+    "Verdict": "CONSIDER",
+    "Weight (g)": 170,
+    "Motor Length (mm)": 34.8,
+    "Use Case": [
+      "XY",
+      "Z"
+    ],
+    "Frame Size": "NEMA14",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "14HS13-0804S",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-14-bipolar-1-8deg-18ncm-25-5oz-in-0-8a-5-4v-35x35x34mm-4-wires-14hs13-0804s",
+    "Brand": "OMC",
+    "Price (USD)": 8.48,
+    "Voltage Rating": "24V",
+    "Pros": "Shortest NEMA 14 in the line\nLight at 170g",
+    "Holding Torque (N·cm)": 18,
+    "Slug": "14hs13-0804s",
+    "Phase Voltage": "5.4V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "14HS13-0804S"
+  },
+  {
     "id": "recwbpzt1ffjdldUF",
     "Cons": "V2.4 requires 4 of these — Z motor set totals ~$160–170\n350mm screw matched to V2.4 geometry — not interchangeable with Trident (300mm) without modification",
     "Description": "The LDO-42STH40-1684CL350ET is the Voron 2.4 Z motor: NEMA17 with 350mm integrated T8 lead screw at 8mm lead (4-start, 2mm pitch). The V2.4 uses 4 of these — one per Z axis. Set rotation_distance to 8.0 in Klipper. Thread consistency is measurably better than budget alternatives — Z banding from pitch variation is a real issue on cheap lead screws, particularly visible on tall prints. The 'ET' suffix denotes a Voron-specific variant with geometry matched to V2.4 frame dimensions.",
@@ -941,5 +1752,34 @@
     "Integrated Lead Screw": true,
     "Shaft Diameter (mm)": 8,
     "Part Number": "LDO-42STH40-1684CL350ET"
+  },
+  {
+    "id": "recwbtILPPKZFUIhD",
+    "Cons": "Needs a closed-loop driver\nWeight not published by the manufacturer",
+    "Compatible Printers": [
+      "Universal"
+    ],
+    "Description": "The magnetic-encoder closed-loop pancake: 26mm long, close to open-loop pancake size, with encoder feedback for geared extruders. StepperOnline doesn't publish a weight.",
+    "Verdict Label": "The shortest closed-loop pancake — magnetic encoder extruder motor",
+    "Rated Current (A)": 1,
+    "Verdict": "CONSIDER",
+    "Motor Length (mm)": 26,
+    "Use Case": [
+      "Extruder"
+    ],
+    "Frame Size": "NEMA17",
+    "Vendor 1 Name": "StepperOnline",
+    "Name": "17HS08-1004-ME1K",
+    "Step Angle": "1.8°",
+    "Vendor 1 URL": "https://www.omc-stepperonline.com/nema-17-closed-loop-stepper-motor-16ncm-22-7oz-in-with-magnetic-encoder-1000ppr-4000cpr-17hs08-1004-me1k",
+    "Brand": "OMC",
+    "Price (USD)": 17.33,
+    "Voltage Rating": "24V",
+    "Pros": "Near-pancake length with encoder feedback\nFull 16 N·cm of the open-loop version",
+    "Holding Torque (N·cm)": 16,
+    "Slug": "17hs08-1004-me1k",
+    "Phase Voltage": "3.7V",
+    "Shaft Diameter (mm)": 5,
+    "Part Number": "17HS08-1004-ME1K"
   }
 ]

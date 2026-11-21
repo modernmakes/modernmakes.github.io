@@ -66,6 +66,22 @@
     "Brand": "Mellow 3D"
   },
   {
+    "id": "rec7SyuPbs3xx4hf9",
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "N/A",
+    "Price (USD)": 18.45,
+    "Pros": "Cheaper than the ADXL345 version\nUSB connection",
+    "Slug": "s2dw-v1-0-1",
+    "Description": "A USB accelerometer board using the LIS2DW12TR sensor for Klipper input-shaper calibration. Listed here following the Fly ADXL precedent — it measures resonance, it does not probe the bed.",
+    "Verdict Label": "USB LIS2DW accelerometer for Klipper input shaping",
+    "Cons": "Calibration tool only, not a probe",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "S2DW V1.0.1",
+    "Type": "Accelerometer",
+    "Vendor 1 URL": "https://biqu.equipment/products/adxl-345-accelerometer-board-for-36-stepper-motors",
+    "Brand": "BigTreeTech"
+  },
+  {
     "id": "rec9Q3K0ocZ2e6B5Z",
     "Verdict": "Bleeding Edge",
     "Accuracy (mm)": "±0.005mm repeatability (contact/collision-sensing mode; per project README)",
@@ -124,6 +140,37 @@
     "Type": "Accelerometer",
     "Vendor 1 URL": "https://www.aliexpress.com/store/1069528",
     "Brand": "Mellow 3D"
+  },
+  {
+    "id": "recLNDyq5Hus6bJjl",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 59.99,
+    "Pros": "CNC-machined — stiffer and more repeatable than printed Tap\nNozzle-contact probing measures the actual nozzle",
+    "Slug": "cnc-voron-tap-v2-0",
+    "Description": "ChaoticLab's CNC-machined take on Voron Tap: a nozzle-contact probe (62g) with an OMRON EE-SX4320 sensor on an MGN7H rail, distinct from the printed Voron Tap. Black in stock, red out of stock at BIQU. Brand choice for ChaoticLab doesn't exist in this table yet.",
+    "Verdict Label": "ChaoticLab CNC-machined nozzle-contact probe on an MGN7H rail",
+    "Cons": "62g on the toolhead\nNozzle must be clean for accurate probing",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "CNC Voron Tap V2.0",
+    "Type": "Nozzle Contact",
+    "Vendor 1 URL": "https://biqu.equipment/products/cnc-voron-tap-v2",
+    "Brand": "ChaoticLab"
+  },
+  {
+    "id": "recLd6mDyqHEKcQ4v",
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "N/A",
+    "Price (USD)": 29.99,
+    "Pros": "USB — no toolhead wiring needed for calibration",
+    "Slug": "adxl345-v2-0-1",
+    "Description": "A USB ADXL345 accelerometer board for Klipper input-shaper calibration. Listed here following the Fly ADXL precedent — it measures resonance, it does not probe the bed.",
+    "Verdict Label": "USB ADXL345 accelerometer for Klipper input shaping",
+    "Cons": "Calibration tool only, not a probe",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "ADXL345 V2.0.1",
+    "Type": "Accelerometer",
+    "Vendor 1 URL": "https://biqu.equipment/products/adxl-345-accelerometer-board-for-36-stepper-motors",
+    "Brand": "BigTreeTech"
   },
   {
     "id": "recVMRZJcx5QUzwJB",
@@ -202,6 +249,37 @@
     "Name": "Klicky PCB",
     "Type": "Microswitch",
     "Brand": "Open Source / Community"
+  },
+  {
+    "id": "recZyrMnEJtg9ch8X",
+    "Verdict": "CONSIDER",
+    "Accuracy (mm)": "0.003",
+    "Price (USD)": 35.98,
+    "Pros": "Only 6g — negligible toolhead mass\nBLTouch wiring compatibility",
+    "Slug": "microprobe-v2-0",
+    "Description": "A 6g deployable metal-pin probe with ≤0.003mm repeatability and BLTouch-compatible wiring, Voron-compatible.",
+    "Verdict Label": "6g deployable metal-pin probe with BLTouch wiring",
+    "Cons": "Deployable pin adds a moving part vs fixed probes",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "MicroProbe V2.0",
+    "Type": "Contact",
+    "Vendor 1 URL": "https://biqu.equipment/products/microprobe-v1-0-for-b1-printers-h2-extruders-ender-3",
+    "Brand": "BigTreeTech"
+  },
+  {
+    "id": "recc4dCzEyOtKLTWE",
+    "Verdict": "CONSIDER",
+    "Price (USD)": 14.99,
+    "Pros": "Cheap way into a DIY Tap build",
+    "Slug": "cnc-voron-tap-sensor-v1-0",
+    "Description": "The sensor board from the CNC Voron Tap sold on its own, for DIY Tap builds. Brand choice for ChaoticLab doesn't exist in this table yet.",
+    "Verdict Label": "Sensor board alone for DIY Tap builds",
+    "Cons": "Sensor only — rail and mount are on you",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "CNC Voron Tap Sensor V1.0",
+    "Type": "Nozzle Contact",
+    "Vendor 1 URL": "https://biqu.equipment/products/cnc-voron-tap-sensor-module",
+    "Brand": "ChaoticLab"
   },
   {
     "id": "receKP1YdCZsdh1iw",

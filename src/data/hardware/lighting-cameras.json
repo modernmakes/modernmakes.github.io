@@ -188,7 +188,7 @@
     "Resolution": "Unknown",
     "Type": "Camera",
     "Vendor 1 URL": "https://www.mintion.net/products/mintion-nozzle-camera",
-    "Brand": "Generic / Community",
+    "Brand": "Mintion",
     "Price (USD)": 42.99,
     "Color Temp (K)": "N/A",
     "Pros": "Purpose-built for nozzle-level viewing — auto-focus lens and two LEDs, not a repurposed endoscope camera\nStealthBurner holder available to download and print\nObico first-layer AI detection for automatic failure alerts\nPlug and play on Klipper; USB cable included",

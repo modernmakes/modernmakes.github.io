@@ -811,6 +811,21 @@
     "Rail Profile": "N/A"
   },
   {
+    "id": "reciz6rInwaLuWqrU",
+    "Description": "ChaoticLab's all-metal, tool-free Z belt tensioner for Voron 2.4 R1/R2. Brand choice for ChaoticLab doesn't exist in this table yet.",
+    "Verdict Label": "ChaoticLab all-metal Z belt tensioner for Voron 2.4 R1/R2",
+    "Verdict": "CONSIDER",
+    "Cons": "Premium price for a tensioner",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "CNC Tool-free Z-Axis Tensioner",
+    "Vendor 1 URL": "https://biqu.equipment/products/cnc-tool-free-z-axis-tensioner-for-voron-2-4",
+    "Brand": "ChaoticLab",
+    "Price (USD)": 58.32,
+    "Pros": "Tool-free tension adjustment\nAll-metal vs printed tensioners",
+    "Slug": "cnc-tool-free-z-axis-tensioner",
+    "Material": "Aluminum"
+  },
+  {
     "id": "recj4Gu8w5SnArEzQ",
     "Image URL": "/media/hardware/motion-systems/gates-1-5gt-9mm-rf-belt.webp",
     "Belt Width (mm)": 9,

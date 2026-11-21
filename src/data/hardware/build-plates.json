@@ -61,6 +61,20 @@
     ]
   },
   {
+    "id": "recGRV3bEcxbt0BGg",
+    "Description": "The coarse-texture version of the CryoGrip Pro composite cold plate. Price basis: 300mm size (350mm regular $62.99).",
+    "Verdict Label": "Coarse-texture version of the CryoGrip Pro cold plate",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "CryoGrip Pro Frostbite",
+    "Vendor 1 URL": "https://biqu.equipment/products/biqu-cryogrip-pro-glacier-build-plate",
+    "Brand": "BIGTREETECH",
+    "Price (USD)": 45.99,
+    "Pros": "Coarse texture for stronger first-layer grip\nCold-release surface",
+    "Slug": "cryogrip-pro-frostbite",
+    "Verdict": "Solid Choice",
+    "Cons": "Composite plate — not spring steel"
+  },
+  {
     "id": "recHoiLkmvx6xmXE4",
     "Description": "Fire Thorn flex plate with Mandala Rose Works' ThornGrip cold-plate surface, cut from premium 0.65mm 1075 spring steel. Designed to print at low bed temperatures — PLA at 35C, PETG 50-60C (release agent recommended), ABS/ASA 50-80C, nylon 70C, PC up to 100-110C. Stock sizes run from Voron 0 up to RatRig 500, with custom sizes available direct from Mandala Rose Works. A specialty plate for low-temperature printing rather than a general-purpose PEI surface. Price: $22.00 (smallest in-stock variant, Voron 0 130x130; Voron 250 is $53; RatRig 500 oversize $199.)",
     "Verdict Label": "Specialist cold plate for low-temp filaments — wide size range, premium price",
@@ -264,6 +278,20 @@
       "300"
     ],
     "Cons": "110C max bed temp rules out the highest-temp engineering filaments\nTextured-both-sides variant costs the same but loses the smooth side\nNo magnetic base included — magnetic sheets are sold separately"
+  },
+  {
+    "id": "recaNUG70TpRuv93p",
+    "Description": "A double-sided 7-layer composite cold plate with a fine texture for Voron 300/350. Price basis: 300mm size.",
+    "Verdict Label": "Double-sided 7-layer composite cold plate, fine texture",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "CryoGrip Pro Glacier",
+    "Vendor 1 URL": "https://biqu.equipment/products/biqu-cryogrip-pro-glacier-build-plate",
+    "Brand": "BIGTREETECH",
+    "Price (USD)": 39.99,
+    "Pros": "Cold-release surface — parts pop off as it cools\nDouble-sided",
+    "Slug": "cryogrip-pro-glacier",
+    "Verdict": "Solid Choice",
+    "Cons": "Composite plate — not spring steel"
   },
   {
     "id": "recdcP11q23iVMqxd",

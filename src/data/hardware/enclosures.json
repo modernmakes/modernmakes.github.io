@@ -294,6 +294,22 @@
     "Name": "XPS Foam Insulation Panels"
   },
   {
+    "id": "recOF9WdcY7Cdrm0j",
+    "Verdict": "CONSIDER",
+    "Type": "Door Hardware",
+    "Vendor 1 URL": "https://biqu.equipment/products/cnc-door-mounting-kit",
+    "Brand": "ChaoticLab",
+    "Price (USD)": 45.99,
+    "Pros": "Machined aluminum vs printed hinges",
+    "Material": "Aluminum",
+    "Description": "ChaoticLab's CNC aluminum door hinges and mounts for Voron 2.4 enclosures. Both Black and Red out of stock at BIQU at last check. Brand choice for ChaoticLab doesn't exist in this table yet.",
+    "Verdict Label": "ChaoticLab CNC aluminum door hinges/mounts for Voron 2.4 enclosures",
+    "Slug": "cnc-door-mounting-kit",
+    "Cons": "Out of stock at BIQU at last check",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "CNC Door Mounting Kit"
+  },
+  {
     "id": "recPmgxt7DHt7BeSe",
     "Verdict": "BUY",
     "Type": "Panel",

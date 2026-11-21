@@ -551,5 +551,23 @@
     "Name": "Revo Heater Core",
     "Slug": "revo-heater-core",
     "Size": "Proprietary"
+  },
+  {
+    "id": "reczrPJOi8hUoje4q",
+    "Verdict Label": "BIQU 6×20mm ceramic cartridge for V6-style hotends (2-pack)",
+    "Verdict": "CONSIDER",
+    "Type": "Heater Cartridge",
+    "Vendor 1 URL": "https://biqu.equipment/products/biqu-50w-ceramic-cartridge-heater",
+    "Brand": "BIQU",
+    "Price (USD)": 7.88,
+    "Pros": "Very cheap — 2-pack pricing\nCeramic element heats fast",
+    "Wattage (W)": 50,
+    "Description": "BIQU's 50W 6×20mm ceramic heater cartridge for V6-style hotends, sold as a 2-pack (24V 1M; 2M variants out of stock). Distinct from the Slice Engineering 50W cartridge already in the DB. Brand choice for BIQU doesn't exist in this table yet.",
+    "Voltage": "24V",
+    "Cons": "Budget cartridge — consistency varies",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Name": "50W Ceramic Cartridge",
+    "Slug": "50w-ceramic-cartridge",
+    "Size": "6×20mm"
   }
 ]

@@ -1,5 +1,20 @@
 [
   {
+    "id": "rec1UzPUO0KrtEy2t",
+    "Brand": "BIQU",
+    "Price (USD)": 63.99,
+    "Pros": "CPAP cooling at a budget price\nBrushless Nidec blower",
+    "Cons": "Less airflow than the Wonsmart Turbo Kit",
+    "Name": "Eco Turbo Kit",
+    "Vendor 1 Name": "BIGTREETECH",
+    "Type": "CPAP Blower",
+    "Vendor 1 URL": "https://biqu.equipment/products/biqu-eco-turbo-kit",
+    "Slug": "eco-turbo-kit",
+    "Description": "BIQU's budget CPAP part-cooling kit: a Nidec brushless blower with adapter board. The budget alternative to the Wonsmart-based Universal Turbo Kit already in the DB. Brand choice for BIQU/Nidec doesn't exist in this table yet.",
+    "Verdict Label": "Nidec brushless CPAP blower + adapter board — the budget Turbo Kit",
+    "Verdict": "Solid Choice"
+  },
+  {
     "id": "recFPP2PiY8tLqqrK",
     "Brand": "Delta Electronics",
     "Price (USD)": 18.26,
